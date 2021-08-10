@@ -9,7 +9,7 @@
 \renewcommand\thechapter{\@roman\c@chapter}
 \makeatother
 
-% \setcounter{secnumdepth}{4}
+\setcounter{secnumdepth}{4}
 
 \usepackage{cleveref}
 
@@ -49,13 +49,11 @@
 \zref{sec:subs-2.1.1.1}
 
 
-
-
-
-
-\makeatletter
-\show\cl@chapter
-\makeatother
-
+\begin{enumerate}
+\item \zlabel{item:1}
+  \begin{enumerate}
+  \item \zlabel{item:1-1}
+  \end{enumerate}
+\end{enumerate}
 
 \end{document}

@@ -145,23 +145,13 @@
 % `ltcounts.dtx' in `source2e').  Besides, there may be a chain of resetting
 % counters, which must be taken into account.  The procedure below examines a
 % set of counters, those included in \cs{g_@@_reseters_seq}, and for each
-% counter each of those reset, define a \texttt{tl} variable with name
-% \cs{g_@@_counter_ \meta{counter} _within_tl} storing the value of its
-% ``within-counter''.  These \texttt{tl} variables are then used by
-% \cs{@@_get_within_counters:n} to store the desired information when the
-% label is actually set.  There are two relevante caveats to this procedure:
-% i) \cs{g_@@_reseters_seq} is populated by hand with the ``usual suspects'',
-% there is no way (that I know of) to ensure it is exhaustive; ii)
-% \cs{@@_set_within_counters:} is being run \cs{AtBeginDocument}, hence if
-% counters resetting behavior gets redefined mid-document, or new ones
-% created, this information will not be taken into account.  I believe these
-% caveats are not particularly grave to the case at hand: i) it is not that
-% difficult to create a reasonable ``usual suspects'' list which, of course,
-% should include the counters for the sectioning commands, to start with; ii)
-% it is easy to add more counters to this list if needed; iii) setting one's
-% counters (the ones that may get reset) in the preamble is not that
-% restrictive a limitation, indeed, I'd expect the ones we are interested in
-% here to be set by \cs{documentclass}.
+% counter retrieves its ``within-counters'' recursively.  There is one
+% relevant caveat to this procedure: \cs{g_@@_reseters_seq} is populated by
+% hand with the ``usual suspects'', there is no way (that I know of) to ensure
+% it is exhaustive.  However, it is not that difficult to create a reasonable
+% ``usual suspects'' list which, of course, should include the counters for
+% the sectioning commands, to start with, and it is easy to add more counters
+% to this list if needed.
 %
 % \begin{variable}{\g_@@_reseters_seq}
 %   Stores the list of counters which get examined \cs{AtBeginDocument} as
@@ -180,53 +170,65 @@
 %    \end{macrocode}
 % \end{variable}
 %
-% \begin{macro}{\@@_set_within_counters:}
-%   Map through \cs{g_@@_reseters_seq} defining \texttt{tl} variables storing,
-%   for each counter that may be reset, the ``within-counter'' which may do
-%   so.
-%    \begin{macrocode}
-\cs_new:Npn \@@_set_within_counters:
-  {
-    \group_begin:
-      \seq_map_inline:Nn \g_@@_reseters_seq
-        {
-          \cs_if_exist:cT { c@ ##1 }
-            {
-              \cs_set:Npn \@@_elt_aux:n ####1
-                {
-                  \tl_if_exist:cF { g_@@_counter_ ####1 _within_tl }
-                    { \tl_gset:cx { g_@@_counter_ ####1 _within_tl } {##1} }
-                }
-              \cs_set_eq:NN \@elt \@@_elt_aux:n
-              \use:c { cl@ ##1 }
-            }
-        }
-    \group_end:
-  }
-%    \end{macrocode}
-% And run it \cs{AtBeginDocument}.
-%    \begin{macrocode}
-\AtBeginDocument { \@@_set_within_counters: }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\@@_get_within_counters:n}
+% \begin{macro}[EXP]{\@@_get_within_counters:n}
 %   Recursively generate a \emph{sequence} of ``within-counters'' values, for
-%   a given \Arg{counter}.
+%   a given \Arg{counter} and leave it in the input stream.  This function
+%   must be expandable, since it gets called from \cs{zref@newprop} and is the
+%   one responsible for generating the desired information when the label is
+%   being set.
 %    \begin{macrocode}
 \cs_new:Npn \@@_get_within_counters:n #1
   {
-    \bool_lazy_and:nnT
-      { \tl_if_exist_p:c { g_@@_counter_ \tl_use:N #1 _within_tl } }
+    \cs_if_exist:cT { c@ \@@_counter_reset_by:n {#1} }
       {
-        \cs_if_exist_p:c
-          { c@ \use:c { g_@@_counter_ \tl_use:N #1 _within_tl } }
+        { \int_use:N \cs:w c@ \@@_counter_reset_by:n {#1} \cs_end: }
+        \@@_get_within_counters:e
+          { \@@_counter_reset_by:n {#1} }
+      }
+  }
+% Both \texttt{e} and \texttt{f} variants work for the recursive call.
+\cs_generate_variant:Nn \@@_get_within_counters:n { o , e , f }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]
+%   {
+%     \@@_counter_reset_by:n,
+%     \@@_counter_within:nn,
+%     \@@_counter_within_aux:nnn
+%   }
+% Auxiliary functions for \cs{@@_get_within_counters:n}.  They are broken in
+% parts to be able to use the expandable mapping functions.  In particular
+% \cs{@@_counter_reset_by:n} leaves in the stream the ``within-counter'' which
+% resets \Arg{counter}.
+%    \begin{macrocode}
+\cs_new:Npn \@@_counter_reset_by:n #1
+  {
+    \bool_case_true:nF
+      {
+        % TODO Handle exceptions. Start with "enumi...".
+        { \c_false_bool } {}
       }
       {
-        { \int_use:c { c@ \use:c { g_@@_counter_ \tl_use:N #1 _within_tl } } }
-        \@@_get_within_counters:n
-          { \use:c { g_@@_counter_ \tl_use:N #1 _within_tl } }
+        \seq_map_tokens:Nn \g_@@_reseters_seq
+          { \@@_counter_within:nn {#1} }
       }
+  }
+\cs_new:Npn \@@_counter_within:nn #1#2
+  {
+    \cs_if_exist:cT { c@ #2 }
+      {
+        \tl_if_empty:cF { cl@ #2 }
+          {
+            \tl_map_tokens:cn { cl@ #2 }
+              { \@@_counter_within_aux:nnn {#2} {#1} }
+          }
+      }
+  }
+\cs_new:Npn \@@_counter_within_aux:nnn #1#2#3
+  {
+    \str_if_eq:nnT {#2} {#3}
+      { \tl_map_break:n { \seq_map_break:n {#1} } }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -234,9 +236,71 @@
 % Finally, add \texttt{zc@within} to \pkg{zref}'s \texttt{main} property list.
 %    \begin{macrocode}
 \zref@newprop { zc@within }
-  { \@@_get_within_counters:n { \@currentcounter } }
+  { \@@_get_within_counters:o { \@currentcounter } }
 \zref@addprop \ZREF@mainlist { zc@within }
 %    \end{macrocode}
+%
+%
+% A previous version of the same task.  Easier to implement, hence possibly
+% more robust (for me to maintain, that is\dots{}), but which required to
+% assess the state of the reset counters \cs{AtBeginDocument}, so does not get
+% mid-document changes.  Keep it around for the time being, in case we face
+% trouble with the expandable version.  The procedure here examines a set of
+% counters, those included in \cs{g_@@_reseters_seq}, and for each counter
+% each of those reset, defines a \texttt{tl} variable with name
+% \cs{g_@@_counter_\meta{counter}_within_tl} storing the value of its
+% ``within-counter''.  These \texttt{tl} variables are then used by
+% \cs{@@_get_within_counters_old:n} to store the desired information when the
+% label is actually set.
+% \begin{verbatim}
+% \cs_new:Npn \@@_get_within_counters_old:n #1
+%   {
+%     \bool_lazy_and:nnT
+%       { \tl_if_exist_p:c { g_@@_counter_ \tl_use:N #1 _within_tl } }
+%       {
+%         \cs_if_exist_p:c
+%           { c@ \use:c { g_@@_counter_ \tl_use:N #1 _within_tl } }
+%       }
+%       {
+%         { \int_use:c { c@ \use:c { g_@@_counter_ \tl_use:N #1 _within_tl } } }
+%         \@@_get_within_counters_old:n
+%           { \use:c { g_@@_counter_ \tl_use:N #1 _within_tl } }
+%       }
+%   }
+% \end{verbatim}
+% Map through \cs{g_@@_reseters_seq} defining \texttt{tl} variables storing,
+% for each counter that may be reset, the ``within-counter'' which may do so.
+% \begin{verbatim}
+% \cs_new:Npn \@@_set_within_counters:
+%   {
+%     \group_begin:
+%       \seq_map_inline:Nn \g_@@_reseters_seq
+%         {
+%           \cs_if_exist:cT { c@ ##1 }
+%             {
+%               \cs_set:Npn \@@_elt_aux:n ####1
+%                 {
+%                   \tl_if_exist:cF { g_@@_counter_ ####1 _within_tl }
+%                     { \tl_gset:cx { g_@@_counter_ ####1 _within_tl } {##1} }
+%                 }
+%               \cs_set_eq:NN \@elt \@@_elt_aux:n
+%               \use:c { cl@ ##1 }
+%             }
+%         }
+%     \group_end:
+%   }
+% \end{verbatim}
+% And run it \cs{AtBeginDocument}.
+% \begin{verbatim}
+% \AtBeginDocument { \@@_set_within_counters: }
+% \end{verbatim}
+%
+%
+%
+%
+%
+%
+%
 %
 %
 %
