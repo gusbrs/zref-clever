@@ -90,8 +90,12 @@
 %    \begin{macrocode}
 \RequirePackage { zref-user }
 \RequirePackage { zref-counter }
-\RequirePackage { zref-titleref }
-\RequirePackage { zref-abspage }% CHECK to sort pages. check if really needed.
+% FIXME I should not load 'zref-titleref' by default, since it patches a lot
+% of stuff, including 'caption', all sectioning commands etc.  I should make
+% the package use it, if it is loaded.
+% \RequirePackage { zref-titleref }
+% CHECK 'abspage' to sort pages?  Check if really needed.
+% \RequirePackage { zref-abspage }
 \RequirePackage { translations }
 %    \end{macrocode}
 %
@@ -99,73 +103,139 @@
 %
 % \section{\pkg{zref} setup}
 %
-% We are interested in four basic label fields: the reference itself, the
-% page, the counter and the title.  The page is handled by \pkg{zref} in its
-% \pkg{zref-base} module.  `counter' and `title' are handled respectively by
-% modules \pkg{zref-counter} and \pkg{zref-titleref}.  But the reference
-% itself, stored by \pkg{zref} in the `default' field, is somewhat a disputed
-% real estate.  In particular, the use of \cs{labelformat} will include there
-% the reference ``prefix'' and complicate the job we are trying to do here.
+% We are interested in three basic label elements: the reference itself, the
+% page, and the counter.  The `page' and `counter' are respectively handled by
+% modules \pkg{zref-base} and \pkg{zref-counter}.  But the reference itself,
+% stored by \pkg{zref} in the `default' field, is somewhat a disputed real
+% estate.  In particular, the use of \cs{labelformat} will include there the
+% reference ``prefix'' and complicate the job we are trying to do here.
 % Hence, we isolate \cs{the}\meta{counter} and store it ``clean'' in
-% \texttt{zc@thecounter} for reserved use.  We also store the counter
-% \emph{value} in \texttt{zc@countervalue}.
-%
+% \texttt{zc@thecounter} for reserved use.
 %
 % From the definition of \cs{@currentlabel} done inside \cs{refstepcounter} in
-% 'texdoc source2e', section 'ltcounts.dtx'.  We just drop the \cs{\p@...}
+% 'texdoc source2e', section 'ltcounts.dtx'.  We just drop the \cs{p@...}
 % prefix.
 %    \begin{macrocode}
-\zref@newprop { zc@thecounter } { \cs:w the\@currentcounter \cs_end: }
+\zref@newprop { zc@thecounter } { \cs:w the \@currentcounter \cs_end: }
+\zref@addprop \ZREF@mainlist { zc@thecounter }
 %    \end{macrocode}
 %
-% \cs{c@}\meta{counter} contains the counter's numerical value, see 'texdoc
-% source2e', section 'ltcounts.dtx'.
+% However, the moment where the label is set is a privileged one, because at
+% this point we have a lot of raw information available.  Information which
+% may be difficult to retrieve later on by parsing the reference printed value
+% of the counter, which we stored in \texttt{zc@thecounter} above.  Hence, we
+% seize the opportunity to store some of that information in a way which eases
+% significantly the task of processing the reference later on: i) the counter
+% \emph{value}, as a number; ii) the counter values of the set of counters
+% which may trigger a reset of the current counter.
+%
+% The first one is trivial, \cs{c@}\meta{counter} contains the counter's
+% numerical value (see `texdoc source2e', section `ltcounts.dtx'), we just
+% store it in \texttt{zc@countervalue}.
 %    \begin{macrocode}
 \zref@newprop { zc@countervalue } { \int_use:c { c@\@currentcounter } }
-%    \end{macrocode}
-%
-%
-%    \begin{macrocode}
-\zref@addprop \ZREF@mainlist { zc@thecounter }
 \zref@addprop \ZREF@mainlist { zc@countervalue }
 %    \end{macrocode}
 %
+% The second one is trickier.  For starters, the counters which may reset the
+% current counter are not retrievable from the counter itself, because this
+% information is stored with the counter that does the resetting, not with the
+% one that gets reset (the list is stored in \cs{cl@}\meta{counter} with
+% format |\@elt{countera}\@elt{counterb}\@elt{counterc}|, again see section
+% `ltcounts.dtx' in `source2e').  Besides, there may be a chain of resetting
+% counters, which must be taken into account.  The procedure below examines a
+% set of counters, those included in \cs{g_@@_reseters_seq}, and for each
+% counter each of those reset, define a \texttt{tl} variable with name
+% \cs{g_@@_counter_ \meta{counter} _within_tl} storing the value of its
+% ``within-counter''.  These \texttt{tl} variables are then used by
+% \cs{@@_get_within_counters:n} to store the desired information when the
+% label is actually set.  There are two relevante caveats to this procedure:
+% i) \cs{g_@@_reseters_seq} is populated by hand with the ``usual suspects'',
+% there is no way (that I know of) to ensure it is exhaustive; ii)
+% \cs{@@_set_within_counters:} is being run \cs{AtBeginDocument}, hence if
+% counters resetting behavior gets redefined mid-document, or new ones
+% created, this information will not be taken into account.  I believe these
+% caveats are not particularly grave to the case at hand: i) it is not that
+% difficult to create a reasonable ``usual suspects'' list which, of course,
+% should include the counters for the sectioning commands, to start with; ii)
+% it is easy to add more counters to this list if needed; iii) setting one's
+% counters (the ones that may get reset) in the preamble is not that
+% restrictive a limitation, indeed, I'd expect the ones we are interested in
+% here to be set by \cs{documentclass}.
 %
-%
+% \begin{variable}{\g_@@_reseters_seq}
+%   Stores the list of counters which get examined \cs{AtBeginDocument} as
+%   potential ``within-counters'' for other counters.
 %    \begin{macrocode}
+\seq_set_from_clist:Nn \g_@@_reseters_seq
+  {
+    part ,
+    chapter ,
+    section ,
+    subsection ,
+    subsubsection ,
+    paragraph ,
+    subparagraph
+  }
+%    \end{macrocode}
+% \end{variable}
 %
-% TODO Now we must get these values from '\cl@<counter>' atbegindocument for
-% each in a list of ``known'' counters (sectioning ones, see most important
-% classes).
-\tl_set:Nn \g_@@_counter_section_within_tl {chapter}
-\tl_set:Nn \g_@@_counter_subsection_within_tl {section}
-
-\zref@newprop { zc@withinvalue }
+% \begin{macro}{\@@_set_within_counters:}
+%   Map through \cs{g_@@_reseters_seq} defining \texttt{tl} variables storing,
+%   for each counter that may be reset, the ``within-counter'' which may do
+%   so.
+%    \begin{macrocode}
+\cs_new:Npn \@@_set_within_counters:
+  {
+    \group_begin:
+      \seq_map_inline:Nn \g_@@_reseters_seq
+        {
+          \cs_if_exist:cT { c@ ##1 }
+            {
+              \cs_set:Npn \@@_elt_aux:n ####1
+                {
+                  \tl_if_exist:cF { g_@@_counter_ ####1 _within_tl }
+                    { \tl_gset:cx { g_@@_counter_ ####1 _within_tl } {##1} }
+                }
+              \cs_set_eq:NN \@elt \@@_elt_aux:n
+              \use:c { cl@ ##1 }
+            }
+        }
+    \group_end:
+  }
+%    \end{macrocode}
+% And run it \cs{AtBeginDocument}.
+%    \begin{macrocode}
+\AtBeginDocument { \@@_set_within_counters: }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_get_within_counters:n}
+%   Recursively generate a \emph{sequence} of ``within-counters'' values, for
+%   a given \Arg{counter}.
+%    \begin{macrocode}
+\cs_new:Npn \@@_get_within_counters:n #1
   {
     \bool_lazy_and:nnT
-      {
-        \tl_if_exist_p:c
-          { g_@@_counter_ \tl_use:N \@currentcounter _within_tl }
-      }
+      { \tl_if_exist_p:c { g_@@_counter_ \tl_use:N #1 _within_tl } }
       {
         \cs_if_exist_p:c
-          {
-            c@ \use:c
-              { g_@@_counter_ \tl_use:N \@currentcounter _within_tl }
-          }
+          { c@ \use:c { g_@@_counter_ \tl_use:N #1 _within_tl } }
       }
       {
-        \int_use:c
-          {
-            c@ \use:c
-              { g_@@_counter_ \tl_use:N \@currentcounter _within_tl }
-          }
+        { \int_use:c { c@ \use:c { g_@@_counter_ \tl_use:N #1 _within_tl } } }
+        \@@_get_within_counters:n
+          { \use:c { g_@@_counter_ \tl_use:N #1 _within_tl } }
       }
   }
-
-\zref@addprop \ZREF@mainlist { zc@withinvalue }
-
-
+%    \end{macrocode}
+% \end{macro}
+%
+% Finally, add \texttt{zc@within} to \pkg{zref}'s \texttt{main} property list.
+%    \begin{macrocode}
+\zref@newprop { zc@within }
+  { \@@_get_within_counters:n { \@currentcounter } }
+\zref@addprop \ZREF@mainlist { zc@within }
 %    \end{macrocode}
 %
 %

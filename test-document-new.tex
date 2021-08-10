@@ -9,12 +9,17 @@
 \renewcommand\thechapter{\@roman\c@chapter}
 \makeatother
 
+% \setcounter{secnumdepth}{4}
+
+\usepackage{cleveref}
+
 \begin{document}
 
 \part{Part 1}
 \label{part:part-1}
 \zlabel{part:part-1}
 
+\setcounter{chapter}{12}
 
 \chapter{Chapter 1}
 \label{cha:chapter-1}
@@ -32,6 +37,17 @@
 \section{Section 1}
 \label{sec:section-2-1}
 \zlabel{sec:section-2-1}
+
+\subsection{Subsection 2.1.1}
+\label{sec:subsection-2.1.1}
+\zlabel{sec:subsection-2.1.1}
+
+\subsubsection{Subsubsection 2.1.1.1}
+\label{sec:subs-2.1.1.1}
+\zlabel{sec:subs-2.1.1.1}
+
+\zref{sec:subs-2.1.1.1}
+
 
 
 
