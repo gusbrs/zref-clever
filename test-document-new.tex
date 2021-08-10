@@ -5,6 +5,10 @@
 
 \labelformat{section}{section~#1}
 
+\makeatletter
+\renewcommand\thechapter{\@roman\c@chapter}
+\makeatother
+
 \begin{document}
 
 \part{Part 1}
@@ -17,11 +21,25 @@
 \zlabel{cha:chapter-1}
 
 
+\section{Section 1.1}
+\label{sec:section-1-1}
+\zlabel{sec:section-1-1}
+
+\chapter{Chapter 2}
+\label{cha:chapter-2}
+\zlabel{cha:chapter-2}
+
 \section{Section 1}
-\label{sec:section-1}
-\zlabel{sec:section-1}
+\label{sec:section-2-1}
+\zlabel{sec:section-2-1}
 
 
+
+
+
+\makeatletter
+\show\cl@chapter
+\makeatother
 
 
 \end{document}

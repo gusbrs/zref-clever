@@ -87,10 +87,13 @@
 %
 % \section{Dependencies}
 %
+%    \begin{macrocode}
 \RequirePackage { zref-user }
 \RequirePackage { zref-counter }
 \RequirePackage { zref-titleref }
+\RequirePackage { zref-abspage }% CHECK to sort pages. check if really needed.
 \RequirePackage { translations }
+%    \end{macrocode}
 %
 %
 %
@@ -111,15 +114,59 @@
 % From the definition of \cs{@currentlabel} done inside \cs{refstepcounter} in
 % 'texdoc source2e', section 'ltcounts.dtx'.  We just drop the \cs{\p@...}
 % prefix.
+%    \begin{macrocode}
 \zref@newprop { zc@thecounter } { \cs:w the\@currentcounter \cs_end: }
+%    \end{macrocode}
 %
 % \cs{c@}\meta{counter} contains the counter's numerical value, see 'texdoc
 % source2e', section 'ltcounts.dtx'.
+%    \begin{macrocode}
 \zref@newprop { zc@countervalue } { \int_use:c { c@\@currentcounter } }
+%    \end{macrocode}
 %
 %
+%    \begin{macrocode}
 \zref@addprop \ZREF@mainlist { zc@thecounter }
 \zref@addprop \ZREF@mainlist { zc@countervalue }
+%    \end{macrocode}
+%
+%
+%
+%    \begin{macrocode}
+%
+% TODO Now we must get these values from '\cl@<counter>' atbegindocument for
+% each in a list of ``known'' counters (sectioning ones, see most important
+% classes).
+\tl_set:Nn \g_@@_counter_section_within_tl {chapter}
+\tl_set:Nn \g_@@_counter_subsection_within_tl {section}
+
+\zref@newprop { zc@withinvalue }
+  {
+    \bool_lazy_and:nnT
+      {
+        \tl_if_exist_p:c
+          { g_@@_counter_ \tl_use:N \@currentcounter _within_tl }
+      }
+      {
+        \cs_if_exist_p:c
+          {
+            c@ \use:c
+              { g_@@_counter_ \tl_use:N \@currentcounter _within_tl }
+          }
+      }
+      {
+        \int_use:c
+          {
+            c@ \use:c
+              { g_@@_counter_ \tl_use:N \@currentcounter _within_tl }
+          }
+      }
+  }
+
+\zref@addprop \ZREF@mainlist { zc@withinvalue }
+
+
+%    \end{macrocode}
 %
 %
 %
