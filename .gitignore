@@ -8,3 +8,4 @@ aux/
 *.aux
 *.log
 *.synctex.gz
+*.out

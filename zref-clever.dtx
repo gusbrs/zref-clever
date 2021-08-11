@@ -90,12 +90,7 @@
 %    \begin{macrocode}
 \RequirePackage { zref-user }
 \RequirePackage { zref-counter }
-% FIXME I should not load 'zref-titleref' by default, since it patches a lot
-% of stuff, including 'caption', all sectioning commands etc.  I should make
-% the package use it, if it is loaded.
-% \RequirePackage { zref-titleref }
-% CHECK 'abspage' to sort pages?  Check if really needed.
-% \RequirePackage { zref-abspage }
+\RequirePackage { zref-abspage }
 \RequirePackage { translations }
 %    \end{macrocode}
 %
@@ -105,12 +100,14 @@
 %
 % We are interested in three basic label elements: the reference itself, the
 % page, and the counter.  The `page' and `counter' are respectively handled by
-% modules \pkg{zref-base} and \pkg{zref-counter}.  But the reference itself,
-% stored by \pkg{zref} in the `default' field, is somewhat a disputed real
-% estate.  In particular, the use of \cs{labelformat} will include there the
-% reference ``prefix'' and complicate the job we are trying to do here.
-% Hence, we isolate \cs{the}\meta{counter} and store it ``clean'' in
-% \texttt{zc@thecounter} for reserved use.
+% modules \pkg{zref-base} and \pkg{zref-counter}.  The \pkg{zref-abspage} also
+% provides the `abspage` property which gives us a safe and easy way to sort
+% labels on page references.  But the reference itself, stored by \pkg{zref}
+% in the `default' field, is somewhat a disputed real estate.  In particular,
+% the use of \cs{labelformat} will include there the reference ``prefix'' and
+% complicate the job we are trying to do here.  Hence, we isolate
+% \cs{the}\meta{counter} and store it ``clean'' in \texttt{zc@thecounter} for
+% reserved use.
 %
 % From the definition of \cs{@currentlabel} done inside \cs{refstepcounter} in
 % 'texdoc source2e', section 'ltcounts.dtx'.  We just drop the \cs{p@...}
@@ -175,14 +172,17 @@
 %   a given \Arg{counter} and leave it in the input stream.  This function
 %   must be expandable, since it gets called from \cs{zref@newprop} and is the
 %   one responsible for generating the desired information when the label is
-%   being set.
+%   being set.  Note that the order in which we are getting this information
+%   is reversed, since we are navigating the counter reset chain bottom-up.
+%   But it is very hard to do otherwise here where we need expandable
+%   functions, and easy to handle at the reading side.
 %    \begin{macrocode}
 \cs_new:Npn \@@_get_within_counters:n #1
   {
     \cs_if_exist:cT { c@ \@@_counter_reset_by:n {#1} }
       {
         { \int_use:N \cs:w c@ \@@_counter_reset_by:n {#1} \cs_end: }
-        \@@_get_within_counters:e
+        \@@_get_within_counters:f
           { \@@_counter_reset_by:n {#1} }
       }
   }
@@ -233,11 +233,21 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% Finally, add \texttt{zc@within} to \pkg{zref}'s \texttt{main} property list.
+% Finally, add \texttt{zc@counterwithin} to \pkg{zref}'s \texttt{main}
+% property list.
 %    \begin{macrocode}
-\zref@newprop { zc@within }
+\zref@newprop { zc@counterwithin }
   { \@@_get_within_counters:o { \@currentcounter } }
-\zref@addprop \ZREF@mainlist { zc@within }
+\zref@addprop \ZREF@mainlist { zc@counterwithin }
+%    \end{macrocode}
+%
+% And the `page' itself may also be subject to resetting with
+% \cs{refstepcounter} (it is not by default in the standard classes, but it
+% \emph{may} be defined to be so).  So we store that too.
+%    \begin{macrocode}
+\zref@newprop { zc@pagewithin }
+  { \@@_get_within_counters:n { page } }
+\zref@addprop \ZREF@mainlist { zc@pagewithin }
 %    \end{macrocode}
 %
 %
@@ -296,11 +306,41 @@
 % \end{verbatim}
 %
 %
+% \begin{macro}[EXP]{\@@_page_numbering:}
+%   Another piece of information we need and can retrieve at label setting is
+%   the type of numbering being used by \cs{thepage}, so that we know when we
+%   can (or not) group a set of page references in a range.  To see how
+%   \cs{pagenumbering} is constructed, and hence \cs{thepage}'s definition,
+%   see 'ltpageno.dtx' in 'texdoc source2e'.
+%    \begin{macrocode}
+\cs_new:Npn \@@_page_numbering:
+  {
+    \exp_args:No \tl_map_function:nN
+      { \thepage } \@@_page_numbering_aux:n
+  }
+\cs_new:Npn \@@_page_numbering_aux:n #1
+  {
+    \tl_case:NnF #1
+      {
+        \csname {}
+        @ {}
+        \endcsname { \tl_map_break: }
+      }
+      {#1}
+  }
+\zref@newprop* { zc@pagenum } { \@@_page_numbering: }
+\zref@addprop \ZREF@mainlist { zc@pagenum }
+%    \end{macrocode}
+% \end{macro}
 %
 %
 %
+% \section{Plumbing}
 %
-%
+% \subsection{Counter override}
+
+
+
 %
 %
 %

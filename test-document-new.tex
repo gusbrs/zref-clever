@@ -2,8 +2,11 @@
 
 
 \usepackage{zref-clever}
+\usepackage{zref-titleref}
 
-\labelformat{section}{section~#1}
+\usepackage{hyperref}
+
+% \labelformat{section}{section~#1}
 
 \makeatletter
 \renewcommand\thechapter{\@roman\c@chapter}
@@ -29,10 +32,14 @@
 \section{Section 1.1}
 \label{sec:section-1-1}
 \zlabel{sec:section-1-1}
+\mainmatter
+
 
 \chapter{Chapter 2}
 \label{cha:chapter-2}
 \zlabel{cha:chapter-2}
+
+\clearpage{}
 
 \section{Section 1}
 \label{sec:section-2-1}
@@ -48,12 +55,32 @@
 
 \zref{sec:subs-2.1.1.1}
 
-
 \begin{enumerate}
 \item \zlabel{item:1}
   \begin{enumerate}
   \item \zlabel{item:1-1}
   \end{enumerate}
 \end{enumerate}
+
+\chapter{\zlabel{cha:chapter-3}Chapter 3}
+\label{cha:chapter-3}
+
+
+
+\begin{figure}
+  \centering
+
+  \caption{\zlabel{fig:figure-3-1}Figure 3.1}
+  \label{fig:figure-3-1}
+\end{figure}
+
+\section{\zlabel{sec:section-3-1}Section 3.1}
+\label{sec:section-3-1}
+
+\cref{part:part-1,cha:chapter-1,sec:section-1-1,cha:chapter-2,sec:section-2-1,sec:subsection-2.1.1,sec:subs-2.1.1.1,cha:chapter-3,sec:section-3-1}
+
+\cref{sec:subsection-2.1.1}
+\cref{sec:subs-2.1.1.1}
+
 
 \end{document}
