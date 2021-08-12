@@ -338,8 +338,64 @@
 % \section{Plumbing}
 %
 % \subsection{Counter override}
-
-
+%
+% There are some cases in which differently named references are made to
+% document objects sharing the same counter.  Prominently, the environments
+% created with the kernel's \cs{newtheorem} command, but the case will be
+% considered, and handled generally.
+%
+% \pkg{cleveref} deals with this by redefining \cs{newtheorem}'s internals and
+% retrieve the environment's name, to infer the type and do an ``automatic
+% definition'' of theorem-like environments with a reasonable default.  But
+% even then, it can only provide the singular form of the cross-reference
+% name, and if the plural is ever needed, the name has to be provided manually
+% anyway.  It also imposes the restriction of \cs{newtheorem} only being used
+% in the preamble, which would be good practice, but \cs{newtheorem} is
+% documented to be allowed anywhere in the document (see `texdoc source2e',
+% section `ltthm.dtx', comment at the definition of \cs{newtheorem}).  And the
+% calls to \cs{newtheorem} must also come after \pkg{cleveref} is loaded.  And
+% for this to work, either \pkg{ntheorem} or \pkg{amsthm} must be loaded (as
+% stated in the ``Non-Bugs'' section of the documentation).  This automatism
+% is, of course, a good thing, but the restrictions are considerable.
+%
+% Another mechanism \pkg{cleveref} provides for overriding individual labels
+% is by adding optional arguments to both \cs{label} and \cs{refstepcounter}
+% which receives a ``counter override label type'' and stores that
+% \emph{instead} of regular counter with the \cs{newlabel} in the \file{.aux}
+% file.
+%
+% All in all, and since \pkg{zref} spares us of the need to redefine such core
+% commands, I think a more general approach, even if a little less automatic,
+% is the best for us here.  \pkg{zref}'s data flexibility also helps us in
+% this.  The idea is simple, use a variable which serves as a ``flag'', if
+% this variable is set and contains something, we store that in the label as
+% an \emph{additional} property \texttt{zc@counterover} which, if present,
+% will have precedence when we refer to that label.  And this ``flag
+% variable'' can be set at appropriate times (it should always be done within
+% a group, of course).  For environments, it is trivial with a hook to
+% \texttt{env/\meta{env}/begin}.  This can be used for \cs{newtheorem}
+% environments to start with.  The use case for the optional argument for
+% \cs{label} and \cs{refstepcounter} I do not quite grasp, and it does
+% introduce ample opportunity for users to shoot themselves in the foot.
+% Still an equivalent could be provided by, for example, defining a document
+% command \cs{zclabel}\oart{counterover}\marg{label} which makes a group, sets
+% the flag with \meta{counterover}, and calls \cs{zlabel} with \meta{label}.
+% Anyway, for the time being, I'll provide the infrastructure for
+% environments, covering \cs{newtheorem} with that, and only introduce a
+% manual override of the sort if the need indeed arises and is well justified.
+%
+% Another relevant use case of the same general problem of different names for
+% the same counter is the \cs{appendix} which in some document classes,
+% including the standard ones, change the sectioning commands looks but, of
+% course, keep using the same counter (\file{book.cls} and \file{report.cls}
+% reset counters \texttt{chapter} and \texttt{section} to 0, change
+% \cs{@chapapp} to use \cs{appendixname} and use \cs{@Alph} for
+% \cs{thechapter}; \file{article.cls} resets counters \texttt{section} and
+% \texttt{subsection} to 0, and uses \cs{@Alph} for \cs{thesection};
+% \file{memoir.cls}, \file{scrbook.cls} and \file{scrarticle.cls} do the same
+% as their corresponding standard classes, and sometimes a little more, but
+% what interests us here is pretty much the same; see also the \pkg{appendix}
+% package).
 
 %
 %

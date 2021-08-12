@@ -8,18 +8,20 @@
 
 % \labelformat{section}{section~#1}
 
-\makeatletter
-\renewcommand\thechapter{\@roman\c@chapter}
-\makeatother
-
 \setcounter{secnumdepth}{4}
 
 \usepackage{cleveref}
 
+\newtheorem{lemma}{Lemma}
+
+\makeatletter
+\AtBeginEnvironment{lemma}{\show\@currentcounter}
+\makeatother
+
 \begin{document}
 
 \part{Part 1}
-\label{part:part-1}
+\label[banana]{part:part-1}
 \zlabel{part:part-1}
 
 \setcounter{chapter}{12}
@@ -82,5 +84,13 @@
 \cref{sec:subsection-2.1.1}
 \cref{sec:subs-2.1.1.1}
 
+
+\begin{lemma}
+  teste
+\end{lemma}
+
+\makeatletter
+\show\@currentcounter
+\makeatother
 
 \end{document}
