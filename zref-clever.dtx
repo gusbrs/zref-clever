@@ -341,48 +341,30 @@
 %
 % There are some cases in which differently named references are made to
 % document objects sharing the same counter.  Prominently, the environments
-% created with the kernel's \cs{newtheorem} command, but the case will be
-% considered, and handled generally.
+% created with the kernel's \cs{newtheorem} command and the \cs{appendix}, but
+% I'll try to consider, and handle, the case generally.
 %
-% \pkg{cleveref} deals with this by redefining \cs{newtheorem}'s internals and
-% retrieve the environment's name, to infer the type and do an ``automatic
-% definition'' of theorem-like environments with a reasonable default.  But
-% even then, it can only provide the singular form of the cross-reference
-% name, and if the plural is ever needed, the name has to be provided manually
-% anyway.  It also imposes the restriction of \cs{newtheorem} only being used
-% in the preamble, which would be good practice, but \cs{newtheorem} is
-% documented to be allowed anywhere in the document (see `texdoc source2e',
-% section `ltthm.dtx', comment at the definition of \cs{newtheorem}).  And the
-% calls to \cs{newtheorem} must also come after \pkg{cleveref} is loaded.  And
-% for this to work, either \pkg{ntheorem} or \pkg{amsthm} must be loaded (as
-% stated in the ``Non-Bugs'' section of the documentation).  This automatism
-% is, of course, a good thing, but the restrictions are considerable.
+% Regarding \cs{newtheorem}, \pkg{cleveref} deals with this by redefining its
+% internals and retrieving the environment's name, to infer the type and do an
+% ``automatic definition'' of theorem-like environments with a reasonable
+% default.  But even then, it can only provide the singular form of the
+% cross-reference name, and if the plural is ever needed, the name has to be
+% provided manually anyway.  It also imposes the restriction of
+% \cs{newtheorem} only being used in the preamble, which would be good
+% practice, but \cs{newtheorem} is documented to be allowed anywhere in the
+% document (see `texdoc source2e', section `ltthm.dtx', comment at the
+% definition of \cs{newtheorem}).  And the calls to \cs{newtheorem} must also
+% come after \pkg{cleveref} is loaded.  And for this to work, either
+% \pkg{ntheorem} or \pkg{amsthm} must be loaded (as stated in the ``Non-Bugs''
+% section of the documentation).  This automatism is, of course, a good thing,
+% but the restrictions are considerable.
 %
-% Another mechanism \pkg{cleveref} provides for overriding individual labels
+% A related mechanism \pkg{cleveref} provides for overriding individual labels
 % is by adding optional arguments to both \cs{label} and \cs{refstepcounter}
 % which receives a ``counter override label type'' and stores that
 % \emph{instead} of regular counter with the \cs{newlabel} in the \file{.aux}
-% file.
-%
-% All in all, and since \pkg{zref} spares us of the need to redefine such core
-% commands, I think a more general approach, even if a little less automatic,
-% is the best for us here.  \pkg{zref}'s data flexibility also helps us in
-% this.  The idea is simple, use a variable which serves as a ``flag'', if
-% this variable is set and contains something, we store that in the label as
-% an \emph{additional} property \texttt{zc@counterover} which, if present,
-% will have precedence when we refer to that label.  And this ``flag
-% variable'' can be set at appropriate times (it should always be done within
-% a group, of course).  For environments, it is trivial with a hook to
-% \texttt{env/\meta{env}/begin}.  This can be used for \cs{newtheorem}
-% environments to start with.  The use case for the optional argument for
-% \cs{label} and \cs{refstepcounter} I do not quite grasp, and it does
-% introduce ample opportunity for users to shoot themselves in the foot.
-% Still an equivalent could be provided by, for example, defining a document
-% command \cs{zclabel}\oart{counterover}\marg{label} which makes a group, sets
-% the flag with \meta{counterover}, and calls \cs{zlabel} with \meta{label}.
-% Anyway, for the time being, I'll provide the infrastructure for
-% environments, covering \cs{newtheorem} with that, and only introduce a
-% manual override of the sort if the need indeed arises and is well justified.
+% file.  This affords for a fully manual ``one time'' counter override for
+% that particular label.
 %
 % Another relevant use case of the same general problem of different names for
 % the same counter is the \cs{appendix} which in some document classes,
@@ -396,7 +378,50 @@
 % as their corresponding standard classes, and sometimes a little more, but
 % what interests us here is pretty much the same; see also the \pkg{appendix}
 % package).
-
+%
+% All in all, and since \pkg{zref} spares us of the need to redefine such core
+% commands, I think a more general approach, even if a little less automatic,
+% is the best for us here.  \pkg{zref}'s data flexibility also helps us in
+% this.  The idea is simple, use a (locally scoped) property list variable
+% storing a mapping of counters to its respective ``counter override''.  When
+% a label is set, if such ``counter override'' for \cs{@currentcounter} is
+% found in the list, we store that in the label as an \emph{additional}
+% property \texttt{zc@counterover} which, if present, will have precedence
+% when we refer to that label.  And this variable can be set at appropriate
+% times.  For environments, it is trivial with a hook to
+% \texttt{env/\meta{env}/begin}.  This can be used for \cs{newtheorem}
+% environments to start with.  Ideally, this would rely on \cs{zcsetup}, let's
+% see.
+%
+% The use case for the optional argument for \cs{label} and
+% \cs{refstepcounter} I do not quite grasp, and it does introduce ample
+% opportunity for users to shoot themselves in the foot.  Still an equivalent
+% could be provided by, for example, defining a document command
+% \cs{zclabel}\oart{counterover}\marg{label} which makes a group, sets the
+% counter override variable, and calls \cs{zlabel} with \meta{label}.  Anyway,
+% for the time being, I'll provide the higher level infrastructure, covering
+% \cs{newtheorem} and \cs{appendix}, and only introduce a manual override of
+% the sort if the need indeed arises and is well justified.
+%
+%
+%
+% \section{Counter alias}
+%
+% The inverse of the above case may also occur: references made to different
+% counters sharing the same name.  This case is much easier to handle, since
+% it can be done entirely on the side of \pkg{zref-clever}.  We hence define
+% \texttt{counter B} to be an alias of \texttt{counter A} when we want
+% \texttt{counter B} use the same setup (strings, separators, etc.) as
+% \texttt{counter A}.  This can be done in \cs{zcsetup} for \texttt{counter A}
+% and specifying \texttt{counter B} as an alias for it.
+%
+% One prominent case of this are sectioning commands.  \cs{section},
+% \cs{subsection}, and \cs{subsubsection} have each their counter, but we'd
+% like to refer to all of them by ``section''.  The same for \cs{paragraph}
+% and \cs{subparagraph}.
+%
+%
+%
 %
 %
 %
