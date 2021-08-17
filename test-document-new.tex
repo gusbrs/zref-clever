@@ -4,7 +4,10 @@
 % \usepackage[ngerman]{babel}
 
 \usepackage{zref-clever}
+\usepackage[user]{zref}
 \usepackage{zref-titleref}
+
+\usepackage{chappg}
 
 \usepackage{hyperref}
 
@@ -22,16 +25,21 @@
 
 \begin{document}
 
+\frontmatter{}
+
+
 \part{Part 1}
 \label[banana]{part:part-1}
 \zlabel{part:part-1}
 
 \setcounter{chapter}{12}
 
+
 \chapter{Chapter 1}
 \label{cha:chapter-1}
 \zlabel{cha:chapter-1}
 
+\clearpage{}
 
 \section{Section 1.1}
 \label{sec:section-1-1}
@@ -49,9 +57,13 @@
 \label{sec:section-2-1}
 \zlabel{sec:section-2-1}
 
+\clearpage{}
+
 \subsection{Subsection 2.1.1}
 \label{sec:subsection-2.1.1}
 \zlabel{sec:subsection-2.1.1}
+
+\clearpage{}
 
 \subsubsection{Subsubsection 2.1.1.1}
 \label{sec:subs-2.1.1.1}
@@ -77,6 +89,8 @@
   \caption{\zlabel{fig:figure-3-1}Figure 3.1}
   \label{fig:figure-3-1}
 \end{figure}
+
+\clearpage{}
 
 \section{\zlabel{sec:section-3-1}Section 3.1}
 \label{sec:section-3-1}

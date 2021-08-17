@@ -137,8 +137,14 @@
 % numerical value (see `texdoc source2e', section `ltcounts.dtx'), we just
 % store it in \texttt{zc@cntval}.
 %    \begin{macrocode}
-\zref@newprop { zc@cntval } { \int_use:c { c@\@currentcounter } }
+\zref@newprop { zc@cntval } [0] { \int_use:c { c@\@currentcounter } }
 \zref@addprop \ZREF@mainlist { zc@cntval }
+%    \end{macrocode}
+%
+% And we need the same for the page.
+%    \begin{macrocode}
+\zref@newprop* { zc@pgval } [0] { \int_use:c { c@page } }
+\zref@addprop \ZREF@mainlist { zc@pgval }
 %    \end{macrocode}
 %
 % The second one is trickier.  For starters, the counters which may reset the
@@ -278,13 +284,22 @@
 \zref@addprop \ZREF@mainlist { zc@withinval }
 %    \end{macrocode}
 %
-% And the `page' itself may also be subject to resetting with
-% \cs{refstepcounter} (it is not by default in the standard classes, but it
-% \emph{may} be defined to be so).  So we store that too.
+% The `page' itself may also be subject to resetting with \cs{refstepcounter}.
+% It is not by default in the standard classes, but it \emph{may} be defined
+% to be so, e.g.z as with the package \pkg{chappg}, so we store that too.
+% CHECK I think this is not actually needed.  \pkg{cleveref} does store the
+% equivalent of \texttt{zc@pgwithinval}, but it doesn't have \texttt{abspage}
+% available.  Since we can sort with the later, and decide about compression
+% with \texttt{zc@pgfmt}, we don't need to keep track of the whole reset chain
+% for \texttt{page}, which does not tell us the whole picture anyway, given it
+% gets reset more frequently with \cs{pagenumbering}.
 %    \begin{macrocode}
-\zref@newprop { zc@withinpg }
-  { \@@_get_within_counters_value:n { page } }
-\zref@addprop \ZREF@mainlist { zc@withinpg }
+% \zref@newprop { zc@pgwithincnt }
+%   { \@@_get_within_counters:o { page } }
+% \zref@newprop { zc@pgwithinval }
+%   { \@@_get_within_counters_value:n { page } }
+% \zref@addprop \ZREF@mainlist { zc@pgwithincnt }
+% \zref@addprop \ZREF@mainlist { zc@pgwithinval }
 %    \end{macrocode}
 %
 %
@@ -344,29 +359,43 @@
 %
 %
 % \begin{macro}[EXP]{\@@_page_numbering:}
-%   Another piece of information we need and can retrieve at label setting is
-%   the type of numbering being used by \cs{thepage}, so that we know when we
-%   can (or not) group a set of page references in a range.  To see how
-%   \cs{pagenumbering} is constructed, and hence \cs{thepage}'s definition,
-%   see 'ltpageno.dtx' in 'texdoc source2e'.
+%   Another piece of information we need is the page numbering format being
+%   used by \cs{thepage}, so that we know when we can (or not) group a set of
+%   page references in a range.  Unfortunately, the ``page'' is not a typical
+%   counter in ways which complicates things.  First, it does commonly get
+%   reset along the document, not necessarily by the usual counter reset
+%   chains, but rather with \cs{pagenumbering} or variations thereof.  Second,
+%   the format of the page number commonly changes in the document (roman,
+%   arabic, etc.), not necessarily, though usually, together with a reset.
+%   Trying to ``parse'' \cs{thepage} to retrieve such information is bound to
+%   go wrong: we don't know, and can't know, what is within that macro, and
+%   that's the business of the user, or of the documentclass, or of the loaded
+%   packages.  The technique used by \pkg{cleveref}, which we borrow here, is
+%   simple and smart: store with the label what \cs{thepage} would return, if
+%   the counter \cs{c@page} was ``1''.  That does not allow us to \emph{sort}
+%   the references, luckily however, we have \texttt{abspage} which can be
+%   used for that.  But we can decide whether two labels can be compressed or
+%   not based on this format: if they are identical, we can compress them,
+%   otherwise, we can't.  \pkg{cleveref} actually resets the counter to ``1''
+%   with \cs{setcounter}, which is a global operation, and restores it in
+%   sequence.  Here we adopt a more cautious approach of locally redefining
+%   \cs{c@page} to return ``1'', thus avoiding any global spillovers of this
+%   trick.  Since this operation is not expandable we cannot run it directly
+%   from the property definition.  Hence, we use a shipout hook, and set
+%   \cs{g_@@_page_format_tl}, which can then be retrieved by the starred
+%   definition of |\zref@newprop*{zc@pgfmt}|.
 %    \begin{macrocode}
-\cs_new:Npn \@@_page_numbering:
+\tl_new:N \g_@@_page_format_tl
+\cs_new:Npx \@@_page_format_aux: { \int_eval:n { 1 } }
+\AddToHook { shipout / before }
   {
-    \exp_args:No \tl_map_function:nN
-      { \thepage } \@@_page_numbering_aux:n
+    \group_begin:
+    \cs_set_eq:NN \c@page \@@_page_format_aux:
+    \exp_args:NNx \tl_gset:Nn \g_@@_page_format_tl { \thepage }
+    \group_end:
   }
-\cs_new:Npn \@@_page_numbering_aux:n #1
-  {
-    \tl_case:NnF #1
-      {
-        \csname {}
-        @ {}
-        \endcsname { \tl_map_break: }
-      }
-      {#1}
-  }
-\zref@newprop* { zc@pgnum } { \@@_page_numbering: }
-\zref@addprop \ZREF@mainlist { zc@pgnum }
+\zref@newprop* { zc@pgfmt } { \g_@@_page_format_tl }
+\zref@addprop \ZREF@mainlist { zc@pgfmt }
 %    \end{macrocode}
 % \end{macro}
 %
