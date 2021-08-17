@@ -407,21 +407,22 @@
 % \label{sec:reference-types}
 %
 % Let's start with a bit of terminology, to avoid confusion.  A ``reference
-% type'' is a the basic \pkg{zref-clever} setup unit for specifying how a
+% type'' is the basic \pkg{zref-clever} setup unit for specifying how a
 % cross-reference group of a certain kind is to be typeset.  Though, usually,
 % it will have the same name as the underlying \LaTeX{} \emph{counter}, they
 % are conceptually different.  \pkg{zref-clever} defines \emph{reference
-% types} and an association between each \emph{counter} and these types, it
-% does not define the counters themselves, which are defined by your document.
-% One \emph{reference type} can be associated with one or more
-% \emph{counters}, but each counter can only have one \emph{type}, and that
-% determines how the reference is typeset.  References to different
-% \emph{counters} of the same \emph{type} are grouped together, and treated
-% alike by \pkg{zref-clever}.  A \emph{reference type} may exist even when the
-% \emph{counter} it is associated with is not actually defined, and this
-% inconsequential.  In practice, the contrary may also happen, a
-% \emph{counter} may be defined but we have no \emph{type} for it, but this
-% must be handled by \pkg{zref-clever} as a ``missing type'' error.
+% types} and an association between each \emph{counter} and its \emph{type},
+% it does not define the counters themselves, which are defined by your
+% document.  One \emph{reference type} can be associated with one or more
+% \emph{counters}, but each counter can only have one \emph{type}
+% (locally\dots{}), and that determines how the reference is typeset.
+% References to different \emph{counters} of the same \emph{type} are grouped
+% together, and treated alike by \pkg{zref-clever}.  A \emph{reference type}
+% may exist even when the \emph{counter} it is associated with is not actually
+% defined, and this inconsequential.  In practice, the contrary may also
+% happen, a \emph{counter} may be defined but we have no \emph{type} for it,
+% but this must be handled by \pkg{zref-clever} as a ``missing type'' error
+% (at least, if we try to refer to it).
 %
 % A \emph{reference type} can be associated with multiple counters because we
 % may want to refer to different document elements, with different
@@ -431,7 +432,7 @@
 % them by ``section''.  The same for \cs{paragraph} and \cs{subparagraph}.
 % There is one relevant subtlety to grouping multiple counters under the same
 % type: in order for us to be able to meaningfully sort and compress this
-% group the set of counters contained therein cannot be arbitrary.  Indeed,
+% group, the set of counters contained therein cannot be arbitrary.  Indeed,
 % all of the \emph{counters} grouped in the same \emph{type} must belong to
 % the same counter reset chain, and must be nested within each other (they
 % cannot even just share the same parent).  The need to check this (?) has
@@ -543,6 +544,54 @@
 % \cs{newtheorem} and \cs{appendix}, and only introduce a manual override of
 % the sort if the need indeed arises and is well justified.
 %
+%
+%
+%
+%
+% \section{\cs{zcref}}
+%
+%
+%
+%
+% \begin{macro}[int]{\zcheck}
+%   \begin{syntax}
+%     \cs{zcref}\meta{*}\oarg{options}\marg{labels}
+%   \end{syntax}
+%    \begin{macrocode}
+\NewDocumentCommand \zcref
+  { s O { } > { \SplitList { , } } m }
+  { \zref@wrapper@babel \@@_zcref:nnn {#3} {#1} {#2} }
+%    \end{macrocode}
+% \end{macro}
+
+
+% \begin{macro}{\@@_zcref:nnnn}
+%   An intermediate internal function, which does the actual heavy lifting,
+%   and places \Arg{labels} as first argument, so that it can be protected by
+%   \cs{zref@wrapper@babel} in \cs{zcref}.
+%   \begin{syntax}
+%     \cs{@@_zcref:nnnn} \Arg{labels} \Arg{*} \Arg{options}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_zcref:nnn #1#2#3
+  {
+    \group_begin:
+
+
+    \group_end:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+%
+%
+%
+%
+%
+%
+% \section{Sorting}
 %
 %
 %
