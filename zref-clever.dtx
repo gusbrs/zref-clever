@@ -386,7 +386,7 @@
 %   definition of |\zref@newprop*{zc@pgfmt}|.
 %    \begin{macrocode}
 \tl_new:N \g_@@_page_format_tl
-\cs_new:Npx \@@_page_format_aux: { \int_eval:n { 1 } }
+\cs_new_protected:Npx \@@_page_format_aux: { \int_eval:n { 1 } }
 \AddToHook { shipout / before }
   {
     \group_begin:
@@ -558,13 +558,12 @@
 %     \cs{zcref}\meta{*}\oarg{options}\marg{labels}
 %   \end{syntax}
 %    \begin{macrocode}
-\NewDocumentCommand \zcref
-  { s O { } > { \SplitList { , } } m }
+\NewDocumentCommand \zcref { s O { } > { \SplitList { , } } m }
   { \zref@wrapper@babel \@@_zcref:nnn {#3} {#1} {#2} }
 %    \end{macrocode}
 % \end{macro}
-
-
+%
+%
 % \begin{macro}{\@@_zcref:nnnn}
 %   An intermediate internal function, which does the actual heavy lifting,
 %   and places \Arg{labels} as first argument, so that it can be protected by
@@ -573,10 +572,13 @@
 %     \cs{@@_zcref:nnnn} \Arg{labels} \Arg{*} \Arg{options}
 %   \end{syntax}
 %    \begin{macrocode}
-\cs_new:Npn \@@_zcref:nnn #1#2#3
+\seq_new:N \l_@@_zcref_labels_seq
+\cs_new_protected:Npn \@@_zcref:nnn #1#2#3
   {
     \group_begin:
-
+    \seq_set_split:Nnn \l_@@_zcref_labels_seq { } {#1}
+    \@@_sort_labels:
+    \seq_use:Nn \l_@@_zcref_labels_seq {,}
 
     \group_end:
   }
@@ -594,6 +596,33 @@
 % \section{Sorting}
 %
 %
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_sort_labels:
+  {
+    \seq_sort:Nn \l_@@_zcref_labels_seq
+      {
+        \zref@ifrefundefined {##1}
+          {
+            % If the first label is undefined, throw it to the end of the
+            % list.
+            \sort_return_swapped:
+          }
+          {
+            \zref@ifrefundefined {##2}
+              {
+                % If the first label is defined, but the second isn't, keep
+                % the second behind.
+                \sort_return_same:
+              }
+              {
+                \sort_return_same:
+              }
+          }
+      }
+  }
+
+
+%    \end{macrocode}
 %
 %
 %

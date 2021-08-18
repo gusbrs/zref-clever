@@ -29,7 +29,7 @@
 
 
 \part{Part 1}
-\label[banana]{part:part-1}
+\label{part:part-1}
 \zlabel{part:part-1}
 
 \setcounter{chapter}{12}
@@ -78,24 +78,31 @@
   \end{enumerate}
 \end{enumerate}
 
-\chapter{\zlabel{cha:chapter-3}Chapter 3}
+\chapter{Chapter 3}
 \label{cha:chapter-3}
+\zlabel{cha:chapter-3}
 
 
 
 \begin{figure}
   \centering
 
-  \caption{\zlabel{fig:figure-3-1}Figure 3.1}
+  \caption{Figure 3.1}
   \label{fig:figure-3-1}
+  \zlabel{fig:figure-3-1}
 \end{figure}
 
 \clearpage{}
 
-\section{\zlabel{sec:section-3-1}Section 3.1}
+\section{Section 3.1}
 \label{sec:section-3-1}
+\zlabel{sec:section-3-1}
 
 \cref{sec:section-1-1,cha:chapter-1,cha:chapter-2,sec:section-2-1,sec:subsection-2.1.1,sec:subs-2.1.1.1,cha:chapter-3,sec:section-3-1}
+
+
+\zcref{undefined,sec:section-1-1,{{cha:chapter-1}},cha:chapter-2,sec:section-2-1,sec:subsection-2.1.1,sec:subs-2.1.1.1,cha:chapter-3,sec:section-3-1}
+
 
 % \cref{sec:subsection-2.1.1}
 % \cref{sec:subs-2.1.1.1}
