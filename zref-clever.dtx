@@ -597,28 +597,199 @@
 %
 %
 %    \begin{macrocode}
+
+% TODO Stores whether this reference is to the page, or to the default
+% counter, this should be moved to options.
+\bool_new:N \l_@@_page_ref_bool
+
+% Auxiliary variable for \cs{@@_sort_labels:}, stores the sequence that
+% reference types appear in the label list supplied by the user in \cs{zcref}.
+\seq_new:N \l_@@_label_type_seq
+
+% Aux variables.
+\tl_new:N \l_@@_ref_type_a_tl
+\tl_new:N \l_@@_ref_type_b_tl
+\tl_new:N \l_@@_label_a_tl
+\tl_new:N \l_@@_label_b_tl
+
+% TODO The "priority" should be coming somehow from options, but this is not
+% done yet, just set a temporary value to build one piece at a time.  Items
+% with higher priority go to the top.
+\int_new:N \l_@@_sort_prior_a_int
+\int_new:N \l_@@_sort_prior_b_int
+
+
+% An auxiliary function to handle the case of ``signaling'' a label should not
+% be grouped by double bracing it.  Argument parsing (by \pkg{xparse}) will
+% strip the first pair of braces, we may receive it with one (or none).
+\cs_new:Npn \@@_tl_set_unbraced:Nn #1#2
+  {
+    \tl_if_head_is_group:nTF {#2}
+      { \tl_set:Nn #1 #2 }
+      { \tl_set:Nn #1 {#2} }
+  }
+
 \cs_new_protected:Npn \@@_sort_labels:
   {
-    \seq_sort:Nn \l_@@_zcref_labels_seq
+    % Store the reference type sequence of the labels list given by the user
+    % in \cs{zcref} in \cs{l_@@_label_type_seq} to have a sort criterion when
+    % the sort priority of different types is the same.
+    \seq_clear:N \l_@@_label_type_seq
+    \seq_map_inline:Nn \l_@@_zcref_labels_seq
       {
-        \zref@ifrefundefined {##1}
+        \tl_clear:N \l_@@_label_a_tl
+        \tl_clear:N \l_@@_ref_type_a_tl
+        \@@_tl_set_unbraced:Nn \l_@@_label_a_tl {##1}
+        \tl_set:Nx \l_@@_ref_type_a_tl
           {
-            % If the first label is undefined, throw it to the end of the
-            % list.
-            \sort_return_swapped:
+            \zref@extractdefault
+              { \l_@@_label_a_tl } { zc@type } { \c_empty_tl }
           }
+        \tl_if_empty:NF \l_@@_ref_type_a_tl
           {
-            \zref@ifrefundefined {##2}
+            \seq_if_in:NVF \l_@@_label_type_seq \l_@@_ref_type_a_tl
               {
-                % If the first label is defined, but the second isn't, keep
-                % the second behind.
-                \sort_return_same:
-              }
-              {
-                \sort_return_same:
+                \seq_put_right:NV
+                \l_@@_label_type_seq \l_@@_ref_type_a_tl
               }
           }
       }
+
+    \seq_sort:Nn \l_@@_zcref_labels_seq
+      {
+        % Handle possible bracing of labels to signal grouping inhibition.
+        \tl_clear:N \l_@@_label_a_tl
+        \tl_clear:N \l_@@_label_b_tl
+        \@@_tl_set_unbraced:Nn \l_@@_label_a_tl {##1}
+        \@@_tl_set_unbraced:Nn \l_@@_label_b_tl {##2}
+
+        \zref@ifrefundefined { \l_@@_label_a_tl }
+          {
+            \zref@ifrefundefined { \l_@@_label_b_tl }
+              {
+                % Neither label is defined.
+                \sort_return_same:
+              }
+              {
+                % The second label is defined, but the first isn't, bring the
+                % second forward.
+                \sort_return_swapped:
+              }
+          }
+          {
+
+            \zref@ifrefundefined { \l_@@_label_b_tl }
+              {
+                % The first label is defined, but the second isn't, keep the
+                % second behind.
+                \sort_return_same:
+              }
+              {
+                % The interesting case: both labels are defined. The reference
+                % to the "default" property/counter or to the page are quite
+                % different from our perspective, they rely on different
+                % fields and even use different information for sorting (and
+                % compressing), so we branch them here to specialized
+                % functions.
+                \bool_if:NTF \l_@@_page_ref_bool
+                  {
+                    \@@_sort_page_aux:nn
+                      { \l_@@_label_a_tl } { \l_@@_label_b_tl }
+                  }
+                  {
+                    \@@_sort_default_aux:nn
+                      { \l_@@_label_a_tl } { \l_@@_label_b_tl }
+                  }
+              }
+          }
+      }
+  }
+
+\cs_new_protected:Npn \@@_sort_default_aux:nn #1#2
+  {
+    \tl_clear:N \l_@@_ref_type_a_tl
+    \tl_clear:N \l_@@_ref_type_b_tl
+    \tl_set:Nx \l_@@_ref_type_a_tl
+      { \zref@extractdefault {#1} { zc@type } { \c_empty_tl } }
+    \tl_set:Nx \l_@@_ref_type_b_tl
+      { \zref@extractdefault {#2} { zc@type } { \c_empty_tl } }
+    \bool_case_true:nF
+      {
+        % The second label has a type, but the first doesn't, bring the second
+        % forward.
+        {
+          \tl_if_empty_p:N \l_@@_ref_type_a_tl &&
+          ! \tl_if_empty_p:N \l_@@_ref_type_b_tl
+        }
+        { \sort_return_swapped: }
+        % Both labels have a type.
+        {
+          ! \tl_if_empty_p:N \l_@@_ref_type_a_tl &&
+          ! \tl_if_empty_p:N \l_@@_ref_type_b_tl
+        }
+        {
+          \tl_if_eq:NNTF \l_@@_ref_type_a_tl \l_@@_ref_type_b_tl
+            {
+              % Same type.
+              % TODO Temporary.
+              \sort_return_same:
+            }
+            {
+              % Different types.
+
+              % TODO Ditto.
+              \int_set:Nn \l_@@_sort_prior_a_int { 0 }
+              \int_set:Nn \l_@@_sort_prior_b_int { 0 }
+
+              \bool_case_true:nF
+                {
+                  {
+                    \int_compare_p:nNn
+                      { \l_@@_sort_prior_a_int } >
+                      { \l_@@_sort_prior_b_int }
+                  }
+                  { \sort_return_same: }
+                  {
+                    \int_compare_p:nNn
+                      { \l_@@_sort_prior_a_int } <
+                      { \l_@@_sort_prior_b_int }
+                  }
+                  { \sort_return_swapped: }
+                }
+                {
+                  % Sort priorities are equal.
+                  % NOTE This procedure assumes one of them *must* be found,
+                  % otherwise no \cs{sort_return_...} is returned.
+                  % Considering the way \cs{l_@@_label_type_seq} was
+                  % constructed and were we are in the branching we should
+                  % actually find both of them eventually.  However, if this
+                  % reasoning proves faulty, we'd have to control for this.
+                  \seq_map_inline:Nn \l_@@_label_type_seq
+                    {
+                      \tl_if_eq:NnTF \l_@@_ref_type_a_tl {##1}
+                        { \seq_map_break:n { \sort_return_same: } }
+                        {
+                          \tl_if_eq:NnT \l_@@_ref_type_b_tl {##1}
+                            { \seq_map_break:n { \sort_return_swapped: } }
+                        }
+                    }
+                }
+            }
+        }
+      }
+      {
+        % If none of the above cases match, we have either: i) neither of the
+        % labels has a type; or ii) the first label has a type, but the second
+        % doesn't.  In both cases the answer is:
+        \sort_return_same:
+      }
+  }
+
+
+\cs_new_protected:Npn \@@_sort_page_aux:nn #1#2
+  {
+    % TODO Temporary.
+    \sort_return_same:
   }
 
 
