@@ -212,13 +212,15 @@
           { \@@_counter_reset_by:n {#1} }
       }
   }
-% Both \texttt{e} and \texttt{f} variants work for the recursive call.  For
-% the time being, I'll stay with \texttt{e}, since conceptually it is what I
-% want (\texttt{x} itself is not expandable), and this package is unlikely to
-% be used within the context of older kernels for which the performance
-% penalty of the \texttt{e} expansion would ensue.  But review this if needed.
-\cs_generate_variant:Nn \@@_get_within_counters:n { o , e , f }
-\cs_generate_variant:Nn \@@_get_within_counters_value:n { o , e , f }
+% Both \texttt{e} and \texttt{f} expansions work for this particular recursive
+% call.  For the time being, I'll stay with the \texttt{e} variant, since
+% conceptually it is what I want (\texttt{x} itself is not expandable), and
+% this package is unlikely to be used within the context of older kernels for
+% which the performance penalty of the \texttt{e} expansion would ensue (see
+% also \url{https://tex.stackexchange.com/q/611370/#comment1529282_611385},
+% thanks Enrico Gregorio, aka `egreg').
+\cs_generate_variant:Nn \@@_get_within_counters:n { o , e }
+\cs_generate_variant:Nn \@@_get_within_counters_value:n { o , e }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -619,15 +621,6 @@
 \int_new:N \l_@@_sort_prior_b_int
 
 
-% An auxiliary function to handle the case of ``signaling'' a label should not
-% be grouped by double bracing it.  Argument parsing (by \pkg{xparse}) will
-% strip the first pair of braces, we may receive it with one (or none).
-\cs_new:Npn \@@_tl_set_unbraced:Nn #1#2
-  {
-    \tl_if_head_is_group:nTF {#2}
-      { \tl_set:Nn #1 #2 }
-      { \tl_set:Nn #1 {#2} }
-  }
 
 \cs_new_protected:Npn \@@_sort_labels:
   {
@@ -637,14 +630,9 @@
     \seq_clear:N \l_@@_label_type_seq
     \seq_map_inline:Nn \l_@@_zcref_labels_seq
       {
-        \tl_clear:N \l_@@_label_a_tl
         \tl_clear:N \l_@@_ref_type_a_tl
-        \@@_tl_set_unbraced:Nn \l_@@_label_a_tl {##1}
         \tl_set:Nx \l_@@_ref_type_a_tl
-          {
-            \zref@extractdefault
-              { \l_@@_label_a_tl } { zc@type } { \c_empty_tl }
-          }
+          { \zref@extractdefault {##1} { zc@type } { \c_empty_tl } }
         \tl_if_empty:NF \l_@@_ref_type_a_tl
           {
             \seq_if_in:NVF \l_@@_label_type_seq \l_@@_ref_type_a_tl
@@ -657,15 +645,9 @@
 
     \seq_sort:Nn \l_@@_zcref_labels_seq
       {
-        % Handle possible bracing of labels to signal grouping inhibition.
-        \tl_clear:N \l_@@_label_a_tl
-        \tl_clear:N \l_@@_label_b_tl
-        \@@_tl_set_unbraced:Nn \l_@@_label_a_tl {##1}
-        \@@_tl_set_unbraced:Nn \l_@@_label_b_tl {##2}
-
-        \zref@ifrefundefined { \l_@@_label_a_tl }
+        \zref@ifrefundefined {##1}
           {
-            \zref@ifrefundefined { \l_@@_label_b_tl }
+            \zref@ifrefundefined {##2}
               {
                 % Neither label is defined.
                 \sort_return_same:
@@ -678,7 +660,7 @@
           }
           {
 
-            \zref@ifrefundefined { \l_@@_label_b_tl }
+            \zref@ifrefundefined {##2}
               {
                 % The first label is defined, but the second isn't, keep the
                 % second behind.
@@ -692,14 +674,8 @@
                 % compressing), so we branch them here to specialized
                 % functions.
                 \bool_if:NTF \l_@@_page_ref_bool
-                  {
-                    \@@_sort_page_aux:nn
-                      { \l_@@_label_a_tl } { \l_@@_label_b_tl }
-                  }
-                  {
-                    \@@_sort_default_aux:nn
-                      { \l_@@_label_a_tl } { \l_@@_label_b_tl }
-                  }
+                  { \@@_sort_page_aux:nn {##1} {##2} }
+                  { \@@_sort_default_aux:nn {##1} {##2} }
               }
           }
       }
@@ -794,6 +770,21 @@
 
 
 %    \end{macrocode}
+%
+%
+%
+%
+% \section{Compressing}
+%
+% About possible alternatives to signal compression inhibition for individual
+% labels, see \url{https://tex.stackexchange.com/q/611370} (thanks Enrico
+% Gregorio, Phelype Oleinik, and Steven B.\ Segletes).  All in all, and
+% rethinking this here, probably the best is to receive an optional argument
+% with the label(s) not to be compressed.  This is a repetition, but keeps the
+% syntax ``clean'', and I do expect the use case to be rare enough that this
+% inconvenience is not too large.
+%
+%
 %
 %
 %
