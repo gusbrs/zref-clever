@@ -7,7 +7,7 @@
 \usepackage[user]{zref}
 \usepackage{zref-titleref}
 
-\usepackage{chappg}
+% \usepackage{chappg}
 
 \usepackage{hyperref}
 
@@ -25,14 +25,16 @@
 
 \begin{document}
 
-\frontmatter{}
+\frontmatter
 
+
+\mainmatter
 
 \part{Part 1}
 \label{part:part-1}
 \zlabel{part:part-1}
 
-\setcounter{chapter}{12}
+% \setcounter{chapter}{12}
 
 
 \chapter{Chapter 1}
@@ -42,9 +44,9 @@
 \clearpage{}
 
 \section{Section 1.1}
-\label{sec:section-1-1}
-\zlabel{sec:section-1-1}
-\mainmatter
+\label{sec:section-1.1}
+\zlabel{sec:section-1.1}
+
 
 
 \chapter{Chapter 2}
@@ -54,8 +56,8 @@
 \clearpage{}
 
 \section{Section 1}
-\label{sec:section-2-1}
-\zlabel{sec:section-2-1}
+\label{sec:section-2.1}
+\zlabel{sec:section-2.1}
 
 \clearpage{}
 
@@ -69,7 +71,13 @@
 \label{sec:subs-2.1.1.1}
 \zlabel{sec:subs-2.1.1.1}
 
+
+
 \zref{sec:subs-2.1.1.1}
+
+\subsubsection{Subsubsection 2.1.1.2}
+\label{sec:subs-2.1.1.2}
+\zlabel{sec:subs-2.1.1.2}
 
 \begin{enumerate}
 \item \zlabel{item:1}
@@ -95,13 +103,14 @@
 \clearpage{}
 
 \section{Section 3.1}
-\label{sec:section-3-1}
-\zlabel{sec:section-3-1}
+\label{sec:section-3.1}
+\zlabel{sec:section-3.1}
 
-\cref{sec:section-1-1,cha:chapter-1,cha:chapter-2,sec:section-2-1,sec:subsection-2.1.1,sec:subs-2.1.1.1,cha:chapter-3,sec:section-3-1}
+\cref{sec:section-1.1,cha:chapter-1,cha:chapter-2,sec:section-2.1,sec:subsection-2.1.1,sec:subs-2.1.1.2,sec:subs-2.1.1.1,cha:chapter-3,sec:section-3.1}
 
 
-\zcref{undefined,cha:chapter-3,sec:section-1-1,cha:chapter-1,cha:chapter-2,sec:section-2-1,sec:subsection-2.1.1,sec:subs-2.1.1.1,sec:section-3-1}
+\zcref{undefined,sec:section-3.1,cha:chapter-3,sec:section-1.1,cha:chapter-1,cha:chapter-2,sec:section-2.1,sec:subs-2.1.1.2,sec:subs-2.1.1.1,sec:subsection-2.1.1}
+
 
 
 
