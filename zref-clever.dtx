@@ -81,16 +81,15 @@
 %
 % Identify the package.
 %    \begin{macrocode}
-\ProvidesExplPackage {zref-clever} {2021-08-09} {0.1.0-alpha}
+\ProvidesExplPackage {zref-clever} {2021-08-25} {0.1.0-alpha}
   {Do-what-I-mean cross-references based on zref}
 %    \end{macrocode}
 %
 % \section{Dependencies}
 %
 %    \begin{macrocode}
+\RequirePackage { zref-base }
 \RequirePackage { zref-user }
-\RequirePackage { zref-counter }
-\RequirePackage { zref-abspage }
 \RequirePackage { translations }
 %    \end{macrocode}
 %
@@ -110,7 +109,16 @@
 % reserved use.  We also store the ``type'' of the label at this point (see
 % Section~\ref{sec:reference-types}).
 %
+% However, the \pkg{zref-abspage} module is very simple, but loads
+% \pkg{atbegshi}, which is no longer needed with a recent kernel, which we
+% require here anyway.  So we can spare this additional dependence by
+% providing the property internally.  Since only \pkg{zref-counter} remains,
+% which is also trivial, we do that too, and thus ensure that all needed data
+% is stored in ``internal'' properties.
+%
 %    \begin{macrocode}
+\zref@newprop { zc@counter } { \@currentcounter }
+\zref@addprop \ZREF@mainlist { zc@counter }
 \zref@newprop { zc@type }
   { \exp_args:NNo \prop_item:Nn \l_@@_counter_type_prop { \@currentcounter } }
 \zref@addprop \ZREF@mainlist { zc@type }
@@ -141,10 +149,14 @@
 \zref@addprop \ZREF@mainlist { zc@cntval }
 %    \end{macrocode}
 %
-% And we need the same for the page.
+% And we need the same for the page and abspage.
 %    \begin{macrocode}
 \zref@newprop* { zc@pgval } [0] { \int_use:c { c@page } }
 \zref@addprop \ZREF@mainlist { zc@pgval }
+\int_new:N \g_@@_abspage_int
+\AddToHook { shipout/before } { \int_gincr:N \g_@@_abspage_int }
+\zref@newprop* { zc@abspg } [0] { \int_use:N \g_@@_abspage_int }
+\zref@addprop \ZREF@mainlist { zc@abspg }
 %    \end{macrocode}
 %
 % The second one is trickier.  For starters, the counters which may reset the
@@ -212,6 +224,7 @@
           { \@@_counter_reset_by:n {#1} }
       }
   }
+%    \end{macrocode}
 % Both \texttt{e} and \texttt{f} expansions work for this particular recursive
 % call.  For the time being, I'll stay with the \texttt{e} variant, since
 % conceptually it is what I want (\texttt{x} itself is not expandable), and
@@ -219,6 +232,7 @@
 % which the performance penalty of the \texttt{e} expansion would ensue (see
 % also \url{https://tex.stackexchange.com/q/611370/#comment1529282_611385},
 % thanks Enrico Gregorio, aka `egreg').
+%    \begin{macrocode}
 \cs_generate_variant:Nn \@@_get_within_counters:n { o , e }
 \cs_generate_variant:Nn \@@_get_within_counters_value:n { o , e }
 %    \end{macrocode}
@@ -354,9 +368,9 @@
 %     \group_end:
 %   }
 % \end{verbatim}
-% And run it \cs{AtBeginDocument}.
+% And run it at \texttt{begindocument}.
 % \begin{verbatim}
-% \AtBeginDocument { \@@_set_within_counters: }
+% \AddToHook { begindocument } { \@@_set_within_counters: }
 % \end{verbatim}
 %
 %
@@ -540,7 +554,7 @@
 % \cs{refstepcounter} I do not quite grasp, and it does introduce ample
 % opportunity for users to shoot themselves in the foot.  Still, an equivalent
 % could be provided by, for example, defining a document command
-% \cs{zclabel}\oart{type}\marg{label} which makes a group, sets the type
+% \cs{zclabel}\oarg{type}\marg{label} which makes a group, sets the type
 % variable, and calls \cs{zlabel} with \meta{label}.  Anyway, for the time
 % being, I'll provide the higher level infrastructure, covering
 % \cs{newtheorem} and \cs{appendix}, and only introduce a manual override of
@@ -591,29 +605,14 @@
 %
 %
 %
-%
-%
-%
-%
 % \section{Sorting}
 %
 %
 %    \begin{macrocode}
-
 % TODO Stores whether this reference is to the page, or to the default
 % counter, this should be moved to options.
 \bool_new:N \l_@@_page_ref_bool
-
-% Aux variables.
-\tl_new:N \l_@@_label_type_a_tl
-\tl_new:N \l_@@_label_type_b_tl
-\tl_new:N \l_@@_label_counter_a_tl
-\tl_new:N \l_@@_label_counter_b_tl
-\tl_new:N \l_@@_label_withincnt_a_tl
-\tl_new:N \l_@@_label_withincnt_b_tl
-\tl_new:N \l_@@_label_withinval_a_tl
-\tl_new:N \l_@@_label_withinval_b_tl
-
+\bool_set_true:N \l_@@_page_ref_bool
 
 % TODO Stores whether sort priorities should be used or not.  This should be
 % moved to options.  This is a way to enable/disable sort priority wholesale.
@@ -628,22 +627,121 @@
 % with higher priority go to the top.
 \int_new:N \l_@@_sort_prior_a_int
 \int_new:N \l_@@_sort_prior_b_int
-
-% Auxiliary variable for \cs{@@_sort_labels:}, stores the sequence that
-% reference types appear in the label list supplied by the user in \cs{zcref}.
+\int_set:Nn \l_@@_sort_prior_a_int { 0 }
+\int_set:Nn \l_@@_sort_prior_b_int { 0 }
+%    \end{macrocode}
+%
+%
+% \begin{variable}
+%   {
+%     \l_@@_label_type_a_tl ,
+%     \l_@@_label_type_b_tl ,
+%     \l_@@_label_withincnt_a_tl ,
+%     \l_@@_label_withincnt_b_tl ,
+%     \l_@@_label_withinval_a_tl ,
+%     \l_@@_label_withinval_b_tl
+%   }
+% Aux variables.
+%    \begin{macrocode}
+\tl_new:N \l_@@_label_type_a_tl
+\tl_new:N \l_@@_label_type_b_tl
+\tl_new:N \l_@@_label_withincnt_a_tl
+\tl_new:N \l_@@_label_withincnt_b_tl
+\tl_new:N \l_@@_label_withinval_a_tl
+\tl_new:N \l_@@_label_withinval_b_tl
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}{\l_@@_label_types_seq}
+%   Stores the order in which reference types appear in the label list
+%   supplied by the user in \cs{zcref}.  This order is required as a ``last
+%   resort'' sort criterion between the reference types, for use in
+%   \cs{@@_sort_default_aux:nn}.
+%    \begin{macrocode}
 \seq_new:N \l_@@_label_types_seq
-
-% Auxiliary variable for \cs{@@_sort_labels:}, signals if the sorting between
-% two labels has been decided or not.
-\bool_new:N \l_@@_sort_decided_bool
-
-% Variant not provided by the kernel.
-\cs_generate_variant:Nn \tl_reverse_items:n { V }
-
-% Auxiliary function used to store ``new'' label types in
-% \cs{l_@@_label_types_seq} as the sorting proceeds.  The reference type
-% sequence of the labels list given by the user in \cs{zcref} is needed to
-% have a sort criterion when the sort priority of different types is the same.
+%    \end{macrocode}
+% \end{variable}
+%
+%
+% \begin{macro}{\@@_sort_labels:}
+%   The main sorting function.  It does not receive arguments, but it is
+%   expected to be run inside \cs{@@_zcref:nnnn} where a number of environment
+%   variables are to be set appropriately.  In particular,
+%   \cs{l_@@_zcref_labels_seq} should contain the labels received as argument
+%   to \cs{zcheck}, and the function performs its task by sorting this
+%   variable.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_sort_labels:
+  {
+%    \end{macrocode}
+% Clear label types sequence.
+%    \begin{macrocode}
+    \seq_clear:N \l_@@_label_types_seq
+%    \end{macrocode}
+% Sort.
+%    \begin{macrocode}
+    \seq_sort:Nn \l_@@_zcref_labels_seq
+      {
+        \zref@ifrefundefined {##1}
+          {
+            \zref@ifrefundefined {##2}
+              {
+%    \end{macrocode}
+% Neither label is defined.
+%    \begin{macrocode}
+                \sort_return_same:
+              }
+              {
+%    \end{macrocode}
+% Possibly store new label type.
+%    \begin{macrocode}
+                \bool_if:NF \l_@@_page_ref_bool
+                  { \@@_label_type_put_new_right:n {##2} }
+%    \end{macrocode}
+% The second label is defined, but the first isn't, bring the second forward.
+%    \begin{macrocode}
+                \sort_return_swapped:
+              }
+          }
+          {
+%    \end{macrocode}
+% Possibly store new label type.
+%    \begin{macrocode}
+            \bool_if:NF \l_@@_page_ref_bool
+              { \@@_label_type_put_new_right:n {##1} }
+            \zref@ifrefundefined {##2}
+              {
+%    \end{macrocode}
+% The first label is defined, but the second isn't, keep the second behind.
+%    \begin{macrocode}
+                \sort_return_same:
+              }
+              {
+%    \end{macrocode}
+% The interesting case: both labels are defined. The reference to the
+% "default" property/counter or to the page are quite different from our
+% perspective, they rely on different fields and even use different
+% information for sorting (and compressing), so we branch them here to
+% specialized functions.
+%    \begin{macrocode}
+                \bool_if:NTF \l_@@_page_ref_bool
+                  { \@@_sort_page_aux:nn {##1} {##2} }
+                  { \@@_sort_default_aux:nn {##1} {##2} }
+              }
+          }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_label_type_put_new_right:n}
+%   Auxiliary function used to store ``new'' label types (in order) as the
+%   sorting proceeds.  It is expected to be run inside \cs{@@_sort_labels:},
+%   and stores new types in \cs{l_@@_label_types_seq}.
+%   \begin{syntax}
+%     \cs{@@_label_type_put_new_right:n} \Arg{label}
+%   \end{syntax}
+%    \begin{macrocode}
 \cs_new_protected:Npn \@@_label_type_put_new_right:n #1
   {
     \tl_set:Nx \l_@@_label_type_a_tl
@@ -657,53 +755,37 @@
           }
       }
   }
-
-\cs_new_protected:Npn \@@_sort_labels:
-  {
-    \seq_clear:N \l_@@_label_types_seq
-    \seq_sort:Nn \l_@@_zcref_labels_seq
-      {
-        \zref@ifrefundefined {##1}
-          {
-            \zref@ifrefundefined {##2}
-              {
-                % Neither label is defined.
-                \sort_return_same:
-              }
-              {
-                % Possibly store new label type.
-                \@@_label_type_put_new_right:n {##2}
-
-                % The second label is defined, but the first isn't, bring the
-                % second forward.
-                \sort_return_swapped:
-              }
-          }
-          {
-            % Possibly store new label type.
-            \@@_label_type_put_new_right:n {##1}
-
-            \zref@ifrefundefined {##2}
-              {
-                % The first label is defined, but the second isn't, keep the
-                % second behind.
-                \sort_return_same:
-              }
-              {
-                % The interesting case: both labels are defined. The reference
-                % to the "default" property/counter or to the page are quite
-                % different from our perspective, they rely on different
-                % fields and even use different information for sorting (and
-                % compressing), so we branch them here to specialized
-                % functions.
-                \bool_if:NTF \l_@@_page_ref_bool
-                  { \@@_sort_page_aux:nn {##1} {##2} }
-                  { \@@_sort_default_aux:nn {##1} {##2} }
-              }
-          }
-      }
-  }
-
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{variable}{\l_@@_sort_decided_bool}
+%   Auxiliary variable for \cs{@@_sort_default_aux:nn}, signals if the sorting
+%   between two labels has been decided or not.
+%    \begin{macrocode}
+\bool_new:N \l_@@_sort_decided_bool
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{macro}{\tl_reverse_items:V}
+%   Variant not provided by the kernel.
+%    \begin{macrocode}
+\cs_generate_variant:Nn \tl_reverse_items:n { V }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_sort_default_aux:nn}
+%   The heavy-lifting function for sorting of existing labels for ``default''
+%   references (that is, a standard reference, not to ``page'' etc.).  This
+%   function is expected to be called within the sorting loop of
+%   \cs{@@_sort_labels:} and receives the pair of labels being considered for
+%   a change of order or not.  It should \emph{always} ``return'' either
+%   \cs{sort_return_same:} or \cs{sort_return_swapped:}.
+%   \begin{syntax}
+%     \cs{@@_sort_default_aux:nn} \Arg{label a} \Arg{label b}
+%   \end{syntax}
+%    \begin{macrocode}
 \cs_new_protected:Npn \@@_sort_default_aux:nn #1#2
   {
     \tl_set:Nx \l_@@_label_type_a_tl
@@ -712,15 +794,17 @@
       { \zref@extractdefault {#2} { zc@type } { \c_empty_tl } }
     \bool_case_true:nF
       {
-        % The second label has a type, but the first doesn't...
+%    \end{macrocode}
+% The second label has a type, but the first doesn't bring the second forward.
+%    \begin{macrocode}
         {
           \tl_if_empty_p:N \l_@@_label_type_a_tl &&
           ! \tl_if_empty_p:N \l_@@_label_type_b_tl
         }
-        % ... bring the second forward.
         { \sort_return_swapped: }
-
-        % Both labels have a type...
+%    \end{macrocode}
+% Both labels have a type\dots{}
+%    \begin{macrocode}
         {
           ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
           ! \tl_if_empty_p:N \l_@@_label_type_b_tl
@@ -728,8 +812,9 @@
         {
           \tl_if_eq:NNTF \l_@@_label_type_a_tl \l_@@_label_type_b_tl
             {
-              % ... and it's the same type.
-
+%    \end{macrocode}
+% \dots{} and it's the same type.
+%    \begin{macrocode}
               \tl_set:Nx \l_@@_label_withincnt_a_tl
                 { \zref@extractdefault {#1} { zc@withincnt } { \c_empty_tl } }
               \tl_set:Nx \l_@@_label_withincnt_a_tl
@@ -767,8 +852,8 @@
                       }
                       {
                         \exp_args:Nxx \tl_if_eq:nnTF
-                          { \zref@extractdefault {#1} { counter } { } }
-                          { \zref@extractdefault {#2} { counter } { } }
+                          { \zref@extractdefault {#1} { zc@counter } { } }
+                          { \zref@extractdefault {#2} { zc@counter } { } }
                           {
                             \bool_set_true:N \l_@@_sort_decided_bool
                             \int_compare:nNnTF
@@ -791,7 +876,7 @@
                       { \tl_if_empty_p:V \l_tmpa_tl }
                       {
                         \tl_set:Nx \l_tmpa_tl
-                          { {\zref@extractdefault {#1} { counter } { }} }
+                          { {\zref@extractdefault {#1} { zc@counter } { }} }
                         \exp_args:NNx \tl_if_in:NnTF
                           \l_@@_label_withincnt_b_tl { \l_tmpa_tl }
                           {
@@ -811,7 +896,7 @@
                       { \tl_if_empty_p:V \l_tmpb_tl }
                       {
                         \tl_set:Nx \l_tmpb_tl
-                          { {\zref@extractdefault {#2} { counter } { }} }
+                          { {\zref@extractdefault {#2} { zc@counter } { }} }
                         \exp_args:NNx \tl_if_in:NnTF
                           \l_@@_label_withincnt_a_tl { \l_tmpb_tl }
                           {
@@ -869,12 +954,11 @@
                 }
             }
             {
-              % ... and they are different types.
-
-              % TODO Ditto.
-              \int_set:Nn \l_@@_sort_prior_a_int { 0 }
-              \int_set:Nn \l_@@_sort_prior_b_int { 0 }
-
+%    \end{macrocode}
+% \dots{} and they are different types.
+%    \begin{macrocode}
+              % TODO We still have to get the sort priorities from options
+              % here, they are just currently set to arbitrary values.
               \bool_case_true:nF
                 {
                   {
@@ -893,9 +977,10 @@
                   { \sort_return_swapped: }
                 }
                 {
-                  % Sort priorities are equal: the type that occurs first in
-                  % \meta{labels}, as given by the user, is kept (or brought)
-                  % forward.
+%    \end{macrocode}
+% Sort priorities are equal for different types: the type that occurs first in
+% \meta{labels}, as given by the user, is kept (or brought) forward.
+%    \begin{macrocode}
                   \seq_map_inline:Nn \l_@@_label_types_seq
                     {
                       \tl_if_eq:NnTF \l_@@_label_type_a_tl {##1}
@@ -911,27 +996,50 @@
         }
       }
       {
-        % If none of the above cases match, we have either: i) neither of the
-        % labels has a type; or ii) the first label has a type, but the second
-        % doesn't.  In both cases the answer is:
+%    \end{macrocode}
+% If none of the above cases match, we have either: i) neither of the labels
+% has a type; or ii) the first label has a type, but the second doesn't.  In
+% both cases the answer is:
+%    \begin{macrocode}
         \sort_return_same:
       }
   }
-
+%    \end{macrocode}
+% \end{macro}
+%
+% Warning message used in \cs{@@_sort_default_aux:nn}.
+%    \begin{macrocode}
 \msg_new:nnn { zref-clever } { counters-not-nested }
   {
     Counters~not~nested~for~labels~'#1'~and~'#2' \iow_newline:
     on~input~line~\msg_line_number:.
   }
-
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\@@_sort_page_aux:nn}
+%   The sorting function for sorting of existing labels for references to
+%   ``page''.  This function is expected to be called within the sorting loop
+%   of \cs{@@_sort_labels:} and receives the pair of labels being considered
+%   for a change of order or not.  It should \emph{always} ``return'' either
+%   \cs{sort_return_same:} or \cs{sort_return_swapped:}.  Compared to the
+%   sorting of default labels, this is a piece of cake (thanks to
+%   \texttt{abspage}).
+%   \begin{syntax}
+%     \cs{@@_sort_page_aux:nn} \Arg{label a} \Arg{label b}
+%   \end{syntax}
+%    \begin{macrocode}
 \cs_new_protected:Npn \@@_sort_page_aux:nn #1#2
   {
-    % TODO Temporary.
-    \sort_return_same:
+    \int_compare:nNnTF
+      { \zref@extractdefault {#1} { zc@abspg } {-1} }
+        >
+      { \zref@extractdefault {#2} { zc@abspg } {-1} }
+      { \sort_return_swapped: }
+      { \sort_return_same:    }
   }
-
-
 %    \end{macrocode}
+% \end{macro}
 %
 %
 %
