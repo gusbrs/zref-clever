@@ -567,8 +567,6 @@
 % \section{\cs{zcref}}
 %
 %
-%
-%
 % \begin{macro}[int]{\zcheck}
 %   \begin{syntax}
 %     \cs{zcref}\meta{*}\oarg{options}\marg{labels}
@@ -594,14 +592,14 @@
     \group_begin:
     \seq_set_split:Nnn \l_@@_zcref_labels_seq { } {#1}
     \@@_sort_labels:
-    \seq_use:Nn \l_@@_zcref_labels_seq {,~}
+    \bool_if:NTF \l_@@_page_ref_bool
+      { \@@_typeset_page: }
+      { \@@_typeset_default: }
 
     \group_end:
   }
 %    \end{macrocode}
 % \end{macro}
-%
-%
 %
 %
 %
@@ -612,7 +610,7 @@
 % TODO Stores whether this reference is to the page, or to the default
 % counter, this should be moved to options.
 \bool_new:N \l_@@_page_ref_bool
-\bool_set_true:N \l_@@_page_ref_bool
+% \bool_set_true:N \l_@@_page_ref_bool
 
 % TODO Stores whether sort priorities should be used or not.  This should be
 % moved to options.  This is a way to enable/disable sort priority wholesale.
@@ -634,6 +632,8 @@
 %
 % \begin{variable}
 %   {
+%     \l_@@_label_a_tl ,
+%     \l_@@_label_b_tl ,
 %     \l_@@_label_type_a_tl ,
 %     \l_@@_label_type_b_tl ,
 %     \l_@@_label_withincnt_a_tl ,
@@ -641,8 +641,12 @@
 %     \l_@@_label_withinval_a_tl ,
 %     \l_@@_label_withinval_b_tl
 %   }
-% Aux variables.
+% Aux variables, for use in sorting and typesetting.  I could probably let go
+% some of them in favor of \texttt{tmpa}/\texttt{tmpb}, but they do improve
+% code readability.
 %    \begin{macrocode}
+\tl_new:N \l_@@_label_a_tl
+\tl_new:N \l_@@_label_b_tl
 \tl_new:N \l_@@_label_type_a_tl
 \tl_new:N \l_@@_label_type_b_tl
 \tl_new:N \l_@@_label_withincnt_a_tl
@@ -698,9 +702,10 @@
                 \bool_if:NF \l_@@_page_ref_bool
                   { \@@_label_type_put_new_right:n {##2} }
 %    \end{macrocode}
-% The second label is defined, but the first isn't, bring the second forward.
+% The second label is defined, but the first isn't, leave the undefined first
+% (to be more visible).
 %    \begin{macrocode}
-                \sort_return_swapped:
+                \sort_return_same:
               }
           }
           {
@@ -712,9 +717,9 @@
             \zref@ifrefundefined {##2}
               {
 %    \end{macrocode}
-% The first label is defined, but the second isn't, keep the second behind.
+% The first label is defined, but the second isn't, bring the second forward.
 %    \begin{macrocode}
-                \sort_return_same:
+                \sort_return_swapped:
               }
               {
 %    \end{macrocode}
@@ -795,11 +800,22 @@
     \bool_case_true:nF
       {
 %    \end{macrocode}
-% The second label has a type, but the first doesn't bring the second forward.
+% The second label has a type, but the first doesn't, leave the undefined
+% first (to be more visible).
 %    \begin{macrocode}
         {
           \tl_if_empty_p:N \l_@@_label_type_a_tl &&
           ! \tl_if_empty_p:N \l_@@_label_type_b_tl
+        }
+        { \sort_return_same: }
+%    \end{macrocode}
+%    \end{macrocode}
+% The first label has a type, but the second doesn't, bring the second
+% forward.
+%    \begin{macrocode}
+        {
+          ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
+          \tl_if_empty_p:N \l_@@_label_type_b_tl
         }
         { \sort_return_swapped: }
 %    \end{macrocode}
@@ -997,11 +1013,22 @@
       }
       {
 %    \end{macrocode}
-% If none of the above cases match, we have either: i) neither of the labels
-% has a type; or ii) the first label has a type, but the second doesn't.  In
-% both cases the answer is:
+% If none of the above cases match, then neither of the labels has a type.  We
+% can't do much of meaningful here, but if it's the same counter, compare it.
 %    \begin{macrocode}
-        \sort_return_same:
+        \exp_args:Nxx \tl_if_eq:nnTF
+          { \zref@extractdefault {#1} { zc@counter } { } }
+          { \zref@extractdefault {#2} { zc@counter } { } }
+          {
+            \int_compare:nNnTF
+              { \zref@extractdefault {#1} { zc@cntval } {-1} }
+                >
+              { \zref@extractdefault {#2} { zc@cntval } {-1} }
+              { \sort_return_swapped: }
+              { \sort_return_same:    }
+          }
+          { \sort_return_same: }
+
       }
   }
 %    \end{macrocode}
@@ -1044,7 +1071,7 @@
 %
 %
 %
-% \section{Compressing}
+% \section{Typesetting}
 %
 % About possible alternatives to signal compression inhibition for individual
 % labels, see \url{https://tex.stackexchange.com/q/611370} (thanks Enrico
@@ -1055,6 +1082,323 @@
 % inconvenience is not too large.
 %
 %
+% \begin{variable}{\l_@@_typeset_last_bool}
+%   Auxiliary variable for \cs{@@_typeset_default:} and \cs{@@_typeset_page:},
+%   signals if the label list is over so that we can leave the loop.
+%    \begin{macrocode}
+\bool_new:N \l_@@_typeset_last_bool
+%    \end{macrocode}
+% \end{variable}
+%
+
+\prop_new:N \l_@@_type_names_prop
+\prop_set_from_keyval:Nn \l_@@_type_names_prop
+  {
+    part = Part ,
+    chapter = Chapter ,
+    section = Section ,
+    paragraph = Paragraph ,
+    figure = Figure ,
+    table = Table ,
+    equation = Equation ,
+    item = Item ,
+  }
+\tl_new:N \l_@@_namesep_tl
+\tl_set:Nn \l_@@_namesep_tl {~}
+\tl_new:N \l_@@_rangesep_tl
+\tl_set:Nn \l_@@_rangesep_tl {~to~}
+\tl_new:N \l_@@_pairsep_tl
+\tl_set:Nn \l_@@_pairsep_tl {~and~}
+\tl_new:N \l_@@_listsep_tl
+\tl_set:Nn \l_@@_listsep_tl {,~}
+\tl_new:N \l_@@_lastsep_tl
+\tl_set:Nn \l_@@_lastsep_tl {~and~}
+% `t' for ``type''
+\tl_new:N \l_@@_tpairsep_tl
+\tl_set:Nn \l_@@_tpairsep_tl {~and~}
+\tl_new:N \l_@@_tlistsep_tl
+\tl_set:Nn \l_@@_tlistsep_tl {,~}
+\tl_new:N \l_@@_tlastsep_tl
+\tl_set:Nn \l_@@_tlastsep_tl {,~and~}
+
+
+\tl_new:N \l_@@_typeset_queue_prev_tl
+\tl_new:N \l_@@_typeset_queue_curr_tl
+\int_new:N \l_@@_ref_count_int
+\int_new:N \l_@@_type_count_int
+
+\tl_new:N \l_@@_thecnt_a_tl
+\tl_new:N \l_@@_type_name_a_tl
+\tl_new:N \l_@@_anchor_a_tl
+
+\bool_new:N \l_@@_last_of_type_bool
+\bool_new:N \l_@@_found_name_a_bool
+
+% Does (almost) the same as \cs{zref@extract}, but puts \cs{zref@default} on
+% the stream protected, so that it can be accumulated in the queue.
+\cs_new:Npn \@@_zref_extract_thecnt:n #1
+  {
+    \zref@ifrefcontainsprop {#1} { zc@thecnt }
+      { \zref@extractdefault {#1} { zc@thecnt } {} }
+      { \exp_not:N \zref@default }
+  }
+\cs_generate_variant:Nn \@@_zref_extract_thecnt:n {V}
+
+
+\cs_new_protected:Npn \@@_typeset_default:
+  {
+    \tl_clear:N \l_@@_typeset_queue_prev_tl
+    \tl_clear:N \l_@@_typeset_queue_curr_tl
+    \int_zero:N \l_@@_ref_count_int
+    \int_zero:N \l_@@_type_count_int
+
+    \bool_set_false:N \l_@@_typeset_last_bool
+    \bool_until_do:Nn \l_@@_typeset_last_bool
+      {
+        \seq_pop_left:NN \l_@@_zcref_labels_seq \l_@@_label_a_tl
+        \seq_if_empty:NTF \l_@@_zcref_labels_seq
+          {
+            \tl_clear:N \l_@@_label_b_tl
+            \bool_set_true:N \l_@@_typeset_last_bool
+          }
+          { \seq_get_left:NN \l_@@_zcref_labels_seq \l_@@_label_b_tl }
+
+        \tl_set:Nx \l_@@_label_type_a_tl
+          {
+            \zref@extractdefault
+              { \l_@@_label_a_tl } { zc@type } { \c_empty_tl }
+          }
+        \tl_set:Nx \l_@@_label_type_b_tl
+          {
+            \zref@extractdefault
+              { \l_@@_label_b_tl } { zc@type } { \c_empty_tl }
+          }
+
+        % First, we establish whether the ``current label'' (i.e. `a') is the
+        % last one of its type.  This can happen because the ``next label''
+        % (i.e. `b') is of a different type (or different definition status),
+        % or because we are at the end of the list.
+        \bool_if:NTF \l_@@_typeset_last_bool
+          { \bool_set_true:N \l_@@_last_of_type_bool }
+          {
+            \zref@ifrefundefined { \l_@@_label_a_tl }
+              {
+                \zref@ifrefundefined { \l_@@_label_b_tl }
+                  { \bool_set_false:N \l_@@_last_of_type_bool }
+                  { \bool_set_true:N \l_@@_last_of_type_bool  }
+              }
+              {
+                \zref@ifrefundefined { \l_@@_label_b_tl }
+                  { \bool_set_true:N \l_@@_last_of_type_bool }
+                  {
+                    % Neither is undefined, we must check the types.
+                    \bool_case_true:nF
+                      {
+                        % Both empty: same ``type''.
+                        {
+                          \tl_if_empty_p:N \l_@@_label_type_a_tl &&
+                          \tl_if_empty_p:N \l_@@_label_type_b_tl
+                        }
+                        { \bool_set_false:N \l_@@_last_of_type_bool }
+
+                        % Neither empty: compare types.
+                        {
+                          ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
+                          ! \tl_if_empty_p:N \l_@@_label_type_b_tl
+                        }
+                        {
+                          \tl_if_eq:NNTF
+                            \l_@@_label_type_a_tl \l_@@_label_type_b_tl
+                            { \bool_set_false:N \l_@@_last_of_type_bool }
+                            { \bool_set_true:N \l_@@_last_of_type_bool  }
+                        }
+                      }
+                      % One empty, the other not: different ``types''.
+                      { \bool_set_true:N \l_@@_last_of_type_bool }
+                  }
+              }
+          }
+
+        % Handle errors in case of reference or type undefined.
+        \zref@refused { \l_@@_label_a_tl }
+        \zref@ifrefundefined { \l_@@_label_a_tl }
+          {}
+          {
+            \tl_if_empty:NT \l_@@_label_type_a_tl
+              {
+                \exp_args:Nnnx \msg_warning:nnn { zref-clever }
+                  { missing-type } { \l_@@_label_a_tl }
+              }
+          }
+
+        % \tl_set:Nx \l_@@_anchor_a_tl
+        %   {
+        %     \zref@extractdefault
+        %       { \l_@@_label_a_tl } { anchor } { \c_empty_tl }
+        %   }
+
+        \bool_if:NTF \l_@@_last_of_type_bool
+          {
+            \int_case:nnF { \l_@@_ref_count_int }
+              {
+                % It is the last of its type, but also the first one, hence
+                % the only.
+                { 0 }
+                {
+                  \bool_set_false:N \l_@@_found_name_a_bool
+                  \zref@ifrefundefined { \l_@@_label_a_tl }
+                    { }
+                    {
+                      \tl_if_empty:NTF \l_@@_label_type_a_tl
+                        {
+                          \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                            { \exp_not:N \zref@default \l_@@_namesep_tl }
+                        }
+                        {
+                          \prop_get:NVNTF
+                            \l_@@_type_names_prop \l_@@_label_type_a_tl
+                            \l_@@_type_name_a_tl
+                            { \bool_set_true:N \l_@@_found_name_a_bool }
+                            {
+                              \exp_args:Nnnx \msg_warning:nnn { zref-clever }
+                                { missing-name } { \l_@@_label_type_a_tl }
+                              \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                                { \exp_not:N \zref@default \l_@@_namesep_tl }
+                            }
+                        }
+                    }
+                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                    {
+                      \bool_if:NT \l_@@_found_name_a_bool
+                        { \l_@@_type_name_a_tl \l_@@_namesep_tl }
+                      \@@_zref_extract_thecnt:V \l_@@_label_a_tl
+                    }
+                }
+
+                % The last is the second: we have a pair.
+                { 1 }
+                {
+                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                    {
+                      \l_@@_pairsep_tl
+                      \@@_zref_extract_thecnt:V \l_@@_label_a_tl
+                    }
+                }
+              }
+              {
+                % If neither the first, nor the second: we have the last
+                % element in a list.
+                \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                  {
+                    \l_@@_lastsep_tl
+                    \@@_zref_extract_thecnt:V \l_@@_label_a_tl
+                  }
+              }
+
+            % Typeset the previous queue, if there is one.
+            \tl_if_empty:VF \l_@@_typeset_queue_prev_tl
+              {
+                \int_compare:nNnT { \l_@@_type_count_int } > { 1 }
+                  { \l_@@_tlistsep_tl }
+                \l_@@_typeset_queue_prev_tl
+              }
+
+            \bool_if:NTF \l_@@_typeset_last_bool
+              {
+                % We are finishing, typeset the current queue.
+                \int_case:nnF { \l_@@_type_count_int }
+                  {
+                    % Single type.
+                    { 0 }
+                    { \l_@@_typeset_queue_curr_tl }
+                    % Pair of types.
+                    { 1 }
+                    {
+                      \l_@@_tpairsep_tl
+                      \l_@@_typeset_queue_curr_tl
+                    }
+                  }
+                  {
+                    % Last in list of types.
+                    \l_@@_tlastsep_tl
+                    \l_@@_typeset_queue_curr_tl
+                  }
+              }
+              {
+                % There are further labels, set variables for next iteration.
+                \tl_set_eq:NN
+                  \l_@@_typeset_queue_prev_tl \l_@@_typeset_queue_curr_tl
+                \tl_clear:N \l_@@_typeset_queue_curr_tl
+                \int_zero:N \l_@@_ref_count_int
+                \int_incr:N \l_@@_type_count_int
+              }
+          }
+          {
+            \int_compare:nNnTF { \l_@@_ref_count_int } = { 0 }
+              {
+                % The first of its type.
+                \bool_set_false:N \l_@@_found_name_a_bool
+                \zref@ifrefundefined { \l_@@_label_a_tl }
+                  { }
+                  {
+                    \tl_if_empty:NTF \l_@@_label_type_a_tl
+                      {
+                        \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                          { \exp_not:N \zref@default \l_@@_namesep_tl }
+                      }
+                      {
+                        % TODO The first, but we know it's not the last, so we
+                        % should get plural names here.  Not available yet.
+                        \prop_get:NVNTF
+                          \l_@@_type_names_prop \l_@@_label_type_a_tl
+                          \l_@@_type_name_a_tl
+                          { \bool_set_true:N \l_@@_found_name_a_bool }
+                          {
+                            \exp_args:Nnnx \msg_warning:nnn { zref-clever }
+                              { missing-name } { \l_@@_label_type_a_tl }
+                            \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                              { \exp_not:N \zref@default \l_@@_namesep_tl }
+                          }
+                      }
+                  }
+                \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                  {
+                    \bool_if:NT \l_@@_found_name_a_bool
+                      { \l_@@_type_name_a_tl \l_@@_namesep_tl }
+                    \@@_zref_extract_thecnt:V \l_@@_label_a_tl
+                  }
+              }
+              {
+                % Neither the first (nor the last) of its type.
+                \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                  {
+                    \l_@@_listsep_tl
+                    \@@_zref_extract_thecnt:V \l_@@_label_a_tl
+                  }
+              }
+            \int_incr:N \l_@@_ref_count_int
+          }
+      }
+  }
+
+\msg_new:nnn { zref-clever } { missing-type }
+  {
+    Reference~type~undefined~for~label~'#1' \iow_newline:
+    on~input~line~\msg_line_number:.
+  }
+\msg_new:nnn { zref-clever } { missing-name }
+  {
+    Name~undefined~for~type~'#1' \iow_newline:
+    on~input~line~\msg_line_number:.
+  }
+
+
+
+\cs_new_protected:Npn \@@_typeset_page:
+  {
+    \seq_use:Nn \l_@@_zcref_labels_seq {,~}
+  }
+
 %
 %
 %
