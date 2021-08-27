@@ -1121,28 +1121,58 @@
 \tl_new:N \l_@@_tlastsep_tl
 \tl_set:Nn \l_@@_tlastsep_tl {,~and~}
 
+% TODO User option, compress ranges or not
+\bool_new:N \l_@@_compress_bool
+\bool_set_true:N \l_@@_compress_bool
+
 
 \tl_new:N \l_@@_typeset_queue_prev_tl
 \tl_new:N \l_@@_typeset_queue_curr_tl
 \int_new:N \l_@@_ref_count_int
 \int_new:N \l_@@_type_count_int
+\int_new:N \l_@@_range_count_int
 
 \tl_new:N \l_@@_thecnt_a_tl
 \tl_new:N \l_@@_type_name_a_tl
 \tl_new:N \l_@@_anchor_a_tl
+\tl_new:N \l_@@_range_beg_tl
 
 \bool_new:N \l_@@_last_of_type_bool
 \bool_new:N \l_@@_found_name_a_bool
+\bool_new:N \l_@@_next_maybe_range_bool
+\bool_new:N \l_@@_range_inhibit_next_bool
 
 % Does (almost) the same as \cs{zref@extract}, but puts \cs{zref@default} on
 % the stream protected, so that it can be accumulated in the queue.
-\cs_new:Npn \@@_zref_extract_thecnt:n #1
+\cs_new:Npn \@@_get_ref:n #1
   {
     \zref@ifrefcontainsprop {#1} { zc@thecnt }
       { \zref@extractdefault {#1} { zc@thecnt } {} }
       { \exp_not:N \zref@default }
   }
-\cs_generate_variant:Nn \@@_zref_extract_thecnt:n {V}
+\cs_generate_variant:Nn \@@_get_ref:n {V}
+
+
+% Sets \cs{l_@@_next_maybe_range_bool} to true if label `1' comes in immediate
+% sequence from label `2'.
+\cs_new_protected:Npn \@@_labels_in_sequence:nn #1#2
+  {
+    \exp_args:Nxx \tl_if_eq:nnT
+      { \zref@extractdefault {#1} { zc@counter } { } }
+      { \zref@extractdefault {#2} { zc@counter } { } }
+      {
+        \exp_args:Nxx \tl_if_eq:nnT
+          { \zref@extractdefault {#1} { zc@withinval } { } }
+          { \zref@extractdefault {#2} { zc@withinval } { } }
+          {
+            \int_compare:nNnT
+              { \zref@extractdefault {#1} { zc@cntval } {-2} + 1 }
+                =
+              { \zref@extractdefault {#2} { zc@cntval } {-2} }
+              { \bool_set_true:N \l_@@_next_maybe_range_bool }
+          }
+      }
+  }
 
 
 \cs_new_protected:Npn \@@_typeset_default:
@@ -1151,6 +1181,7 @@
     \tl_clear:N \l_@@_typeset_queue_curr_tl
     \int_zero:N \l_@@_ref_count_int
     \int_zero:N \l_@@_type_count_int
+    \int_zero:N \l_@@_range_count_int
 
     \bool_set_false:N \l_@@_typeset_last_bool
     \bool_until_do:Nn \l_@@_typeset_last_bool
@@ -1239,6 +1270,9 @@
 
         \bool_if:NTF \l_@@_last_of_type_bool
           {
+            %%% There exists no next label of the same type as the current.
+
+            % Process the current label to the current queue.
             \int_case:nnF { \l_@@_ref_count_int }
               {
                 % It is the last of its type, but also the first one, hence
@@ -1271,7 +1305,7 @@
                     {
                       \bool_if:NT \l_@@_found_name_a_bool
                         { \l_@@_type_name_a_tl \l_@@_namesep_tl }
-                      \@@_zref_extract_thecnt:V \l_@@_label_a_tl
+                      \@@_get_ref:V \l_@@_label_a_tl
                     }
                 }
 
@@ -1281,19 +1315,53 @@
                   \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                     {
                       \l_@@_pairsep_tl
-                      \@@_zref_extract_thecnt:V \l_@@_label_a_tl
+                      \@@_get_ref:V \l_@@_label_a_tl
                     }
                 }
               }
+              % If neither the first, nor the second: we have the last label
+              % on the current type list.
               {
-                % If neither the first, nor the second: we have the last
-                % element in a list.
-                \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                \int_case:nnF { \l_@@_range_count_int }
                   {
-                    \l_@@_lastsep_tl
-                    \@@_zref_extract_thecnt:V \l_@@_label_a_tl
+                    % There was no range going on.
+                    {0}
+                    {
+                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                        {
+                          \l_@@_lastsep_tl
+                          \@@_get_ref:V \l_@@_label_a_tl
+                        }
+                    }
+                    % Last in the range is also the second in it.
+                    {1}
+                    {
+                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                        {
+                          % We know range beg is not empty, since this is the
+                          % second element in the range, but the third or more
+                          % in the type list.
+                          \l_@@_listsep_tl
+                          \l_@@_range_beg_tl
+                          \l_@@_lastsep_tl
+                          \@@_get_ref:V \l_@@_label_a_tl
+                        }
+                    }
+                  }
+                  % Last in the range is third or more in it.
+                  {
+                    \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                      {
+                        % If range_beg is empty, it means it was also the
+                        % first of the type, and hence was already typeset.
+                        \tl_if_empty:VTF \l_@@_range_beg_tl
+                          { \l_@@_rangesep_tl }
+                          { \l_@@_lastsep_tl \l_@@_range_beg_tl }
+                        \@@_get_ref:V \l_@@_label_a_tl
+                      }
                   }
               }
+
 
             % Typeset the previous queue, if there is one.
             \tl_if_empty:VF \l_@@_typeset_queue_prev_tl
@@ -1303,6 +1371,8 @@
                 \l_@@_typeset_queue_prev_tl
               }
 
+
+            % Close loop, or prepare for next iteration.
             \bool_if:NTF \l_@@_typeset_last_bool
               {
                 % We are finishing, typeset the current queue.
@@ -1330,13 +1400,35 @@
                   \l_@@_typeset_queue_prev_tl \l_@@_typeset_queue_curr_tl
                 \tl_clear:N \l_@@_typeset_queue_curr_tl
                 \int_zero:N \l_@@_ref_count_int
+                \int_zero:N \l_@@_range_count_int
                 \int_incr:N \l_@@_type_count_int
               }
+
           }
           {
+            %%% There exists a next label of the same type as the current.
+
+            % Signal if next label may form a range with the current one (of
+            % course, only considered if compression is enabled in the first
+            % place).
+            \bool_set_false:N \l_@@_next_maybe_range_bool
+            \bool_lazy_and:nnT
+              { \l_@@_compress_bool }
+              { ! \l_@@_range_inhibit_next_bool }
+              {
+                \zref@ifrefundefined { \l_@@_label_a_tl }
+                  { }
+                  {
+                    \@@_labels_in_sequence:nn
+                      { \l_@@_label_a_tl } { \l_@@_label_b_tl }
+                  }
+              }
+
+            % Process the current label to the current queue.
             \int_compare:nNnTF { \l_@@_ref_count_int } = { 0 }
               {
-                % The first of its type.
+                % Current label is the first of its type (but not the last).
+
                 \bool_set_false:N \l_@@_found_name_a_bool
                 \zref@ifrefundefined { \l_@@_label_a_tl }
                   { }
@@ -1365,15 +1457,76 @@
                   {
                     \bool_if:NT \l_@@_found_name_a_bool
                       { \l_@@_type_name_a_tl \l_@@_namesep_tl }
-                    \@@_zref_extract_thecnt:V \l_@@_label_a_tl
+                    \@@_get_ref:V \l_@@_label_a_tl
+                  }
+
+                % If the next label may be part of a range, we set range beg
+                % to ``empty'' (we have already typeset it, and must do it
+                % here, to handle hyperlinking), but also step the range
+                % counter.
+                \bool_if:NT \l_@@_next_maybe_range_bool
+                  {
+                    \tl_clear:N \l_@@_range_beg_tl
+                    \int_incr:N \l_@@_range_count_int
                   }
               }
               {
-                % Neither the first (nor the last) of its type.
-                \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                % Current label is neither the first (nor the last) of its
+                % type.
+
+                \bool_if:NTF \l_@@_next_maybe_range_bool
                   {
-                    \l_@@_listsep_tl
-                    \@@_zref_extract_thecnt:V \l_@@_label_a_tl
+                    % Starting, or continuing a range.
+                    \int_compare:nNnTF
+                      { \l_@@_range_count_int } = {0}
+                      {
+                        % There was no range going, we are starting one.
+                        \tl_set:Nx \l_@@_range_beg_tl
+                          { \@@_get_ref:V \l_@@_label_a_tl }
+                        \int_incr:N \l_@@_range_count_int
+                      }
+                      {
+                        % Second or more in the range, but not the last.
+                        \int_incr:N \l_@@_range_count_int
+                      }
+                  }
+                  {
+                    % There was no range, or we are closing one.
+                    \int_case:nnF { \l_@@_range_count_int }
+                      {
+                        % There was no range going on.
+                        {0}
+                        {
+                          \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                            {
+                              \l_@@_listsep_tl
+                              \@@_get_ref:V \l_@@_label_a_tl
+                            }
+                        }
+                        % Last is second in the range: it's a list.
+                        {1}
+                        {
+                          \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                            {
+                              \tl_if_empty:VF \l_@@_range_beg_tl
+                                { \l_@@_listsep_tl \l_@@_range_beg_tl }
+                              \l_@@_listsep_tl
+                              \@@_get_ref:V \l_@@_label_a_tl
+                            }
+                        }
+                      }
+                      {
+                        % Last is third or more in the range: it is a real
+                        % range.
+                        \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                          {
+                            \tl_if_empty:VF \l_@@_range_beg_tl
+                              { \l_@@_listsep_tl \l_@@_range_beg_tl }
+                            \l_@@_rangesep_tl
+                            \@@_get_ref:V \l_@@_label_a_tl
+                          }
+                      }
+                    \int_zero:N \l_@@_range_count_int
                   }
               }
             \int_incr:N \l_@@_ref_count_int
