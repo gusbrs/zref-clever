@@ -700,7 +700,8 @@
     \keys_set:nn { zref-clever } {#3}
     \seq_set_split:Nnn \l_@@_zcref_labels_seq { } {#1}
     \bool_set:Nn \l_@@_link_star_bool {#2}
-    \@@_sort_labels:
+    \bool_if:NT \l_@@_sort_bool
+      { \@@_sort_labels: }
     \@@_typeset_refs:
     \group_end:
   }
@@ -1180,22 +1181,21 @@
 %
 % About possible alternatives to signal compression inhibition for individual
 % labels, see \url{https://tex.stackexchange.com/q/611370} (thanks Enrico
-% Gregorio, Phelype Oleinik, and Steven B.\ Segletes).  All in all, and
-% rethinking this here, probably the best is to receive an optional argument
-% with the label(s) not to be compressed.  This is a repetition, but keeps the
-% syntax ``clean'', and I do expect the use case to be rare enough that this
-% inconvenience is not too large.
+% Gregorio, Phelype Oleinik, and Steven B.\ Segletes).  Yet another
+% alternative would be to receive an optional argument with the label(s) not
+% to be compressed.  This would be a repetition, but would keep the syntax
+% ``clean''.  All in all, and rethinking this here, probably the best is
+% simply to not allow individual inhibition of compression.  We can already
+% control compression of each individual call of \cs{zcref} with existing
+% options, this should be enough.  I don't think the small extra flexibility
+% this would grant is worth the syntax disruption it entails.  Anyway, I have
+% kept a ``handle'' to deal with this in case the need arises, in the form of
+% \cs{l_@@_range_inhibit_next_bool}, which is currently no-op, but is in
+% place.
 %
-%
-% \begin{variable}{\l_@@_typeset_last_bool}
-%   Auxiliary variable for \cs{@@_typeset_refs:}, signals if the label list is
-%   over so that we can leave the loop.
-%    \begin{macrocode}
-\bool_new:N \l_@@_typeset_last_bool
-%    \end{macrocode}
-% \end{variable}
 %
 %    \begin{macrocode}
+% TODO Must become user options
 \prop_new:N \l_@@_type_names_prop
 \prop_set_from_keyval:Nn \l_@@_type_names_prop
   {
@@ -1231,32 +1231,106 @@
 \bool_new:N \l_@@_compress_bool
 \bool_set_true:N \l_@@_compress_bool
 
+% TODO User option, sort labels ranges or not
+\bool_new:N \l_@@_sort_bool
+\bool_set_true:N \l_@@_sort_bool
 
+%    \end{macrocode}
+%
+%
+%
+%
+% \begin{variable}{\l_@@_typeset_last_bool, \l_@@_last_of_type_bool}
+%   Auxiliary variables for \cs{@@_typeset_refs:}.
+%   \cs{l_@@_typeset_last_bool} signals if the label list is over so that we
+%   can leave the loop.  \cs{l_@@_last_of_type_bool} signals if we are
+%   processing the last label of the current reference type.
+%    \begin{macrocode}
+\bool_new:N \l_@@_typeset_last_bool
+\bool_new:N \l_@@_last_of_type_bool
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}
+%   {
+%     \l_@@_typeset_queue_prev_tl ,
+%     \l_@@_typeset_queue_curr_tl ,
+%     \l_@@_type_first_label_prev_tl ,
+%     \l_@@_type_first_label_curr_tl
+%   }
+%   Auxiliary variables for \cs{@@_typeset_refs:}.  They store, respectively
+%   the ``previous'' and the ``current'' reference type information while they
+%   are being processed, since we cannot typeset them directly, given we can
+%   only know certain things when the (next) type list is over.  The ``queue''
+%   stores all references but the first of the type, and they are stored ready
+%   to be typeset.  The ``first_label'' stores the \emph{label} of the first
+%   reference for the type, because the name can only be determined at the
+%   end, and its (potential) hyperlink must be handled at that point.
+%    \begin{macrocode}
 \tl_new:N \l_@@_typeset_queue_prev_tl
 \tl_new:N \l_@@_typeset_queue_curr_tl
 \tl_new:N \l_@@_type_first_label_prev_tl
 \tl_new:N \l_@@_type_first_label_curr_tl
-
+%    \end{macrocode}
+% \end{variable}
+%
+%
+% \begin{variable}
+%   {
+%     \l_@@_ref_count_int ,
+%     \l_@@_type_count_int ,
+%   }
+%   Main counters for \cs{@@_typeset_refs:}.  They track the state of the
+%   parsing of the labels list.  \cs{l_@@_ref_count_int} is stepped for every
+%   reference/label in the list. \cs{l_@@_type_count_int} is stepped at every
+%   reference type change.
+%    \begin{macrocode}
 \int_new:N \l_@@_ref_count_int
 \int_new:N \l_@@_type_count_int
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}
+%   {
+%     \l_@@_range_count_int ,
+%     \l_@@_range_same_count_int ,
+%     \l_@@_range_beg_label_tl ,
+%     \l_@@_next_maybe_range_bool ,
+%     \l_@@_next_is_same_bool ,
+%     \l_@@_range_inhibit_next_bool
+%   }
+%   Range related auxiliary variables for \cs{@@_typeset_refs:}.
+%   \cs{l_@@_range_count_int} counts how many references/labels are in the
+%   current ongoing range.  \cs{l_@@_range_same_count_int} counts how many of
+%   the references in the current ongoing range are repeated ones.
+%   \cs{l_@@_range_beg_label_tl} stores the label of the reference that starts
+%   a range.  \cs{l_@@_next_maybe_range_bool} signals whether the next element
+%   is in sequence to the current one.  \cs{l_@@_next_is_same_bool} signals
+%   whether the next element repeats the current one.
+%   \cs{l_@@_range_inhibit_next_bool} allows to control/track compression
+%   inhibition of the next label.
+%    \begin{macrocode}
 \int_new:N \l_@@_range_count_int
 \int_new:N \l_@@_range_same_count_int
-
 \tl_new:N \l_@@_range_beg_label_tl
-
-\bool_new:N \l_@@_last_of_type_bool
 \bool_new:N \l_@@_next_maybe_range_bool
 \bool_new:N \l_@@_next_is_same_bool
 \bool_new:N \l_@@_range_inhibit_next_bool
-
-
-% Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
-% ``ref-block'', including ``pre'' and ``pos'' elements, and
-% \emph{hyperlinking}.  It does not handle the reference type ``name'', for
-% that use \cs{@@_get_ref_first:VN}.  It should get the reference with
-% \cs{zref@extractdefault} as usual but, if the reference is not available,
-% should put \cs{zref@default} on the stream protected, so that it can be
-% accumulated in the queue.
+%    \end{macrocode}
+% \end{variable}
+%
+%
+%
+% \begin{macro}{\@@_get_ref:n}
+%   Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
+%   ``ref-block'', including ``pre'' and ``pos'' elements, and
+%   \emph{hyperlinking}.  It does not handle the reference type ``name'', for
+%   that use \cs{@@_get_ref_first:VN}.  It should get the reference with
+%   \cs{zref@extractdefault} as usual but, if the reference is not available,
+%   should put \cs{zref@default} on the stream protected, so that it can be
+%   accumulated in the queue.  \cs{hyperlink} must also be protected from
+%   expansion for the same reason.
+%    \begin{macrocode}
 \cs_new:Npn \@@_get_ref:n #1
   {
     \bool_if:NTF \l_@@_page_ref_bool
@@ -1290,31 +1364,75 @@
       }
   }
 \cs_generate_variant:Nn \@@_get_ref:n {V}
-
-
-
-% aux variables for \cs{@@_get_ref_first:nn}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{variable}
+%   {
+%     \l_@@_label_type_first_tl ,
+%     \l_@@_typeset_queue_first_tl ,
+%     \l_@@_type_count_first_int ,
+%     \l_@@_type_name_tl ,
+%     \l_@@_found_name_bool ,
+%     \l_@@_name_in_link_bool
+%   }
+%   Auxiliary variables for \cs{@@_get_ref_first:nn}.
+%    \begin{macrocode}
 \tl_new:N \l_@@_label_type_first_tl
-\tl_new:N \l_@@_type_name_first_tl
 \tl_new:N \l_@@_typeset_queue_first_tl
 \int_new:N \l_@@_type_count_first_int
+\tl_new:N \l_@@_type_name_tl
 \bool_new:N \l_@@_found_name_bool
 \bool_new:N \l_@@_name_in_link_bool
-
-
-% Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
-% ``ref-block'', including ``pre'' and ``pos'' elements, \emph{hyperlinking},
-% and the reference type ``name''.  For use on the first reference of each
-% type.  It does not need to protect expansion of anything, since it is not
-% accumulated in the queue, but typeset on the spot.  The first argument is
-% the (first) label (of the type), the second one is an ``index'' number,
-% which should receive ``\(-1\)'' when processing the \emph{previous} type,
-% and ``\(0\)'' (technically, any integer different from ``\(-1\)'', but stick
-% to zero) when processing the \emph{current} one, so that we can check
-% whether the queue is empty or not, and hence know whether the name is
-% singular or plural, and also whether this is the first type or not to be
-% able do decide capitalization and so on.
-\cs_new_protected:Npn \@@_get_ref_first:nn #1#2
+%    \end{macrocode}
+% \end{variable}
+%
+%
+% \begin{macro}
+%   {
+%     \@@_get_ref_first:n ,
+%     \@@_get_ref_first_prev:n ,
+%     \@@_get_ref_first_curr:n
+%   }
+%   Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
+%   ``ref-block'', including ``pre'' and ``pos'' elements,
+%   \emph{hyperlinking}, and the reference type ``name''.  For use on the
+%   first reference of each type.  It does not need to protect expansion of
+%   anything, since it is not accumulated in the queue, but typeset on the
+%   spot.  \cs{@@_get_ref_first_prev:n} is to be called with the ``previous''
+%   queue, and \cs{@@_get_ref_first_curr:n} with the ``current'' queue.  Both
+%   of them set \cs{l_@@_typeset_queue_first_tl} and
+%   \cs{l_@@_type_count_first_int}, so that we can tell whether the ``first''
+%   label is single in its type or single altogether, so that we can know when
+%   to include the type names in the links (according to options), when to
+%   capitalize or not, and whether to use singular or plural names.  Hence,
+%   \cs{@@_get_ref_first:n} should not be called directly without controlling
+%   the values of these variables.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_get_ref_first_prev:n #1
+  {
+    \tl_set_eq:NN
+      \l_@@_typeset_queue_first_tl \l_@@_typeset_queue_prev_tl
+    \int_set:Nn
+      \l_@@_type_count_first_int { \l_@@_type_count_int - 1 }
+    \@@_get_ref_first:n {#1}
+  }
+\cs_new_protected:Npn \@@_get_ref_first_curr:n #1
+  {
+    \tl_set_eq:NN
+      \l_@@_typeset_queue_first_tl \l_@@_typeset_queue_curr_tl
+    \int_set:Nn
+      \l_@@_type_count_first_int { \l_@@_type_count_int }
+    \@@_get_ref_first:n {#1}
+  }
+\cs_generate_variant:Nn \@@_get_ref_first_prev:n { V }
+\cs_generate_variant:Nn \@@_get_ref_first_curr:n { V }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_get_ref_first:n #1
   {
     \bool_if:NTF \l_@@_page_ref_bool
       { \tl_set:Nn \l_@@_label_type_first_tl { page } }
@@ -1322,23 +1440,10 @@
         \tl_set:Nx \l_@@_label_type_first_tl
           { \zref@extractdefault {#1} { zc@type } { \c_empty_tl } }
       }
-
-    % Set relevant variables according to whether we are processing the
-    % ``current'' or the ``previous'' reference type on the list.
-    \int_compare:nNnTF {#2} = { -1 }
-      {
-        \tl_set_eq:NN
-          \l_@@_typeset_queue_first_tl \l_@@_typeset_queue_prev_tl
-        \int_set:Nn
-          \l_@@_type_count_first_int { \l_@@_type_count_int - 1 }
-      }
-      {
-        \tl_set_eq:NN
-          \l_@@_typeset_queue_first_tl \l_@@_typeset_queue_curr_tl
-        \int_set:Nn
-          \l_@@_type_count_first_int { \l_@@_type_count_int }
-      }
-
+%    \end{macrocode}
+% Set the type name variable \cs{l_@@_type_name_tl}.  When it cannot be found,
+% handle it and signal.
+%    \begin{macrocode}
     \bool_set_false:N \l_@@_found_name_bool
     \zref@ifrefundefined {#1}
       { }
@@ -1354,7 +1459,7 @@
                 % Singular.
                 \prop_get:NVNTF
                   \l_@@_type_names_prop \l_@@_label_type_first_tl
-                  \l_@@_type_name_first_tl
+                  \l_@@_type_name_tl
                   { \bool_set_true:N \l_@@_found_name_bool }
                   {
                     \exp_args:Nnnx \msg_warning:nnn { zref-clever }
@@ -1367,7 +1472,7 @@
                 % Plural.
                 \prop_get:NVNTF
                   \l_@@_type_names_prop \l_@@_label_type_first_tl
-                  \l_@@_type_name_first_tl
+                  \l_@@_type_name_tl
                   { \bool_set_true:N \l_@@_found_name_bool }
                   {
                     \exp_args:Nnnx \msg_warning:nnn { zref-clever }
@@ -1377,13 +1482,13 @@
                   }
                 % FIXME Temporary, of course.
                 \bool_if:NT \l_@@_found_name_bool
-                  { \tl_put_right:Nn \l_@@_type_name_first_tl { s } }
+                  { \tl_put_right:Nn \l_@@_type_name_tl { s } }
               }
           }
       }
-
-    % Establish whether the type name is to be included in the hyperlink or
-    % not.
+%    \end{macrocode}
+% Establish whether the type name is to be included in the hyperlink or not.
+%    \begin{macrocode}
     \bool_case_true:nF
       {
         { ! \l_@@_use_hyperref_bool }
@@ -1416,7 +1521,9 @@
         { \bool_set_true:N \l_@@_name_in_link_bool }
       }
       { \bool_set_false:N \l_@@_name_in_link_bool }
-
+%    \end{macrocode}
+% Finally, typeset it.
+%    \begin{macrocode}
     \bool_if:NTF \l_@@_name_in_link_bool
       {
         \bool_if:NTF \l_@@_page_ref_bool
@@ -1426,13 +1533,13 @@
                 \hyperlink
                   { \zref@extractdefault {#1} { anchor } {} }
                   {
-                    \l_@@_type_name_first_tl
+                    \l_@@_type_name_tl
                     \l_@@_namesep_tl
                     \zref@extractdefault {#1} { page } {}
                   }
               }
               {
-                \l_@@_type_name_first_tl
+                \l_@@_type_name_tl
                 \l_@@_namesep_tl
                 \zref@default
               }
@@ -1443,13 +1550,13 @@
                 \hyperlink
                   { \zref@extractdefault {#1} { anchor } {} }
                   {
-                    \l_@@_type_name_first_tl
+                    \l_@@_type_name_tl
                     \l_@@_namesep_tl
                     \zref@extractdefault {#1} { zc@thecnt } {}
                   }
               }
               {
-                \l_@@_type_name_first_tl
+                \l_@@_type_name_tl
                 \l_@@_namesep_tl
                 \zref@default
               }
@@ -1458,7 +1565,7 @@
       {
         \bool_if:NT \l_@@_found_name_bool
           {
-            \l_@@_type_name_first_tl
+            \l_@@_type_name_tl
             \l_@@_namesep_tl
           }
         \bool_if:NTF \l_@@_page_ref_bool
@@ -1466,7 +1573,10 @@
             \zref@ifrefcontainsprop {#1} { page }
               {
                 \bool_if:nTF
-                  { \l_@@_use_hyperref_bool && ! \l_@@_link_star_bool }
+                  {
+                    \l_@@_use_hyperref_bool &&
+                    ! \l_@@_link_star_bool
+                  }
                   {
                     \hyperlink
                       { \zref@extractdefault {#1} { anchor } {} }
@@ -1480,7 +1590,10 @@
             \zref@ifrefcontainsprop {#1} { zc@thecnt }
               {
                 \bool_if:nTF
-                  { \l_@@_use_hyperref_bool && ! \l_@@_link_star_bool }
+                  {
+                    \l_@@_use_hyperref_bool &&
+                    ! \l_@@_link_star_bool
+                  }
                   {
                     \hyperlink
                       { \zref@extractdefault {#1} { anchor } {} }
@@ -1492,7 +1605,11 @@
           }
       }
   }
-\cs_generate_variant:Nn \@@_get_ref_first:nn { Vn }
+%    \end{macrocode}
+% \end{macro}
+
+
+%    \begin{macrocode}
 
 
 
@@ -1779,7 +1896,7 @@
       {
         \int_compare:nNnT { \l_@@_type_count_int } > { 1 }
           { \l_@@_tlistsep_tl }
-        \@@_get_ref_first:Vn \l_@@_type_first_label_prev_tl { -1 }
+        \@@_get_ref_first_prev:V \l_@@_type_first_label_prev_tl
         \l_@@_typeset_queue_prev_tl
       }
 
@@ -1792,21 +1909,21 @@
             % Single type.
             { 0 }
             {
-              \@@_get_ref_first:Vn \l_@@_type_first_label_curr_tl { 0 }
+              \@@_get_ref_first_curr:V \l_@@_type_first_label_curr_tl
               \l_@@_typeset_queue_curr_tl
             }
             % Pair of types.
             { 1 }
             {
               \l_@@_tpairsep_tl
-              \@@_get_ref_first:Vn \l_@@_type_first_label_curr_tl { 0 }
+              \@@_get_ref_first_curr:V \l_@@_type_first_label_curr_tl
               \l_@@_typeset_queue_curr_tl
             }
           }
           {
             % Last in list of types.
             \l_@@_tlastsep_tl
-            \@@_get_ref_first:Vn \l_@@_type_first_label_curr_tl { 0 }
+            \@@_get_ref_first_curr:V \l_@@_type_first_label_curr_tl
             \l_@@_typeset_queue_curr_tl
           }
       }
@@ -1835,6 +1952,8 @@
     \bool_set_false:N \l_@@_next_is_same_bool
     \bool_lazy_and:nnT
       { \l_@@_compress_bool }
+      % Currently no-op, but kept as ``handle'' to inhibit compression of
+      % individual labels.
       { ! \l_@@_range_inhibit_next_bool }
       {
         \zref@ifrefundefined { \l_@@_label_a_tl }
@@ -1886,7 +2005,8 @@
               }
           }
           {
-            % There was no range, or we are closing one.
+            % Next element is not in sequence, meaning: there was no range, or
+            % we are closing one.
             \int_case:nnF { \l_@@_range_count_int }
               {
                 % There was no range going on.
@@ -1985,8 +2105,7 @@
     Name~undefined~for~type~'#1' \iow_newline:
     on~input~line~\msg_line_number:.
   }
-
-
+%    \end{macrocode}
 %
 %
 %
