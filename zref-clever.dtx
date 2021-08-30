@@ -550,6 +550,118 @@
 %
 %
 %
+% \subsection{Options}
+%
+%
+% \subsubsection*{\opt{hyperref} option}
+%
+% \begin{variable}{\l_@@_use_hyperref_bool, \l_@@_warn_hyperref_bool}
+%    \begin{macrocode}
+\bool_new:N \l_@@_use_hyperref_bool
+\bool_new:N \l_@@_warn_hyperref_bool
+\keys_define:nn { zref-clever }
+  {
+    hyperref .choice: ,
+    hyperref / auto .code:n =
+      {
+        \bool_set_true:N \l_@@_use_hyperref_bool
+        \bool_set_false:N \l_@@_warn_hyperref_bool
+      } ,
+    hyperref / true .code:n =
+      {
+        \bool_set_true:N \l_@@_use_hyperref_bool
+        \bool_set_true:N \l_@@_warn_hyperref_bool
+      } ,
+    hyperref / false .code:n =
+      {
+        \bool_set_false:N \l_@@_use_hyperref_bool
+        \bool_set_false:N \l_@@_warn_hyperref_bool
+      } ,
+    hyperref .initial:n = auto ,
+    hyperref .default:n = auto
+  }
+%    \end{macrocode}
+% \end{variable}
+%
+%    \begin{macrocode}
+\AddToHook { begindocument }
+  {
+    \@ifpackageloaded { hyperref }
+      {
+        \bool_if:NT \l_@@_use_hyperref_bool
+          { \RequirePackage { zref-hyperref } }
+      }
+      {
+        \bool_if:NT \l_@@_warn_hyperref_bool
+          { \msg_warning:nn { zref-clever } { missing-hyperref } }
+        \bool_set_false:N \l_@@_use_hyperref_bool
+      }
+    \keys_define:nn { zref-check }
+      {
+        hyperref .code:n =
+          { \msg_warning:nn { zref-clever } { hyperref-preamble-only } }
+      }
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\msg_new:nnn { zref-clever } { hyperref-preamble-only }
+  {
+    Option~'hyperref'~only~available~in~the~preamble. \iow_newline:
+    Use~the~starred~version~of~'\noexpand\zcheck'~instead.
+  }
+\msg_new:nnn { zref-clever } { missing-hyperref }
+  { Missing~'hyperref'~package. \iow_newline: Setting~'hyperref=false'. }
+%    \end{macrocode}
+%
+%
+% \subsubsection*{\opt{nameinlink} option}
+%
+% \begin{variable}{\l_@@_nameinlink_tl}
+%    \begin{macrocode}
+\str_new:N \l_@@_nameinlink_str
+\keys_define:nn { zref-clever }
+  {
+    nameinlink .choice: ,
+    nameinlink / true .code:n =
+      { \str_set:Nn \l_@@_nameinlink_str { true } } ,
+    nameinlink / false .code:n =
+      { \str_set:Nn \l_@@_nameinlink_str { false } } ,
+    nameinlink / single .code:n =
+      { \str_set:Nn \l_@@_nameinlink_str { single } } ,
+    nameinlink / singleintype .code:n =
+      { \str_set:Nn \l_@@_nameinlink_str { singleintype } } ,
+    nameinlink .initial:n = singleintype ,
+    nameinlink .default:n = singleintype ,
+  }
+%    \end{macrocode}
+% \end{variable}
+%
+%
+%
+%
+%
+% \subsubsection*{Package options}
+%
+% Process load-time package options
+% (\url{https://tex.stackexchange.com/a/15840}).
+%    \begin{macrocode}
+\RequirePackage { l3keys2e }
+\ProcessKeysOptions { zref-clever }
+%    \end{macrocode}
+%
+%
+% \begin{macro}[int]{\zcsetup}
+%   Provide \cs{zrefchecksetup}.
+%    \begin{macrocode}
+\NewDocumentCommand \zcsetup { m }
+  { \keys_set:nn { zref-clever } {#1} }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+%
 % \section{\cs{zcref}}
 %
 %
@@ -563,6 +675,15 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{variable}
+%   {
+%     \l_@@_link_star_bool
+%   }
+%    \begin{macrocode}
+\bool_new:N \l_@@_link_star_bool
+%    \end{macrocode}
+% \end{variable}
+
 %
 % \begin{macro}{\@@_zcref:nnnn}
 %   An intermediate internal function, which does the actual heavy lifting,
@@ -576,10 +697,11 @@
 \cs_new_protected:Npn \@@_zcref:nnn #1#2#3
   {
     \group_begin:
+    \keys_set:nn { zref-clever } {#3}
     \seq_set_split:Nnn \l_@@_zcref_labels_seq { } {#1}
+    \bool_set:Nn \l_@@_link_star_bool {#2}
     \@@_sort_labels:
     \@@_typeset_refs:
-
     \group_end:
   }
 %    \end{macrocode}
@@ -792,7 +914,6 @@
           ! \tl_if_empty_p:N \l_@@_label_type_b_tl
         }
         { \sort_return_same: }
-%    \end{macrocode}
 %    \end{macrocode}
 % The first label has a type, but the second doesn't, bring the second
 % forward.
@@ -1074,7 +1195,7 @@
 %    \end{macrocode}
 % \end{variable}
 %
-
+%    \begin{macrocode}
 \prop_new:N \l_@@_type_names_prop
 \prop_set_from_keyval:Nn \l_@@_type_names_prop
   {
@@ -1116,29 +1237,17 @@
 \tl_new:N \l_@@_type_first_label_prev_tl
 \tl_new:N \l_@@_type_first_label_curr_tl
 
-
 \int_new:N \l_@@_ref_count_int
 \int_new:N \l_@@_type_count_int
 \int_new:N \l_@@_range_count_int
 \int_new:N \l_@@_range_same_count_int
 
-\tl_new:N \l_@@_thecnt_a_tl
-\tl_new:N \l_@@_anchor_a_tl
-
 \tl_new:N \l_@@_range_beg_label_tl
 
-% aux variables for \cs{@@_get_ref_first:nn}
-\tl_new:N \l_@@_label_type_first_tl
-\tl_new:N \l_@@_type_name_first_tl
-\tl_new:N \l_@@_typeset_queue_first_tl
-\int_new:N \l_@@_type_count_first_int
-
 \bool_new:N \l_@@_last_of_type_bool
-\bool_new:N \l_@@_found_name_a_bool
 \bool_new:N \l_@@_next_maybe_range_bool
 \bool_new:N \l_@@_next_is_same_bool
 \bool_new:N \l_@@_range_inhibit_next_bool
-
 
 
 % Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
@@ -1153,16 +1262,44 @@
     \bool_if:NTF \l_@@_page_ref_bool
       {
         \zref@ifrefcontainsprop {#1} { page }
-          { \zref@extractdefault {#1} { page } {} }
+          {
+            \bool_if:nTF
+              { \l_@@_use_hyperref_bool && ! \l_@@_link_star_bool }
+              {
+                \exp_not:N \hyperlink
+                  { \zref@extractdefault {#1} { anchor } {} }
+                  { \zref@extractdefault {#1} { page } {} }
+              }
+              { \zref@extractdefault {#1} { page } {} }
+          }
           { \exp_not:N \zref@default }
       }
       {
         \zref@ifrefcontainsprop {#1} { zc@thecnt }
-          { \zref@extractdefault {#1} { zc@thecnt } {} }
+          {
+            \bool_if:nTF
+              { \l_@@_use_hyperref_bool && ! \l_@@_link_star_bool }
+              {
+                \exp_not:N \hyperlink
+                  { \zref@extractdefault {#1} { anchor } {} }
+                  { \zref@extractdefault {#1} { zc@thecnt } {} }
+              }
+              { \zref@extractdefault {#1} { zc@thecnt } {} }
+          }
           { \exp_not:N \zref@default }
       }
   }
 \cs_generate_variant:Nn \@@_get_ref:n {V}
+
+
+
+% aux variables for \cs{@@_get_ref_first:nn}
+\tl_new:N \l_@@_label_type_first_tl
+\tl_new:N \l_@@_type_name_first_tl
+\tl_new:N \l_@@_typeset_queue_first_tl
+\int_new:N \l_@@_type_count_first_int
+\bool_new:N \l_@@_found_name_bool
+\bool_new:N \l_@@_name_in_link_bool
 
 
 % Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
@@ -1177,7 +1314,7 @@
 % whether the queue is empty or not, and hence know whether the name is
 % singular or plural, and also whether this is the first type or not to be
 % able do decide capitalization and so on.
-\cs_new:Npn \@@_get_ref_first:nn #1#2
+\cs_new_protected:Npn \@@_get_ref_first:nn #1#2
   {
     \bool_if:NTF \l_@@_page_ref_bool
       { \tl_set:Nn \l_@@_label_type_first_tl { page } }
@@ -1202,12 +1339,15 @@
           \l_@@_type_count_first_int { \l_@@_type_count_int }
       }
 
-    \bool_set_false:N \l_@@_found_name_a_bool
+    \bool_set_false:N \l_@@_found_name_bool
     \zref@ifrefundefined {#1}
       { }
       {
         \tl_if_empty:nTF \l_@@_label_type_first_tl
-          { \zref@default \l_@@_namesep_tl }
+          {
+            \zref@default
+            \l_@@_namesep_tl
+          }
           {
             \tl_if_empty:NTF \l_@@_typeset_queue_first_tl
               {
@@ -1215,11 +1355,12 @@
                 \prop_get:NVNTF
                   \l_@@_type_names_prop \l_@@_label_type_first_tl
                   \l_@@_type_name_first_tl
-                  { \bool_set_true:N \l_@@_found_name_a_bool }
+                  { \bool_set_true:N \l_@@_found_name_bool }
                   {
                     \exp_args:Nnnx \msg_warning:nnn { zref-clever }
                       { missing-name } { \l_@@_label_type_first_tl }
-                    \zref@default \l_@@_namesep_tl
+                    \zref@default
+                    \l_@@_namesep_tl
                   }
               }
               {
@@ -1227,32 +1368,128 @@
                 \prop_get:NVNTF
                   \l_@@_type_names_prop \l_@@_label_type_first_tl
                   \l_@@_type_name_first_tl
-                  { \bool_set_true:N \l_@@_found_name_a_bool }
+                  { \bool_set_true:N \l_@@_found_name_bool }
                   {
                     \exp_args:Nnnx \msg_warning:nnn { zref-clever }
                       { missing-name } { \l_@@_label_type_first_tl }
-                    \zref@default \l_@@_namesep_tl
+                    \zref@default
+                    \l_@@_namesep_tl
                   }
                 % FIXME Temporary, of course.
-                \bool_if:NT \l_@@_found_name_a_bool
+                \bool_if:NT \l_@@_found_name_bool
                   { \tl_put_right:Nn \l_@@_type_name_first_tl { s } }
               }
           }
       }
 
-    \bool_if:NT \l_@@_found_name_a_bool
-      { \l_@@_type_name_first_tl \l_@@_namesep_tl }
-
-    \bool_if:NTF \l_@@_page_ref_bool
+    % Establish whether the type name is to be included in the hyperlink or
+    % not.
+    \bool_case_true:nF
       {
-        \zref@ifrefcontainsprop {#1} { page }
-          { \zref@extractdefault {#1} { page } {} }
-          { \zref@default }
+        { ! \l_@@_use_hyperref_bool }
+        { \bool_set_false:N \l_@@_name_in_link_bool }
+
+        { \l_@@_link_star_bool }
+        { \bool_set_false:N \l_@@_name_in_link_bool }
+
+        { ! \l_@@_found_name_bool }
+        { \bool_set_false:N \l_@@_name_in_link_bool }
+
+        { \str_if_eq_p:Vn \l_@@_nameinlink_str { false } }
+        { \bool_set_false:N \l_@@_name_in_link_bool }
+
+        { \str_if_eq_p:Vn \l_@@_nameinlink_str { true } }
+        { \bool_set_true:N \l_@@_name_in_link_bool }
+
+        {
+          \str_if_eq_p:Vn \l_@@_nameinlink_str { singleintype } &&
+          \tl_if_empty_p:N \l_@@_typeset_queue_first_tl
+        }
+        { \bool_set_true:N \l_@@_name_in_link_bool }
+
+        {
+          \str_if_eq_p:Vn \l_@@_nameinlink_str { single } &&
+          \tl_if_empty_p:N \l_@@_typeset_queue_first_tl &&
+          \l_@@_typeset_last_bool &&
+          \int_compare_p:nNn { \l_@@_type_count_first_int } = { 0 }
+        }
+        { \bool_set_true:N \l_@@_name_in_link_bool }
+      }
+      { \bool_set_false:N \l_@@_name_in_link_bool }
+
+    \bool_if:NTF \l_@@_name_in_link_bool
+      {
+        \bool_if:NTF \l_@@_page_ref_bool
+          {
+            \zref@ifrefcontainsprop {#1} { page }
+              {
+                \hyperlink
+                  { \zref@extractdefault {#1} { anchor } {} }
+                  {
+                    \l_@@_type_name_first_tl
+                    \l_@@_namesep_tl
+                    \zref@extractdefault {#1} { page } {}
+                  }
+              }
+              {
+                \l_@@_type_name_first_tl
+                \l_@@_namesep_tl
+                \zref@default
+              }
+          }
+          {
+            \zref@ifrefcontainsprop {#1} { zc@thecnt }
+              {
+                \hyperlink
+                  { \zref@extractdefault {#1} { anchor } {} }
+                  {
+                    \l_@@_type_name_first_tl
+                    \l_@@_namesep_tl
+                    \zref@extractdefault {#1} { zc@thecnt } {}
+                  }
+              }
+              {
+                \l_@@_type_name_first_tl
+                \l_@@_namesep_tl
+                \zref@default
+              }
+          }
       }
       {
-        \zref@ifrefcontainsprop {#1} { zc@thecnt }
-          { \zref@extractdefault {#1} { zc@thecnt } {} }
-          { \zref@default }
+        \bool_if:NT \l_@@_found_name_bool
+          {
+            \l_@@_type_name_first_tl
+            \l_@@_namesep_tl
+          }
+        \bool_if:NTF \l_@@_page_ref_bool
+          {
+            \zref@ifrefcontainsprop {#1} { page }
+              {
+                \bool_if:nTF
+                  { \l_@@_use_hyperref_bool && ! \l_@@_link_star_bool }
+                  {
+                    \hyperlink
+                      { \zref@extractdefault {#1} { anchor } {} }
+                      { \zref@extractdefault {#1} { page } {} }
+                  }
+                  { \zref@extractdefault {#1} { page } {} }
+              }
+              { \zref@default }
+          }
+          {
+            \zref@ifrefcontainsprop {#1} { zc@thecnt }
+              {
+                \bool_if:nTF
+                  { \l_@@_use_hyperref_bool && ! \l_@@_link_star_bool }
+                  {
+                    \hyperlink
+                      { \zref@extractdefault {#1} { anchor } {} }
+                      { \zref@extractdefault {#1} { zc@thecnt } {} }
+                  }
+                  { \zref@extractdefault {#1} { zc@thecnt } {} }
+              }
+              { \zref@default }
+          }
       }
   }
 \cs_generate_variant:Nn \@@_get_ref_first:nn { Vn }
@@ -1546,7 +1783,6 @@
         \l_@@_typeset_queue_prev_tl
       }
 
-
     % Wrap up loop, or prepare for next iteration.
     \bool_if:NTF \l_@@_typeset_last_bool
       {
@@ -1664,7 +1900,7 @@
                 }
                 % Last is second in the range: if `range_same_count' is also
                 % `1', it's a repetition (drop it), otherwise, it's a ``pair
-                % within a list'', which is a list.
+                % within a list'', treat as list.
                 {1}
                 {
                   \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
