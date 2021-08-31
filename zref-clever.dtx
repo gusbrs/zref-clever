@@ -446,32 +446,6 @@
 % \texttt{zc@withincnt} and \texttt{zc@withinval}).
 %
 %
-% \begin{variable}{\l_@@_counter_type_prop}
-%   Variable storing a mapping from ``counter'' to ``reference type''. TODO
-%   This will have to be populated by user facing setup infrastructure.
-%    \begin{macrocode}
-\prop_new:N \l_@@_counter_type_prop
-\prop_set_from_keyval:Nn \l_@@_counter_type_prop
-  {
-    part = part ,
-    chapter = chapter ,
-    section = section ,
-    subsection = section ,
-    subsubsection = section ,
-    paragraph = paragraph ,
-    subparagraph = paragraph ,
-    figure = figure ,
-    table = table ,
-    equation = equation ,
-    enumi = item ,
-    enumii = item ,
-    enumiii = item ,
-    enumiv = item ,
-  }
-%    \end{macrocode}
-% \end{variable}
-%
-%
 % There are also cases in which we may want to use different \emph{reference
 % types} to refer to document objects sharing the same \emph{counter}.
 % Prominently, the environments created with the kernel's \cs{newtheorem}
@@ -548,6 +522,307 @@
 %
 %
 %
+% \subsection{Type format}
+%
+%
+% \subsubsection{Counter types}
+%
+% \begin{variable}{\l_@@_counter_type_prop}
+%   Variable storing a mapping from ``counter'' to ``reference type''.
+%    \begin{macrocode}
+\prop_new:N \l_@@_counter_type_prop
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{macro}[int]{\zcCounterTypes}
+%   Provide \cs{zcCounterTypes}.
+%    \begin{macrocode}
+\NewDocumentCommand \zcCounterTypes { m }
+  { \prop_put_from_keyval:Nn \l_@@_counter_type_prop {#1} }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%    \begin{macrocode}
+\zcCounterTypes
+  {
+    part = part ,
+    chapter = chapter ,
+    section = section ,
+    subsection = section ,
+    subsubsection = section ,
+    paragraph = paragraph ,
+    subparagraph = paragraph ,
+    figure = figure ,
+    table = table ,
+    equation = equation ,
+    enumi = item ,
+    enumii = item ,
+    enumiii = item ,
+    enumiv = item ,
+  }
+%    \end{macrocode}
+%
+%
+%
+% \subsubsection{\cs{zcRefTypeSetup}}
+%
+%
+% \begin{variable}{\l_@@_ref_type_language_tl}
+%   Variable storing the language and type to be used in \cs{zcRefTypeSetup}.
+%    \begin{macrocode}
+\tl_new:N \l_@@_reftypesetup_language_tl
+\tl_new:N \l_@@_reftypesetup_type_tl
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{macro}[int]{\zcRefTypeSetup}
+%   Provide \cs{zcRefTypeSetup}.
+%    \begin{macrocode}
+\NewDocumentCommand \zcRefTypeSetup { m m }
+  {
+    \prop_if_exist:cF { l_@@_type_ #1 _strings_prop }
+      { \prop_new:c { l_@@_type_ #1 _strings_prop } }
+    \tl_set:Nn \l_@@_reftypesetup_type_tl {#1}
+    \tl_clear:N \l_@@_reftypesetup_language_tl
+    \keys_set:nn { zref-clever / type } {#2}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%    \begin{macrocode}
+\keys_define:nn { zref-clever / type }
+  {
+    lang .code:n =
+      {
+        \tl_if_blank:nTF {#1}
+          { \tl_clear:N \l_@@_reftypesetup_language_tl }
+          { \tl_set:Nn \l_@@_reftypesetup_language_tl {#1} }
+      } ,
+    lang .value_required:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+% \subsubsection{Type names}
+%
+%
+%
+% \subsubsection{Type reference strings}
+%
+
+%    \begin{macrocode}
+% \Arg{string} \Arg{reference type} \Arg{var to store result}
+\cs_new_protected:Npn \@@_get_string:nnN #1#2#3
+  {
+    % First attempt options stored in \cs{l_@@_ref_strings_prop}.
+    \prop_get:NnNF \l_@@_ref_strings_prop {#1} #3
+      {
+        % If not found, try the type specific strings.
+        \prop_get:cnNF { l_@@_type_ #2 _strings_prop } {#1} #3
+          {
+            % If not found, try the type specific translations.
+            \IfTranslation { \@trnslt@current@language }
+              { zrefclever-type- #2 - #1 }
+              {
+                \SaveTranslationFor {#3}
+                  { \@trnslt@current@language }
+                  { zrefclever-type- #2 - #1 }
+                % \tl_set:Nx #3
+                %   {
+                %     \GetTranslationFor { \@trnslt@current@language }
+                %       { zrefclever-type- #2 - #1 }
+                %   }
+              }
+              {
+                % If not found, try general translations.
+                \tl_clear:N #3
+              }
+          }
+      }
+  }
+\cs_generate_variant:Nn \@@_get_string:nnN { nVN }
+
+
+\keys_define:nn { zref-clever / type }
+  {
+    namesep .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_reftypesetup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ #1 _strings_prop } { namesep } {#1}
+          }
+          {
+            \exp_args:Nxx \declaretranslation
+              { \l_@@_reftypesetup_language_tl }
+              { zrefclever-type- \l_@@_reftypesetup_type_tl -namesep }
+              {#1}
+          }
+      } ,
+    namesep .value_required:n = true ,
+    rangesep .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_reftypesetup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ #1 _strings_prop } { rangesep } {#1}
+          }
+          {
+            \exp_args:Nxx \declaretranslation
+              { \l_@@_reftypesetup_language_tl }
+              { zrefclever-type- \l_@@_reftypesetup_type_tl -rangesep }
+              {#1}
+          }
+      } ,
+    rangesep .value_required:n = true ,
+    pairsep .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_reftypesetup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ #1 _strings_prop } { pairsep } {#1}
+          }
+          {
+            \exp_args:Nxx \declaretranslation
+              { \l_@@_reftypesetup_language_tl }
+              { zrefclever-type- \l_@@_reftypesetup_type_tl -pairsep }
+              {#1}
+          }
+      } ,
+    pairsep .value_required:n = true ,
+    listsep .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_reftypesetup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ #1 _strings_prop } { listsep } {#1}
+          }
+          {
+            \exp_args:Nxx \declaretranslation
+              { \l_@@_reftypesetup_language_tl }
+              { zrefclever-type- \l_@@_reftypesetup_type_tl -listsep }
+              {#1}
+          }
+      } ,
+    listsep .value_required:n = true ,
+    lastsep .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_reftypesetup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ #1 _strings_prop } { lastsep } {#1}
+          }
+          {
+            \exp_args:Nxx \declaretranslation
+              { \l_@@_reftypesetup_language_tl }
+              { zrefclever-type- \l_@@_reftypesetup_type_tl -lastsep }
+              {#1}
+          }
+      } ,
+    lastsep .value_required:n = true ,
+    refpre .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_reftypesetup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ #1 _strings_prop } { refpre } {#1}
+          }
+          {
+            \exp_args:Nxx \declaretranslation
+              { \l_@@_reftypesetup_language_tl }
+              { zrefclever-type- \l_@@_reftypesetup_type_tl -refpre }
+              {#1}
+          }
+      } ,
+    refpre .value_required:n = true ,
+    refpos .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_reftypesetup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ #1 _strings_prop } { refpos } {#1}
+          }
+          {
+            \exp_args:Nxx \declaretranslation
+              { \l_@@_reftypesetup_language_tl }
+              { zrefclever-type- \l_@@_reftypesetup_type_tl -refpos }
+              {#1}
+          }
+      } ,
+    refpos .value_required:n = true ,
+    refpre-in .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_reftypesetup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ #1 _strings_prop } { refpre-in } {#1}
+          }
+          {
+            \exp_args:Nxx \declaretranslation
+              { \l_@@_reftypesetup_language_tl }
+              { zrefclever-type- \l_@@_reftypesetup_type_tl -refpre-in }
+              {#1}
+          }
+      } ,
+    refpre-in .value_required:n = true ,
+    refpos-in .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_reftypesetup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ #1 _strings_prop } { refpos-in } {#1}
+          }
+          {
+            \exp_args:Nxx \declaretranslation
+              { \l_@@_reftypesetup_language_tl }
+              { zrefclever-type- \l_@@_reftypesetup_type_tl -refpos-in }
+              {#1}
+          }
+      } ,
+    refpos-in .value_required:n = true ,
+  }
+
+
+
+\zcRefTypeSetup{section}
+  {
+    lang = French,
+    namesep   = {~} ,
+    rangesep  = {~to~} ,
+    pairsep   = {~and~} ,
+    listsep   = {,~} ,
+    lastsep   = {~and~} ,
+    % refpre    = {} ,
+    % refpos    = {} ,
+    refpre-in = {(} ,
+    refpos-in = {)} ,
+
+  }
+
+\zcRefTypeSetup{chapter}
+  {
+    lang = French,
+    namesep   = {~} ,
+    rangesep  = {~to~} ,
+    pairsep   = {~and~} ,
+    listsep   = {,~} ,
+    lastsep   = {~and~} ,
+
+    % refpre    = {} ,
+    % refpos    = {} ,
+    % refpre-in = {} ,
+    % refpos-in = {} ,
+
+  }
+
+
+
+
+
+
+%    \end{macrocode}
 %
 %
 % \subsection{Options}
@@ -639,6 +914,67 @@
 %
 %
 %
+% \subsubsection*{Reference strings}
+%
+%
+
+%    \begin{macrocode}
+
+
+\prop_new:N \l_@@_ref_strings_prop
+
+\keys_define:nn { zref-clever }
+  {
+    namesep   .prop_put:N = \l_@@_ref_strings_prop ,
+    namesep   .value_required:n = true ,
+    rangesep  .prop_put:N = \l_@@_ref_strings_prop ,
+    rangesep  .value_required:n = true ,
+    pairsep   .prop_put:N = \l_@@_ref_strings_prop ,
+    pairsep   .value_required:n = true ,
+    listsep   .prop_put:N = \l_@@_ref_strings_prop ,
+    listsep   .value_required:n = true ,
+    lastsep   .prop_put:N = \l_@@_ref_strings_prop ,
+    lastsep   .value_required:n = true ,
+    tpairsep  .prop_put:N = \l_@@_ref_strings_prop ,
+    tpairsep  .value_required:n = true ,
+    tlistsep  .prop_put:N = \l_@@_ref_strings_prop ,
+    tlistsep  .value_required:n = true ,
+    tlastsep  .prop_put:N = \l_@@_ref_strings_prop ,
+    tlastsep  .value_required:n = true ,
+    refpre    .prop_put:N = \l_@@_ref_strings_prop ,
+    refpre    .value_required:n = true ,
+    refpos    .prop_put:N = \l_@@_ref_strings_prop ,
+    refpos    .value_required:n = true ,
+    refpre-in .prop_put:N = \l_@@_ref_strings_prop ,
+    refpre-in .value_required:n = true ,
+    refpos-in .prop_put:N = \l_@@_ref_strings_prop ,
+    refpos-in .value_required:n = true ,
+  }
+
+
+% TODO Temporary
+\prop_set_from_keyval:Nn \l_@@_ref_strings_prop
+  {
+    % namesep   = {~} ,
+    % rangesep  = {~to~} ,
+    % pairsep   = {~and~} ,
+    % listsep   = {,~} ,
+    % lastsep   = {~and~} ,
+    tpairsep  = {~and~} ,
+    tlistsep  = {,~} ,
+    tlastsep  = {,~and~} ,
+    % refpre    = {} ,
+    % refpos    = {} ,
+    % refpre-in = {} ,
+    % refpos-in = {} ,
+  }
+
+
+
+%    \end{macrocode}
+
+%
+%
 %
 %
 % \subsubsection*{Package options}
@@ -652,7 +988,7 @@
 %
 %
 % \begin{macro}[int]{\zcsetup}
-%   Provide \cs{zrefchecksetup}.
+%   Provide \cs{zcsetup}.
 %    \begin{macrocode}
 \NewDocumentCommand \zcsetup { m }
   { \keys_set:nn { zref-clever } {#1} }
@@ -1209,23 +1545,6 @@
     equation = Equation ,
     item = Item ,
   }
-\tl_new:N \l_@@_namesep_tl
-\tl_set:Nn \l_@@_namesep_tl {~}
-\tl_new:N \l_@@_rangesep_tl
-\tl_set:Nn \l_@@_rangesep_tl {~to~}
-\tl_new:N \l_@@_pairsep_tl
-\tl_set:Nn \l_@@_pairsep_tl {~and~}
-\tl_new:N \l_@@_listsep_tl
-\tl_set:Nn \l_@@_listsep_tl {,~}
-\tl_new:N \l_@@_lastsep_tl
-\tl_set:Nn \l_@@_lastsep_tl {~and~}
-% `t' for ``type''
-\tl_new:N \l_@@_tpairsep_tl
-\tl_set:Nn \l_@@_tpairsep_tl {~and~}
-\tl_new:N \l_@@_tlistsep_tl
-\tl_set:Nn \l_@@_tlistsep_tl {,~}
-\tl_new:N \l_@@_tlastsep_tl
-\tl_set:Nn \l_@@_tlastsep_tl {,~and~}
 
 % TODO User option, compress ranges or not
 \bool_new:N \l_@@_compress_bool
@@ -1277,18 +1596,19 @@
 %
 % \begin{variable}
 %   {
-%     \l_@@_ref_count_int ,
+%     \l_@@_label_count_int ,
 %     \l_@@_type_count_int ,
 %   }
 %   Main counters for \cs{@@_typeset_refs:}.  They track the state of the
-%   parsing of the labels list.  \cs{l_@@_ref_count_int} is stepped for every
-%   reference/label in the list. \cs{l_@@_type_count_int} is stepped at every
-%   reference type change.
+%   parsing of the labels list.  \cs{l_@@_label_count_int} is stepped for every
+%   reference/label in the list, and reset at the start of a new type.
+%   \cs{l_@@_type_count_int} is stepped at every reference type change.
 %    \begin{macrocode}
-\int_new:N \l_@@_ref_count_int
+\int_new:N \l_@@_label_count_int
 \int_new:N \l_@@_type_count_int
 %    \end{macrocode}
 % \end{variable}
+%
 %
 % \begin{variable}
 %   {
@@ -1320,6 +1640,26 @@
 % \end{variable}
 %
 %
+% \begin{variable}{}
+%   Aux variables for \cs{@@_typeset_refs:}.  Store separators and refpre/pos
+%   strings.
+%    \begin{macrocode}
+\tl_new:N \l_@@_namesep_tl
+\tl_new:N \l_@@_rangesep_tl
+\tl_new:N \l_@@_pairsep_tl
+\tl_new:N \l_@@_listsep_tl
+\tl_new:N \l_@@_lastsep_tl
+% `t' for ``type''
+\tl_new:N \l_@@_tpairsep_tl
+\tl_new:N \l_@@_tlistsep_tl
+\tl_new:N \l_@@_tlastsep_tl
+\tl_new:N \l_@@_refpre_out_tl
+\tl_new:N \l_@@_refpos_out_tl
+\tl_new:N \l_@@_refpre_in_tl
+\tl_new:N \l_@@_refpos_in_tl
+%    \end{macrocode}
+% \end{variable}
+%
 %
 % \begin{macro}{\@@_get_ref:n}
 %   Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
@@ -1340,11 +1680,23 @@
             \bool_if:nTF
               { \l_@@_use_hyperref_bool && ! \l_@@_link_star_bool }
               {
+                \l_@@_refpre_out_tl
                 \exp_not:N \hyperlink
                   { \zref@extractdefault {#1} { anchor } {} }
-                  { \zref@extractdefault {#1} { page } {} }
+                  {
+                    \l_@@_refpre_in_tl
+                    \zref@extractdefault {#1} { page } {}
+                    \l_@@_refpos_in_tl
+                  }
+                \l_@@_refpos_out_tl
               }
-              { \zref@extractdefault {#1} { page } {} }
+              {
+                \l_@@_refpre_out_tl
+                \l_@@_refpre_in_tl
+                \zref@extractdefault {#1} { page } {}
+                \l_@@_refpos_in_tl
+                \l_@@_refpos_out_tl
+              }
           }
           { \exp_not:N \zref@default }
       }
@@ -1354,11 +1706,23 @@
             \bool_if:nTF
               { \l_@@_use_hyperref_bool && ! \l_@@_link_star_bool }
               {
+                \l_@@_refpre_out_tl
                 \exp_not:N \hyperlink
                   { \zref@extractdefault {#1} { anchor } {} }
-                  { \zref@extractdefault {#1} { zc@thecnt } {} }
+                  {
+                    \l_@@_refpre_in_tl
+                    \zref@extractdefault {#1} { zc@thecnt } {}
+                    \l_@@_refpos_in_tl
+                  }
+                \l_@@_refpos_out_tl
               }
-              { \zref@extractdefault {#1} { zc@thecnt } {} }
+              {
+                \l_@@_refpre_out_tl
+                \l_@@_refpre_in_tl
+                \zref@extractdefault {#1} { zc@thecnt } {}
+                \l_@@_refpos_in_tl
+                \l_@@_refpos_out_tl
+              }
           }
           { \exp_not:N \zref@default }
       }
@@ -1535,8 +1899,12 @@
                   {
                     \l_@@_type_name_tl
                     \l_@@_namesep_tl
+                    \l_@@_refpre_out_tl
+                    \l_@@_refpre_in_tl
                     \zref@extractdefault {#1} { page } {}
+                    \l_@@_refpos_in_tl
                   }
+                \l_@@_refpos_out_tl
               }
               {
                 \l_@@_type_name_tl
@@ -1552,8 +1920,12 @@
                   {
                     \l_@@_type_name_tl
                     \l_@@_namesep_tl
+                    \l_@@_refpre_out_tl
+                    \l_@@_refpre_in_tl
                     \zref@extractdefault {#1} { zc@thecnt } {}
+                    \l_@@_refpos_in_tl
                   }
+                \l_@@_refpos_out_tl
               }
               {
                 \l_@@_type_name_tl
@@ -1578,11 +1950,23 @@
                     ! \l_@@_link_star_bool
                   }
                   {
+                    \l_@@_refpre_out_tl
                     \hyperlink
                       { \zref@extractdefault {#1} { anchor } {} }
-                      { \zref@extractdefault {#1} { page } {} }
+                      {
+                        \l_@@_refpre_in_tl
+                        \zref@extractdefault {#1} { page } {}
+                        \l_@@_refpos_in_tl
+                      }
+                    \l_@@_refpos_out_tl
                   }
-                  { \zref@extractdefault {#1} { page } {} }
+                  {
+                    \l_@@_refpre_out_tl
+                    \l_@@_refpre_in_tl
+                    \zref@extractdefault {#1} { page } {}
+                    \l_@@_refpos_in_tl
+                    \l_@@_refpos_out_tl
+                  }
               }
               { \zref@default }
           }
@@ -1595,11 +1979,23 @@
                     ! \l_@@_link_star_bool
                   }
                   {
+                    \l_@@_refpre_out_tl
                     \hyperlink
                       { \zref@extractdefault {#1} { anchor } {} }
-                      { \zref@extractdefault {#1} { zc@thecnt } {} }
+                      {
+                        \l_@@_refpre_in_tl
+                        \zref@extractdefault {#1} { zc@thecnt } {}
+                        \l_@@_refpos_in_tl
+                      }
+                    \l_@@_refpos_out_tl
                   }
-                  { \zref@extractdefault {#1} { zc@thecnt } {} }
+                  {
+                    \l_@@_refpre_out_tl
+                    \l_@@_refpre_in_tl
+                    \zref@extractdefault {#1} { zc@thecnt } {}
+                    \l_@@_refpos_in_tl
+                    \l_@@_refpos_out_tl
+                  }
               }
               { \zref@default }
           }
@@ -1677,7 +2073,7 @@
     \tl_clear:N \l_@@_type_first_label_prev_tl
     \tl_clear:N \l_@@_type_first_label_curr_tl
     \tl_clear:N \l_@@_range_beg_label_tl
-    \int_zero:N \l_@@_ref_count_int
+    \int_zero:N \l_@@_label_count_int
     \int_zero:N \l_@@_type_count_int
     \int_zero:N \l_@@_range_count_int
     \int_zero:N \l_@@_range_same_count_int
@@ -1769,6 +2165,37 @@
               }
           }
 
+        % Get separators and refpre/pos strings, once per type.
+        % FIXME There's a mistake here: these values are not the correct ones
+        % for \cs{@@_get_ref_first_prev:V}.
+        \int_compare:nNnT { \l_@@_label_count_int } = { 0 }
+          {
+            \@@_get_string:nVN {namesep}
+              \l_@@_label_type_a_tl \l_@@_namesep_tl
+            \@@_get_string:nVN {rangesep}
+              \l_@@_label_type_a_tl \l_@@_rangesep_tl
+            \@@_get_string:nVN {pairsep}
+              \l_@@_label_type_a_tl \l_@@_pairsep_tl
+            \@@_get_string:nVN {listsep}
+              \l_@@_label_type_a_tl \l_@@_listsep_tl
+            \@@_get_string:nVN {lastsep}
+              \l_@@_label_type_a_tl \l_@@_lastsep_tl
+            \@@_get_string:nVN {tpairsep}
+              \l_@@_label_type_a_tl \l_@@_tpairsep_tl
+            \@@_get_string:nVN {tlistsep}
+              \l_@@_label_type_a_tl \l_@@_tlistsep_tl
+            \@@_get_string:nVN {tlastsep}
+              \l_@@_label_type_a_tl \l_@@_tlastsep_tl
+            \@@_get_string:nVN {refpre}
+              \l_@@_label_type_a_tl \l_@@_refpre_out_tl
+            \@@_get_string:nVN {refpos}
+              \l_@@_label_type_a_tl \l_@@_refpos_out_tl
+            \@@_get_string:nVN {refpre-in}
+              \l_@@_label_type_a_tl \l_@@_refpre_in_tl
+            \@@_get_string:nVN {refpos-in}
+              \l_@@_label_type_a_tl \l_@@_refpos_in_tl
+          }
+
         % Here we send this to a couple of auxiliary functions for no other
         % reason than to keep this long function a little less unreadable.
         \bool_if:NTF \l_@@_last_of_type_bool
@@ -1786,10 +2213,10 @@
 \cs_new_protected:Npn \@@_typeset_refs_aux_last_of_type:
   {
     % Process the current label to the current queue.
-    \int_case:nnF { \l_@@_ref_count_int }
+    \int_case:nnF { \l_@@_label_count_int }
       {
-        % It is the last of its type, but also the first one, and that's what
-        % matters here: just store the label.
+        % It is the last label of its type, but also the first one, and that's
+        % what matters here: just store it.
         { 0 }
         { \tl_set:NV \l_@@_type_first_label_curr_tl \l_@@_label_a_tl }
 
@@ -1936,7 +2363,7 @@
           \l_@@_type_first_label_prev_tl \l_@@_type_first_label_curr_tl
         \tl_clear:N \l_@@_type_first_label_curr_tl
         \tl_clear:N \l_@@_range_beg_label_tl
-        \int_zero:N \l_@@_ref_count_int
+        \int_zero:N \l_@@_label_count_int
         \int_incr:N \l_@@_type_count_int
         \int_zero:N \l_@@_range_count_int
         \int_zero:N \l_@@_range_same_count_int
@@ -1965,7 +2392,7 @@
       }
 
     % Process the current label to the current queue.
-    \int_compare:nNnTF { \l_@@_ref_count_int } = { 0 }
+    \int_compare:nNnTF { \l_@@_label_count_int } = { 0 }
       {
         % Current label is the first of its type (also not the last, but it
         % doesn't matter here): just store the label.
@@ -2089,8 +2516,8 @@
             \int_zero:N \l_@@_range_same_count_int
           }
       }
-    % Step counter for next iteration.
-    \int_incr:N \l_@@_ref_count_int
+    % Step label counter for next iteration.
+    \int_incr:N \l_@@_label_count_int
   }
 
 
@@ -2106,6 +2533,8 @@
     on~input~line~\msg_line_number:.
   }
 %    \end{macrocode}
+%
+%
 %
 %
 %

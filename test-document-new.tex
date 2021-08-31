@@ -1,7 +1,7 @@
 \documentclass{book}
 
 
-% \usepackage[ngerman]{babel}
+\usepackage[french]{babel}
 
 \usepackage{zref-clever}
 % \usepackage[user]{zref}
@@ -9,13 +9,13 @@
 
 % \usepackage{chappg}
 
-\usepackage{hyperref}
+% \usepackage{hyperref}
 
 % \labelformat{section}{section~#1}
 
 \setcounter{secnumdepth}{4}
 
-\usepackage{cleveref}
+% \usepackage{cleveref}
 % https://tex.stackexchange.com/q/603514/105447).
 \makeatletter
 \newcommand*{\@setcpagerefrange}[3]{%
@@ -29,10 +29,6 @@
 
 
 \newtheorem{lemma}{Lemma}
-
-\makeatletter
-\AtBeginEnvironment{lemma}{\show\@currentcounter}
-\makeatother
 
 \begin{document}
 
@@ -138,9 +134,9 @@
 
 % \cpageref{sec:section-1.1,cha:chapter-3,cha:chapter-1,fig:figure-3-1,sec:section-3.1}
 
-\zcref{sec:section-1.1,cha:chapter-3,sec:subs-2.1.1.2,cha:chapter-1,fig:figure-3-1,sec:section-3.1}
+% \zcref{cha:chapter-3,sec:section-1.1,sec:subs-2.1.1.2,cha:chapter-1,fig:figure-3-1,sec:section-3.1}
 
-\zcref[nameinlink=singleintype]{sec:subs-2.1.1.2}
+% \zcref[nameinlink=singleintype]{sec:subs-2.1.1.2}
 
 
 
@@ -164,6 +160,6 @@
 \label{cha:chapter-6}
 \zlabel{cha:chapter-6}
 
-\cref{cha:chapter-1,cha:chapter-2,cha:chapter-4,cha:chapter-5,cha:chapter-6}
+% \cref{cha:chapter-1,cha:chapter-2,cha:chapter-4,cha:chapter-5,cha:chapter-6}
 
 \end{document}
