@@ -613,36 +613,31 @@
 %
 
 %    \begin{macrocode}
-% \Arg{string} \Arg{reference type} \Arg{var to store result}
-\cs_new_protected:Npn \@@_get_string:nnN #1#2#3
+% \Arg{string} \Arg{var to store result}
+\cs_new_protected:Npn \@@_get_string:nN #1#2
   {
     % First attempt options stored in \cs{l_@@_ref_strings_prop}.
-    \prop_get:NnNF \l_@@_ref_strings_prop {#1} #3
+    \prop_get:NnNF \l_@@_ref_strings_prop {#1} #2
       {
         % If not found, try the type specific strings.
-        \prop_get:cnNF { l_@@_type_ #2 _strings_prop } {#1} #3
+        \prop_get:cnNF
+          { l_@@_type_ \l_@@_label_type_a_tl _strings_prop } {#1} #2
           {
             % If not found, try the type specific translations.
             \IfTranslation { \@trnslt@current@language }
-              { zrefclever-type- #2 - #1 }
+              { zrefclever-type- \l_@@_label_type_a_tl - #1 }
               {
-                \SaveTranslationFor {#3}
+                \SaveTranslationFor {#2}
                   { \@trnslt@current@language }
-                  { zrefclever-type- #2 - #1 }
-                % \tl_set:Nx #3
-                %   {
-                %     \GetTranslationFor { \@trnslt@current@language }
-                %       { zrefclever-type- #2 - #1 }
-                %   }
+                  { zrefclever-type- \l_@@_label_type_a_tl - #1 }
               }
               {
                 % If not found, try general translations.
-                \tl_clear:N #3
+                \tl_clear:N #2
               }
           }
       }
   }
-\cs_generate_variant:Nn \@@_get_string:nnN { nVN }
 
 
 \keys_define:nn { zref-clever / type }
@@ -1574,8 +1569,8 @@
 %   {
 %     \l_@@_typeset_queue_prev_tl ,
 %     \l_@@_typeset_queue_curr_tl ,
-%     \l_@@_type_first_label_prev_tl ,
-%     \l_@@_type_first_label_curr_tl
+%     \l_@@_type_first_label_tl ,
+%     \l_@@_type_first_label_type_tl
 %   }
 %   Auxiliary variables for \cs{@@_typeset_refs:}.  They store, respectively
 %   the ``previous'' and the ``current'' reference type information while they
@@ -1588,8 +1583,8 @@
 %    \begin{macrocode}
 \tl_new:N \l_@@_typeset_queue_prev_tl
 \tl_new:N \l_@@_typeset_queue_curr_tl
-\tl_new:N \l_@@_type_first_label_prev_tl
-\tl_new:N \l_@@_type_first_label_curr_tl
+\tl_new:N \l_@@_type_first_label_tl
+\tl_new:N \l_@@_type_first_label_type_tl
 %    \end{macrocode}
 % \end{variable}
 %
@@ -1665,7 +1660,7 @@
 %   Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
 %   ``ref-block'', including ``pre'' and ``pos'' elements, and
 %   \emph{hyperlinking}.  It does not handle the reference type ``name'', for
-%   that use \cs{@@_get_ref_first:VN}.  It should get the reference with
+%   that use \cs{@@_get_ref_first:}.  It should get the reference with
 %   \cs{zref@extractdefault} as usual but, if the reference is not available,
 %   should put \cs{zref@default} on the stream protected, so that it can be
 %   accumulated in the queue.  \cs{hyperlink} must also be protected from
@@ -1739,27 +1734,20 @@
 %     \l_@@_typeset_queue_first_tl ,
 %     \l_@@_type_count_first_int ,
 %     \l_@@_type_name_tl ,
-%     \l_@@_found_name_bool ,
 %     \l_@@_name_in_link_bool
 %   }
-%   Auxiliary variables for \cs{@@_get_ref_first:nn}.
+%   Auxiliary variables for \cs{@@_get_ref_first:}.
 %    \begin{macrocode}
 \tl_new:N \l_@@_label_type_first_tl
 \tl_new:N \l_@@_typeset_queue_first_tl
 \int_new:N \l_@@_type_count_first_int
 \tl_new:N \l_@@_type_name_tl
-\bool_new:N \l_@@_found_name_bool
 \bool_new:N \l_@@_name_in_link_bool
 %    \end{macrocode}
 % \end{variable}
 %
 %
-% \begin{macro}
-%   {
-%     \@@_get_ref_first:n ,
-%     \@@_get_ref_first_prev:n ,
-%     \@@_get_ref_first_curr:n
-%   }
+% \begin{macro}{\@@_get_ref_first:}
 %   Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
 %   ``ref-block'', including ``pre'' and ``pos'' elements,
 %   \emph{hyperlinking}, and the reference type ``name''.  For use on the
@@ -1775,83 +1763,46 @@
 %   \cs{@@_get_ref_first:n} should not be called directly without controlling
 %   the values of these variables.
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_get_ref_first_prev:n #1
+\cs_new_protected:Npn \@@_get_type_name:
   {
-    \tl_set_eq:NN
-      \l_@@_typeset_queue_first_tl \l_@@_typeset_queue_prev_tl
-    \int_set:Nn
-      \l_@@_type_count_first_int { \l_@@_type_count_int - 1 }
-    \@@_get_ref_first:n {#1}
-  }
-\cs_new_protected:Npn \@@_get_ref_first_curr:n #1
-  {
-    \tl_set_eq:NN
-      \l_@@_typeset_queue_first_tl \l_@@_typeset_queue_curr_tl
-    \int_set:Nn
-      \l_@@_type_count_first_int { \l_@@_type_count_int }
-    \@@_get_ref_first:n {#1}
-  }
-\cs_generate_variant:Nn \@@_get_ref_first_prev:n { V }
-\cs_generate_variant:Nn \@@_get_ref_first_curr:n { V }
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_get_ref_first:n #1
-  {
-    \bool_if:NTF \l_@@_page_ref_bool
-      { \tl_set:Nn \l_@@_label_type_first_tl { page } }
-      {
-        \tl_set:Nx \l_@@_label_type_first_tl
-          { \zref@extractdefault {#1} { zc@type } { \c_empty_tl } }
-      }
 %    \end{macrocode}
 % Set the type name variable \cs{l_@@_type_name_tl}.  When it cannot be found,
-% handle it and signal.
+% clear it.
 %    \begin{macrocode}
-    \bool_set_false:N \l_@@_found_name_bool
-    \zref@ifrefundefined {#1}
-      { }
+    \zref@ifrefundefined { \l_@@_type_first_label_tl }
+      { \tl_clear:N \l_@@_type_name_tl }
       {
-        \tl_if_empty:nTF \l_@@_label_type_first_tl
+        \tl_if_empty:nTF \l_@@_type_first_label_type_tl
+          { \tl_clear:N \l_@@_type_name_tl }
           {
-            \zref@default
-            \l_@@_namesep_tl
-          }
-          {
-            \tl_if_empty:NTF \l_@@_typeset_queue_first_tl
+            \tl_if_empty:NTF \l_@@_typeset_queue_curr_tl
               {
                 % Singular.
-                \prop_get:NVNTF
-                  \l_@@_type_names_prop \l_@@_label_type_first_tl
+                \prop_get:NVNF
+                  \l_@@_type_names_prop \l_@@_type_first_label_type_tl
                   \l_@@_type_name_tl
-                  { \bool_set_true:N \l_@@_found_name_bool }
                   {
                     \exp_args:Nnnx \msg_warning:nnn { zref-clever }
-                      { missing-name } { \l_@@_label_type_first_tl }
-                    \zref@default
-                    \l_@@_namesep_tl
+                      { missing-name } { \l_@@_type_first_label_type_tl }
                   }
               }
               {
                 % Plural.
-                \prop_get:NVNTF
-                  \l_@@_type_names_prop \l_@@_label_type_first_tl
+                \prop_get:NVNF
+                  \l_@@_type_names_prop \l_@@_type_first_label_type_tl
                   \l_@@_type_name_tl
-                  { \bool_set_true:N \l_@@_found_name_bool }
                   {
                     \exp_args:Nnnx \msg_warning:nnn { zref-clever }
-                      { missing-name } { \l_@@_label_type_first_tl }
-                    \zref@default
-                    \l_@@_namesep_tl
+                      { missing-name } { \l_@@_type_first_label_type_tl }
                   }
                 % FIXME Temporary, of course.
-                \bool_if:NT \l_@@_found_name_bool
+                \tl_if_empty:NF \l_@@_type_name_tl
                   { \tl_put_right:Nn \l_@@_type_name_tl { s } }
               }
           }
       }
 %    \end{macrocode}
-% Establish whether the type name is to be included in the hyperlink or not.
+% Signal whether the type name is to be included in the hyperlink or not.
 %    \begin{macrocode}
     \bool_case_true:nF
       {
@@ -1861,7 +1812,7 @@
         { \l_@@_link_star_bool }
         { \bool_set_false:N \l_@@_name_in_link_bool }
 
-        { ! \l_@@_found_name_bool }
+        { \tl_if_empty_p:N \l_@@_type_name_tl }
         { \bool_set_false:N \l_@@_name_in_link_bool }
 
         { \str_if_eq_p:Vn \l_@@_nameinlink_str { false } }
@@ -1872,132 +1823,167 @@
 
         {
           \str_if_eq_p:Vn \l_@@_nameinlink_str { singleintype } &&
-          \tl_if_empty_p:N \l_@@_typeset_queue_first_tl
+          \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl
         }
         { \bool_set_true:N \l_@@_name_in_link_bool }
 
         {
           \str_if_eq_p:Vn \l_@@_nameinlink_str { single } &&
-          \tl_if_empty_p:N \l_@@_typeset_queue_first_tl &&
+          \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl &&
           \l_@@_typeset_last_bool &&
           \int_compare_p:nNn { \l_@@_type_count_first_int } = { 0 }
         }
         { \bool_set_true:N \l_@@_name_in_link_bool }
       }
       { \bool_set_false:N \l_@@_name_in_link_bool }
-%    \end{macrocode}
-% Finally, typeset it.
-%    \begin{macrocode}
-    \bool_if:NTF \l_@@_name_in_link_bool
+  }
+
+\cs_new:Npn \@@_get_ref_first:
+  {
+    \zref@ifrefundefined { \l_@@_type_first_label_tl }
+      { \exp_not:N \zref@default }
       {
-        \bool_if:NTF \l_@@_page_ref_bool
+        \bool_if:nTF
           {
-            \zref@ifrefcontainsprop {#1} { page }
-              {
-                \hyperlink
-                  { \zref@extractdefault {#1} { anchor } {} }
-                  {
-                    \l_@@_type_name_tl
-                    \l_@@_namesep_tl
-                    \l_@@_refpre_out_tl
-                    \l_@@_refpre_in_tl
-                    \zref@extractdefault {#1} { page } {}
-                    \l_@@_refpos_in_tl
-                  }
-                \l_@@_refpos_out_tl
-              }
-              {
-                \l_@@_type_name_tl
-                \l_@@_namesep_tl
-                \zref@default
-              }
+            \tl_if_empty_p:N \l_@@_type_first_label_type_tl ||
+            \tl_if_empty_p:N \l_@@_type_name_tl
           }
           {
-            \zref@ifrefcontainsprop {#1} { zc@thecnt }
-              {
-                \hyperlink
-                  { \zref@extractdefault {#1} { anchor } {} }
-                  {
-                    \l_@@_type_name_tl
-                    \l_@@_namesep_tl
-                    \l_@@_refpre_out_tl
-                    \l_@@_refpre_in_tl
-                    \zref@extractdefault {#1} { zc@thecnt } {}
-                    \l_@@_refpos_in_tl
-                  }
-                \l_@@_refpos_out_tl
-              }
-              {
-                \l_@@_type_name_tl
-                \l_@@_namesep_tl
-                \zref@default
-              }
-          }
-      }
-      {
-        \bool_if:NT \l_@@_found_name_bool
-          {
-            \l_@@_type_name_tl
+            \exp_not:N \zref@default
             \l_@@_namesep_tl
           }
-        \bool_if:NTF \l_@@_page_ref_bool
           {
-            \zref@ifrefcontainsprop {#1} { page }
+            \bool_if:NTF \l_@@_name_in_link_bool
               {
-                \bool_if:nTF
+                \bool_if:NTF \l_@@_page_ref_bool
                   {
-                    \l_@@_use_hyperref_bool &&
-                    ! \l_@@_link_star_bool
-                  }
-                  {
-                    \l_@@_refpre_out_tl
-                    \hyperlink
-                      { \zref@extractdefault {#1} { anchor } {} }
+                    \zref@ifrefcontainsprop
+                      { \l_@@_type_first_label_tl } { page }
                       {
-                        \l_@@_refpre_in_tl
-                        \zref@extractdefault {#1} { page } {}
-                        \l_@@_refpos_in_tl
+                        \exp_not:N \hyperlink
+                          {
+                            \zref@extractdefault
+                              { \l_@@_type_first_label_tl } { anchor } {}
+                          }
+                          {
+                            \l_@@_type_name_tl
+                            \l_@@_namesep_tl
+                            \l_@@_refpre_out_tl
+                            \l_@@_refpre_in_tl
+                            \zref@extractdefault
+                              { \l_@@_type_first_label_tl } { page } {}
+                            \l_@@_refpos_in_tl
+                          }
+                        \l_@@_refpos_out_tl
                       }
-                    \l_@@_refpos_out_tl
+                      {
+                        \l_@@_type_name_tl
+                        \l_@@_namesep_tl
+                        \exp_not:N \zref@default
+                      }
                   }
                   {
-                    \l_@@_refpre_out_tl
-                    \l_@@_refpre_in_tl
-                    \zref@extractdefault {#1} { page } {}
-                    \l_@@_refpos_in_tl
-                    \l_@@_refpos_out_tl
+                    \zref@ifrefcontainsprop
+                      { \l_@@_type_first_label_tl } { zc@thecnt }
+                      {
+                        \exp_not:N \hyperlink
+                          {
+                            \zref@extractdefault
+                              { \l_@@_type_first_label_tl } { anchor } {}
+                          }
+                          {
+                            \l_@@_type_name_tl
+                            \l_@@_namesep_tl
+                            \l_@@_refpre_out_tl
+                            \l_@@_refpre_in_tl
+                            \zref@extractdefault
+                              { \l_@@_type_first_label_tl } { zc@thecnt } {}
+                            \l_@@_refpos_in_tl
+                          }
+                        \l_@@_refpos_out_tl
+                      }
+                      {
+                        \l_@@_type_name_tl
+                        \l_@@_namesep_tl
+                        \exp_not:N \zref@default
+                      }
                   }
               }
-              { \zref@default }
-          }
-          {
-            \zref@ifrefcontainsprop {#1} { zc@thecnt }
               {
-                \bool_if:nTF
+                \l_@@_type_name_tl
+                \l_@@_namesep_tl
+                \bool_if:NTF \l_@@_page_ref_bool
                   {
-                    \l_@@_use_hyperref_bool &&
-                    ! \l_@@_link_star_bool
-                  }
-                  {
-                    \l_@@_refpre_out_tl
-                    \hyperlink
-                      { \zref@extractdefault {#1} { anchor } {} }
+                    \zref@ifrefcontainsprop
+                      { \l_@@_type_first_label_tl } { page }
                       {
-                        \l_@@_refpre_in_tl
-                        \zref@extractdefault {#1} { zc@thecnt } {}
-                        \l_@@_refpos_in_tl
+                        \bool_if:nTF
+                          {
+                            \l_@@_use_hyperref_bool &&
+                            ! \l_@@_link_star_bool
+                          }
+                          {
+                            \l_@@_refpre_out_tl
+                            \exp_not:N \hyperlink
+                              {
+                                \zref@extractdefault
+                                  { \l_@@_type_first_label_tl } { anchor } {}
+                              }
+                              {
+                                \l_@@_refpre_in_tl
+                                \zref@extractdefault
+                                  { \l_@@_type_first_label_tl } { page } {}
+                                \l_@@_refpos_in_tl
+                              }
+                            \l_@@_refpos_out_tl
+                          }
+                          {
+                            \l_@@_refpre_out_tl
+                            \l_@@_refpre_in_tl
+                            \zref@extractdefault
+                              { \l_@@_type_first_label_tl } { page } {}
+                            \l_@@_refpos_in_tl
+                            \l_@@_refpos_out_tl
+                          }
                       }
-                    \l_@@_refpos_out_tl
+                      { \exp_not:N \zref@default }
                   }
                   {
-                    \l_@@_refpre_out_tl
-                    \l_@@_refpre_in_tl
-                    \zref@extractdefault {#1} { zc@thecnt } {}
-                    \l_@@_refpos_in_tl
-                    \l_@@_refpos_out_tl
+                    \zref@ifrefcontainsprop
+                      { \l_@@_type_first_label_tl } { zc@thecnt }
+                      {
+                        \bool_if:nTF
+                          {
+                            \l_@@_use_hyperref_bool &&
+                            ! \l_@@_link_star_bool
+                          }
+                          {
+                            \l_@@_refpre_out_tl
+                            \exp_not:N \hyperlink
+                              {
+                                \zref@extractdefault
+                                  { \l_@@_type_first_label_tl } { anchor } {}
+                              }
+                              {
+                                \l_@@_refpre_in_tl
+                                \zref@extractdefault
+                                  { \l_@@_type_first_label_tl } { zc@thecnt } {}
+                                \l_@@_refpos_in_tl
+                              }
+                            \l_@@_refpos_out_tl
+                          }
+                          {
+                            \l_@@_refpre_out_tl
+                            \l_@@_refpre_in_tl
+                            \zref@extractdefault
+                              { \l_@@_type_first_label_tl } { zc@thecnt } {}
+                            \l_@@_refpos_in_tl
+                            \l_@@_refpos_out_tl
+                          }
+                      }
+                      { \exp_not:N \zref@default }
                   }
               }
-              { \zref@default }
           }
       }
   }
@@ -2070,8 +2056,8 @@
   {
     \tl_clear:N \l_@@_typeset_queue_prev_tl
     \tl_clear:N \l_@@_typeset_queue_curr_tl
-    \tl_clear:N \l_@@_type_first_label_prev_tl
-    \tl_clear:N \l_@@_type_first_label_curr_tl
+    \tl_clear:N \l_@@_type_first_label_tl
+    \tl_clear:N \l_@@_type_first_label_type_tl
     \tl_clear:N \l_@@_range_beg_label_tl
     \int_zero:N \l_@@_label_count_int
     \int_zero:N \l_@@_type_count_int
@@ -2166,34 +2152,25 @@
           }
 
         % Get separators and refpre/pos strings, once per type.
-        % FIXME There's a mistake here: these values are not the correct ones
-        % for \cs{@@_get_ref_first_prev:V}.
         \int_compare:nNnT { \l_@@_label_count_int } = { 0 }
           {
-            \@@_get_string:nVN {namesep}
-              \l_@@_label_type_a_tl \l_@@_namesep_tl
-            \@@_get_string:nVN {rangesep}
-              \l_@@_label_type_a_tl \l_@@_rangesep_tl
-            \@@_get_string:nVN {pairsep}
-              \l_@@_label_type_a_tl \l_@@_pairsep_tl
-            \@@_get_string:nVN {listsep}
-              \l_@@_label_type_a_tl \l_@@_listsep_tl
-            \@@_get_string:nVN {lastsep}
-              \l_@@_label_type_a_tl \l_@@_lastsep_tl
-            \@@_get_string:nVN {tpairsep}
-              \l_@@_label_type_a_tl \l_@@_tpairsep_tl
-            \@@_get_string:nVN {tlistsep}
-              \l_@@_label_type_a_tl \l_@@_tlistsep_tl
-            \@@_get_string:nVN {tlastsep}
-              \l_@@_label_type_a_tl \l_@@_tlastsep_tl
-            \@@_get_string:nVN {refpre}
-              \l_@@_label_type_a_tl \l_@@_refpre_out_tl
-            \@@_get_string:nVN {refpos}
-              \l_@@_label_type_a_tl \l_@@_refpos_out_tl
-            \@@_get_string:nVN {refpre-in}
-              \l_@@_label_type_a_tl \l_@@_refpre_in_tl
-            \@@_get_string:nVN {refpos-in}
-              \l_@@_label_type_a_tl \l_@@_refpos_in_tl
+            \@@_get_string:nN {namesep}   \l_@@_namesep_tl
+            \@@_get_string:nN {rangesep}  \l_@@_rangesep_tl
+            \@@_get_string:nN {pairsep}   \l_@@_pairsep_tl
+            \@@_get_string:nN {listsep}   \l_@@_listsep_tl
+            \@@_get_string:nN {lastsep}   \l_@@_lastsep_tl
+            \@@_get_string:nN {refpre}    \l_@@_refpre_out_tl
+            \@@_get_string:nN {refpos}    \l_@@_refpos_out_tl
+            \@@_get_string:nN {refpre-in} \l_@@_refpre_in_tl
+            \@@_get_string:nN {refpos-in} \l_@@_refpos_in_tl
+            % The `t' ones are not type specific, just set them on the first
+            % overall iteration.
+            \int_compare:nNnT { \l_@@_type_count_int } = { 0 }
+              {
+                \@@_get_string:nN {tpairsep} \l_@@_tpairsep_tl
+                \@@_get_string:nN {tlistsep} \l_@@_tlistsep_tl
+                \@@_get_string:nN {tlastsep} \l_@@_tlastsep_tl
+              }
           }
 
         % Here we send this to a couple of auxiliary functions for no other
@@ -2218,7 +2195,10 @@
         % It is the last label of its type, but also the first one, and that's
         % what matters here: just store it.
         { 0 }
-        { \tl_set:NV \l_@@_type_first_label_curr_tl \l_@@_label_a_tl }
+        {
+          \tl_set:NV \l_@@_type_first_label_tl \l_@@_label_a_tl
+          \tl_set:NV \l_@@_type_first_label_type_tl \l_@@_label_type_a_tl
+        }
 
         % The last is the second: we have a pair (if not repeated).
         { 1 }
@@ -2317,13 +2297,17 @@
           }
       }
 
+    % Now that the type is finished, we can add the name and the first ref to
+    % the queue.
+    \@@_get_type_name:
+    \tl_put_left:Nx
+      \l_@@_typeset_queue_curr_tl { \@@_get_ref_first: }
 
     % Typeset the previous type, if there is one.
     \int_compare:nNnT { \l_@@_type_count_int } > { 0 }
       {
         \int_compare:nNnT { \l_@@_type_count_int } > { 1 }
           { \l_@@_tlistsep_tl }
-        \@@_get_ref_first_prev:V \l_@@_type_first_label_prev_tl
         \l_@@_typeset_queue_prev_tl
       }
 
@@ -2335,22 +2319,17 @@
           {
             % Single type.
             { 0 }
-            {
-              \@@_get_ref_first_curr:V \l_@@_type_first_label_curr_tl
-              \l_@@_typeset_queue_curr_tl
-            }
+            { \l_@@_typeset_queue_curr_tl }
             % Pair of types.
             { 1 }
             {
               \l_@@_tpairsep_tl
-              \@@_get_ref_first_curr:V \l_@@_type_first_label_curr_tl
               \l_@@_typeset_queue_curr_tl
             }
           }
           {
             % Last in list of types.
             \l_@@_tlastsep_tl
-            \@@_get_ref_first_curr:V \l_@@_type_first_label_curr_tl
             \l_@@_typeset_queue_curr_tl
           }
       }
@@ -2359,9 +2338,8 @@
         \tl_set_eq:NN
           \l_@@_typeset_queue_prev_tl \l_@@_typeset_queue_curr_tl
         \tl_clear:N \l_@@_typeset_queue_curr_tl
-        \tl_set_eq:NN
-          \l_@@_type_first_label_prev_tl \l_@@_type_first_label_curr_tl
-        \tl_clear:N \l_@@_type_first_label_curr_tl
+        \tl_clear:N \l_@@_type_first_label_tl
+        \tl_clear:N \l_@@_type_first_label_type_tl
         \tl_clear:N \l_@@_range_beg_label_tl
         \int_zero:N \l_@@_label_count_int
         \int_incr:N \l_@@_type_count_int
@@ -2396,7 +2374,8 @@
       {
         % Current label is the first of its type (also not the last, but it
         % doesn't matter here): just store the label.
-        \tl_set:NV \l_@@_type_first_label_curr_tl \l_@@_label_a_tl
+        \tl_set:NV \l_@@_type_first_label_tl \l_@@_label_a_tl
+        \tl_set:NV \l_@@_type_first_label_type_tl \l_@@_label_type_a_tl
 
         % If the next label may be part of a range, we set `range_beg_label'
         % to ``empty'' (we deal with it as the ``first'', and must do it
