@@ -1,10 +1,10 @@
 \documentclass{book}
 
+\usepackage[T1]{fontenc}
 
-\usepackage[french]{babel}
+\usepackage[french,american]{babel}
 
 \usepackage{zref-clever}
-% \usepackage[user]{zref}
 % \usepackage{zref-titleref}
 
 % \usepackage{chappg}
@@ -134,12 +134,11 @@
 
 % \cpageref{sec:section-1.1,cha:chapter-3,cha:chapter-1,fig:figure-3-1,sec:section-3.1}
 
-\zcref{cha:chapter-3,sec:section-1.1,sec:subs-2.1.1.2,cha:chapter-1,fig:figure-3-1,sec:section-3.1}
+% \selectlanguage{french}
+
+\zcref[capitalize=first,abbrev=butfirst,language=main]{cha:chapter-3,fig:figure-3-1,sec:section-1.1,sec:subs-2.1.1.2,cha:chapter-1,sec:section-3.1}
 
 \zcref[nameinlink=singleintype]{sec:subs-2.1.1.2}
-
-
-
 
 \begin{lemma}
   teste
