@@ -582,29 +582,320 @@
 %    \begin{macrocode}
 \NewDocumentCommand \zcRefTypeSetup { m m }
   {
-    \prop_if_exist:cF { l_@@_type_ #1 _strings_prop }
-      { \prop_new:c { l_@@_type_ #1 _strings_prop } }
+    \prop_if_exist:cF { l_@@_type_ #1 _options_prop }
+      { \prop_new:c { l_@@_type_ #1 _options_prop } }
     \tl_set:Nn \l_@@_setup_type_tl {#1}
     \tl_clear:N \l_@@_setup_language_tl
-    \keys_set:nn { zref-clever / type } {#2}
+    \keys_set:nn { zref-clever / typesetup } {#2}
   }
 %    \end{macrocode}
 % \end{macro}
 %
 %
 %    \begin{macrocode}
-\keys_define:nn { zref-clever / type }
+\keys_define:nn { zref-clever / typesetup }
   {
-    lang .code:n =
+    language .code:n =
       {
         \tl_if_blank:nTF {#1}
           { \tl_clear:N \l_@@_setup_language_tl }
           { \tl_set:Nn \l_@@_setup_language_tl {#1} }
       } ,
-    lang .value_required:n = true ,
+    language .value_required:n = true ,
   }
 %    \end{macrocode}
 %
+%    \begin{macrocode}
+\keys_define:nn { zref-clever / typesetup }
+  {
+    % Not type-specific strings.
+    tpairsep .value_required:n = true ,
+    tpairsep .code:n =
+      {
+        \msg_warning:nnn { zref-clever }
+          { string-not-type-specific } { tpairsep }
+      } ,
+
+    tlistsep .value_required:n = true ,
+    tlistsep .code:n =
+      {
+        \msg_warning:nnn { zref-clever }
+          { string-not-type-specific } { tlistsep }
+      } ,
+
+    tlastsep .value_required:n = true ,
+    tlastsep .code:n =
+      {
+        \msg_warning:nnn { zref-clever }
+          { string-not-type-specific } { tlastsep }
+      } ,
+
+    % Possibly type-specific strings.
+    namesep .value_required:n = true ,
+    namesep .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { namesep } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -namesep } {#1}
+          }
+      } ,
+
+    pairsep .value_required:n = true ,
+    pairsep .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { pairsep } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -pairsep } {#1}
+          }
+      } ,
+
+    listsep .value_required:n = true ,
+    listsep .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { listsep } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -listsep } {#1}
+          }
+      } ,
+
+    lastsep .value_required:n = true ,
+    lastsep .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { lastsep } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -lastsep } {#1}
+          }
+      } ,
+
+    rangesep .value_required:n = true ,
+    rangesep .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { rangesep } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -rangesep } {#1}
+          }
+      } ,
+
+    refpre .value_required:n = true ,
+    refpre .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { refpre } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -refpre } {#1}
+          }
+      } ,
+
+    refpos .value_required:n = true ,
+    refpos .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { refpos } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -refpos } {#1}
+          }
+      } ,
+
+    refpre-in .value_required:n = true ,
+    refpre-in .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { refpre-in } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -refpre-in } {#1}
+          }
+      } ,
+
+    refpos-in .value_required:n = true ,
+    refpos-in .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { refpos-in } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -refpos-in } {#1}
+          }
+      } ,
+
+    % Necessarily type-specific strings.
+    name .value_required:n = true ,
+    name .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { name } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -name } {#1}
+          }
+      } ,
+
+    name-pl .value_required:n = true ,
+    name-pl .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { name-pl } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -name-pl } {#1}
+          }
+      } ,
+
+    Name .value_required:n = true ,
+    Name .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { Name } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -Name } {#1}
+          }
+      } ,
+
+    Name-pl .value_required:n = true ,
+    Name-pl .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { Name-pl } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -Name-pl } {#1}
+          }
+      } ,
+
+    name-abbrev .value_required:n = true ,
+    name-abbrev .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { name-abbrev } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -name-abbrev } {#1}
+          }
+      } ,
+
+    name-abbrev-pl .value_required:n = true ,
+    name-abbrev-pl .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { name-abbrev-pl } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -name-abbrev-pl } {#1}
+          }
+      } ,
+
+    Name-abbrev .value_required:n = true ,
+    Name-abbrev .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { Name-abbrev } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -Name-abbrev } {#1}
+          }
+      } ,
+
+    Name-abbrev-pl .value_required:n = true ,
+    Name-abbrev-pl .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_language_tl
+          {
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { Name-abbrev-pl } {#1}
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -Name-abbrev-pl } {#1}
+          }
+      } ,
+  }
+
+\msg_new:nnn { zref-clever } { string-not-type-specific }
+  {
+    String~'#1'~is~not~type-specific~on~input~line\msg_line_number:.~
+    Set~it~in~'\exp_not:N \zcDeclareRefStrings'~before~first~'type'~switch.
+  }
+
+%    \end{macrocode}
+
 %
 % \subsubsection{\cs{zcDeclareRefStrings}}
 %
@@ -617,21 +908,21 @@
   {
     \tl_set:Nn \l_@@_setup_language_tl {#1}
     \tl_clear:N \l_@@_setup_type_tl
-    \keys_set:nn { zref-clever / strings } {#2}
+    \keys_set:nn { zref-clever / refstrings } {#2}
   }
 %    \end{macrocode}
 % \end{macro}
 %
 %    \begin{macrocode}
-\keys_define:nn { zref-clever / strings }
+\keys_define:nn { zref-clever / refstrings }
   {
     type .code:n =
       {
         \tl_if_blank:nTF {#1}
           { \tl_clear:N \l_@@_setup_type_tl }
           {
-            \prop_if_exist:cF { l_@@_type_ #1 _strings_prop }
-              { \prop_new:c { l_@@_type_ #1 _strings_prop } }
+            \prop_if_exist:cF { l_@@_type_ #1 _options_prop }
+              { \prop_new:c { l_@@_type_ #1 _options_prop } }
             \tl_set:Nn \l_@@_setup_type_tl {#1}
           }
       } ,
@@ -639,32 +930,56 @@
   }
 %    \end{macrocode}
 %
+%
 %    \begin{macrocode}
-\keys_define:nn { zref-clever / strings }
+
+\keys_define:nn { zref-clever / refstrings }
   {
     % Not type-specific strings.
+    tpairsep .value_required:n = true ,
     tpairsep .code:n =
       {
-        \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-          { zrefclever-default-tpairsep } {#1}
+        \tl_if_empty:NTF \l_@@_setup_type_tl
+          {
+            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
+              { zrefclever-default-tpairsep } {#1}
+          }
+          {
+            \msg_warning:nnn { zref-clever }
+              { string-not-type-specific } { tpairsep }
+          }
       } ,
-    tpairsep .value_required:n = true ,
 
+    tlistsep .value_required:n = true ,
     tlistsep .code:n =
       {
-        \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-          { zrefclever-default-tlistsep } {#1}
+        \tl_if_empty:NTF \l_@@_setup_type_tl
+          {
+            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
+              { zrefclever-default-tlistsep } {#1}
+          }
+          {
+            \msg_warning:nnn { zref-clever }
+              { string-not-type-specific } { tlistsep }
+          }
       } ,
-    tlistsep .value_required:n = true ,
 
+    tlastsep .value_required:n = true ,
     tlastsep .code:n =
       {
-        \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-          { zrefclever-default-tlastsep } {#1}
+        \tl_if_empty:NTF \l_@@_setup_type_tl
+          {
+            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
+              { zrefclever-default-tlastsep } {#1}
+          }
+          {
+            \msg_warning:nnn { zref-clever }
+              { string-not-type-specific } { tlastsep }
+          }
       } ,
-    tlastsep .value_required:n = true ,
 
     % Possibly type-specific strings.
+    namesep .value_required:n = true ,
     namesep .code:n =
       {
         \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -677,8 +992,8 @@
               { zrefclever-type- \l_@@_setup_type_tl -namesep } {#1}
           }
       } ,
-    namesep .value_required:n = true ,
 
+    pairsep .value_required:n = true ,
     pairsep .code:n =
       {
         \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -691,8 +1006,8 @@
               { zrefclever-type- \l_@@_setup_type_tl -pairsep } {#1}
           }
       } ,
-    pairsep .value_required:n = true ,
 
+    listsep .value_required:n = true ,
     listsep .code:n =
       {
         \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -705,8 +1020,8 @@
               { zrefclever-type- \l_@@_setup_type_tl -listsep } {#1}
           }
       } ,
-    listsep .value_required:n = true ,
 
+    lastsep .value_required:n = true ,
     lastsep .code:n =
       {
         \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -719,8 +1034,8 @@
               { zrefclever-type- \l_@@_setup_type_tl -lastsep } {#1}
           }
       } ,
-    lastsep .value_required:n = true ,
 
+    rangesep .value_required:n = true ,
     rangesep .code:n =
       {
         \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -733,8 +1048,8 @@
               { zrefclever-type- \l_@@_setup_type_tl -rangesep } {#1}
           }
       } ,
-    rangesep .value_required:n = true ,
 
+    refpre .value_required:n = true ,
     refpre .code:n =
       {
         \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -747,8 +1062,8 @@
               { zrefclever-type- \l_@@_setup_type_tl -refpre } {#1}
           }
       } ,
-    refpre .value_required:n = true ,
 
+    refpos .value_required:n = true ,
     refpos .code:n =
       {
         \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -761,8 +1076,8 @@
               { zrefclever-type- \l_@@_setup_type_tl -refpos } {#1}
           }
       } ,
-    refpos .value_required:n = true ,
 
+    refpre-in .value_required:n = true ,
     refpre-in .code:n =
       {
         \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -775,8 +1090,8 @@
               { zrefclever-type- \l_@@_setup_type_tl -refpre-in } {#1}
           }
       } ,
-    refpre-in .value_required:n = true ,
 
+    refpos-in .value_required:n = true ,
     refpos-in .code:n =
       {
         \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -789,16 +1104,15 @@
               { zrefclever-type- \l_@@_setup_type_tl -refpos-in } {#1}
           }
       } ,
-    refpos-in .value_required:n = true ,
-
-
 
     % Necessarily type-specific strings.
+    name .value_required:n = true ,
     name .code:n =
       {
         \tl_if_empty:NTF \l_@@_setup_type_tl
           {
-            % warn
+            \msg_warning:nnn { zref-clever }
+              { string-only-type-specific } { name }
           }
           {
             \@@_declare_translation:xxn { \l_@@_setup_language_tl }
@@ -806,47 +1120,13 @@
           }
       } ,
 
-    Name .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            % warn
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -Name } {#1}
-          }
-      } ,
-
-    name-abbrev .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            % warn
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -name-abbrev } {#1}
-          }
-      } ,
-
-    Name-abbrev .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            % warn
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -Name-abbrev } {#1}
-          }
-      } ,
-
+    name-pl .value_required:n = true ,
     name-pl .code:n =
       {
         \tl_if_empty:NTF \l_@@_setup_type_tl
           {
-            % warn
+            \msg_warning:nnn { zref-clever }
+              { string-only-type-specific } { name-pl }
           }
           {
             \@@_declare_translation:xxn { \l_@@_setup_language_tl }
@@ -854,11 +1134,27 @@
           }
       } ,
 
+    Name .value_required:n = true ,
+    Name .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_type_tl
+          {
+            \msg_warning:nnn { zref-clever }
+              { string-only-type-specific } { Name }
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -Name } {#1}
+          }
+      } ,
+
+    Name-pl .value_required:n = true ,
     Name-pl .code:n =
       {
         \tl_if_empty:NTF \l_@@_setup_type_tl
           {
-            % warn
+            \msg_warning:nnn { zref-clever }
+              { string-only-type-specific } { Name-pl }
           }
           {
             \@@_declare_translation:xxn { \l_@@_setup_language_tl }
@@ -866,11 +1162,27 @@
           }
       } ,
 
+    name-abbrev .value_required:n = true ,
+    name-abbrev .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_type_tl
+          {
+            \msg_warning:nnn { zref-clever }
+              { string-only-type-specific } { name-abbrev }
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -name-abbrev } {#1}
+          }
+      } ,
+
+    name-abbrev-pl .value_required:n = true ,
     name-abbrev-pl .code:n =
       {
         \tl_if_empty:NTF \l_@@_setup_type_tl
           {
-            % warn
+            \msg_warning:nnn { zref-clever }
+              { string-only-type-specific } { name-abbrev-pl }
           }
           {
             \@@_declare_translation:xxn { \l_@@_setup_language_tl }
@@ -878,218 +1190,44 @@
           }
       } ,
 
+    Name-abbrev .value_required:n = true ,
+    Name-abbrev .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_type_tl
+          {
+            \msg_warning:nnn { zref-clever }
+              { string-only-type-specific } { Name-abbrev }
+          }
+          {
+            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+              { zrefclever-type- \l_@@_setup_type_tl -Name-abbrev } {#1}
+          }
+      } ,
+
+    Name-abbrev-pl .value_required:n = true ,
     Name-abbrev-pl .code:n =
       {
         \tl_if_empty:NTF \l_@@_setup_type_tl
           {
-            % warn
+            \msg_warning:nnn { zref-clever }
+              { string-only-type-specific } { Name-abbrev-pl }
           }
           {
             \@@_declare_translation:xxn { \l_@@_setup_language_tl }
               { zrefclever-type- \l_@@_setup_type_tl -Name-abbrev-pl } {#1}
           }
       } ,
-
-  }
-%    \end{macrocode}
-
-%
-%
-%
-% \subsubsection{Type names}
-%
-%
-%
-% \subsubsection{Type reference strings}
-%
-
-%    \begin{macrocode}
-% \Arg{string} \Arg{var to store result}
-\cs_new_protected:Npn \@@_get_string:nN #1#2
-  {
-    % First attempt options stored in \cs{l_@@_ref_strings_prop}.
-    \prop_get:NnNF \l_@@_ref_strings_prop {#1} #2
-      {
-        % If not found, try the type specific strings.
-        \bool_lazy_all:nTF
-          {
-            { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
-            {
-              \prop_if_exist_p:c
-                { l_@@_type_ \l_@@_label_type_a_tl _strings_prop }
-            }
-            {
-              \prop_if_in_p:cn
-                { l_@@_type_ \l_@@_label_type_a_tl _strings_prop } {#1}
-            }
-          }
-          {
-            \prop_get:cnN
-              { l_@@_type_ \l_@@_label_type_a_tl _strings_prop } {#1} #2
-          }
-          {
-            % If not found, try the type specific translations.
-            \@@_if_translation:xxTF
-              { \l_@@_ref_language_tl }
-              { zrefclever-type- \l_@@_label_type_a_tl - #1 }
-              {
-                \@@_get_translation_for:nxx {#2}
-                  { \l_@@_ref_language_tl }
-                  { zrefclever-type- \l_@@_label_type_a_tl - #1 }
-              }
-              {
-                % If not found, try general translations.  We are not
-                % controlling for their existence, but we must make sure all
-                % strings being retrieved with \cs{@@_get_string:nN} have
-                % their values set for `English' and `fallback'.
-                \@@_get_translation_for:nxx {#2}
-                  { \l_@@_ref_language_tl }
-                  { zrefclever-default- #1 }
-              }
-          }
-      }
   }
 
-\keys_define:nn { zref-clever / type }
+\msg_new:nnn { zref-clever } { string-only-type-specific }
   {
-    namesep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { namesep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -namesep } {#1}
-          }
-      } ,
-    namesep .value_required:n = true ,
-
-    rangesep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { rangesep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -rangesep } {#1}
-          }
-      } ,
-    rangesep .value_required:n = true ,
-
-    pairsep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { pairsep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -pairsep } {#1}
-          }
-      } ,
-    pairsep .value_required:n = true ,
-
-    listsep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { listsep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -listsep } {#1}
-          }
-      } ,
-    listsep .value_required:n = true ,
-
-    lastsep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { lastsep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -lastsep } {#1}
-          }
-      } ,
-    lastsep .value_required:n = true ,
-
-    refpre .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { refpre } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -refpre } {#1}
-          }
-      } ,
-    refpre .value_required:n = true ,
-
-    refpos .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { refpos } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -refpos } {#1}
-          }
-      } ,
-    refpos .value_required:n = true ,
-
-    refpre-in .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { refpre-in } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -refpre-in } {#1}
-          }
-      } ,
-    refpre-in .value_required:n = true ,
-
-    refpos-in .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { refpos-in } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -refpos-in } {#1}
-          }
-      } ,
-    refpos-in .value_required:n = true ,
+    No~type~specified~for~string~'#1'~on~input~line\msg_line_number:.~
+    Set~it~after~'type'~switch~or~in~'\exp_not:N \zcRefTypeSetup'.
   }
 
 
 %    \end{macrocode}
+
 %
 %
 % \subsection{Options}
@@ -1345,38 +1483,38 @@
 %    \end{macrocode}
 %
 %
-% \subsubsection*{Reference strings}
+% \subsubsection*{Strings options}
 %
 %
 %    \begin{macrocode}
 
-\prop_new:N \l_@@_ref_strings_prop
+\prop_new:N \l_@@_ref_options_prop
 
 \keys_define:nn { zref-clever }
   {
-    namesep   .prop_put:N = \l_@@_ref_strings_prop ,
+    namesep   .prop_put:N = \l_@@_ref_options_prop ,
     namesep   .value_required:n = true ,
-    rangesep  .prop_put:N = \l_@@_ref_strings_prop ,
+    rangesep  .prop_put:N = \l_@@_ref_options_prop ,
     rangesep  .value_required:n = true ,
-    pairsep   .prop_put:N = \l_@@_ref_strings_prop ,
+    pairsep   .prop_put:N = \l_@@_ref_options_prop ,
     pairsep   .value_required:n = true ,
-    listsep   .prop_put:N = \l_@@_ref_strings_prop ,
+    listsep   .prop_put:N = \l_@@_ref_options_prop ,
     listsep   .value_required:n = true ,
-    lastsep   .prop_put:N = \l_@@_ref_strings_prop ,
+    lastsep   .prop_put:N = \l_@@_ref_options_prop ,
     lastsep   .value_required:n = true ,
-    tpairsep  .prop_put:N = \l_@@_ref_strings_prop ,
+    tpairsep  .prop_put:N = \l_@@_ref_options_prop ,
     tpairsep  .value_required:n = true ,
-    tlistsep  .prop_put:N = \l_@@_ref_strings_prop ,
+    tlistsep  .prop_put:N = \l_@@_ref_options_prop ,
     tlistsep  .value_required:n = true ,
-    tlastsep  .prop_put:N = \l_@@_ref_strings_prop ,
+    tlastsep  .prop_put:N = \l_@@_ref_options_prop ,
     tlastsep  .value_required:n = true ,
-    refpre    .prop_put:N = \l_@@_ref_strings_prop ,
+    refpre    .prop_put:N = \l_@@_ref_options_prop ,
     refpre    .value_required:n = true ,
-    refpos    .prop_put:N = \l_@@_ref_strings_prop ,
+    refpos    .prop_put:N = \l_@@_ref_options_prop ,
     refpos    .value_required:n = true ,
-    refpre-in .prop_put:N = \l_@@_ref_strings_prop ,
+    refpre-in .prop_put:N = \l_@@_ref_options_prop ,
     refpre-in .value_required:n = true ,
-    refpos-in .prop_put:N = \l_@@_ref_strings_prop ,
+    refpos-in .prop_put:N = \l_@@_ref_options_prop ,
     refpos-in .value_required:n = true ,
   }
 
@@ -2545,6 +2683,57 @@
 % \end{macro}
 
 
+
+
+%    \begin{macrocode}
+% \Arg{string} \Arg{var to store result}
+\cs_new_protected:Npn \@@_get_string:nN #1#2
+  {
+    % First attempt options stored in \cs{l_@@_ref_options_prop}.
+    \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
+      {
+        % If not found, try the type specific strings.
+        \bool_lazy_all:nTF
+          {
+            { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
+            {
+              \prop_if_exist_p:c
+                { l_@@_type_ \l_@@_label_type_a_tl _options_prop }
+            }
+            {
+              \prop_if_in_p:cn
+                { l_@@_type_ \l_@@_label_type_a_tl _options_prop } {#1}
+            }
+          }
+          {
+            \prop_get:cnN
+              { l_@@_type_ \l_@@_label_type_a_tl _options_prop } {#1} #2
+          }
+          {
+            % If not found, try the type specific translations.
+            \@@_if_translation:xxTF
+              { \l_@@_ref_language_tl }
+              { zrefclever-type- \l_@@_label_type_a_tl - #1 }
+              {
+                \@@_get_translation_for:nxx {#2}
+                  { \l_@@_ref_language_tl }
+                  { zrefclever-type- \l_@@_label_type_a_tl - #1 }
+              }
+              {
+                % If not found, try general translations.  We are not
+                % controlling for their existence, but we must make sure all
+                % strings being retrieved with \cs{@@_get_string:nN} have
+                % their values set for `English' and `fallback'.
+                \@@_get_translation_for:nxx {#2}
+                  { \l_@@_ref_language_tl }
+                  { zrefclever-default- #1 }
+              }
+          }
+      }
+  }
+%    \end{macrocode}
+%
+
 %    \begin{macrocode}
 
 
@@ -3140,94 +3329,94 @@
 
     type = part ,
       name = {part} ,
-      Name = {Part} ,
       name-pl = {parts} ,
+      Name = {Part} ,
       Name-pl = {Parts} ,
       name-abbrev = {part} ,
-      Name-abbrev = {Part} ,
       name-abbrev-pl = {parts} ,
+      Name-abbrev = {Part} ,
       Name-abbrev-pl = {Parts} ,
 
     type = chapter ,
       name = {chapter} ,
-      Name = {Chapter} ,
       name-pl = {chapters} ,
+      Name = {Chapter} ,
       Name-pl = {Chapters} ,
       name-abbrev = {chapter} ,
-      Name-abbrev = {Chapter} ,
       name-abbrev-pl = {chapters} ,
+      Name-abbrev = {Chapter} ,
       Name-abbrev-pl = {Chapters} ,
 
     type = section ,
       name = {section} ,
-      Name = {Section} ,
       name-pl = {sections} ,
+      Name = {Section} ,
       Name-pl = {Sections} ,
       name-abbrev = {section} ,
-      Name-abbrev = {Section} ,
       name-abbrev-pl = {sections} ,
+      Name-abbrev = {Section} ,
       Name-abbrev-pl = {Sections} ,
 
     type = paragraph ,
       name = {paragraph} ,
-      Name = {Paragraph} ,
       name-pl = {paragraphs} ,
+      Name = {Paragraph} ,
       Name-pl = {Paragraphs} ,
       name-abbrev = {par.} ,
-      Name-abbrev = {Par.} ,
       name-abbrev-pl = {par.} ,
+      Name-abbrev = {Par.} ,
       Name-abbrev-pl = {Par.} ,
 
     type = page ,
       name = {page} ,
-      Name = {Page} ,
       name-pl = {pages} ,
+      Name = {Page} ,
       Name-pl = {Pages} ,
       name-abbrev = {p.} ,
-      Name-abbrev = {Page} ,
       name-abbrev-pl = {pp.} ,
+      Name-abbrev = {Page} ,
       Name-abbrev-pl = {Pages} ,
 
     type = figure ,
       name = {figure} ,
-      Name = {Figure} ,
       name-pl = {figures} ,
+      Name = {Figure} ,
       Name-pl = {Figures} ,
       name-abbrev = {fig.} ,
-      Name-abbrev = {Fig.} ,
       name-abbrev-pl = {figs.} ,
+      Name-abbrev = {Fig.} ,
       Name-abbrev-pl = {Figs.} ,
 
     type = table ,
       name = {table} ,
-      Name = {Table} ,
       name-pl = {tables} ,
+      Name = {Table} ,
       Name-pl = {Tables} ,
       name-abbrev = {table} ,
-      Name-abbrev = {Table} ,
       name-abbrev-pl = {tables} ,
+      Name-abbrev = {Table} ,
       Name-abbrev-pl = {Tables} ,
 
     type = equation ,
       name = {equation} ,
-      Name = {Equation} ,
       name-pl = {equations} ,
+      Name = {Equation} ,
       Name-pl = {Equations} ,
       name-abbrev = {eq.} ,
-      Name-abbrev = {Eq.} ,
       name-abbrev-pl = {eqs.} ,
+      Name-abbrev = {Eq.} ,
       Name-abbrev-pl = {Eqs.} ,
       refpre-in = {(} ,
       refpos-in = {)} ,
 
     type = item ,
       name = {item} ,
-      Name = {Item} ,
       name-pl = {items} ,
+      Name = {Item} ,
       Name-pl = {Items} ,
       name-abbrev = {item} ,
-      Name-abbrev = {Item} ,
       name-abbrev-pl = {items} ,
+      Name-abbrev = {Item} ,
       Name-abbrev-pl = {Items} ,
   }
 
