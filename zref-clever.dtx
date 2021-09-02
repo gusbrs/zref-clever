@@ -582,8 +582,8 @@
 %    \begin{macrocode}
 \NewDocumentCommand \zcRefTypeSetup { m m }
   {
-    \prop_if_exist:cF { l_@@_type_ #1 _options_prop }
-      { \prop_new:c { l_@@_type_ #1 _options_prop } }
+    \prop_if_exist:cF { l_@@_type_ #1 _strings_prop }
+      { \prop_new:c { l_@@_type_ #1 _strings_prop } }
     \tl_set:Nn \l_@@_setup_type_tl {#1}
     \tl_clear:N \l_@@_setup_language_tl
     \keys_set:nn { zref-clever / typesetup } {#2}
@@ -595,13 +595,13 @@
 %    \begin{macrocode}
 \keys_define:nn { zref-clever / typesetup }
   {
-    language .code:n =
+    lang .code:n =
       {
         \tl_if_blank:nTF {#1}
           { \tl_clear:N \l_@@_setup_language_tl }
           { \tl_set:Nn \l_@@_setup_language_tl {#1} }
       } ,
-    language .value_required:n = true ,
+    lang .value_required:n = true ,
   }
 %    \end{macrocode}
 %
@@ -637,7 +637,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { namesep } {#1}
           }
           {
@@ -652,7 +652,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { pairsep } {#1}
           }
           {
@@ -667,7 +667,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { listsep } {#1}
           }
           {
@@ -682,7 +682,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { lastsep } {#1}
           }
           {
@@ -697,7 +697,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { rangesep } {#1}
           }
           {
@@ -712,7 +712,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { refpre } {#1}
           }
           {
@@ -727,7 +727,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { refpos } {#1}
           }
           {
@@ -742,7 +742,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { refpre-in } {#1}
           }
           {
@@ -757,7 +757,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { refpos-in } {#1}
           }
           {
@@ -773,7 +773,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { name } {#1}
           }
           {
@@ -788,7 +788,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { name-pl } {#1}
           }
           {
@@ -803,7 +803,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { Name } {#1}
           }
           {
@@ -818,7 +818,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { Name-pl } {#1}
           }
           {
@@ -833,7 +833,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { name-abbrev } {#1}
           }
           {
@@ -848,7 +848,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { name-abbrev-pl } {#1}
           }
           {
@@ -863,7 +863,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { Name-abbrev } {#1}
           }
           {
@@ -878,7 +878,7 @@
         \tl_if_empty:NTF \l_@@_setup_language_tl
           {
             \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               { Name-abbrev-pl } {#1}
           }
           {
@@ -921,8 +921,8 @@
         \tl_if_blank:nTF {#1}
           { \tl_clear:N \l_@@_setup_type_tl }
           {
-            \prop_if_exist:cF { l_@@_type_ #1 _options_prop }
-              { \prop_new:c { l_@@_type_ #1 _options_prop } }
+            \prop_if_exist:cF { l_@@_type_ #1 _strings_prop }
+              { \prop_new:c { l_@@_type_ #1 _strings_prop } }
             \tl_set:Nn \l_@@_setup_type_tl {#1}
           }
       } ,
@@ -1295,6 +1295,62 @@
 %    \end{macrocode}
 %
 %
+
+% \subsubsection*{\opt{ref} option}
+
+% Stores whether this reference is to the page, or to the default counter.
+%    \begin{macrocode}
+\bool_new:N \l_@@_page_ref_bool
+\keys_define:nn { zref-clever }
+  {
+    ref .choice: ,
+    ref / default .code:n =
+      { \bool_set_false:N \l_@@_page_ref_bool } ,
+    ref / page .code:n =
+      { \bool_set_true:N \l_@@_page_ref_bool } ,
+    ref .initial:n = default ,
+    ref .value_required:n = true ,
+    page .meta:n = { ref = page },
+    page .value_forbidden:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+%
+% \subsubsection*{\opt{sort} option}
+%
+% User option, sort labels ranges or not
+%    \begin{macrocode}
+\bool_new:N \l_@@_sort_bool
+\keys_define:nn { zref-clever }
+  {
+    sort .bool_set:N = \l_@@_sort_bool ,
+    sort .initial:n = true ,
+    sort .default:n = true ,
+    nosort .meta:n = { sort = false },
+    nosort .value_forbidden:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+%
+% \subsubsection*{\opt{comp} option}
+%
+% User option, compress ranges or not
+%    \begin{macrocode}
+\bool_new:N \l_@@_compress_bool
+\keys_define:nn { zref-clever }
+  {
+    comp .bool_set:N = \l_@@_compress_bool ,
+    comp .initial:n = true ,
+    comp .default:n = true ,
+    nocomp .meta:n = { comp = false },
+    nocomp .value_forbidden:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+%
 % \subsubsection*{\opt{nameinlink} option}
 %
 % \begin{variable}{\l_@@_nameinlink_tl}
@@ -1312,74 +1368,59 @@
     nameinlink / singleintype .code:n =
       { \str_set:Nn \l_@@_nameinlink_str { singleintype } } ,
     nameinlink .initial:n = singleintype ,
-    nameinlink .default:n = singleintype , % CHECK Should be "true"?
+    nameinlink .default:n = true ,
   }
 %    \end{macrocode}
 % \end{variable}
 %
 %
-% \subsubsection*{\opt{capitalize} option}
+% \subsubsection*{\opt{cap} \opt{capfirst} options}
 %
 %    \begin{macrocode}
-\bool_new:N \l_@@_capitalize_all_bool
+\bool_new:N \l_@@_capitalize_bool
 \bool_new:N \l_@@_capitalize_first_bool
 \keys_define:nn { zref-clever }
   {
-    capitalize .choice: ,
-    capitalize / true .code:n =
-      {
-        \bool_set_true:N \l_@@_capitalize_all_bool
-        \bool_set_true:N \l_@@_capitalize_first_bool
-      } ,
-    capitalize / false .code:n =
-      {
-        \bool_set_false:N \l_@@_capitalize_all_bool
-        \bool_set_false:N \l_@@_capitalize_first_bool
-      } ,
-    capitalize / first .code:n =
-      {
-        \bool_set_false:N \l_@@_capitalize_all_bool
-        \bool_set_true:N \l_@@_capitalize_first_bool
-      } ,
-    capitalize .initial:n = false ,
-    capitalize .default:n = true ,
+    cap .bool_set:N = \l_@@_capitalize_bool ,
+    cap .initial:n = false ,
+    cap .default:n = true ,
+    nocap .meta:n = { cap = false },
+    nocap .value_forbidden:n = true ,
+
+    capfirst .bool_set:N = \l_@@_capitalize_first_bool ,
+    capfirst .initial:n = false ,
+    capfirst .default:n = true ,
+
+    C .meta:n =
+      { capfirst = true , noabbrevfirst = true },
+    C .value_forbidden:n = true ,
   }
 %    \end{macrocode}
 %
 %
-% \subsubsection*{\opt{abbrev} option}
+% \subsubsection*{\opt{abbrev} \opt{noabbrevfirst} option}
 %
 %    \begin{macrocode}
-\bool_new:N \l_@@_abbrev_all_bool
-\bool_new:N \l_@@_abbrev_tail_bool
+\bool_new:N \l_@@_abbrev_bool
+\bool_new:N \l_@@_noabbrev_first_bool
 \keys_define:nn { zref-clever }
   {
-    abbrev .choice: ,
-    abbrev / true .code:n =
-      {
-        \bool_set_true:N \l_@@_abbrev_all_bool
-        \bool_set_true:N \l_@@_abbrev_tail_bool
-      } ,
-    abbrev / false .code:n =
-      {
-        \bool_set_false:N \l_@@_abbrev_all_bool
-        \bool_set_false:N \l_@@_abbrev_tail_bool
-      } ,
-    abbrev / butfirst .code:n =
-      {
-        \bool_set_false:N \l_@@_abbrev_all_bool
-        \bool_set_true:N \l_@@_abbrev_tail_bool
-      } ,
+    abbrev .bool_set:N = \l_@@_abbrev_bool ,
     abbrev .initial:n = false ,
     abbrev .default:n = true ,
+    noabbrev .meta:n = { abbrev = false },
+    noabbrev .value_forbidden:n = true ,
+
+    noabbrevfirst .bool_set:N = \l_@@_noabbrev_first_bool ,
+    noabbrevfirst .initial:n = false ,
+    noabbrevfirst .default:n = true ,
   }
 %    \end{macrocode}
 %
 %
 %
 %
-% \subsubsection*{\opt{language} option}
-%
+% \subsubsection*{\opt{lang} option}
 %
 %
 %    \begin{macrocode}
@@ -1387,7 +1428,7 @@
 \NewHook { zref-clever / reflanguage }
 \keys_define:nn { zref-clever }
   {
-    language .code:n =
+    lang .code:n =
       {
         \AddToHook { zref-clever / reflanguage }
           {
@@ -1408,8 +1449,8 @@
               { \tl_set:Nn \l_@@_ref_language_tl {#1} }
           }
       } ,
-    language .initial:n = main ,
-    language .value_required:n = true ,
+    lang .initial:n = main ,
+    lang .value_required:n = true ,
   }
 \AtEndOfPackage
   {
@@ -1417,7 +1458,7 @@
       {
         \keys_define:nn { zref-clever }
           {
-            language .code:n =
+            lang .code:n =
               {
                 \str_case:nnF {#1}
                   {
@@ -1435,8 +1476,8 @@
                   }
                   { \tl_set:Nn \l_@@_ref_language_tl {#1} }
               } ,
-            language .initial:n = main ,
-            language .value_required:n = true ,
+            lang .initial:n = main ,
+            lang .value_required:n = true ,
           }
       }
   }
@@ -1488,33 +1529,33 @@
 %
 %    \begin{macrocode}
 
-\prop_new:N \l_@@_ref_options_prop
+\prop_new:N \l_@@_ref_strings_prop
 
 \keys_define:nn { zref-clever }
   {
-    namesep   .prop_put:N = \l_@@_ref_options_prop ,
+    namesep   .prop_put:N = \l_@@_ref_strings_prop ,
     namesep   .value_required:n = true ,
-    rangesep  .prop_put:N = \l_@@_ref_options_prop ,
+    rangesep  .prop_put:N = \l_@@_ref_strings_prop ,
     rangesep  .value_required:n = true ,
-    pairsep   .prop_put:N = \l_@@_ref_options_prop ,
+    pairsep   .prop_put:N = \l_@@_ref_strings_prop ,
     pairsep   .value_required:n = true ,
-    listsep   .prop_put:N = \l_@@_ref_options_prop ,
+    listsep   .prop_put:N = \l_@@_ref_strings_prop ,
     listsep   .value_required:n = true ,
-    lastsep   .prop_put:N = \l_@@_ref_options_prop ,
+    lastsep   .prop_put:N = \l_@@_ref_strings_prop ,
     lastsep   .value_required:n = true ,
-    tpairsep  .prop_put:N = \l_@@_ref_options_prop ,
+    tpairsep  .prop_put:N = \l_@@_ref_strings_prop ,
     tpairsep  .value_required:n = true ,
-    tlistsep  .prop_put:N = \l_@@_ref_options_prop ,
+    tlistsep  .prop_put:N = \l_@@_ref_strings_prop ,
     tlistsep  .value_required:n = true ,
-    tlastsep  .prop_put:N = \l_@@_ref_options_prop ,
+    tlastsep  .prop_put:N = \l_@@_ref_strings_prop ,
     tlastsep  .value_required:n = true ,
-    refpre    .prop_put:N = \l_@@_ref_options_prop ,
+    refpre    .prop_put:N = \l_@@_ref_strings_prop ,
     refpre    .value_required:n = true ,
-    refpos    .prop_put:N = \l_@@_ref_options_prop ,
+    refpos    .prop_put:N = \l_@@_ref_strings_prop ,
     refpos    .value_required:n = true ,
-    refpre-in .prop_put:N = \l_@@_ref_options_prop ,
+    refpre-in .prop_put:N = \l_@@_ref_strings_prop ,
     refpre-in .value_required:n = true ,
-    refpos-in .prop_put:N = \l_@@_ref_options_prop ,
+    refpos-in .prop_put:N = \l_@@_ref_strings_prop ,
     refpos-in .value_required:n = true ,
   }
 
@@ -1596,10 +1637,6 @@
 %
 %
 %    \begin{macrocode}
-% TODO Stores whether this reference is to the page, or to the default
-% counter, this should be moved to options.
-\bool_new:N \l_@@_page_ref_bool
-% \bool_set_true:N \l_@@_page_ref_bool
 
 % TODO Stores whether sort priorities should be used or not.  This should be
 % moved to options.  This is a way to enable/disable sort priority wholesale.
@@ -1607,7 +1644,7 @@
 % not be doable locally as an option, since it must be done ``per type'', so a
 % way to handle the whole thing in one swoop is indeed needed.
 \bool_new:N \l_@@_use_sort_prior_bool
-\bool_set_true:N \l_@@_use_sort_prior_bool
+% \bool_set_true:N \l_@@_use_sort_prior_bool
 
 % TODO The "priority" should be coming somehow from options, but this is not
 % done yet, just set a temporary value to build one piece at a time.  Items
@@ -1667,9 +1704,11 @@
 \cs_new_protected:Npn \@@_sort_labels:
   {
 %    \end{macrocode}
-% Clear label types sequence.
+% Store label types sequence.
 %    \begin{macrocode}
     \seq_clear:N \l_@@_label_types_seq
+    \seq_map_function:NN
+      \l_@@_zcref_labels_seq \@@_label_type_put_new_right:n
 %    \end{macrocode}
 % Sort.
 %    \begin{macrocode}
@@ -1686,11 +1725,6 @@
               }
               {
 %    \end{macrocode}
-% Possibly store new label type.
-%    \begin{macrocode}
-                \bool_if:NF \l_@@_page_ref_bool
-                  { \@@_label_type_put_new_right:n {##2} }
-%    \end{macrocode}
 % The second label is defined, but the first isn't, leave the undefined first
 % (to be more visible).
 %    \begin{macrocode}
@@ -1698,11 +1732,6 @@
               }
           }
           {
-%    \end{macrocode}
-% Possibly store new label type.
-%    \begin{macrocode}
-            \bool_if:NF \l_@@_page_ref_bool
-              { \@@_label_type_put_new_right:n {##1} }
             \zref@ifrefundefined {##2}
               {
 %    \end{macrocode}
@@ -1985,6 +2014,7 @@
 % Sort priorities are equal for different types: the type that occurs first in
 % \meta{labels}, as given by the user, is kept (or brought) forward.
 %    \begin{macrocode}
+                  \seq_show:N \l_@@_label_types_seq
                   \seq_map_inline:Nn \l_@@_label_types_seq
                     {
                       \tl_if_eq:NnTF \l_@@_label_type_a_tl {##1}
@@ -2074,18 +2104,6 @@
 % kept a ``handle'' to deal with this in case the need arises, in the form of
 % \cs{l_@@_range_inhibit_next_bool}, which is currently no-op, but is in
 % place.
-%
-%
-%    \begin{macrocode}
-% TODO User option, compress ranges or not
-\bool_new:N \l_@@_compress_bool
-\bool_set_true:N \l_@@_compress_bool
-
-% TODO User option, sort labels ranges or not
-\bool_new:N \l_@@_sort_bool
-\bool_set_true:N \l_@@_sort_bool
-
-%    \end{macrocode}
 %
 %
 %
@@ -2308,7 +2326,7 @@
 % Determine whether we should use capitalization and abbreviation.
 %    \begin{macrocode}
     \bool_lazy_or:nnTF
-      { \l_@@_capitalize_all_bool }
+      { \l_@@_capitalize_bool }
       {
         \l_@@_capitalize_first_bool &&
         \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
@@ -2317,13 +2335,13 @@
       { \bool_set_false:N \l_@@_name_capitalize_bool }
 
     \bool_lazy_or:nnTF
-      { \l_@@_abbrev_all_bool }
+      { ! \l_@@_abbrev_bool }
       {
-        \l_@@_abbrev_tail_bool &&
-        \int_compare_p:nNn { \l_@@_type_count_int } > { 0 }
+        \l_@@_noabbrev_first_bool &&
+        \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
       }
-      { \bool_set_true:N \l_@@_name_abbrev_bool  }
       { \bool_set_false:N \l_@@_name_abbrev_bool }
+      { \bool_set_true:N \l_@@_name_abbrev_bool  }
 %    \end{macrocode}
 % Set the type name variable \cs{l_@@_type_name_tl}.  When it cannot be found,
 % clear it.
@@ -2570,8 +2588,8 @@
                       {
                         \exp_not:N \group_begin:
                         \exp_not:V \l_@@_type_name_tl
-                        \exp_not:V \l_@@_namesep_tl
                         \exp_not:N \group_end:
+                        \exp_not:V \l_@@_namesep_tl
                         \exp_not:N \group_begin:
                         \exp_not:V \l_@@_refpre_out_tl
                         \exp_not:N \group_begin:
@@ -2579,16 +2597,16 @@
                         \zref@extractdefault
                           { \l_@@_type_first_label_tl } { page } {}
                         \exp_not:V \l_@@_refpos_in_tl
+                        \exp_not:N \group_end:
                       }
-                    \exp_not:N \group_end:
                     \exp_not:V \l_@@_refpos_out_tl
                     \exp_not:N \group_end:
                   }
                   {
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_type_name_tl
-                    \exp_not:V \l_@@_namesep_tl
                     \exp_not:N \group_end:
+                    \exp_not:V \l_@@_namesep_tl
                     \exp_not:N \zref@default
                   }
               }
@@ -2604,8 +2622,8 @@
                       {
                         \exp_not:N \group_begin:
                         \exp_not:V \l_@@_type_name_tl
-                        \exp_not:V \l_@@_namesep_tl
                         \exp_not:N \group_end:
+                        \exp_not:V \l_@@_namesep_tl
                         \exp_not:N \group_begin:
                         \exp_not:V \l_@@_refpre_out_tl
                         \exp_not:N \group_begin:
@@ -2613,16 +2631,16 @@
                         \zref@extractdefault
                           { \l_@@_type_first_label_tl } { zc@thecnt } {}
                         \exp_not:V \l_@@_refpos_in_tl
+                        \exp_not:N \group_end:
                       }
-                    \exp_not:N \group_end:
                     \exp_not:V \l_@@_refpos_out_tl
                     \exp_not:N \group_end:
                   }
                   {
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_type_name_tl
-                    \exp_not:V \l_@@_namesep_tl
                     \exp_not:N \group_end:
+                    \exp_not:V \l_@@_namesep_tl
                     \exp_not:N \zref@default
                   }
               }
@@ -2636,8 +2654,8 @@
               {
                 \exp_not:N \group_begin:
                 \exp_not:V \l_@@_type_name_tl
-                \exp_not:V \l_@@_namesep_tl
                 \exp_not:N \group_end:
+                \exp_not:V \l_@@_namesep_tl
               }
             \bool_if:NTF \l_@@_page_ref_bool
               {
@@ -2739,8 +2757,8 @@
 % \Arg{string} \Arg{var to store result}
 \cs_new_protected:Npn \@@_get_string:nN #1#2
   {
-    % First attempt options stored in \cs{l_@@_ref_options_prop}.
-    \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
+    % First attempt options stored in \cs{l_@@_ref_strings_prop}.
+    \prop_get:NnNF \l_@@_ref_strings_prop {#1} #2
       {
         % If not found, try the type specific strings.
         \bool_lazy_all:nTF
@@ -2748,16 +2766,16 @@
             { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
             {
               \prop_if_exist_p:c
-                { l_@@_type_ \l_@@_label_type_a_tl _options_prop }
+                { l_@@_type_ \l_@@_label_type_a_tl _strings_prop }
             }
             {
               \prop_if_in_p:cn
-                { l_@@_type_ \l_@@_label_type_a_tl _options_prop } {#1}
+                { l_@@_type_ \l_@@_label_type_a_tl _strings_prop } {#1}
             }
           }
           {
             \prop_get:cnN
-              { l_@@_type_ \l_@@_label_type_a_tl _options_prop } {#1} #2
+              { l_@@_type_ \l_@@_label_type_a_tl _strings_prop } {#1} #2
           }
           {
             % If not found, try the type specific translations.
@@ -3095,9 +3113,6 @@
     \@@_type_name_setup:
     \tl_put_left:Nx
       \l_@@_typeset_queue_curr_tl { \@@_get_ref_first: }
-
-    % FIXME testing, remove.
-    \tl_show:N \l_@@_typeset_queue_curr_tl
 
     % Typeset the previous type, if there is one.
     \int_compare:nNnT { \l_@@_type_count_int } > { 0 }
