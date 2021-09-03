@@ -1316,6 +1316,40 @@
 %    \end{macrocode}
 %
 %
+% \subsubsection*{\opt{typeset} option}
+
+%    \begin{macrocode}
+\bool_new:N \l_@@_typeset_ref_bool
+\bool_new:N \l_@@_typeset_name_bool
+\keys_define:nn { zref-clever }
+  {
+    typeset .choice: ,
+    typeset / both .code:n =
+      {
+        \bool_set_true:N \l_@@_typeset_ref_bool
+        \bool_set_true:N \l_@@_typeset_name_bool
+      } ,
+    typeset / ref .code:n =
+      {
+        \bool_set_true:N \l_@@_typeset_ref_bool
+        \bool_set_false:N \l_@@_typeset_name_bool
+      } ,
+    typeset / name .code:n =
+      {
+        \bool_set_false:N \l_@@_typeset_ref_bool
+        \bool_set_true:N \l_@@_typeset_name_bool
+      } ,
+    typeset .initial:n = both ,
+    typeset .value_required:n = true ,
+
+    name .meta:n = { typeset = name },
+    name .value_forbidden:n = true ,
+    noname .meta:n = { typeset = ref },
+    noname .value_forbidden:n = true ,
+  }
+%    \end{macrocode}
+%
+%
 %
 % \subsubsection*{\opt{sort} option}
 %
@@ -1707,8 +1741,11 @@
 % Store label types sequence.
 %    \begin{macrocode}
     \seq_clear:N \l_@@_label_types_seq
-    \seq_map_function:NN
-      \l_@@_zcref_labels_seq \@@_label_type_put_new_right:n
+    \bool_if:NF \l_@@_page_ref_bool
+      {
+        \seq_map_function:NN
+          \l_@@_zcref_labels_seq \@@_label_type_put_new_right:n
+      }
 %    \end{macrocode}
 % Sort.
 %    \begin{macrocode}
@@ -1744,8 +1781,7 @@
 % The interesting case: both labels are defined. The reference to the
 % "default" property/counter or to the page are quite different from our
 % perspective, they rely on different fields and even use different
-% information for sorting (and compressing), so we branch them here to
-% specialized functions.
+% information for sorting, so we branch them here to specialized functions.
 %    \begin{macrocode}
                 \bool_if:NTF \l_@@_page_ref_bool
                   { \@@_sort_page_aux:nn {##1} {##2} }
@@ -2292,7 +2328,7 @@
           { \exp_not:N \zref@default }
       }
   }
-\cs_generate_variant:Nn \@@_get_ref:n {V}
+\cs_generate_variant:Nn \@@_get_ref:n { V }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3109,10 +3145,52 @@
       }
 
     % Now that the type is finished, we can add the name and the first ref to
-    % the queue.
+    % the queue.  Or, if ``typset'' option is not ``both'', handle it here
+    % too.
     \@@_type_name_setup:
-    \tl_put_left:Nx
-      \l_@@_typeset_queue_curr_tl { \@@_get_ref_first: }
+    \bool_case_true:nF
+      {
+        { \l_@@_typeset_ref_bool && \l_@@_typeset_name_bool }
+        {
+          \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
+            { \@@_get_ref_first: }
+        }
+
+        { \l_@@_typeset_ref_bool }
+        {
+          \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
+            { \@@_get_ref:V \l_@@_type_first_label_tl }
+        }
+
+        { \l_@@_typeset_name_bool }
+        {
+          \tl_set:Nx \l_@@_typeset_queue_curr_tl
+            {
+              \bool_if:NTF \l_@@_name_in_link_bool
+                {
+                  \exp_not:N \group_begin:
+                  \exp_not:N \hyperlink
+                    {
+                      \zref@extractdefault
+                        { \l_@@_type_first_label_tl } { anchor } {}
+                    }
+                    { \exp_not:V \l_@@_type_name_tl }
+                  \exp_not:N \group_end:
+                }
+                {
+                  \exp_not:N \group_begin:
+                  \exp_not:V \l_@@_type_name_tl
+                  \exp_not:N \group_end:
+                }
+            }
+        }
+      }
+      {
+        % This case should not happen, given how the options are set up, but a
+        % sensible fallback, equal to the behavior of ``both''.
+        \tl_put_left:Nx
+          \l_@@_typeset_queue_curr_tl { \@@_get_ref_first: }
+      }
 
     % Typeset the previous type, if there is one.
     \int_compare:nNnT { \l_@@_type_count_int } > { 0 }
