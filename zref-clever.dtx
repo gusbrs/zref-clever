@@ -547,25 +547,6 @@
 % \subsection{Type format}
 %
 %
-% \subsubsection{\cs{zcCounterTypes}}
-%
-% \begin{variable}{\l_@@_counter_type_prop}
-%   Variable storing a mapping from ``counter'' to ``reference type''.
-%    \begin{macrocode}
-\prop_new:N \l_@@_counter_type_prop
-%    \end{macrocode}
-% \end{variable}
-%
-% \begin{macro}[int]{\zcCounterTypes}
-%   Provide \cs{zcCounterTypes}.
-%    \begin{macrocode}
-\NewDocumentCommand \zcCounterTypes { m }
-  { \prop_put_from_keyval:Nn \l_@@_counter_type_prop {#1} }
-%    \end{macrocode}
-% \end{macro}
-%
-%
-%
 % \subsubsection{\cs{zcRefTypeSetup}}
 %
 %
@@ -606,286 +587,67 @@
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\keys_define:nn { zref-clever / typesetup }
+
+% Not type-specific strings.
+\clist_map_inline:nn
   {
-    % Not type-specific strings.
-    tpairsep .value_required:n = true ,
-    tpairsep .code:n =
+    tpairsep ,
+    tlistsep ,
+    tlastsep ,
+  }
+  {
+    \keys_define:nn { zref-clever / typesetup }
       {
-        \msg_warning:nnn { zref-clever }
-          { string-not-type-specific } { tpairsep }
-      } ,
+        #1 .value_required:n = true ,
+        #1 .code:n =
+          {
+            \msg_warning:nnn { zref-clever } { string-not-type-specific } {#1}
+          } ,
+      }
+  }
 
-    tlistsep .value_required:n = true ,
-    tlistsep .code:n =
-      {
-        \msg_warning:nnn { zref-clever }
-          { string-not-type-specific } { tlistsep }
-      } ,
-
-    tlastsep .value_required:n = true ,
-    tlastsep .code:n =
-      {
-        \msg_warning:nnn { zref-clever }
-          { string-not-type-specific } { tlastsep }
-      } ,
-
+% Possibly or necessarily type-specific strings.
+\clist_map_inline:nn
+  {
     % Possibly type-specific strings.
-    namesep .value_required:n = true ,
-    namesep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { namesep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -namesep } {#1}
-          }
-      } ,
-
-    pairsep .value_required:n = true ,
-    pairsep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { pairsep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -pairsep } {#1}
-          }
-      } ,
-
-    listsep .value_required:n = true ,
-    listsep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { listsep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -listsep } {#1}
-          }
-      } ,
-
-    lastsep .value_required:n = true ,
-    lastsep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { lastsep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -lastsep } {#1}
-          }
-      } ,
-
-    rangesep .value_required:n = true ,
-    rangesep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { rangesep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -rangesep } {#1}
-          }
-      } ,
-
-    refpre .value_required:n = true ,
-    refpre .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { refpre } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -refpre } {#1}
-          }
-      } ,
-
-    refpos .value_required:n = true ,
-    refpos .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { refpos } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -refpos } {#1}
-          }
-      } ,
-
-    refpre-in .value_required:n = true ,
-    refpre-in .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { refpre-in } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -refpre-in } {#1}
-          }
-      } ,
-
-    refpos-in .value_required:n = true ,
-    refpos-in .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { refpos-in } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -refpos-in } {#1}
-          }
-      } ,
-
+    namesep ,
+    pairsep ,
+    listsep ,
+    lastsep ,
+    rangesep ,
+    refpre ,
+    refpos ,
+    refpre-in ,
+    refpos-in ,
     % Necessarily type-specific strings.
-    name .value_required:n = true ,
-    name .code:n =
+    name ,
+    name-pl ,
+    Name ,
+    Name-pl ,
+    name-abbrev ,
+    name-abbrev-pl ,
+    Name-abbrev ,
+    Name-abbrev-pl ,
+  }
+  {
+    \keys_define:nn { zref-clever / typesetup }
       {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
+        #1 .value_required:n = true ,
+        #1 .code:n =
           {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { name } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -name } {#1}
-          }
-      } ,
-
-    name-pl .value_required:n = true ,
-    name-pl .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { name-pl } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -name-pl } {#1}
-          }
-      } ,
-
-    Name .value_required:n = true ,
-    Name .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { Name } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -Name } {#1}
-          }
-      } ,
-
-    Name-pl .value_required:n = true ,
-    Name-pl .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { Name-pl } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -Name-pl } {#1}
-          }
-      } ,
-
-    name-abbrev .value_required:n = true ,
-    name-abbrev .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { name-abbrev } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -name-abbrev } {#1}
-          }
-      } ,
-
-    name-abbrev-pl .value_required:n = true ,
-    name-abbrev-pl .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { name-abbrev-pl } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -name-abbrev-pl } {#1}
-          }
-      } ,
-
-    Name-abbrev .value_required:n = true ,
-    Name-abbrev .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { Name-abbrev } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -Name-abbrev } {#1}
-          }
-      } ,
-
-    Name-abbrev-pl .value_required:n = true ,
-    Name-abbrev-pl .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_language_tl
-          {
-            \prop_put:cnn
-              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-              { Name-abbrev-pl } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -Name-abbrev-pl } {#1}
-          }
-      } ,
+            \tl_if_empty:NTF \l_@@_setup_language_tl
+              {
+                \prop_put:cnn
+                  { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                  { #1 } {##1}
+                \prop_show:c { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+              }
+              {
+                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+                  { zrefclever-type- \l_@@_setup_type_tl - #1 } {##1}
+              }
+          } ,
+      }
   }
 
 \msg_new:nnn { zref-clever } { string-not-type-specific }
@@ -933,290 +695,93 @@
 %
 %    \begin{macrocode}
 
-\keys_define:nn { zref-clever / refstrings }
+% Not type-specific strings.
+\clist_map_inline:nn
   {
-    % Not type-specific strings.
-    tpairsep .value_required:n = true ,
-    tpairsep .code:n =
+    tpairsep ,
+    tlistsep ,
+    tlastsep ,
+  }
+  {
+    \keys_define:nn { zref-clever / refstrings }
       {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
+        #1 .value_required:n = true ,
+        #1 .code:n =
           {
-            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-              { zrefclever-default-tpairsep } {#1}
-          }
-          {
-            \msg_warning:nnn { zref-clever }
-              { string-not-type-specific } { tpairsep }
-          }
-      } ,
+            \tl_if_empty:NTF \l_@@_setup_type_tl
+              {
+                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+                  { zrefclever-default- #1 } {##1}
+              }
+              {
+                \msg_warning:nnn { zref-clever }
+                  { string-not-type-specific } { tpairsep }
+              }
+          } ,
+      }
+  }
 
-    tlistsep .value_required:n = true ,
-    tlistsep .code:n =
+% Possibly type-specific strings.
+\clist_map_inline:nn
+  {
+    namesep ,
+    pairsep ,
+    listsep ,
+    lastsep ,
+    rangesep ,
+    refpre ,
+    refpos ,
+    refpre-in ,
+    refpos-in ,
+  }
+  {
+    \keys_define:nn { zref-clever / refstrings }
       {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
+        #1 .value_required:n = true ,
+        #1 .code:n =
           {
-            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-              { zrefclever-default-tlistsep } {#1}
-          }
-          {
-            \msg_warning:nnn { zref-clever }
-              { string-not-type-specific } { tlistsep }
-          }
-      } ,
+            \tl_if_empty:NTF \l_@@_setup_type_tl
+              {
+                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+                  { zrefclever-default- #1 } {##1}
+              }
+              {
+                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+                  { zrefclever-type- \l_@@_setup_type_tl - #1 } {##1}
+              }
+          } ,
+      }
+  }
 
-    tlastsep .value_required:n = true ,
-    tlastsep .code:n =
+% Necessarily type-specific strings.
+\clist_map_inline:nn
+  {
+    name ,
+    name-pl ,
+    Name ,
+    Name-pl ,
+    name-abbrev ,
+    name-abbrev-pl ,
+    Name-abbrev ,
+    Name-abbrev-pl ,
+  }
+  {
+    \keys_define:nn { zref-clever / refstrings }
       {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
+        #1 .value_required:n = true ,
+        #1 .code:n =
           {
-            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-              { zrefclever-default-tlastsep } {#1}
-          }
-          {
-            \msg_warning:nnn { zref-clever }
-              { string-not-type-specific } { tlastsep }
-          }
-      } ,
-
-    % Possibly type-specific strings.
-    namesep .value_required:n = true ,
-    namesep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-              { zrefclever-default-namesep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -namesep } {#1}
-          }
-      } ,
-
-    pairsep .value_required:n = true ,
-    pairsep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-              { zrefclever-default-pairsep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -pairsep } {#1}
-          }
-      } ,
-
-    listsep .value_required:n = true ,
-    listsep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-              { zrefclever-default-listsep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -listsep } {#1}
-          }
-      } ,
-
-    lastsep .value_required:n = true ,
-    lastsep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-              { zrefclever-default-lastsep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -lastsep } {#1}
-          }
-      } ,
-
-    rangesep .value_required:n = true ,
-    rangesep .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-              { zrefclever-default-rangesep } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -rangesep } {#1}
-          }
-      } ,
-
-    refpre .value_required:n = true ,
-    refpre .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-              { zrefclever-default-refpre } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -refpre } {#1}
-          }
-      } ,
-
-    refpos .value_required:n = true ,
-    refpos .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-              { zrefclever-default-refpos } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -refpos } {#1}
-          }
-      } ,
-
-    refpre-in .value_required:n = true ,
-    refpre-in .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-              { zrefclever-default-refpre-in } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -refpre-in } {#1}
-          }
-      } ,
-
-    refpos-in .value_required:n = true ,
-    refpos-in .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \@@_declare_translation:xnn { \l_@@_setup_language_tl }
-              { zrefclever-default-refpos-in } {#1}
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -refpos-in } {#1}
-          }
-      } ,
-
-    % Necessarily type-specific strings.
-    name .value_required:n = true ,
-    name .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \msg_warning:nnn { zref-clever }
-              { string-only-type-specific } { name }
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -name } {#1}
-          }
-      } ,
-
-    name-pl .value_required:n = true ,
-    name-pl .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \msg_warning:nnn { zref-clever }
-              { string-only-type-specific } { name-pl }
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -name-pl } {#1}
-          }
-      } ,
-
-    Name .value_required:n = true ,
-    Name .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \msg_warning:nnn { zref-clever }
-              { string-only-type-specific } { Name }
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -Name } {#1}
-          }
-      } ,
-
-    Name-pl .value_required:n = true ,
-    Name-pl .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \msg_warning:nnn { zref-clever }
-              { string-only-type-specific } { Name-pl }
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -Name-pl } {#1}
-          }
-      } ,
-
-    name-abbrev .value_required:n = true ,
-    name-abbrev .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \msg_warning:nnn { zref-clever }
-              { string-only-type-specific } { name-abbrev }
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -name-abbrev } {#1}
-          }
-      } ,
-
-    name-abbrev-pl .value_required:n = true ,
-    name-abbrev-pl .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \msg_warning:nnn { zref-clever }
-              { string-only-type-specific } { name-abbrev-pl }
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -name-abbrev-pl } {#1}
-          }
-      } ,
-
-    Name-abbrev .value_required:n = true ,
-    Name-abbrev .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \msg_warning:nnn { zref-clever }
-              { string-only-type-specific } { Name-abbrev }
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -Name-abbrev } {#1}
-          }
-      } ,
-
-    Name-abbrev-pl .value_required:n = true ,
-    Name-abbrev-pl .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \msg_warning:nnn { zref-clever }
-              { string-only-type-specific } { Name-abbrev-pl }
-          }
-          {
-            \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-              { zrefclever-type- \l_@@_setup_type_tl -Name-abbrev-pl } {#1}
-          }
-      } ,
+            \tl_if_empty:NTF \l_@@_setup_type_tl
+              {
+                \msg_warning:nnn { zref-clever }
+                  { string-only-type-specific } {#1}
+              }
+              {
+                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+                  { zrefclever-type- \l_@@_setup_type_tl - #1 } {##1}
+              }
+          } ,
+      }
   }
 
 \msg_new:nnn { zref-clever } { string-only-type-specific }
@@ -1225,77 +790,63 @@
     Set~it~after~'type'~switch~or~in~'\exp_not:N \zcRefTypeSetup'.
   }
 
-
 %    \end{macrocode}
 
 %
 %
 % \subsection{Options}
 %
+
+% \subsubsection*{\opt{countertype} option}
 %
-% \subsubsection*{\opt{hyperref} option}
-%
-% \begin{variable}{\l_@@_use_hyperref_bool, \l_@@_warn_hyperref_bool}
+% \begin{variable}{\l_@@_counter_type_prop}
+%   Variable storing a mapping from ``counter'' to ``reference type''.
 %    \begin{macrocode}
-\bool_new:N \l_@@_use_hyperref_bool
-\bool_new:N \l_@@_warn_hyperref_bool
-\keys_define:nn { zref-clever }
-  {
-    hyperref .choice: ,
-    hyperref / auto .code:n =
-      {
-        \bool_set_true:N \l_@@_use_hyperref_bool
-        \bool_set_false:N \l_@@_warn_hyperref_bool
-      } ,
-    hyperref / true .code:n =
-      {
-        \bool_set_true:N \l_@@_use_hyperref_bool
-        \bool_set_true:N \l_@@_warn_hyperref_bool
-      } ,
-    hyperref / false .code:n =
-      {
-        \bool_set_false:N \l_@@_use_hyperref_bool
-        \bool_set_false:N \l_@@_warn_hyperref_bool
-      } ,
-    hyperref .initial:n = auto ,
-    hyperref .default:n = auto
-  }
+\prop_new:N \l_@@_counter_type_prop
 %    \end{macrocode}
 % \end{variable}
 %
 %    \begin{macrocode}
-\AddToHook { begindocument }
+\cs_new_protected:Npn \@@_prop_put_non_blank:Nnn #1#2#3
   {
-    \@ifpackageloaded { hyperref }
-      {
-        \bool_if:NT \l_@@_use_hyperref_bool
-          { \RequirePackage { zref-hyperref } }
-      }
-      {
-        \bool_if:NT \l_@@_warn_hyperref_bool
-          { \msg_warning:nn { zref-clever } { missing-hyperref } }
-        \bool_set_false:N \l_@@_use_hyperref_bool
-      }
-    \keys_define:nn { zref-check }
-      {
-        hyperref .code:n =
-          { \msg_warning:nn { zref-clever } { hyperref-preamble-only } }
-      }
+    \tl_if_blank:nTF {#3}
+      { \prop_remove:Nn #1 {#2} }
+      { \prop_put:Nnn #1 {#2} {#3} }
   }
+\keys_define:nn { zref-clever }
+  {
+    countertype .code:n =
+      {
+        \keyval_parse:nnn
+          { \msg_warning:nnn { zref-clever } { countertype-requires-value } }
+          { \@@_prop_put_non_blank:Nnn \l_@@_counter_type_prop }
+          {#1}
+      } ,
+    countertype .value_required:n = true ,
+    countertype .initial:n =
+      {
+        part          = part ,
+        chapter       = chapter ,
+        section       = section ,
+        subsection    = section ,
+        subsubsection = section ,
+        paragraph     = paragraph ,
+        subparagraph  = paragraph ,
+        figure        = figure ,
+        table         = table ,
+        equation      = equation ,
+        enumi         = item ,
+        enumii        = item ,
+        enumiii       = item ,
+        enumiv        = item ,
+      } ,
+  }
+\msg_new:nnn  { zref-clever } { countertype-requires-value }
+  { The~'countertype'~key~'#1'~requires~a~value. }
 %    \end{macrocode}
 %
-%    \begin{macrocode}
-\msg_new:nnn { zref-clever } { hyperref-preamble-only }
-  {
-    Option~'hyperref'~only~available~in~the~preamble. \iow_newline:
-    Use~the~starred~version~of~'\noexpand\zcheck'~instead.
-  }
-\msg_new:nnn { zref-clever } { missing-hyperref }
-  { Missing~'hyperref'~package. \iow_newline: Setting~'hyperref=false'. }
-%    \end{macrocode}
 %
 %
-
 % \subsubsection*{\opt{ref} option}
 
 % Stores whether this reference is to the page, or to the default counter.
@@ -1431,6 +982,69 @@
 %
 %
 %
+%
+% \subsubsection*{\opt{hyperref} option}
+%
+% \begin{variable}{\l_@@_use_hyperref_bool, \l_@@_warn_hyperref_bool}
+%    \begin{macrocode}
+\bool_new:N \l_@@_use_hyperref_bool
+\bool_new:N \l_@@_warn_hyperref_bool
+\keys_define:nn { zref-clever }
+  {
+    hyperref .choice: ,
+    hyperref / auto .code:n =
+      {
+        \bool_set_true:N \l_@@_use_hyperref_bool
+        \bool_set_false:N \l_@@_warn_hyperref_bool
+      } ,
+    hyperref / true .code:n =
+      {
+        \bool_set_true:N \l_@@_use_hyperref_bool
+        \bool_set_true:N \l_@@_warn_hyperref_bool
+      } ,
+    hyperref / false .code:n =
+      {
+        \bool_set_false:N \l_@@_use_hyperref_bool
+        \bool_set_false:N \l_@@_warn_hyperref_bool
+      } ,
+    hyperref .initial:n = auto ,
+    hyperref .default:n = auto
+  }
+%    \end{macrocode}
+% \end{variable}
+%
+%    \begin{macrocode}
+\AddToHook { begindocument }
+  {
+    \@ifpackageloaded { hyperref }
+      {
+        \bool_if:NT \l_@@_use_hyperref_bool
+          { \RequirePackage { zref-hyperref } }
+      }
+      {
+        \bool_if:NT \l_@@_warn_hyperref_bool
+          { \msg_warning:nn { zref-clever } { missing-hyperref } }
+        \bool_set_false:N \l_@@_use_hyperref_bool
+      }
+    \keys_define:nn { zref-check }
+      {
+        hyperref .code:n =
+          { \msg_warning:nn { zref-clever } { hyperref-preamble-only } }
+      }
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\msg_new:nnn { zref-clever } { hyperref-preamble-only }
+  {
+    Option~'hyperref'~only~available~in~the~preamble. \iow_newline:
+    Use~the~starred~version~of~'\noexpand\zcheck'~instead.
+  }
+\msg_new:nnn { zref-clever } { missing-hyperref }
+  { Missing~'hyperref'~package. \iow_newline: Setting~'hyperref=false'. }
+%    \end{macrocode}
+%
+%
 % \subsubsection*{\opt{nameinlink} option}
 %
 % \begin{variable}{\l_@@_nameinlink_tl}
@@ -1532,6 +1146,8 @@
     lang .initial:n = main ,
     lang .value_required:n = true ,
   }
+% \cs{AtEndOfPackage} so that it comes after
+% \cs{ProcessKeysOptions}\texttt{{zref-clever}}.
 \AtEndOfPackage
   {
     \AddToHook { zref-clever / reflanguage }
@@ -1612,32 +1228,30 @@
 
 \prop_new:N \l_@@_ref_strings_prop
 
-\keys_define:nn { zref-clever }
+% Only not necessarily type-specific strings are pertinent here.
+\clist_map_inline:nn
   {
-    namesep   .prop_put:N = \l_@@_ref_strings_prop ,
-    namesep   .value_required:n = true ,
-    rangesep  .prop_put:N = \l_@@_ref_strings_prop ,
-    rangesep  .value_required:n = true ,
-    pairsep   .prop_put:N = \l_@@_ref_strings_prop ,
-    pairsep   .value_required:n = true ,
-    listsep   .prop_put:N = \l_@@_ref_strings_prop ,
-    listsep   .value_required:n = true ,
-    lastsep   .prop_put:N = \l_@@_ref_strings_prop ,
-    lastsep   .value_required:n = true ,
-    tpairsep  .prop_put:N = \l_@@_ref_strings_prop ,
-    tpairsep  .value_required:n = true ,
-    tlistsep  .prop_put:N = \l_@@_ref_strings_prop ,
-    tlistsep  .value_required:n = true ,
-    tlastsep  .prop_put:N = \l_@@_ref_strings_prop ,
-    tlastsep  .value_required:n = true ,
-    refpre    .prop_put:N = \l_@@_ref_strings_prop ,
-    refpre    .value_required:n = true ,
-    refpos    .prop_put:N = \l_@@_ref_strings_prop ,
-    refpos    .value_required:n = true ,
-    refpre-in .prop_put:N = \l_@@_ref_strings_prop ,
-    refpre-in .value_required:n = true ,
-    refpos-in .prop_put:N = \l_@@_ref_strings_prop ,
-    refpos-in .value_required:n = true ,
+    % Not type-specific strings.
+    tpairsep ,
+    tlistsep ,
+    tlastsep ,
+    % Possibly type-specific strings.
+    namesep ,
+    pairsep ,
+    listsep ,
+    lastsep ,
+    rangesep ,
+    refpre ,
+    refpos ,
+    refpre-in ,
+    refpos-in ,
+  }
+  {
+    \keys_define:nn { zref-clever }
+      {
+        #1 .prop_put:N = \l_@@_ref_strings_prop ,
+        #1 .value_required:n = true ,
+      }
   }
 
 %    \end{macrocode}
@@ -2393,6 +2007,9 @@
 \bool_new:N \l_@@_name_capitalize_bool
 \bool_new:N \l_@@_name_abbrev_bool
 \tl_new:N \l_@@_name_maybe_plural_tl
+% Variant not provided by the kernel.
+\prg_generate_conditional_variant:Nnn \prop_get:NnN { cxN } { F }
+
 \cs_new_protected:Npn \@@_type_name_setup:
   {
 %    \end{macrocode}
@@ -2436,44 +2053,10 @@
                 { ! \l_@@_name_abbrev_bool && ! \l_@@_name_capitalize_bool }
                 {
                   % name(-pl)
-                  \@@_if_translation:xxTF
-                    { \l_@@_ref_language_tl }
-                    {
-                      zrefclever-type- \l_@@_type_first_label_type_tl
-                      -name \l_@@_name_maybe_plural_tl
-                    }
-                    {
-                      \@@_get_translation_for:nxx { \l_@@_type_name_tl }
-                        { \l_@@_ref_language_tl }
-                        {
-                          zrefclever-type- \l_@@_type_first_label_type_tl
-                          -name \l_@@_name_maybe_plural_tl
-                        }
-                    }
-                    {
-                      \tl_clear:N \l_@@_type_name_tl
-                      \msg_warning:nnx { zref-clever } { missing-name }
-                        { \l_@@_type_first_label_type_tl }
-                    }
-                }
-
-                { ! \l_@@_name_abbrev_bool } % but capitalize
-                {
-                  % Name(-pl)
-                  \@@_if_translation:xxTF
-                    { \l_@@_ref_language_tl }
-                    {
-                      zrefclever-type- \l_@@_type_first_label_type_tl
-                      -Name \l_@@_name_maybe_plural_tl
-                    }
-                    {
-                      \@@_get_translation_for:nxx { \l_@@_type_name_tl }
-                        { \l_@@_ref_language_tl }
-                        {
-                          zrefclever-type- \l_@@_type_first_label_type_tl
-                          -Name \l_@@_name_maybe_plural_tl
-                        }
-                    }
+                  \prop_get:cxNF
+                    { l_@@_type_ \l_@@_type_first_label_type_tl _strings_prop }
+                    { name \l_@@_name_maybe_plural_tl }
+                    \l_@@_type_name_tl
                     {
                       \@@_if_translation:xxTF
                         { \l_@@_ref_language_tl }
@@ -2488,13 +2071,59 @@
                               zrefclever-type- \l_@@_type_first_label_type_tl
                               -name \l_@@_name_maybe_plural_tl
                             }
-                          \tl_set:Nx \l_@@_type_name_tl
-                            { \text_titlecase_first:n { \l_@@_type_name_tl } }
                         }
                         {
                           \tl_clear:N \l_@@_type_name_tl
                           \msg_warning:nnx { zref-clever } { missing-name }
                             { \l_@@_type_first_label_type_tl }
+                        }
+                    }
+                }
+
+                { ! \l_@@_name_abbrev_bool } % but capitalize
+                {
+                  % Name(-pl)
+                  \prop_get:cxNF
+                    { l_@@_type_ \l_@@_type_first_label_type_tl _strings_prop }
+                    { Name \l_@@_name_maybe_plural_tl }
+                    \l_@@_type_name_tl
+                    {
+                      \@@_if_translation:xxTF
+                        { \l_@@_ref_language_tl }
+                        {
+                          zrefclever-type- \l_@@_type_first_label_type_tl
+                          -Name \l_@@_name_maybe_plural_tl
+                        }
+                        {
+                          \@@_get_translation_for:nxx { \l_@@_type_name_tl }
+                            { \l_@@_ref_language_tl }
+                            {
+                              zrefclever-type- \l_@@_type_first_label_type_tl
+                              -Name \l_@@_name_maybe_plural_tl
+                            }
+                        }
+                        {
+                          \@@_if_translation:xxTF
+                            { \l_@@_ref_language_tl }
+                            {
+                              zrefclever-type- \l_@@_type_first_label_type_tl
+                              -name \l_@@_name_maybe_plural_tl
+                            }
+                            {
+                              \@@_get_translation_for:nxx { \l_@@_type_name_tl }
+                                { \l_@@_ref_language_tl }
+                                {
+                                  zrefclever-type- \l_@@_type_first_label_type_tl
+                                  -name \l_@@_name_maybe_plural_tl
+                                }
+                              \tl_set:Nx \l_@@_type_name_tl
+                                { \text_titlecase_first:n { \l_@@_type_name_tl } }
+                            }
+                            {
+                              \tl_clear:N \l_@@_type_name_tl
+                              \msg_warning:nnx { zref-clever } { missing-name }
+                                { \l_@@_type_first_label_type_tl }
+                            }
                         }
                     }
                 }
@@ -2502,102 +2131,115 @@
                 { ! \l_@@_name_capitalize_bool } % but abbrev
                 {
                   % name-abbrev(-pl)
-                  \@@_if_translation:xxTF
-                    { \l_@@_ref_language_tl }
-                    {
-                      zrefclever-type- \l_@@_type_first_label_type_tl
-                      -name-abbrev \l_@@_name_maybe_plural_tl
-                    }
-                    {
-                      \@@_get_translation_for:nxx { \l_@@_type_name_tl }
-                        { \l_@@_ref_language_tl }
-                        {
-                          zrefclever-type- \l_@@_type_first_label_type_tl
-                          -name-abbrev \l_@@_name_maybe_plural_tl
-                        }
-                    }
+                  \prop_get:cxNF
+                    { l_@@_type_ \l_@@_type_first_label_type_tl _strings_prop }
+                    { name-abbrev \l_@@_name_maybe_plural_tl }
+                    \l_@@_type_name_tl
                     {
                       \@@_if_translation:xxTF
                         { \l_@@_ref_language_tl }
                         {
                           zrefclever-type- \l_@@_type_first_label_type_tl
-                          -name \l_@@_name_maybe_plural_tl
+                          -name-abbrev \l_@@_name_maybe_plural_tl
                         }
                         {
                           \@@_get_translation_for:nxx { \l_@@_type_name_tl }
                             { \l_@@_ref_language_tl }
                             {
                               zrefclever-type- \l_@@_type_first_label_type_tl
-                              -name \l_@@_name_maybe_plural_tl
+                              -name-abbrev \l_@@_name_maybe_plural_tl
                             }
                         }
                         {
-                          \tl_clear:N \l_@@_type_name_tl
-                          \msg_warning:nnx { zref-clever } { missing-name }
-                            { \l_@@_type_first_label_type_tl }
+                          \@@_if_translation:xxTF
+                            { \l_@@_ref_language_tl }
+                            {
+                              zrefclever-type- \l_@@_type_first_label_type_tl
+                              -name \l_@@_name_maybe_plural_tl
+                            }
+                            {
+                              \@@_get_translation_for:nxx { \l_@@_type_name_tl }
+                                { \l_@@_ref_language_tl }
+                                {
+                                  zrefclever-type- \l_@@_type_first_label_type_tl
+                                  -name \l_@@_name_maybe_plural_tl
+                                }
+                            }
+                            {
+                              \tl_clear:N \l_@@_type_name_tl
+                              \msg_warning:nnx { zref-clever } { missing-name }
+                                { \l_@@_type_first_label_type_tl }
+                            }
                         }
                     }
                 }
               }
               {
                 % Name-abbrev(-pl)
-                \@@_if_translation:xxTF
-                  { \l_@@_ref_language_tl }
-                  {
-                    zrefclever-type- \l_@@_type_first_label_type_tl
-                    -Name-abbrev \l_@@_name_maybe_plural_tl
-                  }
-                  {
-                    \@@_get_translation_for:nxx { \l_@@_type_name_tl }
-                      { \l_@@_ref_language_tl }
-                      {
-                        zrefclever-type- \l_@@_type_first_label_type_tl
-                        -Name-abbrev \l_@@_name_maybe_plural_tl
-                      }
-                  }
+                \prop_get:cxNF
+                  { l_@@_type_ \l_@@_type_first_label_type_tl _strings_prop }
+                  { Name-abbrev \l_@@_name_maybe_plural_tl }
+                  \l_@@_type_name_tl
                   {
                     \@@_if_translation:xxTF
                       { \l_@@_ref_language_tl }
                       {
                         zrefclever-type- \l_@@_type_first_label_type_tl
-                        -name-abbrev \l_@@_name_maybe_plural_tl
+                        -Name-abbrev \l_@@_name_maybe_plural_tl
                       }
                       {
                         \@@_get_translation_for:nxx { \l_@@_type_name_tl }
                           { \l_@@_ref_language_tl }
                           {
                             zrefclever-type- \l_@@_type_first_label_type_tl
-                            -name-abbrev \l_@@_name_maybe_plural_tl
+                            -Name-abbrev \l_@@_name_maybe_plural_tl
                           }
-                        \tl_set:Nx \l_@@_type_name_tl
-                          { \text_titlecase_first:n { \l_@@_type_name_tl } }
                       }
                       {
-                        % We don't try to fallback to `Name' here, and spare a
-                        % branching with it going directly to `name', which is
-                        % expected to exist.  It is not really that meaningful
-                        % to attempt to retrieve the last bit of information
-                        % if the user does not want to specify it.
                         \@@_if_translation:xxTF
                           { \l_@@_ref_language_tl }
                           {
                             zrefclever-type- \l_@@_type_first_label_type_tl
-                            -name \l_@@_name_maybe_plural_tl
+                            -name-abbrev \l_@@_name_maybe_plural_tl
                           }
                           {
                             \@@_get_translation_for:nxx { \l_@@_type_name_tl }
                               { \l_@@_ref_language_tl }
                               {
                                 zrefclever-type- \l_@@_type_first_label_type_tl
-                                -name \l_@@_name_maybe_plural_tl
+                                -name-abbrev \l_@@_name_maybe_plural_tl
                               }
                             \tl_set:Nx \l_@@_type_name_tl
                               { \text_titlecase_first:n { \l_@@_type_name_tl } }
                           }
                           {
-                            \tl_clear:N \l_@@_type_name_tl
-                            \msg_warning:nnx { zref-clever } { missing-name }
-                              { \l_@@_type_first_label_type_tl }
+                            % We don't try to fallback to `Name' here, and
+                            % spare a branching with it going directly to
+                            % `name', which is expected to exist.  It is not
+                            % really that meaningful to attempt to retrieve
+                            % the last bit of information if the user does not
+                            % want to specify it.
+                            \@@_if_translation:xxTF
+                              { \l_@@_ref_language_tl }
+                              {
+                                zrefclever-type- \l_@@_type_first_label_type_tl
+                                -name \l_@@_name_maybe_plural_tl
+                              }
+                              {
+                                \@@_get_translation_for:nxx { \l_@@_type_name_tl }
+                                  { \l_@@_ref_language_tl }
+                                  {
+                                    zrefclever-type- \l_@@_type_first_label_type_tl
+                                    -name \l_@@_name_maybe_plural_tl
+                                  }
+                                \tl_set:Nx \l_@@_type_name_tl
+                                  { \text_titlecase_first:n { \l_@@_type_name_tl } }
+                              }
+                              {
+                                \tl_clear:N \l_@@_type_name_tl
+                                \msg_warning:nnx { zref-clever } { missing-name }
+                                  { \l_@@_type_first_label_type_tl }
+                              }
                           }
                       }
                   }
@@ -3406,30 +3048,6 @@
   }
 %    \end{macrocode}
 %
-%
-%
-% \section{Declare Counter Types}
-%
-%
-%    \begin{macrocode}
-\zcCounterTypes
-  {
-    part          = part ,
-    chapter       = chapter ,
-    section       = section ,
-    subsection    = section ,
-    subsubsection = section ,
-    paragraph     = paragraph ,
-    subparagraph  = paragraph ,
-    figure        = figure ,
-    table         = table ,
-    equation      = equation ,
-    enumi         = item ,
-    enumii        = item ,
-    enumiii       = item ,
-    enumiv        = item ,
-  }
-%    \end{macrocode}
 %
 %
 %
