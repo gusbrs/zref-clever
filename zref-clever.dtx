@@ -1300,19 +1300,41 @@
 
 % Stores whether this reference is to the page, or to the default counter.
 %    \begin{macrocode}
+\tl_new:N \l_@@_ref_property_tl
 \bool_new:N \l_@@_page_ref_bool
 \keys_define:nn { zref-clever }
   {
-    ref .choice: ,
-    ref / default .code:n =
-      { \bool_set_false:N \l_@@_page_ref_bool } ,
-    ref / page .code:n =
-      { \bool_set_true:N \l_@@_page_ref_bool } ,
-    ref .initial:n = default ,
+    ref .code:n =
+      {
+        \tl_if_eq:nnTF {#1} { page }
+          {
+            \tl_set:Nn \l_@@_ref_property_tl { page }
+            \bool_set_true:N \l_@@_page_ref_bool
+          }
+          {
+            \zref@ifpropundefined {#1}
+              {
+                \msg_warning:nnn { zref-clever } { prop-not-defined } {#1}
+                \tl_set:Nn \l_@@_ref_property_tl { zc@thecnt }
+              }
+              {
+                \tl_set:Nn \l_@@_ref_property_tl {#1}
+              }
+            \bool_set_false:N \l_@@_page_ref_bool
+          }
+      } ,
+    ref .initial:n = zc@thecnt ,
     ref .value_required:n = true ,
     page .meta:n = { ref = page },
     page .value_forbidden:n = true ,
   }
+
+\msg_new:nnn { zref-clever } { prop-not-defined }
+  {
+    Property~'#1'~undefined~on~input~line~\msg_line_number:. \iow_newline:
+    Falling-back~to~default~'ref='.
+  }
+
 %    \end{macrocode}
 %
 %
@@ -2299,75 +2321,38 @@
 %    \begin{macrocode}
 \cs_new:Npn \@@_get_ref:n #1
   {
-    \bool_if:NTF \l_@@_page_ref_bool
+    \zref@ifrefcontainsprop {#1} { \l_@@_ref_property_tl }
       {
-        \zref@ifrefcontainsprop {#1} { page }
+        \bool_if:nTF
+          { \l_@@_use_hyperref_bool && ! \l_@@_link_star_bool }
           {
-            \bool_if:nTF
-              { \l_@@_use_hyperref_bool && ! \l_@@_link_star_bool }
+            \exp_not:N \group_begin:
+            \exp_not:V \l_@@_refpre_out_tl
+            \exp_not:N \group_begin:
+            \exp_not:N \hyperlink
+              { \zref@extractdefault {#1} { anchor } {} }
               {
-                \exp_not:N \group_begin:
-                \exp_not:V \l_@@_refpre_out_tl
-                \exp_not:N \group_begin:
-                \exp_not:N \hyperlink
-                  { \zref@extractdefault {#1} { anchor } {} }
-                  {
-                    \exp_not:V \l_@@_refpre_in_tl
-                    \zref@extractdefault {#1} { page } {}
-                    \exp_not:V \l_@@_refpos_in_tl
-                  }
-                \exp_not:N \group_end:
-                \exp_not:V \l_@@_refpos_out_tl
-                \exp_not:N \group_end:
-              }
-              {
-                \exp_not:N \group_begin:
-                \exp_not:V \l_@@_refpre_out_tl
-                \exp_not:N \group_begin:
                 \exp_not:V \l_@@_refpre_in_tl
-                \zref@extractdefault {#1} { page } {}
+                \zref@extractdefault {#1} { \l_@@_ref_property_tl } {}
                 \exp_not:V \l_@@_refpos_in_tl
-                \exp_not:N \group_end:
-                \exp_not:V \l_@@_refpos_out_tl
-                \exp_not:N \group_end:
               }
+            \exp_not:N \group_end:
+            \exp_not:V \l_@@_refpos_out_tl
+            \exp_not:N \group_end:
           }
-          { \exp_not:N \zref@default }
-      }
-      {
-        \zref@ifrefcontainsprop {#1} { zc@thecnt }
           {
-            \bool_if:nTF
-              { \l_@@_use_hyperref_bool && ! \l_@@_link_star_bool }
-              {
-                \exp_not:N \group_begin:
-                \exp_not:V \l_@@_refpre_out_tl
-                \exp_not:N \group_begin:
-                \exp_not:N \hyperlink
-                  { \zref@extractdefault {#1} { anchor } {} }
-                  {
-                    \exp_not:V \l_@@_refpre_in_tl
-                    \zref@extractdefault {#1} { zc@thecnt } {}
-                    \exp_not:V \l_@@_refpos_in_tl
-                  }
-                \exp_not:N \group_end:
-                \exp_not:V \l_@@_refpos_out_tl
-                \exp_not:N \group_end:
-              }
-              {
-                \exp_not:N \group_begin:
-                \exp_not:V \l_@@_refpre_out_tl
-                \exp_not:N \group_begin:
-                \exp_not:V \l_@@_refpre_in_tl
-                \zref@extractdefault {#1} { zc@thecnt } {}
-                \exp_not:V \l_@@_refpos_in_tl
-                \exp_not:N \group_end:
-                \exp_not:V \l_@@_refpos_out_tl
-                \exp_not:N \group_end:
-              }
+            \exp_not:N \group_begin:
+            \exp_not:V \l_@@_refpre_out_tl
+            \exp_not:N \group_begin:
+            \exp_not:V \l_@@_refpre_in_tl
+            \zref@extractdefault {#1} { \l_@@_ref_property_tl } {}
+            \exp_not:V \l_@@_refpos_in_tl
+            \exp_not:N \group_end:
+            \exp_not:V \l_@@_refpos_out_tl
+            \exp_not:N \group_end:
           }
-          { \exp_not:N \zref@default }
       }
+      { \exp_not:N \zref@default }
   }
 \cs_generate_variant:Nn \@@_get_ref:n { V }
 %    \end{macrocode}
@@ -2456,8 +2441,8 @@
                     }
                     {
                       \tl_clear:N \l_@@_type_name_tl
-                      \exp_args:Nnnx \msg_warning:nnn { zref-clever }
-                        { missing-name } { \l_@@_type_first_label_type_tl }
+                      \msg_warning:nnx { zref-clever } { missing-name }
+                        { \l_@@_type_first_label_type_tl }
                     }
                 }
 
@@ -2497,8 +2482,8 @@
                         }
                         {
                           \tl_clear:N \l_@@_type_name_tl
-                          \exp_args:Nnnx \msg_warning:nnn { zref-clever }
-                            { missing-name } { \l_@@_type_first_label_type_tl }
+                          \msg_warning:nnx { zref-clever } { missing-name }
+                            { \l_@@_type_first_label_type_tl }
                         }
                     }
                 }
@@ -2537,8 +2522,8 @@
                         }
                         {
                           \tl_clear:N \l_@@_type_name_tl
-                          \exp_args:Nnnx \msg_warning:nnn { zref-clever }
-                            { missing-name } { \l_@@_type_first_label_type_tl }
+                          \msg_warning:nnx { zref-clever } { missing-name }
+                            { \l_@@_type_first_label_type_tl }
                         }
                     }
                 }
@@ -2600,8 +2585,8 @@
                           }
                           {
                             \tl_clear:N \l_@@_type_name_tl
-                            \exp_args:Nnnx \msg_warning:nnn { zref-clever }
-                              { missing-name } { \l_@@_type_first_label_type_tl }
+                            \msg_warning:nnx { zref-clever } { missing-name }
+                              { \l_@@_type_first_label_type_tl }
                           }
                       }
                   }
@@ -2652,74 +2637,37 @@
       {
         \bool_if:NTF \l_@@_name_in_link_bool
           {
-            \bool_if:NTF \l_@@_page_ref_bool
+            \zref@ifrefcontainsprop
+              { \l_@@_type_first_label_tl } { \l_@@_ref_property_tl }
               {
-                \zref@ifrefcontainsprop
-                  { \l_@@_type_first_label_tl } { page }
+                \exp_not:N \hyperlink
                   {
-                    \exp_not:N \hyperlink
-                      {
-                        \zref@extractdefault
-                          { \l_@@_type_first_label_tl } { anchor } {}
-                      }
-                      {
-                        \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_type_name_tl
-                        \exp_not:N \group_end:
-                        \exp_not:V \l_@@_namesep_tl
-                        \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_refpre_out_tl
-                        \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_refpre_in_tl
-                        \zref@extractdefault
-                          { \l_@@_type_first_label_tl } { page } {}
-                        \exp_not:V \l_@@_refpos_in_tl
-                        \exp_not:N \group_end:
-                      }
-                    \exp_not:V \l_@@_refpos_out_tl
-                    \exp_not:N \group_end:
+                    \zref@extractdefault { \l_@@_type_first_label_tl }
+                      { anchor } {}
                   }
                   {
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_type_name_tl
                     \exp_not:N \group_end:
                     \exp_not:V \l_@@_namesep_tl
-                    \exp_not:N \zref@default
+                    \exp_not:N \group_begin:
+                    \exp_not:V \l_@@_refpre_out_tl
+                    \exp_not:N \group_begin:
+                    \exp_not:V \l_@@_refpre_in_tl
+                    \zref@extractdefault { \l_@@_type_first_label_tl }
+                      { \l_@@_ref_property_tl } {}
+                    \exp_not:V \l_@@_refpos_in_tl
+                    \exp_not:N \group_end:
                   }
+                \exp_not:V \l_@@_refpos_out_tl
+                \exp_not:N \group_end:
               }
               {
-                \zref@ifrefcontainsprop
-                  { \l_@@_type_first_label_tl } { zc@thecnt }
-                  {
-                    \exp_not:N \hyperlink
-                      {
-                        \zref@extractdefault
-                          { \l_@@_type_first_label_tl } { anchor } {}
-                      }
-                      {
-                        \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_type_name_tl
-                        \exp_not:N \group_end:
-                        \exp_not:V \l_@@_namesep_tl
-                        \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_refpre_out_tl
-                        \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_refpre_in_tl
-                        \zref@extractdefault
-                          { \l_@@_type_first_label_tl } { zc@thecnt } {}
-                        \exp_not:V \l_@@_refpos_in_tl
-                        \exp_not:N \group_end:
-                      }
-                    \exp_not:V \l_@@_refpos_out_tl
-                    \exp_not:N \group_end:
-                  }
-                  {
-                    \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_type_name_tl
-                    \exp_not:N \group_end:
-                    \exp_not:V \l_@@_namesep_tl
-                    \exp_not:N \zref@default
-                  }
+                \exp_not:N \group_begin:
+                \exp_not:V \l_@@_type_name_tl
+                \exp_not:N \group_end:
+                \exp_not:V \l_@@_namesep_tl
+                \exp_not:N \zref@default
               }
           }
           {
@@ -2734,93 +2682,47 @@
                 \exp_not:N \group_end:
                 \exp_not:V \l_@@_namesep_tl
               }
-            \bool_if:NTF \l_@@_page_ref_bool
+            \zref@ifrefcontainsprop
+              { \l_@@_type_first_label_tl } { \l_@@_ref_property_tl }
               {
-                \zref@ifrefcontainsprop
-                  { \l_@@_type_first_label_tl } { page }
+                \bool_if:nTF
                   {
-                    \bool_if:nTF
-                      {
-                        \l_@@_use_hyperref_bool &&
-                        ! \l_@@_link_star_bool
-                      }
-                      {
-                        \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_refpre_out_tl
-                        \exp_not:N \group_begin:
-                        \exp_not:N \hyperlink
-                          {
-                            \zref@extractdefault
-                              { \l_@@_type_first_label_tl } { anchor } {}
-                          }
-                          {
-                            \exp_not:V \l_@@_refpre_in_tl
-                            \zref@extractdefault
-                              { \l_@@_type_first_label_tl } { page } {}
-                            \exp_not:V \l_@@_refpos_in_tl
-                          }
-                        \exp_not:N \group_end:
-                        \exp_not:V \l_@@_refpos_out_tl
-                        \exp_not:N \group_end:
-                      }
-                      {
-                        \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_refpre_out_tl
-                        \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_refpre_in_tl
-                        \zref@extractdefault
-                          { \l_@@_type_first_label_tl } { page } {}
-                        \exp_not:V \l_@@_refpos_in_tl
-                        \exp_not:N \group_end:
-                        \exp_not:V \l_@@_refpos_out_tl
-                        \exp_not:N \group_end:
-                      }
+                    \l_@@_use_hyperref_bool &&
+                    ! \l_@@_link_star_bool
                   }
-                  { \exp_not:N \zref@default }
-              }
-              {
-                \zref@ifrefcontainsprop
-                  { \l_@@_type_first_label_tl } { zc@thecnt }
                   {
-                    \bool_if:nTF
+                    \exp_not:N \group_begin:
+                    \exp_not:V \l_@@_refpre_out_tl
+                    \exp_not:N \group_begin:
+                    \exp_not:N \hyperlink
                       {
-                        \l_@@_use_hyperref_bool &&
-                        ! \l_@@_link_star_bool
+                        \zref@extractdefault { \l_@@_type_first_label_tl }
+                          { anchor } {}
                       }
                       {
-                        \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_refpre_out_tl
-                        \exp_not:N \group_begin:
-                        \exp_not:N \hyperlink
-                          {
-                            \zref@extractdefault
-                              { \l_@@_type_first_label_tl } { anchor } {}
-                          }
-                          {
-                            \exp_not:V \l_@@_refpre_in_tl
-                            \zref@extractdefault
-                              { \l_@@_type_first_label_tl } { zc@thecnt } {}
-                            \exp_not:V \l_@@_refpos_in_tl
-                          }
-                        \exp_not:N \group_end:
-                        \exp_not:V \l_@@_refpos_out_tl
-                        \exp_not:N \group_end:
-                      }
-                      {
-                        \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_refpre_out_tl
-                        \exp_not:N \group_begin:
                         \exp_not:V \l_@@_refpre_in_tl
-                        \zref@extractdefault
-                          { \l_@@_type_first_label_tl } { zc@thecnt } {}
+                        \zref@extractdefault { \l_@@_type_first_label_tl }
+                          { \l_@@_ref_property_tl } {}
                         \exp_not:V \l_@@_refpos_in_tl
-                        \exp_not:N \group_end:
-                        \exp_not:V \l_@@_refpos_out_tl
-                        \exp_not:N \group_end:
                       }
+                    \exp_not:N \group_end:
+                    \exp_not:V \l_@@_refpos_out_tl
+                    \exp_not:N \group_end:
                   }
-                  { \exp_not:N \zref@default }
+                  {
+                    \exp_not:N \group_begin:
+                    \exp_not:V \l_@@_refpre_out_tl
+                    \exp_not:N \group_begin:
+                    \exp_not:V \l_@@_refpre_in_tl
+                    \zref@extractdefault { \l_@@_type_first_label_tl }
+                      { \l_@@_ref_property_tl } {}
+                    \exp_not:V \l_@@_refpos_in_tl
+                    \exp_not:N \group_end:
+                    \exp_not:V \l_@@_refpos_out_tl
+                    \exp_not:N \group_end:
+                  }
               }
+              { \exp_not:N \zref@default }
           }
       }
   }
@@ -3027,15 +2929,22 @@
               }
           }
 
-        % Handle errors in case of reference or type undefined.
+        % Handle warnings in case of reference or type undefined.
         \zref@refused { \l_@@_label_a_tl }
         \zref@ifrefundefined { \l_@@_label_a_tl }
           {}
           {
+            \zref@ifrefcontainsprop
+              { \l_@@_label_a_tl } { \l_@@_ref_property_tl }
+              { }
+              {
+                \msg_warning:nnxx { zref-clever } { missing-property }
+                  { \l_@@_ref_property_tl } { \l_@@_label_a_tl }
+              }
             \tl_if_empty:NT \l_@@_label_type_a_tl
               {
-                \exp_args:Nnnx \msg_warning:nnn { zref-clever }
-                  { missing-type } { \l_@@_label_a_tl }
+                \msg_warning:nnx { zref-clever } { missing-type }
+                  { \l_@@_label_a_tl }
               }
           }
 
@@ -3430,7 +3339,11 @@
   }
 
 
-
+\msg_new:nnn { zref-clever } { missing-property }
+  {
+    Property~'#1'~not~available~for~label~'#2' \iow_newline:
+    on~input~line~\msg_line_number:.
+  }
 \msg_new:nnn { zref-clever } { missing-type }
   {
     Reference~type~undefined~for~label~'#1' \iow_newline:
