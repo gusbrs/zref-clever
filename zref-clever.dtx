@@ -1598,6 +1598,7 @@
           {
             \tl_new:N \l_@@_main_language_tl
             \tl_set:Nn \l_@@_main_language_tl { english }
+            \UseHook { zref-clever / reflanguage }
           }
       }
   }
@@ -2329,7 +2330,17 @@
             \exp_not:N \group_begin:
             \exp_not:V \l_@@_refpre_out_tl
             \exp_not:N \group_begin:
-            \exp_not:N \hyperlink
+            % It's two '@s', but escaped for DocStrip.
+            \exp_not:N \hyper@@@@link
+              {
+                \zref@ifrefcontainsprop {#1} { urluse }
+                  {
+                    \zref@extractdefault {#1} { urluse } {}
+                  }
+                  {
+                    \zref@extractdefault {#1} { url } {}
+                  }
+              }
               { \zref@extractdefault {#1} { anchor } {} }
               {
                 \exp_not:V \l_@@_refpre_in_tl
@@ -2640,7 +2651,20 @@
             \zref@ifrefcontainsprop
               { \l_@@_type_first_label_tl } { \l_@@_ref_property_tl }
               {
-                \exp_not:N \hyperlink
+                % It's two '@s', but escaped for DocStrip.
+                \exp_not:N \hyper@@@@link
+                  {
+                    \zref@ifrefcontainsprop
+                      { \l_@@_type_first_label_tl } { urluse }
+                      {
+                        \zref@extractdefault { \l_@@_type_first_label_tl }
+                          { urluse } {}
+                      }
+                      {
+                        \zref@extractdefault { \l_@@_type_first_label_tl }
+                          { url } {}
+                      }
+                  }
                   {
                     \zref@extractdefault { \l_@@_type_first_label_tl }
                       { anchor } {}
@@ -2694,7 +2718,20 @@
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_refpre_out_tl
                     \exp_not:N \group_begin:
-                    \exp_not:N \hyperlink
+                    % It's two '@s', but escaped for DocStrip.
+                    \exp_not:N \hyper@@@@link
+                      {
+                        \zref@ifrefcontainsprop
+                          { \l_@@_type_first_label_tl } { urluse }
+                          {
+                            \zref@extractdefault { \l_@@_type_first_label_tl }
+                              { urluse } {}
+                          }
+                          {
+                            \zref@extractdefault { \l_@@_type_first_label_tl }
+                              { url } {}
+                          }
+                      }
                       {
                         \zref@extractdefault { \l_@@_type_first_label_tl }
                           { anchor } {}
@@ -3119,7 +3156,20 @@
               \bool_if:NTF \l_@@_name_in_link_bool
                 {
                   \exp_not:N \group_begin:
-                  \exp_not:N \hyperlink
+                  % It's two '@s', but escaped for DocStrip.
+                  \exp_not:N \hyper@@@@link
+                    {
+                      \zref@ifrefcontainsprop
+                        { \l_@@_type_first_label_tl } { urluse }
+                        {
+                          \zref@extractdefault { \l_@@_type_first_label_tl }
+                            { urluse } {}
+                        }
+                        {
+                          \zref@extractdefault { \l_@@_type_first_label_tl }
+                            { url } {}
+                        }
+                    }
                     {
                       \zref@extractdefault
                         { \l_@@_type_first_label_tl } { anchor } {}
