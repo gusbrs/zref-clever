@@ -175,7 +175,7 @@
 % `ltcounts.dtx' in `source2e').  Besides, there may be a chain of resetting
 % counters, which must be taken into account.  The procedure below examines a
 % set of counters, those included in \cs{l_@@_counter_resetters_seq}, and for
-% each counter retrieves its ``within-counters'' recursively.  There is one
+% each counter retrieves its ``enclosing counters'' recursively.  There is one
 % relevant caveat to this procedure: \cs{l_@@_counter_resetters_seq} is
 % populated by hand with the ``usual suspects'', there is no way (that I know
 % of) to ensure it is exhaustive.  However, it is not that difficult to create
@@ -185,10 +185,10 @@
 %
 % \begin{macro}[EXP]
 %   {
-%     \@@_get_within_counters:n,
-%     \@@_get_within_counters_value:n
+%     \@@_get_enclosing_counters:n,
+%     \@@_get_enclosing_counters_value:n
 %   }
-% Recursively generate a \emph{sequence} of ``within-counters'' and values,
+% Recursively generate a \emph{sequence} of ``enclosing counters'' and values,
 % for a given \Arg{counter} and leave it in the input stream.  These functions
 % must be expandable, since they get called from \cs{zref@newprop} and are the
 % ones responsible for generating the desired information when the label is
@@ -197,21 +197,21 @@
 % is very hard to do otherwise here where we need expandable functions, and
 % easy to handle at the reading side.
 %    \begin{macrocode}
-\cs_new:Npn \@@_get_within_counters:n #1
+\cs_new:Npn \@@_get_enclosing_counters:n #1
   {
     \cs_if_exist:cT { c@ \@@_counter_reset_by:n {#1} }
       {
         { \@@_counter_reset_by:n {#1} }
-        \@@_get_within_counters:e
+        \@@_get_enclosing_counters:e
           { \@@_counter_reset_by:n {#1} }
       }
   }
-\cs_new:Npn \@@_get_within_counters_value:n #1
+\cs_new:Npn \@@_get_enclosing_counters_value:n #1
   {
     \cs_if_exist:cT { c@ \@@_counter_reset_by:n {#1} }
       {
         { \int_use:N \cs:w c@ \@@_counter_reset_by:n {#1} \cs_end: }
-        \@@_get_within_counters_value:e
+        \@@_get_enclosing_counters_value:e
           { \@@_counter_reset_by:n {#1} }
       }
   }
@@ -224,22 +224,22 @@
 % also \url{https://tex.stackexchange.com/q/611370/#comment1529282_611385},
 % thanks Enrico Gregorio, aka `egreg').
 %    \begin{macrocode}
-\cs_generate_variant:Nn \@@_get_within_counters:n { o , e }
-\cs_generate_variant:Nn \@@_get_within_counters_value:n { o , e }
+\cs_generate_variant:Nn \@@_get_enclosing_counters:n { V , e }
+\cs_generate_variant:Nn \@@_get_enclosing_counters_value:n { V , e }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}[EXP]
 %   {
 %     \@@_counter_reset_by:n,
-%     \@@_counter_within:nn,
-%     \@@_counter_within_aux:nnn
+%     \@@_counter_reset_by_aux:nn,
+%     \@@_counter_reset_by_auxi:nnn
 %   }
-% Auxiliary functions for \cs{@@_get_within_counters:n} and
-% \cs{@@_get_within_counters_value:n}.  They are broken in parts to be able to
-% use the expandable mapping functions.  In particular
-% \cs{@@_counter_reset_by:n} leaves in the stream the ``within-counter'' which
-% resets \Arg{counter}.
+% Auxiliary functions for \cs{@@_get_enclosing_counters:n} and
+% \cs{@@_get_enclosing_counters_value:n}.  They are broken in parts to be able
+% to use the expandable mapping functions.  In particular
+% \cs{@@_counter_reset_by:n} leaves in the stream the ``enclosing counter''
+% which resets \Arg{counter}.
 %    \begin{macrocode}
 \cs_new:Npn \@@_counter_reset_by:n #1
   {
@@ -248,21 +248,21 @@
       { \prop_item:Nn  \l_@@_counter_resetby_prop {#1} }
       {
         \seq_map_tokens:Nn \l_@@_counter_resetters_seq
-          { \@@_counter_within:nn {#1} }
+          { \@@_counter_reset_by_aux:nn {#1} }
       }
   }
-\cs_new:Npn \@@_counter_within:nn #1#2
+\cs_new:Npn \@@_counter_reset_by_aux:nn #1#2
   {
     \cs_if_exist:cT { c@ #2 }
       {
         \tl_if_empty:cF { cl@ #2 }
           {
             \tl_map_tokens:cn { cl@ #2 }
-              { \@@_counter_within_aux:nnn {#2} {#1} }
+              { \@@_counter_reset_by_auxi:nnn {#2} {#1} }
           }
       }
   }
-\cs_new:Npn \@@_counter_within_aux:nnn #1#2#3
+\cs_new:Npn \@@_counter_reset_by_auxi:nnn #1#2#3
   {
     \str_if_eq:nnT {#2} {#3}
       { \tl_map_break:n { \seq_map_break:n {#1} } }
@@ -270,15 +270,15 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% Finally, add \texttt{zc@withincnt} and \texttt{zc@withinval} to \pkg{zref}'s
+% Finally, add \texttt{zc@enclcnt} and \texttt{zc@enclval} to \pkg{zref}'s
 % \texttt{main} property list.
 %    \begin{macrocode}
-\zref@newprop { zc@withincnt }
-  { \@@_get_within_counters:o { \@currentcounter } }
-\zref@newprop { zc@withinval }
-  { \@@_get_within_counters_value:o { \@currentcounter } }
-\zref@addprop \ZREF@mainlist { zc@withincnt }
-\zref@addprop \ZREF@mainlist { zc@withinval }
+\zref@newprop { zc@enclcnt }
+  { \@@_get_enclosing_counters:V \@currentcounter }
+\zref@newprop { zc@enclval }
+  { \@@_get_enclosing_counters_value:V \@currentcounter }
+\zref@addprop \ZREF@mainlist { zc@enclcnt }
+\zref@addprop \ZREF@mainlist { zc@enclval }
 %    \end{macrocode}
 %
 %
@@ -290,30 +290,31 @@
 % face trouble with the expandable version.  The procedure here examines a set
 % of counters, those included in \cs{g_@@_resetters_seq}, and for each counter
 % each of those reset, defines a \texttt{tl} variable with name
-% \cs{g_@@_counter_\meta{counter}_within_tl} storing the value of its
-% ``within-counter''.  These \texttt{tl} variables are then used by
-% \cs{@@_get_within_counters_value_old:n} to store the desired information
+% \cs{g_@@_counter_\meta{counter}_enclosing_tl} storing the value of its
+% ``enclosing counter''.  These \texttt{tl} variables are then used by
+% \cs{@@_get_enclosing_counters_value_old:n} to store the desired information
 % when the label is actually set.
 % \begin{verbatim}
-% \cs_new:Npn \@@_get_within_counters_value_old:n #1
+% \cs_new:Npn \@@_get_enclosing_counters_value_old:n #1
 %   {
 %     \bool_lazy_and:nnT
-%       { \tl_if_exist_p:c { g_@@_counter_ \tl_use:N #1 _within_tl } }
+%       { \tl_if_exist_p:c { g_@@_counter_ \tl_use:N #1 _enclosing_tl } }
 %       {
 %         \cs_if_exist_p:c
-%           { c@ \use:c { g_@@_counter_ \tl_use:N #1 _within_tl } }
+%           { c@ \use:c { g_@@_counter_ \tl_use:N #1 _enclosing_tl } }
 %       }
 %       {
-%         { \int_use:c { c@ \use:c { g_@@_counter_ \tl_use:N #1 _within_tl } } }
-%         \@@_get_within_counters_value_old:n
-%           { \use:c { g_@@_counter_ \tl_use:N #1 _within_tl } }
+%         { \int_use:c { c@ \use:c { g_@@_counter_ \tl_use:N #1 _enclosing_tl } } }
+%         \@@_get_enclosing_counters_value_old:n
+%           { \use:c { g_@@_counter_ \tl_use:N #1 _enclosing_tl } }
 %       }
 %   }
 % \end{verbatim}
 % Map through \cs{g_@@_resetters_seq} defining \texttt{tl} variables storing,
-% for each counter that may be reset, the ``within-counter'' which may do so.
+% for each counter that may be reset, the ``enclosing counter'' which may do
+% so.
 % \begin{verbatim}
-% \cs_new:Npn \@@_set_within_counters:
+% \cs_new:Npn \@@_set_enclosing_counters:
 %   {
 %     \group_begin:
 %       \seq_map_inline:Nn \g_@@_resetters_seq
@@ -322,8 +323,8 @@
 %             {
 %               \cs_set:Npn \@@_elt_aux:n ####1
 %                 {
-%                   \tl_if_exist:cF { g_@@_counter_ ####1 _within_tl }
-%                     { \tl_gset:cx { g_@@_counter_ ####1 _within_tl } {##1} }
+%                   \tl_if_exist:cF { g_@@_counter_ ####1 _enclosing_tl }
+%                     { \tl_gset:cx { g_@@_counter_ ####1 _enclosing_tl } {##1} }
 %                 }
 %               \cs_set_eq:NN \@elt \@@_elt_aux:n
 %               \use:c { cl@ ##1 }
@@ -334,7 +335,7 @@
 % \end{verbatim}
 % And run it at \texttt{begindocument}.
 % \begin{verbatim}
-% \AddToHook { begindocument } { \@@_set_within_counters: }
+% \AddToHook { begindocument } { \@@_set_enclosing_counters: }
 % \end{verbatim}
 %
 %
@@ -421,7 +422,7 @@
 % point we could only check existing counters, and they may be defined
 % ``later'' or ``never'', the counter reset chain must be stored (names and
 % values) with the label itself (this is done in properties
-% \texttt{zc@withincnt} and \texttt{zc@withinval}).
+% \texttt{zc@enclcnt} and \texttt{zc@enclval}).
 %
 %
 % There are also cases in which we may want to use different \emph{reference
@@ -827,8 +828,8 @@
 % \subsubsection*{\opt{counterresetters} option}
 %
 % \begin{variable}{\l_@@_counter_resetters_seq}
-%   Stores the list of counters with potential ``within-counters'' for other
-%   counters.
+%   Stores the list of counters which are potential ``enclosing counters'' for
+%   other counters.
 %    \begin{macrocode}
 \seq_new:N \l_@@_counter_resetters_seq
 %    \end{macrocode}
@@ -1461,10 +1462,10 @@
 %     \l_@@_label_b_tl ,
 %     \l_@@_label_type_a_tl ,
 %     \l_@@_label_type_b_tl ,
-%     \l_@@_label_withincnt_a_tl ,
-%     \l_@@_label_withincnt_b_tl ,
-%     \l_@@_label_withinval_a_tl ,
-%     \l_@@_label_withinval_b_tl
+%     \l_@@_label_enclcnt_a_tl ,
+%     \l_@@_label_enclcnt_b_tl ,
+%     \l_@@_label_enclval_a_tl ,
+%     \l_@@_label_enclval_b_tl
 %   }
 % Aux variables, for use in sorting and typesetting.  I could probably let go
 % some of them in favor of \texttt{tmpa}/\texttt{tmpb}, but they do improve
@@ -1474,10 +1475,10 @@
 \tl_new:N \l_@@_label_b_tl
 \tl_new:N \l_@@_label_type_a_tl
 \tl_new:N \l_@@_label_type_b_tl
-\tl_new:N \l_@@_label_withincnt_a_tl
-\tl_new:N \l_@@_label_withincnt_b_tl
-\tl_new:N \l_@@_label_withinval_a_tl
-\tl_new:N \l_@@_label_withinval_b_tl
+\tl_new:N \l_@@_label_enclcnt_a_tl
+\tl_new:N \l_@@_label_enclcnt_b_tl
+\tl_new:N \l_@@_label_enclval_a_tl
+\tl_new:N \l_@@_label_enclval_b_tl
 %    \end{macrocode}
 % \end{variable}
 %
@@ -1649,22 +1650,22 @@
 %    \end{macrocode}
 % \dots{} and it's the same type.
 %    \begin{macrocode}
-              \tl_set:Nx \l_@@_label_withincnt_a_tl
-                { \zref@extractdefault {#1} { zc@withincnt } { \c_empty_tl } }
-              \tl_set:Nx \l_@@_label_withincnt_a_tl
-                { \tl_reverse_items:V \l_@@_label_withincnt_a_tl }
-              \tl_set:Nx \l_@@_label_withincnt_b_tl
-                { \zref@extractdefault {#2} { zc@withincnt } { \c_empty_tl } }
-              \tl_set:Nx \l_@@_label_withincnt_b_tl
-                { \tl_reverse_items:V \l_@@_label_withincnt_b_tl }
-              \tl_set:Nx \l_@@_label_withinval_a_tl
-                { \zref@extractdefault {#1} { zc@withinval } { \c_empty_tl } }
-              \tl_set:Nx \l_@@_label_withinval_a_tl
-                { \tl_reverse_items:V \l_@@_label_withinval_a_tl }
-              \tl_set:Nx \l_@@_label_withinval_b_tl
-                { \zref@extractdefault {#2} { zc@withinval } { \c_empty_tl } }
-              \tl_set:Nx \l_@@_label_withinval_b_tl
-                { \tl_reverse_items:V \l_@@_label_withinval_b_tl }
+              \tl_set:Nx \l_@@_label_enclcnt_a_tl
+                { \zref@extractdefault {#1} { zc@enclcnt } { \c_empty_tl } }
+              \tl_set:Nx \l_@@_label_enclcnt_a_tl
+                { \tl_reverse_items:V \l_@@_label_enclcnt_a_tl }
+              \tl_set:Nx \l_@@_label_enclcnt_b_tl
+                { \zref@extractdefault {#2} { zc@enclcnt } { \c_empty_tl } }
+              \tl_set:Nx \l_@@_label_enclcnt_b_tl
+                { \tl_reverse_items:V \l_@@_label_enclcnt_b_tl }
+              \tl_set:Nx \l_@@_label_enclval_a_tl
+                { \zref@extractdefault {#1} { zc@enclval } { \c_empty_tl } }
+              \tl_set:Nx \l_@@_label_enclval_a_tl
+                { \tl_reverse_items:V \l_@@_label_enclval_a_tl }
+              \tl_set:Nx \l_@@_label_enclval_b_tl
+                { \zref@extractdefault {#2} { zc@enclval } { \c_empty_tl } }
+              \tl_set:Nx \l_@@_label_enclval_b_tl
+                { \tl_reverse_items:V \l_@@_label_enclval_b_tl }
 
               \bool_set_false:N \l_@@_sort_decided_bool
               % CHECK should I replace the tmp variables here?
@@ -1673,14 +1674,14 @@
               \bool_until_do:Nn \l_@@_sort_decided_bool
                 {
                   \tl_set:Nx \l_tmpa_tl
-                    { \tl_head:N \l_@@_label_withincnt_a_tl }
+                    { \tl_head:N \l_@@_label_enclcnt_a_tl }
                   \tl_set:Nx \l_tmpb_tl
-                    { \tl_head:N \l_@@_label_withincnt_b_tl }
+                    { \tl_head:N \l_@@_label_enclcnt_b_tl }
 
                   \bool_case_true:nF
                     {
                       % Both are empty, meaning: neither labels have any
-                      % (further) ``within counters'' (left).
+                      % (further) ``enclosing counters'' (left).
                       {
                         \tl_if_empty_p:V \l_tmpa_tl &&
                         \tl_if_empty_p:V \l_tmpb_tl
@@ -1713,7 +1714,7 @@
                         \tl_set:Nx \l_tmpa_tl
                           { {\zref@extractdefault {#1} { zc@counter } { }} }
                         \exp_args:NNx \tl_if_in:NnTF
-                          \l_@@_label_withincnt_b_tl { \l_tmpa_tl }
+                          \l_@@_label_enclcnt_b_tl { \l_tmpa_tl }
                           {
                             \bool_set_true:N \l_@@_sort_decided_bool
                             \sort_return_same:
@@ -1733,7 +1734,7 @@
                         \tl_set:Nx \l_tmpb_tl
                           { {\zref@extractdefault {#2} { zc@counter } { }} }
                         \exp_args:NNx \tl_if_in:NnTF
-                          \l_@@_label_withincnt_a_tl { \l_tmpb_tl }
+                          \l_@@_label_enclcnt_a_tl { \l_tmpb_tl }
                           {
                             \bool_set_true:N \l_@@_sort_decided_bool
                             \sort_return_swapped:
@@ -1748,32 +1749,32 @@
                     }
                     % None of the above matched, hence neither is empty,
                     % meaning: we can (possibly) compare the values of the
-                    % current within counter in the loop, if they are equal,
-                    % we are still in the loop, if they are not, a sorting
-                    % decision can be made directly.
+                    % current enclosing counter in the loop, if they are
+                    % equal, we are still in the loop, if they are not, a
+                    % sorting decision can be made directly.
                     {
                       \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
                         {
                           \int_compare:nNnTF
-                            { \tl_head:N \l_@@_label_withinval_a_tl }
+                            { \tl_head:N \l_@@_label_enclval_a_tl }
                               =
-                            { \tl_head:N \l_@@_label_withinval_b_tl }
+                            { \tl_head:N \l_@@_label_enclval_b_tl }
                             {
-                              \tl_set:Nx \l_@@_label_withincnt_a_tl
-                                { \tl_tail:N \l_@@_label_withincnt_a_tl }
-                              \tl_set:Nx \l_@@_label_withincnt_b_tl
-                                { \tl_tail:N \l_@@_label_withincnt_b_tl }
-                              \tl_set:Nx \l_@@_label_withinval_a_tl
-                                { \tl_tail:N \l_@@_label_withinval_a_tl }
-                              \tl_set:Nx \l_@@_label_withinval_b_tl
-                                { \tl_tail:N \l_@@_label_withinval_b_tl }
+                              \tl_set:Nx \l_@@_label_enclcnt_a_tl
+                                { \tl_tail:N \l_@@_label_enclcnt_a_tl }
+                              \tl_set:Nx \l_@@_label_enclcnt_b_tl
+                                { \tl_tail:N \l_@@_label_enclcnt_b_tl }
+                              \tl_set:Nx \l_@@_label_enclval_a_tl
+                                { \tl_tail:N \l_@@_label_enclval_a_tl }
+                              \tl_set:Nx \l_@@_label_enclval_b_tl
+                                { \tl_tail:N \l_@@_label_enclval_b_tl }
                             }
                             {
                               \bool_set_true:N \l_@@_sort_decided_bool
                               \int_compare:nNnTF
-                                { \tl_head:N \l_@@_label_withinval_a_tl }
+                                { \tl_head:N \l_@@_label_enclval_a_tl }
                                   >
-                                { \tl_head:N \l_@@_label_withinval_b_tl }
+                                { \tl_head:N \l_@@_label_enclval_b_tl }
                                 { \sort_return_swapped: }
                                 { \sort_return_same:    }
                             }
@@ -2604,8 +2605,8 @@
           { \zref@extractdefault {#2} { zc@counter } { } }
           {
             \exp_args:Nxx \tl_if_eq:nnT
-              { \zref@extractdefault {#1} { zc@withinval } { } }
-              { \zref@extractdefault {#2} { zc@withinval } { } }
+              { \zref@extractdefault {#1} { zc@enclval } { } }
+              { \zref@extractdefault {#2} { zc@enclval } { } }
               {
                 \int_compare:nNnTF
                   { \zref@extractdefault {#1} { zc@cntval } {-2} + 1 }
