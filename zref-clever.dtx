@@ -518,7 +518,7 @@
 \cs_generate_variant:Nn \@@_get_translation_for:nnn { nxx }
 \cs_new_protected:Npn \@@_declare_translation:nnn #1#2#3
   { \declaretranslation {#1} {#2} {#3} }
-\cs_generate_variant:Nn \@@_declare_translation:nnn { xxn , xnn }
+\cs_generate_variant:Nn \@@_declare_translation:nnn { xxx , xxn , xnn }
 %    \end{macrocode}
 %
 %
@@ -562,10 +562,131 @@
           { \tl_set:Nn \l_@@_setup_language_tl {#1} }
       } ,
     lang .value_required:n = true ,
+
+    % A special convenience ``short'' way to set name strings.
+    % Necessarily type-specific strings.
+    name .code:n =
+      {
+        \int_case:nnF { \clist_count:n {#1} }
+          {
+            { 2 }
+            {
+              \clist_map_inline:nn
+                {
+                  name-sg ,
+                  Name-sg ,
+                  name-ab-sg ,
+                  Name-ab-sg ,
+                }
+                {
+                  \tl_if_empty:NTF \l_@@_setup_language_tl
+                    {
+                      \prop_put:cnx
+                        { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                        { ##1 } { \clist_item:nn {#1} { 1 } }
+                    }
+                    {
+                      \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                        { zrefclever-type- \l_@@_setup_type_tl - ##1 }
+                        { \clist_item:nn {#1} { 1 } }
+                    }
+                }
+              \clist_map_inline:nn
+                {
+                  name-pl ,
+                  Name-pl ,
+                  name-ab-pl ,
+                  Name-ab-pl ,
+                }
+                {
+                  \tl_if_empty:NTF \l_@@_setup_language_tl
+                    {
+                      \prop_put:cnx
+                        { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                        { ##1 } { \clist_item:nn {#1} { 2 } }
+                    }
+                    {
+                      \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                        { zrefclever-type- \l_@@_setup_type_tl - ##1 }
+                        { \clist_item:nn {#1} { 2 } }
+                    }
+                }
+            }
+
+            { 4 }
+            {
+              \tl_if_empty:NTF \l_@@_setup_language_tl
+                {
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                    { name-sg } { \clist_item:nn {#1} { 1 } }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                    { name-ab-sg } { \clist_item:nn {#1} { 1 } }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                    { name-pl } { \clist_item:nn {#1} { 2 } }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                    { name-ab-pl } { \clist_item:nn {#1} { 2 } }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                    { Name-sg } { \clist_item:nn {#1} { 3 } }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                    { Name-ab-sg } { \clist_item:nn {#1} { 3 } }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                    { Name-pl } { \clist_item:nn {#1} { 4 } }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                    { Name-ab-pl } { \clist_item:nn {#1} { 4 } }
+                }
+                {
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -name-sg }
+                    { \clist_item:nn {#1} { 1 } }
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -name-ab-sg }
+                    { \clist_item:nn {#1} { 1 } }
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -name-pl }
+                    { \clist_item:nn {#1} { 2 } }
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -name-ab-pl }
+                    { \clist_item:nn {#1} { 2 } }
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -Name-sg }
+                    { \clist_item:nn {#1} { 3 } }
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -Name-ab-sg }
+                    { \clist_item:nn {#1} { 3 } }
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -Name-pl }
+                    { \clist_item:nn {#1} { 4 } }
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -Name-ab-pl }
+                    { \clist_item:nn {#1} { 4 } }
+                }
+            }
+          }
+          {
+            \msg_warning:nnx { zref-clever } { type-name-length }
+              { \clist_count:n {#1} }
+          }
+      } ,
+    name .value_required:n = true ,
   }
+\msg_new:nnn { zref-clever } { type-name-length }
+  {
+    Type~'name'~can~only~receive~2~or~4~values~on~input~line~\msg_line_number:.~
+    Don't~know~what~to~do~with~#1.
+  }
+
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+
 
 % Not type-specific strings.
 \clist_map_inline:nn
@@ -599,14 +720,14 @@
     refpre-in ,
     refpos-in ,
     % Necessarily type-specific strings.
-    name ,
+    name-sg ,
     name-pl ,
-    Name ,
+    Name-sg ,
     Name-pl ,
-    name-abbrev ,
-    name-abbrev-pl ,
-    Name-abbrev ,
-    Name-abbrev-pl ,
+    name-ab-sg ,
+    name-ab-pl ,
+    Name-ab-sg ,
+    Name-ab-pl ,
   }
   {
     \keys_define:nn { zref-clever / typesetup }
@@ -619,7 +740,6 @@
                 \prop_put:cnn
                   { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
                   { #1 } {##1}
-                \prop_show:c { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
               }
               {
                 \@@_declare_translation:xxn { \l_@@_setup_language_tl }
@@ -631,7 +751,7 @@
 
 \msg_new:nnn { zref-clever } { string-not-type-specific }
   {
-    String~'#1'~is~not~type-specific~on~input~line\msg_line_number:.~
+    String~'#1'~is~not~type-specific~on~input~line~\msg_line_number:.~
     Set~it~in~'\exp_not:N \zcDeclareRefStrings'~before~first~'type'~switch.
   }
 
@@ -735,14 +855,14 @@
 % Necessarily type-specific strings.
 \clist_map_inline:nn
   {
-    name ,
+    name-sg ,
     name-pl ,
-    Name ,
+    Name-sg ,
     Name-pl ,
-    name-abbrev ,
-    name-abbrev-pl ,
-    Name-abbrev ,
-    Name-abbrev-pl ,
+    name-ab-sg ,
+    name-ab-pl ,
+    Name-ab-sg ,
+    Name-ab-pl ,
   }
   {
     \keys_define:nn { zref-clever / refstrings }
@@ -1035,10 +1155,10 @@
 %
 % User option, sort labels ranges or not
 %    \begin{macrocode}
-\bool_new:N \l_@@_sort_bool
+\bool_new:N \l_@@_typeset_sort_bool
 \keys_define:nn { zref-clever }
   {
-    sort .bool_set:N = \l_@@_sort_bool ,
+    sort .bool_set:N = \l_@@_typeset_sort_bool ,
     sort .initial:n = true ,
     sort .default:n = true ,
     nosort .meta:n = { sort = false },
@@ -1076,10 +1196,10 @@
 %
 % User option, compress ranges or not
 %    \begin{macrocode}
-\bool_new:N \l_@@_compress_bool
+\bool_new:N \l_@@_typeset_compress_bool
 \keys_define:nn { zref-clever }
   {
-    comp .bool_set:N = \l_@@_compress_bool ,
+    comp .bool_set:N = \l_@@_typeset_compress_bool ,
     comp .initial:n = true ,
     comp .default:n = true ,
     nocomp .meta:n = { comp = false },
@@ -1087,6 +1207,18 @@
   }
 %    \end{macrocode}
 %
+%
+% \subsubsection*{\opt{range} option}
+%
+%    \begin{macrocode}
+\bool_new:N \l_@@_typeset_range_bool
+\keys_define:nn { zref-clever }
+  {
+    range .bool_set:N = \l_@@_typeset_range_bool ,
+    range .initial:n = false ,
+    range .default:n = true ,
+  }
+%    \end{macrocode}
 %
 %
 %
@@ -1166,9 +1298,9 @@
       { \str_set:Nn \l_@@_nameinlink_str { false } } ,
     nameinlink / single .code:n =
       { \str_set:Nn \l_@@_nameinlink_str { single } } ,
-    nameinlink / singleintype .code:n =
-      { \str_set:Nn \l_@@_nameinlink_str { singleintype } } ,
-    nameinlink .initial:n = singleintype ,
+    nameinlink / tsingle .code:n =
+      { \str_set:Nn \l_@@_nameinlink_str { tsingle } } ,
+    nameinlink .initial:n = tsingle ,
     nameinlink .default:n = true ,
   }
 %    \end{macrocode}
@@ -1425,7 +1557,9 @@
       \keys_set:nn { zref-clever } {#3}
       \seq_set_from_clist:Nn \l_@@_zcref_labels_seq {#1}
       \bool_set:Nn \l_@@_link_star_bool {#2}
-      \bool_if:NT \l_@@_sort_bool
+      \bool_lazy_or:nnT
+        { \l_@@_typeset_sort_bool }
+        { \l_@@_typeset_range_bool }
         { \@@_sort_labels: }
       \@@_typeset_refs:
     \group_end:
@@ -2151,9 +2285,9 @@
           {
             \tl_if_empty:NTF \l_@@_typeset_queue_curr_tl
               % Singular
-              { \tl_clear:N \l_@@_name_maybe_plural_tl }
+              { \tl_set:Nn \l_@@_name_maybe_plural_tl { -sg } }
               % Plural
-              { \tl_set:Nn \l_@@_name_maybe_plural_tl {-pl} }
+              { \tl_set:Nn \l_@@_name_maybe_plural_tl { -pl } }
 
             \bool_case_true:nF
               {
@@ -2237,24 +2371,24 @@
 
                 { ! \l_@@_name_capitalize_bool } % but abbrev
                 {
-                  % name-abbrev(-pl)
+                  % name-ab(-pl)
                   \prop_get:cxNF
                     { l_@@_type_ \l_@@_type_first_label_type_tl _strings_prop }
-                    { name-abbrev \l_@@_name_maybe_plural_tl }
+                    { name-ab \l_@@_name_maybe_plural_tl }
                     \l_@@_type_name_tl
                     {
                       \@@_if_translation:xxTF
                         { \l_@@_ref_language_tl }
                         {
                           zrefclever-type- \l_@@_type_first_label_type_tl
-                          -name-abbrev \l_@@_name_maybe_plural_tl
+                          -name-ab \l_@@_name_maybe_plural_tl
                         }
                         {
                           \@@_get_translation_for:nxx { \l_@@_type_name_tl }
                             { \l_@@_ref_language_tl }
                             {
                               zrefclever-type- \l_@@_type_first_label_type_tl
-                              -name-abbrev \l_@@_name_maybe_plural_tl
+                              -name-ab \l_@@_name_maybe_plural_tl
                             }
                         }
                         {
@@ -2282,24 +2416,24 @@
                 }
               }
               {
-                % Name-abbrev(-pl)
+                % Name-ab(-pl)
                 \prop_get:cxNF
                   { l_@@_type_ \l_@@_type_first_label_type_tl _strings_prop }
-                  { Name-abbrev \l_@@_name_maybe_plural_tl }
+                  { Name-ab \l_@@_name_maybe_plural_tl }
                   \l_@@_type_name_tl
                   {
                     \@@_if_translation:xxTF
                       { \l_@@_ref_language_tl }
                       {
                         zrefclever-type- \l_@@_type_first_label_type_tl
-                        -Name-abbrev \l_@@_name_maybe_plural_tl
+                        -Name-ab \l_@@_name_maybe_plural_tl
                       }
                       {
                         \@@_get_translation_for:nxx { \l_@@_type_name_tl }
                           { \l_@@_ref_language_tl }
                           {
                             zrefclever-type- \l_@@_type_first_label_type_tl
-                            -Name-abbrev \l_@@_name_maybe_plural_tl
+                            -Name-ab \l_@@_name_maybe_plural_tl
                           }
                       }
                       {
@@ -2307,14 +2441,14 @@
                           { \l_@@_ref_language_tl }
                           {
                             zrefclever-type- \l_@@_type_first_label_type_tl
-                            -name-abbrev \l_@@_name_maybe_plural_tl
+                            -name-ab \l_@@_name_maybe_plural_tl
                           }
                           {
                             \@@_get_translation_for:nxx { \l_@@_type_name_tl }
                               { \l_@@_ref_language_tl }
                               {
                                 zrefclever-type- \l_@@_type_first_label_type_tl
-                                -name-abbrev \l_@@_name_maybe_plural_tl
+                                -name-ab \l_@@_name_maybe_plural_tl
                               }
                             \tl_set:Nx \l_@@_type_name_tl
                               { \text_titlecase_first:n { \l_@@_type_name_tl } }
@@ -2374,7 +2508,7 @@
         { \bool_set_true:N \l_@@_name_in_link_bool }
 
         {
-          \str_if_eq_p:Vn \l_@@_nameinlink_str { singleintype } &&
+          \str_if_eq_p:Vn \l_@@_nameinlink_str { tsingle } &&
           \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl
         }
         { \bool_set_true:N \l_@@_name_in_link_bool }
@@ -2640,6 +2774,11 @@
     \int_zero:N \l_@@_range_count_int
     \int_zero:N \l_@@_range_same_count_int
 
+    % Get not-type-specific separators and refpre/pos strings.
+    \@@_get_string:nN {tpairsep} \l_@@_tpairsep_tl
+    \@@_get_string:nN {tlistsep} \l_@@_tlistsep_tl
+    \@@_get_string:nN {tlastsep} \l_@@_tlastsep_tl
+
     % Loop over the label list in sequence.
     \bool_set_false:N \l_@@_typeset_last_bool
     \bool_until_do:Nn \l_@@_typeset_last_bool
@@ -2720,13 +2859,6 @@
         \zref@ifrefundefined { \l_@@_label_a_tl }
           {}
           {
-            \zref@ifrefcontainsprop
-              { \l_@@_label_a_tl } { \l_@@_ref_property_tl }
-              { }
-              {
-                \msg_warning:nnxx { zref-clever } { missing-property }
-                  { \l_@@_ref_property_tl } { \l_@@_label_a_tl }
-              }
             \tl_if_empty:NT \l_@@_label_type_a_tl
               {
                 \msg_warning:nnx { zref-clever } { missing-type }
@@ -2734,7 +2866,7 @@
               }
           }
 
-        % Get separators and refpre/pos strings, once per type.
+        % Get type-specific separators and refpre/pos strings, once per type.
         \int_compare:nNnT { \l_@@_label_count_int } = { 0 }
           {
             \@@_get_string:nN {namesep}   \l_@@_namesep_tl
@@ -2746,14 +2878,6 @@
             \@@_get_string:nN {refpos}    \l_@@_refpos_out_tl
             \@@_get_string:nN {refpre-in} \l_@@_refpre_in_tl
             \@@_get_string:nN {refpos-in} \l_@@_refpos_in_tl
-            % The `t' ones are not type specific, just set them on the first
-            % overall iteration.
-            \int_compare:nNnT { \l_@@_type_count_int } = { 0 }
-              {
-                \@@_get_string:nN {tpairsep} \l_@@_tpairsep_tl
-                \@@_get_string:nN {tlistsep} \l_@@_tlistsep_tl
-                \@@_get_string:nN {tlastsep} \l_@@_tlastsep_tl
-              }
           }
 
         % Here we send this to a couple of auxiliary functions for no other
@@ -2880,6 +3004,39 @@
           }
       }
 
+    % Handle ``range'' option.  The idea is simple: if the queue is not empty,
+    % we replace it with the end of the range (or pair).  We can still
+    % retrieve the end of the range from \cs{l_@@_label_a_tl} since we know to
+    % be processing the last label of its type at this point.
+    \bool_if:NT \l_@@_typeset_range_bool
+      {
+        \tl_if_empty:NTF \l_@@_typeset_queue_curr_tl
+          {
+            \zref@ifrefundefined { \l_@@_type_first_label_tl }
+              { }
+              {
+                \msg_warning:nnx { zref-clever } { single-element-range }
+                  { \l_@@_type_first_label_type_tl }
+              }
+          }
+          {
+            \bool_set_false:N \l_@@_next_maybe_range_bool
+            \zref@ifrefundefined { \l_@@_type_first_label_tl }
+              { }
+              {
+                \@@_labels_in_sequence:nn
+                  { \l_@@_type_first_label_tl } { \l_@@_label_a_tl }
+              }
+            \tl_set:Nx \l_@@_typeset_queue_curr_tl
+              {
+                \bool_if:NTF \l_@@_next_maybe_range_bool
+                  { \exp_not:V \l_@@_pairsep_tl }
+                  { \exp_not:V \l_@@_rangesep_tl }
+                \@@_get_ref:V \l_@@_label_a_tl
+              }
+          }
+      }
+
     % Now that the type is finished, we can add the name and the first ref to
     % the queue.  Or, if ``typset'' option is not ``both'', handle it here
     % too.
@@ -2994,7 +3151,7 @@
     \bool_set_false:N \l_@@_next_maybe_range_bool
     \bool_set_false:N \l_@@_next_is_same_bool
     \bool_lazy_and:nnT
-      { \l_@@_compress_bool }
+      { \l_@@_typeset_compress_bool }
       % Currently no-op, but kept as ``handle'' to inhibit compression of
       % individual labels.
       { ! \l_@@_range_inhibit_next_bool }
@@ -3137,22 +3294,22 @@
     \int_incr:N \l_@@_label_count_int
   }
 
-
-\msg_new:nnn { zref-clever } { missing-property }
-  {
-    Property~'#1'~not~available~for~label~'#2' \iow_newline:
-    on~input~line~\msg_line_number:.
-  }
 \msg_new:nnn { zref-clever } { missing-type }
   {
-    Reference~type~undefined~for~label~'#1' \iow_newline:
+    Reference~type~undefined~for~label~'#1'~ \iow_newline:
     on~input~line~\msg_line_number:.
   }
 \msg_new:nnn { zref-clever } { missing-name }
   {
-    Name~undefined~for~type~'#1' \iow_newline:
+    Name~undefined~for~type~'#1'~ \iow_newline:
     on~input~line~\msg_line_number:.
   }
+\msg_new:nnn { zref-clever } { single-element-range }
+  {
+    Range~for~type~'#1'~resulted~in~single~element~ \iow_newline:
+    on~input~line~\msg_line_number:.
+  }
+
 %    \end{macrocode}
 %
 %
@@ -3203,96 +3360,96 @@
     refpos-in = {} ,
 
     type = part ,
-      name = {part} ,
+      name-sg = {part} ,
       name-pl = {parts} ,
-      Name = {Part} ,
+      Name-sg = {Part} ,
       Name-pl = {Parts} ,
-      name-abbrev = {part} ,
-      name-abbrev-pl = {parts} ,
-      Name-abbrev = {Part} ,
-      Name-abbrev-pl = {Parts} ,
+      name-ab-sg = {part} ,
+      name-ab-pl = {parts} ,
+      Name-ab-sg = {Part} ,
+      Name-ab-pl = {Parts} ,
 
     type = chapter ,
-      name = {chapter} ,
+      name-sg = {chapter} ,
       name-pl = {chapters} ,
-      Name = {Chapter} ,
+      Name-sg = {Chapter} ,
       Name-pl = {Chapters} ,
-      name-abbrev = {chapter} ,
-      name-abbrev-pl = {chapters} ,
-      Name-abbrev = {Chapter} ,
-      Name-abbrev-pl = {Chapters} ,
+      name-ab-sg = {chapter} ,
+      name-ab-pl = {chapters} ,
+      Name-ab-sg = {Chapter} ,
+      Name-ab-pl = {Chapters} ,
 
     type = section ,
-      name = {section} ,
+      name-sg = {section} ,
       name-pl = {sections} ,
-      Name = {Section} ,
+      Name-sg = {Section} ,
       Name-pl = {Sections} ,
-      name-abbrev = {section} ,
-      name-abbrev-pl = {sections} ,
-      Name-abbrev = {Section} ,
-      Name-abbrev-pl = {Sections} ,
+      name-ab-sg = {section} ,
+      name-ab-pl = {sections} ,
+      Name-ab-sg = {Section} ,
+      Name-ab-pl = {Sections} ,
 
     type = paragraph ,
-      name = {paragraph} ,
+      name-sg = {paragraph} ,
       name-pl = {paragraphs} ,
-      Name = {Paragraph} ,
+      Name-sg = {Paragraph} ,
       Name-pl = {Paragraphs} ,
-      name-abbrev = {par.} ,
-      name-abbrev-pl = {par.} ,
-      Name-abbrev = {Par.} ,
-      Name-abbrev-pl = {Par.} ,
+      name-ab-sg = {par.} ,
+      name-ab-pl = {par.} ,
+      Name-ab-sg = {Par.} ,
+      Name-ab-pl = {Par.} ,
 
     type = page ,
-      name = {page} ,
+      name-sg = {page} ,
       name-pl = {pages} ,
-      Name = {Page} ,
+      Name-sg = {Page} ,
       Name-pl = {Pages} ,
-      name-abbrev = {p.} ,
-      name-abbrev-pl = {pp.} ,
-      Name-abbrev = {Page} ,
-      Name-abbrev-pl = {Pages} ,
+      name-ab-sg = {p.} ,
+      name-ab-pl = {pp.} ,
+      Name-ab-sg = {Page} ,
+      Name-ab-pl = {Pages} ,
 
     type = figure ,
-      name = {figure} ,
+      name-sg = {figure} ,
       name-pl = {figures} ,
-      Name = {Figure} ,
+      Name-sg = {Figure} ,
       Name-pl = {Figures} ,
-      name-abbrev = {fig.} ,
-      name-abbrev-pl = {figs.} ,
-      Name-abbrev = {Fig.} ,
-      Name-abbrev-pl = {Figs.} ,
+      name-ab-sg = {fig.} ,
+      name-ab-pl = {figs.} ,
+      Name-ab-sg = {Fig.} ,
+      Name-ab-pl = {Figs.} ,
 
     type = table ,
-      name = {table} ,
+      name-sg = {table} ,
       name-pl = {tables} ,
-      Name = {Table} ,
+      Name-sg = {Table} ,
       Name-pl = {Tables} ,
-      name-abbrev = {table} ,
-      name-abbrev-pl = {tables} ,
-      Name-abbrev = {Table} ,
-      Name-abbrev-pl = {Tables} ,
+      name-ab-sg = {table} ,
+      name-ab-pl = {tables} ,
+      Name-ab-sg = {Table} ,
+      Name-ab-pl = {Tables} ,
 
     type = equation ,
-      name = {equation} ,
+      name-sg = {equation} ,
       name-pl = {equations} ,
-      Name = {Equation} ,
+      Name-sg = {Equation} ,
       Name-pl = {Equations} ,
-      name-abbrev = {eq.} ,
-      name-abbrev-pl = {eqs.} ,
-      Name-abbrev = {Eq.} ,
-      Name-abbrev-pl = {Eqs.} ,
+      name-ab-sg = {eq.} ,
+      name-ab-pl = {eqs.} ,
+      Name-ab-sg = {Eq.} ,
+      Name-ab-pl = {Eqs.} ,
       refpre-in = {(} ,
       refpos-in = {)} ,
 
     type = item ,
-      name = {item} ,
+      name-sg = {item} ,
       name-pl = {items} ,
-      Name = {Item} ,
+      Name-sg = {Item} ,
       Name-pl = {Items} ,
-      name-abbrev = {item} ,
-      name-abbrev-pl = {items} ,
-      Name-abbrev = {Item} ,
-      Name-abbrev-pl = {Items} ,
+      name-ab-sg = {item} ,
+      name-ab-pl = {items} ,
+      Name-ab-sg = {Item} ,
+      Name-ab-pl = {Items} ,
   }
 
 %    \end{macrocode}
