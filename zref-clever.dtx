@@ -46,7 +46,7 @@
 %<*driver>
 \documentclass{l3doc}
 % Have \GetFileInfo pick up date and version data
-\usepackage{zref-check}
+\usepackage{zref-clever}
 \NewDocumentCommand\opt{m}{\texttt{#1}}
 \MakeShortVerb{\|}
 \begin{document}
@@ -97,27 +97,32 @@
 %
 % \section{\pkg{zref} setup}
 %
-% We are interested in three basic label elements: the reference itself, the
-% page, and the counter.  The `page' and `counter' are respectively handled by
-% modules \pkg{zref-base} and \pkg{zref-counter}.  The \pkg{zref-abspage} also
-% provides the `abspage' property which gives us a safe and easy way to sort
-% labels on page references.  But the reference itself, stored by \pkg{zref}
-% in the `default' field, is somewhat a disputed real estate.  In particular,
-% the use of \cs{labelformat} will include there the reference ``prefix'' and
-% complicate the job we are trying to do here.  Hence, we isolate
-% \cs{the}\meta{counter} and store it ``clean'' in \texttt{zc@thecnt} for
-% reserved use.  We also store the ``type'' of the label at this point (see
-% Section~\ref{sec:reference-types}).
+% We are (mostly) interested in three basic label elements: the reference
+% itself, the page, and the counter.  The `page' and `counter' are
+% respectively handled by modules \pkg{zref-base} and \pkg{zref-counter}.  The
+% \pkg{zref-abspage} also provides the `abspage' property which gives us a
+% safe and easy way to sort labels on page references.  But the reference
+% itself, stored by \pkg{zref} in the `default' field, is somewhat a disputed
+% real estate.  In particular, the use of \cs{labelformat} will include there
+% the reference ``prefix'' and complicate the job we are trying to do here.
+% Hence, we isolate \cs{the}\meta{counter} and store it ``clean'' in
+% \texttt{zc@thecnt} for reserved use.  We also store the ``type'' of the
+% label at this point (see Section~\ref{sec:reference-types}).
 %
 % However, the \pkg{zref-abspage} module is very simple, but loads
 % \pkg{atbegshi}, which is no longer needed with a recent kernel, which we
-% require here anyway.  So we can spare this additional dependence by
+% require here anyway.  So we can spare this additional dependency by
 % providing the property internally.  Since only \pkg{zref-counter} remains,
 % which is also trivial, we do that too, and thus ensure that all needed data
 % is stored in ``internal'' properties.  The only exception is the
 % \texttt{page} property, which is available by default (no extra module
 % required), and is not tampered with by \cs{labelformat}, as the
-% \texttt{default} property does.
+% \texttt{default} property does.  Another exception which we don't need to
+% handle at the data provision side, but need to cater for in the retrieval
+% side, is the \texttt{url}/\texttt{urluse} property from \pkg{zref-xr}
+% module, which is added to the labels imported from external documents, and
+% needed to construct hyperlinks to them.
+%
 %
 %    \begin{macrocode}
 \zref@newprop { zc@counter } { \@currentcounter }
@@ -169,31 +174,14 @@
 % format |\@elt{countera}\@elt{counterb}\@elt{counterc}|, again see section
 % `ltcounts.dtx' in `source2e').  Besides, there may be a chain of resetting
 % counters, which must be taken into account.  The procedure below examines a
-% set of counters, those included in \cs{g_@@_reseters_seq}, and for each
-% counter retrieves its ``within-counters'' recursively.  There is one
-% relevant caveat to this procedure: \cs{g_@@_reseters_seq} is populated by
-% hand with the ``usual suspects'', there is no way (that I know of) to ensure
-% it is exhaustive.  However, it is not that difficult to create a reasonable
-% ``usual suspects'' list which, of course, should include the counters for
-% the sectioning commands, to start with, and it is easy to add more counters
-% to this list if needed.
-%
-% \begin{variable}{\g_@@_reseters_seq}
-%   Stores the list of counters which get examined \cs{AtBeginDocument} as
-%   potential ``within-counters'' for other counters.
-%    \begin{macrocode}
-\seq_set_from_clist:Nn \g_@@_reseters_seq
-  {
-    part ,
-    chapter ,
-    section ,
-    subsection ,
-    subsubsection ,
-    paragraph ,
-    subparagraph
-  }
-%    \end{macrocode}
-% \end{variable}
+% set of counters, those included in \cs{l_@@_counter_resetters_seq}, and for
+% each counter retrieves its ``within-counters'' recursively.  There is one
+% relevant caveat to this procedure: \cs{l_@@_counter_resetters_seq} is
+% populated by hand with the ``usual suspects'', there is no way (that I know
+% of) to ensure it is exhaustive.  However, it is not that difficult to create
+% a reasonable ``usual suspects'' list which, of course, should include the
+% counters for the sectioning commands, to start with, and it is easy to add
+% more counters to this list if needed.
 %
 % \begin{macro}[EXP]
 %   {
@@ -255,21 +243,11 @@
 %    \begin{macrocode}
 \cs_new:Npn \@@_counter_reset_by:n #1
   {
-    \bool_case_true:nF
+    \bool_if:nTF
+      { \prop_if_in_p:Nn \l_@@_counter_resetby_prop {#1} }
+      { \prop_item:Nn  \l_@@_counter_resetby_prop {#1} }
       {
-%    \end{macrocode}
-% The counters for the \texttt{enumerate} environment do not use the regular
-% counter machinery for resetting on each level, but are nested nevertheless
-% by other means, treat them as exception.  TODO This list should probably be
-% extended for `enumitem', since it is very hard to expose this at the user
-% side.
-%    \begin{macrocode}
-        { \str_if_eq_p:nn {#1} { enumii  } } { enumi   }
-        { \str_if_eq_p:nn {#1} { enumiii } } { enumii  }
-        { \str_if_eq_p:nn {#1} { enumiv  } } { enumiii }
-      }
-      {
-        \seq_map_tokens:Nn \g_@@_reseters_seq
+        \seq_map_tokens:Nn \l_@@_counter_resetters_seq
           { \@@_counter_within:nn {#1} }
       }
   }
@@ -310,7 +288,7 @@
 % assess the state of the reset counters at \texttt{begindocument}, so does
 % not get mid-document changes.  Keep it around for the time being, in case we
 % face trouble with the expandable version.  The procedure here examines a set
-% of counters, those included in \cs{g_@@_reseters_seq}, and for each counter
+% of counters, those included in \cs{g_@@_resetters_seq}, and for each counter
 % each of those reset, defines a \texttt{tl} variable with name
 % \cs{g_@@_counter_\meta{counter}_within_tl} storing the value of its
 % ``within-counter''.  These \texttt{tl} variables are then used by
@@ -332,13 +310,13 @@
 %       }
 %   }
 % \end{verbatim}
-% Map through \cs{g_@@_reseters_seq} defining \texttt{tl} variables storing,
+% Map through \cs{g_@@_resetters_seq} defining \texttt{tl} variables storing,
 % for each counter that may be reset, the ``within-counter'' which may do so.
 % \begin{verbatim}
 % \cs_new:Npn \@@_set_within_counters:
 %   {
 %     \group_begin:
-%       \seq_map_inline:Nn \g_@@_reseters_seq
+%       \seq_map_inline:Nn \g_@@_resetters_seq
 %         {
 %           \cs_if_exist:cT { c@ ##1 }
 %             {
@@ -578,7 +556,7 @@
   {
     lang .code:n =
       {
-        \tl_if_blank:nTF {#1}
+        \tl_if_empty:nTF {#1}
           { \tl_clear:N \l_@@_setup_language_tl }
           { \tl_set:Nn \l_@@_setup_language_tl {#1} }
       } ,
@@ -680,7 +658,7 @@
   {
     type .code:n =
       {
-        \tl_if_blank:nTF {#1}
+        \tl_if_empty:nTF {#1}
           { \tl_clear:N \l_@@_setup_type_tl }
           {
             \prop_if_exist:cF { l_@@_type_ #1 _strings_prop }
@@ -807,9 +785,9 @@
 % \end{variable}
 %
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_prop_put_non_blank:Nnn #1#2#3
+\cs_new_protected:Npn \@@_prop_put_non_empty:Nnn #1#2#3
   {
-    \tl_if_blank:nTF {#3}
+    \tl_if_empty:nTF {#3}
       { \prop_remove:Nn #1 {#2} }
       { \prop_put:Nnn #1 {#2} {#3} }
   }
@@ -819,7 +797,7 @@
       {
         \keyval_parse:nnn
           { \msg_warning:nnn { zref-clever } { countertype-requires-value } }
-          { \@@_prop_put_non_blank:Nnn \l_@@_counter_type_prop }
+          { \@@_prop_put_non_empty:Nnn \l_@@_counter_type_prop }
           {#1}
       } ,
     countertype .value_required:n = true ,
@@ -846,6 +824,81 @@
 %    \end{macrocode}
 %
 %
+% \subsubsection*{\opt{counterresetters} option}
+%
+% \begin{variable}{\l_@@_counter_resetters_seq}
+%   Stores the list of counters with potential ``within-counters'' for other
+%   counters.
+%    \begin{macrocode}
+\seq_new:N \l_@@_counter_resetters_seq
+%    \end{macrocode}
+% \end{variable}
+%
+%
+%    \begin{macrocode}
+\keys_define:nn { zref-clever }
+  {
+    counterresetters .code:n =
+      {
+        \seq_set_from_clist:Nn \l_@@_counter_resetters_seq {#1}
+      } ,
+    counterresetters .initial:n =
+      {
+        part ,
+        chapter ,
+        section ,
+        subsection ,
+        subsubsection ,
+        paragraph ,
+        subparagraph ,
+      },
+    typesort .value_required:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+%
+%
+% \subsubsection*{\opt{counterresetby} option}
+%
+% \begin{variable}{\l_@@_counter_resetby_prop}
+%   Variable storing a mapping from ``counter'' to the counter which resets
+%   it.
+%    \begin{macrocode}
+\prop_new:N \l_@@_counter_resetby_prop
+%    \end{macrocode}
+% \end{variable}
+%
+%
+%    \begin{macrocode}
+\keys_define:nn { zref-clever }
+  {
+    counterresetby .code:n =
+      {
+        \keyval_parse:nnn
+          { \msg_warning:nnn { zref-clever } { counterresetby-requires-value } }
+          { \@@_prop_put_non_empty:Nnn \l_@@_counter_resetby_prop }
+          {#1}
+      } ,
+    counterresetby .value_required:n = true ,
+    counterresetby .initial:n =
+      {
+%    \end{macrocode}
+% The counters for the \texttt{enumerate} environment do not use the regular
+% counter machinery for resetting on each level, but are nested nevertheless
+% by other means, treat them as exception.  TODO This list should probably be
+% extended for `enumitem', conditioned on it being loaded.
+%    \begin{macrocode}
+        enumii  = enumi   ,
+        enumiii = enumii  ,
+        enumiv  = enumiii ,
+      } ,
+  }
+\msg_new:nnn  { zref-clever } { counterresetby-requires-value }
+  { The~'counterresetby'~key~'#1'~requires~a~value. }
+%    \end{macrocode}
+%
+%
 %
 % \subsubsection*{\opt{ref} option}
 
@@ -855,23 +908,31 @@
 \bool_new:N \l_@@_page_ref_bool
 \keys_define:nn { zref-clever }
   {
-    ref .code:n =
+    ref .choice: ,
+    ref / zc@thecnt .code:n =
       {
-        \tl_if_eq:nnTF {#1} { page }
+        \tl_set:Nn \l_@@_ref_property_tl { zc@thecnt }
+        \bool_set_false:N \l_@@_page_ref_bool
+      } ,
+    ref / page .code:n =
+      {
+        \tl_set:Nn \l_@@_ref_property_tl { page }
+        \bool_set_true:N \l_@@_page_ref_bool
+      } ,
+    ref / title .code:n =
+      {
+        \AddToHook { begindocument }
           {
-            \tl_set:Nn \l_@@_ref_property_tl { page }
-            \bool_set_true:N \l_@@_page_ref_bool
-          }
-          {
-            \zref@ifpropundefined {#1}
+            \@ifpackageloaded { zref-titleref }
               {
-                \msg_warning:nnn { zref-clever } { prop-not-defined } {#1}
+                \tl_set:Nn \l_@@_ref_property_tl { title }
+                \bool_set_false:N \l_@@_page_ref_bool
+              }
+              {
+                \msg_warning:nn { zref-clever } { missing-zref-titleref }
                 \tl_set:Nn \l_@@_ref_property_tl { zc@thecnt }
+                \bool_set_false:N \l_@@_page_ref_bool
               }
-              {
-                \tl_set:Nn \l_@@_ref_property_tl {#1}
-              }
-            \bool_set_false:N \l_@@_page_ref_bool
           }
       } ,
     ref .initial:n = zc@thecnt ,
@@ -880,13 +941,58 @@
     page .value_forbidden:n = true ,
   }
 
+\AddToHook { begindocument }
+  {
+    \@ifpackageloaded { zref-titleref }
+      {
+        \keys_define:nn { zref-clever }
+          {
+            ref / title .code:n =
+              {
+                \tl_set:Nn \l_@@_ref_property_tl { title }
+                \bool_set_false:N \l_@@_page_ref_bool
+              }
+          }
+      }
+      {
+        \keys_define:nn { zref-clever }
+          {
+            ref / title .code:n =
+              {
+                \msg_warning:nn { zref-clever } { missing-zref-titleref }
+                \tl_set:Nn \l_@@_ref_property_tl { zc@thecnt }
+                \bool_set_false:N \l_@@_page_ref_bool
+              }
+          }
+      }
+  }
+
+\msg_new:nnn { zref-clever } { missing-zref-titleref }
+  {
+    Option~'ref=title'~requested~on~input~line~\msg_line_number:. \iow_newline:
+    But~package~'zref-titleref'~is~not~loaded,~falling-back~to~default~'ref'.
+  }
+
 \msg_new:nnn { zref-clever } { prop-not-defined }
   {
     Property~'#1'~undefined~on~input~line~\msg_line_number:. \iow_newline:
-    Falling-back~to~default~'ref='.
+    Falling-back~to~default~'ref'.
   }
 
 %    \end{macrocode}
+%
+% Currently, I have restricted `ref=' to these two (or three) alternatives,
+% but there might be a case for making this more flexible.  The infrastructure
+% can already handle receiving an arbitrary property, as long as one is
+% satisfied with sorting and compressing from the default counter.  If more
+% flexibility is granted, one thing \emph{must} be handled at this point: the
+% existence of the property itself, as far as \pkg{zref} is concerned.  This
+% because typesetting relies on the check \cs{zref@ifrefcontainsprop}, which
+% \emph{presumes} the property is defined and silently expands the \emph{true}
+% branch if it is not (see \url{https://github.com/ho-tex/zref/issues/13},
+% thanks Ulrike Fischer).  Therefore, before adding anything to
+% \cs{l_@@_ref_property_tl}, check if first here with
+% \cs{zref@ifpropundefined}: close it at the door.
 %
 %
 % \subsubsection*{\opt{typeset} option}
@@ -1026,7 +1132,7 @@
           { \msg_warning:nn { zref-clever } { missing-hyperref } }
         \bool_set_false:N \l_@@_use_hyperref_bool
       }
-    \keys_define:nn { zref-check }
+    \keys_define:nn { zref-clever }
       {
         hyperref .code:n =
           { \msg_warning:nn { zref-clever } { hyperref-preamble-only } }
