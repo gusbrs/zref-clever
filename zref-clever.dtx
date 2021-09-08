@@ -518,9 +518,33 @@
 \cs_generate_variant:Nn \@@_get_translation_for:nnn { nxx }
 \cs_new_protected:Npn \@@_declare_translation:nnn #1#2#3
   { \declaretranslation {#1} {#2} {#3} }
-\cs_generate_variant:Nn \@@_declare_translation:nnn { xxx , xxn , xnn }
+\cs_generate_variant:Nn \@@_declare_translation:nnn { xxn }
 %    \end{macrocode}
 %
+%
+% For use in dictionary files.
+%    \begin{macrocode}
+
+% The dictionary file commands cannot rely on expl3 syntax, so we define
+% ``document'' ones.
+% <string><transl>
+\NewDocumentCommand \zcDicDefaultTransl { m m }
+  { \ProvideDictTranslation { zrefclever-default- #1 } {#2} }
+
+% <type><string><transl>
+\NewDocumentCommand \zcDicTypeTransl { m m m }
+  { \ProvideDictTranslation { zrefclever-type- #1 - #2 } {#3} }
+
+% <lang><string><transl>
+\cs_new_protected:Npn \@@_add_default_translation:nnn #1#2#3
+  { \addtranslation {#1} { zrefclever-default- #2 } {#3} }
+
+% <lang><type><string><transl>
+\cs_new_protected:Npn \@@_add_type_translation:nnnn #1#2#3#4
+  { \addtranslation {#1} { zrefclever-type- #2 - #3 } {#4} }
+
+
+%    \end{macrocode}
 %
 %
 % \subsection{Type format}
@@ -530,7 +554,8 @@
 %
 %
 % \begin{variable}{\l_@@_ref_type_language_tl}
-%   Variable storing the language and type to be used in \cs{zcRefTypeSetup}.
+%   Variable storing the language and type to be used in \cs{zcRefTypeSetup}
+%   and \cs{zcDeclareTranslations}.
 %    \begin{macrocode}
 \tl_new:N \l_@@_setup_language_tl
 \tl_new:N \l_@@_setup_type_tl
@@ -545,7 +570,6 @@
     \prop_if_exist:cF { l_@@_type_ #1 _strings_prop }
       { \prop_new:c { l_@@_type_ #1 _strings_prop } }
     \tl_set:Nn \l_@@_setup_type_tl {#1}
-    \tl_clear:N \l_@@_setup_language_tl
     \keys_set:nn { zref-clever / typesetup } {#2}
   }
 %    \end{macrocode}
@@ -555,14 +579,6 @@
 %    \begin{macrocode}
 \keys_define:nn { zref-clever / typesetup }
   {
-    lang .code:n =
-      {
-        \tl_if_empty:nTF {#1}
-          { \tl_clear:N \l_@@_setup_language_tl }
-          { \tl_set:Nn \l_@@_setup_language_tl {#1} }
-      } ,
-    lang .value_required:n = true ,
-
     % A special convenience ``short'' way to set name strings.
     % Necessarily type-specific strings.
     name .code:n =
@@ -579,17 +595,9 @@
                   Name-ab-sg ,
                 }
                 {
-                  \tl_if_empty:NTF \l_@@_setup_language_tl
-                    {
-                      \prop_put:cnx
-                        { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-                        { ##1 } { \clist_item:nn {#1} { 1 } }
-                    }
-                    {
-                      \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                        { zrefclever-type- \l_@@_setup_type_tl - ##1 }
-                        { \clist_item:nn {#1} { 1 } }
-                    }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                    { ##1 } { \clist_item:nn {#1} { 1 } }
                 }
               \clist_map_inline:nn
                 {
@@ -599,75 +607,38 @@
                   Name-ab-pl ,
                 }
                 {
-                  \tl_if_empty:NTF \l_@@_setup_language_tl
-                    {
-                      \prop_put:cnx
-                        { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-                        { ##1 } { \clist_item:nn {#1} { 2 } }
-                    }
-                    {
-                      \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                        { zrefclever-type- \l_@@_setup_type_tl - ##1 }
-                        { \clist_item:nn {#1} { 2 } }
-                    }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                    { ##1 } { \clist_item:nn {#1} { 2 } }
                 }
             }
 
             { 4 }
             {
-              \tl_if_empty:NTF \l_@@_setup_language_tl
-                {
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-                    { name-sg } { \clist_item:nn {#1} { 1 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-                    { name-ab-sg } { \clist_item:nn {#1} { 1 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-                    { name-pl } { \clist_item:nn {#1} { 2 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-                    { name-ab-pl } { \clist_item:nn {#1} { 2 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-                    { Name-sg } { \clist_item:nn {#1} { 3 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-                    { Name-ab-sg } { \clist_item:nn {#1} { 3 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-                    { Name-pl } { \clist_item:nn {#1} { 4 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-                    { Name-ab-pl } { \clist_item:nn {#1} { 4 } }
-                }
-                {
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -name-sg }
-                    { \clist_item:nn {#1} { 1 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -name-ab-sg }
-                    { \clist_item:nn {#1} { 1 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -name-pl }
-                    { \clist_item:nn {#1} { 2 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -name-ab-pl }
-                    { \clist_item:nn {#1} { 2 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -Name-sg }
-                    { \clist_item:nn {#1} { 3 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -Name-ab-sg }
-                    { \clist_item:nn {#1} { 3 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -Name-pl }
-                    { \clist_item:nn {#1} { 4 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -Name-ab-pl }
-                    { \clist_item:nn {#1} { 4 } }
-                }
+              \prop_put:cnx
+                { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                { name-sg } { \clist_item:nn {#1} { 1 } }
+              \prop_put:cnx
+                { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                { name-ab-sg } { \clist_item:nn {#1} { 1 } }
+              \prop_put:cnx
+                { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                { name-pl } { \clist_item:nn {#1} { 2 } }
+              \prop_put:cnx
+                { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                { name-ab-pl } { \clist_item:nn {#1} { 2 } }
+              \prop_put:cnx
+                { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                { Name-sg } { \clist_item:nn {#1} { 3 } }
+              \prop_put:cnx
+                { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                { Name-ab-sg } { \clist_item:nn {#1} { 3 } }
+              \prop_put:cnx
+                { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                { Name-pl } { \clist_item:nn {#1} { 4 } }
+              \prop_put:cnx
+                { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+                { Name-ab-pl } { \clist_item:nn {#1} { 4 } }
             }
           }
           {
@@ -679,7 +650,7 @@
   }
 \msg_new:nnn { zref-clever } { type-name-length }
   {
-    Type~'name'~can~only~receive~2~or~4~values~on~input~line~\msg_line_number:.~
+    Type~'name'~can~only~receive~2~or~4~values~\msg_line_context:.~
     Don't~know~what~to~do~with~#1.
   }
 
@@ -735,47 +706,44 @@
         #1 .value_required:n = true ,
         #1 .code:n =
           {
-            \tl_if_empty:NTF \l_@@_setup_language_tl
-              {
-                \prop_put:cnn
-                  { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
-                  { #1 } {##1}
-              }
-              {
-                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-                  { zrefclever-type- \l_@@_setup_type_tl - #1 } {##1}
-              }
+            \prop_put:cnn
+              { l_@@_type_ \l_@@_setup_type_tl _strings_prop }
+              { #1 } {##1}
           } ,
       }
   }
 
 \msg_new:nnn { zref-clever } { string-not-type-specific }
   {
-    String~'#1'~is~not~type-specific~on~input~line~\msg_line_number:.~
-    Set~it~in~'\exp_not:N \zcDeclareRefStrings'~before~first~'type'~switch.
+    String~'#1'~is~not~type-specific~\msg_line_context:.~
+    Set~it~in~'\exp_not:N \zcDeclareTranslations'~before~first~'type'~switch~
+    or~as~package~option.
   }
 
 %    \end{macrocode}
 
 %
-% \subsubsection{\cs{zcDeclareRefStrings}}
+% \subsubsection{\cs{zcDeclareTranslations}}
 %
 %
+% CHECK Should I make \zcDeclareTranslations preamble only? (I don't even know
+% if the translations definitions are local or global, presumably local but, I
+% don't think this needs to be used in the document body).
 %
-% \begin{macro}[int]{\zcDeclareRefStrings}
-%   Provide \cs{zcDeclareRefStrings}.
+% \begin{macro}[int]{\zcDeclareTranslations}
+%   Provide \cs{zcDeclareTranslations}.
 %    \begin{macrocode}
-\NewDocumentCommand \zcDeclareRefStrings { m m }
+\NewDocumentCommand \zcDeclareTranslations { m m }
   {
     \tl_set:Nn \l_@@_setup_language_tl {#1}
     \tl_clear:N \l_@@_setup_type_tl
-    \keys_set:nn { zref-clever / refstrings } {#2}
+    \keys_set:nn { zref-clever / translations } {#2}
   }
 %    \end{macrocode}
 % \end{macro}
 %
 %    \begin{macrocode}
-\keys_define:nn { zref-clever / refstrings }
+\keys_define:nn { zref-clever / translations }
   {
     type .code:n =
       {
@@ -802,7 +770,7 @@
     tlastsep ,
   }
   {
-    \keys_define:nn { zref-clever / refstrings }
+    \keys_define:nn { zref-clever / translations }
       {
         #1 .value_required:n = true ,
         #1 .code:n =
@@ -834,7 +802,7 @@
     refpos-in ,
   }
   {
-    \keys_define:nn { zref-clever / refstrings }
+    \keys_define:nn { zref-clever / translations }
       {
         #1 .value_required:n = true ,
         #1 .code:n =
@@ -865,7 +833,7 @@
     Name-ab-pl ,
   }
   {
-    \keys_define:nn { zref-clever / refstrings }
+    \keys_define:nn { zref-clever / translations }
       {
         #1 .value_required:n = true ,
         #1 .code:n =
@@ -885,7 +853,7 @@
 
 \msg_new:nnn { zref-clever } { string-only-type-specific }
   {
-    No~type~specified~for~string~'#1'~on~input~line\msg_line_number:.~
+    No~type~specified~for~string~'#1'~\msg_line_context:.~
     Set~it~after~'type'~switch~or~in~'\exp_not:N \zcRefTypeSetup'.
   }
 
@@ -1090,13 +1058,13 @@
 
 \msg_new:nnn { zref-clever } { missing-zref-titleref }
   {
-    Option~'ref=title'~requested~on~input~line~\msg_line_number:. \iow_newline:
+    Option~'ref=title'~requested~\msg_line_context:.~
     But~package~'zref-titleref'~is~not~loaded,~falling-back~to~default~'ref'.
   }
 
 \msg_new:nnn { zref-clever } { prop-not-defined }
   {
-    Property~'#1'~undefined~on~input~line~\msg_line_number:. \iow_newline:
+    Property~'#1'~undefined~\msg_line_context:.~
     Falling-back~to~default~'ref'.
   }
 
@@ -1418,44 +1386,40 @@
   }
 %
 %
-% An internal alias for \pkg{translations}'s internal macro
-% \cs{@trnslt@current@language}.
-%    \begin{macrocode}
-\AddToHook { begindocument }
-  {
-    \tl_set_eq:NN \l_@@_current_language_tl \@trnslt@current@language
-  }
-%    \end{macrocode}
-%
 %
 % See \url{https://tex.stackexchange.com/a/233178} (including Javier Bezos'
-% comment).
+% comment).  Also \url{https://tex.stackexchange.com/a/281220} (including
+% PLK's comments).
 %    \begin{macrocode}
-\AddToHook { begindocument/before }
+% \LoadDictionaryFor{english}{zref-clever}
+\AddToHook { begindocument / before }
   {
+    % An internal alias for \pkg{translations}'s internal macro
+    % \cs{@trnslt@current@language}.
+    \tl_set_eq:NN \l_@@_current_language_tl \@trnslt@current@language
+    % Getting main languages and, for each babel/polyglossia loaded language,
+    % load corresponding zref-clever dictionary.
     \@ifpackageloaded{babel}
       {
-        \AddToHook { begindocument }
-          {
-            \tl_set_eq:NN \l_@@_main_language_tl \bbl@main@language
-            \UseHook { zref-clever / reflanguage }
-          }
+        \tl_set_eq:NN \l_@@_main_language_tl \bbl@main@language
+        \clist_map_inline:Nn \bbl@loaded
+          { \LoadDictionaryFor {#1} { zref-clever } }
       }
       {
         \@ifpackageloaded{polyglossia}
           {
-            \AddToHook { begindocument }
-              {
-                \tl_set_eq:NN \l_@@_main_language_tl \xpg@main@language
-                \UseHook { zref-clever / reflanguage }
-              }
+            \tl_set_eq:NN \l_@@_main_language_tl \xpg@main@language
+            \clist_map_inline:Nn \xpg@loaded
+              { \LoadDictionaryFor {#1} { zref-clever } }
           }
           {
             \tl_new:N \l_@@_main_language_tl
             \tl_set:Nn \l_@@_main_language_tl { english }
-            \UseHook { zref-clever / reflanguage }
+            \LoadDictionaryFor { english } { zref-clever }
           }
       }
+    % *Then* we execute the package options stored in the 'reflanguage' hook.
+    \UseHook { zref-clever / reflanguage }
   }
 %    \end{macrocode}
 %
@@ -1573,18 +1537,6 @@
 %
 %
 %    \begin{macrocode}
-
-% TODO Stores whether sort priorities should be used or not.  This should be
-% moved to options.  This is a way to enable/disable sort priority wholesale.
-% Whatever we do, setting the sort priorities will not be convenient and will
-% not be doable locally as an option, since it must be done ``per type'', so a
-% way to handle the whole thing in one swoop is indeed needed.
-\bool_new:N \l_@@_use_sort_prior_bool
-% \bool_set_true:N \l_@@_use_sort_prior_bool
-
-% TODO The "priority" should be coming somehow from options, but this is not
-% done yet, just set a temporary value to build one piece at a time.  Items
-% with higher priority go to the top.
 \int_new:N \l_@@_sort_prior_a_int
 \int_new:N \l_@@_sort_prior_b_int
 %    \end{macrocode}
@@ -2010,10 +1962,7 @@
 % Warning message used in \cs{@@_sort_default_aux:nn}.
 %    \begin{macrocode}
 \msg_new:nnn { zref-clever } { counters-not-nested }
-  {
-    Counters~not~nested~for~labels~'#1'~and~'#2' \iow_newline:
-    on~input~line~\msg_line_number:.
-  }
+  { Counters~not~nested~for~labels~'#1'~and~'#2'~\msg_line_context:. }
 %    \end{macrocode}
 %
 %
@@ -3295,20 +3244,11 @@
   }
 
 \msg_new:nnn { zref-clever } { missing-type }
-  {
-    Reference~type~undefined~for~label~'#1'~ \iow_newline:
-    on~input~line~\msg_line_number:.
-  }
+  { Reference~type~undefined~for~label~'#1'~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { missing-name }
-  {
-    Name~undefined~for~type~'#1'~ \iow_newline:
-    on~input~line~\msg_line_number:.
-  }
+  { Name~undefined~for~type~'#1'~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { single-element-range }
-  {
-    Range~for~type~'#1'~resulted~in~single~element~ \iow_newline:
-    on~input~line~\msg_line_number:.
-  }
+  { Range~for~type~'#1'~resulted~in~single~element~\msg_line_context:. }
 
 %    \end{macrocode}
 %
@@ -3325,132 +3265,18 @@
 % \pkg{polyglossia} is loaded and sets a language which \pkg{zref-clever} does
 % not know.  On the other hand type-specific strings are not looked for in
 % `fallback'.
-\zcDeclareRefStrings { fallback }
-  {
-    namesep   = {\nobreakspace} ,
-    pairsep   = {,~} ,
-    listsep   = {,~} ,
-    lastsep   = {,~} ,
-    tpairsep  = {,~} ,
-    tlistsep  = {,~} ,
-    tlastsep  = {,~} ,
-    rangesep  = {\textendash} ,
-    refpre    = {} ,
-    refpos    = {} ,
-    refpre-in = {} ,
-    refpos-in = {} ,
-  }
-
-% All strings retrieved with \cs{@@_get_string:nN} must have their values set
-% for `English', since this is what will be retrieved if no language package
-% is loaded.
-\zcDeclareRefStrings { English }
-  {
-    namesep   = {\nobreakspace} ,
-    pairsep   = {~and\nobreakspace} ,
-    listsep   = {,~} ,
-    lastsep   = {~and\nobreakspace} ,
-    tpairsep  = {~and\nobreakspace} ,
-    tlistsep  = {,~} ,
-    tlastsep  = {,~and\nobreakspace} ,
-    rangesep  = {~to\nobreakspace} ,
-    refpre    = {} ,
-    refpos    = {} ,
-    refpre-in = {} ,
-    refpos-in = {} ,
-
-    type = part ,
-      name-sg = {part} ,
-      name-pl = {parts} ,
-      Name-sg = {Part} ,
-      Name-pl = {Parts} ,
-      name-ab-sg = {part} ,
-      name-ab-pl = {parts} ,
-      Name-ab-sg = {Part} ,
-      Name-ab-pl = {Parts} ,
-
-    type = chapter ,
-      name-sg = {chapter} ,
-      name-pl = {chapters} ,
-      Name-sg = {Chapter} ,
-      Name-pl = {Chapters} ,
-      name-ab-sg = {chapter} ,
-      name-ab-pl = {chapters} ,
-      Name-ab-sg = {Chapter} ,
-      Name-ab-pl = {Chapters} ,
-
-    type = section ,
-      name-sg = {section} ,
-      name-pl = {sections} ,
-      Name-sg = {Section} ,
-      Name-pl = {Sections} ,
-      name-ab-sg = {section} ,
-      name-ab-pl = {sections} ,
-      Name-ab-sg = {Section} ,
-      Name-ab-pl = {Sections} ,
-
-    type = paragraph ,
-      name-sg = {paragraph} ,
-      name-pl = {paragraphs} ,
-      Name-sg = {Paragraph} ,
-      Name-pl = {Paragraphs} ,
-      name-ab-sg = {par.} ,
-      name-ab-pl = {par.} ,
-      Name-ab-sg = {Par.} ,
-      Name-ab-pl = {Par.} ,
-
-    type = page ,
-      name-sg = {page} ,
-      name-pl = {pages} ,
-      Name-sg = {Page} ,
-      Name-pl = {Pages} ,
-      name-ab-sg = {p.} ,
-      name-ab-pl = {pp.} ,
-      Name-ab-sg = {Page} ,
-      Name-ab-pl = {Pages} ,
-
-    type = figure ,
-      name-sg = {figure} ,
-      name-pl = {figures} ,
-      Name-sg = {Figure} ,
-      Name-pl = {Figures} ,
-      name-ab-sg = {fig.} ,
-      name-ab-pl = {figs.} ,
-      Name-ab-sg = {Fig.} ,
-      Name-ab-pl = {Figs.} ,
-
-    type = table ,
-      name-sg = {table} ,
-      name-pl = {tables} ,
-      Name-sg = {Table} ,
-      Name-pl = {Tables} ,
-      name-ab-sg = {table} ,
-      name-ab-pl = {tables} ,
-      Name-ab-sg = {Table} ,
-      Name-ab-pl = {Tables} ,
-
-    type = equation ,
-      name-sg = {equation} ,
-      name-pl = {equations} ,
-      Name-sg = {Equation} ,
-      Name-pl = {Equations} ,
-      name-ab-sg = {eq.} ,
-      name-ab-pl = {eqs.} ,
-      Name-ab-sg = {Eq.} ,
-      Name-ab-pl = {Eqs.} ,
-      refpre-in = {(} ,
-      refpos-in = {)} ,
-
-    type = item ,
-      name-sg = {item} ,
-      name-pl = {items} ,
-      Name-sg = {Item} ,
-      Name-pl = {Items} ,
-      name-ab-sg = {item} ,
-      name-ab-pl = {items} ,
-      Name-ab-sg = {Item} ,
-      Name-ab-pl = {Items} ,
-  }
+\@@_add_default_translation:nnn { fallback } { namesep   } {\nobreakspace}
+\@@_add_default_translation:nnn { fallback } { pairsep   } {,~}
+\@@_add_default_translation:nnn { fallback } { listsep   } {,~}
+\@@_add_default_translation:nnn { fallback } { lastsep   } {,~}
+\@@_add_default_translation:nnn { fallback } { tpairsep  } {,~}
+\@@_add_default_translation:nnn { fallback } { tlistsep  } {,~}
+\@@_add_default_translation:nnn { fallback } { tlastsep  } {,~}
+\@@_add_default_translation:nnn { fallback } { rangesep  } {\textendash}
+\@@_add_default_translation:nnn { fallback } { refpre    } {}
+\@@_add_default_translation:nnn { fallback } { refpos    } {}
+\@@_add_default_translation:nnn { fallback } { refpre-in } {}
+\@@_add_default_translation:nnn { fallback } { refpos-in } {}
 
 %    \end{macrocode}
 %
@@ -3461,6 +3287,122 @@
 %</package>
 %    \end{macrocode}
 %
+
+% \section{Localization}
+
+%    \begin{macrocode}
+%<*lang-english>
+%    \end{macrocode}
+%
+%
+% All strings retrieved with \cs{@@_get_string:nN} must have their values set
+% for `English', since this is what will be retrieved if no language package
+% is loaded.
+%    \begin{macrocode}
+\ProvideDictionaryFor{English}{zref-clever}
+
+\zcDicDefaultTransl{namesep}{\nobreakspace}
+\zcDicDefaultTransl{pairsep}{~and\nobreakspace}
+\zcDicDefaultTransl{listsep}{,~}
+\zcDicDefaultTransl{lastsep}{~and\nobreakspace}
+\zcDicDefaultTransl{tpairsep}{~and\nobreakspace}
+\zcDicDefaultTransl{tlistsep}{,~}
+\zcDicDefaultTransl{tlastsep}{,~and\nobreakspace}
+\zcDicDefaultTransl{rangesep}{~to\nobreakspace}
+\zcDicDefaultTransl{refpre}{}
+\zcDicDefaultTransl{refpos}{}
+\zcDicDefaultTransl{refpre-in}{}
+\zcDicDefaultTransl{refpos-in}{}
+
+\zcDicTypeTransl{part}{name-sg}{part}
+\zcDicTypeTransl{part}{name-pl}{parts}
+\zcDicTypeTransl{part}{Name-sg}{Part}
+\zcDicTypeTransl{part}{Name-pl}{Parts}
+\zcDicTypeTransl{part}{name-ab-sg}{part}
+\zcDicTypeTransl{part}{name-ab-pl}{parts}
+\zcDicTypeTransl{part}{Name-ab-sg}{Part}
+\zcDicTypeTransl{part}{Name-ab-pl}{Parts}
+
+\zcDicTypeTransl{chapter}{name-sg}{chapter}
+\zcDicTypeTransl{chapter}{name-pl}{chapters}
+\zcDicTypeTransl{chapter}{Name-sg}{Chapter}
+\zcDicTypeTransl{chapter}{Name-pl}{Chapters}
+\zcDicTypeTransl{chapter}{name-ab-sg}{chapter}
+\zcDicTypeTransl{chapter}{name-ab-pl}{chapters}
+\zcDicTypeTransl{chapter}{Name-ab-sg}{Chapter}
+\zcDicTypeTransl{chapter}{Name-ab-pl}{Chapters}
+
+\zcDicTypeTransl{section}{name-sg}{section}
+\zcDicTypeTransl{section}{name-pl}{sections}
+\zcDicTypeTransl{section}{Name-sg}{Section}
+\zcDicTypeTransl{section}{Name-pl}{Sections}
+\zcDicTypeTransl{section}{name-ab-sg}{section}
+\zcDicTypeTransl{section}{name-ab-pl}{sections}
+\zcDicTypeTransl{section}{Name-ab-sg}{Section}
+\zcDicTypeTransl{section}{Name-ab-pl}{Sections}
+
+\zcDicTypeTransl{paragraph}{name-sg}{paragraph}
+\zcDicTypeTransl{paragraph}{name-pl}{paragraphs}
+\zcDicTypeTransl{paragraph}{Name-sg}{Paragraph}
+\zcDicTypeTransl{paragraph}{Name-pl}{Paragraphs}
+\zcDicTypeTransl{paragraph}{name-ab-sg}{par.}
+\zcDicTypeTransl{paragraph}{name-ab-pl}{par.}
+\zcDicTypeTransl{paragraph}{Name-ab-sg}{Par.}
+\zcDicTypeTransl{paragraph}{Name-ab-pl}{Par.}
+
+\zcDicTypeTransl{page}{name-sg}{page}
+\zcDicTypeTransl{page}{name-pl}{pages}
+\zcDicTypeTransl{page}{Name-sg}{Page}
+\zcDicTypeTransl{page}{Name-pl}{Pages}
+\zcDicTypeTransl{page}{name-ab-sg}{p.}
+\zcDicTypeTransl{page}{name-ab-pl}{pp.}
+\zcDicTypeTransl{page}{Name-ab-sg}{Page}
+\zcDicTypeTransl{page}{Name-ab-pl}{Pages}
+
+\zcDicTypeTransl{figure}{name-sg}{figure}
+\zcDicTypeTransl{figure}{name-pl}{figures}
+\zcDicTypeTransl{figure}{Name-sg}{Figure}
+\zcDicTypeTransl{figure}{Name-pl}{Figures}
+\zcDicTypeTransl{figure}{name-ab-sg}{fig.}
+\zcDicTypeTransl{figure}{name-ab-pl}{figs.}
+\zcDicTypeTransl{figure}{Name-ab-sg}{Fig.}
+\zcDicTypeTransl{figure}{Name-ab-pl}{Figs.}
+
+\zcDicTypeTransl{table}{name-sg}{table}
+\zcDicTypeTransl{table}{name-pl}{tables}
+\zcDicTypeTransl{table}{Name-sg}{Table}
+\zcDicTypeTransl{table}{Name-pl}{Tables}
+\zcDicTypeTransl{table}{name-ab-sg}{table}
+\zcDicTypeTransl{table}{name-ab-pl}{tables}
+\zcDicTypeTransl{table}{Name-ab-sg}{Table}
+\zcDicTypeTransl{table}{Name-ab-pl}{Tables}
+
+\zcDicTypeTransl{equation}{name-sg}{equation}
+\zcDicTypeTransl{equation}{name-pl}{equations}
+\zcDicTypeTransl{equation}{Name-sg}{Equation}
+\zcDicTypeTransl{equation}{Name-pl}{Equations}
+\zcDicTypeTransl{equation}{name-ab-sg}{eq.}
+\zcDicTypeTransl{equation}{name-ab-pl}{eqs.}
+\zcDicTypeTransl{equation}{Name-ab-sg}{Eq.}
+\zcDicTypeTransl{equation}{Name-ab-pl}{Eqs.}
+\zcDicTypeTransl{equation}{refpre-in}{(}
+\zcDicTypeTransl{equation}{refpos-in}{)}
+
+\zcDicTypeTransl{item}{name-sg}{item}
+\zcDicTypeTransl{item}{name-pl}{items}
+\zcDicTypeTransl{item}{Name-sg}{Item}
+\zcDicTypeTransl{item}{Name-pl}{Items}
+\zcDicTypeTransl{item}{name-ab-sg}{item}
+\zcDicTypeTransl{item}{name-ab-pl}{items}
+\zcDicTypeTransl{item}{Name-ab-sg}{Item}
+\zcDicTypeTransl{item}{Name-ab-pl}{Items}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</lang-english>
+%    \end{macrocode}
+
+
 % \PrintIndex
 %
 % \end{implementation}
