@@ -1859,99 +1859,105 @@
       { \zref@extractdefault {#1} { zc@type } { \c_empty_tl } }
     \tl_set:Nx \l_@@_label_type_b_tl
       { \zref@extractdefault {#2} { zc@type } { \c_empty_tl } }
-    \bool_case_true:nF
+    \bool_set_false:N \l_@@_sort_decided_bool
+
+    \bool_if:nTF
       {
-%    \end{macrocode}
-% The second label has a type, but the first doesn't, leave the undefined
-% first (to be more visible).
-%    \begin{macrocode}
-        {
-          \tl_if_empty_p:N \l_@@_label_type_a_tl &&
-          ! \tl_if_empty_p:N \l_@@_label_type_b_tl
-        }
-        { \sort_return_same: }
-%    \end{macrocode}
-% The first label has a type, but the second doesn't, bring the second
-% forward.
-%    \begin{macrocode}
-        {
-          ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
-          \tl_if_empty_p:N \l_@@_label_type_b_tl
-        }
-        { \sort_return_swapped: }
-%    \end{macrocode}
-% Both labels have a type\dots{}
-%    \begin{macrocode}
-        {
-          ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
-          ! \tl_if_empty_p:N \l_@@_label_type_b_tl
-        }
-        {
-          \tl_if_eq:NNTF \l_@@_label_type_a_tl \l_@@_label_type_b_tl
-            {
-%    \end{macrocode}
-% \dots{} and it's the same type.
-%    \begin{macrocode}
-              \tl_set:Nx \l_@@_label_enclcnt_a_tl
-                { \zref@extractdefault {#1} { zc@enclcnt } { \c_empty_tl } }
-              \tl_set:Nx \l_@@_label_enclcnt_a_tl
-                { \tl_reverse_items:V \l_@@_label_enclcnt_a_tl }
-              \tl_set:Nx \l_@@_label_enclcnt_b_tl
-                { \zref@extractdefault {#2} { zc@enclcnt } { \c_empty_tl } }
-              \tl_set:Nx \l_@@_label_enclcnt_b_tl
-                { \tl_reverse_items:V \l_@@_label_enclcnt_b_tl }
-              \tl_set:Nx \l_@@_label_enclval_a_tl
-                { \zref@extractdefault {#1} { zc@enclval } { \c_empty_tl } }
-              \tl_set:Nx \l_@@_label_enclval_a_tl
-                { \tl_reverse_items:V \l_@@_label_enclval_a_tl }
-              \tl_set:Nx \l_@@_label_enclval_b_tl
-                { \zref@extractdefault {#2} { zc@enclval } { \c_empty_tl } }
-              \tl_set:Nx \l_@@_label_enclval_b_tl
-                { \tl_reverse_items:V \l_@@_label_enclval_b_tl }
+        % The second label has a type, but the first doesn't, leave the
+        % undefined first (to be more visible).
+        \tl_if_empty_p:N \l_@@_label_type_a_tl &&
+        ! \tl_if_empty_p:N \l_@@_label_type_b_tl
+      }
+      {
+        \sort_return_same:
+        \bool_set_true:N \l_@@_sort_decided_bool
+      }
+      {
+        \bool_if:nT
+          {
+            % The first label has a type, but the second doesn't, bring the
+            % second forward.
+            ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
+            \tl_if_empty_p:N \l_@@_label_type_b_tl
+          }
+          {
+            \sort_return_swapped:
+            \bool_set_true:N \l_@@_sort_decided_bool
+          }
+      }
 
-              \bool_set_false:N \l_@@_sort_decided_bool
-              % CHECK should I replace the tmp variables here?
-              \tl_clear:N \l_tmpa_tl
-              \tl_clear:N \l_tmpb_tl
-              \bool_until_do:Nn \l_@@_sort_decided_bool
-                {
-                  \tl_set:Nx \l_tmpa_tl
-                    { \tl_head:N \l_@@_label_enclcnt_a_tl }
-                  \tl_set:Nx \l_tmpb_tl
-                    { \tl_head:N \l_@@_label_enclcnt_b_tl }
+    \bool_if:nTF
+      {
+        ! \l_@@_sort_decided_bool &&
+        % Both labels have a type\dots{}
+        ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
+        ! \tl_if_empty_p:N \l_@@_label_type_b_tl
+      }
+      {
+        \tl_if_eq:NNTF \l_@@_label_type_a_tl \l_@@_label_type_b_tl
+          {
+            % \dots{} and it's the same type.
+            \tl_set:Nx \l_@@_label_enclcnt_a_tl
+              { \zref@extractdefault {#1} { zc@enclcnt } { \c_empty_tl } }
+            \tl_set:Nx \l_@@_label_enclcnt_a_tl
+              { \tl_reverse_items:V \l_@@_label_enclcnt_a_tl }
+            \tl_set:Nx \l_@@_label_enclcnt_b_tl
+              { \zref@extractdefault {#2} { zc@enclcnt } { \c_empty_tl } }
+            \tl_set:Nx \l_@@_label_enclcnt_b_tl
+              { \tl_reverse_items:V \l_@@_label_enclcnt_b_tl }
+            \tl_set:Nx \l_@@_label_enclval_a_tl
+              { \zref@extractdefault {#1} { zc@enclval } { \c_empty_tl } }
+            \tl_set:Nx \l_@@_label_enclval_a_tl
+              { \tl_reverse_items:V \l_@@_label_enclval_a_tl }
+            \tl_set:Nx \l_@@_label_enclval_b_tl
+              { \zref@extractdefault {#2} { zc@enclval } { \c_empty_tl } }
+            \tl_set:Nx \l_@@_label_enclval_b_tl
+              { \tl_reverse_items:V \l_@@_label_enclval_b_tl }
 
-                  \bool_case_true:nF
-                    {
-                      % Both are empty, meaning: neither labels have any
-                      % (further) ``enclosing counters'' (left).
+            % CHECK should I replace the tmp variables here?
+            \tl_clear:N \l_tmpa_tl
+            \tl_clear:N \l_tmpb_tl
+            \bool_until_do:Nn \l_@@_sort_decided_bool
+              {
+                \tl_set:Nx \l_tmpa_tl
+                  { \tl_head:N \l_@@_label_enclcnt_a_tl }
+                \tl_set:Nx \l_tmpb_tl
+                  { \tl_head:N \l_@@_label_enclcnt_b_tl }
+
+                \bool_if:nTF
+                  {
+                    % Both are empty, meaning: neither labels have any
+                    % (further) ``enclosing counters'' (left).
+                    \tl_if_empty_p:V \l_tmpa_tl &&
+                    \tl_if_empty_p:V \l_tmpb_tl
+                  }
+                  {
+                    \exp_args:Nxx \tl_if_eq:nnTF
+                      { \zref@extractdefault {#1} { zc@counter } { } }
+                      { \zref@extractdefault {#2} { zc@counter } { } }
                       {
-                        \tl_if_empty_p:V \l_tmpa_tl &&
-                        \tl_if_empty_p:V \l_tmpb_tl
+                        \bool_set_true:N \l_@@_sort_decided_bool
+                        \int_compare:nNnTF
+                          { \zref@extractdefault {#1} { zc@cntval } {-1} }
+                            >
+                          { \zref@extractdefault {#2} { zc@cntval } {-1} }
+                          { \sort_return_swapped: }
+                          { \sort_return_same:    }
                       }
                       {
-                        \exp_args:Nxx \tl_if_eq:nnTF
-                          { \zref@extractdefault {#1} { zc@counter } { } }
-                          { \zref@extractdefault {#2} { zc@counter } { } }
-                          {
-                            \bool_set_true:N \l_@@_sort_decided_bool
-                            \int_compare:nNnTF
-                              { \zref@extractdefault {#1} { zc@cntval } {-1} }
-                                >
-                              { \zref@extractdefault {#2} { zc@cntval } {-1} }
-                              { \sort_return_swapped: }
-                              { \sort_return_same:    }
-                          }
-                          {
-                            \msg_warning:nnnn { zref-clever }
-                              { counters-not-nested } {#1} {#2}
-                            \bool_set_true:N \l_@@_sort_decided_bool
-                            \sort_return_same:
-                          }
+                        \msg_warning:nnnn { zref-clever }
+                          { counters-not-nested } {#1} {#2}
+                        \bool_set_true:N \l_@@_sort_decided_bool
+                        \sort_return_same:
                       }
-
-                      % `a' is empty (and `b' is not), meaning: `b' is
-                      % (possibly) nested in `a'.
-                      { \tl_if_empty_p:V \l_tmpa_tl }
+                  }
+                  {
+                    \bool_if:nTF
+                      {
+                        % `a' is empty (and `b' is not), meaning: `b' is
+                        % (possibly) nested in `a'.
+                        \tl_if_empty_p:V \l_tmpa_tl
+                      }
                       {
                         \tl_set:Nx \l_tmpa_tl
                           { {\zref@extractdefault {#1} { zc@counter } { }} }
@@ -1968,135 +1974,132 @@
                             \sort_return_same:
                           }
                       }
-
-                      % `b' is empty (and `a' is not), meaning: `a' is
-                      % (possibly) nested in `b'.
-                      { \tl_if_empty_p:V \l_tmpb_tl }
                       {
-                        \tl_set:Nx \l_tmpb_tl
-                          { {\zref@extractdefault {#2} { zc@counter } { }} }
-                        \exp_args:NNx \tl_if_in:NnTF
-                          \l_@@_label_enclcnt_a_tl { \l_tmpb_tl }
+                        \bool_if:nTF
                           {
-                            \bool_set_true:N \l_@@_sort_decided_bool
-                            \sort_return_swapped:
+                            % `b' is empty (and `a' is not), meaning: `a' is
+                            % (possibly) nested in `b'.
+                            \tl_if_empty_p:V \l_tmpb_tl
                           }
                           {
-                            \msg_warning:nnnn { zref-clever }
-                              { counters-not-nested } {#1} {#2}
-                            \bool_set_true:N \l_@@_sort_decided_bool
-                            \sort_return_same:
+                            \tl_set:Nx \l_tmpb_tl
+                              { {\zref@extractdefault {#2} { zc@counter } { }} }
+                            \exp_args:NNx \tl_if_in:NnTF
+                              \l_@@_label_enclcnt_a_tl { \l_tmpb_tl }
+                              {
+                                \bool_set_true:N \l_@@_sort_decided_bool
+                                \sort_return_swapped:
+                              }
+                              {
+                                \msg_warning:nnnn { zref-clever }
+                                  { counters-not-nested } {#1} {#2}
+                                \bool_set_true:N \l_@@_sort_decided_bool
+                                \sort_return_same:
+                              }
+                          }
+                          {
+                            % Neither is empty, meaning: we can (possibly)
+                            % compare the values of the current enclosing
+                            % counter in the loop, if they are equal, we are
+                            % still in the loop, if they are not, a sorting
+                            % decision can be made directly.
+                            \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
+                              {
+                                \int_compare:nNnTF
+                                  { \tl_head:N \l_@@_label_enclval_a_tl }
+                                    =
+                                  { \tl_head:N \l_@@_label_enclval_b_tl }
+                                  {
+                                    \tl_set:Nx \l_@@_label_enclcnt_a_tl
+                                      { \tl_tail:N \l_@@_label_enclcnt_a_tl }
+                                    \tl_set:Nx \l_@@_label_enclcnt_b_tl
+                                      { \tl_tail:N \l_@@_label_enclcnt_b_tl }
+                                    \tl_set:Nx \l_@@_label_enclval_a_tl
+                                      { \tl_tail:N \l_@@_label_enclval_a_tl }
+                                    \tl_set:Nx \l_@@_label_enclval_b_tl
+                                      { \tl_tail:N \l_@@_label_enclval_b_tl }
+                                  }
+                                  {
+                                    \bool_set_true:N \l_@@_sort_decided_bool
+                                    \int_compare:nNnTF
+                                      { \tl_head:N \l_@@_label_enclval_a_tl }
+                                        >
+                                      { \tl_head:N \l_@@_label_enclval_b_tl }
+                                      { \sort_return_swapped: }
+                                      { \sort_return_same:    }
+                                  }
+                              }
+                              {
+                                \msg_warning:nnnn { zref-clever }
+                                  { counters-not-nested } {#1} {#2}
+                                \bool_set_true:N \l_@@_sort_decided_bool
+                                \sort_return_same:
+                              }
                           }
                       }
-                    }
-                    % None of the above matched, hence neither is empty,
-                    % meaning: we can (possibly) compare the values of the
-                    % current enclosing counter in the loop, if they are
-                    % equal, we are still in the loop, if they are not, a
-                    % sorting decision can be made directly.
-                    {
-                      \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
-                        {
-                          \int_compare:nNnTF
-                            { \tl_head:N \l_@@_label_enclval_a_tl }
-                              =
-                            { \tl_head:N \l_@@_label_enclval_b_tl }
-                            {
-                              \tl_set:Nx \l_@@_label_enclcnt_a_tl
-                                { \tl_tail:N \l_@@_label_enclcnt_a_tl }
-                              \tl_set:Nx \l_@@_label_enclcnt_b_tl
-                                { \tl_tail:N \l_@@_label_enclcnt_b_tl }
-                              \tl_set:Nx \l_@@_label_enclval_a_tl
-                                { \tl_tail:N \l_@@_label_enclval_a_tl }
-                              \tl_set:Nx \l_@@_label_enclval_b_tl
-                                { \tl_tail:N \l_@@_label_enclval_b_tl }
-                            }
-                            {
-                              \bool_set_true:N \l_@@_sort_decided_bool
-                              \int_compare:nNnTF
-                                { \tl_head:N \l_@@_label_enclval_a_tl }
-                                  >
-                                { \tl_head:N \l_@@_label_enclval_b_tl }
-                                { \sort_return_swapped: }
-                                { \sort_return_same:    }
-                            }
-                        }
-                        {
-                          \msg_warning:nnnn { zref-clever }
-                            { counters-not-nested } {#1} {#2}
-                          \bool_set_true:N \l_@@_sort_decided_bool
-                          \sort_return_same:
-                        }
-
-                    }
-                }
-            }
-            {
-%    \end{macrocode}
-% \dots{} and they are different types.
-%    \begin{macrocode}
-              \int_zero:N \l_@@_sort_prior_a_int
-              \int_zero:N \l_@@_sort_prior_b_int
-              % \cs{l_@@_typesort_seq} was stored in reverse sequence, and we
-              % compute the sort priorities in the negative range, so that we
-              % can implicitly rely on `0' being the ``last value''.
-              \seq_map_indexed_inline:Nn \l_@@_typesort_seq
-                {
-                  \tl_if_eq:nnTF {##2} {{othertypes}}
-                    {
-                      \int_compare:nNnT { \l_@@_sort_prior_a_int } = { 0 }
-                        { \int_set:Nn \l_@@_sort_prior_a_int { - ##1 } }
-                      \int_compare:nNnT { \l_@@_sort_prior_b_int } = { 0 }
-                        { \int_set:Nn \l_@@_sort_prior_b_int { - ##1 } }
-                    }
-                    {
-                      \tl_if_eq:NnTF \l_@@_label_type_a_tl {##2}
-                        { \int_set:Nn \l_@@_sort_prior_a_int { - ##1 } }
-                        {
-                          \tl_if_eq:NnT \l_@@_label_type_b_tl {##2}
-                            { \int_set:Nn \l_@@_sort_prior_b_int { - ##1 } }
-                        }
-                    }
-                }
-              \bool_case_true:nF
-                {
-                  {
-                    \int_compare_p:nNn
-                      { \l_@@_sort_prior_a_int } <
-                      { \l_@@_sort_prior_b_int }
                   }
-                  { \sort_return_same: }
+              }
+          }
+          {
+            % \dots{} and they are different types.
+            \int_zero:N \l_@@_sort_prior_a_int
+            \int_zero:N \l_@@_sort_prior_b_int
+            % \cs{l_@@_typesort_seq} was stored in reverse sequence, and we
+            % compute the sort priorities in the negative range, so that we
+            % can implicitly rely on `0' being the ``last value''.
+            \seq_map_indexed_inline:Nn \l_@@_typesort_seq
+              {
+                \tl_if_eq:nnTF {##2} {{othertypes}}
+                  {
+                    \int_compare:nNnT { \l_@@_sort_prior_a_int } = { 0 }
+                      { \int_set:Nn \l_@@_sort_prior_a_int { - ##1 } }
+                    \int_compare:nNnT { \l_@@_sort_prior_b_int } = { 0 }
+                      { \int_set:Nn \l_@@_sort_prior_b_int { - ##1 } }
+                  }
+                  {
+                    \tl_if_eq:NnTF \l_@@_label_type_a_tl {##2}
+                      { \int_set:Nn \l_@@_sort_prior_a_int { - ##1 } }
+                      {
+                        \tl_if_eq:NnT \l_@@_label_type_b_tl {##2}
+                          { \int_set:Nn \l_@@_sort_prior_b_int { - ##1 } }
+                      }
+                  }
+              }
+            \bool_if:nTF
+              {
+                \int_compare_p:nNn
+                  { \l_@@_sort_prior_a_int } <
+                  { \l_@@_sort_prior_b_int }
+              }
+              { \sort_return_same: }
+              {
+                \bool_if:nTF
                   {
                     \int_compare_p:nNn
                       { \l_@@_sort_prior_a_int } >
                       { \l_@@_sort_prior_b_int }
                   }
                   { \sort_return_swapped: }
-                }
-                {
-%    \end{macrocode}
-% Sort priorities are equal for different types: the type that occurs first in
-% \meta{labels}, as given by the user, is kept (or brought) forward.
-%    \begin{macrocode}
-                  \seq_map_inline:Nn \l_@@_label_types_seq
-                    {
-                      \tl_if_eq:NnTF \l_@@_label_type_a_tl {##1}
-                        { \seq_map_break:n { \sort_return_same: } }
-                        {
-                          \tl_if_eq:NnT \l_@@_label_type_b_tl {##1}
-                            { \seq_map_break:n { \sort_return_swapped: } }
-                        }
-                    }
-
-                }
-            }
-        }
+                  {
+                    % Sort priorities are equal for different types: the type
+                    % that occurs first in \meta{labels}, as given by the
+                    % user, is kept (or brought) forward.
+                    \seq_map_inline:Nn \l_@@_label_types_seq
+                      {
+                        \tl_if_eq:NnTF \l_@@_label_type_a_tl {##1}
+                          { \seq_map_break:n { \sort_return_same: } }
+                          {
+                            \tl_if_eq:NnT \l_@@_label_type_b_tl {##1}
+                              { \seq_map_break:n { \sort_return_swapped: } }
+                          }
+                      }
+                  }
+              }
+          }
       }
       {
-%    \end{macrocode}
-% If none of the above cases match, then neither of the labels has a type.  We
-% can't do much of meaningful here, but if it's the same counter, compare it.
-%    \begin{macrocode}
+        % Neither of the labels has a type.  We can't do much of meaningful
+        % here, but if it's the same counter, compare it.
         \exp_args:Nxx \tl_if_eq:nnTF
           { \zref@extractdefault {#1} { zc@counter } { } }
           { \zref@extractdefault {#2} { zc@counter } { } }
@@ -2109,7 +2112,6 @@
               { \sort_return_same:    }
           }
           { \sort_return_same: }
-
       }
   }
 %    \end{macrocode}
@@ -2425,38 +2427,32 @@
 %    \end{macrocode}
 % Signal whether the type name is to be included in the hyperlink or not.
 %    \begin{macrocode}
-    \bool_case_true:nF
+    \bool_lazy_any:nTF
       {
         { ! \l_@@_use_hyperref_bool }
-        { \bool_set_false:N \l_@@_name_in_link_bool }
-
         { \l_@@_link_star_bool }
-        { \bool_set_false:N \l_@@_name_in_link_bool }
-
         { \tl_if_empty_p:N \l_@@_type_name_tl }
-        { \bool_set_false:N \l_@@_name_in_link_bool }
-
         { \str_if_eq_p:Vn \l_@@_nameinlink_str { false } }
-        { \bool_set_false:N \l_@@_name_in_link_bool }
-
-        { \str_if_eq_p:Vn \l_@@_nameinlink_str { true } }
-        { \bool_set_true:N \l_@@_name_in_link_bool }
-
-        {
-          \str_if_eq_p:Vn \l_@@_nameinlink_str { tsingle } &&
-          \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl
-        }
-        { \bool_set_true:N \l_@@_name_in_link_bool }
-
-        {
-          \str_if_eq_p:Vn \l_@@_nameinlink_str { single } &&
-          \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl &&
-          \l_@@_typeset_last_bool &&
-          \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
-        }
-        { \bool_set_true:N \l_@@_name_in_link_bool }
       }
       { \bool_set_false:N \l_@@_name_in_link_bool }
+      {
+        \bool_lazy_any:nTF
+          {
+            { \str_if_eq_p:Vn \l_@@_nameinlink_str { true } }
+            {
+              \str_if_eq_p:Vn \l_@@_nameinlink_str { tsingle } &&
+              \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl
+            }
+            {
+              \str_if_eq_p:Vn \l_@@_nameinlink_str { single } &&
+              \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl &&
+              \l_@@_typeset_last_bool &&
+              \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
+            }
+          }
+          { \bool_set_true:N \l_@@_name_in_link_bool }
+          { \bool_set_false:N \l_@@_name_in_link_bool }
+      }
   }
 
 \cs_new:Npn \@@_get_ref_first:
@@ -2807,29 +2803,29 @@
                   { \bool_set_true:N \l_@@_last_of_type_bool }
                   {
                     % Neither is undefined, we must check the types.
-                    \bool_case_true:nF
+                    \bool_if:nTF
+                      % Both empty: same ``type''.
                       {
-                        % Both empty: same ``type''.
-                        {
-                          \tl_if_empty_p:N \l_@@_label_type_a_tl &&
-                          \tl_if_empty_p:N \l_@@_label_type_b_tl
-                        }
-                        { \bool_set_false:N \l_@@_last_of_type_bool }
-
-                        % Neither empty: compare types.
-                        {
-                          ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
-                          ! \tl_if_empty_p:N \l_@@_label_type_b_tl
-                        }
-                        {
-                          \tl_if_eq:NNTF
-                            \l_@@_label_type_a_tl \l_@@_label_type_b_tl
-                            { \bool_set_false:N \l_@@_last_of_type_bool }
-                            { \bool_set_true:N \l_@@_last_of_type_bool  }
-                        }
+                        \tl_if_empty_p:N \l_@@_label_type_a_tl &&
+                        \tl_if_empty_p:N \l_@@_label_type_b_tl
                       }
-                      % One empty, the other not: different ``types''.
-                      { \bool_set_true:N \l_@@_last_of_type_bool }
+                      { \bool_set_false:N \l_@@_last_of_type_bool }
+                      {
+                        \bool_if:nTF
+                          % Neither empty: compare types.
+                          {
+                            ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
+                            ! \tl_if_empty_p:N \l_@@_label_type_b_tl
+                          }
+                          {
+                            \tl_if_eq:NNTF
+                              \l_@@_label_type_a_tl \l_@@_label_type_b_tl
+                              { \bool_set_false:N \l_@@_last_of_type_bool }
+                              { \bool_set_true:N \l_@@_last_of_type_bool  }
+                          }
+                          % One empty, the other not: different ``types''.
+                          { \bool_set_true:N \l_@@_last_of_type_bool }
+                      }
                   }
               }
           }
@@ -3024,63 +3020,69 @@
     % the queue.  Or, if ``typset'' option is not ``both'', handle it here
     % too.
     \@@_type_name_setup:
-    \bool_case_true:nF
+    \bool_if:nTF
+      { \l_@@_typeset_ref_bool && \l_@@_typeset_name_bool }
       {
-        { \l_@@_typeset_ref_bool && \l_@@_typeset_name_bool }
-        {
-          \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
-            { \@@_get_ref_first: }
-        }
-
-        { \l_@@_typeset_ref_bool }
-        {
-          \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
-            { \@@_get_ref:V \l_@@_type_first_label_tl }
-        }
-
-        { \l_@@_typeset_name_bool }
-        {
-          \tl_set:Nx \l_@@_typeset_queue_curr_tl
-            {
-              \bool_if:NTF \l_@@_name_in_link_bool
-                {
-                  \exp_not:N \group_begin:
-                  \exp_not:V \l_@@_namefont_tl
-                  % It's two '@s', but escaped for DocStrip.
-                  \exp_not:N \hyper@@@@link
-                    {
-                      \zref@ifrefcontainsprop
-                        { \l_@@_type_first_label_tl } { urluse }
-                        {
-                          \zref@extractdefault { \l_@@_type_first_label_tl }
-                            { urluse } {}
-                        }
-                        {
-                          \zref@extractdefault { \l_@@_type_first_label_tl }
-                            { url } {}
-                        }
-                    }
-                    {
-                      \zref@extractdefault
-                        { \l_@@_type_first_label_tl } { anchor } {}
-                    }
-                    { \exp_not:V \l_@@_type_name_tl }
-                  \exp_not:N \group_end:
-                }
-                {
-                  \exp_not:N \group_begin:
-                  \exp_not:V \l_@@_namefont_tl
-                  \exp_not:V \l_@@_type_name_tl
-                  \exp_not:N \group_end:
-                }
-            }
-        }
+        \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
+          { \@@_get_ref_first: }
       }
       {
-        % This case should not happen, given how the options are set up, but a
-        % sensible fallback, equal to the behavior of ``both''.
-        \tl_put_left:Nx
-          \l_@@_typeset_queue_curr_tl { \@@_get_ref_first: }
+        \bool_if:nTF
+          { \l_@@_typeset_ref_bool }
+          {
+            \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
+              { \@@_get_ref:V \l_@@_type_first_label_tl }
+          }
+          {
+            \bool_if:nTF
+              { \l_@@_typeset_name_bool }
+              {
+                \tl_set:Nx \l_@@_typeset_queue_curr_tl
+                  {
+                    \bool_if:NTF \l_@@_name_in_link_bool
+                      {
+                        \exp_not:N \group_begin:
+                        \exp_not:V \l_@@_namefont_tl
+                        % It's two '@s', but escaped for DocStrip.
+                        \exp_not:N \hyper@@@@link
+                          {
+                            \zref@ifrefcontainsprop
+                              { \l_@@_type_first_label_tl } { urluse }
+                              {
+                                \zref@extractdefault
+                                  { \l_@@_type_first_label_tl }
+                                  { urluse } {}
+                              }
+                              {
+                                \zref@extractdefault
+                                  { \l_@@_type_first_label_tl }
+                                  { url } {}
+                              }
+                          }
+                          {
+                            \zref@extractdefault
+                              { \l_@@_type_first_label_tl } { anchor } {}
+                          }
+                          { \exp_not:V \l_@@_type_name_tl }
+                        \exp_not:N \group_end:
+                      }
+                      {
+                        \exp_not:N \group_begin:
+                        \exp_not:V \l_@@_namefont_tl
+                        \exp_not:V \l_@@_type_name_tl
+                        \exp_not:N \group_end:
+                      }
+                  }
+              }
+              {
+                % This case would correspond to "typeset=none" but should not
+                % happen, given the options are set up to typeset at least one
+                % of "ref" or "name", but a sensible fallback, equal to the
+                % behavior of ``both''.
+                \tl_put_left:Nx
+                  \l_@@_typeset_queue_curr_tl { \@@_get_ref_first: }
+              }
+          }
       }
 
     % Typeset the previous type, if there is one.
