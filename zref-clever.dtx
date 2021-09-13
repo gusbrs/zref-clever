@@ -59,6 +59,12 @@
 % \begin{documentation}
 %
 %
+% \section{Introduction}
+%
+%
+%
+%
+%
 % \end{documentation}
 %
 %
@@ -78,12 +84,37 @@
 %    \end{macrocode}
 %
 %
+% Taking a stance on backward compatibility of the package.  During initial
+% development, we have used freely recent features of the kernel (albeit
+% refraining from \pkg{l3candidates}, even though I'd have loved to have used
+% \cs{bool_case_true:}\dots{}).  We presume \pkg{xparse} (which made to the
+% kernel in the 2020-10-01 release), and also presume \pkg{expl3} (which made
+% to the kernel in the 2020-02-02 release).  Hence, since we would not be able
+% to go much backwards without special handling anyway, we make the cut with
+% the inclusion of the new hook management system (\pkg{ltcmdhooks}), which is
+% bound to be useful for our purposes, and was released with the 2021-06-01
+% kernel.
+%    \begin{macrocode}
+\providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
+\IfFormatAtLeastTF{2021-06-01}
+  {}
+  {%
+    \PackageError{zref-clever}{LaTeX kernel too old}
+      {%
+        'zref-clever' requires a LaTeX kernel newer than 2021-06-01.%
+        \MessageBreak Loading will abort!%
+      }%
+    \endinput
+  }%
+%    \end{macrocode}
+%
 %
 % Identify the package.
 %    \begin{macrocode}
-\ProvidesExplPackage {zref-clever} {2021-08-25} {0.1.0-alpha}
+\ProvidesExplPackage {zref-clever} {2021-09-13} {0.1.0-alpha}
   {Do-what-I-mean cross-references based on zref}
 %    \end{macrocode}
+%
 %
 % \section{Dependencies}
 %
@@ -94,10 +125,9 @@
 %    \end{macrocode}
 %
 %
-%
 % \section{\pkg{zref} setup}
 %
-% We are (mostly) interested in three basic label elements: the reference
+% We are (mainly) interested in three basic label elements: the reference
 % itself, the page, and the counter.  The `page' and `counter' are
 % respectively handled by modules \pkg{zref-base} and \pkg{zref-counter}.  The
 % \pkg{zref-abspage} also provides the `abspage' property which gives us a
@@ -112,52 +142,56 @@
 % However, the \pkg{zref-abspage} module is very simple, but loads
 % \pkg{atbegshi}, which is no longer needed with a recent kernel, which we
 % require here anyway.  So we can spare this additional dependency by
-% providing the property internally.  Since only \pkg{zref-counter} remains,
-% which is also trivial, we do that too, and thus ensure that all needed data
-% is stored in ``internal'' properties.  The only exception is the
-% \texttt{page} property, which is available by default (no extra module
-% required), and is not tampered with by \cs{labelformat}, as the
-% \texttt{default} property does.  Another exception which we don't need to
-% handle at the data provision side, but need to cater for in the retrieval
-% side, is the \texttt{url}/\texttt{urluse} property from \pkg{zref-xr}
-% module, which is added to the labels imported from external documents, and
-% needed to construct hyperlinks to them.
+% providing the property internally.  Since the job of \pkg{zref-counter} is
+% also trivial, we do that too, and thus ensure that almost all needed data is
+% stored in ``internal'' properties.  The only exception is the \texttt{page}
+% property, which is available by default (no extra module required), and is
+% not tampered with by \cs{labelformat}, as the \texttt{default} property is.
+% Another exception which we don't need to handle at the data provision side,
+% but need to cater for in the retrieval side, are the \texttt{url} /
+% \texttt{urluse} properties from the \pkg{zref-xr} module, which are added to
+% the labels imported from external documents, and needed to construct
+% hyperlinks to them.
 %
 %
 %    \begin{macrocode}
 \zref@newprop { zc@counter } { \@currentcounter }
 \zref@addprop \ZREF@mainlist { zc@counter }
 \zref@newprop { zc@type }
-  { \exp_args:NNo \prop_item:Nn \l_@@_counter_type_prop { \@currentcounter } }
+  { \exp_args:NNe \prop_item:Nn \l_@@_counter_type_prop { \@currentcounter } }
 \zref@addprop \ZREF@mainlist { zc@type }
 %    \end{macrocode}
 %
-% From the definition of \cs{@currentlabel} done inside \cs{refstepcounter} in
-% 'texdoc source2e', section 'ltcounts.dtx'.  We just drop the \cs{p@...}
-% prefix.
+%
+% Provide \texttt{zc@thecnt} property, based on the definition of
+% \cs{@currentlabel} done inside \cs{refstepcounter} in 'texdoc source2e',
+% section 'ltcounts.dtx'.  We just drop the \cs{p@...} prefix.
 %    \begin{macrocode}
-\zref@newprop { zc@thecnt } { \cs:w the \@currentcounter \cs_end: }
+\zref@newprop { zc@thecnt } { \use:c { the \@currentcounter } }
 \zref@addprop \ZREF@mainlist { zc@thecnt }
 %    \end{macrocode}
 %
-% However, the moment where the label is set is a privileged one, because at
-% this point we have a lot of raw information available.  Information which
-% may be difficult to retrieve later on by parsing the reference printed value
-% of the counter, which we stored in \texttt{zc@thecnt} above.  Hence, we
-% seize the opportunity to store some of that information in a way which eases
+%
+% At this point, the basic properties of interest are handled.  However, the
+% moment where the label is set is a privileged one, because at this point we
+% have a lot of raw information available.  Information which may be difficult
+% to retrieve later on by parsing the reference printed value of the counter,
+% which we stored in \texttt{zc@thecnt} above.  Hence, we seize the
+% opportunity to store some of that information in a way which eases
 % significantly the task of processing the reference later on: i) the counter
-% \emph{value}, as a number; ii) the counter values of the set of counters
-% which may trigger a reset of the current counter.
+% \emph{value}, as a number; ii) the counter (and value) of the set of
+% counters which may trigger a reset of the current counter.
+%
 %
 % The first one is trivial, \cs{c@}\meta{counter} contains the counter's
 % numerical value (see `texdoc source2e', section `ltcounts.dtx'), we just
 % store it in \texttt{zc@cntval}.
 %    \begin{macrocode}
-\zref@newprop { zc@cntval } [0] { \int_use:c { c@\@currentcounter } }
+\zref@newprop { zc@cntval } [0] { \int_use:c { c@ \@currentcounter } }
 \zref@addprop \ZREF@mainlist { zc@cntval }
 %    \end{macrocode}
 %
-% And we need the same for the page and abspage.
+% And we need the numeric value for the page and abspage.
 %    \begin{macrocode}
 \zref@newprop* { zc@pgval } [0] { \int_use:c { c@page } }
 \zref@addprop \ZREF@mainlist { zc@pgval }
@@ -166,6 +200,7 @@
 \zref@newprop* { zc@abspg } [0] { \int_use:N \g_@@_abspage_int }
 \zref@addprop \ZREF@mainlist { zc@abspg }
 %    \end{macrocode}
+%
 %
 % The second one is trickier.  For starters, the counters which may reset the
 % current counter are not retrievable from the counter itself, because this
@@ -216,6 +251,7 @@
       }
   }
 %    \end{macrocode}
+%
 % Both \texttt{e} and \texttt{f} expansions work for this particular recursive
 % call.  For the time being, I'll stay with the \texttt{e} variant, since
 % conceptually it is what I want (\texttt{x} itself is not expandable), and
@@ -228,6 +264,7 @@
 \cs_generate_variant:Nn \@@_get_enclosing_counters_value:n { V , e }
 %    \end{macrocode}
 % \end{macro}
+%
 %
 % \begin{macro}[EXP]
 %   {
@@ -270,6 +307,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
+%
 % Finally, add \texttt{zc@enclcnt} and \texttt{zc@enclval} to \pkg{zref}'s
 % \texttt{main} property list.
 %    \begin{macrocode}
@@ -282,89 +320,32 @@
 %    \end{macrocode}
 %
 %
-%
-% A previous version of the same task.  Easier to implement, hence possibly
-% more robust (for me to maintain, that is\dots{}), but which required to
-% assess the state of the reset counters at \texttt{begindocument}, so does
-% not get mid-document changes.  Keep it around for the time being, in case we
-% face trouble with the expandable version.  The procedure here examines a set
-% of counters, those included in \cs{g_@@_resetters_seq}, and for each counter
-% each of those reset, defines a \texttt{tl} variable with name
-% \cs{g_@@_counter_\meta{counter}_enclosing_tl} storing the value of its
-% ``enclosing counter''.  These \texttt{tl} variables are then used by
-% \cs{@@_get_enclosing_counters_value_old:n} to store the desired information
-% when the label is actually set.
-% \begin{verbatim}
-% \cs_new:Npn \@@_get_enclosing_counters_value_old:n #1
-%   {
-%     \bool_lazy_and:nnT
-%       { \tl_if_exist_p:c { g_@@_counter_ \tl_use:N #1 _enclosing_tl } }
-%       {
-%         \cs_if_exist_p:c
-%           { c@ \use:c { g_@@_counter_ \tl_use:N #1 _enclosing_tl } }
-%       }
-%       {
-%         { \int_use:c { c@ \use:c { g_@@_counter_ \tl_use:N #1 _enclosing_tl } } }
-%         \@@_get_enclosing_counters_value_old:n
-%           { \use:c { g_@@_counter_ \tl_use:N #1 _enclosing_tl } }
-%       }
-%   }
-% \end{verbatim}
-% Map through \cs{g_@@_resetters_seq} defining \texttt{tl} variables storing,
-% for each counter that may be reset, the ``enclosing counter'' which may do
-% so.
-% \begin{verbatim}
-% \cs_new:Npn \@@_set_enclosing_counters:
-%   {
-%     \group_begin:
-%       \seq_map_inline:Nn \g_@@_resetters_seq
-%         {
-%           \cs_if_exist:cT { c@ ##1 }
-%             {
-%               \cs_set:Npn \@@_elt_aux:n ####1
-%                 {
-%                   \tl_if_exist:cF { g_@@_counter_ ####1 _enclosing_tl }
-%                     { \tl_gset:cx { g_@@_counter_ ####1 _enclosing_tl } {##1} }
-%                 }
-%               \cs_set_eq:NN \@elt \@@_elt_aux:n
-%               \use:c { cl@ ##1 }
-%             }
-%         }
-%     \group_end:
-%   }
-% \end{verbatim}
-% And run it at \texttt{begindocument}.
-% \begin{verbatim}
-% \AddToHook { begindocument } { \@@_set_enclosing_counters: }
-% \end{verbatim}
-%
+% Another piece of information we need is the page numbering format being used
+% by \cs{thepage}, so that we know when we can (or not) group a set of page
+% references in a range.  Unfortunately, the ``page'' is not a typical counter
+% in ways which complicates things.  First, it does commonly get reset along
+% the document, not necessarily by the usual counter reset chains, but rather
+% with \cs{pagenumbering} or variations thereof.  Second, the format of the
+% page number commonly changes in the document (roman, arabic, etc.), not
+% necessarily, though usually, together with a reset.  Trying to ``parse''
+% \cs{thepage} to retrieve such information is bound to go wrong: we don't
+% know, and can't know, what is within that macro, and that's the business of
+% the user, or of the documentclass, or of the loaded packages.  The technique
+% used by \pkg{cleveref}, which we borrow here, is simple and smart: store
+% with the label what \cs{thepage} would return, if the counter \cs{c@page}
+% was ``1''.  That does not allow us to \emph{sort} the references, luckily
+% however, we have \texttt{abspage} which can be used for that.  But we can
+% decide whether two labels can be compressed or not based on this format: if
+% they are identical, we can compress them, otherwise, we can't.
+% \pkg{cleveref} actually resets the counter to ``1'' with \cs{setcounter},
+% which is a global operation, and restores it in sequence.  Here we adopt a
+% more cautious approach of locally redefining \cs{c@page} to return ``1'',
+% thus avoiding any global spillovers of this trick.  Since this operation is
+% not expandable we cannot run it directly from the property definition.
+% Hence, we use a shipout hook, and set \cs{g_@@_page_format_tl}, which can
+% then be retrieved by the starred definition of |\zref@newprop*{zc@pgfmt}|.
 %
 % \begin{macro}[EXP]{\@@_page_numbering:}
-%   Another piece of information we need is the page numbering format being
-%   used by \cs{thepage}, so that we know when we can (or not) group a set of
-%   page references in a range.  Unfortunately, the ``page'' is not a typical
-%   counter in ways which complicates things.  First, it does commonly get
-%   reset along the document, not necessarily by the usual counter reset
-%   chains, but rather with \cs{pagenumbering} or variations thereof.  Second,
-%   the format of the page number commonly changes in the document (roman,
-%   arabic, etc.), not necessarily, though usually, together with a reset.
-%   Trying to ``parse'' \cs{thepage} to retrieve such information is bound to
-%   go wrong: we don't know, and can't know, what is within that macro, and
-%   that's the business of the user, or of the documentclass, or of the loaded
-%   packages.  The technique used by \pkg{cleveref}, which we borrow here, is
-%   simple and smart: store with the label what \cs{thepage} would return, if
-%   the counter \cs{c@page} was ``1''.  That does not allow us to \emph{sort}
-%   the references, luckily however, we have \texttt{abspage} which can be
-%   used for that.  But we can decide whether two labels can be compressed or
-%   not based on this format: if they are identical, we can compress them,
-%   otherwise, we can't.  \pkg{cleveref} actually resets the counter to ``1''
-%   with \cs{setcounter}, which is a global operation, and restores it in
-%   sequence.  Here we adopt a more cautious approach of locally redefining
-%   \cs{c@page} to return ``1'', thus avoiding any global spillovers of this
-%   trick.  Since this operation is not expandable we cannot run it directly
-%   from the property definition.  Hence, we use a shipout hook, and set
-%   \cs{g_@@_page_format_tl}, which can then be retrieved by the starred
-%   definition of |\zref@newprop*{zc@pgfmt}|.
 %    \begin{macrocode}
 \tl_new:N \g_@@_page_format_tl
 \cs_new_protected:Npx \@@_page_format_aux: { \int_eval:n { 1 } }
@@ -384,7 +365,7 @@
 %
 % \section{Plumbing}
 %
-% \subsection{Reference Types}
+% \subsection{Reference types}
 % \label{sec:reference-types}
 %
 % Let's start with a bit of terminology, to avoid confusion.  A ``reference
@@ -395,15 +376,15 @@
 % types} and an association between each \emph{counter} and its \emph{type},
 % it does not define the counters themselves, which are defined by your
 % document.  One \emph{reference type} can be associated with one or more
-% \emph{counters}, but each counter can only have one \emph{type}
-% (locally\dots{}), and that determines how the reference is typeset.
-% References to different \emph{counters} of the same \emph{type} are grouped
-% together, and treated alike by \pkg{zref-clever}.  A \emph{reference type}
-% may exist even when the \emph{counter} it is associated with is not actually
-% defined, and this inconsequential.  In practice, the contrary may also
-% happen, a \emph{counter} may be defined but we have no \emph{type} for it,
-% but this must be handled by \pkg{zref-clever} as a ``missing type'' error
-% (at least, if we try to refer to it).
+% \emph{counters}, but each counter can only have one \emph{type} (for a given
+% label\dots{}), and that determines how the reference is typeset.  References
+% to different \emph{counters} of the same \emph{type} are grouped together,
+% and treated alike by \pkg{zref-clever}.  A \emph{reference type} may exist
+% even when the \emph{counter} it is associated with is not actually defined,
+% and this inconsequential.  In practice, the contrary may also happen, a
+% \emph{counter} may be defined but we have no \emph{type} for it, but this
+% must be handled by \pkg{zref-clever} as a ``missing type'' error (at least,
+% if we try to refer to it).
 %
 % A \emph{reference type} can be associated with multiple counters because we
 % may want to refer to different document elements, with different
@@ -416,13 +397,13 @@
 % group, the set of counters contained therein cannot be arbitrary.  Indeed,
 % all of the \emph{counters} grouped in the same \emph{type} must belong to
 % the same counter reset chain, and must be nested within each other (they
-% cannot even just share the same parent).  The need to check this (?) has
-% some implications to the data we store in the label.  Since we cannot do
-% this verification when we set up the \emph{reference type}, because at this
-% point we could only check existing counters, and they may be defined
-% ``later'' or ``never'', the counter reset chain must be stored (names and
-% values) with the label itself (this is done in properties
-% \texttt{zc@enclcnt} and \texttt{zc@enclval}).
+% cannot even just share the same parent).  The need to check this has some
+% implications to the data we store in the label.  Since we cannot do this
+% verification when we set up the \emph{reference type}, because at this point
+% we could only check existing counters, and they may be defined ``later'' or
+% ``never'', the counter reset chain must be stored (names and values) with
+% the label itself (this is done in properties \texttt{zc@enclcnt} and
+% \texttt{zc@enclval}).
 %
 %
 % There are also cases in which we may want to use different \emph{reference
@@ -501,10 +482,59 @@
 %
 %
 %
+% \subsection{Messages}
+%
+%
+%    \begin{macrocode}
+\msg_new:nnn { zref-clever } { type-name-length }
+  {
+    Type~'name'~can~only~receive~2~or~4~values~\msg_line_context:.~
+    Don't~know~what~to~do~with~#1.
+  }
+\msg_new:nnn { zref-clever } { option-not-type-specific }
+  {
+    Option~'#1'~is~not~type-specific~\msg_line_context:.~
+    Set~it~in~'\exp_not:N \zcDeclareTranslations'~before~first~'type'~switch~
+    or~as~package~option.
+  }
+\msg_new:nnn { zref-clever } { option-only-type-specific }
+  {
+    No~type~specified~for~option~'#1'~\msg_line_context:.~
+    Set~it~after~'type'~switch~or~in~'\exp_not:N \zcRefTypeSetup'.
+  }
+\msg_new:nnn  { zref-clever } { countertype-requires-value }
+  { The~'countertype'~key~'#1'~requires~a~value. }
+\msg_new:nnn  { zref-clever } { counterresetby-requires-value }
+  { The~'counterresetby'~key~'#1'~requires~a~value. }
+\msg_new:nnn { zref-clever } { missing-zref-titleref }
+  {
+    Option~'ref=title'~requested~\msg_line_context:.~
+    But~package~'zref-titleref'~is~not~loaded,~falling-back~to~default~'ref'.
+  }
+\msg_new:nnn { zref-clever } { hyperref-preamble-only }
+  {
+    Option~'hyperref'~only~available~in~the~preamble. \iow_newline:
+    Use~the~starred~version~of~'\noexpand\zcheck'~instead.
+  }
+\msg_new:nnn { zref-clever } { missing-hyperref }
+  { Missing~'hyperref'~package. \iow_newline: Setting~'hyperref=false'. }
+\msg_new:nnn { zref-clever } { counters-not-nested }
+  { Counters~not~nested~for~labels~'#1'~and~'#2'~\msg_line_context:. }
+\msg_new:nnn { zref-clever } { missing-type }
+  { Reference~type~undefined~for~label~'#1'~\msg_line_context:. }
+\msg_new:nnn { zref-clever } { missing-name }
+  { Name~undefined~for~type~'#1'~\msg_line_context:. }
+\msg_new:nnn { zref-clever } { single-element-range }
+  { Range~for~type~'#1'~resulted~in~single~element~\msg_line_context:. }
+%    \end{macrocode}
+%
+%
+%
 % \subsection{Translations aux}
 %
-% Just some wrappers around \pkg{translations} functions, so that we
-% can generate variants with expansion control for arguments.
+% Some wrappers around \pkg{translations} functions, so that we can generate
+% variants with expansion control for arguments, or for convenience.
+%
 %    \begin{macrocode}
 \prg_new_conditional:Npnn \@@_if_translation:nn #1#2 { p , TF }
   {
@@ -519,482 +549,34 @@
 \cs_new_protected:Npn \@@_declare_translation:nnn #1#2#3
   { \declaretranslation {#1} {#2} {#3} }
 \cs_generate_variant:Nn \@@_declare_translation:nnn { xxn , xxx }
-%    \end{macrocode}
-%
-%
-% For use in dictionary files.
-%    \begin{macrocode}
 
-% The dictionary file commands cannot rely on expl3 syntax, so we define
-% ``document'' ones.
-% <option><transl>
-\NewDocumentCommand \zcDicDefaultTransl { m m }
-  { \ProvideDictTranslation { zrefclever-default- #1 } {#2} }
-
-% <type><option><transl>
-\NewDocumentCommand \zcDicTypeTransl { m m m }
-  { \ProvideDictTranslation { zrefclever-type- #1 - #2 } {#3} }
-
-% <lang><option><transl>
+% <lang><key><transl>
 \cs_new_protected:Npn \@@_add_default_translation:nnn #1#2#3
   { \addtranslation {#1} { zrefclever-default- #2 } {#3} }
 
-% <lang><type><option><transl>
+% <lang><type><key><transl>
 \cs_new_protected:Npn \@@_add_type_translation:nnnn #1#2#3#4
   { \addtranslation {#1} { zrefclever-type- #2 - #3 } {#4} }
-
-
 %    \end{macrocode}
 %
 %
-% \subsection{Type format}
-%
-%
-% \subsubsection{\cs{zcRefTypeSetup}}
-%
-%
-% \begin{variable}{\l_@@_ref_type_language_tl}
-%   Variable storing the language and type to be used in \cs{zcRefTypeSetup}
-%   and \cs{zcDeclareTranslations}.
-%    \begin{macrocode}
-\tl_new:N \l_@@_setup_language_tl
-\tl_new:N \l_@@_setup_type_tl
-%    \end{macrocode}
-% \end{variable}
-%
-% \begin{macro}[int]{\zcRefTypeSetup}
-%   Provide \cs{zcRefTypeSetup}.
-%    \begin{macrocode}
-\NewDocumentCommand \zcRefTypeSetup { m m }
-  {
-    \prop_if_exist:cF { l_@@_type_ #1 _options_prop }
-      { \prop_new:c { l_@@_type_ #1 _options_prop } }
-    \tl_set:Nn \l_@@_setup_type_tl {#1}
-    \keys_set:nn { zref-clever / typesetup } {#2}
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-% Inside \cs{zcRefTypeSetup} any of the options \emph{can} receive empty
-% values, and those values if they exist in the property list, will override
-% translations, regardless of their emptiness.  In principle, we could live
-% with the situation of, once a setting has made
-% \cs{l_@@_type_<type>_options_prop} or \cs{l_@@_ref_options_prop} it stays
-% there forever, and can only be overridden by a new value at the same
-% precedence level or a higher one.  But it would be nice if an user can
-% ``unset'' an option at either of those to go back to the lower precedence
-% level of the translations at any given point.  So both in
-% \cs{zcRefTypeSetup} and in setting reference options, we leverage the
-% distinction of an ``empty valued key'' (\texttt{key=} or \texttt{key={}})
-% from a ``key with no value'' (\texttt{key}).  This distinction is captured
-% internally by the lower-level key parsing, but must be made explicit at
-% \cs{keys_set:nn} by means of the \texttt{.default:} property of the key in
-% \cs{keys_define:nn}.  For the technique, see
-% \url{https://tex.stackexchange.com/q/614690} (thanks to Jonathan P. Spratte,
-% aka Skillmon, and Phelype Oleinik).
+% Functions for use in dictionary files.  The dictionary file commands cannot
+% rely on expl3 syntax, so we define ``document'' ones.
 %
 %    \begin{macrocode}
-\keys_define:nn { zref-clever / typesetup }
-  {
-    % A special convenience ``short'' way to set name options.
-    % Necessarily type-specific options.
-    name .default:V = \c_novalue_tl ,
-    name .code:n =
-      {
-        \tl_if_novalue:nTF {#1}
-          {
-            \clist_map_inline:nn
-              {
-                name-sg ,
-                name-pl ,
-                Name-sg ,
-                Name-pl ,
-                name-ab-sg ,
-                name-ab-pl ,
-                Name-ab-sg ,
-                Name-ab-pl ,
-              }
-              {
-                \prop_remove:cn
-                  { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                  {##1}
-              }
-          }
-          {
-            \int_case:nnF { \clist_count:n {#1} }
-              {
-                { 2 }
-                {
-                  \clist_map_inline:nn
-                    {
-                      name-sg ,
-                      Name-sg ,
-                      name-ab-sg ,
-                      Name-ab-sg ,
-                    }
-                    {
-                      \prop_put:cnx
-                        { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                        {##1} { \clist_item:nn {#1} { 1 } }
-                    }
-                  \clist_map_inline:nn
-                    {
-                      name-pl ,
-                      Name-pl ,
-                      name-ab-pl ,
-                      Name-ab-pl ,
-                    }
-                    {
-                      \prop_put:cnx
-                        { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                        {##1} { \clist_item:nn {#1} { 2 } }
-                    }
-                }
-
-                { 4 }
-                {
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { name-sg } { \clist_item:nn {#1} { 1 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { name-ab-sg } { \clist_item:nn {#1} { 1 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { name-pl } { \clist_item:nn {#1} { 2 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { name-ab-pl } { \clist_item:nn {#1} { 2 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { Name-sg } { \clist_item:nn {#1} { 3 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { Name-ab-sg } { \clist_item:nn {#1} { 3 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { Name-pl } { \clist_item:nn {#1} { 4 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { Name-ab-pl } { \clist_item:nn {#1} { 4 } }
-                }
-              }
-              {
-                \msg_warning:nnx { zref-clever } { type-name-length }
-                  { \clist_count:n {#1} }
-              }
-          }
-      } ,
-  }
-\msg_new:nnn { zref-clever } { type-name-length }
-  {
-    Type~'name'~can~only~receive~2~or~4~values~\msg_line_context:.~
-    Don't~know~what~to~do~with~#1.
-  }
-
+% <key><transl>
+\NewDocumentCommand \zcDicDefaultTransl { m m }
+  { \ProvideDictTranslation { zrefclever-default- #1 } {#2} }
+% <type><key><transl>
+\NewDocumentCommand \zcDicTypeTransl { m m m }
+  { \ProvideDictTranslation { zrefclever-type- #1 - #2 } {#3} }
 %    \end{macrocode}
 %
-%    \begin{macrocode}
-
-
-% Not type-specific options.
-\clist_map_inline:nn
-  {
-    tpairsep ,
-    tlistsep ,
-    tlastsep ,
-  }
-  {
-    \keys_define:nn { zref-clever / typesetup }
-      {
-        #1 .code:n =
-          {
-            \msg_warning:nnn { zref-clever } { option-not-type-specific } {#1}
-          } ,
-      }
-  }
-
-% Possibly or necessarily type-specific options.
-\clist_map_inline:nn
-  {
-    % Possibly type-specific options.
-    namefont ,
-    namesep ,
-    pairsep ,
-    listsep ,
-    lastsep ,
-    rangesep ,
-    reffont ,
-    refpre ,
-    refpos ,
-    reffont-in ,
-    refpre-in ,
-    refpos-in ,
-    % Necessarily type-specific options.
-    name-sg ,
-    name-pl ,
-    Name-sg ,
-    Name-pl ,
-    name-ab-sg ,
-    name-ab-pl ,
-    Name-ab-sg ,
-    Name-ab-pl ,
-  }
-  {
-    \keys_define:nn { zref-clever / typesetup }
-      {
-        #1 .default:V = \c_novalue_tl ,
-        #1 .code:n =
-          {
-            \tl_if_novalue:nTF {##1}
-              {
-                \prop_remove:cn
-                  { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                  {#1}
-              }
-              {
-                \prop_put:cnn
-                  { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                  {#1} {##1}
-              }
-          } ,
-      }
-  }
-
-\msg_new:nnn { zref-clever } { option-not-type-specific }
-  {
-    Option~'#1'~is~not~type-specific~\msg_line_context:.~
-    Set~it~in~'\exp_not:N \zcDeclareTranslations'~before~first~'type'~switch~
-    or~as~package~option.
-  }
-
-%    \end{macrocode}
-
-%
-% \subsubsection{\cs{zcDeclareTranslations}}
-%
-%
-% CHECK Should I make \zcDeclareTranslations preamble only? (I don't even know
-% if the translations definitions are local or global, presumably local but, I
-% don't think this needs to be used in the document body).
-%
-% \begin{macro}[int]{\zcDeclareTranslations}
-%   Provide \cs{zcDeclareTranslations}.
-%    \begin{macrocode}
-\NewDocumentCommand \zcDeclareTranslations { m m }
-  {
-    \tl_set:Nn \l_@@_setup_language_tl {#1}
-    \tl_clear:N \l_@@_setup_type_tl
-    \keys_set:nn { zref-clever / translations } {#2}
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-%    \begin{macrocode}
-\keys_define:nn { zref-clever / translations }
-  {
-    type .code:n =
-      {
-        \tl_if_empty:nTF {#1}
-          { \tl_clear:N \l_@@_setup_type_tl }
-          {
-            \prop_if_exist:cF { l_@@_type_ #1 _options_prop }
-              { \prop_new:c { l_@@_type_ #1 _options_prop } }
-            \tl_set:Nn \l_@@_setup_type_tl {#1}
-          }
-      } ,
-  }
-%    \end{macrocode}
-%
-%
-%    \begin{macrocode}
-\keys_define:nn { zref-clever / translations }
-  {
-    % A special convenience ``short'' way to set name options.
-    % Necessarily type-specific options.
-    name .value_required:n = true ,
-    name .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \msg_warning:nnn { zref-clever }
-              { option-only-type-specific } {#1}
-          }
-          {
-            \int_case:nnF { \clist_count:n {#1} }
-              {
-                { 2 }
-                {
-                  \clist_map_inline:nn
-                    {
-                      name-sg ,
-                      Name-sg ,
-                      name-ab-sg ,
-                      Name-ab-sg ,
-                    }
-                    {
-                      \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                        { zrefclever-type- \l_@@_setup_type_tl - ##1 }
-                        { \clist_item:nn {#1} { 1 } }
-                    }
-                  \clist_map_inline:nn
-                    {
-                      name-pl ,
-                      Name-pl ,
-                      name-ab-pl ,
-                      Name-ab-pl ,
-                    }
-                    {
-                      \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                        { zrefclever-type- \l_@@_setup_type_tl - ##1 }
-                        { \clist_item:nn {#1} { 2 } }
-                    }
-                }
-
-                { 4 }
-                {
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -name-sg }
-                    { \clist_item:nn {#1} { 1 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -name-ab-sg }
-                    { \clist_item:nn {#1} { 1 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -name-pl }
-                    { \clist_item:nn {#1} { 2 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -name-ab-pl }
-                    { \clist_item:nn {#1} { 2 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -Name-sg }
-                    { \clist_item:nn {#1} { 3 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -Name-ab-sg }
-                    { \clist_item:nn {#1} { 3 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -Name-pl }
-                    { \clist_item:nn {#1} { 4 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -Name-ab-pl }
-                    { \clist_item:nn {#1} { 4 } }
-                }
-              }
-              {
-                \msg_warning:nnx { zref-clever } { type-name-length }
-                  { \clist_count:n {#1} }
-              }
-          }
-      } ,
-  }
-%    \end{macrocode}
-
-
-
-
-%    \begin{macrocode}
-
-% Not type-specific options.
-\clist_map_inline:nn
-  {
-    tpairsep ,
-    tlistsep ,
-    tlastsep ,
-  }
-  {
-    \keys_define:nn { zref-clever / translations }
-      {
-        #1 .value_required:n = true ,
-        #1 .code:n =
-          {
-            \tl_if_empty:NTF \l_@@_setup_type_tl
-              {
-                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-                  { zrefclever-default- #1 } {##1}
-              }
-              {
-                \msg_warning:nnn { zref-clever }
-                  { option-not-type-specific } {#1}
-              }
-          } ,
-      }
-  }
-
-% Possibly type-specific options.
-\clist_map_inline:nn
-  {
-    namesep ,
-    pairsep ,
-    listsep ,
-    lastsep ,
-    rangesep ,
-    refpre ,
-    refpos ,
-    refpre-in ,
-    refpos-in ,
-  }
-  {
-    \keys_define:nn { zref-clever / translations }
-      {
-        #1 .value_required:n = true ,
-        #1 .code:n =
-          {
-            \tl_if_empty:NTF \l_@@_setup_type_tl
-              {
-                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-                  { zrefclever-default- #1 } {##1}
-              }
-              {
-                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-                  { zrefclever-type- \l_@@_setup_type_tl - #1 } {##1}
-              }
-          } ,
-      }
-  }
-
-% Necessarily type-specific options.
-\clist_map_inline:nn
-  {
-    name-sg ,
-    name-pl ,
-    Name-sg ,
-    Name-pl ,
-    name-ab-sg ,
-    name-ab-pl ,
-    Name-ab-sg ,
-    Name-ab-pl ,
-  }
-  {
-    \keys_define:nn { zref-clever / translations }
-      {
-        #1 .value_required:n = true ,
-        #1 .code:n =
-          {
-            \tl_if_empty:NTF \l_@@_setup_type_tl
-              {
-                \msg_warning:nnn { zref-clever }
-                  { option-only-type-specific } {#1}
-              }
-              {
-                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
-                  { zrefclever-type- \l_@@_setup_type_tl - #1 } {##1}
-              }
-          } ,
-      }
-  }
-
-\msg_new:nnn { zref-clever } { option-only-type-specific }
-  {
-    No~type~specified~for~option~'#1'~\msg_line_context:.~
-    Set~it~after~'type'~switch~or~in~'\exp_not:N \zcRefTypeSetup'.
-  }
-
-%    \end{macrocode}
-
 %
 %
 % \subsection{Options}
 %
-
+%
 % \subsubsection*{\opt{countertype} option}
 %
 % \begin{variable}{\l_@@_counter_type_prop}
@@ -1039,12 +621,11 @@
         enumiv        = item ,
       } ,
   }
-\msg_new:nnn  { zref-clever } { countertype-requires-value }
-  { The~'countertype'~key~'#1'~requires~a~value. }
 %    \end{macrocode}
 %
 %
 % \subsubsection*{\opt{counterresetters} option}
+%
 %
 % \begin{variable}{\l_@@_counter_resetters_seq}
 %   Stores the list of counters which are potential ``enclosing counters'' for
@@ -1060,7 +641,11 @@
   {
     counterresetters .code:n =
       {
-        \seq_set_from_clist:Nn \l_@@_counter_resetters_seq {#1}
+        \clist_map_inline:nn {#1}
+          {
+            \seq_if_in:NnF \l_@@_counter_resetters_seq {##1}
+              { \seq_put_right:Nn \l_@@_counter_resetters_seq {##1} }
+          }
       } ,
     counterresetters .initial:n =
       {
@@ -1078,8 +663,8 @@
 %
 %
 %
-%
 % \subsubsection*{\opt{counterresetby} option}
+%
 %
 % \begin{variable}{\l_@@_counter_resetby_prop}
 %   Variable storing a mapping from ``counter'' to the counter which resets
@@ -1114,14 +699,13 @@
         enumiv  = enumiii ,
       } ,
   }
-\msg_new:nnn  { zref-clever } { counterresetby-requires-value }
-  { The~'counterresetby'~key~'#1'~requires~a~value. }
 %    \end{macrocode}
 %
 %
 %
 % \subsubsection*{\opt{ref} option}
-
+%
+%
 % Stores whether this reference is to the page, or to the default counter.
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_property_tl
@@ -1186,22 +770,9 @@
           }
       }
   }
-
-\msg_new:nnn { zref-clever } { missing-zref-titleref }
-  {
-    Option~'ref=title'~requested~\msg_line_context:.~
-    But~package~'zref-titleref'~is~not~loaded,~falling-back~to~default~'ref'.
-  }
-
-\msg_new:nnn { zref-clever } { prop-not-defined }
-  {
-    Property~'#1'~undefined~\msg_line_context:.~
-    Falling-back~to~default~'ref'.
-  }
-
 %    \end{macrocode}
 %
-% Currently, I have restricted `ref=' to these two (or three) alternatives,
+% Currently, we restrict `ref=' to these two (or three) alternatives,
 % but there might be a case for making this more flexible.  The infrastructure
 % can already handle receiving an arbitrary property, as long as one is
 % satisfied with sorting and compressing from the default counter.  If more
@@ -1216,7 +787,8 @@
 %
 %
 % \subsubsection*{\opt{typeset} option}
-
+%
+%
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_ref_bool
 \bool_new:N \l_@@_typeset_name_bool
@@ -1241,8 +813,6 @@
     typeset .initial:n = both ,
     typeset .value_required:n = true ,
 
-    name .meta:n = { typeset = name },
-    name .value_forbidden:n = true ,
     noname .meta:n = { typeset = ref },
     noname .value_forbidden:n = true ,
   }
@@ -1264,6 +834,7 @@
     nosort .value_forbidden:n = true ,
   }
 %    \end{macrocode}
+%
 %
 %
 % \subsubsection*{\opt{typesort} option}
@@ -1305,6 +876,7 @@
     nocomp .value_forbidden:n = true ,
   }
 %    \end{macrocode}
+%
 %
 %
 % \subsubsection*{\opt{range} option}
@@ -1372,15 +944,6 @@
   }
 %    \end{macrocode}
 %
-%    \begin{macrocode}
-\msg_new:nnn { zref-clever } { hyperref-preamble-only }
-  {
-    Option~'hyperref'~only~available~in~the~preamble. \iow_newline:
-    Use~the~starred~version~of~'\noexpand\zcheck'~instead.
-  }
-\msg_new:nnn { zref-clever } { missing-hyperref }
-  { Missing~'hyperref'~package. \iow_newline: Setting~'hyperref=false'. }
-%    \end{macrocode}
 %
 %
 % \subsubsection*{\opt{nameinlink} option}
@@ -1451,7 +1014,6 @@
 %
 %
 %
-%
 % \subsubsection*{\opt{lang} option}
 %
 %
@@ -1484,7 +1046,10 @@
     lang .initial:n = main ,
     lang .value_required:n = true ,
   }
+%    \end{macrocode}
+%
 % \cs{AtEndOfPackage} so that it comes after \cs{ProcessKeysOptions}.
+%    \begin{macrocode}
 \AtEndOfPackage
   {
     \AddToHook { zref-clever / reflanguage }
@@ -1514,6 +1079,7 @@
           }
       }
   }
+%    \end{macrocode}
 %
 %
 %
@@ -1538,7 +1104,7 @@
             % First, there is no way to disable this, even if we don't need
             % them at all here.  Second, \pkg{translations} sends messages of
             % its own missing dictionaries to `info' and everyone else's to
-            % 'warning'...  So we have to control ourselves for missing
+            % 'warning'\dots{}  So we have to control ourselves for missing
             % dictionaries and load them only if available.
             \exp_args:Nx \file_if_exist:nT
               { zref-clever- \@trnslt@language {#1} .trsl }
@@ -1568,24 +1134,41 @@
 %    \end{macrocode}
 %
 %
+%
+% \subsubsection*{\opt{note} option}
+%
+%
+%    \begin{macrocode}
+\tl_new:N \l_@@_zcref_note_tl
+\keys_define:nn { zref-clever }
+  {
+    note .tl_set:N = \l_@@_zcref_note_tl ,
+    note .value_required:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+%
 % \subsubsection*{Reference options}
 %
 %
 %    \begin{macrocode}
-
 \tl_new:N \l_@@_ref_typeset_font_tl
 \keys_define:nn { zref-clever }
   { font .tl_set:N = \l_@@_ref_typeset_font_tl }
-
-
-\prop_new:N \l_@@_ref_options_prop
+%    \end{macrocode}
+%
+%
 % Only not necessarily type-specific options are pertinent here.
+%    \begin{macrocode}
+\prop_new:N \l_@@_ref_options_prop
 \clist_map_inline:nn
   {
     % Not type-specific options.
     tpairsep ,
     tlistsep ,
     tlastsep ,
+    notesep ,
     % Possibly type-specific options.
     namefont ,
     namesep ,
@@ -1612,9 +1195,7 @@
           } ,
       }
   }
-
 %    \end{macrocode}
-%
 %
 %
 %
@@ -1638,11 +1219,449 @@
 %
 %
 %
+% \section{Type format}
+%
+%
+% \subsection{\cs{zcRefTypeSetup}}
+%
+%
+% \begin{variable}{
+%     \l_@@_setup_type_tl ,
+%     \l_@@_setup_language_tl ,
+%   }
+%   Variables storing the language and type to be used in \cs{zcRefTypeSetup}
+%   and \cs{zcDeclareTranslations}.
+%    \begin{macrocode}
+\tl_new:N \l_@@_setup_type_tl
+\tl_new:N \l_@@_setup_language_tl
+%    \end{macrocode}
+% \end{variable}
+%
+%
+% \begin{macro}[int]{\zcRefTypeSetup}
+%   Provide \cs{zcRefTypeSetup}.
+%    \begin{macrocode}
+\NewDocumentCommand \zcRefTypeSetup { m m }
+  {
+    \prop_if_exist:cF { l_@@_type_ #1 _options_prop }
+      { \prop_new:c { l_@@_type_ #1 _options_prop } }
+    \tl_set:Nn \l_@@_setup_type_tl {#1}
+    \keys_set:nn { zref-clever / typesetup } {#2}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% Inside \cs{zcRefTypeSetup} any of the options \emph{can} receive empty
+% values, and those values, if they exist in the property list, will override
+% translations, regardless of their emptiness.  In principle, we could live
+% with the situation of, once a setting has made
+% \cs{l_@@_type_<type>_options_prop} or \cs{l_@@_ref_options_prop} it stays
+% there forever, and can only be overridden by a new value at the same
+% precedence level or a higher one.  But it would be nice if an user can
+% ``unset'' an option at either of those to go back to the lower precedence
+% level of the translations at any given point.  So both in
+% \cs{zcRefTypeSetup} and in setting reference options, we leverage the
+% distinction of an ``empty valued key'' (\texttt{key=} or \texttt{key={}})
+% from a ``key with no value'' (\texttt{key}).  This distinction is captured
+% internally by the lower-level key parsing, but must be made explicit at
+% \cs{keys_set:nn} by means of the \texttt{.default:} property of the key in
+% \cs{keys_define:nn}.  For the technique, see
+% \url{https://tex.stackexchange.com/q/614690} (thanks Jonathan P.\ Spratte,
+% aka `Skillmon', and Phelype Oleinik).
+%
+%
+% \texttt{name}: a special convenience ``short'' way to set name options.
+% Necessarily type-specific options.
+%    \begin{macrocode}
+\keys_define:nn { zref-clever / typesetup }
+  {
+    name .default:V = \c_novalue_tl ,
+    name .code:n =
+      {
+        \tl_if_novalue:nTF {#1}
+          {
+            \clist_map_inline:nn
+              {
+                name-sg ,
+                name-pl ,
+                Name-sg ,
+                Name-pl ,
+                name-ab-sg ,
+                name-ab-pl ,
+                Name-ab-sg ,
+                Name-ab-pl ,
+              }
+              {
+                \prop_remove:cn
+                  { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                  {##1}
+              }
+          }
+          {
+            \int_case:nnF { \clist_count:n {#1} }
+              {
+                { 2 }
+                {
+                  \clist_map_inline:nn
+                    {
+                      name-sg ,
+                      Name-sg ,
+                      name-ab-sg ,
+                      Name-ab-sg ,
+                    }
+                    {
+                      \prop_put:cnx
+                        { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                        {##1} { \clist_item:nn {#1} { 1 } }
+                    }
+                  \clist_map_inline:nn
+                    {
+                      name-pl ,
+                      Name-pl ,
+                      name-ab-pl ,
+                      Name-ab-pl ,
+                    }
+                    {
+                      \prop_put:cnx
+                        { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                        {##1} { \clist_item:nn {#1} { 2 } }
+                    }
+                }
+
+                { 4 }
+                {
+                  % Make the first pair the capitalized ones, so as to make
+                  % them "feel" the default for the single pair case.
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                    { Name-sg } { \clist_item:nn {#1} { 1 } }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                    { Name-ab-sg } { \clist_item:nn {#1} { 1 } }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                    { Name-pl } { \clist_item:nn {#1} { 2 } }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                    { Name-ab-pl } { \clist_item:nn {#1} { 2 } }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                    { name-sg } { \clist_item:nn {#1} { 3 } }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                    { name-ab-sg } { \clist_item:nn {#1} { 3 } }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                    { name-pl } { \clist_item:nn {#1} { 4 } }
+                  \prop_put:cnx
+                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                    { name-ab-pl } { \clist_item:nn {#1} { 4 } }
+                }
+              }
+              {
+                \msg_warning:nnx { zref-clever } { type-name-length }
+                  { \clist_count:n {#1} }
+              }
+          }
+      } ,
+  }
+%    \end{macrocode}
+%
+%
+% Not type-specific options.
+%    \begin{macrocode}
+\clist_map_inline:nn
+  {
+    tpairsep ,
+    tlistsep ,
+    tlastsep ,
+    notesep ,
+  }
+  {
+    \keys_define:nn { zref-clever / typesetup }
+      {
+        #1 .code:n =
+          {
+            \msg_warning:nnn { zref-clever } { option-not-type-specific } {#1}
+          } ,
+      }
+  }
+%    \end{macrocode}
+%
+%
+% Possibly or necessarily type-specific options.
+%    \begin{macrocode}
+\clist_map_inline:nn
+  {
+    % Possibly type-specific options.
+    namefont ,
+    namesep ,
+    pairsep ,
+    listsep ,
+    lastsep ,
+    rangesep ,
+    reffont ,
+    refpre ,
+    refpos ,
+    reffont-in ,
+    refpre-in ,
+    refpos-in ,
+    % Necessarily type-specific options.
+    name-sg ,
+    name-pl ,
+    Name-sg ,
+    Name-pl ,
+    name-ab-sg ,
+    name-ab-pl ,
+    Name-ab-sg ,
+    Name-ab-pl ,
+  }
+  {
+    \keys_define:nn { zref-clever / typesetup }
+      {
+        #1 .default:V = \c_novalue_tl ,
+        #1 .code:n =
+          {
+            \tl_if_novalue:nTF {##1}
+              {
+                \prop_remove:cn
+                  { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                  {#1}
+              }
+              {
+                \prop_put:cnn
+                  { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                  {#1} {##1}
+              }
+          } ,
+      }
+  }
+%    \end{macrocode}
+%
+%
+%
+% \subsection{\cs{zcDeclareTranslations}}
+%
+%
+% \begin{macro}[int]{\zcDeclareTranslations}
+%   Provide \cs{zcDeclareTranslations}.
+%    \begin{macrocode}
+\NewDocumentCommand \zcDeclareTranslations { m m }
+  {
+    \tl_set:Nn \l_@@_setup_language_tl {#1}
+    \tl_clear:N \l_@@_setup_type_tl
+    \keys_set:nn { zref-clever / translations } {#2}
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%    \begin{macrocode}
+\keys_define:nn { zref-clever / translations }
+  {
+    type .code:n =
+      {
+        \tl_if_empty:nTF {#1}
+          { \tl_clear:N \l_@@_setup_type_tl }
+          {
+            \prop_if_exist:cF { l_@@_type_ #1 _options_prop }
+              { \prop_new:c { l_@@_type_ #1 _options_prop } }
+            \tl_set:Nn \l_@@_setup_type_tl {#1}
+          }
+      } ,
+  }
+%    \end{macrocode}
+%
+%
+% \texttt{name}: a special convenience ``short'' way to set name options.
+% Necessarily type-specific options.
+%    \begin{macrocode}
+\keys_define:nn { zref-clever / translations }
+  {
+    name .value_required:n = true ,
+    name .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_type_tl
+          {
+            \msg_warning:nnn { zref-clever }
+              { option-only-type-specific } {#1}
+          }
+          {
+            \int_case:nnF { \clist_count:n {#1} }
+              {
+                { 2 }
+                {
+                  \clist_map_inline:nn
+                    {
+                      name-sg ,
+                      Name-sg ,
+                      name-ab-sg ,
+                      Name-ab-sg ,
+                    }
+                    {
+                      \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                        { zrefclever-type- \l_@@_setup_type_tl - ##1 }
+                        { \clist_item:nn {#1} { 1 } }
+                    }
+                  \clist_map_inline:nn
+                    {
+                      name-pl ,
+                      Name-pl ,
+                      name-ab-pl ,
+                      Name-ab-pl ,
+                    }
+                    {
+                      \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                        { zrefclever-type- \l_@@_setup_type_tl - ##1 }
+                        { \clist_item:nn {#1} { 2 } }
+                    }
+                }
+
+                { 4 }
+                {
+                  % Make the first pair the capitalized ones, so as to make
+                  % them "feel" the default for the single pair case.
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -Name-sg }
+                    { \clist_item:nn {#1} { 1 } }
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -Name-ab-sg }
+                    { \clist_item:nn {#1} { 1 } }
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -Name-pl }
+                    { \clist_item:nn {#1} { 2 } }
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -Name-ab-pl }
+                    { \clist_item:nn {#1} { 2 } }
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -name-sg }
+                    { \clist_item:nn {#1} { 3 } }
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -name-ab-sg }
+                    { \clist_item:nn {#1} { 3 } }
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -name-pl }
+                    { \clist_item:nn {#1} { 4 } }
+                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
+                    { zrefclever-type- \l_@@_setup_type_tl -name-ab-pl }
+                    { \clist_item:nn {#1} { 4 } }
+                }
+              }
+              {
+                \msg_warning:nnx { zref-clever } { type-name-length }
+                  { \clist_count:n {#1} }
+              }
+          }
+      } ,
+  }
+%    \end{macrocode}
+%
+%
+% Not type-specific options.
+%    \begin{macrocode}
+\clist_map_inline:nn
+  {
+    tpairsep ,
+    tlistsep ,
+    tlastsep ,
+    notesep ,
+  }
+  {
+    \keys_define:nn { zref-clever / translations }
+      {
+        #1 .value_required:n = true ,
+        #1 .code:n =
+          {
+            \tl_if_empty:NTF \l_@@_setup_type_tl
+              {
+                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+                  { zrefclever-default- #1 } {##1}
+              }
+              {
+                \msg_warning:nnn { zref-clever }
+                  { option-not-type-specific } {#1}
+              }
+          } ,
+      }
+  }
+%    \end{macrocode}
+%
+%
+% Possibly type-specific options.
+%    \begin{macrocode}
+\clist_map_inline:nn
+  {
+    namesep ,
+    pairsep ,
+    listsep ,
+    lastsep ,
+    rangesep ,
+    refpre ,
+    refpos ,
+    refpre-in ,
+    refpos-in ,
+  }
+  {
+    \keys_define:nn { zref-clever / translations }
+      {
+        #1 .value_required:n = true ,
+        #1 .code:n =
+          {
+            \tl_if_empty:NTF \l_@@_setup_type_tl
+              {
+                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+                  { zrefclever-default- #1 } {##1}
+              }
+              {
+                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+                  { zrefclever-type- \l_@@_setup_type_tl - #1 } {##1}
+              }
+          } ,
+      }
+  }
+%    \end{macrocode}
+%
+%
+% Necessarily type-specific options.
+%    \begin{macrocode}
+\clist_map_inline:nn
+  {
+    name-sg ,
+    name-pl ,
+    Name-sg ,
+    Name-pl ,
+    name-ab-sg ,
+    name-ab-pl ,
+    Name-ab-sg ,
+    Name-ab-pl ,
+  }
+  {
+    \keys_define:nn { zref-clever / translations }
+      {
+        #1 .value_required:n = true ,
+        #1 .code:n =
+          {
+            \tl_if_empty:NTF \l_@@_setup_type_tl
+              {
+                \msg_warning:nnn { zref-clever }
+                  { option-only-type-specific } {#1}
+              }
+              {
+                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+                  { zrefclever-type- \l_@@_setup_type_tl - #1 } {##1}
+              }
+          } ,
+      }
+  }
+%    \end{macrocode}
+%
+%
 %
 % \section{\cs{zcref}}
 %
 %
-% \begin{macro}[int]{\zcheck}
+% \begin{macro}[int]{\zcref}
 %   \begin{syntax}
 %     \cs{zcref}\meta{*}\oarg{options}\marg{labels}
 %   \end{syntax}
@@ -1652,15 +1671,18 @@
 %    \end{macrocode}
 % \end{macro}
 %
+%
 % \begin{variable}
 %   {
-%     \l_@@_link_star_bool
+%     \l_@@_zcref_labels_seq ,
+%     \l_@@_link_star_bool ,
 %   }
 %    \begin{macrocode}
+\seq_new:N \l_@@_zcref_labels_seq
 \bool_new:N \l_@@_link_star_bool
 %    \end{macrocode}
 % \end{variable}
-
+%
 %
 % \begin{macro}{\@@_zcref:nnnn}
 %   An intermediate internal function, which does the actual heavy lifting,
@@ -1670,7 +1692,6 @@
 %     \cs{@@_zcref:nnnn} \Arg{labels} \Arg{*} \Arg{options}
 %   \end{syntax}
 %    \begin{macrocode}
-\seq_new:N \l_@@_zcref_labels_seq
 \cs_new_protected:Npn \@@_zcref:nnn #1#2#3
   {
     \group_begin:
@@ -1682,7 +1703,29 @@
         { \l_@@_typeset_range_bool }
         { \@@_sort_labels: }
       \@@_typeset_refs:
+      % Typeset \texttt{note}.
+      \l_@@_notesep_tl
+      \l_@@_zcref_note_tl
     \group_end:
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \section{\cs{zcpageref}}
+%
+%
+% \begin{macro}[int]{\zcpageref}
+%   \begin{syntax}
+%     \cs{zcpageref}\meta{*}\oarg{options}\marg{labels}
+%   \end{syntax}
+%    \begin{macrocode}
+\NewDocumentCommand \zcpageref { s O { } m }
+  {
+    \IfBooleanTF {#1}
+      { \zcref*[#2, ref = page] {#3} }
+      { \zcref [#2, ref = page] {#3} }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -1740,7 +1783,7 @@
 %   expected to be run inside \cs{@@_zcref:nnnn} where a number of environment
 %   variables are to be set appropriately.  In particular,
 %   \cs{l_@@_zcref_labels_seq} should contain the labels received as argument
-%   to \cs{zcheck}, and the function performs its task by sorting this
+%   to \cs{zcref}, and the function performs its task by sorting this
 %   variable.
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_sort_labels:
@@ -1763,34 +1806,28 @@
           {
             \zref@ifrefundefined {##2}
               {
-%    \end{macrocode}
-% Neither label is defined.
-%    \begin{macrocode}
+                % Neither label is defined.
                 \sort_return_same:
               }
               {
-%    \end{macrocode}
-% The second label is defined, but the first isn't, leave the undefined first
-% (to be more visible).
-%    \begin{macrocode}
+                % The second label is defined, but the first isn't, leave the
+                % undefined first (to be more visible).
                 \sort_return_same:
               }
           }
           {
             \zref@ifrefundefined {##2}
               {
-%    \end{macrocode}
-% The first label is defined, but the second isn't, bring the second forward.
-%    \begin{macrocode}
+                % The first label is defined, but the second isn't, bring the
+                % second forward.
                 \sort_return_swapped:
               }
               {
-%    \end{macrocode}
-% The interesting case: both labels are defined. The reference to the
-% "default" property/counter or to the page are quite different from our
-% perspective, they rely on different fields and even use different
-% information for sorting, so we branch them here to specialized functions.
-%    \begin{macrocode}
+                % The interesting case: both labels are defined.  The
+                % reference to the "default" property/counter or to the page
+                % are quite different from our perspective, they rely on
+                % different fields and even use different information for
+                % sorting, so we branch them here to specialized functions.
                 \bool_if:NTF \l_@@_page_ref_bool
                   { \@@_sort_page_aux:nn {##1} {##2} }
                   { \@@_sort_default_aux:nn {##1} {##2} }
@@ -1800,6 +1837,7 @@
   }
 %    \end{macrocode}
 % \end{macro}
+%
 %
 % \begin{macro}{\@@_label_type_put_new_right:n}
 %   Auxiliary function used to store ``new'' label types (in order) as the
@@ -1844,7 +1882,7 @@
 %
 % \begin{macro}{\@@_sort_default_aux:nn}
 %   The heavy-lifting function for sorting of existing labels for ``default''
-%   references (that is, a standard reference, not to ``page'' etc.).  This
+%   references (that is, a standard reference, not to ``page'').  This
 %   function is expected to be called within the sorting loop of
 %   \cs{@@_sort_labels:} and receives the pair of labels being considered for
 %   a change of order or not.  It should \emph{always} ``return'' either
@@ -1859,7 +1897,6 @@
       { \zref@extractdefault {#1} { zc@type } { \c_empty_tl } }
     \tl_set:Nx \l_@@_label_type_b_tl
       { \zref@extractdefault {#2} { zc@type } { \c_empty_tl } }
-    \bool_set_false:N \l_@@_sort_decided_bool
 
     \bool_if:nTF
       {
@@ -1868,127 +1905,74 @@
         \tl_if_empty_p:N \l_@@_label_type_a_tl &&
         ! \tl_if_empty_p:N \l_@@_label_type_b_tl
       }
+      { \sort_return_same: }
       {
-        \sort_return_same:
-        \bool_set_true:N \l_@@_sort_decided_bool
-      }
-      {
-        \bool_if:nT
+        \bool_if:nTF
           {
             % The first label has a type, but the second doesn't, bring the
             % second forward.
             ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
             \tl_if_empty_p:N \l_@@_label_type_b_tl
           }
+          { \sort_return_swapped: }
           {
-            \sort_return_swapped:
-            \bool_set_true:N \l_@@_sort_decided_bool
-          }
-      }
-
-    \bool_if:nTF
-      {
-        ! \l_@@_sort_decided_bool &&
-        % Both labels have a type\dots{}
-        ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
-        ! \tl_if_empty_p:N \l_@@_label_type_b_tl
-      }
-      {
-        \tl_if_eq:NNTF \l_@@_label_type_a_tl \l_@@_label_type_b_tl
-          {
-            % \dots{} and it's the same type.
-            \tl_set:Nx \l_@@_label_enclcnt_a_tl
-              { \zref@extractdefault {#1} { zc@enclcnt } { \c_empty_tl } }
-            \tl_set:Nx \l_@@_label_enclcnt_a_tl
-              { \tl_reverse_items:V \l_@@_label_enclcnt_a_tl }
-            \tl_set:Nx \l_@@_label_enclcnt_b_tl
-              { \zref@extractdefault {#2} { zc@enclcnt } { \c_empty_tl } }
-            \tl_set:Nx \l_@@_label_enclcnt_b_tl
-              { \tl_reverse_items:V \l_@@_label_enclcnt_b_tl }
-            \tl_set:Nx \l_@@_label_enclval_a_tl
-              { \zref@extractdefault {#1} { zc@enclval } { \c_empty_tl } }
-            \tl_set:Nx \l_@@_label_enclval_a_tl
-              { \tl_reverse_items:V \l_@@_label_enclval_a_tl }
-            \tl_set:Nx \l_@@_label_enclval_b_tl
-              { \zref@extractdefault {#2} { zc@enclval } { \c_empty_tl } }
-            \tl_set:Nx \l_@@_label_enclval_b_tl
-              { \tl_reverse_items:V \l_@@_label_enclval_b_tl }
-
-            % CHECK should I replace the tmp variables here?
-            \tl_clear:N \l_tmpa_tl
-            \tl_clear:N \l_tmpb_tl
-            \bool_until_do:Nn \l_@@_sort_decided_bool
+            \bool_if:nTF
               {
-                \tl_set:Nx \l_tmpa_tl
-                  { \tl_head:N \l_@@_label_enclcnt_a_tl }
-                \tl_set:Nx \l_tmpb_tl
-                  { \tl_head:N \l_@@_label_enclcnt_b_tl }
+                % Both labels have a type\dots{}
+                ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
+                ! \tl_if_empty_p:N \l_@@_label_type_b_tl
+              }
+              {
+                \tl_if_eq:NNTF \l_@@_label_type_a_tl \l_@@_label_type_b_tl
+                  {
+                    % \dots{} and it's the same type.
+                    \tl_set:Nx \l_@@_label_enclcnt_a_tl
+                      { \zref@extractdefault {#1} { zc@enclcnt } { \c_empty_tl } }
+                    \tl_set:Nx \l_@@_label_enclcnt_a_tl
+                      { \tl_reverse_items:V \l_@@_label_enclcnt_a_tl }
+                    \tl_set:Nx \l_@@_label_enclcnt_b_tl
+                      { \zref@extractdefault {#2} { zc@enclcnt } { \c_empty_tl } }
+                    \tl_set:Nx \l_@@_label_enclcnt_b_tl
+                      { \tl_reverse_items:V \l_@@_label_enclcnt_b_tl }
+                    \tl_set:Nx \l_@@_label_enclval_a_tl
+                      { \zref@extractdefault {#1} { zc@enclval } { \c_empty_tl } }
+                    \tl_set:Nx \l_@@_label_enclval_a_tl
+                      { \tl_reverse_items:V \l_@@_label_enclval_a_tl }
+                    \tl_set:Nx \l_@@_label_enclval_b_tl
+                      { \zref@extractdefault {#2} { zc@enclval } { \c_empty_tl } }
+                    \tl_set:Nx \l_@@_label_enclval_b_tl
+                      { \tl_reverse_items:V \l_@@_label_enclval_b_tl }
 
-                \bool_if:nTF
-                  {
-                    % Both are empty, meaning: neither labels have any
-                    % (further) ``enclosing counters'' (left).
-                    \tl_if_empty_p:V \l_tmpa_tl &&
-                    \tl_if_empty_p:V \l_tmpb_tl
-                  }
-                  {
-                    \exp_args:Nxx \tl_if_eq:nnTF
-                      { \zref@extractdefault {#1} { zc@counter } { } }
-                      { \zref@extractdefault {#2} { zc@counter } { } }
-                      {
-                        \bool_set_true:N \l_@@_sort_decided_bool
-                        \int_compare:nNnTF
-                          { \zref@extractdefault {#1} { zc@cntval } {-1} }
-                            >
-                          { \zref@extractdefault {#2} { zc@cntval } {-1} }
-                          { \sort_return_swapped: }
-                          { \sort_return_same:    }
-                      }
-                      {
-                        \msg_warning:nnnn { zref-clever }
-                          { counters-not-nested } {#1} {#2}
-                        \bool_set_true:N \l_@@_sort_decided_bool
-                        \sort_return_same:
-                      }
-                  }
-                  {
-                    \bool_if:nTF
-                      {
-                        % `a' is empty (and `b' is not), meaning: `b' is
-                        % (possibly) nested in `a'.
-                        \tl_if_empty_p:V \l_tmpa_tl
-                      }
+                    \bool_set_false:N \l_@@_sort_decided_bool
+                    % CHECK should I replace the tmp variables here?
+                    \tl_clear:N \l_tmpa_tl
+                    \tl_clear:N \l_tmpb_tl
+                    \bool_until_do:Nn \l_@@_sort_decided_bool
                       {
                         \tl_set:Nx \l_tmpa_tl
-                          { {\zref@extractdefault {#1} { zc@counter } { }} }
-                        \exp_args:NNx \tl_if_in:NnTF
-                          \l_@@_label_enclcnt_b_tl { \l_tmpa_tl }
-                          {
-                            \bool_set_true:N \l_@@_sort_decided_bool
-                            \sort_return_same:
-                          }
-                          {
-                            \msg_warning:nnnn { zref-clever }
-                              { counters-not-nested } {#1} {#2}
-                            \bool_set_true:N \l_@@_sort_decided_bool
-                            \sort_return_same:
-                          }
-                      }
-                      {
+                          { \tl_head:N \l_@@_label_enclcnt_a_tl }
+                        \tl_set:Nx \l_tmpb_tl
+                          { \tl_head:N \l_@@_label_enclcnt_b_tl }
+
                         \bool_if:nTF
                           {
-                            % `b' is empty (and `a' is not), meaning: `a' is
-                            % (possibly) nested in `b'.
+                            % Both are empty, meaning: neither labels have any
+                            % (further) ``enclosing counters'' (left).
+                            \tl_if_empty_p:V \l_tmpa_tl &&
                             \tl_if_empty_p:V \l_tmpb_tl
                           }
                           {
-                            \tl_set:Nx \l_tmpb_tl
-                              { {\zref@extractdefault {#2} { zc@counter } { }} }
-                            \exp_args:NNx \tl_if_in:NnTF
-                              \l_@@_label_enclcnt_a_tl { \l_tmpb_tl }
+                            \exp_args:Nxx \tl_if_eq:nnTF
+                              { \zref@extractdefault {#1} { zc@counter } { } }
+                              { \zref@extractdefault {#2} { zc@counter } { } }
                               {
                                 \bool_set_true:N \l_@@_sort_decided_bool
-                                \sort_return_swapped:
+                                \int_compare:nNnTF
+                                  { \zref@extractdefault {#1} { zc@cntval } {-1} }
+                                    >
+                                  { \zref@extractdefault {#2} { zc@cntval } {-1} }
+                                  { \sort_return_swapped: }
+                                  { \sort_return_same:    }
                               }
                               {
                                 \msg_warning:nnnn { zref-clever }
@@ -1998,130 +1982,175 @@
                               }
                           }
                           {
-                            % Neither is empty, meaning: we can (possibly)
-                            % compare the values of the current enclosing
-                            % counter in the loop, if they are equal, we are
-                            % still in the loop, if they are not, a sorting
-                            % decision can be made directly.
-                            \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
+                            \bool_if:nTF
                               {
-                                \int_compare:nNnTF
-                                  { \tl_head:N \l_@@_label_enclval_a_tl }
-                                    =
-                                  { \tl_head:N \l_@@_label_enclval_b_tl }
-                                  {
-                                    \tl_set:Nx \l_@@_label_enclcnt_a_tl
-                                      { \tl_tail:N \l_@@_label_enclcnt_a_tl }
-                                    \tl_set:Nx \l_@@_label_enclcnt_b_tl
-                                      { \tl_tail:N \l_@@_label_enclcnt_b_tl }
-                                    \tl_set:Nx \l_@@_label_enclval_a_tl
-                                      { \tl_tail:N \l_@@_label_enclval_a_tl }
-                                    \tl_set:Nx \l_@@_label_enclval_b_tl
-                                      { \tl_tail:N \l_@@_label_enclval_b_tl }
-                                  }
+                                % `a' is empty (and `b' is not), meaning: `b'
+                                % is (possibly) nested in `a'.
+                                \tl_if_empty_p:V \l_tmpa_tl
+                              }
+                              {
+                                \tl_set:Nx \l_tmpa_tl
+                                  { {\zref@extractdefault {#1} { zc@counter } { }} }
+                                \exp_args:NNx \tl_if_in:NnTF
+                                  \l_@@_label_enclcnt_b_tl { \l_tmpa_tl }
                                   {
                                     \bool_set_true:N \l_@@_sort_decided_bool
-                                    \int_compare:nNnTF
-                                      { \tl_head:N \l_@@_label_enclval_a_tl }
-                                        >
-                                      { \tl_head:N \l_@@_label_enclval_b_tl }
-                                      { \sort_return_swapped: }
-                                      { \sort_return_same:    }
+                                    \sort_return_same:
+                                  }
+                                  {
+                                    \msg_warning:nnnn { zref-clever }
+                                      { counters-not-nested } {#1} {#2}
+                                    \bool_set_true:N \l_@@_sort_decided_bool
+                                    \sort_return_same:
                                   }
                               }
                               {
-                                \msg_warning:nnnn { zref-clever }
-                                  { counters-not-nested } {#1} {#2}
-                                \bool_set_true:N \l_@@_sort_decided_bool
-                                \sort_return_same:
+                                \bool_if:nTF
+                                  {
+                                    % `b' is empty (and `a' is not), meaning:
+                                    % `a' is (possibly) nested in `b'.
+                                    \tl_if_empty_p:V \l_tmpb_tl
+                                  }
+                                  {
+                                    \tl_set:Nx \l_tmpb_tl
+                                      { {\zref@extractdefault {#2} { zc@counter } { }} }
+                                    \exp_args:NNx \tl_if_in:NnTF
+                                      \l_@@_label_enclcnt_a_tl { \l_tmpb_tl }
+                                      {
+                                        \bool_set_true:N \l_@@_sort_decided_bool
+                                        \sort_return_swapped:
+                                      }
+                                      {
+                                        \msg_warning:nnnn { zref-clever }
+                                          { counters-not-nested } {#1} {#2}
+                                        \bool_set_true:N \l_@@_sort_decided_bool
+                                        \sort_return_same:
+                                      }
+                                  }
+                                  {
+                                    % Neither is empty, meaning: we can
+                                    % (possibly) compare the values of the
+                                    % current enclosing counter in the loop,
+                                    % if they are equal, we are still in the
+                                    % loop, if they are not, a sorting
+                                    % decision can be made directly.
+                                    \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
+                                      {
+                                        \int_compare:nNnTF
+                                          { \tl_head:N \l_@@_label_enclval_a_tl }
+                                            =
+                                          { \tl_head:N \l_@@_label_enclval_b_tl }
+                                          {
+                                            \tl_set:Nx \l_@@_label_enclcnt_a_tl
+                                              { \tl_tail:N \l_@@_label_enclcnt_a_tl }
+                                            \tl_set:Nx \l_@@_label_enclcnt_b_tl
+                                              { \tl_tail:N \l_@@_label_enclcnt_b_tl }
+                                            \tl_set:Nx \l_@@_label_enclval_a_tl
+                                              { \tl_tail:N \l_@@_label_enclval_a_tl }
+                                            \tl_set:Nx \l_@@_label_enclval_b_tl
+                                              { \tl_tail:N \l_@@_label_enclval_b_tl }
+                                          }
+                                          {
+                                            \bool_set_true:N \l_@@_sort_decided_bool
+                                            \int_compare:nNnTF
+                                              { \tl_head:N \l_@@_label_enclval_a_tl }
+                                                >
+                                              { \tl_head:N \l_@@_label_enclval_b_tl }
+                                              { \sort_return_swapped: }
+                                              { \sort_return_same:    }
+                                          }
+                                      }
+                                      {
+                                        \msg_warning:nnnn { zref-clever }
+                                          { counters-not-nested } {#1} {#2}
+                                        \bool_set_true:N \l_@@_sort_decided_bool
+                                        \sort_return_same:
+                                      }
+                                  }
+                              }
+                          }
+                      }
+                  }
+                  {
+                    % \dots{} and they are different types.
+                    \int_zero:N \l_@@_sort_prior_a_int
+                    \int_zero:N \l_@@_sort_prior_b_int
+                    % \cs{l_@@_typesort_seq} was stored in reverse sequence,
+                    % and we compute the sort priorities in the negative
+                    % range, so that we can implicitly rely on `0' being the
+                    % ``last value''.
+                    \seq_map_indexed_inline:Nn \l_@@_typesort_seq
+                      {
+                        \tl_if_eq:nnTF {##2} {{othertypes}}
+                          {
+                            \int_compare:nNnT { \l_@@_sort_prior_a_int } = { 0 }
+                              { \int_set:Nn \l_@@_sort_prior_a_int { - ##1 } }
+                            \int_compare:nNnT { \l_@@_sort_prior_b_int } = { 0 }
+                              { \int_set:Nn \l_@@_sort_prior_b_int { - ##1 } }
+                          }
+                          {
+                            \tl_if_eq:NnTF \l_@@_label_type_a_tl {##2}
+                              { \int_set:Nn \l_@@_sort_prior_a_int { - ##1 } }
+                              {
+                                \tl_if_eq:NnT \l_@@_label_type_b_tl {##2}
+                                  { \int_set:Nn \l_@@_sort_prior_b_int { - ##1 } }
+                              }
+                          }
+                      }
+                    \bool_if:nTF
+                      {
+                        \int_compare_p:nNn
+                          { \l_@@_sort_prior_a_int } <
+                          { \l_@@_sort_prior_b_int }
+                      }
+                      { \sort_return_same: }
+                      {
+                        \bool_if:nTF
+                          {
+                            \int_compare_p:nNn
+                              { \l_@@_sort_prior_a_int } >
+                              { \l_@@_sort_prior_b_int }
+                          }
+                          { \sort_return_swapped: }
+                          {
+                            % Sort priorities are equal for different types:
+                            % the type that occurs first in \meta{labels}, as
+                            % given by the user, is kept (or brought) forward.
+                            \seq_map_inline:Nn \l_@@_label_types_seq
+                              {
+                                \tl_if_eq:NnTF \l_@@_label_type_a_tl {##1}
+                                  { \seq_map_break:n { \sort_return_same: } }
+                                  {
+                                    \tl_if_eq:NnT \l_@@_label_type_b_tl {##1}
+                                      { \seq_map_break:n { \sort_return_swapped: } }
+                                  }
                               }
                           }
                       }
                   }
               }
-          }
-          {
-            % \dots{} and they are different types.
-            \int_zero:N \l_@@_sort_prior_a_int
-            \int_zero:N \l_@@_sort_prior_b_int
-            % \cs{l_@@_typesort_seq} was stored in reverse sequence, and we
-            % compute the sort priorities in the negative range, so that we
-            % can implicitly rely on `0' being the ``last value''.
-            \seq_map_indexed_inline:Nn \l_@@_typesort_seq
               {
-                \tl_if_eq:nnTF {##2} {{othertypes}}
+                % Neither of the labels has a type.  We can't do much of
+                % meaningful here, but if it's the same counter, compare it.
+                \exp_args:Nxx \tl_if_eq:nnTF
+                  { \zref@extractdefault {#1} { zc@counter } { } }
+                  { \zref@extractdefault {#2} { zc@counter } { } }
                   {
-                    \int_compare:nNnT { \l_@@_sort_prior_a_int } = { 0 }
-                      { \int_set:Nn \l_@@_sort_prior_a_int { - ##1 } }
-                    \int_compare:nNnT { \l_@@_sort_prior_b_int } = { 0 }
-                      { \int_set:Nn \l_@@_sort_prior_b_int { - ##1 } }
+                    \int_compare:nNnTF
+                      { \zref@extractdefault {#1} { zc@cntval } {-1} }
+                        >
+                      { \zref@extractdefault {#2} { zc@cntval } {-1} }
+                      { \sort_return_swapped: }
+                      { \sort_return_same:    }
                   }
-                  {
-                    \tl_if_eq:NnTF \l_@@_label_type_a_tl {##2}
-                      { \int_set:Nn \l_@@_sort_prior_a_int { - ##1 } }
-                      {
-                        \tl_if_eq:NnT \l_@@_label_type_b_tl {##2}
-                          { \int_set:Nn \l_@@_sort_prior_b_int { - ##1 } }
-                      }
-                  }
-              }
-            \bool_if:nTF
-              {
-                \int_compare_p:nNn
-                  { \l_@@_sort_prior_a_int } <
-                  { \l_@@_sort_prior_b_int }
-              }
-              { \sort_return_same: }
-              {
-                \bool_if:nTF
-                  {
-                    \int_compare_p:nNn
-                      { \l_@@_sort_prior_a_int } >
-                      { \l_@@_sort_prior_b_int }
-                  }
-                  { \sort_return_swapped: }
-                  {
-                    % Sort priorities are equal for different types: the type
-                    % that occurs first in \meta{labels}, as given by the
-                    % user, is kept (or brought) forward.
-                    \seq_map_inline:Nn \l_@@_label_types_seq
-                      {
-                        \tl_if_eq:NnTF \l_@@_label_type_a_tl {##1}
-                          { \seq_map_break:n { \sort_return_same: } }
-                          {
-                            \tl_if_eq:NnT \l_@@_label_type_b_tl {##1}
-                              { \seq_map_break:n { \sort_return_swapped: } }
-                          }
-                      }
-                  }
+                  { \sort_return_same: }
               }
           }
-      }
-      {
-        % Neither of the labels has a type.  We can't do much of meaningful
-        % here, but if it's the same counter, compare it.
-        \exp_args:Nxx \tl_if_eq:nnTF
-          { \zref@extractdefault {#1} { zc@counter } { } }
-          { \zref@extractdefault {#2} { zc@counter } { } }
-          {
-            \int_compare:nNnTF
-              { \zref@extractdefault {#1} { zc@cntval } {-1} }
-                >
-              { \zref@extractdefault {#2} { zc@cntval } {-1} }
-              { \sort_return_swapped: }
-              { \sort_return_same:    }
-          }
-          { \sort_return_same: }
       }
   }
 %    \end{macrocode}
 % \end{macro}
 %
-% Warning message used in \cs{@@_sort_default_aux:nn}.
-%    \begin{macrocode}
-\msg_new:nnn { zref-clever } { counters-not-nested }
-  { Counters~not~nested~for~labels~'#1'~and~'#2'~\msg_line_context:. }
-%    \end{macrocode}
 %
 %
 % \begin{macro}{\@@_sort_page_aux:nn}
@@ -2150,8 +2179,8 @@
 %
 %
 %
-%
 % \section{Typesetting}
+%
 %
 % About possible alternatives to signal compression inhibition for individual
 % labels, see \url{https://tex.stackexchange.com/q/611370} (thanks Enrico
@@ -2168,7 +2197,7 @@
 % place.
 %
 %
-%
+% \subsection*{Typesetting variables}
 %
 % \begin{variable}{\l_@@_typeset_last_bool, \l_@@_last_of_type_bool}
 %   Auxiliary variables for \cs{@@_typeset_refs:}.
@@ -2268,6 +2297,7 @@
 \tl_new:N \l_@@_tpairsep_tl
 \tl_new:N \l_@@_tlistsep_tl
 \tl_new:N \l_@@_tlastsep_tl
+\tl_new:N \l_@@_notesep_tl
 \tl_new:N \l_@@_refpre_out_tl
 \tl_new:N \l_@@_refpos_out_tl
 \tl_new:N \l_@@_refpre_in_tl
@@ -2276,465 +2306,29 @@
 % \end{variable}
 %
 %
-% \begin{macro}{\@@_get_ref:n}
-%   Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
-%   ``ref-block'', including ``pre'' and ``pos'' elements, and
-%   \emph{hyperlinking}.  It does not handle the reference type ``name'', for
-%   that use \cs{@@_get_ref_first:}.  It should get the reference with
-%   \cs{zref@extractdefault} as usual but, if the reference is not available,
-%   should put \cs{zref@default} on the stream protected, so that it can be
-%   accumulated in the queue.  \cs{hyperlink} must also be protected from
-%   expansion for the same reason.
-%    \begin{macrocode}
-\cs_new:Npn \@@_get_ref:n #1
-  {
-    \zref@ifrefcontainsprop {#1} { \l_@@_ref_property_tl }
-      {
-        \bool_if:nTF
-          { \l_@@_use_hyperref_bool && ! \l_@@_link_star_bool }
-          {
-            \exp_not:N \group_begin:
-            \exp_not:V \l_@@_reffont_out_tl
-            \exp_not:V \l_@@_refpre_out_tl
-            \exp_not:N \group_begin:
-            \exp_not:V \l_@@_reffont_in_tl
-            % It's two '@s', but escaped for DocStrip.
-            \exp_not:N \hyper@@@@link
-              {
-                \zref@ifrefcontainsprop {#1} { urluse }
-                  {
-                    \zref@extractdefault {#1} { urluse } {}
-                  }
-                  {
-                    \zref@extractdefault {#1} { url } {}
-                  }
-              }
-              { \zref@extractdefault {#1} { anchor } {} }
-              {
-                \exp_not:V \l_@@_refpre_in_tl
-                \zref@extractdefault {#1} { \l_@@_ref_property_tl } {}
-                \exp_not:V \l_@@_refpos_in_tl
-              }
-            \exp_not:N \group_end:
-            \exp_not:V \l_@@_refpos_out_tl
-            \exp_not:N \group_end:
-          }
-          {
-            \exp_not:N \group_begin:
-            \exp_not:V \l_@@_reffont_out_tl
-            \exp_not:V \l_@@_refpre_out_tl
-            \exp_not:N \group_begin:
-            \exp_not:V \l_@@_reffont_in_tl
-            \exp_not:V \l_@@_refpre_in_tl
-            \zref@extractdefault {#1} { \l_@@_ref_property_tl } {}
-            \exp_not:V \l_@@_refpos_in_tl
-            \exp_not:N \group_end:
-            \exp_not:V \l_@@_refpos_out_tl
-            \exp_not:N \group_end:
-          }
-      }
-      { \exp_not:N \zref@default }
-  }
-\cs_generate_variant:Nn \@@_get_ref:n { V }
-%    \end{macrocode}
-% \end{macro}
-%
-%
 %
 % \begin{variable}
 %   {
 %     \l_@@_type_name_tl ,
-%     \l_@@_name_in_link_bool
+%     \l_@@_name_in_link_bool ,
+%     \l_@@_name_format_tl
 %   }
-%   Auxiliary variables for \cs{@@_get_ref_first:}.
+%   Auxiliary variables for \cs{@@_get_ref_first:} and
+%   \cs{@@_type_name_setup:}.
 %    \begin{macrocode}
 \tl_new:N \l_@@_type_name_tl
 \bool_new:N \l_@@_name_in_link_bool
+\tl_new:N \l_@@_name_format_tl
 %    \end{macrocode}
 % \end{variable}
 %
 %
-% \begin{macro}{\@@_get_ref_first:}
-%   Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
-%   ``ref-block'', including ``pre'' and ``pos'' elements,
-%   \emph{hyperlinking}, and the reference type ``name''.  For use on the
-%   first reference of each type.
-%    \begin{macrocode}
-\tl_new:N \l_@@_name_format_tl
-
-%    \end{macrocode}
-% Set the type name variable \cs{l_@@_type_name_tl}.  When it cannot be found,
-% clear it.
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_type_name_setup:
-  {
-    \zref@ifrefundefined { \l_@@_type_first_label_tl }
-      { \tl_clear:N \l_@@_type_name_tl }
-      {
-        \tl_if_empty:nTF \l_@@_type_first_label_type_tl
-          { \tl_clear:N \l_@@_type_name_tl }
-          {
-%    \end{macrocode}
-% Determine whether we should use capitalization, abbreviation, and plural.
-%    \begin{macrocode}
-            \bool_lazy_or:nnTF
-              { \l_@@_capitalize_bool }
-              {
-                \l_@@_capitalize_first_bool &&
-                \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
-              }
-              { \tl_set:Nn \l_@@_name_format_tl {Name} }
-              { \tl_set:Nn \l_@@_name_format_tl {name} }
-            \bool_lazy_and:nnT
-              { \l_@@_abbrev_bool }
-              {
-                ! \int_compare_p:nNn { \l_@@_type_count_int } = { 0 } ||
-                ! \l_@@_noabbrev_first_bool
-              }
-              { \tl_put_right:Nn \l_@@_name_format_tl { -ab } }
-            % If the queue is empty, we have a singular, otherwise, plural.
-            \tl_if_empty:NTF \l_@@_typeset_queue_curr_tl
-              { \tl_put_right:Nn \l_@@_name_format_tl { -sg } }
-              { \tl_put_right:Nn \l_@@_name_format_tl { -pl } }
-
-            \prop_get:cVNF
-              { l_@@_type_ \l_@@_type_first_label_type_tl _options_prop }
-              \l_@@_name_format_tl
-              \l_@@_type_name_tl
-              {
-                \@@_if_translation:xxTF
-                  { \l_@@_ref_language_tl }
-                  {
-                    zrefclever-type- \l_@@_type_first_label_type_tl -
-                    \l_@@_name_format_tl
-                  }
-                  {
-                    \@@_get_translation_for:nxx { \l_@@_type_name_tl }
-                      { \l_@@_ref_language_tl }
-                      {
-                        zrefclever-type- \l_@@_type_first_label_type_tl -
-                        \l_@@_name_format_tl
-                      }
-                  }
-                  {
-                    \tl_clear:N \l_@@_type_name_tl
-                    \msg_warning:nnx { zref-clever } { missing-name }
-                      { \l_@@_type_first_label_type_tl }
-                  }
-              }
-          }
-      }
-%    \end{macrocode}
-% Signal whether the type name is to be included in the hyperlink or not.
-%    \begin{macrocode}
-    \bool_lazy_any:nTF
-      {
-        { ! \l_@@_use_hyperref_bool }
-        { \l_@@_link_star_bool }
-        { \tl_if_empty_p:N \l_@@_type_name_tl }
-        { \str_if_eq_p:Vn \l_@@_nameinlink_str { false } }
-      }
-      { \bool_set_false:N \l_@@_name_in_link_bool }
-      {
-        \bool_lazy_any:nTF
-          {
-            { \str_if_eq_p:Vn \l_@@_nameinlink_str { true } }
-            {
-              \str_if_eq_p:Vn \l_@@_nameinlink_str { tsingle } &&
-              \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl
-            }
-            {
-              \str_if_eq_p:Vn \l_@@_nameinlink_str { single } &&
-              \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl &&
-              \l_@@_typeset_last_bool &&
-              \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
-            }
-          }
-          { \bool_set_true:N \l_@@_name_in_link_bool }
-          { \bool_set_false:N \l_@@_name_in_link_bool }
-      }
-  }
-
-\cs_new:Npn \@@_get_ref_first:
-  {
-    \zref@ifrefundefined { \l_@@_type_first_label_tl }
-      { \exp_not:N \zref@default }
-      {
-        \bool_if:NTF \l_@@_name_in_link_bool
-          {
-            \zref@ifrefcontainsprop
-              { \l_@@_type_first_label_tl } { \l_@@_ref_property_tl }
-              {
-                % It's two '@s', but escaped for DocStrip.
-                \exp_not:N \hyper@@@@link
-                  {
-                    \zref@ifrefcontainsprop
-                      { \l_@@_type_first_label_tl } { urluse }
-                      {
-                        \zref@extractdefault { \l_@@_type_first_label_tl }
-                          { urluse } {}
-                      }
-                      {
-                        \zref@extractdefault { \l_@@_type_first_label_tl }
-                          { url } {}
-                      }
-                  }
-                  {
-                    \zref@extractdefault { \l_@@_type_first_label_tl }
-                      { anchor } {}
-                  }
-                  {
-                    \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_namefont_tl
-                    \exp_not:V \l_@@_type_name_tl
-                    \exp_not:N \group_end:
-                    \exp_not:V \l_@@_namesep_tl
-                    \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_reffont_out_tl
-                    \exp_not:V \l_@@_refpre_out_tl
-                    \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_reffont_in_tl
-                    \exp_not:V \l_@@_refpre_in_tl
-                    \zref@extractdefault { \l_@@_type_first_label_tl }
-                      { \l_@@_ref_property_tl } {}
-                    \exp_not:V \l_@@_refpos_in_tl
-                    \exp_not:N \group_end:
-                    % hyperlink makes it's own group, we'd like to close the
-                    % 'refpre-out' group after 'refpos-out', but... we close
-                    % it here, and give the trailing 'refpos-out' its own
-                    % group.  This will result that formatting given to
-                    % 'refpre-out' will not reach 'refpos-out', but I see no
-                    % alternative, and this has to be handled specially.
-                    \exp_not:N \group_end:
-                  }
-                \exp_not:N \group_begin:
-                % Ditto: special treatment.
-                \exp_not:V \l_@@_reffont_out_tl
-                \exp_not:V \l_@@_refpos_out_tl
-                \exp_not:N \group_end:
-              }
-              {
-                \exp_not:N \group_begin:
-                \exp_not:V \l_@@_namefont_tl
-                \exp_not:V \l_@@_type_name_tl
-                \exp_not:N \group_end:
-                \exp_not:V \l_@@_namesep_tl
-                \exp_not:N \zref@default
-              }
-          }
-          {
-            \tl_if_empty:NTF \l_@@_type_name_tl
-              {
-                \exp_not:N \zref@default
-                \exp_not:V \l_@@_namesep_tl
-              }
-              {
-                \exp_not:N \group_begin:
-                \exp_not:V \l_@@_namefont_tl
-                \exp_not:V \l_@@_type_name_tl
-                \exp_not:N \group_end:
-                \exp_not:V \l_@@_namesep_tl
-              }
-            \zref@ifrefcontainsprop
-              { \l_@@_type_first_label_tl } { \l_@@_ref_property_tl }
-              {
-                \bool_if:nTF
-                  {
-                    \l_@@_use_hyperref_bool &&
-                    ! \l_@@_link_star_bool
-                  }
-                  {
-                    \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_reffont_out_tl
-                    \exp_not:V \l_@@_refpre_out_tl
-                    \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_reffont_in_tl
-                    % It's two '@s', but escaped for DocStrip.
-                    \exp_not:N \hyper@@@@link
-                      {
-                        \zref@ifrefcontainsprop
-                          { \l_@@_type_first_label_tl } { urluse }
-                          {
-                            \zref@extractdefault { \l_@@_type_first_label_tl }
-                              { urluse } {}
-                          }
-                          {
-                            \zref@extractdefault { \l_@@_type_first_label_tl }
-                              { url } {}
-                          }
-                      }
-                      {
-                        \zref@extractdefault { \l_@@_type_first_label_tl }
-                          { anchor } {}
-                      }
-                      {
-                        \exp_not:V \l_@@_refpre_in_tl
-                        \zref@extractdefault { \l_@@_type_first_label_tl }
-                          { \l_@@_ref_property_tl } {}
-                        \exp_not:V \l_@@_refpos_in_tl
-                      }
-                    \exp_not:N \group_end:
-                    \exp_not:V \l_@@_refpos_out_tl
-                    \exp_not:N \group_end:
-                  }
-                  {
-                    \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_reffont_out_tl
-                    \exp_not:V \l_@@_refpre_out_tl
-                    \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_reffont_in_tl
-                    \exp_not:V \l_@@_refpre_in_tl
-                    \zref@extractdefault { \l_@@_type_first_label_tl }
-                      { \l_@@_ref_property_tl } {}
-                    \exp_not:V \l_@@_refpos_in_tl
-                    \exp_not:N \group_end:
-                    \exp_not:V \l_@@_refpos_out_tl
-                    \exp_not:N \group_end:
-                  }
-              }
-              { \exp_not:N \zref@default }
-          }
-      }
-  }
-%    \end{macrocode}
-% \end{macro}
-
-
-
-
-%    \begin{macrocode}
-% \Arg{option} \Arg{var to store result}
-\cs_new_protected:Npn \@@_get_option_with_transl:nN #1#2
-  {
-    % First attempt options stored in \cs{l_@@_ref_options_prop}.
-    \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
-      {
-        % If not found, try the type specific options.
-        \bool_lazy_all:nTF
-          {
-            { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
-            {
-              \prop_if_exist_p:c
-                { l_@@_type_ \l_@@_label_type_a_tl _options_prop }
-            }
-            {
-              \prop_if_in_p:cn
-                { l_@@_type_ \l_@@_label_type_a_tl _options_prop } {#1}
-            }
-          }
-          {
-            \prop_get:cnN
-              { l_@@_type_ \l_@@_label_type_a_tl _options_prop } {#1} #2
-          }
-          {
-            % If not found, try the type specific translations.
-            \@@_if_translation:xxTF
-              { \l_@@_ref_language_tl }
-              { zrefclever-type- \l_@@_label_type_a_tl - #1 }
-              {
-                \@@_get_translation_for:nxx {#2}
-                  { \l_@@_ref_language_tl }
-                  { zrefclever-type- \l_@@_label_type_a_tl - #1 }
-              }
-              {
-                % If not found, try general translations.  We are not
-                % controlling for their existence, but we must make sure all
-                % options being retrieved with
-                % \cs{@@_get_option_with_transl:nN} have their values set for
-                % `English' and `fallback'.
-                \@@_get_translation_for:nxx {#2}
-                  { \l_@@_ref_language_tl }
-                  { zrefclever-default- #1 }
-              }
-          }
-      }
-  }
-
-\cs_new_protected:Npn \@@_get_option_plain:nN #1#2
-  {
-    % First attempt options stored in \cs{l_@@_ref_options_prop}.
-    \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
-      {
-        % If not found, try the type specific options.
-        \bool_lazy_and:nnTF
-          { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
-          {
-            \prop_if_exist_p:c
-              { l_@@_type_ \l_@@_label_type_a_tl _options_prop }
-          }
-          {
-            \prop_get:cnNF
-              { l_@@_type_ \l_@@_label_type_a_tl _options_prop } {#1} #2
-              { \tl_clear:N #2 }
-          }
-          { \tl_clear:N #2 }
-      }
-  }
-
-%    \end{macrocode}
 %
-
+% \subsection*{Main typesetting functions}
+%
+% \begin{macro}{\@@_typeset_refs:}
+%   Main typesetting function for \cs{zcref}.
 %    \begin{macrocode}
-
-
-
-% Sets \cs{l_@@_next_maybe_range_bool} to true if label `1' comes in immediate
-% sequence from label `2'.  And sets both \cs{l_@@_next_maybe_range_bool} and
-% \cs{l_@@_next_is_same_bool} if the labels are the ``same''.
-\cs_new_protected:Npn \@@_labels_in_sequence:nn #1#2
-  {
-    \bool_if:NTF \l_@@_page_ref_bool
-      {
-        \exp_args:Nxx \tl_if_eq:nnT
-          { \zref@extractdefault {#1} { zc@pgfmt } { } }
-          { \zref@extractdefault {#2} { zc@pgfmt } { } }
-          {
-            \int_compare:nNnTF
-              { \zref@extractdefault {#1} { zc@pgval } {-2} + 1 }
-                =
-              { \zref@extractdefault {#2} { zc@pgval } {-1} }
-              { \bool_set_true:N \l_@@_next_maybe_range_bool }
-              {
-                \int_compare:nNnT
-                  { \zref@extractdefault {#1} { zc@pgval } {-1} }
-                    =
-                  { \zref@extractdefault {#2} { zc@pgval } {-1} }
-                  {
-                    \bool_set_true:N \l_@@_next_maybe_range_bool
-                    \bool_set_true:N \l_@@_next_is_same_bool
-                  }
-              }
-          }
-      }
-      {
-        \exp_args:Nxx \tl_if_eq:nnT
-          { \zref@extractdefault {#1} { zc@counter } { } }
-          { \zref@extractdefault {#2} { zc@counter } { } }
-          {
-            \exp_args:Nxx \tl_if_eq:nnT
-              { \zref@extractdefault {#1} { zc@enclval } { } }
-              { \zref@extractdefault {#2} { zc@enclval } { } }
-              {
-                \int_compare:nNnTF
-                  { \zref@extractdefault {#1} { zc@cntval } {-2} + 1 }
-                    =
-                  { \zref@extractdefault {#2} { zc@cntval } {-1} }
-                  { \bool_set_true:N \l_@@_next_maybe_range_bool }
-                  {
-                    \int_compare:nNnT
-                      { \zref@extractdefault {#1} { zc@cntval } {-1} }
-                        =
-                      { \zref@extractdefault {#2} { zc@cntval } {-1} }
-                      {
-                        \bool_set_true:N \l_@@_next_maybe_range_bool
-                        \bool_set_true:N \l_@@_next_is_same_bool
-                      }
-                  }
-              }
-          }
-      }
-  }
-
 \cs_new_protected:Npn \@@_typeset_refs:
   {
     \tl_clear:N \l_@@_typeset_queue_prev_tl
@@ -2751,6 +2345,7 @@
     \@@_get_option_with_transl:nN {tpairsep} \l_@@_tpairsep_tl
     \@@_get_option_with_transl:nN {tlistsep} \l_@@_tlistsep_tl
     \@@_get_option_with_transl:nN {tlastsep} \l_@@_tlastsep_tl
+    \@@_get_option_with_transl:nN {notesep}  \l_@@_notesep_tl
 
     % Set the font option for this zcref call.
     \l_@@_ref_typeset_font_tl
@@ -2842,12 +2437,13 @@
               }
           }
 
-        % Get type-specific separators and refpre/pos options, once per type.
+        % Get type-specific separators, refpre/pos and font options, once per
+        % type.
         \int_compare:nNnT { \l_@@_label_count_int } = { 0 }
           {
-            \@@_get_option_plain:nN {namefont}   \l_@@_namefont_tl
-            \@@_get_option_plain:nN {reffont}    \l_@@_reffont_out_tl
-            \@@_get_option_plain:nN {reffont-in} \l_@@_reffont_in_tl
+            \@@_get_option_plain:nN {namefont}        \l_@@_namefont_tl
+            \@@_get_option_plain:nN {reffont}         \l_@@_reffont_out_tl
+            \@@_get_option_plain:nN {reffont-in}      \l_@@_reffont_in_tl
             \@@_get_option_with_transl:nN {namesep}   \l_@@_namesep_tl
             \@@_get_option_with_transl:nN {rangesep}  \l_@@_rangesep_tl
             \@@_get_option_with_transl:nN {pairsep}   \l_@@_pairsep_tl
@@ -2872,7 +2468,13 @@
           }
       }
   }
-
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\@@_typeset_refs_aux_last_of_type:}
+%   Handles typesetting of when the current label is the last of its type.
+%    \begin{macrocode}
 \cs_new_protected:Npn \@@_typeset_refs_aux_last_of_type:
   {
     % Process the current label to the current queue.
@@ -3129,7 +2731,14 @@
         \int_zero:N \l_@@_range_same_count_int
       }
   }
-
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\@@_typeset_refs_aux_not_last_of_type:}
+%   Handles typesetting of when the current label is not the last of its type.
+%    \begin{macrocode}
 \cs_new_protected:Npn \@@_typeset_refs_aux_not_last_of_type:
   {
     % Signal if next label may form a range with the current one (of
@@ -3280,29 +2889,478 @@
     % Step label counter for next iteration.
     \int_incr:N \l_@@_label_count_int
   }
-
-\msg_new:nnn { zref-clever } { missing-type }
-  { Reference~type~undefined~for~label~'#1'~\msg_line_context:. }
-\msg_new:nnn { zref-clever } { missing-name }
-  { Name~undefined~for~type~'#1'~\msg_line_context:. }
-\msg_new:nnn { zref-clever } { single-element-range }
-  { Range~for~type~'#1'~resulted~in~single~element~\msg_line_context:. }
-
 %    \end{macrocode}
+% \end{macro}
 %
 %
 %
+% \subsection*{Aux typesetting functions}
 %
-% \section{Declare Translations}
 %
-%
+% \begin{macro}{\@@_get_ref:n}
+%   Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
+%   ``ref-block'', including ``pre'' and ``pos'' elements, and
+%   \emph{hyperlinking}.  It does not handle the reference type ``name'', for
+%   that use \cs{@@_get_ref_first:}.  It should get the reference with
+%   \cs{zref@extractdefault} as usual but, if the reference is not available,
+%   should put \cs{zref@default} on the stream protected, so that it can be
+%   accumulated in the queue.  \cs{hyperlink} must also be protected from
+%   expansion for the same reason.
 %    \begin{macrocode}
+\cs_new:Npn \@@_get_ref:n #1
+  {
+    \zref@ifrefcontainsprop {#1} { \l_@@_ref_property_tl }
+      {
+        \bool_if:nTF
+          { \l_@@_use_hyperref_bool && ! \l_@@_link_star_bool }
+          {
+            \exp_not:N \group_begin:
+            \exp_not:V \l_@@_reffont_out_tl
+            \exp_not:V \l_@@_refpre_out_tl
+            \exp_not:N \group_begin:
+            \exp_not:V \l_@@_reffont_in_tl
+            % It's two '@s', but escaped for DocStrip.
+            \exp_not:N \hyper@@@@link
+              {
+                \zref@ifrefcontainsprop {#1} { urluse }
+                  { \zref@extractdefault {#1} { urluse } {} }
+                  { \zref@extractdefault {#1} { url } {} }
+              }
+              { \zref@extractdefault {#1} { anchor } {} }
+              {
+                \exp_not:V \l_@@_refpre_in_tl
+                \zref@extractdefault {#1} { \l_@@_ref_property_tl } {}
+                \exp_not:V \l_@@_refpos_in_tl
+              }
+            \exp_not:N \group_end:
+            \exp_not:V \l_@@_refpos_out_tl
+            \exp_not:N \group_end:
+          }
+          {
+            \exp_not:N \group_begin:
+            \exp_not:V \l_@@_reffont_out_tl
+            \exp_not:V \l_@@_refpre_out_tl
+            \exp_not:N \group_begin:
+            \exp_not:V \l_@@_reffont_in_tl
+            \exp_not:V \l_@@_refpre_in_tl
+            \zref@extractdefault {#1} { \l_@@_ref_property_tl } {}
+            \exp_not:V \l_@@_refpos_in_tl
+            \exp_not:N \group_end:
+            \exp_not:V \l_@@_refpos_out_tl
+            \exp_not:N \group_end:
+          }
+      }
+      { \exp_not:N \zref@default }
+  }
+\cs_generate_variant:Nn \@@_get_ref:n { V }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\@@_type_name_setup:}
+%   Auxiliary function to \cs{@@_typeset_refs:}.  Sets the type name variable
+%   \cs{l_@@_type_name_tl}.  When it cannot be found, clears it.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_type_name_setup:
+  {
+    \zref@ifrefundefined { \l_@@_type_first_label_tl }
+      { \tl_clear:N \l_@@_type_name_tl }
+      {
+        \tl_if_empty:nTF \l_@@_type_first_label_type_tl
+          { \tl_clear:N \l_@@_type_name_tl }
+          {
+%    \end{macrocode}
+% Determine whether we should use capitalization, abbreviation, and plural.
+%    \begin{macrocode}
+            \bool_lazy_or:nnTF
+              { \l_@@_capitalize_bool }
+              {
+                \l_@@_capitalize_first_bool &&
+                \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
+              }
+              { \tl_set:Nn \l_@@_name_format_tl {Name} }
+              { \tl_set:Nn \l_@@_name_format_tl {name} }
+            \bool_lazy_and:nnT
+              { \l_@@_abbrev_bool }
+              {
+                ! \int_compare_p:nNn { \l_@@_type_count_int } = { 0 } ||
+                ! \l_@@_noabbrev_first_bool
+              }
+              { \tl_put_right:Nn \l_@@_name_format_tl { -ab } }
+            % If the queue is empty, we have a singular, otherwise, plural.
+            \tl_if_empty:NTF \l_@@_typeset_queue_curr_tl
+              { \tl_put_right:Nn \l_@@_name_format_tl { -sg } }
+              { \tl_put_right:Nn \l_@@_name_format_tl { -pl } }
 
+            \prop_get:cVNF
+              { l_@@_type_ \l_@@_type_first_label_type_tl _options_prop }
+              \l_@@_name_format_tl
+              \l_@@_type_name_tl
+              {
+                \@@_if_translation:xxTF
+                  { \l_@@_ref_language_tl }
+                  {
+                    zrefclever-type- \l_@@_type_first_label_type_tl -
+                    \l_@@_name_format_tl
+                  }
+                  {
+                    \@@_get_translation_for:nxx { \l_@@_type_name_tl }
+                      { \l_@@_ref_language_tl }
+                      {
+                        zrefclever-type- \l_@@_type_first_label_type_tl -
+                        \l_@@_name_format_tl
+                      }
+                  }
+                  {
+                    \tl_clear:N \l_@@_type_name_tl
+                    \msg_warning:nnx { zref-clever } { missing-name }
+                      { \l_@@_type_first_label_type_tl }
+                  }
+              }
+          }
+      }
+%    \end{macrocode}
+% Signal whether the type name is to be included in the hyperlink or not.
+%    \begin{macrocode}
+    \bool_lazy_any:nTF
+      {
+        { ! \l_@@_use_hyperref_bool }
+        { \l_@@_link_star_bool }
+        { \tl_if_empty_p:N \l_@@_type_name_tl }
+        { \str_if_eq_p:Vn \l_@@_nameinlink_str { false } }
+      }
+      { \bool_set_false:N \l_@@_name_in_link_bool }
+      {
+        \bool_lazy_any:nTF
+          {
+            { \str_if_eq_p:Vn \l_@@_nameinlink_str { true } }
+            {
+              \str_if_eq_p:Vn \l_@@_nameinlink_str { tsingle } &&
+              \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl
+            }
+            {
+              \str_if_eq_p:Vn \l_@@_nameinlink_str { single } &&
+              \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl &&
+              \l_@@_typeset_last_bool &&
+              \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
+            }
+          }
+          { \bool_set_true:N \l_@@_name_in_link_bool }
+          { \bool_set_false:N \l_@@_name_in_link_bool }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\@@_get_ref_first:}
+%   Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
+%   ``ref-block'', including ``pre'' and ``pos'' elements,
+%   \emph{hyperlinking}, and the reference type ``name''.  For use on the
+%   first reference of each type.
+%    \begin{macrocode}
+\cs_new:Npn \@@_get_ref_first:
+  {
+    \zref@ifrefundefined { \l_@@_type_first_label_tl }
+      { \exp_not:N \zref@default }
+      {
+        \bool_if:NTF \l_@@_name_in_link_bool
+          {
+            \zref@ifrefcontainsprop
+              { \l_@@_type_first_label_tl } { \l_@@_ref_property_tl }
+              {
+                % It's two '@s', but escaped for DocStrip.
+                \exp_not:N \hyper@@@@link
+                  {
+                    \zref@ifrefcontainsprop
+                      { \l_@@_type_first_label_tl } { urluse }
+                      {
+                        \zref@extractdefault { \l_@@_type_first_label_tl }
+                          { urluse } {}
+                      }
+                      {
+                        \zref@extractdefault { \l_@@_type_first_label_tl }
+                          { url } {}
+                      }
+                  }
+                  {
+                    \zref@extractdefault { \l_@@_type_first_label_tl }
+                      { anchor } {}
+                  }
+                  {
+                    \exp_not:N \group_begin:
+                    \exp_not:V \l_@@_namefont_tl
+                    \exp_not:V \l_@@_type_name_tl
+                    \exp_not:N \group_end:
+                    \exp_not:V \l_@@_namesep_tl
+                    \exp_not:N \group_begin:
+                    \exp_not:V \l_@@_reffont_out_tl
+                    \exp_not:V \l_@@_refpre_out_tl
+                    \exp_not:N \group_begin:
+                    \exp_not:V \l_@@_reffont_in_tl
+                    \exp_not:V \l_@@_refpre_in_tl
+                    \zref@extractdefault { \l_@@_type_first_label_tl }
+                      { \l_@@_ref_property_tl } {}
+                    \exp_not:V \l_@@_refpos_in_tl
+                    \exp_not:N \group_end:
+                    % hyperlink makes it's own group, we'd like to close the
+                    % 'refpre-out' group after 'refpos-out', but... we close
+                    % it here, and give the trailing 'refpos-out' its own
+                    % group.  This will result that formatting given to
+                    % 'refpre-out' will not reach 'refpos-out', but I see no
+                    % alternative, and this has to be handled specially.
+                    \exp_not:N \group_end:
+                  }
+                \exp_not:N \group_begin:
+                % Ditto: special treatment.
+                \exp_not:V \l_@@_reffont_out_tl
+                \exp_not:V \l_@@_refpos_out_tl
+                \exp_not:N \group_end:
+              }
+              {
+                \exp_not:N \group_begin:
+                \exp_not:V \l_@@_namefont_tl
+                \exp_not:V \l_@@_type_name_tl
+                \exp_not:N \group_end:
+                \exp_not:V \l_@@_namesep_tl
+                \exp_not:N \zref@default
+              }
+          }
+          {
+            \tl_if_empty:NTF \l_@@_type_name_tl
+              {
+                \exp_not:N \zref@default
+                \exp_not:V \l_@@_namesep_tl
+              }
+              {
+                \exp_not:N \group_begin:
+                \exp_not:V \l_@@_namefont_tl
+                \exp_not:V \l_@@_type_name_tl
+                \exp_not:N \group_end:
+                \exp_not:V \l_@@_namesep_tl
+              }
+            \zref@ifrefcontainsprop
+              { \l_@@_type_first_label_tl } { \l_@@_ref_property_tl }
+              {
+                \bool_if:nTF
+                  {
+                    \l_@@_use_hyperref_bool &&
+                    ! \l_@@_link_star_bool
+                  }
+                  {
+                    \exp_not:N \group_begin:
+                    \exp_not:V \l_@@_reffont_out_tl
+                    \exp_not:V \l_@@_refpre_out_tl
+                    \exp_not:N \group_begin:
+                    \exp_not:V \l_@@_reffont_in_tl
+                    % It's two '@s', but escaped for DocStrip.
+                    \exp_not:N \hyper@@@@link
+                      {
+                        \zref@ifrefcontainsprop
+                          { \l_@@_type_first_label_tl } { urluse }
+                          {
+                            \zref@extractdefault { \l_@@_type_first_label_tl }
+                              { urluse } {}
+                          }
+                          {
+                            \zref@extractdefault { \l_@@_type_first_label_tl }
+                              { url } {}
+                          }
+                      }
+                      {
+                        \zref@extractdefault { \l_@@_type_first_label_tl }
+                          { anchor } {}
+                      }
+                      {
+                        \exp_not:V \l_@@_refpre_in_tl
+                        \zref@extractdefault { \l_@@_type_first_label_tl }
+                          { \l_@@_ref_property_tl } {}
+                        \exp_not:V \l_@@_refpos_in_tl
+                      }
+                    \exp_not:N \group_end:
+                    \exp_not:V \l_@@_refpos_out_tl
+                    \exp_not:N \group_end:
+                  }
+                  {
+                    \exp_not:N \group_begin:
+                    \exp_not:V \l_@@_reffont_out_tl
+                    \exp_not:V \l_@@_refpre_out_tl
+                    \exp_not:N \group_begin:
+                    \exp_not:V \l_@@_reffont_in_tl
+                    \exp_not:V \l_@@_refpre_in_tl
+                    \zref@extractdefault { \l_@@_type_first_label_tl }
+                      { \l_@@_ref_property_tl } {}
+                    \exp_not:V \l_@@_refpos_in_tl
+                    \exp_not:N \group_end:
+                    \exp_not:V \l_@@_refpos_out_tl
+                    \exp_not:N \group_end:
+                  }
+              }
+              { \exp_not:N \zref@default }
+          }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+%
+% \begin{macro}{\@@_get_option_with_transl:nN}
+%    \begin{macrocode}
+% \Arg{option} \Arg{var to store result}
+\cs_new_protected:Npn \@@_get_option_with_transl:nN #1#2
+  {
+    % First attempt options stored in \cs{l_@@_ref_options_prop}.
+    \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
+      {
+        % If not found, try the type specific options.
+        \bool_lazy_all:nTF
+          {
+            { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
+            {
+              \prop_if_exist_p:c
+                { l_@@_type_ \l_@@_label_type_a_tl _options_prop }
+            }
+            {
+              \prop_if_in_p:cn
+                { l_@@_type_ \l_@@_label_type_a_tl _options_prop } {#1}
+            }
+          }
+          {
+            \prop_get:cnN
+              { l_@@_type_ \l_@@_label_type_a_tl _options_prop } {#1} #2
+          }
+          {
+            % If not found, try the type specific translations.
+            \@@_if_translation:xxTF
+              { \l_@@_ref_language_tl }
+              { zrefclever-type- \l_@@_label_type_a_tl - #1 }
+              {
+                \@@_get_translation_for:nxx {#2}
+                  { \l_@@_ref_language_tl }
+                  { zrefclever-type- \l_@@_label_type_a_tl - #1 }
+              }
+              {
+                % If not found, try general translations.  We are not
+                % controlling for their existence, but we must make sure all
+                % options being retrieved with
+                % \cs{@@_get_option_with_transl:nN} have their values set for
+                % `English' and `fallback'.
+                \@@_get_translation_for:nxx {#2}
+                  { \l_@@_ref_language_tl }
+                  { zrefclever-default- #1 }
+              }
+          }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\@@_get_option_plain:nN}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_get_option_plain:nN #1#2
+  {
+    % First attempt options stored in \cs{l_@@_ref_options_prop}.
+    \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
+      {
+        % If not found, try the type specific options.
+        \bool_lazy_and:nnTF
+          { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
+          {
+            \prop_if_exist_p:c
+              { l_@@_type_ \l_@@_label_type_a_tl _options_prop }
+          }
+          {
+            \prop_get:cnNF
+              { l_@@_type_ \l_@@_label_type_a_tl _options_prop } {#1} #2
+              { \tl_clear:N #2 }
+          }
+          { \tl_clear:N #2 }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\@@_labels_in_sequence:nn}
+%   Sets \cs{l_@@_next_maybe_range_bool} to true if label `1' comes in
+%   immediate sequence from label `2'.  And sets both
+%   \cs{l_@@_next_maybe_range_bool} and \cs{l_@@_next_is_same_bool} if the
+%   labels are the ``same''.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_labels_in_sequence:nn #1#2
+  {
+    \bool_if:NTF \l_@@_page_ref_bool
+      {
+        \exp_args:Nxx \tl_if_eq:nnT
+          { \zref@extractdefault {#1} { zc@pgfmt } { } }
+          { \zref@extractdefault {#2} { zc@pgfmt } { } }
+          {
+            \int_compare:nNnTF
+              { \zref@extractdefault {#1} { zc@pgval } {-2} + 1 }
+                =
+              { \zref@extractdefault {#2} { zc@pgval } {-1} }
+              { \bool_set_true:N \l_@@_next_maybe_range_bool }
+              {
+                \int_compare:nNnT
+                  { \zref@extractdefault {#1} { zc@pgval } {-1} }
+                    =
+                  { \zref@extractdefault {#2} { zc@pgval } {-1} }
+                  {
+                    \bool_set_true:N \l_@@_next_maybe_range_bool
+                    \bool_set_true:N \l_@@_next_is_same_bool
+                  }
+              }
+          }
+      }
+      {
+        \exp_args:Nxx \tl_if_eq:nnT
+          { \zref@extractdefault {#1} { zc@counter } { } }
+          { \zref@extractdefault {#2} { zc@counter } { } }
+          {
+            \exp_args:Nxx \tl_if_eq:nnT
+              { \zref@extractdefault {#1} { zc@enclval } { } }
+              { \zref@extractdefault {#2} { zc@enclval } { } }
+              {
+                \int_compare:nNnTF
+                  { \zref@extractdefault {#1} { zc@cntval } {-2} + 1 }
+                    =
+                  { \zref@extractdefault {#2} { zc@cntval } {-1} }
+                  { \bool_set_true:N \l_@@_next_maybe_range_bool }
+                  {
+                    \int_compare:nNnT
+                      { \zref@extractdefault {#1} { zc@cntval } {-1} }
+                        =
+                      { \zref@extractdefault {#2} { zc@cntval } {-1} }
+                      {
+                        \bool_set_true:N \l_@@_next_maybe_range_bool
+                        \bool_set_true:N \l_@@_next_is_same_bool
+                      }
+                  }
+              }
+          }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \section{Falback translations}
+%
+%
 % All options retrieved with \cs{@@_get_option_with_transl:nN} must have their
 % values set for `fallback', since this is what will be retrieved if
 % \pkg{babel} or \pkg{polyglossia} is loaded and sets a language which
 % \pkg{zref-clever} does not know.  On the other hand type-specific options
 % are not looked for in `fallback'.
+%    \begin{macrocode}
 \@@_add_default_translation:nnn { fallback } { namesep   } {\nobreakspace}
 \@@_add_default_translation:nnn { fallback } { pairsep   } {,~}
 \@@_add_default_translation:nnn { fallback } { listsep   } {,~}
@@ -3310,14 +3368,13 @@
 \@@_add_default_translation:nnn { fallback } { tpairsep  } {,~}
 \@@_add_default_translation:nnn { fallback } { tlistsep  } {,~}
 \@@_add_default_translation:nnn { fallback } { tlastsep  } {,~}
+\@@_add_default_translation:nnn { fallback } { notesep   } {~}
 \@@_add_default_translation:nnn { fallback } { rangesep  } {\textendash}
 \@@_add_default_translation:nnn { fallback } { refpre    } {}
 \@@_add_default_translation:nnn { fallback } { refpos    } {}
 \@@_add_default_translation:nnn { fallback } { refpre-in } {}
 \@@_add_default_translation:nnn { fallback } { refpos-in } {}
-
 %    \end{macrocode}
-%
 %
 %
 %
@@ -3325,12 +3382,15 @@
 %</package>
 %    \end{macrocode}
 %
-
 % \section{Localization}
-
+%
+%
 %    \begin{macrocode}
 %<*lang-english>
 %    \end{macrocode}
+%
+%
+% \subsection*{English}
 %
 %
 % All options retrieved with \cs{@@_get_option_with_transl:nN} must have their
@@ -3346,6 +3406,7 @@
 \zcDicDefaultTransl{tpairsep}{~and\nobreakspace}
 \zcDicDefaultTransl{tlistsep}{,~}
 \zcDicDefaultTransl{tlastsep}{,~and\nobreakspace}
+\zcDicDefaultTransl{notesep}{~}
 \zcDicDefaultTransl{rangesep}{~to\nobreakspace}
 \zcDicDefaultTransl{refpre}{}
 \zcDicDefaultTransl{refpos}{}
@@ -3439,9 +3500,8 @@
 %    \begin{macrocode}
 %</lang-english>
 %    \end{macrocode}
-
-
+%
+%
 % \PrintIndex
 %
 % \end{implementation}
-%

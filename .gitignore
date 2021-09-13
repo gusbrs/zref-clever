@@ -1,11 +1,5 @@
 build/
 aux/
 .auctex-auto/
-*.pdf
+# *.pdf
 *.zip
-
-
-*.aux
-*.log
-*.synctex.gz
-*.out

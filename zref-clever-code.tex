@@ -1,0 +1,87 @@
+% \iffalse meta-comment
+%
+% File: zref-clever-code.tex
+%
+% This file is part of the LaTeX package "zref-clever".
+%
+% Copyright (C) 2021  Gustavo Barros
+%
+% It may be distributed and/or modified under the conditions of the
+% LaTeX Project Public License (LPPL), either version 1.3c of this
+% license or (at your option) any later version.  The latest version
+% of this license is in the file:
+%
+%    https://www.latex-project.org/lppl.txt
+%
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+%
+% This work is "maintained" (as per LPPL maintenance status) by
+% Gustavo Barros.
+%
+% This work consists of the files zref-clever.dtx,
+%                                 zref-clever.ins,
+%                                 zref-clever.tex,
+%                                 zref-clever-code.tex,
+%           and the derived files zref-clever.sty and
+%                                 zref-clever.pdf,
+%                                 zref-clever-code.pdf.
+%
+% The released version of this package is available from CTAN.
+%
+% -----------------------------------------------------------------------
+%
+% The development version of the package can be found at
+%
+%    https://github.com/gusbrs/zref-clever
+%
+% for those people who are interested.
+%
+% -----------------------------------------------------------------------
+%
+% \fi
+
+\documentclass{l3doc}
+
+% Have \GetFileInfo pick up date and version data
+\usepackage{zref-clever}
+
+\NewDocumentCommand\opt{m}{\texttt{#1}}
+
+% Have the Index at 'section' level rather than 'part'.  Otherwise it is just
+% the same definition from 'l3doc.cls'.
+\IndexPrologue{%
+  \section*{Index}
+  \markboth{Index}{Index}
+  \addcontentsline{toc}{section}{Index}
+  The italic numbers denote the pages where the corresponding entry is
+  described, numbers underlined point to the definition, all others indicate
+  the places where it is used.%
+}
+
+\begin{document}
+
+\GetFileInfo{zref-clever.sty}
+
+\title{%
+  The \pkg{zref-clever} package implementation%
+  \thanks{This file describes \fileversion, last revised \filedate.}%
+}
+
+\author{%
+  Gustavo Barros%
+  \thanks{\url{https://github.com/gusbrs/zref-clever}}%
+}
+
+\date{\filedate}
+
+\maketitle
+
+\tableofcontents
+
+\DisableDocumentation
+
+\DocInput{zref-clever.dtx}
+
+\end{document}

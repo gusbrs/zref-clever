@@ -1,6 +1,6 @@
 #!/usr/bin/env texlua
 
--- Build script for "zref-check" package
+-- Build script for "zref-clever" package
 
 -- Identify the bundle and module
 bundle = ""
@@ -9,11 +9,11 @@ module = "zref-clever"
 -- -- Use a dedicated readme for CTAN to meet upload requirements
 -- ctanreadme = "readme-ctan.md"
 
--- -- Typeset only the .tex files
--- typesetfiles = {"*.tex"}
+-- Typeset only the .tex files
+typesetfiles = {"*.tex"}
 
--- -- Two runs for label testing
--- checkruns = 2
+-- Two runs for label testing
+checkruns = 2
 
 -- -- CTAN upload settings
 
