@@ -1771,7 +1771,7 @@
 %   Stores the order in which reference types appear in the label list
 %   supplied by the user in \cs{zcref}.  This order is required as a ``last
 %   resort'' sort criterion between the reference types, for use in
-%   \cs{@@_sort_default_aux:nn}.
+%   \cs{@@_sort_default:nn}.
 %    \begin{macrocode}
 \seq_new:N \l_@@_label_types_seq
 %    \end{macrocode}
@@ -1829,8 +1829,8 @@
                 % different fields and even use different information for
                 % sorting, so we branch them here to specialized functions.
                 \bool_if:NTF \l_@@_page_ref_bool
-                  { \@@_sort_page_aux:nn {##1} {##2} }
-                  { \@@_sort_default_aux:nn {##1} {##2} }
+                  { \@@_sort_page:nn {##1} {##2} }
+                  { \@@_sort_default:nn {##1} {##2} }
               }
           }
       }
@@ -1866,7 +1866,7 @@
 %
 %
 % \begin{variable}{\l_@@_sort_decided_bool}
-%   Auxiliary variable for \cs{@@_sort_default_aux:nn}, signals if the sorting
+%   Auxiliary variable for \cs{@@_sort_default:nn}, signals if the sorting
 %   between two labels has been decided or not.
 %    \begin{macrocode}
 \bool_new:N \l_@@_sort_decided_bool
@@ -1880,7 +1880,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_sort_default_aux:nn}
+% \begin{macro}{\@@_sort_default:nn}
 %   The heavy-lifting function for sorting of existing labels for ``default''
 %   references (that is, a standard reference, not to ``page'').  This
 %   function is expected to be called within the sorting loop of
@@ -1888,10 +1888,10 @@
 %   a change of order or not.  It should \emph{always} ``return'' either
 %   \cs{sort_return_same:} or \cs{sort_return_swapped:}.
 %   \begin{syntax}
-%     \cs{@@_sort_default_aux:nn} \Arg{label a} \Arg{label b}
+%     \cs{@@_sort_default:nn} \Arg{label a} \Arg{label b}
 %   \end{syntax}
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_sort_default_aux:nn #1#2
+\cs_new_protected:Npn \@@_sort_default:nn #1#2
   {
     \tl_set:Nx \l_@@_label_type_a_tl
       { \zref@extractdefault {#1} { zc@type } { \c_empty_tl } }
@@ -1918,215 +1918,22 @@
           {
             \bool_if:nTF
               {
-                % Both labels have a type\dots{}
+                % The interesting case: both labels have a type\dots{}
                 ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
                 ! \tl_if_empty_p:N \l_@@_label_type_b_tl
               }
               {
+                % Here we send this to a couple of auxiliary functions for no
+                % other reason than to keep this long function a little less
+                % unreadable.
                 \tl_if_eq:NNTF \l_@@_label_type_a_tl \l_@@_label_type_b_tl
                   {
                     % \dots{} and it's the same type.
-                    \tl_set:Nx \l_@@_label_enclcnt_a_tl
-                      { \zref@extractdefault {#1} { zc@enclcnt } { \c_empty_tl } }
-                    \tl_set:Nx \l_@@_label_enclcnt_a_tl
-                      { \tl_reverse_items:V \l_@@_label_enclcnt_a_tl }
-                    \tl_set:Nx \l_@@_label_enclcnt_b_tl
-                      { \zref@extractdefault {#2} { zc@enclcnt } { \c_empty_tl } }
-                    \tl_set:Nx \l_@@_label_enclcnt_b_tl
-                      { \tl_reverse_items:V \l_@@_label_enclcnt_b_tl }
-                    \tl_set:Nx \l_@@_label_enclval_a_tl
-                      { \zref@extractdefault {#1} { zc@enclval } { \c_empty_tl } }
-                    \tl_set:Nx \l_@@_label_enclval_a_tl
-                      { \tl_reverse_items:V \l_@@_label_enclval_a_tl }
-                    \tl_set:Nx \l_@@_label_enclval_b_tl
-                      { \zref@extractdefault {#2} { zc@enclval } { \c_empty_tl } }
-                    \tl_set:Nx \l_@@_label_enclval_b_tl
-                      { \tl_reverse_items:V \l_@@_label_enclval_b_tl }
-
-                    \bool_set_false:N \l_@@_sort_decided_bool
-                    % CHECK should I replace the tmp variables here?
-                    \tl_clear:N \l_tmpa_tl
-                    \tl_clear:N \l_tmpb_tl
-                    \bool_until_do:Nn \l_@@_sort_decided_bool
-                      {
-                        \tl_set:Nx \l_tmpa_tl
-                          { \tl_head:N \l_@@_label_enclcnt_a_tl }
-                        \tl_set:Nx \l_tmpb_tl
-                          { \tl_head:N \l_@@_label_enclcnt_b_tl }
-
-                        \bool_if:nTF
-                          {
-                            % Both are empty, meaning: neither labels have any
-                            % (further) ``enclosing counters'' (left).
-                            \tl_if_empty_p:V \l_tmpa_tl &&
-                            \tl_if_empty_p:V \l_tmpb_tl
-                          }
-                          {
-                            \exp_args:Nxx \tl_if_eq:nnTF
-                              { \zref@extractdefault {#1} { zc@counter } { } }
-                              { \zref@extractdefault {#2} { zc@counter } { } }
-                              {
-                                \bool_set_true:N \l_@@_sort_decided_bool
-                                \int_compare:nNnTF
-                                  { \zref@extractdefault {#1} { zc@cntval } {-1} }
-                                    >
-                                  { \zref@extractdefault {#2} { zc@cntval } {-1} }
-                                  { \sort_return_swapped: }
-                                  { \sort_return_same:    }
-                              }
-                              {
-                                \msg_warning:nnnn { zref-clever }
-                                  { counters-not-nested } {#1} {#2}
-                                \bool_set_true:N \l_@@_sort_decided_bool
-                                \sort_return_same:
-                              }
-                          }
-                          {
-                            \bool_if:nTF
-                              {
-                                % `a' is empty (and `b' is not), meaning: `b'
-                                % is (possibly) nested in `a'.
-                                \tl_if_empty_p:V \l_tmpa_tl
-                              }
-                              {
-                                \tl_set:Nx \l_tmpa_tl
-                                  { {\zref@extractdefault {#1} { zc@counter } { }} }
-                                \exp_args:NNx \tl_if_in:NnTF
-                                  \l_@@_label_enclcnt_b_tl { \l_tmpa_tl }
-                                  {
-                                    \bool_set_true:N \l_@@_sort_decided_bool
-                                    \sort_return_same:
-                                  }
-                                  {
-                                    \msg_warning:nnnn { zref-clever }
-                                      { counters-not-nested } {#1} {#2}
-                                    \bool_set_true:N \l_@@_sort_decided_bool
-                                    \sort_return_same:
-                                  }
-                              }
-                              {
-                                \bool_if:nTF
-                                  {
-                                    % `b' is empty (and `a' is not), meaning:
-                                    % `a' is (possibly) nested in `b'.
-                                    \tl_if_empty_p:V \l_tmpb_tl
-                                  }
-                                  {
-                                    \tl_set:Nx \l_tmpb_tl
-                                      { {\zref@extractdefault {#2} { zc@counter } { }} }
-                                    \exp_args:NNx \tl_if_in:NnTF
-                                      \l_@@_label_enclcnt_a_tl { \l_tmpb_tl }
-                                      {
-                                        \bool_set_true:N \l_@@_sort_decided_bool
-                                        \sort_return_swapped:
-                                      }
-                                      {
-                                        \msg_warning:nnnn { zref-clever }
-                                          { counters-not-nested } {#1} {#2}
-                                        \bool_set_true:N \l_@@_sort_decided_bool
-                                        \sort_return_same:
-                                      }
-                                  }
-                                  {
-                                    % Neither is empty, meaning: we can
-                                    % (possibly) compare the values of the
-                                    % current enclosing counter in the loop,
-                                    % if they are equal, we are still in the
-                                    % loop, if they are not, a sorting
-                                    % decision can be made directly.
-                                    \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
-                                      {
-                                        \int_compare:nNnTF
-                                          { \tl_head:N \l_@@_label_enclval_a_tl }
-                                            =
-                                          { \tl_head:N \l_@@_label_enclval_b_tl }
-                                          {
-                                            \tl_set:Nx \l_@@_label_enclcnt_a_tl
-                                              { \tl_tail:N \l_@@_label_enclcnt_a_tl }
-                                            \tl_set:Nx \l_@@_label_enclcnt_b_tl
-                                              { \tl_tail:N \l_@@_label_enclcnt_b_tl }
-                                            \tl_set:Nx \l_@@_label_enclval_a_tl
-                                              { \tl_tail:N \l_@@_label_enclval_a_tl }
-                                            \tl_set:Nx \l_@@_label_enclval_b_tl
-                                              { \tl_tail:N \l_@@_label_enclval_b_tl }
-                                          }
-                                          {
-                                            \bool_set_true:N \l_@@_sort_decided_bool
-                                            \int_compare:nNnTF
-                                              { \tl_head:N \l_@@_label_enclval_a_tl }
-                                                >
-                                              { \tl_head:N \l_@@_label_enclval_b_tl }
-                                              { \sort_return_swapped: }
-                                              { \sort_return_same:    }
-                                          }
-                                      }
-                                      {
-                                        \msg_warning:nnnn { zref-clever }
-                                          { counters-not-nested } {#1} {#2}
-                                        \bool_set_true:N \l_@@_sort_decided_bool
-                                        \sort_return_same:
-                                      }
-                                  }
-                              }
-                          }
-                      }
+                    \@@_sort_default_same_type:nn {#1} {#2}
                   }
                   {
                     % \dots{} and they are different types.
-                    \int_zero:N \l_@@_sort_prior_a_int
-                    \int_zero:N \l_@@_sort_prior_b_int
-                    % \cs{l_@@_typesort_seq} was stored in reverse sequence,
-                    % and we compute the sort priorities in the negative
-                    % range, so that we can implicitly rely on `0' being the
-                    % ``last value''.
-                    \seq_map_indexed_inline:Nn \l_@@_typesort_seq
-                      {
-                        \tl_if_eq:nnTF {##2} {{othertypes}}
-                          {
-                            \int_compare:nNnT { \l_@@_sort_prior_a_int } = { 0 }
-                              { \int_set:Nn \l_@@_sort_prior_a_int { - ##1 } }
-                            \int_compare:nNnT { \l_@@_sort_prior_b_int } = { 0 }
-                              { \int_set:Nn \l_@@_sort_prior_b_int { - ##1 } }
-                          }
-                          {
-                            \tl_if_eq:NnTF \l_@@_label_type_a_tl {##2}
-                              { \int_set:Nn \l_@@_sort_prior_a_int { - ##1 } }
-                              {
-                                \tl_if_eq:NnT \l_@@_label_type_b_tl {##2}
-                                  { \int_set:Nn \l_@@_sort_prior_b_int { - ##1 } }
-                              }
-                          }
-                      }
-                    \bool_if:nTF
-                      {
-                        \int_compare_p:nNn
-                          { \l_@@_sort_prior_a_int } <
-                          { \l_@@_sort_prior_b_int }
-                      }
-                      { \sort_return_same: }
-                      {
-                        \bool_if:nTF
-                          {
-                            \int_compare_p:nNn
-                              { \l_@@_sort_prior_a_int } >
-                              { \l_@@_sort_prior_b_int }
-                          }
-                          { \sort_return_swapped: }
-                          {
-                            % Sort priorities are equal for different types:
-                            % the type that occurs first in \meta{labels}, as
-                            % given by the user, is kept (or brought) forward.
-                            \seq_map_inline:Nn \l_@@_label_types_seq
-                              {
-                                \tl_if_eq:NnTF \l_@@_label_type_a_tl {##1}
-                                  { \seq_map_break:n { \sort_return_same: } }
-                                  {
-                                    \tl_if_eq:NnT \l_@@_label_type_b_tl {##1}
-                                      { \seq_map_break:n { \sort_return_swapped: } }
-                                  }
-                              }
-                          }
-                      }
+                    \@@_sort_default_different_types:nn {#1} {#2}
                   }
               }
               {
@@ -2153,7 +1960,221 @@
 %
 %
 %
-% \begin{macro}{\@@_sort_page_aux:nn}
+% \begin{macro}{\@@_sort_default_same_type:nn}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_sort_default_same_type:nn #1#2
+  {
+    \tl_set:Nx \l_@@_label_enclcnt_a_tl
+      { \zref@extractdefault {#1} { zc@enclcnt } { \c_empty_tl } }
+    \tl_set:Nx \l_@@_label_enclcnt_a_tl
+      { \tl_reverse_items:V \l_@@_label_enclcnt_a_tl }
+    \tl_set:Nx \l_@@_label_enclcnt_b_tl
+      { \zref@extractdefault {#2} { zc@enclcnt } { \c_empty_tl } }
+    \tl_set:Nx \l_@@_label_enclcnt_b_tl
+      { \tl_reverse_items:V \l_@@_label_enclcnt_b_tl }
+    \tl_set:Nx \l_@@_label_enclval_a_tl
+      { \zref@extractdefault {#1} { zc@enclval } { \c_empty_tl } }
+    \tl_set:Nx \l_@@_label_enclval_a_tl
+      { \tl_reverse_items:V \l_@@_label_enclval_a_tl }
+    \tl_set:Nx \l_@@_label_enclval_b_tl
+      { \zref@extractdefault {#2} { zc@enclval } { \c_empty_tl } }
+    \tl_set:Nx \l_@@_label_enclval_b_tl
+      { \tl_reverse_items:V \l_@@_label_enclval_b_tl }
+
+    \bool_set_false:N \l_@@_sort_decided_bool
+    % CHECK should I replace the tmp variables here?
+    \tl_clear:N \l_tmpa_tl
+    \tl_clear:N \l_tmpb_tl
+    \bool_until_do:Nn \l_@@_sort_decided_bool
+      {
+        \tl_set:Nx \l_tmpa_tl
+          { \tl_head:N \l_@@_label_enclcnt_a_tl }
+        \tl_set:Nx \l_tmpb_tl
+          { \tl_head:N \l_@@_label_enclcnt_b_tl }
+
+        \bool_if:nTF
+          {
+            % Both are empty, meaning: neither labels have any (further)
+            % ``enclosing counters'' (left).
+            \tl_if_empty_p:V \l_tmpa_tl &&
+            \tl_if_empty_p:V \l_tmpb_tl
+          }
+          {
+            \exp_args:Nxx \tl_if_eq:nnTF
+              { \zref@extractdefault {#1} { zc@counter } { } }
+              { \zref@extractdefault {#2} { zc@counter } { } }
+              {
+                \bool_set_true:N \l_@@_sort_decided_bool
+                \int_compare:nNnTF
+                  { \zref@extractdefault {#1} { zc@cntval } {-1} }
+                    >
+                  { \zref@extractdefault {#2} { zc@cntval } {-1} }
+                  { \sort_return_swapped: }
+                  { \sort_return_same:    }
+              }
+              {
+                \msg_warning:nnnn { zref-clever }
+                  { counters-not-nested } {#1} {#2}
+                \bool_set_true:N \l_@@_sort_decided_bool
+                \sort_return_same:
+              }
+          }
+          {
+            \bool_if:nTF
+              {
+                % `a' is empty (and `b' is not), meaning: `b' is (possibly)
+                % nested in `a'.
+                \tl_if_empty_p:V \l_tmpa_tl
+              }
+              {
+                \tl_set:Nx \l_tmpa_tl
+                  { {\zref@extractdefault {#1} { zc@counter } { }} }
+                \exp_args:NNx \tl_if_in:NnTF
+                  \l_@@_label_enclcnt_b_tl { \l_tmpa_tl }
+                  {
+                    \bool_set_true:N \l_@@_sort_decided_bool
+                    \sort_return_same:
+                  }
+                  {
+                    \msg_warning:nnnn { zref-clever }
+                      { counters-not-nested } {#1} {#2}
+                    \bool_set_true:N \l_@@_sort_decided_bool
+                    \sort_return_same:
+                  }
+              }
+              {
+                \bool_if:nTF
+                  {
+                    % `b' is empty (and `a' is not), meaning: `a' is
+                    % (possibly) nested in `b'.
+                    \tl_if_empty_p:V \l_tmpb_tl
+                  }
+                  {
+                    \tl_set:Nx \l_tmpb_tl
+                      { {\zref@extractdefault {#2} { zc@counter } { }} }
+                    \exp_args:NNx \tl_if_in:NnTF
+                      \l_@@_label_enclcnt_a_tl { \l_tmpb_tl }
+                      {
+                        \bool_set_true:N \l_@@_sort_decided_bool
+                        \sort_return_swapped:
+                      }
+                      {
+                        \msg_warning:nnnn { zref-clever }
+                          { counters-not-nested } {#1} {#2}
+                        \bool_set_true:N \l_@@_sort_decided_bool
+                        \sort_return_same:
+                      }
+                  }
+                  {
+                    % Neither is empty, meaning: we can (possibly) compare the
+                    % values of the current enclosing counter in the loop, if
+                    % they are equal, we are still in the loop, if they are
+                    % not, a sorting decision can be made directly.
+                    \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
+                      {
+                        \int_compare:nNnTF
+                          { \tl_head:N \l_@@_label_enclval_a_tl }
+                            =
+                          { \tl_head:N \l_@@_label_enclval_b_tl }
+                          {
+                            \tl_set:Nx \l_@@_label_enclcnt_a_tl
+                              { \tl_tail:N \l_@@_label_enclcnt_a_tl }
+                            \tl_set:Nx \l_@@_label_enclcnt_b_tl
+                              { \tl_tail:N \l_@@_label_enclcnt_b_tl }
+                            \tl_set:Nx \l_@@_label_enclval_a_tl
+                              { \tl_tail:N \l_@@_label_enclval_a_tl }
+                            \tl_set:Nx \l_@@_label_enclval_b_tl
+                              { \tl_tail:N \l_@@_label_enclval_b_tl }
+                          }
+                          {
+                            \bool_set_true:N \l_@@_sort_decided_bool
+                            \int_compare:nNnTF
+                              { \tl_head:N \l_@@_label_enclval_a_tl }
+                                >
+                              { \tl_head:N \l_@@_label_enclval_b_tl }
+                              { \sort_return_swapped: }
+                              { \sort_return_same:    }
+                          }
+                      }
+                      {
+                        \msg_warning:nnnn { zref-clever }
+                          { counters-not-nested } {#1} {#2}
+                        \bool_set_true:N \l_@@_sort_decided_bool
+                        \sort_return_same:
+                      }
+                  }
+              }
+          }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\@@_sort_default_different_types:nn}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_sort_default_different_types:nn #1#2
+  {
+    \int_zero:N \l_@@_sort_prior_a_int
+    \int_zero:N \l_@@_sort_prior_b_int
+    % \cs{l_@@_typesort_seq} was stored in reverse sequence, and we compute
+    % the sort priorities in the negative range, so that we can implicitly
+    % rely on `0' being the ``last value''.
+    \seq_map_indexed_inline:Nn \l_@@_typesort_seq
+      {
+        \tl_if_eq:nnTF {##2} {{othertypes}}
+          {
+            \int_compare:nNnT { \l_@@_sort_prior_a_int } = { 0 }
+              { \int_set:Nn \l_@@_sort_prior_a_int { - ##1 } }
+            \int_compare:nNnT { \l_@@_sort_prior_b_int } = { 0 }
+              { \int_set:Nn \l_@@_sort_prior_b_int { - ##1 } }
+          }
+          {
+            \tl_if_eq:NnTF \l_@@_label_type_a_tl {##2}
+              { \int_set:Nn \l_@@_sort_prior_a_int { - ##1 } }
+              {
+                \tl_if_eq:NnT \l_@@_label_type_b_tl {##2}
+                  { \int_set:Nn \l_@@_sort_prior_b_int { - ##1 } }
+              }
+          }
+      }
+    \bool_if:nTF
+      {
+        \int_compare_p:nNn
+          { \l_@@_sort_prior_a_int } <
+          { \l_@@_sort_prior_b_int }
+      }
+      { \sort_return_same: }
+      {
+        \bool_if:nTF
+          {
+            \int_compare_p:nNn
+              { \l_@@_sort_prior_a_int } >
+              { \l_@@_sort_prior_b_int }
+          }
+          { \sort_return_swapped: }
+          {
+            % Sort priorities are equal for different types: the type that
+            % occurs first in \meta{labels}, as given by the user, is kept (or
+            % brought) forward.
+            \seq_map_inline:Nn \l_@@_label_types_seq
+              {
+                \tl_if_eq:NnTF \l_@@_label_type_a_tl {##1}
+                  { \seq_map_break:n { \sort_return_same: } }
+                  {
+                    \tl_if_eq:NnT \l_@@_label_type_b_tl {##1}
+                      { \seq_map_break:n { \sort_return_swapped: } }
+                  }
+              }
+          }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\@@_sort_page:nn}
 %   The sorting function for sorting of existing labels for references to
 %   ``page''.  This function is expected to be called within the sorting loop
 %   of \cs{@@_sort_labels:} and receives the pair of labels being considered
@@ -2162,10 +2183,10 @@
 %   sorting of default labels, this is a piece of cake (thanks to
 %   \texttt{abspage}).
 %   \begin{syntax}
-%     \cs{@@_sort_page_aux:nn} \Arg{label a} \Arg{label b}
+%     \cs{@@_sort_page:nn} \Arg{label a} \Arg{label b}
 %   \end{syntax}
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_sort_page_aux:nn #1#2
+\cs_new_protected:Npn \@@_sort_page:nn #1#2
   {
     \int_compare:nNnTF
       { \zref@extractdefault {#1} { zc@abspg } {-1} }
