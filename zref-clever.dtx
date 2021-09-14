@@ -518,6 +518,13 @@
   }
 \msg_new:nnn { zref-clever } { missing-hyperref }
   { Missing~'hyperref'~package. \iow_newline: Setting~'hyperref=false'. }
+\msg_new:nnn { zref-check } { check-document-only }
+  { Option~'check'~only~available~in~the~document. }
+\msg_new:nnn { zref-clever } { missing-zref-check }
+  {
+    Option~'check'~requested~\msg_line_context:.~
+    But~package~'zref-check'~is~not~loaded,~can't~run~the~checks.
+  }
 \msg_new:nnn { zref-clever } { counters-not-nested }
   { Counters~not~nested~for~labels~'#1'~and~'#2'~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { missing-type }
@@ -1149,6 +1156,47 @@
 %
 %
 %
+% \subsubsection*{\opt{check} option}
+%
+%
+% Integration with \pkg{zref-check}.
+%
+%
+%    \begin{macrocode}
+\bool_new:N \l_@@_zrefcheck_available_bool
+\bool_new:N \l_@@_zcref_with_check_bool
+\keys_define:nn { zref-clever }
+  {
+    check .code:n =
+      { \msg_warning:nn { zref-clever } { check-document-only } } ,
+  }
+\AddToHook { begindocument }
+  {
+    \@ifpackageloaded { zref-check }
+      {
+        \bool_set_true:N \l_@@_zrefcheck_available_bool
+        \keys_define:nn { zref-clever }
+          {
+            check .code:n =
+              {
+                \bool_set_true:N \l_@@_zcref_with_check_bool
+                \keys_set:nn { zref-check / zcheck } {#1}
+              }
+          }
+      }
+      {
+        \bool_set_false:N \l_@@_zrefcheck_available_bool
+        \keys_define:nn { zref-clever }
+          {
+            check .code:n =
+              { \msg_warning:nn { zref-clever } { missing-zref-check } }
+          }
+      }
+  }
+%    \end{macrocode}
+%
+%
+%
 % \subsubsection*{Reference options}
 %
 %
@@ -1698,6 +1746,11 @@
       \keys_set:nn { zref-clever } {#3}
       \seq_set_from_clist:Nn \l_@@_zcref_labels_seq {#1}
       \bool_set:Nn \l_@@_link_star_bool {#2}
+      % Integration with 'zref-check'.
+      \bool_lazy_and:nnT
+        { \l_@@_zrefcheck_available_bool }
+        { \l_@@_zcref_with_check_bool }
+        { \zrefcheck_zcref_beg_label: }
       \bool_lazy_or:nnT
         { \l_@@_typeset_sort_bool }
         { \l_@@_typeset_range_bool }
@@ -1706,6 +1759,15 @@
       % Typeset \texttt{note}.
       \l_@@_notesep_tl
       \l_@@_zcref_note_tl
+      % Integration with 'zref-check'.
+      \bool_lazy_and:nnT
+        { \l_@@_zrefcheck_available_bool }
+        { \l_@@_zcref_with_check_bool }
+        {
+          \zrefcheck_zcref_end_label_maybe:
+          \zrefcheck_zcref_run_checks_on_labels:n
+            { \l_@@_zcref_labels_seq }
+        }
     \group_end:
   }
 %    \end{macrocode}
