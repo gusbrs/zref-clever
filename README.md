@@ -1,6 +1,6 @@
 # zref-clever
 
-**DWIM LaTeX cross-references based on zref**
+**Clever LaTeX cross-references based on zref**
 
 If you got here, you probably know what this is about.  It's already
 functional, but it is not quite ready yet.  In particular, testing and
