@@ -1014,6 +1014,8 @@
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_language_tl
+\tl_new:N \l_@@_main_language_tl
+\tl_new:N \l_@@_current_language_tl
 \NewHook { zref-clever / reflanguage }
 \keys_define:nn { zref-clever }
   {
@@ -1035,7 +1037,21 @@
                     \l_@@_ref_language_tl \l_@@_current_language_tl
                 }
               }
-              { \tl_set:Nn \l_@@_ref_language_tl {#1} }
+              {
+                \tl_set:Nn \l_@@_ref_language_tl {#1}
+                % If user specified a language at the preamble, we make sure
+                % it is loaded.
+                \exp_args:Nx \file_if_exist:nT
+                  { zref-clever- \@trnslt@language {#1} .trsl }
+                  { \LoadDictionaryFor {#1} { zref-clever } }
+                \exp_args:Nxx \tl_if_eq:nnF
+                  { \@trnslt@language {#1} } { \baselanguage {#1} }
+                  {
+                    \exp_args:Nx \file_if_exist:nT
+                      { zref-clever- \baselanguage {#1} .trsl }
+                      { \LoadDictionaryFor { \baselanguage {#1} } { zref-clever } }
+                  }
+              }
           }
       } ,
     lang .initial:n = main ,
@@ -1069,7 +1085,6 @@
                   }
                   { \tl_set:Nn \l_@@_ref_language_tl {#1} }
               } ,
-            lang .initial:n = main ,
             lang .value_required:n = true ,
           }
       }
@@ -1104,6 +1119,15 @@
             \exp_args:Nx \file_if_exist:nT
               { zref-clever- \@trnslt@language {#1} .trsl }
               { \LoadDictionaryFor {#1} { zref-clever } }
+            % If language is a dialect, also load the base language's
+            % dictionary.
+            \exp_args:Nxx \tl_if_eq:nnF
+              { \@trnslt@language {#1} } { \baselanguage {#1} }
+              {
+                \exp_args:Nx \file_if_exist:nT
+                  { zref-clever- \baselanguage {#1} .trsl }
+                  { \LoadDictionaryFor { \baselanguage {#1} } { zref-clever } }
+              }
           }
       }
       {
@@ -1115,10 +1139,16 @@
                 \exp_args:Nx \file_if_exist:nT
                   { zref-clever- \@trnslt@language {#1} .trsl }
                   { \LoadDictionaryFor {#1} { zref-clever } }
+                \exp_args:Nxx \tl_if_eq:nnF
+                  { \@trnslt@language {#1} } { \baselanguage {#1} }
+                  {
+                    \exp_args:Nx \file_if_exist:nT
+                      { zref-clever- \baselanguage {#1} .trsl }
+                      { \LoadDictionaryFor { \baselanguage {#1} } { zref-clever } }
+                  }
               }
           }
           {
-            \tl_new:N \l_@@_main_language_tl
             \tl_set:Nn \l_@@_main_language_tl { english }
             \LoadDictionaryFor { english } { zref-clever }
           }
