@@ -2295,6 +2295,7 @@
 %
 % \begin{variable}
 %   {
+%     \l_@@_typeset_labels_seq ,
 %     \l_@@_typeset_queue_prev_tl ,
 %     \l_@@_typeset_queue_curr_tl ,
 %     \l_@@_type_first_label_tl ,
@@ -2309,6 +2310,7 @@
 %   reference for the type, because the name can only be determined at the
 %   end, and its (potential) hyperlink must be handled at that point.
 %    \begin{macrocode}
+\seq_new:N \l_@@_typeset_labels_seq
 \tl_new:N \l_@@_typeset_queue_prev_tl
 \tl_new:N \l_@@_typeset_queue_curr_tl
 \tl_new:N \l_@@_type_first_label_tl
@@ -2414,6 +2416,7 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_typeset_refs:
   {
+    \seq_set_eq:NN \l_@@_typeset_labels_seq \l_@@_zcref_labels_seq
     \tl_clear:N \l_@@_typeset_queue_prev_tl
     \tl_clear:N \l_@@_typeset_queue_curr_tl
     \tl_clear:N \l_@@_type_first_label_tl
@@ -2437,13 +2440,13 @@
     \bool_set_false:N \l_@@_typeset_last_bool
     \bool_until_do:Nn \l_@@_typeset_last_bool
       {
-        \seq_pop_left:NN \l_@@_zcref_labels_seq \l_@@_label_a_tl
-        \seq_if_empty:NTF \l_@@_zcref_labels_seq
+        \seq_pop_left:NN \l_@@_typeset_labels_seq \l_@@_label_a_tl
+        \seq_if_empty:NTF \l_@@_typeset_labels_seq
           {
             \tl_clear:N \l_@@_label_b_tl
             \bool_set_true:N \l_@@_typeset_last_bool
           }
-          { \seq_get_left:NN \l_@@_zcref_labels_seq \l_@@_label_b_tl }
+          { \seq_get_left:NN \l_@@_typeset_labels_seq \l_@@_label_b_tl }
 
         \bool_if:NTF \l_@@_page_ref_bool
           {
