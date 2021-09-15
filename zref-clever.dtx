@@ -121,6 +121,8 @@
 %    \begin{macrocode}
 \RequirePackage { zref-base }
 \RequirePackage { zref-user }
+\RequirePackage { zref-counter }
+\RequirePackage { zref-abspage }
 \RequirePackage { translations }
 %    \end{macrocode}
 %
@@ -139,15 +141,7 @@
 % \texttt{zc@thecnt} for reserved use.  We also store the ``type'' of the
 % label at this point (see Section~\ref{sec:reference-types}).
 %
-% However, the \pkg{zref-abspage} module is very simple, but loads
-% \pkg{atbegshi}, which is no longer needed with a recent kernel, which we
-% require here anyway.  So we can spare this additional dependency by
-% providing the property internally.  Since the job of \pkg{zref-counter} is
-% also trivial, we do that too, and thus ensure that almost all needed data is
-% stored in ``internal'' properties.  The only exception is the \texttt{page}
-% property, which is available by default (no extra module required), and is
-% not tampered with by \cs{labelformat}, as the \texttt{default} property is.
-% Another exception which we don't need to handle at the data provision side,
+% Another property which we don't need to handle at the data provision side,
 % but need to cater for in the retrieval side, are the \texttt{url} /
 % \texttt{urluse} properties from the \pkg{zref-xr} module, which are added to
 % the labels imported from external documents, and needed to construct
@@ -155,8 +149,6 @@
 %
 %
 %    \begin{macrocode}
-\zref@newprop { zc@counter } { \@currentcounter }
-\zref@addprop \ZREF@mainlist { zc@counter }
 \zref@newprop { zc@type }
   { \exp_args:NNe \prop_item:Nn \l_@@_counter_type_prop { \@currentcounter } }
 \zref@addprop \ZREF@mainlist { zc@type }
@@ -191,14 +183,10 @@
 \zref@addprop \ZREF@mainlist { zc@cntval }
 %    \end{macrocode}
 %
-% And we need the numeric value for the page and abspage.
+% And we also need the numeric value for the page.
 %    \begin{macrocode}
 \zref@newprop* { zc@pgval } [0] { \int_use:c { c@page } }
 \zref@addprop \ZREF@mainlist { zc@pgval }
-\int_new:N \g_@@_abspage_int
-\AddToHook { shipout/before } { \int_gincr:N \g_@@_abspage_int }
-\zref@newprop* { zc@abspg } [0] { \int_use:N \g_@@_abspage_int }
-\zref@addprop \ZREF@mainlist { zc@abspg }
 %    \end{macrocode}
 %
 %
@@ -2002,8 +1990,8 @@
                 % Neither of the labels has a type.  We can't do much of
                 % meaningful here, but if it's the same counter, compare it.
                 \exp_args:Nxx \tl_if_eq:nnTF
-                  { \zref@extractdefault {#1} { zc@counter } { } }
-                  { \zref@extractdefault {#2} { zc@counter } { } }
+                  { \zref@extractdefault {#1} { counter } { } }
+                  { \zref@extractdefault {#2} { counter } { } }
                   {
                     \int_compare:nNnTF
                       { \zref@extractdefault {#1} { zc@cntval } {-1} }
@@ -2063,8 +2051,8 @@
           }
           {
             \exp_args:Nxx \tl_if_eq:nnTF
-              { \zref@extractdefault {#1} { zc@counter } { } }
-              { \zref@extractdefault {#2} { zc@counter } { } }
+              { \zref@extractdefault {#1} { counter } { } }
+              { \zref@extractdefault {#2} { counter } { } }
               {
                 \bool_set_true:N \l_@@_sort_decided_bool
                 \int_compare:nNnTF
@@ -2090,7 +2078,7 @@
               }
               {
                 \tl_set:Nx \l_tmpa_tl
-                  { {\zref@extractdefault {#1} { zc@counter } { }} }
+                  { {\zref@extractdefault {#1} { counter } { }} }
                 \exp_args:NNx \tl_if_in:NnTF
                   \l_@@_label_enclcnt_b_tl { \l_tmpa_tl }
                   {
@@ -2113,7 +2101,7 @@
                   }
                   {
                     \tl_set:Nx \l_tmpb_tl
-                      { {\zref@extractdefault {#2} { zc@counter } { }} }
+                      { {\zref@extractdefault {#2} { counter } { }} }
                     \exp_args:NNx \tl_if_in:NnTF
                       \l_@@_label_enclcnt_a_tl { \l_tmpb_tl }
                       {
@@ -2251,9 +2239,9 @@
 \cs_new_protected:Npn \@@_sort_page:nn #1#2
   {
     \int_compare:nNnTF
-      { \zref@extractdefault {#1} { zc@abspg } {-1} }
+      { \zref@extractdefault {#1} { abspage } {-1} }
         >
-      { \zref@extractdefault {#2} { zc@abspg } {-1} }
+      { \zref@extractdefault {#2} { abspage } {-1} }
       { \sort_return_swapped: }
       { \sort_return_same:    }
   }
@@ -3407,8 +3395,8 @@
       }
       {
         \exp_args:Nxx \tl_if_eq:nnT
-          { \zref@extractdefault {#1} { zc@counter } { } }
-          { \zref@extractdefault {#2} { zc@counter } { } }
+          { \zref@extractdefault {#1} { counter } { } }
+          { \zref@extractdefault {#2} { counter } { } }
           {
             \exp_args:Nxx \tl_if_eq:nnT
               { \zref@extractdefault {#1} { zc@enclval } { } }
