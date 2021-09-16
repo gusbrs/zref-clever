@@ -1034,17 +1034,15 @@
               }
               {
                 \tl_set:Nn \l_@@_ref_language_tl {#1}
-                % If user specified a language at the preamble, we make sure
-                % it is loaded.
-                \exp_args:Nx \file_if_exist:nT
+                % If user specified a language at the preamble, make sure it
+                % is loaded.
+                \exp_args:Nx \file_if_exist:nTF
                   { zref-clever- \@trnslt@language {#1} .trsl }
                   { \LoadDictionaryFor {#1} { zref-clever } }
-                \exp_args:Nxx \tl_if_eq:nnF
-                  { \@trnslt@language {#1} } { \baselanguage {#1} }
                   {
                     \exp_args:Nx \file_if_exist:nT
                       { zref-clever- \baselanguage {#1} .trsl }
-                      { \LoadDictionaryFor { \baselanguage {#1} } { zref-clever } }
+                      { \LoadDictionaryFor {#1} { zref-clever } }
                   }
               }
           }
@@ -1109,19 +1107,15 @@
             % First, there is no way to disable this, even if we don't need
             % them at all here.  Second, \pkg{translations} sends messages of
             % its own missing dictionaries to `info' and everyone else's to
-            % 'warning'\dots{}  So we have to control ourselves for missing
+            % 'warning'...  So we have to control ourselves for missing
             % dictionaries and load them only if available.
-            \exp_args:Nx \file_if_exist:nT
+            \exp_args:Nx \file_if_exist:nTF
               { zref-clever- \@trnslt@language {#1} .trsl }
               { \LoadDictionaryFor {#1} { zref-clever } }
-            % If language is a dialect, also load the base language's
-            % dictionary.
-            \exp_args:Nxx \tl_if_eq:nnF
-              { \@trnslt@language {#1} } { \baselanguage {#1} }
               {
                 \exp_args:Nx \file_if_exist:nT
                   { zref-clever- \baselanguage {#1} .trsl }
-                  { \LoadDictionaryFor { \baselanguage {#1} } { zref-clever } }
+                  { \LoadDictionaryFor {#1} { zref-clever } }
               }
           }
       }
@@ -1131,15 +1125,13 @@
             \tl_set_eq:NN \l_@@_main_language_tl \xpg@main@language
             \clist_map_inline:Nn \xpg@loaded
               {
-                \exp_args:Nx \file_if_exist:nT
+                \exp_args:Nx \file_if_exist:nTF
                   { zref-clever- \@trnslt@language {#1} .trsl }
                   { \LoadDictionaryFor {#1} { zref-clever } }
-                \exp_args:Nxx \tl_if_eq:nnF
-                  { \@trnslt@language {#1} } { \baselanguage {#1} }
                   {
                     \exp_args:Nx \file_if_exist:nT
                       { zref-clever- \baselanguage {#1} .trsl }
-                      { \LoadDictionaryFor { \baselanguage {#1} } { zref-clever } }
+                      { \LoadDictionaryFor {#1} { zref-clever } }
                   }
               }
           }
