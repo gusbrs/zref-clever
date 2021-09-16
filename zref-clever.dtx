@@ -474,11 +474,6 @@
 %
 %
 %    \begin{macrocode}
-\msg_new:nnn { zref-clever } { type-name-length }
-  {
-    Type~'name'~can~only~receive~2~or~4~values~\msg_line_context:.~
-    Don't~know~what~to~do~with~#1.
-  }
 \msg_new:nnn { zref-clever } { option-not-type-specific }
   {
     Option~'#1'~is~not~type-specific~\msg_line_context:.~
@@ -1337,104 +1332,6 @@
 % aka `Skillmon', and Phelype Oleinik).
 %
 %
-% \texttt{name}: a special convenience ``short'' way to set name options.
-% Necessarily type-specific options.
-%    \begin{macrocode}
-\keys_define:nn { zref-clever / typesetup }
-  {
-    name .default:V = \c_novalue_tl ,
-    name .code:n =
-      {
-        \tl_if_novalue:nTF {#1}
-          {
-            \clist_map_inline:nn
-              {
-                name-sg ,
-                name-pl ,
-                Name-sg ,
-                Name-pl ,
-                name-ab-sg ,
-                name-ab-pl ,
-                Name-ab-sg ,
-                Name-ab-pl ,
-              }
-              {
-                \prop_remove:cn
-                  { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                  {##1}
-              }
-          }
-          {
-            \int_case:nnF { \clist_count:n {#1} }
-              {
-                { 2 }
-                {
-                  \clist_map_inline:nn
-                    {
-                      name-sg ,
-                      Name-sg ,
-                      name-ab-sg ,
-                      Name-ab-sg ,
-                    }
-                    {
-                      \prop_put:cnx
-                        { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                        {##1} { \clist_item:nn {#1} { 1 } }
-                    }
-                  \clist_map_inline:nn
-                    {
-                      name-pl ,
-                      Name-pl ,
-                      name-ab-pl ,
-                      Name-ab-pl ,
-                    }
-                    {
-                      \prop_put:cnx
-                        { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                        {##1} { \clist_item:nn {#1} { 2 } }
-                    }
-                }
-
-                { 4 }
-                {
-                  % Make the first pair the capitalized ones, so as to make
-                  % them "feel" the default for the single pair case.
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { Name-sg } { \clist_item:nn {#1} { 1 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { Name-ab-sg } { \clist_item:nn {#1} { 1 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { Name-pl } { \clist_item:nn {#1} { 2 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { Name-ab-pl } { \clist_item:nn {#1} { 2 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { name-sg } { \clist_item:nn {#1} { 3 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { name-ab-sg } { \clist_item:nn {#1} { 3 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { name-pl } { \clist_item:nn {#1} { 4 } }
-                  \prop_put:cnx
-                    { l_@@_type_ \l_@@_setup_type_tl _options_prop }
-                    { name-ab-pl } { \clist_item:nn {#1} { 4 } }
-                }
-              }
-              {
-                \msg_warning:nnx { zref-clever } { type-name-length }
-                  { \clist_count:n {#1} }
-              }
-          }
-      } ,
-  }
-%    \end{macrocode}
-%
-%
 % Not type-specific options.
 %    \begin{macrocode}
 \clist_map_inline:nn
@@ -1474,14 +1371,14 @@
     refpre-in ,
     refpos-in ,
     % Necessarily type-specific options.
-    name-sg ,
-    name-pl ,
     Name-sg ,
+    name-sg ,
     Name-pl ,
-    name-ab-sg ,
-    name-ab-pl ,
-    Name-ab-sg ,
-    Name-ab-pl ,
+    name-pl ,
+    Name-sg-ab ,
+    name-sg-ab ,
+    Name-pl-ab ,
+    name-pl-ab ,
   }
   {
     \keys_define:nn { zref-clever / typesetup }
@@ -1534,90 +1431,6 @@
             \prop_if_exist:cF { l_@@_type_ #1 _options_prop }
               { \prop_new:c { l_@@_type_ #1 _options_prop } }
             \tl_set:Nn \l_@@_setup_type_tl {#1}
-          }
-      } ,
-  }
-%    \end{macrocode}
-%
-%
-% \texttt{name}: a special convenience ``short'' way to set name options.
-% Necessarily type-specific options.
-%    \begin{macrocode}
-\keys_define:nn { zref-clever / translations }
-  {
-    name .value_required:n = true ,
-    name .code:n =
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \msg_warning:nnn { zref-clever }
-              { option-only-type-specific } {#1}
-          }
-          {
-            \int_case:nnF { \clist_count:n {#1} }
-              {
-                { 2 }
-                {
-                  \clist_map_inline:nn
-                    {
-                      name-sg ,
-                      Name-sg ,
-                      name-ab-sg ,
-                      Name-ab-sg ,
-                    }
-                    {
-                      \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                        { zrefclever-type- \l_@@_setup_type_tl - ##1 }
-                        { \clist_item:nn {#1} { 1 } }
-                    }
-                  \clist_map_inline:nn
-                    {
-                      name-pl ,
-                      Name-pl ,
-                      name-ab-pl ,
-                      Name-ab-pl ,
-                    }
-                    {
-                      \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                        { zrefclever-type- \l_@@_setup_type_tl - ##1 }
-                        { \clist_item:nn {#1} { 2 } }
-                    }
-                }
-
-                { 4 }
-                {
-                  % Make the first pair the capitalized ones, so as to make
-                  % them "feel" the default for the single pair case.
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -Name-sg }
-                    { \clist_item:nn {#1} { 1 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -Name-ab-sg }
-                    { \clist_item:nn {#1} { 1 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -Name-pl }
-                    { \clist_item:nn {#1} { 2 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -Name-ab-pl }
-                    { \clist_item:nn {#1} { 2 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -name-sg }
-                    { \clist_item:nn {#1} { 3 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -name-ab-sg }
-                    { \clist_item:nn {#1} { 3 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -name-pl }
-                    { \clist_item:nn {#1} { 4 } }
-                  \@@_declare_translation:xxx { \l_@@_setup_language_tl }
-                    { zrefclever-type- \l_@@_setup_type_tl -name-ab-pl }
-                    { \clist_item:nn {#1} { 4 } }
-                }
-              }
-              {
-                \msg_warning:nnx { zref-clever } { type-name-length }
-                  { \clist_count:n {#1} }
-              }
           }
       } ,
   }
@@ -1693,14 +1506,14 @@
 %    \begin{macrocode}
 \clist_map_inline:nn
   {
-    name-sg ,
-    name-pl ,
     Name-sg ,
+    name-sg ,
     Name-pl ,
-    name-ab-sg ,
-    name-ab-pl ,
-    Name-ab-sg ,
-    Name-ab-pl ,
+    name-pl ,
+    Name-sg-ab ,
+    name-sg-ab ,
+    Name-pl-ab ,
+    name-pl-ab ,
   }
   {
     \keys_define:nn { zref-clever / translations }
@@ -2414,7 +2227,8 @@
 %   {
 %     \l_@@_type_name_tl ,
 %     \l_@@_name_in_link_bool ,
-%     \l_@@_name_format_tl
+%     \l_@@_name_format_tl ,
+%     \l_@@_name_format_fallback_tl
 %   }
 %   Auxiliary variables for \cs{@@_get_ref_first:} and
 %   \cs{@@_type_name_setup:}.
@@ -2422,6 +2236,7 @@
 \tl_new:N \l_@@_type_name_tl
 \bool_new:N \l_@@_name_in_link_bool
 \tl_new:N \l_@@_name_format_tl
+\tl_new:N \l_@@_name_format_fallback_tl
 %    \end{macrocode}
 % \end{variable}
 %
@@ -3085,41 +2900,97 @@
               }
               { \tl_set:Nn \l_@@_name_format_tl {Name} }
               { \tl_set:Nn \l_@@_name_format_tl {name} }
-            \bool_lazy_and:nnT
+            % If the queue is empty, we have a singular, otherwise, plural.
+            \tl_if_empty:NTF \l_@@_typeset_queue_curr_tl
+              { \tl_put_right:Nn \l_@@_name_format_tl { -sg } }
+              { \tl_put_right:Nn \l_@@_name_format_tl { -pl } }
+            \bool_lazy_and:nnTF
               { \l_@@_abbrev_bool }
               {
                 ! \int_compare_p:nNn { \l_@@_type_count_int } = { 0 } ||
                 ! \l_@@_noabbrev_first_bool
               }
-              { \tl_put_right:Nn \l_@@_name_format_tl { -ab } }
-            % If the queue is empty, we have a singular, otherwise, plural.
-            \tl_if_empty:NTF \l_@@_typeset_queue_curr_tl
-              { \tl_put_right:Nn \l_@@_name_format_tl { -sg } }
-              { \tl_put_right:Nn \l_@@_name_format_tl { -pl } }
-
-            \prop_get:cVNF
-              { l_@@_type_ \l_@@_type_first_label_type_tl _options_prop }
-              \l_@@_name_format_tl
-              \l_@@_type_name_tl
               {
-                \@@_if_translation:xxTF
-                  { \l_@@_ref_language_tl }
+                \tl_set:NV \l_@@_name_format_fallback_tl \l_@@_name_format_tl
+                \tl_put_right:Nn \l_@@_name_format_tl { -ab }
+              }
+              { \tl_clear:N \l_@@_name_format_fallback_tl }
+
+            \tl_if_empty:NTF \l_@@_name_format_fallback_tl
+              {
+                \prop_get:cVNF
+                  { l_@@_type_ \l_@@_type_first_label_type_tl _options_prop }
+                  \l_@@_name_format_tl
+                  \l_@@_type_name_tl
                   {
-                    zrefclever-type- \l_@@_type_first_label_type_tl -
-                    \l_@@_name_format_tl
-                  }
-                  {
-                    \@@_get_translation_for:nxx { \l_@@_type_name_tl }
+                    \@@_if_translation:xxTF
                       { \l_@@_ref_language_tl }
                       {
                         zrefclever-type- \l_@@_type_first_label_type_tl -
                         \l_@@_name_format_tl
                       }
+                      {
+                        \@@_get_translation_for:nxx { \l_@@_type_name_tl }
+                          { \l_@@_ref_language_tl }
+                          {
+                            zrefclever-type- \l_@@_type_first_label_type_tl -
+                            \l_@@_name_format_tl
+                          }
+                      }
+                      {
+                        \tl_clear:N \l_@@_type_name_tl
+                        \msg_warning:nnx { zref-clever } { missing-name }
+                          { \l_@@_type_first_label_type_tl }
+                      }
                   }
+              }
+              {
+                \prop_get:cVNF
+                  { l_@@_type_ \l_@@_type_first_label_type_tl _options_prop }
+                  \l_@@_name_format_tl
+                  \l_@@_type_name_tl
                   {
-                    \tl_clear:N \l_@@_type_name_tl
-                    \msg_warning:nnx { zref-clever } { missing-name }
-                      { \l_@@_type_first_label_type_tl }
+                    \prop_get:cVNF
+                      { l_@@_type_ \l_@@_type_first_label_type_tl _options_prop }
+                      \l_@@_name_format_fallback_tl
+                      \l_@@_type_name_tl
+                      {
+                        \@@_if_translation:xxTF
+                          { \l_@@_ref_language_tl }
+                          {
+                            zrefclever-type- \l_@@_type_first_label_type_tl -
+                            \l_@@_name_format_tl
+                          }
+                          {
+                            \@@_get_translation_for:nxx { \l_@@_type_name_tl }
+                              { \l_@@_ref_language_tl }
+                              {
+                                zrefclever-type- \l_@@_type_first_label_type_tl -
+                                \l_@@_name_format_tl
+                              }
+                          }
+                          {
+                            \@@_if_translation:xxTF
+                              { \l_@@_ref_language_tl }
+                              {
+                                zrefclever-type- \l_@@_type_first_label_type_tl -
+                                \l_@@_name_format_fallback_tl
+                              }
+                              {
+                                \@@_get_translation_for:nxx { \l_@@_type_name_tl }
+                                  { \l_@@_ref_language_tl }
+                                  {
+                                    zrefclever-type- \l_@@_type_first_label_type_tl -
+                                    \l_@@_name_format_fallback_tl
+                                  }
+                              }
+                              {
+                                \tl_clear:N \l_@@_type_name_tl
+                                \msg_warning:nnx { zref-clever } { missing-name }
+                                  { \l_@@_type_first_label_type_tl }
+                              }
+                          }
+                      }
                   }
               }
           }
@@ -3517,241 +3388,151 @@
 \zcDicDefaultTransl{refpre-in}{}
 \zcDicDefaultTransl{refpos-in}{}
 
-\zcDicTypeTransl{part}{name-sg}    {part}
-\zcDicTypeTransl{part}{name-ab-sg} {part}
-\zcDicTypeTransl{part}{name-pl}    {parts}
-\zcDicTypeTransl{part}{name-ab-pl} {parts}
-\zcDicTypeTransl{part}{Name-sg}    {Part}
-\zcDicTypeTransl{part}{Name-ab-sg} {Part}
-\zcDicTypeTransl{part}{Name-pl}    {Parts}
-\zcDicTypeTransl{part}{Name-ab-pl} {Parts}
+\zcDicTypeTransl{part}{Name-sg}{Part}
+\zcDicTypeTransl{part}{name-sg}{part}
+\zcDicTypeTransl{part}{Name-pl}{Parts}
+\zcDicTypeTransl{part}{name-pl}{parts}
 
-\zcDicTypeTransl{chapter}{name-sg}    {chapter}
-\zcDicTypeTransl{chapter}{name-ab-sg} {chapter}
-\zcDicTypeTransl{chapter}{name-pl}    {chapters}
-\zcDicTypeTransl{chapter}{name-ab-pl} {chapters}
-\zcDicTypeTransl{chapter}{Name-sg}    {Chapter}
-\zcDicTypeTransl{chapter}{Name-ab-sg} {Chapter}
-\zcDicTypeTransl{chapter}{Name-pl}    {Chapters}
-\zcDicTypeTransl{chapter}{Name-ab-pl} {Chapters}
+\zcDicTypeTransl{chapter}{Name-sg}{Chapter}
+\zcDicTypeTransl{chapter}{name-sg}{chapter}
+\zcDicTypeTransl{chapter}{Name-pl}{Chapters}
+\zcDicTypeTransl{chapter}{name-pl}{chapters}
 
-\zcDicTypeTransl{section}{name-sg}    {section}
-\zcDicTypeTransl{section}{name-ab-sg} {section}
-\zcDicTypeTransl{section}{name-pl}    {sections}
-\zcDicTypeTransl{section}{name-ab-pl} {sections}
-\zcDicTypeTransl{section}{Name-sg}    {Section}
-\zcDicTypeTransl{section}{Name-ab-sg} {Section}
-\zcDicTypeTransl{section}{Name-pl}    {Sections}
-\zcDicTypeTransl{section}{Name-ab-pl} {Sections}
+\zcDicTypeTransl{section}{Name-sg}{Section}
+\zcDicTypeTransl{section}{name-sg}{section}
+\zcDicTypeTransl{section}{Name-pl}{Sections}
+\zcDicTypeTransl{section}{name-pl}{sections}
 
-\zcDicTypeTransl{paragraph}{name-sg}    {paragraph}
-\zcDicTypeTransl{paragraph}{name-ab-sg} {par.}
-\zcDicTypeTransl{paragraph}{name-pl}    {paragraphs}
-\zcDicTypeTransl{paragraph}{name-ab-pl} {par.}
-\zcDicTypeTransl{paragraph}{Name-sg}    {Paragraph}
-\zcDicTypeTransl{paragraph}{Name-ab-sg} {Par.}
-\zcDicTypeTransl{paragraph}{Name-pl}    {Paragraphs}
-\zcDicTypeTransl{paragraph}{Name-ab-pl} {Par.}
+\zcDicTypeTransl{paragraph}{Name-sg}{Paragraph}
+\zcDicTypeTransl{paragraph}{name-sg}{paragraph}
+\zcDicTypeTransl{paragraph}{Name-pl}{Paragraphs}
+\zcDicTypeTransl{paragraph}{name-pl}{paragraphs}
+\zcDicTypeTransl{paragraph}{Name-sg-ab}{Par.}
+\zcDicTypeTransl{paragraph}{name-sg-ab}{par.}
+\zcDicTypeTransl{paragraph}{Name-pl-ab}{Par.}
+\zcDicTypeTransl{paragraph}{name-pl-ab}{par.}
 
-\zcDicTypeTransl{appendix}{name-sg}    {appendix}
-\zcDicTypeTransl{appendix}{name-ab-sg} {appendix}
-\zcDicTypeTransl{appendix}{name-pl}    {appendices}
-\zcDicTypeTransl{appendix}{name-ab-pl} {appendices}
-\zcDicTypeTransl{appendix}{Name-sg}    {Appendix}
-\zcDicTypeTransl{appendix}{Name-ab-sg} {Appendix}
-\zcDicTypeTransl{appendix}{Name-pl}    {Appendices}
-\zcDicTypeTransl{appendix}{Name-ab-pl} {Appendices}
+\zcDicTypeTransl{appendix}{Name-sg}{Appendix}
+\zcDicTypeTransl{appendix}{name-sg}{appendix}
+\zcDicTypeTransl{appendix}{Name-pl}{Appendices}
+\zcDicTypeTransl{appendix}{name-pl}{appendices}
 
-\zcDicTypeTransl{page}{name-sg}    {page}
-\zcDicTypeTransl{page}{name-ab-sg} {p.}
-\zcDicTypeTransl{page}{name-pl}    {pages}
-\zcDicTypeTransl{page}{name-ab-pl} {pp.}
-\zcDicTypeTransl{page}{Name-sg}    {Page}
-\zcDicTypeTransl{page}{Name-ab-sg} {Page}
-\zcDicTypeTransl{page}{Name-pl}    {Pages}
-\zcDicTypeTransl{page}{Name-ab-pl} {Pages}
+\zcDicTypeTransl{page}{Name-sg}{Page}
+\zcDicTypeTransl{page}{name-sg}{page}
+\zcDicTypeTransl{page}{Name-pl}{Pages}
+\zcDicTypeTransl{page}{name-pl}{pages}
+\zcDicTypeTransl{page}{name-sg-ab}{p.}
+\zcDicTypeTransl{page}{name-pl-ab}{pp.}
 
-\zcDicTypeTransl{line}{name-sg}    {line}
-\zcDicTypeTransl{line}{name-ab-sg} {line}
-\zcDicTypeTransl{line}{name-pl}    {lines}
-\zcDicTypeTransl{line}{name-ab-pl} {lines}
-\zcDicTypeTransl{line}{Name-sg}    {Line}
-\zcDicTypeTransl{line}{Name-ab-sg} {Line}
-\zcDicTypeTransl{line}{Name-pl}    {Lines}
-\zcDicTypeTransl{line}{Name-ab-pl} {Lines}
+\zcDicTypeTransl{line}{Name-sg}{Line}
+\zcDicTypeTransl{line}{name-sg}{line}
+\zcDicTypeTransl{line}{Name-pl}{Lines}
+\zcDicTypeTransl{line}{name-pl}{lines}
 
-\zcDicTypeTransl{figure}{name-sg}    {figure}
-\zcDicTypeTransl{figure}{name-ab-sg} {fig.}
-\zcDicTypeTransl{figure}{name-pl}    {figures}
-\zcDicTypeTransl{figure}{name-ab-pl} {figs.}
-\zcDicTypeTransl{figure}{Name-sg}    {Figure}
-\zcDicTypeTransl{figure}{Name-ab-sg} {Fig.}
-\zcDicTypeTransl{figure}{Name-pl}    {Figures}
-\zcDicTypeTransl{figure}{Name-ab-pl} {Figs.}
+\zcDicTypeTransl{figure}{Name-sg}{Figure}
+\zcDicTypeTransl{figure}{name-sg}{figure}
+\zcDicTypeTransl{figure}{Name-pl}{Figures}
+\zcDicTypeTransl{figure}{name-pl}{figures}
+\zcDicTypeTransl{figure}{Name-sg-ab}{Fig.}
+\zcDicTypeTransl{figure}{name-sg-ab}{fig.}
+\zcDicTypeTransl{figure}{Name-pl-ab}{Figs.}
+\zcDicTypeTransl{figure}{name-pl-ab}{figs.}
 
-\zcDicTypeTransl{table}{name-sg}    {table}
-\zcDicTypeTransl{table}{name-ab-sg} {table}
-\zcDicTypeTransl{table}{name-pl}    {tables}
-\zcDicTypeTransl{table}{name-ab-pl} {tables}
-\zcDicTypeTransl{table}{Name-sg}    {Table}
-\zcDicTypeTransl{table}{Name-ab-sg} {Table}
-\zcDicTypeTransl{table}{Name-pl}    {Tables}
-\zcDicTypeTransl{table}{Name-ab-pl} {Tables}
+\zcDicTypeTransl{table}{Name-sg}{Table}
+\zcDicTypeTransl{table}{name-sg}{table}
+\zcDicTypeTransl{table}{Name-pl}{Tables}
+\zcDicTypeTransl{table}{name-pl}{tables}
 
-\zcDicTypeTransl{item}{name-sg}    {item}
-\zcDicTypeTransl{item}{name-ab-sg} {item}
-\zcDicTypeTransl{item}{name-pl}    {items}
-\zcDicTypeTransl{item}{name-ab-pl} {items}
-\zcDicTypeTransl{item}{Name-sg}    {Item}
-\zcDicTypeTransl{item}{Name-ab-sg} {Item}
-\zcDicTypeTransl{item}{Name-pl}    {Items}
-\zcDicTypeTransl{item}{Name-ab-pl} {Items}
+\zcDicTypeTransl{item}{Name-sg}{Item}
+\zcDicTypeTransl{item}{name-sg}{item}
+\zcDicTypeTransl{item}{Name-pl}{Items}
+\zcDicTypeTransl{item}{name-pl}{items}
 
-\zcDicTypeTransl{footnote}{name-sg}    {footnote}
-\zcDicTypeTransl{footnote}{name-ab-sg} {footnote}
-\zcDicTypeTransl{footnote}{name-pl}    {footnotes}
-\zcDicTypeTransl{footnote}{name-ab-pl} {footnotes}
-\zcDicTypeTransl{footnote}{Name-sg}    {Footnote}
-\zcDicTypeTransl{footnote}{Name-ab-sg} {Footnote}
-\zcDicTypeTransl{footnote}{Name-pl}    {Footnotes}
-\zcDicTypeTransl{footnote}{Name-ab-pl} {Footnotes}
+\zcDicTypeTransl{footnote}{Name-sg}{Footnote}
+\zcDicTypeTransl{footnote}{name-sg}{footnote}
+\zcDicTypeTransl{footnote}{Name-pl}{Footnotes}
+\zcDicTypeTransl{footnote}{name-pl}{footnotes}
 
-\zcDicTypeTransl{note}{name-sg}    {note}
-\zcDicTypeTransl{note}{name-ab-sg} {note}
-\zcDicTypeTransl{note}{name-pl}    {notes}
-\zcDicTypeTransl{note}{name-ab-pl} {notes}
-\zcDicTypeTransl{note}{Name-sg}    {Note}
-\zcDicTypeTransl{note}{Name-ab-sg} {Note}
-\zcDicTypeTransl{note}{Name-pl}    {Notes}
-\zcDicTypeTransl{note}{Name-ab-pl} {Notes}
+\zcDicTypeTransl{note}{Name-sg}{Note}
+\zcDicTypeTransl{note}{name-sg}{note}
+\zcDicTypeTransl{note}{Name-pl}{Notes}
+\zcDicTypeTransl{note}{name-pl}{notes}
 
-\zcDicTypeTransl{equation}{name-sg}    {equation}
-\zcDicTypeTransl{equation}{name-ab-sg} {eq.}
-\zcDicTypeTransl{equation}{name-pl}    {equations}
-\zcDicTypeTransl{equation}{name-ab-pl} {eqs.}
-\zcDicTypeTransl{equation}{Name-sg}    {Equation}
-\zcDicTypeTransl{equation}{Name-ab-sg} {Eq.}
-\zcDicTypeTransl{equation}{Name-pl}    {Equations}
-\zcDicTypeTransl{equation}{Name-ab-pl} {Eqs.}
-\zcDicTypeTransl{equation}{refpre-in}  {(}
-\zcDicTypeTransl{equation}{refpos-in}  {)}
+\zcDicTypeTransl{equation}{Name-sg}{Equation}
+\zcDicTypeTransl{equation}{name-sg}{equation}
+\zcDicTypeTransl{equation}{Name-pl}{Equations}
+\zcDicTypeTransl{equation}{name-pl}{equations}
+\zcDicTypeTransl{equation}{Name-sg-ab}{Eq.}
+\zcDicTypeTransl{equation}{name-sg-ab}{eq.}
+\zcDicTypeTransl{equation}{Name-pl-ab}{Eqs.}
+\zcDicTypeTransl{equation}{name-pl-ab}{eqs.}
+\zcDicTypeTransl{equation}{refpre-in}{(}
+\zcDicTypeTransl{equation}{refpos-in}{)}
 
-\zcDicTypeTransl{theorem}{name-sg}    {theorem}
-\zcDicTypeTransl{theorem}{name-ab-sg} {theorem}
-\zcDicTypeTransl{theorem}{name-pl}    {theorems}
-\zcDicTypeTransl{theorem}{name-ab-pl} {theorems}
-\zcDicTypeTransl{theorem}{Name-sg}    {Theorem}
-\zcDicTypeTransl{theorem}{Name-ab-sg} {Theorem}
-\zcDicTypeTransl{theorem}{Name-pl}    {Theorems}
-\zcDicTypeTransl{theorem}{Name-ab-pl} {Theorems}
+\zcDicTypeTransl{theorem}{Name-sg}{Theorem}
+\zcDicTypeTransl{theorem}{name-sg}{theorem}
+\zcDicTypeTransl{theorem}{Name-pl}{Theorems}
+\zcDicTypeTransl{theorem}{name-pl}{theorems}
 
-\zcDicTypeTransl{lemma}{name-sg}    {lemma}
-\zcDicTypeTransl{lemma}{name-ab-sg} {lemma}
-\zcDicTypeTransl{lemma}{name-pl}    {lemmas}
-\zcDicTypeTransl{lemma}{name-ab-pl} {lemmas}
-\zcDicTypeTransl{lemma}{Name-sg}    {Lemma}
-\zcDicTypeTransl{lemma}{Name-ab-sg} {Lemma}
-\zcDicTypeTransl{lemma}{Name-pl}    {Lemmas}
-\zcDicTypeTransl{lemma}{Name-ab-pl} {Lemmas}
+\zcDicTypeTransl{lemma}{Name-sg}{Lemma}
+\zcDicTypeTransl{lemma}{name-sg}{lemma}
+\zcDicTypeTransl{lemma}{Name-pl}{Lemmas}
+\zcDicTypeTransl{lemma}{name-pl}{lemmas}
 
-\zcDicTypeTransl{corollary}{name-sg}    {corollary}
-\zcDicTypeTransl{corollary}{name-ab-sg} {corollary}
-\zcDicTypeTransl{corollary}{name-pl}    {corollaries}
-\zcDicTypeTransl{corollary}{name-ab-pl} {corollaries}
-\zcDicTypeTransl{corollary}{Name-sg}    {Corollary}
-\zcDicTypeTransl{corollary}{Name-ab-sg} {Corollary}
-\zcDicTypeTransl{corollary}{Name-pl}    {Corollaries}
-\zcDicTypeTransl{corollary}{Name-ab-pl} {Corollaries}
+\zcDicTypeTransl{corollary}{Name-sg}{Corollary}
+\zcDicTypeTransl{corollary}{name-sg}{corollary}
+\zcDicTypeTransl{corollary}{Name-pl}{Corollaries}
+\zcDicTypeTransl{corollary}{name-pl}{corollaries}
 
-\zcDicTypeTransl{proposition}{name-sg}    {proposition}
-\zcDicTypeTransl{proposition}{name-ab-sg} {proposition}
-\zcDicTypeTransl{proposition}{name-pl}    {propositions}
-\zcDicTypeTransl{proposition}{name-ab-pl} {propositions}
-\zcDicTypeTransl{proposition}{Name-sg}    {Proposition}
-\zcDicTypeTransl{proposition}{Name-ab-sg} {Proposition}
-\zcDicTypeTransl{proposition}{Name-pl}    {Propositions}
-\zcDicTypeTransl{proposition}{Name-ab-pl} {Propositions}
+\zcDicTypeTransl{proposition}{Name-sg}{Proposition}
+\zcDicTypeTransl{proposition}{name-sg}{proposition}
+\zcDicTypeTransl{proposition}{Name-pl}{Propositions}
+\zcDicTypeTransl{proposition}{name-pl}{propositions}
 
-\zcDicTypeTransl{definition}{name-sg}    {definition}
-\zcDicTypeTransl{definition}{name-ab-sg} {definition}
-\zcDicTypeTransl{definition}{name-pl}    {definitions}
-\zcDicTypeTransl{definition}{name-ab-pl} {definitions}
-\zcDicTypeTransl{definition}{Name-sg}    {Definition}
-\zcDicTypeTransl{definition}{Name-ab-sg} {Definition}
-\zcDicTypeTransl{definition}{Name-pl}    {Definitions}
-\zcDicTypeTransl{definition}{Name-ab-pl} {Definitions}
+\zcDicTypeTransl{definition}{Name-sg}{Definition}
+\zcDicTypeTransl{definition}{name-sg}{definition}
+\zcDicTypeTransl{definition}{Name-pl}{Definitions}
+\zcDicTypeTransl{definition}{name-pl}{definitions}
 
-\zcDicTypeTransl{proof}{name-sg}    {proof}
-\zcDicTypeTransl{proof}{name-ab-sg} {proof}
-\zcDicTypeTransl{proof}{name-pl}    {proofs}
-\zcDicTypeTransl{proof}{name-ab-pl} {proofs}
-\zcDicTypeTransl{proof}{Name-sg}    {Proof}
-\zcDicTypeTransl{proof}{Name-ab-sg} {Proof}
-\zcDicTypeTransl{proof}{Name-pl}    {Proofs}
-\zcDicTypeTransl{proof}{Name-ab-pl} {Proofs}
+\zcDicTypeTransl{proof}{Name-sg}{Proof}
+\zcDicTypeTransl{proof}{name-sg}{proof}
+\zcDicTypeTransl{proof}{Name-pl}{Proofs}
+\zcDicTypeTransl{proof}{name-pl}{proofs}
 
-\zcDicTypeTransl{result}{name-sg}    {result}
-\zcDicTypeTransl{result}{name-ab-sg} {result}
-\zcDicTypeTransl{result}{name-pl}    {results}
-\zcDicTypeTransl{result}{name-ab-pl} {results}
-\zcDicTypeTransl{result}{Name-sg}    {Result}
-\zcDicTypeTransl{result}{Name-ab-sg} {Result}
-\zcDicTypeTransl{result}{Name-pl}    {Results}
-\zcDicTypeTransl{result}{Name-ab-pl} {Results}
+\zcDicTypeTransl{result}{Name-sg}{Result}
+\zcDicTypeTransl{result}{name-sg}{result}
+\zcDicTypeTransl{result}{Name-pl}{Results}
+\zcDicTypeTransl{result}{name-pl}{results}
 
-\zcDicTypeTransl{example}{name-sg}    {example}
-\zcDicTypeTransl{example}{name-ab-sg} {example}
-\zcDicTypeTransl{example}{name-pl}    {examples}
-\zcDicTypeTransl{example}{name-ab-pl} {examples}
-\zcDicTypeTransl{example}{Name-sg}    {Example}
-\zcDicTypeTransl{example}{Name-ab-sg} {Example}
-\zcDicTypeTransl{example}{Name-pl}    {Examples}
-\zcDicTypeTransl{example}{Name-ab-pl} {Examples}
+\zcDicTypeTransl{example}{Name-sg}{Example}
+\zcDicTypeTransl{example}{name-sg}{example}
+\zcDicTypeTransl{example}{Name-pl}{Examples}
+\zcDicTypeTransl{example}{name-pl}{examples}
 
-\zcDicTypeTransl{remark}{name-sg}    {remark}
-\zcDicTypeTransl{remark}{name-ab-sg} {remark}
-\zcDicTypeTransl{remark}{name-pl}    {remarks}
-\zcDicTypeTransl{remark}{name-ab-pl} {remarks}
-\zcDicTypeTransl{remark}{Name-sg}    {Remark}
-\zcDicTypeTransl{remark}{Name-ab-sg} {Remark}
-\zcDicTypeTransl{remark}{Name-pl}    {Remarks}
-\zcDicTypeTransl{remark}{Name-ab-pl} {Remarks}
+\zcDicTypeTransl{remark}{Name-sg}{Remark}
+\zcDicTypeTransl{remark}{name-sg}{remark}
+\zcDicTypeTransl{remark}{Name-pl}{Remarks}
+\zcDicTypeTransl{remark}{name-pl}{remarks}
 
-\zcDicTypeTransl{algorithm}{name-sg}    {algorithm}
-\zcDicTypeTransl{algorithm}{name-ab-sg} {algorithm}
-\zcDicTypeTransl{algorithm}{name-pl}    {algorithms}
-\zcDicTypeTransl{algorithm}{name-ab-pl} {algorithms}
-\zcDicTypeTransl{algorithm}{Name-sg}    {Algorithm}
-\zcDicTypeTransl{algorithm}{Name-ab-sg} {Algorithm}
-\zcDicTypeTransl{algorithm}{Name-pl}    {Algorithms}
-\zcDicTypeTransl{algorithm}{Name-ab-pl} {Algorithms}
+\zcDicTypeTransl{algorithm}{Name-sg}{Algorithm}
+\zcDicTypeTransl{algorithm}{name-sg}{algorithm}
+\zcDicTypeTransl{algorithm}{Name-pl}{Algorithms}
+\zcDicTypeTransl{algorithm}{name-pl}{algorithms}
 
-\zcDicTypeTransl{listing}{name-sg}    {listing}
-\zcDicTypeTransl{listing}{name-ab-sg} {listing}
-\zcDicTypeTransl{listing}{name-pl}    {listings}
-\zcDicTypeTransl{listing}{name-ab-pl} {listings}
-\zcDicTypeTransl{listing}{Name-sg}    {Listing}
-\zcDicTypeTransl{listing}{Name-ab-sg} {Listing}
-\zcDicTypeTransl{listing}{Name-pl}    {Listings}
-\zcDicTypeTransl{listing}{Name-ab-pl} {Listings}
+\zcDicTypeTransl{listing}{Name-sg}{Listing}
+\zcDicTypeTransl{listing}{name-sg}{listing}
+\zcDicTypeTransl{listing}{Name-pl}{Listings}
+\zcDicTypeTransl{listing}{name-pl}{listings}
 
-\zcDicTypeTransl{exercise}{name-sg}    {exercise}
-\zcDicTypeTransl{exercise}{name-ab-sg} {exercise}
-\zcDicTypeTransl{exercise}{name-pl}    {exercises}
-\zcDicTypeTransl{exercise}{name-ab-pl} {exercises}
-\zcDicTypeTransl{exercise}{Name-sg}    {Exercise}
-\zcDicTypeTransl{exercise}{Name-ab-sg} {Exercise}
-\zcDicTypeTransl{exercise}{Name-pl}    {Exercises}
-\zcDicTypeTransl{exercise}{Name-ab-pl} {Exercises}
+\zcDicTypeTransl{exercise}{Name-sg}{Exercise}
+\zcDicTypeTransl{exercise}{name-sg}{exercise}
+\zcDicTypeTransl{exercise}{Name-pl}{Exercises}
+\zcDicTypeTransl{exercise}{name-pl}{exercises}
 
-\zcDicTypeTransl{solution}{name-sg}    {solution}
-\zcDicTypeTransl{solution}{name-ab-sg} {solution}
-\zcDicTypeTransl{solution}{name-pl}    {solutions}
-\zcDicTypeTransl{solution}{name-ab-pl} {solutions}
-\zcDicTypeTransl{solution}{Name-sg}    {Solution}
-\zcDicTypeTransl{solution}{Name-ab-sg} {Solution}
-\zcDicTypeTransl{solution}{Name-pl}    {Solutions}
-\zcDicTypeTransl{solution}{Name-ab-pl} {Solutions}
+\zcDicTypeTransl{solution}{Name-sg}{Solution}
+\zcDicTypeTransl{solution}{name-sg}{solution}
+\zcDicTypeTransl{solution}{Name-pl}{Solutions}
+\zcDicTypeTransl{solution}{name-pl}{solutions}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -3780,241 +3561,141 @@
 \zcDicDefaultTransl{notesep}{~}
 \zcDicDefaultTransl{rangesep}{~bis\nobreakspace}
 
-\zcDicTypeTransl{part}{name-sg}    {Teil}
-\zcDicTypeTransl{part}{name-ab-sg} {Teil}
-\zcDicTypeTransl{part}{name-pl}    {Teile}
-\zcDicTypeTransl{part}{name-ab-pl} {Teile}
-\zcDicTypeTransl{part}{Name-sg}    {Teil}
-\zcDicTypeTransl{part}{Name-ab-sg} {Teil}
-\zcDicTypeTransl{part}{Name-pl}    {Teile}
-\zcDicTypeTransl{part}{Name-ab-pl} {Teile}
+\zcDicTypeTransl{part}{Name-sg}{Teil}
+\zcDicTypeTransl{part}{name-sg}{Teil}
+\zcDicTypeTransl{part}{Name-pl}{Teile}
+\zcDicTypeTransl{part}{name-pl}{Teile}
 
-\zcDicTypeTransl{chapter}{name-sg}    {Kapitel}
-\zcDicTypeTransl{chapter}{name-ab-sg} {Kapitel}
-\zcDicTypeTransl{chapter}{name-pl}    {Kapitel}
-\zcDicTypeTransl{chapter}{name-ab-pl} {Kapitel}
-\zcDicTypeTransl{chapter}{Name-sg}    {Kapitel}
-\zcDicTypeTransl{chapter}{Name-ab-sg} {Kapitel}
-\zcDicTypeTransl{chapter}{Name-pl}    {Kapitel}
-\zcDicTypeTransl{chapter}{Name-ab-pl} {Kapitel}
+\zcDicTypeTransl{chapter}{Name-sg}{Kapitel}
+\zcDicTypeTransl{chapter}{name-sg}{Kapitel}
+\zcDicTypeTransl{chapter}{Name-pl}{Kapitel}
+\zcDicTypeTransl{chapter}{name-pl}{Kapitel}
 
-\zcDicTypeTransl{section}{name-sg}    {Abschnitt}
-\zcDicTypeTransl{section}{name-ab-sg} {Abschnitt}
-\zcDicTypeTransl{section}{name-pl}    {Abschnitte}
-\zcDicTypeTransl{section}{name-ab-pl} {Abschnitte}
-\zcDicTypeTransl{section}{Name-sg}    {Abschnitt}
-\zcDicTypeTransl{section}{Name-ab-sg} {Abschnitt}
-\zcDicTypeTransl{section}{Name-pl}    {Abschnitte}
-\zcDicTypeTransl{section}{Name-ab-pl} {Abschnitte}
+\zcDicTypeTransl{section}{Name-sg}{Abschnitt}
+\zcDicTypeTransl{section}{name-sg}{Abschnitt}
+\zcDicTypeTransl{section}{Name-pl}{Abschnitte}
+\zcDicTypeTransl{section}{name-pl}{Abschnitte}
 
-\zcDicTypeTransl{paragraph}{name-sg}    {Absatz}
-\zcDicTypeTransl{paragraph}{name-ab-sg} {Absatz}
-\zcDicTypeTransl{paragraph}{name-pl}    {Absätze}
-\zcDicTypeTransl{paragraph}{name-ab-pl} {Absätze}
-\zcDicTypeTransl{paragraph}{Name-sg}    {Absatz}
-\zcDicTypeTransl{paragraph}{Name-ab-sg} {Absatz}
-\zcDicTypeTransl{paragraph}{Name-pl}    {Absätze}
-\zcDicTypeTransl{paragraph}{Name-ab-pl} {Absätze}
+\zcDicTypeTransl{paragraph}{Name-sg}{Absatz}
+\zcDicTypeTransl{paragraph}{name-sg}{Absatz}
+\zcDicTypeTransl{paragraph}{Name-pl}{Absätze}
+\zcDicTypeTransl{paragraph}{name-pl}{Absätze}
 
-\zcDicTypeTransl{appendix}{name-sg}    {Anhang}
-\zcDicTypeTransl{appendix}{name-ab-sg} {Anhang}
-\zcDicTypeTransl{appendix}{name-pl}    {Anhänge}
-\zcDicTypeTransl{appendix}{name-ab-pl} {Anhänge}
-\zcDicTypeTransl{appendix}{Name-sg}    {Anhang}
-\zcDicTypeTransl{appendix}{Name-ab-sg} {Anhang}
-\zcDicTypeTransl{appendix}{Name-pl}    {Anhänge}
-\zcDicTypeTransl{appendix}{Name-ab-pl} {Anhänge}
+\zcDicTypeTransl{appendix}{Name-sg}{Anhang}
+\zcDicTypeTransl{appendix}{name-sg}{Anhang}
+\zcDicTypeTransl{appendix}{Name-pl}{Anhänge}
+\zcDicTypeTransl{appendix}{name-pl}{Anhänge}
 
-\zcDicTypeTransl{page}{name-sg}    {Seite}
-\zcDicTypeTransl{page}{name-ab-sg} {Seite}
-\zcDicTypeTransl{page}{name-pl}    {Seiten}
-\zcDicTypeTransl{page}{name-ab-pl} {Seiten}
-\zcDicTypeTransl{page}{Name-sg}    {Seite}
-\zcDicTypeTransl{page}{Name-ab-sg} {Seite}
-\zcDicTypeTransl{page}{Name-pl}    {Seiten}
-\zcDicTypeTransl{page}{Name-ab-pl} {Seiten}
+\zcDicTypeTransl{page}{Name-sg}{Seite}
+\zcDicTypeTransl{page}{name-sg}{Seite}
+\zcDicTypeTransl{page}{Name-pl}{Seiten}
+\zcDicTypeTransl{page}{name-pl}{Seiten}
 
-\zcDicTypeTransl{line}{name-sg}    {Zeile}
-\zcDicTypeTransl{line}{name-ab-sg} {Zeile}
-\zcDicTypeTransl{line}{name-pl}    {Zeilen}
-\zcDicTypeTransl{line}{name-ab-pl} {Zeilen}
-\zcDicTypeTransl{line}{Name-sg}    {Zeile}
-\zcDicTypeTransl{line}{Name-ab-sg} {Zeile}
-\zcDicTypeTransl{line}{Name-pl}    {Zeilen}
-\zcDicTypeTransl{line}{Name-ab-pl} {Zeilen}
+\zcDicTypeTransl{line}{Name-sg}{Zeile}
+\zcDicTypeTransl{line}{name-sg}{Zeile}
+\zcDicTypeTransl{line}{Name-pl}{Zeilen}
+\zcDicTypeTransl{line}{name-pl}{Zeilen}
 
-\zcDicTypeTransl{figure}{name-sg}    {Abbildung}
-\zcDicTypeTransl{figure}{name-ab-sg} {Abbildung}
-\zcDicTypeTransl{figure}{name-pl}    {Abbildungen}
-\zcDicTypeTransl{figure}{name-ab-pl} {Abbildungen}
-\zcDicTypeTransl{figure}{Name-sg}    {Abbildung}
-\zcDicTypeTransl{figure}{Name-ab-sg} {Abbildung}
-\zcDicTypeTransl{figure}{Name-pl}    {Abbildungen}
-\zcDicTypeTransl{figure}{Name-ab-pl} {Abbildungen}
+\zcDicTypeTransl{figure}{Name-sg}{Abbildung}
+\zcDicTypeTransl{figure}{name-sg}{Abbildung}
+\zcDicTypeTransl{figure}{Name-pl}{Abbildungen}
+\zcDicTypeTransl{figure}{name-pl}{Abbildungen}
+\zcDicTypeTransl{figure}{Name-sg-ab}{Abb.}
+\zcDicTypeTransl{figure}{name-sg-ab}{Abb.}
+\zcDicTypeTransl{figure}{Name-pl-ab}{Abb.}
+\zcDicTypeTransl{figure}{name-pl-ab}{Abb.}
 
-\zcDicTypeTransl{table}{name-sg}    {Tabelle}
-\zcDicTypeTransl{table}{name-ab-sg} {Tabelle}
-\zcDicTypeTransl{table}{name-pl}    {Tabellen}
-\zcDicTypeTransl{table}{name-ab-pl} {Tabellen}
-\zcDicTypeTransl{table}{Name-sg}    {Tabelle}
-\zcDicTypeTransl{table}{Name-ab-sg} {Tabelle}
-\zcDicTypeTransl{table}{Name-pl}    {Tabellen}
-\zcDicTypeTransl{table}{Name-ab-pl} {Tabellen}
+\zcDicTypeTransl{table}{Name-sg}{Tabelle}
+\zcDicTypeTransl{table}{name-sg}{Tabelle}
+\zcDicTypeTransl{table}{Name-pl}{Tabellen}
+\zcDicTypeTransl{table}{name-pl}{Tabellen}
 
-\zcDicTypeTransl{item}{name-sg}    {Punkt}
-\zcDicTypeTransl{item}{name-ab-sg} {Punkt}
-\zcDicTypeTransl{item}{name-pl}    {Punkte}
-\zcDicTypeTransl{item}{name-ab-pl} {Punkte}
-\zcDicTypeTransl{item}{Name-sg}    {Punkt}
-\zcDicTypeTransl{item}{Name-ab-sg} {Punkt}
-\zcDicTypeTransl{item}{Name-pl}    {Punkte}
-\zcDicTypeTransl{item}{Name-ab-pl} {Punkte}
+\zcDicTypeTransl{item}{Name-sg}{Punkt}
+\zcDicTypeTransl{item}{name-sg}{Punkt}
+\zcDicTypeTransl{item}{Name-pl}{Punkte}
+\zcDicTypeTransl{item}{name-pl}{Punkte}
 
-\zcDicTypeTransl{footnote}{name-sg}    {Fußnote}
-\zcDicTypeTransl{footnote}{name-ab-sg} {Fußnote}
-\zcDicTypeTransl{footnote}{name-pl}    {Fußnoten}
-\zcDicTypeTransl{footnote}{name-ab-pl} {Fußnoten}
-\zcDicTypeTransl{footnote}{Name-sg}    {Fußnote}
-\zcDicTypeTransl{footnote}{Name-ab-sg} {Fußnote}
-\zcDicTypeTransl{footnote}{Name-pl}    {Fußnoten}
-\zcDicTypeTransl{footnote}{Name-ab-pl} {Fußnoten}
+\zcDicTypeTransl{footnote}{Name-sg}{Fußnote}
+\zcDicTypeTransl{footnote}{name-sg}{Fußnote}
+\zcDicTypeTransl{footnote}{Name-pl}{Fußnoten}
+\zcDicTypeTransl{footnote}{name-pl}{Fußnoten}
 
-\zcDicTypeTransl{note}{name-sg}    {Anmerkung}
-\zcDicTypeTransl{note}{name-ab-sg} {Anmerkung}
-\zcDicTypeTransl{note}{name-pl}    {Anmerkungen}
-\zcDicTypeTransl{note}{name-ab-pl} {Anmerkungen}
-\zcDicTypeTransl{note}{Name-sg}    {Anmerkung}
-\zcDicTypeTransl{note}{Name-ab-sg} {Anmerkung}
-\zcDicTypeTransl{note}{Name-pl}    {Anmerkungen}
-\zcDicTypeTransl{note}{Name-ab-pl} {Anmerkungen}
+\zcDicTypeTransl{note}{Name-sg}{Anmerkung}
+\zcDicTypeTransl{note}{name-sg}{Anmerkung}
+\zcDicTypeTransl{note}{Name-pl}{Anmerkungen}
+\zcDicTypeTransl{note}{name-pl}{Anmerkungen}
 
-\zcDicTypeTransl{equation}{name-sg}    {Gleichung}
-\zcDicTypeTransl{equation}{name-ab-sg} {Gleichung}
-\zcDicTypeTransl{equation}{name-pl}    {Gleichungen}
-\zcDicTypeTransl{equation}{name-ab-pl} {Gleichungen}
-\zcDicTypeTransl{equation}{Name-sg}    {Gleichung}
-\zcDicTypeTransl{equation}{Name-ab-sg} {Gleichung}
-\zcDicTypeTransl{equation}{Name-pl}    {Gleichungen}
-\zcDicTypeTransl{equation}{Name-ab-pl} {Gleichungen}
-\zcDicTypeTransl{equation}{refpre-in}  {(}
-\zcDicTypeTransl{equation}{refpos-in}  {)}
+\zcDicTypeTransl{equation}{Name-sg}{Gleichung}
+\zcDicTypeTransl{equation}{name-sg}{Gleichung}
+\zcDicTypeTransl{equation}{Name-pl}{Gleichungen}
+\zcDicTypeTransl{equation}{name-pl}{Gleichungen}
+\zcDicTypeTransl{equation}{refpre-in}{(}
+\zcDicTypeTransl{equation}{refpos-in}{)}
 
-\zcDicTypeTransl{theorem}{name-sg}    {Theorem}
-\zcDicTypeTransl{theorem}{name-ab-sg} {Theorem}
-\zcDicTypeTransl{theorem}{name-pl}    {Theoreme}
-\zcDicTypeTransl{theorem}{name-ab-pl} {Theoreme}
-\zcDicTypeTransl{theorem}{Name-sg}    {Theorem}
-\zcDicTypeTransl{theorem}{Name-ab-sg} {Theorem}
-\zcDicTypeTransl{theorem}{Name-pl}    {Theoreme}
-\zcDicTypeTransl{theorem}{Name-ab-pl} {Theoreme}
+\zcDicTypeTransl{theorem}{Name-sg}{Theorem}
+\zcDicTypeTransl{theorem}{name-sg}{Theorem}
+\zcDicTypeTransl{theorem}{Name-pl}{Theoreme}
+\zcDicTypeTransl{theorem}{name-pl}{Theoreme}
 
-\zcDicTypeTransl{lemma}{name-sg}    {Lemma}
-\zcDicTypeTransl{lemma}{name-ab-sg} {Lemma}
-\zcDicTypeTransl{lemma}{name-pl}    {Lemmata}
-\zcDicTypeTransl{lemma}{name-ab-pl} {Lemmata}
-\zcDicTypeTransl{lemma}{Name-sg}    {Lemma}
-\zcDicTypeTransl{lemma}{Name-ab-sg} {Lemma}
-\zcDicTypeTransl{lemma}{Name-pl}    {Lemmata}
-\zcDicTypeTransl{lemma}{Name-ab-pl} {Lemmata}
+\zcDicTypeTransl{lemma}{Name-sg}{Lemma}
+\zcDicTypeTransl{lemma}{name-sg}{Lemma}
+\zcDicTypeTransl{lemma}{Name-pl}{Lemmata}
+\zcDicTypeTransl{lemma}{name-pl}{Lemmata}
 
-\zcDicTypeTransl{corollary}{name-sg}    {Korollar}
-\zcDicTypeTransl{corollary}{name-ab-sg} {Korollar}
-\zcDicTypeTransl{corollary}{name-pl}    {Korollare}
-\zcDicTypeTransl{corollary}{name-ab-pl} {Korollare}
-\zcDicTypeTransl{corollary}{Name-sg}    {Korollar}
-\zcDicTypeTransl{corollary}{Name-ab-sg} {Korollar}
-\zcDicTypeTransl{corollary}{Name-pl}    {Korollare}
-\zcDicTypeTransl{corollary}{Name-ab-pl} {Korollare}
+\zcDicTypeTransl{corollary}{Name-sg}{Korollar}
+\zcDicTypeTransl{corollary}{name-sg}{Korollar}
+\zcDicTypeTransl{corollary}{Name-pl}{Korollare}
+\zcDicTypeTransl{corollary}{name-pl}{Korollare}
 
-\zcDicTypeTransl{proposition}{name-sg}    {Satz}
-\zcDicTypeTransl{proposition}{name-ab-sg} {Satz}
-\zcDicTypeTransl{proposition}{name-pl}    {Sätze}
-\zcDicTypeTransl{proposition}{name-ab-pl} {Sätze}
-\zcDicTypeTransl{proposition}{Name-sg}    {Satz}
-\zcDicTypeTransl{proposition}{Name-ab-sg} {Satz}
-\zcDicTypeTransl{proposition}{Name-pl}    {Sätze}
-\zcDicTypeTransl{proposition}{Name-ab-pl} {Sätze}
+\zcDicTypeTransl{proposition}{Name-sg}{Satz}
+\zcDicTypeTransl{proposition}{name-sg}{Satz}
+\zcDicTypeTransl{proposition}{Name-pl}{Sätze}
+\zcDicTypeTransl{proposition}{name-pl}{Sätze}
 
-\zcDicTypeTransl{definition}{name-sg}    {Definition}
-\zcDicTypeTransl{definition}{name-ab-sg} {Definition}
-\zcDicTypeTransl{definition}{name-pl}    {Definitionen}
-\zcDicTypeTransl{definition}{name-ab-pl} {Definitionen}
-\zcDicTypeTransl{definition}{Name-sg}    {Definition}
-\zcDicTypeTransl{definition}{Name-ab-sg} {Definition}
-\zcDicTypeTransl{definition}{Name-pl}    {Definitionen}
-\zcDicTypeTransl{definition}{Name-ab-pl} {Definitionen}
+\zcDicTypeTransl{definition}{Name-sg}{Definition}
+\zcDicTypeTransl{definition}{name-sg}{Definition}
+\zcDicTypeTransl{definition}{Name-pl}{Definitionen}
+\zcDicTypeTransl{definition}{name-pl}{Definitionen}
 
-\zcDicTypeTransl{proof}{name-sg}    {Beweis}
-\zcDicTypeTransl{proof}{name-ab-sg} {Beweis}
-\zcDicTypeTransl{proof}{name-pl}    {Beweise}
-\zcDicTypeTransl{proof}{name-ab-pl} {Beweise}
-\zcDicTypeTransl{proof}{Name-sg}    {Beweis}
-\zcDicTypeTransl{proof}{Name-ab-sg} {Beweis}
-\zcDicTypeTransl{proof}{Name-pl}    {Beweise}
-\zcDicTypeTransl{proof}{Name-ab-pl} {Beweise}
+\zcDicTypeTransl{proof}{Name-sg}{Beweis}
+\zcDicTypeTransl{proof}{name-sg}{Beweis}
+\zcDicTypeTransl{proof}{Name-pl}{Beweise}
+\zcDicTypeTransl{proof}{name-pl}{Beweise}
 
-\zcDicTypeTransl{result}{name-sg}    {Ergebnis}
-\zcDicTypeTransl{result}{name-ab-sg} {Ergebnis}
-\zcDicTypeTransl{result}{name-pl}    {Ergebnisse}
-\zcDicTypeTransl{result}{name-ab-pl} {Ergebnisse}
-\zcDicTypeTransl{result}{Name-sg}    {Ergebnis}
-\zcDicTypeTransl{result}{Name-ab-sg} {Ergebnis}
-\zcDicTypeTransl{result}{Name-pl}    {Ergebnisse}
-\zcDicTypeTransl{result}{Name-ab-pl} {Ergebnisse}
+\zcDicTypeTransl{result}{Name-sg}{Ergebnis}
+\zcDicTypeTransl{result}{name-sg}{Ergebnis}
+\zcDicTypeTransl{result}{Name-pl}{Ergebnisse}
+\zcDicTypeTransl{result}{name-pl}{Ergebnisse}
 
-\zcDicTypeTransl{example}{name-sg}    {Beispiel}
-\zcDicTypeTransl{example}{name-ab-sg} {Beispiel}
-\zcDicTypeTransl{example}{name-pl}    {Beispiele}
-\zcDicTypeTransl{example}{name-ab-pl} {Beispiele}
-\zcDicTypeTransl{example}{Name-sg}    {Beispiel}
-\zcDicTypeTransl{example}{Name-ab-sg} {Beispiel}
-\zcDicTypeTransl{example}{Name-pl}    {Beispiele}
-\zcDicTypeTransl{example}{Name-ab-pl} {Beispiele}
+\zcDicTypeTransl{example}{Name-sg}{Beispiel}
+\zcDicTypeTransl{example}{name-sg}{Beispiel}
+\zcDicTypeTransl{example}{Name-pl}{Beispiele}
+\zcDicTypeTransl{example}{name-pl}{Beispiele}
 
-\zcDicTypeTransl{remark}{name-sg}    {Bemerkung}
-\zcDicTypeTransl{remark}{name-ab-sg} {Bemerkung}
-\zcDicTypeTransl{remark}{name-pl}    {Bemerkungen}
-\zcDicTypeTransl{remark}{name-ab-pl} {Bemerkungen}
-\zcDicTypeTransl{remark}{Name-sg}    {Bemerkung}
-\zcDicTypeTransl{remark}{Name-ab-sg} {Bemerkung}
-\zcDicTypeTransl{remark}{Name-pl}    {Bemerkungen}
-\zcDicTypeTransl{remark}{Name-ab-pl} {Bemerkungen}
+\zcDicTypeTransl{remark}{Name-sg}{Bemerkung}
+\zcDicTypeTransl{remark}{name-sg}{Bemerkung}
+\zcDicTypeTransl{remark}{Name-pl}{Bemerkungen}
+\zcDicTypeTransl{remark}{name-pl}{Bemerkungen}
 
-\zcDicTypeTransl{algorithm}{name-sg}    {Algorithmus}
-\zcDicTypeTransl{algorithm}{name-ab-sg} {Algorithmus}
-\zcDicTypeTransl{algorithm}{name-pl}    {Algorithmen}
-\zcDicTypeTransl{algorithm}{name-ab-pl} {Algorithmen}
-\zcDicTypeTransl{algorithm}{Name-sg}    {Algorithmus}
-\zcDicTypeTransl{algorithm}{Name-ab-sg} {Algorithmus}
-\zcDicTypeTransl{algorithm}{Name-pl}    {Algorithmen}
-\zcDicTypeTransl{algorithm}{Name-ab-pl} {Algorithmen}
+\zcDicTypeTransl{algorithm}{Name-sg}{Algorithmus}
+\zcDicTypeTransl{algorithm}{name-sg}{Algorithmus}
+\zcDicTypeTransl{algorithm}{Name-pl}{Algorithmen}
+\zcDicTypeTransl{algorithm}{name-pl}{Algorithmen}
 
-\zcDicTypeTransl{listing}{name-sg}    {Listing} % CHECK
-\zcDicTypeTransl{listing}{name-ab-sg} {Listing} % CHECK
-\zcDicTypeTransl{listing}{name-pl}    {Listings} % CHECK
-\zcDicTypeTransl{listing}{name-ab-pl} {Listings} % CHECK
-\zcDicTypeTransl{listing}{Name-sg}    {Listing} % CHECK
-\zcDicTypeTransl{listing}{Name-ab-sg} {Listing} % CHECK
-\zcDicTypeTransl{listing}{Name-pl}    {Listings} % CHECK
-\zcDicTypeTransl{listing}{Name-ab-pl} {Listings} % CHECK
+\zcDicTypeTransl{listing}{Name-sg}{Listing} % CHECK
+\zcDicTypeTransl{listing}{name-sg}{Listing} % CHECK
+\zcDicTypeTransl{listing}{Name-pl}{Listings} % CHECK
+\zcDicTypeTransl{listing}{name-pl}{Listings} % CHECK
 
-\zcDicTypeTransl{exercise}{name-sg}    {Übungsaufgabe}
-\zcDicTypeTransl{exercise}{name-ab-sg} {Übungsaufgabe}
-\zcDicTypeTransl{exercise}{name-pl}    {Übungsaufgaben}
-\zcDicTypeTransl{exercise}{name-ab-pl} {Übungsaufgaben}
-\zcDicTypeTransl{exercise}{Name-sg}    {Übungsaufgabe}
-\zcDicTypeTransl{exercise}{Name-ab-sg} {Übungsaufgabe}
-\zcDicTypeTransl{exercise}{Name-pl}    {Übungsaufgaben}
-\zcDicTypeTransl{exercise}{Name-ab-pl} {Übungsaufgaben}
+\zcDicTypeTransl{exercise}{Name-sg}{Übungsaufgabe}
+\zcDicTypeTransl{exercise}{name-sg}{Übungsaufgabe}
+\zcDicTypeTransl{exercise}{Name-pl}{Übungsaufgaben}
+\zcDicTypeTransl{exercise}{name-pl}{Übungsaufgaben}
 
-\zcDicTypeTransl{solution}{name-sg}    {Lösung}
-\zcDicTypeTransl{solution}{name-ab-sg} {Lösung}
-\zcDicTypeTransl{solution}{name-pl}    {Lösungen}
-\zcDicTypeTransl{solution}{name-ab-pl} {Lösungen}
-\zcDicTypeTransl{solution}{Name-sg}    {Lösung}
-\zcDicTypeTransl{solution}{Name-ab-sg} {Lösung}
-\zcDicTypeTransl{solution}{Name-pl}    {Lösungen}
-\zcDicTypeTransl{solution}{Name-ab-pl} {Lösungen}
+\zcDicTypeTransl{solution}{Name-sg}{Lösung}
+\zcDicTypeTransl{solution}{name-sg}{Lösung}
+\zcDicTypeTransl{solution}{Name-pl}{Lösungen}
+\zcDicTypeTransl{solution}{name-pl}{Lösungen}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
