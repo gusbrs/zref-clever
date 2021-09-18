@@ -64,6 +64,149 @@
 %
 %
 %
+% \section{Loading the package}
+%
+%
+%
+%
+%
+%
+%
+%
+% \section{Dependencies}
+%
+%
+%
+%
+%
+%
+%
+%
+% \section{User interface}
+%
+%
+%
+%
+%
+%
+%
+%
+% \section{Options}
+%
+%
+%
+%
+%
+%
+%
+% \section{Reference Types}
+% \label{sec:reference-types}
+%
+%
+% A bit of terminology, to avoid confusion.  A ``reference type'' is the basic
+% \pkg{zref-clever} setup unit for specifying how a cross-reference group of a
+% certain kind is to be typeset.  Though, usually, it will have the same name
+% as the underlying \LaTeX{} \emph{counter}, they are conceptually different.
+% \pkg{zref-clever} defines \emph{reference types} and an association between
+% each \emph{counter} and its \emph{type}, it does not define the counters
+% themselves, which are defined by your document.  One \emph{reference type}
+% can be associated with one or more \emph{counters}, and a \emph{counter} can
+% be associated with different \emph{types} at different points in your
+% document.  But each label is stored with only one \emph{type}, as specified
+% by the counter-type association at the moment it is set, and that determines
+% how the reference to that label is typeset.  References to different
+% \emph{counters} of the same \emph{type} are grouped together, and treated
+% alike by \pkg{zref-clever}.  A \emph{reference type} may exist even when the
+% \emph{counter} it is associated with is not actually defined, and this
+% inconsequential.  In practice, the contrary may also happen, a
+% \emph{counter} may be defined but we have no \emph{type} for it, but this
+% must be handled by \pkg{zref-clever} as a ``missing type'' error (at least,
+% if we try to refer to it).
+%
+% A \emph{reference type} can be associated with multiple counters because we
+% may want to refer to different document elements, with different
+% \emph{counters}, with a single name, as a single \emph{type}.  One prominent
+% case of this are sectioning commands.  \cs{section}, \cs{subsection}, and
+% \cs{subsubsection} have each their counter, but we'd like to refer to all of
+% them by ``section''.  The same for \cs{paragraph} and \cs{subparagraph}.
+% There is one relevant subtlety to grouping multiple counters under the same
+% type: in order for us to be able to meaningfully sort and compress this
+% group, the set of counters contained therein cannot be arbitrary.  Indeed,
+% all of the \emph{counters} grouped in the same \emph{type} must belong to
+% the same counter reset chain, and must be nested within each other (they
+% cannot even just share the same parent).
+%
+%
+% There are also cases in which we may want to use different \emph{reference
+% types} to refer to document objects sharing the same \emph{counter}.
+% Prominently, the environments created with the kernel's \cs{newtheorem}
+% command and the \cs{appendix}, but we'll try to consider, and handle, the
+% case generally.
+%
+% Another relevant use case of the same general problem of different types for
+% the same counter is the \cs{appendix} which in some document classes,
+% including the standard ones, change the sectioning commands looks but, of
+% course, keep using the same counter (\file{book.cls} and \file{report.cls}
+% reset counters \texttt{chapter} and \texttt{section} to 0, change
+% \cs{@chapapp} to use \cs{appendixname} and use \cs{@Alph} for
+% \cs{thechapter}; \file{article.cls} resets counters \texttt{section} and
+% \texttt{subsection} to 0, and uses \cs{@Alph} for \cs{thesection};
+% \file{memoir.cls}, \file{scrbook.cls} and \file{scrarticle.cls} do the same
+% as their corresponding standard classes, and sometimes a little more, but
+% what interests us here is pretty much the same; see also the \pkg{appendix}
+% package).
+%
+% All in all, and since \pkg{zref} spares us of the need to redefine such core
+% commands, I think a more general approach, even if a little less automatic,
+% is the best for us here.  \pkg{zref}'s data flexibility also helps us in
+% this.  As it turns out, we can also use \cs{l_@@_counter_type_prop} for this
+% purpose (hence it was made locally scoped).  And we do so by storing, with
+% the label, the ``type'' value of the ``counter'' key in
+% \cs{l_@@_counter_type_prop} when the label is set.  If it was not for the
+% need to distinguish different \emph{types} of the same \emph{counter} this
+% information could be kept in the variable alone, but since we need to
+% leverage other document information in the process, storing it with the
+% label is not a bad idea.  And it makes some things simpler even for the
+% general case, since we don't have to control whether there is a type
+% property in the label or not.  (The property would have to be included
+% anyway, since the \cs{appendix} case offers little in terms of hooks or
+% grouping, the only choice is whether to populate this property for every
+% label or just for the ones we'd like to ``override'').  With that in hand,
+% \cs{l_@@_counter_type_prop} can be set at appropriate times, and the
+% information gets stored in the label.  For environments, it is trivial with
+% a hook to \texttt{env/\meta{env}/begin}.  This can be used for
+% \cs{newtheorem} environments to start with.  In principle, with a recent
+% kernel, a hook to \cs{appendix} could also be used, otherwise some (simple)
+% user intervention may be required.
+%
+%
+%
+%
+% \section{Limitations}
+%
+%
+%
+%
+%
+%
+% \section{Acknowledgments}
+%
+%
+%
+%
+%
+%
+%
+% \section{Change history}
+%
+%
+% A change log with relevant changes for each version, eventual upgrade
+% instructions, and upcoming changes, is maintained in the package's
+% repository, at
+% \url{https://github.com/gusbrs/zref-clever/blob/main/CHANGELOG.md}.
+%
+%
+%
 %
 % \end{documentation}
 %
@@ -88,12 +231,13 @@
 % development, we have used freely recent features of the kernel (albeit
 % refraining from \pkg{l3candidates}, even though I'd have loved to have used
 % \cs{bool_case_true:}\dots{}).  We presume \pkg{xparse} (which made to the
-% kernel in the 2020-10-01 release), and also presume \pkg{expl3} (which made
-% to the kernel in the 2020-02-02 release).  Hence, since we would not be able
-% to go much backwards without special handling anyway, we make the cut with
-% the inclusion of the new hook management system (\pkg{ltcmdhooks}), which is
-% bound to be useful for our purposes, and was released with the 2021-06-01
-% kernel.
+% kernel in the 2020-10-01 release), and \pkg{expl3} as well (which made to
+% the kernel in the 2020-02-02 release).  We also just use UTF-8 for the
+% translations (which became the default input encoding in the 2018-04-01
+% release).  Hence, since we would not be able to go much backwards without
+% special handling anyway, we make the cut with the inclusion of the new hook
+% management system (\pkg{ltcmdhooks}), which is bound to be useful for our
+% purposes, and was released with the 2021-06-01 kernel.
 %    \begin{macrocode}
 \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
 \IfFormatAtLeastTF{2021-06-01}
@@ -118,6 +262,11 @@
 %
 % \section{Dependencies}
 %
+%
+% Required packages.  Besides these, \pkg{zref-hyperref} may also be required
+% depending on the presence of \pkg{hyperref} itself and on the \opt{hyperref}
+% option.
+%
 %    \begin{macrocode}
 \RequirePackage { zref-base }
 \RequirePackage { zref-user }
@@ -129,65 +278,82 @@
 %
 % \section{\pkg{zref} setup}
 %
-% We are (mainly) interested in three basic label elements: the reference
-% itself, the page, and the counter.  The `page' and `counter' are
-% respectively handled by modules \pkg{zref-base} and \pkg{zref-counter}.  The
-% \pkg{zref-abspage} also provides the `abspage' property which gives us a
-% safe and easy way to sort labels on page references.  But the reference
-% itself, stored by \pkg{zref} in the `default' field, is somewhat a disputed
-% real estate.  In particular, the use of \cs{labelformat} will include there
-% the reference ``prefix'' and complicate the job we are trying to do here.
-% Hence, we isolate \cs{the}\meta{counter} and store it ``clean'' in
-% \texttt{zc@thecnt} for reserved use.  We also store the ``type'' of the
-% label at this point (see Section~\ref{sec:reference-types}).
 %
-% Another property which we don't need to handle at the data provision side,
-% but need to cater for in the retrieval side, are the \texttt{url} /
-% \texttt{urluse} properties from the \pkg{zref-xr} module, which are added to
-% the labels imported from external documents, and needed to construct
-% hyperlinks to them.
+% For the purposes of the package, we need to store some information with the
+% labels, some of it standard, some of it not so much.  So, we have to setup
+% \pkg{zref} to do so.
 %
+% Some basic properties are handled by \pkg{zref} itself, or some of its
+% modules.  The \texttt{page} and \texttt{counter} properties are respectively
+% provided by modules \pkg{zref-base} and \pkg{zref-counter}.  The
+% \pkg{zref-abspage} provides the \texttt{abspage} property which gives us a
+% safe and easy way to sort labels for page references.
 %
-%    \begin{macrocode}
-\zref@newprop { zc@type }
-  { \exp_args:NNe \prop_item:Nn \l_@@_counter_type_prop { \@currentcounter } }
-\zref@addprop \ZREF@mainlist { zc@type }
-%    \end{macrocode}
+% But the reference itself, stored by \pkg{zref-base} in the \texttt{default}
+% property, is somewhat a disputed real estate.  In particular, the use of
+% \cs{labelformat} (previously from \pkg{varioref}, now in the kernel) will
+% include there the reference ``prefix'' and complicate the job we are trying
+% to do here.  Hence, we isolate \cs{the}\meta{counter} and store it ``clean''
+% in \texttt{zc@thecnt} for reserved use.  Based on the definition of
+% \cs{@currentlabel} done inside \cs{refstepcounter} in `texdoc source2e',
+% section `ltcounts.dtx'.  We just drop the \cs{p@...} prefix.
 %
-%
-% Provide \texttt{zc@thecnt} property, based on the definition of
-% \cs{@currentlabel} done inside \cs{refstepcounter} in 'texdoc source2e',
-% section 'ltcounts.dtx'.  We just drop the \cs{p@...} prefix.
 %    \begin{macrocode}
 \zref@newprop { zc@thecnt } { \use:c { the \@currentcounter } }
 \zref@addprop \ZREF@mainlist { zc@thecnt }
 %    \end{macrocode}
 %
 %
-% At this point, the basic properties of interest are handled.  However, the
-% moment where the label is set is a privileged one, because at this point we
-% have a lot of raw information available.  Information which may be difficult
-% to retrieve later on by parsing the reference printed value of the counter,
-% which we stored in \texttt{zc@thecnt} above.  Hence, we seize the
-% opportunity to store some of that information in a way which eases
-% significantly the task of processing the reference later on: i) the counter
-% \emph{value}, as a number; ii) the counter (and value) of the set of
-% counters which may trigger a reset of the current counter.
+% Much of the work of \pkg{zref-clever} relies on the association between a
+% label's ``counter'' and its ``type'' (see
+% Section~\ref{sec:reference-types}).  Apparently, this relation might just be
+% stored in a property list, rather than in the label itself.  However, there
+% are cases in which we must distinguish different types for the same counter,
+% depending on the document context.  Hence, we need to store the ``type'' of
+% the ``counter'' for each ``label''.  In setting this, the presumption is
+% that the label's type has the same name as its counter, unless it is
+% specified otherwise by the \opt{countertype} option, as stored in
+% \cs{l_@@_counter_type_prop}.
+%
+%    \begin{macrocode}
+\zref@newprop { zc@type }
+  {
+    \prop_if_in:NVTF \l_@@_counter_type_prop \@currentcounter
+      {
+        \exp_args:NNe \prop_item:Nn
+          \l_@@_counter_type_prop { \@currentcounter }
+      }
+      { \use:c { @currentcounter } }
+  }
+\zref@addprop \ZREF@mainlist { zc@type }
+%    \end{macrocode}
 %
 %
-% The first one is trivial, \cs{c@}\meta{counter} contains the counter's
-% numerical value (see `texdoc source2e', section `ltcounts.dtx'), we just
-% store it in \texttt{zc@cntval}.
+% Since the \texttt{zc@thecnt} and \texttt{page} properties store the
+% ``\emph{printed} representation'' of their respective counters, for sorting
+% and compressing purposes, we are also interested in their numeric values.
+% So we store them in \texttt{zc@cntval} and \texttt{zc@pgval}.  For this, we
+% use \cs{c@}\meta{counter}, which contains the counter's numerical value (see
+% `texdoc source2e', section `ltcounts.dtx').
 %    \begin{macrocode}
 \zref@newprop { zc@cntval } [0] { \int_use:c { c@ \@currentcounter } }
 \zref@addprop \ZREF@mainlist { zc@cntval }
-%    \end{macrocode}
-%
-% And we also need the numeric value for the page.
-%    \begin{macrocode}
 \zref@newprop* { zc@pgval } [0] { \int_use:c { c@page } }
 \zref@addprop \ZREF@mainlist { zc@pgval }
 %    \end{macrocode}
+%
+%
+% TODO Stopped here.
+%
+% The need to check this [nested counters] has some implications to the data
+% we store in the label.  Since we cannot do this verification when we set up
+% the \emph{reference type}, because at this point we could only check
+% existing counters, and they may be defined ``later'' or ``never'', the
+% counter reset chain must be stored (names and values) with the label itself
+% (this is done in properties \texttt{zc@enclcnt} and \texttt{zc@enclval}).
+%
+% i) the counter \emph{value}, as a number; ii) the counter (and value) of the
+% set of counters which may trigger a reset of the current counter.
 %
 %
 % The second one is trickier.  For starters, the counters which may reset the
@@ -205,6 +371,7 @@
 % a reasonable ``usual suspects'' list which, of course, should include the
 % counters for the sectioning commands, to start with, and it is easy to add
 % more counters to this list if needed.
+%
 %
 % \begin{macro}[EXP]
 %   {
@@ -350,124 +517,15 @@
 % \end{macro}
 %
 %
+% Another property which we don't need to handle at the data provision side,
+% but need to cater for in the retrieval side, are the \texttt{url} /
+% \texttt{urluse} properties from the \pkg{zref-xr} module, which are added to
+% the labels imported from external documents, and needed to construct
+% hyperlinks to them.
+%
+%
 %
 % \section{Plumbing}
-%
-% \subsection{Reference types}
-% \label{sec:reference-types}
-%
-% Let's start with a bit of terminology, to avoid confusion.  A ``reference
-% type'' is the basic \pkg{zref-clever} setup unit for specifying how a
-% cross-reference group of a certain kind is to be typeset.  Though, usually,
-% it will have the same name as the underlying \LaTeX{} \emph{counter}, they
-% are conceptually different.  \pkg{zref-clever} defines \emph{reference
-% types} and an association between each \emph{counter} and its \emph{type},
-% it does not define the counters themselves, which are defined by your
-% document.  One \emph{reference type} can be associated with one or more
-% \emph{counters}, but each counter can only have one \emph{type} (for a given
-% label\dots{}), and that determines how the reference is typeset.  References
-% to different \emph{counters} of the same \emph{type} are grouped together,
-% and treated alike by \pkg{zref-clever}.  A \emph{reference type} may exist
-% even when the \emph{counter} it is associated with is not actually defined,
-% and this inconsequential.  In practice, the contrary may also happen, a
-% \emph{counter} may be defined but we have no \emph{type} for it, but this
-% must be handled by \pkg{zref-clever} as a ``missing type'' error (at least,
-% if we try to refer to it).
-%
-% A \emph{reference type} can be associated with multiple counters because we
-% may want to refer to different document elements, with different
-% \emph{counters}, with a single name, as a single \emph{type}.  One prominent
-% case of this are sectioning commands.  \cs{section}, \cs{subsection}, and
-% \cs{subsubsection} have each their counter, but we'd like to refer to all of
-% them by ``section''.  The same for \cs{paragraph} and \cs{subparagraph}.
-% There is one relevant subtlety to grouping multiple counters under the same
-% type: in order for us to be able to meaningfully sort and compress this
-% group, the set of counters contained therein cannot be arbitrary.  Indeed,
-% all of the \emph{counters} grouped in the same \emph{type} must belong to
-% the same counter reset chain, and must be nested within each other (they
-% cannot even just share the same parent).  The need to check this has some
-% implications to the data we store in the label.  Since we cannot do this
-% verification when we set up the \emph{reference type}, because at this point
-% we could only check existing counters, and they may be defined ``later'' or
-% ``never'', the counter reset chain must be stored (names and values) with
-% the label itself (this is done in properties \texttt{zc@enclcnt} and
-% \texttt{zc@enclval}).
-%
-%
-% There are also cases in which we may want to use different \emph{reference
-% types} to refer to document objects sharing the same \emph{counter}.
-% Prominently, the environments created with the kernel's \cs{newtheorem}
-% command and the \cs{appendix}, but we'll try to consider, and handle, the
-% case generally.
-%
-% Regarding \cs{newtheorem}, \pkg{cleveref} deals with this by redefining its
-% internals and retrieving the environment's name, to infer the type and do an
-% ``automatic definition'' of theorem-like environments with a reasonable
-% default.  But even then, it can only provide the singular form of the
-% cross-reference name, and if the plural is ever needed, the name has to be
-% provided manually anyway.  It also imposes the restriction of
-% \cs{newtheorem} only being used in the preamble, which in itself would be
-% good practice, but \cs{newtheorem} is documented to be allowed anywhere in
-% the document (see \texttt{texdoc source2e}, section `ltthm.dtx', comment at
-% the definition of \cs{newtheorem}).  And the calls to \cs{newtheorem} must
-% also come after \pkg{cleveref} is loaded.  And for this to work, either
-% \pkg{ntheorem} or \pkg{amsthm} must be loaded (as stated in the ``Non-Bugs''
-% section of the documentation).  This automatism is, of course, a good thing,
-% but the restrictions are considerable.
-%
-% A related mechanism \pkg{cleveref} provides for overriding individual labels
-% is by adding optional arguments to both \cs{label} and \cs{refstepcounter}
-% which receives a ``counter override label type'' and stores that
-% \emph{instead} of regular counter with the \cs{newlabel} in the \file{.aux}
-% file.  This affords for a fully manual ``one time'' counter override for
-% that particular label.
-%
-% Another relevant use case of the same general problem of different types for
-% the same counter is the \cs{appendix} which in some document classes,
-% including the standard ones, change the sectioning commands looks but, of
-% course, keep using the same counter (\file{book.cls} and \file{report.cls}
-% reset counters \texttt{chapter} and \texttt{section} to 0, change
-% \cs{@chapapp} to use \cs{appendixname} and use \cs{@Alph} for
-% \cs{thechapter}; \file{article.cls} resets counters \texttt{section} and
-% \texttt{subsection} to 0, and uses \cs{@Alph} for \cs{thesection};
-% \file{memoir.cls}, \file{scrbook.cls} and \file{scrarticle.cls} do the same
-% as their corresponding standard classes, and sometimes a little more, but
-% what interests us here is pretty much the same; see also the \pkg{appendix}
-% package).
-%
-% All in all, and since \pkg{zref} spares us of the need to redefine such core
-% commands, I think a more general approach, even if a little less automatic,
-% is the best for us here.  \pkg{zref}'s data flexibility also helps us in
-% this.  As it turns out, we can also use \cs{l_@@_counter_type_prop} for this
-% purpose (hence it was made locally scoped).  And we do so by storing, with
-% the label, the ``type'' value of the ``counter'' key in
-% \cs{l_@@_counter_type_prop} when the label is set.  If it was not for the
-% need to distinguish different \emph{types} of the same \emph{counter} this
-% information could be kept in the variable alone, but since we need to
-% leverage other document information in the process, storing it with the
-% label is not a bad idea.  And it makes some things simpler even for the
-% general case, since we don't have to control whether there is a type
-% property in the label or not.  (The property would have to be included
-% anyway, since the \cs{appendix} case offers little in terms of hooks or
-% grouping, the only choice is whether to populate this property for every
-% label or just for the ones we'd like to ``override'').  With that in hand,
-% \cs{l_@@_counter_type_prop} can be set at appropriate times, and the
-% information gets stored in the label.  For environments, it is trivial with
-% a hook to \texttt{env/\meta{env}/begin}.  This can be used for
-% \cs{newtheorem} environments to start with.  In principle, with a recent
-% kernel, a hook to \cs{appendix} could also be used, otherwise some (simple)
-% user intervention may be required.
-%
-% The use case for the optional argument for \cs{label} and
-% \cs{refstepcounter} I do not quite grasp, and it does introduce ample
-% opportunity for users to shoot themselves in the foot.  Still, an equivalent
-% could be provided by, for example, defining a document command
-% \cs{zclabel}\oarg{type}\marg{label} which makes a group, sets the type
-% variable, and calls \cs{zlabel} with \meta{label}.  Anyway, for the time
-% being, I'll provide the higher level infrastructure, covering
-% \cs{newtheorem} and \cs{appendix}, and only introduce a manual override of
-% the sort if the need indeed arises and is well justified.
-%
 %
 %
 % \subsection{Messages}
@@ -595,16 +653,9 @@
     countertype .value_required:n = true ,
     countertype .initial:n =
       {
-        part          = part ,
-        chapter       = chapter ,
-        section       = section ,
         subsection    = section ,
         subsubsection = section ,
-        paragraph     = paragraph ,
         subparagraph  = paragraph ,
-        figure        = figure ,
-        table         = table ,
-        equation      = equation ,
         enumi         = item ,
         enumii        = item ,
         enumiii       = item ,
@@ -3319,7 +3370,10 @@
 %
 %
 %
-% \section{Falback translations}
+% \section{Translations}
+%
+%
+% \subsection*{Fallback}
 %
 %
 % All options retrieved with \cs{@@_get_option_with_transl:nN} must have their
@@ -3349,7 +3403,6 @@
 %</package>
 %    \end{macrocode}
 %
-% \section{Localization}
 %
 %
 %    \begin{macrocode}
