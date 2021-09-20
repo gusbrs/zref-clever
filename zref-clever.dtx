@@ -102,26 +102,24 @@
 % \section{Reference Types}
 % \label{sec:reference-types}
 %
-%
-% A bit of terminology, to avoid confusion.  A ``reference type'' is the basic
-% \pkg{zref-clever} setup unit for specifying how a cross-reference group of a
-% certain kind is to be typeset.  Though, usually, it will have the same name
-% as the underlying \LaTeX{} \emph{counter}, they are conceptually different.
-% \pkg{zref-clever} defines \emph{reference types} and an association between
-% each \emph{counter} and its \emph{type}, it does not define the counters
-% themselves, which are defined by your document.  One \emph{reference type}
-% can be associated with one or more \emph{counters}, and a \emph{counter} can
-% be associated with different \emph{types} at different points in your
-% document.  But each label is stored with only one \emph{type}, as specified
-% by the counter-type association at the moment it is set, and that determines
-% how the reference to that label is typeset.  References to different
-% \emph{counters} of the same \emph{type} are grouped together, and treated
-% alike by \pkg{zref-clever}.  A \emph{reference type} may exist even when the
-% \emph{counter} it is associated with is not actually defined, and this
-% inconsequential.  In practice, the contrary may also happen, a
-% \emph{counter} may be defined but we have no \emph{type} for it, but this
-% must be handled by \pkg{zref-clever} as a ``missing type'' error (at least,
-% if we try to refer to it).
+% A ``reference type'' is the basic \pkg{zref-clever} setup unit for
+% specifying how a cross-reference group of a certain kind is to be typeset.
+% Though, usually, it will have the same name as the underlying \LaTeX{}
+% \emph{counter}, they are conceptually different.  \pkg{zref-clever} defines
+% \emph{reference types} and an association between each \emph{counter} and
+% its \emph{type}, it does not define the counters themselves, which are
+% defined by your document.  One \emph{reference type} can be associated with
+% one or more \emph{counters}, and a \emph{counter} can be associated with
+% different \emph{types} at different points in your document.  But each label
+% is stored with only one \emph{type}, as specified by the counter-type
+% association at the moment it is set, and that determines how the reference
+% to that label is typeset.  References to different \emph{counters} of the
+% same \emph{type} are grouped together, and treated alike by \cs{zcref}.  A
+% \emph{reference type} may exist even when the \emph{counter} it is
+% associated with is not actually defined, and this inconsequential.  In
+% practice, the contrary may also happen, a \emph{counter} may be defined but
+% we have no \emph{type} for it, but this must be handled by \pkg{zref-clever}
+% as a ``missing type'' error (at least, if we try to refer to it).
 %
 % A \emph{reference type} can be associated with multiple counters because we
 % may want to refer to different document elements, with different
@@ -129,56 +127,11 @@
 % case of this are sectioning commands.  \cs{section}, \cs{subsection}, and
 % \cs{subsubsection} have each their counter, but we'd like to refer to all of
 % them by ``section''.  The same for \cs{paragraph} and \cs{subparagraph}.
-% There is one relevant subtlety to grouping multiple counters under the same
-% type: in order for us to be able to meaningfully sort and compress this
-% group, the set of counters contained therein cannot be arbitrary.  Indeed,
-% all of the \emph{counters} grouped in the same \emph{type} must belong to
-% the same counter reset chain, and must be nested within each other (they
-% cannot even just share the same parent).
-%
 %
 % There are also cases in which we may want to use different \emph{reference
 % types} to refer to document objects sharing the same \emph{counter}.
-% Prominently, the environments created with the kernel's \cs{newtheorem}
-% command and the \cs{appendix}, but we'll try to consider, and handle, the
-% case generally.
-%
-% Another relevant use case of the same general problem of different types for
-% the same counter is the \cs{appendix} which in some document classes,
-% including the standard ones, change the sectioning commands looks but, of
-% course, keep using the same counter (\file{book.cls} and \file{report.cls}
-% reset counters \texttt{chapter} and \texttt{section} to 0, change
-% \cs{@chapapp} to use \cs{appendixname} and use \cs{@Alph} for
-% \cs{thechapter}; \file{article.cls} resets counters \texttt{section} and
-% \texttt{subsection} to 0, and uses \cs{@Alph} for \cs{thesection};
-% \file{memoir.cls}, \file{scrbook.cls} and \file{scrarticle.cls} do the same
-% as their corresponding standard classes, and sometimes a little more, but
-% what interests us here is pretty much the same; see also the \pkg{appendix}
-% package).
-%
-% All in all, and since \pkg{zref} spares us of the need to redefine such core
-% commands, I think a more general approach, even if a little less automatic,
-% is the best for us here.  \pkg{zref}'s data flexibility also helps us in
-% this.  As it turns out, we can also use \cs{l_@@_counter_type_prop} for this
-% purpose (hence it was made locally scoped).  And we do so by storing, with
-% the label, the ``type'' value of the ``counter'' key in
-% \cs{l_@@_counter_type_prop} when the label is set.  If it was not for the
-% need to distinguish different \emph{types} of the same \emph{counter} this
-% information could be kept in the variable alone, but since we need to
-% leverage other document information in the process, storing it with the
-% label is not a bad idea.  And it makes some things simpler even for the
-% general case, since we don't have to control whether there is a type
-% property in the label or not.  (The property would have to be included
-% anyway, since the \cs{appendix} case offers little in terms of hooks or
-% grouping, the only choice is whether to populate this property for every
-% label or just for the ones we'd like to ``override'').  With that in hand,
-% \cs{l_@@_counter_type_prop} can be set at appropriate times, and the
-% information gets stored in the label.  For environments, it is trivial with
-% a hook to \texttt{env/\meta{env}/begin}.  This can be used for
-% \cs{newtheorem} environments to start with.  In principle, with a recent
-% kernel, a hook to \cs{appendix} could also be used, otherwise some (simple)
-% user intervention may be required.
-%
+% Notably, the environments created with \LaTeX{}'s \cs{newtheorem} command
+% and the \cs{appendix}.
 %
 %
 %
@@ -296,7 +249,7 @@
 % to do here.  Hence, we isolate \cs{the}\meta{counter} and store it ``clean''
 % in \texttt{zc@thecnt} for reserved use.  Based on the definition of
 % \cs{@currentlabel} done inside \cs{refstepcounter} in `texdoc source2e',
-% section `ltcounts.dtx'.  We just drop the \cs{p@...} prefix.
+% section `ltxref.dtx'.  We just drop the \cs{p@...} prefix.
 %
 %    \begin{macrocode}
 \zref@newprop { zc@thecnt } { \use:c { the \@currentcounter } }
@@ -305,15 +258,15 @@
 %
 %
 % Much of the work of \pkg{zref-clever} relies on the association between a
-% label's ``counter'' and its ``type'' (see
-% Section~\ref{sec:reference-types}).  Apparently, this relation might just be
-% stored in a property list, rather than in the label itself.  However, there
-% are cases in which we must distinguish different types for the same counter,
-% depending on the document context.  Hence, we need to store the ``type'' of
-% the ``counter'' for each ``label''.  In setting this, the presumption is
-% that the label's type has the same name as its counter, unless it is
-% specified otherwise by the \opt{countertype} option, as stored in
-% \cs{l_@@_counter_type_prop}.
+% label's ``counter'' and its ``type'' (see the User manual section on
+% ``Reference types'').  Superficially examined, one might think this relation
+% could just be stored in a global property list, rather than in the label
+% itself.  However, there are cases in which we want to distinguish different
+% types for the same counter, depending on the document context.  Hence, we
+% need to store the ``type'' of the ``counter'' for each ``label''.  In
+% setting this, the presumption is that the label's type has the same name as
+% its counter, unless it is specified otherwise by the \opt{countertype}
+% option, as stored in \cs{l_@@_counter_type_prop}.
 %
 %    \begin{macrocode}
 \zref@newprop { zc@type }
@@ -323,7 +276,7 @@
         \exp_args:NNe \prop_item:Nn
           \l_@@_counter_type_prop { \@currentcounter }
       }
-      { \use:c { @currentcounter } }
+      { \@currentcounter }
   }
 \zref@addprop \ZREF@mainlist { zc@type }
 %    \end{macrocode}
@@ -343,49 +296,89 @@
 %    \end{macrocode}
 %
 %
-% TODO Stopped here.
+% However, since many counters (may) get reset along the document, we require
+% more than just their numeric values.  We need to know the reset chain of a
+% given counter, in order to sort and compress a group of references.  Also
+% here, the ``printed representation'' is not enough, not only because it is
+% easier to work with the numeric values but, given we occasionally group
+% multiple counters within a single type, sorting this group requires to know
+% the actual counter reset chain (the counters' names and values).  Indeed,
+% the set of counters grouped into a single type cannot be arbitrary: all of
+% them must belong to the same reset chain, and must be nested within each
+% other (they cannot even just share the same parent).
 %
-% The need to check this [nested counters] has some implications to the data
-% we store in the label.  Since we cannot do this verification when we set up
-% the \emph{reference type}, because at this point we could only check
-% existing counters, and they may be defined ``later'' or ``never'', the
-% counter reset chain must be stored (names and values) with the label itself
-% (this is done in properties \texttt{zc@enclcnt} and \texttt{zc@enclval}).
+% Furthermore, even if it is true that most of the definitions of counters,
+% and hence of their reset behavior is likely to be defined in the preamble,
+% this is not necessarily true.  Users can create counters, newtheorems
+% mid-document, and alter their reset behavior along the way.  Was that not
+% the case, we could just store the desired information at
+% \texttt{begindocument} in a variable and retrieve it when needed.  But since
+% it is, we need to store the information with the label, with the values as
+% current when the label is set.
 %
-% i) the counter \emph{value}, as a number; ii) the counter (and value) of the
-% set of counters which may trigger a reset of the current counter.
+% Though counters can be reset at any time, and in different ways at that, the
+% most important use case is the automatic resetting of counters when some
+% other counter is stepped, as performed by the standard mechanisms of the
+% kernel (optional argument of \cs{newcounter}, \cs{@addtoreset},
+% \cs{counterwithin} and related infrastructure).  The canonical optional
+% argument of \cs{newcounter} establishes that the counter being created (the
+% mandatory argument) gets reset every time the ``enclosing counter'' gets
+% stepped (this is called in the usual sources ``within-counter'', ``old
+% counter'', ``supercounter'' etc.).  This information is a little trickier to
+% get.  For starters, the counters which may reset the current counter are not
+% retrievable from the counter itself, because this information is stored with
+% the counter that does the resetting, not with the one that gets reset (the
+% list is stored in \cs{cl@}\meta{counter} with format
+% |\@elt{countera}\@elt{counterb}\@elt{counterc}|, see section `ltcounts.dtx'
+% in `source2e').  Besides, there may be a chain of resetting counters, which
+% must be taken into account: if `counterC' gets reset by `counterB', and
+% `counterB' gets reset by `counterA', stepping the latter affects all three
+% of them.
 %
-%
-% The second one is trickier.  For starters, the counters which may reset the
-% current counter are not retrievable from the counter itself, because this
-% information is stored with the counter that does the resetting, not with the
-% one that gets reset (the list is stored in \cs{cl@}\meta{counter} with
-% format |\@elt{countera}\@elt{counterb}\@elt{counterc}|, again see section
-% `ltcounts.dtx' in `source2e').  Besides, there may be a chain of resetting
-% counters, which must be taken into account.  The procedure below examines a
-% set of counters, those included in \cs{l_@@_counter_resetters_seq}, and for
-% each counter retrieves its ``enclosing counters'' recursively.  There is one
-% relevant caveat to this procedure: \cs{l_@@_counter_resetters_seq} is
-% populated by hand with the ``usual suspects'', there is no way (that I know
-% of) to ensure it is exhaustive.  However, it is not that difficult to create
-% a reasonable ``usual suspects'' list which, of course, should include the
-% counters for the sectioning commands, to start with, and it is easy to add
-% more counters to this list if needed.
+% The procedure below examines a set of counters, those included in
+% \cs{l_@@_counter_resetters_seq}, and for each of them retrieves the set of
+% counters it resets, as stored in \cs{cl@}\meta{counter}, looking for the
+% counter for which we are trying to set a label (\cs{@currentcounter}, passed
+% as an argument to the functions).  There is one relevant caveat to this
+% procedure: \cs{l_@@_counter_resetters_seq} is populated by hand with the
+% ``usual suspects'', there is no way (that I know of) to ensure it is
+% exhaustive.  However, it is not that difficult to create a reasonable
+% ``usual suspects'' list which, of course, should include the counters for
+% the sectioning commands to start with, and it is easy to add more counters
+% to this list if needed, with the option \opt{counterresetters}.
+% Unfortunately, not all counters are created alike, or reset alike.  Some
+% counters, even some kernel ones, get reset by other mechanisms (notably, the
+% \texttt{enumerate} environment counters do not use the regular counter
+% machinery for resetting on each level, but are nested nevertheless by other
+% means).  Therefore, inspecting \cs{cl@}\meta{counter} cannot possibly fully
+% account for all of the automatic counter resetting which takes place in the
+% document.  And there's also no other ``general rule'' we could grab on for
+% this, as far as I know.  So we provide a way to manually tell
+% \pkg{zref-clever} of these cases, by means of the \opt{counterresetby}
+% option, whose information is stored in \cs{l_@@_counter_resetby_prop}.  This
+% manual specification has precedence over the search through
+% \cs{l_@@_counter_resetters_seq}, and should be handled with care, since
+% there is no possible verification mechanism for this.
 %
 %
 % \begin{macro}[EXP]
 %   {
-%     \@@_get_enclosing_counters:n,
-%     \@@_get_enclosing_counters_value:n
+%     \@@_get_enclosing_counters:n ,
+%     \@@_get_enclosing_counters_value:n ,
 %   }
-% Recursively generate a \emph{sequence} of ``enclosing counters'' and values,
-% for a given \Arg{counter} and leave it in the input stream.  These functions
-% must be expandable, since they get called from \cs{zref@newprop} and are the
-% ones responsible for generating the desired information when the label is
-% being set.  Note that the order in which we are getting this information is
-% reversed, since we are navigating the counter reset chain bottom-up.  But it
-% is very hard to do otherwise here where we need expandable functions, and
-% easy to handle at the reading side.
+%     Recursively generate a \emph{sequence} of ``enclosing counters'' and
+%     values, for a given \meta{counter} and leave it in the input stream.
+%     These functions must be expandable, since they get called from
+%     \cs{zref@newprop} and are the ones responsible for generating the
+%     desired information when the label is being set.  Note that the order in
+%     which we are getting this information is reversed, since we are
+%     navigating the counter reset chain bottom-up.  But it is very hard to do
+%     otherwise here where we need expandable functions, and easy to handle at
+%     the reading side.
+%     \begin{syntax}
+%       \cs{@@_get_enclosing_counters:n} \Arg{counter}
+%       \cs{@@_get_enclosing_counters_value:n} \Arg{counter}
+%     \end{syntax}
 %    \begin{macrocode}
 \cs_new:Npn \@@_get_enclosing_counters:n #1
   {
@@ -400,7 +393,7 @@
   {
     \cs_if_exist:cT { c@ \@@_counter_reset_by:n {#1} }
       {
-        { \int_use:N \cs:w c@ \@@_counter_reset_by:n {#1} \cs_end: }
+        { \int_use:c { c@ \@@_counter_reset_by:n {#1} } }
         \@@_get_enclosing_counters_value:e
           { \@@_counter_reset_by:n {#1} }
       }
@@ -421,17 +414,15 @@
 % \end{macro}
 %
 %
-% \begin{macro}[EXP]
-%   {
-%     \@@_counter_reset_by:n,
-%     \@@_counter_reset_by_aux:nn,
-%     \@@_counter_reset_by_auxi:nnn
-%   }
-% Auxiliary functions for \cs{@@_get_enclosing_counters:n} and
-% \cs{@@_get_enclosing_counters_value:n}.  They are broken in parts to be able
-% to use the expandable mapping functions.  In particular
-% \cs{@@_counter_reset_by:n} leaves in the stream the ``enclosing counter''
-% which resets \Arg{counter}.
+% \begin{macro}[EXP]{\@@_counter_reset_by:n}
+%   Auxiliary function for \cs{@@_get_enclosing_counters:n} and
+%   \cs{@@_get_enclosing_counters_value:n}.  They are broken in parts to be
+%   able to use the expandable mapping functions.  \cs{@@_counter_reset_by:n}
+%   leaves in the stream the ``enclosing counter'' which resets
+%   \meta{counter}.
+%   \begin{syntax}
+%     \cs{@@_counter_reset_by:n} \Arg{counter}
+%   \end{syntax}
 %    \begin{macrocode}
 \cs_new:Npn \@@_counter_reset_by:n #1
   {
@@ -463,8 +454,8 @@
 % \end{macro}
 %
 %
-% Finally, add \texttt{zc@enclcnt} and \texttt{zc@enclval} to \pkg{zref}'s
-% \texttt{main} property list.
+% Finally, we create the \texttt{zc@enclcnt} and \texttt{zc@enclval}
+% properties, and add them to the \texttt{main} property list.
 %    \begin{macrocode}
 \zref@newprop { zc@enclcnt }
   { \@@_get_enclosing_counters:V \@currentcounter }
@@ -477,30 +468,27 @@
 %
 % Another piece of information we need is the page numbering format being used
 % by \cs{thepage}, so that we know when we can (or not) group a set of page
-% references in a range.  Unfortunately, the ``page'' is not a typical counter
-% in ways which complicates things.  First, it does commonly get reset along
-% the document, not necessarily by the usual counter reset chains, but rather
-% with \cs{pagenumbering} or variations thereof.  Second, the format of the
-% page number commonly changes in the document (roman, arabic, etc.), not
+% references in a range.  Unfortunately, \texttt{page} is not a typical
+% counter in ways which complicates things.  First, it does commonly get reset
+% along the document, not necessarily by the usual counter reset chains, but
+% rather with \cs{pagenumbering} or variations thereof.  Second, the format of
+% the page number commonly changes in the document (roman, arabic, etc.), not
 % necessarily, though usually, together with a reset.  Trying to ``parse''
 % \cs{thepage} to retrieve such information is bound to go wrong: we don't
 % know, and can't know, what is within that macro, and that's the business of
 % the user, or of the documentclass, or of the loaded packages.  The technique
 % used by \pkg{cleveref}, which we borrow here, is simple and smart: store
 % with the label what \cs{thepage} would return, if the counter \cs{c@page}
-% was ``1''.  That does not allow us to \emph{sort} the references, luckily
-% however, we have \texttt{abspage} which can be used for that.  But we can
-% decide whether two labels can be compressed or not based on this format: if
-% they are identical, we can compress them, otherwise, we can't.
-% \pkg{cleveref} actually resets the counter to ``1'' with \cs{setcounter},
-% which is a global operation, and restores it in sequence.  Here we adopt a
-% more cautious approach of locally redefining \cs{c@page} to return ``1'',
-% thus avoiding any global spillovers of this trick.  Since this operation is
-% not expandable we cannot run it directly from the property definition.
-% Hence, we use a shipout hook, and set \cs{g_@@_page_format_tl}, which can
-% then be retrieved by the starred definition of |\zref@newprop*{zc@pgfmt}|.
+% was ``\(1\)''.  That does not allow us to \emph{sort} the references,
+% luckily however, we have \texttt{abspage} which solves this problem.  But we
+% can decide whether two labels can be compressed into a range or not based on
+% this format: if they are identical, we can compress them, otherwise, we
+% can't.  To do so, we locally redefine \cs{c@page} to return ``1'', thus
+% avoiding any global spillovers of this trick.  Since this operation is not
+% expandable we cannot run it directly from the property definition.  Hence,
+% we use a shipout hook, and set \cs{g_@@_page_format_tl}, which can then be
+% retrieved by the starred definition of |\zref@newprop*{zc@pgfmt}|.
 %
-% \begin{macro}[EXP]{\@@_page_numbering:}
 %    \begin{macrocode}
 \tl_new:N \g_@@_page_format_tl
 \cs_new_protected:Npx \@@_page_format_aux: { \int_eval:n { 1 } }
@@ -514,14 +502,13 @@
 \zref@newprop* { zc@pgfmt } { \g_@@_page_format_tl }
 \zref@addprop \ZREF@mainlist { zc@pgfmt }
 %    \end{macrocode}
-% \end{macro}
 %
 %
-% Another property which we don't need to handle at the data provision side,
-% but need to cater for in the retrieval side, are the \texttt{url} /
-% \texttt{urluse} properties from the \pkg{zref-xr} module, which are added to
-% the labels imported from external documents, and needed to construct
-% hyperlinks to them.
+% Still another property which we don't need to handle at the data provision
+% side, but need to cater for at the retrieval side, is the \texttt{url}
+% property (or the equivalent \texttt{urluse}) from the \pkg{zref-xr} module,
+% which is added to the labels imported from external documents, and needed to
+% construct hyperlinks to them.
 %
 %
 %
@@ -543,10 +530,8 @@
     No~type~specified~for~option~'#1'~\msg_line_context:.~
     Set~it~after~'type'~switch~or~in~'\exp_not:N \zcRefTypeSetup'.
   }
-\msg_new:nnn  { zref-clever } { countertype-requires-value }
-  { The~'countertype'~key~'#1'~requires~a~value. }
-\msg_new:nnn  { zref-clever } { counterresetby-requires-value }
-  { The~'counterresetby'~key~'#1'~requires~a~value. }
+\msg_new:nnn  { zref-clever } { key-requires-value }
+  { The~'#1'~key~'#2'~requires~a~value. }
 \msg_new:nnn { zref-clever } { missing-zref-titleref }
   {
     Option~'ref=title'~requested~\msg_line_context:.~
@@ -578,62 +563,115 @@
 %
 %
 %
-% \subsection{Translations aux}
+% \subsection{Translations}
+%
 %
 % Some wrappers around \pkg{translations} functions, so that we can generate
 % variants with expansion control for arguments, or for convenience.
 %
-%    \begin{macrocode}
-\prg_new_conditional:Npnn \@@_if_translation:nn #1#2 { p , TF }
+%
+% \begin{macro}{\@@_if_transl:nnTF}
+%   Conditional to check if a translation of \meta{key} exists for language
+%   \meta{lang}.
+%   \begin{syntax}
+%     \cs{@@_if_transl:nnTF} \Arg{lang} \Arg{key} \Arg{true} \Arg{false}
+%   \end{syntax}
+%  \begin{macrocode}
+\prg_new_conditional:Npnn \@@_if_transl:nn #1#2 { TF }
   {
     \IfTranslation {#1} {#2}
       { \prg_return_true:  }
       { \prg_return_false: }
   }
-\prg_generate_conditional_variant:Nnn \@@_if_translation:nn { xx } { p , TF }
-\cs_new_protected:Npn \@@_get_translation_for:nnn #1#2#3
-  { \SaveTranslationFor{#1}{#2}{#3} }
-\cs_generate_variant:Nn \@@_get_translation_for:nnn { nxx }
-\cs_new_protected:Npn \@@_declare_translation:nnn #1#2#3
-  { \declaretranslation {#1} {#2} {#3} }
-\cs_generate_variant:Nn \@@_declare_translation:nnn { xxn , xxx }
-
-% <lang><key><transl>
-\cs_new_protected:Npn \@@_add_default_translation:nnn #1#2#3
-  { \addtranslation {#1} { zrefclever-default- #2 } {#3} }
-
-% <lang><type><key><transl>
-\cs_new_protected:Npn \@@_add_type_translation:nnnn #1#2#3#4
-  { \addtranslation {#1} { zrefclever-type- #2 - #3 } {#4} }
+\prg_generate_conditional_variant:Nnn \@@_if_transl:nn { xx } { TF }
 %    \end{macrocode}
+% \end{macro}
 %
 %
-% Functions for use in dictionary files.  The dictionary file commands cannot
-% rely on expl3 syntax, so we define ``document'' ones.
-%
+% \begin{macro}{\@@_get_transl:nnn}
+%   Retrieves the translation of \meta{key} for the language \meta{lang} and
+%   saves it in \meta{macro}.
+%   \begin{syntax}
+%     \cs{@@_get_transl:nnn} \Arg{macro} \Arg{lang} \Arg{key}
+%   \end{syntax}
 %    \begin{macrocode}
-% <key><transl>
+\cs_new_protected:Npn \@@_get_transl:nnn #1#2#3
+  { \SaveTranslationFor{#1}{#2}{#3} }
+\cs_generate_variant:Nn \@@_get_transl:nnn { nxx }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\@@_declare_transl:nnn}
+%   Defines the translation of \meta{key} for the language \meta{lang}.  The
+%   \meta{key} here is the full key, including package prefix, type, and
+%   internal key name (i.e. the ``key'' from the perspective of
+%   \pkg{translations}).
+%   \begin{syntax}
+%     \cs{@@_declare_transl:nnn} \Arg{lang} \Arg{key} \Arg{translation}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_declare_transl:nnn #1#2#3
+  { \declaretranslation {#1} {#2} {#3} }
+\cs_generate_variant:Nn \@@_declare_transl:nnn { xxn }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{macro}{\@@_declare_default_transl:nnn}
+%   Defines the translation of \meta{key} for the language \meta{lang}.  The
+%   \meta{key} here is the internal key name (i.e. the name of the option).
+%   \begin{syntax}
+%     \cs{@@_declare_default_transl:nnn} \Arg{lang} \Arg{key} \Arg{translation}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_declare_default_transl:nnn #1#2#3
+  { \declaretranslation {#1} { zrefclever-default- #2 } {#3} }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{macro}[int]{\zcDicDefaultTransl, \zcDicTypeTransl}
+%   Functions for providing translations in dictionary files.  We refrain from
+%   using \texttt{expl3} names and ``atletter'', so that we don't have to
+%   control catcodes in those files (as far as I can tell, \pkg{translations}
+%   itself doesn't cater for this), even if these commands are only really
+%   meant for internal use.  The \meta{key} here is always the internal key
+%   name (i.e. the name of the option).  The language does not need to be
+%   specified, it is automatically retrieved from the dictionary's declaration
+%   done by \cs{ProvideDictionaryFor}.  Since \cs{ProvideDictTranslation} is
+%   restricted by \pkg{translations} to the preamble, we inherit this
+%   restriction here.
+%   \begin{syntax}
+%     \cs{zcDicDefaultTransl} \marg{key} \marg{translation}
+%     \cs{zcDicTypeTransl} \marg{type} \marg{key} \marg{translation}
+%   \end{syntax}
+%    \begin{macrocode}
 \NewDocumentCommand \zcDicDefaultTransl { m m }
   { \ProvideDictTranslation { zrefclever-default- #1 } {#2} }
-% <type><key><transl>
 \NewDocumentCommand \zcDicTypeTransl { m m m }
   { \ProvideDictTranslation { zrefclever-type- #1 - #2 } {#3} }
+\@onlypreamble \zcDicDefaultTransl
+\@onlypreamble \zcDicTypeTransl
 %    \end{macrocode}
+% \end{macro}
 %
 %
 %
 % \subsection{Options}
 %
 %
-% \subsubsection*{\opt{countertype} option}
+% \subsubsection*{Auxiliary functions}
 %
-% \begin{variable}{\l_@@_counter_type_prop}
-%   Variable storing a mapping from ``counter'' to ``reference type''.
-%    \begin{macrocode}
-\prop_new:N \l_@@_counter_type_prop
-%    \end{macrocode}
-% \end{variable}
 %
+% \begin{macro}{\@@_prop_put_non_empty:Nnn}
+%   If \meta{value} is empty, remove \meta{key} from \meta{property list}.
+%   Otherwise, add \meta{key} = \meta{value} to \meta{property list}.
+%   \begin{syntax}
+%     \cs{@@_prop_put_non_empty:Nnn} \meta{property list} \Arg{key} \Arg{value}
+%   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_prop_put_non_empty:Nnn #1#2#3
   {
@@ -641,13 +679,33 @@
       { \prop_remove:Nn #1 {#2} }
       { \prop_put:Nnn #1 {#2} {#3} }
   }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsubsection*{\opt{countertype} option}
+%
+% \cs{l_@@_counter_type_prop} is used by \texttt{zc@type} property, and stores
+% a mapping from ``counter'' to ``reference type''.  Only those counters whose
+% type name is different from that of the counter need to be specified, since
+% \texttt{zc@type} presumes the counter as the type if the counter is not
+% found in \cs{l_@@_counter_type_prop}.
+%
+%    \begin{macrocode}
+\prop_new:N \l_@@_counter_type_prop
 \keys_define:nn { zref-clever }
   {
     countertype .code:n =
       {
         \keyval_parse:nnn
-          { \msg_warning:nnn { zref-clever } { countertype-requires-value } }
-          { \@@_prop_put_non_empty:Nnn \l_@@_counter_type_prop }
+          {
+            \msg_warning:nnnn { zref-clever }
+              { key-requires-value } { countertype }
+          }
+          {
+            \@@_prop_put_non_empty:Nnn
+              \l_@@_counter_type_prop
+          }
           {#1}
       } ,
     countertype .value_required:n = true ,
@@ -667,17 +725,18 @@
 %
 % \subsubsection*{\opt{counterresetters} option}
 %
+% \cs{l_@@_counter_resetters_seq} is used by \cs{@@_counter_reset_by:n} to
+% populate the \texttt{zc@enclcnt} and \texttt{zc@enclval} properties, and
+% stores the list of counters which are potential ``enclosing counters'' for
+% other counters.  This option is constructed such that users can only
+% \emph{add} items to the variable.  There would be little gain and some risk
+% in allowing removal, and the syntax of the option would become unnecessarily
+% more complicated.  Besides, users can already override, for any particular
+% counter, the search done from the set in \cs{l_@@_counter_resetters_seq}
+% with the \opt{counterresetby} option.
 %
-% \begin{variable}{\l_@@_counter_resetters_seq}
-%   Stores the list of counters which are potential ``enclosing counters'' for
-%   other counters.
 %    \begin{macrocode}
 \seq_new:N \l_@@_counter_resetters_seq
-%    \end{macrocode}
-% \end{variable}
-%
-%
-%    \begin{macrocode}
 \keys_define:nn { zref-clever }
   {
     counterresetters .code:n =
@@ -685,7 +744,10 @@
         \clist_map_inline:nn {#1}
           {
             \seq_if_in:NnF \l_@@_counter_resetters_seq {##1}
-              { \seq_put_right:Nn \l_@@_counter_resetters_seq {##1} }
+              {
+                \seq_put_right:Nn
+                  \l_@@_counter_resetters_seq {##1}
+              }
           }
       } ,
     counterresetters .initial:n =
@@ -706,24 +768,27 @@
 %
 % \subsubsection*{\opt{counterresetby} option}
 %
+% \cs{l_@@_counter_resetby_prop} is used by \cs{@@_counter_reset_by:n} to
+% populate the \texttt{zc@enclcnt} and \texttt{zc@enclval} properties, and
+% stores a mapping from counters to the counter which resets each of them.
+% This mapping has precedence in \cs{@@_counter_reset_by:n} over the search
+% through \cs{l_@@_counter_resetters_seq}.
 %
-% \begin{variable}{\l_@@_counter_resetby_prop}
-%   Variable storing a mapping from ``counter'' to the counter which resets
-%   it.
 %    \begin{macrocode}
 \prop_new:N \l_@@_counter_resetby_prop
-%    \end{macrocode}
-% \end{variable}
-%
-%
-%    \begin{macrocode}
 \keys_define:nn { zref-clever }
   {
     counterresetby .code:n =
       {
         \keyval_parse:nnn
-          { \msg_warning:nnn { zref-clever } { counterresetby-requires-value } }
-          { \@@_prop_put_non_empty:Nnn \l_@@_counter_resetby_prop }
+          {
+            \msg_warning:nnn { zref-clever }
+              { key-requires-value } { counterresetby }
+          }
+          {
+            \@@_prop_put_non_empty:Nnn
+              \l_@@_counter_resetby_prop
+          }
           {#1}
       } ,
     counterresetby .value_required:n = true ,
@@ -732,8 +797,7 @@
 %    \end{macrocode}
 % The counters for the \texttt{enumerate} environment do not use the regular
 % counter machinery for resetting on each level, but are nested nevertheless
-% by other means, treat them as exception.  TODO This list should probably be
-% extended for `enumitem', conditioned on it being loaded.
+% by other means, treat them as exception.
 %    \begin{macrocode}
         enumii  = enumi   ,
         enumiii = enumii  ,
@@ -1497,7 +1561,7 @@
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+                \@@_declare_transl:xxn { \l_@@_setup_language_tl }
                   { zrefclever-default- #1 } {##1}
               }
               {
@@ -1532,11 +1596,11 @@
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+                \@@_declare_transl:xxn { \l_@@_setup_language_tl }
                   { zrefclever-default- #1 } {##1}
               }
               {
-                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+                \@@_declare_transl:xxn { \l_@@_setup_language_tl }
                   { zrefclever-type- \l_@@_setup_type_tl - #1 } {##1}
               }
           } ,
@@ -1570,7 +1634,7 @@
                   { option-only-type-specific } {#1}
               }
               {
-                \@@_declare_translation:xxn { \l_@@_setup_language_tl }
+                \@@_declare_transl:xxn { \l_@@_setup_language_tl }
                   { zrefclever-type- \l_@@_setup_type_tl - #1 } {##1}
               }
           } ,
@@ -1809,7 +1873,7 @@
 %    \end{macrocode}
 % \end{variable}
 %
-% \begin{macro}{\tl_reverse_items:V}
+% \begin{macro}[int]{\tl_reverse_items:V}
 %   Variant not provided by the kernel.
 %    \begin{macrocode}
 \cs_generate_variant:Nn \tl_reverse_items:n { V }
@@ -2966,14 +3030,14 @@
                   \l_@@_name_format_tl
                   \l_@@_type_name_tl
                   {
-                    \@@_if_translation:xxTF
+                    \@@_if_transl:xxTF
                       { \l_@@_ref_language_tl }
                       {
                         zrefclever-type- \l_@@_type_first_label_type_tl -
                         \l_@@_name_format_tl
                       }
                       {
-                        \@@_get_translation_for:nxx { \l_@@_type_name_tl }
+                        \@@_get_transl:nxx { \l_@@_type_name_tl }
                           { \l_@@_ref_language_tl }
                           {
                             zrefclever-type- \l_@@_type_first_label_type_tl -
@@ -2998,14 +3062,14 @@
                       \l_@@_name_format_fallback_tl
                       \l_@@_type_name_tl
                       {
-                        \@@_if_translation:xxTF
+                        \@@_if_transl:xxTF
                           { \l_@@_ref_language_tl }
                           {
                             zrefclever-type- \l_@@_type_first_label_type_tl -
                             \l_@@_name_format_tl
                           }
                           {
-                            \@@_get_translation_for:nxx { \l_@@_type_name_tl }
+                            \@@_get_transl:nxx { \l_@@_type_name_tl }
                               { \l_@@_ref_language_tl }
                               {
                                 zrefclever-type- \l_@@_type_first_label_type_tl -
@@ -3013,14 +3077,14 @@
                               }
                           }
                           {
-                            \@@_if_translation:xxTF
+                            \@@_if_transl:xxTF
                               { \l_@@_ref_language_tl }
                               {
                                 zrefclever-type- \l_@@_type_first_label_type_tl -
                                 \l_@@_name_format_fallback_tl
                               }
                               {
-                                \@@_get_translation_for:nxx { \l_@@_type_name_tl }
+                                \@@_get_transl:nxx { \l_@@_type_name_tl }
                                   { \l_@@_ref_language_tl }
                                   {
                                     zrefclever-type- \l_@@_type_first_label_type_tl -
@@ -3253,11 +3317,11 @@
           }
           {
             % If not found, try the type specific translations.
-            \@@_if_translation:xxTF
+            \@@_if_transl:xxTF
               { \l_@@_ref_language_tl }
               { zrefclever-type- \l_@@_label_type_a_tl - #1 }
               {
-                \@@_get_translation_for:nxx {#2}
+                \@@_get_transl:nxx {#2}
                   { \l_@@_ref_language_tl }
                   { zrefclever-type- \l_@@_label_type_a_tl - #1 }
               }
@@ -3267,7 +3331,7 @@
                 % options being retrieved with
                 % \cs{@@_get_option_with_transl:nN} have their values set for
                 % `English' and `fallback'.
-                \@@_get_translation_for:nxx {#2}
+                \@@_get_transl:nxx {#2}
                   { \l_@@_ref_language_tl }
                   { zrefclever-default- #1 }
               }
@@ -3370,6 +3434,51 @@
 %
 %
 %
+% \section{Special handling}
+%
+% This section is meant to aggregate any ``special handling'' needed for
+% \LaTeX{} kernel features, document classes, and packages, needed for
+% \pkg{zref-clever} to work properly with them.  It is not meant to be a
+% ``kitchen sink of workarounds''.  Rather, I intend to keep this as lean as
+% possible, trying to add things selectively when they are safe and
+% reasonable.  And, hopefully, doing so by proper setting of
+% \pkg{zref-clever}'s options, not by messing with other packages' code.  In
+% particular, I do not mean to compensate for ``lack of support for
+% \pkg{zref}'' by individual packages here, unless there is really no
+% alternative.
+%
+%
+% \subsection{Appendix}
+%
+%
+% Another relevant use case of the same general problem of different types for
+% the same counter is the \cs{appendix} which in some document classes,
+% including the standard ones, change the sectioning commands looks but, of
+% course, keep using the same counter (\file{book.cls} and \file{report.cls}
+% reset counters \texttt{chapter} and \texttt{section} to 0, change
+% \cs{@chapapp} to use \cs{appendixname} and use \cs{@Alph} for
+% \cs{thechapter}; \file{article.cls} resets counters \texttt{section} and
+% \texttt{subsection} to 0, and uses \cs{@Alph} for \cs{thesection};
+% \file{memoir.cls}, \file{scrbook.cls} and \file{scrarticle.cls} do the same
+% as their corresponding standard classes, and sometimes a little more, but
+% what interests us here is pretty much the same; see also the \pkg{appendix}
+% package).
+%
+%
+%
+% \subsection{\cs{newtheorem}}
+%
+%
+%
+%
+%
+% \subsection{\pkg{enumitem} package}
+%
+% TODO Option \opt{counterresetby} should probably be extended for
+% \pkg{enumitem}, conditioned on it being loaded.
+%
+%
+%
 % \section{Translations}
 %
 %
@@ -3382,19 +3491,19 @@
 % \pkg{zref-clever} does not know.  On the other hand type-specific options
 % are not looked for in `fallback'.
 %    \begin{macrocode}
-\@@_add_default_translation:nnn { fallback } { namesep   } {\nobreakspace}
-\@@_add_default_translation:nnn { fallback } { pairsep   } {,~}
-\@@_add_default_translation:nnn { fallback } { listsep   } {,~}
-\@@_add_default_translation:nnn { fallback } { lastsep   } {,~}
-\@@_add_default_translation:nnn { fallback } { tpairsep  } {,~}
-\@@_add_default_translation:nnn { fallback } { tlistsep  } {,~}
-\@@_add_default_translation:nnn { fallback } { tlastsep  } {,~}
-\@@_add_default_translation:nnn { fallback } { notesep   } {~}
-\@@_add_default_translation:nnn { fallback } { rangesep  } {\textendash}
-\@@_add_default_translation:nnn { fallback } { refpre    } {}
-\@@_add_default_translation:nnn { fallback } { refpos    } {}
-\@@_add_default_translation:nnn { fallback } { refpre-in } {}
-\@@_add_default_translation:nnn { fallback } { refpos-in } {}
+\@@_declare_default_transl:nnn { fallback } { namesep   } {\nobreakspace}
+\@@_declare_default_transl:nnn { fallback } { pairsep   } {,~}
+\@@_declare_default_transl:nnn { fallback } { listsep   } {,~}
+\@@_declare_default_transl:nnn { fallback } { lastsep   } {,~}
+\@@_declare_default_transl:nnn { fallback } { tpairsep  } {,~}
+\@@_declare_default_transl:nnn { fallback } { tlistsep  } {,~}
+\@@_declare_default_transl:nnn { fallback } { tlastsep  } {,~}
+\@@_declare_default_transl:nnn { fallback } { notesep   } {~}
+\@@_declare_default_transl:nnn { fallback } { rangesep  } {\textendash}
+\@@_declare_default_transl:nnn { fallback } { refpre    } {}
+\@@_declare_default_transl:nnn { fallback } { refpos    } {}
+\@@_declare_default_transl:nnn { fallback } { refpre-in } {}
+\@@_declare_default_transl:nnn { fallback } { refpos-in } {}
 %    \end{macrocode}
 %
 %
