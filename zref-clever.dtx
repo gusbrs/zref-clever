@@ -810,8 +810,22 @@
 %
 % \subsubsection*{\opt{ref} option}
 %
+% \cs{l_@@_ref_property_tl} stores the property to which the reference is
+% being made.  Currently, we restrict \texttt{ref=} to these two (or three)
+% alternatives -- \texttt{zc@thecnt}, \texttt{page}, and \texttt{title} if
+% \pkg{zref-titleref} is loaded --, but there might be a case for making this
+% more flexible.  The infrastructure can already handle receiving an arbitrary
+% property, as long as one is satisfied with sorting and compressing from the
+% default counter.  If more flexibility is granted, one thing \emph{must} be
+% handled at this point: the existence of the property itself, as far as
+% \pkg{zref} is concerned.  This because typesetting relies on the check
+% \cs{zref@ifrefcontainsprop}, which \emph{presumes} the property is defined
+% and silently expands the \emph{true} branch if it is not (see
+% \url{https://github.com/ho-tex/zref/issues/13}, thanks Ulrike Fischer).
+% Therefore, before adding anything to \cs{l_@@_ref_property_tl}, check if
+% first here with \cs{zref@ifpropundefined}: close it at the door.
 %
-% Stores whether this reference is to the page, or to the default counter.
+%
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_property_tl
 \keys_define:nn { zref-clever / reference }
@@ -838,7 +852,6 @@
     page .meta:n = { ref = page },
     page .value_forbidden:n = true ,
   }
-
 \AddToHook { begindocument }
   {
     \@ifpackageloaded { zref-titleref }
@@ -862,22 +875,9 @@
   }
 %    \end{macrocode}
 %
-% Currently, we restrict `ref=' to these two (or three) alternatives,
-% but there might be a case for making this more flexible.  The infrastructure
-% can already handle receiving an arbitrary property, as long as one is
-% satisfied with sorting and compressing from the default counter.  If more
-% flexibility is granted, one thing \emph{must} be handled at this point: the
-% existence of the property itself, as far as \pkg{zref} is concerned.  This
-% because typesetting relies on the check \cs{zref@ifrefcontainsprop}, which
-% \emph{presumes} the property is defined and silently expands the \emph{true}
-% branch if it is not (see \url{https://github.com/ho-tex/zref/issues/13},
-% thanks Ulrike Fischer).  Therefore, before adding anything to
-% \cs{l_@@_ref_property_tl}, check if first here with
-% \cs{zref@ifpropundefined}: close it at the door.
 %
 %
 % \subsubsection*{\opt{typeset} option}
-%
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_ref_bool
@@ -912,7 +912,6 @@
 %
 % \subsubsection*{\opt{sort} option}
 %
-% User option, sort labels ranges or not
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_sort_bool
 \keys_define:nn { zref-clever / reference }
@@ -929,6 +928,11 @@
 %
 % \subsubsection*{\opt{typesort} option}
 %
+% \cs{l_@@_typesort_seq} is stored reversed, since the sort priorities are
+% computed in the negative range in \cs{@@_sort_default_different_types:nn},
+% so that we can implicitly rely on `0' being the ``last value'', and spare
+% creating an integer variable using \cs{seq_map_indexed_inline:Nn}.
+%
 %    \begin{macrocode}
 \seq_new:N \l_@@_typesort_seq
 \keys_define:nn { zref-clever / reference }
@@ -936,9 +940,6 @@
     typesort .code:n =
       {
         \seq_set_from_clist:Nn \l_@@_typesort_seq {#1}
-        % Reverse the sequence, since the sort priorities are computed in the
-        % negative range, so that we can implicitly rely on `0' being the
-        % ``last value''.
         \seq_reverse:N \l_@@_typesort_seq
       } ,
     typesort .initial:n =
@@ -954,7 +955,6 @@
 %
 % \subsubsection*{\opt{comp} option}
 %
-% User option, compress ranges or not
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_compress_bool
 \keys_define:nn { zref-clever / reference }
@@ -985,7 +985,6 @@
 %
 % \subsubsection*{\opt{hyperref} option}
 %
-% \begin{variable}{\l_@@_use_hyperref_bool, \l_@@_warn_hyperref_bool}
 %    \begin{macrocode}
 \bool_new:N \l_@@_use_hyperref_bool
 \bool_new:N \l_@@_warn_hyperref_bool
@@ -1011,7 +1010,6 @@
     hyperref .default:n = auto
   }
 %    \end{macrocode}
-% \end{variable}
 %
 %    \begin{macrocode}
 \AddToHook { begindocument }
@@ -1038,7 +1036,6 @@
 %
 % \subsubsection*{\opt{nameinlink} option}
 %
-% \begin{variable}{\l_@@_nameinlink_tl}
 %    \begin{macrocode}
 \str_new:N \l_@@_nameinlink_str
 \keys_define:nn { zref-clever / reference }
@@ -1056,7 +1053,6 @@
     nameinlink .default:n = true ,
   }
 %    \end{macrocode}
-% \end{variable}
 %
 %
 % \subsubsection*{\opt{cap} and \opt{capfirst} options}
@@ -1106,6 +1102,40 @@
 %
 % \subsubsection*{\opt{lang} option}
 %
+% \cs{l_@@_current_language_tl} is an internal alias for \pkg{translations}'s
+% internal macro \cs{@trnslt@current@language} which, in turn, is an alias for
+% \cs{languagename} used by both \pkg{babel} and \pkg{polyglossia}, but
+% \pkg{translations} ensures it always exists, even if no language package is
+% loaded.  \cs{l_@@_main_language_tl} is an internal alias for \pkg{babel}'s
+% \cs{bbl@main@language} or for \pkg{polyglossia}'s \cs{xpg@main@language}, as
+% the case may be.  \cs{l_@@_ref_language_tl} is the internal variable which
+% stores the language in which the reference is to be made.
+%
+% The overall setup here seems a little roundabout, but this is actually
+% required.  In the preamble, we (potentially) don't yet have values for the
+% ``main'' and ``current'' document languages, this must be retrieved at a
+% \texttt{begindocument/before} hook.  And it must be \texttt{before}, since
+% \cs{LoadDictionaryFor} is preamble only.  The \texttt{begindocument/before}
+% hook is responsible to get values for \cs{l_@@_main_language_tl} and
+% \cs{l_@@_current_language_tl} and load \pkg{zref-clever} dictionaries for
+% all languages loaded by \pkg{babel} or \pkg{polyglossia}, or directly
+% specified by the user.  After this information is retrieved, the preamble
+% options are executed, and this is handled by the internal
+% \texttt{zref-clever/reflanguage} hook, which is called at this point.  This
+% hook handles two things: it executes the preamble options and, in sequence,
+% it redefines the \texttt{lang} option key, since in the document body, we
+% can handle ``main'' and ``current'' language options immediately.  This
+% redefinition is added to the \texttt{zref-clever/reflanguage} hook, but
+% \cs{AtEndOfPackage} so that it comes after \cs{ProcessKeysOptions}.  In
+% other words, this is how we ensure the preamble options are executed before
+% the \texttt{lang} key is redefined.
+%
+% For the \pkg{babel} and \pkg{polyglossia} variables which store the ``main''
+% and ``current'' languages, see \url{https://tex.stackexchange.com/a/233178},
+% including comments, particularly the one by Javier Bezos.  For the
+% \pkg{babel} and \pkg{polyglossia} variables which store the list of loaded
+% languages, see \url{https://tex.stackexchange.com/a/281220}, including
+% comments, particularly PLK's.
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_language_tl
@@ -1122,20 +1152,24 @@
               {
                 { main }
                 {
-                  \tl_set_eq:NN
-                    \l_@@_ref_language_tl \l_@@_main_language_tl
+                  \tl_set_eq:NN \l_@@_ref_language_tl
+                    \l_@@_main_language_tl
                 }
 
                 { current }
                 {
-                  \tl_set_eq:NN
-                    \l_@@_ref_language_tl \l_@@_current_language_tl
+                  \tl_set_eq:NN \l_@@_ref_language_tl
+                    \l_@@_current_language_tl
                 }
               }
               {
                 \tl_set:Nn \l_@@_ref_language_tl {#1}
-                % If user specified a language at the preamble, make sure it
-                % is loaded.
+%    \end{macrocode}
+% If the user specified a language in the preamble, make sure it is loaded.
+% There's no need to worry with redundancy with \pkg{babel} and
+% \pkg{polyglosssia} loaded languages, since \cs{LoadDictionaryFor} does not
+% reload a dictionary if it's already been loaded.
+%    \begin{macrocode}
                 \exp_args:Nx \file_if_exist:nTF
                   { zref-clever- \@trnslt@language {#1} .trsl }
                   { \LoadDictionaryFor {#1} { zref-clever } }
@@ -1152,7 +1186,8 @@
   }
 %    \end{macrocode}
 %
-% \cs{AtEndOfPackage} so that it comes after \cs{ProcessKeysOptions}.
+%
+% Redefinition of the \texttt{lang} key option for the document body.
 %    \begin{macrocode}
 \AtEndOfPackage
   {
@@ -1166,14 +1201,14 @@
                   {
                     { main }
                     {
-                      \tl_set_eq:NN
-                        \l_@@_ref_language_tl \l_@@_main_language_tl
+                      \tl_set_eq:NN \l_@@_ref_language_tl
+                        \l_@@_main_language_tl
                     }
 
                     { current }
                     {
-                      \tl_set_eq:NN
-                        \l_@@_ref_language_tl \l_@@_current_language_tl
+                      \tl_set_eq:NN \l_@@_ref_language_tl
+                        \l_@@_current_language_tl
                     }
                   }
                   { \tl_set:Nn \l_@@_ref_language_tl {#1} }
@@ -1185,30 +1220,25 @@
 %    \end{macrocode}
 %
 %
-%
-% See \url{https://tex.stackexchange.com/a/233178} (including Javier Bezos'
-% comment).  Also \url{https://tex.stackexchange.com/a/281220} (including
-% PLK's comments).
 %    \begin{macrocode}
 \AddToHook { begindocument / before }
   {
-    % An internal alias for \pkg{translations}'s internal macro
-    % \cs{@trnslt@current@language}.
-    \tl_set_eq:NN \l_@@_current_language_tl \@trnslt@current@language
-    % Getting main languages and, for each babel/polyglossia loaded language,
-    % load corresponding zref-clever dictionary.
+    \tl_set_eq:NN \l_@@_current_language_tl
+      \@trnslt@current@language
     \@ifpackageloaded{babel}
       {
-        \tl_set_eq:NN \l_@@_main_language_tl \bbl@main@language
+        \tl_set_eq:NN \l_@@_main_language_tl
+          \bbl@main@language
         \clist_map_inline:Nn \bbl@loaded
           {
-            % Funny enough, \pkg{translations} also loads its basic
-            % dictionaries for all languages loaded by babel or polyglossia.
-            % First, there is no way to disable this, even if we don't need
-            % them at all here.  Second, \pkg{translations} sends messages of
-            % its own missing dictionaries to `info' and everyone else's to
-            % 'warning'...  So we have to control ourselves for missing
-            % dictionaries and load them only if available.
+%    \end{macrocode}
+% Funny enough, \pkg{translations} also loads its basic dictionaries for all
+% languages loaded by \pkg{babel} or \pkg{polyglossia}.  First, there is no
+% way to disable this, even if we don't need them at all here.  Second,
+% \pkg{translations} sends messages of its own missing dictionaries to
+% \texttt{info} and everyone else's to \texttt{warning}\dots{} So we have to
+% control ourselves for missing dictionaries and load them only if available.
+%    \begin{macrocode}
             \exp_args:Nx \file_if_exist:nTF
               { zref-clever- \@trnslt@language {#1} .trsl }
               { \LoadDictionaryFor {#1} { zref-clever } }
@@ -1222,7 +1252,8 @@
       {
         \@ifpackageloaded{polyglossia}
           {
-            \tl_set_eq:NN \l_@@_main_language_tl \xpg@main@language
+            \tl_set_eq:NN \l_@@_main_language_tl
+              \xpg@main@language
             \clist_map_inline:Nn \xpg@loaded
               {
                 \exp_args:Nx \file_if_exist:nTF
@@ -1240,7 +1271,10 @@
             \LoadDictionaryFor { english } { zref-clever }
           }
       }
-    % *Then* we execute the package options stored in the 'reflanguage' hook.
+%    \end{macrocode}
+% \emph{Then} we execute the package options stored in the
+% \texttt{zref-clever/reflanguage} hook.
+%    \begin{macrocode}
     \UseHook { zref-clever / reflanguage }
   }
 %    \end{macrocode}
@@ -1248,7 +1282,6 @@
 %
 %
 % \subsubsection*{\opt{note} option}
-%
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_zcref_note_tl
@@ -1263,9 +1296,7 @@
 %
 % \subsubsection*{\opt{check} option}
 %
-%
 % Integration with \pkg{zref-check}.
-%
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_zrefcheck_available_bool
@@ -1353,8 +1384,6 @@
 %
 %
 % \subsubsection*{Package options}
-%
-%
 %
 %    \begin{macrocode}
 \keys_define:nn { }
