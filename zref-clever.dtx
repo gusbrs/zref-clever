@@ -814,33 +814,22 @@
 % Stores whether this reference is to the page, or to the default counter.
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_property_tl
-\bool_new:N \l_@@_page_ref_bool
 \keys_define:nn { zref-clever / reference }
   {
     ref .choice: ,
     ref / zc@thecnt .code:n =
-      {
-        \tl_set:Nn \l_@@_ref_property_tl { zc@thecnt }
-        \bool_set_false:N \l_@@_page_ref_bool
-      } ,
+      { \tl_set:Nn \l_@@_ref_property_tl { zc@thecnt } } ,
     ref / page .code:n =
-      {
-        \tl_set:Nn \l_@@_ref_property_tl { page }
-        \bool_set_true:N \l_@@_page_ref_bool
-      } ,
+      { \tl_set:Nn \l_@@_ref_property_tl { page } } ,
     ref / title .code:n =
       {
         \AddToHook { begindocument }
           {
             \@ifpackageloaded { zref-titleref }
-              {
-                \tl_set:Nn \l_@@_ref_property_tl { title }
-                \bool_set_false:N \l_@@_page_ref_bool
-              }
+              { \tl_set:Nn \l_@@_ref_property_tl { title } }
               {
                 \msg_warning:nn { zref-clever } { missing-zref-titleref }
                 \tl_set:Nn \l_@@_ref_property_tl { zc@thecnt }
-                \bool_set_false:N \l_@@_page_ref_bool
               }
           }
       } ,
@@ -857,10 +846,7 @@
         \keys_define:nn { zref-clever / reference }
           {
             ref / title .code:n =
-              {
-                \tl_set:Nn \l_@@_ref_property_tl { title }
-                \bool_set_false:N \l_@@_page_ref_bool
-              }
+              { \tl_set:Nn \l_@@_ref_property_tl { title } }
           }
       }
       {
@@ -870,7 +856,6 @@
               {
                 \msg_warning:nn { zref-clever } { missing-zref-titleref }
                 \tl_set:Nn \l_@@_ref_property_tl { zc@thecnt }
-                \bool_set_false:N \l_@@_page_ref_bool
               }
           }
       }
@@ -1803,7 +1788,7 @@
 % Store label types sequence.
 %    \begin{macrocode}
     \seq_clear:N \l_@@_label_types_seq
-    \bool_if:NF \l_@@_page_ref_bool
+    \tl_if_eq:NnF \l_@@_ref_property_tl { page }
       {
         \seq_map_function:NN
           \l_@@_zcref_labels_seq \@@_label_type_put_new_right:n
@@ -1839,7 +1824,7 @@
                 % are quite different from our perspective, they rely on
                 % different fields and even use different information for
                 % sorting, so we branch them here to specialized functions.
-                \bool_if:NTF \l_@@_page_ref_bool
+                \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
                   { \@@_sort_page:nn {##1} {##2} }
                   { \@@_sort_default:nn {##1} {##2} }
               }
@@ -2399,7 +2384,7 @@
           }
           { \seq_get_left:NN \l_@@_typeset_labels_seq \l_@@_label_b_tl }
 
-        \bool_if:NTF \l_@@_page_ref_bool
+        \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
           {
             \tl_set:Nn \l_@@_label_type_a_tl { page }
             \tl_set:Nn \l_@@_label_type_b_tl { page }
@@ -3389,7 +3374,7 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_labels_in_sequence:nn #1#2
   {
-    \bool_if:NTF \l_@@_page_ref_bool
+    \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
       {
         \exp_args:Nxx \tl_if_eq:nnT
           { \zref@extractdefault {#1} { zc@pgfmt } { } }
