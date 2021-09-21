@@ -693,7 +693,7 @@
 %
 %    \begin{macrocode}
 \prop_new:N \l_@@_counter_type_prop
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / label }
   {
     countertype .code:n =
       {
@@ -737,7 +737,7 @@
 %
 %    \begin{macrocode}
 \seq_new:N \l_@@_counter_resetters_seq
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / label }
   {
     counterresetters .code:n =
       {
@@ -776,7 +776,7 @@
 %
 %    \begin{macrocode}
 \prop_new:N \l_@@_counter_resetby_prop
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / label }
   {
     counterresetby .code:n =
       {
@@ -815,7 +815,7 @@
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_property_tl
 \bool_new:N \l_@@_page_ref_bool
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / reference }
   {
     ref .choice: ,
     ref / zc@thecnt .code:n =
@@ -854,7 +854,7 @@
   {
     \@ifpackageloaded { zref-titleref }
       {
-        \keys_define:nn { zref-clever }
+        \keys_define:nn { zref-clever / reference }
           {
             ref / title .code:n =
               {
@@ -864,7 +864,7 @@
           }
       }
       {
-        \keys_define:nn { zref-clever }
+        \keys_define:nn { zref-clever / reference }
           {
             ref / title .code:n =
               {
@@ -897,7 +897,7 @@
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_ref_bool
 \bool_new:N \l_@@_typeset_name_bool
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / reference }
   {
     typeset .choice: ,
     typeset / both .code:n =
@@ -930,7 +930,7 @@
 % User option, sort labels ranges or not
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_sort_bool
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / reference }
   {
     sort .bool_set:N = \l_@@_typeset_sort_bool ,
     sort .initial:n = true ,
@@ -946,7 +946,7 @@
 %
 %    \begin{macrocode}
 \seq_new:N \l_@@_typesort_seq
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / reference }
   {
     typesort .code:n =
       {
@@ -972,7 +972,7 @@
 % User option, compress ranges or not
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_compress_bool
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / reference }
   {
     comp .bool_set:N = \l_@@_typeset_compress_bool ,
     comp .initial:n = true ,
@@ -988,7 +988,7 @@
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_range_bool
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / reference }
   {
     range .bool_set:N = \l_@@_typeset_range_bool ,
     range .initial:n = false ,
@@ -1004,7 +1004,7 @@
 %    \begin{macrocode}
 \bool_new:N \l_@@_use_hyperref_bool
 \bool_new:N \l_@@_warn_hyperref_bool
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / reference }
   {
     hyperref .choice: ,
     hyperref / auto .code:n =
@@ -1041,7 +1041,7 @@
           { \msg_warning:nn { zref-clever } { missing-hyperref } }
         \bool_set_false:N \l_@@_use_hyperref_bool
       }
-    \keys_define:nn { zref-clever }
+    \keys_define:nn { zref-clever / reference }
       {
         hyperref .code:n =
           { \msg_warning:nn { zref-clever } { hyperref-preamble-only } }
@@ -1056,7 +1056,7 @@
 % \begin{variable}{\l_@@_nameinlink_tl}
 %    \begin{macrocode}
 \str_new:N \l_@@_nameinlink_str
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / reference }
   {
     nameinlink .choice: ,
     nameinlink / true .code:n =
@@ -1074,12 +1074,12 @@
 % \end{variable}
 %
 %
-% \subsubsection*{\opt{cap} \opt{capfirst} options}
+% \subsubsection*{\opt{cap} and \opt{capfirst} options}
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_capitalize_bool
 \bool_new:N \l_@@_capitalize_first_bool
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / reference }
   {
     cap .bool_set:N = \l_@@_capitalize_bool ,
     cap .initial:n = false ,
@@ -1098,12 +1098,12 @@
 %    \end{macrocode}
 %
 %
-% \subsubsection*{\opt{abbrev} \opt{noabbrevfirst} option}
+% \subsubsection*{\opt{abbrev} and \opt{noabbrevfirst} options}
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_abbrev_bool
 \bool_new:N \l_@@_noabbrev_first_bool
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / reference }
   {
     abbrev .bool_set:N = \l_@@_abbrev_bool ,
     abbrev .initial:n = false ,
@@ -1127,7 +1127,7 @@
 \tl_new:N \l_@@_main_language_tl
 \tl_new:N \l_@@_current_language_tl
 \NewHook { zref-clever / reflanguage }
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / reference }
   {
     lang .code:n =
       {
@@ -1173,7 +1173,7 @@
   {
     \AddToHook { zref-clever / reflanguage }
       {
-        \keys_define:nn { zref-clever }
+        \keys_define:nn { zref-clever / reference }
           {
             lang .code:n =
               {
@@ -1267,7 +1267,7 @@
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_zcref_note_tl
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / reference }
   {
     note .tl_set:N = \l_@@_zcref_note_tl ,
     note .value_required:n = true ,
@@ -1285,7 +1285,7 @@
 %    \begin{macrocode}
 \bool_new:N \l_@@_zrefcheck_available_bool
 \bool_new:N \l_@@_zcref_with_check_bool
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / reference }
   {
     check .code:n =
       { \msg_warning:nn { zref-clever } { check-document-only } } ,
@@ -1295,7 +1295,7 @@
     \@ifpackageloaded { zref-check }
       {
         \bool_set_true:N \l_@@_zrefcheck_available_bool
-        \keys_define:nn { zref-clever }
+        \keys_define:nn { zref-clever / reference }
           {
             check .code:n =
               {
@@ -1306,7 +1306,7 @@
       }
       {
         \bool_set_false:N \l_@@_zrefcheck_available_bool
-        \keys_define:nn { zref-clever }
+        \keys_define:nn { zref-clever / reference }
           {
             check .code:n =
               { \msg_warning:nn { zref-clever } { missing-zref-check } }
@@ -1322,7 +1322,7 @@
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_typeset_font_tl
-\keys_define:nn { zref-clever }
+\keys_define:nn { zref-clever / reference }
   { font .tl_set:N = \l_@@_ref_typeset_font_tl }
 %    \end{macrocode}
 %
@@ -1352,7 +1352,7 @@
     refpos-in ,
   }
   {
-    \keys_define:nn { zref-clever }
+    \keys_define:nn { zref-clever / reference }
       {
         #1 .default:V = \c_novalue_tl ,
         #1 .code:n =
@@ -1369,21 +1369,32 @@
 %
 % \subsubsection*{Package options}
 %
-% Process load-time package options
-% (\url{https://tex.stackexchange.com/a/15840}).
-%    \begin{macrocode}
-\RequirePackage { l3keys2e }
-\ProcessKeysOptions { zref-clever }
-%    \end{macrocode}
 %
+%
+%    \begin{macrocode}
+\keys_define:nn { }
+  {
+    zref-clever / zcsetup .inherit:n = zref-clever / label ,
+    zref-clever / zcsetup .inherit:n = zref-clever / reference ,
+  }
+%    \end{macrocode}
 %
 % \begin{macro}[int]{\zcsetup}
 %   Provide \cs{zcsetup}.
 %    \begin{macrocode}
 \NewDocumentCommand \zcsetup { m }
-  { \keys_set:nn { zref-clever } {#1} }
+  { \keys_set:nn { zref-clever / zcsetup } {#1} }
 %    \end{macrocode}
 % \end{macro}
+%
+%
+%
+% Process load-time package options
+% (\url{https://tex.stackexchange.com/a/15840}).
+%    \begin{macrocode}
+\RequirePackage { l3keys2e }
+\ProcessKeysOptions { zref-clever / zcsetup }
+%    \end{macrocode}
 %
 %
 %
@@ -1681,7 +1692,7 @@
 \cs_new_protected:Npn \@@_zcref:nnn #1#2#3
   {
     \group_begin:
-      \keys_set:nn { zref-clever } {#3}
+      \keys_set:nn { zref-clever / reference } {#3}
       \seq_set_from_clist:Nn \l_@@_zcref_labels_seq {#1}
       \bool_set:Nn \l_@@_link_star_bool {#2}
       % Integration with 'zref-check'.
