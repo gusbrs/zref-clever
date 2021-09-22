@@ -58,7 +58,6 @@
 %
 % \begin{documentation}
 %
-%
 % \section{Introduction}
 %
 %
@@ -162,7 +161,6 @@
 %
 %
 % \end{documentation}
-%
 %
 %
 % \begin{implementation}
@@ -401,12 +399,12 @@
 %    \end{macrocode}
 %
 % Both \texttt{e} and \texttt{f} expansions work for this particular recursive
-% call.  For the time being, I'll stay with the \texttt{e} variant, since
-% conceptually it is what I want (\texttt{x} itself is not expandable), and
-% this package is unlikely to be used within the context of older kernels for
-% which the performance penalty of the \texttt{e} expansion would ensue (see
-% also \url{https://tex.stackexchange.com/q/611370/#comment1529282_611385},
-% thanks Enrico Gregorio, aka `egreg').
+% call.  I'll stay with the \texttt{e} variant, since conceptually it is what
+% I want (\texttt{x} itself is not expandable), and this package is anyway not
+% compatible with older kernels for which the performance penalty of the
+% \texttt{e} expansion would ensue (see also
+% \url{https://tex.stackexchange.com/q/611370/#comment1529282_611385}, thanks
+% Enrico Gregorio, aka `egreg').
 %    \begin{macrocode}
 \cs_generate_variant:Nn \@@_get_enclosing_counters:n { V , e }
 \cs_generate_variant:Nn \@@_get_enclosing_counters_value:n { V , e }
@@ -563,7 +561,7 @@
 %
 %
 %
-% \subsection{Translations}
+% \subsection{\pkg{translations}}
 %
 %
 % Some wrappers around \pkg{translations} functions, so that we can generate
@@ -619,15 +617,16 @@
 %
 %
 %
-% \begin{macro}{\@@_declare_default_transl:nnn}
-%   Defines the translation of \meta{key} for the language \meta{lang}.  The
-%   \meta{key} here is the internal key name (i.e. the name of the option).
+% \begin{macro}{\@@_declare_fallback_transl:nn}
+%   Defines the default fallback translation of \meta{key} for the language
+%   \meta{lang}.  The \meta{key} here is the internal key name (i.e. the name
+%   of the option).
 %   \begin{syntax}
-%     \cs{@@_declare_default_transl:nnn} \Arg{lang} \Arg{key} \Arg{translation}
+%     \cs{@@_declare_fallback_transl:nn} \Arg{key} \Arg{translation}
 %   \end{syntax}
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_declare_default_transl:nnn #1#2#3
-  { \declaretranslation {#1} { zrefclever-default- #2 } {#3} }
+\cs_new_protected:Npn \@@_declare_fallback_transl:nn #1#2
+  { \declaretranslationfallback { zrefclever-default- #1 } {#2} }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -663,7 +662,7 @@
 % \subsection{Options}
 %
 %
-% \subsubsection*{Auxiliary functions}
+% \subsubsection{Auxiliary}
 %
 %
 % \begin{macro}{\@@_prop_put_non_empty:Nnn}
@@ -683,7 +682,7 @@
 % \end{macro}
 %
 %
-% \subsubsection*{\opt{countertype} option}
+% \subsubsection{\opt{countertype} option}
 %
 % \cs{l_@@_counter_type_prop} is used by \texttt{zc@type} property, and stores
 % a mapping from ``counter'' to ``reference type''.  Only those counters whose
@@ -723,7 +722,7 @@
 %    \end{macrocode}
 %
 %
-% \subsubsection*{\opt{counterresetters} option}
+% \subsubsection{\opt{counterresetters} option}
 %
 % \cs{l_@@_counter_resetters_seq} is used by \cs{@@_counter_reset_by:n} to
 % populate the \texttt{zc@enclcnt} and \texttt{zc@enclval} properties, and
@@ -766,7 +765,7 @@
 %
 %
 %
-% \subsubsection*{\opt{counterresetby} option}
+% \subsubsection{\opt{counterresetby} option}
 %
 % \cs{l_@@_counter_resetby_prop} is used by \cs{@@_counter_reset_by:n} to
 % populate the \texttt{zc@enclcnt} and \texttt{zc@enclval} properties, and
@@ -808,7 +807,7 @@
 %
 %
 %
-% \subsubsection*{\opt{ref} option}
+% \subsubsection{\opt{ref} option}
 %
 % \cs{l_@@_ref_property_tl} stores the property to which the reference is
 % being made.  Currently, we restrict \texttt{ref=} to these two (or three)
@@ -877,7 +876,7 @@
 %
 %
 %
-% \subsubsection*{\opt{typeset} option}
+% \subsubsection{\opt{typeset} option}
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_ref_bool
@@ -910,7 +909,7 @@
 %
 %
 %
-% \subsubsection*{\opt{sort} option}
+% \subsubsection{\opt{sort} option}
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_sort_bool
@@ -926,7 +925,7 @@
 %
 %
 %
-% \subsubsection*{\opt{typesort} option}
+% \subsubsection{\opt{typesort} option}
 %
 % \cs{l_@@_typesort_seq} is stored reversed, since the sort priorities are
 % computed in the negative range in \cs{@@_sort_default_different_types:nn},
@@ -953,7 +952,7 @@
 %
 %
 %
-% \subsubsection*{\opt{comp} option}
+% \subsubsection{\opt{comp} option}
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_compress_bool
@@ -969,7 +968,7 @@
 %
 %
 %
-% \subsubsection*{\opt{range} option}
+% \subsubsection{\opt{range} option}
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_range_bool
@@ -983,7 +982,7 @@
 %
 %
 %
-% \subsubsection*{\opt{hyperref} option}
+% \subsubsection{\opt{hyperref} option}
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_use_hyperref_bool
@@ -1034,7 +1033,7 @@
 %
 %
 %
-% \subsubsection*{\opt{nameinlink} option}
+% \subsubsection{\opt{nameinlink} option}
 %
 %    \begin{macrocode}
 \str_new:N \l_@@_nameinlink_str
@@ -1055,7 +1054,7 @@
 %    \end{macrocode}
 %
 %
-% \subsubsection*{\opt{cap} and \opt{capfirst} options}
+% \subsubsection{\opt{cap} and \opt{capfirst} options}
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_capitalize_bool
@@ -1079,7 +1078,7 @@
 %    \end{macrocode}
 %
 %
-% \subsubsection*{\opt{abbrev} and \opt{noabbrevfirst} options}
+% \subsubsection{\opt{abbrev} and \opt{noabbrevfirst} options}
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_abbrev_bool
@@ -1100,7 +1099,7 @@
 %
 %
 %
-% \subsubsection*{\opt{lang} option}
+% \subsubsection{\opt{lang} option}
 %
 % \cs{l_@@_current_language_tl} is an internal alias for \pkg{translations}'s
 % internal macro \cs{@trnslt@current@language} which, in turn, is an alias for
@@ -1281,7 +1280,17 @@
 %
 %
 %
-% \subsubsection*{\opt{note} option}
+% \subsubsection{\opt{font} option}
+%
+%    \begin{macrocode}
+\tl_new:N \l_@@_ref_typeset_font_tl
+\keys_define:nn { zref-clever / reference }
+  { font .tl_set:N = \l_@@_ref_typeset_font_tl }
+%    \end{macrocode}
+%
+%
+%
+% \subsubsection{\opt{note} option}
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_zcref_note_tl
@@ -1294,7 +1303,7 @@
 %
 %
 %
-% \subsubsection*{\opt{check} option}
+% \subsubsection{\opt{check} option}
 %
 % Integration with \pkg{zref-check}.
 %
@@ -1333,27 +1342,38 @@
 %
 %
 %
-% \subsubsection*{Reference options}
+% \subsubsection{Reference options}
+% \label{sec:reference-options}
 %
+% This is a set of options related to reference typesetting which receive
+% equal treatment and, hence, are handled in batch.  Since we are dealing with
+% options to be passed to \cs{zcref} or to \cs{zcsetup} or at load time, only
+% not necessarily type-specific options are pertinent here.  However, they
+% \emph{may} either be type-specific or language-specific, and thus must be
+% stored in a property list, \cs{l_@@_ref_options_prop}, in order to be
+% retrieved from the option \emph{name} by \cs{@@_get_option_with_transl:nN}
+% and \cs{@@_get_option_plain:nN} according to context and precedence rules.
 %
-%    \begin{macrocode}
-\tl_new:N \l_@@_ref_typeset_font_tl
-\keys_define:nn { zref-clever / reference }
-  { font .tl_set:N = \l_@@_ref_typeset_font_tl }
-%    \end{macrocode}
+% The keys are set so that any value, including an empty one, is added to
+% \cs{l_@@_ref_options_prop}, while a key with \emph{no value} removes the
+% property from the list, so that these options can then fall back to lower
+% precedence levels settings.  For discussion about the used technique, see
+% Section~\ref{sec:zcreftypesetup}.
 %
-%
-% Only not necessarily type-specific options are pertinent here.
 %    \begin{macrocode}
 \prop_new:N \l_@@_ref_options_prop
 \clist_map_inline:nn
   {
-    % Not type-specific options.
+%    \end{macrocode}
+% Not type-specific options.
+%    \begin{macrocode}
     tpairsep ,
     tlistsep ,
     tlastsep ,
     notesep ,
-    % Possibly type-specific options.
+%    \end{macrocode}
+% Possibly type-specific options.
+%    \begin{macrocode}
     namefont ,
     namesep ,
     pairsep ,
@@ -1383,7 +1403,15 @@
 %
 %
 %
-% \subsubsection*{Package options}
+% \subsection{\cs{zcsetup}}
+%
+% The options have been separated in two different groups, so that we
+% can potentially apply them selectively to different contexts: \texttt{label}
+% and \texttt{reference}.  Currently, the only use of this selection is the
+% ability to exclude label related options from the \cs{zcref}'s options.
+% Anyway, for load-time package options and for \cs{zcsetup} we want the whole
+% set, so we aggregate the two into \texttt{zref-clever/zcsetup}, and use that
+% here.
 %
 %    \begin{macrocode}
 \keys_define:nn { }
@@ -1403,6 +1431,8 @@
 %
 %
 %
+% \subsection{Package options}
+%
 % Process load-time package options
 % (\url{https://tex.stackexchange.com/a/15840}).
 %    \begin{macrocode}
@@ -1412,18 +1442,58 @@
 %
 %
 %
-% \section{Type format}
+% \section{Reference format}
+%
+% Formatting how the reference is to be typeset is, quite naturally, a big
+% part of the user interface of \pkg{zref-clever}.  In this area, we tried to
+% balance ``flexibility'' and ``user friendliness''.  But the former does
+% place a big toll overall, since there are indeed many places where tweaking
+% may be desired, and the settings may depend on at least two important
+% dimensions of variation: the reference type and the language.  Combination
+% of those necessarily makes for a large set of possibilities.  Hence, the
+% attempt here is to provide a rich set of ``handles'' for fine tuning the
+% reference format but, at the same time, do not \emph{require} detailed setup
+% by the users, unless they really want it.
+%
+% With that in mind, we have settled with an user interface for reference
+% formatting which allows settings to be done in different scopes, with more
+% or less overarching effects, and some precedence rules to regulate the
+% relation of settings given in each of these scopes.  There are four scopes
+% in which reference formatting can be specified by the user, in the following
+% precedence order: i) as general \emph{options}; ii) as \emph{type-specific
+% options}; iii) as \emph{language-specific and type-specific translations};
+% and iv) as \emph{default translations} (that is, language-specific but not
+% type-specific).  These precedence rules are handled / enforced in
+% \cs{@@_get_option_with_transl:nN} and \cs{@@_get_option_plain:nN}, which are
+% the basic functions to retrieve proper values for reference format settings.
+%
+% General ``options'' (i) can be given by the user in the optional argument of
+% \cs{zcref}, but just as well in \cs{zcsetup} or as package options at
+% load-time (see Section~\ref{sec:reference-options}).  ``Type-specific
+% options'' (ii) are handled by \cs{zcRefTypeSetup}.  ``Language-specific
+% translations'', be they ``type-specific'' (iii) or ``default'' (iv) have
+% their user interface in \cs{zcDeclareTranslations}, and have their values
+% populated by the package's dictionaries.
+%
+% Not all reference format specifications can be given in all of these
+% scopes.  Some of them can't be type-specific, others must be type-specific,
+% so the set available in each scope depends on the pertinence of the case.
+%
+% The package itself places the default setup for reference formatting at low
+% precedence levels, and the users can easily and conveniently override them
+% as desired.  Indeed, I expect most of the users' needs to be normally
+% achievable with the general options and type-specific options, since
+% references will normally be typeset in a single language (the document's
+% main language) and, hence, multiple translations don't need to be provided.
 %
 %
-% \subsection{\cs{zcRefTypeSetup}}
-%
-%
-% \begin{variable}{
+% \begin{variable}
+%   {
 %     \l_@@_setup_type_tl ,
 %     \l_@@_setup_language_tl ,
 %   }
-%   Variables storing the language and type to be used in \cs{zcRefTypeSetup}
-%   and \cs{zcDeclareTranslations}.
+%     Store type and language in use in \cs{zcRefTypeSetup} and
+%     \cs{zcDeclareTranslations}.
 %    \begin{macrocode}
 \tl_new:N \l_@@_setup_type_tl
 \tl_new:N \l_@@_setup_language_tl
@@ -1431,8 +1501,24 @@
 % \end{variable}
 %
 %
+%
+% \subsection{\cs{zcRefTypeSetup}}
+% \label{sec:zcreftypesetup}
+%
+% \cs{zcRefTypeSetup} is the main user interface for ``type-specific''
+% reference formatting.  Settings done by this command have a higher
+% precedence than any translation, hence they override any language-specific
+% setting, either done at \cs{zcDeclareTranslations} or by the package's
+% dictionaries.  On the other hand, they have a lower precedence than non
+% type-specific general options.  The \meta{options} should be given in the
+% usual \texttt{key=val} format.  The \meta{type} does not need to pre-exist,
+% the property list variable to store the properties for the type gets created
+% if need be.
+%
 % \begin{macro}[int]{\zcRefTypeSetup}
-%   Provide \cs{zcRefTypeSetup}.
+%   \begin{syntax}
+%     \cs{zcRefTypeSetup} \marg{type} \marg{options}
+%   \end{syntax}
 %    \begin{macrocode}
 \NewDocumentCommand \zcRefTypeSetup { m m }
   {
@@ -1448,26 +1534,29 @@
 % Inside \cs{zcRefTypeSetup} any of the options \emph{can} receive empty
 % values, and those values, if they exist in the property list, will override
 % translations, regardless of their emptiness.  In principle, we could live
-% with the situation of, once a setting has made
-% \cs{l_@@_type_<type>_options_prop} or \cs{l_@@_ref_options_prop} it stays
+% with the situation of, once a setting has been made in
+% \cs{l_@@_type_<type>_options_prop} or in \cs{l_@@_ref_options_prop} it stays
 % there forever, and can only be overridden by a new value at the same
 % precedence level or a higher one.  But it would be nice if an user can
-% ``unset'' an option at either of those to go back to the lower precedence
-% level of the translations at any given point.  So both in
-% \cs{zcRefTypeSetup} and in setting reference options, we leverage the
-% distinction of an ``empty valued key'' (\texttt{key=} or \texttt{key={}})
-% from a ``key with no value'' (\texttt{key}).  This distinction is captured
-% internally by the lower-level key parsing, but must be made explicit at
-% \cs{keys_set:nn} by means of the \texttt{.default:} property of the key in
-% \cs{keys_define:nn}.  For the technique, see
+% ``unset'' an option at either of those scopes to go back to the lower
+% precedence level of the translations at any given point.  So both in
+% \cs{zcRefTypeSetup} and in setting reference options (see
+% Section~\ref{sec:reference-options}), we leverage the distinction of an
+% ``empty valued key'' (|key=| or |key={}|) from a ``key with no value''
+% (|key|).  This distinction is captured internally by the lower-level key
+% parsing, but must be made explicit at \cs{keys_set:nn} by means of the
+% \texttt{.default:V} property of the key in \cs{keys_define:nn}.  For the
+% technique and some discussion about it, see
 % \url{https://tex.stackexchange.com/q/614690} (thanks Jonathan P.\ Spratte,
-% aka `Skillmon', and Phelype Oleinik).
+% aka `Skillmon', and Phelype Oleinik) and
+% \url{https://github.com/latex3/latex3/pull/988}.
 %
-%
-% Not type-specific options.
 %    \begin{macrocode}
 \clist_map_inline:nn
   {
+%    \end{macrocode}
+% Not type-specific options.
+%    \begin{macrocode}
     tpairsep ,
     tlistsep ,
     tlastsep ,
@@ -1478,18 +1567,20 @@
       {
         #1 .code:n =
           {
-            \msg_warning:nnn { zref-clever } { option-not-type-specific } {#1}
+            \msg_warning:nnn { zref-clever }
+              { option-not-type-specific } {#1}
           } ,
       }
   }
 %    \end{macrocode}
 %
 %
-% Possibly or necessarily type-specific options.
 %    \begin{macrocode}
 \clist_map_inline:nn
   {
-    % Possibly type-specific options.
+%    \end{macrocode}
+% Possibly type-specific options.
+%    \begin{macrocode}
     namefont ,
     namesep ,
     pairsep ,
@@ -1502,7 +1593,9 @@
     reffont-in ,
     refpre-in ,
     refpos-in ,
-    % Necessarily type-specific options.
+%    \end{macrocode}
+% Necessarily type-specific options.
+%    \begin{macrocode}
     Name-sg ,
     name-sg ,
     Name-pl ,
@@ -1521,12 +1614,18 @@
             \tl_if_novalue:nTF {##1}
               {
                 \prop_remove:cn
-                  { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                  {
+                    l_@@_type_
+                    \l_@@_setup_type_tl _options_prop
+                  }
                   {#1}
               }
               {
                 \prop_put:cnn
-                  { l_@@_type_ \l_@@_setup_type_tl _options_prop }
+                  {
+                    l_@@_type_
+                    \l_@@_setup_type_tl _options_prop
+                  }
                   {#1} {##1}
               }
           } ,
@@ -1538,9 +1637,20 @@
 %
 % \subsection{\cs{zcDeclareTranslations}}
 %
+% \cs{zcDeclareTranslations} is the main user interface for
+% ``language-specific'' reference formatting, be it ``type-specific'' or not.
+% The difference between the two cases is captured by the \texttt{type} key,
+% which works as a sort of a ``switch''.  Inside the \meta{options} argument
+% of \cs{zcDeclareTranslations}, any options made before the first
+% \texttt{type} key declare ``default'' (non type-specific) translations.
+% When the \texttt{type} key is given with a value, the options following it
+% will set ``type-specific'' translations for that type.  The current type can
+% be switched off by an empty \texttt{type} key.
 %
 % \begin{macro}[int]{\zcDeclareTranslations}
-%   Provide \cs{zcDeclareTranslations}.
+%   \begin{syntax}
+%     \cs{zcDeclareTranslations} \marg{language} \marg{options}
+%   \end{syntax}
 %    \begin{macrocode}
 \NewDocumentCommand \zcDeclareTranslations { m m }
   {
@@ -1569,10 +1679,12 @@
 %    \end{macrocode}
 %
 %
-% Not type-specific options.
 %    \begin{macrocode}
 \clist_map_inline:nn
   {
+%    \end{macrocode}
+% Not type-specific options.
+%    \begin{macrocode}
     tpairsep ,
     tlistsep ,
     tlastsep ,
@@ -1586,7 +1698,8 @@
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \@@_declare_transl:xxn { \l_@@_setup_language_tl }
+                \@@_declare_transl:xxn
+                  { \l_@@_setup_language_tl }
                   { zrefclever-default- #1 } {##1}
               }
               {
@@ -1599,10 +1712,12 @@
 %    \end{macrocode}
 %
 %
-% Possibly type-specific options.
 %    \begin{macrocode}
 \clist_map_inline:nn
   {
+%    \end{macrocode}
+% Possibly type-specific options.
+%    \begin{macrocode}
     namesep ,
     pairsep ,
     listsep ,
@@ -1621,11 +1736,13 @@
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \@@_declare_transl:xxn { \l_@@_setup_language_tl }
+                \@@_declare_transl:xxn
+                  { \l_@@_setup_language_tl }
                   { zrefclever-default- #1 } {##1}
               }
               {
-                \@@_declare_transl:xxn { \l_@@_setup_language_tl }
+                \@@_declare_transl:xxn
+                  { \l_@@_setup_language_tl }
                   { zrefclever-type- \l_@@_setup_type_tl - #1 } {##1}
               }
           } ,
@@ -1634,10 +1751,12 @@
 %    \end{macrocode}
 %
 %
-% Necessarily type-specific options.
 %    \begin{macrocode}
 \clist_map_inline:nn
   {
+%    \end{macrocode}
+% Necessarily type-specific options.
+%    \begin{macrocode}
     Name-sg ,
     name-sg ,
     Name-pl ,
@@ -1659,7 +1778,8 @@
                   { option-only-type-specific } {#1}
               }
               {
-                \@@_declare_transl:xxn { \l_@@_setup_language_tl }
+                \@@_declare_transl:xxn
+                  { \l_@@_setup_language_tl }
                   { zrefclever-type- \l_@@_setup_type_tl - #1 } {##1}
               }
           } ,
@@ -1669,7 +1789,9 @@
 %
 %
 %
-% \section{\cs{zcref}}
+% \section{User interface}
+%
+% \subsection{\cs{zcref}}
 %
 %
 % \begin{macro}[int]{\zcref}
@@ -1683,18 +1805,6 @@
 % \end{macro}
 %
 %
-% \begin{variable}
-%   {
-%     \l_@@_zcref_labels_seq ,
-%     \l_@@_link_star_bool ,
-%   }
-%    \begin{macrocode}
-\seq_new:N \l_@@_zcref_labels_seq
-\bool_new:N \l_@@_link_star_bool
-%    \end{macrocode}
-% \end{variable}
-%
-%
 % \begin{macro}{\@@_zcref:nnnn}
 %   An intermediate internal function, which does the actual heavy lifting,
 %   and places \Arg{labels} as first argument, so that it can be protected by
@@ -1706,23 +1816,41 @@
 \cs_new_protected:Npn \@@_zcref:nnn #1#2#3
   {
     \group_begin:
+%    \end{macrocode}
+% Set options.
+%    \begin{macrocode}
       \keys_set:nn { zref-clever / reference } {#3}
+%    \end{macrocode}
+% Store arguments values.
+%    \begin{macrocode}
       \seq_set_from_clist:Nn \l_@@_zcref_labels_seq {#1}
       \bool_set:Nn \l_@@_link_star_bool {#2}
-      % Integration with 'zref-check'.
+%    \end{macrocode}
+% Integration with \pkg{zref-check}.
+%    \begin{macrocode}
       \bool_lazy_and:nnT
         { \l_@@_zrefcheck_available_bool }
         { \l_@@_zcref_with_check_bool }
         { \zrefcheck_zcref_beg_label: }
+%    \end{macrocode}
+% Sort the labels.
+%    \begin{macrocode}
       \bool_lazy_or:nnT
         { \l_@@_typeset_sort_bool }
         { \l_@@_typeset_range_bool }
         { \@@_sort_labels: }
+%    \end{macrocode}
+% Typeset the references.
+%    \begin{macrocode}
       \@@_typeset_refs:
-      % Typeset \texttt{note}.
+%    \end{macrocode}
+% Typeset \texttt{note}.
+%    \begin{macrocode}
       \l_@@_notesep_tl
       \l_@@_zcref_note_tl
-      % Integration with 'zref-check'.
+%    \end{macrocode}
+% Integration with \pkg{zref-check}.
+%    \begin{macrocode}
       \bool_lazy_and:nnT
         { \l_@@_zrefcheck_available_bool }
         { \l_@@_zcref_with_check_bool }
@@ -1736,9 +1864,16 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{variable}{\l_@@_zcref_labels_seq, \l_@@_link_star_bool}
+%    \begin{macrocode}
+\seq_new:N \l_@@_zcref_labels_seq
+\bool_new:N \l_@@_link_star_bool
+%    \end{macrocode}
+% \end{variable}
 %
 %
-% \section{\cs{zcpageref}}
+%
+% \subsection{\cs{zcpageref}}
 %
 %
 % \begin{macro}[int]{\zcpageref}
@@ -1758,12 +1893,6 @@
 %
 %
 % \section{Sorting}
-%
-%
-%    \begin{macrocode}
-\int_new:N \l_@@_sort_prior_a_int
-\int_new:N \l_@@_sort_prior_b_int
-%    \end{macrocode}
 %
 %
 % \begin{variable}
@@ -1792,6 +1921,53 @@
 %    \end{macrocode}
 % \end{variable}
 %
+%    \begin{macrocode}
+\int_new:N \l_@@_sort_prior_a_int
+\int_new:N \l_@@_sort_prior_b_int
+%    \end{macrocode}
+%
+%
+% \begin{variable}{\l_@@_sort_decided_bool}
+%   Auxiliary variable for \cs{@@_sort_default:nn}, signals if the sorting
+%   between two labels has been decided or not.
+%    \begin{macrocode}
+\bool_new:N \l_@@_sort_decided_bool
+%    \end{macrocode}
+% \end{variable}
+%
+%
+% Variant not provided by the kernel.
+%    \begin{macrocode}
+\cs_generate_variant:Nn \tl_reverse_items:n { V }
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\@@_label_type_put_new_right:n}
+%   Auxiliary function used to store ``new'' label types (in order) as the
+%   sorting proceeds.  It is expected to be run inside \cs{@@_sort_labels:},
+%   and stores new types in \cs{l_@@_label_types_seq}.
+%   \begin{syntax}
+%     \cs{@@_label_type_put_new_right:n} \Arg{label}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_label_type_put_new_right:n #1
+  {
+    \tl_set:Nx \l_@@_label_type_a_tl
+      { \zref@extractdefault {#1} { zc@type } { \c_empty_tl } }
+    \tl_if_empty:NF \l_@@_label_type_a_tl
+      {
+        \seq_if_in:NVF
+          \l_@@_label_types_seq
+          \l_@@_label_type_a_tl
+          {
+            \seq_put_right:NV \l_@@_label_types_seq
+              \l_@@_label_type_a_tl
+          }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{variable}{\l_@@_label_types_seq}
 %   Stores the order in which reference types appear in the label list
 %   supplied by the user in \cs{zcref}.  This order is required as a ``last
@@ -1801,6 +1977,8 @@
 \seq_new:N \l_@@_label_types_seq
 %    \end{macrocode}
 % \end{variable}
+%
+%
 %
 %
 % \begin{macro}{\@@_sort_labels:}
@@ -1819,8 +1997,8 @@
     \seq_clear:N \l_@@_label_types_seq
     \tl_if_eq:NnF \l_@@_ref_property_tl { page }
       {
-        \seq_map_function:NN
-          \l_@@_zcref_labels_seq \@@_label_type_put_new_right:n
+        \seq_map_function:NN \l_@@_zcref_labels_seq
+          \@@_label_type_put_new_right:n
       }
 %    \end{macrocode}
 % Sort.
@@ -1864,47 +2042,6 @@
 % \end{macro}
 %
 %
-% \begin{macro}{\@@_label_type_put_new_right:n}
-%   Auxiliary function used to store ``new'' label types (in order) as the
-%   sorting proceeds.  It is expected to be run inside \cs{@@_sort_labels:},
-%   and stores new types in \cs{l_@@_label_types_seq}.
-%   \begin{syntax}
-%     \cs{@@_label_type_put_new_right:n} \Arg{label}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_label_type_put_new_right:n #1
-  {
-    \tl_set:Nx \l_@@_label_type_a_tl
-      { \zref@extractdefault {#1} { zc@type } { \c_empty_tl } }
-    \tl_if_empty:NF \l_@@_label_type_a_tl
-      {
-        \seq_if_in:NVF \l_@@_label_types_seq \l_@@_label_type_a_tl
-          {
-            \seq_put_right:NV
-              \l_@@_label_types_seq \l_@@_label_type_a_tl
-          }
-      }
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-%
-%
-% \begin{variable}{\l_@@_sort_decided_bool}
-%   Auxiliary variable for \cs{@@_sort_default:nn}, signals if the sorting
-%   between two labels has been decided or not.
-%    \begin{macrocode}
-\bool_new:N \l_@@_sort_decided_bool
-%    \end{macrocode}
-% \end{variable}
-%
-% \begin{macro}[int]{\tl_reverse_items:V}
-%   Variant not provided by the kernel.
-%    \begin{macrocode}
-\cs_generate_variant:Nn \tl_reverse_items:n { V }
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{\@@_sort_default:nn}
 %   The heavy-lifting function for sorting of existing labels for ``default''
 %   references (that is, a standard reference, not to ``page'').  This
@@ -1943,7 +2080,7 @@
           {
             \bool_if:nTF
               {
-                % The interesting case: both labels have a type\dots{}
+                % The interesting case: both labels have a type...
                 ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
                 ! \tl_if_empty_p:N \l_@@_label_type_b_tl
               }
@@ -1951,13 +2088,15 @@
                 % Here we send this to a couple of auxiliary functions for no
                 % other reason than to keep this long function a little less
                 % unreadable.
-                \tl_if_eq:NNTF \l_@@_label_type_a_tl \l_@@_label_type_b_tl
+                \tl_if_eq:NNTF
+                  \l_@@_label_type_a_tl
+                  \l_@@_label_type_b_tl
                   {
-                    % \dots{} and it's the same type.
+                    % ...and it's the same type.
                     \@@_sort_default_same_type:nn {#1} {#2}
                   }
                   {
-                    % \dots{} and they are different types.
+                    % ...and they are different types.
                     \@@_sort_default_different_types:nn {#1} {#2}
                   }
               }
@@ -2142,9 +2281,9 @@
   {
     \int_zero:N \l_@@_sort_prior_a_int
     \int_zero:N \l_@@_sort_prior_b_int
-    % \cs{l_@@_typesort_seq} was stored in reverse sequence, and we compute
-    % the sort priorities in the negative range, so that we can implicitly
-    % rely on `0' being the ``last value''.
+    % \cs{l_@@_typesort_seq} was stored in reverse sequence, and
+    % we compute the sort priorities in the negative range, so that we can
+    % implicitly rely on `0' being the ``last value''.
     \seq_map_indexed_inline:Nn \l_@@_typesort_seq
       {
         \tl_if_eq:nnTF {##2} {{othertypes}}
@@ -2180,7 +2319,7 @@
           { \sort_return_swapped: }
           {
             % Sort priorities are equal for different types: the type that
-            % occurs first in \meta{labels}, as given by the user, is kept (or
+            % occurs first in 'labels', as given by the user, is kept (or
             % brought) forward.
             \seq_map_inline:Nn \l_@@_label_types_seq
               {
@@ -2243,7 +2382,7 @@
 % place.
 %
 %
-% \subsection*{Typesetting variables}
+% \subsection*{Variables}
 %
 % \begin{variable}{\l_@@_typeset_last_bool, \l_@@_last_of_type_bool}
 %   Auxiliary variables for \cs{@@_typeset_refs:}.
@@ -2341,7 +2480,6 @@
 \tl_new:N \l_@@_pairsep_tl
 \tl_new:N \l_@@_listsep_tl
 \tl_new:N \l_@@_lastsep_tl
-% `t' for ``type''
 \tl_new:N \l_@@_tpairsep_tl
 \tl_new:N \l_@@_tlistsep_tl
 \tl_new:N \l_@@_tlastsep_tl
@@ -2374,7 +2512,7 @@
 %
 %
 %
-% \subsection*{Main typesetting functions}
+% \subsection*{Main functions}
 %
 % \begin{macro}{\@@_typeset_refs:}
 %   Main typesetting function for \cs{zcref}.
@@ -2945,7 +3083,7 @@
 %
 %
 %
-% \subsection*{Aux typesetting functions}
+% \subsection*{Aux functions}
 %
 %
 % \begin{macro}{\@@_get_ref:n}
@@ -3473,7 +3611,7 @@
 % alternative.
 %
 %
-% \subsection{Appendix}
+% \subsection{\cs{appendix}}
 %
 %
 % Another relevant use case of the same general problem of different types for
@@ -3506,32 +3644,36 @@
 %
 % \section{Translations}
 %
+% \DoNotIndex{\__zrefclever_declare_fallback_transl:nn}
+% \DoNotIndex{\zcDicDefaultTransl}
+% \DoNotIndex{\zcDicTypeTransl}
 %
-% \subsection*{Fallback}
 %
+% \subsection{Fallback}
 %
 % All options retrieved with \cs{@@_get_option_with_transl:nN} must have their
-% values set for `fallback', since this is what will be retrieved if
-% \pkg{babel} or \pkg{polyglossia} is loaded and sets a language which
-% \pkg{zref-clever} does not know.  On the other hand type-specific options
-% are not looked for in `fallback'.
+% values set for `fallback', even if to empty values, since this is what will
+% be retrieved if \pkg{babel} or \pkg{polyglossia} is loaded and sets a
+% language which \pkg{zref-clever} does not know.  And \pkg{translations}
+% typesets the \emph{key} as a last resource fallback, which we don't want to
+% happen.  On the other hand, type-specific options are not looked for in
+% `fallback'.
+%
 %    \begin{macrocode}
-\@@_declare_default_transl:nnn { fallback } { namesep   } {\nobreakspace}
-\@@_declare_default_transl:nnn { fallback } { pairsep   } {,~}
-\@@_declare_default_transl:nnn { fallback } { listsep   } {,~}
-\@@_declare_default_transl:nnn { fallback } { lastsep   } {,~}
-\@@_declare_default_transl:nnn { fallback } { tpairsep  } {,~}
-\@@_declare_default_transl:nnn { fallback } { tlistsep  } {,~}
-\@@_declare_default_transl:nnn { fallback } { tlastsep  } {,~}
-\@@_declare_default_transl:nnn { fallback } { notesep   } {~}
-\@@_declare_default_transl:nnn { fallback } { rangesep  } {\textendash}
-\@@_declare_default_transl:nnn { fallback } { refpre    } {}
-\@@_declare_default_transl:nnn { fallback } { refpos    } {}
-\@@_declare_default_transl:nnn { fallback } { refpre-in } {}
-\@@_declare_default_transl:nnn { fallback } { refpos-in } {}
+\@@_declare_fallback_transl:nn { namesep   } {\nobreakspace}
+\@@_declare_fallback_transl:nn { pairsep   } {,~}
+\@@_declare_fallback_transl:nn { listsep   } {,~}
+\@@_declare_fallback_transl:nn { lastsep   } {,~}
+\@@_declare_fallback_transl:nn { tpairsep  } {,~}
+\@@_declare_fallback_transl:nn { tlistsep  } {,~}
+\@@_declare_fallback_transl:nn { tlastsep  } {,~}
+\@@_declare_fallback_transl:nn { notesep   } {~}
+\@@_declare_fallback_transl:nn { rangesep  } {\textendash}
+\@@_declare_fallback_transl:nn { refpre    } {}
+\@@_declare_fallback_transl:nn { refpos    } {}
+\@@_declare_fallback_transl:nn { refpre-in } {}
+\@@_declare_fallback_transl:nn { refpos-in } {}
 %    \end{macrocode}
-%
-%
 %
 %    \begin{macrocode}
 %</package>
@@ -3539,17 +3681,18 @@
 %
 %
 %
+% \subsection{English}
+%
+% All options retrieved with \cs{@@_get_option_with_transl:nN} must have their
+% values set for `English', since this is what will be retrieved if no
+% language package is loaded.  In other words, `English' is the
+% \pkg{translations} equivalent of `fallback' when no language package is
+% present.
+%
 %    \begin{macrocode}
 %<*lang-english>
 %    \end{macrocode}
 %
-%
-% \subsection*{English}
-%
-%
-% All options retrieved with \cs{@@_get_option_with_transl:nN} must have their
-% values set for `English', since this is what will be retrieved if no
-% language package is loaded.
 %    \begin{macrocode}
 \ProvideDictionaryFor{English}{zref-clever}
 
@@ -3720,12 +3863,11 @@
 %
 %
 %
+% \subsection{German}
+%
 %    \begin{macrocode}
 %<*lang-german>
 %    \end{macrocode}
-%
-% \subsection*{German}
-%
 %
 %    \begin{macrocode}
 \ProvideDictionaryFor{German}{zref-clever}
@@ -3883,12 +4025,11 @@
 %
 %
 %
+% \subsection{French}
+%
 %    \begin{macrocode}
 %<*lang-french>
 %    \end{macrocode}
-%
-% \subsection*{French}
-%
 %
 %    \begin{macrocode}
 \ProvideDictionaryFor{French}{zref-clever}
@@ -4042,12 +4183,11 @@
 %
 %
 %
+% \subsection{Portuguese}
+%
 %    \begin{macrocode}
 %<*lang-portuguese>
 %    \end{macrocode}
-%
-% \subsection*{Portuguese}
-%
 %
 %    \begin{macrocode}
 \ProvideDictionaryFor{Portuguese}{zref-clever}
@@ -4215,12 +4355,11 @@
 %
 %
 %
+% \subsection{Spanish}
+%
 %    \begin{macrocode}
 %<*lang-spanish>
 %    \end{macrocode}
-%
-% \subsection*{Spanish}
-%
 %
 %    \begin{macrocode}
 \ProvideDictionaryFor{Spanish}{zref-clever}
