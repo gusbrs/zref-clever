@@ -184,7 +184,7 @@
 % \cs{bool_case_true:}\dots{}).  We presume \pkg{xparse} (which made to the
 % kernel in the 2020-10-01 release), and \pkg{expl3} as well (which made to
 % the kernel in the 2020-02-02 release).  We also just use UTF-8 for the
-% translations (which became the default input encoding in the 2018-04-01
+% dictionaries (which became the default input encoding in the 2018-04-01
 % release).  Hence, since we would not be able to go much backwards without
 % special handling anyway, we make the cut with the inclusion of the new hook
 % management system (\pkg{ltcmdhooks}), which is bound to be useful for our
@@ -224,7 +224,6 @@
 \RequirePackage { zref-counter }
 \RequirePackage { zref-abspage }
 \RequirePackage { l3keys2e }
-\RequirePackage { translations }
 %    \end{macrocode}
 %
 %
@@ -521,16 +520,40 @@
 \msg_new:nnn { zref-clever } { option-not-type-specific }
   {
     Option~'#1'~is~not~type-specific~\msg_line_context:.~
-    Set~it~in~'\exp_not:N \zcDeclareTranslations'~before~first~'type'~switch~
+    Set~it~in~'\iow_char:N\\zcDeclareTranslations'~before~first~'type'~switch~
     or~as~package~option.
   }
 \msg_new:nnn { zref-clever } { option-only-type-specific }
   {
     No~type~specified~for~option~'#1'~\msg_line_context:.~
-    Set~it~after~'type'~switch~or~in~'\exp_not:N \zcRefTypeSetup'.
+    Set~it~after~'type'~switch~or~in~'\iow_char:N\\zcRefTypeSetup'.
   }
-\msg_new:nnn  { zref-clever } { key-requires-value }
+\msg_new:nnn { zref-clever } { key-requires-value }
   { The~'#1'~key~'#2'~requires~a~value. }
+\msg_new:nnn { zref-clever } { language-declared }
+  { Language~'#1'~is~already~declared.~Nothing~to~do. }
+\msg_new:nnn { zref-clever } { alias-declared }
+  { Language~'#1'~is~already~an~alias~to~'#2'.~Nothing~to~do. }
+\msg_new:nnn { zref-clever } { unknown-language-alias }
+  {
+    Language~'#1'~is~unknown,~cannot~alias~to~it.~See~documentation~for~
+    '\iow_char:N\\zcDeclareLanguage'~and~'\iow_char:N\\zcDeclareLanguageAlias'.
+  }
+\msg_new:nnn { zref-clever } { unknown-language-transl }
+  {
+    Language~'#1'~is~unknown,~cannot~declare~translations~to~it.~
+    See~documentation~for~'\iow_char:N\\zcDeclareLanguage'~and~
+    '\iow_char:N\\zcDeclareLanguageAlias'.
+  }
+\msg_new:nnn { zref-clever } { dict-loaded }
+  { Loaded~'#1'~dictionary. }
+\msg_new:nnn { zref-clever } { dict-not-available }
+  { Dictionary~for~'#1'~not~available. }
+\msg_new:nnn { zref-clever } { unknown-language-load }
+  {
+    Unable~to~load~dictionary.~Language~'#1'~is~unknown.~See~documentation~for~
+    '\iow_char:N\\zcDeclareLanguage'~and~'\iow_char:N\\zcDeclareLanguageAlias'.
+  }
 \msg_new:nnn { zref-clever } { missing-zref-titleref }
   {
     Option~'ref=title'~requested~\msg_line_context:.~
@@ -539,7 +562,7 @@
 \msg_new:nnn { zref-clever } { hyperref-preamble-only }
   {
     Option~'hyperref'~only~available~in~the~preamble. \iow_newline:
-    Use~the~starred~version~of~'\noexpand\zcheck'~instead.
+    Use~the~starred~version~of~'\iow_char:N\\zcref'~instead.
   }
 \msg_new:nnn { zref-clever } { missing-hyperref }
   { Missing~'hyperref'~package. \iow_newline: Setting~'hyperref=false'. }
@@ -562,101 +585,325 @@
 %
 %
 %
-% \subsection{\pkg{translations}}
+% \subsection{Reference options variables}
 %
 %
-% Some wrappers around \pkg{translations} functions, so that we can generate
-% variants with expansion control for arguments, or for convenience.
-%
-%
-% \begin{macro}{\@@_if_transl:nnTF}
-%   Conditional to check if a translation of \meta{key} exists for language
-%   \meta{lang}.
-%   \begin{syntax}
-%     \cs{@@_if_transl:nnTF} \Arg{lang} \Arg{key} \Arg{true} \Arg{false}
-%   \end{syntax}
-%  \begin{macrocode}
-\prg_new_conditional:Npnn \@@_if_transl:nn #1#2 { TF }
+%    \begin{macrocode}
+\seq_const_from_clist:Nn
+  \c_@@_ref_options_necessarily_not_type_specific_seq
   {
-    \IfTranslation {#1} {#2}
+    tpairsep ,
+    tlistsep ,
+    tlastsep ,
+    notesep ,
+  }
+\seq_const_from_clist:Nn
+  \c_@@_ref_options_possibly_type_specific_seq
+  {
+    namesep ,
+    pairsep ,
+    listsep ,
+    lastsep ,
+    rangesep ,
+    refpre ,
+    refpos ,
+    refpre-in ,
+    refpos-in ,
+  }
+\seq_const_from_clist:Nn
+  \c_@@_ref_options_necessarily_type_specific_seq
+  {
+    Name-sg ,
+    name-sg ,
+    Name-pl ,
+    name-pl ,
+    Name-sg-ab ,
+    name-sg-ab ,
+    Name-pl-ab ,
+    name-pl-ab ,
+  }
+\seq_new:N \c_@@_ref_options_type_specific_seq
+\seq_gconcat:NNN \c_@@_ref_options_type_specific_seq
+  \c_@@_ref_options_possibly_type_specific_seq
+  \c_@@_ref_options_necessarily_type_specific_seq
+\seq_new:N \c_@@_ref_options_not_type_specific_seq
+\seq_gconcat:NNN \c_@@_ref_options_not_type_specific_seq
+  \c_@@_ref_options_necessarily_not_type_specific_seq
+  \c_@@_ref_options_possibly_type_specific_seq
+%    \end{macrocode}
+%
+%
+%
+%
+% \subsection{Internationalization}
+%
+%
+%    \begin{macrocode}
+\prop_new:N \g_@@_language_aliases_prop
+
+% {<base language>}
+\NewDocumentCommand \zcDeclareLanguage { m }
+  {
+    \prop_if_in:NnTF \g_@@_language_aliases_prop {#1}
+      {
+        \str_if_eq:eeTF {#1}
+          { \prop_item:Nn \g_@@_language_aliases_prop {#1} }
+          { \msg_warning:nnn { zref-clever } { language-declared } {#1} }
+          {
+            \msg_warning:nnxx { zref-clever } { alias-declared } {#1}
+              { \prop_item:Nn \g_@@_language_aliases_prop {#1} }
+          }
+      }
+      { \prop_gput:Nnn \g_@@_language_aliases_prop {#1} {#1} }
+  }
+
+% {<alias>}{<base language>}
+\NewDocumentCommand \zcDeclareLanguageAlias { m m }
+  {
+    \tl_if_empty:nF {#2}
+      {
+        \prop_if_in:NnTF \g_@@_language_aliases_prop {#2}
+          {
+            \exp_args:NNnx \prop_gput:Nnn \g_@@_language_aliases_prop {#1}
+              { \prop_item:Nn \g_@@_language_aliases_prop {#2} }
+          }
+          { \msg_warning:nnn { zref-clever } { unknown-language-alias } {#2} }
+      }
+  }
+%    \end{macrocode}
+%
+%
+% \begin{variable}
+%   {
+%     \l_@@_dict_type_tl ,
+%     \l_@@_dict_language_tl ,
+%   }
+%    \begin{macrocode}
+\tl_new:N \l_@@_dict_type_tl
+\tl_new:N \l_@@_dict_language_tl
+%    \end{macrocode}
+% \end{variable}
+%
+%
+%    \begin{macrocode}
+\seq_new:N \g_@@_loaded_dictionaries_seq
+\tl_new:N \l_@@_dict_file_tl
+\bool_new:N \l_@@_load_dict_verbose_bool
+
+% {<language>}
+\cs_new_protected:Npn \@@_provide_dictionary:n #1
+  {
+    \prop_get:NnNTF \g_@@_language_aliases_prop {#1}
+      \l_@@_dict_language_tl
+      {
+        \seq_if_in:NVF
+          \g_@@_loaded_dictionaries_seq
+          \l_@@_dict_language_tl
+          {
+            \exp_args:Nx \file_get:nnNTF
+              { zref-clever- \l_@@_dict_language_tl .dict }
+              { \ExplSyntaxOn }
+              \l_@@_dict_file_tl
+              {
+                \prop_if_exist:cF { g_@@_dict_ \l_@@_dict_language_tl _prop }
+                  { \prop_new:c { g_@@_dict_ \l_@@_dict_language_tl _prop } }
+                \tl_clear:N \l_@@_dict_type_tl
+                \exp_args:NnV \keys_set:nn
+                  { zref-clever / dictionary } \l_@@_dict_file_tl
+                \seq_gput_right:NV \g_@@_loaded_dictionaries_seq
+                  \l_@@_dict_language_tl
+                \msg_note:nnx { zref-clever } { dict-loaded }
+                  { \l_@@_dict_language_tl }
+              }
+              {
+                \bool_if:NT \l_@@_load_dict_verbose_bool
+                  {
+                    \msg_warning:nnx { zref-clever } { dict-not-available }
+                      { \l_@@_dict_language_tl }
+                  }
+              }
+          }
+      }
+      {
+        \bool_if:NT \l_@@_load_dict_verbose_bool
+          { \msg_warning:nnn { zref-clever } { unknown-language-load } {#1} }
+      }
+  }
+\cs_generate_variant:Nn \@@_provide_dictionary:n { x }
+
+\cs_new_protected:Npn \@@_provide_dictionary_verbose:n #1
+  {
+    \group_begin:
+    \bool_set_true:N \l_@@_load_dict_verbose_bool
+    \@@_provide_dictionary:n {#1}
+    \group_end:
+  }
+\cs_generate_variant:Nn \@@_provide_dictionary_verbose:n { x }
+
+% {<key>}{<translation>}
+\cs_new_protected:Npn \@@_provide_dict_type_transl:nn #1#2
+  {
+    \exp_args:Nnx \prop_gput_if_new:cnn
+      { g_@@_dict_ \l_@@_dict_language_tl _prop }
+      { type- \l_@@_dict_type_tl - #1 } {#2}
+  }
+
+% {<key>}{<translation>}
+\cs_new_protected:Npn \@@_provide_dict_default_transl:nn #1#2
+  {
+    \prop_gput_if_new:cnn
+      { g_@@_dict_ \l_@@_dict_language_tl _prop }
+      { default- #1 } {#2}
+  }
+
+% {<language>}{<type>}{<key>}{<translation>}
+\cs_new_protected:Npn \@@_declare_type_transl:nnnn #1#2#3#4
+  {
+    \prop_gput:cnn { g_@@_dict_ #1 _prop }
+      { type- #2 - #3 } {#4}
+  }
+\cs_generate_variant:Nn \@@_declare_type_transl:nnnn { VVnn }
+
+% {<language>}{<key>}{<translation>}
+\cs_new_protected:Npn \@@_declare_default_transl:nnn #1#2#3
+  {
+    \prop_gput:cnn { g_@@_dict_ #1 _prop }
+      { default- #2 } {#3}
+  }
+\cs_generate_variant:Nn \@@_declare_default_transl:nnn { Vnn }
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\keys_define:nn { zref-clever / dictionary }
+  {
+    type .code:n =
+      {
+        \tl_if_empty:nTF {#1}
+          { \tl_clear:N \l_@@_dict_type_tl }
+          { \tl_set:Nn \l_@@_dict_type_tl {#1} }
+      } ,
+  }
+\seq_map_inline:Nn
+  \c_@@_ref_options_necessarily_not_type_specific_seq
+  {
+    \keys_define:nn { zref-clever / dictionary }
+      {
+        #1 .value_required:n = true ,
+        #1 .code:n =
+          {
+            \tl_if_empty:NTF \l_@@_dict_type_tl
+              { \@@_provide_dict_default_transl:nn {#1} {##1} }
+              {
+                \msg_info:nnn { zref-clever }
+                  { option-not-type-specific } {#1}
+              }
+          } ,
+      }
+  }
+\seq_map_inline:Nn
+  \c_@@_ref_options_possibly_type_specific_seq
+  {
+    \keys_define:nn { zref-clever / dictionary }
+      {
+        #1 .value_required:n = true ,
+        #1 .code:n =
+          {
+            \tl_if_empty:NTF \l_@@_dict_type_tl
+              { \@@_provide_dict_default_transl:nn {#1} {##1} }
+              { \@@_provide_dict_type_transl:nn {#1} {##1} }
+          } ,
+      }
+  }
+\seq_map_inline:Nn
+  \c_@@_ref_options_necessarily_type_specific_seq
+  {
+    \keys_define:nn { zref-clever / dictionary }
+      {
+        #1 .value_required:n = true ,
+        #1 .code:n =
+          {
+            \tl_if_empty:NTF \l_@@_dict_type_tl
+              {
+                \msg_info:nnn { zref-clever }
+                  { option-only-type-specific } {#1}
+              }
+              { \@@_provide_dict_type_transl:nn {#1} {##1} }
+          } ,
+      }
+  }
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+% {<language>}{<type>}{<key>}<tl var to set>
+\prg_new_protected_conditional:Npnn \@@_get_type_transl:nnnN #1#2#3#4 { F }
+  {
+    \prop_get:NnNTF \g_@@_language_aliases_prop {#1}
+      \l_@@_dict_language_tl
+      {
+        \prop_get:cnNTF { g_@@_dict_ \l_@@_dict_language_tl _prop }
+          { type- #2 - #3 } #4
+          { \prg_return_true:  }
+          { \prg_return_false: }
+      }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn \@@_get_type_transl:nnnN { xxxN , xxnN } { F }
+
+% {<language>}{<key>}<tl var to set>
+\prg_new_protected_conditional:Npnn \@@_get_default_transl:nnN #1#2#3 { F }
+  {
+    \prop_get:NnNTF \g_@@_language_aliases_prop {#1}
+      \l_@@_dict_language_tl
+      {
+        \prop_get:cnNTF { g_@@_dict_ \l_@@_dict_language_tl _prop }
+          { default- #2 } #3
+          { \prg_return_true:  }
+          { \prg_return_false: }
+      }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn \@@_get_default_transl:nnN { xnN } { F }
+
+% {<key>}<tl var to set>
+\prg_new_protected_conditional:Npnn \@@_get_fallback_transl:nN #1#2 { F }
+  {
+    \prop_get:NnNTF \g_@@_fallback_dict_prop
+      { #1 } #2
       { \prg_return_true:  }
       { \prg_return_false: }
   }
-\prg_generate_conditional_variant:Nnn \@@_if_transl:nn { xx } { TF }
 %    \end{macrocode}
-% \end{macro}
 %
 %
-% \begin{macro}{\@@_get_transl:nnn}
-%   Retrieves the translation of \meta{key} for the language \meta{lang} and
-%   saves it in \meta{macro}.
-%   \begin{syntax}
-%     \cs{@@_get_transl:nnn} \Arg{macro} \Arg{lang} \Arg{key}
-%   \end{syntax}
+%
+%
+% All options retrieved with \cs{@@_get_option_with_transl:nN} must have their
+% values set for `fallback', even if to empty values, since this is what will
+% be retrieved if \pkg{babel} or \pkg{polyglossia} is loaded and sets a
+% language which \pkg{zref-clever} does not know.  On the other hand,
+% type-specific options are not looked for in `fallback'.
+%
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_get_transl:nnn #1#2#3
-  { \SaveTranslationFor{#1}{#2}{#3} }
-\cs_generate_variant:Nn \@@_get_transl:nnn { nxx }
+\prop_new:N \g_@@_fallback_dict_prop
+\prop_gset_from_keyval:Nn \g_@@_fallback_dict_prop
+  {
+    namesep   = {\nobreakspace} ,
+    pairsep   = {,~} ,
+    listsep   = {,~} ,
+    lastsep   = {,~} ,
+    tpairsep  = {,~} ,
+    tlistsep  = {,~} ,
+    tlastsep  = {,~} ,
+    notesep   = {~} ,
+    rangesep  = {\textendash} ,
+    refpre    = {} ,
+    refpos    = {} ,
+    refpre-in = {} ,
+    refpos-in = {} ,
+  }
 %    \end{macrocode}
-% \end{macro}
-%
-%
-% \begin{macro}{\@@_declare_transl:nnn}
-%   Defines the translation of \meta{key} for the language \meta{lang}.  The
-%   \meta{key} here is the full key, including package prefix, type, and
-%   internal key name (i.e. the ``key'' from the perspective of
-%   \pkg{translations}).
-%   \begin{syntax}
-%     \cs{@@_declare_transl:nnn} \Arg{lang} \Arg{key} \Arg{translation}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_declare_transl:nnn #1#2#3
-  { \declaretranslation {#1} {#2} {#3} }
-\cs_generate_variant:Nn \@@_declare_transl:nnn { xxn }
-%    \end{macrocode}
-% \end{macro}
-%
-%
-%
-% \begin{macro}{\@@_declare_fallback_transl:nn}
-%   Defines the default fallback translation of \meta{key} for the language
-%   \meta{lang}.  The \meta{key} here is the internal key name (i.e. the name
-%   of the option).
-%   \begin{syntax}
-%     \cs{@@_declare_fallback_transl:nn} \Arg{key} \Arg{translation}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_declare_fallback_transl:nn #1#2
-  { \declaretranslationfallback { zrefclever-default- #1 } {#2} }
-%    \end{macrocode}
-% \end{macro}
-%
-%
-%
-% \begin{macro}[int]{\zcDicDefaultTransl, \zcDicTypeTransl}
-%   Functions for providing translations in dictionary files.  We refrain from
-%   using \texttt{expl3} names and ``atletter'', so that we don't have to
-%   control catcodes in those files (as far as I can tell, \pkg{translations}
-%   itself doesn't cater for this), even if these commands are only really
-%   meant for internal use.  The \meta{key} here is always the internal key
-%   name (i.e. the name of the option).  The language does not need to be
-%   specified, it is automatically retrieved from the dictionary's declaration
-%   done by \cs{ProvideDictionaryFor}.  Since \cs{ProvideDictTranslation} is
-%   restricted by \pkg{translations} to the preamble, we inherit this
-%   restriction here.
-%   \begin{syntax}
-%     \cs{zcDicDefaultTransl} \marg{key} \marg{translation}
-%     \cs{zcDicTypeTransl} \marg{type} \marg{key} \marg{translation}
-%   \end{syntax}
-%    \begin{macrocode}
-\NewDocumentCommand \zcDicDefaultTransl { m m }
-  { \ProvideDictTranslation { zrefclever-default- #1 } {#2} }
-\NewDocumentCommand \zcDicTypeTransl { m m m }
-  { \ProvideDictTranslation { zrefclever-type- #1 - #2 } {#3} }
-\@onlypreamble \zcDicDefaultTransl
-\@onlypreamble \zcDicTypeTransl
-%    \end{macrocode}
-% \end{macro}
 %
 %
 %
@@ -1102,97 +1349,124 @@
 %
 % \subsubsection{\opt{lang} option}
 %
-% \cs{l_@@_current_language_tl} is an internal alias for \pkg{translations}'s
-% internal macro \cs{@trnslt@current@language} which, in turn, is an alias for
-% \cs{languagename} used by both \pkg{babel} and \pkg{polyglossia}, but
-% \pkg{translations} ensures it always exists, even if no language package is
-% loaded.  \cs{l_@@_main_language_tl} is an internal alias for \pkg{babel}'s
-% \cs{bbl@main@language} or for \pkg{polyglossia}'s \cs{xpg@main@language}, as
-% the case may be.  \cs{l_@@_ref_language_tl} is the internal variable which
-% stores the language in which the reference is to be made.
+% \cs{l_@@_current_language_tl} is an internal alias for \pkg{babel}'s
+% \cs{languagename} or \pkg{polyglossia}'s \cs{mainbabelname}, if none of them
+% is loaded, we set it to \texttt{english}.  \cs{l_@@_main_language_tl} is an
+% internal alias for \pkg{babel}'s \cs{bbl@main@language} or for
+% \pkg{polyglossia}'s \cs{mainbabelname}, as the case may be. Note that for
+% \pkg{polyglossia} we get \pkg{babel}'s language names, so that we only need
+% to handle those internally.  \cs{l_@@_ref_language_tl} is the internal
+% variable which stores the language in which the reference is to be made.
 %
 % The overall setup here seems a little roundabout, but this is actually
 % required.  In the preamble, we (potentially) don't yet have values for the
 % ``main'' and ``current'' document languages, this must be retrieved at a
-% \texttt{begindocument/before} hook.  And it must be \texttt{before}, since
-% \cs{LoadDictionaryFor} is preamble only.  The \texttt{begindocument/before}
-% hook is responsible to get values for \cs{l_@@_main_language_tl} and
-% \cs{l_@@_current_language_tl} and load \pkg{zref-clever} dictionaries for
-% all languages loaded by \pkg{babel} or \pkg{polyglossia}, or directly
-% specified by the user.  After this information is retrieved, the preamble
-% options are executed, and this is handled by the internal
-% \texttt{zref-clever/reflanguage} hook, which is called at this point.  This
-% hook handles two things: it executes the preamble options and, in sequence,
-% it redefines the \texttt{lang} option key, since in the document body, we
-% can handle ``main'' and ``current'' language options immediately.  This
-% redefinition is added to the \texttt{zref-clever/reflanguage} hook, but
-% \cs{AtEndOfPackage} so that it comes after \cs{ProcessKeysOptions}.  In
-% other words, this is how we ensure the preamble options are executed before
-% the \texttt{lang} key is redefined.
+% \texttt{begindocument} hook.  The \texttt{begindocument} hook is responsible
+% to get values for \cs{l_@@_main_language_tl} and
+% \cs{l_@@_current_language_tl}, and to set the default for
+% \cs{l_@@_ref_language_tl}.  Package options, or preamble calls to
+% \cs{zcsetup} are also hooked at \texttt{begindocument}, but come after the
+% first hook, so that the pertinent variables are set.  Finally, we set a
+% third \texttt{begindocument} hook, at \texttt{begindocument/before}, so that
+% it runs after any options set in the preamble.  This hook redefines the
+% \opt{lang} option for immediate execution in the document body, and ensures
+% the \texttt{main} language's dictionary gets loaded, if it hadn't been
+% already.
 %
 % For the \pkg{babel} and \pkg{polyglossia} variables which store the ``main''
 % and ``current'' languages, see \url{https://tex.stackexchange.com/a/233178},
 % including comments, particularly the one by Javier Bezos.  For the
 % \pkg{babel} and \pkg{polyglossia} variables which store the list of loaded
 % languages, see \url{https://tex.stackexchange.com/a/281220}, including
-% comments, particularly PLK's.
+% comments, particularly PLK's.  Note, however, that languages loaded by
+% \cs{babelprovide}, either directly, ``on the fly'', or with the
+% \texttt{provide} option, \texttt{do not} get included in \cs{bbl@loaded}.
 %
+
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_language_tl
 \tl_new:N \l_@@_main_language_tl
 \tl_new:N \l_@@_current_language_tl
-\NewHook { zref-clever / reflanguage }
+\AddToHook { begindocument }
+  {
+    \@ifpackageloaded { babel }
+      {
+        \tl_set:Nn \l_@@_current_language_tl { \languagename }
+        \tl_set:Nn \l_@@_main_language_tl { \bbl@main@language }
+      }
+      {
+        \@ifpackageloaded { polyglossia }
+          {
+            \tl_set:Nn \l_@@_current_language_tl { \babelname }
+            \tl_set:Nn \l_@@_main_language_tl { \mainbabelname }
+          }
+          {
+            \tl_set:Nn \l_@@_current_language_tl { english }
+            \tl_set:Nn \l_@@_main_language_tl { english }
+          }
+      }
+%    \end{macrocode}
+% Provide default value for \cs{l_@@_ref_language_tl} corresponding to option
+% \opt{main}, but do so outside of the \pkg{l3keys} machinery, so that we are
+% able to distinguish when the user actually gave the option, in which case,
+% the dictionary loading is done verbosely.
+%    \begin{macrocode}
+    \tl_set:Nn \l_@@_ref_language_tl { \l_@@_main_language_tl }
+  }
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
 \keys_define:nn { zref-clever / reference }
   {
     lang .code:n =
       {
-        \AddToHook { zref-clever / reflanguage }
+        \AddToHook { begindocument }
           {
             \str_case:nnF {#1}
               {
                 { main }
                 {
-                  \tl_set_eq:NN \l_@@_ref_language_tl
-                    \l_@@_main_language_tl
+                  \tl_set:Nn \l_@@_ref_language_tl
+                    { \l_@@_main_language_tl }
+                  \@@_provide_dictionary_verbose:x
+                    { \l_@@_ref_language_tl }
                 }
 
                 { current }
                 {
-                  \tl_set_eq:NN \l_@@_ref_language_tl
-                    \l_@@_current_language_tl
+                  \tl_set:Nn \l_@@_ref_language_tl
+                    { \l_@@_current_language_tl }
+                  \@@_provide_dictionary_verbose:x
+                    { \l_@@_ref_language_tl }
                 }
               }
               {
                 \tl_set:Nn \l_@@_ref_language_tl {#1}
-%    \end{macrocode}
-% If the user specified a language in the preamble, make sure it is loaded.
-% There's no need to worry with redundancy with \pkg{babel} and
-% \pkg{polyglosssia} loaded languages, since \cs{LoadDictionaryFor} does not
-% reload a dictionary if it's already been loaded.
-%    \begin{macrocode}
-                \exp_args:Nx \file_if_exist:nTF
-                  { zref-clever- \@trnslt@language {#1} .trsl }
-                  { \LoadDictionaryFor {#1} { zref-clever } }
-                  {
-                    \exp_args:Nx \file_if_exist:nT
-                      { zref-clever- \baselanguage {#1} .trsl }
-                      { \LoadDictionaryFor {#1} { zref-clever } }
-                  }
+                \@@_provide_dictionary_verbose:x
+                  { \l_@@_ref_language_tl }
               }
           }
       } ,
-    lang .initial:n = main ,
     lang .value_required:n = true ,
   }
 %    \end{macrocode}
 %
 %
+%    \begin{macrocode}
+\AddToHook { begindocument / before }
+  {
+    \AddToHook { begindocument }
+      {
+%    \end{macrocode}
+% If any \opt{lang} option has been given by the user, the corresponding
+% language is already loaded, otherwise, ensure the default one
+% (\texttt{main}) gets loaded early, but not verbosely.
+%    \begin{macrocode}
+        \@@_provide_dictionary:x { \l_@@_ref_language_tl }
+%    \end{macrocode}
 % Redefinition of the \texttt{lang} key option for the document body.
 %    \begin{macrocode}
-\AtEndOfPackage
-  {
-    \AddToHook { zref-clever / reflanguage }
-      {
         \keys_define:nn { zref-clever / reference }
           {
             lang .code:n =
@@ -1201,81 +1475,29 @@
                   {
                     { main }
                     {
-                      \tl_set_eq:NN \l_@@_ref_language_tl
-                        \l_@@_main_language_tl
+                      \tl_set:Nn \l_@@_ref_language_tl
+                        { \l_@@_main_language_tl }
+                      \@@_provide_dictionary_verbose:x
+                        { \l_@@_ref_language_tl }
                     }
 
                     { current }
                     {
-                      \tl_set_eq:NN \l_@@_ref_language_tl
-                        \l_@@_current_language_tl
+                      \tl_set:Nn \l_@@_ref_language_tl
+                        { \l_@@_current_language_tl }
+                      \@@_provide_dictionary_verbose:x
+                        { \l_@@_ref_language_tl }
                     }
                   }
-                  { \tl_set:Nn \l_@@_ref_language_tl {#1} }
+                  {
+                    \tl_set:Nn \l_@@_ref_language_tl {#1}
+                    \@@_provide_dictionary_verbose:x
+                      { \l_@@_ref_language_tl }
+                  }
               } ,
             lang .value_required:n = true ,
           }
       }
-  }
-%    \end{macrocode}
-%
-%
-%    \begin{macrocode}
-\AddToHook { begindocument / before }
-  {
-    \tl_set_eq:NN \l_@@_current_language_tl
-      \@trnslt@current@language
-    \@ifpackageloaded{babel}
-      {
-        \tl_set_eq:NN \l_@@_main_language_tl
-          \bbl@main@language
-        \clist_map_inline:Nn \bbl@loaded
-          {
-%    \end{macrocode}
-% Funny enough, \pkg{translations} also loads its basic dictionaries for all
-% languages loaded by \pkg{babel} or \pkg{polyglossia}.  First, there is no
-% way to disable this, even if we don't need them at all here.  Second,
-% \pkg{translations} sends messages of its own missing dictionaries to
-% \texttt{info} and everyone else's to \texttt{warning}\dots{} So we have to
-% control ourselves for missing dictionaries and load them only if available.
-%    \begin{macrocode}
-            \exp_args:Nx \file_if_exist:nTF
-              { zref-clever- \@trnslt@language {#1} .trsl }
-              { \LoadDictionaryFor {#1} { zref-clever } }
-              {
-                \exp_args:Nx \file_if_exist:nT
-                  { zref-clever- \baselanguage {#1} .trsl }
-                  { \LoadDictionaryFor {#1} { zref-clever } }
-              }
-          }
-      }
-      {
-        \@ifpackageloaded{polyglossia}
-          {
-            \tl_set_eq:NN \l_@@_main_language_tl
-              \xpg@main@language
-            \clist_map_inline:Nn \xpg@loaded
-              {
-                \exp_args:Nx \file_if_exist:nTF
-                  { zref-clever- \@trnslt@language {#1} .trsl }
-                  { \LoadDictionaryFor {#1} { zref-clever } }
-                  {
-                    \exp_args:Nx \file_if_exist:nT
-                      { zref-clever- \baselanguage {#1} .trsl }
-                      { \LoadDictionaryFor {#1} { zref-clever } }
-                  }
-              }
-          }
-          {
-            \tl_set:Nn \l_@@_main_language_tl { english }
-            \LoadDictionaryFor { english } { zref-clever }
-          }
-      }
-%    \end{macrocode}
-% \emph{Then} we execute the package options stored in the
-% \texttt{zref-clever/reflanguage} hook.
-%    \begin{macrocode}
-    \UseHook { zref-clever / reflanguage }
   }
 %    \end{macrocode}
 %
@@ -1363,31 +1585,8 @@
 %
 %    \begin{macrocode}
 \prop_new:N \l_@@_ref_options_prop
-\clist_map_inline:nn
-  {
-%    \end{macrocode}
-% Not type-specific options.
-%    \begin{macrocode}
-    tpairsep ,
-    tlistsep ,
-    tlastsep ,
-    notesep ,
-%    \end{macrocode}
-% Possibly type-specific options.
-%    \begin{macrocode}
-    namefont ,
-    namesep ,
-    pairsep ,
-    listsep ,
-    lastsep ,
-    rangesep ,
-    reffont ,
-    refpre ,
-    refpos ,
-    reffont-in ,
-    refpre-in ,
-    refpos-in ,
-  }
+\seq_map_inline:Nn
+  \c_@@_ref_options_not_type_specific_seq
   {
     \keys_define:nn { zref-clever / reference }
       {
@@ -1552,16 +1751,8 @@
 % \url{https://github.com/latex3/latex3/pull/988}.
 %
 %    \begin{macrocode}
-\clist_map_inline:nn
-  {
-%    \end{macrocode}
-% Not type-specific options.
-%    \begin{macrocode}
-    tpairsep ,
-    tlistsep ,
-    tlastsep ,
-    notesep ,
-  }
+\seq_map_inline:Nn
+  \c_@@_ref_options_necessarily_not_type_specific_seq
   {
     \keys_define:nn { zref-clever / typesetup }
       {
@@ -1576,35 +1767,8 @@
 %
 %
 %    \begin{macrocode}
-\clist_map_inline:nn
-  {
-%    \end{macrocode}
-% Possibly type-specific options.
-%    \begin{macrocode}
-    namefont ,
-    namesep ,
-    pairsep ,
-    listsep ,
-    lastsep ,
-    rangesep ,
-    reffont ,
-    refpre ,
-    refpos ,
-    reffont-in ,
-    refpre-in ,
-    refpos-in ,
-%    \end{macrocode}
-% Necessarily type-specific options.
-%    \begin{macrocode}
-    Name-sg ,
-    name-sg ,
-    Name-pl ,
-    name-pl ,
-    Name-sg-ab ,
-    name-sg-ab ,
-    Name-pl-ab ,
-    name-pl-ab ,
-  }
+\seq_map_inline:Nn
+  \c_@@_ref_options_type_specific_seq
   {
     \keys_define:nn { zref-clever / typesetup }
       {
@@ -1654,9 +1818,13 @@
 %    \begin{macrocode}
 \NewDocumentCommand \zcDeclareTranslations { m m }
   {
-    \tl_set:Nn \l_@@_setup_language_tl {#1}
-    \tl_clear:N \l_@@_setup_type_tl
-    \keys_set:nn { zref-clever / translations } {#2}
+    \prop_get:NnNTF \g_@@_language_aliases_prop {#1}
+      \l_@@_setup_language_tl
+      {
+        \tl_clear:N \l_@@_setup_type_tl
+        \keys_set:nn { zref-clever / translations } {#2}
+      }
+      { \msg_warning:nnn { zref-clever } { unknown-language-transl } {#1} }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -1669,27 +1837,15 @@
       {
         \tl_if_empty:nTF {#1}
           { \tl_clear:N \l_@@_setup_type_tl }
-          {
-            \prop_if_exist:cF { l_@@_type_ #1 _options_prop }
-              { \prop_new:c { l_@@_type_ #1 _options_prop } }
-            \tl_set:Nn \l_@@_setup_type_tl {#1}
-          }
+          { \tl_set:Nn \l_@@_setup_type_tl {#1} }
       } ,
   }
 %    \end{macrocode}
 %
 %
 %    \begin{macrocode}
-\clist_map_inline:nn
-  {
-%    \end{macrocode}
-% Not type-specific options.
-%    \begin{macrocode}
-    tpairsep ,
-    tlistsep ,
-    tlastsep ,
-    notesep ,
-  }
+\seq_map_inline:Nn
+  \c_@@_ref_options_necessarily_not_type_specific_seq
   {
     \keys_define:nn { zref-clever / translations }
       {
@@ -1698,9 +1854,9 @@
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \@@_declare_transl:xxn
-                  { \l_@@_setup_language_tl }
-                  { zrefclever-default- #1 } {##1}
+                \@@_declare_default_transl:Vnn
+                  \l_@@_setup_language_tl
+                  {#1} {##1}
               }
               {
                 \msg_warning:nnn { zref-clever }
@@ -1713,21 +1869,8 @@
 %
 %
 %    \begin{macrocode}
-\clist_map_inline:nn
-  {
-%    \end{macrocode}
-% Possibly type-specific options.
-%    \begin{macrocode}
-    namesep ,
-    pairsep ,
-    listsep ,
-    lastsep ,
-    rangesep ,
-    refpre ,
-    refpos ,
-    refpre-in ,
-    refpos-in ,
-  }
+\seq_map_inline:Nn
+  \c_@@_ref_options_possibly_type_specific_seq
   {
     \keys_define:nn { zref-clever / translations }
       {
@@ -1736,14 +1879,15 @@
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \@@_declare_transl:xxn
-                  { \l_@@_setup_language_tl }
-                  { zrefclever-default- #1 } {##1}
+                \@@_declare_default_transl:Vnn
+                  \l_@@_setup_language_tl
+                  {#1} {##1}
               }
               {
-                \@@_declare_transl:xxn
-                  { \l_@@_setup_language_tl }
-                  { zrefclever-type- \l_@@_setup_type_tl - #1 } {##1}
+                \@@_declare_type_transl:VVnn
+                  \l_@@_setup_language_tl
+                  \l_@@_setup_type_tl
+                  {#1} {##1}
               }
           } ,
       }
@@ -1752,20 +1896,8 @@
 %
 %
 %    \begin{macrocode}
-\clist_map_inline:nn
-  {
-%    \end{macrocode}
-% Necessarily type-specific options.
-%    \begin{macrocode}
-    Name-sg ,
-    name-sg ,
-    Name-pl ,
-    name-pl ,
-    Name-sg-ab ,
-    name-sg-ab ,
-    Name-pl-ab ,
-    name-pl-ab ,
-  }
+\seq_map_inline:Nn
+  \c_@@_ref_options_necessarily_type_specific_seq
   {
     \keys_define:nn { zref-clever / translations }
       {
@@ -1778,9 +1910,10 @@
                   { option-only-type-specific } {#1}
               }
               {
-                \@@_declare_transl:xxn
-                  { \l_@@_setup_language_tl }
-                  { zrefclever-type- \l_@@_setup_type_tl - #1 } {##1}
+                \@@_declare_type_transl:VVnn
+                  \l_@@_setup_language_tl
+                  \l_@@_setup_type_tl
+                  {#1} {##1}
               }
           } ,
       }
@@ -1825,6 +1958,14 @@
 %    \begin{macrocode}
       \seq_set_from_clist:Nn \l_@@_zcref_labels_seq {#1}
       \bool_set:Nn \l_@@_link_star_bool {#2}
+%    \end{macrocode}
+% Ensure dictionary for reference language is loaded, if available.  We cannot
+% rely on \cs{keys_set:nn} for the task, since if the \opt{lang} option is set
+% for \texttt{current}, the actual language may have changed outside our
+% control.  \cs{@@_provide_dictionary:x} does nothing if the dictionary is
+% already loaded.
+%    \begin{macrocode}
+      \@@_provide_dictionary:x { \l_@@_ref_language_tl }
 %    \end{macrocode}
 % Integration with \pkg{zref-check}.
 %    \begin{macrocode}
@@ -3193,20 +3334,11 @@
                   \l_@@_name_format_tl
                   \l_@@_type_name_tl
                   {
-                    \@@_if_transl:xxTF
+                    \@@_get_type_transl:xxxNF
                       { \l_@@_ref_language_tl }
-                      {
-                        zrefclever-type- \l_@@_type_first_label_type_tl -
-                        \l_@@_name_format_tl
-                      }
-                      {
-                        \@@_get_transl:nxx { \l_@@_type_name_tl }
-                          { \l_@@_ref_language_tl }
-                          {
-                            zrefclever-type- \l_@@_type_first_label_type_tl -
-                            \l_@@_name_format_tl
-                          }
-                      }
+                      { \l_@@_type_first_label_type_tl }
+                      { \l_@@_name_format_tl }
+                      \l_@@_type_name_tl
                       {
                         \tl_clear:N \l_@@_type_name_tl
                         \msg_warning:nnx { zref-clever } { missing-name }
@@ -3225,35 +3357,17 @@
                       \l_@@_name_format_fallback_tl
                       \l_@@_type_name_tl
                       {
-                        \@@_if_transl:xxTF
+                        \@@_get_type_transl:xxxNF
                           { \l_@@_ref_language_tl }
+                          { \l_@@_type_first_label_type_tl }
+                          { \l_@@_name_format_tl }
+                          \l_@@_type_name_tl
                           {
-                            zrefclever-type- \l_@@_type_first_label_type_tl -
-                            \l_@@_name_format_tl
-                          }
-                          {
-                            \@@_get_transl:nxx { \l_@@_type_name_tl }
+                            \@@_get_type_transl:xxxNF
                               { \l_@@_ref_language_tl }
-                              {
-                                zrefclever-type- \l_@@_type_first_label_type_tl -
-                                \l_@@_name_format_tl
-                              }
-                          }
-                          {
-                            \@@_if_transl:xxTF
-                              { \l_@@_ref_language_tl }
-                              {
-                                zrefclever-type- \l_@@_type_first_label_type_tl -
-                                \l_@@_name_format_fallback_tl
-                              }
-                              {
-                                \@@_get_transl:nxx { \l_@@_type_name_tl }
-                                  { \l_@@_ref_language_tl }
-                                  {
-                                    zrefclever-type- \l_@@_type_first_label_type_tl -
-                                    \l_@@_name_format_fallback_tl
-                                  }
-                              }
+                              { \l_@@_type_first_label_type_tl }
+                              { \l_@@_name_format_fallback_tl }
+                              \l_@@_type_name_tl
                               {
                                 \tl_clear:N \l_@@_type_name_tl
                                 \msg_warning:nnx { zref-clever } { missing-name }
@@ -3480,23 +3594,20 @@
           }
           {
             % If not found, try the type specific translations.
-            \@@_if_transl:xxTF
+            \@@_get_type_transl:xxnNF
               { \l_@@_ref_language_tl }
-              { zrefclever-type- \l_@@_label_type_a_tl - #1 }
+              { \l_@@_label_type_a_tl }
+              {#1} #2
               {
-                \@@_get_transl:nxx {#2}
+                % If not found, try default translations.
+                \@@_get_default_transl:xnNF
                   { \l_@@_ref_language_tl }
-                  { zrefclever-type- \l_@@_label_type_a_tl - #1 }
-              }
-              {
-                % If not found, try general translations.  We are not
-                % controlling for their existence, but we must make sure all
-                % options being retrieved with
-                % \cs{@@_get_option_with_transl:nN} have their values set for
-                % `English' and `fallback'.
-                \@@_get_transl:nxx {#2}
-                  { \l_@@_ref_language_tl }
-                  { zrefclever-default- #1 }
+                  {#1} #2
+                  {
+                    % If not found, try fallback.
+                    \@@_get_fallback_transl:nNF {#1} #2
+                      { \tl_clear:N #2 }
+                  }
               }
           }
       }
@@ -3642,38 +3753,7 @@
 %
 %
 %
-% \section{Translations}
-%
-% \DoNotIndex{\__zrefclever_declare_fallback_transl:nn}
-% \DoNotIndex{\zcDicDefaultTransl}
-% \DoNotIndex{\zcDicTypeTransl}
-%
-%
-% \subsection{Fallback}
-%
-% All options retrieved with \cs{@@_get_option_with_transl:nN} must have their
-% values set for `fallback', even if to empty values, since this is what will
-% be retrieved if \pkg{babel} or \pkg{polyglossia} is loaded and sets a
-% language which \pkg{zref-clever} does not know.  And \pkg{translations}
-% typesets the \emph{key} as a last resource fallback, which we don't want to
-% happen.  On the other hand, type-specific options are not looked for in
-% `fallback'.
-%
-%    \begin{macrocode}
-\@@_declare_fallback_transl:nn { namesep   } {\nobreakspace}
-\@@_declare_fallback_transl:nn { pairsep   } {,~}
-\@@_declare_fallback_transl:nn { listsep   } {,~}
-\@@_declare_fallback_transl:nn { lastsep   } {,~}
-\@@_declare_fallback_transl:nn { tpairsep  } {,~}
-\@@_declare_fallback_transl:nn { tlistsep  } {,~}
-\@@_declare_fallback_transl:nn { tlastsep  } {,~}
-\@@_declare_fallback_transl:nn { notesep   } {~}
-\@@_declare_fallback_transl:nn { rangesep  } {\textendash}
-\@@_declare_fallback_transl:nn { refpre    } {}
-\@@_declare_fallback_transl:nn { refpos    } {}
-\@@_declare_fallback_transl:nn { refpre-in } {}
-\@@_declare_fallback_transl:nn { refpos-in } {}
-%    \end{macrocode}
+% \section{Dictionaries}
 %
 %    \begin{macrocode}
 %</package>
@@ -3683,832 +3763,980 @@
 %
 % \subsection{English}
 %
+%<package>\zcDeclareLanguage { english }
+%<package>\zcDeclareLanguageAlias { american   } { english }
+%<package>\zcDeclareLanguageAlias { australian } { english }
+%<package>\zcDeclareLanguageAlias { british    } { english }
+%<package>\zcDeclareLanguageAlias { canadian   } { english }
+%<package>\zcDeclareLanguageAlias { newzealand } { english }
+%<package>\zcDeclareLanguageAlias { UKenglish  } { english }
+%<package>\zcDeclareLanguageAlias { USenglish  } { english }
+%
 % All options retrieved with \cs{@@_get_option_with_transl:nN} must have their
 % values set for `English', since this is what will be retrieved if no
-% language package is loaded.  In other words, `English' is the
-% \pkg{translations} equivalent of `fallback' when no language package is
-% present.
+% language package is loaded.
 %
 %    \begin{macrocode}
-%<*lang-english>
+%<*dict-english>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{English}{zref-clever}
+namesep   = {\nobreakspace} ,
+pairsep   = {~and\nobreakspace} ,
+listsep   = {,~} ,
+lastsep   = {~and\nobreakspace} ,
+tpairsep  = {~and\nobreakspace} ,
+tlistsep  = {,~} ,
+tlastsep  = {,~and\nobreakspace} ,
+notesep   = {~} ,
+rangesep  = {~to\nobreakspace} ,
+refpre    = ,
+refpos    = ,
+refpre-in = ,
+refpos-in = ,
 
-\zcDicDefaultTransl{namesep}{\nobreakspace}
-\zcDicDefaultTransl{pairsep}{~and\nobreakspace}
-\zcDicDefaultTransl{listsep}{,~}
-\zcDicDefaultTransl{lastsep}{~and\nobreakspace}
-\zcDicDefaultTransl{tpairsep}{~and\nobreakspace}
-\zcDicDefaultTransl{tlistsep}{,~}
-\zcDicDefaultTransl{tlastsep}{,~and\nobreakspace}
-\zcDicDefaultTransl{notesep}{~}
-\zcDicDefaultTransl{rangesep}{~to\nobreakspace}
-\zcDicDefaultTransl{refpre}{}
-\zcDicDefaultTransl{refpos}{}
-\zcDicDefaultTransl{refpre-in}{}
-\zcDicDefaultTransl{refpos-in}{}
+type = part ,
+  Name-sg = Part ,
+  name-sg = part ,
+  Name-pl = Parts ,
+  name-pl = parts ,
 
-\zcDicTypeTransl{part}{Name-sg}{Part}
-\zcDicTypeTransl{part}{name-sg}{part}
-\zcDicTypeTransl{part}{Name-pl}{Parts}
-\zcDicTypeTransl{part}{name-pl}{parts}
+type = chapter ,
+  Name-sg = Chapter ,
+  name-sg = chapter ,
+  Name-pl = Chapters ,
+  name-pl = chapters ,
 
-\zcDicTypeTransl{chapter}{Name-sg}{Chapter}
-\zcDicTypeTransl{chapter}{name-sg}{chapter}
-\zcDicTypeTransl{chapter}{Name-pl}{Chapters}
-\zcDicTypeTransl{chapter}{name-pl}{chapters}
+type = section ,
+  Name-sg = Section ,
+  name-sg = section ,
+  Name-pl = Sections ,
+  name-pl = sections ,
 
-\zcDicTypeTransl{section}{Name-sg}{Section}
-\zcDicTypeTransl{section}{name-sg}{section}
-\zcDicTypeTransl{section}{Name-pl}{Sections}
-\zcDicTypeTransl{section}{name-pl}{sections}
+type = paragraph ,
+  Name-sg = Paragraph ,
+  name-sg = paragraph ,
+  Name-pl = Paragraphs ,
+  name-pl = paragraphs ,
+  Name-sg-ab = Par. ,
+  name-sg-ab = par. ,
+  Name-pl-ab = Par. ,
+  name-pl-ab = par. ,
 
-\zcDicTypeTransl{paragraph}{Name-sg}{Paragraph}
-\zcDicTypeTransl{paragraph}{name-sg}{paragraph}
-\zcDicTypeTransl{paragraph}{Name-pl}{Paragraphs}
-\zcDicTypeTransl{paragraph}{name-pl}{paragraphs}
-\zcDicTypeTransl{paragraph}{Name-sg-ab}{Par.}
-\zcDicTypeTransl{paragraph}{name-sg-ab}{par.}
-\zcDicTypeTransl{paragraph}{Name-pl-ab}{Par.}
-\zcDicTypeTransl{paragraph}{name-pl-ab}{par.}
+type = appendix ,
+  Name-sg = Appendix ,
+  name-sg = appendix ,
+  Name-pl = Appendices ,
+  name-pl = appendices ,
 
-\zcDicTypeTransl{appendix}{Name-sg}{Appendix}
-\zcDicTypeTransl{appendix}{name-sg}{appendix}
-\zcDicTypeTransl{appendix}{Name-pl}{Appendices}
-\zcDicTypeTransl{appendix}{name-pl}{appendices}
+type = page ,
+  Name-sg = Page ,
+  name-sg = page ,
+  Name-pl = Pages ,
+  name-pl = pages ,
+  name-sg-ab = p. ,
+  name-pl-ab = pp. ,
 
-\zcDicTypeTransl{page}{Name-sg}{Page}
-\zcDicTypeTransl{page}{name-sg}{page}
-\zcDicTypeTransl{page}{Name-pl}{Pages}
-\zcDicTypeTransl{page}{name-pl}{pages}
-\zcDicTypeTransl{page}{name-sg-ab}{p.}
-\zcDicTypeTransl{page}{name-pl-ab}{pp.}
+type = line ,
+  Name-sg = Line ,
+  name-sg = line ,
+  Name-pl = Lines ,
+  name-pl = lines ,
 
-\zcDicTypeTransl{line}{Name-sg}{Line}
-\zcDicTypeTransl{line}{name-sg}{line}
-\zcDicTypeTransl{line}{Name-pl}{Lines}
-\zcDicTypeTransl{line}{name-pl}{lines}
+type = figure ,
+  Name-sg = Figure ,
+  name-sg = figure ,
+  Name-pl = Figures ,
+  name-pl = figures ,
+  Name-sg-ab = Fig. ,
+  name-sg-ab = fig. ,
+  Name-pl-ab = Figs. ,
+  name-pl-ab = figs. ,
 
-\zcDicTypeTransl{figure}{Name-sg}{Figure}
-\zcDicTypeTransl{figure}{name-sg}{figure}
-\zcDicTypeTransl{figure}{Name-pl}{Figures}
-\zcDicTypeTransl{figure}{name-pl}{figures}
-\zcDicTypeTransl{figure}{Name-sg-ab}{Fig.}
-\zcDicTypeTransl{figure}{name-sg-ab}{fig.}
-\zcDicTypeTransl{figure}{Name-pl-ab}{Figs.}
-\zcDicTypeTransl{figure}{name-pl-ab}{figs.}
+type = table ,
+  Name-sg = Table ,
+  name-sg = table ,
+  Name-pl = Tables ,
+  name-pl = tables ,
 
-\zcDicTypeTransl{table}{Name-sg}{Table}
-\zcDicTypeTransl{table}{name-sg}{table}
-\zcDicTypeTransl{table}{Name-pl}{Tables}
-\zcDicTypeTransl{table}{name-pl}{tables}
+type = item ,
+  Name-sg = Item ,
+  name-sg = item ,
+  Name-pl = Items ,
+  name-pl = items ,
 
-\zcDicTypeTransl{item}{Name-sg}{Item}
-\zcDicTypeTransl{item}{name-sg}{item}
-\zcDicTypeTransl{item}{Name-pl}{Items}
-\zcDicTypeTransl{item}{name-pl}{items}
+type = footnote ,
+  Name-sg = Footnote ,
+  name-sg = footnote ,
+  Name-pl = Footnotes ,
+  name-pl = footnotes ,
 
-\zcDicTypeTransl{footnote}{Name-sg}{Footnote}
-\zcDicTypeTransl{footnote}{name-sg}{footnote}
-\zcDicTypeTransl{footnote}{Name-pl}{Footnotes}
-\zcDicTypeTransl{footnote}{name-pl}{footnotes}
+type = note ,
+  Name-sg = Note ,
+  name-sg = note ,
+  Name-pl = Notes ,
+  name-pl = notes ,
 
-\zcDicTypeTransl{note}{Name-sg}{Note}
-\zcDicTypeTransl{note}{name-sg}{note}
-\zcDicTypeTransl{note}{Name-pl}{Notes}
-\zcDicTypeTransl{note}{name-pl}{notes}
+type = equation ,
+  Name-sg = Equation ,
+  name-sg = equation ,
+  Name-pl = Equations ,
+  name-pl = equations ,
+  Name-sg-ab = Eq. ,
+  name-sg-ab = eq. ,
+  Name-pl-ab = Eqs. ,
+  name-pl-ab = eqs. ,
+  refpre-in = {(} ,
+  refpos-in = {)} ,
 
-\zcDicTypeTransl{equation}{Name-sg}{Equation}
-\zcDicTypeTransl{equation}{name-sg}{equation}
-\zcDicTypeTransl{equation}{Name-pl}{Equations}
-\zcDicTypeTransl{equation}{name-pl}{equations}
-\zcDicTypeTransl{equation}{Name-sg-ab}{Eq.}
-\zcDicTypeTransl{equation}{name-sg-ab}{eq.}
-\zcDicTypeTransl{equation}{Name-pl-ab}{Eqs.}
-\zcDicTypeTransl{equation}{name-pl-ab}{eqs.}
-\zcDicTypeTransl{equation}{refpre-in}{(}
-\zcDicTypeTransl{equation}{refpos-in}{)}
+type = theorem ,
+  Name-sg = Theorem ,
+  name-sg = theorem ,
+  Name-pl = Theorems ,
+  name-pl = theorems ,
 
-\zcDicTypeTransl{theorem}{Name-sg}{Theorem}
-\zcDicTypeTransl{theorem}{name-sg}{theorem}
-\zcDicTypeTransl{theorem}{Name-pl}{Theorems}
-\zcDicTypeTransl{theorem}{name-pl}{theorems}
+type = lemma ,
+  Name-sg = Lemma ,
+  name-sg = lemma ,
+  Name-pl = Lemmas ,
+  name-pl = lemmas ,
 
-\zcDicTypeTransl{lemma}{Name-sg}{Lemma}
-\zcDicTypeTransl{lemma}{name-sg}{lemma}
-\zcDicTypeTransl{lemma}{Name-pl}{Lemmas}
-\zcDicTypeTransl{lemma}{name-pl}{lemmas}
+type = corollary ,
+  Name-sg = Corollary ,
+  name-sg = corollary ,
+  Name-pl = Corollaries ,
+  name-pl = corollaries ,
 
-\zcDicTypeTransl{corollary}{Name-sg}{Corollary}
-\zcDicTypeTransl{corollary}{name-sg}{corollary}
-\zcDicTypeTransl{corollary}{Name-pl}{Corollaries}
-\zcDicTypeTransl{corollary}{name-pl}{corollaries}
+type = proposition ,
+  Name-sg = Proposition ,
+  name-sg = proposition ,
+  Name-pl = Propositions ,
+  name-pl = propositions ,
 
-\zcDicTypeTransl{proposition}{Name-sg}{Proposition}
-\zcDicTypeTransl{proposition}{name-sg}{proposition}
-\zcDicTypeTransl{proposition}{Name-pl}{Propositions}
-\zcDicTypeTransl{proposition}{name-pl}{propositions}
+type = definition ,
+  Name-sg = Definition ,
+  name-sg = definition ,
+  Name-pl = Definitions ,
+  name-pl = definitions ,
 
-\zcDicTypeTransl{definition}{Name-sg}{Definition}
-\zcDicTypeTransl{definition}{name-sg}{definition}
-\zcDicTypeTransl{definition}{Name-pl}{Definitions}
-\zcDicTypeTransl{definition}{name-pl}{definitions}
+type = proof ,
+  Name-sg = Proof ,
+  name-sg = proof ,
+  Name-pl = Proofs ,
+  name-pl = proofs ,
 
-\zcDicTypeTransl{proof}{Name-sg}{Proof}
-\zcDicTypeTransl{proof}{name-sg}{proof}
-\zcDicTypeTransl{proof}{Name-pl}{Proofs}
-\zcDicTypeTransl{proof}{name-pl}{proofs}
+type = result ,
+  Name-sg = Result ,
+  name-sg = result ,
+  Name-pl = Results ,
+  name-pl = results ,
 
-\zcDicTypeTransl{result}{Name-sg}{Result}
-\zcDicTypeTransl{result}{name-sg}{result}
-\zcDicTypeTransl{result}{Name-pl}{Results}
-\zcDicTypeTransl{result}{name-pl}{results}
+type = example ,
+  Name-sg = Example ,
+  name-sg = example ,
+  Name-pl = Examples ,
+  name-pl = examples ,
 
-\zcDicTypeTransl{example}{Name-sg}{Example}
-\zcDicTypeTransl{example}{name-sg}{example}
-\zcDicTypeTransl{example}{Name-pl}{Examples}
-\zcDicTypeTransl{example}{name-pl}{examples}
+type = remark ,
+  Name-sg = Remark ,
+  name-sg = remark ,
+  Name-pl = Remarks ,
+  name-pl = remarks ,
 
-\zcDicTypeTransl{remark}{Name-sg}{Remark}
-\zcDicTypeTransl{remark}{name-sg}{remark}
-\zcDicTypeTransl{remark}{Name-pl}{Remarks}
-\zcDicTypeTransl{remark}{name-pl}{remarks}
+type = algorithm ,
+  Name-sg = Algorithm ,
+  name-sg = algorithm ,
+  Name-pl = Algorithms ,
+  name-pl = algorithms ,
 
-\zcDicTypeTransl{algorithm}{Name-sg}{Algorithm}
-\zcDicTypeTransl{algorithm}{name-sg}{algorithm}
-\zcDicTypeTransl{algorithm}{Name-pl}{Algorithms}
-\zcDicTypeTransl{algorithm}{name-pl}{algorithms}
+type = listing ,
+  Name-sg = Listing ,
+  name-sg = listing ,
+  Name-pl = Listings ,
+  name-pl = listings ,
 
-\zcDicTypeTransl{listing}{Name-sg}{Listing}
-\zcDicTypeTransl{listing}{name-sg}{listing}
-\zcDicTypeTransl{listing}{Name-pl}{Listings}
-\zcDicTypeTransl{listing}{name-pl}{listings}
+type = exercise ,
+  Name-sg = Exercise ,
+  name-sg = exercise ,
+  Name-pl = Exercises ,
+  name-pl = exercises ,
 
-\zcDicTypeTransl{exercise}{Name-sg}{Exercise}
-\zcDicTypeTransl{exercise}{name-sg}{exercise}
-\zcDicTypeTransl{exercise}{Name-pl}{Exercises}
-\zcDicTypeTransl{exercise}{name-pl}{exercises}
-
-\zcDicTypeTransl{solution}{Name-sg}{Solution}
-\zcDicTypeTransl{solution}{name-sg}{solution}
-\zcDicTypeTransl{solution}{Name-pl}{Solutions}
-\zcDicTypeTransl{solution}{name-pl}{solutions}
+type = solution ,
+  Name-sg = Solution ,
+  name-sg = solution ,
+  Name-pl = Solutions ,
+  name-pl = solutions ,
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%</lang-english>
+%</dict-english>
 %    \end{macrocode}
 %
 %
 %
 % \subsection{German}
 %
+%<package>\zcDeclareLanguage { german }
+%<package>\zcDeclareLanguageAlias { austrian     } { german }
+%<package>\zcDeclareLanguageAlias { germanb      } { german }
+%<package>\zcDeclareLanguageAlias { ngerman      } { german }
+%<package>\zcDeclareLanguageAlias { naustrian    } { german }
+%<package>\zcDeclareLanguageAlias { nswissgerman } { german }
+%<package>\zcDeclareLanguageAlias { swissgerman  } { german }
+%
 %    \begin{macrocode}
-%<*lang-german>
+%<*dict-german>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{German}{zref-clever}
+namesep  = {\nobreakspace} ,
+pairsep  = {~und\nobreakspace} ,
+listsep  = {,~} ,
+lastsep  = {~und\nobreakspace} ,
+tpairsep = {~und\nobreakspace} ,
+tlistsep = {,~} ,
+tlastsep = {~und\nobreakspace} ,
+notesep  = {~} ,
+rangesep = {~bis\nobreakspace} ,
 
-\zcDicDefaultTransl{namesep}{\nobreakspace}
-\zcDicDefaultTransl{pairsep}{~und\nobreakspace}
-\zcDicDefaultTransl{listsep}{,~}
-\zcDicDefaultTransl{lastsep}{~und\nobreakspace}
-\zcDicDefaultTransl{tpairsep}{~und\nobreakspace}
-\zcDicDefaultTransl{tlistsep}{,~}
-\zcDicDefaultTransl{tlastsep}{~und\nobreakspace}
-\zcDicDefaultTransl{notesep}{~}
-\zcDicDefaultTransl{rangesep}{~bis\nobreakspace}
+type = part ,
+  Name-sg = Teil ,
+  name-sg = Teil ,
+  Name-pl = Teile ,
+  name-pl = Teile ,
 
-\zcDicTypeTransl{part}{Name-sg}{Teil}
-\zcDicTypeTransl{part}{name-sg}{Teil}
-\zcDicTypeTransl{part}{Name-pl}{Teile}
-\zcDicTypeTransl{part}{name-pl}{Teile}
+type = chapter ,
+  Name-sg = Kapitel ,
+  name-sg = Kapitel ,
+  Name-pl = Kapitel ,
+  name-pl = Kapitel ,
 
-\zcDicTypeTransl{chapter}{Name-sg}{Kapitel}
-\zcDicTypeTransl{chapter}{name-sg}{Kapitel}
-\zcDicTypeTransl{chapter}{Name-pl}{Kapitel}
-\zcDicTypeTransl{chapter}{name-pl}{Kapitel}
+type = section ,
+  Name-sg = Abschnitt ,
+  name-sg = Abschnitt ,
+  Name-pl = Abschnitte ,
+  name-pl = Abschnitte ,
 
-\zcDicTypeTransl{section}{Name-sg}{Abschnitt}
-\zcDicTypeTransl{section}{name-sg}{Abschnitt}
-\zcDicTypeTransl{section}{Name-pl}{Abschnitte}
-\zcDicTypeTransl{section}{name-pl}{Abschnitte}
+type = paragraph ,
+  Name-sg = Absatz ,
+  name-sg = Absatz ,
+  Name-pl = Absätze ,
+  name-pl = Absätze ,
 
-\zcDicTypeTransl{paragraph}{Name-sg}{Absatz}
-\zcDicTypeTransl{paragraph}{name-sg}{Absatz}
-\zcDicTypeTransl{paragraph}{Name-pl}{Absätze}
-\zcDicTypeTransl{paragraph}{name-pl}{Absätze}
+type = appendix ,
+  Name-sg = Anhang ,
+  name-sg = Anhang ,
+  Name-pl = Anhänge ,
+  name-pl = Anhänge ,
 
-\zcDicTypeTransl{appendix}{Name-sg}{Anhang}
-\zcDicTypeTransl{appendix}{name-sg}{Anhang}
-\zcDicTypeTransl{appendix}{Name-pl}{Anhänge}
-\zcDicTypeTransl{appendix}{name-pl}{Anhänge}
+type = page ,
+  Name-sg = Seite ,
+  name-sg = Seite ,
+  Name-pl = Seiten ,
+  name-pl = Seiten ,
 
-\zcDicTypeTransl{page}{Name-sg}{Seite}
-\zcDicTypeTransl{page}{name-sg}{Seite}
-\zcDicTypeTransl{page}{Name-pl}{Seiten}
-\zcDicTypeTransl{page}{name-pl}{Seiten}
+type = line ,
+  Name-sg = Zeile ,
+  name-sg = Zeile ,
+  Name-pl = Zeilen ,
+  name-pl = Zeilen ,
 
-\zcDicTypeTransl{line}{Name-sg}{Zeile}
-\zcDicTypeTransl{line}{name-sg}{Zeile}
-\zcDicTypeTransl{line}{Name-pl}{Zeilen}
-\zcDicTypeTransl{line}{name-pl}{Zeilen}
+type = figure ,
+  Name-sg = Abbildung ,
+  name-sg = Abbildung ,
+  Name-pl = Abbildungen ,
+  name-pl = Abbildungen ,
+  Name-sg-ab = Abb. ,
+  name-sg-ab = Abb. ,
+  Name-pl-ab = Abb. ,
+  name-pl-ab = Abb. ,
 
-\zcDicTypeTransl{figure}{Name-sg}{Abbildung}
-\zcDicTypeTransl{figure}{name-sg}{Abbildung}
-\zcDicTypeTransl{figure}{Name-pl}{Abbildungen}
-\zcDicTypeTransl{figure}{name-pl}{Abbildungen}
-\zcDicTypeTransl{figure}{Name-sg-ab}{Abb.}
-\zcDicTypeTransl{figure}{name-sg-ab}{Abb.}
-\zcDicTypeTransl{figure}{Name-pl-ab}{Abb.}
-\zcDicTypeTransl{figure}{name-pl-ab}{Abb.}
+type = table ,
+  Name-sg = Tabelle ,
+  name-sg = Tabelle ,
+  Name-pl = Tabellen ,
+  name-pl = Tabellen ,
 
-\zcDicTypeTransl{table}{Name-sg}{Tabelle}
-\zcDicTypeTransl{table}{name-sg}{Tabelle}
-\zcDicTypeTransl{table}{Name-pl}{Tabellen}
-\zcDicTypeTransl{table}{name-pl}{Tabellen}
+type = item ,
+  Name-sg = Punkt ,
+  name-sg = Punkt ,
+  Name-pl = Punkte ,
+  name-pl = Punkte ,
 
-\zcDicTypeTransl{item}{Name-sg}{Punkt}
-\zcDicTypeTransl{item}{name-sg}{Punkt}
-\zcDicTypeTransl{item}{Name-pl}{Punkte}
-\zcDicTypeTransl{item}{name-pl}{Punkte}
+type = footnote ,
+  Name-sg = Fußnote ,
+  name-sg = Fußnote ,
+  Name-pl = Fußnoten ,
+  name-pl = Fußnoten ,
 
-\zcDicTypeTransl{footnote}{Name-sg}{Fußnote}
-\zcDicTypeTransl{footnote}{name-sg}{Fußnote}
-\zcDicTypeTransl{footnote}{Name-pl}{Fußnoten}
-\zcDicTypeTransl{footnote}{name-pl}{Fußnoten}
+type = note ,
+  Name-sg = Anmerkung ,
+  name-sg = Anmerkung ,
+  Name-pl = Anmerkungen ,
+  name-pl = Anmerkungen ,
 
-\zcDicTypeTransl{note}{Name-sg}{Anmerkung}
-\zcDicTypeTransl{note}{name-sg}{Anmerkung}
-\zcDicTypeTransl{note}{Name-pl}{Anmerkungen}
-\zcDicTypeTransl{note}{name-pl}{Anmerkungen}
+type = equation ,
+  Name-sg = Gleichung ,
+  name-sg = Gleichung ,
+  Name-pl = Gleichungen ,
+  name-pl = Gleichungen ,
+  refpre-in = {(} ,
+  refpos-in = {)} ,
 
-\zcDicTypeTransl{equation}{Name-sg}{Gleichung}
-\zcDicTypeTransl{equation}{name-sg}{Gleichung}
-\zcDicTypeTransl{equation}{Name-pl}{Gleichungen}
-\zcDicTypeTransl{equation}{name-pl}{Gleichungen}
-\zcDicTypeTransl{equation}{refpre-in}{(}
-\zcDicTypeTransl{equation}{refpos-in}{)}
+type = theorem ,
+  Name-sg = Theorem ,
+  name-sg = Theorem ,
+  Name-pl = Theoreme ,
+  name-pl = Theoreme ,
 
-\zcDicTypeTransl{theorem}{Name-sg}{Theorem}
-\zcDicTypeTransl{theorem}{name-sg}{Theorem}
-\zcDicTypeTransl{theorem}{Name-pl}{Theoreme}
-\zcDicTypeTransl{theorem}{name-pl}{Theoreme}
+type = lemma ,
+  Name-sg = Lemma ,
+  name-sg = Lemma ,
+  Name-pl = Lemmata ,
+  name-pl = Lemmata ,
 
-\zcDicTypeTransl{lemma}{Name-sg}{Lemma}
-\zcDicTypeTransl{lemma}{name-sg}{Lemma}
-\zcDicTypeTransl{lemma}{Name-pl}{Lemmata}
-\zcDicTypeTransl{lemma}{name-pl}{Lemmata}
+type = corollary ,
+  Name-sg = Korollar ,
+  name-sg = Korollar ,
+  Name-pl = Korollare ,
+  name-pl = Korollare ,
 
-\zcDicTypeTransl{corollary}{Name-sg}{Korollar}
-\zcDicTypeTransl{corollary}{name-sg}{Korollar}
-\zcDicTypeTransl{corollary}{Name-pl}{Korollare}
-\zcDicTypeTransl{corollary}{name-pl}{Korollare}
+type = proposition ,
+  Name-sg = Satz ,
+  name-sg = Satz ,
+  Name-pl = Sätze ,
+  name-pl = Sätze ,
 
-\zcDicTypeTransl{proposition}{Name-sg}{Satz}
-\zcDicTypeTransl{proposition}{name-sg}{Satz}
-\zcDicTypeTransl{proposition}{Name-pl}{Sätze}
-\zcDicTypeTransl{proposition}{name-pl}{Sätze}
+type = definition ,
+  Name-sg = Definition ,
+  name-sg = Definition ,
+  Name-pl = Definitionen ,
+  name-pl = Definitionen ,
 
-\zcDicTypeTransl{definition}{Name-sg}{Definition}
-\zcDicTypeTransl{definition}{name-sg}{Definition}
-\zcDicTypeTransl{definition}{Name-pl}{Definitionen}
-\zcDicTypeTransl{definition}{name-pl}{Definitionen}
+type = proof ,
+  Name-sg = Beweis ,
+  name-sg = Beweis ,
+  Name-pl = Beweise ,
+  name-pl = Beweise ,
 
-\zcDicTypeTransl{proof}{Name-sg}{Beweis}
-\zcDicTypeTransl{proof}{name-sg}{Beweis}
-\zcDicTypeTransl{proof}{Name-pl}{Beweise}
-\zcDicTypeTransl{proof}{name-pl}{Beweise}
+type = result ,
+  Name-sg = Ergebnis ,
+  name-sg = Ergebnis ,
+  Name-pl = Ergebnisse ,
+  name-pl = Ergebnisse ,
 
-\zcDicTypeTransl{result}{Name-sg}{Ergebnis}
-\zcDicTypeTransl{result}{name-sg}{Ergebnis}
-\zcDicTypeTransl{result}{Name-pl}{Ergebnisse}
-\zcDicTypeTransl{result}{name-pl}{Ergebnisse}
+type = example ,
+  Name-sg = Beispiel ,
+  name-sg = Beispiel ,
+  Name-pl = Beispiele ,
+  name-pl = Beispiele ,
 
-\zcDicTypeTransl{example}{Name-sg}{Beispiel}
-\zcDicTypeTransl{example}{name-sg}{Beispiel}
-\zcDicTypeTransl{example}{Name-pl}{Beispiele}
-\zcDicTypeTransl{example}{name-pl}{Beispiele}
+type = remark ,
+  Name-sg = Bemerkung ,
+  name-sg = Bemerkung ,
+  Name-pl = Bemerkungen ,
+  name-pl = Bemerkungen ,
 
-\zcDicTypeTransl{remark}{Name-sg}{Bemerkung}
-\zcDicTypeTransl{remark}{name-sg}{Bemerkung}
-\zcDicTypeTransl{remark}{Name-pl}{Bemerkungen}
-\zcDicTypeTransl{remark}{name-pl}{Bemerkungen}
+type = algorithm ,
+  Name-sg = Algorithmus ,
+  name-sg = Algorithmus ,
+  Name-pl = Algorithmen ,
+  name-pl = Algorithmen ,
 
-\zcDicTypeTransl{algorithm}{Name-sg}{Algorithmus}
-\zcDicTypeTransl{algorithm}{name-sg}{Algorithmus}
-\zcDicTypeTransl{algorithm}{Name-pl}{Algorithmen}
-\zcDicTypeTransl{algorithm}{name-pl}{Algorithmen}
+type = listing ,
+  Name-sg = Listing , % CHECK
+  name-sg = Listing , % CHECK
+  Name-pl = Listings , % CHECK
+  name-pl = Listings , % CHECK
 
-\zcDicTypeTransl{listing}{Name-sg}{Listing} % CHECK
-\zcDicTypeTransl{listing}{name-sg}{Listing} % CHECK
-\zcDicTypeTransl{listing}{Name-pl}{Listings} % CHECK
-\zcDicTypeTransl{listing}{name-pl}{Listings} % CHECK
+type = exercise ,
+  Name-sg = Übungsaufgabe ,
+  name-sg = Übungsaufgabe ,
+  Name-pl = Übungsaufgaben ,
+  name-pl = Übungsaufgaben ,
 
-\zcDicTypeTransl{exercise}{Name-sg}{Übungsaufgabe}
-\zcDicTypeTransl{exercise}{name-sg}{Übungsaufgabe}
-\zcDicTypeTransl{exercise}{Name-pl}{Übungsaufgaben}
-\zcDicTypeTransl{exercise}{name-pl}{Übungsaufgaben}
-
-\zcDicTypeTransl{solution}{Name-sg}{Lösung}
-\zcDicTypeTransl{solution}{name-sg}{Lösung}
-\zcDicTypeTransl{solution}{Name-pl}{Lösungen}
-\zcDicTypeTransl{solution}{name-pl}{Lösungen}
+type = solution ,
+  Name-sg = Lösung ,
+  name-sg = Lösung ,
+  Name-pl = Lösungen ,
+  name-pl = Lösungen ,
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%</lang-german>
+%</dict-german>
 %    \end{macrocode}
 %
 %
 %
 % \subsection{French}
 %
+%<package>\zcDeclareLanguage { french }
+%<package>\zcDeclareLanguageAlias { acadian  } { french }
+%<package>\zcDeclareLanguageAlias { canadien } { french }
+%<package>\zcDeclareLanguageAlias { francais } { french }
+%<package>\zcDeclareLanguageAlias { frenchb  } { french }
+%
 %    \begin{macrocode}
-%<*lang-french>
+%<*dict-french>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{French}{zref-clever}
+namesep  = {\nobreakspace} ,
+pairsep  = {~et\nobreakspace} ,
+listsep  = {,~} ,
+lastsep  = {~et\nobreakspace} ,
+tpairsep = {~et\nobreakspace} ,
+tlistsep = {,~} ,
+tlastsep = {~et\nobreakspace} ,
+notesep  = {~} ,
+rangesep = {~à\nobreakspace} ,
 
-\zcDicDefaultTransl{namesep}{\nobreakspace}
-\zcDicDefaultTransl{pairsep}{~et\nobreakspace}
-\zcDicDefaultTransl{listsep}{,~}
-\zcDicDefaultTransl{lastsep}{~et\nobreakspace}
-\zcDicDefaultTransl{tpairsep}{~et\nobreakspace}
-\zcDicDefaultTransl{tlistsep}{,~}
-\zcDicDefaultTransl{tlastsep}{~et\nobreakspace}
-\zcDicDefaultTransl{notesep}{~}
-\zcDicDefaultTransl{rangesep}{~à\nobreakspace}
+type = part ,
+  Name-sg = Partie ,
+  name-sg = partie ,
+  Name-pl = Parties ,
+  name-pl = parties ,
 
-\zcDicTypeTransl{part}{Name-sg}{Partie}
-\zcDicTypeTransl{part}{name-sg}{partie}
-\zcDicTypeTransl{part}{Name-pl}{Parties}
-\zcDicTypeTransl{part}{name-pl}{parties}
+type = chapter ,
+  Name-sg = Chapitre ,
+  name-sg = chapitre ,
+  Name-pl = Chapitres ,
+  name-pl = chapitres ,
 
-\zcDicTypeTransl{chapter}{Name-sg}{Chapitre}
-\zcDicTypeTransl{chapter}{name-sg}{chapitre}
-\zcDicTypeTransl{chapter}{Name-pl}{Chapitres}
-\zcDicTypeTransl{chapter}{name-pl}{chapitres}
+type = section ,
+  Name-sg = Section ,
+  name-sg = section ,
+  Name-pl = Sections ,
+  name-pl = sections ,
 
-\zcDicTypeTransl{section}{Name-sg}{Section}
-\zcDicTypeTransl{section}{name-sg}{section}
-\zcDicTypeTransl{section}{Name-pl}{Sections}
-\zcDicTypeTransl{section}{name-pl}{sections}
+type = paragraph ,
+  Name-sg = Paragraphe ,
+  name-sg = paragraphe ,
+  Name-pl = Paragraphes ,
+  name-pl = paragraphes ,
 
-\zcDicTypeTransl{paragraph}{Name-sg}{Paragraphe}
-\zcDicTypeTransl{paragraph}{name-sg}{paragraphe}
-\zcDicTypeTransl{paragraph}{Name-pl}{Paragraphes}
-\zcDicTypeTransl{paragraph}{name-pl}{paragraphes}
+type = appendix ,
+  Name-sg = Annexe ,
+  name-sg = annexe ,
+  Name-pl = Annexes ,
+  name-pl = annexes ,
 
-\zcDicTypeTransl{appendix}{Name-sg}{Annexe}
-\zcDicTypeTransl{appendix}{name-sg}{annexe}
-\zcDicTypeTransl{appendix}{Name-pl}{Annexes}
-\zcDicTypeTransl{appendix}{name-pl}{annexes}
+type = page ,
+  Name-sg = Page ,
+  name-sg = page ,
+  Name-pl = Pages ,
+  name-pl = pages ,
 
-\zcDicTypeTransl{page}{Name-sg}{Page}
-\zcDicTypeTransl{page}{name-sg}{page}
-\zcDicTypeTransl{page}{Name-pl}{Pages}
-\zcDicTypeTransl{page}{name-pl}{pages}
+type = line ,
+  Name-sg = Ligne ,
+  name-sg = ligne ,
+  Name-pl = Lignes ,
+  name-pl = lignes ,
 
-\zcDicTypeTransl{line}{Name-sg}{Ligne}
-\zcDicTypeTransl{line}{name-sg}{ligne}
-\zcDicTypeTransl{line}{Name-pl}{Lignes}
-\zcDicTypeTransl{line}{name-pl}{lignes}
+type = figure ,
+  Name-sg = Figure ,
+  name-sg = figure ,
+  Name-pl = Figures ,
+  name-pl = figures ,
 
-\zcDicTypeTransl{figure}{Name-sg}{Figure}
-\zcDicTypeTransl{figure}{name-sg}{figure}
-\zcDicTypeTransl{figure}{Name-pl}{Figures}
-\zcDicTypeTransl{figure}{name-pl}{figures}
+type = table ,
+  Name-sg = Table ,
+  name-sg = table ,
+  Name-pl = Tables ,
+  name-pl = tables ,
 
-\zcDicTypeTransl{table}{Name-sg}{Table}
-\zcDicTypeTransl{table}{name-sg}{table}
-\zcDicTypeTransl{table}{Name-pl}{Tables}
-\zcDicTypeTransl{table}{name-pl}{tables}
+type = item ,
+  Name-sg = Point ,
+  name-sg = point ,
+  Name-pl = Points ,
+  name-pl = points ,
 
-\zcDicTypeTransl{item}{Name-sg}{Point}
-\zcDicTypeTransl{item}{name-sg}{point}
-\zcDicTypeTransl{item}{Name-pl}{Points}
-\zcDicTypeTransl{item}{name-pl}{points}
+type = footnote ,
+  Name-sg = Note ,
+  name-sg = note ,
+  Name-pl = Notes ,
+  name-pl = notes ,
 
-\zcDicTypeTransl{footnote}{Name-sg}{Note}
-\zcDicTypeTransl{footnote}{name-sg}{note}
-\zcDicTypeTransl{footnote}{Name-pl}{Notes}
-\zcDicTypeTransl{footnote}{name-pl}{notes}
+type = note ,
+  Name-sg = Note ,
+  name-sg = note ,
+  Name-pl = Notes ,
+  name-pl = notes ,
 
-\zcDicTypeTransl{note}{Name-sg}{Note}
-\zcDicTypeTransl{note}{name-sg}{note}
-\zcDicTypeTransl{note}{Name-pl}{Notes}
-\zcDicTypeTransl{note}{name-pl}{notes}
+type = equation ,
+  Name-sg = Équation ,
+  name-sg = équation ,
+  Name-pl = Équations ,
+  name-pl = équations ,
+  refpre-in = {(} ,
+  refpos-in = {)} ,
 
-\zcDicTypeTransl{equation}{Name-sg}{Équation}
-\zcDicTypeTransl{equation}{name-sg}{équation}
-\zcDicTypeTransl{equation}{Name-pl}{Équations}
-\zcDicTypeTransl{equation}{name-pl}{équations}
-\zcDicTypeTransl{equation}{refpre-in}{(}
-\zcDicTypeTransl{equation}{refpos-in}{)}
+type = theorem ,
+  Name-sg = Théorème ,
+  name-sg = théorème ,
+  Name-pl = Théorèmes ,
+  name-pl = théorèmes ,
 
-\zcDicTypeTransl{theorem}{Name-sg}{Théorème}
-\zcDicTypeTransl{theorem}{name-sg}{théorème}
-\zcDicTypeTransl{theorem}{Name-pl}{Théorèmes}
-\zcDicTypeTransl{theorem}{name-pl}{théorèmes}
+type = lemma ,
+  Name-sg = Lemme ,
+  name-sg = lemme ,
+  Name-pl = Lemmes ,
+  name-pl = lemmes ,
 
-\zcDicTypeTransl{lemma}{Name-sg}{Lemme}
-\zcDicTypeTransl{lemma}{name-sg}{lemme}
-\zcDicTypeTransl{lemma}{Name-pl}{Lemmes}
-\zcDicTypeTransl{lemma}{name-pl}{lemmes}
+type = corollary ,
+  Name-sg = Corollaire ,
+  name-sg = corollaire ,
+  Name-pl = Corollaires ,
+  name-pl = corollaires ,
 
-\zcDicTypeTransl{corollary}{Name-sg}{Corollaire}
-\zcDicTypeTransl{corollary}{name-sg}{corollaire}
-\zcDicTypeTransl{corollary}{Name-pl}{Corollaires}
-\zcDicTypeTransl{corollary}{name-pl}{corollaires}
+type = proposition ,
+  Name-sg = Proposition ,
+  name-sg = proposition ,
+  Name-pl = Propositions ,
+  name-pl = propositions ,
 
-\zcDicTypeTransl{proposition}{Name-sg}{Proposition}
-\zcDicTypeTransl{proposition}{name-sg}{proposition}
-\zcDicTypeTransl{proposition}{Name-pl}{Propositions}
-\zcDicTypeTransl{proposition}{name-pl}{propositions}
+type = definition ,
+  Name-sg = Définition ,
+  name-sg = définition ,
+  Name-pl = Définitions ,
+  name-pl = définitions ,
 
-\zcDicTypeTransl{definition}{Name-sg}{Définition}
-\zcDicTypeTransl{definition}{name-sg}{définition}
-\zcDicTypeTransl{definition}{Name-pl}{Définitions}
-\zcDicTypeTransl{definition}{name-pl}{définitions}
+type = proof ,
+  Name-sg = Démonstration ,
+  name-sg = démonstration ,
+  Name-pl = Démonstrations ,
+  name-pl = démonstrations ,
 
-\zcDicTypeTransl{proof}{Name-sg}{Démonstration}
-\zcDicTypeTransl{proof}{name-sg}{démonstration}
-\zcDicTypeTransl{proof}{Name-pl}{Démonstrations}
-\zcDicTypeTransl{proof}{name-pl}{démonstrations}
+type = result ,
+  Name-sg = Résultat ,
+  name-sg = résultat ,
+  Name-pl = Résultats ,
+  name-pl = résultats ,
 
-\zcDicTypeTransl{result}{Name-sg}{Résultat}
-\zcDicTypeTransl{result}{name-sg}{résultat}
-\zcDicTypeTransl{result}{Name-pl}{Résultats}
-\zcDicTypeTransl{result}{name-pl}{résultats}
+type = example ,
+  Name-sg = Exemple ,
+  name-sg = exemple ,
+  Name-pl = Exemples ,
+  name-pl = exemples ,
 
-\zcDicTypeTransl{example}{Name-sg}{Exemple}
-\zcDicTypeTransl{example}{name-sg}{exemple}
-\zcDicTypeTransl{example}{Name-pl}{Exemples}
-\zcDicTypeTransl{example}{name-pl}{exemples}
+type = remark ,
+  Name-sg = Remarque ,
+  name-sg = remarque ,
+  Name-pl = Remarques ,
+  name-pl = remarques ,
 
-\zcDicTypeTransl{remark}{Name-sg}{Remarque}
-\zcDicTypeTransl{remark}{name-sg}{remarque}
-\zcDicTypeTransl{remark}{Name-pl}{Remarques}
-\zcDicTypeTransl{remark}{name-pl}{remarques}
+type = algorithm ,
+  Name-sg = Algorithme ,
+  name-sg = algorithme ,
+  Name-pl = Algorithmes ,
+  name-pl = algorithmes ,
 
-\zcDicTypeTransl{algorithm}{Name-sg}{Algorithme}
-\zcDicTypeTransl{algorithm}{name-sg}{algorithme}
-\zcDicTypeTransl{algorithm}{Name-pl}{Algorithmes}
-\zcDicTypeTransl{algorithm}{name-pl}{algorithmes}
+type = listing ,
+  Name-sg = Liste ,
+  name-sg = liste ,
+  Name-pl = Listes ,
+  name-pl = listes ,
 
-\zcDicTypeTransl{listing}{Name-sg}{Liste}
-\zcDicTypeTransl{listing}{name-sg}{liste}
-\zcDicTypeTransl{listing}{Name-pl}{Listes}
-\zcDicTypeTransl{listing}{name-pl}{listes}
+type = exercise ,
+  Name-sg = Exercice ,
+  name-sg = exercice ,
+  Name-pl = Exercices ,
+  name-pl = exercices ,
 
-\zcDicTypeTransl{exercise}{Name-sg}{Exercice}
-\zcDicTypeTransl{exercise}{name-sg}{exercice}
-\zcDicTypeTransl{exercise}{Name-pl}{Exercices}
-\zcDicTypeTransl{exercise}{name-pl}{exercices}
-
-\zcDicTypeTransl{solution}{Name-sg}{Solution}
-\zcDicTypeTransl{solution}{name-sg}{solution}
-\zcDicTypeTransl{solution}{Name-pl}{Solutions}
-\zcDicTypeTransl{solution}{name-pl}{solutions}
+type = solution ,
+  Name-sg = Solution ,
+  name-sg = solution ,
+  Name-pl = Solutions ,
+  name-pl = solutions ,
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%</lang-french>
+%</dict-french>
 %    \end{macrocode}
 %
 %
 %
 % \subsection{Portuguese}
 %
+%<package>\zcDeclareLanguage { portuguese }
+%<package>\zcDeclareLanguageAlias { brazilian } { portuguese }
+%<package>\zcDeclareLanguageAlias { portuges  } { portuguese }
+%<package>\zcDeclareLanguageAlias { brazil    } { portuguese }
+%
 %    \begin{macrocode}
-%<*lang-portuguese>
+%<*dict-portuguese>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{Portuguese}{zref-clever}
+namesep  = {\nobreakspace} ,
+pairsep  = {~e\nobreakspace} ,
+listsep  = {,~} ,
+lastsep  = {~e\nobreakspace} ,
+tpairsep = {~e\nobreakspace} ,
+tlistsep = {,~} ,
+tlastsep = {~e\nobreakspace} ,
+notesep  = {~} ,
+rangesep = {~a\nobreakspace} ,
 
-\zcDicDefaultTransl{namesep}{\nobreakspace}
-\zcDicDefaultTransl{pairsep}{~e\nobreakspace}
-\zcDicDefaultTransl{listsep}{,~}
-\zcDicDefaultTransl{lastsep}{~e\nobreakspace}
-\zcDicDefaultTransl{tpairsep}{~e\nobreakspace}
-\zcDicDefaultTransl{tlistsep}{,~}
-\zcDicDefaultTransl{tlastsep}{~e\nobreakspace}
-\zcDicDefaultTransl{notesep}{~}
-\zcDicDefaultTransl{rangesep}{~a\nobreakspace}
+type = part ,
+  Name-sg = Parte ,
+  name-sg = parte ,
+  Name-pl = Partes ,
+  name-pl = partes ,
 
-\zcDicTypeTransl{part}{Name-sg}{Parte}
-\zcDicTypeTransl{part}{name-sg}{parte}
-\zcDicTypeTransl{part}{Name-pl}{Partes}
-\zcDicTypeTransl{part}{name-pl}{partes}
+type = chapter ,
+  Name-sg = Capítulo ,
+  name-sg = capítulo ,
+  Name-pl = Capítulos ,
+  name-pl = capítulos ,
 
-\zcDicTypeTransl{chapter}{Name-sg}{Capítulo}
-\zcDicTypeTransl{chapter}{name-sg}{capítulo}
-\zcDicTypeTransl{chapter}{Name-pl}{Capítulos}
-\zcDicTypeTransl{chapter}{name-pl}{capítulos}
+type = section ,
+  Name-sg = Seção ,
+  name-sg = seção ,
+  Name-pl = Seções ,
+  name-pl = seções ,
 
-\zcDicTypeTransl{section}{Name-sg}{Seção}
-\zcDicTypeTransl{section}{name-sg}{seção}
-\zcDicTypeTransl{section}{Name-pl}{Seções}
-\zcDicTypeTransl{section}{name-pl}{seções}
+type = paragraph ,
+  Name-sg = Parágrafo ,
+  name-sg = parágrafo ,
+  Name-pl = Parágrafos ,
+  name-pl = parágrafos ,
+  Name-sg-ab = Par. ,
+  name-sg-ab = par. ,
+  Name-pl-ab = Par. ,
+  name-pl-ab = par. ,
 
-\zcDicTypeTransl{paragraph}{Name-sg}{Parágrafo}
-\zcDicTypeTransl{paragraph}{name-sg}{parágrafo}
-\zcDicTypeTransl{paragraph}{Name-pl}{Parágrafos}
-\zcDicTypeTransl{paragraph}{name-pl}{parágrafos}
-\zcDicTypeTransl{paragraph}{Name-sg-ab}{Par.}
-\zcDicTypeTransl{paragraph}{name-sg-ab}{par.}
-\zcDicTypeTransl{paragraph}{Name-pl-ab}{Par.}
-\zcDicTypeTransl{paragraph}{name-pl-ab}{par.}
+type = appendix ,
+  Name-sg = Apêndice ,
+  name-sg = apêndice ,
+  Name-pl = Apêndices ,
+  name-pl = apêndices ,
 
-\zcDicTypeTransl{appendix}{Name-sg}{Apêndice}
-\zcDicTypeTransl{appendix}{name-sg}{apêndice}
-\zcDicTypeTransl{appendix}{Name-pl}{Apêndices}
-\zcDicTypeTransl{appendix}{name-pl}{apêndices}
+type = page ,
+  Name-sg = Página ,
+  name-sg = página ,
+  Name-pl = Páginas ,
+  name-pl = páginas ,
+  name-sg-ab = p. ,
+  name-pl-ab = pp. ,
 
-\zcDicTypeTransl{page}{Name-sg}{Página}
-\zcDicTypeTransl{page}{name-sg}{página}
-\zcDicTypeTransl{page}{Name-pl}{Páginas}
-\zcDicTypeTransl{page}{name-pl}{páginas}
-\zcDicTypeTransl{page}{name-sg-ab}{p.}
-\zcDicTypeTransl{page}{name-pl-ab}{pp.}
+type = line ,
+  Name-sg = Linha ,
+  name-sg = linha ,
+  Name-pl = Linhas ,
+  name-pl = linhas ,
 
-\zcDicTypeTransl{line}{Name-sg}{Linha}
-\zcDicTypeTransl{line}{name-sg}{linha}
-\zcDicTypeTransl{line}{Name-pl}{Linhas}
-\zcDicTypeTransl{line}{name-pl}{linhas}
+type = figure ,
+  Name-sg = Figura ,
+  name-sg = figura ,
+  Name-pl = Figuras ,
+  name-pl = figuras ,
+  Name-sg-ab = Fig. ,
+  name-sg-ab = fig. ,
+  Name-pl-ab = Figs. ,
+  name-pl-ab = figs. ,
 
-\zcDicTypeTransl{figure}{Name-sg}{Figura}
-\zcDicTypeTransl{figure}{name-sg}{figura}
-\zcDicTypeTransl{figure}{Name-pl}{Figuras}
-\zcDicTypeTransl{figure}{name-pl}{figuras}
-\zcDicTypeTransl{figure}{Name-sg-ab}{Fig.}
-\zcDicTypeTransl{figure}{name-sg-ab}{fig.}
-\zcDicTypeTransl{figure}{Name-pl-ab}{Figs.}
-\zcDicTypeTransl{figure}{name-pl-ab}{figs.}
+type = table ,
+  Name-sg = Tabela ,
+  name-sg = tabela ,
+  Name-pl = Tabelas ,
+  name-pl = tabelas ,
 
-\zcDicTypeTransl{table}{Name-sg}{Tabela}
-\zcDicTypeTransl{table}{name-sg}{tabela}
-\zcDicTypeTransl{table}{Name-pl}{Tabelas}
-\zcDicTypeTransl{table}{name-pl}{tabelas}
+type = item ,
+  Name-sg = Item ,
+  name-sg = item ,
+  Name-pl = Itens ,
+  name-pl = itens ,
 
-\zcDicTypeTransl{item}{Name-sg}{Item}
-\zcDicTypeTransl{item}{name-sg}{item}
-\zcDicTypeTransl{item}{Name-pl}{Itens}
-\zcDicTypeTransl{item}{name-pl}{itens}
+type = footnote ,
+  Name-sg = Nota ,
+  name-sg = nota ,
+  Name-pl = Notas ,
+  name-pl = notas ,
 
-\zcDicTypeTransl{footnote}{Name-sg}{Nota}
-\zcDicTypeTransl{footnote}{name-sg}{nota}
-\zcDicTypeTransl{footnote}{Name-pl}{Notas}
-\zcDicTypeTransl{footnote}{name-pl}{notas}
+type = note ,
+  Name-sg = Nota ,
+  name-sg = nota ,
+  Name-pl = Notas ,
+  name-pl = notas ,
 
-\zcDicTypeTransl{note}{Name-sg}{Nota}
-\zcDicTypeTransl{note}{name-sg}{nota}
-\zcDicTypeTransl{note}{Name-pl}{Notas}
-\zcDicTypeTransl{note}{name-pl}{notas}
+type = equation ,
+  Name-sg = Equação ,
+  name-sg = equação ,
+  Name-pl = Equações ,
+  name-pl = equações ,
+  Name-sg-ab = Eq. ,
+  name-sg-ab = eq. ,
+  Name-pl-ab = Eqs. ,
+  name-pl-ab = eqs. ,
+  refpre-in = ( ,
+  refpos-in = ) ,
 
-\zcDicTypeTransl{equation}{Name-sg}{Equação}
-\zcDicTypeTransl{equation}{name-sg}{equação}
-\zcDicTypeTransl{equation}{Name-pl}{Equações}
-\zcDicTypeTransl{equation}{name-pl}{equações}
-\zcDicTypeTransl{equation}{Name-sg-ab}{Eq.}
-\zcDicTypeTransl{equation}{name-sg-ab}{eq.}
-\zcDicTypeTransl{equation}{Name-pl-ab}{Eqs.}
-\zcDicTypeTransl{equation}{name-pl-ab}{eqs.}
-\zcDicTypeTransl{equation}{refpre-in}{(}
-\zcDicTypeTransl{equation}{refpos-in}{)}
+type = theorem ,
+  Name-sg = Teorema ,
+  name-sg = teorema ,
+  Name-pl = Teoremas ,
+  name-pl = teoremas ,
 
-\zcDicTypeTransl{theorem}{Name-sg}{Teorema}
-\zcDicTypeTransl{theorem}{name-sg}{teorema}
-\zcDicTypeTransl{theorem}{Name-pl}{Teoremas}
-\zcDicTypeTransl{theorem}{name-pl}{teoremas}
+type = lemma ,
+  Name-sg = Lema ,
+  name-sg = lema ,
+  Name-pl = Lemas ,
+  name-pl = lemas ,
 
-\zcDicTypeTransl{lemma}{Name-sg}{Lema}
-\zcDicTypeTransl{lemma}{name-sg}{lema}
-\zcDicTypeTransl{lemma}{Name-pl}{Lemas}
-\zcDicTypeTransl{lemma}{name-pl}{lemas}
+type = corollary ,
+  Name-sg = Corolário ,
+  name-sg = corolário ,
+  Name-pl = Corolários ,
+  name-pl = corolários ,
 
-\zcDicTypeTransl{corollary}{Name-sg}{Corolário}
-\zcDicTypeTransl{corollary}{name-sg}{corolário}
-\zcDicTypeTransl{corollary}{Name-pl}{Corolários}
-\zcDicTypeTransl{corollary}{name-pl}{corolários}
+type = proposition ,
+  Name-sg = Proposição ,
+  name-sg = proposição ,
+  Name-pl = Proposições ,
+  name-pl = proposições ,
 
-\zcDicTypeTransl{proposition}{Name-sg}{Proposição}
-\zcDicTypeTransl{proposition}{name-sg}{proposição}
-\zcDicTypeTransl{proposition}{Name-pl}{Proposições}
-\zcDicTypeTransl{proposition}{name-pl}{proposições}
+type = definition ,
+  Name-sg = Definição ,
+  name-sg = definição ,
+  Name-pl = Definições ,
+  name-pl = definições ,
 
-\zcDicTypeTransl{definition}{Name-sg}{Definição}
-\zcDicTypeTransl{definition}{name-sg}{definição}
-\zcDicTypeTransl{definition}{Name-pl}{Definições}
-\zcDicTypeTransl{definition}{name-pl}{definições}
+type = proof ,
+  Name-sg = Demonstração ,
+  name-sg = demonstração ,
+  Name-pl = Demonstrações ,
+  name-pl = demonstrações ,
 
-\zcDicTypeTransl{proof}{Name-sg}{Demonstração}
-\zcDicTypeTransl{proof}{name-sg}{demonstração}
-\zcDicTypeTransl{proof}{Name-pl}{Demonstrações}
-\zcDicTypeTransl{proof}{name-pl}{demonstrações}
+type = result ,
+  Name-sg = Resultado ,
+  name-sg = resultado ,
+  Name-pl = Resultados ,
+  name-pl = resultados ,
 
-\zcDicTypeTransl{result}{Name-sg}{Resultado}
-\zcDicTypeTransl{result}{name-sg}{resultado}
-\zcDicTypeTransl{result}{Name-pl}{Resultados}
-\zcDicTypeTransl{result}{name-pl}{resultados}
+type = example ,
+  Name-sg = Exemplo ,
+  name-sg = exemplo ,
+  Name-pl = Exemplos ,
+  name-pl = exemplos ,
 
-\zcDicTypeTransl{example}{Name-sg}{Exemplo}
-\zcDicTypeTransl{example}{name-sg}{exemplo}
-\zcDicTypeTransl{example}{Name-pl}{Exemplos}
-\zcDicTypeTransl{example}{name-pl}{exemplos}
+type = remark ,
+  Name-sg = Observação ,
+  name-sg = observação ,
+  Name-pl = Observações ,
+  name-pl = observações ,
 
-\zcDicTypeTransl{remark}{Name-sg}{Observação}
-\zcDicTypeTransl{remark}{name-sg}{observação}
-\zcDicTypeTransl{remark}{Name-pl}{Observações}
-\zcDicTypeTransl{remark}{name-pl}{observações}
+type = algorithm ,
+  Name-sg = Algoritmo ,
+  name-sg = algoritmo ,
+  Name-pl = Algoritmos ,
+  name-pl = algoritmos ,
 
-\zcDicTypeTransl{algorithm}{Name-sg}{Algoritmo}
-\zcDicTypeTransl{algorithm}{name-sg}{algoritmo}
-\zcDicTypeTransl{algorithm}{Name-pl}{Algoritmos}
-\zcDicTypeTransl{algorithm}{name-pl}{algoritmos}
+type = listing ,
+  Name-sg = Listagem ,
+  name-sg = listagem ,
+  Name-pl = Listagens ,
+  name-pl = listagens ,
 
-\zcDicTypeTransl{listing}{Name-sg}{Listagem}
-\zcDicTypeTransl{listing}{name-sg}{listagem}
-\zcDicTypeTransl{listing}{Name-pl}{Listagens}
-\zcDicTypeTransl{listing}{name-pl}{listagens}
+type = exercise ,
+  Name-sg = Exercício ,
+  name-sg = exercício ,
+  Name-pl = Exercícios ,
+  name-pl = exercícios ,
 
-\zcDicTypeTransl{exercise}{Name-sg}{Exercício}
-\zcDicTypeTransl{exercise}{name-sg}{exercício}
-\zcDicTypeTransl{exercise}{Name-pl}{Exercícios}
-\zcDicTypeTransl{exercise}{name-pl}{exercícios}
-
-\zcDicTypeTransl{solution}{Name-sg}{Solução}
-\zcDicTypeTransl{solution}{name-sg}{solução}
-\zcDicTypeTransl{solution}{Name-pl}{Soluções}
-\zcDicTypeTransl{solution}{name-pl}{soluções}
+type = solution ,
+  Name-sg = Solução ,
+  name-sg = solução ,
+  Name-pl = Soluções ,
+  name-pl = soluções ,
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%</lang-portuguese>
+%</dict-portuguese>
 %    \end{macrocode}
 %
 %
 %
 % \subsection{Spanish}
 %
+%<package>\zcDeclareLanguage { spanish }
+%
 %    \begin{macrocode}
-%<*lang-spanish>
+%<*dict-spanish>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\ProvideDictionaryFor{Spanish}{zref-clever}
+namesep  = {\nobreakspace} ,
+pairsep  = {~y\nobreakspace} ,
+listsep  = {,~} ,
+lastsep  = {~y\nobreakspace} ,
+tpairsep = {~y\nobreakspace} ,
+tlistsep = {,~} ,
+tlastsep = {~y\nobreakspace} ,
+notesep  = {~} ,
+rangesep = {~a\nobreakspace} ,
 
-\zcDicDefaultTransl{namesep}{\nobreakspace}
-\zcDicDefaultTransl{pairsep}{~y\nobreakspace}
-\zcDicDefaultTransl{listsep}{,~}
-\zcDicDefaultTransl{lastsep}{~y\nobreakspace}
-\zcDicDefaultTransl{tpairsep}{~y\nobreakspace}
-\zcDicDefaultTransl{tlistsep}{,~}
-\zcDicDefaultTransl{tlastsep}{~y\nobreakspace}
-\zcDicDefaultTransl{notesep}{~}
-\zcDicDefaultTransl{rangesep}{~a\nobreakspace}
+type = part ,
+  Name-sg = Parte ,
+  name-sg = parte ,
+  Name-pl = Partes ,
+  name-pl = partes ,
 
-\zcDicTypeTransl{part}{Name-sg}{Parte}
-\zcDicTypeTransl{part}{name-sg}{parte}
-\zcDicTypeTransl{part}{Name-pl}{Partes}
-\zcDicTypeTransl{part}{name-pl}{partes}
+type = chapter ,
+  Name-sg = Capítulo ,
+  name-sg = capítulo ,
+  Name-pl = Capítulos ,
+  name-pl = capítulos ,
 
-\zcDicTypeTransl{chapter}{Name-sg}{Capítulo}
-\zcDicTypeTransl{chapter}{name-sg}{capítulo}
-\zcDicTypeTransl{chapter}{Name-pl}{Capítulos}
-\zcDicTypeTransl{chapter}{name-pl}{capítulos}
+type = section ,
+  Name-sg = Sección ,
+  name-sg = sección ,
+  Name-pl = Secciones ,
+  name-pl = secciones ,
 
-\zcDicTypeTransl{section}{Name-sg}{Sección}
-\zcDicTypeTransl{section}{name-sg}{sección}
-\zcDicTypeTransl{section}{Name-pl}{Secciones}
-\zcDicTypeTransl{section}{name-pl}{secciones}
+type = paragraph ,
+  Name-sg = Párrafo ,
+  name-sg = párrafo ,
+  Name-pl = Párrafos ,
+  name-pl = párrafos ,
 
-\zcDicTypeTransl{paragraph}{Name-sg}{Párrafo}
-\zcDicTypeTransl{paragraph}{name-sg}{párrafo}
-\zcDicTypeTransl{paragraph}{Name-pl}{Párrafos}
-\zcDicTypeTransl{paragraph}{name-pl}{párrafos}
+type = appendix ,
+  Name-sg = Apéndice ,
+  name-sg = apéndice ,
+  Name-pl = Apéndices ,
+  name-pl = apéndices ,
 
-\zcDicTypeTransl{appendix}{Name-sg}{Apéndice}
-\zcDicTypeTransl{appendix}{name-sg}{apéndice}
-\zcDicTypeTransl{appendix}{Name-pl}{Apéndices}
-\zcDicTypeTransl{appendix}{name-pl}{apéndices}
+type = page ,
+  Name-sg = Página ,
+  name-sg = página ,
+  Name-pl = Páginas ,
+  name-pl = páginas ,
 
-\zcDicTypeTransl{page}{Name-sg}{Página}
-\zcDicTypeTransl{page}{name-sg}{página}
-\zcDicTypeTransl{page}{Name-pl}{Páginas}
-\zcDicTypeTransl{page}{name-pl}{páginas}
+type = line ,
+  Name-sg = Línea ,
+  name-sg = línea ,
+  Name-pl = Líneas ,
+  name-pl = líneas ,
 
-\zcDicTypeTransl{line}{Name-sg}{Línea}
-\zcDicTypeTransl{line}{name-sg}{línea}
-\zcDicTypeTransl{line}{Name-pl}{Líneas}
-\zcDicTypeTransl{line}{name-pl}{líneas}
+type = figure ,
+  Name-sg = Figura ,
+  name-sg = figura ,
+  Name-pl = Figuras ,
+  name-pl = figuras ,
 
-\zcDicTypeTransl{figure}{Name-sg}{Figura}
-\zcDicTypeTransl{figure}{name-sg}{figura}
-\zcDicTypeTransl{figure}{Name-pl}{Figuras}
-\zcDicTypeTransl{figure}{name-pl}{figuras}
+type = table ,
+  Name-sg = Cuadro ,
+  name-sg = cuadro ,
+  Name-pl = Cuadros ,
+  name-pl = cuadros ,
 
-\zcDicTypeTransl{table}{Name-sg}{Cuadro}
-\zcDicTypeTransl{table}{name-sg}{cuadro}
-\zcDicTypeTransl{table}{Name-pl}{Cuadros}
-\zcDicTypeTransl{table}{name-pl}{cuadros}
+type = item ,
+  Name-sg = Punto ,
+  name-sg = punto ,
+  Name-pl = Puntos ,
+  name-pl = puntos ,
 
-\zcDicTypeTransl{item}{Name-sg}{Punto}
-\zcDicTypeTransl{item}{name-sg}{punto}
-\zcDicTypeTransl{item}{Name-pl}{Puntos}
-\zcDicTypeTransl{item}{name-pl}{puntos}
+type = footnote ,
+  Name-sg = Nota ,
+  name-sg = nota ,
+  Name-pl = Notas ,
+  name-pl = notas ,
 
-\zcDicTypeTransl{footnote}{Name-sg}{Nota}
-\zcDicTypeTransl{footnote}{name-sg}{nota}
-\zcDicTypeTransl{footnote}{Name-pl}{Notas}
-\zcDicTypeTransl{footnote}{name-pl}{notas}
+type = note ,
+  Name-sg = Nota ,
+  name-sg = nota ,
+  Name-pl = Notas ,
+  name-pl = notas ,
 
-\zcDicTypeTransl{note}{Name-sg}{Nota}
-\zcDicTypeTransl{note}{name-sg}{nota}
-\zcDicTypeTransl{note}{Name-pl}{Notas}
-\zcDicTypeTransl{note}{name-pl}{notas}
+type = equation ,
+  Name-sg = Ecuación ,
+  name-sg = ecuación ,
+  Name-pl = Ecuaciones ,
+  name-pl = ecuaciones ,
+  refpre-in = ( ,
+  refpos-in = ) ,
 
-\zcDicTypeTransl{equation}{Name-sg}{Ecuación}
-\zcDicTypeTransl{equation}{name-sg}{ecuación}
-\zcDicTypeTransl{equation}{Name-pl}{Ecuaciones}
-\zcDicTypeTransl{equation}{name-pl}{ecuaciones}
-\zcDicTypeTransl{equation}{refpre-in}{(}
-\zcDicTypeTransl{equation}{refpos-in}{)}
+type = theorem ,
+  Name-sg = Teorema ,
+  name-sg = teorema ,
+  Name-pl = Teoremas ,
+  name-pl = teoremas ,
 
-\zcDicTypeTransl{theorem}{Name-sg}{Teorema}
-\zcDicTypeTransl{theorem}{name-sg}{teorema}
-\zcDicTypeTransl{theorem}{Name-pl}{Teoremas}
-\zcDicTypeTransl{theorem}{name-pl}{teoremas}
+type = lemma ,
+  Name-sg = Lema ,
+  name-sg = lema ,
+  Name-pl = Lemas ,
+  name-pl = lemas ,
 
-\zcDicTypeTransl{lemma}{Name-sg}{Lema}
-\zcDicTypeTransl{lemma}{name-sg}{lema}
-\zcDicTypeTransl{lemma}{Name-pl}{Lemas}
-\zcDicTypeTransl{lemma}{name-pl}{lemas}
+type = corollary ,
+  Name-sg = Corolario ,
+  name-sg = corolario ,
+  Name-pl = Corolarios ,
+  name-pl = corolarios ,
 
-\zcDicTypeTransl{corollary}{Name-sg}{Corolario}
-\zcDicTypeTransl{corollary}{name-sg}{corolario}
-\zcDicTypeTransl{corollary}{Name-pl}{Corolarios}
-\zcDicTypeTransl{corollary}{name-pl}{corolarios}
+type = proposition ,
+  Name-sg = Proposición ,
+  name-sg = proposición ,
+  Name-pl = Proposiciones ,
+  name-pl = proposiciones ,
 
-\zcDicTypeTransl{proposition}{Name-sg}{Proposición}
-\zcDicTypeTransl{proposition}{name-sg}{proposición}
-\zcDicTypeTransl{proposition}{Name-pl}{Proposiciones}
-\zcDicTypeTransl{proposition}{name-pl}{proposiciones}
+type = definition ,
+  Name-sg = Definición ,
+  name-sg = definición ,
+  Name-pl = Definiciones ,
+  name-pl = definiciones ,
 
-\zcDicTypeTransl{definition}{Name-sg}{Definición}
-\zcDicTypeTransl{definition}{name-sg}{definición}
-\zcDicTypeTransl{definition}{Name-pl}{Definiciones}
-\zcDicTypeTransl{definition}{name-pl}{definiciones}
+type = proof ,
+  Name-sg = Demostración ,
+  name-sg = demostración ,
+  Name-pl = Demostraciones ,
+  name-pl = demostraciones ,
 
-\zcDicTypeTransl{proof}{Name-sg}{Demostración}
-\zcDicTypeTransl{proof}{name-sg}{demostración}
-\zcDicTypeTransl{proof}{Name-pl}{Demostraciones}
-\zcDicTypeTransl{proof}{name-pl}{demostraciones}
+type = result ,
+  Name-sg = Resultado ,
+  name-sg = resultado ,
+  Name-pl = Resultados ,
+  name-pl = resultados ,
 
-\zcDicTypeTransl{result}{Name-sg}{Resultado}
-\zcDicTypeTransl{result}{name-sg}{resultado}
-\zcDicTypeTransl{result}{Name-pl}{Resultados}
-\zcDicTypeTransl{result}{name-pl}{resultados}
+type = example ,
+  Name-sg = Ejemplo ,
+  name-sg = ejemplo ,
+  Name-pl = Ejemplos ,
+  name-pl = ejemplos ,
 
-\zcDicTypeTransl{example}{Name-sg}{Ejemplo}
-\zcDicTypeTransl{example}{name-sg}{ejemplo}
-\zcDicTypeTransl{example}{Name-pl}{Ejemplos}
-\zcDicTypeTransl{example}{name-pl}{ejemplos}
+type = remark ,
+  Name-sg = Observación ,
+  name-sg = observación ,
+  Name-pl = Observaciones ,
+  name-pl = observaciones ,
 
-\zcDicTypeTransl{remark}{Name-sg}{Observación}
-\zcDicTypeTransl{remark}{name-sg}{observación}
-\zcDicTypeTransl{remark}{Name-pl}{Observaciones}
-\zcDicTypeTransl{remark}{name-pl}{observaciones}
+type = algorithm ,
+  Name-sg = Algoritmo ,
+  name-sg = algoritmo ,
+  Name-pl = Algoritmos ,
+  name-pl = algoritmos ,
 
-\zcDicTypeTransl{algorithm}{Name-sg}{Algoritmo}
-\zcDicTypeTransl{algorithm}{name-sg}{algoritmo}
-\zcDicTypeTransl{algorithm}{Name-pl}{Algoritmos}
-\zcDicTypeTransl{algorithm}{name-pl}{algoritmos}
+type = listing ,
+  Name-sg = Listado ,
+  name-sg = listado ,
+  Name-pl = Listados ,
+  name-pl = listados ,
 
-\zcDicTypeTransl{listing}{Name-sg}{Listado}
-\zcDicTypeTransl{listing}{name-sg}{listado}
-\zcDicTypeTransl{listing}{Name-pl}{Listados}
-\zcDicTypeTransl{listing}{name-pl}{listados}
+type = exercise ,
+  Name-sg = Ejercicio ,
+  name-sg = ejercicio ,
+  Name-pl = Ejercicios ,
+  name-pl = ejercicios ,
 
-\zcDicTypeTransl{exercise}{Name-sg}{Ejercicio}
-\zcDicTypeTransl{exercise}{name-sg}{ejercicio}
-\zcDicTypeTransl{exercise}{Name-pl}{Ejercicios}
-\zcDicTypeTransl{exercise}{name-pl}{ejercicios}
-
-\zcDicTypeTransl{solution}{Name-sg}{Solución}
-\zcDicTypeTransl{solution}{name-sg}{solución}
-\zcDicTypeTransl{solution}{Name-pl}{Soluciones}
-\zcDicTypeTransl{solution}{name-pl}{soluciones}
+type = solution ,
+  Name-sg = Solución ,
+  name-sg = solución ,
+  Name-pl = Soluciones ,
+  name-pl = soluciones ,
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%</lang-spanish>
+%</dict-spanish>
 %    \end{macrocode}
 %
 %
