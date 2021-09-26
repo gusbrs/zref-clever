@@ -607,8 +607,8 @@
 % options}; iii) as \emph{language-specific and type-specific translations};
 % and iv) as \emph{default translations} (that is, language-specific but not
 % type-specific).  These precedence rules are handled / enforced in
-% \cs{@@_get_option_with_transl:nN} and \cs{@@_get_option_plain:nN}, which are
-% the basic functions to retrieve proper values for reference format settings.
+% \cs{@@_get_ref_string:nN} and \cs{@@_get_ref_font:nN}, which are the basic
+% functions to retrieve proper values for reference format settings.
 %
 % General ``options'' (i) can be given by the user in the optional argument of
 % \cs{zcref}, but just as well in \cs{zcsetup} or as package options at
@@ -652,8 +652,9 @@
 %     \c_@@_ref_options_necessarily_not_type_specific_seq ,
 %     \c_@@_ref_options_possibly_type_specific_seq ,
 %     \c_@@_ref_options_necessarily_type_specific_seq ,
-%     \c_@@_ref_options_type_specific_seq ,
-%     \c_@@_ref_options_not_type_specific_seq ,
+%     \c_@@_ref_options_font_seq ,
+%     \c_@@_ref_options_typesetup_seq ,
+%     \c_@@_ref_options_reference_seq ,
 %   }
 %     Lists of reference format related options in ``categories''.  Since
 %     these options are set in different scopes, and at different places,
@@ -681,6 +682,12 @@
     refpre-in ,
     refpos-in ,
   }
+%    \end{macrocode}
+% Only ``type names'' are ``necessarily type-specific'', which makes them
+% somewhat special on the retrieval side of things.  In short, they don't have
+% their values queried by \cs{@@_get_ref_string:nN}, but by
+% \cs{@@_type_name_setup:}.
+%    \begin{macrocode}
 \seq_const_from_clist:Nn
   \c_@@_ref_options_necessarily_type_specific_seq
   {
@@ -693,14 +700,31 @@
     Name-pl-ab ,
     name-pl-ab ,
   }
-\seq_new:N \c_@@_ref_options_type_specific_seq
-\seq_gconcat:NNN \c_@@_ref_options_type_specific_seq
+%    \end{macrocode}
+% \cs{c_@@_ref_options_font_seq} are technically ``possibly type-specific'',
+% but are not ``language-specific'', so we separate them.
+%    \begin{macrocode}
+\seq_const_from_clist:Nn
+  \c_@@_ref_options_font_seq
+  {
+    namefont ,
+    reffont ,
+    reffont-in ,
+  }
+\seq_new:N \c_@@_ref_options_typesetup_seq
+\seq_gconcat:NNN \c_@@_ref_options_typesetup_seq
   \c_@@_ref_options_possibly_type_specific_seq
   \c_@@_ref_options_necessarily_type_specific_seq
-\seq_new:N \c_@@_ref_options_not_type_specific_seq
-\seq_gconcat:NNN \c_@@_ref_options_not_type_specific_seq
+\seq_gconcat:NNN \c_@@_ref_options_typesetup_seq
+  \c_@@_ref_options_typesetup_seq
+  \c_@@_ref_options_font_seq
+\seq_new:N \c_@@_ref_options_reference_seq
+\seq_gconcat:NNN \c_@@_ref_options_reference_seq
   \c_@@_ref_options_necessarily_not_type_specific_seq
   \c_@@_ref_options_possibly_type_specific_seq
+\seq_gconcat:NNN \c_@@_ref_options_reference_seq
+  \c_@@_ref_options_reference_seq
+  \c_@@_ref_options_font_seq
 %    \end{macrocode}
 % \end{variable}
 %
@@ -929,24 +953,28 @@
 %
 %
 %
-% All options retrieved with \cs{@@_get_option_with_transl:nN} must have their
-% values set for `fallback', even if to empty values, since this is what will
-% be retrieved if \pkg{babel} or \pkg{polyglossia} is loaded and sets a
-% language which \pkg{zref-clever} does not know.  On the other hand,
-% type-specific options are not looked for in `fallback'.
+% All ``strings'' queried with \cs{@@_get_ref_string:nN} -- in practice, those
+% in either \cs{c_@@_ref_options_necessarily_not_type_specific_seq} or
+% \cs{c_@@_ref_options_possibly_type_specific_seq} -- must have their values
+% set for ``fallback'', even if to empty ones, since this is what will be
+% retrieved in the absence of a proper translation, which will be the case if
+% \pkg{babel} or \pkg{polyglossia} is loaded and sets a language which
+% \pkg{zref-clever} does not know.  On the other hand, ``type names'' are not
+% looked for in ``fallback'', since it is indeed impossible to provide any
+% reasonable value for them for a ``specified but unknown language''.
 %
 %    \begin{macrocode}
 \prop_new:N \g_@@_fallback_dict_prop
 \prop_gset_from_keyval:Nn \g_@@_fallback_dict_prop
   {
-    namesep   = {\nobreakspace} ,
-    pairsep   = {,~} ,
-    listsep   = {,~} ,
-    lastsep   = {,~} ,
     tpairsep  = {,~} ,
     tlistsep  = {,~} ,
     tlastsep  = {,~} ,
     notesep   = {~} ,
+    namesep   = {\nobreakspace} ,
+    pairsep   = {,~} ,
+    listsep   = {,~} ,
+    lastsep   = {,~} ,
     rangesep  = {\textendash} ,
     refpre    = {} ,
     refpos    = {} ,
@@ -1624,8 +1652,8 @@
 % not necessarily type-specific options are pertinent here.  However, they
 % \emph{may} either be type-specific or language-specific, and thus must be
 % stored in a property list, \cs{l_@@_ref_options_prop}, in order to be
-% retrieved from the option \emph{name} by \cs{@@_get_option_with_transl:nN}
-% and \cs{@@_get_option_plain:nN} according to context and precedence rules.
+% retrieved from the option \emph{name} by \cs{@@_get_ref_string:nN} and
+% \cs{@@_get_ref_font:nN} according to context and precedence rules.
 %
 % The keys are set so that any value, including an empty one, is added to
 % \cs{l_@@_ref_options_prop}, while a key with \emph{no value} removes the
@@ -1636,7 +1664,7 @@
 %    \begin{macrocode}
 \prop_new:N \l_@@_ref_options_prop
 \seq_map_inline:Nn
-  \c_@@_ref_options_not_type_specific_seq
+  \c_@@_ref_options_reference_seq
   {
     \keys_define:nn { zref-clever / reference }
       {
@@ -1680,7 +1708,7 @@
 %
 %
 %
-% \section{User interface}
+% \section{Configuration}
 %
 % \subsection{\cs{zcsetup}}
 %
@@ -1762,7 +1790,7 @@
 %
 %    \begin{macrocode}
 \seq_map_inline:Nn
-  \c_@@_ref_options_type_specific_seq
+  \c_@@_ref_options_typesetup_seq
   {
     \keys_define:nn { zref-clever / typesetup }
       {
@@ -1940,6 +1968,8 @@
 %
 %
 %
+% \section{User interface}
+%
 % \subsection{\cs{zcref}}
 %
 %
@@ -1997,12 +2027,17 @@
         { \l_@@_typeset_range_bool }
         { \@@_sort_labels: }
 %    \end{macrocode}
-% Typeset the references.
+% Typeset the references.  Also, set the reference font, and group it, so that
+% it does not leak to the note.
 %    \begin{macrocode}
+      \group_begin:
+      \l_@@_ref_typeset_font_tl
       \@@_typeset_refs:
+      \group_end:
 %    \end{macrocode}
 % Typeset \texttt{note}.
 %    \begin{macrocode}
+      \@@_get_ref_string:nN {notesep} \l_@@_notesep_tl
       \l_@@_notesep_tl
       \l_@@_zcref_note_tl
 %    \end{macrocode}
@@ -2688,13 +2723,9 @@
     \int_zero:N \l_@@_range_same_count_int
 
     % Get not-type-specific separators and refpre/pos options.
-    \@@_get_option_with_transl:nN {tpairsep} \l_@@_tpairsep_tl
-    \@@_get_option_with_transl:nN {tlistsep} \l_@@_tlistsep_tl
-    \@@_get_option_with_transl:nN {tlastsep} \l_@@_tlastsep_tl
-    \@@_get_option_with_transl:nN {notesep}  \l_@@_notesep_tl
-
-    % Set the font option for this zcref call.
-    \l_@@_ref_typeset_font_tl
+    \@@_get_ref_string:nN {tpairsep} \l_@@_tpairsep_tl
+    \@@_get_ref_string:nN {tlistsep} \l_@@_tlistsep_tl
+    \@@_get_ref_string:nN {tlastsep} \l_@@_tlastsep_tl
 
     % Loop over the label list in sequence.
     \bool_set_false:N \l_@@_typeset_last_bool
@@ -2787,18 +2818,18 @@
         % type.
         \int_compare:nNnT { \l_@@_label_count_int } = { 0 }
           {
-            \@@_get_option_plain:nN {namefont}        \l_@@_namefont_tl
-            \@@_get_option_plain:nN {reffont}         \l_@@_reffont_out_tl
-            \@@_get_option_plain:nN {reffont-in}      \l_@@_reffont_in_tl
-            \@@_get_option_with_transl:nN {namesep}   \l_@@_namesep_tl
-            \@@_get_option_with_transl:nN {rangesep}  \l_@@_rangesep_tl
-            \@@_get_option_with_transl:nN {pairsep}   \l_@@_pairsep_tl
-            \@@_get_option_with_transl:nN {listsep}   \l_@@_listsep_tl
-            \@@_get_option_with_transl:nN {lastsep}   \l_@@_lastsep_tl
-            \@@_get_option_with_transl:nN {refpre}    \l_@@_refpre_out_tl
-            \@@_get_option_with_transl:nN {refpos}    \l_@@_refpos_out_tl
-            \@@_get_option_with_transl:nN {refpre-in} \l_@@_refpre_in_tl
-            \@@_get_option_with_transl:nN {refpos-in} \l_@@_refpos_in_tl
+            \@@_get_ref_font:nN {namefont}    \l_@@_namefont_tl
+            \@@_get_ref_font:nN {reffont}     \l_@@_reffont_out_tl
+            \@@_get_ref_font:nN {reffont-in}  \l_@@_reffont_in_tl
+            \@@_get_ref_string:nN {namesep}   \l_@@_namesep_tl
+            \@@_get_ref_string:nN {rangesep}  \l_@@_rangesep_tl
+            \@@_get_ref_string:nN {pairsep}   \l_@@_pairsep_tl
+            \@@_get_ref_string:nN {listsep}   \l_@@_listsep_tl
+            \@@_get_ref_string:nN {lastsep}   \l_@@_lastsep_tl
+            \@@_get_ref_string:nN {refpre}    \l_@@_refpre_out_tl
+            \@@_get_ref_string:nN {refpos}    \l_@@_refpos_out_tl
+            \@@_get_ref_string:nN {refpre-in} \l_@@_refpre_in_tl
+            \@@_get_ref_string:nN {refpos-in} \l_@@_refpos_in_tl
           }
 
         % Here we send this to a couple of auxiliary functions for no other
@@ -3583,10 +3614,10 @@
 %
 %
 %
-% \begin{macro}{\@@_get_option_with_transl:nN}
+% \begin{macro}{\@@_get_ref_string:nN}
 %    \begin{macrocode}
 % \Arg{option} \Arg{var to store result}
-\cs_new_protected:Npn \@@_get_option_with_transl:nN #1#2
+\cs_new_protected:Npn \@@_get_ref_string:nN #1#2
   {
     % First attempt options stored in \cs{l_@@_ref_options_prop}.
     \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
@@ -3633,9 +3664,9 @@
 %
 %
 %
-% \begin{macro}{\@@_get_option_plain:nN}
+% \begin{macro}{\@@_get_ref_font:nN}
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_get_option_plain:nN #1#2
+\cs_new_protected:Npn \@@_get_ref_font:nN #1#2
   {
     % First attempt options stored in \cs{l_@@_ref_options_prop}.
     \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
