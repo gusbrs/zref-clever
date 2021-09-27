@@ -793,7 +793,6 @@
           \g_@@_loaded_dictionaries_seq
           \l_@@_dict_language_tl
           {
-            \tl_clear:N \l_tmpa_tl
             \exp_args:Nx \file_get:nnNTF
               { zref-clever- \l_@@_dict_language_tl .dict }
               { \ExplSyntaxOn }
@@ -2101,7 +2100,9 @@
 %     \l_@@_label_enclcnt_a_tl ,
 %     \l_@@_label_enclcnt_b_tl ,
 %     \l_@@_label_enclval_a_tl ,
-%     \l_@@_label_enclval_b_tl
+%     \l_@@_label_enclval_b_tl ,
+%     \l_@@_label_enclhead_a_tl ,
+%     \l_@@_label_enclhead_b_tl ,
 %   }
 % Aux variables, for use in sorting and typesetting.  I could probably let go
 % some of them in favor of \texttt{tmpa}/\texttt{tmpb}, but they do improve
@@ -2115,6 +2116,8 @@
 \tl_new:N \l_@@_label_enclcnt_b_tl
 \tl_new:N \l_@@_label_enclval_a_tl
 \tl_new:N \l_@@_label_enclval_b_tl
+\tl_new:N \l_@@_label_enclhead_a_tl
+\tl_new:N \l_@@_label_enclhead_b_tl
 %    \end{macrocode}
 % \end{variable}
 %
@@ -2343,22 +2346,19 @@
       { \tl_reverse_items:V \l_@@_label_enclval_b_tl }
 
     \bool_set_false:N \l_@@_sort_decided_bool
-    % CHECK should I replace the tmp variables here?
-    \tl_clear:N \l_tmpa_tl
-    \tl_clear:N \l_tmpb_tl
     \bool_until_do:Nn \l_@@_sort_decided_bool
       {
-        \tl_set:Nx \l_tmpa_tl
+        \tl_set:Nx \l_@@_label_enclhead_a_tl
           { \tl_head:N \l_@@_label_enclcnt_a_tl }
-        \tl_set:Nx \l_tmpb_tl
+        \tl_set:Nx \l_@@_label_enclhead_b_tl
           { \tl_head:N \l_@@_label_enclcnt_b_tl }
 
         \bool_if:nTF
           {
             % Both are empty, meaning: neither labels have any (further)
             % ``enclosing counters'' (left).
-            \tl_if_empty_p:V \l_tmpa_tl &&
-            \tl_if_empty_p:V \l_tmpb_tl
+            \tl_if_empty_p:V \l_@@_label_enclhead_a_tl &&
+            \tl_if_empty_p:V \l_@@_label_enclhead_b_tl
           }
           {
             \exp_args:Nxx \tl_if_eq:nnTF
@@ -2385,7 +2385,7 @@
               {
                 % `a' is empty (and `b' is not), meaning: `b' is (possibly)
                 % nested in `a'.
-                \tl_if_empty_p:V \l_tmpa_tl
+                \tl_if_empty_p:V \l_@@_label_enclhead_a_tl
               }
               {
                 \tl_set:Nx \l_tmpa_tl
@@ -2408,7 +2408,7 @@
                   {
                     % `b' is empty (and `a' is not), meaning: `a' is
                     % (possibly) nested in `b'.
-                    \tl_if_empty_p:V \l_tmpb_tl
+                    \tl_if_empty_p:V \l_@@_label_enclhead_b_tl
                   }
                   {
                     \tl_set:Nx \l_tmpb_tl
@@ -2431,7 +2431,9 @@
                     % values of the current enclosing counter in the loop, if
                     % they are equal, we are still in the loop, if they are
                     % not, a sorting decision can be made directly.
-                    \tl_if_eq:NNTF \l_tmpa_tl \l_tmpb_tl
+                    \tl_if_eq:NNTF
+                      \l_@@_label_enclhead_a_tl
+                      \l_@@_label_enclhead_b_tl
                       {
                         \int_compare:nNnTF
                           { \tl_head:N \l_@@_label_enclval_a_tl }
