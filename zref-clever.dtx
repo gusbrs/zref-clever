@@ -177,7 +177,6 @@
 %<@@=zrefclever>
 %    \end{macrocode}
 %
-%
 % Taking a stance on backward compatibility of the package.  During initial
 % development, we have used freely recent features of the kernel (albeit
 % refraining from \pkg{l3candidates}, even though I'd have loved to have used
@@ -213,7 +212,6 @@
 %
 % \section{Dependencies}
 %
-%
 % Required packages.  Besides these, \pkg{zref-hyperref} may also be required
 % depending on the presence of \pkg{hyperref} itself and on the \opt{hyperref}
 % option.
@@ -228,7 +226,6 @@
 %
 %
 % \section{\pkg{zref} setup}
-%
 %
 % For the purposes of the package, we need to store some information with the
 % labels, some of it standard, some of it not so much.  So, we have to setup
@@ -318,7 +315,7 @@
 % most important use case is the automatic resetting of counters when some
 % other counter is stepped, as performed by the standard mechanisms of the
 % kernel (optional argument of \cs{newcounter}, \cs{@addtoreset},
-% \cs{counterwithin} and related infrastructure).  The canonical optional
+% \cs{counterwithin}, and related infrastructure).  The canonical optional
 % argument of \cs{newcounter} establishes that the counter being created (the
 % mandatory argument) gets reset every time the ``enclosing counter'' gets
 % stepped (this is called in the usual sources ``within-counter'', ``old
@@ -520,8 +517,8 @@
 \msg_new:nnn { zref-clever } { option-not-type-specific }
   {
     Option~'#1'~is~not~type-specific~\msg_line_context:.~
-    Set~it~in~'\iow_char:N\\zcDeclareTranslations'~before~first~'type'~switch~
-    or~as~package~option.
+    Set~it~in~'\iow_char:N\\zcDeclareTranslations'~before~first~'type'
+    ~switch~or~as~package~option.
   }
 \msg_new:nnn { zref-clever } { option-only-type-specific }
   {
@@ -529,15 +526,14 @@
     Set~it~after~'type'~switch~or~in~'\iow_char:N\\zcRefTypeSetup'.
   }
 \msg_new:nnn { zref-clever } { key-requires-value }
-  { The~'#1'~key~'#2'~requires~a~value. }
+  { The~'#1'~key~'#2'~requires~a~value~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { language-declared }
   { Language~'#1'~is~already~declared.~Nothing~to~do. }
-\msg_new:nnn { zref-clever } { alias-declared }
-  { Language~'#1'~is~already~an~alias~to~'#2'.~Nothing~to~do. }
 \msg_new:nnn { zref-clever } { unknown-language-alias }
   {
     Language~'#1'~is~unknown,~cannot~alias~to~it.~See~documentation~for~
-    '\iow_char:N\\zcDeclareLanguage'~and~'\iow_char:N\\zcDeclareLanguageAlias'.
+    '\iow_char:N\\zcDeclareLanguage'~and~
+    '\iow_char:N\\zcDeclareLanguageAlias'.
   }
 \msg_new:nnn { zref-clever } { unknown-language-transl }
   {
@@ -548,11 +544,12 @@
 \msg_new:nnn { zref-clever } { dict-loaded }
   { Loaded~'#1'~dictionary. }
 \msg_new:nnn { zref-clever } { dict-not-available }
-  { Dictionary~for~'#1'~not~available. }
+  { Dictionary~for~'#1'~not~available~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { unknown-language-load }
   {
-    Unable~to~load~dictionary.~Language~'#1'~is~unknown.~See~documentation~for~
-    '\iow_char:N\\zcDeclareLanguage'~and~'\iow_char:N\\zcDeclareLanguageAlias'.
+    Language~'#1'~is~unknown~\msg_line_context:.~Unable~to~load~dictionary.~
+    See~documentation~for~'\iow_char:N\\zcDeclareLanguage'~and~
+    '\iow_char:N\\zcDeclareLanguageAlias'.
   }
 \msg_new:nnn { zref-clever } { missing-zref-titleref }
   {
@@ -561,11 +558,11 @@
   }
 \msg_new:nnn { zref-clever } { hyperref-preamble-only }
   {
-    Option~'hyperref'~only~available~in~the~preamble. \iow_newline:
+    Option~'hyperref'~only~available~in~the~preamble.~
     Use~the~starred~version~of~'\iow_char:N\\zcref'~instead.
   }
 \msg_new:nnn { zref-clever } { missing-hyperref }
-  { Missing~'hyperref'~package. \iow_newline: Setting~'hyperref=false'. }
+  { Missing~'hyperref'~package.~Setting~'hyperref=false'. }
 \msg_new:nnn { zref-check } { check-document-only }
   { Option~'check'~only~available~in~the~document. }
 \msg_new:nnn { zref-clever } { missing-zref-check }
@@ -611,8 +608,11 @@
 % precedence order: i) as general \emph{options}; ii) as \emph{type-specific
 % options}; iii) as \emph{language-specific and type-specific translations};
 % and iv) as \emph{default translations} (that is, language-specific but not
-% type-specific).  These precedence rules are handled / enforced in
-% \cs{@@_get_ref_string:nN} and \cs{@@_get_ref_font:nN}, which are the basic
+% type-specific).  Besides those, there's actually a fifth \emph{internal}
+% scope, with the least priority of all, a ``fallback'', for the cases where
+% it is meaningful to provide some value, even for an unknown language. These
+% precedence rules are handled / enforced in \cs{@@_get_ref_string:nN},
+% \cs{@@_get_ref_font:nN}, and \cs{@@_type_name_setup:} which are the basic
 % functions to retrieve proper values for reference format settings.
 %
 % General ``options'' (i) can be given by the user in the optional argument of
@@ -621,7 +621,8 @@
 % options'' (ii) are handled by \cs{zcRefTypeSetup}.  ``Language-specific
 % translations'', be they ``type-specific'' (iii) or ``default'' (iv) have
 % their user interface in \cs{zcDeclareTranslations}, and have their values
-% populated by the package's dictionaries.
+% populated by the package's dictionaries.  The ``fallback'' settings are
+% stored in \cs{g_@@_fallback_dict_prop}.
 %
 % Not all reference format specifications can be given in all of these
 % scopes.  Some of them can't be type-specific, others must be type-specific,
@@ -737,56 +738,158 @@
 %
 % \subsection{Languages}
 %
-%
+% \begin{variable}{\g_@@_languages_prop}
+%   Stores the names of known languages and the mapping from ``language name''
+%   to ``dictionary name''.  Whether of not a language or alias is known to
+%   \pkg{zref-clever} is decided by its presence in this property list.  A
+%   ``base language'' (loose concept here, meaning just ``the name we gave for
+%   the dictionary in that particular language'') is just like any other one,
+%   the only difference is that the ``language name'' happens to be the same
+%   as the ``dictionary name'', in other words, it is an ``alias to itself''.
 %    \begin{macrocode}
-\prop_new:N \g_@@_language_aliases_prop
-
-% {<base language>}
+\prop_new:N \g_@@_languages_prop
+%    \end{macrocode}
+% \end{variable}
+%
+%
+% \begin{macro}[int]{\zcDeclareLanguage}
+%   Declare a new language for use with \pkg{zref-clever}.  \meta{language} is
+%   taken to be both the ``language name'' and the ``dictionary name''.  If
+%   \meta{language} is already known, just warn.  \cs{zcDeclareLanguage} is
+%   preamble only.
+%   \begin{syntax}
+%     \cs{zcDeclareLanguage} \marg{language}
+%   \end{syntax}
+%    \begin{macrocode}
 \NewDocumentCommand \zcDeclareLanguage { m }
   {
     \tl_if_empty:nF {#1}
       {
-        \prop_if_in:NnTF \g_@@_language_aliases_prop {#1}
-          {
-            \str_if_eq:eeTF {#1}
-              { \prop_item:Nn \g_@@_language_aliases_prop {#1} }
-              { \msg_warning:nnn { zref-clever } { language-declared } {#1} }
-              {
-                \msg_warning:nnxx { zref-clever } { alias-declared } {#1}
-                  { \prop_item:Nn \g_@@_language_aliases_prop {#1} }
-              }
-          }
-          { \prop_gput:Nnn \g_@@_language_aliases_prop {#1} {#1} }
+        \prop_if_in:NnTF \g_@@_languages_prop {#1}
+          { \msg_warning:nnn { zref-clever } { language-declared } {#1} }
+          { \prop_gput:Nnn \g_@@_languages_prop {#1} {#1} }
       }
   }
 \@onlypreamble \zcDeclareLanguage
-
-% {<alias>}{<base language>}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}[int]{\zcDeclareLanguageAlias}
+%   Declare \meta{language alias} to be an alias of \meta{aliased language}.
+%   \meta{aliased language} must be already known to \pkg{zref-clever}, as
+%   stored in \cs{g_@@_languages_prop}.  \cs{zcDeclareLanguageAlias} is
+%   preamble only.
+%   \begin{syntax}
+%     \cs{zcDeclareLanguageAlias} \marg{language alias} \marg{aliased language}
+%   \end{syntax}
+%    \begin{macrocode}
 \NewDocumentCommand \zcDeclareLanguageAlias { m m }
   {
-    \prop_if_in:NnTF \g_@@_language_aliases_prop {#2}
+    \tl_if_empty:nF {#1}
       {
-        \exp_args:NNnx \prop_gput:Nnn \g_@@_language_aliases_prop {#1}
-          { \prop_item:Nn \g_@@_language_aliases_prop {#2} }
+        \prop_if_in:NnTF \g_@@_languages_prop {#2}
+          {
+            \exp_args:NNnx
+              \prop_gput:Nnn \g_@@_languages_prop {#1}
+                { \prop_item:Nn \g_@@_languages_prop {#2} }
+          }
+          { \msg_warning:nnn { zref-clever } { unknown-language-alias } {#2} }
       }
-      { \msg_warning:nnn { zref-clever } { unknown-language-alias } {#2} }
   }
 \@onlypreamble \zcDeclareLanguageAlias
 %    \end{macrocode}
+% \end{macro}
 %
 %
 %
 % \subsection{Dictionaries}
 %
+% Contrary to general options and type options, which are always \emph{local},
+% ``dictionaries'', ``translations'' or ``language-specific settings'' are
+% always \emph{global}.  Hence, the loading of built-in dictionaries, as well
+% as settings done with \cs{zcDeclareTranslations}, should set the relevant
+% variables globally.
+%
+% The built-in dictionaries and their related infrastructure are designed to
+% perform ``on the fly'' loading of dictionaries, ``lazily'' as needed.  Much
+% like \pkg{babel} does for languages not declared in the preamble, but used
+% in the document.  This offers some convenience, of course, and that's one
+% reason to do it.  But it also has the purpose of parsimony, of ``loading the
+% least possible''.  My expectation is that for most use cases, users will
+% require a single language of the functionality of \pkg{zref-clever} -- the
+% main language of the document --, even in multilingual documents.  Hence,
+% even the set of \pkg{babel} or \pkg{polyglossia} ``loaded languages'', which
+% would be the most tenable set if loading were restricted to the preamble, is
+% bound to be an overshoot in typical cases.  Therefore, we load at
+% \texttt{begindocument} one single language (see \nameref{sec:lang-option}),
+% as specified by the user in the preamble with the \opt{lang} option or,
+% failing any specification, the main language of the document, which is the
+% default.  Anything else is lazily loaded, on the fly, along the document.
+%
+% This design decision has also implications to the \emph{form} the dictionary
+% files assumed.  As far as my somewhat impressionistic sampling goes,
+% dictionary or localization files of the most common packages in this area of
+% functionality, are usually a set of commands which perform the relevant
+% definitions and assignments in the preamble or at \texttt{begindocument}.
+% This includes \pkg{translator}, \pkg{translations}, but also \pkg{babel}'s
+% \file{.ldf} files, and \pkg{biblatex}'s \file{.lbx} files.  I'm not really
+% well acquainted with this machinery, but as far as I grasp, they all rely on
+% some variation of \cs{ProvidesFile} and \cs{input}.  And they can be safely
+% \cs{input} without generating spurious content, because they rely on being
+% loaded before the document has actually started.  As far as I can tell,
+% \pkg{babel}'s ``on the fly'' functionality is not based on the \file{.ldf}
+% files, but on the \file{.ini} files, and on \cs{babelprovide}.  And the
+% \file{.ini} files are not in this form, but actually resemble
+% ``configuration files'' of sorts, which means they are read and processed
+% somehow else than with just \cs{input}.  So we do the more or less the same
+% here.  It seems a reasonable way to ensure we can load dictionaries on the
+% fly robustly mid-document, without getting paranoid with the last bit of
+% white-space in them, and without introducing any undue content on the stream
+% when we cannot afford to do it.  Hence, \pkg{zref-clever}'s built-in
+% dictionary files are a set of \emph{key-value options} which are read from
+% the file, and fed to |\keys_set:nn{zref-clever/dictionary}| by
+% \cs{@@_provide_dictionary:n}.  And they use the same syntax and options as
+% \cs{zcDeclareTranslations} does.  The dictionary file itself is read with
+% \cs{ExplSyntaxOn} with the usual implications for white-space and catcodes.
+%
+% \cs{@@_provide_dictionary:n} is only meant to load the built-in
+% dictionaries.  For languages declared by the user, or for any settings to a
+% known language made with \cs{zcDeclareTranslations}, values are populated
+% directly to a variable \cs{g_@@_dict_\meta{language}_prop}, created as
+% needed.  Hence, there is no need to ``load'' anything in this case:
+% definitions and assignments made by the user are performed immediately.
+%
+%
+% \subsubsection*{Provide}
+%
+% \begin{variable}{\g_@@_loaded_dictionaries_seq}
+%   Used to keep track of whether a dictionary has already been loaded or not.
 %    \begin{macrocode}
 \seq_new:N \g_@@_loaded_dictionaries_seq
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}{\l_@@_load_dict_verbose_bool}
+%   Controls whether \cs{@@_provide_dictionary:n} fails silently or verbosely
+%   in case of unknown languages or dictionaries not found.
+%    \begin{macrocode}
 \bool_new:N \l_@@_load_dict_verbose_bool
-
-% {<language>}
+%    \end{macrocode}
+% \end{variable}
+%
+%
+% \begin{macro}{\@@_provide_dictionary:n}
+%   Load dictionary for known \meta{language} if it is available and if it has
+%   not already been loaded.
+%   \begin{syntax}
+%     \cs{@@_provide_dictionary:n} \Arg{language}
+%   \end{syntax}
+%    \begin{macrocode}
 \cs_new_protected:Npn \@@_provide_dictionary:n #1
   {
     \group_begin:
-    \prop_get:NnNTF \g_@@_language_aliases_prop {#1}
+    \prop_get:NnNTF \g_@@_languages_prop {#1}
       \l_@@_dict_language_tl
       {
         \seq_if_in:NVF
@@ -798,8 +901,18 @@
               { \ExplSyntaxOn }
               \l_tmpa_tl
               {
-                \prop_if_exist:cF { g_@@_dict_ \l_@@_dict_language_tl _prop }
-                  { \prop_new:c { g_@@_dict_ \l_@@_dict_language_tl _prop } }
+                \prop_if_exist:cF
+                  {
+                    g_@@_dict_
+                    \l_@@_dict_language_tl _prop
+                  }
+                  {
+                    \prop_new:c
+                      {
+                        g_@@_dict_
+                        \l_@@_dict_language_tl _prop
+                      }
+                  }
                 \tl_clear:N \l_@@_setup_type_tl
                 \exp_args:NnV
                   \keys_set:nn { zref-clever / dictionary } \l_tmpa_tl
@@ -824,7 +937,17 @@
     \group_end:
   }
 \cs_generate_variant:Nn \@@_provide_dictionary:n { x }
-
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\@@_provide_dictionary_verbose:n}
+%   Does the same as \cs{@@_provide_dictionary:n}, but warns if the loading of
+%   the dictionary has failed.
+%   \begin{syntax}
+%     \cs{@@_provide_dictionary_verbose:n} \Arg{language}
+%   \end{syntax}
+%    \begin{macrocode}
 \cs_new_protected:Npn \@@_provide_dictionary_verbose:n #1
   {
     \group_begin:
@@ -833,16 +956,34 @@
     \group_end:
   }
 \cs_generate_variant:Nn \@@_provide_dictionary_verbose:n { x }
-
-% {<key>}{<translation>}
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}
+%   {
+%     \@@_provide_dict_type_transl:nn ,
+%     \@@_provide_dict_default_transl:nn ,
+%   }
+%   A couple of auxiliary functions for the of
+%   \texttt{{zref-clever/dictionary}} keys set in
+%   \cs{@@_provide_dictionary:n}.  They respectively ``provide'' (i.e.  set if
+%   it value does not exist, do nothing if it already does) ``type-specific''
+%   and ``default'' translations.  Both receive \meta{key} and
+%   \meta{translation} as arguments, but \cs{@@_provide_dict_type_transl:nn}
+%   relies on the current value of \cs{l_@@_setup_type_tl}, as set by the
+%   \texttt{type} key.
+%   \begin{syntax}
+%     \cs{@@_provide_dict_type_transl:nn} \Arg{key} \Arg{translation}
+%     \cs{@@_provide_dict_default_transl:nn} \Arg{key} \Arg{translation}
+%   \end{syntax}
+%    \begin{macrocode}
 \cs_new_protected:Npn \@@_provide_dict_type_transl:nn #1#2
   {
     \exp_args:Nnx \prop_gput_if_new:cnn
       { g_@@_dict_ \l_@@_dict_language_tl _prop }
       { type- \l_@@_setup_type_tl - #1 } {#2}
   }
-
-% {<key>}{<translation>}
 \cs_new_protected:Npn \@@_provide_dict_default_transl:nn #1#2
   {
     \prop_gput_if_new:cnn
@@ -850,7 +991,14 @@
       { default- #1 } {#2}
   }
 %    \end{macrocode}
+% \end{macro}
 %
+%
+% The set of keys for \texttt{{zref-clever/dictionary}}, which is used to
+% process the dictionary files in \cs{@@_provide_dictionary:n}.  The no-op
+% cases for each category have their messages sent to ``info''.  These
+% messages should not occur, as long as the dictionaries are well formed, but
+% they're placed there nevertheless, and can be leveraged in regression tests.
 %
 %    \begin{macrocode}
 \keys_define:nn { zref-clever / dictionary }
@@ -913,49 +1061,8 @@
 %    \end{macrocode}
 %
 %
-%    \begin{macrocode}
-% {<language>}{<type>}{<key>}<tl var to set>
-\prg_new_protected_conditional:Npnn \@@_get_type_transl:nnnN #1#2#3#4 { F }
-  {
-    \prop_get:NnNTF \g_@@_language_aliases_prop {#1}
-      \l_@@_dict_language_tl
-      {
-        \prop_get:cnNTF { g_@@_dict_ \l_@@_dict_language_tl _prop }
-          { type- #2 - #3 } #4
-          { \prg_return_true:  }
-          { \prg_return_false: }
-      }
-      { \prg_return_false: }
-  }
-\prg_generate_conditional_variant:Nnn \@@_get_type_transl:nnnN { xxxN , xxnN } { F }
-
-% {<language>}{<key>}<tl var to set>
-\prg_new_protected_conditional:Npnn \@@_get_default_transl:nnN #1#2#3 { F }
-  {
-    \prop_get:NnNTF \g_@@_language_aliases_prop {#1}
-      \l_@@_dict_language_tl
-      {
-        \prop_get:cnNTF { g_@@_dict_ \l_@@_dict_language_tl _prop }
-          { default- #2 } #3
-          { \prg_return_true:  }
-          { \prg_return_false: }
-      }
-      { \prg_return_false: }
-  }
-\prg_generate_conditional_variant:Nnn \@@_get_default_transl:nnN { xnN } { F }
-
-% {<key>}<tl var to set>
-\prg_new_protected_conditional:Npnn \@@_get_fallback_transl:nN #1#2 { F }
-  {
-    \prop_get:NnNTF \g_@@_fallback_dict_prop
-      { #1 } #2
-      { \prg_return_true:  }
-      { \prg_return_false: }
-  }
-%    \end{macrocode}
 %
-%
-%
+% \subsubsection*{Fallback}
 %
 % All ``strings'' queried with \cs{@@_get_ref_string:nN} -- in practice, those
 % in either \cs{c_@@_ref_options_necessarily_not_type_specific_seq} or
@@ -965,7 +1072,10 @@
 % \pkg{babel} or \pkg{polyglossia} is loaded and sets a language which
 % \pkg{zref-clever} does not know.  On the other hand, ``type names'' are not
 % looked for in ``fallback'', since it is indeed impossible to provide any
-% reasonable value for them for a ``specified but unknown language''.
+% reasonable value for them for a ``specified but unknown language''.  Also
+% ``font'' options -- those in \cs{c_@@_ref_options_font_seq}, and queried
+% with \cs{@@_get_ref_font:nN} -- do not need to be provided here, since the
+% later function sets an empty value if the option is not found.
 %
 % TODO Add regression test to ensure all fallback ``translations'' are indeed
 % present.
@@ -989,6 +1099,91 @@
     refpos-in = {} ,
   }
 %    \end{macrocode}
+%
+%
+%
+% \subsubsection*{Get translations}
+%
+% \begin{macro}{\@@_get_type_transl:nnnNF}
+%   Get type-specific translation of \meta{key} for \meta{type} and
+%   \meta{language}, and store it in \meta{tl variable} if found.  If not
+%   found, leave the \meta{false code} on the stream, in which case the value
+%   of \meta{tl variable} should not be relied upon.
+%   \begin{syntax}
+%     \cs{@@_get_type_transl:nnnNF} \Arg{language} \Arg{type} \Arg{key}
+%     ~~\meta{tl variable} \Arg{false code}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_protected_conditional:Npnn
+  \@@_get_type_transl:nnnN #1#2#3#4 { F }
+  {
+    \prop_get:NnNTF \g_@@_languages_prop {#1}
+      \l_@@_dict_language_tl
+      {
+        \prop_get:cnNTF
+          { g_@@_dict_ \l_@@_dict_language_tl _prop }
+          { type- #2 - #3 } #4
+          { \prg_return_true:  }
+          { \prg_return_false: }
+      }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn
+  \@@_get_type_transl:nnnN { xxxN , xxnN } { F }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\@@_get_default_transl:nnNF}
+%   Get default translation of \meta{key} for \meta{language}, and store it in
+%   \meta{tl variable} if found.  If not found, leave the \meta{false code} on
+%   the stream, in which case the value of \meta{tl variable} should not be
+%   relied upon.
+%   \begin{syntax}
+%     \cs{@@_get_default_transl:nnNF} \Arg{language} \Arg{key}
+%     ~~\meta{tl variable} \Arg{false code}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_protected_conditional:Npnn
+  \@@_get_default_transl:nnN #1#2#3 { F }
+  {
+    \prop_get:NnNTF \g_@@_languages_prop {#1}
+      \l_@@_dict_language_tl
+      {
+        \prop_get:cnNTF
+          { g_@@_dict_ \l_@@_dict_language_tl _prop }
+          { default- #2 } #3
+          { \prg_return_true:  }
+          { \prg_return_false: }
+      }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn
+  \@@_get_default_transl:nnN { xnN } { F }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\@@_get_fallback_transl:nNF}
+%   Get fallback translation of \meta{key}, and store it in \meta{tl variable}
+%   if found.  If not found, leave the \meta{false code} on the stream, in
+%   which case the value of \meta{tl variable} should not be relied upon.
+%   \begin{syntax}
+%     \cs{@@_get_fallback_transl:nNF} \Arg{key}
+%     ~~\meta{tl variable} \Arg{false code}
+%   \end{syntax}
+%    \begin{macrocode}
+% {<key>}<tl var to set>
+\prg_new_protected_conditional:Npnn
+  \@@_get_fallback_transl:nN #1#2 { F }
+  {
+    \prop_get:NnNTF \g_@@_fallback_dict_prop
+      { #1 } #2
+      { \prg_return_true:  }
+      { \prg_return_false: }
+  }
+%    \end{macrocode}
+% \end{macro}
 %
 %
 %
@@ -1433,11 +1628,12 @@
 %
 %
 % \subsubsection*{\opt{lang} option}
+% \phantomsection{}\label{sec:lang-option}
 %
 % \cs{l_@@_current_language_tl} is an internal alias for \pkg{babel}'s
-% \cs{languagename} or \pkg{polyglossia}'s \cs{mainbabelname}, if none of them
-% is loaded, we set it to \texttt{english}.  \cs{l_@@_main_language_tl} is an
-% internal alias for \pkg{babel}'s \cs{bbl@main@language} or for
+% \cs{languagename} or \pkg{polyglossia}'s \cs{mainbabelname} and, if none of
+% them is loaded, we set it to \texttt{english}.  \cs{l_@@_main_language_tl}
+% is an internal alias for \pkg{babel}'s \cs{bbl@main@language} or for
 % \pkg{polyglossia}'s \cs{mainbabelname}, as the case may be. Note that for
 % \pkg{polyglossia} we get \pkg{babel}'s language names, so that we only need
 % to handle those internally.  \cs{l_@@_ref_language_tl} is the internal
@@ -1451,12 +1647,12 @@
 % \cs{l_@@_current_language_tl}, and to set the default for
 % \cs{l_@@_ref_language_tl}.  Package options, or preamble calls to
 % \cs{zcsetup} are also hooked at \texttt{begindocument}, but come after the
-% first hook, so that the pertinent variables are set.  Finally, we set a
-% third \texttt{begindocument} hook, at \texttt{begindocument/before}, so that
-% it runs after any options set in the preamble.  This hook redefines the
-% \opt{lang} option for immediate execution in the document body, and ensures
-% the \texttt{main} language's dictionary gets loaded, if it hadn't been
-% already.
+% first hook, so that the pertinent variables have been set when they are
+% executed.  Finally, we set a third \texttt{begindocument} hook, at
+% \texttt{begindocument/before}, so that it runs after any options set in the
+% preamble.  This hook redefines the \opt{lang} option for immediate execution
+% in the document body, and ensures the \texttt{main} language's dictionary
+% gets loaded, if it hadn't been already.
 %
 % For the \pkg{babel} and \pkg{polyglossia} variables which store the ``main''
 % and ``current'' languages, see \url{https://tex.stackexchange.com/a/233178},
@@ -1492,11 +1688,14 @@
       }
 %    \end{macrocode}
 % Provide default value for \cs{l_@@_ref_language_tl} corresponding to option
-% \opt{main}, but do so outside of the \pkg{l3keys} machinery, so that we are
-% able to distinguish when the user actually gave the option, in which case,
-% the dictionary loading is done verbosely.
+% \opt{main}, but do so outside of the \pkg{l3keys} machinery (that is,
+% instead of using \texttt{.initial:n}), so that we are able to distinguish
+% when the user actually gave the option, in which case the dictionary loading
+% is done verbosely, from when we are setting the default value (here), in
+% which case the dictionary loading is done silently.
 %    \begin{macrocode}
-    \tl_set:Nn \l_@@_ref_language_tl { \l_@@_main_language_tl }
+    \tl_set:Nn \l_@@_ref_language_tl
+      { \l_@@_main_language_tl }
   }
 %    \end{macrocode}
 %
@@ -1656,7 +1855,7 @@
 % This is a set of options related to reference typesetting which receive
 % equal treatment and, hence, are handled in batch.  Since we are dealing with
 % options to be passed to \cs{zcref} or to \cs{zcsetup} or at load time, only
-% not necessarily type-specific options are pertinent here.  However, they
+% ``not necessarily type-specific'' options are pertinent here.  However, they
 % \emph{may} either be type-specific or language-specific, and thus must be
 % stored in a property list, \cs{l_@@_ref_options_prop}, in order to be
 % retrieved from the option \emph{name} by \cs{@@_get_ref_string:nN} and
@@ -1690,13 +1889,12 @@
 %
 % \subsubsection*{Package options}
 %
-% The options have been separated in two different groups, so that we
-% can potentially apply them selectively to different contexts: \texttt{label}
-% and \texttt{reference}.  Currently, the only use of this selection is the
-% ability to exclude label related options from the \cs{zcref}'s options.
-% Anyway, for load-time package options and for \cs{zcsetup} we want the whole
-% set, so we aggregate the two into \texttt{zref-clever/zcsetup}, and use that
-% here.
+% The options have been separated in two different groups, so that we can
+% potentially apply them selectively to different contexts: \texttt{label} and
+% \texttt{reference}.  Currently, the only use of this selection is the
+% ability to exclude label related options from \cs{zcref}'s options.  Anyway,
+% for load-time package options and for \cs{zcsetup} we want the whole set, so
+% we aggregate the two into \texttt{zref-clever/zcsetup}, and use that here.
 %
 %    \begin{macrocode}
 \keys_define:nn { }
@@ -1722,6 +1920,9 @@
 %
 % \begin{macro}[int]{\zcsetup}
 %   Provide \cs{zcsetup}.
+%   \begin{syntax}
+%     \cs{zcsetup}\marg{options}
+%   \end{syntax}
 %    \begin{macrocode}
 \NewDocumentCommand \zcsetup { m }
   { \keys_set:nn { zref-clever / zcsetup } {#1} }
@@ -1843,13 +2044,13 @@
 %
 % \begin{macro}[int]{\zcDeclareTranslations}
 %   \begin{syntax}
-%     \cs{zcDeclareTranslations} \marg{language} \marg{options}
+%     \cs{zcDeclareTranslations}\marg{language}\marg{options}
 %   \end{syntax}
 %    \begin{macrocode}
 \NewDocumentCommand \zcDeclareTranslations { m m }
   {
     \group_begin:
-    \prop_get:NnNTF \g_@@_language_aliases_prop {#1}
+    \prop_get:NnNTF \g_@@_languages_prop {#1}
       \l_@@_dict_language_tl
       {
         \tl_clear:N \l_@@_setup_type_tl
@@ -1863,6 +2064,41 @@
 % \end{macro}
 %
 %
+% \begin{macro}
+%   {
+%     \@@_declare_type_transl:nnnn ,
+%     \@@_declare_default_transl:nnn ,
+%   }
+%   A couple of auxiliary functions for the of
+%   \texttt{{zref-clever/translation}} keys set in \cs{zcDeclareTranslations}.
+%   They respectively declare (unconditionally set) ``type-specific'' and
+%   ``default'' translations.
+%   \begin{syntax}
+%     \cs{@@_declare_type_transl:nnnn} \Arg{language} \Arg{type}
+%     ~~\Arg{key} \Arg{translation}
+%     \cs{@@_declare_default_transl:nnn} \Arg{language}
+%     ~~\Arg{key} \Arg{translation}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_declare_type_transl:nnnn #1#2#3#4
+  {
+    \prop_gput:cnn { g_@@_dict_ #1 _prop }
+      { type- #2 - #3 } {#4}
+  }
+\cs_generate_variant:Nn \@@_declare_type_transl:nnnn { VVnn }
+\cs_new_protected:Npn \@@_declare_default_transl:nnn #1#2#3
+  {
+    \prop_gput:cnn { g_@@_dict_ #1 _prop }
+      { default- #2 } {#3}
+  }
+\cs_generate_variant:Nn \@@_declare_default_transl:nnn { Vnn }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% The set of keys for \texttt{{zref-clever/translations}}, which is used to
+% set language-specific translations in \cs{zcDeclareTranslations}.
+%
 %    \begin{macrocode}
 \keys_define:nn { zref-clever / translations }
   {
@@ -1873,30 +2109,6 @@
           { \tl_set:Nn \l_@@_setup_type_tl {#1} }
       } ,
   }
-%    \end{macrocode}
-%
-%
-%    \begin{macrocode}
-% {<language>}{<type>}{<key>}{<translation>}
-\cs_new_protected:Npn \@@_declare_type_transl:nnnn #1#2#3#4
-  {
-    \prop_gput:cnn { g_@@_dict_ #1 _prop }
-      { type- #2 - #3 } {#4}
-  }
-\cs_generate_variant:Nn \@@_declare_type_transl:nnnn { VVnn }
-
-% {<language>}{<key>}{<translation>}
-\cs_new_protected:Npn \@@_declare_default_transl:nnn #1#2#3
-  {
-    \prop_gput:cnn { g_@@_dict_ #1 _prop }
-      { default- #2 } {#3}
-  }
-\cs_generate_variant:Nn \@@_declare_default_transl:nnn { Vnn }
-%    \end{macrocode}
-%
-%
-%
-%    \begin{macrocode}
 \seq_map_inline:Nn
   \c_@@_ref_options_necessarily_not_type_specific_seq
   {
@@ -1918,10 +2130,6 @@
           } ,
       }
   }
-%    \end{macrocode}
-%
-%
-%    \begin{macrocode}
 \seq_map_inline:Nn
   \c_@@_ref_options_possibly_type_specific_seq
   {
@@ -1945,10 +2153,6 @@
           } ,
       }
   }
-%    \end{macrocode}
-%
-%
-%    \begin{macrocode}
 \seq_map_inline:Nn
   \c_@@_ref_options_necessarily_type_specific_seq
   {
@@ -2359,7 +2563,7 @@
         \bool_if:nTF
           {
             % Both are empty, meaning: neither labels have any (further)
-            % ``enclosing counters'' (left).
+            % "enclosing counters" (left).
             \tl_if_empty_p:V \l_@@_label_enclhead_a_tl &&
             \tl_if_empty_p:V \l_@@_label_enclhead_b_tl
           }
@@ -2483,9 +2687,9 @@
   {
     \int_zero:N \l_@@_sort_prior_a_int
     \int_zero:N \l_@@_sort_prior_b_int
-    % \cs{l_@@_typesort_seq} was stored in reverse sequence, and
-    % we compute the sort priorities in the negative range, so that we can
-    % implicitly rely on `0' being the ``last value''.
+    % `typesort_seq' was stored in reverse sequence, and we compute the sort
+    % priorities in the negative range, so that we can implicitly rely on `0'
+    % being the "last value".
     \seq_map_indexed_inline:Nn \l_@@_typesort_seq
       {
         \tl_if_eq:nnTF {##2} {{othertypes}}
@@ -2578,10 +2782,10 @@
 % simply to not allow individual inhibition of compression.  We can already
 % control compression of each individual call of \cs{zcref} with existing
 % options, this should be enough.  I don't think the small extra flexibility
-% this would grant is worth the syntax disruption it entails.  Anyway, I have
-% kept a ``handle'' to deal with this in case the need arises, in the form of
-% \cs{l_@@_range_inhibit_next_bool}, which is currently no-op, but is in
-% place.
+% this would grant is worth the syntax disruption it entails.  Anyway, it is
+% easy to deal with this in case the need arises, by just adding another
+% condition (coming from whatever the chosen syntax was) when we check for
+% \cs{@@_labels_in_sequence:nn} in \cs{@@_typeset_refs_aux_not_last_of_type:}.
 %
 %
 % \subsection*{Variables}
@@ -2646,7 +2850,6 @@
 %     \l_@@_range_beg_label_tl ,
 %     \l_@@_next_maybe_range_bool ,
 %     \l_@@_next_is_same_bool ,
-%     \l_@@_range_inhibit_next_bool
 %   }
 %   Range related auxiliary variables for \cs{@@_typeset_refs:}.
 %   \cs{l_@@_range_count_int} counts how many references/labels are in the
@@ -2656,15 +2859,12 @@
 %   a range.  \cs{l_@@_next_maybe_range_bool} signals whether the next element
 %   is in sequence to the current one.  \cs{l_@@_next_is_same_bool} signals
 %   whether the next element repeats the current one.
-%   \cs{l_@@_range_inhibit_next_bool} allows to control/track compression
-%   inhibition of the next label.
 %    \begin{macrocode}
 \int_new:N \l_@@_range_count_int
 \int_new:N \l_@@_range_same_count_int
 \tl_new:N \l_@@_range_beg_label_tl
 \bool_new:N \l_@@_next_maybe_range_bool
 \bool_new:N \l_@@_next_is_same_bool
-\bool_new:N \l_@@_range_inhibit_next_bool
 %    \end{macrocode}
 % \end{variable}
 %
@@ -2720,7 +2920,8 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_typeset_refs:
   {
-    \seq_set_eq:NN \l_@@_typeset_labels_seq \l_@@_zcref_labels_seq
+    \seq_set_eq:NN \l_@@_typeset_labels_seq
+      \l_@@_zcref_labels_seq
     \tl_clear:N \l_@@_typeset_queue_prev_tl
     \tl_clear:N \l_@@_typeset_queue_curr_tl
     \tl_clear:N \l_@@_type_first_label_tl
@@ -2732,21 +2933,28 @@
     \int_zero:N \l_@@_range_same_count_int
 
     % Get not-type-specific separators and refpre/pos options.
-    \@@_get_ref_string:nN {tpairsep} \l_@@_tpairsep_tl
-    \@@_get_ref_string:nN {tlistsep} \l_@@_tlistsep_tl
-    \@@_get_ref_string:nN {tlastsep} \l_@@_tlastsep_tl
+    \@@_get_ref_string:nN { tpairsep }
+      \l_@@_tpairsep_tl
+    \@@_get_ref_string:nN { tlistsep }
+      \l_@@_tlistsep_tl
+    \@@_get_ref_string:nN { tlastsep }
+      \l_@@_tlastsep_tl
 
     % Loop over the label list in sequence.
     \bool_set_false:N \l_@@_typeset_last_bool
     \bool_until_do:Nn \l_@@_typeset_last_bool
       {
-        \seq_pop_left:NN \l_@@_typeset_labels_seq \l_@@_label_a_tl
+        \seq_pop_left:NN \l_@@_typeset_labels_seq
+          \l_@@_label_a_tl
         \seq_if_empty:NTF \l_@@_typeset_labels_seq
           {
             \tl_clear:N \l_@@_label_b_tl
             \bool_set_true:N \l_@@_typeset_last_bool
           }
-          { \seq_get_left:NN \l_@@_typeset_labels_seq \l_@@_label_b_tl }
+          {
+            \seq_get_left:NN \l_@@_typeset_labels_seq
+              \l_@@_label_b_tl
+          }
 
         \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
           {
@@ -2766,8 +2974,8 @@
               }
           }
 
-        % First, we establish whether the ``current label'' (i.e. `a') is the
-        % last one of its type.  This can happen because the ``next label''
+        % First, we establish whether the "current label" (i.e. `a') is the
+        % last one of its type.  This can happen because the "next label"
         % (i.e. `b') is of a different type (or different definition status),
         % or because we are at the end of the list.
         \bool_if:NTF \l_@@_typeset_last_bool
@@ -2785,7 +2993,7 @@
                   {
                     % Neither is undefined, we must check the types.
                     \bool_if:nTF
-                      % Both empty: same ``type''.
+                      % Both empty: same "type".
                       {
                         \tl_if_empty_p:N \l_@@_label_type_a_tl &&
                         \tl_if_empty_p:N \l_@@_label_type_b_tl
@@ -2795,17 +3003,28 @@
                         \bool_if:nTF
                           % Neither empty: compare types.
                           {
-                            ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
+                            ! \tl_if_empty_p:N \l_@@_label_type_a_tl
+                            &&
                             ! \tl_if_empty_p:N \l_@@_label_type_b_tl
                           }
                           {
                             \tl_if_eq:NNTF
-                              \l_@@_label_type_a_tl \l_@@_label_type_b_tl
-                              { \bool_set_false:N \l_@@_last_of_type_bool }
-                              { \bool_set_true:N \l_@@_last_of_type_bool  }
+                              \l_@@_label_type_a_tl
+                              \l_@@_label_type_b_tl
+                              {
+                                \bool_set_false:N
+                                  \l_@@_last_of_type_bool
+                              }
+                              {
+                                \bool_set_true:N
+                                  \l_@@_last_of_type_bool
+                              }
                           }
-                          % One empty, the other not: different ``types''.
-                          { \bool_set_true:N \l_@@_last_of_type_bool }
+                          % One empty, the other not: different "types".
+                          {
+                            \bool_set_true:N
+                              \l_@@_last_of_type_bool
+                          }
                       }
                   }
               }
@@ -2827,18 +3046,30 @@
         % type.
         \int_compare:nNnT { \l_@@_label_count_int } = { 0 }
           {
-            \@@_get_ref_font:nN {namefont}    \l_@@_namefont_tl
-            \@@_get_ref_font:nN {reffont}     \l_@@_reffont_out_tl
-            \@@_get_ref_font:nN {reffont-in}  \l_@@_reffont_in_tl
-            \@@_get_ref_string:nN {namesep}   \l_@@_namesep_tl
-            \@@_get_ref_string:nN {rangesep}  \l_@@_rangesep_tl
-            \@@_get_ref_string:nN {pairsep}   \l_@@_pairsep_tl
-            \@@_get_ref_string:nN {listsep}   \l_@@_listsep_tl
-            \@@_get_ref_string:nN {lastsep}   \l_@@_lastsep_tl
-            \@@_get_ref_string:nN {refpre}    \l_@@_refpre_out_tl
-            \@@_get_ref_string:nN {refpos}    \l_@@_refpos_out_tl
-            \@@_get_ref_string:nN {refpre-in} \l_@@_refpre_in_tl
-            \@@_get_ref_string:nN {refpos-in} \l_@@_refpos_in_tl
+            \@@_get_ref_font:nN   { namefont   }
+              \l_@@_namefont_tl
+            \@@_get_ref_font:nN   { reffont    }
+              \l_@@_reffont_out_tl
+            \@@_get_ref_font:nN   { reffont-in }
+              \l_@@_reffont_in_tl
+            \@@_get_ref_string:nN { namesep    }
+              \l_@@_namesep_tl
+            \@@_get_ref_string:nN { rangesep   }
+              \l_@@_rangesep_tl
+            \@@_get_ref_string:nN { pairsep    }
+              \l_@@_pairsep_tl
+            \@@_get_ref_string:nN { listsep    }
+              \l_@@_listsep_tl
+            \@@_get_ref_string:nN { lastsep    }
+              \l_@@_lastsep_tl
+            \@@_get_ref_string:nN { refpre     }
+              \l_@@_refpre_out_tl
+            \@@_get_ref_string:nN { refpos     }
+              \l_@@_refpos_out_tl
+            \@@_get_ref_string:nN { refpre-in  }
+              \l_@@_refpre_in_tl
+            \@@_get_ref_string:nN { refpos-in  }
+              \l_@@_refpos_in_tl
           }
 
         % Here we send this to a couple of auxiliary functions for no other
@@ -2870,14 +3101,16 @@
         % what matters here: just store it.
         { 0 }
         {
-          \tl_set:NV \l_@@_type_first_label_tl \l_@@_label_a_tl
-          \tl_set:NV \l_@@_type_first_label_type_tl \l_@@_label_type_a_tl
+          \tl_set:NV \l_@@_type_first_label_tl
+            \l_@@_label_a_tl
+          \tl_set:NV \l_@@_type_first_label_type_tl
+            \l_@@_label_type_a_tl
         }
 
         % The last is the second: we have a pair (if not repeated).
         { 1 }
         {
-          \int_compare:nNnF { \l_@@_range_same_count_int } = {1}
+          \int_compare:nNnF { \l_@@_range_same_count_int } = { 1 }
             {
               \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                 {
@@ -2893,7 +3126,7 @@
         \int_case:nnF { \l_@@_range_count_int }
           {
             % There was no range going on.
-            {0}
+            { 0 }
             {
               \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                 {
@@ -2902,7 +3135,7 @@
                 }
             }
             % Last in the range is also the second in it.
-            {1}
+            { 1 }
             {
               \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                 {
@@ -2911,7 +3144,8 @@
                   % type list.
                   \exp_not:V \l_@@_listsep_tl
                   \@@_get_ref:V \l_@@_range_beg_label_tl
-                  \int_compare:nNnF { \l_@@_range_same_count_int } = {1}
+                  \int_compare:nNnF
+                    { \l_@@_range_same_count_int } = { 1 }
                     {
                       \exp_not:V \l_@@_lastsep_tl
                       \@@_get_ref:V \l_@@_label_a_tl
@@ -2922,10 +3156,13 @@
           % Last in the range is third or more in it.
           {
             \int_case:nnF
-              { \l_@@_range_count_int - \l_@@_range_same_count_int }
+              {
+                \l_@@_range_count_int -
+                \l_@@_range_same_count_int
+              }
               {
                 % Repetition, not a range.
-                {0}
+                { 0 }
                 {
                   % If `range_beg_label' is empty, it means it was also the
                   % first of the type, and hence was already handled.
@@ -2934,12 +3171,13 @@
                       \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                         {
                           \exp_not:V \l_@@_lastsep_tl
-                          \@@_get_ref:V \l_@@_range_beg_label_tl
+                          \@@_get_ref:V
+                            \l_@@_range_beg_label_tl
                         }
                     }
                 }
                 % A ``range'', but with no skipped value, treat as list.
-                {1}
+                { 1 }
                 {
                   \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                     {
@@ -2947,7 +3185,8 @@
                       \tl_if_empty:VF \l_@@_range_beg_label_tl
                         {
                           \exp_not:V \l_@@_listsep_tl
-                          \@@_get_ref:V \l_@@_range_beg_label_tl
+                          \@@_get_ref:V
+                            \l_@@_range_beg_label_tl
                         }
                       \exp_not:V \l_@@_lastsep_tl
                       \@@_get_ref:V \l_@@_label_a_tl
@@ -2962,7 +3201,8 @@
                     \tl_if_empty:VF \l_@@_range_beg_label_tl
                       {
                         \exp_not:V \l_@@_lastsep_tl
-                        \@@_get_ref:V \l_@@_range_beg_label_tl
+                        \@@_get_ref:V
+                          \l_@@_range_beg_label_tl
                       }
                     \exp_not:V \l_@@_rangesep_tl
                     \@@_get_ref:V \l_@@_label_a_tl
@@ -2971,10 +3211,10 @@
           }
       }
 
-    % Handle ``range'' option.  The idea is simple: if the queue is not empty,
+    % Handle "range" option.  The idea is simple: if the queue is not empty,
     % we replace it with the end of the range (or pair).  We can still
-    % retrieve the end of the range from \cs{l_@@_label_a_tl} since we know to
-    % be processing the last label of its type at this point.
+    % retrieve the end of the range from `label_a' since we know to be
+    % processing the last label of its type at this point.
     \bool_if:NT \l_@@_typeset_range_bool
       {
         \tl_if_empty:NTF \l_@@_typeset_queue_curr_tl
@@ -2992,7 +3232,8 @@
               { }
               {
                 \@@_labels_in_sequence:nn
-                  { \l_@@_type_first_label_tl } { \l_@@_label_a_tl }
+                  { \l_@@_type_first_label_tl }
+                  { \l_@@_label_a_tl }
               }
             \tl_set:Nx \l_@@_typeset_queue_curr_tl
               {
@@ -3005,8 +3246,7 @@
       }
 
     % Now that the type is finished, we can add the name and the first ref to
-    % the queue.  Or, if ``typeset'' option is not ``both'', handle it here
-    % too.
+    % the queue.  Or, if "typeset" option is not "both", handle it here too.
     \@@_type_name_setup:
     \bool_if:nTF
       { \l_@@_typeset_ref_bool && \l_@@_typeset_name_bool }
@@ -3035,7 +3275,8 @@
                         \exp_not:N \hyper@@@@link
                           {
                             \zref@ifrefcontainsprop
-                              { \l_@@_type_first_label_tl } { urluse }
+                              { \l_@@_type_first_label_tl }
+                              { urluse }
                               {
                                 \zref@extractdefault
                                   { \l_@@_type_first_label_tl }
@@ -3049,7 +3290,8 @@
                           }
                           {
                             \zref@extractdefault
-                              { \l_@@_type_first_label_tl } { anchor } {}
+                              { \l_@@_type_first_label_tl }
+                              { anchor } {}
                           }
                           { \exp_not:V \l_@@_type_name_tl }
                         \exp_not:N \group_end:
@@ -3066,9 +3308,9 @@
                 % This case would correspond to "typeset=none" but should not
                 % happen, given the options are set up to typeset at least one
                 % of "ref" or "name", but a sensible fallback, equal to the
-                % behavior of ``both''.
-                \tl_put_left:Nx
-                  \l_@@_typeset_queue_curr_tl { \@@_get_ref_first: }
+                % behavior of "both".
+                \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
+                  { \@@_get_ref_first: }
               }
           }
       }
@@ -3105,8 +3347,8 @@
       }
       {
         % There are further labels, set variables for next iteration.
-        \tl_set_eq:NN
-          \l_@@_typeset_queue_prev_tl \l_@@_typeset_queue_curr_tl
+        \tl_set_eq:NN \l_@@_typeset_queue_prev_tl
+          \l_@@_typeset_queue_curr_tl
         \tl_clear:N \l_@@_typeset_queue_curr_tl
         \tl_clear:N \l_@@_type_first_label_tl
         \tl_clear:N \l_@@_type_first_label_type_tl
@@ -3127,16 +3369,11 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_typeset_refs_aux_not_last_of_type:
   {
-    % Signal if next label may form a range with the current one (of
-    % course, only considered if compression is enabled in the first
-    % place).
+    % Signal if next label may form a range with the current one (of course,
+    % only considered if compression is enabled in the first place).
     \bool_set_false:N \l_@@_next_maybe_range_bool
     \bool_set_false:N \l_@@_next_is_same_bool
-    \bool_lazy_and:nnT
-      { \l_@@_typeset_compress_bool }
-      % Currently no-op, but kept as ``handle'' to inhibit compression of
-      % individual labels.
-      { ! \l_@@_range_inhibit_next_bool }
+    \bool_if:NT \l_@@_typeset_compress_bool
       {
         \zref@ifrefundefined { \l_@@_label_a_tl }
           { }
@@ -3151,12 +3388,14 @@
       {
         % Current label is the first of its type (also not the last, but it
         % doesn't matter here): just store the label.
-        \tl_set:NV \l_@@_type_first_label_tl \l_@@_label_a_tl
-        \tl_set:NV \l_@@_type_first_label_type_tl \l_@@_label_type_a_tl
+        \tl_set:NV \l_@@_type_first_label_tl
+          \l_@@_label_a_tl
+        \tl_set:NV \l_@@_type_first_label_type_tl
+          \l_@@_label_type_a_tl
 
         % If the next label may be part of a range, we set `range_beg_label'
-        % to ``empty'' (we deal with it as the ``first'', and must do it
-        % there, to handle hyperlinking), but also step the range counters.
+        % to "empty" (we deal with it as the "first", and must do it there, to
+        % handle hyperlinking), but also step the range counters.
         \bool_if:NT \l_@@_next_maybe_range_bool
           {
             \tl_clear:N \l_@@_range_beg_label_tl
@@ -3166,16 +3405,16 @@
          }
       }
       {
-        % Current label is neither the first (nor the last) of its
-        % type.
+        % Current label is neither the first (nor the last) of its type.
         \bool_if:NTF \l_@@_next_maybe_range_bool
           {
             % Starting, or continuing a range.
             \int_compare:nNnTF
-              { \l_@@_range_count_int } = {0}
+              { \l_@@_range_count_int } = { 0 }
               {
                 % There was no range going, we are starting one.
-                \tl_set:NV \l_@@_range_beg_label_tl \l_@@_label_a_tl
+                \tl_set:NV \l_@@_range_beg_label_tl
+                  \l_@@_label_a_tl
                 \int_incr:N \l_@@_range_count_int
                 \bool_if:NT \l_@@_next_is_same_bool
                   { \int_incr:N \l_@@_range_same_count_int }
@@ -3193,7 +3432,7 @@
             \int_case:nnF { \l_@@_range_count_int }
               {
                 % There was no range going on.
-                {0}
+                { 0 }
                 {
                   \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                     {
@@ -3202,21 +3441,24 @@
                     }
                 }
                 % Last is second in the range: if `range_same_count' is also
-                % `1', it's a repetition (drop it), otherwise, it's a ``pair
-                % within a list'', treat as list.
-                {1}
+                % `1', it's a repetition (drop it), otherwise, it's a "pair
+                % within a list", treat as list.
+                { 1 }
                 {
                   \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                     {
                       \tl_if_empty:VF \l_@@_range_beg_label_tl
                         {
                           \exp_not:V \l_@@_listsep_tl
-                          \@@_get_ref:V \l_@@_range_beg_label_tl
+                          \@@_get_ref:V
+                            \l_@@_range_beg_label_tl
                         }
-                      \int_compare:nNnF { \l_@@_range_same_count_int } = {1}
+                      \int_compare:nNnF
+                        { \l_@@_range_same_count_int } = { 1 }
                         {
                           \exp_not:V \l_@@_listsep_tl
-                          \@@_get_ref:V \l_@@_label_a_tl
+                          \@@_get_ref:V
+                            \l_@@_label_a_tl
                         }
                     }
                 }
@@ -3227,27 +3469,32 @@
                 % if they differ by `1', its a list, if they differ by more,
                 % it is a real range.
                 \int_case:nnF
-                  { \l_@@_range_count_int - \l_@@_range_same_count_int }
                   {
-                    {0}
+                    \l_@@_range_count_int -
+                    \l_@@_range_same_count_int
+                  }
+                  {
+                    { 0 }
                     {
                       \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                         {
                           \tl_if_empty:VF \l_@@_range_beg_label_tl
                             {
                               \exp_not:V \l_@@_listsep_tl
-                              \@@_get_ref:V \l_@@_range_beg_label_tl
+                              \@@_get_ref:V
+                                \l_@@_range_beg_label_tl
                             }
                         }
                     }
-                    {1}
+                    { 1 }
                     {
                       \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                         {
                           \tl_if_empty:VF \l_@@_range_beg_label_tl
                             {
                               \exp_not:V \l_@@_listsep_tl
-                              \@@_get_ref:V \l_@@_range_beg_label_tl
+                              \@@_get_ref:V
+                                \l_@@_range_beg_label_tl
                             }
                           \exp_not:V \l_@@_listsep_tl
                           \@@_get_ref:V \l_@@_label_a_tl
@@ -3260,7 +3507,8 @@
                         \tl_if_empty:VF \l_@@_range_beg_label_tl
                           {
                             \exp_not:V \l_@@_listsep_tl
-                            \@@_get_ref:V \l_@@_range_beg_label_tl
+                            \@@_get_ref:V
+                              \l_@@_range_beg_label_tl
                           }
                         \exp_not:V \l_@@_rangesep_tl
                         \@@_get_ref:V \l_@@_label_a_tl
@@ -3307,24 +3555,28 @@
     \zref@ifrefcontainsprop {#1} { \l_@@_ref_property_tl }
       {
         \bool_if:nTF
-          { \l_@@_use_hyperref_bool && ! \l_@@_link_star_bool }
+          {
+            \l_@@_use_hyperref_bool &&
+            ! \l_@@_link_star_bool
+          }
           {
             \exp_not:N \group_begin:
             \exp_not:V \l_@@_reffont_out_tl
             \exp_not:V \l_@@_refpre_out_tl
             \exp_not:N \group_begin:
             \exp_not:V \l_@@_reffont_in_tl
-            % It's two '@s', but escaped for DocStrip.
+            % It's two `@s', but escaped for DocStrip.
             \exp_not:N \hyper@@@@link
               {
                 \zref@ifrefcontainsprop {#1} { urluse }
-                  { \zref@extractdefault {#1} { urluse } {} }
-                  { \zref@extractdefault {#1} { url } {} }
+                  { \zref@extractdefault {#1} { urluse } { } }
+                  { \zref@extractdefault {#1} { url } { } }
               }
-              { \zref@extractdefault {#1} { anchor } {} }
+              { \zref@extractdefault {#1} { anchor } { } }
               {
                 \exp_not:V \l_@@_refpre_in_tl
-                \zref@extractdefault {#1} { \l_@@_ref_property_tl } {}
+                \zref@extractdefault {#1}
+                  { \l_@@_ref_property_tl } { }
                 \exp_not:V \l_@@_refpos_in_tl
               }
             \exp_not:N \group_end:
@@ -3338,7 +3590,7 @@
             \exp_not:N \group_begin:
             \exp_not:V \l_@@_reffont_in_tl
             \exp_not:V \l_@@_refpre_in_tl
-            \zref@extractdefault {#1} { \l_@@_ref_property_tl } {}
+            \zref@extractdefault {#1} { \l_@@_ref_property_tl } { }
             \exp_not:V \l_@@_refpos_in_tl
             \exp_not:N \group_end:
             \exp_not:V \l_@@_refpos_out_tl
@@ -3383,11 +3635,13 @@
             \bool_lazy_and:nnTF
               { \l_@@_abbrev_bool }
               {
-                ! \int_compare_p:nNn { \l_@@_type_count_int } = { 0 } ||
+                ! \int_compare_p:nNn
+                    { \l_@@_type_count_int } = { 0 } ||
                 ! \l_@@_noabbrev_first_bool
               }
               {
-                \tl_set:NV \l_@@_name_format_fallback_tl \l_@@_name_format_tl
+                \tl_set:NV \l_@@_name_format_fallback_tl
+                  \l_@@_name_format_tl
                 \tl_put_right:Nn \l_@@_name_format_tl { -ab }
               }
               { \tl_clear:N \l_@@_name_format_fallback_tl }
@@ -3395,7 +3649,10 @@
             \tl_if_empty:NTF \l_@@_name_format_fallback_tl
               {
                 \prop_get:cVNF
-                  { l_@@_type_ \l_@@_type_first_label_type_tl _options_prop }
+                  {
+                    l_@@_type_
+                    \l_@@_type_first_label_type_tl _options_prop
+                  }
                   \l_@@_name_format_tl
                   \l_@@_type_name_tl
                   {
@@ -3413,12 +3670,18 @@
               }
               {
                 \prop_get:cVNF
-                  { l_@@_type_ \l_@@_type_first_label_type_tl _options_prop }
+                  {
+                    l_@@_type_
+                    \l_@@_type_first_label_type_tl _options_prop
+                  }
                   \l_@@_name_format_tl
                   \l_@@_type_name_tl
                   {
                     \prop_get:cVNF
-                      { l_@@_type_ \l_@@_type_first_label_type_tl _options_prop }
+                      {
+                        l_@@_type_
+                        \l_@@_type_first_label_type_tl _options_prop
+                      }
                       \l_@@_name_format_fallback_tl
                       \l_@@_type_name_tl
                       {
@@ -3435,7 +3698,8 @@
                               \l_@@_type_name_tl
                               {
                                 \tl_clear:N \l_@@_type_name_tl
-                                \msg_warning:nnx { zref-clever } { missing-name }
+                                \msg_warning:nnx { zref-clever }
+                                  { missing-name }
                                   { \l_@@_type_first_label_type_tl }
                               }
                           }
@@ -3493,25 +3757,29 @@
         \bool_if:NTF \l_@@_name_in_link_bool
           {
             \zref@ifrefcontainsprop
-              { \l_@@_type_first_label_tl } { \l_@@_ref_property_tl }
+              { \l_@@_type_first_label_tl }
+              { \l_@@_ref_property_tl }
               {
-                % It's two '@s', but escaped for DocStrip.
+                % It's two `@s', but escaped for DocStrip.
                 \exp_not:N \hyper@@@@link
                   {
                     \zref@ifrefcontainsprop
                       { \l_@@_type_first_label_tl } { urluse }
                       {
-                        \zref@extractdefault { \l_@@_type_first_label_tl }
-                          { urluse } {}
+                        \zref@extractdefault
+                          { \l_@@_type_first_label_tl }
+                          { urluse } { }
                       }
                       {
-                        \zref@extractdefault { \l_@@_type_first_label_tl }
-                          { url } {}
+                        \zref@extractdefault
+                          { \l_@@_type_first_label_tl }
+                          { url } { }
                       }
                   }
                   {
-                    \zref@extractdefault { \l_@@_type_first_label_tl }
-                      { anchor } {}
+                    \zref@extractdefault
+                      { \l_@@_type_first_label_tl }
+                      { anchor } { }
                   }
                   {
                     \exp_not:N \group_begin:
@@ -3525,15 +3793,16 @@
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_reffont_in_tl
                     \exp_not:V \l_@@_refpre_in_tl
-                    \zref@extractdefault { \l_@@_type_first_label_tl }
-                      { \l_@@_ref_property_tl } {}
+                    \zref@extractdefault
+                      { \l_@@_type_first_label_tl }
+                      { \l_@@_ref_property_tl } { }
                     \exp_not:V \l_@@_refpos_in_tl
                     \exp_not:N \group_end:
                     % hyperlink makes it's own group, we'd like to close the
-                    % 'refpre-out' group after 'refpos-out', but... we close
-                    % it here, and give the trailing 'refpos-out' its own
+                    % `refpre-out' group after `refpos-out', but... we close
+                    % it here, and give the trailing `refpos-out' its own
                     % group.  This will result that formatting given to
-                    % 'refpre-out' will not reach 'refpos-out', but I see no
+                    % `refpre-out' will not reach `refpos-out', but I see no
                     % alternative, and this has to be handled specially.
                     \exp_not:N \group_end:
                   }
@@ -3566,7 +3835,8 @@
                 \exp_not:V \l_@@_namesep_tl
               }
             \zref@ifrefcontainsprop
-              { \l_@@_type_first_label_tl } { \l_@@_ref_property_tl }
+              { \l_@@_type_first_label_tl }
+              { \l_@@_ref_property_tl }
               {
                 \bool_if:nTF
                   {
@@ -3585,22 +3855,26 @@
                         \zref@ifrefcontainsprop
                           { \l_@@_type_first_label_tl } { urluse }
                           {
-                            \zref@extractdefault { \l_@@_type_first_label_tl }
-                              { urluse } {}
+                            \zref@extractdefault
+                              { \l_@@_type_first_label_tl }
+                              { urluse } { }
                           }
                           {
-                            \zref@extractdefault { \l_@@_type_first_label_tl }
-                              { url } {}
+                            \zref@extractdefault
+                              { \l_@@_type_first_label_tl }
+                              { url } { }
                           }
                       }
                       {
-                        \zref@extractdefault { \l_@@_type_first_label_tl }
-                          { anchor } {}
+                        \zref@extractdefault
+                          { \l_@@_type_first_label_tl }
+                          { anchor } { }
                       }
                       {
                         \exp_not:V \l_@@_refpre_in_tl
-                        \zref@extractdefault { \l_@@_type_first_label_tl }
-                          { \l_@@_ref_property_tl } {}
+                        \zref@extractdefault
+                          { \l_@@_type_first_label_tl }
+                          { \l_@@_ref_property_tl } { }
                         \exp_not:V \l_@@_refpos_in_tl
                       }
                     \exp_not:N \group_end:
@@ -3614,8 +3888,9 @@
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_reffont_in_tl
                     \exp_not:V \l_@@_refpre_in_tl
-                    \zref@extractdefault { \l_@@_type_first_label_tl }
-                      { \l_@@_ref_property_tl } {}
+                    \zref@extractdefault
+                      { \l_@@_type_first_label_tl }
+                      { \l_@@_ref_property_tl } { }
                     \exp_not:V \l_@@_refpos_in_tl
                     \exp_not:N \group_end:
                     \exp_not:V \l_@@_refpos_out_tl
@@ -3637,39 +3912,60 @@
 % \Arg{option} \Arg{var to store result}
 \cs_new_protected:Npn \@@_get_ref_string:nN #1#2
   {
-    % First attempt options stored in \cs{l_@@_ref_options_prop}.
+%    \end{macrocode}
+% First attempt options stored in \cs{l_@@_ref_options_prop}.
+%    \begin{macrocode}
     \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
       {
-        % If not found, try the type specific options.
+%    \end{macrocode}
+% If not found, try the type specific options.
+%    \begin{macrocode}
         \bool_lazy_all:nTF
           {
             { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
             {
               \prop_if_exist_p:c
-                { l_@@_type_ \l_@@_label_type_a_tl _options_prop }
+                {
+                  l_@@_type_
+                  \l_@@_label_type_a_tl _options_prop
+                }
             }
             {
               \prop_if_in_p:cn
-                { l_@@_type_ \l_@@_label_type_a_tl _options_prop } {#1}
+                {
+                  l_@@_type_
+                  \l_@@_label_type_a_tl _options_prop
+                }
+                {#1}
             }
           }
           {
             \prop_get:cnN
-              { l_@@_type_ \l_@@_label_type_a_tl _options_prop } {#1} #2
+              {
+                l_@@_type_
+                \l_@@_label_type_a_tl _options_prop
+              }
+              {#1} #2
           }
           {
-            % If not found, try the type specific translations.
+%    \end{macrocode}
+% If not found, try the type specific translations.
+%    \begin{macrocode}
             \@@_get_type_transl:xxnNF
               { \l_@@_ref_language_tl }
               { \l_@@_label_type_a_tl }
               {#1} #2
               {
-                % If not found, try default translations.
+%    \end{macrocode}
+% If not found, try default translations.
+%    \begin{macrocode}
                 \@@_get_default_transl:xnNF
                   { \l_@@_ref_language_tl }
                   {#1} #2
                   {
-                    % If not found, try fallback.
+%    \end{macrocode}
+% If not found, try fallback.
+%    \begin{macrocode}
                     \@@_get_fallback_transl:nNF {#1} #2
                       {
                         \tl_clear:N #2
@@ -3690,19 +3986,30 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_get_ref_font:nN #1#2
   {
-    % First attempt options stored in \cs{l_@@_ref_options_prop}.
+%    \end{macrocode}
+% First attempt options stored in \cs{l_@@_ref_options_prop}.
+%    \begin{macrocode}
     \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
       {
-        % If not found, try the type specific options.
+%    \end{macrocode}
+% If not found, try the type specific options.
+%    \begin{macrocode}
         \bool_lazy_and:nnTF
           { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
           {
             \prop_if_exist_p:c
-              { l_@@_type_ \l_@@_label_type_a_tl _options_prop }
+              {
+                l_@@_type_
+                \l_@@_label_type_a_tl _options_prop
+              }
           }
           {
             \prop_get:cnNF
-              { l_@@_type_ \l_@@_label_type_a_tl _options_prop } {#1} #2
+              {
+                l_@@_type_
+                \l_@@_label_type_a_tl _options_prop
+              }
+              {#1} #2
               { \tl_clear:N #2 }
           }
           { \tl_clear:N #2 }
@@ -3728,15 +4035,15 @@
           { \zref@extractdefault {#2} { zc@pgfmt } { } }
           {
             \int_compare:nNnTF
-              { \zref@extractdefault {#1} { zc@pgval } {-2} + 1 }
+              { \zref@extractdefault {#1} { zc@pgval } { -2 } + 1 }
                 =
-              { \zref@extractdefault {#2} { zc@pgval } {-1} }
+              { \zref@extractdefault {#2} { zc@pgval } { -1 } }
               { \bool_set_true:N \l_@@_next_maybe_range_bool }
               {
                 \int_compare:nNnT
-                  { \zref@extractdefault {#1} { zc@pgval } {-1} }
+                  { \zref@extractdefault {#1} { zc@pgval } { -1 } }
                     =
-                  { \zref@extractdefault {#2} { zc@pgval } {-1} }
+                  { \zref@extractdefault {#2} { zc@pgval } { -1 } }
                   {
                     \bool_set_true:N \l_@@_next_maybe_range_bool
                     \bool_set_true:N \l_@@_next_is_same_bool
@@ -3754,15 +4061,15 @@
               { \zref@extractdefault {#2} { zc@enclval } { } }
               {
                 \int_compare:nNnTF
-                  { \zref@extractdefault {#1} { zc@cntval } {-2} + 1 }
+                  { \zref@extractdefault {#1} { zc@cntval } { -2 } + 1 }
                     =
-                  { \zref@extractdefault {#2} { zc@cntval } {-1} }
+                  { \zref@extractdefault {#2} { zc@cntval } { -1 } }
                   { \bool_set_true:N \l_@@_next_maybe_range_bool }
                   {
                     \int_compare:nNnT
-                      { \zref@extractdefault {#1} { zc@cntval } {-1} }
+                      { \zref@extractdefault {#1} { zc@cntval } { -1 } }
                         =
-                      { \zref@extractdefault {#2} { zc@cntval } {-1} }
+                      { \zref@extractdefault {#2} { zc@cntval } { -1 } }
                       {
                         \bool_set_true:N \l_@@_next_maybe_range_bool
                         \bool_set_true:N \l_@@_next_is_same_bool
