@@ -3274,15 +3274,24 @@
 % \subsection*{Aux functions}
 %
 %
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_ref_default:
+  { \zref@default }
+\cs_new_protected:Npn \@@_name_default:
+  { \zref@default }
+%    \end{macrocode}
+%
+%
+%
 % \begin{macro}{\@@_get_ref:n}
 %   Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
 %   ``ref-block'', including ``pre'' and ``pos'' elements, and
 %   \emph{hyperlinking}.  It does not handle the reference type ``name'', for
 %   that use \cs{@@_get_ref_first:}.  It should get the reference with
 %   \cs{zref@extractdefault} as usual but, if the reference is not available,
-%   should put \cs{zref@default} on the stream protected, so that it can be
-%   accumulated in the queue.  \cs{hyperlink} must also be protected from
-%   expansion for the same reason.
+%   should put \cs{@@_ref_default:} or \cs{@@_name_default:} on the stream
+%   protected, so that it can be accumulated in the queue.  \cs{hyperlink}
+%   must also be protected from expansion for the same reason.
 %    \begin{macrocode}
 \cs_new:Npn \@@_get_ref:n #1
   {
@@ -3327,7 +3336,7 @@
             \exp_not:N \group_end:
           }
       }
-      { \exp_not:N \zref@default }
+      { \exp_not:N \@@_ref_default: }
   }
 \cs_generate_variant:Nn \@@_get_ref:n { V }
 %    \end{macrocode}
@@ -3470,7 +3479,7 @@
 \cs_new:Npn \@@_get_ref_first:
   {
     \zref@ifrefundefined { \l_@@_type_first_label_tl }
-      { \exp_not:N \zref@default }
+      { \exp_not:N \@@_ref_default: }
       {
         \bool_if:NTF \l_@@_name_in_link_bool
           {
@@ -3531,13 +3540,13 @@
                 \exp_not:V \l_@@_type_name_tl
                 \exp_not:N \group_end:
                 \exp_not:V \l_@@_namesep_tl
-                \exp_not:N \zref@default
+                \exp_not:N \@@_ref_default:
               }
           }
           {
             \tl_if_empty:NTF \l_@@_type_name_tl
               {
-                \exp_not:N \zref@default
+                \exp_not:N \@@_name_default:
                 \exp_not:V \l_@@_namesep_tl
               }
               {
@@ -3604,7 +3613,7 @@
                     \exp_not:N \group_end:
                   }
               }
-              { \exp_not:N \zref@default }
+              { \exp_not:N \@@_ref_default: }
           }
       }
   }
