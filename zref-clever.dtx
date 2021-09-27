@@ -579,6 +579,11 @@
   { Reference~type~undefined~for~label~'#1'~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { missing-name }
   { Name~undefined~for~type~'#1'~\msg_line_context:. }
+\msg_new:nnn { zref-clever } { missing-string }
+  {
+    We~couldn't~find~a~value~for~reference~option~'#1'~\msg_line_context:.~
+    But~we~should~have:~throw~a~rock~at~the~maintainer.
+  }
 \msg_new:nnn { zref-clever } { single-element-range }
   { Range~for~type~'#1'~resulted~in~single~element~\msg_line_context:. }
 %    \end{macrocode}
@@ -3662,7 +3667,11 @@
                   {
                     % If not found, try fallback.
                     \@@_get_fallback_transl:nNF {#1} #2
-                      { \tl_clear:N #2 }
+                      {
+                        \tl_clear:N #2
+                        \msg_warning:nnn { zref-clever }
+                          { missing-string } {#1}
+                      }
                   }
               }
           }
