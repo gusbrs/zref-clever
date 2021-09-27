@@ -967,6 +967,9 @@
 % looked for in ``fallback'', since it is indeed impossible to provide any
 % reasonable value for them for a ``specified but unknown language''.
 %
+% TODO Add regression test to ensure all fallback ``translations'' are indeed
+% present.
+%
 %    \begin{macrocode}
 \prop_new:N \g_@@_fallback_dict_prop
 \prop_gset_from_keyval:Nn \g_@@_fallback_dict_prop
@@ -2667,13 +2670,12 @@
 %
 %
 % \begin{variable}{}
-%   Aux variables for \cs{@@_typeset_refs:}.  Store separators and refpre/pos
-%   options.
+%   Aux variables for \cs{@@_typeset_refs:}.  Store separators, refpre/pos and
+%   font options.
 %    \begin{macrocode}
 \tl_new:N \l_@@_namefont_tl
 \tl_new:N \l_@@_reffont_out_tl
 \tl_new:N \l_@@_reffont_in_tl
-
 \tl_new:N \l_@@_namesep_tl
 \tl_new:N \l_@@_rangesep_tl
 \tl_new:N \l_@@_pairsep_tl
@@ -3003,7 +3005,7 @@
       }
 
     % Now that the type is finished, we can add the name and the first ref to
-    % the queue.  Or, if ``typset'' option is not ``both'', handle it here
+    % the queue.  Or, if ``typeset'' option is not ``both'', handle it here
     % too.
     \@@_type_name_setup:
     \bool_if:nTF
