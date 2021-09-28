@@ -588,6 +588,7 @@
 %
 %
 % \subsection{Reference format}
+% \label{sec:reference-format}
 %
 % Formatting how the reference is to be typeset is, quite naturally, a big
 % part of the user interface of \pkg{zref-clever}.  In this area, we tried to
@@ -2185,6 +2186,7 @@
 %
 %
 % \begin{macro}[int]{\zcref}
+%   The main user command of the package.
 %   \begin{syntax}
 %     \cs{zcref}\meta{*}\oarg{options}\marg{labels}
 %   \end{syntax}
@@ -2248,8 +2250,8 @@
 %    \end{macrocode}
 % Typeset \texttt{note}.
 %    \begin{macrocode}
-      \@@_get_ref_string:nN {notesep} \l_@@_notesep_tl
-      \l_@@_notesep_tl
+      \@@_get_ref_string:nN { notesep } \l_tmpa_tl
+      \l_tmpa_tl
       \l_@@_zcref_note_tl
 %    \end{macrocode}
 % Integration with \pkg{zref-check}.
@@ -2280,6 +2282,7 @@
 %
 %
 % \begin{macro}[int]{\zcpageref}
+%   A \cs{pageref} equivalent of \cs{zcref}.
 %   \begin{syntax}
 %     \cs{zcpageref}\meta{*}\oarg{options}\marg{labels}
 %   \end{syntax}
@@ -2297,95 +2300,69 @@
 %
 % \section{Sorting}
 %
+% Sorting is certainly a ``big task'' for \pkg{zref-clever} but, in the end,
+% it boils down to ``carefully done branching'', and quite some of it.  The
+% sorting of ``page'' references is very much lightened by the availability of
+% \texttt{abspage}, from the \pkg{zref-abspage} module, which offers ``just
+% what we need'' for our purposes.  The sorting of ``default'' references
+% falls on two main cases: i) labels of the same type; ii) labels of different
+% types.  The first case is sorted according to the priorities set by the
+% \opt{typesort} option or, if that is silent for the case, by the order in
+% which labels were given by the user in \cs{zcref}.  The second case is the
+% most involved one, since it is possible for multiple counters to be bundled
+% together in a single reference type.  Because of this, sorting must take
+% into account the whole chain of ``enclosing counters'' for the counters of
+% the labels at hand.
 %
 % \begin{variable}
 %   {
-%     \l_@@_label_a_tl ,
-%     \l_@@_label_b_tl ,
 %     \l_@@_label_type_a_tl ,
 %     \l_@@_label_type_b_tl ,
 %     \l_@@_label_enclcnt_a_tl ,
 %     \l_@@_label_enclcnt_b_tl ,
 %     \l_@@_label_enclval_a_tl ,
 %     \l_@@_label_enclval_b_tl ,
-%     \l_@@_label_enclhead_a_tl ,
-%     \l_@@_label_enclhead_b_tl ,
 %   }
-% Aux variables, for use in sorting and typesetting.  I could probably let go
-% some of them in favor of \texttt{tmpa}/\texttt{tmpb}, but they do improve
-% code readability.
+%   Auxiliary variables, for use in sorting, and some also in typesetting.
+%   Used to store reference information -- label properties -- of the
+%   ``current'' (\texttt{a}) and ``next'' (\texttt{b}) labels.
 %    \begin{macrocode}
-\tl_new:N \l_@@_label_a_tl
-\tl_new:N \l_@@_label_b_tl
 \tl_new:N \l_@@_label_type_a_tl
 \tl_new:N \l_@@_label_type_b_tl
 \tl_new:N \l_@@_label_enclcnt_a_tl
 \tl_new:N \l_@@_label_enclcnt_b_tl
 \tl_new:N \l_@@_label_enclval_a_tl
 \tl_new:N \l_@@_label_enclval_b_tl
-\tl_new:N \l_@@_label_enclhead_a_tl
-\tl_new:N \l_@@_label_enclhead_b_tl
 %    \end{macrocode}
 % \end{variable}
 %
-%    \begin{macrocode}
-\int_new:N \l_@@_sort_prior_a_int
-\int_new:N \l_@@_sort_prior_b_int
-%    \end{macrocode}
-%
-%
 % \begin{variable}{\l_@@_sort_decided_bool}
-%   Auxiliary variable for \cs{@@_sort_default:nn}, signals if the sorting
-%   between two labels has been decided or not.
+%   Auxiliary variable for \cs{@@_sort_default_same_type:nn}, signals if the
+%   sorting between two labels has been decided or not.
 %    \begin{macrocode}
 \bool_new:N \l_@@_sort_decided_bool
 %    \end{macrocode}
 % \end{variable}
 %
-%
-% Variant not provided by the kernel.
+% \begin{variable}{\l_@@_sort_prior_a_int,\l_@@_sort_prior_b_int}
+%   Auxiliary variables for \cs{@@_sort_default_different_types:nn}.  Store
+%   the sort priority of the ``current'' and ``next'' labels.
 %    \begin{macrocode}
-\cs_generate_variant:Nn \tl_reverse_items:n { V }
+\int_new:N \l_@@_sort_prior_a_int
+\int_new:N \l_@@_sort_prior_b_int
 %    \end{macrocode}
-%
-%
-% \begin{macro}{\@@_label_type_put_new_right:n}
-%   Auxiliary function used to store ``new'' label types (in order) as the
-%   sorting proceeds.  It is expected to be run inside \cs{@@_sort_labels:},
-%   and stores new types in \cs{l_@@_label_types_seq}.
-%   \begin{syntax}
-%     \cs{@@_label_type_put_new_right:n} \Arg{label}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_label_type_put_new_right:n #1
-  {
-    \tl_set:Nx \l_@@_label_type_a_tl
-      { \zref@extractdefault {#1} { zc@type } { \c_empty_tl } }
-    \tl_if_empty:NF \l_@@_label_type_a_tl
-      {
-        \seq_if_in:NVF
-          \l_@@_label_types_seq
-          \l_@@_label_type_a_tl
-          {
-            \seq_put_right:NV \l_@@_label_types_seq
-              \l_@@_label_type_a_tl
-          }
-      }
-  }
-%    \end{macrocode}
-% \end{macro}
+% \end{variable}
 %
 % \begin{variable}{\l_@@_label_types_seq}
 %   Stores the order in which reference types appear in the label list
-%   supplied by the user in \cs{zcref}.  This order is required as a ``last
-%   resort'' sort criterion between the reference types, for use in
-%   \cs{@@_sort_default:nn}.
+%   supplied by the user in \cs{zcref}.  This variable is populated by
+%   \cs{@@_label_type_put_new_right:n} at the start of \cs{@@_sort_labels:}.
+%   This order is required as a ``last resort'' sort criterion between the
+%   reference types, for use in \cs{@@_sort_default_different_types:nn}.
 %    \begin{macrocode}
 \seq_new:N \l_@@_label_types_seq
 %    \end{macrocode}
 % \end{variable}
-%
-%
 %
 %
 % \begin{macro}{\@@_sort_labels:}
@@ -2433,11 +2410,10 @@
                 \sort_return_swapped:
               }
               {
-                % The interesting case: both labels are defined.  The
-                % reference to the "default" property/counter or to the page
-                % are quite different from our perspective, they rely on
-                % different fields and even use different information for
-                % sorting, so we branch them here to specialized functions.
+                % The interesting case: both labels are defined.  References
+                % to the "default" property or to the "page" are quite
+                % different with regard to sorting, so we branch them here to
+                % specialized functions.
                 \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
                   { \@@_sort_page:nn {##1} {##2} }
                   { \@@_sort_default:nn {##1} {##2} }
@@ -2448,9 +2424,37 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\@@_label_type_put_new_right:n}
+%   Auxiliary function used to store the order in which reference types appear
+%   in the label list supplied by the user in \cs{zcref}.  It is expected to
+%   be run inside \cs{@@_sort_labels:}, and stores the types sequence in
+%   \cs{l_@@_label_types_seq}.  I have tried to handle the same task inside
+%   \cs{seq_sort:Nn} in \cs{@@_sort_labels:} to spare mapping over
+%   \cs{l_@@_zcref_labels_seq}, but it turned out it not to be easy to rely on
+%   the order the labels get processed at that point, since the variable is
+%   being sorted there.  Besides, the mapping is simple, not a particularly
+%   expensive operation.  Anyway, this keeps things clean.
+%   \begin{syntax}
+%     \cs{@@_label_type_put_new_right:n} \Arg{label}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_label_type_put_new_right:n #1
+  {
+    \tl_set:Nx \l_@@_label_type_a_tl
+      { \zref@extractdefault {#1} { zc@type } { \c_empty_tl } }
+    \seq_if_in:NVF \l_@@_label_types_seq
+      \l_@@_label_type_a_tl
+      {
+        \seq_put_right:NV \l_@@_label_types_seq
+          \l_@@_label_type_a_tl
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
 %
 % \begin{macro}{\@@_sort_default:nn}
-%   The heavy-lifting function for sorting of existing labels for ``default''
+%   The heavy-lifting function for sorting of defined labels for ``default''
 %   references (that is, a standard reference, not to ``page'').  This
 %   function is expected to be called within the sorting loop of
 %   \cs{@@_sort_labels:} and receives the pair of labels being considered for
@@ -2492,32 +2496,25 @@
                 ! \tl_if_empty_p:N \l_@@_label_type_b_tl
               }
               {
-                % Here we send this to a couple of auxiliary functions for no
-                % other reason than to keep this long function a little less
-                % unreadable.
                 \tl_if_eq:NNTF
                   \l_@@_label_type_a_tl
                   \l_@@_label_type_b_tl
-                  {
-                    % ...and it's the same type.
-                    \@@_sort_default_same_type:nn {#1} {#2}
-                  }
-                  {
-                    % ...and they are different types.
-                    \@@_sort_default_different_types:nn {#1} {#2}
-                  }
+                  % ...and it's the same type.
+                  { \@@_sort_default_same_type:nn {#1} {#2} }
+                  % ...and they are different types.
+                  { \@@_sort_default_different_types:nn {#1} {#2} }
               }
               {
-                % Neither of the labels has a type.  We can't do much of
-                % meaningful here, but if it's the same counter, compare it.
+                % Neither label has a type.  We can't do much of meaningful
+                % here, but if it's the same counter, compare it.
                 \exp_args:Nxx \tl_if_eq:nnTF
                   { \zref@extractdefault {#1} { counter } { } }
                   { \zref@extractdefault {#2} { counter } { } }
                   {
                     \int_compare:nNnTF
-                      { \zref@extractdefault {#1} { zc@cntval } {-1} }
+                      { \zref@extractdefault {#1} { zc@cntval } { -1 } }
                         >
-                      { \zref@extractdefault {#2} { zc@cntval } {-1} }
+                      { \zref@extractdefault {#2} { zc@cntval } { -1 } }
                       { \sort_return_swapped: }
                       { \sort_return_same:    }
                   }
@@ -2530,8 +2527,16 @@
 % \end{macro}
 %
 %
+% Variant not provided by the kernel, for use in
+% \cs{@@_sort_default_same_type:nn}.
+%    \begin{macrocode}
+\cs_generate_variant:Nn \tl_reverse_items:n { V }
+%    \end{macrocode}
 %
 % \begin{macro}{\@@_sort_default_same_type:nn}
+%   \begin{syntax}
+%     \cs{@@_sort_default_same_type:nn} \Arg{label a} \Arg{label b}
+%   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_sort_default_same_type:nn #1#2
   {
@@ -2555,17 +2560,12 @@
     \bool_set_false:N \l_@@_sort_decided_bool
     \bool_until_do:Nn \l_@@_sort_decided_bool
       {
-        \tl_set:Nx \l_@@_label_enclhead_a_tl
-          { \tl_head:N \l_@@_label_enclcnt_a_tl }
-        \tl_set:Nx \l_@@_label_enclhead_b_tl
-          { \tl_head:N \l_@@_label_enclcnt_b_tl }
-
         \bool_if:nTF
           {
-            % Both are empty, meaning: neither labels have any (further)
-            % "enclosing counters" (left).
-            \tl_if_empty_p:V \l_@@_label_enclhead_a_tl &&
-            \tl_if_empty_p:V \l_@@_label_enclhead_b_tl
+            % Both are empty: neither label has any (further) "enclosing
+            % counters" (left).
+            \tl_if_empty_p:V \l_@@_label_enclcnt_a_tl &&
+            \tl_if_empty_p:V \l_@@_label_enclcnt_b_tl
           }
           {
             \exp_args:Nxx \tl_if_eq:nnTF
@@ -2574,9 +2574,9 @@
               {
                 \bool_set_true:N \l_@@_sort_decided_bool
                 \int_compare:nNnTF
-                  { \zref@extractdefault {#1} { zc@cntval } {-1} }
+                  { \zref@extractdefault {#1} { zc@cntval } { -1 } }
                     >
-                  { \zref@extractdefault {#2} { zc@cntval } {-1} }
+                  { \zref@extractdefault {#2} { zc@cntval } { -1 } }
                   { \sort_return_swapped: }
                   { \sort_return_same:    }
               }
@@ -2590,15 +2590,13 @@
           {
             \bool_if:nTF
               {
-                % `a' is empty (and `b' is not), meaning: `b' is (possibly)
-                % nested in `a'.
-                \tl_if_empty_p:V \l_@@_label_enclhead_a_tl
+                % `a' is empty (and `b' is not): `b' may be nested in `a'.
+                \tl_if_empty_p:V \l_@@_label_enclcnt_a_tl
               }
               {
-                \tl_set:Nx \l_tmpa_tl
-                  { {\zref@extractdefault {#1} { counter } { }} }
                 \exp_args:NNx \tl_if_in:NnTF
-                  \l_@@_label_enclcnt_b_tl { \l_tmpa_tl }
+                  \l_@@_label_enclcnt_b_tl
+                  { {\zref@extractdefault {#1} { counter } { }} }
                   {
                     \bool_set_true:N \l_@@_sort_decided_bool
                     \sort_return_same:
@@ -2613,15 +2611,13 @@
               {
                 \bool_if:nTF
                   {
-                    % `b' is empty (and `a' is not), meaning: `a' is
-                    % (possibly) nested in `b'.
-                    \tl_if_empty_p:V \l_@@_label_enclhead_b_tl
+                    % `b' is empty (and `a' is not): `a' may be nested in `b'.
+                    \tl_if_empty_p:V \l_@@_label_enclcnt_b_tl
                   }
                   {
-                    \tl_set:Nx \l_tmpb_tl
-                      { {\zref@extractdefault {#2} { counter } { }} }
                     \exp_args:NNx \tl_if_in:NnTF
-                      \l_@@_label_enclcnt_a_tl { \l_tmpb_tl }
+                      \l_@@_label_enclcnt_a_tl
+                      { {\zref@extractdefault {#2} { counter } { }} }
                       {
                         \bool_set_true:N \l_@@_sort_decided_bool
                         \sort_return_swapped:
@@ -2634,13 +2630,13 @@
                       }
                   }
                   {
-                    % Neither is empty, meaning: we can (possibly) compare the
-                    % values of the current enclosing counter in the loop, if
-                    % they are equal, we are still in the loop, if they are
-                    % not, a sorting decision can be made directly.
-                    \tl_if_eq:NNTF
-                      \l_@@_label_enclhead_a_tl
-                      \l_@@_label_enclhead_b_tl
+                    % Neither is empty: we can (possibly) compare the values
+                    % of the current enclosing counter in the loop, if they
+                    % are equal, we are still in the loop, if they are not, a
+                    % sorting decision can be made directly.
+                    \exp_args:Nxx \tl_if_eq:nnTF
+                      { \tl_head:N \l_@@_label_enclcnt_a_tl }
+                      { \tl_head:N \l_@@_label_enclcnt_b_tl }
                       {
                         \int_compare:nNnTF
                           { \tl_head:N \l_@@_label_enclval_a_tl }
@@ -2682,14 +2678,20 @@
 %
 %
 % \begin{macro}{\@@_sort_default_different_types:nn}
+%   \begin{syntax}
+%     \cs{@@_sort_default_different_types:nn} \Arg{label a} \Arg{label b}
+%   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_sort_default_different_types:nn #1#2
   {
+%    \end{macrocode}
+% Retrieve sort priorities for \meta{label a} and \meta{label b}.
+% \cs{l_@@_typesort_seq} was stored in reverse sequence, and we compute the
+% sort priorities in the negative range, so that we can implicitly rely on `0'
+% being the ``last value''.
+%    \begin{macrocode}
     \int_zero:N \l_@@_sort_prior_a_int
     \int_zero:N \l_@@_sort_prior_b_int
-    % `typesort_seq' was stored in reverse sequence, and we compute the sort
-    % priorities in the negative range, so that we can implicitly rely on `0'
-    % being the "last value".
     \seq_map_indexed_inline:Nn \l_@@_typesort_seq
       {
         \tl_if_eq:nnTF {##2} {{othertypes}}
@@ -2708,6 +2710,9 @@
               }
           }
       }
+%    \end{macrocode}
+% Then do the actual sorting.
+%    \begin{macrocode}
     \bool_if:nTF
       {
         \int_compare_p:nNn
@@ -2724,9 +2729,8 @@
           }
           { \sort_return_swapped: }
           {
-            % Sort priorities are equal for different types: the type that
-            % occurs first in 'labels', as given by the user, is kept (or
-            % brought) forward.
+            % Sort priorities are equal: the type that occurs first in
+            % `labels', as given by the user, is kept (or brought) forward.
             \seq_map_inline:Nn \l_@@_label_types_seq
               {
                 \tl_if_eq:NnTF \l_@@_label_type_a_tl {##1}
@@ -2743,9 +2747,8 @@
 % \end{macro}
 %
 %
-%
 % \begin{macro}{\@@_sort_page:nn}
-%   The sorting function for sorting of existing labels for references to
+%   The sorting function for sorting of defined labels for references to
 %   ``page''.  This function is expected to be called within the sorting loop
 %   of \cs{@@_sort_labels:} and receives the pair of labels being considered
 %   for a change of order or not.  It should \emph{always} ``return'' either
@@ -2772,30 +2775,106 @@
 %
 % \section{Typesetting}
 %
+% ``Typesetting'' the reference, which here includes the parsing of the labels
+% and eventual compression of labels in sequence into ranges, is definitely
+% the ``crux'' of \pkg{zref-clever}.  This because we process the label set as
+% a stack, in a single pass, and hence ``parsing'', ``compressing'', and
+% ``typesetting'' must be decided upon at the same time, making it difficult
+% to slice the job into more specific and self-contained tasks.  So, do bear
+% this in mind before you curse me for the length of some of the functions
+% below, or before a more orthodox ``docstripper'' complains about me not
+% sticking to code commenting conventions to keep the code more readable in
+% the \file{.dtx} file.
 %
-% About possible alternatives to signal compression inhibition for individual
-% labels, see \url{https://tex.stackexchange.com/q/611370} (thanks Enrico
-% Gregorio, Phelype Oleinik, and Steven B.\ Segletes).  Yet another
-% alternative would be to receive an optional argument with the label(s) not
-% to be compressed.  This would be a repetition, but would keep the syntax
-% ``clean''.  All in all, and rethinking this here, probably the best is
-% simply to not allow individual inhibition of compression.  We can already
-% control compression of each individual call of \cs{zcref} with existing
-% options, this should be enough.  I don't think the small extra flexibility
-% this would grant is worth the syntax disruption it entails.  Anyway, it is
-% easy to deal with this in case the need arises, by just adding another
-% condition (coming from whatever the chosen syntax was) when we check for
-% \cs{@@_labels_in_sequence:nn} in \cs{@@_typeset_refs_aux_not_last_of_type:}.
+% While processing the label stack (kept in \cs{l_@@_typeset_labels_seq}),
+% \cs{@@_typeset_refs:} ``sees'' two labels, and two labels only, the
+% ``current'' one (kept in \cs{l_@@_label_a_tl}), and the ``next'' one (kept
+% in \cs{l_@@_label_b_tl}).  However, the typesetting needs (a lot) more
+% information than just these two immediate labels to make a number of
+% critical decisions.  Some examples: i) We cannot know if labels ``current''
+% and ``next'' of the same type are a ``pair'', or just ``elements in a
+% list'', until we examine the label after ``next''; ii) If the ``next'' label
+% is of the same type as the ``current'', and it is in immediate sequence to
+% it, it potentially forms a ``range'', but we cannot know if ``next'' is
+% actually the end of the range until we examined an arbitrary number of
+% labels, and found one which is not in sequence from the previous one; iii)
+% When processing a type block, the ``name'' comes first, however, we only
+% know if that name should be plural, or if it should be included in the
+% hyperlink, after processing an arbitrary number of labels and find one of a
+% different type.  One could naively assume that just examining ``next'' would
+% be enough for this, since we can know if it is of the same type or not.
+% Alas, ``there be ranges'', and a compression operation may boil down to a
+% single element, so we have to process the whole type block to know how its
+% name should be typeset; iv) Similar issues apply to lists of type blocks,
+% each of which is of arbitrary length: we can only know if two type blocks
+% form a ``pair'' or are ``elements in a list'' when we finish the
+% block. Etc.\ etc.\ etc.
+%
+% We handle this by storing the reference ``pieces'' in ``queues'', instead of
+% typesetting them immediately upon processing.  The ``queues'' get typeset at
+% the point where all the information needed is available, which usually
+% happens when a type block finishes (we see something of a different type in
+% ``next'', signaled by \cs{l_@@_last_of_type_bool}), or the stack itself
+% finishes (has no more elements, signaled by \cs{l_@@_typeset_last_bool}).
+% And, in processing a type block, the type ``name'' gets added last (on the
+% left) of the queue.  The very first reference of its type always follows the
+% name, since it may form a hyperlink with it (so we keep it stored
+% separately, in \cs{l_@@_type_first_label_tl}, with
+% \cs{l_@@_type_first_label_type_tl} being its type).  And, since we may need
+% up to two type blocks in storage before typesetting, we have two of these
+% ``queues'': \cs{l_@@_typeset_queue_curr_tl} and
+% \cs{l_@@_typeset_queue_prev_tl}.
+%
+% Some of the relevant cases (e.g., distinguishing ``pair'' from ``list'') are
+% handled by counters, the main ones are: one for the ``type''
+% (\cs{l_@@_type_count_int}) and one for the ``label in the current type
+% block'' (\cs{l_@@_label_count_int}).
+%
+% Range compression, in particular, relies heavily on counting to be able do
+% distinguish relevant cases.  \cs{l_@@_range_count_int} counts the number of
+% elements in the current sequential ``streak'', and
+% \cs{l_@@_range_same_count_int} counts the number of \emph{equal} elements in
+% that same ``streak''.  The difference between the two allows us to
+% distinguish the cases in which a range actually ``skips'' a number in the
+% sequence, in which case we should use a range separator, from when they are
+% after all just contiguous, in which case a pair separator is called for.
+% Since, as usual, we can only know this when a arbitrary long ``streak''
+% finishes, we have to store the label which (potentially) begins a range
+% (kept in \cs{l_@@_range_beg_label_tl}).  \cs{l_@@_next_maybe_range_bool}
+% signals when ``next'' is potentially a range with ``current'', and
+% \cs{l_@@_next_is_same_bool} when their values are actually equal.
+%
+%
+% One further thing to discuss here -- to keep this ``on record'' -- is
+% inhibition of compression for individual labels.  It is not difficult to
+% handle it at the infrastructure side, what gets sloppy is the user facing
+% syntax to signal such inhibition.  For some possible alternatives for this
+% (and good ones at that) see \url{https://tex.stackexchange.com/q/611370}
+% (thanks Enrico Gregorio, Phelype Oleinik, and Steven B.\ Segletes).  Yet
+% another alternative would be an option receiving the label(s) not to be
+% compressed, this would be a repetition, but would keep the syntax clean.
+% All in all, probably the best is simply not to allow individual inhibition
+% of compression.  We can already control compression of each \cs{zcref} call
+% with existing options, this should be enough.  I don't think the small extra
+% flexibility individual label control for this would grant is worth the
+% syntax disruption it would entail.  Anyway, it would be easy to deal with
+% this in case the need arose, by just adding another condition (coming from
+% whatever the chosen syntax was) when we check for
+% \cs{@@_labels_in_sequence:nn} in \cs{@@_typeset_refs_not_last_of_type:}.
+% But I remain unconvinced of the pertinence of doing so.
 %
 %
 % \subsection*{Variables}
 %
-% \begin{variable}{\l_@@_typeset_last_bool, \l_@@_last_of_type_bool}
-%   Auxiliary variables for \cs{@@_typeset_refs:}.
-%   \cs{l_@@_typeset_last_bool} signals if the label list is over so that we
-%   can leave the loop.  \cs{l_@@_last_of_type_bool} signals if we are
-%   processing the last label of the current reference type.
+% \begin{variable}
+%   {
+%     \l_@@_typeset_labels_seq ,
+%     \l_@@_typeset_last_bool ,
+%     \l_@@_last_of_type_bool ,
+%   }
+%   Auxiliary variables for \cs{@@_typeset_refs:} main stack control.
 %    \begin{macrocode}
+\seq_new:N \l_@@_typeset_labels_seq
 \bool_new:N \l_@@_typeset_last_bool
 \bool_new:N \l_@@_last_of_type_bool
 %    \end{macrocode}
@@ -2803,22 +2882,30 @@
 %
 % \begin{variable}
 %   {
-%     \l_@@_typeset_labels_seq ,
+%     \l_@@_type_count_int ,
+%     \l_@@_label_count_int ,
+%   }
+%   Auxiliary variables for \cs{@@_typeset_refs:} main counters.
+%    \begin{macrocode}
+\int_new:N \l_@@_type_count_int
+\int_new:N \l_@@_label_count_int
+%    \end{macrocode}
+% \end{variable}
+%
+% \begin{variable}
+%   {
+%     \l_@@_label_a_tl ,
+%     \l_@@_label_b_tl ,
 %     \l_@@_typeset_queue_prev_tl ,
 %     \l_@@_typeset_queue_curr_tl ,
 %     \l_@@_type_first_label_tl ,
 %     \l_@@_type_first_label_type_tl
 %   }
-%   Auxiliary variables for \cs{@@_typeset_refs:}.  They store, respectively
-%   the ``previous'' and the ``current'' reference type information while they
-%   are being processed, since we cannot typeset them directly, given we can
-%   only know certain things when the (next) type list is over.  The ``queue''
-%   stores all references but the first of the type, and they are stored ready
-%   to be typeset.  The ``first_label'' stores the \emph{label} of the first
-%   reference for the type, because the name can only be determined at the
-%   end, and its (potential) hyperlink must be handled at that point.
+%   Auxiliary variables for \cs{@@_typeset_refs:} main ``queue'' control and
+%   storage.
 %    \begin{macrocode}
-\seq_new:N \l_@@_typeset_labels_seq
+\tl_new:N \l_@@_label_a_tl
+\tl_new:N \l_@@_label_b_tl
 \tl_new:N \l_@@_typeset_queue_prev_tl
 \tl_new:N \l_@@_typeset_queue_curr_tl
 \tl_new:N \l_@@_type_first_label_tl
@@ -2826,22 +2913,21 @@
 %    \end{macrocode}
 % \end{variable}
 %
-%
 % \begin{variable}
 %   {
-%     \l_@@_label_count_int ,
-%     \l_@@_type_count_int ,
+%     \l_@@_type_name_tl ,
+%     \l_@@_name_in_link_bool ,
+%     \l_@@_name_format_tl ,
+%     \l_@@_name_format_fallback_tl
 %   }
-%   Main counters for \cs{@@_typeset_refs:}.  They track the state of the
-%   parsing of the labels list.  \cs{l_@@_label_count_int} is stepped for every
-%   reference/label in the list, and reset at the start of a new type.
-%   \cs{l_@@_type_count_int} is stepped at every reference type change.
+%   Auxiliary variables for \cs{@@_typeset_refs:} type name handling.
 %    \begin{macrocode}
-\int_new:N \l_@@_label_count_int
-\int_new:N \l_@@_type_count_int
+\tl_new:N \l_@@_type_name_tl
+\bool_new:N \l_@@_name_in_link_bool
+\tl_new:N \l_@@_name_format_tl
+\tl_new:N \l_@@_name_format_fallback_tl
 %    \end{macrocode}
 % \end{variable}
-%
 %
 % \begin{variable}
 %   {
@@ -2851,14 +2937,7 @@
 %     \l_@@_next_maybe_range_bool ,
 %     \l_@@_next_is_same_bool ,
 %   }
-%   Range related auxiliary variables for \cs{@@_typeset_refs:}.
-%   \cs{l_@@_range_count_int} counts how many references/labels are in the
-%   current ongoing range.  \cs{l_@@_range_same_count_int} counts how many of
-%   the references in the current ongoing range are repeated ones.
-%   \cs{l_@@_range_beg_label_tl} stores the label of the reference that starts
-%   a range.  \cs{l_@@_next_maybe_range_bool} signals whether the next element
-%   is in sequence to the current one.  \cs{l_@@_next_is_same_bool} signals
-%   whether the next element repeats the current one.
+%   Auxiliary variables for \cs{@@_typeset_refs:} range handling.
 %    \begin{macrocode}
 \int_new:N \l_@@_range_count_int
 \int_new:N \l_@@_range_same_count_int
@@ -2868,49 +2947,44 @@
 %    \end{macrocode}
 % \end{variable}
 %
-%
-% \begin{variable}{}
-%   Aux variables for \cs{@@_typeset_refs:}.  Store separators, refpre/pos and
+% \begin{variable}
+%   {
+%     \l_@@_tpairsep_tl ,
+%     \l_@@_tlistsep_tl ,
+%     \l_@@_tlastsep_tl ,
+%     \l_@@_namesep_tl ,
+%     \l_@@_pairsep_tl ,
+%     \l_@@_listsep_tl ,
+%     \l_@@_lastsep_tl ,
+%     \l_@@_rangesep_tl ,
+%     \l_@@_refpre_out_tl ,
+%     \l_@@_refpos_out_tl ,
+%     \l_@@_refpre_in_tl ,
+%     \l_@@_refpos_in_tl ,
+%     \l_@@_namefont_tl ,
+%     \l_@@_reffont_out_tl ,
+%     \l_@@_reffont_in_tl ,
+%   }
+%   Auxiliary variables for \cs{@@_typeset_refs:} separators, refpre/pos and
 %   font options.
 %    \begin{macrocode}
-\tl_new:N \l_@@_namefont_tl
-\tl_new:N \l_@@_reffont_out_tl
-\tl_new:N \l_@@_reffont_in_tl
-\tl_new:N \l_@@_namesep_tl
-\tl_new:N \l_@@_rangesep_tl
-\tl_new:N \l_@@_pairsep_tl
-\tl_new:N \l_@@_listsep_tl
-\tl_new:N \l_@@_lastsep_tl
 \tl_new:N \l_@@_tpairsep_tl
 \tl_new:N \l_@@_tlistsep_tl
 \tl_new:N \l_@@_tlastsep_tl
-\tl_new:N \l_@@_notesep_tl
+\tl_new:N \l_@@_namesep_tl
+\tl_new:N \l_@@_pairsep_tl
+\tl_new:N \l_@@_listsep_tl
+\tl_new:N \l_@@_lastsep_tl
+\tl_new:N \l_@@_rangesep_tl
 \tl_new:N \l_@@_refpre_out_tl
 \tl_new:N \l_@@_refpos_out_tl
 \tl_new:N \l_@@_refpre_in_tl
 \tl_new:N \l_@@_refpos_in_tl
+\tl_new:N \l_@@_namefont_tl
+\tl_new:N \l_@@_reffont_out_tl
+\tl_new:N \l_@@_reffont_in_tl
 %    \end{macrocode}
 % \end{variable}
-%
-%
-%
-% \begin{variable}
-%   {
-%     \l_@@_type_name_tl ,
-%     \l_@@_name_in_link_bool ,
-%     \l_@@_name_format_tl ,
-%     \l_@@_name_format_fallback_tl
-%   }
-%   Auxiliary variables for \cs{@@_get_ref_first:} and
-%   \cs{@@_type_name_setup:}.
-%    \begin{macrocode}
-\tl_new:N \l_@@_type_name_tl
-\bool_new:N \l_@@_name_in_link_bool
-\tl_new:N \l_@@_name_format_tl
-\tl_new:N \l_@@_name_format_fallback_tl
-%    \end{macrocode}
-% \end{variable}
-%
 %
 %
 % \subsection*{Main functions}
@@ -2932,7 +3006,7 @@
     \int_zero:N \l_@@_range_count_int
     \int_zero:N \l_@@_range_same_count_int
 
-    % Get not-type-specific separators and refpre/pos options.
+    % Get type block options (not type-specific).
     \@@_get_ref_string:nN { tpairsep }
       \l_@@_tpairsep_tl
     \@@_get_ref_string:nN { tlistsep }
@@ -2940,7 +3014,7 @@
     \@@_get_ref_string:nN { tlastsep }
       \l_@@_tlastsep_tl
 
-    % Loop over the label list in sequence.
+    % Process label stack.
     \bool_set_false:N \l_@@_typeset_last_bool
     \bool_until_do:Nn \l_@@_typeset_last_bool
       {
@@ -2993,16 +3067,16 @@
                   {
                     % Neither is undefined, we must check the types.
                     \bool_if:nTF
-                      % Both empty: same "type".
                       {
+                        % Both empty: same "type".
                         \tl_if_empty_p:N \l_@@_label_type_a_tl &&
                         \tl_if_empty_p:N \l_@@_label_type_b_tl
                       }
                       { \bool_set_false:N \l_@@_last_of_type_bool }
                       {
                         \bool_if:nTF
-                          % Neither empty: compare types.
                           {
+                            % Neither empty: compare types.
                             ! \tl_if_empty_p:N \l_@@_label_type_a_tl
                             &&
                             ! \tl_if_empty_p:N \l_@@_label_type_b_tl
@@ -3046,12 +3120,6 @@
         % type.
         \int_compare:nNnT { \l_@@_label_count_int } = { 0 }
           {
-            \@@_get_ref_font:nN   { namefont   }
-              \l_@@_namefont_tl
-            \@@_get_ref_font:nN   { reffont    }
-              \l_@@_reffont_out_tl
-            \@@_get_ref_font:nN   { reffont-in }
-              \l_@@_reffont_in_tl
             \@@_get_ref_string:nN { namesep    }
               \l_@@_namesep_tl
             \@@_get_ref_string:nN { rangesep   }
@@ -3070,29 +3138,43 @@
               \l_@@_refpre_in_tl
             \@@_get_ref_string:nN { refpos-in  }
               \l_@@_refpos_in_tl
+            \@@_get_ref_font:nN   { namefont   }
+              \l_@@_namefont_tl
+            \@@_get_ref_font:nN   { reffont    }
+              \l_@@_reffont_out_tl
+            \@@_get_ref_font:nN   { reffont-in }
+              \l_@@_reffont_in_tl
           }
 
-        % Here we send this to a couple of auxiliary functions for no other
-        % reason than to keep this long function a little less unreadable.
+        % Here we send this to a couple of auxiliary functions.
         \bool_if:NTF \l_@@_last_of_type_bool
-          {
-            % There exists no next label of the same type as the current.
-            \@@_typeset_refs_aux_last_of_type:
-          }
-          {
-            % There exists a next label of the same type as the current.
-            \@@_typeset_refs_aux_not_last_of_type:
-          }
+          % There exists no next label of the same type as the current.
+          { \@@_typeset_refs_last_of_type: }
+          % There exists a next label of the same type as the current.
+          { \@@_typeset_refs_not_last_of_type: }
       }
   }
 %    \end{macrocode}
 % \end{macro}
 %
 %
-% \begin{macro}{\@@_typeset_refs_aux_last_of_type:}
-%   Handles typesetting of when the current label is the last of its type.
+% This is actually the one meaningful ``big branching'' we can do while
+% processing the label stack: i) the ``current'' label is the last of its type
+% block; or ii) the ``current'' label is \emph{not} the last of its type
+% block.  Indeed, as mentioned above, quite a number of things can only be
+% decided when the type block ends, and we only know this when we look at the
+% ``next'' label and find something of a different ``type'' (loose here, maybe
+% different definition status, maybe end of stack).  So, though this is not
+% very strict, \cs{@@_typeset_refs_last_of_type:} is more of a ``wrapping
+% up'' function, and it is indeed the one which does the actual typesetting,
+% while \cs{@@_typeset_refs_not_last_of_type:} is more of an
+% ``accumulation'' function.
+%
+%
+% \begin{macro}{\@@_typeset_refs_last_of_type:}
+%   Handles typesetting when the current label is the last of its type.
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_typeset_refs_aux_last_of_type:
+\cs_new_protected:Npn \@@_typeset_refs_last_of_type:
   {
     % Process the current label to the current queue.
     \int_case:nnF { \l_@@_label_count_int }
@@ -3120,8 +3202,8 @@
             }
         }
       }
-      % If neither the first, nor the second: we have the last label
-      % on the current type list (if not repeated).
+      % Last is third or more of its type: without repetition, we'd have the
+      % last element on a list, but control for possible repetition.
       {
         \int_case:nnF { \l_@@_range_count_int }
           {
@@ -3176,7 +3258,7 @@
                         }
                     }
                 }
-                % A ``range'', but with no skipped value, treat as list.
+                % A `range', but with no skipped value, treat as list.
                 { 1 }
                 {
                   \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
@@ -3245,8 +3327,9 @@
           }
       }
 
-    % Now that the type is finished, we can add the name and the first ref to
-    % the queue.  Or, if "typeset" option is not "both", handle it here too.
+    % Now that the type block is finished, we can add the name and the first
+    % ref to the queue.  Also, if "typeset" option is not "both", handle it
+    % here as well.
     \@@_type_name_setup:
     \bool_if:nTF
       { \l_@@_typeset_ref_bool && \l_@@_typeset_name_bool }
@@ -3305,10 +3388,10 @@
                   }
               }
               {
-                % This case would correspond to "typeset=none" but should not
-                % happen, given the options are set up to typeset at least one
-                % of "ref" or "name", but a sensible fallback, equal to the
-                % behavior of "both".
+                % Logically, this case would correspond to "typeset=none", but
+                % it should not occur, given that the options are set up to
+                % typeset either "ref" or "name".  Still, leave here a
+                % sensible fallback, equal to the behavior of "both".
                 \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
                   { \@@_get_ref_first: }
               }
@@ -3363,14 +3446,13 @@
 % \end{macro}
 %
 %
-%
-% \begin{macro}{\@@_typeset_refs_aux_not_last_of_type:}
-%   Handles typesetting of when the current label is not the last of its type.
+% \begin{macro}{\@@_typeset_refs_not_last_of_type:}
+%   Handles typesetting when the current label is not the last of its type.
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_typeset_refs_aux_not_last_of_type:
+\cs_new_protected:Npn \@@_typeset_refs_not_last_of_type:
   {
-    % Signal if next label may form a range with the current one (of course,
-    % only considered if compression is enabled in the first place).
+    % Signal if next label may form a range with the current one (only
+    % considered if compression is enabled in the first place).
     \bool_set_false:N \l_@@_next_maybe_range_bool
     \bool_set_false:N \l_@@_next_is_same_bool
     \bool_if:NT \l_@@_typeset_compress_bool
@@ -3427,8 +3509,8 @@
               }
           }
           {
-            % Next element is not in sequence, meaning: there was no range, or
-            % we are closing one.
+            % Next element is not in sequence: there was no range, or we are
+            % closing one.
             \int_case:nnF { \l_@@_range_count_int }
               {
                 % There was no range going on.
@@ -3530,25 +3612,52 @@
 %
 % \subsection*{Aux functions}
 %
+% \cs{@@_get_ref:n} and \cs{@@_get_ref_first:} are the two functions which
+% actually build the reference blocks for typesetting.  \cs{@@_get_ref:n}
+% handles all references but the first of its type, and \cs{@@_get_ref_first:}
+% deals with the first reference of a type.  Saying they do ``typesetting'' is
+% imprecise though, they actually prepare material to be accumulated in
+% \cs{l_@@_typeset_queue_curr_tl} inside \cs{@@_typeset_refs_last_of_type:}
+% and \cs{@@_typeset_refs_not_last_of_type:}.  And this difference results
+% quite crucial for the \TeX{}nical requirements of these functions.  This
+% because, as we are processing the label stack and accumulating content in
+% the queue, we are using a number of variables which are transient to the
+% current label, the label properties among them, but not only.  Hence, these
+% variables \emph{must} be expanded to their current values to be stored in
+% the queue.  Indeed, \cs{@@_get_ref:n} and \cs{@@_get_ref_first:} get called,
+% as they must, in the context of \texttt{x} type expansions.  But we don't
+% want to expand the values of the variables themselves, so we need to get
+% current values, but stop expansion after that.  In particular, reference
+% options given by the user should reach the stream for its final typesetting
+% (when the queue itself gets typeset) \emph{unmodified} (``no manipulation'',
+% to use the \texttt{n} signature jargon).  We also need to prevent premature
+% expansion of material that can't be expanded at this point (e.g. grouping,
+% \cs{zref@default} or \cs{hyper@@@@link}).  In a nutshell, the job of these
+% two functions is putting the pieces in place, but with proper expansion
+% control.
 %
+%
+% \begin{macro}{\@@_ref_default:, \@@_name_default:}
+%   Default values for undefined references and undefined type names,
+%   respectively.  We are ultimately using \cs{zref@default}, but calls to it
+%   should be made through these internal functions, according to the case.
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_ref_default:
   { \zref@default }
 \cs_new_protected:Npn \@@_name_default:
   { \zref@default }
 %    \end{macrocode}
-%
+% \end{macro}
 %
 %
 % \begin{macro}{\@@_get_ref:n}
-%   Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
-%   ``ref-block'', including ``pre'' and ``pos'' elements, and
-%   \emph{hyperlinking}.  It does not handle the reference type ``name'', for
-%   that use \cs{@@_get_ref_first:}.  It should get the reference with
-%   \cs{zref@extractdefault} as usual but, if the reference is not available,
-%   should put \cs{@@_ref_default:} or \cs{@@_name_default:} on the stream
-%   protected, so that it can be accumulated in the queue.  \cs{hyperlink}
-%   must also be protected from expansion for the same reason.
+%   Handles a complete reference block to be accumulated in the ``queue'',
+%   including ``pre'' and ``pos'' elements, and hyperlinking.  For use with
+%   all labels, except the first of its type, which is done by
+%   \cs{@@_get_ref_first:}.
+%   \begin{syntax}
+%     \cs{@@_get_ref:n} \Arg{label}
+%   \end{syntax}
 %    \begin{macrocode}
 \cs_new:Npn \@@_get_ref:n #1
   {
@@ -3603,151 +3712,16 @@
 %    \end{macrocode}
 % \end{macro}
 %
-%
-%
-% \begin{macro}{\@@_type_name_setup:}
-%   Auxiliary function to \cs{@@_typeset_refs:}.  Sets the type name variable
-%   \cs{l_@@_type_name_tl}.  When it cannot be found, clears it.
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_type_name_setup:
-  {
-    \zref@ifrefundefined { \l_@@_type_first_label_tl }
-      { \tl_clear:N \l_@@_type_name_tl }
-      {
-        \tl_if_empty:nTF \l_@@_type_first_label_type_tl
-          { \tl_clear:N \l_@@_type_name_tl }
-          {
-%    \end{macrocode}
-% Determine whether we should use capitalization, abbreviation, and plural.
-%    \begin{macrocode}
-            \bool_lazy_or:nnTF
-              { \l_@@_capitalize_bool }
-              {
-                \l_@@_capitalize_first_bool &&
-                \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
-              }
-              { \tl_set:Nn \l_@@_name_format_tl {Name} }
-              { \tl_set:Nn \l_@@_name_format_tl {name} }
-            % If the queue is empty, we have a singular, otherwise, plural.
-            \tl_if_empty:NTF \l_@@_typeset_queue_curr_tl
-              { \tl_put_right:Nn \l_@@_name_format_tl { -sg } }
-              { \tl_put_right:Nn \l_@@_name_format_tl { -pl } }
-            \bool_lazy_and:nnTF
-              { \l_@@_abbrev_bool }
-              {
-                ! \int_compare_p:nNn
-                    { \l_@@_type_count_int } = { 0 } ||
-                ! \l_@@_noabbrev_first_bool
-              }
-              {
-                \tl_set:NV \l_@@_name_format_fallback_tl
-                  \l_@@_name_format_tl
-                \tl_put_right:Nn \l_@@_name_format_tl { -ab }
-              }
-              { \tl_clear:N \l_@@_name_format_fallback_tl }
-
-            \tl_if_empty:NTF \l_@@_name_format_fallback_tl
-              {
-                \prop_get:cVNF
-                  {
-                    l_@@_type_
-                    \l_@@_type_first_label_type_tl _options_prop
-                  }
-                  \l_@@_name_format_tl
-                  \l_@@_type_name_tl
-                  {
-                    \@@_get_type_transl:xxxNF
-                      { \l_@@_ref_language_tl }
-                      { \l_@@_type_first_label_type_tl }
-                      { \l_@@_name_format_tl }
-                      \l_@@_type_name_tl
-                      {
-                        \tl_clear:N \l_@@_type_name_tl
-                        \msg_warning:nnx { zref-clever } { missing-name }
-                          { \l_@@_type_first_label_type_tl }
-                      }
-                  }
-              }
-              {
-                \prop_get:cVNF
-                  {
-                    l_@@_type_
-                    \l_@@_type_first_label_type_tl _options_prop
-                  }
-                  \l_@@_name_format_tl
-                  \l_@@_type_name_tl
-                  {
-                    \prop_get:cVNF
-                      {
-                        l_@@_type_
-                        \l_@@_type_first_label_type_tl _options_prop
-                      }
-                      \l_@@_name_format_fallback_tl
-                      \l_@@_type_name_tl
-                      {
-                        \@@_get_type_transl:xxxNF
-                          { \l_@@_ref_language_tl }
-                          { \l_@@_type_first_label_type_tl }
-                          { \l_@@_name_format_tl }
-                          \l_@@_type_name_tl
-                          {
-                            \@@_get_type_transl:xxxNF
-                              { \l_@@_ref_language_tl }
-                              { \l_@@_type_first_label_type_tl }
-                              { \l_@@_name_format_fallback_tl }
-                              \l_@@_type_name_tl
-                              {
-                                \tl_clear:N \l_@@_type_name_tl
-                                \msg_warning:nnx { zref-clever }
-                                  { missing-name }
-                                  { \l_@@_type_first_label_type_tl }
-                              }
-                          }
-                      }
-                  }
-              }
-          }
-      }
-%    \end{macrocode}
-% Signal whether the type name is to be included in the hyperlink or not.
-%    \begin{macrocode}
-    \bool_lazy_any:nTF
-      {
-        { ! \l_@@_use_hyperref_bool }
-        { \l_@@_link_star_bool }
-        { \tl_if_empty_p:N \l_@@_type_name_tl }
-        { \str_if_eq_p:Vn \l_@@_nameinlink_str { false } }
-      }
-      { \bool_set_false:N \l_@@_name_in_link_bool }
-      {
-        \bool_lazy_any:nTF
-          {
-            { \str_if_eq_p:Vn \l_@@_nameinlink_str { true } }
-            {
-              \str_if_eq_p:Vn \l_@@_nameinlink_str { tsingle } &&
-              \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl
-            }
-            {
-              \str_if_eq_p:Vn \l_@@_nameinlink_str { single } &&
-              \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl &&
-              \l_@@_typeset_last_bool &&
-              \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
-            }
-          }
-          { \bool_set_true:N \l_@@_name_in_link_bool }
-          { \bool_set_false:N \l_@@_name_in_link_bool }
-      }
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-%
-%
 % \begin{macro}{\@@_get_ref_first:}
-%   Auxiliary function to \cs{@@_typeset_refs:}.  Handles a complete
-%   ``ref-block'', including ``pre'' and ``pos'' elements,
-%   \emph{hyperlinking}, and the reference type ``name''.  For use on the
-%   first reference of each type.
+%   Handles a complete reference block for the first label of its type to be
+%   accumulated in the ``queue'', including ``pre'' and ``pos'' elements,
+%   hyperlinking, and the reference type ``name''.  It does not receive
+%   arguments, but relies on being called in the appropriate place in
+%   \cs{@@_typeset_refs_last_of_type:} where a number of variables are
+%   expected to be appropriately set for it to consume.  Prominently among
+%   those is \cs{l_@@_type_first_label_tl}, but it also expected to be called
+%   right after \cs{@@_type_name_setup:} which sets \cs{l_@@_type_name_tl} and
+%   \cs{l_@@_name_in_link_bool} which it uses.
 %    \begin{macrocode}
 \cs_new:Npn \@@_get_ref_first:
   {
@@ -3904,115 +3878,145 @@
 %    \end{macrocode}
 % \end{macro}
 %
-%
-%
-%
-% \begin{macro}{\@@_get_ref_string:nN}
+% \begin{macro}{\@@_type_name_setup:}
+%   Auxiliary function to \cs{@@_typeset_refs_last_of_type:}.  It is
+%   responsible for setting the type name variable \cs{l_@@_type_name_tl} and
+%   \cs{l_@@_name_in_link_bool}.  If a type name can't be found,
+%   \cs{l_@@_type_name_tl} is cleared.  The function takes no arguments, but
+%   is expected to be called in \cs{@@_typeset_refs_last_of_type:} right
+%   before \cs{@@_get_ref_first:}, which is the main consumer of the variables
+%   it sets, though not the only one (and hence this cannot be moved into
+%   \cs{@@_get_ref_first:} itself).  It also expects a number of relevant
+%   variables to have been appropriately set, and which it uses, prominently
+%   \cs{l_@@_type_first_label_type_tl}, but also the queue itself in
+%   \cs{l_@@_typeset_queue_curr_tl}, which should be ``ready except for the
+%   first label'', and the type counter \cs{l_@@_type_count_int}.
 %    \begin{macrocode}
-% \Arg{option} \Arg{var to store result}
-\cs_new_protected:Npn \@@_get_ref_string:nN #1#2
+\cs_new_protected:Npn \@@_type_name_setup:
   {
-%    \end{macrocode}
-% First attempt options stored in \cs{l_@@_ref_options_prop}.
-%    \begin{macrocode}
-    \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
+    \zref@ifrefundefined { \l_@@_type_first_label_tl }
+      { \tl_clear:N \l_@@_type_name_tl }
       {
-%    \end{macrocode}
-% If not found, try the type specific options.
-%    \begin{macrocode}
-        \bool_lazy_all:nTF
+        \tl_if_empty:nTF \l_@@_type_first_label_type_tl
+          { \tl_clear:N \l_@@_type_name_tl }
           {
-            { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
-            {
-              \prop_if_exist_p:c
-                {
-                  l_@@_type_
-                  \l_@@_label_type_a_tl _options_prop
-                }
-            }
-            {
-              \prop_if_in_p:cn
-                {
-                  l_@@_type_
-                  \l_@@_label_type_a_tl _options_prop
-                }
-                {#1}
-            }
-          }
-          {
-            \prop_get:cnN
+            % Determine whether we should use capitalization, abbreviation,
+            % and plural.
+            \bool_lazy_or:nnTF
+              { \l_@@_capitalize_bool }
               {
-                l_@@_type_
-                \l_@@_label_type_a_tl _options_prop
+                \l_@@_capitalize_first_bool &&
+                \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
               }
-              {#1} #2
-          }
-          {
-%    \end{macrocode}
-% If not found, try the type specific translations.
-%    \begin{macrocode}
-            \@@_get_type_transl:xxnNF
-              { \l_@@_ref_language_tl }
-              { \l_@@_label_type_a_tl }
-              {#1} #2
+              { \tl_set:Nn \l_@@_name_format_tl {Name} }
+              { \tl_set:Nn \l_@@_name_format_tl {name} }
+            % If the queue is empty, we have a singular, otherwise, plural.
+            \tl_if_empty:NTF \l_@@_typeset_queue_curr_tl
+              { \tl_put_right:Nn \l_@@_name_format_tl { -sg } }
+              { \tl_put_right:Nn \l_@@_name_format_tl { -pl } }
+            \bool_lazy_and:nnTF
+              { \l_@@_abbrev_bool }
               {
-%    \end{macrocode}
-% If not found, try default translations.
-%    \begin{macrocode}
-                \@@_get_default_transl:xnNF
-                  { \l_@@_ref_language_tl }
-                  {#1} #2
+                ! \int_compare_p:nNn
+                    { \l_@@_type_count_int } = { 0 } ||
+                ! \l_@@_noabbrev_first_bool
+              }
+              {
+                \tl_set:NV \l_@@_name_format_fallback_tl
+                  \l_@@_name_format_tl
+                \tl_put_right:Nn \l_@@_name_format_tl { -ab }
+              }
+              { \tl_clear:N \l_@@_name_format_fallback_tl }
+
+            \tl_if_empty:NTF \l_@@_name_format_fallback_tl
+              {
+                \prop_get:cVNF
                   {
-%    \end{macrocode}
-% If not found, try fallback.
-%    \begin{macrocode}
-                    \@@_get_fallback_transl:nNF {#1} #2
+                    l_@@_type_
+                    \l_@@_type_first_label_type_tl _options_prop
+                  }
+                  \l_@@_name_format_tl
+                  \l_@@_type_name_tl
+                  {
+                    \@@_get_type_transl:xxxNF
+                      { \l_@@_ref_language_tl }
+                      { \l_@@_type_first_label_type_tl }
+                      { \l_@@_name_format_tl }
+                      \l_@@_type_name_tl
                       {
-                        \tl_clear:N #2
-                        \msg_warning:nnn { zref-clever }
-                          { missing-string } {#1}
+                        \tl_clear:N \l_@@_type_name_tl
+                        \msg_warning:nnx { zref-clever } { missing-name }
+                          { \l_@@_type_first_label_type_tl }
+                      }
+                  }
+              }
+              {
+                \prop_get:cVNF
+                  {
+                    l_@@_type_
+                    \l_@@_type_first_label_type_tl _options_prop
+                  }
+                  \l_@@_name_format_tl
+                  \l_@@_type_name_tl
+                  {
+                    \prop_get:cVNF
+                      {
+                        l_@@_type_
+                        \l_@@_type_first_label_type_tl _options_prop
+                      }
+                      \l_@@_name_format_fallback_tl
+                      \l_@@_type_name_tl
+                      {
+                        \@@_get_type_transl:xxxNF
+                          { \l_@@_ref_language_tl }
+                          { \l_@@_type_first_label_type_tl }
+                          { \l_@@_name_format_tl }
+                          \l_@@_type_name_tl
+                          {
+                            \@@_get_type_transl:xxxNF
+                              { \l_@@_ref_language_tl }
+                              { \l_@@_type_first_label_type_tl }
+                              { \l_@@_name_format_fallback_tl }
+                              \l_@@_type_name_tl
+                              {
+                                \tl_clear:N \l_@@_type_name_tl
+                                \msg_warning:nnx { zref-clever }
+                                  { missing-name }
+                                  { \l_@@_type_first_label_type_tl }
+                              }
+                          }
                       }
                   }
               }
           }
       }
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-%
-%
-% \begin{macro}{\@@_get_ref_font:nN}
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_get_ref_font:nN #1#2
-  {
-%    \end{macrocode}
-% First attempt options stored in \cs{l_@@_ref_options_prop}.
-%    \begin{macrocode}
-    \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
+
+    % Signal whether the type name is to be included in the hyperlink or not.
+    \bool_lazy_any:nTF
       {
-%    \end{macrocode}
-% If not found, try the type specific options.
-%    \begin{macrocode}
-        \bool_lazy_and:nnTF
-          { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
+        { ! \l_@@_use_hyperref_bool }
+        { \l_@@_link_star_bool }
+        { \tl_if_empty_p:N \l_@@_type_name_tl }
+        { \str_if_eq_p:Vn \l_@@_nameinlink_str { false } }
+      }
+      { \bool_set_false:N \l_@@_name_in_link_bool }
+      {
+        \bool_lazy_any:nTF
           {
-            \prop_if_exist_p:c
-              {
-                l_@@_type_
-                \l_@@_label_type_a_tl _options_prop
-              }
+            { \str_if_eq_p:Vn \l_@@_nameinlink_str { true } }
+            {
+              \str_if_eq_p:Vn \l_@@_nameinlink_str { tsingle } &&
+              \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl
+            }
+            {
+              \str_if_eq_p:Vn \l_@@_nameinlink_str { single } &&
+              \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl &&
+              \l_@@_typeset_last_bool &&
+              \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
+            }
           }
-          {
-            \prop_get:cnNF
-              {
-                l_@@_type_
-                \l_@@_label_type_a_tl _options_prop
-              }
-              {#1} #2
-              { \tl_clear:N #2 }
-          }
-          { \tl_clear:N #2 }
+          { \bool_set_true:N \l_@@_name_in_link_bool }
+          { \bool_set_false:N \l_@@_name_in_link_bool }
       }
   }
 %    \end{macrocode}
@@ -4021,10 +4025,17 @@
 %
 %
 % \begin{macro}{\@@_labels_in_sequence:nn}
-%   Sets \cs{l_@@_next_maybe_range_bool} to true if label `1' comes in
-%   immediate sequence from label `2'.  And sets both
-%   \cs{l_@@_next_maybe_range_bool} and \cs{l_@@_next_is_same_bool} if the
-%   labels are the ``same''.
+%   Auxiliary function to \cs{@@_typeset_refs_not_last_of_type:}. Sets
+%   \cs{l_@@_next_maybe_range_bool} to true if \meta{label b} comes in
+%   immediate sequence from \meta{label a}.  And sets both
+%   \cs{l_@@_next_maybe_range_bool} and \cs{l_@@_next_is_same_bool} to true if
+%   the two labels are the ``same'' (that is, have the same counter value).
+%   These two boolean variables are the basis for all range and compression
+%   handling inside \cs{@@_typeset_refs_not_last_of_type:}, so this function
+%   is expected to be called at its beginning, if compression is enabled.
+%   \begin{syntax}
+%     \cs{@@_labels_in_sequence:nn} \Arg{label a} \Arg{label b}
+%   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_labels_in_sequence:nn #1#2
   {
@@ -4084,6 +4095,124 @@
 %
 %
 %
+% Finally, a couple of functions for retrieving options values, according to
+% the relevant precedence rules (see Section~\ref{sec:reference-format}).
+% They both receive an \meta{option} as argument, and store the retrieved
+% value in \meta{tl variable}.  Though these are mostly general functions (for
+% a change\dots{}), they are not completely so, they rely on the current state
+% of \cs{l_@@_label_type_a_tl}, as set during the processing of the label
+% stack.  This could be easily generalized, of course, but I don't think it is
+% worth it, \cs{l_@@_label_type_a_tl} is indeed what we want in all practical
+% cases.  The difference between \cs{@@_get_ref_string:nN} and
+% \cs{@@_get_ref_font:nN} is the kind of option each should be used for.
+% \cs{@@_get_ref_string:nN} is meant for the general options, and attempts to
+% find values for them in all precedence levels (four plus ``fallback'').
+% \cs{@@_get_ref_font:nN} is intended for ``font'' options, which cannot be
+% ``language-specific'', thus for these we just search general options and
+% type options.
+%
+% \begin{macro}{\@@_get_ref_string:nN}
+%   \begin{syntax}
+%     \cs{@@_get_ref_string:nN} \Arg{option} \Arg{tl variable}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_get_ref_string:nN #1#2
+  {
+    % First attempt: general options.
+    \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
+      {
+        % If not found, try type specific options.
+        \bool_lazy_all:nTF
+          {
+            { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
+            {
+              \prop_if_exist_p:c
+                {
+                  l_@@_type_
+                  \l_@@_label_type_a_tl _options_prop
+                }
+            }
+            {
+              \prop_if_in_p:cn
+                {
+                  l_@@_type_
+                  \l_@@_label_type_a_tl _options_prop
+                }
+                {#1}
+            }
+          }
+          {
+            \prop_get:cnN
+              {
+                l_@@_type_
+                \l_@@_label_type_a_tl _options_prop
+              }
+              {#1} #2
+          }
+          {
+            % If not found, try type specific translations.
+            \@@_get_type_transl:xxnNF
+              { \l_@@_ref_language_tl }
+              { \l_@@_label_type_a_tl }
+              {#1} #2
+              {
+                % If not found, try default translations.
+                \@@_get_default_transl:xnNF
+                  { \l_@@_ref_language_tl }
+                  {#1} #2
+                  {
+                    % If not found, try fallback.
+                    \@@_get_fallback_transl:nNF {#1} #2
+                      {
+                        \tl_clear:N #2
+                        \msg_warning:nnn { zref-clever }
+                          { missing-string } {#1}
+                      }
+                  }
+              }
+          }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_get_ref_font:nN}
+%   \begin{syntax}
+%     \cs{@@_get_ref_font:nN} \Arg{option} \Arg{tl variable}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_get_ref_font:nN #1#2
+  {
+    % First attempt: general options.
+    \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
+      {
+        % If not found, try type specific options.
+        \bool_lazy_and:nnTF
+          { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
+          {
+            \prop_if_exist_p:c
+              {
+                l_@@_type_
+                \l_@@_label_type_a_tl _options_prop
+              }
+          }
+          {
+            \prop_get:cnNF
+              {
+                l_@@_type_
+                \l_@@_label_type_a_tl _options_prop
+              }
+              {#1} #2
+              { \tl_clear:N #2 }
+          }
+          { \tl_clear:N #2 }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
 % \section{Special handling}
 %
 % This section is meant to aggregate any ``special handling'' needed for
@@ -4113,12 +4242,6 @@
 % as their corresponding standard classes, and sometimes a little more, but
 % what interests us here is pretty much the same; see also the \pkg{appendix}
 % package).
-%
-%
-%
-% \subsection{\cs{newtheorem}}
-%
-%
 %
 %
 %
