@@ -43,12 +43,22 @@
 % \iffalse
 %<*driver>
 \documentclass{l3doc}
-% Have \GetFileInfo pick up date and version data
-\usepackage{zref-clever}
+
+% Have \GetFileInfo pick up date and version data and used in the
+% documentation.
+\usepackage[cap,nameinlink=false]{zref-clever}
+
+% Used in the documentation.
+\usepackage{zref-titleref}
+
 \NewDocumentCommand\opt{m}{\texttt{#1}}
+
 \MakeShortVerb{\|}
+
 \begin{document}
-  \DocInput{zref-clever.dtx}
+
+\DocInput{zref-clever.dtx}
+
 \end{document}
 %</driver>
 % \fi
@@ -62,47 +72,263 @@
 %
 %
 % \section{Loading the package}
+% \zlabel{sec:loading-package}
 %
+% As usual:
 %
-%
-%
-%
-%
+% \begin{syntax}
+%   \cs{usepackage}\oarg{options}|{zref-clever}|
+% \end{syntax}
 %
 %
 % \section{Dependencies}
 %
-%
-%
-%
-%
-%
+% \pkg{zref-clever} requires \pkg{zref}, and \LaTeX{} kernel 2021-06-01, or
+% newer.  It also needs \pkg{l3keys2e}.  Some packages are leveraged by
+% \pkg{zref-clever} if they are present, but are not loaded or required by it,
+% namely: \pkg{hyperref}, \pkg{zref-titleref} (\pkg{zref}'s module), and
+% \pkg{zref-check}.
 %
 %
 % \section{User interface}
+% \zlabel{sec:user-interface}
+%
+% \begin{function}{\zcref}
+%   \begin{syntax}
+%     \cs{zcref}\meta{*}\oarg{options}\marg{labels}
+%   \end{syntax}
+%   Typesets references to \meta{labels}, given as a comma separated list.
+%   When \pkg{hyperref} support is enabled, references will be hyperlinked to
+%   their respective anchors, according to options.  The starred version of
+%   the command does the same as the plain one, just does not form links.  The
+%   \meta{options} are (mostly) the same as those of the package, and can be
+%   given to local effect.
+% \end{function}
+%
+% \begin{function}{\zcpageref}
+%   \begin{syntax}
+%     \cs{zcpageref}\meta{*}\oarg{options}\marg{labels}
+%   \end{syntax}
+%   Typesets page references to \meta{labels}, given as a comma separated
+%   list.  It is equivalent to calling \cs{zcref} with the \opt{ref=page}
+%   option: \cs{zcref}\texttt{\meta{*}[}\meta{options}\texttt{,
+%   ref=page]}\marg{labels}.
+% \end{function}
 %
 %
+% \begin{function}{\zcsetup}
+%   \begin{syntax}
+%     \cs{zcsetup}\marg{options}
+%   \end{syntax}
+%   Sets \pkg{zref-clever}'s general options (see \zcref{sec:options}).
+% \end{function}
 %
+% \begin{function}{\zcRefTypeSetup}
+%   \begin{syntax}
+%     \cs{zcRefTypeSetup} \marg{type} \marg{options}
+%   \end{syntax}
+%   Sets type-specific reference format options (see
+%   \zcref{sec:reference-format}).
+% \end{function}
 %
+% \vspace{\baselineskip}
 %
-%
+% Besides these, user facing commands related to internationalization are
+% presented in \zcref{sec:internationalization}.
 %
 %
 % \section{Options}
+% \zlabel{sec:options}
+%
+% \pkg{zref-clever} is highly configurable, offering a lot of flexibility in
+% typeset results of the references, but it also tries to keep these
+% ``handles'' as convenient and user friendly as possible.  To this end, most
+% of what one can do with \pkg{zref-clever} (pretty much all of it), can be
+% achieved directly through the standard and familiar ``comma separated list
+% of \texttt{key=value} options''.
+%
+% There are two main groups of options in \pkg{zref-clever}: ``general
+% options'', which affect the overall behavior of the package, or the
+% reference as a whole; and ``reference format options'', which control the
+% detail of reference formatting, including type-specific and
+% language-specific settings.
+%
+% This section covers the first group (for the second one, see
+% \zcref{sec:reference-format}).  General options can be set globally either
+% as package options at load-time (see \zcref{sec:loading-package}) or by
+% means of \cs{zcsetup} in the preamble (see \zcref{sec:user-interface}).
+% They can also be set locally with \cs{zcsetup} along the document or through
+% the optional argument of \cs{zcref} (see \zcref{sec:user-interface}).  Most
+% general options can be used in any of these contexts, but that is not
+% necessarily true for all cases, some restrictions may apply, as described in
+% each option's documentation.
+%
+% \vspace{\baselineskip}
+%
+% \DescribeOption{ref} %
+% \DescribeOption{page} %
+% The \opt{ref} option controls the label property to which \cs{zcref} refers
+% to.  It can receive values \texttt{zc@thecnt} and \texttt{page}.  If
+% \pkg{zref-titleref} is loaded, \opt{ref} also accepts the value
+% \texttt{title}.  The package's default is \texttt{zc@thecnt}, which is an
+% internal property equivalent to \pkg{zref}'s \texttt{default} property,
+% except that it is not affected by the kernel's \cs{labelformat}.  In sum,
+% just what you'd expect from a regular reference.  By default, sorting and
+% compression is done according to the information of the counter underlying
+% \texttt{zc@thecnt}.  Special treatment in these areas is provided for
+% \texttt{page}, but not for \texttt{title}.  The \opt{page} option is a
+% convenience alias for \texttt{ref=page}.
+%
+% \DescribeOption{typeset} %
+% \DescribeOption{noname} %
+% When \cs{zcref} typesets a set of references, each group of references of
+% the same type can be, and by default are, preceded by the type's ``name'',
+% and this is indeed an important feature of \pkg{zref-clever}.  This is
+% optional however, and the \opt{typeset} option controls this behavior.  It
+% can receive values \texttt{ref}, in which case it typesets only the
+% reference(s), \texttt{name}, in which case it typesets only the name(s), or
+% \texttt{both}, in which case it typesets, well, both of them.  Note that,
+% when value \texttt{name} is used, the name is still typeset according to the
+% set of references given to \cs{zcref}.  For example, for multiple
+% references, the plural form is used, capitalization options are honored,
+% etc.  Also hyperlinking behaves just \emph{as if} the references were
+% present and, depending on the corresponding options, the name may be linked
+% to the first reference of the type group.  The \opt{noname} option is a
+% convenience alias for \texttt{typeset=ref}.
+%
+% \DescribeOption{sort} %
+% \DescribeOption{nosort} %
+% The \opt{sort} option controls whether the list of \meta{labels} received as
+% argument by \cs{zcref} should be sorted or not.  It is a boolean option, and
+% defaults to \texttt{true}.  The \opt{nosort} option is a convenience alias
+% for \texttt{sort=false}.
+%
+% \DescribeOption{typesort} %
+% \DescribeOption{notypesort} %
+% Sorting references of the same type can be done with well defined logical
+% criteria.  They either have the same counter or their counters share a clear
+% hierarchical relation (in the resetting behavior), such that a definite
+% sorting rule can be inferred from the label's data.  The same is not true
+% for sorting of references of different types.  Should ``tables'' come before
+% or after ``figures''?  The \pkg{typesort} option allows to specify the
+% sorting priority of different reference types.  It receives as value a comma
+% separated list of reference types, specifying that their sorting is to be
+% done in the order of that list.  But \opt{typesort} does not need to receive
+% \emph{all} possible reference types.  The special value |{othertypes}| (yes,
+% braced) can be placed anywhere along the list, to specify the sort priority
+% of any type not included explicitly in the list.  If |{othertypes}| is not
+% present in the list, it is presumed to be at the end of it.  Any unspecified
+% types (that is, those falling implicitly or explicitly into the
+% |{othertypes}| category) get sorted between themselves in the order of their
+% first appearance in the label list given as argument to \cs{zcref}.  I
+% presume the common use cases will not need to specify |{othertypes}| at all
+% but, for the sake of example, if you just really dislike equations, you
+% could use |typesort={{othertypes}, equation}|.  \opt{typesort}'s default
+% value is |{part, chapter, section, paragraph}|, which places the sectioning
+% reference types first in the list, in their hierarchical order, and leaves
+% everything else to the order of appearance of the labels.  The
+% \opt{notypesort} option behaves like |typesort={{othertypes}}| would do,
+% that is, it sorts all types in the order of the first appearance in the
+% labels' list.
+%
+% \DescribeOption{comp} %
+% \DescribeOption{nocomp} %
+% \cs{zcref} can automatically compress a set of references of the same type
+% into a range, when they occur in immediate sequence.  The \opt{comp}
+% controls whether this compression should take place or not.  It is a boolean
+% option, and defaults to \texttt{true}.  The \opt{nocomp} option is a
+% convenience alias for \texttt{comp=false}.  Of course, for better
+% compression results the \opt{sort} is recommended, but the two options are
+% technically independent.
+%
+% \DescribeOption{range} %
+% By default (that is, when the \opt{range} option is not given), \cs{zcref}
+% typesets a complete list of references according to the \meta{labels} it
+% received as argument, and only compresses some of them into ranges if the
+% \opt{comp} option is enabled and if references of the same type occur in
+% immediate sequence.  The \opt{range} option makes \cs{zcref} behave
+% differently.  Sorting is implied by this option (the \opt{sort} option is
+% disregarded) and, for each reference type group in \meta{labels}, \cs{zcref}
+% builds a range from the first to the last reference in it, even if
+% references in between do not occur in immediate sequence.  \cs{zcref} is
+% smart enough, though, to recognize when the first and last references of a
+% type do happen to be contiguous, in which case it typesets a ``pair'',
+% instead of a ``range''.  It is a boolean option, and the package's default
+% is \texttt{range=false}.  The option given without a value is equivalent to
+% \texttt{range=true} (in the \pkg{l3keys}' jargon, the \emph{option}'s
+% default is \texttt{true}).
+%
+% \DescribeOption{nameinlink} %
+% The \opt{nameinlink} option controls whether the type name should be
+% included in the reference hyperlink or not (provided there is a link, of
+% course).  Naturally, the name can only be included in the link of the
+% \emph{first} reference of each type block.  \opt{nameinlink} can receive
+% values \texttt{true}, \texttt{false}, \texttt{single}, and \texttt{tsingle}.
+% When the value is \texttt{true} the type name is always included in the
+% hyperlink.  When it is \texttt{false} the type name is never included in the
+% link.  When the value is \texttt{single}, the type name is included in the
+% link only if \cs{zcref} is typesetting a single reference (not necessarily
+% having received a single label as argument, as they may have been
+% compressed), otherwise, the name is left out of the link.  When the value is
+% \texttt{tsingle}, the type name is included in the link for each type block
+% with a single reference, otherwise, it isn't.  An example: suppose you make
+% a couple of references to something like \cs{zcref}|{chap:chapter1}| and
+% \cs{zcref}|{chap:chapter1, sec:section1, fig:figure1, fig:figure2}|.  The
+% ``figure'' type name will only be included in the hyperlink if
+% \opt{nameinlink} option is set to \texttt{true}.  If it is set to
+% \texttt{tsingle}, the first reference will include the name in the link for
+% ``chapter'', as expected, but also in the second reference the ``chapter''
+% and ``section'' names will be included in their respective links, while that
+% of ``figure'' will not.  If the option is set to \texttt{single}, only the
+% name for ``chapter'' in the first reference will be included in the link,
+% while in the second reference none of them will.  The package's default is
+% \texttt{nameinlink=tsingle}, and the option given without a value is
+% equivalent to \texttt{nameinlink=true}.
+%
+% \DescribeOption{cap} %
+% \DescribeOption{nocap} %
+% \DescribeOption{capfirst} %
+%
+%
+% \DescribeOption{abbrev} %
+% \DescribeOption{noabbrevfirst} %
+%
+%
+% \DescribeOption{C} %
+%
+%
+% \DescribeOption{hyperref} %
+%
+%
+% \DescribeOption{lang} %
+%
+%
+% \DescribeOption{font} %
+%
+%
+% \DescribeOption{note} %
+%
+%
+% \DescribeOption{check} %
+%
+%
+% \DescribeOption{countertype} %
+%
+%
+% \DescribeOption{counterresetters} %
+%
+%
+% \DescribeOption{counterresetby} %
 %
 %
 %
-%
-%
-%
-%
-% \section{Reference Types}
-% \label{sec:reference-types}
+% \section{Reference types}
+% \zlabel{sec:reference-types}
 %
 % A ``reference type'' is the basic \pkg{zref-clever} setup unit for
 % specifying how a cross-reference group of a certain kind is to be typeset.
 % Though, usually, it will have the same name as the underlying \LaTeX{}
-% \emph{counter}, they are conceptually different.  \pkg{zref-clever} defines
+% \emph{counter}, they are conceptually different.  \pkg{zref-clever} sets up
 % \emph{reference types} and an association between each \emph{counter} and
 % its \emph{type}, it does not define the counters themselves, which are
 % defined by your document.  One \emph{reference type} can be associated with
@@ -112,23 +338,88 @@
 % association at the moment it is set, and that determines how the reference
 % to that label is typeset.  References to different \emph{counters} of the
 % same \emph{type} are grouped together, and treated alike by \cs{zcref}.  A
-% \emph{reference type} may exist even when the \emph{counter} it is
-% associated with is not actually defined, and this inconsequential.  In
-% practice, the contrary may also happen, a \emph{counter} may be defined but
-% we have no \emph{type} for it, but this must be handled by \pkg{zref-clever}
-% as a ``missing type'' error (at least, if we try to refer to it).
+% \emph{reference type} may be known to \pkg{zref-clever} when the
+% \emph{counter} it is associated with is not actually defined, and this
+% inconsequential.  In practice, the contrary may also happen, a
+% \emph{counter} may be defined but we have no \emph{type} for it, but this
+% must be handled by \pkg{zref-clever} as an error (at least, if we try to
+% refer to it), usually a ``missing name'' error.
+%
+% The association of a \emph{counter} to its \emph{type} is controlled by the
+% \opt{countertype} option.  As seen in its documentation, \pkg{zref-clever}
+% presumes the \emph{type} to be the same as the \emph{counter} unless
+% instructed otherwise by that option.  This association, as determined by the
+% local value of the option, affects how the \emph{label} is set, which stores
+% the type among its properties.  However, when it comes to typesetting, that
+% is from the perspective of \cs{zcref}, only the \emph{type} matters.  In
+% other words, how the reference is supposed to be typeset is determined at
+% the point the \emph{label} gets set.  In sum, they may be namesakes (or
+% not), but ``type'' is \emph{type} and ``counter'' is \emph{counter}.
 %
 % A \emph{reference type} can be associated with multiple counters because we
 % may want to refer to different document elements, with different
-% \emph{counters}, with a single name, as a single \emph{type}.  One prominent
+% \emph{counters}, as a single \emph{type}, with a single name.  One prominent
 % case of this are sectioning commands.  \cs{section}, \cs{subsection}, and
 % \cs{subsubsection} have each their counter, but we'd like to refer to all of
-% them by ``section''.  The same for \cs{paragraph} and \cs{subparagraph}.
+% them by ``sections'' and group them together.  The same for \cs{paragraph}
+% and \cs{subparagraph}.
 %
 % There are also cases in which we may want to use different \emph{reference
 % types} to refer to document objects sharing the same \emph{counter}.
 % Notably, the environments created with \LaTeX{}'s \cs{newtheorem} command
 % and the \cs{appendix}.
+%
+%
+% One more observation about ``reference types'' is due here.  A \emph{type}
+% is not really ``defined'' in the sense a variable or a function is.  It is
+% more of a ``string'' which \pkg{zref-clever} uses to look for a whole set of
+% type-specific reference format options (see \zcref{sec:reference-format}).
+% Each of these options individually may be ``set'' or not, ``defined'' or
+% not.  And, depending on the setup and the relevant precedence rules for
+% this, some of them may be required and some not.  In practice,
+% \pkg{zref-clever} uses the \emph{type} to look for these options when it
+% needs one, and issues a compilation warning when it cannot find a suitable
+% value.
+%
+%
+% \section{Reference format}
+% \zlabel{sec:reference-format}
+%
+%
+% \section{Internationalization}
+% \zlabel{sec:internationalization}
+%
+% \begin{function}{\zcDeclareLanguage}
+%   Declare a new language for use with \pkg{zref-clever}.  If \meta{language}
+%   is already known, just warn.  \cs{zcDeclareLanguage} is preamble only.
+%   \begin{syntax}
+%     \cs{zcDeclareLanguage} \marg{language}
+%   \end{syntax}
+% \end{function}
+%
+%
+% \begin{function}{\zcDeclareLanguageAlias}
+%   Declare \meta{language alias} to be an alias of \meta{aliased language}.
+%   \meta{aliased language} must be already known to \pkg{zref-clever}.
+%   \cs{zcDeclareLanguageAlias} is preamble only.
+%   \begin{syntax}
+%     \cs{zcDeclareLanguageAlias} \marg{language alias} \marg{aliased language}
+%   \end{syntax}
+% \end{function}
+%
+%
+% \begin{function}{\zcDeclareTranslations}
+%   \begin{syntax}
+%     \cs{zcDeclareTranslations} \marg{language} \marg{options}
+%   \end{syntax}
+%   Sets language-specific reference format options for \meta{language} (see
+%   \zcref{sec:reference-format}). \meta{language} must be already known to
+%   \pkg{zref-clever}.  \cs{zcDeclareTranslations} is preamble only.
+% \end{function}
+%
+%
+% \section{Usage examples}
+%
 %
 %
 %
@@ -203,7 +494,7 @@
 %
 % Identify the package.
 %    \begin{macrocode}
-\ProvidesExplPackage {zref-clever} {2021-09-13} {0.1.0-alpha}
+\ProvidesExplPackage {zref-clever} {2021-09-29} {0.1.0-alpha}
   {Clever LaTeX cross-references based on zref}
 %    \end{macrocode}
 %
@@ -586,7 +877,7 @@
 %
 %
 % \subsection{Reference format}
-% \label{sec:reference-format}
+% \zlabel{impl:sec:reference-format}
 %
 % Formatting how the reference is to be typeset is, quite naturally, a big
 % part of the user interface of \pkg{zref-clever}.  In this area, we tried to
@@ -616,7 +907,7 @@
 %
 % General ``options'' (i) can be given by the user in the optional argument of
 % \cs{zcref}, but just as well in \cs{zcsetup} or as package options at
-% load-time (see Section~\ref{sec:reference-options}).  ``Type-specific
+% load-time (see \zcref{impl:sec:reference-options}).  ``Type-specific
 % options'' (ii) are handled by \cs{zcRefTypeSetup}.  ``Language-specific
 % translations'', be they ``type-specific'' (iii) or ``default'' (iv) have
 % their user interface in \cs{zcDeclareTranslations}, and have their values
@@ -821,10 +1112,11 @@
 % even the set of \pkg{babel} or \pkg{polyglossia} ``loaded languages'', which
 % would be the most tenable set if loading were restricted to the preamble, is
 % bound to be an overshoot in typical cases.  Therefore, we load at
-% \texttt{begindocument} one single language (see \nameref{sec:lang-option}),
-% as specified by the user in the preamble with the \opt{lang} option or,
-% failing any specification, the main language of the document, which is the
-% default.  Anything else is lazily loaded, on the fly, along the document.
+% \texttt{begindocument} one single language (see \zcref[ref=title,
+% noname]{impl:sec:lang-option}), as specified by the user in the preamble
+% with the \opt{lang} option or, failing any specification, the main language
+% of the document, which is the default.  Anything else is lazily loaded, on
+% the fly, along the document.
 %
 % This design decision has also implications to the \emph{form} the dictionary
 % files assumed.  As far as my somewhat impressionistic sampling goes,
@@ -1286,7 +1578,7 @@
         paragraph ,
         subparagraph ,
       },
-    typesort .value_required:n = true ,
+    counterresetters .value_required:n = true ,
   }
 %    \end{macrocode}
 %
@@ -1374,7 +1666,7 @@
           }
       } ,
     ref .initial:n = zc@thecnt ,
-    ref .value_required:n = true ,
+    ref .default:n = zc@thecnt ,
     page .meta:n = { ref = page },
     page .value_forbidden:n = true ,
   }
@@ -1597,10 +1889,6 @@
     capfirst .bool_set:N = \l_@@_capitalize_first_bool ,
     capfirst .initial:n = false ,
     capfirst .default:n = true ,
-
-    C .meta:n =
-      { capfirst = true , noabbrevfirst = true },
-    C .value_forbidden:n = true ,
   }
 %    \end{macrocode}
 %
@@ -1626,8 +1914,20 @@
 %
 %
 %
+% \subsubsection*{\opt{C} option}
+%
+%    \begin{macrocode}
+\keys_define:nn { zref-clever / reference }
+  {
+    C .meta:n =
+      { capfirst = true , noabbrevfirst = true },
+    C .value_forbidden:n = true ,
+  }
+%    \end{macrocode}
+%
+%
 % \subsubsection*{\opt{lang} option}
-% \phantomsection{}\label{sec:lang-option}
+% \phantomsection{}\zlabel{impl:sec:lang-option}
 %
 % \cs{l_@@_current_language_tl} is an internal alias for \pkg{babel}'s
 % \cs{languagename} or \pkg{polyglossia}'s \cs{mainbabelname} and, if none of
@@ -1849,7 +2149,7 @@
 %
 %
 % \subsubsection*{Reference options}
-% \label{sec:reference-options}
+% \zlabel{impl:sec:reference-options}
 %
 % This is a set of options related to reference typesetting which receive
 % equal treatment and, hence, are handled in batch.  Since we are dealing with
@@ -1864,7 +2164,7 @@
 % \cs{l_@@_ref_options_prop}, while a key with \emph{no value} removes the
 % property from the list, so that these options can then fall back to lower
 % precedence levels settings.  For discussion about the used technique, see
-% Section~\ref{sec:zcreftypesetup}.
+% \zcref{impl:sec:zcreftypesetup}.
 %
 %    \begin{macrocode}
 \prop_new:N \l_@@_ref_options_prop
@@ -1931,7 +2231,7 @@
 %
 %
 % \subsection{\cs{zcRefTypeSetup}}
-% \label{sec:zcreftypesetup}
+% \zlabel{impl:sec:zcreftypesetup}
 %
 % \cs{zcRefTypeSetup} is the main user interface for ``type-specific''
 % reference formatting.  Settings done by this command have a higher
@@ -1969,7 +2269,7 @@
 % ``unset'' an option at either of those scopes to go back to the lower
 % precedence level of the translations at any given point.  So both in
 % \cs{zcRefTypeSetup} and in setting reference options (see
-% Section~\ref{sec:reference-options}), we leverage the distinction of an
+% \zcref{impl:sec:reference-options}), we leverage the distinction of an
 % ``empty valued key'' (|key=| or |key={}|) from a ``key with no value''
 % (|key|).  This distinction is captured internally by the lower-level key
 % parsing, but must be made explicit at \cs{keys_set:nn} by means of the
@@ -2248,9 +2548,12 @@
 %    \end{macrocode}
 % Typeset \texttt{note}.
 %    \begin{macrocode}
-      \@@_get_ref_string:nN { notesep } \l_tmpa_tl
-      \l_tmpa_tl
-      \l_@@_zcref_note_tl
+      \tl_if_empty:NF \l_@@_zcref_note_tl
+        {
+          \@@_get_ref_string:nN { notesep } \l_tmpa_tl
+          \l_tmpa_tl
+          \l_@@_zcref_note_tl
+        }
 %    \end{macrocode}
 % Integration with \pkg{zref-check}.
 %    \begin{macrocode}
@@ -3639,6 +3942,8 @@
 %   Default values for undefined references and undefined type names,
 %   respectively.  We are ultimately using \cs{zref@default}, but calls to it
 %   should be made through these internal functions, according to the case.
+%   As a bonus, we don't need to protect them with \cs{exp_not:N}, as
+%   \cs{zref@default} would require, since we already define them protected.
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_ref_default:
   { \zref@default }
@@ -3704,7 +4009,7 @@
             \exp_not:N \group_end:
           }
       }
-      { \exp_not:N \@@_ref_default: }
+      { \@@_ref_default: }
   }
 \cs_generate_variant:Nn \@@_get_ref:n { V }
 %    \end{macrocode}
@@ -3724,7 +4029,7 @@
 \cs_new:Npn \@@_get_ref_first:
   {
     \zref@ifrefundefined { \l_@@_type_first_label_tl }
-      { \exp_not:N \@@_ref_default: }
+      { \@@_ref_default: }
       {
         \bool_if:NTF \l_@@_name_in_link_bool
           {
@@ -3790,13 +4095,13 @@
                 \exp_not:V \l_@@_type_name_tl
                 \exp_not:N \group_end:
                 \exp_not:V \l_@@_namesep_tl
-                \exp_not:N \@@_ref_default:
+                \@@_ref_default:
               }
           }
           {
             \tl_if_empty:NTF \l_@@_type_name_tl
               {
-                \exp_not:N \@@_name_default:
+                \@@_name_default:
                 \exp_not:V \l_@@_namesep_tl
               }
               {
@@ -3869,7 +4174,7 @@
                     \exp_not:N \group_end:
                   }
               }
-              { \exp_not:N \@@_ref_default: }
+              { \@@_ref_default: }
           }
       }
   }
@@ -4094,10 +4399,10 @@
 %
 %
 % Finally, a couple of functions for retrieving options values, according to
-% the relevant precedence rules (see Section~\ref{sec:reference-format}).
-% They both receive an \meta{option} as argument, and store the retrieved
-% value in \meta{tl variable}.  Though these are mostly general functions (for
-% a change\dots{}), they are not completely so, they rely on the current state
+% the relevant precedence rules (see \zcref{impl:sec:reference-format}).  They
+% both receive an \meta{option} as argument, and store the retrieved value in
+% \meta{tl variable}.  Though these are mostly general functions (for a
+% change\dots{}), they are not completely so, they rely on the current state
 % of \cs{l_@@_label_type_a_tl}, as set during the processing of the label
 % stack.  This could be easily generalized, of course, but I don't think it is
 % worth it, \cs{l_@@_label_type_a_tl} is indeed what we want in all practical
