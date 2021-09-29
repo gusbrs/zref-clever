@@ -2,6 +2,9 @@
 
 **Clever LaTeX cross-references based on zref**
 
+Author: Gustavo Barros
+Maintainer: Gustavo Barros
+
 `zref-clever` provides an user interface for making LaTeX cross-references
 which automates some of their typical requirements, thus easing their input in
 the document and improving the consistency of typeset results.  A reference
@@ -11,7 +14,10 @@ due.  The reference format is highly and easily customizable, both globally
 and locally.  `zref-clever` is based on `zref`'s extensible referencing
 system.
 
-The released version of this package is available from CTAN. (soonish, but not
-yet...)
+License: LPPL Version 1.3c
 
-For more details, check the Documentation.
+Repository: https://github.com/gusbrs/zref-clever
+
+Bug tracker: https://github.com/gusbrs/zref-clever/issues
+
+CTAN: https://ctan.org/pkg/zref-clever
