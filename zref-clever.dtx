@@ -77,7 +77,7 @@
 % As usual:
 %
 % \begin{syntax}
-%   \cs{usepackage}\oarg{options}|{zref-clever}|
+%   \cs{usepackage}\oarg{options}\texttt{\{zref-clever\}}
 % \end{syntax}
 %
 %
@@ -133,8 +133,9 @@
 %
 % \vspace{\baselineskip}
 %
-% Besides these, user facing commands related to internationalization are
-% presented in \zcref{sec:internationalization}.
+% Besides these, user facing commands related to \zcref*[ref=title,
+% noname]{sec:internationalization} are presented in
+% \zcref{sec:internationalization}.
 %
 %
 % \section{Options}
@@ -214,22 +215,23 @@
 % sorting priority of different reference types.  It receives as value a comma
 % separated list of reference types, specifying that their sorting is to be
 % done in the order of that list.  But \opt{typesort} does not need to receive
-% \emph{all} possible reference types.  The special value |{othertypes}| (yes,
-% braced) can be placed anywhere along the list, to specify the sort priority
-% of any type not included explicitly in the list.  If |{othertypes}| is not
-% present in the list, it is presumed to be at the end of it.  Any unspecified
-% types (that is, those falling implicitly or explicitly into the
-% |{othertypes}| category) get sorted between themselves in the order of their
-% first appearance in the label list given as argument to \cs{zcref}.  I
-% presume the common use cases will not need to specify |{othertypes}| at all
-% but, for the sake of example, if you just really dislike equations, you
-% could use |typesort={{othertypes}, equation}|.  \opt{typesort}'s default
-% value is |{part, chapter, section, paragraph}|, which places the sectioning
-% reference types first in the list, in their hierarchical order, and leaves
-% everything else to the order of appearance of the labels.  The
-% \opt{notypesort} option behaves like |typesort={{othertypes}}| would do,
-% that is, it sorts all types in the order of the first appearance in the
-% labels' list.
+% \emph{all} possible reference types.  The special value
+% \texttt{\{othertypes\}} (yes, braced) can be placed anywhere along the list,
+% to specify the sort priority of any type not included explicitly in the
+% list.  If \texttt{\{othertypes\}} is not present in the list, it is presumed
+% to be at the end of it.  Any unspecified types (that is, those falling
+% implicitly or explicitly into the \texttt{\{othertypes\}} category) get
+% sorted between themselves in the order of their first appearance in the
+% label list given as argument to \cs{zcref}.  I presume the common use cases
+% will not need to specify \texttt{\{othertypes\}} at all but, for the sake of
+% example, if you just really dislike equations, you could use
+% \texttt{typesort=\{\{othertypes\}, equation\}}.  \opt{typesort}'s default
+% value is \texttt{\{part, chapter, section, paragraph\}}, which places the
+% sectioning reference types first in the list, in their hierarchical order,
+% and leaves everything else to the order of appearance of the labels.  The
+% \opt{notypesort} option behaves like \texttt{typesort=\{\{othertypes\}\}}
+% would do, that is, it sorts all types in the order of the first appearance
+% in the labels' list.
 %
 % \DescribeOption{comp} %
 % \DescribeOption{nocomp} %
@@ -258,6 +260,51 @@
 % \texttt{range=true} (in the \pkg{l3keys}' jargon, the \emph{option}'s
 % default is \texttt{true}).
 %
+% \DescribeOption{cap} %
+% \DescribeOption{nocap} %
+% \DescribeOption{capfirst} %
+% The \opt{cap} option controls whether the reference type names should be
+% capitalized or not.  It is a boolean option, and the package's default is
+% \texttt{cap=false}.  The option given without a value is equivalent to
+% \texttt{cap=true}.  The \opt{nocap} option is a convenience alias for
+% \texttt{cap=false}.  The \opt{capfirst} ensures that the reference type name
+% of the \emph{first} type block is capitalized, even when \opt{cap} is set to
+% \texttt{false}.
+%
+% \DescribeOption{abbrev} %
+% \DescribeOption{noabbrev} %
+% \DescribeOption{noabbrevfirst} %
+% The \opt{abbrev} option controls whether to use abbreviated reference type
+% names when they are available.  It is a boolean option, and the package's
+% default is \texttt{abbrev=false}.  The option given without a value is
+% equivalent to \texttt{abbrev=true}.  The \opt{noabbrev} option is a
+% convenience alias for \texttt{abbrev=false}.  The \opt{noabbrevfirst}
+% ensures that the reference type name of the \emph{first} type block is never
+% abbreviated, even when \opt{abbrev} is set to \texttt{true}.
+%
+% \DescribeOption{S} %
+% \opt{S} for ``Sentence''.  The \opt{S} option is a convenience alias for
+% \texttt{capfirst=true, noabbrevfirst=true}, and is intended to be used in
+% references made at the beginning of a sentence.  It is highly recommended
+% that you make a habit of using the \opt{S} option for beginning of sentence
+% references.  Even if you do happen to be currently using \texttt{cap=true,
+% abbrev=false}, proper semantic markup will ensure you get expected results
+% even if you change your mind in that regard later on.  For that reason, it
+% was made short and mnemonic, it can't get any easier.
+%
+% \DescribeOption{hyperref} %
+% The \opt{hyperref} option controls the use of \pkg{hyperref} by
+% \pkg{zref-clever} and takes values \opt{auto}, \opt{true}, \opt{false}.  The
+% default value, \opt{auto}, makes \pkg{zref-clever} use \pkg{hyperref} if it
+% is loaded, meaning that references made with \cs{zcref} get hyperlinked to
+% the anchors of their respective \meta{labels}.  \opt{true} does the same
+% thing, but warns if \pkg{hyperref} is not loaded (\pkg{hyperref} is never
+% loaded for you).  In either of these cases, if \pkg{hyperref} is loaded,
+% module \pkg{zref-hyperref} is also loaded by \pkg{zref-clever}.  \opt{false}
+% means not to use \pkg{hyperref} regardless of its availability.  This is a
+% preamble only option, but \cs{zcref} provides granular control of
+% hyperlinking by means of its starred version.
+%
 % \DescribeOption{nameinlink} %
 % The \opt{nameinlink} option controls whether the type name should be
 % included in the reference hyperlink or not (provided there is a link, of
@@ -272,54 +319,109 @@
 % compressed), otherwise, the name is left out of the link.  When the value is
 % \texttt{tsingle}, the type name is included in the link for each type block
 % with a single reference, otherwise, it isn't.  An example: suppose you make
-% a couple of references to something like \cs{zcref}|{chap:chapter1}| and
-% \cs{zcref}|{chap:chapter1, sec:section1, fig:figure1, fig:figure2}|.  The
-% ``figure'' type name will only be included in the hyperlink if
-% \opt{nameinlink} option is set to \texttt{true}.  If it is set to
-% \texttt{tsingle}, the first reference will include the name in the link for
-% ``chapter'', as expected, but also in the second reference the ``chapter''
-% and ``section'' names will be included in their respective links, while that
-% of ``figure'' will not.  If the option is set to \texttt{single}, only the
-% name for ``chapter'' in the first reference will be included in the link,
-% while in the second reference none of them will.  The package's default is
-% \texttt{nameinlink=tsingle}, and the option given without a value is
-% equivalent to \texttt{nameinlink=true}.
-%
-% \DescribeOption{cap} %
-% \DescribeOption{nocap} %
-% \DescribeOption{capfirst} %
-%
-%
-% \DescribeOption{abbrev} %
-% \DescribeOption{noabbrevfirst} %
-%
-%
-% \DescribeOption{C} %
-%
-%
-% \DescribeOption{hyperref} %
-%
+% a couple of references to something like
+% \cs{zcref}\texttt{\{chap:chapter1\}} and \cs{zcref}\texttt{\{chap:chapter1,
+% sec:section1, fig:figure1, fig:figure2\}}.  The ``figure'' type name will
+% only be included in the hyperlink if \opt{nameinlink} option is set to
+% \texttt{true}.  If it is set to \texttt{tsingle}, the first reference will
+% include the name in the link for ``chapter'', as expected, but also in the
+% second reference the ``chapter'' and ``section'' names will be included in
+% their respective links, while that of ``figure'' will not.  If the option is
+% set to \texttt{single}, only the name for ``chapter'' in the first reference
+% will be included in the link, while in the second reference none of them
+% will.  The package's default is \texttt{nameinlink=tsingle}, and the option
+% given without a value is equivalent to \texttt{nameinlink=true}.
 %
 % \DescribeOption{lang} %
-%
+% The \opt{lang} option controls the language used by \cs{zcref} when looking
+% for language-specific reference format options (see
+% \zcref{sec:reference-format}).  The default value, \texttt{main}, uses the
+% main document language, as defined by \pkg{babel} or \pkg{polyglossia} (or
+% \texttt{english} if none of them is loaded).  Value \texttt{current} uses
+% the current language, as defined by \pkg{babel} or \pkg{polyglossia} (or
+% \texttt{english} if none of them is loaded).  The \opt{lang} option also
+% accepts that the language be specified directly by its name, as long as it's
+% a language known by \pkg{zref-clever}.  For more details on
+% \zcref*[ref=title,noname]{sec:internationalization}, see
+% \zcref{sec:internationalization}.
 %
 % \DescribeOption{font} %
-%
+% The \opt{font} option can receive font styling commands to change the
+% appearance of the whole reference list (see also the reference format
+% options, \opt{namefont}, \opt{reffont}, and \opt{reffont-in} in
+% \zcref{sec:reference-format}).  It does not affect the content of the
+% \opt{note}, however.  The option is intended exclusively for commands that
+% only change font attributes: style, family, shape, weight, size, color, etc.
+% Anything else, particularly commands that may generate typeset output, is
+% not supported.  Given how package options are handled by \LaTeX{}, the fact
+% that this option receives commands as value means this option \emph{can't}
+% be set at load time, as a package option.  If you want to set it globally,
+% use \cs{zcsetup} instead.
 %
 % \DescribeOption{note} %
-%
+% The \opt{note} option receives as value some text to be typeset at the end
+% of the whole reference list.  It is separated from it by \opt{notesep} (see
+% \zcref{sec:reference-format}).
 %
 % \DescribeOption{check} %
-%
+% Provides integration of \pkg{zref-clever} with the \pkg{zref-check} package.
+% The \opt{check} option is only available when the latter is loaded and, if
+% so, it works exactly like the optional argument of \cs{zcheck}, and can
+% receive both checks and \cs{zcheck}'s options.  And the checks are performed
+% for each label in \marg{labels} received as argument by \cs{zcref}.  See the
+% User manual of \pkg{zref-check} for details.  The checks done by the
+% \opt{check} option in \cs{zcref} comprise the whole reference list,
+% including the \opt{note}.
 %
 % \DescribeOption{countertype} %
+% The \opt{countertype} option allows to specify the ``reference type'' of
+% each counter, which is stored as a label property when the label is set.
+% This ``reference type'' is what determines how a reference to this label
+% will eventually be typeset when it is referred to (see
+% \zcref{sec:reference-types}).  A value like \texttt{countertype = \{foo =
+% bar\}} sets the \texttt{foo} counter to use the reference type \texttt{bar}.
+% There's only need to specify the \opt{countertype} for counters whose name
+% differs from that of their type, since \pkg{zref-clever} presumes the type
+% has the same name as the counter, unless otherwise specified.  Also, the
+% default value of the option already sets appropriate types for basic
+% \LaTeX{} counters, including those from the standard classes.  Setting a
+% counter type to an empty value removes any (explicit) type association for
+% that counter, in practice, this means it then uses a type equal to its name.
+% Since this option only affects how labels are set, it is not available in
+% \cs{zcref}.
 %
-%
-% \DescribeOption{counterresetters} %
-%
-%
+% \DescribeOption{\raisebox{-.2em}{\dbend}\ counterresetters} %
 % \DescribeOption{counterresetby} %
-%
+% The sorting and compression of references done by \cs{zcref} requires that
+% we know the counter whose \cs{refstepcounter} is being stored by \cs{zlabel}
+% but also information on any counter whose stepping may trigger its
+% resetting, or its ``enclosing counters''.  This information is not easily
+% retrievable from the counter itself but is (normally) stored with the
+% counter that does the resetting.  The \opt{counterresetters} option adds
+% counter names, received as a comma separated list, to the list of counters
+% \pkg{zref-clever} uses to search for ``enclosing counters'' of the counter
+% for which a label is being set.  Unfortunately, not every counter gets reset
+% through the standard machinery for this, including some \LaTeX{} kernel ones
+% (e.g. the \texttt{enumerate} environment counters).  For those, there is
+% really no way to retrieve this information directly, so we have to just tell
+% \pkg{zref-clever} about them.  And that's what the \opt{counterresetby}
+% option is made for.  It receives a comma separated list of
+% \texttt{key=value} pairs, in which \texttt{key} is the counter, and
+% \texttt{value} is its ``enclosing counter'', that is, the counter whose
+% stepping results in its resetting.  This is not really an ``option'' in the
+% sense of ``user choice'', it is more of a way to inform \pkg{zref-clever} of
+% something it cannot know or automatically find in general.  One cannot place
+% arbitrary information there, or \pkg{zref-clever} can be thoroughly
+% confused.  The setting must correspond to the actual resetting behavior of
+% the involved counters.  \opt{counterresetby} has precedence over the search
+% done in the \opt{counterresetters} list.  The default value of
+% \opt{counterresetters} includes the counters for sectioning commands of the
+% standard classes which, in most cases, should be the relevant ones for
+% cross-referencing purposes.  The default value of \opt{counterresetby}
+% includes the \texttt{enumerate} environment counters.  So, hopefully you
+% don't need to ever bother with either of these options.  But, if you do,
+% they are here.  Use them with caution though.  Since these options only
+% affect how labels are set, they are not available in \cs{zcref}.
 %
 %
 % \section{Reference types}
@@ -613,11 +715,11 @@
 % retrievable from the counter itself, because this information is stored with
 % the counter that does the resetting, not with the one that gets reset (the
 % list is stored in \cs{cl@}\meta{counter} with format
-% |\@elt{countera}\@elt{counterb}\@elt{counterc}|, see section `ltcounts.dtx'
-% in `source2e').  Besides, there may be a chain of resetting counters, which
-% must be taken into account: if `counterC' gets reset by `counterB', and
-% `counterB' gets reset by `counterA', stepping the latter affects all three
-% of them.
+% \texttt{\cs{@elt}\{countera\}\cs{@elt}\{counterb\}\cs{@elt}\{counterc\}},
+% see section `ltcounts.dtx' in `source2e').  Besides, there may be a chain of
+% resetting counters, which must be taken into account: if `counterC' gets
+% reset by `counterB', and `counterB' gets reset by `counterA', stepping the
+% latter affects all three of them.
 %
 % The procedure below examines a set of counters, those included in
 % \cs{l_@@_counter_resetters_seq}, and for each of them retrieves the set of
@@ -771,7 +873,8 @@
 % avoiding any global spillovers of this trick.  Since this operation is not
 % expandable we cannot run it directly from the property definition.  Hence,
 % we use a shipout hook, and set \cs{g_@@_page_format_tl}, which can then be
-% retrieved by the starred definition of |\zref@newprop*{zc@pgfmt}|.
+% retrieved by the starred definition of
+% \texttt{\cs{zref@newprop}*\{zc@pgfmt\}}.
 %
 %    \begin{macrocode}
 \tl_new:N \g_@@_page_format_tl
@@ -827,6 +930,12 @@
 \msg_new:nnn { zref-clever } { unknown-language-transl }
   {
     Language~'#1'~is~unknown,~cannot~declare~translations~to~it.~
+    See~documentation~for~'\iow_char:N\\zcDeclareLanguage'~and~
+    '\iow_char:N\\zcDeclareLanguageAlias'.
+  }
+\msg_new:nnn { zref-clever } { unknown-language-opt }
+  {
+    Language~'#1'~is~unknown~\msg_line_context:.~Using~default.~
     See~documentation~for~'\iow_char:N\\zcDeclareLanguage'~and~
     '\iow_char:N\\zcDeclareLanguageAlias'.
   }
@@ -1139,7 +1248,7 @@
 % white-space in them, and without introducing any undue content on the stream
 % when we cannot afford to do it.  Hence, \pkg{zref-clever}'s built-in
 % dictionary files are a set of \emph{key-value options} which are read from
-% the file, and fed to |\keys_set:nn{zref-clever/dictionary}| by
+% the file, and fed to \texttt{\cs{keys_set:nn}\{zref-clever/dictionary\}} by
 % \cs{@@_provide_dictionary:n}.  And they use the same syntax and options as
 % \cs{zcDeclareTranslations} does.  The dictionary file itself is read with
 % \cs{ExplSyntaxOn} with the usual implications for white-space and catcodes.
@@ -1218,6 +1327,19 @@
                     \msg_warning:nnx { zref-clever } { dict-not-available }
                       { \l_@@_dict_language_tl }
                   }
+%    \end{macrocode}
+% Even if we don't have the actual dictionary, we register it as ``loaded''.
+% At this point, it is a known language, properly declared.  There is no point
+% in trying to load it multiple times, because users cannot really provide the
+% dictionary files (well, technically they could, but we are working so they
+% don't need to, and have better ways to do what they want).  And if the users
+% had provided some translations themselves, by means of
+% \cs{zcDeclareTranslations}, everything would be in place, and they could use
+% the \opt{lang} option multiple times, and the \texttt{dict-not-available}
+% warning would never go away.
+%    \begin{macrocode}
+                \seq_gput_right:NV \g_@@_loaded_dictionaries_seq
+                  \l_@@_dict_language_tl
               }
           }
       }
@@ -1501,131 +1623,6 @@
 % \end{macro}
 %
 %
-% \subsubsection*{\opt{countertype} option}
-%
-% \cs{l_@@_counter_type_prop} is used by \texttt{zc@type} property, and stores
-% a mapping from ``counter'' to ``reference type''.  Only those counters whose
-% type name is different from that of the counter need to be specified, since
-% \texttt{zc@type} presumes the counter as the type if the counter is not
-% found in \cs{l_@@_counter_type_prop}.
-%
-%    \begin{macrocode}
-\prop_new:N \l_@@_counter_type_prop
-\keys_define:nn { zref-clever / label }
-  {
-    countertype .code:n =
-      {
-        \keyval_parse:nnn
-          {
-            \msg_warning:nnnn { zref-clever }
-              { key-requires-value } { countertype }
-          }
-          {
-            \@@_prop_put_non_empty:Nnn
-              \l_@@_counter_type_prop
-          }
-          {#1}
-      } ,
-    countertype .value_required:n = true ,
-    countertype .initial:n =
-      {
-        subsection    = section ,
-        subsubsection = section ,
-        subparagraph  = paragraph ,
-        enumi         = item ,
-        enumii        = item ,
-        enumiii       = item ,
-        enumiv        = item ,
-      } ,
-  }
-%    \end{macrocode}
-%
-%
-% \subsubsection*{\opt{counterresetters} option}
-%
-% \cs{l_@@_counter_resetters_seq} is used by \cs{@@_counter_reset_by:n} to
-% populate the \texttt{zc@enclcnt} and \texttt{zc@enclval} properties, and
-% stores the list of counters which are potential ``enclosing counters'' for
-% other counters.  This option is constructed such that users can only
-% \emph{add} items to the variable.  There would be little gain and some risk
-% in allowing removal, and the syntax of the option would become unnecessarily
-% more complicated.  Besides, users can already override, for any particular
-% counter, the search done from the set in \cs{l_@@_counter_resetters_seq}
-% with the \opt{counterresetby} option.
-%
-%    \begin{macrocode}
-\seq_new:N \l_@@_counter_resetters_seq
-\keys_define:nn { zref-clever / label }
-  {
-    counterresetters .code:n =
-      {
-        \clist_map_inline:nn {#1}
-          {
-            \seq_if_in:NnF \l_@@_counter_resetters_seq {##1}
-              {
-                \seq_put_right:Nn
-                  \l_@@_counter_resetters_seq {##1}
-              }
-          }
-      } ,
-    counterresetters .initial:n =
-      {
-        part ,
-        chapter ,
-        section ,
-        subsection ,
-        subsubsection ,
-        paragraph ,
-        subparagraph ,
-      },
-    counterresetters .value_required:n = true ,
-  }
-%    \end{macrocode}
-%
-%
-%
-% \subsubsection*{\opt{counterresetby} option}
-%
-% \cs{l_@@_counter_resetby_prop} is used by \cs{@@_counter_reset_by:n} to
-% populate the \texttt{zc@enclcnt} and \texttt{zc@enclval} properties, and
-% stores a mapping from counters to the counter which resets each of them.
-% This mapping has precedence in \cs{@@_counter_reset_by:n} over the search
-% through \cs{l_@@_counter_resetters_seq}.
-%
-%    \begin{macrocode}
-\prop_new:N \l_@@_counter_resetby_prop
-\keys_define:nn { zref-clever / label }
-  {
-    counterresetby .code:n =
-      {
-        \keyval_parse:nnn
-          {
-            \msg_warning:nnn { zref-clever }
-              { key-requires-value } { counterresetby }
-          }
-          {
-            \@@_prop_put_non_empty:Nnn
-              \l_@@_counter_resetby_prop
-          }
-          {#1}
-      } ,
-    counterresetby .value_required:n = true ,
-    counterresetby .initial:n =
-      {
-%    \end{macrocode}
-% The counters for the \texttt{enumerate} environment do not use the regular
-% counter machinery for resetting on each level, but are nested nevertheless
-% by other means, treat them as exception.
-%    \begin{macrocode}
-        enumii  = enumi   ,
-        enumiii = enumii  ,
-        enumiv  = enumiii ,
-      } ,
-  }
-%    \end{macrocode}
-%
-%
-%
 % \subsubsection*{\opt{ref} option}
 %
 % \cs{l_@@_ref_property_tl} stores the property to which the reference is
@@ -1801,6 +1798,59 @@
 %
 %
 %
+% \subsubsection*{\opt{cap} and \opt{capfirst} options}
+%
+%    \begin{macrocode}
+\bool_new:N \l_@@_capitalize_bool
+\bool_new:N \l_@@_capitalize_first_bool
+\keys_define:nn { zref-clever / reference }
+  {
+    cap .bool_set:N = \l_@@_capitalize_bool ,
+    cap .initial:n = false ,
+    cap .default:n = true ,
+    nocap .meta:n = { cap = false },
+    nocap .value_forbidden:n = true ,
+
+    capfirst .bool_set:N = \l_@@_capitalize_first_bool ,
+    capfirst .initial:n = false ,
+    capfirst .default:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+% \subsubsection*{\opt{abbrev} and \opt{noabbrevfirst} options}
+%
+%    \begin{macrocode}
+\bool_new:N \l_@@_abbrev_bool
+\bool_new:N \l_@@_noabbrev_first_bool
+\keys_define:nn { zref-clever / reference }
+  {
+    abbrev .bool_set:N = \l_@@_abbrev_bool ,
+    abbrev .initial:n = false ,
+    abbrev .default:n = true ,
+    noabbrev .meta:n = { abbrev = false },
+    noabbrev .value_forbidden:n = true ,
+
+    noabbrevfirst .bool_set:N = \l_@@_noabbrev_first_bool ,
+    noabbrevfirst .initial:n = false ,
+    noabbrevfirst .default:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+%
+% \subsubsection*{\opt{S} option}
+%
+%    \begin{macrocode}
+\keys_define:nn { zref-clever / reference }
+  {
+    S .meta:n =
+      { capfirst = true , noabbrevfirst = true },
+    S .value_forbidden:n = true ,
+  }
+%    \end{macrocode}
+%
+%
 % \subsubsection*{\opt{hyperref} option}
 %
 %    \begin{macrocode}
@@ -1869,59 +1919,6 @@
       { \str_set:Nn \l_@@_nameinlink_str { tsingle } } ,
     nameinlink .initial:n = tsingle ,
     nameinlink .default:n = true ,
-  }
-%    \end{macrocode}
-%
-%
-% \subsubsection*{\opt{cap} and \opt{capfirst} options}
-%
-%    \begin{macrocode}
-\bool_new:N \l_@@_capitalize_bool
-\bool_new:N \l_@@_capitalize_first_bool
-\keys_define:nn { zref-clever / reference }
-  {
-    cap .bool_set:N = \l_@@_capitalize_bool ,
-    cap .initial:n = false ,
-    cap .default:n = true ,
-    nocap .meta:n = { cap = false },
-    nocap .value_forbidden:n = true ,
-
-    capfirst .bool_set:N = \l_@@_capitalize_first_bool ,
-    capfirst .initial:n = false ,
-    capfirst .default:n = true ,
-  }
-%    \end{macrocode}
-%
-%
-% \subsubsection*{\opt{abbrev} and \opt{noabbrevfirst} options}
-%
-%    \begin{macrocode}
-\bool_new:N \l_@@_abbrev_bool
-\bool_new:N \l_@@_noabbrev_first_bool
-\keys_define:nn { zref-clever / reference }
-  {
-    abbrev .bool_set:N = \l_@@_abbrev_bool ,
-    abbrev .initial:n = false ,
-    abbrev .default:n = true ,
-    noabbrev .meta:n = { abbrev = false },
-    noabbrev .value_forbidden:n = true ,
-
-    noabbrevfirst .bool_set:N = \l_@@_noabbrev_first_bool ,
-    noabbrevfirst .initial:n = false ,
-    noabbrevfirst .default:n = true ,
-  }
-%    \end{macrocode}
-%
-%
-%
-% \subsubsection*{\opt{C} option}
-%
-%    \begin{macrocode}
-\keys_define:nn { zref-clever / reference }
-  {
-    C .meta:n =
-      { capfirst = true , noabbrevfirst = true },
-    C .value_forbidden:n = true ,
   }
 %    \end{macrocode}
 %
@@ -2025,7 +2022,16 @@
                 }
               }
               {
-                \tl_set:Nn \l_@@_ref_language_tl {#1}
+                \prop_if_in:NnTF \g_@@_languages_prop {#1}
+                  {
+                    \tl_set:Nn \l_@@_ref_language_tl {#1}
+                  }
+                  {
+                    \msg_warning:nnn { zref-clever }
+                      { unknown-language-opt } {#1}
+                    \tl_set:Nn \l_@@_ref_language_tl
+                      { \l_@@_main_language_tl }
+                  }
                 \@@_provide_dictionary_verbose:x
                   { \l_@@_ref_language_tl }
               }
@@ -2048,7 +2054,10 @@
 %    \begin{macrocode}
         \@@_provide_dictionary:x { \l_@@_ref_language_tl }
 %    \end{macrocode}
-% Redefinition of the \texttt{lang} key option for the document body.
+% Redefinition of the \texttt{lang} key option for the document body.  Also,
+% drop the verbose dictionary loading in the document body, as it can become
+% intrusive depending on the use case, and does not provide much ``juice''
+% anyway: in \cs{zcref} missing names warnings will already ensue.
 %    \begin{macrocode}
         \keys_define:nn { zref-clever / reference }
           {
@@ -2060,7 +2069,7 @@
                     {
                       \tl_set:Nn \l_@@_ref_language_tl
                         { \l_@@_main_language_tl }
-                      \@@_provide_dictionary_verbose:x
+                      \@@_provide_dictionary:x
                         { \l_@@_ref_language_tl }
                     }
 
@@ -2068,13 +2077,22 @@
                     {
                       \tl_set:Nn \l_@@_ref_language_tl
                         { \l_@@_current_language_tl }
-                      \@@_provide_dictionary_verbose:x
+                      \@@_provide_dictionary:x
                         { \l_@@_ref_language_tl }
                     }
                   }
                   {
-                    \tl_set:Nn \l_@@_ref_language_tl {#1}
-                    \@@_provide_dictionary_verbose:x
+                    \prop_if_in:NnTF \g_@@_languages_prop {#1}
+                      {
+                        \tl_set:Nn \l_@@_ref_language_tl {#1}
+                      }
+                      {
+                        \msg_warning:nnn { zref-clever }
+                          { unknown-language-opt } {#1}
+                        \tl_set:Nn \l_@@_ref_language_tl
+                          { \l_@@_main_language_tl }
+                      }
+                    \@@_provide_dictionary:x
                       { \l_@@_ref_language_tl }
                   }
               } ,
@@ -2087,6 +2105,11 @@
 %
 %
 % \subsubsection*{\opt{font} option}
+%
+% \opt{font} \emph{can't be used as a package option}, since the options get
+% expanded by \LaTeX{} before being passed to the package (see
+% \url{https://tex.stackexchange.com/a/489570}).  It can't be set in
+% \cs{zcref} and, for global settings, with \cs{zcsetup}.
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_typeset_font_tl
@@ -2143,6 +2166,131 @@
               { \msg_warning:nn { zref-clever } { missing-zref-check } }
           }
       }
+  }
+%    \end{macrocode}
+%
+%
+%
+% \subsubsection*{\opt{countertype} option}
+%
+% \cs{l_@@_counter_type_prop} is used by \texttt{zc@type} property, and stores
+% a mapping from ``counter'' to ``reference type''.  Only those counters whose
+% type name is different from that of the counter need to be specified, since
+% \texttt{zc@type} presumes the counter as the type if the counter is not
+% found in \cs{l_@@_counter_type_prop}.
+%
+%    \begin{macrocode}
+\prop_new:N \l_@@_counter_type_prop
+\keys_define:nn { zref-clever / label }
+  {
+    countertype .code:n =
+      {
+        \keyval_parse:nnn
+          {
+            \msg_warning:nnnn { zref-clever }
+              { key-requires-value } { countertype }
+          }
+          {
+            \@@_prop_put_non_empty:Nnn
+              \l_@@_counter_type_prop
+          }
+          {#1}
+      } ,
+    countertype .value_required:n = true ,
+    countertype .initial:n =
+      {
+        subsection    = section ,
+        subsubsection = section ,
+        subparagraph  = paragraph ,
+        enumi         = item ,
+        enumii        = item ,
+        enumiii       = item ,
+        enumiv        = item ,
+      } ,
+  }
+%    \end{macrocode}
+%
+%
+% \subsubsection*{\opt{counterresetters} option}
+%
+% \cs{l_@@_counter_resetters_seq} is used by \cs{@@_counter_reset_by:n} to
+% populate the \texttt{zc@enclcnt} and \texttt{zc@enclval} properties, and
+% stores the list of counters which are potential ``enclosing counters'' for
+% other counters.  This option is constructed such that users can only
+% \emph{add} items to the variable.  There would be little gain and some risk
+% in allowing removal, and the syntax of the option would become unnecessarily
+% more complicated.  Besides, users can already override, for any particular
+% counter, the search done from the set in \cs{l_@@_counter_resetters_seq}
+% with the \opt{counterresetby} option.
+%
+%    \begin{macrocode}
+\seq_new:N \l_@@_counter_resetters_seq
+\keys_define:nn { zref-clever / label }
+  {
+    counterresetters .code:n =
+      {
+        \clist_map_inline:nn {#1}
+          {
+            \seq_if_in:NnF \l_@@_counter_resetters_seq {##1}
+              {
+                \seq_put_right:Nn
+                  \l_@@_counter_resetters_seq {##1}
+              }
+          }
+      } ,
+    counterresetters .initial:n =
+      {
+        part ,
+        chapter ,
+        section ,
+        subsection ,
+        subsubsection ,
+        paragraph ,
+        subparagraph ,
+      },
+    counterresetters .value_required:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+%
+% \subsubsection*{\opt{counterresetby} option}
+%
+% \cs{l_@@_counter_resetby_prop} is used by \cs{@@_counter_reset_by:n} to
+% populate the \texttt{zc@enclcnt} and \texttt{zc@enclval} properties, and
+% stores a mapping from counters to the counter which resets each of them.
+% This mapping has precedence in \cs{@@_counter_reset_by:n} over the search
+% through \cs{l_@@_counter_resetters_seq}.
+%
+%    \begin{macrocode}
+\prop_new:N \l_@@_counter_resetby_prop
+\keys_define:nn { zref-clever / label }
+  {
+    counterresetby .code:n =
+      {
+        \keyval_parse:nnn
+          {
+            \msg_warning:nnn { zref-clever }
+              { key-requires-value } { counterresetby }
+          }
+          {
+            \@@_prop_put_non_empty:Nnn
+              \l_@@_counter_resetby_prop
+          }
+          {#1}
+      } ,
+    counterresetby .value_required:n = true ,
+    counterresetby .initial:n =
+      {
+%    \end{macrocode}
+% The counters for the \texttt{enumerate} environment do not use the regular
+% counter machinery for resetting on each level, but are nested nevertheless
+% by other means, treat them as exception.
+%    \begin{macrocode}
+        enumii  = enumi   ,
+        enumiii = enumii  ,
+        enumiv  = enumiii ,
+      } ,
   }
 %    \end{macrocode}
 %
@@ -2270,11 +2418,11 @@
 % precedence level of the translations at any given point.  So both in
 % \cs{zcRefTypeSetup} and in setting reference options (see
 % \zcref{impl:sec:reference-options}), we leverage the distinction of an
-% ``empty valued key'' (|key=| or |key={}|) from a ``key with no value''
-% (|key|).  This distinction is captured internally by the lower-level key
-% parsing, but must be made explicit at \cs{keys_set:nn} by means of the
-% \texttt{.default:V} property of the key in \cs{keys_define:nn}.  For the
-% technique and some discussion about it, see
+% ``empty valued key'' (\texttt{key=} or \texttt{key=\{\}}) from a ``key with
+% no value'' (\texttt{key}).  This distinction is captured internally by the
+% lower-level key parsing, but must be made explicit at \cs{keys_set:nn} by
+% means of the \texttt{.default:V} property of the key in \cs{keys_define:nn}.
+% For the technique and some discussion about it, see
 % \url{https://tex.stackexchange.com/q/614690} (thanks Jonathan P.\ Spratte,
 % aka `Skillmon', and Phelype Oleinik) and
 % \url{https://github.com/latex3/latex3/pull/988}.
