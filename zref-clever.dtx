@@ -418,7 +418,7 @@
 % \opt{counterresetters} includes the counters for sectioning commands of the
 % standard classes which, in most cases, should be the relevant ones for
 % cross-referencing purposes.  The default value of \opt{counterresetby}
-% includes the \texttt{enumerate} environment counters.  So, hopefully you
+% includes the \texttt{enumerate} environment counters.  So, hopefully, you
 % don't need to ever bother with either of these options.  But, if you do,
 % they are here.  Use them with caution though.  Since these options only
 % affect how labels are set, they are not available in \cs{zcref}.
@@ -491,6 +491,67 @@
 % \section{Internationalization}
 % \zlabel{sec:internationalization}
 %
+% \pkg{zref-clever} provides internationalization facilities for reference
+% format options and integrates with \pkg{babel} and \pkg{polyglossia} to
+% adapt these options to the languages in use by either of these language
+% packages.  This is particularly relevant for reference type \emph{names},
+% but applies in general to all reference format options (except for the font
+% related ones) presented in \zcref{sec:reference-format}, and which can have
+% language-specific values, or ``translations''.
+%
+% As long as the language is declared and \pkg{zref-clever} has a built-in
+% dictionary for it, most use cases will likely be covered by the \opt{lang}
+% option (see \zcref{sec:options}), and its values \texttt{main} and
+% \texttt{current}.  \pkg{zref-clever} has built-in dictionaries for the
+% languages listed in \zcref{tab:languages-and-aliases}, which also includes a
+% the declared aliases to those languages.
+%
+% \begin{table}
+%   \centering
+%   \begin{tabular}{ll}
+%     \toprule
+%     Language   & Aliases      \\
+%     \midrule
+%     english    & american     \\
+%                & australian   \\
+%                & british      \\
+%                & canadian     \\
+%                & newzealand   \\
+%                & UKenglish    \\
+%                & USenglish    \\
+%     french     & acadian      \\
+%                & canadien     \\
+%                & francais     \\
+%                & frenchb      \\
+%     \bottomrule
+%   \end{tabular}
+%   \quad
+%   \begin{tabular}{ll}
+%     \toprule
+%     Language   & Aliases      \\
+%     \midrule
+%     german     & austrian     \\
+%                & germanb      \\
+%                & ngerman      \\
+%                & naustrian    \\
+%                & nswissgerman \\
+%                & swissgerman  \\
+%     portuguese & brazilian    \\
+%                & brazil       \\
+%                & portuges     \\
+%     spanish    &              \\
+%                &              \\
+%     \bottomrule
+%   \end{tabular}
+%   \caption{Declared languages and aliases}
+%   \zlabel{tab:languages-and-aliases}
+% \end{table}
+%
+%
+%
+%
+%
+%
 % \begin{function}{\zcDeclareLanguage}
 %   Declare a new language for use with \pkg{zref-clever}.  If \meta{language}
 %   is already known, just warn.  \cs{zcDeclareLanguage} is preamble only.
@@ -510,13 +571,13 @@
 % \end{function}
 %
 %
-% \begin{function}{\zcDeclareTranslations}
+% \begin{function}{\zcLanguageSetup}
 %   \begin{syntax}
-%     \cs{zcDeclareTranslations} \marg{language} \marg{options}
+%     \cs{zcLanguageSetup} \marg{language} \marg{options}
 %   \end{syntax}
 %   Sets language-specific reference format options for \meta{language} (see
 %   \zcref{sec:reference-format}). \meta{language} must be already known to
-%   \pkg{zref-clever}.  \cs{zcDeclareTranslations} is preamble only.
+%   \pkg{zref-clever}.  \cs{zcLanguageSetup} is preamble only.
 % \end{function}
 %
 %
@@ -909,7 +970,7 @@
 \msg_new:nnn { zref-clever } { option-not-type-specific }
   {
     Option~'#1'~is~not~type-specific~\msg_line_context:.~
-    Set~it~in~'\iow_char:N\\zcDeclareTranslations'~before~first~'type'
+    Set~it~in~'\iow_char:N\\zcLanguageSetup'~before~first~'type'
     ~switch~or~as~package~option.
   }
 \msg_new:nnn { zref-clever } { option-only-type-specific }
@@ -1019,7 +1080,7 @@
 % load-time (see \zcref{impl:sec:reference-options}).  ``Type-specific
 % options'' (ii) are handled by \cs{zcRefTypeSetup}.  ``Language-specific
 % translations'', be they ``type-specific'' (iii) or ``default'' (iv) have
-% their user interface in \cs{zcDeclareTranslations}, and have their values
+% their user interface in \cs{zcLanguageSetup}, and have their values
 % populated by the package's dictionaries.  The ``fallback'' settings are
 % stored in \cs{g_@@_fallback_dict_prop}.
 %
@@ -1040,11 +1101,11 @@
 %     \l_@@_setup_type_tl ,
 %     \l_@@_dict_language_tl ,
 %   }
-%     Store ``current'' type and language in different places for option and
-%     translation handling, notably in \cs{@@_provide_dictionary:n},
-%     \cs{zcRefTypeSetup}, and \cs{zcDeclareTranslations}.  But also for
-%     translations retrieval, in \cs{@@_get_type_transl:nnnN} and
-%     \cs{@@_get_default_transl:nnN}.
+%   Store ``current'' type and language in different places for option and
+%   translation handling, notably in \cs{@@_provide_dictionary:n},
+%   \cs{zcRefTypeSetup}, and \cs{zcLanguageSetup}.  But also for translations
+%   retrieval, in \cs{@@_get_type_transl:nnnN} and
+%   \cs{@@_get_default_transl:nnN}.
 %    \begin{macrocode}
 \tl_new:N \l_@@_setup_type_tl
 \tl_new:N \l_@@_dict_language_tl
@@ -1207,7 +1268,7 @@
 % Contrary to general options and type options, which are always \emph{local},
 % ``dictionaries'', ``translations'' or ``language-specific settings'' are
 % always \emph{global}.  Hence, the loading of built-in dictionaries, as well
-% as settings done with \cs{zcDeclareTranslations}, should set the relevant
+% as settings done with \cs{zcLanguageSetup}, should set the relevant
 % variables globally.
 %
 % The built-in dictionaries and their related infrastructure are designed to
@@ -1250,15 +1311,15 @@
 % dictionary files are a set of \emph{key-value options} which are read from
 % the file, and fed to \texttt{\cs{keys_set:nn}\{zref-clever/dictionary\}} by
 % \cs{@@_provide_dictionary:n}.  And they use the same syntax and options as
-% \cs{zcDeclareTranslations} does.  The dictionary file itself is read with
+% \cs{zcLanguageSetup} does.  The dictionary file itself is read with
 % \cs{ExplSyntaxOn} with the usual implications for white-space and catcodes.
 %
 % \cs{@@_provide_dictionary:n} is only meant to load the built-in
 % dictionaries.  For languages declared by the user, or for any settings to a
-% known language made with \cs{zcDeclareTranslations}, values are populated
-% directly to a variable \cs{g_@@_dict_\meta{language}_prop}, created as
-% needed.  Hence, there is no need to ``load'' anything in this case:
-% definitions and assignments made by the user are performed immediately.
+% known language made with \cs{zcLanguageSetup}, values are populated directly
+% to a variable \cs{g_@@_dict_\meta{language}_prop}, created as needed.
+% Hence, there is no need to ``load'' anything in this case: definitions and
+% assignments made by the user are performed immediately.
 %
 %
 % \subsubsection*{Provide}
@@ -1333,10 +1394,10 @@
 % in trying to load it multiple times, because users cannot really provide the
 % dictionary files (well, technically they could, but we are working so they
 % don't need to, and have better ways to do what they want).  And if the users
-% had provided some translations themselves, by means of
-% \cs{zcDeclareTranslations}, everything would be in place, and they could use
-% the \opt{lang} option multiple times, and the \texttt{dict-not-available}
-% warning would never go away.
+% had provided some translations themselves, by means of \cs{zcLanguageSetup},
+% everything would be in place, and they could use the \opt{lang} option
+% multiple times, and the \texttt{dict-not-available} warning would never go
+% away.
 %    \begin{macrocode}
                 \seq_gput_right:NV \g_@@_loaded_dictionaries_seq
                   \l_@@_dict_language_tl
@@ -2384,7 +2445,7 @@
 % \cs{zcRefTypeSetup} is the main user interface for ``type-specific''
 % reference formatting.  Settings done by this command have a higher
 % precedence than any translation, hence they override any language-specific
-% setting, either done at \cs{zcDeclareTranslations} or by the package's
+% setting, either done at \cs{zcLanguageSetup} or by the package's
 % dictionaries.  On the other hand, they have a lower precedence than non
 % type-specific general options.  The \meta{options} should be given in the
 % usual \texttt{key=val} format.  The \meta{type} does not need to pre-exist,
@@ -2476,37 +2537,37 @@
 %
 %
 %
-% \subsection{\cs{zcDeclareTranslations}}
+% \subsection{\cs{zcLanguageSetup}}
 %
-% \cs{zcDeclareTranslations} is the main user interface for
-% ``language-specific'' reference formatting, be it ``type-specific'' or not.
-% The difference between the two cases is captured by the \texttt{type} key,
-% which works as a sort of a ``switch''.  Inside the \meta{options} argument
-% of \cs{zcDeclareTranslations}, any options made before the first
-% \texttt{type} key declare ``default'' (non type-specific) translations.
-% When the \texttt{type} key is given with a value, the options following it
-% will set ``type-specific'' translations for that type.  The current type can
-% be switched off by an empty \texttt{type} key.  \cs{zcDeclareTranslations}
-% is preamble only.
+% \cs{zcLanguageSetup} is the main user interface for ``language-specific''
+% reference formatting, be it ``type-specific'' or not.  The difference
+% between the two cases is captured by the \texttt{type} key, which works as a
+% sort of a ``switch''.  Inside the \meta{options} argument of
+% \cs{zcLanguageSetup}, any options made before the first \texttt{type} key
+% declare ``default'' (non type-specific) translations.  When the
+% \texttt{type} key is given with a value, the options following it will set
+% ``type-specific'' translations for that type.  The current type can be
+% switched off by an empty \texttt{type} key.  \cs{zcLanguageSetup} is
+% preamble only.
 %
-% \begin{macro}[int]{\zcDeclareTranslations}
+% \begin{macro}[int]{\zcLanguageSetup}
 %   \begin{syntax}
-%     \cs{zcDeclareTranslations}\marg{language}\marg{options}
+%     \cs{zcLanguageSetup}\marg{language}\marg{options}
 %   \end{syntax}
 %    \begin{macrocode}
-\NewDocumentCommand \zcDeclareTranslations { m m }
+\NewDocumentCommand \zcLanguageSetup { m m }
   {
     \group_begin:
     \prop_get:NnNTF \g_@@_languages_prop {#1}
       \l_@@_dict_language_tl
       {
         \tl_clear:N \l_@@_setup_type_tl
-        \keys_set:nn { zref-clever / translations } {#2}
+        \keys_set:nn { zref-clever / langsetup } {#2}
       }
       { \msg_warning:nnn { zref-clever } { unknown-language-transl } {#1} }
     \group_end:
   }
-\@onlypreamble \zcDeclareTranslations
+\@onlypreamble \zcLanguageSetup
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2517,8 +2578,8 @@
 %     \@@_declare_default_transl:nnn ,
 %   }
 %   A couple of auxiliary functions for the of
-%   \texttt{{zref-clever/translation}} keys set in \cs{zcDeclareTranslations}.
-%   They respectively declare (unconditionally set) ``type-specific'' and
+%   \texttt{{zref-clever/translation}} keys set in \cs{zcLanguageSetup}.  They
+%   respectively declare (unconditionally set) ``type-specific'' and
 %   ``default'' translations.
 %   \begin{syntax}
 %     \cs{@@_declare_type_transl:nnnn} \Arg{language} \Arg{type}
@@ -2543,11 +2604,11 @@
 % \end{macro}
 %
 %
-% The set of keys for \texttt{{zref-clever/translations}}, which is used to
-% set language-specific translations in \cs{zcDeclareTranslations}.
+% The set of keys for \texttt{{zref-clever/langsetup}}, which is used to
+% set language-specific translations in \cs{zcLanguageSetup}.
 %
 %    \begin{macrocode}
-\keys_define:nn { zref-clever / translations }
+\keys_define:nn { zref-clever / langsetup }
   {
     type .code:n =
       {
@@ -2559,7 +2620,7 @@
 \seq_map_inline:Nn
   \c_@@_ref_options_necessarily_not_type_specific_seq
   {
-    \keys_define:nn { zref-clever / translations }
+    \keys_define:nn { zref-clever / langsetup }
       {
         #1 .value_required:n = true ,
         #1 .code:n =
@@ -2580,7 +2641,7 @@
 \seq_map_inline:Nn
   \c_@@_ref_options_possibly_type_specific_seq
   {
-    \keys_define:nn { zref-clever / translations }
+    \keys_define:nn { zref-clever / langsetup }
       {
         #1 .value_required:n = true ,
         #1 .code:n =
@@ -2603,7 +2664,7 @@
 \seq_map_inline:Nn
   \c_@@_ref_options_necessarily_type_specific_seq
   {
-    \keys_define:nn { zref-clever / translations }
+    \keys_define:nn { zref-clever / langsetup }
       {
         #1 .value_required:n = true ,
         #1 .code:n =
