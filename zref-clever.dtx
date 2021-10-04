@@ -52,6 +52,11 @@
 \usepackage{zref-titleref}
 
 \NewDocumentCommand\opt{m}{\texttt{#1}}
+\definecolor{reffmtbox}{gray}{0.15}
+\definecolor{reffmtback}{gray}{0.85}
+\NewDocumentCommand\reffmt{m}{%
+  \fcolorbox{reffmtbox}{reffmtback}{%
+    \rule[-0.2\baselineskip]{0pt}{0.8\baselineskip}\texttt{#1}}}
 
 \MakeShortVerb{\|}
 
@@ -102,7 +107,9 @@
 %   their respective anchors, according to options.  The starred version of
 %   the command does the same as the plain one, just does not form links.  The
 %   \meta{options} are (mostly) the same as those of the package, and can be
-%   given to local effect.
+%   given to local effect.  The \meta{labels} argument is protected by
+%   \pkg{zref}'s \cs{zref@wrapper@babel}, so that it enjoys the same support
+%   for \pkg{babel}'s active characters as \pkg{zref} itself does.
 % \end{function}
 %
 % \begin{function}{\zcpageref}
@@ -135,7 +142,10 @@
 %
 % Besides these, user facing commands related to \zcref*[ref=title,
 % noname]{sec:internationalization} are presented in
-% \zcref{sec:internationalization}.
+% \zcref{sec:internationalization}.  Note still that all user commands are
+% defined with \cs{NewDocumentCommand}, which translates into the usual
+% handling of arguments by it and/or processing by \pkg{l3keys}, particularly
+% with regard to brace-stripping and space-trimming.
 %
 %
 % \section{Options}
@@ -487,6 +497,260 @@
 % \section{Reference format}
 % \zlabel{sec:reference-format}
 %
+% Formatting how the reference is to be typeset is, quite naturally, a big
+% part of the user interface of \pkg{zref-clever}.  In this area, we tried to
+% balance ``flexibility'' and ``user friendliness''.  But the former does
+% place a big toll overall, since there are indeed many places where tweaking
+% may be desired, and the settings may depend on at least two important
+% dimensions of variation: the reference type and the language.  Combination
+% of those necessarily makes for a large set of possibilities.  Hence, the
+% attempt here is to provide a rich set of ``handles'' for fine tuning the
+% reference format but, at the same time, do not \emph{require} detailed setup
+% by the users, unless they really want it.
+%
+% With that in mind, we have settled with an user interface for reference
+% formatting which allows settings to be done in different scopes, with more
+% or less overarching effects, and some precedence rules to regulate the
+% relation of settings given in each of these scopes.  There are four scopes
+% in which reference formatting can be specified by the user, in the following
+% precedence order: i) as general \emph{options}; ii) as \emph{type-specific
+% options}; iii) as \emph{language-specific and type-specific translations};
+% and iv) as \emph{default translations} (that is, language-specific but not
+% type-specific).  Besides those, there's a fifth \emph{internal} scope, with
+% the least priority of all, a ``fallback'', for the cases where it is
+% meaningful to provide some value, even for an unknown language.
+%
+% General ``options'' (i) can be given by the user in the optional argument of
+% \cs{zcref}, but just as well in \cs{zcsetup} or as package options at
+% load-time (see \zcref{sec:options}).  ``Type-specific options'' (ii) are
+% handled by \cs{zcRefTypeSetup} (see \zcref{sec:user-interface}).
+% ``Language-specific translations'', be they ``type-specific'' (iii) or
+% ``default'' (iv) have their user interface in \cs{zcLanguageSetup}, and have
+% their values populated by the package's dictionaries (see
+% \zcref{sec:internationalization}).  Not all reference format specifications
+% can be given in all of these scopes, though.  Some of them can't be
+% type-specific, others must be type-specific, so the set available in each
+% scope depends on the pertinence of the case.  \zcref{tab:reference-format}
+% introduces the available reference format options, which will be discussed
+% in more detail soon, and lists the scopes in which each is available.
+%
+%
+% \begin{table}[htb]
+%   \centering
+%   \begin{tabular}{l>{\ttfamily}lcccc}
+%    \toprule
+%                    &    & General & Type    & Type-specific & Default      \\
+%                    &    & options & options & translations  & translations \\
+%                    &    & (i)     & (ii)    & (iii)         & (iv)         \\
+%
+%    \midrule
+%    Necessarily not & tpairsep   & $\bullet$ &           &           & $\bullet$ \\
+%    type-specific   & tlistsep   & $\bullet$ &           &           & $\bullet$ \\
+%                    & tlastsep   & $\bullet$ &           &           & $\bullet$ \\
+%                    & notesep    & $\bullet$ &           &           & $\bullet$ \\
+%
+%    \addlinespace
+%    Possibly        & namesep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+%    type-specific   & pairsep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+%                    & listsep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+%                    & lastsep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+%                    & rangesep   & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+%                    & refpre     & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+%                    & refpos     & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+%                    & refpre-in  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+%                    & refpos-in  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+%
+%    \addlinespace
+%    Necessarily     & Name-sg    &           & $\bullet$ & $\bullet$ &           \\
+%    type-specific   & name-sg    &           & $\bullet$ & $\bullet$ &           \\
+%                    & Name-pl    &           & $\bullet$ & $\bullet$ &           \\
+%                    & name-pl    &           & $\bullet$ & $\bullet$ &           \\
+%                    & Name-sg-ab &           & $\bullet$ & $\bullet$ &           \\
+%                    & name-sg-ab &           & $\bullet$ & $\bullet$ &           \\
+%                    & Name-pl-ab &           & $\bullet$ & $\bullet$ &           \\
+%                    & name-pl-ab &           & $\bullet$ & $\bullet$ &           \\
+%
+%    \addlinespace
+%    Font            & namefont   & $\bullet$ & $\bullet$ &           &           \\
+%    options         & reffont    & $\bullet$ & $\bullet$ &           &           \\
+%                    & reffont-in & $\bullet$ & $\bullet$ &           &           \\
+%    \bottomrule
+%   \end{tabular}
+%   \caption{Reference format options and their scopes}
+%   \zlabel{tab:reference-format}
+% \end{table}
+%
+%
+% The package itself places the default setup for reference formatting at low
+% precedence levels, and the users can easily and conveniently override them
+% as desired.  Indeed, I expect most of the users' needs to be normally
+% achievable with the general options and type-specific options, since
+% references will normally be typeset in a single language (the document's
+% main language) and, hence, multiple translations don't need to be provided.
+%
+% Understanding the role of each of these reference format options is likely
+% eased by some visual schemes of how \pkg{zref-clever} builds a reference
+% based on the labels' data and the value of these options. Take a
+% \texttt{ref} to be that which a standard \LaTeX{} \cs{ref} would typeset.  A
+% \pkg{zref-clever} ``reference block'', or \texttt{ref-block}, is constructed
+% as:
+%
+% \begin{quote}
+%   \reffmt{ref-block} \(\equiv\)
+%
+%   \reffmt{refpre} \reffmt{refpre-in} \reffmt{ref} \reffmt{refpos-in}
+%   \reffmt{refpos}
+% \end{quote}
+%
+% Where the difference between \texttt{refpre} and \texttt{refpos}, with
+% regard to \texttt{refpre-in} and \texttt{refpos-in} is that the later are
+% included in the reference hyperlink, whereas the former are not.
+%
+% A \texttt{ref-block} is built for \emph{each} label given as argument to
+% \cs{zcref}.  When the \meta{labels} argument is comprised of multiple
+% labels, each ``reference type group'', or \texttt{type-group} is potentially
+% made from the combination of single reference blocks, ``reference block
+% pairs'', ``reference block lists'', or ``reference block ranges'', where
+% each is respectively built as:
+%
+% \begin{quote}
+%   \reffmt{type-group} is a combination of:
+% \end{quote}
+%
+% \begin{quote}
+%   \reffmt{ref-block}
+% \end{quote}
+%
+% \begin{quote}
+%   \reffmt{ref-block1} \reffmt{pairsep} \reffmt{ref-block2}
+% \end{quote}
+%
+% \begin{quote}
+%   \reffmt{ref-block1} \reffmt{listsep} \reffmt{ref-block2} \reffmt{listsep}
+%   \reffmt{ref-block3} \dots{} \par \qquad \dots{}\reffmt{ref-blockN-1}
+%   \reffmt{lastsep} \reffmt{ref-blockN}
+% \end{quote}
+%
+% \begin{quote}
+%   \reffmt{ref-block1} \reffmt{rangesep} \reffmt{ref-blockN}
+% \end{quote}
+%
+% To complete a ``type-block'', a \texttt{type-group} only needs to be
+% accompanied by the ``type name'':
+%
+% \begin{quote}
+%   \reffmt{type-block} \(\equiv\)
+%
+%   \reffmt{type-name} \reffmt{namesep} \reffmt{type-group}
+% \end{quote}
+%
+% The \texttt{type-name} is determined not by one single reference format
+% option but by the appropriate one among the \opt{[Nn]ame-} options according
+% to the composition of \texttt{type-group} and the general options.  The
+% reference format name options are eight in total: \opt{Name-sg},
+% \opt{name-sg}, \opt{Name-pl}, \opt{name-pl}, \opt{Name-sg-ab},
+% \opt{name-sg-ab}, \opt{Name-pl-ab}, and \opt{name-pl-ab}.  The initial
+% uppercase ``\texttt{N}'' signals the capitalized form of the type name.  The
+% \texttt{-sg} suffix stands for singular, while \texttt{-pl} for plural.  The
+% \texttt{-ab} is appended to the abbreviated type name form options.  When
+% setting up a type, not necessarily all forms need to be provided.
+% \pkg{zref-clever} will always use the non-abbreviated form as a fallback to
+% the abbreviated one, if the later is not available.  Hence, if a reference
+% type is not intended to be used with abbreviated names (the most common
+% case), only the basic four forms are needed.  Besides that, if you are using
+% the \opt{cap} option, only the capitalized forms will ever be required by
+% \cs{zcref}, so you can get away setting only \opt{Name-sg} and
+% \opt{Name-pl}.  You should not do the contrary though, and provide only the
+% non-capitalized forms because, even if you are using the \opt{nocap} option,
+% the capitalized forms will be still required for \opt{capfirst} and \opt{S}
+% options to work.  Whatever the case may be, you need not worry too much
+% about being remiss in this area: if \cs{zcref} does lack a name form in any
+% given reference, it will let you know with a compilation warning (and will
+% typeset the usual missing reference ``sign'').
+%
+% A complete reference typeset by \cs{zcref} may be comprised of multiple
+% \texttt{type-block}s, in which case the ``type-block-group'' can also be
+% made of single type blocks, ``type block pairs'' or ``type block lists'',
+% where each is respectively built as:
+%
+% \begin{quote}
+%   \reffmt{type-block-group} is one of:
+% \end{quote}
+%
+% \begin{quote}
+%   \reffmt{type-block}
+% \end{quote}
+%
+% \begin{quote}
+%   \reffmt{type-block1} \reffmt{tpairsep} \reffmt{type-block2}
+% \end{quote}
+%
+% \begin{quote}
+%   \reffmt{type-block1} \reffmt{tlistsep} \reffmt{type-block2}
+%   \reffmt{tlistsep} \reffmt{type-block3} \dots{} \par \qquad \dots{}
+%   \reffmt{type-blockN-1} \reffmt{tlastsep} \reffmt{type-blockN}
+% \end{quote}
+%
+% Finally, since \cs{zcref} can also receive an optional \opt{note}, its full
+% typeset output is built as:
+%
+% \begin{quote}
+%   A complete \reffmt{\cs{zcref}} reference:
+% \end{quote}
+%
+% \begin{quote}
+%   \reffmt{type-block-group} \reffmt{notesep} \reffmt{note}
+% \end{quote}
+%
+% Reference format options can yet be divided in two general categories: i)
+% ``string'' options, the ones which we have seen thus far, as ``building
+% blocks'' of the reference; and ii) ``font'' options, which control font
+% attributes of parts of the reference, namely \opt{namefont}, \opt{reffont},
+% and \opt{reffont-in}.  These options set the font, respectively, for the
+% \texttt{type-name}, for the whole \texttt{ref-block}, and for the part of
+% \texttt{ref-block} which is included in the hyperlink (to set the font for
+% the whole reference, see the \opt{font} option in \zcref{sec:options}).
+% ``String'' options is not really a strict denomination for the first
+% category, but this set of options is intended exclusively for typesetting
+% material: things you expect to see in the output of your references.  The
+% ``font'' options, on the other hand, are intended exclusively for commands
+% that only change font attributes: style, family, shape, weight, size, color,
+% etc.  In either case, anything other than their intended uses is not
+% supported.
+%
+% Finally, a comment about the internal ``fallback'' reference format values
+% mentioned above.  These ``last resort'' option values are required by
+% \pkg{zref-clever} for a clear particular case: if the user loads either
+% \pkg{babel} or \pkg{polyglossia}, or explicitly sets a language, with a
+% language that \pkg{zref-clever} does not know and has no dictionary for, it
+% cannot guess what language that is, and thus has to provide some reasonable
+% ``language agnostic'' default, at least for the options for which this makes
+% sense (all the ``string'' options, except for the \texttt{[Nn]ame-} ones).
+% Users do not need to have access to this scope, since they know the language
+% of their document, or know the values they want for those options, and can
+% set them as general options, type-specific options, or language options
+% through the user interface provided for the purpose.  But the ``fallback''
+% options are documented here so that you can recognize when you are getting
+% these values and change them appropriately as desired.  Though hopefully
+% reasonable, they may not be what you want.  The ``fallback'' option values
+% are the following:
+%
+% \begin{verbatim}
+%     tpairsep  = {, } ,
+%     tlistsep  = {, } ,
+%     tlastsep  = {, } ,
+%     notesep   = { } ,
+%     namesep   = {\nobreakspace} ,
+%     pairsep   = {, } ,
+%     listsep   = {, } ,
+%     lastsep   = {, } ,
+%     rangesep  = {\textendash} ,
+%     refpre    = {} ,
+%     refpos    = {} ,
+%     refpre-in = {} ,
+%     refpos-in = {} ,
+% \end{verbatim}
+%
 %
 % \section{Internationalization}
 % \zlabel{sec:internationalization}
@@ -500,11 +764,34 @@
 % language-specific values, or ``translations''.
 %
 % As long as the language is declared and \pkg{zref-clever} has a built-in
-% dictionary for it, most use cases will likely be covered by the \opt{lang}
-% option (see \zcref{sec:options}), and its values \texttt{main} and
-% \texttt{current}.  \pkg{zref-clever} has built-in dictionaries for the
-% languages listed in \zcref{tab:languages-and-aliases}, which also includes a
-% the declared aliases to those languages.
+% ``dictionary'' for it, most use cases will likely be covered by the
+% \opt{lang} option (see \zcref{sec:options}), and its values \texttt{main}
+% and \texttt{current}.  When the \opt{lang} option is set to \texttt{main} or
+% \texttt{current}, \pkg{zref-check} will use, respectively, the \emph{main}
+% or \emph{current} language of the document, as defined by \pkg{babel} or
+% \pkg{polyglossia}.\footnote{Technically, \pkg{zref-clever} uses
+% \cs{bbl@main@language} and \cs{languagename} for \pkg{babel}, and
+% \cs{mainbabelname} and \cs{babelname} for \pkg{polyglossia}, which boils
+% down to \pkg{zref-clever} always using \emph{\pkg{babel} names} internally,
+% regardless of which language package is in use.  Indeed, an acquainted user
+% will note that \zcref{tab:languages-and-aliases} contains only \pkg{babel}
+% language names.}  ``Use'' here means: when language-specific reference
+% format options are needed by \cs{zcref} (see \zcref{sec:reference-format}),
+% it uses the language name as set by \pkg{babel} or \pkg{polyglossia} to
+% search for values for these options.  Users can also set \opt{lang} to a
+% specific language directly, in which case \pkg{babel} and \pkg{polyglossia}
+% are disregarded.  Hence, the \opt{lang} option and \pkg{babel} and
+% \pkg{polyglossia} languages determine what \cs{zcref} \emph{looks for}, what
+% it finds (or not) depends exclusively on the internal settings of
+% \pkg{zref-clever}.  And the package provides a number of built-in
+% ``dictionaries'', for the languages listed in
+% \zcref{tab:languages-and-aliases}, which also includes the declared aliases
+% to those languages.  But if that is not the case, or if you'd like to adjust
+% the default language-specific option values, this can be done with
+% \cs{zcDeclareLanguage}, \cs{zcDeclareLanguageAlias}, and
+% \cs{zcLanguageSetup}.\footnote{Needless to say, if you'd like to contribute
+% a dictionary upstream at \url{https://github.com/gusbrs/zref-clever/issues},
+% that is much welcome.}
 %
 % \begin{table}
 %   \centering
@@ -547,11 +834,6 @@
 %   \zlabel{tab:languages-and-aliases}
 % \end{table}
 %
-%
-%
-%
-%
-%
 % \begin{function}{\zcDeclareLanguage}
 %   Declare a new language for use with \pkg{zref-clever}.  If \meta{language}
 %   is already known, just warn.  \cs{zcDeclareLanguage} is preamble only.
@@ -576,9 +858,33 @@
 %     \cs{zcLanguageSetup} \marg{language} \marg{options}
 %   \end{syntax}
 %   Sets language-specific reference format options for \meta{language} (see
-%   \zcref{sec:reference-format}). \meta{language} must be already known to
-%   \pkg{zref-clever}.  \cs{zcLanguageSetup} is preamble only.
+%   \zcref{sec:reference-format}), be they type-specific or
+%   not. \meta{language} must be already known to \pkg{zref-clever}.  Besides
+%   reference format options, \cs{zcLanguageSetup} knows the \texttt{type}
+%   key, which works like a ``switch'' affecting the options \emph{following}
+%   it.  For example, if \texttt{type=foo} is given in \meta{options} the
+%   options following it will be set as type-specific options for reference
+%   type \texttt{foo}.  Options given in \meta{options} before the first
+%   \texttt{type=\meta{type}} occurrence (or after \texttt{type} with an empty
+%   value) are set as ``default translations'' (that is, not type-specific,
+%   but language-specific options).  \cs{zcLanguageSetup} is preamble only.
 % \end{function}
+%
+% \vspace{\baselineskip}
+%
+% \pkg{zref-clever}'s ``dictionaries'' are loaded sparingly and lazily.  A
+% dictionary for a single language -- that specified by user options in the
+% preamble, which by default is the main document language -- is loaded at
+% \texttt{begindocument}.  If any other dictionary is needed, it is loaded on
+% the fly, if and when required.  Of course, in either case, conditioned on
+% availability.  This is done because the presumed common use case for
+% \pkg{zref-clever} is to use a single language for cross-references (the
+% ``main'' one), even in many multi-language documents scenarios.  Hence, even
+% the ``loaded languages'' set, from \pkg{babel} or \pkg{polyglossia}, would
+% tend to be an overshoot of the actual needs.  So, \pkg{zref-clever} loads as
+% little as possible, but allows for convenient on the fly loading of
+% dictionaries if the values are indeed required, without users having to
+% worry about it at all.
 %
 %
 % \section{Usage examples}
@@ -1047,53 +1353,13 @@
 %
 %
 % \subsection{Reference format}
-% \zlabel{impl:sec:reference-format}
 %
-% Formatting how the reference is to be typeset is, quite naturally, a big
-% part of the user interface of \pkg{zref-clever}.  In this area, we tried to
-% balance ``flexibility'' and ``user friendliness''.  But the former does
-% place a big toll overall, since there are indeed many places where tweaking
-% may be desired, and the settings may depend on at least two important
-% dimensions of variation: the reference type and the language.  Combination
-% of those necessarily makes for a large set of possibilities.  Hence, the
-% attempt here is to provide a rich set of ``handles'' for fine tuning the
-% reference format but, at the same time, do not \emph{require} detailed setup
-% by the users, unless they really want it.
-%
-% With that in mind, we have settled with an user interface for reference
-% formatting which allows settings to be done in different scopes, with more
-% or less overarching effects, and some precedence rules to regulate the
-% relation of settings given in each of these scopes.  There are four scopes
-% in which reference formatting can be specified by the user, in the following
-% precedence order: i) as general \emph{options}; ii) as \emph{type-specific
-% options}; iii) as \emph{language-specific and type-specific translations};
-% and iv) as \emph{default translations} (that is, language-specific but not
-% type-specific).  Besides those, there's actually a fifth \emph{internal}
-% scope, with the least priority of all, a ``fallback'', for the cases where
-% it is meaningful to provide some value, even for an unknown language. These
-% precedence rules are handled / enforced in \cs{@@_get_ref_string:nN},
+% For a general discussion on the precedence rules for reference format
+% options, see Section ``Reference format'' in the User manual.  Internally,
+% these precedence rules are handled / enforced in \cs{@@_get_ref_string:nN},
 % \cs{@@_get_ref_font:nN}, and \cs{@@_type_name_setup:} which are the basic
-% functions to retrieve proper values for reference format settings.
-%
-% General ``options'' (i) can be given by the user in the optional argument of
-% \cs{zcref}, but just as well in \cs{zcsetup} or as package options at
-% load-time (see \zcref{impl:sec:reference-options}).  ``Type-specific
-% options'' (ii) are handled by \cs{zcRefTypeSetup}.  ``Language-specific
-% translations'', be they ``type-specific'' (iii) or ``default'' (iv) have
-% their user interface in \cs{zcLanguageSetup}, and have their values
-% populated by the package's dictionaries.  The ``fallback'' settings are
-% stored in \cs{g_@@_fallback_dict_prop}.
-%
-% Not all reference format specifications can be given in all of these
-% scopes.  Some of them can't be type-specific, others must be type-specific,
-% so the set available in each scope depends on the pertinence of the case.
-%
-% The package itself places the default setup for reference formatting at low
-% precedence levels, and the users can easily and conveniently override them
-% as desired.  Indeed, I expect most of the users' needs to be normally
-% achievable with the general options and type-specific options, since
-% references will normally be typeset in a single language (the document's
-% main language) and, hence, multiple translations don't need to be provided.
+% functions to retrieve proper values for reference format settings.  The
+% ``fallback'' settings are stored in \cs{g_@@_fallback_dict_prop}.
 %
 %
 % \begin{variable}
@@ -4608,20 +4874,19 @@
 %
 %
 % Finally, a couple of functions for retrieving options values, according to
-% the relevant precedence rules (see \zcref{impl:sec:reference-format}).  They
-% both receive an \meta{option} as argument, and store the retrieved value in
-% \meta{tl variable}.  Though these are mostly general functions (for a
-% change\dots{}), they are not completely so, they rely on the current state
-% of \cs{l_@@_label_type_a_tl}, as set during the processing of the label
-% stack.  This could be easily generalized, of course, but I don't think it is
-% worth it, \cs{l_@@_label_type_a_tl} is indeed what we want in all practical
-% cases.  The difference between \cs{@@_get_ref_string:nN} and
-% \cs{@@_get_ref_font:nN} is the kind of option each should be used for.
-% \cs{@@_get_ref_string:nN} is meant for the general options, and attempts to
-% find values for them in all precedence levels (four plus ``fallback'').
-% \cs{@@_get_ref_font:nN} is intended for ``font'' options, which cannot be
-% ``language-specific'', thus for these we just search general options and
-% type options.
+% the relevant precedence rules.  They both receive an \meta{option} as
+% argument, and store the retrieved value in \meta{tl variable}.  Though these
+% are mostly general functions (for a change\dots{}), they are not completely
+% so, they rely on the current state of \cs{l_@@_label_type_a_tl}, as set
+% during the processing of the label stack.  This could be easily generalized,
+% of course, but I don't think it is worth it, \cs{l_@@_label_type_a_tl} is
+% indeed what we want in all practical cases.  The difference between
+% \cs{@@_get_ref_string:nN} and \cs{@@_get_ref_font:nN} is the kind of option
+% each should be used for.  \cs{@@_get_ref_string:nN} is meant for the general
+% options, and attempts to find values for them in all precedence levels (four
+% plus ``fallback'').  \cs{@@_get_ref_font:nN} is intended for ``font''
+% options, which cannot be ``language-specific'', thus for these we just
+% search general options and type options.
 %
 % \begin{macro}{\@@_get_ref_string:nN}
 %   \begin{syntax}
