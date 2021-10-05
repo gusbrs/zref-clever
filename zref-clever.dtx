@@ -433,6 +433,34 @@
 % they are here.  Use them with caution though.  Since these options only
 % affect how labels are set, they are not available in \cs{zcref}.
 %
+% \DescribeOption{\raisebox{.4em}{\dbend}\ currentcounter} %
+% \LaTeX{}'s \cs{refstepcounter} sets two variables which potentially affect
+% the \cs{label} (or \cs{zlabel}) set after it: the current label
+% (\cs{@currentlabel}), and the current counter (\cs{@currentcounter}).
+% Actually, traditionally, only the current label was thus stored, the current
+% counter was added to \cs{refstepcounter} somewhat recently (2020-10-01
+% release).  But, since \pkg{zref-clever} relies heavily on the information of
+% what the current counter is, it must store that information with the label,
+% as it does.  As long as the document element we are trying to refer to uses
+% the standard machinery of \cs{refstepcounter} we are on solid ground and can
+% retrieve the correct information.  However, it is not always ensured that
+% \cs{@currentcounter} is kept up to date.  For example, packages which handle
+% labels specially, for one reason or another, may or may not set
+% \cs{@currentcounter} as required.  Considering the addition of
+% \cs{@currentcounter} to \cs{refstepcounter} itself is not that old, it is
+% likely that in a good number of places a reliable \cs{@currentcounter} is
+% not really in place.  Therefore, it may happen we need to tell
+% \pkg{zref-clever} what the current counter is in certain circumstances, and
+% that's what \opt{currentcounter} does.  The same as with the previous two
+% options, this is not really an ``user choice'' kind of option, but a way to
+% tell \pkg{zref-clever} a piece of information it has no means to retrieve
+% automatically.  The setting must correspond to the actual ``current
+% counter'', meaning here ``the counter underlying \cs{@currentlabel}'' in a
+% given situation.  Its default value is, quite naturally,
+% \cs{@currentcounter}.  Since this option only affects how labels are set, it
+% is not available in \cs{zcref}.
+%
+%
 %
 % \section{Reference types}
 % \zlabel{sec:reference-types}
@@ -951,7 +979,6 @@
 %    \begin{macrocode}
 \RequirePackage { zref-base }
 \RequirePackage { zref-user }
-\RequirePackage { zref-counter }
 \RequirePackage { zref-abspage }
 \RequirePackage { l3keys2e }
 %    \end{macrocode}
@@ -964,12 +991,24 @@
 % \pkg{zref} to do so.
 %
 % Some basic properties are handled by \pkg{zref} itself, or some of its
-% modules.  The \texttt{page} and \texttt{counter} properties are respectively
-% provided by modules \pkg{zref-base} and \pkg{zref-counter}.  The
+% modules.  The \texttt{page} property is provided by \pkg{zref-base}, while
 % \pkg{zref-abspage} provides the \texttt{abspage} property which gives us a
 % safe and easy way to sort labels for page references.
 %
-% But the reference itself, stored by \pkg{zref-base} in the \texttt{default}
+% The \texttt{counter} property, in most cases, will be just the kernel's
+% \cs{@currentcounter}, set by \cs{refstepcounter}.  However, not everywhere
+% is it assured that \cs{@currentcounter} gets updated as it should, so we
+% need to have some means to manually tell \pkg{zref-clever} what the current
+% counter actually is.  This is done with the \opt{currentcounter} option, and
+% stored in \cs{l_@@_current_counter_tl}, whose default is
+% \cs{@currentcounter}.
+%
+%    \begin{macrocode}
+\zref@newprop { zc@counter } { \l_@@_current_counter_tl }
+\zref@addprop \ZREF@mainlist { zc@counter }
+%    \end{macrocode}
+%
+% The reference itself, stored by \pkg{zref-base} in the \texttt{default}
 % property, is somewhat a disputed real estate.  In particular, the use of
 % \cs{labelformat} (previously from \pkg{varioref}, now in the kernel) will
 % include there the reference ``prefix'' and complicate the job we are trying
@@ -979,7 +1018,8 @@
 % section `ltxref.dtx'.  We just drop the \cs{p@...} prefix.
 %
 %    \begin{macrocode}
-\zref@newprop { zc@thecnt } { \use:c { the \@currentcounter } }
+\zref@newprop { zc@thecnt }
+  { \use:c { the \l_@@_current_counter_tl } }
 \zref@addprop \ZREF@mainlist { zc@thecnt }
 %    \end{macrocode}
 %
@@ -998,12 +1038,13 @@
 %    \begin{macrocode}
 \zref@newprop { zc@type }
   {
-    \prop_if_in:NVTF \l_@@_counter_type_prop \@currentcounter
+    \exp_args:NNe \prop_if_in:NnTF \l_@@_counter_type_prop
+      \l_@@_current_counter_tl
       {
-        \exp_args:NNe \prop_item:Nn
-          \l_@@_counter_type_prop { \@currentcounter }
+        \exp_args:NNe \prop_item:Nn \l_@@_counter_type_prop
+          { \l_@@_current_counter_tl }
       }
-      { \@currentcounter }
+      { \l_@@_current_counter_tl }
   }
 \zref@addprop \ZREF@mainlist { zc@type }
 %    \end{macrocode}
@@ -1016,7 +1057,8 @@
 % use \cs{c@}\meta{counter}, which contains the counter's numerical value (see
 % `texdoc source2e', section `ltcounts.dtx').
 %    \begin{macrocode}
-\zref@newprop { zc@cntval } [0] { \int_use:c { c@ \@currentcounter } }
+\zref@newprop { zc@cntval } [0]
+  { \int_use:c { c@ \l_@@_current_counter_tl } }
 \zref@addprop \ZREF@mainlist { zc@cntval }
 \zref@newprop* { zc@pgval } [0] { \int_use:c { c@page } }
 \zref@addprop \ZREF@mainlist { zc@pgval }
@@ -1065,8 +1107,9 @@
 % The procedure below examines a set of counters, those included in
 % \cs{l_@@_counter_resetters_seq}, and for each of them retrieves the set of
 % counters it resets, as stored in \cs{cl@}\meta{counter}, looking for the
-% counter for which we are trying to set a label (\cs{@currentcounter}, passed
-% as an argument to the functions).  There is one relevant caveat to this
+% counter for which we are trying to set a label
+% (\cs{\l_@@_current_counter_tl}, by default \cs{@currentcounter}, passed as
+% an argument to the functions).  There is one relevant caveat to this
 % procedure: \cs{l_@@_counter_resetters_seq} is populated by hand with the
 % ``usual suspects'', there is no way (that I know of) to ensure it is
 % exhaustive.  However, it is not that difficult to create a reasonable
@@ -1135,8 +1178,8 @@
 % \url{https://tex.stackexchange.com/q/611370/#comment1529282_611385}, thanks
 % Enrico Gregorio, aka `egreg').
 %    \begin{macrocode}
-\cs_generate_variant:Nn \@@_get_enclosing_counters:n { V , e }
-\cs_generate_variant:Nn \@@_get_enclosing_counters_value:n { V , e }
+\cs_generate_variant:Nn \@@_get_enclosing_counters:n { e }
+\cs_generate_variant:Nn \@@_get_enclosing_counters_value:n { e }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1185,9 +1228,9 @@
 % properties, and add them to the \texttt{main} property list.
 %    \begin{macrocode}
 \zref@newprop { zc@enclcnt }
-  { \@@_get_enclosing_counters:V \@currentcounter }
+  { \@@_get_enclosing_counters:e \l_@@_current_counter_tl }
 \zref@newprop { zc@enclval }
-  { \@@_get_enclosing_counters_value:V \@currentcounter }
+  { \@@_get_enclosing_counters_value:e \l_@@_current_counter_tl }
 \zref@addprop \ZREF@mainlist { zc@enclcnt }
 \zref@addprop \ZREF@mainlist { zc@enclval }
 %    \end{macrocode}
@@ -2592,6 +2635,25 @@
         enumiii = enumii  ,
         enumiv  = enumiii ,
       } ,
+  }
+%    \end{macrocode}
+%
+%
+% \subsubsection*{\opt{currentcounter} option}
+%
+% \cs{l_@@_current_counter_tl} is pretty much the starting point of all of the
+% data specification for label setting done by \pkg{zref} with our setup for
+% it.  It exists because we must provide some ``handle'' to specify the
+% current counter for packages/features that do not set \cs{@currentcounter}
+% appropriately.
+%
+%    \begin{macrocode}
+\tl_new:N \l_@@_current_counter_tl
+\keys_define:nn { zref-clever / label }
+  {
+    currentcounter .tl_set:N = \l_@@_current_counter_tl ,
+    currentcounter .value_required:n = true ,
+    currentcounter .initial:n = \@currentcounter ,
   }
 %    \end{macrocode}
 %
