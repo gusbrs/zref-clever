@@ -595,12 +595,11 @@
 % \pkg{zref-clever} ``reference block'', or \texttt{ref-block}, is constructed
 % as:
 %
-% \begin{quote}
-%   \reffmt{ref-block} \(\equiv\)
-%
-%   \reffmt{refpre} \reffmt{refpre-in} \reffmt{ref} \reffmt{refpos-in}
+% \begin{refformat}
+% \item \reffmt{ref-block} \(\equiv\)
+% \item \reffmt{refpre} \reffmt{refpre-in} \reffmt{ref} \reffmt{refpos-in}
 %   \reffmt{refpos}
-% \end{quote}
+% \end{refformat}
 %
 % Where the difference between \texttt{refpre} and \texttt{refpos}, with
 % regard to \texttt{refpre-in} and \texttt{refpos-in} is that the later are
@@ -613,36 +612,23 @@
 % pairs'', ``reference block lists'', or ``reference block ranges'', where
 % each is respectively built as:
 %
-% \begin{quote}
-%   \reffmt{type-group} is a combination of:
-% \end{quote}
-%
-% \begin{quote}
-%   \reffmt{ref-block}
-% \end{quote}
-%
-% \begin{quote}
-%   \reffmt{ref-block1} \reffmt{pairsep} \reffmt{ref-block2}
-% \end{quote}
-%
-% \begin{quote}
-%   \reffmt{ref-block1} \reffmt{listsep} \reffmt{ref-block2} \reffmt{listsep}
-%   \reffmt{ref-block3} \dots{} \par \qquad \dots{}\reffmt{ref-blockN-1}
-%   \reffmt{lastsep} \reffmt{ref-blockN}
-% \end{quote}
-%
-% \begin{quote}
-%   \reffmt{ref-block1} \reffmt{rangesep} \reffmt{ref-blockN}
-% \end{quote}
+% \begin{refformat}
+% \item \reffmt{type-group} is a combination of:
+% \item \reffmt{ref-block}
+% \item \reffmt{ref-block1} \reffmt{pairsep} \reffmt{ref-block2}
+% \item \reffmt{ref-block1} \reffmt{listsep} \reffmt{ref-block2}
+%   \reffmt{listsep} \reffmt{ref-block3} \dots{} \par \qquad
+%   \dots{}\reffmt{ref-blockN-1} \reffmt{lastsep} \reffmt{ref-blockN}
+% \item \reffmt{ref-block1} \reffmt{rangesep} \reffmt{ref-blockN}
+% \end{refformat}
 %
 % To complete a ``type-block'', a \texttt{type-group} only needs to be
 % accompanied by the ``type name'':
 %
-% \begin{quote}
-%   \reffmt{type-block} \(\equiv\)
-%
-%   \reffmt{type-name} \reffmt{namesep} \reffmt{type-group}
-% \end{quote}
+% \begin{refformat}
+% \item \reffmt{type-block} \(\equiv\)
+% \item \reffmt{type-name} \reffmt{namesep} \reffmt{type-group}
+% \end{refformat}
 %
 % The \texttt{type-name} is determined not by one single reference format
 % option but by the appropriate one among the \opt{[Nn]ame-} options according
@@ -673,34 +659,22 @@
 % made of single type blocks, ``type block pairs'' or ``type block lists'',
 % where each is respectively built as:
 %
-% \begin{quote}
-%   \reffmt{type-block-group} is one of:
-% \end{quote}
-%
-% \begin{quote}
-%   \reffmt{type-block}
-% \end{quote}
-%
-% \begin{quote}
-%   \reffmt{type-block1} \reffmt{tpairsep} \reffmt{type-block2}
-% \end{quote}
-%
-% \begin{quote}
-%   \reffmt{type-block1} \reffmt{tlistsep} \reffmt{type-block2}
+% \begin{refformat}
+% \item \reffmt{type-block-group} is one of:
+% \item \reffmt{type-block}
+% \item \reffmt{type-block1} \reffmt{tpairsep} \reffmt{type-block2}
+% \item \reffmt{type-block1} \reffmt{tlistsep} \reffmt{type-block2}
 %   \reffmt{tlistsep} \reffmt{type-block3} \dots{} \par \qquad \dots{}
 %   \reffmt{type-blockN-1} \reffmt{tlastsep} \reffmt{type-blockN}
-% \end{quote}
+% \end{refformat}
 %
 % Finally, since \cs{zcref} can also receive an optional \opt{note}, its full
 % typeset output is built as:
 %
-% \begin{quote}
-%   A complete \reffmt{\cs{zcref}} reference:
-% \end{quote}
-%
-% \begin{quote}
-%   \reffmt{type-block-group} \reffmt{notesep} \reffmt{note}
-% \end{quote}
+% \begin{refformat}
+% \item A complete \reffmt{\cs{zcref}} reference:
+% \item \reffmt{type-block-group} \reffmt{notesep} \reffmt{note}
+% \end{refformat}
 %
 % Reference format options can yet be divided in two general categories: i)
 % ``string'' options, the ones which we have seen thus far, as ``building
