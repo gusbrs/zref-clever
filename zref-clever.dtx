@@ -3409,13 +3409,30 @@
                 \tl_if_empty_p:V \l_@@_label_enclcnt_a_tl
               }
               {
-                \exp_args:NNx \tl_if_in:NnTF
-                  \l_@@_label_enclcnt_b_tl
-                  { {\zref@extractdefault {#1} { counter } { }} }
+                \int_zero:N \l_tmpb_int
+                \tl_map_inline:Nn \l_@@_label_enclcnt_b_tl
                   {
-                    \bool_set_true:N \l_@@_sort_decided_bool
-                    \sort_return_same:
+                    \int_incr:N \l_tmpb_int
+                    \exp_args:Nnx \tl_if_eq:nnT {##1}
+                      { \zref@extractdefault {#1} { zc@counter } { } }
+                      {
+                        \tl_map_break:n
+                          {
+                            \int_show:N \l_tmpb_int
+                            \int_compare:nNnTF
+                              { \zref@extractdefault {#1} { zc@cntval } { } }
+                                >
+                              {
+                                \tl_item:Nn \l_@@_label_enclval_b_tl
+                                  { \l_tmpb_int }
+                              }
+                              { \sort_return_swapped: }
+                              { \sort_return_same:    }
+                            \bool_set_true:N \l_@@_sort_decided_bool
+                          }
+                      }
                   }
+                \bool_if:NF \l_@@_sort_decided_bool
                   {
                     \msg_warning:nnnn { zref-clever }
                       { counters-not-nested } {#1} {#2}
@@ -3430,13 +3447,34 @@
                     \tl_if_empty_p:V \l_@@_label_enclcnt_b_tl
                   }
                   {
-                    \exp_args:NNx \tl_if_in:NnTF
-                      \l_@@_label_enclcnt_a_tl
-                      { {\zref@extractdefault {#2} { counter } { }} }
+                    \int_zero:N \l_tmpa_int
+                    \tl_map_inline:Nn \l_@@_label_enclcnt_a_tl
                       {
-                        \bool_set_true:N \l_@@_sort_decided_bool
-                        \sort_return_swapped:
+                        \int_incr:N \l_tmpa_int
+                        \exp_args:Nnx \tl_if_eq:nnT {##1}
+                          { \zref@extractdefault {#2} { zc@counter } { } }
+                          {
+                            \tl_map_break:n
+                              {
+                                \int_compare:nNnTF
+                                  {
+                                    \tl_item:Nn
+                                      \l_@@_label_enclval_a_tl
+                                      { \l_tmpa_int }
+                                  }
+                                    <
+                                  {
+                                    \zref@extractdefault {#2}
+                                      { zc@cntval } { }
+                                  }
+                                  { \sort_return_same:    }
+                                  { \sort_return_swapped: }
+                                \bool_set_true:N
+                                  \l_@@_sort_decided_bool
+                              }
+                          }
                       }
+                    \bool_if:NF \l_@@_sort_decided_bool
                       {
                         \msg_warning:nnnn { zref-clever }
                           { counters-not-nested } {#1} {#2}
