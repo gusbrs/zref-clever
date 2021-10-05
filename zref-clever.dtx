@@ -5029,7 +5029,7 @@
 %
 %
 %
-% \section{Special handling}
+% \section{Compatibility}
 %
 % This section is meant to aggregate any ``special handling'' needed for
 % \LaTeX{} kernel features, document classes, and packages, needed for
@@ -5059,6 +5059,52 @@
 % what interests us here is pretty much the same; see also the \pkg{appendix}
 % package).
 %
+%
+%
+% \subsection{\pkg{listings} package}
+%
+%
+%    \begin{macrocode}
+\AddToHook { begindocument }
+  {
+    \@ifpackageloaded { listings }
+      {
+        \zcsetup
+          {
+            countertype =
+              {
+                lstlisting = listing ,
+                lstnumber = line ,
+              } ,
+            counterresetby = { lstnumber = lstlisting } ,
+          }
+        \lst@AddToHook { Init }
+          {
+%    \end{macrocode}
+% Set (also) a \cs{zlabel} with the label received in the \texttt{label=}
+% option from the \texttt{lstlisting} environment.
+%    \begin{macrocode}
+            \tl_if_empty:NF \lst@label
+              { \zlabel { \lst@label } }
+%    \end{macrocode}
+% The correct place to set \texttt{currentcounter} to \texttt{lstnumber} is
+% indeed the \texttt{Init} hook, since \pkg{listings} itself sets
+% \cs{@currentlabel} to \cs{thelstnumber} in the same hook.  See section
+% ``Line numbers'' of 'texdoc listings-devel' (the \file{.dtx}), and search
+% for the definition of macro \cs{c@lstnumber}.  Note that \pkg{listings}
+% \emph{does use} \cs{refstepcounter}\texttt{\{lstnumber\}}, but does so in
+% the \texttt{EveryPar} hook, and there must be some grouping involved such
+% that \cs{@currentcounter} ends up not being visible to the label.  Indeed,
+% the fact that \pkg{listings} manually sets \cs{@currentlabel} to
+% \cs{thelstnumber} is a signal that the work of \cs{refstepcounter} is being
+% restrained somehow.
+%    \begin{macrocode}
+            \zcsetup { currentcounter = lstnumber }
+          }
+      }
+      {}
+  }
+%    \end{macrocode}
 %
 %
 % \subsection{\pkg{enumitem} package}
