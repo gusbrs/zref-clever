@@ -2709,8 +2709,11 @@
 %    \begin{macrocode}
 \keys_define:nn { }
   {
-    zref-clever / zcsetup .inherit:n = zref-clever / label ,
-    zref-clever / zcsetup .inherit:n = zref-clever / reference ,
+    zref-clever / zcsetup .inherit:n =
+      {
+        zref-clever / label ,
+        zref-clever / reference ,
+      }
   }
 %    \end{macrocode}
 %
