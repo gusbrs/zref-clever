@@ -3323,8 +3323,8 @@
                 % Neither label has a type.  We can't do much of meaningful
                 % here, but if it's the same counter, compare it.
                 \exp_args:Nxx \tl_if_eq:nnTF
-                  { \zref@extractdefault {#1} { counter } { } }
-                  { \zref@extractdefault {#2} { counter } { } }
+                  { \zref@extractdefault {#1} { zc@counter } { } }
+                  { \zref@extractdefault {#2} { zc@counter } { } }
                   {
                     \int_compare:nNnTF
                       { \zref@extractdefault {#1} { zc@cntval } { -1 } }
@@ -3384,8 +3384,8 @@
           }
           {
             \exp_args:Nxx \tl_if_eq:nnTF
-              { \zref@extractdefault {#1} { counter } { } }
-              { \zref@extractdefault {#2} { counter } { } }
+              { \zref@extractdefault {#1} { zc@counter } { } }
+              { \zref@extractdefault {#2} { zc@counter } { } }
               {
                 \bool_set_true:N \l_@@_sort_decided_bool
                 \int_compare:nNnTF
@@ -4881,8 +4881,8 @@
       }
       {
         \exp_args:Nxx \tl_if_eq:nnT
-          { \zref@extractdefault {#1} { counter } { } }
-          { \zref@extractdefault {#2} { counter } { } }
+          { \zref@extractdefault {#1} { zc@counter } { } }
+          { \zref@extractdefault {#2} { zc@counter } { } }
           {
             \exp_args:Nxx \tl_if_eq:nnT
               { \zref@extractdefault {#1} { zc@enclval } { } }
