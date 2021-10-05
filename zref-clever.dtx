@@ -51,13 +51,6 @@
 % Used in the documentation.
 \usepackage{zref-titleref}
 
-\NewDocumentCommand\opt{m}{\texttt{#1}}
-\definecolor{reffmtbox}{gray}{0.15}
-\definecolor{reffmtback}{gray}{0.85}
-\NewDocumentCommand\reffmt{m}{%
-  \fcolorbox{reffmtbox}{reffmtback}{%
-    \rule[-0.2\baselineskip]{0pt}{0.8\baselineskip}\texttt{#1}}}
-
 \MakeShortVerb{\|}
 
 \begin{document}
@@ -485,6 +478,23 @@
 % must be handled by \pkg{zref-clever} as an error (at least, if we try to
 % refer to it), usually a ``missing name'' error.
 %
+% \pkg{zref-clever} provides default settings for the following reference
+% types: \texttt{part}, \texttt{chapter}, \texttt{section},
+% \texttt{paragraph}, \texttt{appendix}, \texttt{page}, \texttt{line},
+% \texttt{figure}, \texttt{table}, \texttt{item}, \texttt{footnote},
+% \texttt{note}, \texttt{equation}, \texttt{theorem}, \texttt{lemma},
+% \texttt{corollary}, \texttt{proposition}, \texttt{definition},
+% \texttt{proof}, \texttt{result}, \texttt{remark}, \texttt{example},
+% \texttt{algorithm}, \texttt{listing}, \texttt{exercise}, \texttt{solution}.
+% Therefore, if you are using a language for which \pkg{zref-clever} has
+% built-in support (see \zcref{sec:internationalization}), these reference
+% types are available for use out-of-the-box.\footnote{There may be slight
+% availability differences depending on the language, but \pkg{zref-clever}
+% strives to keep this complete list available for the languages it has
+% built-in dictionaries.}  And, in any case, it is always easy to setup custom
+% reference types with \cs{zcRefTypeSetup} or \cs{zcLanguageSetup} (see
+% \zcref{sec:user-interface, sec:reference-format, sec:internationalization}).
+%
 % The association of a \emph{counter} to its \emph{type} is controlled by the
 % \opt{countertype} option.  As seen in its documentation, \pkg{zref-clever}
 % presumes the \emph{type} to be the same as the \emph{counter} unless
@@ -494,9 +504,9 @@
 % is from the perspective of \cs{zcref}, only the \emph{type} matters.  In
 % other words, how the reference is supposed to be typeset is determined at
 % the point the \emph{label} gets set.  In sum, they may be namesakes (or
-% not), but ``type'' is \emph{type} and ``counter'' is \emph{counter}.
+% not), but type is type and counter is counter.
 %
-% A \emph{reference type} can be associated with multiple counters because we
+% Indeed, a reference type can be associated with multiple counters because we
 % may want to refer to different document elements, with different
 % \emph{counters}, as a single \emph{type}, with a single name.  One prominent
 % case of this are sectioning commands.  \cs{section}, \cs{subsection}, and
@@ -520,6 +530,7 @@
 % \pkg{zref-clever} uses the \emph{type} to look for these options when it
 % needs one, and issues a compilation warning when it cannot find a suitable
 % value.
+%
 %
 %
 % \section{Reference format}
@@ -566,43 +577,43 @@
 % \begin{table}[htb]
 %   \centering
 %   \begin{tabular}{l>{\ttfamily}lcccc}
-%    \toprule
-%                    &    & General & Type    & Type-specific & Default      \\
-%                    &    & options & options & translations  & translations \\
-%                    &    & (i)     & (ii)    & (iii)         & (iv)         \\
+%     \toprule
+%                     &            & General & Type    & Type-specific & Default      \\
+%                     &            & options & options & translations  & translations \\
+%                     &            &   (i)   &  (ii)   &    (iii)      &    (iv)      \\
 %
-%    \midrule
-%    Necessarily not & tpairsep   & $\bullet$ &           &           & $\bullet$ \\
-%    type-specific   & tlistsep   & $\bullet$ &           &           & $\bullet$ \\
-%                    & tlastsep   & $\bullet$ &           &           & $\bullet$ \\
-%                    & notesep    & $\bullet$ &           &           & $\bullet$ \\
+%     \midrule
+%     Necessarily not & tpairsep   &    ●    &         &               &      ●       \\
+%     type-specific   & tlistsep   &    ●    &         &               &      ●       \\
+%                     & tlastsep   &    ●    &         &               &      ●       \\
+%                     & notesep    &    ●    &         &               &      ●       \\
 %
-%    \addlinespace
-%    Possibly        & namesep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-%    type-specific   & pairsep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-%                    & listsep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-%                    & lastsep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-%                    & rangesep   & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-%                    & refpre     & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-%                    & refpos     & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-%                    & refpre-in  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-%                    & refpos-in  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+%     \addlinespace
+%     Possibly        & namesep    &    ●    &    ●    &       ●       &      ●       \\
+%     type-specific   & pairsep    &    ●    &    ●    &       ●       &      ●       \\
+%                     & listsep    &    ●    &    ●    &       ●       &      ●       \\
+%                     & lastsep    &    ●    &    ●    &       ●       &      ●       \\
+%                     & rangesep   &    ●    &    ●    &       ●       &      ●       \\
+%                     & refpre     &    ●    &    ●    &       ●       &      ●       \\
+%                     & refpos     &    ●    &    ●    &       ●       &      ●       \\
+%                     & refpre-in  &    ●    &    ●    &       ●       &      ●       \\
+%                     & refpos-in  &    ●    &    ●    &       ●       &      ●       \\
 %
-%    \addlinespace
-%    Necessarily     & Name-sg    &           & $\bullet$ & $\bullet$ &           \\
-%    type-specific   & name-sg    &           & $\bullet$ & $\bullet$ &           \\
-%                    & Name-pl    &           & $\bullet$ & $\bullet$ &           \\
-%                    & name-pl    &           & $\bullet$ & $\bullet$ &           \\
-%                    & Name-sg-ab &           & $\bullet$ & $\bullet$ &           \\
-%                    & name-sg-ab &           & $\bullet$ & $\bullet$ &           \\
-%                    & Name-pl-ab &           & $\bullet$ & $\bullet$ &           \\
-%                    & name-pl-ab &           & $\bullet$ & $\bullet$ &           \\
+%     \addlinespace
+%     Necessarily     & Name-sg    &         &    ●    &       ●       &              \\
+%     type-specific   & name-sg    &         &    ●    &       ●       &              \\
+%                     & Name-pl    &         &    ●    &       ●       &              \\
+%                     & name-pl    &         &    ●    &       ●       &              \\
+%                     & Name-sg-ab &         &    ●    &       ●       &              \\
+%                     & name-sg-ab &         &    ●    &       ●       &              \\
+%                     & Name-pl-ab &         &    ●    &       ●       &              \\
+%                     & name-pl-ab &         &    ●    &       ●       &              \\
 %
-%    \addlinespace
-%    Font            & namefont   & $\bullet$ & $\bullet$ &           &           \\
-%    options         & reffont    & $\bullet$ & $\bullet$ &           &           \\
-%                    & reffont-in & $\bullet$ & $\bullet$ &           &           \\
-%    \bottomrule
+%     \addlinespace
+%     Font            & namefont   &    ●    &    ●    &               &              \\
+%     options         & reffont    &    ●    &    ●    &               &              \\
+%                     & reffont-in &    ●    &    ●    &               &              \\
+%     \bottomrule
 %   \end{tabular}
 %   \caption{Reference format options and their scopes}
 %   \zlabel{tab:reference-format}
@@ -891,7 +902,24 @@
 %
 % \section{Usage examples}
 %
+% This section gathers some usage examples of cases which may require some
+% \pkg{zref-clever} setup, and each item is set around a cross-reference
+% ``task'' we'd like to perform with \pkg{zref-clever}.
 %
+%
+%
+% \subsection*{\cs{newtheorem}}
+%
+% \subsubsection*{Simple case}
+%
+% \zctask{Setup up a new theorem environment created with \cs{newtheorem} to
+% be referred to with \cs{zcref}.  The theorem environment does not share its
+% counter with other theorem environments, and one of \pkg{zref-clever}
+% built-in reference types is adequate for my needs.}
+%
+% \begin{zcusage}
+%   \documentclass{article}
+% \end{zcusage}
 %
 %
 % \section{Limitations}

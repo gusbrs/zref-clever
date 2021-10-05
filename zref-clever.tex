@@ -58,7 +58,18 @@
     \rule[-0.2\baselineskip]{0pt}{0.8\baselineskip}\texttt{#1}}}
 
 \newlist{refformat}{itemize}{1}
-\setlist[refformat]{label={}}
+\setlist[refformat]{label={}, beginpenalty=500, midpenalty=500}
+
+\DeclareUnicodeCharacter{25CF}{\ensuremath{\bullet}}
+
+\NewDocumentCommand\zctask{m}{%
+  \begin{description}
+  \item[Task] #1
+  \end{description}}
+
+\NewDocumentEnvironment{zcusage}{}%
+  {\endgraf\verbatim}%
+  {\endverbatim}
 
 \begin{document}
 
