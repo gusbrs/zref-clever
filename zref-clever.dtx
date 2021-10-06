@@ -120,7 +120,10 @@
 %   \begin{syntax}
 %     \cs{zcsetup}\marg{options}
 %   \end{syntax}
-%   Sets \pkg{zref-clever}'s general options (see \zcref{sec:options}).
+%   Sets \pkg{zref-clever}'s general options (see \zcref{sec:options,
+%   sec:reference-format}).  The settings performed by \cs{zcsetup} are local,
+%   within the current group.  But, of course, it can also be used to global
+%   effects if ungrouped, e.g.\ in the preamble.
 % \end{function}
 %
 % \begin{function}{\zcRefTypeSetup}
@@ -128,7 +131,8 @@
 %     \cs{zcRefTypeSetup} \marg{type} \marg{options}
 %   \end{syntax}
 %   Sets type-specific reference format options (see
-%   \zcref{sec:reference-format}).
+%   \zcref{sec:reference-format}).  Just as for \cs{zcsetup}, the settings
+%   performed by \cs{zcRefTypeSetup} are local, within the current group.
 % \end{function}
 %
 % \vspace{\baselineskip}
@@ -428,17 +432,17 @@
 %
 % \DescribeOption{\raisebox{.4em}{\dbend}\ currentcounter} %
 % \LaTeX{}'s \cs{refstepcounter} sets two variables which potentially affect
-% the \cs{label} (or \cs{zlabel}) set after it: the current label
-% (\cs{@currentlabel}), and the current counter (\cs{@currentcounter}).
-% Actually, traditionally, only the current label was thus stored, the current
-% counter was added to \cs{refstepcounter} somewhat recently (2020-10-01
-% release).  But, since \pkg{zref-clever} relies heavily on the information of
-% what the current counter is, it must store that information with the label,
-% as it does.  As long as the document element we are trying to refer to uses
-% the standard machinery of \cs{refstepcounter} we are on solid ground and can
-% retrieve the correct information.  However, it is not always ensured that
-% \cs{@currentcounter} is kept up to date.  For example, packages which handle
-% labels specially, for one reason or another, may or may not set
+% the \cs{zlabel} set after it: the current label (\cs{@currentlabel}), and
+% the current counter (\cs{@currentcounter}).  Actually, traditionally, only
+% the current label was thus stored, the current counter was added to
+% \cs{refstepcounter} somewhat recently (with the 2020-10-01 kernel release).
+% But, since \pkg{zref-clever} relies heavily on the information of what the
+% current counter is, it must set \pkg{zref} to store that information with
+% the label, as it does.  As long as the document element we are trying to
+% refer to uses the standard machinery of \cs{refstepcounter} we are on solid
+% ground and can retrieve the correct information.  However, it is not always
+% ensured that \cs{@currentcounter} is kept up to date.  For example, packages
+% which handle labels specially, for one reason or another, may or may not set
 % \cs{@currentcounter} as required.  Considering the addition of
 % \cs{@currentcounter} to \cs{refstepcounter} itself is not that old, it is
 % likely that in a good number of places a reliable \cs{@currentcounter} is
@@ -561,12 +565,18 @@
 % meaningful to provide some value, even for an unknown language.
 %
 % General ``options'' (i) can be given by the user in the optional argument of
-% \cs{zcref}, but just as well in \cs{zcsetup} or as package options at
-% load-time (see \zcref{sec:options}).  ``Type-specific options'' (ii) are
-% handled by \cs{zcRefTypeSetup} (see \zcref{sec:user-interface}).
+% \cs{zcref}, but also set through \cs{zcsetup} or even, depending on the
+% case, as package options at load-time (see
+% \zcref{sec:options}).\footnote{The use of \cs{zcsetup} for global reference
+% format settings is recommended though.  Whether you can use load-time
+% options or not depends on the values of the options: due to how \LaTeX{}
+% handles package options, if the values of the options you are setting
+% include \emph{commands} you can't set them at load-time, and rather
+% \emph{must} use \cs{zcsetup}.}  ``Type-specific options'' (ii) are handled
+% by \cs{zcRefTypeSetup} (see \zcref{sec:user-interface}).
 % ``Language-specific translations'', be they ``type-specific'' (iii) or
 % ``default'' (iv) have their user interface in \cs{zcLanguageSetup}, and have
-% their values populated by the package's dictionaries (see
+% their values populated by the package's built-in dictionaries (see
 % \zcref{sec:internationalization}).  Not all reference format specifications
 % can be given in all of these scopes, though.  Some of them can't be
 % type-specific, others must be type-specific, so the set available in each
@@ -692,7 +702,7 @@
 % options to work.  Whatever the case may be, you need not worry too much
 % about being remiss in this area: if \cs{zcref} does lack a name form in any
 % given reference, it will let you know with a compilation warning (and will
-% typeset the usual missing reference ``sign'').
+% typeset the usual missing reference sign: ``\textbf{??}'').
 %
 % A complete reference typeset by \cs{zcref} may be comprised of multiple
 % \texttt{type-block}s, in which case the ``type-block-group'' can also be
@@ -1254,11 +1264,12 @@
 % argument of \cs{newcounter} establishes that the counter being created (the
 % mandatory argument) gets reset every time the ``enclosing counter'' gets
 % stepped (this is called in the usual sources ``within-counter'', ``old
-% counter'', ``supercounter'' etc.).  This information is a little trickier to
-% get.  For starters, the counters which may reset the current counter are not
-% retrievable from the counter itself, because this information is stored with
-% the counter that does the resetting, not with the one that gets reset (the
-% list is stored in \cs{cl@}\meta{counter} with format
+% counter'', ``supercounter'', ``parent counter'' etc.).  This information is
+% a little trickier to get.  For starters, the counters which may reset the
+% current counter are not retrievable from the counter itself, because this
+% information is stored with the counter that does the resetting, not with the
+% one that gets reset (the list is stored in \cs{cl@}\meta{counter} with
+% format
 % \texttt{\cs{@elt}\{countera\}\cs{@elt}\{counterb\}\cs{@elt}\{counterc\}},
 % see section `ltcounts.dtx' in `source2e').  Besides, there may be a chain of
 % resetting counters, which must be taken into account: if `counterC' gets
@@ -5367,8 +5378,9 @@
   }
 %    \end{macrocode}
 %
-% \subsection{\pkg{listings} package}
 %
+%
+% \subsection{\pkg{listings} package}
 %
 %    \begin{macrocode}
 \AddToHook { begindocument }
