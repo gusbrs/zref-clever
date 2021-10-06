@@ -901,15 +901,29 @@
 % worry about it at all.
 %
 %
-% \section{Usage examples}
+% \section{How tos}
 %
-% This section gathers some usage examples of cases which may require some
-% \pkg{zref-clever} setup, and each item is set around a cross-reference
-% ``task'' we'd like to perform with \pkg{zref-clever}.
+% This section gathers some usage examples, or ``how tos'', of cases which may
+% require some \pkg{zref-clever} setup, and each item is set around a
+% cross-reference ``task'' we'd like to perform with \pkg{zref-clever}.
 %
 %
+% \subsection{\cs{newtheorem}}
 %
-% \subsection*{\cs{newtheorem}}
+% Since \LaTeX{}'s \cs{newtheorem} allows users to create arbitrary numbered
+% environments, with respective arbitrary counters, the most \pkg{zref-clever}
+% can do in this regard is to provide some ``typical'' built-in reference
+% types to smooth user setup but, in the general case, some user setup may be
+% indeed required.  The examples below are equaly valid for \pkg{amsthm}'s
+% \cs{newtheorem} since, even it provides features beyond those available in
+% the kernel, its syntax and underlying relation with counters is pretty much
+% the same.  For \pkg{thmtools}' \cs{declaretheorem} the situation is similar.
+% Though some adjustments to the examples below may be required, the basic
+% logic is the same.  There is no integration with the \opt{Refname},
+% \opt{refname}, and \opt{label} options, which are targeted to the standard
+% reference system, but you don't actually need them to get things working
+% conveniently.
+%
 %
 % \subsubsection*{Simple case}
 %
@@ -918,9 +932,127 @@
 % counter with other theorem environments, and one of \pkg{zref-clever}
 % built-in reference types is adequate for my needs.}
 %
-% \begin{zcusage}
+% Suppose you set a ``Lemma'' environment with:
+%
+% \begin{zchowto}
+%   \newtheorem{lemma}{Lemma}
+% \end{zchowto}
+%
+% Or with:
+%
+% \begin{zchowto}
+%   \newtheorem{lemma}{Lemma}[section]
+% \end{zchowto}
+%
+% In this case, since \pkg{zref-clever} provides a built-in \texttt{lemma}
+% type (for supported languages) and presumes the reference type to be the
+% same name as the counter, there is no need for setup, and things just work
+% out-of-the-box.  So, you can go ahead with:
+%
+% \begin{zchowto}
 %   \documentclass{article}
-% \end{zcusage}
+%   \usepackage{zref-clever}
+%   \newtheorem{lemma}{Lemma}[section]
+%   \begin{document}
+%   \section{Section 1}
+%   \begin{lemma}\zlabel{lemma-1}
+%     A lemma.
+%   \end{lemma}
+%   \zcref{lemma-1}
+%   \end{document}
+% \end{zchowto}
+%
+% If, however, you had chosen an environment name which did not happen to
+% coincide with the built-in reference type, all you'd need to do is instruct
+% \pkg{zref-clever} to associate the counter for your environment to the
+% desired type with the \opt{countertype} option:
+%
+% \begin{zchowto}
+%   \documentclass{article}
+%   \usepackage{zref-clever}
+%   \zcsetup{countertype={lem=lemma}}
+%   \newtheorem{lem}{Lemma}[section]
+%   \begin{document}
+%   \section{Section 1}
+%   \begin{lem}\zlabel{lemma-1}
+%     A lemma.
+%   \end{lem}
+%   \zcref{lemma-1}
+%   \end{document}
+% \end{zchowto}
+%
+%
+% \subsubsection*{Shared counter}
+%
+% \zctask{Setup up two new theorem environments created with \cs{newtheorem}
+% to be referred to with \cs{zcref}.  The theorem environments share the same
+% counter, and the available \pkg{zref-clever} built-in reference types are
+% adequate for my needs.}
+%
+% In this case, we need to set the \opt{countertype} option in the appropriate
+% contexts, so that the labels of each environment get set with the expected
+% reference type.  As we've seen (at \zcref{sec:user-interface}), \cs{zcsetup}
+% has local effects, so it can be issued inside the respective environments
+% for the purpose.  Even better, we can leverage the kernel's new hook
+% management system and just set it for all occurrences with
+% \cs{AddToHook}\texttt{\{env/\meta{myenv}/begin\}}.
+%
+% \begin{zchowto}
+%   \documentclass{article}
+%   \usepackage{zref-clever}
+%   \AddToHook{env/mytheorem/begin}{%
+%     \zcsetup{countertype={mytheorem=theorem}}}
+%   \AddToHook{env/myproposition/begin}{%
+%     \zcsetup{countertype={mytheorem=proposition}}}
+%   \newtheorem{mytheorem}{Theorem}[section]
+%   \newtheorem{myproposition}[mytheorem]{Proposition}
+%   \begin{document}
+%   \section{Section 1}
+%   \begin{mytheorem}\zlabel{theorem-1}
+%     A theorem.
+%   \end{mytheorem}
+%   \begin{myproposition}\zlabel{proposition-1}
+%     A proposition.
+%   \end{myproposition}
+%   \zcref{theorem-1,proposition-1}
+%   \end{document}
+% \end{zchowto}
+%
+%
+% \subsubsection*{Custom type}
+%
+% \zctask{Setup up a new theorem environment created with \cs{newtheorem} to
+% be referred to with \cs{zcref}.  The theorem environment does not share its
+% counter with other theorem environments, but none of \pkg{zref-clever}
+% built-in reference types is adequate for my needs.}
+%
+% In this case, we need to provide \pkg{zref-clever} with settings pertaining
+% to the custom reference type we'd like to use.  Unless you need to typeset
+% your cross-references in multiple languages, in which case you'd require
+% \cs{zcLanguageSetup}, the most convenient way to setup a reference type is
+% \cs{zcRefTypeSetup}.  In most cases, what we really need to provide for a
+% custom type are the ``type names'' and other reference format options can
+% rely on default translations already provided by the package (assuming the
+% language is supported).
+%
+% \begin{zchowto}
+%   \documentclass{article}
+%   \usepackage{zref-clever}
+%   \newtheorem{myconjecture}{Conjecture}[section]
+%   \zcRefTypeSetup{myconjecture}{
+%     Name-sg = Conjecture ,
+%     name-sg = conjecture ,
+%     Name-pl = Conjectures ,
+%     name-pl = conjectures ,
+%   }
+%   \begin{document}
+%   \section{Section 1}
+%   \begin{myconjecture}\zlabel{conjecture-1}
+%     A conjecture.
+%   \end{myconjecture}
+%   \zcref{conjecture-1}
+%   \end{document}
+% \end{zchowto}
 %
 %
 % \section{Limitations}
