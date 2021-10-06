@@ -480,20 +480,21 @@
 %
 % \pkg{zref-clever} provides default settings for the following reference
 % types: \texttt{part}, \texttt{chapter}, \texttt{section},
-% \texttt{paragraph}, \texttt{appendix}, \texttt{page}, \texttt{line},
-% \texttt{figure}, \texttt{table}, \texttt{item}, \texttt{footnote},
-% \texttt{note}, \texttt{equation}, \texttt{theorem}, \texttt{lemma},
-% \texttt{corollary}, \texttt{proposition}, \texttt{definition},
-% \texttt{proof}, \texttt{result}, \texttt{remark}, \texttt{example},
-% \texttt{algorithm}, \texttt{listing}, \texttt{exercise}, \texttt{solution}.
-% Therefore, if you are using a language for which \pkg{zref-clever} has
-% built-in support (see \zcref{sec:internationalization}), these reference
-% types are available for use out-of-the-box.\footnote{There may be slight
-% availability differences depending on the language, but \pkg{zref-clever}
-% strives to keep this complete list available for the languages it has
-% built-in dictionaries.}  And, in any case, it is always easy to setup custom
-% reference types with \cs{zcRefTypeSetup} or \cs{zcLanguageSetup} (see
-% \zcref{sec:user-interface, sec:reference-format, sec:internationalization}).
+% \texttt{paragraph}, \texttt{appendix}, \texttt{subappendix}, \texttt{page},
+% \texttt{line}, \texttt{figure}, \texttt{table}, \texttt{item},
+% \texttt{footnote}, \texttt{note}, \texttt{equation}, \texttt{theorem},
+% \texttt{lemma}, \texttt{corollary}, \texttt{proposition},
+% \texttt{definition}, \texttt{proof}, \texttt{result}, \texttt{remark},
+% \texttt{example}, \texttt{algorithm}, \texttt{listing}, \texttt{exercise},
+% \texttt{solution}.  Therefore, if you are using a language for which
+% \pkg{zref-clever} has built-in support (see
+% \zcref{sec:internationalization}), these reference types are available for
+% use out-of-the-box.\footnote{There may be slight availability differences
+% depending on the language, but \pkg{zref-clever} strives to keep this
+% complete list available for the languages it has built-in dictionaries.}
+% And, in any case, it is always easy to setup custom reference types with
+% \cs{zcRefTypeSetup} or \cs{zcLanguageSetup} (see \zcref{sec:user-interface,
+% sec:reference-format, sec:internationalization}).
 %
 % The association of a \emph{counter} to its \emph{type} is controlled by the
 % \opt{countertype} option.  As seen in its documentation, \pkg{zref-clever}
@@ -5110,21 +5111,129 @@
 %
 % \subsection{\cs{appendix}}
 %
+% One relevant case of different reference types sharing the same counter is
+% the \cs{appendix} which in some document classes, including the standard
+% ones, change the sectioning commands looks but, of course, keep using the
+% same counter.  \file{book.cls} and \file{report.cls} reset counters
+% \texttt{chapter} and \texttt{section} to 0, change \cs{@chapapp} to use
+% \cs{appendixname} and use \cs{@Alph} for \cs{thechapter}. \file{article.cls}
+% resets counters \texttt{section} and \texttt{subsection} to 0, and uses
+% \cs{@Alph} for \cs{thesection}. \file{memoir.cls}, \file{scrbook.cls} and
+% \file{scrarticle.cls} do the same as their corresponding standard classes,
+% and sometimes a little more, but what interests us here is pretty much the
+% same.  See also the \pkg{appendix} package.
 %
-% Another relevant use case of the same general problem of different types for
-% the same counter is the \cs{appendix} which in some document classes,
-% including the standard ones, change the sectioning commands looks but, of
-% course, keep using the same counter (\file{book.cls} and \file{report.cls}
-% reset counters \texttt{chapter} and \texttt{section} to 0, change
-% \cs{@chapapp} to use \cs{appendixname} and use \cs{@Alph} for
-% \cs{thechapter}; \file{article.cls} resets counters \texttt{section} and
-% \texttt{subsection} to 0, and uses \cs{@Alph} for \cs{thesection};
-% \file{memoir.cls}, \file{scrbook.cls} and \file{scrarticle.cls} do the same
-% as their corresponding standard classes, and sometimes a little more, but
-% what interests us here is pretty much the same; see also the \pkg{appendix}
-% package).
+% The standard \cs{appendix} command is a one way switch, in other words, it
+% cannot be reverted (see \url{https://tex.stackexchange.com/a/444057}).  So,
+% even if the fact that it is a ``switch'' rather than an environment
+% complicates things, because we have to make ungrouped settings to correspond
+% to its effects, in practice this is not a big deal, since these settings are
+% never really reverted (by default, at least).  Hence, hooking into
+% \cs{appendix} is a viable and natural alternative.  The \pkg{appendix}
+% package defines the \texttt{appendices} environment, which provides for a
+% way for the appendix to ``end'', but in this case, of course, we can hook
+% into the environment instead.
+%
+% FIXME But using the hook in a command we are not sure of the content is more
+% risky than I had presumed (see \url{https://tex.stackexchange.com/q/617905},
+% thanks Phelype Oleinik).  So, decide later whether I want to keep this, or
+% if the appendix should just be turned into a ``how to''.
+%
+%    \begin{macrocode}
+\AddToHook { cmd / appendix / before }
+  {
+    \zcsetup
+      {
+        countertype =
+          {
+            chapter       = appendix ,
+            section       = appendix ,
+            subsection    = appendix ,
+            subsubsection = appendix ,
+          }
+      }
+  }
+%    \begin{macrocode}
 %
 %
+%
+% \subsection{\pkg{appendix} package}
+%
+%    \begin{macrocode}
+\AddToHook { begindocument }
+  {
+    \@ifpackageloaded { appendix }
+      {
+        \AddToHook { env / appendices / begin }
+          {
+            \zcsetup
+              {
+                countertype =
+                  {
+                    chapter       = appendix ,
+                    section       = appendix ,
+                    subsection    = appendix ,
+                    subsubsection = appendix ,
+                  }
+              }
+          }
+        \AddToHook { env / subappendices / begin }
+          {
+            \zcsetup
+              {
+                countertype =
+                  {
+                    chapter       = subappendix ,
+                    section       = subappendix ,
+                    subsection    = subappendix ,
+                    subsubsection = subappendix ,
+                  }
+              }
+          }
+      }
+      {}
+  }
+%    \end{macrocode}
+%
+%
+%
+% \subsection{\cls{memoir} class}
+%
+%    \begin{macrocode}
+\AddToHook { begindocument }
+  {
+    \@ifclassloaded { memoir }
+      {
+        \AddToHook { env / appendices / begin }
+          {
+            \zcsetup
+              {
+                countertype =
+                  {
+                    chapter       = appendix ,
+                    section       = appendix ,
+                    subsection    = appendix ,
+                    subsubsection = appendix ,
+                  }
+              }
+          }
+        \AddToHook { env / subappendices / begin }
+          {
+            \zcsetup
+              {
+                countertype =
+                  {
+                    chapter       = subappendix ,
+                    section       = subappendix ,
+                    subsection    = subappendix ,
+                    subsubsection = subappendix ,
+                  }
+              }
+          }
+      }
+      {}
+  }
+%    \end{macrocode}
 %
 % \subsection{\pkg{listings} package}
 %
@@ -5244,6 +5353,12 @@ type = paragraph ,
   name-pl-ab = par. ,
 
 type = appendix ,
+  Name-sg = Appendix ,
+  name-sg = appendix ,
+  Name-pl = Appendices ,
+  name-pl = appendices ,
+
+type = subappendix ,
   Name-sg = Appendix ,
   name-sg = appendix ,
   Name-pl = Appendices ,
@@ -5451,6 +5566,12 @@ type = appendix ,
   Name-pl = Anhänge ,
   name-pl = Anhänge ,
 
+type = subappendix ,
+  Name-sg = Anhang ,
+  name-sg = Anhang ,
+  Name-pl = Anhänge ,
+  name-pl = Anhänge ,
+
 type = page ,
   Name-sg = Seite ,
   name-sg = Seite ,
@@ -5640,6 +5761,12 @@ type = paragraph ,
   name-pl = paragraphes ,
 
 type = appendix ,
+  Name-sg = Annexe ,
+  name-sg = annexe ,
+  Name-pl = Annexes ,
+  name-pl = annexes ,
+
+type = subappendix ,
   Name-sg = Annexe ,
   name-sg = annexe ,
   Name-pl = Annexes ,
@@ -5838,6 +5965,12 @@ type = appendix ,
   Name-pl = Apêndices ,
   name-pl = apêndices ,
 
+type = subappendix ,
+  Name-sg = Apêndice ,
+  name-sg = apêndice ,
+  Name-pl = Apêndices ,
+  name-pl = apêndices ,
+
 type = page ,
   Name-sg = Página ,
   name-sg = página ,
@@ -6029,6 +6162,12 @@ type = paragraph ,
   name-pl = párrafos ,
 
 type = appendix ,
+  Name-sg = Apéndice ,
+  name-sg = apéndice ,
+  Name-pl = Apéndices ,
+  name-pl = apéndices ,
+
+type = subappendix ,
   Name-sg = Apéndice ,
   name-sg = apéndice ,
   Name-pl = Apéndices ,
