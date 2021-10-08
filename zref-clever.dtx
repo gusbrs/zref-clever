@@ -1228,6 +1228,10 @@
 % special handling anyway, we make the cut with the inclusion of the new hook
 % management system (\pkg{ltcmdhooks}), which is bound to be useful for our
 % purposes, and was released with the 2021-06-01 kernel.
+%
+% CHECK Should I just go ahead and bump this to 2021-11-15 considering the
+% appendix case?
+%
 %    \begin{macrocode}
 \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
 \IfFormatAtLeastTF{2021-06-01}
@@ -1646,6 +1650,10 @@
   }
 \msg_new:nnn { zref-clever } { single-element-range }
   { Range~for~type~'#1'~resulted~in~single~element~\msg_line_context:. }
+\msg_new:nnn { zref-clever } { compat-package }
+  { Loaded~support~for~'#1'~package. }
+\msg_new:nnn { zref-clever } { compat-class }
+  { Loaded~support~for~'#1'~documentclass. }
 %    \end{macrocode}
 %
 %
@@ -5414,7 +5422,7 @@
 % \texttt{chapter} and \texttt{section} to 0, change \cs{@chapapp} to use
 % \cs{appendixname} and use \cs{@Alph} for \cs{thechapter}. \file{article.cls}
 % resets counters \texttt{section} and \texttt{subsection} to 0, and uses
-% \cs{@Alph} for \cs{thesection}. \file{memoir.cls}, \file{scrbook.cls} and
+% \cs{@Alph} for \cs{thesection}.  \file{memoir.cls}, \file{scrbook.cls} and
 % \file{scrarticle.cls} do the same as their corresponding standard classes,
 % and sometimes a little more, but what interests us here is pretty much the
 % same.  See also the \pkg{appendix} package.
@@ -5425,15 +5433,11 @@
 % complicates things, because we have to make ungrouped settings to correspond
 % to its effects, in practice this is not a big deal, since these settings are
 % never really reverted (by default, at least).  Hence, hooking into
-% \cs{appendix} is a viable and natural alternative.  The \pkg{appendix}
-% package defines the \texttt{appendices} environment, which provides for a
-% way for the appendix to ``end'', but in this case, of course, we can hook
-% into the environment instead.
-%
-% FIXME But using the hook in a command we are not sure of the content is more
-% risky than I had presumed (see \url{https://tex.stackexchange.com/q/617905},
-% thanks Phelype Oleinik).  So, decide later whether I want to keep this, or
-% if the appendix should just be turned into a ``how to''.
+% \cs{appendix} is a viable and natural alternative.  The \cls{memoir} class
+% and the \pkg{appendix} package define the \texttt{appendices} and
+% \texttt{subappendices} environments, which provide for a way for the
+% appendix to ``end'', but in this case, of course, we can hook into the
+% environment instead.
 %
 %    \begin{macrocode}
 \AddToHook { cmd / appendix / before }
@@ -5449,11 +5453,40 @@
           }
       }
   }
-%    \begin{macrocode}
+%    \end{macrocode}
+%
+% Depending on the definition of \cs{appendix}, using the hook may lead to
+% trouble with the first released version of \pkg{ltcmdhooks} (the one
+% released with the 2021-06-01 kernel).  Particularly, if the definition of
+% the command being hooked at contains a double hash mark (\texttt{\#\#}) the
+% patch to add the hook, if it needs to be done with the \cs{scantokens}
+% method, may fail noisily (see \url{https://tex.stackexchange.com/q/617905},
+% thanks Phelype Oleinik).  The 2021-11-15 kernel release should already
+% handle this gracefully.  In the meantime, given we cannot really expect to
+% know what \cs{appendix} may contain in general, since it potentially gets
+% redefined in quite a number of classes and packages, a user facing
+% workaround may be needed in case of trouble.  Phelype Oleinik recommends
+% activating/providing the generic hook in question, so that \pkg{ltcmdhooks}
+% considers the patch as already done, and do the patch ourselves with
+% \pkg{etoolbox} (\url{https://tex.stackexchange.com/a/617998}).  Like so:
+%
+% \begin{verbatim}
+%   \IfFormatAtLeastTF{2021-11-15}%
+%     {\ActivateGenericHook}%
+%     {\ProvideHook}%
+%       {cmd/appendix/before}
+%   \usepackage{etoolbox}
+%   \pretocmd\appendix
+%     {\UseHook{cmd/appendix/before}}
+%     {}{\FAILED}
+% \end{verbatim}
 %
 %
 %
 % \subsection{\pkg{appendix} package}
+%
+% These settings also apply to the \cls{memoir} class, since it ``emulates''
+% the loading of the \pkg{appendix} package.
 %
 %    \begin{macrocode}
 \AddToHook { begindocument }
@@ -5486,46 +5519,7 @@
                   }
               }
           }
-      }
-      {}
-  }
-%    \end{macrocode}
-%
-%
-%
-% \subsection{\cls{memoir} class}
-%
-%    \begin{macrocode}
-\AddToHook { begindocument }
-  {
-    \@ifclassloaded { memoir }
-      {
-        \AddToHook { env / appendices / begin }
-          {
-            \zcsetup
-              {
-                countertype =
-                  {
-                    chapter       = appendix ,
-                    section       = appendix ,
-                    subsection    = appendix ,
-                    subsubsection = appendix ,
-                  }
-              }
-          }
-        \AddToHook { env / subappendices / begin }
-          {
-            \zcsetup
-              {
-                countertype =
-                  {
-                    chapter       = subappendix ,
-                    section       = subappendix ,
-                    subsection    = subappendix ,
-                    subsubsection = subappendix ,
-                  }
-              }
-          }
+        \msg_info:nnn { zref-clever } { compat-package } { appendix }
       }
       {}
   }
