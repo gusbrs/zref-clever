@@ -4537,19 +4537,8 @@
                         % It's two '@s', but escaped for DocStrip.
                         \exp_not:N \hyper@@@@link
                           {
-                            \zref@ifrefcontainsprop
-                              { \l_@@_type_first_label_tl }
-                              { urluse }
-                              {
-                                \zref@extractdefault
-                                  { \l_@@_type_first_label_tl }
-                                  { urluse } {}
-                              }
-                              {
-                                \zref@extractdefault
-                                  { \l_@@_type_first_label_tl }
-                                  { url } {}
-                              }
+                            \@@_extract_url:V
+                              \l_@@_type_first_label_tl
                           }
                           {
                             \zref@extractdefault
@@ -4858,11 +4847,7 @@
             \exp_not:V \l_@@_reffont_in_tl
             % It's two `@s', but escaped for DocStrip.
             \exp_not:N \hyper@@@@link
-              {
-                \zref@ifrefcontainsprop {#1} { urluse }
-                  { \zref@extractdefault {#1} { urluse } { } }
-                  { \zref@extractdefault {#1} { url } { } }
-              }
+              { \@@_extract_url:n {#1} }
               { \zref@extractdefault {#1} { anchor } { } }
               {
                 \exp_not:V \l_@@_refpre_in_tl
@@ -4919,18 +4904,8 @@
                 % It's two `@s', but escaped for DocStrip.
                 \exp_not:N \hyper@@@@link
                   {
-                    \zref@ifrefcontainsprop
-                      { \l_@@_type_first_label_tl } { urluse }
-                      {
-                        \zref@extractdefault
-                          { \l_@@_type_first_label_tl }
-                          { urluse } { }
-                      }
-                      {
-                        \zref@extractdefault
-                          { \l_@@_type_first_label_tl }
-                          { url } { }
-                      }
+                    \@@_extract_url:V
+                      \l_@@_type_first_label_tl
                   }
                   {
                     \zref@extractdefault
@@ -5008,18 +4983,8 @@
                     % It's two '@s', but escaped for DocStrip.
                     \exp_not:N \hyper@@@@link
                       {
-                        \zref@ifrefcontainsprop
-                          { \l_@@_type_first_label_tl } { urluse }
-                          {
-                            \zref@extractdefault
-                              { \l_@@_type_first_label_tl }
-                              { urluse } { }
-                          }
-                          {
-                            \zref@extractdefault
-                              { \l_@@_type_first_label_tl }
-                              { url } { }
-                          }
+                        \@@_extract_url:V
+                          \l_@@_type_first_label_tl
                       }
                       {
                         \zref@extractdefault
@@ -5204,6 +5169,24 @@
 %    \end{macrocode}
 % \end{macro}
 %
+%
+% \begin{macro}{\@@_extract_url:n}
+%   A convenience auxiliary function for extraction of the \texttt{url} /
+%   \texttt{urluse} property, provided by the \pkg{zref-xr} module.
+%    \begin{macrocode}
+\cs_new:Npn \@@_extract_url:n #1
+  {
+    \zref@ifpropundefined { urluse }
+      { \zref@extractdefault {#1} { url } { \c_empty_tl } }
+      {
+        \zref@ifrefcontainsprop {#1} { urluse }
+          { \zref@extractdefault {#1} { urluse } { \c_empty_tl } }
+          { \zref@extractdefault {#1} { url } { \c_empty_tl } }
+      }
+  }
+\cs_generate_variant:Nn \@@_extract_url:n { V }
+%    \end{macrocode}
+% \end{macro}
 %
 %
 % \begin{macro}{\@@_labels_in_sequence:nn}
