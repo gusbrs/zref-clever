@@ -1601,16 +1601,16 @@
 \msg_new:nnn { zref-clever } { key-requires-value }
   { The~'#1'~key~'#2'~requires~a~value~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { language-declared }
-  { Language~'#1'~is~already~declared.~Nothing~to~do. }
+  { Language~'#1'~is~already~declared~\msg_line_context:.~Nothing~to~do. }
 \msg_new:nnn { zref-clever } { unknown-language-alias }
   {
-    Language~'#1'~is~unknown,~cannot~alias~to~it.~See~documentation~for~
-    '\iow_char:N\\zcDeclareLanguage'~and~
+    Language~'#1'~is~unknown~\msg_line_context:.~Can't~alias~to~it.~
+    See~documentation~for~'\iow_char:N\\zcDeclareLanguage'~and~
     '\iow_char:N\\zcDeclareLanguageAlias'.
   }
-\msg_new:nnn { zref-clever } { unknown-language-transl }
+\msg_new:nnn { zref-clever } { unknown-language-setup }
   {
-    Language~'#1'~is~unknown,~cannot~declare~translations~to~it.~
+    Language~'#1'~is~unknown~\msg_line_context:.~Can't~set~it~up.~
     See~documentation~for~'\iow_char:N\\zcDeclareLanguage'~and~
     '\iow_char:N\\zcDeclareLanguageAlias'.
   }
@@ -1637,7 +1637,7 @@
   }
 \msg_new:nnn { zref-clever } { hyperref-preamble-only }
   {
-    Option~'hyperref'~only~available~in~the~preamble.~
+    Option~'hyperref'~only~available~in~the~preamble~\msg_line_context:.~
     Use~the~starred~version~of~'\iow_char:N\\zcref'~instead.
   }
 \msg_new:nnn { zref-clever } { missing-hyperref }
@@ -3192,7 +3192,7 @@
         \tl_clear:N \l_@@_setup_type_tl
         \keys_set:nn { zref-clever / langsetup } {#2}
       }
-      { \msg_warning:nnn { zref-clever } { unknown-language-transl } {#1} }
+      { \msg_warning:nnn { zref-clever } { unknown-language-setup } {#1} }
     \group_end:
   }
 \@onlypreamble \zcLanguageSetup
