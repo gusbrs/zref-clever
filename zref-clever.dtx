@@ -2897,6 +2897,7 @@
         enumii        = item ,
         enumiii       = item ,
         enumiv        = item ,
+        mpfootnote    = footnote ,
       } ,
   }
 %    \end{macrocode}
@@ -5469,6 +5470,33 @@
 % particular, I do not mean to compensate for ``lack of support for
 % \pkg{zref}'' by individual packages here, unless there is really no
 % alternative.
+%
+%
+% \subsection{\cs{footnote}}
+%
+% I'd love not to have to tamper with the \cs{footnote}'s machinery\dots{}
+% However, it is too basic a feature not to work out-of-the-box and,
+% unfortunately, it neither uses \cs{refstepcounter} nor sets
+% \cs{@currentcounter}.  So there's really not much to do here except trust in
+% the new hook management system.
+%
+% I have made a feature request though, for having \cs{@currentcounter}
+% recorded there too: \url{https://github.com/latex3/latex2e/issues/687}.
+%
+% CHECK See if the FR has been implemented or not and, if so, remove this.
+%
+%    \begin{macrocode}
+\tl_new:N \l_@@_footnote_type_tl
+\tl_set:Nn \l_@@_footnote_type_tl { footnote }
+\AddToHook { env / minipage / begin }
+  { \tl_set:Nn \l_@@_footnote_type_tl { mpfootnote } }
+\AddToHook { cmd / @makefntext / before }
+  {
+    \exp_args:Nx \zcsetup
+      { currentcounter = \l_@@_footnote_type_tl }
+  }
+%    \end{macrocode}
+%
 %
 %
 % \subsection{\cs{appendix}}
