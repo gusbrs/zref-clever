@@ -1203,8 +1203,92 @@
 %
 % \section{Limitations}
 %
+% Being based on \pkg{zref} entails one quite sizable advantage for
+% \pkg{zref-clever}: the extensible referencing system of the former allows
+% \pkg{zref-clever} to store and retrieve the information it needs to work
+% without having to redefine some core \LaTeX{} commands.  This alone makes
+% for reduced compatibility problems and less load order issues than the
+% average package in this functionality area.  On the other hand, being based
+% on \pkg{zref} also does impair the supported scope of \pkg{zref-clever}.
+% Not because of any particular limitation of either, but because any class or
+% package which implements some special handling for reference labels
+% universally does so aiming at the standard referencing system, and whether
+% specific support for \pkg{zref} is included, or whether things work by
+% spillover of the particular technique employed, is not guaranteed.
+%
+% The limitation here is less one of \pkg{zref-clever} than that of a
+% potencial lack of support for \pkg{zref} itself.  Broadly speaking, what
+% \pkg{zref-clever} does is setup \pkg{zref} so that its \cs{zref@newlabel}s
+% contain the information we need using \pkg{zref}'s API.  Once the
+% \cs{zlabel} is set correctly, there is little in the way of
+% \pkg{zref-clever}, it can just extract the label's information, again using
+% \pkg{zref}'s API, and do its job.  Therefore, the problems that may arise
+% are really in \emph{label setting}.
+%
+% For \cs{zlabel} to be able to set a label with everything \pkg{zref-clever}
+% needs, some conditions must be fulfilled, most of which are pretty much the
+% same as that of a regular label, but not only.  In particular, the
+% \cs{@currentcounter} is critical for the task of \pkg{zref-clever}: the
+% reference type will depend on that and, consequently, sorting and
+% compression as well, counter resetting behavior information is also
+% retrieved based on it, and so on.  \pkg{zref} provides the
+% \pkg{zref-counter} module which stores it in the \texttt{counter} property.
+%
+% Despite that, as far as I've been experimenting, the following label setting
+% requirements seem to be potentially problematic and are not necessarily
+% granted for \cs{zlabel}:
+%
+% \begin{enumerate}
+% \item One must be able to call \cs{zlabel} at the appropriate scope/location
+%   so as to set the label.  Alternatively, \cs{zlabel} must be called with
+%   the desired label by some other means.
+% \item When \cs{zlabel} is set, it must see the proper value of
+%   \cs{@currentcounter}.
+% \end{enumerate}
+%
+% As for the first, it is not everywhere we technically can set a (z)label.
+% On verbatim-like environments it depends on how they are defined and whether
+% they provide a proper place or option to do so.  But not only those,
+% \pkg{amsmath} environments also handle \cs{label} specially and the same
+% work is not done for \cs{zlabel}.
+%
+% Regarding \cs{@currentcounter}, since the 2020-10-01 kernel release, it is
+% set by \cs{refstepcounter} alongside \cs{@currentlabel}.  Hence, as long as
+% \cs{refstepcounter} is the tool used for the purpose, \cs{zlabel} will tend
+% to have all information within its grasp at label setting time.  But that's
+% not always the case.  For this reason \pkg{zref-clever} has the option
+% \opt{currentcounter} which at least allows for some viable workarounds when
+% the kernel's \cs{@currentcounter} itself cannot be relied upon.  Whether we
+% have a proper opening to set it, depends on the case.  Still,
+% \cs{refstepcounter} is ubiquitous enough a tool that we can count on
+% \cs{@currentcounter} most of the time.
+%
+% All in all, most things work, but some things don't.  And if the later will
+% eventually work depends essentially on whether support for \pkg{zref}
+% (\pkg{zref-counter} included) is provided by these packages/features or not.
+% In what follows of this section, I list cases of known lack of support.
+% Even if, formally, this should probably belong to \pkg{zref} rather than
+% here, \pkg{zref-clever} is more of a ``user side'' kind of package than
+% \pkg{zref} itself, so hopefully it is not inappropriate to do so.
 %
 %
+% \subsection*{\pkg{amsmath}}
+%
+% To quote Heiko Oberdiek himself on the matter:
+%
+% \begin{quote}
+%   The environments of \pkg{amsmath} process the contents twice.  The first
+%   run measures the width and the second run sets the equations.  Also, they
+%   support \cs{notag} and friends.  The \textins{problem} is that the support
+%   of \cs{label} is quite hard-wired into the environments.  Other
+%   label\textins{s} as \cs{zlabel} are not supported.
+% \end{quote}
+%
+% That is from \url{https://tex.stackexchange.com/a/402297}.  Unfortunately
+% for us, the workaround he suggests there, of ``self-importing'' the standard
+% labels with \pkg{zref-xr}, is not a viable option for \pkg{zref-clever}
+% because the required properties would not be available for the labels thus
+% imported.
 %
 %
 %
