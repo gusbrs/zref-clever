@@ -370,6 +370,10 @@
 % be set at load time, as a package option.  If you want to set it globally,
 % use \cs{zcsetup} instead.
 %
+% \DescribeOption{titleref} %
+% The \opt{titleref} option receives no value and, when given, loads
+% \pkg{zref}'s \pkg{zref-titleref} module.  This is a preamble only option.%
+%
 % \DescribeOption{note} %
 % The \opt{note} option receives as value some text to be typeset at the end
 % of the whole reference list.  It is separated from it by \opt{notesep} (see
@@ -1637,6 +1641,11 @@
   { Missing~'hyperref'~package.~Setting~'hyperref=false'. }
 \msg_new:nnn { zref-check } { check-document-only }
   { Option~'check'~only~available~in~the~document. }
+\msg_new:nnn { zref-clever } { titleref-preamble-only }
+  {
+    Option~'titleref'~only~available~in~the~preamble~\msg_line_context:.~
+    Did~you~mean~'ref=title'?.
+  }
 \msg_new:nnn { zref-clever } { missing-zref-check }
   {
     Option~'check'~requested~\msg_line_context:.~
@@ -2755,6 +2764,25 @@
   { font .tl_set:N = \l_@@_ref_typeset_font_tl }
 %    \end{macrocode}
 %
+%
+%
+% \subsubsection*{\opt{titleref} option}
+%
+%    \begin{macrocode}
+\keys_define:nn { zref-clever / reference }
+  {
+    titleref .code:n = { \RequirePackage { zref-titleref } } ,
+    titleref .value_forbidden:n = true ,
+  }
+\AddToHook { begindocument }
+  {
+    \keys_define:nn { zref-clever / reference }
+      {
+        titleref .code:n =
+          { \msg_warning:nn { zref-clever } { titleref-preamble-only } }
+      }
+  }
+%    \end{macrocode}
 %
 %
 % \subsubsection*{\opt{note} option}
