@@ -3418,6 +3418,8 @@
 %     \l_@@_label_enclcnt_b_tl ,
 %     \l_@@_label_enclval_a_tl ,
 %     \l_@@_label_enclval_b_tl ,
+%     \l_@@_label_extdoc_a_tl ,
+%     \l_@@_label_extdoc_b_tl ,
 %   }
 %   Auxiliary variables, for use in sorting, and some also in typesetting.
 %   Used to store reference information -- label properties -- of the
@@ -3429,6 +3431,8 @@
 \tl_new:N \l_@@_label_enclcnt_b_tl
 \tl_new:N \l_@@_label_enclval_a_tl
 \tl_new:N \l_@@_label_enclval_b_tl
+\tl_new:N \l_@@_label_extdoc_a_tl
+\tl_new:N \l_@@_label_extdoc_b_tl
 %    \end{macrocode}
 % \end{variable}
 %
@@ -3652,8 +3656,51 @@
       { \zref@extractdefault {#2} { zc@enclval } { \c_empty_tl } }
     \tl_set:Nx \l_@@_label_enclval_b_tl
       { \tl_reverse_items:V \l_@@_label_enclval_b_tl }
+    \tl_set:Nx \l_@@_label_extdoc_a_tl
+      { \zref@extractdefault {#1} { externaldocument } { \c_empty_tl } }
+    \tl_set:Nx \l_@@_label_extdoc_b_tl
+      { \zref@extractdefault {#2} { externaldocument } { \c_empty_tl } }
 
     \bool_set_false:N \l_@@_sort_decided_bool
+
+    % First we check if there's any "external document" difference (coming
+    % from 'zref-xr') and, if so, sort based on that.
+    \tl_if_eq:NNF
+      \l_@@_label_extdoc_a_tl
+      \l_@@_label_extdoc_b_tl
+      {
+        \bool_if:nTF
+          {
+            \tl_if_empty_p:V \l_@@_label_extdoc_a_tl &&
+            ! \tl_if_empty_p:V \l_@@_label_extdoc_b_tl
+          }
+          {
+            \bool_set_true:N \l_@@_sort_decided_bool
+            \sort_return_same:
+          }
+          {
+            \bool_if:nTF
+              {
+                ! \tl_if_empty_p:V \l_@@_label_extdoc_a_tl &&
+                \tl_if_empty_p:V \l_@@_label_extdoc_b_tl
+              }
+              {
+                \bool_set_true:N \l_@@_sort_decided_bool
+                \sort_return_swapped:
+              }
+              {
+                \bool_set_true:N \l_@@_sort_decided_bool
+                % Two different "external documents": last resort, sort by the
+                % document name itself.
+                \str_compare:eNeTF
+                  { \l_@@_label_extdoc_b_tl } <
+                  { \l_@@_label_extdoc_a_tl }
+                  { \sort_return_swapped: }
+                  { \sort_return_same:    }
+              }
+          }
+      }
+
     \bool_until_do:Nn \l_@@_sort_decided_bool
       {
         \bool_if:nTF
@@ -5174,51 +5221,65 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_labels_in_sequence:nn #1#2
   {
-    \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
+    \tl_set:Nx \l_@@_label_extdoc_a_tl
+      { \zref@extractdefault {#1} { externaldocument } { \c_empty_tl } }
+    \tl_set:Nx \l_@@_label_extdoc_b_tl
+      { \zref@extractdefault {#2} { externaldocument } { \c_empty_tl } }
+
+    \tl_if_eq:NNT
+      \l_@@_label_extdoc_a_tl
+      \l_@@_label_extdoc_b_tl
       {
-        \exp_args:Nxx \tl_if_eq:nnT
-          { \zref@extractdefault {#1} { zc@pgfmt } { } }
-          { \zref@extractdefault {#2} { zc@pgfmt } { } }
-          {
-            \int_compare:nNnTF
-              { \zref@extractdefault {#1} { zc@pgval } { -2 } + 1 }
-                =
-              { \zref@extractdefault {#2} { zc@pgval } { -1 } }
-              { \bool_set_true:N \l_@@_next_maybe_range_bool }
-              {
-                \int_compare:nNnT
-                  { \zref@extractdefault {#1} { zc@pgval } { -1 } }
-                    =
-                  { \zref@extractdefault {#2} { zc@pgval } { -1 } }
-                  {
-                    \bool_set_true:N \l_@@_next_maybe_range_bool
-                    \bool_set_true:N \l_@@_next_is_same_bool
-                  }
-              }
-          }
-      }
-      {
-        \exp_args:Nxx \tl_if_eq:nnT
-          { \zref@extractdefault {#1} { zc@counter } { } }
-          { \zref@extractdefault {#2} { zc@counter } { } }
+        \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
           {
             \exp_args:Nxx \tl_if_eq:nnT
-              { \zref@extractdefault {#1} { zc@enclval } { } }
-              { \zref@extractdefault {#2} { zc@enclval } { } }
+              { \zref@extractdefault {#1} { zc@pgfmt } { } }
+              { \zref@extractdefault {#2} { zc@pgfmt } { } }
               {
                 \int_compare:nNnTF
-                  { \zref@extractdefault {#1} { zc@cntval } { -2 } + 1 }
+                  { \zref@extractdefault {#1} { zc@pgval } { -2 } + 1 }
                     =
-                  { \zref@extractdefault {#2} { zc@cntval } { -1 } }
+                  { \zref@extractdefault {#2} { zc@pgval } { -1 } }
                   { \bool_set_true:N \l_@@_next_maybe_range_bool }
                   {
                     \int_compare:nNnT
-                      { \zref@extractdefault {#1} { zc@cntval } { -1 } }
+                      { \zref@extractdefault {#1} { zc@pgval } { -1 } }
+                        =
+                      { \zref@extractdefault {#2} { zc@pgval } { -1 } }
+                      {
+                        \bool_set_true:N
+                          \l_@@_next_maybe_range_bool
+                        \bool_set_true:N
+                          \l_@@_next_is_same_bool
+                      }
+                  }
+              }
+          }
+          {
+            \exp_args:Nxx \tl_if_eq:nnT
+              { \zref@extractdefault {#1} { zc@counter } { } }
+              { \zref@extractdefault {#2} { zc@counter } { } }
+              {
+                \exp_args:Nxx \tl_if_eq:nnT
+                  { \zref@extractdefault {#1} { zc@enclval } { } }
+                  { \zref@extractdefault {#2} { zc@enclval } { } }
+                  {
+                    \int_compare:nNnTF
+                      { \zref@extractdefault {#1} { zc@cntval } { -2 } + 1 }
                         =
                       { \zref@extractdefault {#2} { zc@cntval } { -1 } }
+                      { \bool_set_true:N \l_@@_next_maybe_range_bool }
                       {
-                        \bool_set_true:N \l_@@_next_maybe_range_bool
-                        \bool_set_true:N \l_@@_next_is_same_bool
+                        \int_compare:nNnT
+                          { \zref@extractdefault {#1} { zc@cntval } { -1 } }
+                            =
+                          { \zref@extractdefault {#2} { zc@cntval } { -1 } }
+                          {
+                            \bool_set_true:N
+                              \l_@@_next_maybe_range_bool
+                            \bool_set_true:N
+                              \l_@@_next_is_same_bool
+                          }
                       }
                   }
               }
