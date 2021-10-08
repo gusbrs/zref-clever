@@ -181,16 +181,31 @@
 % \DescribeOption{ref} %
 % \DescribeOption{page} %
 % The \opt{ref} option controls the label property to which \cs{zcref} refers
-% to.  It can receive values \texttt{zc@thecnt} and \texttt{page}.  If
-% \pkg{zref-titleref} is loaded, \opt{ref} also accepts the value
-% \texttt{title}.  The package's default is \texttt{zc@thecnt}, which is an
-% internal property equivalent to \pkg{zref}'s \texttt{default} property,
-% except that it is not affected by the kernel's \cs{labelformat}.  In sum,
-% just what you'd expect from a regular reference.  By default, sorting and
-% compression is done according to the information of the counter underlying
-% \texttt{zc@thecnt}.  Special treatment in these areas is provided for
-% \texttt{page}, but not for \texttt{title}.  The \opt{page} option is a
-% convenience alias for \texttt{ref=page}.
+% to.  It can receive values \texttt{default}, \texttt{zc@thecnt} and
+% \texttt{page}.  If \pkg{zref-titleref} is loaded, \opt{ref} also accepts the
+% value \texttt{title}.  The package's default is, well, \texttt{default},
+% which is our standard reference.  \texttt{zc@thecnt} is a property set by
+% \pkg{zref-clever} and is similar to \pkg{zref}'s \texttt{default} property,
+% except that it is not affected by the kernel's
+% \cs{labelformat}.\footnote{Technical note: the \texttt{default} property
+% stores \cs{@currentlabel}, while the \texttt{zc@thecnt} property stores
+% \cs{the}\cs{@currentcounter}.  The later is exactly what \cs{refstepcounter}
+% uses to build \cs{@currentlabel}, except for the \cs{labelformat} prefix
+% and, hence, has the advantage of being unaffected by it.  But the former is
+% \emph{more reliable}, since \cs{@currentlabel} is expected to be correct
+% pretty much anywhere whereas, even though \cs{refstepcounter} does set
+% \cs{@currentcounter}, it is not everywhere that uses \cs{refstepcounter} for
+% the purpose.  In the cases where the references from these two do diverge,
+% \pkg{zref-clever} will likely misbehave (reference type, sorting and
+% compression inevitably depend on a correct \opt{currentcounter}), but using
+% \texttt{default} at least ensures that the reference itself is correct.
+% That said, if you do set \cs{labelformat} for some reason,
+% \texttt{zc@thecnt} may be useful.}  By default, reference formatting,
+% sorting, and compression are done according to information inferred from the
+% \emph{current counter} (see \opt{currentcounter} option below).  Special
+% treatment in these areas is provided for \texttt{page}, but not for
+% \texttt{title}.  The \opt{page} option is a convenience alias for
+% \texttt{ref=page}.
 %
 % \DescribeOption{typeset} %
 % \DescribeOption{noname} %
@@ -1287,9 +1302,10 @@
 % \pkg{zref} to do so.
 %
 % Some basic properties are handled by \pkg{zref} itself, or some of its
-% modules.  The \texttt{page} property is provided by \pkg{zref-base}, while
-% \pkg{zref-abspage} provides the \texttt{abspage} property which gives us a
-% safe and easy way to sort labels for page references.
+% modules.  The \texttt{default} and \texttt{page} properties are provided by
+% \pkg{zref-base}, while \pkg{zref-abspage} provides the \texttt{abspage}
+% property which gives us a safe and easy way to sort labels for page
+% references.
 %
 % The \texttt{counter} property, in most cases, will be just the kernel's
 % \cs{@currentcounter}, set by \cs{refstepcounter}.  However, not everywhere
@@ -1309,8 +1325,12 @@
 % \cs{labelformat} (previously from \pkg{varioref}, now in the kernel) will
 % include there the reference ``prefix'' and complicate the job we are trying
 % to do here.  Hence, we isolate \cs{the}\meta{counter} and store it ``clean''
-% in \texttt{zc@thecnt} for reserved use.  Based on the definition of
-% \cs{@currentlabel} done inside \cs{refstepcounter} in `texdoc source2e',
+% in \texttt{zc@thecnt} for reserved use.  Since \cs{@currentlabel}, which
+% populates the \texttt{default} property, is \emph{more reliable} than
+% \cs{@currentcounter}, \texttt{zc@thecnt} is meant to be kept as an
+% \emph{option} (\opt{ref} option), in case there's need to use
+% \pkg{zref-clever} together with \cs{labelformat}.  Based on the definition
+% of \cs{@currentlabel} done inside \cs{refstepcounter} in `texdoc source2e',
 % section `ltxref.dtx'.  We just drop the \cs{p@...} prefix.
 %
 %    \begin{macrocode}
@@ -1346,12 +1366,13 @@
 %    \end{macrocode}
 %
 %
-% Since the \texttt{zc@thecnt} and \texttt{page} properties store the
-% ``\emph{printed} representation'' of their respective counters, for sorting
-% and compressing purposes, we are also interested in their numeric values.
-% So we store them in \texttt{zc@cntval} and \texttt{zc@pgval}.  For this, we
-% use \cs{c@}\meta{counter}, which contains the counter's numerical value (see
-% `texdoc source2e', section `ltcounts.dtx').
+% Since the \texttt{default}, \texttt{zc@thecnt}, and \texttt{page} properties
+% store the ``\emph{printed} representation'' of their respective counters,
+% for sorting and compressing purposes, we are also interested in their
+% numeric values.  So we store them in \texttt{zc@cntval} and
+% \texttt{zc@pgval}.  For this, we use \cs{c@}\meta{counter}, which contains
+% the counter's numerical value (see `texdoc source2e', section
+% `ltcounts.dtx').
 %    \begin{macrocode}
 \zref@newprop { zc@cntval } [0]
   { \int_use:c { c@ \l_@@_current_counter_tl } }
@@ -2274,19 +2295,20 @@
 % \subsubsection*{\opt{ref} option}
 %
 % \cs{l_@@_ref_property_tl} stores the property to which the reference is
-% being made.  Currently, we restrict \texttt{ref=} to these two (or three)
-% alternatives -- \texttt{zc@thecnt}, \texttt{page}, and \texttt{title} if
-% \pkg{zref-titleref} is loaded --, but there might be a case for making this
-% more flexible.  The infrastructure can already handle receiving an arbitrary
-% property, as long as one is satisfied with sorting and compressing from the
-% default counter.  If more flexibility is granted, one thing \emph{must} be
-% handled at this point: the existence of the property itself, as far as
-% \pkg{zref} is concerned.  This because typesetting relies on the check
-% \cs{zref@ifrefcontainsprop}, which \emph{presumes} the property is defined
-% and silently expands the \emph{true} branch if it is not (see
-% \url{https://github.com/ho-tex/zref/issues/13}, thanks Ulrike Fischer).
-% Therefore, before adding anything to \cs{l_@@_ref_property_tl}, check if
-% first here with \cs{zref@ifpropundefined}: close it at the door.
+% being made.  Currently, we restrict \texttt{ref=} to these three (or four)
+% alternatives -- \texttt{default}, \texttt{zc@thecnt}, \texttt{page}, and
+% \texttt{title} if \pkg{zref-titleref} is loaded --, but there might be a
+% case for making this more flexible.  The infrastructure can already handle
+% receiving an arbitrary property, as long as one is satisfied with sorting
+% and compressing from the current counter.  If more flexibility is granted,
+% one thing \emph{must} be handled at this point: the existence of the
+% property itself, as far as \pkg{zref} is concerned.  This because
+% typesetting relies on the check \cs{zref@ifrefcontainsprop}, which
+% \emph{presumes} the property is defined and silently expands the \emph{true}
+% branch if it is not (see \url{https://github.com/ho-tex/zref/issues/13},
+% thanks Ulrike Fischer).  Therefore, before adding anything to
+% \cs{l_@@_ref_property_tl}, check if first here with
+% \cs{zref@ifpropundefined}: close it at the door.
 %
 %
 %    \begin{macrocode}
@@ -2294,6 +2316,8 @@
 \keys_define:nn { zref-clever / reference }
   {
     ref .choice: ,
+    ref / default .code:n =
+      { \tl_set:Nn \l_@@_ref_property_tl { default } } ,
     ref / zc@thecnt .code:n =
       { \tl_set:Nn \l_@@_ref_property_tl { zc@thecnt } } ,
     ref / page .code:n =
@@ -2306,12 +2330,12 @@
               { \tl_set:Nn \l_@@_ref_property_tl { title } }
               {
                 \msg_warning:nn { zref-clever } { missing-zref-titleref }
-                \tl_set:Nn \l_@@_ref_property_tl { zc@thecnt }
+                \tl_set:Nn \l_@@_ref_property_tl { default }
               }
           }
       } ,
-    ref .initial:n = zc@thecnt ,
-    ref .default:n = zc@thecnt ,
+    ref .initial:n = default ,
+    ref .default:n = default ,
     page .meta:n = { ref = page },
     page .value_forbidden:n = true ,
   }
@@ -2331,7 +2355,7 @@
             ref / title .code:n =
               {
                 \msg_warning:nn { zref-clever } { missing-zref-titleref }
-                \tl_set:Nn \l_@@_ref_property_tl { zc@thecnt }
+                \tl_set:Nn \l_@@_ref_property_tl { default }
               }
           }
       }
