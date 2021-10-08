@@ -1119,6 +1119,61 @@
 % \end{zchowto}
 %
 %
+% \subsection{\pkg{zref-xr}}
+%
+% \zctask{Make references to labels set in an external document with
+% \cs{zcref}.}
+%
+% \pkg{zref} itself offers this functionality with module \pkg{zref-xr}, and
+% \pkg{zref-clever} is prepared to make use of it.  Just a couple of details
+% have to be catered for, so that it works as expected: i) \pkg{zref-clever}
+% must be loaded in both the main document and the external document, so that
+% the imported labels also contain the properties required by
+% \pkg{zref-clever}; ii) since \cs{zexternaldocument} defines any properties
+% it finds in the labels from the external document when it imports them, it
+% must be called after \pkg{zref-clever} is loaded, otherwise the later will
+% find its own internal properties already defined when it does get loaded,
+% and will justifiably complain.  Note as well that the starred version of
+% \cs{zexternaldocument*}, which imports the standard labels from the external
+% document, is not sufficient for \pkg{zref-clever}, since the imported labels
+% will not contain all the required properties.
+%
+% Assuming here \file{documentA.tex} as the main file and \file{documentB.tex}
+% as the external one, and also assuming we just want to refer in
+% ``\texttt{A}'' to the labels from ``\texttt{B}'', and not the contrary, a
+% minimum setup would be the following.
+%
+% \vspace{\baselineskip}
+%
+% \file{documentA.tex}:
+%
+% \begin{zchowto}
+%   \documentclass{article}
+%   \usepackage{zref-clever}
+%   \usepackage{zref-xr}
+%   \zexternaldocument[B-]{documentB}
+%   \usepackage{hyperref}
+%   \begin{document}
+%   \section{Section A1}
+%   \zlabel{sec:section-a1}
+%   \zcref{sec:section-a1,B-sec:section-b1}
+%   \end{document}
+% \end{zchowto}
+%
+% \file{documentB.tex}:
+%
+% \begin{zchowto}
+%   \documentclass{article}
+%   \usepackage{zref-clever}
+%   \usepackage{hyperref}
+%   \begin{document}
+%   \section{Section B1}
+%   \zlabel{sec:section-b1}
+%   \end{document}
+% \end{zchowto}
+%
+%
+%
 % \section{Limitations}
 %
 %
