@@ -83,9 +83,9 @@
 %
 % \pkg{zref-clever} requires \pkg{zref}, and \LaTeX{} kernel 2021-06-01, or
 % newer.  It also needs \pkg{l3keys2e}.  Some packages are leveraged by
-% \pkg{zref-clever} if they are present, but are not loaded or required by it,
-% namely: \pkg{hyperref}, \pkg{zref-titleref} (\pkg{zref}'s module), and
-% \pkg{zref-check}.
+% \pkg{zref-clever} if they are present, but are not loaded by default or
+% required by it, namely: \pkg{hyperref}, \pkg{zref-check}, and \pkg{zref}'s
+% modules \pkg{zref-titleref} and \pkg{zref-xr}.
 %
 %
 % \section{User interface}
@@ -143,6 +143,11 @@
 % defined with \cs{NewDocumentCommand}, which translates into the usual
 % handling of arguments by it and/or processing by \pkg{l3keys}, particularly
 % with regard to brace-stripping and space-trimming.
+%
+% Furthermore, \pkg{zref-clever} loads \pkg{zref}'s \pkg{zref-user} module by
+% default.  So you also have its user commands available out-of-the-box,
+% notably \cs{zlabel}, but also \cs{zref} and \cs{zpageref} themselves.
+%
 %
 %
 % \section{Options}
@@ -274,9 +279,9 @@
 % capitalized or not.  It is a boolean option, and the package's default is
 % \texttt{cap=false}.  The option given without a value is equivalent to
 % \texttt{cap=true}.  The \opt{nocap} option is a convenience alias for
-% \texttt{cap=false}.  The \opt{capfirst} ensures that the reference type name
-% of the \emph{first} type block is capitalized, even when \opt{cap} is set to
-% \texttt{false}.
+% \texttt{cap=false}.  The \opt{capfirst} option ensures that the reference
+% type name of the \emph{first} type block is capitalized, even when \opt{cap}
+% is set to \texttt{false}.
 %
 % \DescribeOption{abbrev} %
 % \DescribeOption{noabbrev} %
