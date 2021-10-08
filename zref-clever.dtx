@@ -1065,6 +1065,60 @@
 % \end{zchowto}
 %
 %
+%
+% \subsection{\pkg{enumitem}}
+%
+% \zctask{Setup a custom enumerate environment created with \pkg{enumitem} to
+% be referred to with \cs{zcref}.}
+%
+% Since the \texttt{enumerate} environment's counters are reset at each
+% nesting level, but not with the usual \cs{refstepcounter} machinery, we have
+% to inform \pkg{zref-clever} of this resetting behavior with the
+% \opt{counterresetby} option.  Also, given the naming of the underlying
+% counters is tied with the environment's name and the level's number, we
+% cannot really rely on an implicit counter-type association, and have to set
+% it explicitly with the \opt{countertype} option.
+%
+% \begin{zchowto}
+%   \documentclass{article}
+%   \usepackage{zref-clever}
+%   \zcsetup{
+%     countertype = {
+%       myenumeratei   = item ,
+%       myenumerateii  = item ,
+%       myenumerateiii = item ,
+%       myenumerateiv  = item ,
+%     } ,
+%     counterresetby = {
+%       myenumerateii  = myenumeratei ,
+%       myenumerateiii = myenumerateii ,
+%       myenumerateiv  = myenumerateiii ,
+%     }
+%   }
+%   \usepackage{enumitem}
+%   \newlist{myenumerate}{enumerate}{4}
+%   \setlist[myenumerate,1]{label=(\arabic*)}
+%   \setlist[myenumerate,2]{label=(\Roman*)}
+%   \setlist[myenumerate,3]{label=(\Alph*)}
+%   \setlist[myenumerate,4]{label=(\roman*)}
+%   \begin{document}
+%   \begin{myenumerate}
+%   \item An item.\zlabel{item-1}
+%     \begin{myenumerate}
+%     \item An item.\zlabel{item-2}
+%       \begin{myenumerate}
+%       \item An item.\zlabel{item-3}
+%         \begin{myenumerate}
+%         \item An item.\zlabel{item-4}
+%         \end{myenumerate}
+%       \end{myenumerate}
+%     \end{myenumerate}
+%   \end{myenumerate}
+%   \zcref{item-1,item-2,item-3,item-4}
+%   \end{document}
+% \end{zchowto}
+%
+%
 % \section{Limitations}
 %
 %
