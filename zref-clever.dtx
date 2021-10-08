@@ -381,13 +381,16 @@
 %
 % \DescribeOption{check} %
 % Provides integration of \pkg{zref-clever} with the \pkg{zref-check} package.
-% The \opt{check} option is only available when the latter is loaded and, if
-% so, it works exactly like the optional argument of \cs{zcheck}, and can
+% In the preamble, the \opt{check} option receives no value and, when given,
+% loads \pkg{zref-check}.  In the document body, \opt{check} requires a value,
+% which works exactly like the optional argument of \cs{zcheck}, and can
 % receive both checks and \cs{zcheck}'s options.  And the checks are performed
 % for each label in \marg{labels} received as argument by \cs{zcref}.  See the
 % User manual of \pkg{zref-check} for details.  The checks done by the
-% \opt{check} option in \cs{zcref} comprise the whole reference list,
-% including the \opt{note}.
+% \opt{check} option in \cs{zcref} comprise the complete reference, including
+% the \opt{note} (see \zcref{sec:reference-format}).  If \pkg{zref-check} was
+% not loaded in the preamble, at begin document the option is made no-op and
+% issues a warning.
 %
 % \DescribeOption{countertype} %
 % The \opt{countertype} option allows to specify the ``reference type'' of
@@ -1639,8 +1642,6 @@
   }
 \msg_new:nnn { zref-clever } { missing-hyperref }
   { Missing~'hyperref'~package.~Setting~'hyperref=false'. }
-\msg_new:nnn { zref-check } { check-document-only }
-  { Option~'check'~only~available~in~the~document. }
 \msg_new:nnn { zref-clever } { titleref-preamble-only }
   {
     Option~'titleref'~only~available~in~the~preamble~\msg_line_context:.~
@@ -2797,7 +2798,6 @@
 %    \end{macrocode}
 %
 %
-%
 % \subsubsection*{\opt{check} option}
 %
 % Integration with \pkg{zref-check}.
@@ -2807,8 +2807,8 @@
 \bool_new:N \l_@@_zcref_with_check_bool
 \keys_define:nn { zref-clever / reference }
   {
-    check .code:n =
-      { \msg_warning:nn { zref-clever } { check-document-only } } ,
+    check .code:n = { \RequirePackage { zref-check } } ,
+    check .value_forbidden:n = true ,
   }
 \AddToHook { begindocument }
   {
@@ -2821,20 +2821,21 @@
               {
                 \bool_set_true:N \l_@@_zcref_with_check_bool
                 \keys_set:nn { zref-check / zcheck } {#1}
-              }
+              } ,
+            check .value_required:n = true ,
           }
       }
       {
         \bool_set_false:N \l_@@_zrefcheck_available_bool
         \keys_define:nn { zref-clever / reference }
           {
+            check .value_forbidden:n = false ,
             check .code:n =
-              { \msg_warning:nn { zref-clever } { missing-zref-check } }
+              { \msg_warning:nn { zref-clever } { missing-zref-check } } ,
           }
       }
   }
 %    \end{macrocode}
-%
 %
 %
 % \subsubsection*{\opt{countertype} option}
