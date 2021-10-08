@@ -5580,9 +5580,54 @@
 %
 % \subsection{\pkg{enumitem} package}
 %
-% TODO Option \opt{counterresetby} should probably be extended for
-% \pkg{enumitem}, conditioned on it being loaded.
+% The procedure below will ``see'' any changes made to the \texttt{enumerate}
+% environment (made with \pkg{enumitem}'s \cs{renewlist}) as long as it is
+% done in the preamble.  Though, technically, \cs{renewlist} can be issued
+% anywhere in the document, this should be more than enough for the purpose at
+% hand.  Besides, trying to retrieve this information ``on the fly'' would be
+% much overkill.
 %
+% The only real reason to ``renew'' \texttt{enumerate} itself is to change
+% \marg{max-depth}.  \cs{renewlist} \emph{hard-codes} \texttt{max-depth} in
+% the environment's definition (well, just as the kernel does), so we cannot
+% retrieve this information from any sort of variable.  But \cs{renewlist}
+% also creates any needed missing counters, so we can use their existence to
+% make the appropriate settings.  In the end, the existence of the counters is
+% indeed what matters from \pkg{zref-clever}'s perspective.  Since the first
+% four are defined by the kernel and already setup for \pkg{zref-clever} by
+% default, we start from \(5\), and stop at the first non-existent
+% \cs{c@enumN} counter.
+%
+%    \begin{macrocode}
+\AddToHook { begindocument }
+  {
+    \@ifpackageloaded { enumitem }
+      {
+        \int_set:Nn \l_tmpa_int { 5 }
+        \bool_while_do:nn
+          {
+            \cs_if_exist_p:c
+              { c@ enum \int_to_roman:n { \l_tmpa_int } }
+          }
+          {
+            \exp_args:Nx \zcsetup
+              {
+                counterresetby =
+                  {
+                    enum \int_to_roman:n { \l_tmpa_int } =
+                    enum \int_to_roman:n { \l_tmpa_int - 1 }
+                  } ,
+                countertype =
+                  { enum \int_to_roman:n { \l_tmpa_int } = item } ,
+              }
+            \int_incr:N \l_tmpa_int
+          }
+        \int_compare:nNnT { \l_tmpa_int } > { 5 }
+          { \msg_info:nnn { zref-clever } { compat-package } { enumitem } }
+      }
+      {}
+  }
+%    \end{macrocode}
 %
 %
 %    \begin{macrocode}
