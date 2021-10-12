@@ -5564,8 +5564,26 @@
   {
     \@ifpackageloaded { appendix }
       {
+        \newcounter { zc@appendix }
+        \newcounter { zc@save@appendix }
+        \setcounter { zc@appendix } { 0 }
+        \setcounter { zc@save@appendix } { 0 }
+        \cs_if_exist:cTF { chapter }
+          {
+            \cs_if_exist:cT { section }
+              {
+                \@@_zcsetup:n
+                  { counterresetby = { section = zc@appendix } }
+              }
+          }
+          {
+            \@@_zcsetup:n
+              { counterresetby = { chapter = zc@appendix } }
+          }
         \AddToHook { env / appendices / begin }
           {
+            \stepcounter { zc@save@appendix }
+            \setcounter { zc@appendix } { \value { zc@save@appendix } }
             \@@_zcsetup:n
               {
                 countertype =
@@ -5577,17 +5595,23 @@
                   }
               }
           }
+        \AddToHook { env / appendices / end }
+          { \setcounter { zc@appendix } { 0 } }
+        \AddToHook { cmd / appendix / before }
+          {
+            \stepcounter { zc@save@appendix }
+            \setcounter { zc@appendix } { \value { zc@save@appendix } }
+          }
         \AddToHook { env / subappendices / begin }
           {
             \@@_zcsetup:n
               {
                 countertype =
                   {
-                    chapter       = subappendix ,
-                    section       = subappendix ,
-                    subsection    = subappendix ,
-                    subsubsection = subappendix ,
-                  }
+                    section       = appendix ,
+                    subsection    = appendix ,
+                    subsubsection = appendix ,
+                  } ,
               }
           }
         \msg_info:nnn { zref-clever } { compat-package } { appendix }
