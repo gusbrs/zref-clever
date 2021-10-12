@@ -1533,34 +1533,19 @@
 % there is no possible verification mechanism for this.
 %
 %
-% \begin{macro}[EXP]
-%   {
-%     \@@_get_enclosing_counters:n ,
-%     \@@_get_enclosing_counters_value:n ,
-%   }
-%     Recursively generate a \emph{sequence} of ``enclosing counters'' and
-%     values, for a given \meta{counter} and leave it in the input stream.
-%     These functions must be expandable, since they get called from
-%     \cs{zref@newprop} and are the ones responsible for generating the
-%     desired information when the label is being set.  Note that the order in
-%     which we are getting this information is reversed, since we are
-%     navigating the counter reset chain bottom-up.  But it is very hard to do
-%     otherwise here where we need expandable functions, and easy to handle at
-%     the reading side.
+% \begin{macro}[EXP]{\@@_get_enclosing_counters_value:n}
+%   Recursively generate a \emph{sequence} of ``enclosing counters'' values,
+%   for a given \meta{counter} and leave it in the input stream.  These
+%   functions must be expandable, since they get called from \cs{zref@newprop}
+%   and are the ones responsible for generating the desired information when
+%   the label is being set.  Note that the order in which we are getting this
+%   information is reversed, since we are navigating the counter reset chain
+%   bottom-up.  But it is very hard to do otherwise here where we need
+%   expandable functions, and easy to handle at the reading side.
 %     \begin{syntax}
-%       \cs{@@_get_enclosing_counters:n} \Arg{counter}
 %       \cs{@@_get_enclosing_counters_value:n} \Arg{counter}
 %     \end{syntax}
 %    \begin{macrocode}
-\cs_new:Npn \@@_get_enclosing_counters:n #1
-  {
-    \cs_if_exist:cT { c@ \@@_counter_reset_by:n {#1} }
-      {
-        { \@@_counter_reset_by:n {#1} }
-        \@@_get_enclosing_counters:e
-          { \@@_counter_reset_by:n {#1} }
-      }
-  }
 \cs_new:Npn \@@_get_enclosing_counters_value:n #1
   {
     \cs_if_exist:cT { c@ \@@_counter_reset_by:n {#1} }
@@ -1580,18 +1565,16 @@
 % \url{https://tex.stackexchange.com/q/611370/#comment1529282_611385}, thanks
 % Enrico Gregorio, aka `egreg').
 %    \begin{macrocode}
-\cs_generate_variant:Nn \@@_get_enclosing_counters:n { e }
 \cs_generate_variant:Nn \@@_get_enclosing_counters_value:n { e }
 %    \end{macrocode}
 % \end{macro}
 %
 %
 % \begin{macro}[EXP]{\@@_counter_reset_by:n}
-%   Auxiliary function for \cs{@@_get_enclosing_counters:n} and
-%   \cs{@@_get_enclosing_counters_value:n}.  They are broken in parts to be
-%   able to use the expandable mapping functions.  \cs{@@_counter_reset_by:n}
-%   leaves in the stream the ``enclosing counter'' which resets
-%   \meta{counter}.
+%   Auxiliary function for \cs{@@_get_enclosing_counters_value:n}, and useful
+%   on its own standing.  It is broken in parts to be able to use the
+%   expandable mapping functions.  \cs{@@_counter_reset_by:n} leaves in the
+%   stream the ``enclosing counter'' which resets \meta{counter}.
 %   \begin{syntax}
 %     \cs{@@_counter_reset_by:n} \Arg{counter}
 %   \end{syntax}
@@ -1626,14 +1609,11 @@
 % \end{macro}
 %
 %
-% Finally, we create the \texttt{zc@enclcnt} and \texttt{zc@enclval}
-% properties, and add them to the \texttt{main} property list.
+% Finally, we create the \texttt{zc@enclval} property, and add it to the
+% \texttt{main} property list.
 %    \begin{macrocode}
-\zref@newprop { zc@enclcnt }
-  { \@@_get_enclosing_counters:e \l_@@_current_counter_tl }
 \zref@newprop { zc@enclval }
   { \@@_get_enclosing_counters_value:e \l_@@_current_counter_tl }
-\zref@addprop \ZREF@mainlist { zc@enclcnt }
 \zref@addprop \ZREF@mainlist { zc@enclval }
 %    \end{macrocode}
 %
@@ -1757,8 +1737,6 @@
     Option~'check'~requested~\msg_line_context:.~
     But~package~'zref-check'~is~not~loaded,~can't~run~the~checks.
   }
-\msg_new:nnn { zref-clever } { counters-not-nested }
-  { Counters~not~nested~for~labels~'#1'~and~'#2'~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { missing-type }
   { Reference~type~undefined~for~label~'#1'~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { missing-name }
@@ -2990,14 +2968,13 @@
 % \subsubsection*{\opt{counterresetters} option}
 %
 % \cs{l_@@_counter_resetters_seq} is used by \cs{@@_counter_reset_by:n} to
-% populate the \texttt{zc@enclcnt} and \texttt{zc@enclval} properties, and
-% stores the list of counters which are potential ``enclosing counters'' for
-% other counters.  This option is constructed such that users can only
-% \emph{add} items to the variable.  There would be little gain and some risk
-% in allowing removal, and the syntax of the option would become unnecessarily
-% more complicated.  Besides, users can already override, for any particular
-% counter, the search done from the set in \cs{l_@@_counter_resetters_seq}
-% with the \opt{counterresetby} option.
+% populate the \texttt{zc@enclval} property, and stores the list of counters
+% which are potential ``enclosing counters'' for other counters.  This option
+% is constructed such that users can only \emph{add} items to the variable.
+% There would be little gain and some risk in allowing removal, and the syntax
+% of the option would become unnecessarily more complicated.  Besides, users
+% can already override, for any particular counter, the search done from the
+% set in \cs{l_@@_counter_resetters_seq} with the \opt{counterresetby} option.
 %
 %    \begin{macrocode}
 \seq_new:N \l_@@_counter_resetters_seq
@@ -3033,10 +3010,10 @@
 % \subsubsection*{\opt{counterresetby} option}
 %
 % \cs{l_@@_counter_resetby_prop} is used by \cs{@@_counter_reset_by:n} to
-% populate the \texttt{zc@enclcnt} and \texttt{zc@enclval} properties, and
-% stores a mapping from counters to the counter which resets each of them.
-% This mapping has precedence in \cs{@@_counter_reset_by:n} over the search
-% through \cs{l_@@_counter_resetters_seq}.
+% populate the \texttt{zc@enclval} property, and stores a mapping from
+% counters to the counter which resets each of them.  This mapping has
+% precedence in \cs{@@_counter_reset_by:n} over the search through
+% \cs{l_@@_counter_resetters_seq}.
 %
 %    \begin{macrocode}
 \prop_new:N \l_@@_counter_resetby_prop
@@ -3565,8 +3542,6 @@
 %   {
 %     \l_@@_label_type_a_tl ,
 %     \l_@@_label_type_b_tl ,
-%     \l_@@_label_enclcnt_a_tl ,
-%     \l_@@_label_enclcnt_b_tl ,
 %     \l_@@_label_enclval_a_tl ,
 %     \l_@@_label_enclval_b_tl ,
 %     \l_@@_label_extdoc_a_tl ,
@@ -3578,8 +3553,6 @@
 %    \begin{macrocode}
 \tl_new:N \l_@@_label_type_a_tl
 \tl_new:N \l_@@_label_type_b_tl
-\tl_new:N \l_@@_label_enclcnt_a_tl
-\tl_new:N \l_@@_label_enclcnt_b_tl
 \tl_new:N \l_@@_label_enclval_a_tl
 \tl_new:N \l_@@_label_enclval_b_tl
 \tl_new:N \l_@@_label_extdoc_a_tl
@@ -3791,14 +3764,6 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_sort_default_same_type:nn #1#2
   {
-    \tl_set:Nx \l_@@_label_enclcnt_a_tl
-      { \zref@extractdefault {#1} { zc@enclcnt } { \c_empty_tl } }
-    \tl_set:Nx \l_@@_label_enclcnt_a_tl
-      { \tl_reverse_items:V \l_@@_label_enclcnt_a_tl }
-    \tl_set:Nx \l_@@_label_enclcnt_b_tl
-      { \zref@extractdefault {#2} { zc@enclcnt } { \c_empty_tl } }
-    \tl_set:Nx \l_@@_label_enclcnt_b_tl
-      { \tl_reverse_items:V \l_@@_label_enclcnt_b_tl }
     \tl_set:Nx \l_@@_label_enclval_a_tl
       { \zref@extractdefault {#1} { zc@enclval } { \c_empty_tl } }
     \tl_set:Nx \l_@@_label_enclval_a_tl
@@ -3858,146 +3823,71 @@
           {
             % Both are empty: neither label has any (further) "enclosing
             % counters" (left).
-            \tl_if_empty_p:V \l_@@_label_enclcnt_a_tl &&
-            \tl_if_empty_p:V \l_@@_label_enclcnt_b_tl
+            \tl_if_empty_p:V \l_@@_label_enclval_a_tl &&
+            \tl_if_empty_p:V \l_@@_label_enclval_b_tl
           }
           {
-            \exp_args:Nxx \tl_if_eq:nnTF
-              { \zref@extractdefault {#1} { zc@counter } { } }
-              { \zref@extractdefault {#2} { zc@counter } { } }
-              {
-                \bool_set_true:N \l_@@_sort_decided_bool
-                \int_compare:nNnTF
-                  { \zref@extractdefault {#1} { zc@cntval } { -1 } }
-                    >
-                  { \zref@extractdefault {#2} { zc@cntval } { -1 } }
-                  { \sort_return_swapped: }
-                  { \sort_return_same:    }
-              }
-              {
-                \msg_warning:nnnn { zref-clever }
-                  { counters-not-nested } {#1} {#2}
-                \bool_set_true:N \l_@@_sort_decided_bool
-                \sort_return_same:
-              }
+            \bool_set_true:N \l_@@_sort_decided_bool
+            \int_compare:nNnTF
+              { \zref@extractdefault {#1} { zc@cntval } { -1 } }
+                >
+              { \zref@extractdefault {#2} { zc@cntval } { -1 } }
+              { \sort_return_swapped: }
+              { \sort_return_same:    }
           }
           {
             \bool_if:nTF
               {
                 % `a' is empty (and `b' is not): `b' may be nested in `a'.
-                \tl_if_empty_p:V \l_@@_label_enclcnt_a_tl
+                \tl_if_empty_p:V \l_@@_label_enclval_a_tl
               }
               {
-                \int_zero:N \l_tmpb_int
-                \tl_map_inline:Nn \l_@@_label_enclcnt_b_tl
-                  {
-                    \int_incr:N \l_tmpb_int
-                    \exp_args:Nnx \tl_if_eq:nnT {##1}
-                      { \zref@extractdefault {#1} { zc@counter } { } }
-                      {
-                        \tl_map_break:n
-                          {
-                            \int_compare:nNnTF
-                              { \zref@extractdefault {#1} { zc@cntval } { } }
-                                >
-                              {
-                                \tl_item:Nn \l_@@_label_enclval_b_tl
-                                  { \l_tmpb_int }
-                              }
-                              { \sort_return_swapped: }
-                              { \sort_return_same:    }
-                            \bool_set_true:N \l_@@_sort_decided_bool
-                          }
-                      }
-                  }
-                \bool_if:NF \l_@@_sort_decided_bool
-                  {
-                    \msg_warning:nnnn { zref-clever }
-                      { counters-not-nested } {#1} {#2}
-                    \bool_set_true:N \l_@@_sort_decided_bool
-                    \sort_return_same:
-                  }
+                \bool_set_true:N \l_@@_sort_decided_bool
+                \int_compare:nNnTF
+                  { \zref@extractdefault {#1} { zc@cntval } { } }
+                    >
+                  { \tl_head:N \l_@@_label_enclval_b_tl }
+                  { \sort_return_swapped: }
+                  { \sort_return_same:    }
               }
               {
                 \bool_if:nTF
                   {
                     % `b' is empty (and `a' is not): `a' may be nested in `b'.
-                    \tl_if_empty_p:V \l_@@_label_enclcnt_b_tl
+                    \tl_if_empty_p:V \l_@@_label_enclval_b_tl
                   }
                   {
-                    \int_zero:N \l_tmpa_int
-                    \tl_map_inline:Nn \l_@@_label_enclcnt_a_tl
-                      {
-                        \int_incr:N \l_tmpa_int
-                        \exp_args:Nnx \tl_if_eq:nnT {##1}
-                          { \zref@extractdefault {#2} { zc@counter } { } }
-                          {
-                            \tl_map_break:n
-                              {
-                                \int_compare:nNnTF
-                                  {
-                                    \tl_item:Nn
-                                      \l_@@_label_enclval_a_tl
-                                      { \l_tmpa_int }
-                                  }
-                                    <
-                                  {
-                                    \zref@extractdefault {#2}
-                                      { zc@cntval } { }
-                                  }
-                                  { \sort_return_same:    }
-                                  { \sort_return_swapped: }
-                                \bool_set_true:N
-                                  \l_@@_sort_decided_bool
-                              }
-                          }
-                      }
-                    \bool_if:NF \l_@@_sort_decided_bool
-                      {
-                        \msg_warning:nnnn { zref-clever }
-                          { counters-not-nested } {#1} {#2}
-                        \bool_set_true:N \l_@@_sort_decided_bool
-                        \sort_return_same:
-                      }
+                    \bool_set_true:N \l_@@_sort_decided_bool
+                    \int_compare:nNnTF
+                      { \tl_head:N \l_@@_label_enclval_a_tl }
+                        <
+                      { \zref@extractdefault {#2} { zc@cntval } { } }
+                      { \sort_return_same:    }
+                      { \sort_return_swapped: }
                   }
                   {
-                    % Neither is empty: we can (possibly) compare the values
-                    % of the current enclosing counter in the loop, if they
-                    % are equal, we are still in the loop, if they are not, a
+                    % Neither is empty: we can compare the values of the
+                    % current enclosing counter in the loop, if they are
+                    % equal, we are still in the loop, if they are not, a
                     % sorting decision can be made directly.
-                    \exp_args:Nxx \tl_if_eq:nnTF
-                      { \tl_head:N \l_@@_label_enclcnt_a_tl }
-                      { \tl_head:N \l_@@_label_enclcnt_b_tl }
+                    \int_compare:nNnTF
+                      { \tl_head:N \l_@@_label_enclval_a_tl }
+                        =
+                      { \tl_head:N \l_@@_label_enclval_b_tl }
                       {
+                        \tl_set:Nx \l_@@_label_enclval_a_tl
+                          { \tl_tail:N \l_@@_label_enclval_a_tl }
+                        \tl_set:Nx \l_@@_label_enclval_b_tl
+                          { \tl_tail:N \l_@@_label_enclval_b_tl }
+                      }
+                      {
+                        \bool_set_true:N \l_@@_sort_decided_bool
                         \int_compare:nNnTF
                           { \tl_head:N \l_@@_label_enclval_a_tl }
-                            =
+                            >
                           { \tl_head:N \l_@@_label_enclval_b_tl }
-                          {
-                            \tl_set:Nx \l_@@_label_enclcnt_a_tl
-                              { \tl_tail:N \l_@@_label_enclcnt_a_tl }
-                            \tl_set:Nx \l_@@_label_enclcnt_b_tl
-                              { \tl_tail:N \l_@@_label_enclcnt_b_tl }
-                            \tl_set:Nx \l_@@_label_enclval_a_tl
-                              { \tl_tail:N \l_@@_label_enclval_a_tl }
-                            \tl_set:Nx \l_@@_label_enclval_b_tl
-                              { \tl_tail:N \l_@@_label_enclval_b_tl }
-                          }
-                          {
-                            \bool_set_true:N \l_@@_sort_decided_bool
-                            \int_compare:nNnTF
-                              { \tl_head:N \l_@@_label_enclval_a_tl }
-                                >
-                              { \tl_head:N \l_@@_label_enclval_b_tl }
-                              { \sort_return_swapped: }
-                              { \sort_return_same:    }
-                          }
-                      }
-                      {
-                        \msg_warning:nnnn { zref-clever }
-                          { counters-not-nested } {#1} {#2}
-                        \bool_set_true:N \l_@@_sort_decided_bool
-                        \sort_return_same:
+                          { \sort_return_swapped: }
+                          { \sort_return_same:    }
                       }
                   }
               }
