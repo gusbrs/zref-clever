@@ -5598,6 +5598,113 @@
 %
 %
 %
+% \subsection{\pkg{amsmath} package}
+%
+%
+%    \begin{macrocode}
+\AddToHook { begindocument }
+  {
+    \@ifpackageloaded { amsmath }
+      {
+        \cs_set_nopar:Npn \@@_ltxlabel:n #1
+          {
+            \@@_orig_ltxlabel:n {#1}
+            \zlabel {#1}
+          }
+        % We must handle 'hyperref' here, which comes very late in the
+        % preamble, and which loads 'nameref' with a 'atbegindocument' hook,
+        % which in turn, lets '\ltx@label' be '\label'.  This has to come
+        % after 'nameref'.  'cleveref' also redefines it, and comes even
+        % later, but this is not compatible with it.
+        \IfFormatAtLeastTF { 2021-11-15 }
+          {
+            \@ifpackageloaded { hyperref }
+              {
+                \AddToHook { package / nameref / after }
+                  {
+                    \cs_set_eq:NN \@@_orig_ltxlabel:n \ltx@label
+                    \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
+                  }
+              }
+              {
+                \cs_set_eq:NN \@@_orig_ltxlabel:n \ltx@label
+                \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
+              }
+          }
+          {
+            \@ifpackageloaded { hyperref }
+              {
+                \@ifpackageloaded { nameref }
+                  {
+                    \cs_set_eq:NN \@@_orig_ltxlabel:n \ltx@label
+                    \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
+                  }
+                  {
+                    \AddToHook { package / after / nameref }
+                      {
+                        \cs_set_eq:NN \@@_orig_ltxlabel:n \ltx@label
+                        \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
+                      }
+                  }
+              }
+              {
+                \cs_set_eq:NN \@@_orig_ltxlabel:n \ltx@label
+                \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
+              }
+          }
+
+        \clist_map_inline:nn
+          {
+            equation ,
+            equation* ,
+            align ,
+            align* ,
+            alignat ,
+            alignat* ,
+            flalign ,
+            flalign* ,
+            xalignat ,
+            xalignat* ,
+            xxalignat ,
+            gather ,
+            gather* ,
+            multline ,
+            multline* ,
+          }
+          {
+            \AddToHook { env / #1 / begin }
+              {
+                % Needed for '\tag', but also for subequations, since we have
+                % to manually set currentcounter to 'parentequation' in them,
+                % we also have to manually set it to 'equation' in the
+                % environments within it.
+                \@@_zcsetup:n { currentcounter = equation }
+                % Makes no sense here, better empty than confusing.
+                \zref@setcurrent { title } { }
+              }
+          }
+        \AddToHook { env / subequations / begin }
+          {
+            \@@_zcsetup:x
+              {
+                counterresetby =
+                  {
+                    parentequation =
+                      \@@_counter_reset_by:n { equation } ,
+                    equation = parentequation ,
+                  } ,
+                currentcounter = parentequation ,
+                countertype = { parentequation = equation } ,
+              }
+          }
+        \msg_info:nnn { zref-clever } { compat-package } { amsmath }
+      }
+      {}
+  }
+%    \end{macrocode}
+%
+%
+%
 % \subsection{\pkg{listings} package}
 %
 %    \begin{macrocode}
