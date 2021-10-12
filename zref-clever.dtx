@@ -5312,8 +5312,19 @@
                           {
                             \bool_set_true:N
                               \l_@@_next_maybe_range_bool
-                            \bool_set_true:N
-                              \l_@@_next_is_same_bool
+                            \exp_args:Nxx \tl_if_eq:nnT
+                              {
+                                \zref@extractdefault {#1}
+                                  { \l_@@_ref_property_tl } { }
+                              }
+                              {
+                                \zref@extractdefault {#2}
+                                  { \l_@@_ref_property_tl } { }
+                              }
+                              {
+                                \bool_set_true:N
+                                  \l_@@_next_is_same_bool
+                              }
                           }
                       }
                   }
