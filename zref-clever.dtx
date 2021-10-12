@@ -135,7 +135,7 @@
 %   performed by \cs{zcRefTypeSetup} are local, within the current group.
 % \end{function}
 %
-% \vspace{\baselineskip}
+% \bigskip{}
 %
 % Besides these, user facing commands related to \zcref*[ref=title,
 % noname]{sec:internationalization} are presented in
@@ -176,7 +176,7 @@
 % necessarily true for all cases, some restrictions may apply, as described in
 % each option's documentation.
 %
-% \vspace{\baselineskip}
+% \bigskip{}
 %
 % \DescribeOption{ref} %
 % \DescribeOption{page} %
@@ -921,7 +921,7 @@
 %   but language-specific options).  \cs{zcLanguageSetup} is preamble only.
 % \end{function}
 %
-% \vspace{\baselineskip}
+% \bigskip{}
 %
 % \pkg{zref-clever}'s ``dictionaries'' are loaded sparingly and lazily.  A
 % dictionary for a single language -- that specified by user options in the
@@ -1170,7 +1170,7 @@
 % ``\texttt{A}'' to the labels from ``\texttt{B}'', and not the contrary, a
 % minimum setup would be the following.
 %
-% \vspace{\baselineskip}
+% \bigskip{}
 %
 % \file{documentA.tex}:
 %
@@ -1613,7 +1613,10 @@
 % \texttt{main} property list.
 %    \begin{macrocode}
 \zref@newprop { zc@enclval }
-  { \@@_get_enclosing_counters_value:e \l_@@_current_counter_tl }
+  {
+    \@@_get_enclosing_counters_value:e
+      \l_@@_current_counter_tl
+  }
 \zref@addprop \ZREF@mainlist { zc@enclval }
 %    \end{macrocode}
 %
@@ -1649,7 +1652,7 @@
   {
     \group_begin:
     \cs_set_eq:NN \c@page \@@_page_format_aux:
-    \exp_args:NNx \tl_gset:Nn \g_@@_page_format_tl { \thepage }
+    \tl_gset:Nx \g_@@_page_format_tl { \thepage }
     \group_end:
   }
 \zref@newprop* { zc@pgfmt } { \g_@@_page_format_tl }
@@ -1657,11 +1660,12 @@
 %    \end{macrocode}
 %
 %
-% Still another property which we don't need to handle at the data provision
-% side, but need to cater for at the retrieval side, is the \texttt{url}
-% property (or the equivalent \texttt{urluse}) from the \pkg{zref-xr} module,
-% which is added to the labels imported from external documents, and needed to
-% construct hyperlinks to them.
+% Still some other properties which we don't need to handle at the data
+% provision side, but need to cater for at the retrieval side, are the ones
+% from the \pkg{zref-xr} module, which are added to the labels imported from
+% external documents, and needed to construct hyperlinks to them and to
+% distinguish them from the current document ones at sorting and compressing:
+% \texttt{urluse}, \texttt{url} and \texttt{externaldocument}.
 %
 %
 %
@@ -1793,7 +1797,8 @@
     \exp_args:NNo \exp_args:No
       \exp_not:n { \zref@extractdefault {#1} {#2} {#3} }
   }
-\cs_generate_variant:Nn \@@_extract_default_unexp:nnn { Vnn , nvn , Vvn }
+\cs_generate_variant:Nn
+  \@@_extract_default_unexp:nnn { Vnn , nvn , Vvn }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3205,6 +3210,7 @@
 % \end{macro}
 %
 % \begin{macro}{\@@_zcsetup:n}
+%   A version of \cs{zcsetup} for internal use with variant.
 %   \begin{syntax}
 %     \cs{@@_zcsetup:n}\marg{options}
 %   \end{syntax}
@@ -3796,13 +3802,25 @@
                 % Neither label has a type.  We can't do much of meaningful
                 % here, but if it's the same counter, compare it.
                 \exp_args:Nxx \tl_if_eq:nnTF
-                  { \@@_extract_default_unexp:nnn {#1} { zc@counter } { } }
-                  { \@@_extract_default_unexp:nnn {#2} { zc@counter } { } }
+                  {
+                    \@@_extract_default_unexp:nnn
+                      {#1} { zc@counter } { }
+                  }
+                  {
+                    \@@_extract_default_unexp:nnn
+                      {#2} { zc@counter } { }
+                  }
                   {
                     \int_compare:nNnTF
-                      { \@@_extract_default:nnn {#1} { zc@cntval } { -1 } }
+                      {
+                        \@@_extract_default:nnn
+                          {#1} { zc@cntval } { -1 }
+                      }
                         >
-                      { \@@_extract_default:nnn {#2} { zc@cntval } { -1 } }
+                      {
+                        \@@_extract_default:nnn
+                          {#2} { zc@cntval } { -1 }
+                      }
                       { \sort_return_swapped: }
                       { \sort_return_same:    }
                   }
@@ -3828,16 +3846,16 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_sort_default_same_type:nn #1#2
   {
-    \@@_def_extract_default:Nnnn
-      \l_@@_label_enclval_a_tl {#1} { zc@enclval } { \c_empty_tl }
+    \@@_def_extract_default:Nnnn \l_@@_label_enclval_a_tl
+      {#1} { zc@enclval } { \c_empty_tl }
     \tl_reverse:N \l_@@_label_enclval_a_tl
-    \@@_def_extract_default:Nnnn
-      \l_@@_label_enclval_b_tl {#2} { zc@enclval } { \c_empty_tl }
+    \@@_def_extract_default:Nnnn \l_@@_label_enclval_b_tl
+      {#2} { zc@enclval } { \c_empty_tl }
     \tl_reverse:N \l_@@_label_enclval_b_tl
-    \@@_def_extract_default:Nnnn
-      \l_@@_label_extdoc_a_tl {#1} { externaldocument } { \c_empty_tl }
-    \@@_def_extract_default:Nnnn
-      \l_@@_label_extdoc_b_tl {#2} { externaldocument } { \c_empty_tl }
+    \@@_def_extract_default:Nnnn \l_@@_label_extdoc_a_tl
+      {#1} { externaldocument } { \c_empty_tl }
+    \@@_def_extract_default:Nnnn \l_@@_label_extdoc_b_tl
+      {#2} { externaldocument } { \c_empty_tl }
 
     \bool_set_false:N \l_@@_sort_decided_bool
 
@@ -3923,7 +3941,10 @@
                     \int_compare:nNnTF
                       { \tl_head:N \l_@@_label_enclval_a_tl }
                         <
-                      { \@@_extract_default:nnn {#2} { zc@cntval } { } }
+                      {
+                        \@@_extract_default:nnn
+                          {#2} { zc@cntval } { }
+                      }
                       { \sort_return_same:    }
                       { \sort_return_swapped: }
                   }
@@ -5280,11 +5301,20 @@
 \cs_new:Npn \@@_extract_url_unexp:n #1
   {
     \zref@ifpropundefined { urluse }
-      { \@@_extract_default_unexp:nnn {#1} { url } { \c_empty_tl } }
+      {
+        \@@_extract_default_unexp:nnn
+          {#1} { url } { \c_empty_tl }
+      }
       {
         \zref@ifrefcontainsprop {#1} { urluse }
-          { \@@_extract_default_unexp:nnn {#1} { urluse } { \c_empty_tl } }
-          { \@@_extract_default_unexp:nnn {#1} { url } { \c_empty_tl } }
+          {
+            \@@_extract_default_unexp:nnn
+              {#1} { urluse } { \c_empty_tl }
+          }
+          {
+            \@@_extract_default_unexp:nnn
+              {#1} { url } { \c_empty_tl }
+          }
       }
   }
 \cs_generate_variant:Nn \@@_extract_url_unexp:n { V }
@@ -5307,10 +5337,10 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_labels_in_sequence:nn #1#2
   {
-    \@@_def_extract_default:Nnnn
-      \l_@@_label_extdoc_a_tl {#1} { externaldocument } { \c_empty_tl }
-    \@@_def_extract_default:Nnnn
-      \l_@@_label_extdoc_b_tl {#2} { externaldocument } { \c_empty_tl }
+    \@@_def_extract_default:Nnnn \l_@@_label_extdoc_a_tl
+      {#1} { externaldocument } { \c_empty_tl }
+    \@@_def_extract_default:Nnnn \l_@@_label_extdoc_b_tl
+      {#2} { externaldocument } { \c_empty_tl }
 
     \tl_if_eq:NNT
       \l_@@_label_extdoc_a_tl
@@ -5319,19 +5349,37 @@
         \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
           {
             \exp_args:Nxx \tl_if_eq:nnT
-              { \@@_extract_default_unexp:nnn {#1} { zc@pgfmt } { } }
-              { \@@_extract_default_unexp:nnn {#2} { zc@pgfmt } { } }
+              {
+                \@@_extract_default_unexp:nnn
+                  {#1} { zc@pgfmt } { }
+              }
+              {
+                \@@_extract_default_unexp:nnn
+                  {#2} { zc@pgfmt } { }
+              }
               {
                 \int_compare:nNnTF
-                  { \@@_extract_default:nnn {#1} { zc@pgval } { -2 } + 1 }
-                    =
-                  { \@@_extract_default:nnn {#2} { zc@pgval } { -1 } }
+                  {
+                    \@@_extract_default:nnn
+                      {#1} { zc@pgval } { -2 } + 1
+                  }
+                  =
+                  {
+                    \@@_extract_default:nnn
+                      {#2} { zc@pgval } { -1 }
+                  }
                   { \bool_set_true:N \l_@@_next_maybe_range_bool }
                   {
                     \int_compare:nNnT
-                      { \@@_extract_default:nnn {#1} { zc@pgval } { -1 } }
-                        =
-                      { \@@_extract_default:nnn {#2} { zc@pgval } { -1 } }
+                      {
+                        \@@_extract_default:nnn
+                          {#1} { zc@pgval } { -1 }
+                      }
+                      =
+                      {
+                        \@@_extract_default:nnn
+                          {#2} { zc@pgval } { -1 }
+                      }
                       {
                         \bool_set_true:N
                           \l_@@_next_maybe_range_bool
@@ -5343,23 +5391,50 @@
           }
           {
             \exp_args:Nxx \tl_if_eq:nnT
-              { \@@_extract_default_unexp:nnn {#1} { zc@counter } { } }
-              { \@@_extract_default_unexp:nnn {#2} { zc@counter } { } }
+              {
+                \@@_extract_default_unexp:nnn
+                  {#1} { zc@counter } { }
+              }
+              {
+                \@@_extract_default_unexp:nnn
+                  {#2} { zc@counter } { }
+              }
               {
                 \exp_args:Nxx \tl_if_eq:nnT
-                  { \@@_extract_default_unexp:nnn {#1} { zc@enclval } { } }
-                  { \@@_extract_default_unexp:nnn {#2} { zc@enclval } { } }
+                  {
+                    \@@_extract_default_unexp:nnn
+                      {#1} { zc@enclval } { }
+                  }
+                  {
+                    \@@_extract_default_unexp:nnn
+                      {#2} { zc@enclval } { }
+                  }
                   {
                     \int_compare:nNnTF
-                      { \@@_extract_default:nnn {#1} { zc@cntval } { -2 } + 1 }
-                        =
-                      { \@@_extract_default:nnn {#2} { zc@cntval } { -1 } }
-                      { \bool_set_true:N \l_@@_next_maybe_range_bool }
+                      {
+                        \@@_extract_default:nnn
+                          {#1} { zc@cntval } { -2 } + 1
+                      }
+                      =
+                      {
+                        \@@_extract_default:nnn
+                          {#2} { zc@cntval } { -1 }
+                      }
+                      {
+                        \bool_set_true:N
+                          \l_@@_next_maybe_range_bool
+                      }
                       {
                         \int_compare:nNnT
-                          { \@@_extract_default:nnn {#1} { zc@cntval } { -1 } }
-                            =
-                          { \@@_extract_default:nnn {#2} { zc@cntval } { -1 } }
+                          {
+                            \@@_extract_default:nnn
+                              {#1} { zc@cntval } { -1 }
+                          }
+                          =
+                          {
+                            \@@_extract_default:nnn
+                              {#2} { zc@cntval } { -1 }
+                          }
                           {
                             \bool_set_true:N
                               \l_@@_next_maybe_range_bool
@@ -5509,14 +5584,29 @@
 %
 % This section is meant to aggregate any ``special handling'' needed for
 % \LaTeX{} kernel features, document classes, and packages, needed for
-% \pkg{zref-clever} to work properly with them.  It is not meant to be a
-% ``kitchen sink of workarounds''.  Rather, I intend to keep this as lean as
-% possible, trying to add things selectively when they are safe and
-% reasonable.  And, hopefully, doing so by proper setting of
-% \pkg{zref-clever}'s options, not by messing with other packages' code.  In
-% particular, I do not mean to compensate for ``lack of support for
-% \pkg{zref}'' by individual packages here, unless there is really no
-% alternative.
+% \pkg{zref-clever} to work properly with them.
+%
+%
+% \subsection*{Auxiliary}
+%
+%
+% \begin{macro}{\@@_ride_on_label:n}
+%   An auxiliary function to ``get a ride'' on the standard \cs{label}, so
+%   that it issues a \cs{zlabel} too, to be used locally in selected
+%   environments for compatibility support of packages/features for which
+%   there's really no other way to do it.
+%    \begin{macrocode}
+\AddToHook { begindocument }
+  {
+    \cs_set_eq:NN \@@_orig_label:n \label
+  }
+\cs_new_nopar:Npn \@@_ride_on_label:n #1
+  {
+    \@@_orig_label:n {#1}
+    \zlabel {#1}
+  }
+%    \end{macrocode}
+% \end{macro}
 %
 %
 % \subsection{\cs{footnote}}
@@ -5765,8 +5855,6 @@
                 % we also have to manually set it to 'equation' in the
                 % environments within it.
                 \@@_zcsetup:n { currentcounter = equation }
-                % Makes no sense here, better empty than confusing.
-                \zref@setcurrent { title } { }
               }
           }
         \AddToHook { env / subequations / begin }
