@@ -1756,6 +1756,59 @@
 %
 %
 %
+% \subsection{Data extraction}
+%
+%
+% \begin{macro}{\@@_def_extract_default:Nnnn}
+%   Extract property \meta{prop} from \meta{label} and sets variable \meta{tl
+%   var} with extracted value.  Ensure \cs{zref@extractdefault} is expanded
+%   exactly twice, but no further to retrieve the proper value.  In case the
+%   property is not found, set \meta{tl var} with \meta{default}.
+%   \begin{syntax}
+%     \cs{@@_def_extract_default:Nnnn} \Arg{tl val}
+%     ~~\Arg{label} \Arg{prop} \Arg{default}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_def_extract_default:Nnnn #1#2#3#4
+  {
+    \exp_args:NNNo \exp_args:NNo \tl_set:Nn #1
+      { \zref@extractdefault {#2} {#3} {#4} }
+  }
+\cs_generate_variant:Nn \@@_def_extract_default:Nnnn { NVnn }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_extract_default_unexp:nnn}
+%   Extract property \meta{prop} from \meta{label}.  Ensure that, in the
+%   context of an x expansion, \cs{zref@extractdefault} is expanded exactly
+%   twice, but no further to retrieve the proper value.  Thus, this is meant
+%   to be use in an x expansion context, not in other situations.  In case the
+%   property is not found, leave \meta{default} in the stream.
+%   \begin{syntax}
+%     \cs{@@_extract_default_unexp:nnn}\Arg{label}\Arg{prop}\Arg{default}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_extract_default_unexp:nnn #1#2#3
+  {
+    \exp_args:NNo \exp_args:No
+      \exp_not:n { \zref@extractdefault {#1} {#2} {#3} }
+  }
+\cs_generate_variant:Nn \@@_extract_default_unexp:nnn { Vnn , nvn , Vvn }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_extract_default:nnn}
+%   An internal version for \cs{zref@extractdefault}.
+%   \begin{syntax}
+%     \cs{@@_extract_default:nnn}\Arg{label}\Arg{prop}\Arg{default}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_extract_default:nnn #1#2#3
+  { \zref@extractdefault {#1} {#2} {#3} }
+%    \end{macrocode}
+% \end{macro}
+%
+%
 % \subsection{Reference format}
 %
 % For a general discussion on the precedence rules for reference format
@@ -3675,8 +3728,8 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_label_type_put_new_right:n #1
   {
-    \tl_set:Nx \l_@@_label_type_a_tl
-      { \zref@extractdefault {#1} { zc@type } { \c_empty_tl } }
+    \@@_def_extract_default:Nnnn
+      \l_@@_label_type_a_tl {#1} { zc@type } { \c_empty_tl }
     \seq_if_in:NVF \l_@@_label_types_seq
       \l_@@_label_type_a_tl
       {
@@ -3701,10 +3754,10 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_sort_default:nn #1#2
   {
-    \tl_set:Nx \l_@@_label_type_a_tl
-      { \zref@extractdefault {#1} { zc@type } { \c_empty_tl } }
-    \tl_set:Nx \l_@@_label_type_b_tl
-      { \zref@extractdefault {#2} { zc@type } { \c_empty_tl } }
+    \@@_def_extract_default:Nnnn
+      \l_@@_label_type_a_tl {#1} { zc@type } { \c_empty_tl }
+    \@@_def_extract_default:Nnnn
+      \l_@@_label_type_b_tl {#2} { zc@type } { \c_empty_tl }
 
     \bool_if:nTF
       {
@@ -3743,13 +3796,13 @@
                 % Neither label has a type.  We can't do much of meaningful
                 % here, but if it's the same counter, compare it.
                 \exp_args:Nxx \tl_if_eq:nnTF
-                  { \zref@extractdefault {#1} { zc@counter } { } }
-                  { \zref@extractdefault {#2} { zc@counter } { } }
+                  { \@@_extract_default_unexp:nnn {#1} { zc@counter } { } }
+                  { \@@_extract_default_unexp:nnn {#2} { zc@counter } { } }
                   {
                     \int_compare:nNnTF
-                      { \zref@extractdefault {#1} { zc@cntval } { -1 } }
+                      { \@@_extract_default:nnn {#1} { zc@cntval } { -1 } }
                         >
-                      { \zref@extractdefault {#2} { zc@cntval } { -1 } }
+                      { \@@_extract_default:nnn {#2} { zc@cntval } { -1 } }
                       { \sort_return_swapped: }
                       { \sort_return_same:    }
                   }
@@ -3775,18 +3828,16 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_sort_default_same_type:nn #1#2
   {
-    \tl_set:Nx \l_@@_label_enclval_a_tl
-      { \zref@extractdefault {#1} { zc@enclval } { \c_empty_tl } }
-    \tl_set:Nx \l_@@_label_enclval_a_tl
-      { \tl_reverse_items:V \l_@@_label_enclval_a_tl }
-    \tl_set:Nx \l_@@_label_enclval_b_tl
-      { \zref@extractdefault {#2} { zc@enclval } { \c_empty_tl } }
-    \tl_set:Nx \l_@@_label_enclval_b_tl
-      { \tl_reverse_items:V \l_@@_label_enclval_b_tl }
-    \tl_set:Nx \l_@@_label_extdoc_a_tl
-      { \zref@extractdefault {#1} { externaldocument } { \c_empty_tl } }
-    \tl_set:Nx \l_@@_label_extdoc_b_tl
-      { \zref@extractdefault {#2} { externaldocument } { \c_empty_tl } }
+    \@@_def_extract_default:Nnnn
+      \l_@@_label_enclval_a_tl {#1} { zc@enclval } { \c_empty_tl }
+    \tl_reverse:N \l_@@_label_enclval_a_tl
+    \@@_def_extract_default:Nnnn
+      \l_@@_label_enclval_b_tl {#2} { zc@enclval } { \c_empty_tl }
+    \tl_reverse:N \l_@@_label_enclval_b_tl
+    \@@_def_extract_default:Nnnn
+      \l_@@_label_extdoc_a_tl {#1} { externaldocument } { \c_empty_tl }
+    \@@_def_extract_default:Nnnn
+      \l_@@_label_extdoc_b_tl {#2} { externaldocument } { \c_empty_tl }
 
     \bool_set_false:N \l_@@_sort_decided_bool
 
@@ -3840,9 +3891,9 @@
           {
             \bool_set_true:N \l_@@_sort_decided_bool
             \int_compare:nNnTF
-              { \zref@extractdefault {#1} { zc@cntval } { -1 } }
+              { \@@_extract_default:nnn {#1} { zc@cntval } { -1 } }
                 >
-              { \zref@extractdefault {#2} { zc@cntval } { -1 } }
+              { \@@_extract_default:nnn {#2} { zc@cntval } { -1 } }
               { \sort_return_swapped: }
               { \sort_return_same:    }
           }
@@ -3855,7 +3906,7 @@
               {
                 \bool_set_true:N \l_@@_sort_decided_bool
                 \int_compare:nNnTF
-                  { \zref@extractdefault {#1} { zc@cntval } { } }
+                  { \@@_extract_default:nnn {#1} { zc@cntval } { } }
                     >
                   { \tl_head:N \l_@@_label_enclval_b_tl }
                   { \sort_return_swapped: }
@@ -3872,7 +3923,7 @@
                     \int_compare:nNnTF
                       { \tl_head:N \l_@@_label_enclval_a_tl }
                         <
-                      { \zref@extractdefault {#2} { zc@cntval } { } }
+                      { \@@_extract_default:nnn {#2} { zc@cntval } { } }
                       { \sort_return_same:    }
                       { \sort_return_swapped: }
                   }
@@ -3994,9 +4045,9 @@
 \cs_new_protected:Npn \@@_sort_page:nn #1#2
   {
     \int_compare:nNnTF
-      { \zref@extractdefault {#1} { abspage } {-1} }
+      { \@@_extract_default:nnn {#1} { abspage } { -1 } }
         >
-      { \zref@extractdefault {#2} { abspage } {-1} }
+      { \@@_extract_default:nnn {#2} { abspage } { -1 } }
       { \sort_return_swapped: }
       { \sort_return_same:    }
   }
@@ -4268,16 +4319,12 @@
             \tl_set:Nn \l_@@_label_type_b_tl { page }
           }
           {
-            \tl_set:Nx \l_@@_label_type_a_tl
-              {
-                \zref@extractdefault
-                  { \l_@@_label_a_tl } { zc@type } { \c_empty_tl }
-              }
-            \tl_set:Nx \l_@@_label_type_b_tl
-              {
-                \zref@extractdefault
-                  { \l_@@_label_b_tl } { zc@type } { \c_empty_tl }
-              }
+            \@@_def_extract_default:NVnn
+              \l_@@_label_type_a_tl \l_@@_label_a_tl
+              { zc@type } { \c_empty_tl }
+            \@@_def_extract_default:NVnn
+              \l_@@_label_type_b_tl \l_@@_label_b_tl
+              { zc@type } { \c_empty_tl }
           }
 
         % First, we establish whether the "current label" (i.e. `a') is the
@@ -4589,13 +4636,13 @@
                         % It's two '@s', but escaped for DocStrip.
                         \exp_not:N \hyper@@@@link
                           {
-                            \@@_extract_url:V
+                            \@@_extract_url_unexp:V
                               \l_@@_type_first_label_tl
                           }
                           {
-                            \zref@extractdefault
-                              { \l_@@_type_first_label_tl }
-                              { anchor } {}
+                            \@@_extract_default_unexp:Vnn
+                              \l_@@_type_first_label_tl
+                              { anchor } { }
                           }
                           { \exp_not:V \l_@@_type_name_tl }
                         \exp_not:N \group_end:
@@ -4899,12 +4946,12 @@
             \exp_not:V \l_@@_reffont_in_tl
             % It's two `@s', but escaped for DocStrip.
             \exp_not:N \hyper@@@@link
-              { \@@_extract_url:n {#1} }
-              { \zref@extractdefault {#1} { anchor } { } }
+              { \@@_extract_url_unexp:n {#1} }
+              { \@@_extract_default_unexp:nnn {#1} { anchor } { } }
               {
                 \exp_not:V \l_@@_refpre_in_tl
-                \zref@extractdefault {#1}
-                  { \l_@@_ref_property_tl } { }
+                \@@_extract_default_unexp:nvn {#1}
+                  { l_@@_ref_property_tl } { }
                 \exp_not:V \l_@@_refpos_in_tl
               }
             \exp_not:N \group_end:
@@ -4918,7 +4965,8 @@
             \exp_not:N \group_begin:
             \exp_not:V \l_@@_reffont_in_tl
             \exp_not:V \l_@@_refpre_in_tl
-            \zref@extractdefault {#1} { \l_@@_ref_property_tl } { }
+            \@@_extract_default_unexp:nvn {#1}
+              { l_@@_ref_property_tl } { }
             \exp_not:V \l_@@_refpos_in_tl
             \exp_not:N \group_end:
             \exp_not:V \l_@@_refpos_out_tl
@@ -4956,12 +5004,12 @@
                 % It's two `@s', but escaped for DocStrip.
                 \exp_not:N \hyper@@@@link
                   {
-                    \@@_extract_url:V
+                    \@@_extract_url_unexp:V
                       \l_@@_type_first_label_tl
                   }
                   {
-                    \zref@extractdefault
-                      { \l_@@_type_first_label_tl }
+                    \@@_extract_default_unexp:Vnn
+                      \l_@@_type_first_label_tl
                       { anchor } { }
                   }
                   {
@@ -4976,9 +5024,9 @@
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_reffont_in_tl
                     \exp_not:V \l_@@_refpre_in_tl
-                    \zref@extractdefault
-                      { \l_@@_type_first_label_tl }
-                      { \l_@@_ref_property_tl } { }
+                    \@@_extract_default_unexp:Vvn
+                      \l_@@_type_first_label_tl
+                      { l_@@_ref_property_tl } { }
                     \exp_not:V \l_@@_refpos_in_tl
                     \exp_not:N \group_end:
                     % hyperlink makes it's own group, we'd like to close the
@@ -5035,19 +5083,19 @@
                     % It's two '@s', but escaped for DocStrip.
                     \exp_not:N \hyper@@@@link
                       {
-                        \@@_extract_url:V
+                        \@@_extract_url_unexp:V
                           \l_@@_type_first_label_tl
                       }
                       {
-                        \zref@extractdefault
-                          { \l_@@_type_first_label_tl }
+                        \@@_extract_default_unexp:Vnn
+                          \l_@@_type_first_label_tl
                           { anchor } { }
                       }
                       {
                         \exp_not:V \l_@@_refpre_in_tl
-                        \zref@extractdefault
-                          { \l_@@_type_first_label_tl }
-                          { \l_@@_ref_property_tl } { }
+                        \@@_extract_default_unexp:Vvn
+                          \l_@@_type_first_label_tl
+                          { l_@@_ref_property_tl } { }
                         \exp_not:V \l_@@_refpos_in_tl
                       }
                     \exp_not:N \group_end:
@@ -5061,9 +5109,9 @@
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_reffont_in_tl
                     \exp_not:V \l_@@_refpre_in_tl
-                    \zref@extractdefault
-                      { \l_@@_type_first_label_tl }
-                      { \l_@@_ref_property_tl } { }
+                    \@@_extract_default_unexp:Vvn
+                      \l_@@_type_first_label_tl
+                      { l_@@_ref_property_tl } { }
                     \exp_not:V \l_@@_refpos_in_tl
                     \exp_not:N \group_end:
                     \exp_not:V \l_@@_refpos_out_tl
@@ -5222,21 +5270,24 @@
 % \end{macro}
 %
 %
-% \begin{macro}{\@@_extract_url:n}
+% \begin{macro}{\@@_extract_url_unexp:n}
 %   A convenience auxiliary function for extraction of the \texttt{url} /
-%   \texttt{urluse} property, provided by the \pkg{zref-xr} module.
+%   \texttt{urluse} property, provided by the \pkg{zref-xr} module.  Ensure
+%   that, in the context of an x expansion, \cs{zref@extractdefault} is
+%   expanded exactly twice, but no further to retrieve the proper value.  See
+%   documentation for \cs{@@_extract_default_unexp:nnn}.
 %    \begin{macrocode}
-\cs_new:Npn \@@_extract_url:n #1
+\cs_new:Npn \@@_extract_url_unexp:n #1
   {
     \zref@ifpropundefined { urluse }
-      { \zref@extractdefault {#1} { url } { \c_empty_tl } }
+      { \@@_extract_default_unexp:nnn {#1} { url } { \c_empty_tl } }
       {
         \zref@ifrefcontainsprop {#1} { urluse }
-          { \zref@extractdefault {#1} { urluse } { \c_empty_tl } }
-          { \zref@extractdefault {#1} { url } { \c_empty_tl } }
+          { \@@_extract_default_unexp:nnn {#1} { urluse } { \c_empty_tl } }
+          { \@@_extract_default_unexp:nnn {#1} { url } { \c_empty_tl } }
       }
   }
-\cs_generate_variant:Nn \@@_extract_url:n { V }
+\cs_generate_variant:Nn \@@_extract_url_unexp:n { V }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -5256,10 +5307,10 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_labels_in_sequence:nn #1#2
   {
-    \tl_set:Nx \l_@@_label_extdoc_a_tl
-      { \zref@extractdefault {#1} { externaldocument } { \c_empty_tl } }
-    \tl_set:Nx \l_@@_label_extdoc_b_tl
-      { \zref@extractdefault {#2} { externaldocument } { \c_empty_tl } }
+    \@@_def_extract_default:Nnnn
+      \l_@@_label_extdoc_a_tl {#1} { externaldocument } { \c_empty_tl }
+    \@@_def_extract_default:Nnnn
+      \l_@@_label_extdoc_b_tl {#2} { externaldocument } { \c_empty_tl }
 
     \tl_if_eq:NNT
       \l_@@_label_extdoc_a_tl
@@ -5268,19 +5319,19 @@
         \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
           {
             \exp_args:Nxx \tl_if_eq:nnT
-              { \zref@extractdefault {#1} { zc@pgfmt } { } }
-              { \zref@extractdefault {#2} { zc@pgfmt } { } }
+              { \@@_extract_default_unexp:nnn {#1} { zc@pgfmt } { } }
+              { \@@_extract_default_unexp:nnn {#2} { zc@pgfmt } { } }
               {
                 \int_compare:nNnTF
-                  { \zref@extractdefault {#1} { zc@pgval } { -2 } + 1 }
+                  { \@@_extract_default:nnn {#1} { zc@pgval } { -2 } + 1 }
                     =
-                  { \zref@extractdefault {#2} { zc@pgval } { -1 } }
+                  { \@@_extract_default:nnn {#2} { zc@pgval } { -1 } }
                   { \bool_set_true:N \l_@@_next_maybe_range_bool }
                   {
                     \int_compare:nNnT
-                      { \zref@extractdefault {#1} { zc@pgval } { -1 } }
+                      { \@@_extract_default:nnn {#1} { zc@pgval } { -1 } }
                         =
-                      { \zref@extractdefault {#2} { zc@pgval } { -1 } }
+                      { \@@_extract_default:nnn {#2} { zc@pgval } { -1 } }
                       {
                         \bool_set_true:N
                           \l_@@_next_maybe_range_bool
@@ -5292,34 +5343,34 @@
           }
           {
             \exp_args:Nxx \tl_if_eq:nnT
-              { \zref@extractdefault {#1} { zc@counter } { } }
-              { \zref@extractdefault {#2} { zc@counter } { } }
+              { \@@_extract_default_unexp:nnn {#1} { zc@counter } { } }
+              { \@@_extract_default_unexp:nnn {#2} { zc@counter } { } }
               {
                 \exp_args:Nxx \tl_if_eq:nnT
-                  { \zref@extractdefault {#1} { zc@enclval } { } }
-                  { \zref@extractdefault {#2} { zc@enclval } { } }
+                  { \@@_extract_default_unexp:nnn {#1} { zc@enclval } { } }
+                  { \@@_extract_default_unexp:nnn {#2} { zc@enclval } { } }
                   {
                     \int_compare:nNnTF
-                      { \zref@extractdefault {#1} { zc@cntval } { -2 } + 1 }
+                      { \@@_extract_default:nnn {#1} { zc@cntval } { -2 } + 1 }
                         =
-                      { \zref@extractdefault {#2} { zc@cntval } { -1 } }
+                      { \@@_extract_default:nnn {#2} { zc@cntval } { -1 } }
                       { \bool_set_true:N \l_@@_next_maybe_range_bool }
                       {
                         \int_compare:nNnT
-                          { \zref@extractdefault {#1} { zc@cntval } { -1 } }
+                          { \@@_extract_default:nnn {#1} { zc@cntval } { -1 } }
                             =
-                          { \zref@extractdefault {#2} { zc@cntval } { -1 } }
+                          { \@@_extract_default:nnn {#2} { zc@cntval } { -1 } }
                           {
                             \bool_set_true:N
                               \l_@@_next_maybe_range_bool
                             \exp_args:Nxx \tl_if_eq:nnT
                               {
-                                \zref@extractdefault {#1}
-                                  { \l_@@_ref_property_tl } { }
+                                \@@_extract_default_unexp:nvn {#1}
+                                  { l_@@_ref_property_tl } { }
                               }
                               {
-                                \zref@extractdefault {#2}
-                                  { \l_@@_ref_property_tl } { }
+                                \@@_extract_default_unexp:nvn {#2}
+                                  { l_@@_ref_property_tl } { }
                               }
                               {
                                 \bool_set_true:N
