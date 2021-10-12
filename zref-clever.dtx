@@ -3147,7 +3147,18 @@
 %   \end{syntax}
 %    \begin{macrocode}
 \NewDocumentCommand \zcsetup { m }
+  { \@@_zcsetup:n {#1} }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_zcsetup:n}
+%   \begin{syntax}
+%     \cs{@@_zcsetup:n}\marg{options}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_zcsetup:n #1
   { \keys_set:nn { zref-clever / zcsetup } {#1} }
+\cs_generate_variant:Nn \@@_zcsetup:n { x }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -5466,7 +5477,7 @@
   { \tl_set:Nn \l_@@_footnote_type_tl { mpfootnote } }
 \AddToHook { cmd / @makefntext / before }
   {
-    \exp_args:Nx \zcsetup
+    \@@_zcsetup:x
       { currentcounter = \l_@@_footnote_type_tl }
   }
 %    \end{macrocode}
@@ -5502,7 +5513,7 @@
 %    \begin{macrocode}
 \AddToHook { cmd / appendix / before }
   {
-    \zcsetup
+    \@@_zcsetup:n
       {
         countertype =
           {
@@ -5555,7 +5566,7 @@
       {
         \AddToHook { env / appendices / begin }
           {
-            \zcsetup
+            \@@_zcsetup:n
               {
                 countertype =
                   {
@@ -5568,7 +5579,7 @@
           }
         \AddToHook { env / subappendices / begin }
           {
-            \zcsetup
+            \@@_zcsetup:n
               {
                 countertype =
                   {
@@ -5594,7 +5605,7 @@
   {
     \@ifpackageloaded { listings }
       {
-        \zcsetup
+        \@@_zcsetup:n
           {
             countertype =
               {
@@ -5624,7 +5635,7 @@
 % \cs{@currentlabel} to \cs{thelstnumber} is a signal that the work of
 % \cs{refstepcounter} is being restrained somehow.
 %    \begin{macrocode}
-            \zcsetup { currentcounter = lstnumber }
+            \@@_zcsetup:n { currentcounter = lstnumber }
           }
         \msg_info:nnn { zref-clever } { compat-package } { listings }
       }
@@ -5665,7 +5676,7 @@
               { c@ enum \int_to_roman:n { \l_tmpa_int } }
           }
           {
-            \exp_args:Nx \zcsetup
+            \@@_zcsetup:x
               {
                 counterresetby =
                   {
