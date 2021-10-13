@@ -3539,6 +3539,14 @@
           \zrefcheck_zcref_run_checks_on_labels:n
             { \l_@@_zcref_labels_seq }
         }
+%    \end{macrocode}
+% Integration with \pkg{mathtools}.
+%    \begin{macrocode}
+    \bool_if:NT \l_@@_mathtools_showonlyrefs_bool
+      {
+        \@@_mathtools_showonlyrefs:n
+          { \l_@@_zcref_labels_seq }
+      }
     \group_end:
   }
 %    \end{macrocode}
@@ -5902,6 +5910,66 @@
   }
 %    \end{macrocode}
 %
+%
+%
+% \subsection{\pkg{mathtools} package}
+%
+% All math environments defined by \pkg{mathtools}, extending the
+% \pkg{amsmath} set, are meant to be used within enclosing math environments,
+% hence we don't need to handle them specially, since the numbering and the
+% counting is being done on the side of \pkg{amsmath}.  This includes the new
+% \env{cases} and \env{matrix} variants, and also \env{multlined}.
+%
+% Hence, as far as I can tell, the only cross-reference related feature to
+% deal with is the \opt{showonlyrefs} option, whose machinery involves writing
+% an extra internal label to the \file{.aux} file to track for labels which
+% get actually referred to.  This is a little more involved, and implies in
+% doing special handling inside \cs{zcref}, but the feature is very cool, so
+% it's worth it.
+%
+%    \begin{macrocode}
+\bool_new:N \l_@@_mathtools_showonlyrefs_bool
+\AddToHook { begindocument }
+  {
+    \@ifpackageloaded { mathtools }
+      {
+        \MH_if_boolean:nT { show_only_refs }
+          {
+            \bool_set_true:N \l_@@_mathtools_showonlyrefs_bool
+            \cs_new_protected:Npn \@@_mathtools_showonlyrefs:n #1
+              {
+                \seq_map_inline:Nn #1
+                  {
+                    \exp_args:Nx \tl_if_eq:nnTF
+                      {
+                        \@@_extract_default_unexp:nnn
+                          {##1} { zc@type } { }
+                      }
+                      { equation }
+                      {
+                        \protected@write \@auxout { }
+                          { \string \MT@newlabel {##1} }
+                      }
+                      {
+                        \exp_args:Nx \tl_if_eq:nnT
+                          {
+                            \@@_extract_default_unexp:nnn
+                              {##1} { zc@type } { }
+                          }
+                          { parentequation }
+                          {
+                            \protected@write \@auxout { }
+                              { \string \MT@newlabel {##1} }
+                          }
+                      }
+                  }
+              }
+            \msg_info:nnn { zref-clever } { compat-package } { mathtools }
+          }
+      }
+      {}
+  }
+%    \end{macrocode}
 %
 %
 % \subsection{\pkg{listings} package}
