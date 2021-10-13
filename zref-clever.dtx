@@ -1272,25 +1272,6 @@
 % \pkg{zref} itself, so hopefully it is not inappropriate to do so.
 %
 %
-% \subsection*{\pkg{amsmath}}
-%
-% To quote Heiko Oberdiek himself on the matter:
-%
-% \begin{quote}
-%   The environments of \pkg{amsmath} process the contents twice.  The first
-%   run measures the width and the second run sets the equations.  Also, they
-%   support \cs{notag} and friends.  The \textins{problem} is that the support
-%   of \cs{label} is quite hard-wired into the environments.  Other
-%   label\textins{s} as \cs{zlabel} are not supported.
-% \end{quote}
-%
-% That is from \url{https://tex.stackexchange.com/a/402297}.  Unfortunately
-% for us, the workaround he suggests there, of ``self-importing'' the standard
-% labels with \pkg{zref-xr}, is not a viable option for \pkg{zref-clever}
-% because the required properties would not be available for the labels thus
-% imported.
-%
-%
 %
 % \section{Acknowledgments}
 %
@@ -5776,22 +5757,39 @@
 %
 % \subsection{\pkg{amsmath} package}
 %
+% About this, see \url{https://tex.stackexchange.com/a/402297}.
 %
 %    \begin{macrocode}
 \AddToHook { begindocument }
   {
     \@ifpackageloaded { amsmath }
       {
+%    \end{macrocode}
+% First, we define a function for label setting inside \pkg{amsmath} math
+% environments, we want it to set both \cs{zlabel} and \cs{label}.  We may
+% ``get a ride'' but not steal the place altogether.  This makes for
+% potentially redundant labels, but seems a good compromise.  We \emph{must}
+% use the lower level \cs{zref@label} in this context, and hence also handle
+% protection with \cs{zref@wrapper@babel}, because \cs{zlabel} makes itself
+% no-op when \cs{label} is equal to \cs{ltx@gobble}, and that's precisely the
+% case inside the \env{multline} environment (and, damn!, I took a beating of
+% this detail\dots{}).
+%    \begin{macrocode}
         \cs_set_nopar:Npn \@@_ltxlabel:n #1
           {
             \@@_orig_ltxlabel:n {#1}
-            \zlabel {#1}
+            \zref@wrapper@babel \zref@label {#1}
           }
-        % We must handle 'hyperref' here, which comes very late in the
-        % preamble, and which loads 'nameref' with a 'atbegindocument' hook,
-        % which in turn, lets '\ltx@label' be '\label'.  This has to come
-        % after 'nameref'.  'cleveref' also redefines it, and comes even
-        % later, but this is not compatible with it.
+%    \end{macrocode}
+% Then we must store the original value of \cs{ltx@label}, which is the macro
+% actually responsible for setting the labels inside \pkg{amsmath}'s math
+% environments.  And, after that, redefine it to be \cs{@@_ltxlabel:n}
+% instead.  We must handle \pkg{hyperref} here, which comes very late in the
+% preamble, and which loads \pkg{nameref} at \texttt{begindocument}, which in
+% turn, lets \cs{ltx@label} be \cs{label}.  This has to come after
+% \pkg{nameref}.  \pkg{cleveref} also redefines it, and comes even later, but
+% this procedure is not compatible with it.
+%    \begin{macrocode}
         \IfFormatAtLeastTF { 2021-11-15 }
           {
             \@ifpackageloaded { hyperref }
@@ -5828,35 +5826,17 @@
                 \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
               }
           }
-
-        \clist_map_inline:nn
-          {
-            equation ,
-            equation* ,
-            align ,
-            align* ,
-            alignat ,
-            alignat* ,
-            flalign ,
-            flalign* ,
-            xalignat ,
-            xalignat* ,
-            xxalignat ,
-            gather ,
-            gather* ,
-            multline ,
-            multline* ,
-          }
-          {
-            \AddToHook { env / #1 / begin }
-              {
-                % Needed for '\tag', but also for subequations, since we have
-                % to manually set currentcounter to 'parentequation' in them,
-                % we also have to manually set it to 'equation' in the
-                % environments within it.
-                \@@_zcsetup:n { currentcounter = equation }
-              }
-          }
+%    \end{macrocode}
+% The \env{subequations} environment uses \texttt{parentequation} and
+% \texttt{equation} as counters, but only the later is subject to
+% \cs{refstepcounter}.  What happens is: at the start, \texttt{equation} is
+% refstepped, it is then stored in \texttt{parentequation} and set to `0' and,
+% at the end of the environment it is restored to the value of
+% \texttt{parentequation}.  So, here, we really must specify manually
+% \opt{currentcounter} and the resetting.  Note that, for \env{subequations},
+% \cs{zlabel} works just fine (that is, if given immediately after
+% \texttt{\cs{begin}\{subequations\}}, to refer to the parent equation).
+%    \begin{macrocode}
         \AddToHook { env / subequations / begin }
           {
             \@@_zcsetup:x
@@ -5871,6 +5851,51 @@
                 countertype = { parentequation = equation } ,
               }
           }
+%    \end{macrocode}
+% \pkg{amsmath} does use \cs{refstepcounter} for the \texttt{equation} counter
+% throughout.  But we still have to set \opt{currentcounter} manually for two
+% reasons.  First: \cs{tag}, which naturally does not change the counter, and
+% just sets \cs{@currentlabel}.  Thus a label to a tag gets
+% \cs{@currentcounter} from whatever came last, normally the current
+% sectioning command.  And we also include the starred environments here, so
+% that we can get proper data for \cs{tag}ed equations even if the environment
+% is unnumbered.  Second, since we had to manually set \opt{currentcounter} to
+% \texttt{parentequation} in \env{subequations}, we also have to manually set
+% it to \env{equation} in environments which may be used within it.  The
+% \env{xxalignat} environment is not included, because it is ``starred'' by
+% default (i.e.\ unnumbered), and does not display or accepts labels or tags
+% anyway.  The \env{-ed} (\env{gathered}, \env{aligned}, and \env{alignedat})
+% and \env{cases} environments ``must appear within an enclosing math
+% environment''.  Same logic applies to other environments defined or
+% redefined by the package, like \env{array}, \env{matrix} and variations.
+% Finally, \env{split} too can only be used as part of another environment.
+%    \begin{macrocode}
+        \clist_map_inline:nn
+          {
+            equation ,
+            equation* ,
+            align ,
+            align* ,
+            alignat ,
+            alignat* ,
+            flalign ,
+            flalign* ,
+            xalignat ,
+            xalignat* ,
+            gather ,
+            gather* ,
+            multline ,
+            multline* ,
+          }
+          {
+            \AddToHook { env / #1 / begin }
+              { \@@_zcsetup:n { currentcounter = equation } }
+          }
+%    \end{macrocode}
+% And a last touch of care for \pkg{amsmath}'s refinements: make the equation
+% references \cs{textup}.
+%    \begin{macrocode}
+        \zcRefTypeSetup { equation } { reffont = \upshape }
         \msg_info:nnn { zref-clever } { compat-package } { amsmath }
       }
       {}
