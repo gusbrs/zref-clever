@@ -954,12 +954,12 @@
 % indeed required.  The examples below are equaly valid for \pkg{amsthm}'s
 % \cs{newtheorem} since, even it provides features beyond those available in
 % the kernel, its syntax and underlying relation with counters is pretty much
-% the same.  For \pkg{thmtools}' \cs{declaretheorem} the situation is similar.
-% Though some adjustments to the examples below may be required, the basic
-% logic is the same.  There is no integration with the \opt{Refname},
-% \opt{refname}, and \opt{label} options, which are targeted to the standard
-% reference system, but you don't actually need them to get things working
-% conveniently.
+% the same.  The same for \pkg{ntheorem}.  For \pkg{thmtools}'
+% \cs{declaretheorem} the situation is also similar.  Though some adjustments
+% to the examples below may be required, the basic logic is the same.  There
+% is no integration with the \opt{Refname}, \opt{refname}, and \opt{label}
+% options, which are targeted to the standard reference system, but you don't
+% actually need them to get things working conveniently.
 %
 %
 % \subsubsection*{Simple case}
@@ -5510,28 +5510,6 @@
 % \pkg{zref-clever} to work properly with them.
 %
 %
-% \subsection*{Auxiliary}
-%
-%
-% \begin{macro}{\@@_ride_on_label:n}
-%   An auxiliary function to ``get a ride'' on the standard \cs{label}, so
-%   that it issues a \cs{zlabel} too, to be used locally in selected
-%   environments for compatibility support of packages/features for which
-%   there's really no other way to do it.
-%    \begin{macrocode}
-\AddToHook { begindocument }
-  {
-    \cs_set_eq:NN \@@_orig_label:n \label
-  }
-\cs_new_nopar:Npn \@@_ride_on_label:n #1
-  {
-    \@@_orig_label:n {#1}
-    \zlabel {#1}
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-%
 % \subsection{\cs{footnote}}
 %
 % I'd love not to have to tamper with the \cs{footnote}'s machinery\dots{}
@@ -5730,7 +5708,18 @@
 % preamble, and which loads \pkg{nameref} at \texttt{begindocument}, which in
 % turn, lets \cs{ltx@label} be \cs{label}.  This has to come after
 % \pkg{nameref}.  \pkg{cleveref} also redefines it, and comes even later, but
-% this procedure is not compatible with it.
+% this procedure is not compatible with it.  Technically, some care is needed
+% here, probably mostly on the documentation side.  If \pkg{cleveref} comes
+% last and hence its redefinition takes precedence, this is of little
+% consequence to \pkg{zref-clever} except that we won't be able to refer to
+% the labels in \pkg{amsmath}'s environments with \cs{zcref}.  However, if
+% \pkg{cleveref}'s definition is overwritten by \pkg{zref-clever}, this may be
+% a substantial problem for \pkg{cleveref}, since it will find the label, but
+% it won't contain the data it is expecting.  Therefore, if for some reason
+% \pkg{cleveref} is being used alongside \pkg{cleveref}, it is due to follow
+% the latter's documented recommendation to load it last.  And use \cs{cref}
+% to make references to those.
+% CHECK Should I just make this no-op in case 'cleveref' is loaded?
 %    \begin{macrocode}
         \IfFormatAtLeastTF { 2021-11-15 }
           {
@@ -5907,10 +5896,11 @@
 % From the \pkg{breqn} documentation: \textquote{Use of the normal \cs{label}
 % command instead of the \opt{label} option works, I think, most of the time
 % (untested)}.  Indeed, light testing suggest it does work for \cs{zlabel}
-% just as well.  However, if it happens not to work, there was no easy handle
-% I could find.  In particular, it does not seem viable to leverage the
-% \opt{label=} option without hacking the package internals, even if the case
-% of doing so would not be specially tricky, just ``not very civil''.
+% just as well.  However, if it happens not to work, there was no easy
+% alternative handle I could find.  In particular, it does not seem viable to
+% leverage the \opt{label=} option without hacking the package internals, even
+% if the case of doing so would not be specially tricky, just ``not very
+% civil''.
 %
 %    \begin{macrocode}
 \AddToHook { begindocument }
