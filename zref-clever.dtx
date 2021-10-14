@@ -2058,6 +2058,7 @@
 \cs_new_protected:Npn \@@_provide_dictionary:n #1
   {
     \group_begin:
+    \@bsphack
     \prop_get:NnNTF \g_@@_languages_prop {#1}
       \l_@@_dict_language_tl
       {
@@ -2116,6 +2117,7 @@
         \bool_if:NT \l_@@_load_dict_verbose_bool
           { \msg_warning:nnn { zref-clever } { unknown-language-load } {#1} }
       }
+    \@esphack
     \group_end:
   }
 \cs_generate_variant:Nn \@@_provide_dictionary:n { x }
@@ -5856,6 +5858,7 @@
             \bool_set_true:N \l_@@_mathtools_showonlyrefs_bool
             \cs_new_protected:Npn \@@_mathtools_showonlyrefs:n #1
               {
+                \@bsphack
                 \seq_map_inline:Nn #1
                   {
                     \exp_args:Nx \tl_if_eq:nnTF
@@ -5875,6 +5878,7 @@
                           }
                       }
                   }
+                \@esphack
               }
             \msg_info:nnn { zref-clever } { compat-package } { mathtools }
           }
