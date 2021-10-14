@@ -5902,6 +5902,59 @@
 %    \end{macrocode}
 %
 %
+% \subsection{\pkg{breqn} package}
+%
+% From the \pkg{breqn} documentation: \textquote{Use of the normal \cs{label}
+% command instead of the \opt{label} option works, I think, most of the time
+% (untested)}.  Indeed, light testing suggest it does work for \cs{zlabel}
+% just as well.  However, if it happens not to work, there was no easy handle
+% I could find.  In particular, it does not seem viable to leverage the
+% \opt{label=} option without hacking the package internals, even if the case
+% of doing so would not be specially tricky, just ``not very civil''.
+%
+%    \begin{macrocode}
+\AddToHook { begindocument }
+  {
+    \@ifpackageloaded { breqn }
+      {
+%    \end{macrocode}
+% Contrary to the practice in \pkg{amsmath}, which prints \cs{tag} even in
+% unnumbered environments, the starred environments from \pkg{breqn} don't
+% typeset any tag/number at all, even for a manually given \opt{number=} as an
+% option.  So, even if one can actually set a label in them, it is not really
+% meaningful to make a reference to them.
+%    \begin{macrocode}
+        \AddToHook { env / dgroup / begin }
+          {
+            \@@_zcsetup:x
+              {
+                counterresetby =
+                  {
+                    parentequation =
+                      \@@_counter_reset_by:n { equation } ,
+                    equation = parentequation ,
+                  } ,
+                currentcounter = parentequation ,
+                countertype = { parentequation = equation } ,
+              }
+          }
+        \clist_map_inline:nn
+          {
+            dmath ,
+            dseries ,
+            darray ,
+          }
+          {
+            \AddToHook { env / #1 / begin }
+              { \@@_zcsetup:n { currentcounter = equation } }
+          }
+      }
+      {}
+  }
+%    \end{macrocode}
+%
+%
+%
 % \subsection{\pkg{listings} package}
 %
 %    \begin{macrocode}
