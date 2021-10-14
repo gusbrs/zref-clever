@@ -1400,7 +1400,14 @@
 %
 %    \begin{macrocode}
 \zref@newprop { zc@thecnt }
-  { \use:c { the \l_@@_current_counter_tl } }
+  {
+    \cs_if_exist:cTF { c@ \l_@@_current_counter_tl }
+      { \use:c { the \l_@@_current_counter_tl } }
+      {
+        \cs_if_exist:cT { c@ \@currentcounter }
+          { \use:c { the \@currentcounter } }
+      }
+  }
 \zref@addprop \ZREF@mainlist { zc@thecnt }
 %    \end{macrocode}
 %
@@ -1440,7 +1447,14 @@
 % `ltcounts.dtx').
 %    \begin{macrocode}
 \zref@newprop { zc@cntval } [0]
-  { \int_use:c { c@ \l_@@_current_counter_tl } }
+  {
+    \cs_if_exist:cTF { c@ \l_@@_current_counter_tl }
+      { \int_use:c { c@ \l_@@_current_counter_tl } }
+      {
+        \cs_if_exist:cT { c@ \@currentcounter }
+          { \int_use:c { c@ \@currentcounter } }
+      }
+  }
 \zref@addprop \ZREF@mainlist { zc@cntval }
 \zref@newprop* { zc@pgval } [0] { \int_use:c { c@page } }
 \zref@addprop \ZREF@mainlist { zc@pgval }
