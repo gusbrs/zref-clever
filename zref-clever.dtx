@@ -5645,15 +5645,15 @@
         \setcounter { zc@save@appendix } { 0 }
         \cs_if_exist:cTF { chapter }
           {
+            \@@_zcsetup:n
+              { counterresetby = { chapter = zc@appendix } }
+          }
+          {
             \cs_if_exist:cT { section }
               {
                 \@@_zcsetup:n
                   { counterresetby = { section = zc@appendix } }
               }
-          }
-          {
-            \@@_zcsetup:n
-              { counterresetby = { chapter = zc@appendix } }
           }
         \AddToHook { env / appendices / begin }
           {
