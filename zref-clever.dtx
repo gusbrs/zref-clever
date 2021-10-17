@@ -82,10 +82,10 @@
 % \section{Dependencies}
 %
 % \pkg{zref-clever} requires \pkg{zref}, and \LaTeX{} kernel 2021-06-01, or
-% newer.  It also needs \pkg{l3keys2e}.  Some packages are leveraged by
-% \pkg{zref-clever} if they are present, but are not loaded by default or
-% required by it, namely: \pkg{hyperref}, \pkg{zref-check}, and \pkg{zref}'s
-% modules \pkg{zref-titleref} and \pkg{zref-xr}.
+% newer.  It also needs \pkg{l3keys2e} and \pkg{ifdraft}.  Some packages are
+% leveraged by \pkg{zref-clever} if they are present, but are not loaded by
+% default or required by it, namely: \pkg{hyperref}, \pkg{zref-check}, and
+% \pkg{zref}'s modules \pkg{zref-titleref} and \pkg{zref-xr}.
 %
 %
 % \section{User interface}
@@ -1357,6 +1357,7 @@
 \RequirePackage { zref-user }
 \RequirePackage { zref-abspage }
 \RequirePackage { l3keys2e }
+\RequirePackage { ifdraft }
 %    \end{macrocode}
 %
 %
@@ -1704,6 +1705,46 @@
     See~documentation~for~'\iow_char:N\\zcDeclareLanguage'~and~
     '\iow_char:N\\zcDeclareLanguageAlias'.
   }
+\msg_new:nnn { zref-clever } { unknown-language-decl }
+  {
+    Can't~set~declension~'#1'~for~unknown~language~'#2'~\msg_line_context:.~
+    See~documentation~for~'\iow_char:N\\zcDeclareLanguage'~and~
+    '\iow_char:N\\zcDeclareLanguageAlias'.
+  }
+\msg_new:nnn { zref-clever } { language-no-decl-ref }
+  {
+    Language~'#1'~has~no~declared~declension~cases~\msg_line_context:.~
+    Nothing~to~do~with~option~'d=#2'.
+  }
+\msg_new:nnn { zref-clever } { language-no-decl-setup }
+  {
+    Language~'#1'~has~no~declared~declension~cases~\msg_line_context:.~
+    Nothing~to~do~with~option~'case=#2'.
+  }
+\msg_new:nnn { zref-clever } { unknown-decl-case }
+  {
+    Declension~case~'#1'~unknown~for~language~'#2'~\msg_line_context:.~
+    Using~default~declension~case.
+  }
+\msg_new:nnn { zref-clever } { nudge-multitype }
+  {
+    Reference~with~multiple~types~\msg_line_context:.~
+    You~may~wish~to~separate~them~or~review~language~around~it.
+  }
+\msg_new:nnn { zref-clever } { nudge-comptosing }
+  {
+    Multiple~labels~have~been~compressed~into~singular~type~name~
+    for~type~'#1'~\msg_line_context:.
+  }
+\msg_new:nnn { zref-clever } { nudge-plural-when-sg }
+  {
+    Option~'sg'~signals~that~a~singular~type~name~was~expected~
+    \msg_line_context:.~But~type~'#1'~has~plural~type~name.
+  }
+\msg_new:nnn { zref-clever } { nudgeif-unknown-value }
+  { Unknown~value~'#1'~for~'nudgeif'~option~\msg_line_context:. }
+\msg_new:nnn { zref-clever } { option-document-only }
+  { Option~'#1'~is~only~available~after~\iow_char:N\\begin\{document\}. }
 \msg_new:nnn { zref-clever } { dict-loaded }
   { Loaded~'#1'~dictionary. }
 \msg_new:nnn { zref-clever } { dict-not-available }
@@ -1739,7 +1780,7 @@
 \msg_new:nnn { zref-clever } { missing-type }
   { Reference~type~undefined~for~label~'#1'~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { missing-name }
-  { Name~undefined~for~type~'#1'~\msg_line_context:. }
+  { Reference~format~option~'#1'~undefined~for~type~'#2'~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { missing-string }
   {
     We~couldn't~find~a~value~for~reference~option~'#1'~\msg_line_context:.~
@@ -1822,15 +1863,19 @@
 %   {
 %     \l_@@_setup_type_tl ,
 %     \l_@@_dict_language_tl ,
+%     \l_@@_dict_decl_case_tl ,
+%     \l_@@_dict_declension_seq ,
 %   }
-%   Store ``current'' type and language in different places for option and
-%   translation handling, notably in \cs{@@_provide_dictionary:n},
-%   \cs{zcRefTypeSetup}, and \cs{zcLanguageSetup}.  But also for translations
-%   retrieval, in \cs{@@_get_type_transl:nnnN} and
-%   \cs{@@_get_default_transl:nnN}.
+%   Store ``current'' type, language, and declension cases in different places
+%   for option and translation handling, notably in
+%   \cs{@@_provide_dictionary:n}, \cs{zcRefTypeSetup}, and
+%   \cs{zcLanguageSetup}.  But also for translations retrieval, in
+%   \cs{@@_get_type_transl:nnnN} and \cs{@@_get_default_transl:nnN}.
 %    \begin{macrocode}
 \tl_new:N \l_@@_setup_type_tl
 \tl_new:N \l_@@_dict_language_tl
+\tl_new:N \l_@@_dict_decl_case_tl
+\seq_new:N \l_@@_dict_declension_seq
 %    \end{macrocode}
 % \end{variable}
 %
@@ -1839,7 +1884,7 @@
 %   {
 %     \c_@@_ref_options_necessarily_not_type_specific_seq ,
 %     \c_@@_ref_options_possibly_type_specific_seq ,
-%     \c_@@_ref_options_necessarily_type_specific_seq ,
+%     \c_@@_ref_options_type_names_seq ,
 %     \c_@@_ref_options_font_seq ,
 %     \c_@@_ref_options_typesetup_seq ,
 %     \c_@@_ref_options_reference_seq ,
@@ -1877,7 +1922,7 @@
 % \cs{@@_type_name_setup:}.
 %    \begin{macrocode}
 \seq_const_from_clist:Nn
-  \c_@@_ref_options_necessarily_type_specific_seq
+  \c_@@_ref_options_type_names_seq
   {
     Name-sg ,
     name-sg ,
@@ -1902,7 +1947,7 @@
 \seq_new:N \c_@@_ref_options_typesetup_seq
 \seq_gconcat:NNN \c_@@_ref_options_typesetup_seq
   \c_@@_ref_options_possibly_type_specific_seq
-  \c_@@_ref_options_necessarily_type_specific_seq
+  \c_@@_ref_options_type_names_seq
 \seq_gconcat:NNN \c_@@_ref_options_typesetup_seq
   \c_@@_ref_options_typesetup_seq
   \c_@@_ref_options_font_seq
@@ -1936,20 +1981,36 @@
 %
 % \begin{macro}[int]{\zcDeclareLanguage}
 %   Declare a new language for use with \pkg{zref-clever}.  \meta{language} is
-%   taken to be both the ``language name'' and the ``dictionary name''.  If
-%   \meta{language} is already known, just warn.  \cs{zcDeclareLanguage} is
-%   preamble only.
+%   taken to be both the ``language name'' and the ``dictionary name''.
+%   Optional argument \oarg{cases} takes the noun declension cases prefixes
+%   for \meta{language} as a comma separated list, whose first element is
+%   taken to be the default case.  If \meta{language} is already known, just
+%   warn.  This implies a particular restriction regarding \oarg{cases},
+%   namely, that the declension of languages defined by the package cannot be
+%   redefined by the user.  This is deliberate, otherwise the built-in
+%   dictionaries would become much too sensitive to this particular user
+%   input, and unnecessarily so.  \cs{zcDeclareLanguage} is preamble only.
 %   \begin{syntax}
-%     \cs{zcDeclareLanguage} \marg{language}
+%     \cs{zcDeclareLanguage} \oarg{cases} \marg{language}
 %   \end{syntax}
 %    \begin{macrocode}
-\NewDocumentCommand \zcDeclareLanguage { m }
+\NewDocumentCommand \zcDeclareLanguage { O { } m }
   {
-    \tl_if_empty:nF {#1}
+    \tl_if_empty:nF {#2}
       {
-        \prop_if_in:NnTF \g_@@_languages_prop {#1}
-          { \msg_warning:nnn { zref-clever } { language-declared } {#1} }
-          { \prop_gput:Nnn \g_@@_languages_prop {#1} {#1} }
+        \prop_if_in:NnTF \g_@@_languages_prop {#2}
+          { \msg_warning:nnn { zref-clever } { language-declared } {#2} }
+          {
+            \prop_gput:Nnn \g_@@_languages_prop {#2} {#2}
+            \tl_if_empty:nF {#1}
+              {
+                \prop_if_exist:cF
+                  { g_@@_dict_ #2 _prop }
+                  { \prop_new:c { g_@@_dict_ #2 _prop } }
+                \prop_put:cnn
+                  { g_@@_dict_ #2 _prop } { declension } {#1}
+              }
+          }
       }
   }
 \@onlypreamble \zcDeclareLanguage
@@ -2098,8 +2159,23 @@
                       }
                   }
                 \tl_clear:N \l_@@_setup_type_tl
-                \exp_args:NnV
-                  \keys_set:nn { zref-clever / dictionary } \l_tmpa_tl
+                \exp_args:NNx \seq_set_from_clist:Nn
+                  \l_@@_dict_declension_seq
+                  {
+                    \prop_item:cn
+                      {
+                        g_@@_dict_
+                        \l_@@_dict_language_tl _prop
+                      }
+                      { declension }
+                  }
+                \seq_if_empty:NTF \l_@@_dict_declension_seq
+                  { \tl_clear:N \l_@@_dict_decl_case_tl }
+                  {
+                    \seq_get_left:NN \l_@@_dict_declension_seq
+                      \l_@@_dict_decl_case_tl
+                  }
+                \keys_set:nV { zref-clever / dictionary } \l_tmpa_tl
                 \seq_gput_right:NV \g_@@_loaded_dictionaries_seq
                   \l_@@_dict_language_tl
                 \msg_note:nnx { zref-clever } { dict-loaded }
@@ -2207,6 +2283,25 @@
           { \tl_clear:N \l_@@_setup_type_tl }
           { \tl_set:Nn \l_@@_setup_type_tl {#1} }
       } ,
+    case .code:n =
+      {
+        \seq_if_empty:NTF \l_@@_dict_declension_seq
+          {
+            \msg_info:nnxx { zref-clever } { language-no-decl-setup }
+              { \l_@@_dict_language_tl } {#1}
+          }
+          {
+            \seq_if_in:NnTF \l_@@_dict_declension_seq {#1}
+              { \tl_set:Nn \l_@@_dict_decl_case_tl {#1} }
+              {
+                \msg_info:nnxx { zref-clever } { unknown-decl-case }
+                  {#1} { \l_@@_dict_language_tl }
+                \seq_get_left:NN \l_@@_dict_declension_seq
+                  \l_@@_dict_decl_case_tl
+              }
+          }
+      } ,
+    case .value_required:n = true ,
   }
 \seq_map_inline:Nn
   \c_@@_ref_options_necessarily_not_type_specific_seq
@@ -2240,7 +2335,7 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_ref_options_necessarily_type_specific_seq
+  \c_@@_ref_options_type_names_seq
   {
     \keys_define:nn { zref-clever / dictionary }
       {
@@ -2252,7 +2347,14 @@
                 \msg_info:nnn { zref-clever }
                   { option-only-type-specific } {#1}
               }
-              { \@@_provide_dict_type_transl:nn {#1} {##1} }
+              {
+                \tl_if_empty:NTF \l_@@_dict_decl_case_tl
+                  { \@@_provide_dict_type_transl:nn {#1} {##1} }
+                  {
+                    \@@_provide_dict_type_transl:nn
+                      { \l_@@_dict_decl_case_tl - #1 } {##1}
+                  }
+              }
           } ,
       }
   }
@@ -2892,6 +2994,181 @@
 %
 %
 %
+% \subsubsection*{\opt{d} option}
+%
+%
+%    \begin{macrocode}
+\tl_new:N \l_@@_ref_decl_case_tl
+\keys_define:nn { zref-clever / reference }
+  {
+    d .code:n =
+      { \msg_warning:nnn { zref-clever } { option-document-only } { d } } ,
+  }
+\AddToHook { begindocument }
+  {
+    \keys_define:nn { zref-clever / reference }
+      {
+%    \end{macrocode}
+% We just store the value at this point, since what are valid values for this
+% variable depends on \cs{l_@@_ref_language_tl}, which may also be set as an
+% option.  Hence, validation for this must be done after \cs{keys_set:nn}.
+%    \begin{macrocode}
+        d .tl_set:N = \l_@@_ref_decl_case_tl ,
+        d .value_required:n = true ,
+      }
+  }
+%    \end{macrocode}
+%
+%
+% \begin{macro}{\@@_validate_decl_option:}
+%   Auxiliary function for \cs{@@_zcref:nnn}, responsible for validating the
+%   declension case (\opt{d}) option for the reference language.  It is
+%   expected to be called right (or soon) after \cs{keys_set:nn} in
+%   \cs{@@_zcref:nnn}, where current values for \cs{l_@@_ref_language_tl} and
+%   \cs{l_@@_ref_decl_case_tl}.  If the user value for the latter does not
+%   match the declension cases declared for the former, the function sets an
+%   appropriate value for \cs{l_@@_ref_decl_case_tl}, either using the default
+%   case, or clearing the variable, depending on the language setup.  And also
+%   issues a warning about it.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_validate_decl_option:
+  {
+    \exp_args:NNx \prop_get:NnNTF \g_@@_languages_prop
+      { \l_@@_ref_language_tl }
+      \l_@@_dict_language_tl
+      {
+        \prop_if_exist:cTF
+          { g_@@_dict_ \l_@@_dict_language_tl _prop }
+          {
+            \exp_args:NNx \seq_set_from_clist:Nn
+              \l_@@_dict_declension_seq
+              {
+                \prop_item:cn
+                  {
+                    g_@@_dict_
+                    \l_@@_dict_language_tl _prop
+                  }
+                  { declension }
+              }
+            \seq_if_empty:NTF \l_@@_dict_declension_seq
+              {
+                \tl_if_empty:NF \l_@@_ref_decl_case_tl
+                  {
+                    \msg_warning:nnxx { zref-clever }
+                      { language-no-decl-ref }
+                      { \l_@@_ref_language_tl }
+                      { \l_@@_ref_decl_case_tl }
+                    \tl_clear:N \l_@@_ref_decl_case_tl
+                  }
+              }
+              {
+                \tl_if_empty:NTF \l_@@_ref_decl_case_tl
+                  {
+                    \seq_get_left:NN \l_@@_dict_declension_seq
+                      \l_@@_ref_decl_case_tl
+                  }
+                  {
+                    \seq_if_in:NVF \l_@@_dict_declension_seq
+                      \l_@@_ref_decl_case_tl
+                      {
+                        \msg_warning:nnxx { zref-clever }
+                          { unknown-decl-case }
+                          { \l_@@_ref_decl_case_tl }
+                          { \l_@@_ref_language_tl }
+                        \seq_get_left:NN \l_@@_dict_declension_seq
+                          \l_@@_ref_decl_case_tl
+                      }
+                  }
+              }
+          }
+          {
+            \tl_if_empty:NF \l_@@_ref_decl_case_tl
+              {
+                \msg_warning:nnxx { zref-clever } { language-no-decl-ref }
+                  { \l_@@_ref_language_tl }
+                  { \l_@@_ref_decl_case_tl }
+                \tl_clear:N \l_@@_ref_decl_case_tl
+              }
+          }
+      }
+      {
+        \tl_if_empty:NF \l_@@_ref_decl_case_tl
+          {
+            \msg_warning:nnxx { zref-clever } { unknown-language-decl }
+              { \l_@@_ref_decl_case_tl }
+              { \l_@@_ref_language_tl }
+            \tl_clear:N \l_@@_ref_decl_case_tl
+          }
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \subsubsection*{\opt{nudge}, \opt{nudgeif}, and \opt{sg} options}
+%
+%    \begin{macrocode}
+\bool_new:N \l_@@_nudge_enabled_bool
+\bool_new:N \l_@@_nudge_multitype_bool
+\bool_new:N \l_@@_nudge_comptosing_bool
+\bool_new:N \l_@@_nudge_singular_bool
+\keys_define:nn { zref-clever / reference }
+  {
+    nudge .choice: ,
+    nudge / true .code:n =
+      { \bool_set_true:N \l_@@_nudge_enabled_bool } ,
+    nudge / false .code:n =
+      { \bool_set_false:N \l_@@_nudge_enabled_bool } ,
+    nudge / obeydraft .code:n =
+      {
+        \ifdraft
+          { \bool_set_false:N \l_@@_nudge_enabled_bool }
+          { \bool_set_true:N \l_@@_nudge_enabled_bool }
+      } ,
+    nudge / obeyfinal .code:n =
+      {
+        \ifoptionfinal
+          { \bool_set_true:N \l_@@_nudge_enabled_bool }
+          { \bool_set_false:N \l_@@_nudge_enabled_bool }
+      } ,
+    nudge .initial:n = false ,
+    nudge .default:n = true ,
+    nonudge .meta:n = { nudge = false } ,
+    nonudge .value_forbidden:n = true ,
+    nudgeif .code:n =
+      {
+        \bool_set_false:N \l_@@_nudge_multitype_bool
+        \bool_set_false:N \l_@@_nudge_comptosing_bool
+        \clist_map_inline:nn {#1}
+          {
+            \str_case:nnF {##1}
+              {
+                { multitype }
+                { \bool_set_true:N \l_@@_nudge_multitype_bool }
+                { comptosing }
+                { \bool_set_true:N \l_@@_nudge_comptosing_bool }
+                { all }
+                {
+                  \bool_set_true:N \l_@@_nudge_multitype_bool
+                  \bool_set_true:N \l_@@_nudge_comptosing_bool
+                }
+              }
+              {
+                \msg_warning:nnn { zref-clever }
+                  { nudgeif-unknown-value } {##1}
+              }
+          }
+      } ,
+    nudgeif .value_required:n = true ,
+    nudgeif .initial:n = all ,
+    sg .bool_set:N = \l_@@_nudge_singular_bool ,
+    sg .initial:n = false ,
+    sg .default:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+%
 % \subsubsection*{\opt{font} option}
 %
 % \opt{font} \emph{can't be used as a package option}, since the options get
@@ -3342,6 +3619,28 @@
       \l_@@_dict_language_tl
       {
         \tl_clear:N \l_@@_setup_type_tl
+        \prop_if_exist:cF
+          { g_@@_dict_ \l_@@_dict_language_tl _prop }
+          {
+            \prop_new:c
+              { g_@@_dict_ \l_@@_dict_language_tl _prop }
+          }
+        \exp_args:NNx \seq_set_from_clist:Nn
+          \l_@@_dict_declension_seq
+          {
+            \prop_item:cn
+              {
+                g_@@_dict_
+                \l_@@_dict_language_tl _prop
+              }
+              { declension }
+          }
+        \seq_if_empty:NTF \l_@@_dict_declension_seq
+          { \tl_clear:N \l_@@_dict_decl_case_tl }
+          {
+            \seq_get_left:NN \l_@@_dict_declension_seq
+              \l_@@_dict_decl_case_tl
+          }
         \keys_set:nn { zref-clever / langsetup } {#2}
       }
       { \msg_warning:nnn { zref-clever } { unknown-language-setup } {#1} }
@@ -3373,7 +3672,7 @@
     \prop_gput:cnn { g_@@_dict_ #1 _prop }
       { type- #2 - #3 } {#4}
   }
-\cs_generate_variant:Nn \@@_declare_type_transl:nnnn { VVnn }
+\cs_generate_variant:Nn \@@_declare_type_transl:nnnn { VVnn , VVxn }
 \cs_new_protected:Npn \@@_declare_default_transl:nnn #1#2#3
   {
     \prop_gput:cnn { g_@@_dict_ #1 _prop }
@@ -3396,6 +3695,25 @@
           { \tl_clear:N \l_@@_setup_type_tl }
           { \tl_set:Nn \l_@@_setup_type_tl {#1} }
       } ,
+    case .code:n =
+      {
+        \seq_if_empty:NTF \l_@@_dict_declension_seq
+          {
+            \msg_warning:nnxx { zref-clever } { language-no-decl-setup }
+              { \l_@@_dict_language_tl } {#1}
+          }
+          {
+            \seq_if_in:NnTF \l_@@_dict_declension_seq {#1}
+              { \tl_set:Nn \l_@@_dict_decl_case_tl {#1} }
+              {
+                \msg_warning:nnxx { zref-clever } { unknown-decl-case }
+                  {#1} { \l_@@_dict_language_tl }
+                \seq_get_left:NN \l_@@_dict_declension_seq
+                  \l_@@_dict_decl_case_tl
+              }
+          }
+      } ,
+    case .value_required:n = true ,
   }
 \seq_map_inline:Nn
   \c_@@_ref_options_necessarily_not_type_specific_seq
@@ -3442,7 +3760,7 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_ref_options_necessarily_type_specific_seq
+  \c_@@_ref_options_type_names_seq
   {
     \keys_define:nn { zref-clever / langsetup }
       {
@@ -3455,10 +3773,19 @@
                   { option-only-type-specific } {#1}
               }
               {
-                \@@_declare_type_transl:VVnn
-                  \l_@@_dict_language_tl
-                  \l_@@_setup_type_tl
-                  {#1} {##1}
+                \tl_if_empty:NTF \l_@@_dict_decl_case_tl
+                  {
+                    \@@_declare_type_transl:VVnn
+                      \l_@@_dict_language_tl
+                      \l_@@_setup_type_tl
+                      {#1} {##1}
+                  }
+                  {
+                    \@@_declare_type_transl:VVxn
+                      \l_@@_dict_language_tl
+                      \l_@@_setup_type_tl
+                      { \l_@@_dict_decl_case_tl - #1 } {##1}
+                  }
               }
           } ,
       }
@@ -3512,6 +3839,10 @@
 % already loaded.
 %    \begin{macrocode}
       \@@_provide_dictionary:x { \l_@@_ref_language_tl }
+%    \end{macrocode}
+% Validate type name declension option.
+%    \begin{macrocode}
+      \@@_validate_decl_option:
 %    \end{macrocode}
 % Integration with \pkg{zref-check}.
 %    \begin{macrocode}
@@ -4697,6 +5028,14 @@
             \l_@@_tlastsep_tl
             \l_@@_typeset_queue_curr_tl
           }
+        % And nudge in case of multitype reference.
+        \bool_lazy_all:nT
+          {
+            { \l_@@_nudge_enabled_bool }
+            { \l_@@_nudge_multitype_bool }
+            { \int_compare_p:nNn { \l_@@_type_count_int } > { 1 } }
+          }
+          { \msg_warning:nn { zref-clever } { nudge-multitype } }
       }
       {
         % There are further labels, set variables for next iteration.
@@ -5175,6 +5514,36 @@
               }
               { \tl_clear:N \l_@@_name_format_fallback_tl }
 
+            % Handle singular/plural nudges.
+            \bool_if:NT \l_@@_nudge_enabled_bool
+              {
+                \bool_if:NTF \l_@@_nudge_singular_bool
+                  {
+                    \tl_if_empty:NF \l_@@_typeset_queue_curr_tl
+                      {
+                        \msg_warning:nnx { zref-clever }
+                          { nudge-plural-when-sg }
+                          { \l_@@_type_first_label_type_tl }
+                      }
+                  }
+                  {
+                    \bool_lazy_all:nT
+                      {
+                        { \l_@@_nudge_comptosing_bool }
+                        { \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl }
+                        {
+                          \int_compare_p:nNn
+                            { \l_@@_label_count_int } > { 0 }
+                        }
+                      }
+                      {
+                        \msg_warning:nnx { zref-clever }
+                          { nudge-comptosing }
+                          { \l_@@_type_first_label_type_tl }
+                      }
+                  }
+              }
+
             \tl_if_empty:NTF \l_@@_name_format_fallback_tl
               {
                 \prop_get:cVNF
@@ -5185,6 +5554,12 @@
                   \l_@@_name_format_tl
                   \l_@@_type_name_tl
                   {
+                    \tl_if_empty:NF \l_@@_ref_decl_case_tl
+                      {
+                        \tl_put_left:Nn \l_@@_name_format_tl { - }
+                        \tl_put_left:NV \l_@@_name_format_tl
+                          \l_@@_ref_decl_case_tl
+                      }
                     \@@_get_type_transl:xxxNF
                       { \l_@@_ref_language_tl }
                       { \l_@@_type_first_label_type_tl }
@@ -5192,7 +5567,8 @@
                       \l_@@_type_name_tl
                       {
                         \tl_clear:N \l_@@_type_name_tl
-                        \msg_warning:nnx { zref-clever } { missing-name }
+                        \msg_warning:nnxx { zref-clever } { missing-name }
+                          { \l_@@_name_format_tl }
                           { \l_@@_type_first_label_type_tl }
                       }
                   }
@@ -5214,6 +5590,18 @@
                       \l_@@_name_format_fallback_tl
                       \l_@@_type_name_tl
                       {
+                        \tl_if_empty:NF \l_@@_ref_decl_case_tl
+                          {
+                            \tl_put_left:Nn
+                              \l_@@_name_format_tl { - }
+                            \tl_put_left:NV \l_@@_name_format_tl
+                              \l_@@_ref_decl_case_tl
+                            \tl_put_left:Nn
+                              \l_@@_name_format_fallback_tl { - }
+                            \tl_put_left:NV
+                              \l_@@_name_format_fallback_tl
+                              \l_@@_ref_decl_case_tl
+                          }
                         \@@_get_type_transl:xxxNF
                           { \l_@@_ref_language_tl }
                           { \l_@@_type_first_label_type_tl }
@@ -5227,8 +5615,9 @@
                               \l_@@_type_name_tl
                               {
                                 \tl_clear:N \l_@@_type_name_tl
-                                \msg_warning:nnx { zref-clever }
+                                \msg_warning:nnxx { zref-clever }
                                   { missing-name }
+                                  { \l_@@_name_format_tl }
                                   { \l_@@_type_first_label_type_tl }
                               }
                           }
@@ -5727,12 +6116,12 @@
               {
                 \AddToHook { package / nameref / after }
                   {
-                    \cs_set_eq:NN \@@_orig_ltxlabel:n \ltx@label
+                    \cs_new_eq:NN \@@_orig_ltxlabel:n \ltx@label
                     \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
                   }
               }
               {
-                \cs_set_eq:NN \@@_orig_ltxlabel:n \ltx@label
+                \cs_new_eq:NN \@@_orig_ltxlabel:n \ltx@label
                 \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
               }
           }
@@ -5741,19 +6130,19 @@
               {
                 \@ifpackageloaded { nameref }
                   {
-                    \cs_set_eq:NN \@@_orig_ltxlabel:n \ltx@label
+                    \cs_new_eq:NN \@@_orig_ltxlabel:n \ltx@label
                     \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
                   }
                   {
                     \AddToHook { package / after / nameref }
                       {
-                        \cs_set_eq:NN \@@_orig_ltxlabel:n \ltx@label
+                        \cs_new_eq:NN \@@_orig_ltxlabel:n \ltx@label
                         \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
                       }
                   }
               }
               {
-                \cs_set_eq:NN \@@_orig_ltxlabel:n \ltx@label
+                \cs_new_eq:NN \@@_orig_ltxlabel:n \ltx@label
                 \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
               }
           }
@@ -6267,7 +6656,7 @@ type = solution ,
 % \subsection{German}
 %
 %    \begin{macrocode}
-%<package>\zcDeclareLanguage { german }
+%<package>\zcDeclareLanguage [ N , A , D , G ] { german }
 %<package>\zcDeclareLanguageAlias { austrian     } { german }
 %<package>\zcDeclareLanguageAlias { germanb      } { german }
 %<package>\zcDeclareLanguageAlias { ngerman      } { german }
@@ -6292,172 +6681,616 @@ notesep  = {~} ,
 rangesep = {~bis\nobreakspace} ,
 
 type = part ,
-  Name-sg = Teil ,
-  name-sg = Teil ,
-  Name-pl = Teile ,
-  name-pl = Teile ,
+  case = N ,
+    Name-sg = Teil ,
+    name-sg = Teil ,
+    Name-pl = Teile ,
+    name-pl = Teile ,
+  case = A ,
+    Name-sg = Teil ,
+    name-sg = Teil ,
+    Name-pl = Teile ,
+    name-pl = Teile ,
+  case = D ,
+    Name-sg = Teil ,
+    name-sg = Teil ,
+    Name-pl = Teilen ,
+    name-pl = Teilen ,
+  case = G ,
+    Name-sg = Teiles ,
+    name-sg = Teiles ,
+    Name-pl = Teile ,
+    name-pl = Teile ,
 
 type = chapter ,
-  Name-sg = Kapitel ,
-  name-sg = Kapitel ,
-  Name-pl = Kapitel ,
-  name-pl = Kapitel ,
+  case = N ,
+    Name-sg = Kapitel ,
+    name-sg = Kapitel ,
+    Name-pl = Kapitel ,
+    name-pl = Kapitel ,
+  case = A ,
+    Name-sg = Kapitel ,
+    name-sg = Kapitel ,
+    Name-pl = Kapitel ,
+    name-pl = Kapitel ,
+  case = D ,
+    Name-sg = Kapitel ,
+    name-sg = Kapitel ,
+    Name-pl = Kapiteln ,
+    name-pl = Kapiteln ,
+  case = G ,
+    Name-sg = Kapitels ,
+    name-sg = Kapitels ,
+    Name-pl = Kapitel ,
+    name-pl = Kapitel ,
 
 type = section ,
-  Name-sg = Abschnitt ,
-  name-sg = Abschnitt ,
-  Name-pl = Abschnitte ,
-  name-pl = Abschnitte ,
+  case = N ,
+    Name-sg = Abschnitt ,
+    name-sg = Abschnitt ,
+    Name-pl = Abschnitte ,
+    name-pl = Abschnitte ,
+  case = A ,
+    Name-sg = Abschnitt ,
+    name-sg = Abschnitt ,
+    Name-pl = Abschnitte ,
+    name-pl = Abschnitte ,
+  case = D ,
+    Name-sg = Abschnitt ,
+    name-sg = Abschnitt ,
+    Name-pl = Abschnitten ,
+    name-pl = Abschnitten ,
+  case = G ,
+    Name-sg = Abschnitts ,
+    name-sg = Abschnitts ,
+    Name-pl = Abschnitte ,
+    name-pl = Abschnitte ,
 
 type = paragraph ,
-  Name-sg = Absatz ,
-  name-sg = Absatz ,
-  Name-pl = Absätze ,
-  name-pl = Absätze ,
+  case = N ,
+    Name-sg = Absatz ,
+    name-sg = Absatz ,
+    Name-pl = Absätze ,
+    name-pl = Absätze ,
+  case = A ,
+    Name-sg = Absatz ,
+    name-sg = Absatz ,
+    Name-pl = Absätze ,
+    name-pl = Absätze ,
+  case = D ,
+    Name-sg = Absatz ,
+    name-sg = Absatz ,
+    Name-pl = Absätzen ,
+    name-pl = Absätzen ,
+  case = G ,
+    Name-sg = Absatzes ,
+    name-sg = Absatzes ,
+    Name-pl = Absätze ,
+    name-pl = Absätze ,
 
 type = appendix ,
-  Name-sg = Anhang ,
-  name-sg = Anhang ,
-  Name-pl = Anhänge ,
-  name-pl = Anhänge ,
+  case = N ,
+    Name-sg = Anhang ,
+    name-sg = Anhang ,
+    Name-pl = Anhänge ,
+    name-pl = Anhänge ,
+  case = A ,
+    Name-sg = Anhang ,
+    name-sg = Anhang ,
+    Name-pl = Anhänge ,
+    name-pl = Anhänge ,
+  case = D ,
+    Name-sg = Anhang ,
+    name-sg = Anhang ,
+    Name-pl = Anhängen ,
+    name-pl = Anhängen ,
+  case = G ,
+    Name-sg = Anhangs ,
+    name-sg = Anhangs ,
+    Name-pl = Anhänge ,
+    name-pl = Anhänge ,
 
 type = subappendix ,
-  Name-sg = Anhang ,
-  name-sg = Anhang ,
-  Name-pl = Anhänge ,
-  name-pl = Anhänge ,
+  case = N ,
+    Name-sg = Anhang ,
+    name-sg = Anhang ,
+    Name-pl = Anhänge ,
+    name-pl = Anhänge ,
+  case = A ,
+    Name-sg = Anhang ,
+    name-sg = Anhang ,
+    Name-pl = Anhänge ,
+    name-pl = Anhänge ,
+  case = D ,
+    Name-sg = Anhang ,
+    name-sg = Anhang ,
+    Name-pl = Anhängen ,
+    name-pl = Anhängen ,
+  case = G ,
+    Name-sg = Anhangs ,
+    name-sg = Anhangs ,
+    Name-pl = Anhänge ,
+    name-pl = Anhänge ,
 
 type = page ,
-  Name-sg = Seite ,
-  name-sg = Seite ,
-  Name-pl = Seiten ,
-  name-pl = Seiten ,
+  case = N ,
+    Name-sg = Seite ,
+    name-sg = Seite ,
+    Name-pl = Seiten ,
+    name-pl = Seiten ,
+  case = A ,
+    Name-sg = Seite ,
+    name-sg = Seite ,
+    Name-pl = Seiten ,
+    name-pl = Seiten ,
+  case = D ,
+    Name-sg = Seite ,
+    name-sg = Seite ,
+    Name-pl = Seiten ,
+    name-pl = Seiten ,
+  case = G ,
+    Name-sg = Seite ,
+    name-sg = Seite ,
+    Name-pl = Seiten ,
+    name-pl = Seiten ,
 
 type = line ,
-  Name-sg = Zeile ,
-  name-sg = Zeile ,
-  Name-pl = Zeilen ,
-  name-pl = Zeilen ,
+  case = N ,
+    Name-sg = Zeile ,
+    name-sg = Zeile ,
+    Name-pl = Zeilen ,
+    name-pl = Zeilen ,
+  case = A ,
+    Name-sg = Zeile ,
+    name-sg = Zeile ,
+    Name-pl = Zeilen ,
+    name-pl = Zeilen ,
+  case = D ,
+    Name-sg = Zeile ,
+    name-sg = Zeile ,
+    Name-pl = Zeilen ,
+    name-pl = Zeilen ,
+  case = G ,
+    Name-sg = Zeile ,
+    name-sg = Zeile ,
+    Name-pl = Zeilen ,
+    name-pl = Zeilen ,
 
 type = figure ,
-  Name-sg = Abbildung ,
-  name-sg = Abbildung ,
-  Name-pl = Abbildungen ,
-  name-pl = Abbildungen ,
-  Name-sg-ab = Abb. ,
-  name-sg-ab = Abb. ,
-  Name-pl-ab = Abb. ,
-  name-pl-ab = Abb. ,
+  case = N ,
+    Name-sg = Abbildung ,
+    name-sg = Abbildung ,
+    Name-pl = Abbildungen ,
+    name-pl = Abbildungen ,
+    Name-sg-ab = Abb. ,
+    name-sg-ab = Abb. ,
+    Name-pl-ab = Abb. ,
+    name-pl-ab = Abb. ,
+  case = A ,
+    Name-sg = Abbildung ,
+    name-sg = Abbildung ,
+    Name-pl = Abbildungen ,
+    name-pl = Abbildungen ,
+    Name-sg-ab = Abb. ,
+    name-sg-ab = Abb. ,
+    Name-pl-ab = Abb. ,
+    name-pl-ab = Abb. ,
+  case = D ,
+    Name-sg = Abbildung ,
+    name-sg = Abbildung ,
+    Name-pl = Abbildungen ,
+    name-pl = Abbildungen ,
+    Name-sg-ab = Abb. ,
+    name-sg-ab = Abb. ,
+    Name-pl-ab = Abb. ,
+    name-pl-ab = Abb. ,
+  case = G ,
+    Name-sg = Abbildung ,
+    name-sg = Abbildung ,
+    Name-pl = Abbildungen ,
+    name-pl = Abbildungen ,
+    Name-sg-ab = Abb. ,
+    name-sg-ab = Abb. ,
+    Name-pl-ab = Abb. ,
+    name-pl-ab = Abb. ,
 
 type = table ,
-  Name-sg = Tabelle ,
-  name-sg = Tabelle ,
-  Name-pl = Tabellen ,
-  name-pl = Tabellen ,
+  case = N ,
+    Name-sg = Tabelle ,
+    name-sg = Tabelle ,
+    Name-pl = Tabellen ,
+    name-pl = Tabellen ,
+  case = A ,
+    Name-sg = Tabelle ,
+    name-sg = Tabelle ,
+    Name-pl = Tabellen ,
+    name-pl = Tabellen ,
+  case = D ,
+    Name-sg = Tabelle ,
+    name-sg = Tabelle ,
+    Name-pl = Tabellen ,
+    name-pl = Tabellen ,
+  case = G ,
+    Name-sg = Tabelle ,
+    name-sg = Tabelle ,
+    Name-pl = Tabellen ,
+    name-pl = Tabellen ,
 
 type = item ,
-  Name-sg = Punkt ,
-  name-sg = Punkt ,
-  Name-pl = Punkte ,
-  name-pl = Punkte ,
+  case = N ,
+    Name-sg = Punkt ,
+    name-sg = Punkt ,
+    Name-pl = Punkte ,
+    name-pl = Punkte ,
+  case = A ,
+    Name-sg = Punkt ,
+    name-sg = Punkt ,
+    Name-pl = Punkte ,
+    name-pl = Punkte ,
+  case = D ,
+    Name-sg = Punkt ,
+    name-sg = Punkt ,
+    Name-pl = Punkten ,
+    name-pl = Punkten ,
+  case = G ,
+    Name-sg = Punktes ,
+    name-sg = Punktes ,
+    Name-pl = Punkte ,
+    name-pl = Punkte ,
 
 type = footnote ,
-  Name-sg = Fußnote ,
-  name-sg = Fußnote ,
-  Name-pl = Fußnoten ,
-  name-pl = Fußnoten ,
+  case = N ,
+    Name-sg = Fußnote ,
+    name-sg = Fußnote ,
+    Name-pl = Fußnoten ,
+    name-pl = Fußnoten ,
+  case = A ,
+    Name-sg = Fußnote ,
+    name-sg = Fußnote ,
+    Name-pl = Fußnoten ,
+    name-pl = Fußnoten ,
+  case = D ,
+    Name-sg = Fußnote ,
+    name-sg = Fußnote ,
+    Name-pl = Fußnoten ,
+    name-pl = Fußnoten ,
+  case = G ,
+    Name-sg = Fußnote ,
+    name-sg = Fußnote ,
+    Name-pl = Fußnoten ,
+    name-pl = Fußnoten ,
 
 type = note ,
-  Name-sg = Anmerkung ,
-  name-sg = Anmerkung ,
-  Name-pl = Anmerkungen ,
-  name-pl = Anmerkungen ,
+  case = N ,
+    Name-sg = Anmerkung ,
+    name-sg = Anmerkung ,
+    Name-pl = Anmerkungen ,
+    name-pl = Anmerkungen ,
+  case = A ,
+    Name-sg = Anmerkung ,
+    name-sg = Anmerkung ,
+    Name-pl = Anmerkungen ,
+    name-pl = Anmerkungen ,
+  case = D ,
+    Name-sg = Anmerkung ,
+    name-sg = Anmerkung ,
+    Name-pl = Anmerkungen ,
+    name-pl = Anmerkungen ,
+  case = G ,
+    Name-sg = Anmerkung ,
+    name-sg = Anmerkung ,
+    Name-pl = Anmerkungen ,
+    name-pl = Anmerkungen ,
 
 type = equation ,
-  Name-sg = Gleichung ,
-  name-sg = Gleichung ,
-  Name-pl = Gleichungen ,
-  name-pl = Gleichungen ,
+  case = N ,
+    Name-sg = Gleichung ,
+    name-sg = Gleichung ,
+    Name-pl = Gleichungen ,
+    name-pl = Gleichungen ,
+  case = A ,
+    Name-sg = Gleichung ,
+    name-sg = Gleichung ,
+    Name-pl = Gleichungen ,
+    name-pl = Gleichungen ,
+  case = D ,
+    Name-sg = Gleichung ,
+    name-sg = Gleichung ,
+    Name-pl = Gleichungen ,
+    name-pl = Gleichungen ,
+  case = G ,
+    Name-sg = Gleichung ,
+    name-sg = Gleichung ,
+    Name-pl = Gleichungen ,
+    name-pl = Gleichungen ,
   refpre-in = {(} ,
   refpos-in = {)} ,
 
 type = theorem ,
-  Name-sg = Theorem ,
-  name-sg = Theorem ,
-  Name-pl = Theoreme ,
-  name-pl = Theoreme ,
+  case = N ,
+    Name-sg = Theorem ,
+    name-sg = Theorem ,
+    Name-pl = Theoreme ,
+    name-pl = Theoreme ,
+  case = A ,
+    Name-sg = Theorem ,
+    name-sg = Theorem ,
+    Name-pl = Theoreme ,
+    name-pl = Theoreme ,
+  case = D ,
+    Name-sg = Theorem ,
+    name-sg = Theorem ,
+    Name-pl = Theoremen ,
+    name-pl = Theoremen ,
+  case = G ,
+    Name-sg = Theorems ,
+    name-sg = Theorems ,
+    Name-pl = Theoreme ,
+    name-pl = Theoreme ,
 
 type = lemma ,
-  Name-sg = Lemma ,
-  name-sg = Lemma ,
-  Name-pl = Lemmata ,
-  name-pl = Lemmata ,
+  case = N ,
+    Name-sg = Lemma ,
+    name-sg = Lemma ,
+    Name-pl = Lemmata ,
+    name-pl = Lemmata ,
+  case = A ,
+    Name-sg = Lemma ,
+    name-sg = Lemma ,
+    Name-pl = Lemmata ,
+    name-pl = Lemmata ,
+  case = D ,
+    Name-sg = Lemma ,
+    name-sg = Lemma ,
+    Name-pl = Lemmata ,
+    name-pl = Lemmata ,
+  case = G ,
+    Name-sg = Lemmas ,
+    name-sg = Lemmas ,
+    Name-pl = Lemmata ,
+    name-pl = Lemmata ,
 
 type = corollary ,
-  Name-sg = Korollar ,
-  name-sg = Korollar ,
-  Name-pl = Korollare ,
-  name-pl = Korollare ,
+  case = N ,
+    Name-sg = Korollar ,
+    name-sg = Korollar ,
+    Name-pl = Korollare ,
+    name-pl = Korollare ,
+  case = A ,
+    Name-sg = Korollar ,
+    name-sg = Korollar ,
+    Name-pl = Korollare ,
+    name-pl = Korollare ,
+  case = D ,
+    Name-sg = Korollar ,
+    name-sg = Korollar ,
+    Name-pl = Korollaren ,
+    name-pl = Korollaren ,
+  case = G ,
+    Name-sg = Korollars ,
+    name-sg = Korollars ,
+    Name-pl = Korollare ,
+    name-pl = Korollare ,
 
 type = proposition ,
-  Name-sg = Satz ,
-  name-sg = Satz ,
-  Name-pl = Sätze ,
-  name-pl = Sätze ,
+  case = N ,
+    Name-sg = Satz ,
+    name-sg = Satz ,
+    Name-pl = Sätze ,
+    name-pl = Sätze ,
+  case = A ,
+    Name-sg = Satz ,
+    name-sg = Satz ,
+    Name-pl = Sätze ,
+    name-pl = Sätze ,
+  case = D ,
+    Name-sg = Satz ,
+    name-sg = Satz ,
+    Name-pl = Sätzen ,
+    name-pl = Sätzen ,
+  case = G ,
+    Name-sg = Satzes ,
+    name-sg = Satzes ,
+    Name-pl = Sätze ,
+    name-pl = Sätze ,
 
 type = definition ,
-  Name-sg = Definition ,
-  name-sg = Definition ,
-  Name-pl = Definitionen ,
-  name-pl = Definitionen ,
+  case = N ,
+    Name-sg = Definition ,
+    name-sg = Definition ,
+    Name-pl = Definitionen ,
+    name-pl = Definitionen ,
+  case = A ,
+    Name-sg = Definition ,
+    name-sg = Definition ,
+    Name-pl = Definitionen ,
+    name-pl = Definitionen ,
+  case = D ,
+    Name-sg = Definition ,
+    name-sg = Definition ,
+    Name-pl = Definitionen ,
+    name-pl = Definitionen ,
+  case = G ,
+    Name-sg = Definition ,
+    name-sg = Definition ,
+    Name-pl = Definitionen ,
+    name-pl = Definitionen ,
 
 type = proof ,
-  Name-sg = Beweis ,
-  name-sg = Beweis ,
-  Name-pl = Beweise ,
-  name-pl = Beweise ,
+  case = N ,
+    Name-sg = Beweis ,
+    name-sg = Beweis ,
+    Name-pl = Beweise ,
+    name-pl = Beweise ,
+  case = A ,
+    Name-sg = Beweis ,
+    name-sg = Beweis ,
+    Name-pl = Beweise ,
+    name-pl = Beweise ,
+  case = D ,
+    Name-sg = Beweis ,
+    name-sg = Beweis ,
+    Name-pl = Beweisen ,
+    name-pl = Beweisen ,
+  case = G ,
+    Name-sg = Beweises ,
+    name-sg = Beweises ,
+    Name-pl = Beweise ,
+    name-pl = Beweise ,
 
 type = result ,
-  Name-sg = Ergebnis ,
-  name-sg = Ergebnis ,
-  Name-pl = Ergebnisse ,
-  name-pl = Ergebnisse ,
+  case = N ,
+    Name-sg = Ergebnis ,
+    name-sg = Ergebnis ,
+    Name-pl = Ergebnisse ,
+    name-pl = Ergebnisse ,
+  case = A ,
+    Name-sg = Ergebnis ,
+    name-sg = Ergebnis ,
+    Name-pl = Ergebnisse ,
+    name-pl = Ergebnisse ,
+  case = D ,
+    Name-sg = Ergebnis ,
+    name-sg = Ergebnis ,
+    Name-pl = Ergebnissen ,
+    name-pl = Ergebnissen ,
+  case = G ,
+    Name-sg = Ergebnisses ,
+    name-sg = Ergebnisses ,
+    Name-pl = Ergebnisse ,
+    name-pl = Ergebnisse ,
 
 type = remark ,
-  Name-sg = Bemerkung ,
-  name-sg = Bemerkung ,
-  Name-pl = Bemerkungen ,
-  name-pl = Bemerkungen ,
+  case = N ,
+    Name-sg = Bemerkung ,
+    name-sg = Bemerkung ,
+    Name-pl = Bemerkungen ,
+    name-pl = Bemerkungen ,
+  case = A ,
+    Name-sg = Bemerkung ,
+    name-sg = Bemerkung ,
+    Name-pl = Bemerkungen ,
+    name-pl = Bemerkungen ,
+  case = D ,
+    Name-sg = Bemerkung ,
+    name-sg = Bemerkung ,
+    Name-pl = Bemerkungen ,
+    name-pl = Bemerkungen ,
+  case = G ,
+    Name-sg = Bemerkung ,
+    name-sg = Bemerkung ,
+    Name-pl = Bemerkungen ,
+    name-pl = Bemerkungen ,
 
 type = example ,
-  Name-sg = Beispiel ,
-  name-sg = Beispiel ,
-  Name-pl = Beispiele ,
-  name-pl = Beispiele ,
+  case = N ,
+    Name-sg = Beispiel ,
+    name-sg = Beispiel ,
+    Name-pl = Beispiele ,
+    name-pl = Beispiele ,
+  case = A ,
+    Name-sg = Beispiel ,
+    name-sg = Beispiel ,
+    Name-pl = Beispiele ,
+    name-pl = Beispiele ,
+  case = D ,
+    Name-sg = Beispiel ,
+    name-sg = Beispiel ,
+    Name-pl = Beispielen ,
+    name-pl = Beispielen ,
+  case = G ,
+    Name-sg = Beispiels ,
+    name-sg = Beispiels ,
+    Name-pl = Beispiele ,
+    name-pl = Beispiele ,
 
 type = algorithm ,
-  Name-sg = Algorithmus ,
-  name-sg = Algorithmus ,
-  Name-pl = Algorithmen ,
-  name-pl = Algorithmen ,
+  case = N ,
+    Name-sg = Algorithmus ,
+    name-sg = Algorithmus ,
+    Name-pl = Algorithmen ,
+    name-pl = Algorithmen ,
+  case = A ,
+    Name-sg = Algorithmus ,
+    name-sg = Algorithmus ,
+    Name-pl = Algorithmen ,
+    name-pl = Algorithmen ,
+  case = D ,
+    Name-sg = Algorithmus ,
+    name-sg = Algorithmus ,
+    Name-pl = Algorithmen ,
+    name-pl = Algorithmen ,
+  case = G ,
+    Name-sg = Algorithmus ,
+    name-sg = Algorithmus ,
+    Name-pl = Algorithmen ,
+    name-pl = Algorithmen ,
 
 type = listing ,
-  Name-sg = Listing ,
-  name-sg = Listing ,
-  Name-pl = Listings ,
-  name-pl = Listings ,
+  case = N ,
+    Name-sg = Listing ,
+    name-sg = Listing ,
+    Name-pl = Listings ,
+    name-pl = Listings ,
+  case = A ,
+    Name-sg = Listing ,
+    name-sg = Listing ,
+    Name-pl = Listings ,
+    name-pl = Listings ,
+  case = D ,
+    Name-sg = Listing ,
+    name-sg = Listing ,
+    Name-pl = Listings ,
+    name-pl = Listings ,
+  case = G ,
+    Name-sg = Listings ,
+    name-sg = Listings ,
+    Name-pl = Listings ,
+    name-pl = Listings ,
 
 type = exercise ,
-  Name-sg = Übungsaufgabe ,
-  name-sg = Übungsaufgabe ,
-  Name-pl = Übungsaufgaben ,
-  name-pl = Übungsaufgaben ,
+  case = N ,
+    Name-sg = Übungsaufgabe ,
+    name-sg = Übungsaufgabe ,
+    Name-pl = Übungsaufgaben ,
+    name-pl = Übungsaufgaben ,
+  case = A ,
+    Name-sg = Übungsaufgabe ,
+    name-sg = Übungsaufgabe ,
+    Name-pl = Übungsaufgaben ,
+    name-pl = Übungsaufgaben ,
+  case = D ,
+    Name-sg = Übungsaufgabe ,
+    name-sg = Übungsaufgabe ,
+    Name-pl = Übungsaufgaben ,
+    name-pl = Übungsaufgaben ,
+  case = G ,
+    Name-sg = Übungsaufgabe ,
+    name-sg = Übungsaufgabe ,
+    Name-pl = Übungsaufgaben ,
+    name-pl = Übungsaufgaben ,
 
 type = solution ,
-  Name-sg = Lösung ,
-  name-sg = Lösung ,
-  Name-pl = Lösungen ,
-  name-pl = Lösungen ,
+  case = N ,
+    Name-sg = Lösung ,
+    name-sg = Lösung ,
+    Name-pl = Lösungen ,
+    name-pl = Lösungen ,
+  case = A ,
+    Name-sg = Lösung ,
+    name-sg = Lösung ,
+    Name-pl = Lösungen ,
+    name-pl = Lösungen ,
+  case = D ,
+    Name-sg = Lösung ,
+    name-sg = Lösung ,
+    Name-pl = Lösungen ,
+    name-pl = Lösungen ,
+  case = G ,
+    Name-sg = Lösung ,
+    name-sg = Lösung ,
+    Name-pl = Lösungen ,
+    name-pl = Lösungen ,
 %    \end{macrocode}
 %
 %    \begin{macrocode}
