@@ -1275,7 +1275,10 @@
 %
 % \section{Acknowledgments}
 %
-%
+% TODO Include: \pkg{cleveref}, \pkg{zref}, Ulrike Fischer, Jonathan P.\
+% Spratte, aka `Skillmon', Phelype Oleinik, Enrico Gregorio, aka `egreg',
+% Steven B.\ Segletes, \texttt{@samcarter}, Alan Munn, Florent Rougon, David
+% Carlisle.
 %
 %
 %
@@ -3074,6 +3077,12 @@
 % \subsubsection*{\opt{d} option}
 %
 %
+%
+% Thanks \texttt{@samcarter} and Alan Munn for useful comments about
+% declension on the TeX.SX chat.  Also, Florent Rougon's efforts in this area,
+% with the \pkg{xcref} package (\url{https://github.com/frougon/xcref}), have
+% been an insightful source to frame the problem in general terms.
+%
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_decl_case_tl
 \keys_define:nn { zref-clever / reference }
@@ -3311,7 +3320,10 @@
 % \opt{font} \emph{can't be used as a package option}, since the options get
 % expanded by \LaTeX{} before being passed to the package (see
 % \url{https://tex.stackexchange.com/a/489570}).  It can't be set in
-% \cs{zcref} and, for global settings, with \cs{zcsetup}.
+% \cs{zcref} and, for global settings, with \cs{zcsetup}.  Note that,
+% technically, the ``raw'' options are already available as
+% \cs{@raw@opt@\meta{package}.sty} (see
+% \url{https://tex.stackexchange.com/a/618439}, thanks David Carlisle).
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_typeset_font_tl
