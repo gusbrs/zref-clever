@@ -2005,20 +2005,26 @@
 % \begin{macro}[int]{\zcDeclareLanguage}
 %   Declare a new language for use with \pkg{zref-clever}.  \meta{language} is
 %   taken to be both the ``language name'' and the ``dictionary name''.
-%   Optional argument \oarg{cases} takes the noun declension cases prefixes
-%   for \meta{language} as a comma separated list, whose first element is
-%   taken to be the default case.  If \meta{language} is already known, just
-%   warn.  This implies a particular restriction regarding \oarg{cases},
-%   namely, that the declension of languages defined by the package cannot be
-%   redefined by the user.  This is deliberate, otherwise the built-in
-%   dictionaries would become much too sensitive to this particular user
-%   input, and unnecessarily so.  \cs{zcDeclareLanguage} is preamble only.
+%   \oarg{options} receive a \texttt{k=v} set of options, with two valid
+%   options.  The first, \opt{declension}, takes the noun declension cases
+%   prefixes for \meta{language} as a comma separated list, whose first
+%   element is taken to be the default case.  The second, \opt{allcaps},
+%   receives no value, and indicates that for \meta{language} all nouns must
+%   be capitalized for grammatical reasons, in which case, the \opt{cap}
+%   option is disregarded for \meta{language}.  If \meta{language} is already
+%   known, just warn.  This implies a particular restriction regarding
+%   \oarg{options}, namely that these options, when defined by the package,
+%   cannot be redefined by the user.  This is deliberate, otherwise the
+%   built-in dictionaries would become much too sensitive to this particular
+%   user input, and unnecessarily so.  \cs{zcDeclareLanguage} is preamble
+%   only.
 %   \begin{syntax}
-%     \cs{zcDeclareLanguage} \oarg{cases} \marg{language}
+%     \cs{zcDeclareLanguage} \oarg{options} \marg{language}
 %   \end{syntax}
 %    \begin{macrocode}
 \NewDocumentCommand \zcDeclareLanguage { O { } m }
   {
+    \group_begin:
     \tl_if_empty:nF {#2}
       {
         \prop_if_in:NnTF \g_@@_languages_prop {#2}
@@ -2026,15 +2032,33 @@
           {
             \prop_gput:Nnn \g_@@_languages_prop {#2} {#2}
             \prop_new:c { g_@@_dict_ #2 _prop }
-            \tl_if_empty:nF {#1}
-              {
-                \prop_gput:cnn
-                  { g_@@_dict_ #2 _prop } { declension } {#1}
-              }
+            \tl_set:Nn \l_@@_dict_language_tl {#2}
+            \keys_set:nn { zref-clever / declarelang } {#1}
           }
       }
+    \group_end:
   }
 \@onlypreamble \zcDeclareLanguage
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\keys_define:nn { zref-clever / declarelang }
+  {
+    declension .code:n =
+      {
+        \prop_gput:cnn
+          { g_@@_dict_ \l_@@_dict_language_tl _prop }
+          { declension } {#1}
+      } ,
+    declension .value_required:n = true ,
+    allcaps .code:n =
+      {
+        \prop_gput:cnn
+          { g_@@_dict_ \l_@@_dict_language_tl _prop }
+          { allcaps } { true }
+      } ,
+    allcaps .value_forbidden:n = true ,
+  }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3046,18 +3070,20 @@
 %    \end{macrocode}
 %
 %
-% \begin{macro}{\@@_validate_decl_option:}
-%   Auxiliary function for \cs{@@_zcref:nnn}, responsible for validating the
-%   declension case (\opt{d}) option for the reference language.  It is
-%   expected to be called right (or soon) after \cs{keys_set:nn} in
-%   \cs{@@_zcref:nnn}, where current values for \cs{l_@@_ref_language_tl} and
-%   \cs{l_@@_ref_decl_case_tl}.  If the user value for the latter does not
-%   match the declension cases declared for the former, the function sets an
-%   appropriate value for \cs{l_@@_ref_decl_case_tl}, either using the default
-%   case, or clearing the variable, depending on the language setup.  And also
-%   issues a warning about it.
+% \begin{macro}{\@@_process_language_options:}
+%   Auxiliary function for \cs{@@_zcref:nnn}, responsible for processing
+%   options from \cs{zcDeclareLanguage}.  It validates the declension case
+%   (\opt{d}) option for the reference language.  It is expected to be called
+%   right (or soon) after \cs{keys_set:nn} in \cs{@@_zcref:nnn}, where current
+%   values for \cs{l_@@_ref_language_tl} and \cs{l_@@_ref_decl_case_tl} are in
+%   place.  If the user value for the latter does not match the declension
+%   cases declared for the former, the function sets an appropriate value for
+%   \cs{l_@@_ref_decl_case_tl}, either using the default case, or clearing the
+%   variable, depending on the language setup.  And also issues a warning
+%   about it.  This function also ensures \cs{l_@@_capitalize_bool} is set to
+%   \texttt{true} when the language was declared with \opt{allcaps} option.
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_validate_decl_option:
+\cs_new_protected:Npn \@@_process_language_options:
   {
     \exp_args:NNx \prop_get:NnNTF \g_@@_languages_prop
       { \l_@@_ref_language_tl }
@@ -3103,6 +3129,17 @@
                   }
               }
           }
+        \str_if_eq:eeT
+          {
+            \prop_item:cn
+              {
+                g_@@_dict_
+                \l_@@_dict_language_tl _prop
+              }
+              { allcaps }
+          }
+          { true }
+          { \bool_set_true:N \l_@@_capitalize_bool }
       }
       {
         \tl_if_empty:NF \l_@@_ref_decl_case_tl
@@ -3116,6 +3153,7 @@
   }
 %    \end{macrocode}
 % \end{macro}
+%
 %
 %
 % \subsubsection*{\opt{nudge} \& Co.\ options}
@@ -3885,9 +3923,9 @@
 %    \begin{macrocode}
       \@@_provide_dictionary:x { \l_@@_ref_language_tl }
 %    \end{macrocode}
-% Validate type name declension option.
+% Process \cs{zcDeclareLanguage} options.
 %    \begin{macrocode}
-      \@@_validate_decl_option:
+      \@@_process_language_options:
 %    \end{macrocode}
 % Integration with \pkg{zref-check}.
 %    \begin{macrocode}
@@ -6522,14 +6560,16 @@
 % \subsection{English}
 %
 %    \begin{macrocode}
-%<package>\zcDeclareLanguage { english }
-%<package>\zcDeclareLanguageAlias { american   } { english }
-%<package>\zcDeclareLanguageAlias { australian } { english }
-%<package>\zcDeclareLanguageAlias { british    } { english }
-%<package>\zcDeclareLanguageAlias { canadian   } { english }
-%<package>\zcDeclareLanguageAlias { newzealand } { english }
-%<package>\zcDeclareLanguageAlias { UKenglish  } { english }
-%<package>\zcDeclareLanguageAlias { USenglish  } { english }
+%<*package>
+\zcDeclareLanguage { english }
+\zcDeclareLanguageAlias { american   } { english }
+\zcDeclareLanguageAlias { australian } { english }
+\zcDeclareLanguageAlias { british    } { english }
+\zcDeclareLanguageAlias { canadian   } { english }
+\zcDeclareLanguageAlias { newzealand } { english }
+\zcDeclareLanguageAlias { UKenglish  } { english }
+\zcDeclareLanguageAlias { USenglish  } { english }
+%</package>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -6736,13 +6776,15 @@ type = solution ,
 % \subsection{German}
 %
 %    \begin{macrocode}
-%<package>\zcDeclareLanguage [ N , A , D , G ] { german }
-%<package>\zcDeclareLanguageAlias { austrian     } { german }
-%<package>\zcDeclareLanguageAlias { germanb      } { german }
-%<package>\zcDeclareLanguageAlias { ngerman      } { german }
-%<package>\zcDeclareLanguageAlias { naustrian    } { german }
-%<package>\zcDeclareLanguageAlias { nswissgerman } { german }
-%<package>\zcDeclareLanguageAlias { swissgerman  } { german }
+%<*package>
+\zcDeclareLanguage [ declension = { N , A , D , G } , allcaps ] { german }
+\zcDeclareLanguageAlias { austrian     } { german }
+\zcDeclareLanguageAlias { germanb      } { german }
+\zcDeclareLanguageAlias { ngerman      } { german }
+\zcDeclareLanguageAlias { naustrian    } { german }
+\zcDeclareLanguageAlias { nswissgerman } { german }
+\zcDeclareLanguageAlias { swissgerman  } { german }
+%</package>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -6764,340 +6806,220 @@ type = part ,
   gender = m ,
   case = N ,
     Name-sg = Teil ,
-    name-sg = Teil ,
     Name-pl = Teile ,
-    name-pl = Teile ,
   case = A ,
     Name-sg = Teil ,
-    name-sg = Teil ,
     Name-pl = Teile ,
-    name-pl = Teile ,
   case = D ,
     Name-sg = Teil ,
-    name-sg = Teil ,
     Name-pl = Teilen ,
-    name-pl = Teilen ,
   case = G ,
     Name-sg = Teiles ,
-    name-sg = Teiles ,
     Name-pl = Teile ,
-    name-pl = Teile ,
 
 type = chapter ,
   gender = n ,
   case = N ,
     Name-sg = Kapitel ,
-    name-sg = Kapitel ,
     Name-pl = Kapitel ,
-    name-pl = Kapitel ,
   case = A ,
     Name-sg = Kapitel ,
-    name-sg = Kapitel ,
     Name-pl = Kapitel ,
-    name-pl = Kapitel ,
   case = D ,
     Name-sg = Kapitel ,
-    name-sg = Kapitel ,
     Name-pl = Kapiteln ,
-    name-pl = Kapiteln ,
   case = G ,
     Name-sg = Kapitels ,
-    name-sg = Kapitels ,
     Name-pl = Kapitel ,
-    name-pl = Kapitel ,
 
 type = section ,
   gender = m ,
   case = N ,
     Name-sg = Abschnitt ,
-    name-sg = Abschnitt ,
     Name-pl = Abschnitte ,
-    name-pl = Abschnitte ,
   case = A ,
     Name-sg = Abschnitt ,
-    name-sg = Abschnitt ,
     Name-pl = Abschnitte ,
-    name-pl = Abschnitte ,
   case = D ,
     Name-sg = Abschnitt ,
-    name-sg = Abschnitt ,
     Name-pl = Abschnitten ,
-    name-pl = Abschnitten ,
   case = G ,
     Name-sg = Abschnitts ,
-    name-sg = Abschnitts ,
     Name-pl = Abschnitte ,
-    name-pl = Abschnitte ,
 
 type = paragraph ,
   gender = m ,
   case = N ,
     Name-sg = Absatz ,
-    name-sg = Absatz ,
     Name-pl = Absätze ,
-    name-pl = Absätze ,
   case = A ,
     Name-sg = Absatz ,
-    name-sg = Absatz ,
     Name-pl = Absätze ,
-    name-pl = Absätze ,
   case = D ,
     Name-sg = Absatz ,
-    name-sg = Absatz ,
     Name-pl = Absätzen ,
-    name-pl = Absätzen ,
   case = G ,
     Name-sg = Absatzes ,
-    name-sg = Absatzes ,
     Name-pl = Absätze ,
-    name-pl = Absätze ,
 
 type = appendix ,
   gender = m ,
   case = N ,
     Name-sg = Anhang ,
-    name-sg = Anhang ,
     Name-pl = Anhänge ,
-    name-pl = Anhänge ,
   case = A ,
     Name-sg = Anhang ,
-    name-sg = Anhang ,
     Name-pl = Anhänge ,
-    name-pl = Anhänge ,
   case = D ,
     Name-sg = Anhang ,
-    name-sg = Anhang ,
     Name-pl = Anhängen ,
-    name-pl = Anhängen ,
   case = G ,
     Name-sg = Anhangs ,
-    name-sg = Anhangs ,
     Name-pl = Anhänge ,
-    name-pl = Anhänge ,
 
 type = subappendix ,
   gender = m ,
   case = N ,
     Name-sg = Anhang ,
-    name-sg = Anhang ,
     Name-pl = Anhänge ,
-    name-pl = Anhänge ,
   case = A ,
     Name-sg = Anhang ,
-    name-sg = Anhang ,
     Name-pl = Anhänge ,
-    name-pl = Anhänge ,
   case = D ,
     Name-sg = Anhang ,
-    name-sg = Anhang ,
     Name-pl = Anhängen ,
-    name-pl = Anhängen ,
   case = G ,
     Name-sg = Anhangs ,
-    name-sg = Anhangs ,
     Name-pl = Anhänge ,
-    name-pl = Anhänge ,
 
 type = page ,
   gender = f ,
   case = N ,
     Name-sg = Seite ,
-    name-sg = Seite ,
     Name-pl = Seiten ,
-    name-pl = Seiten ,
   case = A ,
     Name-sg = Seite ,
-    name-sg = Seite ,
     Name-pl = Seiten ,
-    name-pl = Seiten ,
   case = D ,
     Name-sg = Seite ,
-    name-sg = Seite ,
     Name-pl = Seiten ,
-    name-pl = Seiten ,
   case = G ,
     Name-sg = Seite ,
-    name-sg = Seite ,
     Name-pl = Seiten ,
-    name-pl = Seiten ,
   rangesep = {\textendash} ,
 
 type = line ,
   gender = f ,
   case = N ,
     Name-sg = Zeile ,
-    name-sg = Zeile ,
     Name-pl = Zeilen ,
-    name-pl = Zeilen ,
   case = A ,
     Name-sg = Zeile ,
-    name-sg = Zeile ,
     Name-pl = Zeilen ,
-    name-pl = Zeilen ,
   case = D ,
     Name-sg = Zeile ,
-    name-sg = Zeile ,
     Name-pl = Zeilen ,
-    name-pl = Zeilen ,
   case = G ,
     Name-sg = Zeile ,
-    name-sg = Zeile ,
     Name-pl = Zeilen ,
-    name-pl = Zeilen ,
 
 type = figure ,
   gender = f ,
   case = N ,
     Name-sg = Abbildung ,
-    name-sg = Abbildung ,
     Name-pl = Abbildungen ,
-    name-pl = Abbildungen ,
     Name-sg-ab = Abb. ,
-    name-sg-ab = Abb. ,
     Name-pl-ab = Abb. ,
-    name-pl-ab = Abb. ,
   case = A ,
     Name-sg = Abbildung ,
-    name-sg = Abbildung ,
     Name-pl = Abbildungen ,
-    name-pl = Abbildungen ,
     Name-sg-ab = Abb. ,
-    name-sg-ab = Abb. ,
     Name-pl-ab = Abb. ,
-    name-pl-ab = Abb. ,
   case = D ,
     Name-sg = Abbildung ,
-    name-sg = Abbildung ,
     Name-pl = Abbildungen ,
-    name-pl = Abbildungen ,
     Name-sg-ab = Abb. ,
-    name-sg-ab = Abb. ,
     Name-pl-ab = Abb. ,
-    name-pl-ab = Abb. ,
   case = G ,
     Name-sg = Abbildung ,
-    name-sg = Abbildung ,
     Name-pl = Abbildungen ,
-    name-pl = Abbildungen ,
     Name-sg-ab = Abb. ,
-    name-sg-ab = Abb. ,
     Name-pl-ab = Abb. ,
-    name-pl-ab = Abb. ,
 
 type = table ,
   gender = f ,
   case = N ,
     Name-sg = Tabelle ,
-    name-sg = Tabelle ,
     Name-pl = Tabellen ,
-    name-pl = Tabellen ,
   case = A ,
     Name-sg = Tabelle ,
-    name-sg = Tabelle ,
     Name-pl = Tabellen ,
-    name-pl = Tabellen ,
   case = D ,
     Name-sg = Tabelle ,
-    name-sg = Tabelle ,
     Name-pl = Tabellen ,
-    name-pl = Tabellen ,
   case = G ,
     Name-sg = Tabelle ,
-    name-sg = Tabelle ,
     Name-pl = Tabellen ,
-    name-pl = Tabellen ,
 
 type = item ,
   gender = m ,
   case = N ,
     Name-sg = Punkt ,
-    name-sg = Punkt ,
     Name-pl = Punkte ,
-    name-pl = Punkte ,
   case = A ,
     Name-sg = Punkt ,
-    name-sg = Punkt ,
     Name-pl = Punkte ,
-    name-pl = Punkte ,
   case = D ,
     Name-sg = Punkt ,
-    name-sg = Punkt ,
     Name-pl = Punkten ,
-    name-pl = Punkten ,
   case = G ,
     Name-sg = Punktes ,
-    name-sg = Punktes ,
     Name-pl = Punkte ,
-    name-pl = Punkte ,
 
 type = footnote ,
   gender = f ,
   case = N ,
     Name-sg = Fußnote ,
-    name-sg = Fußnote ,
     Name-pl = Fußnoten ,
-    name-pl = Fußnoten ,
   case = A ,
     Name-sg = Fußnote ,
-    name-sg = Fußnote ,
     Name-pl = Fußnoten ,
-    name-pl = Fußnoten ,
   case = D ,
     Name-sg = Fußnote ,
-    name-sg = Fußnote ,
     Name-pl = Fußnoten ,
-    name-pl = Fußnoten ,
   case = G ,
     Name-sg = Fußnote ,
-    name-sg = Fußnote ,
     Name-pl = Fußnoten ,
-    name-pl = Fußnoten ,
 
 type = note ,
   gender = f ,
   case = N ,
     Name-sg = Anmerkung ,
-    name-sg = Anmerkung ,
     Name-pl = Anmerkungen ,
-    name-pl = Anmerkungen ,
   case = A ,
     Name-sg = Anmerkung ,
-    name-sg = Anmerkung ,
     Name-pl = Anmerkungen ,
-    name-pl = Anmerkungen ,
   case = D ,
     Name-sg = Anmerkung ,
-    name-sg = Anmerkung ,
     Name-pl = Anmerkungen ,
-    name-pl = Anmerkungen ,
   case = G ,
     Name-sg = Anmerkung ,
-    name-sg = Anmerkung ,
     Name-pl = Anmerkungen ,
-    name-pl = Anmerkungen ,
 
 type = equation ,
   gender = f ,
   case = N ,
     Name-sg = Gleichung ,
-    name-sg = Gleichung ,
     Name-pl = Gleichungen ,
-    name-pl = Gleichungen ,
   case = A ,
     Name-sg = Gleichung ,
-    name-sg = Gleichung ,
     Name-pl = Gleichungen ,
-    name-pl = Gleichungen ,
   case = D ,
     Name-sg = Gleichung ,
-    name-sg = Gleichung ,
     Name-pl = Gleichungen ,
-    name-pl = Gleichungen ,
   case = G ,
     Name-sg = Gleichung ,
-    name-sg = Gleichung ,
     Name-pl = Gleichungen ,
-    name-pl = Gleichungen ,
   refpre-in = {(} ,
   refpos-in = {)} ,
 
@@ -7105,300 +7027,196 @@ type = theorem ,
   gender = n ,
   case = N ,
     Name-sg = Theorem ,
-    name-sg = Theorem ,
     Name-pl = Theoreme ,
-    name-pl = Theoreme ,
   case = A ,
     Name-sg = Theorem ,
-    name-sg = Theorem ,
     Name-pl = Theoreme ,
-    name-pl = Theoreme ,
   case = D ,
     Name-sg = Theorem ,
-    name-sg = Theorem ,
     Name-pl = Theoremen ,
-    name-pl = Theoremen ,
   case = G ,
     Name-sg = Theorems ,
-    name-sg = Theorems ,
     Name-pl = Theoreme ,
-    name-pl = Theoreme ,
 
 type = lemma ,
   gender = n ,
   case = N ,
     Name-sg = Lemma ,
-    name-sg = Lemma ,
     Name-pl = Lemmata ,
-    name-pl = Lemmata ,
   case = A ,
     Name-sg = Lemma ,
-    name-sg = Lemma ,
     Name-pl = Lemmata ,
-    name-pl = Lemmata ,
   case = D ,
     Name-sg = Lemma ,
-    name-sg = Lemma ,
     Name-pl = Lemmata ,
-    name-pl = Lemmata ,
   case = G ,
     Name-sg = Lemmas ,
-    name-sg = Lemmas ,
     Name-pl = Lemmata ,
-    name-pl = Lemmata ,
 
 type = corollary ,
   gender = n ,
   case = N ,
     Name-sg = Korollar ,
-    name-sg = Korollar ,
     Name-pl = Korollare ,
-    name-pl = Korollare ,
   case = A ,
     Name-sg = Korollar ,
-    name-sg = Korollar ,
     Name-pl = Korollare ,
-    name-pl = Korollare ,
   case = D ,
     Name-sg = Korollar ,
-    name-sg = Korollar ,
     Name-pl = Korollaren ,
-    name-pl = Korollaren ,
   case = G ,
     Name-sg = Korollars ,
-    name-sg = Korollars ,
     Name-pl = Korollare ,
-    name-pl = Korollare ,
 
 type = proposition ,
   gender = m ,
   case = N ,
     Name-sg = Satz ,
-    name-sg = Satz ,
     Name-pl = Sätze ,
-    name-pl = Sätze ,
   case = A ,
     Name-sg = Satz ,
-    name-sg = Satz ,
     Name-pl = Sätze ,
-    name-pl = Sätze ,
   case = D ,
     Name-sg = Satz ,
-    name-sg = Satz ,
     Name-pl = Sätzen ,
-    name-pl = Sätzen ,
   case = G ,
     Name-sg = Satzes ,
-    name-sg = Satzes ,
     Name-pl = Sätze ,
-    name-pl = Sätze ,
 
 type = definition ,
   gender = f ,
   case = N ,
     Name-sg = Definition ,
-    name-sg = Definition ,
     Name-pl = Definitionen ,
-    name-pl = Definitionen ,
   case = A ,
     Name-sg = Definition ,
-    name-sg = Definition ,
     Name-pl = Definitionen ,
-    name-pl = Definitionen ,
   case = D ,
     Name-sg = Definition ,
-    name-sg = Definition ,
     Name-pl = Definitionen ,
-    name-pl = Definitionen ,
   case = G ,
     Name-sg = Definition ,
-    name-sg = Definition ,
     Name-pl = Definitionen ,
-    name-pl = Definitionen ,
 
 type = proof ,
   gender = m ,
   case = N ,
     Name-sg = Beweis ,
-    name-sg = Beweis ,
     Name-pl = Beweise ,
-    name-pl = Beweise ,
   case = A ,
     Name-sg = Beweis ,
-    name-sg = Beweis ,
     Name-pl = Beweise ,
-    name-pl = Beweise ,
   case = D ,
     Name-sg = Beweis ,
-    name-sg = Beweis ,
     Name-pl = Beweisen ,
-    name-pl = Beweisen ,
   case = G ,
     Name-sg = Beweises ,
-    name-sg = Beweises ,
     Name-pl = Beweise ,
-    name-pl = Beweise ,
 
 type = result ,
   gender = n ,
   case = N ,
     Name-sg = Ergebnis ,
-    name-sg = Ergebnis ,
     Name-pl = Ergebnisse ,
-    name-pl = Ergebnisse ,
   case = A ,
     Name-sg = Ergebnis ,
-    name-sg = Ergebnis ,
     Name-pl = Ergebnisse ,
-    name-pl = Ergebnisse ,
   case = D ,
     Name-sg = Ergebnis ,
-    name-sg = Ergebnis ,
     Name-pl = Ergebnissen ,
-    name-pl = Ergebnissen ,
   case = G ,
     Name-sg = Ergebnisses ,
-    name-sg = Ergebnisses ,
     Name-pl = Ergebnisse ,
-    name-pl = Ergebnisse ,
 
 type = remark ,
   gender = f ,
   case = N ,
     Name-sg = Bemerkung ,
-    name-sg = Bemerkung ,
     Name-pl = Bemerkungen ,
-    name-pl = Bemerkungen ,
   case = A ,
     Name-sg = Bemerkung ,
-    name-sg = Bemerkung ,
     Name-pl = Bemerkungen ,
-    name-pl = Bemerkungen ,
   case = D ,
     Name-sg = Bemerkung ,
-    name-sg = Bemerkung ,
     Name-pl = Bemerkungen ,
-    name-pl = Bemerkungen ,
   case = G ,
     Name-sg = Bemerkung ,
-    name-sg = Bemerkung ,
     Name-pl = Bemerkungen ,
-    name-pl = Bemerkungen ,
 
 type = example ,
   gender = n ,
   case = N ,
     Name-sg = Beispiel ,
-    name-sg = Beispiel ,
     Name-pl = Beispiele ,
-    name-pl = Beispiele ,
   case = A ,
     Name-sg = Beispiel ,
-    name-sg = Beispiel ,
     Name-pl = Beispiele ,
-    name-pl = Beispiele ,
   case = D ,
     Name-sg = Beispiel ,
-    name-sg = Beispiel ,
     Name-pl = Beispielen ,
-    name-pl = Beispielen ,
   case = G ,
     Name-sg = Beispiels ,
-    name-sg = Beispiels ,
     Name-pl = Beispiele ,
-    name-pl = Beispiele ,
 
 type = algorithm ,
   gender = m ,
   case = N ,
     Name-sg = Algorithmus ,
-    name-sg = Algorithmus ,
     Name-pl = Algorithmen ,
-    name-pl = Algorithmen ,
   case = A ,
     Name-sg = Algorithmus ,
-    name-sg = Algorithmus ,
     Name-pl = Algorithmen ,
-    name-pl = Algorithmen ,
   case = D ,
     Name-sg = Algorithmus ,
-    name-sg = Algorithmus ,
     Name-pl = Algorithmen ,
-    name-pl = Algorithmen ,
   case = G ,
     Name-sg = Algorithmus ,
-    name-sg = Algorithmus ,
     Name-pl = Algorithmen ,
-    name-pl = Algorithmen ,
 
 type = listing ,
   gender = n ,
   case = N ,
     Name-sg = Listing ,
-    name-sg = Listing ,
     Name-pl = Listings ,
-    name-pl = Listings ,
   case = A ,
     Name-sg = Listing ,
-    name-sg = Listing ,
     Name-pl = Listings ,
-    name-pl = Listings ,
   case = D ,
     Name-sg = Listing ,
-    name-sg = Listing ,
     Name-pl = Listings ,
-    name-pl = Listings ,
   case = G ,
     Name-sg = Listings ,
-    name-sg = Listings ,
     Name-pl = Listings ,
-    name-pl = Listings ,
 
 type = exercise ,
   gender = f ,
   case = N ,
     Name-sg = Übungsaufgabe ,
-    name-sg = Übungsaufgabe ,
     Name-pl = Übungsaufgaben ,
-    name-pl = Übungsaufgaben ,
   case = A ,
     Name-sg = Übungsaufgabe ,
-    name-sg = Übungsaufgabe ,
     Name-pl = Übungsaufgaben ,
-    name-pl = Übungsaufgaben ,
   case = D ,
     Name-sg = Übungsaufgabe ,
-    name-sg = Übungsaufgabe ,
     Name-pl = Übungsaufgaben ,
-    name-pl = Übungsaufgaben ,
   case = G ,
     Name-sg = Übungsaufgabe ,
-    name-sg = Übungsaufgabe ,
     Name-pl = Übungsaufgaben ,
-    name-pl = Übungsaufgaben ,
 
 type = solution ,
   gender = f ,
   case = N ,
     Name-sg = Lösung ,
-    name-sg = Lösung ,
     Name-pl = Lösungen ,
-    name-pl = Lösungen ,
   case = A ,
     Name-sg = Lösung ,
-    name-sg = Lösung ,
     Name-pl = Lösungen ,
-    name-pl = Lösungen ,
   case = D ,
     Name-sg = Lösung ,
-    name-sg = Lösung ,
     Name-pl = Lösungen ,
-    name-pl = Lösungen ,
   case = G ,
     Name-sg = Lösung ,
-    name-sg = Lösung ,
     Name-pl = Lösungen ,
-    name-pl = Lösungen ,
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -7410,11 +7228,13 @@ type = solution ,
 % \subsection{French}
 %
 %    \begin{macrocode}
-%<package>\zcDeclareLanguage { french }
-%<package>\zcDeclareLanguageAlias { acadian  } { french }
-%<package>\zcDeclareLanguageAlias { canadien } { french }
-%<package>\zcDeclareLanguageAlias { francais } { french }
-%<package>\zcDeclareLanguageAlias { frenchb  } { french }
+%<*package>
+\zcDeclareLanguage { french }
+\zcDeclareLanguageAlias { acadian  } { french }
+\zcDeclareLanguageAlias { canadien } { french }
+\zcDeclareLanguageAlias { francais } { french }
+\zcDeclareLanguageAlias { frenchb  } { french }
+%</package>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -7634,10 +7454,12 @@ type = solution ,
 % \subsection{Portuguese}
 %
 %    \begin{macrocode}
-%<package>\zcDeclareLanguage { portuguese }
-%<package>\zcDeclareLanguageAlias { brazilian } { portuguese }
-%<package>\zcDeclareLanguageAlias { brazil    } { portuguese }
-%<package>\zcDeclareLanguageAlias { portuges  } { portuguese }
+%<*package>
+\zcDeclareLanguage { portuguese }
+\zcDeclareLanguageAlias { brazilian } { portuguese }
+\zcDeclareLanguageAlias { brazil    } { portuguese }
+\zcDeclareLanguageAlias { portuges  } { portuguese }
+%</package>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -7871,7 +7693,9 @@ type = solution ,
 % \subsection{Spanish}
 %
 %    \begin{macrocode}
-%<package>\zcDeclareLanguage { spanish }
+%<*package>
+\zcDeclareLanguage { spanish }
+%</package>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
