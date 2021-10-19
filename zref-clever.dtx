@@ -2025,12 +2025,10 @@
           { \msg_warning:nnn { zref-clever } { language-declared } {#2} }
           {
             \prop_gput:Nnn \g_@@_languages_prop {#2} {#2}
+            \prop_new:c { g_@@_dict_ #2 _prop }
             \tl_if_empty:nF {#1}
               {
-                \prop_if_exist:cF
-                  { g_@@_dict_ #2 _prop }
-                  { \prop_new:c { g_@@_dict_ #2 _prop } }
-                \prop_put:cnn
+                \prop_gput:cnn
                   { g_@@_dict_ #2 _prop } { declension } {#1}
               }
           }
@@ -2169,18 +2167,6 @@
               { \ExplSyntaxOn }
               \l_tmpa_tl
               {
-                \prop_if_exist:cF
-                  {
-                    g_@@_dict_
-                    \l_@@_dict_language_tl _prop
-                  }
-                  {
-                    \prop_new:c
-                      {
-                        g_@@_dict_
-                        \l_@@_dict_language_tl _prop
-                      }
-                  }
                 \tl_clear:N \l_@@_setup_type_tl
                 \exp_args:NNx \seq_set_from_clist:Nn
                   \l_@@_dict_declension_seq
@@ -3077,57 +3063,44 @@
       { \l_@@_ref_language_tl }
       \l_@@_dict_language_tl
       {
-        \prop_if_exist:cTF
-          { g_@@_dict_ \l_@@_dict_language_tl _prop }
+        \exp_args:NNx \seq_set_from_clist:Nn
+          \l_@@_dict_declension_seq
           {
-            \exp_args:NNx \seq_set_from_clist:Nn
-              \l_@@_dict_declension_seq
+            \prop_item:cn
               {
-                \prop_item:cn
-                  {
-                    g_@@_dict_
-                    \l_@@_dict_language_tl _prop
-                  }
-                  { declension }
+                g_@@_dict_
+                \l_@@_dict_language_tl _prop
               }
-            \seq_if_empty:NTF \l_@@_dict_declension_seq
-              {
-                \tl_if_empty:NF \l_@@_ref_decl_case_tl
-                  {
-                    \msg_warning:nnxx { zref-clever }
-                      { language-no-decl-ref }
-                      { \l_@@_ref_language_tl }
-                      { \l_@@_ref_decl_case_tl }
-                    \tl_clear:N \l_@@_ref_decl_case_tl
-                  }
-              }
-              {
-                \tl_if_empty:NTF \l_@@_ref_decl_case_tl
-                  {
-                    \seq_get_left:NN \l_@@_dict_declension_seq
-                      \l_@@_ref_decl_case_tl
-                  }
-                  {
-                    \seq_if_in:NVF \l_@@_dict_declension_seq
-                      \l_@@_ref_decl_case_tl
-                      {
-                        \msg_warning:nnxx { zref-clever }
-                          { unknown-decl-case }
-                          { \l_@@_ref_decl_case_tl }
-                          { \l_@@_ref_language_tl }
-                        \seq_get_left:NN \l_@@_dict_declension_seq
-                          \l_@@_ref_decl_case_tl
-                      }
-                  }
-              }
+              { declension }
           }
+        \seq_if_empty:NTF \l_@@_dict_declension_seq
           {
             \tl_if_empty:NF \l_@@_ref_decl_case_tl
               {
-                \msg_warning:nnxx { zref-clever } { language-no-decl-ref }
+                \msg_warning:nnxx { zref-clever }
+                  { language-no-decl-ref }
                   { \l_@@_ref_language_tl }
                   { \l_@@_ref_decl_case_tl }
                 \tl_clear:N \l_@@_ref_decl_case_tl
+              }
+          }
+          {
+            \tl_if_empty:NTF \l_@@_ref_decl_case_tl
+              {
+                \seq_get_left:NN \l_@@_dict_declension_seq
+                  \l_@@_ref_decl_case_tl
+              }
+              {
+                \seq_if_in:NVF \l_@@_dict_declension_seq
+                  \l_@@_ref_decl_case_tl
+                  {
+                    \msg_warning:nnxx { zref-clever }
+                      { unknown-decl-case }
+                      { \l_@@_ref_decl_case_tl }
+                      { \l_@@_ref_language_tl }
+                    \seq_get_left:NN \l_@@_dict_declension_seq
+                      \l_@@_ref_decl_case_tl
+                  }
               }
           }
       }
@@ -3675,12 +3648,6 @@
       \l_@@_dict_language_tl
       {
         \tl_clear:N \l_@@_setup_type_tl
-        \prop_if_exist:cF
-          { g_@@_dict_ \l_@@_dict_language_tl _prop }
-          {
-            \prop_new:c
-              { g_@@_dict_ \l_@@_dict_language_tl _prop }
-          }
         \exp_args:NNx \seq_set_from_clist:Nn
           \l_@@_dict_declension_seq
           {
