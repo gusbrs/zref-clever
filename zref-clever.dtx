@@ -1741,6 +1741,22 @@
     Option~'sg'~signals~that~a~singular~type~name~was~expected~
     \msg_line_context:.~But~type~'#1'~has~plural~type~name.
   }
+\msg_new:nnn { zref-clever } { nudge-gender-unknown }
+  {
+    Known~values~for~'#1'~option~are~
+    \seq_use:Nnnn \c_@@_ref_options_genders_seq {~and~} {,~} {,~and~}.~
+    Can't~set~value~'#2'~\msg_line_context:.
+  }
+\msg_new:nnn { zref-clever } { nudge-gender-mismatch }
+  {
+    Gender~mismatch~for~type~'#1'~\msg_line_context:.~
+    You've~specified~'g=#2'~but~type~name~is~'#3'~for~language~'#4'.
+  }
+\msg_new:nnn { zref-clever } { nudge-gender-not-defined }
+  {
+    You've~specified~'g=#1'~\msg_line_context:.~
+    But~gender~for~type~'#2'~is~not~defined~for~language~'#3'.
+  }
 \msg_new:nnn { zref-clever } { nudgeif-unknown-value }
   { Unknown~value~'#1'~for~'nudgeif'~option~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { option-document-only }
@@ -1885,6 +1901,7 @@
 %     \c_@@_ref_options_necessarily_not_type_specific_seq ,
 %     \c_@@_ref_options_possibly_type_specific_seq ,
 %     \c_@@_ref_options_type_names_seq ,
+%     \c_@@_ref_options_genders_seq ,
 %     \c_@@_ref_options_font_seq ,
 %     \c_@@_ref_options_typesetup_seq ,
 %     \c_@@_ref_options_reference_seq ,
@@ -1933,6 +1950,9 @@
     Name-pl-ab ,
     name-pl-ab ,
   }
+\seq_const_from_clist:Nn
+  \c_@@_ref_options_genders_seq
+  { f , m , n }
 %    \end{macrocode}
 % \cs{c_@@_ref_options_font_seq} are technically ``possibly type-specific'',
 % but are not ``language-specific'', so we separate them.
@@ -1944,6 +1964,9 @@
     reffont ,
     reffont-in ,
   }
+%    \end{macrocode}
+% And, finally, some combined groups of the above variables, for convenience.
+%    \begin{macrocode}
 \seq_new:N \c_@@_ref_options_typesetup_seq
 \seq_gconcat:NNN \c_@@_ref_options_typesetup_seq
   \c_@@_ref_options_possibly_type_specific_seq
@@ -2302,6 +2325,23 @@
           }
       } ,
     case .value_required:n = true ,
+    gender .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_type_tl
+          {
+            \msg_info:nnn { zref-clever }
+              { option-only-type-specific } { gender }
+          }
+          {
+            \seq_if_in:NnTF \c_@@_ref_options_genders_seq {#1}
+              { \@@_provide_dict_type_transl:nn { gender } {#1} }
+              {
+                \msg_info:nnn { zref-clever } { nudge-gender-unknown }
+                  { gender } {#1}
+              }
+          }
+      } ,
+    gender .value_required:n = true ,
   }
 \seq_map_inline:Nn
   \c_@@_ref_options_necessarily_not_type_specific_seq
@@ -3105,13 +3145,15 @@
 % \end{macro}
 %
 %
-% \subsubsection*{\opt{nudge}, \opt{nudgeif}, and \opt{sg} options}
+% \subsubsection*{\opt{nudge} \& Co.\ options}
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_nudge_enabled_bool
 \bool_new:N \l_@@_nudge_multitype_bool
 \bool_new:N \l_@@_nudge_comptosing_bool
 \bool_new:N \l_@@_nudge_singular_bool
+\bool_new:N \l_@@_nudge_gender_bool
+\tl_new:N \l_@@_ref_gender_tl
 \keys_define:nn { zref-clever / reference }
   {
     nudge .choice: ,
@@ -3139,6 +3181,7 @@
       {
         \bool_set_false:N \l_@@_nudge_multitype_bool
         \bool_set_false:N \l_@@_nudge_comptosing_bool
+        \bool_set_false:N \l_@@_nudge_gender_bool
         \clist_map_inline:nn {#1}
           {
             \str_case:nnF {##1}
@@ -3147,10 +3190,13 @@
                 { \bool_set_true:N \l_@@_nudge_multitype_bool }
                 { comptosing }
                 { \bool_set_true:N \l_@@_nudge_comptosing_bool }
+                { gender }
+                { \bool_set_true:N \l_@@_nudge_gender_bool }
                 { all }
                 {
                   \bool_set_true:N \l_@@_nudge_multitype_bool
                   \bool_set_true:N \l_@@_nudge_comptosing_bool
+                  \bool_set_true:N \l_@@_nudge_gender_bool
                 }
               }
               {
@@ -3164,6 +3210,16 @@
     sg .bool_set:N = \l_@@_nudge_singular_bool ,
     sg .initial:n = false ,
     sg .default:n = true ,
+    g .code:n =
+      {
+        \seq_if_in:NnTF \c_@@_ref_options_genders_seq {#1}
+          { \tl_set:Nn \l_@@_ref_gender_tl {#1} }
+          {
+            \msg_warning:nnn { zref-clever } { nudge-gender-unknown }
+              { g } {#1}
+          }
+      } ,
+    g .value_required:n = true ,
   }
 %    \end{macrocode}
 %
@@ -3714,6 +3770,28 @@
           }
       } ,
     case .value_required:n = true ,
+    gender .code:n =
+      {
+        \tl_if_empty:NTF \l_@@_setup_type_tl
+          {
+            \msg_warning:nnn { zref-clever }
+              { option-only-type-specific } { gender }
+          }
+          {
+            \seq_if_in:NnTF \c_@@_ref_options_genders_seq {#1}
+              {
+                \@@_declare_type_transl:VVnn
+                  \l_@@_dict_language_tl
+                  \l_@@_setup_type_tl
+                  { gender } {#1}
+              }
+              {
+                \msg_warning:nnn { zref-clever } { nudge-gender-unknown }
+                  { gender } {#1}
+              }
+          }
+      } ,
+    gender .value_required:n = true ,
   }
 \seq_map_inline:Nn
   \c_@@_ref_options_necessarily_not_type_specific_seq
@@ -4536,7 +4614,8 @@
 %     \l_@@_type_name_tl ,
 %     \l_@@_name_in_link_bool ,
 %     \l_@@_name_format_tl ,
-%     \l_@@_name_format_fallback_tl
+%     \l_@@_name_format_fallback_tl ,
+%     \l_@@_type_name_gender_tl ,
 %   }
 %   Auxiliary variables for \cs{@@_typeset_refs:} type name handling.
 %    \begin{macrocode}
@@ -4544,6 +4623,7 @@
 \bool_new:N \l_@@_name_in_link_bool
 \tl_new:N \l_@@_name_format_tl
 \tl_new:N \l_@@_name_format_fallback_tl
+\tl_new:N \l_@@_type_name_gender_tl
 %    \end{macrocode}
 % \end{variable}
 %
@@ -5514,7 +5594,7 @@
               }
               { \tl_clear:N \l_@@_name_format_fallback_tl }
 
-            % Handle singular/plural nudges.
+            % Handle number and gender nudges.
             \bool_if:NT \l_@@_nudge_enabled_bool
               {
                 \bool_if:NTF \l_@@_nudge_singular_bool
@@ -5540,6 +5620,38 @@
                         \msg_warning:nnx { zref-clever }
                           { nudge-comptosing }
                           { \l_@@_type_first_label_type_tl }
+                      }
+                  }
+                \bool_lazy_and:nnT
+                  { \l_@@_nudge_gender_bool }
+                  { ! \tl_if_empty_p:N \l_@@_ref_gender_tl }
+                  {
+                    \@@_get_type_transl:xxnNF
+                      { \l_@@_ref_language_tl }
+                      { \l_@@_type_first_label_type_tl }
+                      { gender }
+                      \l_@@_type_name_gender_tl
+                      { \tl_clear:N \l_@@_type_name_gender_tl }
+                    \tl_if_eq:NNF
+                      \l_@@_ref_gender_tl
+                      \l_@@_type_name_gender_tl
+                      {
+                        \tl_if_empty:NTF \l_@@_type_name_gender_tl
+                          {
+                            \msg_warning:nnxxx { zref-clever }
+                              { nudge-gender-not-defined }
+                              { \l_@@_ref_gender_tl }
+                              { \l_@@_type_first_label_type_tl }
+                              { \l_@@_ref_language_tl }
+                          }
+                          {
+                            \msg_warning:nnxxxx { zref-clever }
+                              { nudge-gender-mismatch }
+                              { \l_@@_type_first_label_type_tl }
+                              { \l_@@_ref_gender_tl }
+                              { \l_@@_type_name_gender_tl }
+                              { \l_@@_ref_language_tl }
+                          }
                       }
                   }
               }
@@ -6682,6 +6794,7 @@ notesep  = {~} ,
 rangesep = {~bis\nobreakspace} ,
 
 type = part ,
+  gender = m ,
   case = N ,
     Name-sg = Teil ,
     name-sg = Teil ,
@@ -6704,6 +6817,7 @@ type = part ,
     name-pl = Teile ,
 
 type = chapter ,
+  gender = n ,
   case = N ,
     Name-sg = Kapitel ,
     name-sg = Kapitel ,
@@ -6726,6 +6840,7 @@ type = chapter ,
     name-pl = Kapitel ,
 
 type = section ,
+  gender = m ,
   case = N ,
     Name-sg = Abschnitt ,
     name-sg = Abschnitt ,
@@ -6748,6 +6863,7 @@ type = section ,
     name-pl = Abschnitte ,
 
 type = paragraph ,
+  gender = m ,
   case = N ,
     Name-sg = Absatz ,
     name-sg = Absatz ,
@@ -6770,6 +6886,7 @@ type = paragraph ,
     name-pl = Absätze ,
 
 type = appendix ,
+  gender = m ,
   case = N ,
     Name-sg = Anhang ,
     name-sg = Anhang ,
@@ -6792,6 +6909,7 @@ type = appendix ,
     name-pl = Anhänge ,
 
 type = subappendix ,
+  gender = m ,
   case = N ,
     Name-sg = Anhang ,
     name-sg = Anhang ,
@@ -6814,6 +6932,7 @@ type = subappendix ,
     name-pl = Anhänge ,
 
 type = page ,
+  gender = f ,
   case = N ,
     Name-sg = Seite ,
     name-sg = Seite ,
@@ -6837,6 +6956,7 @@ type = page ,
   rangesep = {\textendash} ,
 
 type = line ,
+  gender = f ,
   case = N ,
     Name-sg = Zeile ,
     name-sg = Zeile ,
@@ -6859,6 +6979,7 @@ type = line ,
     name-pl = Zeilen ,
 
 type = figure ,
+  gender = f ,
   case = N ,
     Name-sg = Abbildung ,
     name-sg = Abbildung ,
@@ -6897,6 +7018,7 @@ type = figure ,
     name-pl-ab = Abb. ,
 
 type = table ,
+  gender = f ,
   case = N ,
     Name-sg = Tabelle ,
     name-sg = Tabelle ,
@@ -6919,6 +7041,7 @@ type = table ,
     name-pl = Tabellen ,
 
 type = item ,
+  gender = m ,
   case = N ,
     Name-sg = Punkt ,
     name-sg = Punkt ,
@@ -6941,6 +7064,7 @@ type = item ,
     name-pl = Punkte ,
 
 type = footnote ,
+  gender = f ,
   case = N ,
     Name-sg = Fußnote ,
     name-sg = Fußnote ,
@@ -6963,6 +7087,7 @@ type = footnote ,
     name-pl = Fußnoten ,
 
 type = note ,
+  gender = f ,
   case = N ,
     Name-sg = Anmerkung ,
     name-sg = Anmerkung ,
@@ -6985,6 +7110,7 @@ type = note ,
     name-pl = Anmerkungen ,
 
 type = equation ,
+  gender = f ,
   case = N ,
     Name-sg = Gleichung ,
     name-sg = Gleichung ,
@@ -7009,6 +7135,7 @@ type = equation ,
   refpos-in = {)} ,
 
 type = theorem ,
+  gender = n ,
   case = N ,
     Name-sg = Theorem ,
     name-sg = Theorem ,
@@ -7031,6 +7158,7 @@ type = theorem ,
     name-pl = Theoreme ,
 
 type = lemma ,
+  gender = n ,
   case = N ,
     Name-sg = Lemma ,
     name-sg = Lemma ,
@@ -7053,6 +7181,7 @@ type = lemma ,
     name-pl = Lemmata ,
 
 type = corollary ,
+  gender = n ,
   case = N ,
     Name-sg = Korollar ,
     name-sg = Korollar ,
@@ -7075,6 +7204,7 @@ type = corollary ,
     name-pl = Korollare ,
 
 type = proposition ,
+  gender = m ,
   case = N ,
     Name-sg = Satz ,
     name-sg = Satz ,
@@ -7097,6 +7227,7 @@ type = proposition ,
     name-pl = Sätze ,
 
 type = definition ,
+  gender = f ,
   case = N ,
     Name-sg = Definition ,
     name-sg = Definition ,
@@ -7119,6 +7250,7 @@ type = definition ,
     name-pl = Definitionen ,
 
 type = proof ,
+  gender = m ,
   case = N ,
     Name-sg = Beweis ,
     name-sg = Beweis ,
@@ -7141,6 +7273,7 @@ type = proof ,
     name-pl = Beweise ,
 
 type = result ,
+  gender = n ,
   case = N ,
     Name-sg = Ergebnis ,
     name-sg = Ergebnis ,
@@ -7163,6 +7296,7 @@ type = result ,
     name-pl = Ergebnisse ,
 
 type = remark ,
+  gender = f ,
   case = N ,
     Name-sg = Bemerkung ,
     name-sg = Bemerkung ,
@@ -7185,6 +7319,7 @@ type = remark ,
     name-pl = Bemerkungen ,
 
 type = example ,
+  gender = n ,
   case = N ,
     Name-sg = Beispiel ,
     name-sg = Beispiel ,
@@ -7207,6 +7342,7 @@ type = example ,
     name-pl = Beispiele ,
 
 type = algorithm ,
+  gender = m ,
   case = N ,
     Name-sg = Algorithmus ,
     name-sg = Algorithmus ,
@@ -7229,6 +7365,7 @@ type = algorithm ,
     name-pl = Algorithmen ,
 
 type = listing ,
+  gender = n ,
   case = N ,
     Name-sg = Listing ,
     name-sg = Listing ,
@@ -7251,6 +7388,7 @@ type = listing ,
     name-pl = Listings ,
 
 type = exercise ,
+  gender = f ,
   case = N ,
     Name-sg = Übungsaufgabe ,
     name-sg = Übungsaufgabe ,
@@ -7273,6 +7411,7 @@ type = exercise ,
     name-pl = Übungsaufgaben ,
 
 type = solution ,
+  gender = f ,
   case = N ,
     Name-sg = Lösung ,
     name-sg = Lösung ,
@@ -7327,42 +7466,49 @@ notesep  = {~} ,
 rangesep = {~à\nobreakspace} ,
 
 type = part ,
+  gender = f ,
   Name-sg = Partie ,
   name-sg = partie ,
   Name-pl = Parties ,
   name-pl = parties ,
 
 type = chapter ,
+  gender = m ,
   Name-sg = Chapitre ,
   name-sg = chapitre ,
   Name-pl = Chapitres ,
   name-pl = chapitres ,
 
 type = section ,
+  gender = f ,
   Name-sg = Section ,
   name-sg = section ,
   Name-pl = Sections ,
   name-pl = sections ,
 
 type = paragraph ,
+  gender = m ,
   Name-sg = Paragraphe ,
   name-sg = paragraphe ,
   Name-pl = Paragraphes ,
   name-pl = paragraphes ,
 
 type = appendix ,
+  gender = f ,
   Name-sg = Annexe ,
   name-sg = annexe ,
   Name-pl = Annexes ,
   name-pl = annexes ,
 
 type = subappendix ,
+  gender = f ,
   Name-sg = Annexe ,
   name-sg = annexe ,
   Name-pl = Annexes ,
   name-pl = annexes ,
 
 type = page ,
+  gender = f ,
   Name-sg = Page ,
   name-sg = page ,
   Name-pl = Pages ,
@@ -7370,42 +7516,49 @@ type = page ,
   rangesep = {\textendash} ,
 
 type = line ,
+  gender = f ,
   Name-sg = Ligne ,
   name-sg = ligne ,
   Name-pl = Lignes ,
   name-pl = lignes ,
 
 type = figure ,
+  gender = f ,
   Name-sg = Figure ,
   name-sg = figure ,
   Name-pl = Figures ,
   name-pl = figures ,
 
 type = table ,
+  gender = f ,
   Name-sg = Table ,
   name-sg = table ,
   Name-pl = Tables ,
   name-pl = tables ,
 
 type = item ,
+  gender = m ,
   Name-sg = Point ,
   name-sg = point ,
   Name-pl = Points ,
   name-pl = points ,
 
 type = footnote ,
+  gender = f ,
   Name-sg = Note ,
   name-sg = note ,
   Name-pl = Notes ,
   name-pl = notes ,
 
 type = note ,
+  gender = f ,
   Name-sg = Note ,
   name-sg = note ,
   Name-pl = Notes ,
   name-pl = notes ,
 
 type = equation ,
+  gender = f ,
   Name-sg = Équation ,
   name-sg = équation ,
   Name-pl = Équations ,
@@ -7414,78 +7567,91 @@ type = equation ,
   refpos-in = {)} ,
 
 type = theorem ,
+  gender = m ,
   Name-sg = Théorème ,
   name-sg = théorème ,
   Name-pl = Théorèmes ,
   name-pl = théorèmes ,
 
 type = lemma ,
+  gender = m ,
   Name-sg = Lemme ,
   name-sg = lemme ,
   Name-pl = Lemmes ,
   name-pl = lemmes ,
 
 type = corollary ,
+  gender = m ,
   Name-sg = Corollaire ,
   name-sg = corollaire ,
   Name-pl = Corollaires ,
   name-pl = corollaires ,
 
 type = proposition ,
+  gender = f ,
   Name-sg = Proposition ,
   name-sg = proposition ,
   Name-pl = Propositions ,
   name-pl = propositions ,
 
 type = definition ,
+  gender = f ,
   Name-sg = Définition ,
   name-sg = définition ,
   Name-pl = Définitions ,
   name-pl = définitions ,
 
 type = proof ,
+  gender = f ,
   Name-sg = Démonstration ,
   name-sg = démonstration ,
   Name-pl = Démonstrations ,
   name-pl = démonstrations ,
 
 type = result ,
+  gender = m ,
   Name-sg = Résultat ,
   name-sg = résultat ,
   Name-pl = Résultats ,
   name-pl = résultats ,
 
 type = remark ,
+  gender = f ,
   Name-sg = Remarque ,
   name-sg = remarque ,
   Name-pl = Remarques ,
   name-pl = remarques ,
 
 type = example ,
+  gender = m ,
   Name-sg = Exemple ,
   name-sg = exemple ,
   Name-pl = Exemples ,
   name-pl = exemples ,
 
 type = algorithm ,
+  gender = m ,
   Name-sg = Algorithme ,
   name-sg = algorithme ,
   Name-pl = Algorithmes ,
   name-pl = algorithmes ,
 
 type = listing ,
+  gender = f ,
   Name-sg = Liste ,
   name-sg = liste ,
   Name-pl = Listes ,
   name-pl = listes ,
 
 type = exercise ,
+  gender = m ,
   Name-sg = Exercice ,
   name-sg = exercice ,
   Name-pl = Exercices ,
   name-pl = exercices ,
 
 type = solution ,
+  gender = f ,
   Name-sg = Solution ,
   name-sg = solution ,
   Name-pl = Solutions ,
@@ -7523,24 +7689,28 @@ notesep  = {~} ,
 rangesep = {~a\nobreakspace} ,
 
 type = part ,
+  gender = f ,
   Name-sg = Parte ,
   name-sg = parte ,
   Name-pl = Partes ,
   name-pl = partes ,
 
 type = chapter ,
+  gender = m ,
   Name-sg = Capítulo ,
   name-sg = capítulo ,
   Name-pl = Capítulos ,
   name-pl = capítulos ,
 
 type = section ,
+  gender = f ,
   Name-sg = Seção ,
   name-sg = seção ,
   Name-pl = Seções ,
   name-pl = seções ,
 
 type = paragraph ,
+  gender = m ,
   Name-sg = Parágrafo ,
   name-sg = parágrafo ,
   Name-pl = Parágrafos ,
@@ -7551,18 +7721,21 @@ type = paragraph ,
   name-pl-ab = par. ,
 
 type = appendix ,
+  gender = m ,
   Name-sg = Apêndice ,
   name-sg = apêndice ,
   Name-pl = Apêndices ,
   name-pl = apêndices ,
 
 type = subappendix ,
+  gender = m ,
   Name-sg = Apêndice ,
   name-sg = apêndice ,
   Name-pl = Apêndices ,
   name-pl = apêndices ,
 
 type = page ,
+  gender = f ,
   Name-sg = Página ,
   name-sg = página ,
   Name-pl = Páginas ,
@@ -7572,12 +7745,14 @@ type = page ,
   rangesep = {\textendash} ,
 
 type = line ,
+  gender = f ,
   Name-sg = Linha ,
   name-sg = linha ,
   Name-pl = Linhas ,
   name-pl = linhas ,
 
 type = figure ,
+  gender = f ,
   Name-sg = Figura ,
   name-sg = figura ,
   Name-pl = Figuras ,
@@ -7588,30 +7763,35 @@ type = figure ,
   name-pl-ab = figs. ,
 
 type = table ,
+  gender = f ,
   Name-sg = Tabela ,
   name-sg = tabela ,
   Name-pl = Tabelas ,
   name-pl = tabelas ,
 
 type = item ,
+  gender = m ,
   Name-sg = Item ,
   name-sg = item ,
   Name-pl = Itens ,
   name-pl = itens ,
 
 type = footnote ,
+  gender = f ,
   Name-sg = Nota ,
   name-sg = nota ,
   Name-pl = Notas ,
   name-pl = notas ,
 
 type = note ,
+  gender = f ,
   Name-sg = Nota ,
   name-sg = nota ,
   Name-pl = Notas ,
   name-pl = notas ,
 
 type = equation ,
+  gender = f ,
   Name-sg = Equação ,
   name-sg = equação ,
   Name-pl = Equações ,
@@ -7624,78 +7804,91 @@ type = equation ,
   refpos-in = {)} ,
 
 type = theorem ,
+  gender = m ,
   Name-sg = Teorema ,
   name-sg = teorema ,
   Name-pl = Teoremas ,
   name-pl = teoremas ,
 
 type = lemma ,
+  gender = m ,
   Name-sg = Lema ,
   name-sg = lema ,
   Name-pl = Lemas ,
   name-pl = lemas ,
 
 type = corollary ,
+  gender = m ,
   Name-sg = Corolário ,
   name-sg = corolário ,
   Name-pl = Corolários ,
   name-pl = corolários ,
 
 type = proposition ,
+  gender = f ,
   Name-sg = Proposição ,
   name-sg = proposição ,
   Name-pl = Proposições ,
   name-pl = proposições ,
 
 type = definition ,
+  gender = f ,
   Name-sg = Definição ,
   name-sg = definição ,
   Name-pl = Definições ,
   name-pl = definições ,
 
 type = proof ,
+  gender = f ,
   Name-sg = Demonstração ,
   name-sg = demonstração ,
   Name-pl = Demonstrações ,
   name-pl = demonstrações ,
 
 type = result ,
+  gender = m ,
   Name-sg = Resultado ,
   name-sg = resultado ,
   Name-pl = Resultados ,
   name-pl = resultados ,
 
 type = remark ,
+  gender = f ,
   Name-sg = Observação ,
   name-sg = observação ,
   Name-pl = Observações ,
   name-pl = observações ,
 
 type = example ,
+  gender = m ,
   Name-sg = Exemplo ,
   name-sg = exemplo ,
   Name-pl = Exemplos ,
   name-pl = exemplos ,
 
 type = algorithm ,
+  gender = m ,
   Name-sg = Algoritmo ,
   name-sg = algoritmo ,
   Name-pl = Algoritmos ,
   name-pl = algoritmos ,
 
 type = listing ,
+  gender = f ,
   Name-sg = Listagem ,
   name-sg = listagem ,
   Name-pl = Listagens ,
   name-pl = listagens ,
 
 type = exercise ,
+  gender = m ,
   Name-sg = Exercício ,
   name-sg = exercício ,
   Name-pl = Exercícios ,
   name-pl = exercícios ,
 
 type = solution ,
+  gender = f ,
   Name-sg = Solução ,
   name-sg = solução ,
   Name-pl = Soluções ,
@@ -7730,42 +7923,49 @@ notesep  = {~} ,
 rangesep = {~a\nobreakspace} ,
 
 type = part ,
+  gender = f ,
   Name-sg = Parte ,
   name-sg = parte ,
   Name-pl = Partes ,
   name-pl = partes ,
 
 type = chapter ,
+  gender = m ,
   Name-sg = Capítulo ,
   name-sg = capítulo ,
   Name-pl = Capítulos ,
   name-pl = capítulos ,
 
 type = section ,
+  gender = f ,
   Name-sg = Sección ,
   name-sg = sección ,
   Name-pl = Secciones ,
   name-pl = secciones ,
 
 type = paragraph ,
+  gender = m ,
   Name-sg = Párrafo ,
   name-sg = párrafo ,
   Name-pl = Párrafos ,
   name-pl = párrafos ,
 
 type = appendix ,
+  gender = m ,
   Name-sg = Apéndice ,
   name-sg = apéndice ,
   Name-pl = Apéndices ,
   name-pl = apéndices ,
 
 type = subappendix ,
+  gender = m ,
   Name-sg = Apéndice ,
   name-sg = apéndice ,
   Name-pl = Apéndices ,
   name-pl = apéndices ,
 
 type = page ,
+  gender = f ,
   Name-sg = Página ,
   name-sg = página ,
   Name-pl = Páginas ,
@@ -7773,42 +7973,49 @@ type = page ,
   rangesep = {\textendash} ,
 
 type = line ,
+  gender = f ,
   Name-sg = Línea ,
   name-sg = línea ,
   Name-pl = Líneas ,
   name-pl = líneas ,
 
 type = figure ,
+  gender = f ,
   Name-sg = Figura ,
   name-sg = figura ,
   Name-pl = Figuras ,
   name-pl = figuras ,
 
 type = table ,
+  gender = m ,
   Name-sg = Cuadro ,
   name-sg = cuadro ,
   Name-pl = Cuadros ,
   name-pl = cuadros ,
 
 type = item ,
+  gender = m ,
   Name-sg = Punto ,
   name-sg = punto ,
   Name-pl = Puntos ,
   name-pl = puntos ,
 
 type = footnote ,
+  gender = f ,
   Name-sg = Nota ,
   name-sg = nota ,
   Name-pl = Notas ,
   name-pl = notas ,
 
 type = note ,
+  gender = f ,
   Name-sg = Nota ,
   name-sg = nota ,
   Name-pl = Notas ,
   name-pl = notas ,
 
 type = equation ,
+  gender = f ,
   Name-sg = Ecuación ,
   name-sg = ecuación ,
   Name-pl = Ecuaciones ,
@@ -7817,78 +8024,91 @@ type = equation ,
   refpos-in = {)} ,
 
 type = theorem ,
+  gender = m ,
   Name-sg = Teorema ,
   name-sg = teorema ,
   Name-pl = Teoremas ,
   name-pl = teoremas ,
 
 type = lemma ,
+  gender = m ,
   Name-sg = Lema ,
   name-sg = lema ,
   Name-pl = Lemas ,
   name-pl = lemas ,
 
 type = corollary ,
+  gender = m ,
   Name-sg = Corolario ,
   name-sg = corolario ,
   Name-pl = Corolarios ,
   name-pl = corolarios ,
 
 type = proposition ,
+  gender = f ,
   Name-sg = Proposición ,
   name-sg = proposición ,
   Name-pl = Proposiciones ,
   name-pl = proposiciones ,
 
 type = definition ,
+  gender = f ,
   Name-sg = Definición ,
   name-sg = definición ,
   Name-pl = Definiciones ,
   name-pl = definiciones ,
 
 type = proof ,
+  gender = f ,
   Name-sg = Demostración ,
   name-sg = demostración ,
   Name-pl = Demostraciones ,
   name-pl = demostraciones ,
 
 type = result ,
+  gender = m ,
   Name-sg = Resultado ,
   name-sg = resultado ,
   Name-pl = Resultados ,
   name-pl = resultados ,
 
 type = remark ,
+  gender = f ,
   Name-sg = Observación ,
   name-sg = observación ,
   Name-pl = Observaciones ,
   name-pl = observaciones ,
 
 type = example ,
+  gender = m ,
   Name-sg = Ejemplo ,
   name-sg = ejemplo ,
   Name-pl = Ejemplos ,
   name-pl = ejemplos ,
 
 type = algorithm ,
+  gender = m ,
   Name-sg = Algoritmo ,
   name-sg = algoritmo ,
   Name-pl = Algoritmos ,
   name-pl = algoritmos ,
 
 type = listing ,
+  gender = m ,
   Name-sg = Listado ,
   name-sg = listado ,
   Name-pl = Listados ,
   name-pl = listados ,
 
 type = exercise ,
+  gender = m ,
   Name-sg = Ejercicio ,
   name-sg = ejercicio ,
   Name-pl = Ejercicios ,
   name-pl = ejercicios ,
 
 type = solution ,
+  gender = f ,
   Name-sg = Solución ,
   name-sg = solución ,
   Name-pl = Soluciones ,
