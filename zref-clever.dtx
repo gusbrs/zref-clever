@@ -1716,6 +1716,11 @@
     Language~'#1'~has~no~declared~declension~cases~\msg_line_context:.~
     Nothing~to~do~with~option~'d=#2'.
   }
+\msg_new:nnn { zref-clever } { language-no-gender }
+  {
+    Language~'#1'~has~no~declared~gender~\msg_line_context:.~
+    Nothing~to~do~with~option~'#2=#3'.
+  }
 \msg_new:nnn { zref-clever } { language-no-decl-setup }
   {
     Language~'#1'~has~no~declared~declension~cases~\msg_line_context:.~
@@ -1741,21 +1746,17 @@
     Option~'sg'~signals~that~a~singular~type~name~was~expected~
     \msg_line_context:.~But~type~'#1'~has~plural~type~name.
   }
-\msg_new:nnn { zref-clever } { nudge-gender-unknown }
-  {
-    Known~values~for~'#1'~option~are~
-    \seq_use:Nnnn \c_@@_ref_options_genders_seq {~and~} {,~} {,~and~}.~
-    Can't~set~value~'#2'~\msg_line_context:.
-  }
+\msg_new:nnn { zref-clever } { gender-not-declared }
+  { Language~'#1'~has~no~'#2'~gender~declared~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { nudge-gender-mismatch }
   {
     Gender~mismatch~for~type~'#1'~\msg_line_context:.~
     You've~specified~'g=#2'~but~type~name~is~'#3'~for~language~'#4'.
   }
-\msg_new:nnn { zref-clever } { nudge-gender-not-defined }
+\msg_new:nnn { zref-clever } { nudge-gender-not-declared-for-type }
   {
     You've~specified~'g=#1'~\msg_line_context:.~
-    But~gender~for~type~'#2'~is~not~defined~for~language~'#3'.
+    But~gender~for~type~'#2'~is~not~declared~for~language~'#3'.
   }
 \msg_new:nnn { zref-clever } { nudgeif-unknown-value }
   { Unknown~value~'#1'~for~'nudgeif'~option~\msg_line_context:. }
@@ -1881,6 +1882,7 @@
 %     \l_@@_dict_language_tl ,
 %     \l_@@_dict_decl_case_tl ,
 %     \l_@@_dict_declension_seq ,
+%     \l_@@_dict_gender_seq ,
 %   }
 %   Store ``current'' type, language, and declension cases in different places
 %   for option and translation handling, notably in
@@ -1892,6 +1894,7 @@
 \tl_new:N \l_@@_dict_language_tl
 \tl_new:N \l_@@_dict_decl_case_tl
 \seq_new:N \l_@@_dict_declension_seq
+\seq_new:N \l_@@_dict_gender_seq
 %    \end{macrocode}
 % \end{variable}
 %
@@ -2051,6 +2054,13 @@
           { declension } {#1}
       } ,
     declension .value_required:n = true ,
+    gender .code:n =
+      {
+        \prop_gput:cnn
+          { g_@@_dict_ \l_@@_dict_language_tl _prop }
+          { gender } {#1}
+      } ,
+    gender .value_required:n = true ,
     allcaps .code:n =
       {
         \prop_gput:cnn
@@ -2208,6 +2218,16 @@
                     \seq_get_left:NN \l_@@_dict_declension_seq
                       \l_@@_dict_decl_case_tl
                   }
+                \exp_args:NNx \seq_set_from_clist:Nn
+                  \l_@@_dict_gender_seq
+                  {
+                    \prop_item:cn
+                      {
+                        g_@@_dict_
+                        \l_@@_dict_language_tl _prop
+                      }
+                      { gender }
+                  }
                 \keys_set:nV { zref-clever / dictionary } \l_tmpa_tl
                 \seq_gput_right:NV \g_@@_loaded_dictionaries_seq
                   \l_@@_dict_language_tl
@@ -2337,17 +2357,24 @@
     case .value_required:n = true ,
     gender .code:n =
       {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
+        \seq_if_empty:NTF \l_@@_dict_gender_seq
           {
-            \msg_info:nnn { zref-clever }
-              { option-only-type-specific } { gender }
+            \msg_info:nnxxx { zref-clever } { language-no-gender }
+              { \l_@@_dict_language_tl } { gender } {#1}
           }
           {
-            \seq_if_in:NnTF \c_@@_ref_options_genders_seq {#1}
-              { \@@_provide_dict_type_transl:nn { gender } {#1} }
+            \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \msg_info:nnn { zref-clever } { nudge-gender-unknown }
-                  { gender } {#1}
+                \msg_info:nnn { zref-clever }
+                  { option-only-type-specific } { gender }
+              }
+              {
+                \seq_if_in:NnTF \l_@@_dict_gender_seq {#1}
+                  { \@@_provide_dict_type_transl:nn { gender } {#1} }
+                  {
+                    \msg_info:nnxx { zref-clever } { gender-not-declared }
+                      { \l_@@_dict_language_tl } {#1}
+                  }
               }
           }
       } ,
@@ -3089,6 +3116,7 @@
       { \l_@@_ref_language_tl }
       \l_@@_dict_language_tl
       {
+        % `declension' option.
         \exp_args:NNx \seq_set_from_clist:Nn
           \l_@@_dict_declension_seq
           {
@@ -3129,6 +3157,45 @@
                   }
               }
           }
+        % `gender' option.
+        \exp_args:NNx \seq_set_from_clist:Nn
+          \l_@@_dict_gender_seq
+          {
+            \prop_item:cn
+              {
+                g_@@_dict_
+                \l_@@_dict_language_tl _prop
+              }
+              { gender }
+          }
+        \seq_if_empty:NTF \l_@@_dict_gender_seq
+          {
+            \tl_if_empty:NF \l_@@_ref_gender_tl
+              {
+                \msg_warning:nnxxx { zref-clever }
+                  { language-no-gender }
+                  { \l_@@_ref_language_tl }
+                  { g }
+                  { \l_@@_ref_gender_tl }
+                \tl_clear:N \l_@@_ref_gender_tl
+              }
+          }
+          {
+            \tl_if_empty:NF \l_@@_ref_gender_tl
+              {
+                \seq_if_in:NVF \l_@@_dict_gender_seq
+                  \l_@@_ref_gender_tl
+                  {
+                    \msg_warning:nnxx { zref-clever }
+                      { gender-not-declared }
+                      { \l_@@_ref_language_tl }
+                      { \l_@@_ref_gender_tl }
+                    \tl_clear:N \l_@@_ref_gender_tl
+                  }
+              }
+          }
+
+        % `allcaps' option.
         \str_if_eq:eeT
           {
             \prop_item:cn
@@ -3222,15 +3289,18 @@
     sg .initial:n = false ,
     sg .default:n = true ,
     g .code:n =
+      { \msg_warning:nnn { zref-clever } { option-document-only } { g } } ,
+  }
+\AddToHook { begindocument }
+  {
+    \keys_define:nn { zref-clever / reference }
       {
-        \seq_if_in:NnTF \c_@@_ref_options_genders_seq {#1}
-          { \tl_set:Nn \l_@@_ref_gender_tl {#1} }
-          {
-            \msg_warning:nnn { zref-clever } { nudge-gender-unknown }
-              { g } {#1}
-          }
-      } ,
-    g .value_required:n = true ,
+%    \end{macrocode}
+% Same thing as for \opt{d} option.
+%    \begin{macrocode}
+        g .tl_set:N = \l_@@_ref_gender_tl ,
+        g .value_required:n = true ,
+      }
   }
 %    \end{macrocode}
 %
@@ -3702,6 +3772,16 @@
             \seq_get_left:NN \l_@@_dict_declension_seq
               \l_@@_dict_decl_case_tl
           }
+        \exp_args:NNx \seq_set_from_clist:Nn
+          \l_@@_dict_gender_seq
+          {
+            \prop_item:cn
+              {
+                g_@@_dict_
+                \l_@@_dict_language_tl _prop
+              }
+              { gender }
+          }
         \keys_set:nn { zref-clever / langsetup } {#2}
       }
       { \msg_warning:nnn { zref-clever } { unknown-language-setup } {#1} }
@@ -3777,22 +3857,29 @@
     case .value_required:n = true ,
     gender .code:n =
       {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
+        \seq_if_empty:NTF \l_@@_dict_gender_seq
           {
-            \msg_warning:nnn { zref-clever }
-              { option-only-type-specific } { gender }
+            \msg_warning:nnxxx { zref-clever } { language-no-gender }
+              { \l_@@_dict_language_tl } { gender } {#1}
           }
           {
-            \seq_if_in:NnTF \c_@@_ref_options_genders_seq {#1}
+            \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \@@_declare_type_transl:VVnn
-                  \l_@@_dict_language_tl
-                  \l_@@_setup_type_tl
-                  { gender } {#1}
+                \msg_warning:nnn { zref-clever }
+                  { option-only-type-specific } { gender }
               }
               {
-                \msg_warning:nnn { zref-clever } { nudge-gender-unknown }
-                  { gender } {#1}
+                \seq_if_in:NnTF \l_@@_dict_gender_seq {#1}
+                  {
+                    \@@_declare_type_transl:VVnn
+                      \l_@@_dict_language_tl
+                      \l_@@_setup_type_tl
+                      { gender } {#1}
+                  }
+                  {
+                    \msg_warning:nnxx { zref-clever } { gender-not-declared }
+                      { \l_@@_dict_language_tl } {#1}
+                  }
               }
           }
       } ,
@@ -5644,7 +5731,7 @@
                         \tl_if_empty:NTF \l_@@_type_name_gender_tl
                           {
                             \msg_warning:nnxxx { zref-clever }
-                              { nudge-gender-not-defined }
+                              { nudge-gender-not-declared-for-type }
                               { \l_@@_ref_gender_tl }
                               { \l_@@_type_first_label_type_tl }
                               { \l_@@_ref_language_tl }
@@ -6777,7 +6864,9 @@ type = solution ,
 %
 %    \begin{macrocode}
 %<*package>
-\zcDeclareLanguage [ declension = { N , A , D , G } , allcaps ] { german }
+\zcDeclareLanguage
+  [ declension = { N , A , D , G } , gender = { f , m , n } , allcaps ]
+  { german }
 \zcDeclareLanguageAlias { austrian     } { german }
 \zcDeclareLanguageAlias { germanb      } { german }
 \zcDeclareLanguageAlias { ngerman      } { german }
@@ -7229,7 +7318,7 @@ type = solution ,
 %
 %    \begin{macrocode}
 %<*package>
-\zcDeclareLanguage { french }
+\zcDeclareLanguage [ gender = { f , m } ] { french }
 \zcDeclareLanguageAlias { acadian  } { french }
 \zcDeclareLanguageAlias { canadien } { french }
 \zcDeclareLanguageAlias { francais } { french }
@@ -7455,7 +7544,7 @@ type = solution ,
 %
 %    \begin{macrocode}
 %<*package>
-\zcDeclareLanguage { portuguese }
+\zcDeclareLanguage [ gender = { f , m } ] { portuguese }
 \zcDeclareLanguageAlias { brazilian } { portuguese }
 \zcDeclareLanguageAlias { brazil    } { portuguese }
 \zcDeclareLanguageAlias { portuges  } { portuguese }
@@ -7694,7 +7783,7 @@ type = solution ,
 %
 %    \begin{macrocode}
 %<*package>
-\zcDeclareLanguage { spanish }
+\zcDeclareLanguage [ gender = { f , m } ] { spanish }
 %</package>
 %    \end{macrocode}
 %
