@@ -372,6 +372,55 @@
 % \zcref*[ref=title,noname]{sec:internationalization}, see
 % \zcref{sec:internationalization}.
 %
+% \DescribeOption{d} %
+% The \opt{d} option sets the declension case, and affects the type name used
+% for typesetting the reference.  Whether this option is operative, and which
+% values it accepts, depends on the declared setup for each language.  For
+% details, see \zcref{sec:internationalization}.
+%
+% \DescribeOption{nudge} %
+% \DescribeOption{nudgeif} %
+% \DescribeOption{nonudge} %
+% \DescribeOption{sg} %
+% \DescribeOption{g} %
+% This set of options revolving around \opt{nudge} aims to offer some guard
+% against mischievous automation on the part of \pkg{zref-clever} by providing
+% a number of ``nudges'' (compilation time messages) for cases in which you
+% may wish to revise material \emph{surrounding} the reference -- an article,
+% a preposition -- according to the reference typeset results.  Useful mainly
+% for languages which inflect the preceding article to gender and/or number,
+% but may be used generally to fine-tune the language and style around the
+% cross-references made with \cs{zcref}.  The \opt{nudge} option is the main
+% entrance to this feature and takes values \texttt{true}, \texttt{false},
+% \texttt{obeydraft}, or \texttt{obeyfinal}.  The first two, respectively,
+% enable or disable the ``nudging'' unconditionally.  With \texttt{obeydraft},
+% \opt{nudge} keeps quiet when option \texttt{draft} is given to
+% \cs{documentclass}, while with \texttt{obeyfinal}, nudging is only enabled
+% when option \texttt{final} is (explicitly) passed to \cs{documentclass}.
+% The option given without a value is equivalent to \texttt{nudge=true} and
+% the package's default is \texttt{nudge=false}.  \opt{nonudge} is a
+% convenience alias for \texttt{nudge=false}, and can be used to silence
+% individual references.  The \opt{nudgeif} option controls the events which
+% may trigger a nudge.  It takes a comma separated list of elements, and
+% recognizes values \texttt{multitype}, \texttt{comptosing}, \texttt{gender},
+% and \texttt{all}.  The \texttt{multitype} nudge warns when the reference is
+% composed by multiple type blocks (see \zcref{sec:reference-format}).  The
+% \texttt{comptosing} nudge let's you know when multiple labels of the same
+% type have been compressed to a singular type name form.  It can be combined
+% with the \opt{sg} option, which is the way to tell \cs{zcref} you know it's
+% a singular and so not to nudge if a compression to singular occurs, but to
+% nudge if the contrary occurs, that is, when a plural type name form is
+% employed.  The \texttt{gender} nudge must be combined with option \opt{g},
+% and depends on the language having support for it.  In essence language
+% dictionaries can store the gender of each type name (this is done for
+% built-in dictionaries, but can also be done with \cs{zcLanguageSetup} for
+% languages declared to support it).  The \opt{g} option let's you specify the
+% gender you expect for that particular reference and the nudge is triggered
+% if there is a mismatch between \opt{g} and the gender for the type name in
+% the dictionary.  Both the \texttt{comptosing} and the \texttt{gender} nudges
+% have a type block as its scope.  See \zcref{sec:internationalization} for
+% more details and intended use cases of the ``nudging'' feature.
+%
 % \DescribeOption{font} %
 % The \opt{font} option can receive font styling commands to change the
 % appearance of the whole reference list (see also the reference format
@@ -806,43 +855,47 @@
 % \section{Internationalization}
 % \zlabel{sec:internationalization}
 %
-% \pkg{zref-clever} provides internationalization facilities for reference
-% format options and integrates with \pkg{babel} and \pkg{polyglossia} to
-% adapt these options to the languages in use by either of these language
-% packages.  This is particularly relevant for reference type \emph{names},
-% but applies in general to all reference format options (except for the font
-% related ones) presented in \zcref{sec:reference-format}, and which can have
-% language-specific values, or ``translations''.
+% \pkg{zref-clever} provides internationalization facilities and integrates
+% with \pkg{babel} and \pkg{polyglossia} to adapt to the languages in use by
+% either of these language packages, or to a language specified directly by
+% the user.  This is primarily relevant for reference format options,
+% particularly reference type \emph{names} (though not only, since most
+% reference format options can have language-specific values, or
+% ``translations'', see \zcref{sec:reference-format}).  But other features of
+% the package also cater for language specific needs.
 %
-% As long as the language is declared and \pkg{zref-clever} has a built-in
-% ``dictionary'' for it, most use cases will likely be covered by the
-% \opt{lang} option (see \zcref{sec:options}), and its values \texttt{main}
-% and \texttt{current}.  When the \opt{lang} option is set to \texttt{main} or
-% \texttt{current}, \pkg{zref-check} will use, respectively, the \emph{main}
-% or \emph{current} language of the document, as defined by \pkg{babel} or
-% \pkg{polyglossia}.\footnote{Technically, \pkg{zref-clever} uses
-% \cs{bbl@main@language} and \cs{languagename} for \pkg{babel}, and
-% \cs{mainbabelname} and \cs{babelname} for \pkg{polyglossia}, which boils
-% down to \pkg{zref-clever} always using \emph{\pkg{babel} names} internally,
-% regardless of which language package is in use.  Indeed, an acquainted user
-% will note that \zcref{tab:languages-and-aliases} contains only \pkg{babel}
-% language names.}  ``Use'' here means: when language-specific reference
-% format options are needed by \cs{zcref} (see \zcref{sec:reference-format}),
-% it uses the language name as set by \pkg{babel} or \pkg{polyglossia} to
-% search for values for these options.  Users can also set \opt{lang} to a
-% specific language directly, in which case \pkg{babel} and \pkg{polyglossia}
-% are disregarded.  Hence, the \opt{lang} option and \pkg{babel} and
-% \pkg{polyglossia} languages determine what \cs{zcref} \emph{looks for}, what
-% it finds (or not) depends exclusively on the internal settings of
-% \pkg{zref-clever}.  And the package provides a number of built-in
-% ``dictionaries'', for the languages listed in
+% As far as language selection is concerned, if the language is declared and
+% \pkg{zref-clever} has a built-in ``dictionary'' for it, most use cases will
+% likely be covered by the \opt{lang} option (see \zcref{sec:options}), and
+% its values \texttt{main} and \texttt{current}.  When the \opt{lang} option
+% is set to \texttt{main} or \texttt{current}, \pkg{zref-check} will use,
+% respectively, the \emph{main} or \emph{current} language of the document, as
+% defined by \pkg{babel} or \pkg{polyglossia}.\footnote{Technically,
+% \pkg{zref-clever} uses \cs{bbl@main@language} and \cs{languagename} for
+% \pkg{babel}, and \cs{mainbabelname} and \cs{babelname} for
+% \pkg{polyglossia}, which boils down to \pkg{zref-clever} always using
+% \emph{\pkg{babel} names} internally, regardless of which language package is
+% in use.  Indeed, an acquainted user will note that
+% \zcref{tab:languages-and-aliases} contains only \pkg{babel} language names.}
+% Users can also set \opt{lang} to a specific language directly, in which case
+% \pkg{babel} and \pkg{polyglossia} are disregarded.  \pkg{zref-clever}
+% provides a number of built-in ``dictionaries'', for the languages listed in
 % \zcref{tab:languages-and-aliases}, which also includes the declared aliases
-% to those languages.  But if that is not the case, or if you'd like to adjust
-% the default language-specific option values, this can be done with
-% \cs{zcDeclareLanguage}, \cs{zcDeclareLanguageAlias}, and
-% \cs{zcLanguageSetup}.\footnote{Needless to say, if you'd like to contribute
-% a dictionary upstream at \url{https://github.com/gusbrs/zref-clever/issues},
-% that is much welcome.}
+% to those languages.
+%
+% \pkg{zref-clever}'s ``dictionaries'' are loaded sparingly and lazily.  A
+% dictionary for a single language -- that specified by user options in the
+% preamble, which by default is the main document language -- is loaded at
+% \texttt{begindocument}.  If any other dictionary is needed, it is loaded on
+% the fly, if and when required.  Of course, in either case, conditioned on
+% availability.  This is done because the presumed common use case for
+% \pkg{zref-clever} is to use a single language for cross-references (the
+% ``main'' one), even in many multi-language documents scenarios.  Hence, even
+% the ``loaded languages'' set, from \pkg{babel} or \pkg{polyglossia}, would
+% tend to be an overshoot of the actual needs.  So, \pkg{zref-clever} loads as
+% little as possible, but allows for convenient on the fly loading of
+% dictionaries if the values are indeed required, without users having to
+% worry about it at all.
 %
 % \begin{table}
 %   \centering
@@ -885,19 +938,67 @@
 %   \zlabel{tab:languages-and-aliases}
 % \end{table}
 %
+%
+% But if the built-in dictionaries do not cover your language, or if you'd
+% like to adjust some of the default language-specific options, this can be
+% done with \cs{zcDeclareLanguage}, \cs{zcDeclareLanguageAlias}, and
+% \cs{zcLanguageSetup}.\footnote{Needless to say, if you'd like to contribute
+% a dictionary or improve an existing one, that is much welcome at
+% \url{https://github.com/gusbrs/zref-clever/issues}.}
+%
 % \begin{function}{\zcDeclareLanguage}
 %   Declare a new language for use with \pkg{zref-clever}.  If \meta{language}
-%   is already known, just warn.  \cs{zcDeclareLanguage} is preamble only.
+%   has already been declared, just warn.  The \meta{options} argument
+%   receives the usual \texttt{key=value} list and recognizes three keys:
+%   \opt{declension}, \opt{gender}, and \opt{allcaps}.  \opt{declension}
+%   receives a coma separated list of valid declension cases for
+%   \meta{language}.  The first element of the list is considered to be the
+%   default case, both for the \opt{d} option in \cs{zcref} and for the
+%   \opt{case} option in \cs{zcLanguageSetup}.  Similarly, \opt{gender}
+%   receives a comma separated list of genders for \meta{language}.  The
+%   elements in this list are those which are recognized as valid for the
+%   language for both the \opt{g} option in \cs{zcref} and the \opt{gender}
+%   option in \cs{zcLanguageSetup}.  There is no default presumed in this
+%   case.  Finally, \opt{allcaps} can be used with languages for which nouns
+%   must be always capitalized for grammatical reasons.  For a language
+%   declared with the \opt{allcaps} option, the \opt{cap} reference option
+%   (see \zcref{sec:options}) is disregarded, and \cs{zcref} always uses the
+%   capitalized type name forms.  This means that dictionaries for languages
+%   with such a trait can be halved in size, and that user customization for
+%   them is simplified, only requiring the capitalized name forms.  On the
+%   other hand, the non-capitalized \texttt{name-\dots{}} reference format
+%   options are rendered no-op for the language in question.
+%   \zcref[S]{tab:language-options} presents an overview of the options in
+%   effect for the languages declared by \pkg{zref-clever}.
+%   \cs{zcDeclareLanguage} is preamble only.
 %   \begin{syntax}
-%     \cs{zcDeclareLanguage} \marg{language}
+%     \cs{zcDeclareLanguage} \oarg{options} \marg{language}
 %   \end{syntax}
 % \end{function}
 %
+% \begin{table}
+%   \centering
+%   \begin{tabular}{l>{\ttfamily}c>{\ttfamily}c>{\ttfamily}c}
+%     \toprule
+%     Language   & declension & gender & allcaps \\
+%     \midrule
+%     english    & --         & --     & --      \\
+%     french     & --         & f,m    & --      \\
+%     german     & N,A,D,G    & f,m,n  & yes     \\
+%     portuguese & --         & f,m    & --      \\
+%     spanish    & --         & f,m    & --      \\
+%     \bottomrule
+%   \end{tabular}
+%   \caption{Options for declared languages}
+%   \zlabel{tab:language-options}
+% \end{table}
 %
 % \begin{function}{\zcDeclareLanguageAlias}
 %   Declare \meta{language alias} to be an alias of \meta{aliased language}.
-%   \meta{aliased language} must be already known to \pkg{zref-clever}.
-%   \cs{zcDeclareLanguageAlias} is preamble only.
+%   \meta{aliased language} must be already known to \pkg{zref-clever}.  Once
+%   set, the \meta{language alias} is treated by \pkg{zref-clever} as
+%   completely equivalent to the \meta{aliased language} for any language
+%   specification by the user. \cs{zcDeclareLanguageAlias} is preamble only.
 %   \begin{syntax}
 %     \cs{zcDeclareLanguageAlias} \marg{language alias} \marg{aliased language}
 %   \end{syntax}
@@ -911,31 +1012,170 @@
 %   Sets language-specific reference format options for \meta{language} (see
 %   \zcref{sec:reference-format}), be they type-specific or
 %   not. \meta{language} must be already known to \pkg{zref-clever}.  Besides
-%   reference format options, \cs{zcLanguageSetup} knows the \texttt{type}
-%   key, which works like a ``switch'' affecting the options \emph{following}
-%   it.  For example, if \texttt{type=foo} is given in \meta{options} the
-%   options following it will be set as type-specific options for reference
-%   type \texttt{foo}.  Options given in \meta{options} before the first
-%   \texttt{type=\meta{type}} occurrence (or after \texttt{type} with an empty
-%   value) are set as ``default translations'' (that is, not type-specific,
-%   but language-specific options).  \cs{zcLanguageSetup} is preamble only.
+%   reference format options, \cs{zcLanguageSetup} knows three other keys:
+%   \opt{type}, \opt{case}, and \opt{gender}.  The first two work like a
+%   ``switch'' affecting the options \emph{following} it.  For example, if
+%   \texttt{type=foo} is given in \meta{options} the options following it will
+%   be set as type-specific options for reference type \texttt{foo}.
+%   Similarly, after \texttt{case=X} (provided \texttt{X} is a valid
+%   declension case for \meta{language}), the following
+%   \texttt{[Nn]ame-\dots{}} options will set values for the \texttt{X}
+%   declension case (other reference format options are not affected by
+%   \opt{case}).  Before the first occurrence of either \opt{type} or
+%   \opt{case} default values are set.  For \opt{case} this means the default
+%   declension case, which is the first element of the list provided to the
+%   \opt{declension} option in \cs{zcDeclareLanguage}.  For \opt{type} this
+%   means ``default translations'', which are language-specific but not
+%   type-specific option values (see \zcref{sec:reference-format}).  An empty
+%   valued \texttt{type=} key can also ``unset'' the type.  The \opt{gender}
+%   key sets the gender of the current \texttt{type} (provided the value it
+%   receives is one of the declared genders for \meta{language}).
+%   \cs{zcLanguageSetup} is preamble only.
 % \end{function}
 %
-% \bigskip{}
+% A couple of examples to illustrate the syntax of \cs{zcLanguageSetup}:
 %
-% \pkg{zref-clever}'s ``dictionaries'' are loaded sparingly and lazily.  A
-% dictionary for a single language -- that specified by user options in the
-% preamble, which by default is the main document language -- is loaded at
-% \texttt{begindocument}.  If any other dictionary is needed, it is loaded on
-% the fly, if and when required.  Of course, in either case, conditioned on
-% availability.  This is done because the presumed common use case for
-% \pkg{zref-clever} is to use a single language for cross-references (the
-% ``main'' one), even in many multi-language documents scenarios.  Hence, even
-% the ``loaded languages'' set, from \pkg{babel} or \pkg{polyglossia}, would
-% tend to be an overshoot of the actual needs.  So, \pkg{zref-clever} loads as
-% little as possible, but allows for convenient on the fly loading of
-% dictionaries if the values are indeed required, without users having to
-% worry about it at all.
+% \begin{verbatim}
+%   \zcLanguageSetup{french}{
+%     type = section ,
+%       gender = f ,
+%       Name-sg = Section ,
+%       name-sg = section ,
+%       Name-pl = Sections ,
+%       name-pl = sections ,
+%   }
+%   \zcLanguageSetup{german}{
+%     type = section ,
+%       gender = m ,
+%       case = N ,
+%         Name-sg = Abschnitt ,
+%         Name-pl = Abschnitte ,
+%       case = A ,
+%         Name-sg = Abschnitt ,
+%         Name-pl = Abschnitte ,
+%       case = D ,
+%         Name-sg = Abschnitt ,
+%         Name-pl = Abschnitten ,
+%       case = G ,
+%         Name-sg = Abschnitts ,
+%         Name-pl = Abschnitte ,
+%   }
+% \end{verbatim}
+%
+%
+% As already noted, \pkg{zref-clever} has some support for languages with
+% declension.  This means mainly the declension of \emph{nouns}, which is used
+% for the reference type names.  But some tools are also provided to support
+% the user in getting better results for the text surrounding a reference,
+% particularly for numbered and gendered articles, even if those don't have
+% their typeset output automated.
+%
+% For reference type names, the declension cases for each language must be
+% declared with \cs{zcDeclareLanguage}, and the name reference format options
+% must be provided for each case, which is done for built-in dictionaries of
+% languages which have noun declension, and can be done by the user with
+% \cs{zcLanguageSetup}, as we've seen.  \pkg{zref-clever} does not try to
+% guess or infer the case though, you must tell it to \cs{zcref}.  And this is
+% done by means of the \opt{d} option (see \zcref{sec:options}).  So you may
+% write something like ``\texttt{nach den
+% \cs{zcref}[d=D]\{sec:section-1,sec:section-2\}}'' to get ``nach den
+% Abschnitten 1 und 2''.  Or ``\texttt{trotz des
+% \cs{zcref}[d=G]\{eq:theorem-1\}}'' to get ``trotz des Theorems 1''.
+%
+% Regarding the text surrounding the reference -- the inflected article, the
+% passing preposition, etc.\ --, the issue is more delicate.
+% \pkg{zref-clever} cannot and intends not to typeset those for you.  But,
+% depending on the language, it is true that the kind of automation provided
+% by \pkg{zref-clever} may betray your best efforts to get a proper
+% surrounding text.  Multiple labels passed to \cs{zcref} may result in
+% singular type names, either because the labels are of different types, or
+% because they got compressed into a single reference.  References comprised
+% of multiple type blocks may have each a name with a different gender.  Or,
+% worse, \opt{tpairsep}, \opt{tpairsep}, and \opt{tlastsep} may not provide a
+% general enough way to separate different type blocks in your language
+% altogether.  You may change something in your document that causes a label
+% to change its type, and hence the gender of the type name.  A page reference
+% to a couple of floats which were by chance on the same page and all of a
+% sudden no longer are.  And so on.
+%
+% In this area, the approach taken by \pkg{zref-clever} is to identify some
+% typical situations in which your attention may be required in reviewing the
+% surrounding text, and signal it at compilation time.  Just like bad boxes,
+% for example.  This feature can be enabled by the \opt{nudge} option (which
+% is opt-in, see \zcref{sec:options}).  There are three ``nudges'' available
+% for this purpose which trigger messages at different events:
+% \opt{multitype}, \opt{comptosing}, and \opt{gender}.  \opt{multitype} nudges
+% when a reference is comprised of multiple type blocks.  \opt{comptosing}
+% when multiple labels of the same type block have been compressed into a
+% single one and, hence, the type name used is singular.  Finally,
+% \opt{gender} nudges when there is a mismatch between the gender specified in
+% \cs{zcref} with the \opt{g} option and the gender of the type name, as
+% stored in the dictionary or language settings, for each type block.  Which
+% nudges to use is configurable with the option \opt{nudgeif}.  And, if you're
+% sure of the results for a particular \cs{zcref} call, you can always silence
+% the nudges locally with the \opt{nonudge} option.
+%
+% The main reason to watch for multiple type references with the
+% \opt{multitype} nudge is that bundling together automatically a list of type
+% blocks is less smooth an operation than it is for a single reference type.
+% While it arguably works reasonably well for English, even there it is not
+% always flawless, and depending on the language, results may range from
+% ``lack of style'' to outright wrong.  A typical case would be of that of a
+% language with inflected articles and a reference with multiple types of
+% different genders or numbers.  For example, in French, with a standard
+% ``\texttt{au \cs{zcref}\{cha:chapter-3, sec:section-3.1\}}'' we get ``au
+% chapitre 3 et section 3.1'' which just sounds like a shrieking chalkboard.
+% So we may be better off writing instead ``\texttt{au
+% \cs{zcref}\{cha:chapter-3\} et à la \cs{zcref}\{sec:section-3.1\}}''.  Or
+% something else, of course.  But the general point is that, depending on
+% circumstances and on the language, the results of automating the grouping of
+% multiple reference types, as \pkg{zref-clever} is able to do, may leave
+% things to be desired for.  Hence it lets you know when one such case occurs,
+% so that you can review it for best results.
+%
+% The case of the \opt{comptosing} and \opt{gender} nudges is more objective
+% in nature, they respectively signal mismatches of number and gender.  When a
+% reference is made with \cs{zcref} to a single label we are sure the type
+% name will be a singular form.  However, when \cs{zcref} receives multiple
+% labels of the same type, the type name will normally be a plural, but not
+% necessarily so, since the labels may be compressed into a single one (see
+% the \opt{comp} option in \zcref{sec:options}), in which case the singular is
+% used.  The compression of multiple labels into a single reference should be
+% an exception for default references, but not so for \opt{page} references,
+% where it is easy to conceive practical situations where it may occur.
+% Suppose, for example, you have two contiguous floats in your document and
+% make a page reference to both of them.  Will they end up in the same page or
+% not?  Maybe we know what the current state is, but we cannot know what may
+% happen as the document keeps being edited.  As a consequence, we don't know
+% whether that reference will end up having a plural or a singular type name.
+% That given, the logic of the \opt{comptosing} nudge is the following.  If we
+% are giving multiple labels to \cs{zcref} we can \emph{presume} a plural type
+% name, but we get a nudge in case the compression of the labels results in a
+% singular type name form.  If one such compression did happen to one of your
+% references you can use a singular article and then tell \cs{zcref} you did
+% so with option \opt{sg}.  The effect of the \opt{sg} option is to inhibit
+% the nudge when a compression to singular occurs, but to do it instead when
+% the compression \emph{ceases} to occur, that is, if we get a plural type
+% name again at some point.
+%
+% The \opt{gender} nudge aims to guard against one particular situation:
+% possible changes of a reference's type.  This does not occur by reason of
+% any internal behavior of \pkg{zref-clever}, but it may be caused by changes
+% in the document.  You may wish to change one \texttt{theorem} into a
+% \texttt{proposition} and, if you're writing in French or Portuguese, for
+% example, that implies that the reference to it changes gender and the likely
+% preceding article will no longer pass to the reference.  The \opt{gender}
+% nudge requires that the gender of each type name and of each reference be
+% explicitly specified.  For the type names, this is done for the built-in
+% dictionaries of languages were this matters, and can be done with
+% \cs{zcLanguageSetup} as well.  For the references, that is the purpose of
+% the \opt{g} option.  When there is a mismatch between the two for any type
+% block, the nudge is triggered.  Of couse, this means that the gender markup
+% has to be supplied in the document at each reference.  And considering such
+% type changes may not be frequent for you, or considered not particularly
+% problematic, you'll have to balance if doing so is worth it.  Still, the
+% feature is available, and it's up to you.
+%
 %
 %
 % \section{How tos}
@@ -1684,7 +1924,7 @@
 \msg_new:nnn { zref-clever } { option-only-type-specific }
   {
     No~type~specified~for~option~'#1'~\msg_line_context:.~
-    Set~it~after~'type'~switch~or~in~'\iow_char:N\\zcRefTypeSetup'.
+    Set~it~after~'type'~switch.
   }
 \msg_new:nnn { zref-clever } { key-requires-value }
   { The~'#1'~key~'#2'~requires~a~value~\msg_line_context:. }
@@ -2046,6 +2286,36 @@
   }
 \@onlypreamble \zcDeclareLanguage
 %    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}[int]{\zcDeclareLanguageAlias}
+%   Declare \meta{language alias} to be an alias of \meta{aliased language}.
+%   \meta{aliased language} must be already known to \pkg{zref-clever}, as
+%   stored in \cs{g_@@_languages_prop}.  \cs{zcDeclareLanguageAlias} is
+%   preamble only.
+%   \begin{syntax}
+%     \cs{zcDeclareLanguageAlias} \marg{language alias} \marg{aliased language}
+%   \end{syntax}
+%    \begin{macrocode}
+\NewDocumentCommand \zcDeclareLanguageAlias { m m }
+  {
+    \tl_if_empty:nF {#1}
+      {
+        \prop_if_in:NnTF \g_@@_languages_prop {#2}
+          {
+            \exp_args:NNnx
+              \prop_gput:Nnn \g_@@_languages_prop {#1}
+                { \prop_item:Nn \g_@@_languages_prop {#2} }
+          }
+          { \msg_warning:nnn { zref-clever } { unknown-language-alias } {#2} }
+      }
+  }
+\@onlypreamble \zcDeclareLanguageAlias
+%    \end{macrocode}
+% \end{macro}
+%
+%
 %
 %    \begin{macrocode}
 \keys_define:nn { zref-clever / declarelang }
@@ -2073,32 +2343,154 @@
     allcaps .value_forbidden:n = true ,
   }
 %    \end{macrocode}
-% \end{macro}
 %
 %
-% \begin{macro}[int]{\zcDeclareLanguageAlias}
-%   Declare \meta{language alias} to be an alias of \meta{aliased language}.
-%   \meta{aliased language} must be already known to \pkg{zref-clever}, as
-%   stored in \cs{g_@@_languages_prop}.  \cs{zcDeclareLanguageAlias} is
-%   preamble only.
-%   \begin{syntax}
-%     \cs{zcDeclareLanguageAlias} \marg{language alias} \marg{aliased language}
-%   \end{syntax}
+%
+% \begin{macro}{\@@_process_language_options:}
+%   Auxiliary function for \cs{@@_zcref:nnn}, responsible for processing
+%   options from \cs{zcDeclareLanguage}.  It is necessary to separate them
+%   from the reference options machinery because their behavior is language
+%   dependent, but the language itself can also be set as an option
+%   (\opt{lang}, value stored in \cs{l_@@_ref_language_tl}).  Hence, we must
+%   validate these options after the reference options have been set.  It is
+%   expected to be called right (or soon) after \cs{keys_set:nn} in
+%   \cs{@@_zcref:nnn}, where current values for \cs{l_@@_ref_language_tl} and
+%   \cs{l_@@_ref_decl_case_tl} are in place.
 %    \begin{macrocode}
-\NewDocumentCommand \zcDeclareLanguageAlias { m m }
+\cs_new_protected:Npn \@@_process_language_options:
   {
-    \tl_if_empty:nF {#1}
+    \exp_args:NNx \prop_get:NnNTF \g_@@_languages_prop
+      { \l_@@_ref_language_tl }
+      \l_@@_dict_language_tl
       {
-        \prop_if_in:NnTF \g_@@_languages_prop {#2}
+%    \end{macrocode}
+% Validate the declension case (\opt{d}) option against the declared cases for
+% the reference language.  If the user value for the latter does not match the
+% declension cases declared for the former, the function sets an appropriate
+% value for \cs{l_@@_ref_decl_case_tl}, either using the default case, or
+% clearing the variable, depending on the language setup.  And also issues a
+% warning about it.
+%    \begin{macrocode}
+        \exp_args:NNx \seq_set_from_clist:Nn
+          \l_@@_dict_declension_seq
           {
-            \exp_args:NNnx
-              \prop_gput:Nnn \g_@@_languages_prop {#1}
-                { \prop_item:Nn \g_@@_languages_prop {#2} }
+            \prop_item:cn
+              {
+                g_@@_dict_
+                \l_@@_dict_language_tl _prop
+              }
+              { declension }
           }
-          { \msg_warning:nnn { zref-clever } { unknown-language-alias } {#2} }
+        \seq_if_empty:NTF \l_@@_dict_declension_seq
+          {
+            \tl_if_empty:NF \l_@@_ref_decl_case_tl
+              {
+                \msg_warning:nnxx { zref-clever }
+                  { language-no-decl-ref }
+                  { \l_@@_ref_language_tl }
+                  { \l_@@_ref_decl_case_tl }
+                \tl_clear:N \l_@@_ref_decl_case_tl
+              }
+          }
+          {
+            \tl_if_empty:NTF \l_@@_ref_decl_case_tl
+              {
+                \seq_get_left:NN \l_@@_dict_declension_seq
+                  \l_@@_ref_decl_case_tl
+              }
+              {
+                \seq_if_in:NVF \l_@@_dict_declension_seq
+                  \l_@@_ref_decl_case_tl
+                  {
+                    \msg_warning:nnxx { zref-clever }
+                      { unknown-decl-case }
+                      { \l_@@_ref_decl_case_tl }
+                      { \l_@@_ref_language_tl }
+                    \seq_get_left:NN \l_@@_dict_declension_seq
+                      \l_@@_ref_decl_case_tl
+                  }
+              }
+          }
+%    \end{macrocode}
+% Validate the gender (\opt{g}) option against the declared genders for the
+% reference language.  If the user value for the latter does not match the
+% genders declared for the former, clear \cs{l_@@_ref_gender_tl} and warn.
+%    \begin{macrocode}
+        \exp_args:NNx \seq_set_from_clist:Nn
+          \l_@@_dict_gender_seq
+          {
+            \prop_item:cn
+              {
+                g_@@_dict_
+                \l_@@_dict_language_tl _prop
+              }
+              { gender }
+          }
+        \seq_if_empty:NTF \l_@@_dict_gender_seq
+          {
+            \tl_if_empty:NF \l_@@_ref_gender_tl
+              {
+                \msg_warning:nnxxx { zref-clever }
+                  { language-no-gender }
+                  { \l_@@_ref_language_tl }
+                  { g }
+                  { \l_@@_ref_gender_tl }
+                \tl_clear:N \l_@@_ref_gender_tl
+              }
+          }
+          {
+            \tl_if_empty:NF \l_@@_ref_gender_tl
+              {
+                \seq_if_in:NVF \l_@@_dict_gender_seq
+                  \l_@@_ref_gender_tl
+                  {
+                    \msg_warning:nnxx { zref-clever }
+                      { gender-not-declared }
+                      { \l_@@_ref_language_tl }
+                      { \l_@@_ref_gender_tl }
+                    \tl_clear:N \l_@@_ref_gender_tl
+                  }
+              }
+          }
+%    \end{macrocode}
+% Ensure \cs{l_@@_capitalize_bool} is set to \texttt{true} when the language
+% was declared with \opt{allcaps} option.
+%    \begin{macrocode}
+        \str_if_eq:eeT
+          {
+            \prop_item:cn
+              {
+                g_@@_dict_
+                \l_@@_dict_language_tl _prop
+              }
+              { allcaps }
+          }
+          { true }
+          { \bool_set_true:N \l_@@_capitalize_bool }
+      }
+      {
+%    \end{macrocode}
+% If the language itself is not declared, we still have to issue declension
+% and gender warnings, if \opt{d} or \opt{g} options were used.
+%    \begin{macrocode}
+        \tl_if_empty:NF \l_@@_ref_decl_case_tl
+          {
+            \msg_warning:nnxx { zref-clever } { unknown-language-decl }
+              { \l_@@_ref_decl_case_tl }
+              { \l_@@_ref_language_tl }
+            \tl_clear:N \l_@@_ref_decl_case_tl
+          }
+        \tl_if_empty:NF \l_@@_ref_gender_tl
+          {
+            \msg_warning:nnxxx { zref-clever }
+              { language-no-gender }
+              { \l_@@_ref_language_tl }
+              { g }
+              { \l_@@_ref_gender_tl }
+            \tl_clear:N \l_@@_ref_gender_tl
+          }
       }
   }
-\@onlypreamble \zcDeclareLanguageAlias
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3076,7 +3468,9 @@
 %
 % \subsubsection*{\opt{d} option}
 %
-%
+% For setting the declension case.  Short for convenience and for not
+% polluting the markup too much given that, for languages that need it, it may
+% get to be used frequently.
 %
 % Thanks \texttt{@samcarter} and Alan Munn for useful comments about
 % declension on the TeX.SX chat.  Also, Florent Rougon's efforts in this area,
@@ -3095,140 +3489,14 @@
     \keys_define:nn { zref-clever / reference }
       {
 %    \end{macrocode}
-% We just store the value at this point, since what are valid values for this
-% variable depends on \cs{l_@@_ref_language_tl}, which may also be set as an
-% option.  Hence, validation for this must be done after \cs{keys_set:nn}.
+% We just store the value at this point, which is validated by
+% \cs{@@_process_language_options:} after \cs{keys_set:nn}.
 %    \begin{macrocode}
         d .tl_set:N = \l_@@_ref_decl_case_tl ,
         d .value_required:n = true ,
       }
   }
 %    \end{macrocode}
-%
-%
-% \begin{macro}{\@@_process_language_options:}
-%   Auxiliary function for \cs{@@_zcref:nnn}, responsible for processing
-%   options from \cs{zcDeclareLanguage}.  It validates the declension case
-%   (\opt{d}) option for the reference language.  It is expected to be called
-%   right (or soon) after \cs{keys_set:nn} in \cs{@@_zcref:nnn}, where current
-%   values for \cs{l_@@_ref_language_tl} and \cs{l_@@_ref_decl_case_tl} are in
-%   place.  If the user value for the latter does not match the declension
-%   cases declared for the former, the function sets an appropriate value for
-%   \cs{l_@@_ref_decl_case_tl}, either using the default case, or clearing the
-%   variable, depending on the language setup.  And also issues a warning
-%   about it.  This function also ensures \cs{l_@@_capitalize_bool} is set to
-%   \texttt{true} when the language was declared with \opt{allcaps} option.
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_process_language_options:
-  {
-    \exp_args:NNx \prop_get:NnNTF \g_@@_languages_prop
-      { \l_@@_ref_language_tl }
-      \l_@@_dict_language_tl
-      {
-        % `declension' option.
-        \exp_args:NNx \seq_set_from_clist:Nn
-          \l_@@_dict_declension_seq
-          {
-            \prop_item:cn
-              {
-                g_@@_dict_
-                \l_@@_dict_language_tl _prop
-              }
-              { declension }
-          }
-        \seq_if_empty:NTF \l_@@_dict_declension_seq
-          {
-            \tl_if_empty:NF \l_@@_ref_decl_case_tl
-              {
-                \msg_warning:nnxx { zref-clever }
-                  { language-no-decl-ref }
-                  { \l_@@_ref_language_tl }
-                  { \l_@@_ref_decl_case_tl }
-                \tl_clear:N \l_@@_ref_decl_case_tl
-              }
-          }
-          {
-            \tl_if_empty:NTF \l_@@_ref_decl_case_tl
-              {
-                \seq_get_left:NN \l_@@_dict_declension_seq
-                  \l_@@_ref_decl_case_tl
-              }
-              {
-                \seq_if_in:NVF \l_@@_dict_declension_seq
-                  \l_@@_ref_decl_case_tl
-                  {
-                    \msg_warning:nnxx { zref-clever }
-                      { unknown-decl-case }
-                      { \l_@@_ref_decl_case_tl }
-                      { \l_@@_ref_language_tl }
-                    \seq_get_left:NN \l_@@_dict_declension_seq
-                      \l_@@_ref_decl_case_tl
-                  }
-              }
-          }
-        % `gender' option.
-        \exp_args:NNx \seq_set_from_clist:Nn
-          \l_@@_dict_gender_seq
-          {
-            \prop_item:cn
-              {
-                g_@@_dict_
-                \l_@@_dict_language_tl _prop
-              }
-              { gender }
-          }
-        \seq_if_empty:NTF \l_@@_dict_gender_seq
-          {
-            \tl_if_empty:NF \l_@@_ref_gender_tl
-              {
-                \msg_warning:nnxxx { zref-clever }
-                  { language-no-gender }
-                  { \l_@@_ref_language_tl }
-                  { g }
-                  { \l_@@_ref_gender_tl }
-                \tl_clear:N \l_@@_ref_gender_tl
-              }
-          }
-          {
-            \tl_if_empty:NF \l_@@_ref_gender_tl
-              {
-                \seq_if_in:NVF \l_@@_dict_gender_seq
-                  \l_@@_ref_gender_tl
-                  {
-                    \msg_warning:nnxx { zref-clever }
-                      { gender-not-declared }
-                      { \l_@@_ref_language_tl }
-                      { \l_@@_ref_gender_tl }
-                    \tl_clear:N \l_@@_ref_gender_tl
-                  }
-              }
-          }
-
-        % `allcaps' option.
-        \str_if_eq:eeT
-          {
-            \prop_item:cn
-              {
-                g_@@_dict_
-                \l_@@_dict_language_tl _prop
-              }
-              { allcaps }
-          }
-          { true }
-          { \bool_set_true:N \l_@@_capitalize_bool }
-      }
-      {
-        \tl_if_empty:NF \l_@@_ref_decl_case_tl
-          {
-            \msg_warning:nnxx { zref-clever } { unknown-language-decl }
-              { \l_@@_ref_decl_case_tl }
-              { \l_@@_ref_language_tl }
-            \tl_clear:N \l_@@_ref_decl_case_tl
-          }
-      }
-  }
-%    \end{macrocode}
-% \end{macro}
 %
 %
 %
@@ -3305,7 +3573,8 @@
     \keys_define:nn { zref-clever / reference }
       {
 %    \end{macrocode}
-% Same thing as for \opt{d} option.
+% We just store the value at this point, which is validated by
+% \cs{@@_process_language_options:} after \cs{keys_set:nn}.
 %    \begin{macrocode}
         g .tl_set:N = \l_@@_ref_gender_tl ,
         g .value_required:n = true ,
