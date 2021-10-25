@@ -359,6 +359,13 @@
 % will.  The package's default is \texttt{nameinlink=tsingle}, and the option
 % given without a value is equivalent to \texttt{nameinlink=true}.
 %
+% \DescribeOption{preposinlink} %
+% The \opt{preposinlink} option controls whether the \opt{refpre} and
+% \opt{refpos} reference format options (see \zcref{sec:reference-format}) are
+% included in the reference hyperlink or not.  It is a boolean option.  The
+% package's default is \texttt{preposinlink=false}, and the option given
+% without a value is equivalent to \texttt{preposinlink=true}.
+%
 % \DescribeOption{lang} %
 % The \opt{lang} option controls the language used by \cs{zcref} when looking
 % for language-specific reference format options (see
@@ -424,15 +431,14 @@
 % \DescribeOption{font} %
 % The \opt{font} option can receive font styling commands to change the
 % appearance of the whole reference list (see also the reference format
-% options, \opt{namefont}, \opt{reffont}, and \opt{reffont-in} in
-% \zcref{sec:reference-format}).  It does not affect the content of the
-% \opt{note}, however.  The option is intended exclusively for commands that
-% only change font attributes: style, family, shape, weight, size, color, etc.
-% Anything else, particularly commands that may generate typeset output, is
-% not supported.  Given how package options are handled by \LaTeX{}, the fact
-% that this option receives commands as value means this option \emph{can't}
-% be set at load time, as a package option.  If you want to set it globally,
-% use \cs{zcsetup} instead.
+% options, \opt{namefont} and \opt{reffont} in \zcref{sec:reference-format}).
+% It does not affect the content of the \opt{note}, however.  The option is
+% intended exclusively for commands that only change font attributes: style,
+% family, shape, weight, size, color, etc.  Anything else, particularly
+% commands that may generate typeset output, is not supported.  Given how
+% package options are handled by \LaTeX{}, the fact that this option receives
+% commands as value means this option \emph{can't} be set at load time, as a
+% package option.  If you want to set it globally, use \cs{zcsetup} instead.
 %
 % \DescribeOption{titleref} %
 % The \opt{titleref} option receives no value and, when given, loads
@@ -683,8 +689,6 @@
 %                     & rangesep   &    ●    &    ●    &       ●       &      ●       \\
 %                     & refpre     &    ●    &    ●    &       ●       &      ●       \\
 %                     & refpos     &    ●    &    ●    &       ●       &      ●       \\
-%                     & refpre-in  &    ●    &    ●    &       ●       &      ●       \\
-%                     & refpos-in  &    ●    &    ●    &       ●       &      ●       \\
 %
 %     \addlinespace
 %     Necessarily     & Name-sg    &         &    ●    &       ●       &              \\
@@ -699,7 +703,6 @@
 %     \addlinespace
 %     Font            & namefont   &    ●    &    ●    &               &              \\
 %     options         & reffont    &    ●    &    ●    &               &              \\
-%                     & reffont-in &    ●    &    ●    &               &              \\
 %     \bottomrule
 %   \end{tabular}
 %   \caption{Reference format options and their scopes}
@@ -723,13 +726,8 @@
 %
 % \begin{refformat}
 % \item \reffmt{ref-block} \(\equiv\)
-% \item \reffmt{refpre} \reffmt{refpre-in} \reffmt{ref} \reffmt{refpos-in}
-%   \reffmt{refpos}
+% \item \reffmt{refpre} \reffmt{ref} \reffmt{refpos}
 % \end{refformat}
-%
-% Where the difference between \texttt{refpre} and \texttt{refpos}, with
-% regard to \texttt{refpre-in} and \texttt{refpos-in} is that the later are
-% included in the reference hyperlink, whereas the former are not.
 %
 % A \texttt{ref-block} is built for \emph{each} label given as argument to
 % \cs{zcref}.  When the \meta{labels} argument is comprised of multiple
@@ -805,8 +803,8 @@
 % Reference format options can yet be divided in two general categories: i)
 % ``string'' options, the ones which we have seen thus far, as ``building
 % blocks'' of the reference; and ii) ``font'' options, which control font
-% attributes of parts of the reference, namely \opt{namefont}, \opt{reffont},
-% and \opt{reffont-in}.  These options set the font, respectively, for the
+% attributes of parts of the reference, namely \opt{namefont} and
+% \opt{reffont}.  These options set the font, respectively, for the
 % \texttt{type-name}, for the whole \texttt{ref-block}, and for the part of
 % \texttt{ref-block} which is included in the hyperlink (to set the font for
 % the whole reference, see the \opt{font} option in \zcref{sec:options}).
@@ -847,8 +845,6 @@
 %     rangesep  = {\textendash} ,
 %     refpre    = {} ,
 %     refpos    = {} ,
-%     refpre-in = {} ,
-%     refpos-in = {} ,
 % \end{verbatim}
 %
 %
@@ -2175,8 +2171,6 @@
     rangesep ,
     refpre ,
     refpos ,
-    refpre-in ,
-    refpos-in ,
   }
 %    \end{macrocode}
 % Only ``type names'' are ``necessarily type-specific'', which makes them
@@ -2208,7 +2202,6 @@
   {
     namefont ,
     reffont ,
-    reffont-in ,
   }
 %    \end{macrocode}
 % And, finally, some combined groups of the above variables, for convenience.
@@ -2867,8 +2860,6 @@
     rangesep  = {\textendash} ,
     refpre    = {} ,
     refpos    = {} ,
-    refpre-in = {} ,
-    refpos-in = {} ,
   }
 %    \end{macrocode}
 %
@@ -3281,6 +3272,19 @@
       { \str_set:Nn \l_@@_nameinlink_str { tsingle } } ,
     nameinlink .initial:n = tsingle ,
     nameinlink .default:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+% \subsubsection*{\opt{preposinlink} option}
+%
+%    \begin{macrocode}
+\bool_new:N \l_@@_preposinlink_bool
+\keys_define:nn { zref-clever / reference }
+  {
+    preposinlink .bool_set:N =  \l_@@_preposinlink_bool ,
+    preposinlink .initial:n = false ,
+    preposinlink .default:n = true ,
   }
 %    \end{macrocode}
 %
@@ -5028,13 +5032,10 @@
 %     \l_@@_listsep_tl ,
 %     \l_@@_lastsep_tl ,
 %     \l_@@_rangesep_tl ,
-%     \l_@@_refpre_out_tl ,
-%     \l_@@_refpos_out_tl ,
-%     \l_@@_refpre_in_tl ,
-%     \l_@@_refpos_in_tl ,
+%     \l_@@_refpre_tl ,
+%     \l_@@_refpos_tl ,
 %     \l_@@_namefont_tl ,
-%     \l_@@_reffont_out_tl ,
-%     \l_@@_reffont_in_tl ,
+%     \l_@@_reffont_tl ,
 %   }
 %   Auxiliary variables for \cs{@@_typeset_refs:} separators, refpre/pos and
 %   font options.
@@ -5047,13 +5048,10 @@
 \tl_new:N \l_@@_listsep_tl
 \tl_new:N \l_@@_lastsep_tl
 \tl_new:N \l_@@_rangesep_tl
-\tl_new:N \l_@@_refpre_out_tl
-\tl_new:N \l_@@_refpos_out_tl
-\tl_new:N \l_@@_refpre_in_tl
-\tl_new:N \l_@@_refpos_in_tl
+\tl_new:N \l_@@_refpre_tl
+\tl_new:N \l_@@_refpos_tl
 \tl_new:N \l_@@_namefont_tl
-\tl_new:N \l_@@_reffont_out_tl
-\tl_new:N \l_@@_reffont_in_tl
+\tl_new:N \l_@@_reffont_tl
 %    \end{macrocode}
 % \end{variable}
 %
@@ -5185,30 +5183,24 @@
         % type.
         \int_compare:nNnT { \l_@@_label_count_int } = { 0 }
           {
-            \@@_get_ref_string:nN { namesep    }
+            \@@_get_ref_string:nN { namesep  }
               \l_@@_namesep_tl
-            \@@_get_ref_string:nN { rangesep   }
+            \@@_get_ref_string:nN { rangesep }
               \l_@@_rangesep_tl
-            \@@_get_ref_string:nN { pairsep    }
+            \@@_get_ref_string:nN { pairsep  }
               \l_@@_pairsep_tl
-            \@@_get_ref_string:nN { listsep    }
+            \@@_get_ref_string:nN { listsep  }
               \l_@@_listsep_tl
-            \@@_get_ref_string:nN { lastsep    }
+            \@@_get_ref_string:nN { lastsep  }
               \l_@@_lastsep_tl
-            \@@_get_ref_string:nN { refpre     }
-              \l_@@_refpre_out_tl
-            \@@_get_ref_string:nN { refpos     }
-              \l_@@_refpos_out_tl
-            \@@_get_ref_string:nN { refpre-in  }
-              \l_@@_refpre_in_tl
-            \@@_get_ref_string:nN { refpos-in  }
-              \l_@@_refpos_in_tl
-            \@@_get_ref_font:nN   { namefont   }
+            \@@_get_ref_string:nN { refpre   }
+              \l_@@_refpre_tl
+            \@@_get_ref_string:nN { refpos   }
+              \l_@@_refpos_tl
+            \@@_get_ref_font:nN   { namefont }
               \l_@@_namefont_tl
-            \@@_get_ref_font:nN   { reffont    }
-              \l_@@_reffont_out_tl
-            \@@_get_ref_font:nN   { reffont-in }
-              \l_@@_reffont_in_tl
+            \@@_get_ref_font:nN   { reffont  }
+              \l_@@_reffont_tl
           }
 
         % Here we send this to a couple of auxiliary functions.
@@ -5452,7 +5444,7 @@
           }
       }
 
-    % Typeset the previous type, if there is one.
+    % Typeset the previous type block, if there is one.
     \int_compare:nNnT { \l_@@_type_count_int } > { 0 }
       {
         \int_compare:nNnT { \l_@@_type_count_int } > { 1 }
@@ -5733,38 +5725,34 @@
             ! \l_@@_link_star_bool
           }
           {
-            \exp_not:N \group_begin:
-            \exp_not:V \l_@@_reffont_out_tl
-            \exp_not:V \l_@@_refpre_out_tl
-            \exp_not:N \group_begin:
-            \exp_not:V \l_@@_reffont_in_tl
+            \bool_if:NF \l_@@_preposinlink_bool
+              { \exp_not:V \l_@@_refpre_tl }
             % It's two `@s', but escaped for DocStrip.
             \exp_not:N \hyper@@@@link
               { \@@_extract_url_unexp:n {#1} }
               { \@@_extract_unexp:nnn {#1} { anchor } { } }
               {
-                \exp_not:V \l_@@_refpre_in_tl
+                \bool_if:NT \l_@@_preposinlink_bool
+                  { \exp_not:V \l_@@_refpre_tl }
+                \exp_not:N \group_begin:
+                \exp_not:V \l_@@_reffont_tl
                 \@@_extract_unexp:nvn {#1}
                   { l_@@_ref_property_tl } { }
-                \exp_not:V \l_@@_refpos_in_tl
+                \exp_not:N \group_end:
+                \bool_if:NT \l_@@_preposinlink_bool
+                  { \exp_not:V \l_@@_refpos_tl }
               }
-            \exp_not:N \group_end:
-            \exp_not:V \l_@@_refpos_out_tl
-            \exp_not:N \group_end:
+            \bool_if:NF \l_@@_preposinlink_bool
+              { \exp_not:V \l_@@_refpos_tl }
           }
           {
+            \exp_not:V \l_@@_refpre_tl
             \exp_not:N \group_begin:
-            \exp_not:V \l_@@_reffont_out_tl
-            \exp_not:V \l_@@_refpre_out_tl
-            \exp_not:N \group_begin:
-            \exp_not:V \l_@@_reffont_in_tl
-            \exp_not:V \l_@@_refpre_in_tl
+            \exp_not:V \l_@@_reffont_tl
             \@@_extract_unexp:nvn {#1}
               { l_@@_ref_property_tl } { }
-            \exp_not:V \l_@@_refpos_in_tl
             \exp_not:N \group_end:
-            \exp_not:V \l_@@_refpos_out_tl
-            \exp_not:N \group_end:
+            \exp_not:V \l_@@_refpos_tl
           }
       }
       { \@@_ref_default: }
@@ -5811,30 +5799,18 @@
                     \exp_not:V \l_@@_type_name_tl
                     \exp_not:N \group_end:
                     \exp_not:V \l_@@_namesep_tl
+                    \exp_not:V \l_@@_refpre_tl
                     \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_reffont_out_tl
-                    \exp_not:V \l_@@_refpre_out_tl
-                    \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_reffont_in_tl
-                    \exp_not:V \l_@@_refpre_in_tl
+                    \exp_not:V \l_@@_reffont_tl
                     \@@_extract_unexp:Vvn
                       \l_@@_type_first_label_tl
                       { l_@@_ref_property_tl } { }
-                    \exp_not:V \l_@@_refpos_in_tl
                     \exp_not:N \group_end:
-                    % hyperlink makes it's own group, we'd like to close the
-                    % `refpre-out' group after `refpos-out', but... we close
-                    % it here, and give the trailing `refpos-out' its own
-                    % group.  This will result that formatting given to
-                    % `refpre-out' will not reach `refpos-out', but I see no
-                    % alternative, and this has to be handled specially.
-                    \exp_not:N \group_end:
+                    \bool_if:NT \l_@@_preposinlink_bool
+                      { \exp_not:V \l_@@_refpos_tl }
                   }
-                \exp_not:N \group_begin:
-                % Ditto: special treatment.
-                \exp_not:V \l_@@_reffont_out_tl
-                \exp_not:V \l_@@_refpos_out_tl
-                \exp_not:N \group_end:
+                \bool_if:NF \l_@@_preposinlink_bool
+                  { \exp_not:V \l_@@_refpos_tl }
               }
               {
                 \exp_not:N \group_begin:
@@ -5868,11 +5844,8 @@
                     ! \l_@@_link_star_bool
                   }
                   {
-                    \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_reffont_out_tl
-                    \exp_not:V \l_@@_refpre_out_tl
-                    \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_reffont_in_tl
+                    \bool_if:NF \l_@@_preposinlink_bool
+                      { \exp_not:V \l_@@_refpre_tl }
                     % It's two '@s', but escaped for DocStrip.
                     \exp_not:N \hyper@@@@link
                       {
@@ -5884,30 +5857,29 @@
                           \l_@@_type_first_label_tl { anchor } { }
                       }
                       {
-                        \exp_not:V \l_@@_refpre_in_tl
+                        \bool_if:NT \l_@@_preposinlink_bool
+                          { \exp_not:V \l_@@_refpre_tl }
+                        \exp_not:N \group_begin:
+                        \exp_not:V \l_@@_reffont_tl
                         \@@_extract_unexp:Vvn
                           \l_@@_type_first_label_tl
                           { l_@@_ref_property_tl } { }
-                        \exp_not:V \l_@@_refpos_in_tl
+                        \exp_not:N \group_end:
+                        \bool_if:NT \l_@@_preposinlink_bool
+                          { \exp_not:V \l_@@_refpos_tl }
                       }
-                    \exp_not:N \group_end:
-                    \exp_not:V \l_@@_refpos_out_tl
-                    \exp_not:N \group_end:
+                    \bool_if:NF \l_@@_preposinlink_bool
+                      { \exp_not:V \l_@@_refpos_tl }
                   }
                   {
+                    \exp_not:V \l_@@_refpre_tl
                     \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_reffont_out_tl
-                    \exp_not:V \l_@@_refpre_out_tl
-                    \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_reffont_in_tl
-                    \exp_not:V \l_@@_refpre_in_tl
+                    \exp_not:V \l_@@_reffont_tl
                     \@@_extract_unexp:Vvn
                       \l_@@_type_first_label_tl
                       { l_@@_ref_property_tl } { }
-                    \exp_not:V \l_@@_refpos_in_tl
                     \exp_not:N \group_end:
-                    \exp_not:V \l_@@_refpos_out_tl
-                    \exp_not:N \group_end:
+                    \exp_not:V \l_@@_refpos_tl
                   }
               }
               { \@@_ref_default: }
@@ -6700,7 +6672,12 @@
 % And a last touch of care for \pkg{amsmath}'s refinements: make the equation
 % references \cs{textup}.
 %    \begin{macrocode}
-        \zcRefTypeSetup { equation } { reffont = \upshape }
+        \zcRefTypeSetup { equation }
+          {
+            reffont = \upshape ,
+            refpre  = {\textup{(}} ,
+            refpos  = {\textup{)}} ,
+          }
         \msg_info:nnn { zref-clever } { compat-package } { amsmath }
       }
       {}
@@ -7053,8 +7030,8 @@ type = equation ,
   name-sg-ab = eq. ,
   Name-pl-ab = Eqs. ,
   name-pl-ab = eqs. ,
-  refpre-in = {(} ,
-  refpos-in = {)} ,
+  refpre = {(} ,
+  refpos = {)} ,
 
 type = theorem ,
   Name-sg = Theorem ,
@@ -7390,8 +7367,8 @@ type = equation ,
   case = G ,
     Name-sg = Gleichung ,
     Name-pl = Gleichungen ,
-  refpre-in = {(} ,
-  refpos-in = {)} ,
+  refpre = {(} ,
+  refpos = {)} ,
 
 type = theorem ,
   gender = n ,
@@ -7720,8 +7697,8 @@ type = equation ,
   name-sg = équation ,
   Name-pl = Équations ,
   name-pl = équations ,
-  refpre-in = {(} ,
-  refpos-in = {)} ,
+  refpre = {(} ,
+  refpos = {)} ,
 
 type = theorem ,
   gender = m ,
@@ -7959,8 +7936,8 @@ type = equation ,
   name-sg-ab = eq. ,
   Name-pl-ab = Eqs. ,
   name-pl-ab = eqs. ,
-  refpre-in = {(} ,
-  refpos-in = {)} ,
+  refpre = {(} ,
+  refpos = {)} ,
 
 type = theorem ,
   gender = m ,
@@ -8181,8 +8158,8 @@ type = equation ,
   name-sg = ecuación ,
   Name-pl = Ecuaciones ,
   name-pl = ecuaciones ,
-  refpre-in = {(} ,
-  refpos-in = {)} ,
+  refpre = {(} ,
+  refpos = {)} ,
 
 type = theorem ,
   gender = m ,
