@@ -1555,13 +1555,14 @@
 % kernel in the 2020-10-01 release), and \pkg{expl3} as well (which made to
 % the kernel in the 2020-02-02 release).  We also just use UTF-8 for the
 % dictionaries (which became the default input encoding in the 2018-04-01
-% release).  Hence, since we would not be able to go much backwards without
-% special handling anyway, we make the cut with the inclusion of the new hook
-% management system (\pkg{ltcmdhooks}), which is bound to be useful for our
-% purposes, and was released with the 2021-06-01 kernel.
+% release).  Finally, a fix came to the new hook management system
+% (\pkg{ltcmdhooks}) with the 2021-11-15 kernel with implications to the hook
+% we add to \cs{appendix} (see \url{https://tex.stackexchange.com/q/617905}
+% and \url{https://github.com/latex3/latex2e/pull/699}, thanks Phelype
+% Oleinik).  Hence, since we would not be able to go much backwards without
+% special handling anyway, we make the cut at the 2021-11-15 kernel release.
 %
-% CHECK Should I just go ahead and bump this to 2021-11-15 considering the
-% appendix case?
+% TODO Bump this to 2021-11-15 when the release comes.
 %
 %    \begin{macrocode}
 \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
@@ -6564,6 +6565,7 @@
 % the latter's documented recommendation to load it last.  And use \cs{cref}
 % to make references to those.
 % CHECK Should I just make this no-op in case 'cleveref' is loaded?
+% TODO Remove this compatibility conditional when 2021-11-15 release comes.
 %    \begin{macrocode}
         \IfFormatAtLeastTF { 2021-11-15 }
           {
