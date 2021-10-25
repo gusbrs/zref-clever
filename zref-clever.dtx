@@ -805,16 +805,14 @@
 % blocks'' of the reference; and ii) ``font'' options, which control font
 % attributes of parts of the reference, namely \opt{namefont} and
 % \opt{reffont}.  These options set the font, respectively, for the
-% \texttt{type-name}, for the whole \texttt{ref-block}, and for the part of
-% \texttt{ref-block} which is included in the hyperlink (to set the font for
-% the whole reference, see the \opt{font} option in \zcref{sec:options}).
-% ``String'' options is not really a strict denomination for the first
-% category, but this set of options is intended exclusively for typesetting
-% material: things you expect to see in the output of your references.  The
-% ``font'' options, on the other hand, are intended exclusively for commands
-% that only change font attributes: style, family, shape, weight, size, color,
-% etc.  In either case, anything other than their intended uses is not
-% supported.
+% \texttt{type-name} and for \texttt{ref} (to set the font for the whole
+% reference, see the \opt{font} option in \zcref{sec:options}).  ``String''
+% options is not really a strict denomination for the first category, but this
+% set of options is intended exclusively for typesetting material: things you
+% expect to see in the output of your references.  The ``font'' options, on
+% the other hand, are intended exclusively for commands that only change font
+% attributes: style, family, shape, weight, size, color, etc.  In either case,
+% anything other than their intended uses is not supported.
 %
 % Finally, a comment about the internal ``fallback'' reference format values
 % mentioned above.  These ``last resort'' option values are required by
@@ -1556,7 +1554,7 @@
 % the kernel in the 2020-02-02 release).  We also just use UTF-8 for the
 % dictionaries (which became the default input encoding in the 2018-04-01
 % release).  Finally, a fix came to the new hook management system
-% (\pkg{ltcmdhooks}) with the 2021-11-15 kernel with implications to the hook
+% (\pkg{ltcmdhooks}) with the 2021-11-15 kernel, with implications to the hook
 % we add to \cs{appendix} (see \url{https://tex.stackexchange.com/q/617905}
 % and \url{https://github.com/latex3/latex2e/pull/699}, thanks Phelype
 % Oleinik).  Hence, since we would not be able to go much backwards without
@@ -6430,9 +6428,10 @@
 % the command being hooked at contains a double hash mark (\texttt{\#\#}) the
 % patch to add the hook, if it needs to be done with the \cs{scantokens}
 % method, may fail noisily (see \url{https://tex.stackexchange.com/q/617905},
-% thanks Phelype Oleinik).  The 2021-11-15 kernel release should already
-% handle this gracefully.  In the meantime, given we cannot really expect to
-% know what \cs{appendix} may contain in general, since it potentially gets
+% thanks Phelype Oleinik).  The 2021-11-15 kernel release already handle this
+% gracefully (see \url{https://github.com/latex3/latex2e/pull/699}, thanks
+% Phelype Oleinik).  In the meantime, given we cannot really expect to know
+% what \cs{appendix} may contain in general, since it potentially gets
 % redefined in quite a number of classes and packages, a user facing
 % workaround may be needed in case of trouble.  Phelype Oleinik recommends
 % activating/providing the generic hook in question, so that \pkg{ltcmdhooks}
