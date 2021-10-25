@@ -5395,15 +5395,13 @@
           { \@@_get_ref_first: }
       }
       {
-        \bool_if:nTF
-          { \l_@@_typeset_ref_bool }
+        \bool_if:NTF \l_@@_typeset_ref_bool
           {
             \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
               { \@@_get_ref:V \l_@@_type_first_label_tl }
           }
           {
-            \bool_if:nTF
-              { \l_@@_typeset_name_bool }
+            \bool_if:NTF \l_@@_typeset_name_bool
               {
                 \tl_set:Nx \l_@@_typeset_queue_curr_tl
                   {
@@ -5538,7 +5536,7 @@
             \int_incr:N \l_@@_range_count_int
             \bool_if:NT \l_@@_next_is_same_bool
               { \int_incr:N \l_@@_range_same_count_int }
-         }
+          }
       }
       {
         % Current label is neither the first (nor the last) of its type.
