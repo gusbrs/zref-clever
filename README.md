@@ -13,4 +13,4 @@ reference format is highly and easily customizable, both globally and locally.
 The released version of this package is available from CTAN. (soonish, but not
 yet...)
 
-For more details, check the Documentation.
+For more details, check the Documentation (use `l3build doc` for the `.pdf`s).

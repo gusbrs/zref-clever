@@ -1,5 +1,5 @@
 build/
 aux/
 .auctex-auto/
-# *.pdf
+*.pdf
 *.zip
