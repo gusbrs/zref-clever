@@ -6620,7 +6620,9 @@
 % \texttt{parentequation}.  So, here, we really must specify manually
 % \opt{currentcounter} and the resetting.  Note that, for \env{subequations},
 % \cs{zlabel} works just fine (that is, if given immediately after
-% \texttt{\cs{begin}\{subequations\}}, to refer to the parent equation).
+% \texttt{\cs{begin}\{subequations\}}, to refer to the parent equation).  See
+% \url{https://github.com/latex3/latex2e/issues/687#issuecomment-951451024}
+% and subsequent discussion.
 %    \begin{macrocode}
         \AddToHook { env / subequations / begin }
           {
