@@ -1509,10 +1509,10 @@
 %
 % \section{Acknowledgments}
 %
-% TODO Include: \pkg{cleveref}, \pkg{zref}, Ulrike Fischer, Jonathan P.\
-% Spratte, aka `Skillmon', Phelype Oleinik, Enrico Gregorio, aka `egreg',
-% Steven B.\ Segletes, \texttt{@samcarter}, Alan Munn, Florent Rougon, David
-% Carlisle.
+% TODO Include: \pkg{cleveref}, \pkg{zref}, Ulrike Fischer, Frank Mittelbach,
+% Phelype Oleinik, Jonathan P.\ Spratte, aka `Skillmon', Enrico Gregorio, aka
+% `egreg', Steven B.\ Segletes, \texttt{@samcarter}, Alan Munn, Florent
+% Rougon, David Carlisle.
 %
 %
 %
@@ -1553,12 +1553,17 @@
 % kernel in the 2020-10-01 release), and \pkg{expl3} as well (which made to
 % the kernel in the 2020-02-02 release).  We also just use UTF-8 for the
 % dictionaries (which became the default input encoding in the 2018-04-01
-% release).  Finally, a fix came to the new hook management system
-% (\pkg{ltcmdhooks}) with the 2021-11-15 kernel, with implications to the hook
-% we add to \cs{appendix} (see \url{https://tex.stackexchange.com/q/617905}
-% and \url{https://github.com/latex3/latex2e/pull/699}, thanks Phelype
-% Oleinik).  Hence, since we would not be able to go much backwards without
-% special handling anyway, we make the cut at the 2021-11-15 kernel release.
+% release).  Finally, a couple of changes came with the 2021-11-15 kernel
+% release, which are important here.  First, a fix was made to the new hook
+% management system (\pkg{ltcmdhooks}), with implications to the hook we add
+% to \cs{appendix} (see \url{https://tex.stackexchange.com/q/617905} and
+% \url{https://github.com/latex3/latex2e/pull/699}, thanks Phelype Oleinik).
+% Second, the support for \cs{@currentcounter} has been improved, including
+% \cs{footnote} and \pkg{amsmath} (see
+% \url{https://github.com/latex3/latex2e/issues/687}, thanks Frank Mittelbach
+% and Ulrike Fischer).  Hence, since we would not be able to go much backwards
+% without special handling anyway, we make the cut at the 2021-11-15 kernel
+% release.
 %
 % TODO Bump this to 2021-11-15 when the release comes.
 %
@@ -6364,17 +6369,21 @@
 % I have made a feature request though, for having \cs{@currentcounter}
 % recorded there too: \url{https://github.com/latex3/latex2e/issues/687}.
 %
-% CHECK See if the FR has been implemented or not and, if so, remove this.
+% TODO The FR has been implemented, remove this when the new release comes.
 %
 %    \begin{macrocode}
-\tl_new:N \l_@@_footnote_type_tl
-\tl_set:Nn \l_@@_footnote_type_tl { footnote }
-\AddToHook { env / minipage / begin }
-  { \tl_set:Nn \l_@@_footnote_type_tl { mpfootnote } }
-\AddToHook { cmd / @makefntext / before }
+\IfFormatAtLeastTF { 2021-11-15 }
+  { }
   {
-    \@@_zcsetup:x
-      { currentcounter = \l_@@_footnote_type_tl }
+    \tl_new:N \l_@@_footnote_type_tl
+    \tl_set:Nn \l_@@_footnote_type_tl { footnote }
+    \AddToHook { env / minipage / begin }
+      { \tl_set:Nn \l_@@_footnote_type_tl { mpfootnote } }
+    \AddToHook { cmd / @makefntext / before }
+      {
+        \@@_zcsetup:x
+          { currentcounter = \l_@@_footnote_type_tl }
+      }
   }
 %    \end{macrocode}
 %
