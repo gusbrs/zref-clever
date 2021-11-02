@@ -1,0 +1,212 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Already in order
+============================================================
+Original order:
+The sequence \l__zrefclever_zcref_labels_seq contains the items (without outer
+braces):
+>  {sec:section-1.1}
+>  {sec:section-1.2}
+>  {sec:section-1.3}.
+<recently read> }
+l. ...  }
+Sorted:
+The sequence \l__zrefclever_zcref_labels_seq contains the items (without outer
+braces):
+>  {sec:section-1.1}
+>  {sec:section-1.2}
+>  {sec:section-1.3}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 2: Inverted order
+============================================================
+Original order:
+The sequence \l__zrefclever_zcref_labels_seq contains the items (without outer
+braces):
+>  {sec:section-1.3}
+>  {sec:section-1.2}
+>  {sec:section-1.1}.
+<recently read> }
+l. ...  }
+Sorted:
+The sequence \l__zrefclever_zcref_labels_seq contains the items (without outer
+braces):
+>  {sec:section-1.1}
+>  {sec:section-1.2}
+>  {sec:section-1.3}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 3: Multiple section levels
+============================================================
+Original order:
+The sequence \l__zrefclever_zcref_labels_seq contains the items (without outer
+braces):
+>  {sec:section-1.2}
+>  {sec:subsection-1.1.1}
+>  {sec:subsection-1.2.2}
+>  {sec:section-1.3}
+>  {sec:subsection-1.1.2}
+>  {sec:subsection-1.3.2}
+>  {sec:section-1.1}
+>  {sec:subsection-1.3.1}
+>  {sec:subsection-1.2.1}
+>  {sec:subsubsection-1.1.2.1}.
+<recently read> }
+l. ...  }
+Sorted:
+The sequence \l__zrefclever_zcref_labels_seq contains the items (without outer
+braces):
+>  {sec:section-1.1}
+>  {sec:subsection-1.1.1}
+>  {sec:subsection-1.1.2}
+>  {sec:subsubsection-1.1.2.1}
+>  {sec:section-1.2}
+>  {sec:subsection-1.2.1}
+>  {sec:subsection-1.2.2}
+>  {sec:section-1.3}
+>  {sec:subsection-1.3.1}
+>  {sec:subsection-1.3.2}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 4: Different types
+============================================================
+Original order:
+The sequence \l__zrefclever_zcref_labels_seq contains the items (without outer
+braces):
+>  {sec:section-1.2}
+>  {tab:table-1.1.1}
+>  {sec:subsection-1.2.2}
+>  {cha:chapter-2}
+>  {eq:theorem-1.1.1}
+>  {cha:chapter-3}
+>  {sec:subsection-1.1.2}
+>  {sec:subsection-1.1.1}
+>  {sec:section-1.3}
+>  {sec:subsection-1.3.2}
+>  {cha:chapter-1}
+>  {sec:section-1.1}.
+<recently read> }
+l. ...  }
+Sorted:
+The sequence \l__zrefclever_zcref_labels_seq contains the items (without outer
+braces):
+>  {cha:chapter-1}
+>  {cha:chapter-2}
+>  {cha:chapter-3}
+>  {sec:section-1.1}
+>  {sec:subsection-1.1.1}
+>  {sec:subsection-1.1.2}
+>  {sec:section-1.2}
+>  {sec:subsection-1.2.2}
+>  {sec:section-1.3}
+>  {sec:subsection-1.3.2}
+>  {tab:table-1.1.1}
+>  {eq:theorem-1.1.1}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 5: Different types notypesort
+============================================================
+Original order:
+The sequence \l__zrefclever_zcref_labels_seq contains the items (without outer
+braces):
+>  {sec:section-1.2}
+>  {tab:table-1.1.1}
+>  {sec:subsection-1.2.2}
+>  {cha:chapter-2}
+>  {eq:theorem-1.1.1}
+>  {cha:chapter-3}
+>  {sec:subsection-1.1.2}
+>  {sec:subsection-1.1.1}
+>  {sec:section-1.3}
+>  {sec:subsection-1.3.2}
+>  {cha:chapter-1}
+>  {sec:section-1.1}.
+<recently read> }
+l. ...  }
+Sorted:
+The sequence \l__zrefclever_zcref_labels_seq contains the items (without outer
+braces):
+>  {sec:section-1.1}
+>  {sec:subsection-1.1.1}
+>  {sec:subsection-1.1.2}
+>  {sec:section-1.2}
+>  {sec:subsection-1.2.2}
+>  {sec:section-1.3}
+>  {sec:subsection-1.3.2}
+>  {tab:table-1.1.1}
+>  {cha:chapter-1}
+>  {cha:chapter-2}
+>  {cha:chapter-3}
+>  {eq:theorem-1.1.1}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 6: Undefined reference
+============================================================
+Original order:
+The sequence \l__zrefclever_zcref_labels_seq contains the items (without outer
+braces):
+>  {sec:section-1.3}
+>  {sec:section-1.2}
+>  {undefined}
+>  {sec:section-1.1}.
+<recently read> }
+l. ...  }
+Sorted:
+The sequence \l__zrefclever_zcref_labels_seq contains the items (without outer
+braces):
+>  {undefined}
+>  {sec:section-1.1}
+>  {sec:section-1.2}
+>  {sec:section-1.3}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 7: Page sort
+============================================================
+Original order:
+The sequence \l__zrefclever_zcref_labels_seq contains the items (without outer
+braces):
+>  {sec:section-1.2}
+>  {tab:table-1.1.1}
+>  {sec:subsection-1.2.2}
+>  {cha:chapter-2}
+>  {eq:theorem-1.1.1}
+>  {cha:chapter-3}
+>  {sec:subsection-1.1.2}
+>  {sec:subsection-1.1.1}
+>  {sec:section-1.3}
+>  {sec:subsection-1.3.2}
+>  {cha:chapter-1}
+>  {sec:section-1.1}.
+<recently read> }
+l. ...  }
+Sorted:
+The sequence \l__zrefclever_zcref_labels_seq contains the items (without outer
+braces):
+>  {sec:section-1.2}
+>  {tab:table-1.1.1}
+>  {sec:subsection-1.2.2}
+>  {eq:theorem-1.1.1}
+>  {sec:subsection-1.1.2}
+>  {sec:subsection-1.1.1}
+>  {sec:section-1.3}
+>  {sec:subsection-1.3.2}
+>  {cha:chapter-1}
+>  {sec:section-1.1}
+>  {cha:chapter-2}
+>  {cha:chapter-3}.
+<recently read> }
+l. ...  }
+============================================================
