@@ -4555,61 +4555,15 @@
 \cs_new_protected:Npn \@@_sort_default:nn #1#2
   {
     \@@_def_extract:Nnnn
-      \l_@@_label_type_a_tl {#1} { zc@type } { \c_empty_tl }
+      \l_@@_label_type_a_tl {#1} { zc@type } { zc@missingtype }
     \@@_def_extract:Nnnn
-      \l_@@_label_type_b_tl {#2} { zc@type } { \c_empty_tl }
+      \l_@@_label_type_b_tl {#2} { zc@type } { zc@missingtype }
 
-    \bool_if:nTF
-      {
-        % The second label has a type, but the first doesn't, leave the
-        % undefined first (to be more visible).
-        \tl_if_empty_p:N \l_@@_label_type_a_tl &&
-        ! \tl_if_empty_p:N \l_@@_label_type_b_tl
-      }
-      { \sort_return_same: }
-      {
-        \bool_if:nTF
-          {
-            % The first label has a type, but the second doesn't, bring the
-            % second forward.
-            ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
-            \tl_if_empty_p:N \l_@@_label_type_b_tl
-          }
-          { \sort_return_swapped: }
-          {
-            \bool_if:nTF
-              {
-                % The interesting case: both labels have a type...
-                ! \tl_if_empty_p:N \l_@@_label_type_a_tl &&
-                ! \tl_if_empty_p:N \l_@@_label_type_b_tl
-              }
-              {
-                \tl_if_eq:NNTF
-                  \l_@@_label_type_a_tl
-                  \l_@@_label_type_b_tl
-                  % ...and it's the same type.
-                  { \@@_sort_default_same_type:nn {#1} {#2} }
-                  % ...and they are different types.
-                  { \@@_sort_default_different_types:nn {#1} {#2} }
-              }
-              {
-                % Neither label has a type.  We can't do much of meaningful
-                % here, but if it's the same counter, compare it.
-                \exp_args:Nxx \tl_if_eq:nnTF
-                  { \@@_extract_unexp:nnn {#1} { zc@counter } { } }
-                  { \@@_extract_unexp:nnn {#2} { zc@counter } { } }
-                  {
-                    \int_compare:nNnTF
-                      { \@@_extract:nnn {#1} { zc@cntval } { -1 } }
-                        >
-                      { \@@_extract:nnn {#2} { zc@cntval } { -1 } }
-                      { \sort_return_swapped: }
-                      { \sort_return_same:    }
-                  }
-                  { \sort_return_same: }
-              }
-          }
-      }
+    \tl_if_eq:NNTF
+      \l_@@_label_type_a_tl
+      \l_@@_label_type_b_tl
+      { \@@_sort_default_same_type:nn {#1} {#2} }
+      { \@@_sort_default_different_types:nn {#1} {#2} }
   }
 %    \end{macrocode}
 % \end{macro}
@@ -5120,9 +5074,9 @@
           }
           {
             \@@_def_extract:NVnn \l_@@_label_type_a_tl
-              \l_@@_label_a_tl { zc@type } { \c_empty_tl }
+              \l_@@_label_a_tl { zc@type } { zc@missingtype }
             \@@_def_extract:NVnn \l_@@_label_type_b_tl
-              \l_@@_label_b_tl { zc@type } { \c_empty_tl }
+              \l_@@_label_b_tl { zc@type } { zc@missingtype }
           }
 
         % First, we establish whether the "current label" (i.e. `a') is the
@@ -5143,40 +5097,11 @@
                   { \bool_set_true:N \l_@@_last_of_type_bool }
                   {
                     % Neither is undefined, we must check the types.
-                    \bool_if:nTF
-                      {
-                        % Both empty: same "type".
-                        \tl_if_empty_p:N \l_@@_label_type_a_tl &&
-                        \tl_if_empty_p:N \l_@@_label_type_b_tl
-                      }
+                    \tl_if_eq:NNTF
+                      \l_@@_label_type_a_tl
+                      \l_@@_label_type_b_tl
                       { \bool_set_false:N \l_@@_last_of_type_bool }
-                      {
-                        \bool_if:nTF
-                          {
-                            % Neither empty: compare types.
-                            ! \tl_if_empty_p:N \l_@@_label_type_a_tl
-                            &&
-                            ! \tl_if_empty_p:N \l_@@_label_type_b_tl
-                          }
-                          {
-                            \tl_if_eq:NNTF
-                              \l_@@_label_type_a_tl
-                              \l_@@_label_type_b_tl
-                              {
-                                \bool_set_false:N
-                                  \l_@@_last_of_type_bool
-                              }
-                              {
-                                \bool_set_true:N
-                                  \l_@@_last_of_type_bool
-                              }
-                          }
-                          % One empty, the other not: different "types".
-                          {
-                            \bool_set_true:N
-                              \l_@@_last_of_type_bool
-                          }
-                      }
+                      { \bool_set_true:N \l_@@_last_of_type_bool  }
                   }
               }
           }
@@ -5188,7 +5113,7 @@
         \zref@ifrefundefined { \l_@@_label_a_tl }
           {}
           {
-            \tl_if_empty:NT \l_@@_label_type_a_tl
+            \tl_if_eq:NnT \l_@@_label_type_a_tl { zc@missingtype }
               {
                 \msg_warning:nnx { zref-clever } { missing-type }
                   { \l_@@_label_a_tl }
@@ -5948,7 +5873,8 @@
     \zref@ifrefundefined { \l_@@_type_first_label_tl }
       { \tl_clear:N \l_@@_type_name_tl }
       {
-        \tl_if_empty:nTF \l_@@_type_first_label_type_tl
+        \tl_if_eq:NnTF
+          \l_@@_type_first_label_type_tl { zc@missingtype }
           { \tl_clear:N \l_@@_type_name_tl }
           {
             % Determine whether we should use capitalization, abbreviation,
@@ -6298,24 +6224,21 @@
     \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
       {
         % If not found, try type specific options.
-        \bool_lazy_all:nTF
+        \bool_lazy_and:nnTF
           {
-            { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
-            {
-              \prop_if_exist_p:c
-                {
-                  l_@@_type_
-                  \l_@@_label_type_a_tl _options_prop
-                }
-            }
-            {
-              \prop_if_in_p:cn
-                {
-                  l_@@_type_
-                  \l_@@_label_type_a_tl _options_prop
-                }
-                {#1}
-            }
+            \prop_if_exist_p:c
+              {
+                l_@@_type_
+                \l_@@_label_type_a_tl _options_prop
+              }
+          }
+          {
+            \prop_if_in_p:cn
+              {
+                l_@@_type_
+                \l_@@_label_type_a_tl _options_prop
+              }
+              {#1}
           }
           {
             \prop_get:cnN
@@ -6363,8 +6286,7 @@
     \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
       {
         % If not found, try type specific options.
-        \bool_lazy_and:nnTF
-          { ! \tl_if_empty_p:N \l_@@_label_type_a_tl }
+        \bool_if:nTF
           {
             \prop_if_exist_p:c
               {
