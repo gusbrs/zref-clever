@@ -1,0 +1,214 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\usepackage{hyperref}
+
+% This file is intended to test the multiple typesetting cases for '\zcref',
+% formally, anything in '\@@_typeset_refs:', but which occur mostly in either
+% '\@@_typeset_refs_last_of_type:' or '\@@_typeset_refs_not_last_of_type:'.
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\begin{document}
+
+\chapter{Chapter 1}
+\zlabel{cha:chapter-1}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+\begin{table}
+  \caption{Table 1.1.1}
+  \zlabel{tab:table-1.1.1}
+\end{table}
+
+\newtheorem{thm}{Theorem}[section]
+
+\begin{thm}
+  \zlabel{eq:theorem-1.1.1}
+\end{thm}
+
+\section{Section 1.2}
+\zlabel{sec:section-1.2}
+
+\section{Section 1.3}
+\zlabel{sec:section-1.3}
+\zlabel{sec:section-1.3a}
+\zlabel{sec:section-1.3b}
+
+\section{Section 1.4}
+\zlabel{sec:section-1.4}
+
+\section{Section 1.5}
+\zlabel{sec:section-1.5}
+
+\clearpage{}
+
+\START
+
+\BEGINTEST{Typeset refs: warn ref undefined}
+\setbox0=\hbox{\zcref{undefined}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Typeset refs: warn missing type}
+\setbox0=\hbox{\zcref{eq:theorem-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: single}
+\setbox0=\hbox{\zcref{sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: pair}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: not range}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: pair in sequence}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: range to one}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a,
+    sec:section-1.3b}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: range to pair}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a,
+    sec:section-1.4}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: range}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4,
+    sec:section-1.5}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: option range}
+\setbox0=\hbox{\zcref[range]{sec:section-1.1, sec:section-1.3,
+    sec:section-1.5}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: option range to pair}
+\setbox0=\hbox{\zcref[range]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: option typeset ref}
+\setbox0=\hbox{\zcref[typeset=ref]{sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: option typeset name}
+\setbox0=\hbox{\zcref[typeset=name]{sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: option typeset none}
+\OMIT
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_typeset_ref_bool
+\bool_set_false:N \l__zrefclever_typeset_name_bool
+\ExplSyntaxOff
+\TIMO
+\setbox0=\hbox{\zcref{sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: single type}
+\setbox0=\hbox{\zcref{cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: pair of types}
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Last of type: list of types}
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1, tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Not last of type: first is range}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3,
+    sec:section-1.5}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Not last of type: no range}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Not last of type: range pair to one}
+\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.5}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Not last of type: range pair}
+\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Not last of type: range to one}
+\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b,
+    sec:section-1.5}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Not last of type: range to pair}
+\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.3, sec:section-1.3a,
+    sec:section-1.5}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Not last of type: range}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3,
+    sec:section-1.5}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}

@@ -5060,6 +5060,16 @@
 % \end{variable}
 %
 %
+% \begin{variable}{\l_@@_verbose_testing_bool}
+%   Internal variable which enables extra log messaging at points of interest
+%   in the code for purposes of regression testing.  Particularly relevant to
+%   keep track of expansion control in \cs{l_@@_typeset_queue_curr_tl}.
+%    \begin{macrocode}
+\bool_new:N \l_@@_verbose_testing_bool
+%    \end{macrocode}
+% \end{variable}
+%
+%
 % \subsection*{Main functions}
 %
 % \begin{macro}{\@@_typeset_refs:}
@@ -5172,7 +5182,9 @@
           }
 
         % Handle warnings in case of reference or type undefined.
+        % Test: 'zc-typeset01.lvt': "Typeset refs: warn ref undefined"
         \zref@refused { \l_@@_label_a_tl }
+        % Test: 'zc-typeset01.lvt': "Typeset refs: warn missing type"
         \zref@ifrefundefined { \l_@@_label_a_tl }
           {}
           {
@@ -5242,6 +5254,7 @@
       {
         % It is the last label of its type, but also the first one, and that's
         % what matters here: just store it.
+        % Test: 'zc-typeset01.lvt': "Last of type: single"
         { 0 }
         {
           \tl_set:NV \l_@@_type_first_label_tl
@@ -5251,6 +5264,7 @@
         }
 
         % The last is the second: we have a pair (if not repeated).
+        % Test: 'zc-typeset01.lvt': "Last of type: pair"
         { 1 }
         {
           \int_compare:nNnF { \l_@@_range_same_count_int } = { 1 }
@@ -5269,6 +5283,7 @@
         \int_case:nnF { \l_@@_range_count_int }
           {
             % There was no range going on.
+            % Test: 'zc-typeset01.lvt': "Last of type: not range"
             { 0 }
             {
               \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
@@ -5278,6 +5293,7 @@
                 }
             }
             % Last in the range is also the second in it.
+            % Test: 'zc-typeset01.lvt': "Last of type: pair in sequence"
             { 1 }
             {
               \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
@@ -5305,6 +5321,7 @@
               }
               {
                 % Repetition, not a range.
+                % Test: 'zc-typeset01.lvt': "Last of type: range to one"
                 { 0 }
                 {
                   % If `range_beg_label' is empty, it means it was also the
@@ -5320,6 +5337,7 @@
                     }
                 }
                 % A `range', but with no skipped value, treat as list.
+                % Test: 'zc-typeset01.lvt': "Last of type: range to pair"
                 { 1 }
                 {
                   \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
@@ -5338,6 +5356,7 @@
               }
               {
                 % An actual range.
+                % Test: 'zc-typeset01.lvt': "Last of type: range"
                 \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                   {
                     % Ditto.
@@ -5378,6 +5397,8 @@
                   { \l_@@_type_first_label_tl }
                   { \l_@@_label_a_tl }
               }
+            % Test: 'zc-typeset01.lvt': "Last of type: option range"
+            % Test: 'zc-typeset01.lvt': "Last of type: option range to pair"
             \tl_set:Nx \l_@@_typeset_queue_curr_tl
               {
                 \bool_if:NTF \l_@@_next_maybe_range_bool
@@ -5401,12 +5422,14 @@
       {
         \bool_if:NTF \l_@@_typeset_ref_bool
           {
+            % Test: 'zc-typeset01.lvt': "Last of type: option typeset ref"
             \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
               { \@@_get_ref:V \l_@@_type_first_label_tl }
           }
           {
             \bool_if:NTF \l_@@_typeset_name_bool
               {
+                % Test: 'zc-typeset01.lvt': "Last of type: option typeset name"
                 \tl_set:Nx \l_@@_typeset_queue_curr_tl
                   {
                     \bool_if:NTF \l_@@_name_in_link_bool
@@ -5440,6 +5463,7 @@
                 % it should not occur, given that the options are set up to
                 % typeset either "ref" or "name".  Still, leave here a
                 % sensible fallback, equal to the behavior of "both".
+                % Test: 'zc-typeset01.lvt': "Last of type: option typeset none"
                 \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
                   { \@@_get_ref_first: }
               }
@@ -5454,6 +5478,10 @@
         \l_@@_typeset_queue_prev_tl
       }
 
+    % Extra log for testing.
+    \bool_if:NT \l_@@_verbose_testing_bool
+      { \tl_show:N \l_@@_typeset_queue_curr_tl }
+
     % Wrap up loop, or prepare for next iteration.
     \bool_if:NTF \l_@@_typeset_last_bool
       {
@@ -5461,9 +5489,11 @@
         \int_case:nnF { \l_@@_type_count_int }
           {
             % Single type.
+            % Test: 'zc-typeset01.lvt': "Last of type: single type"
             { 0 }
             { \l_@@_typeset_queue_curr_tl }
             % Pair of types.
+            % Test: 'zc-typeset01.lvt': "Last of type: pair of types"
             { 1 }
             {
               \l_@@_tpairsep_tl
@@ -5472,6 +5502,7 @@
           }
           {
             % Last in list of types.
+            % Test: 'zc-typeset01.lvt': "Last of type: list of types"
             \l_@@_tlastsep_tl
             \l_@@_typeset_queue_curr_tl
           }
@@ -5534,6 +5565,7 @@
         % If the next label may be part of a range, we set `range_beg_label'
         % to "empty" (we deal with it as the "first", and must do it there, to
         % handle hyperlinking), but also step the range counters.
+        % Test: 'zc-typeset01.lvt': "Not last of type: first is range"
         \bool_if:NT \l_@@_next_maybe_range_bool
           {
             \tl_clear:N \l_@@_range_beg_label_tl
@@ -5570,6 +5602,7 @@
             \int_case:nnF { \l_@@_range_count_int }
               {
                 % There was no range going on.
+                % Test: 'zc-typeset01.lvt': "Not last of type: no range"
                 { 0 }
                 {
                   \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
@@ -5581,6 +5614,8 @@
                 % Last is second in the range: if `range_same_count' is also
                 % `1', it's a repetition (drop it), otherwise, it's a "pair
                 % within a list", treat as list.
+                % Test: 'zc-typeset01.lvt': "Not last of type: range pair to one"
+                % Test: 'zc-typeset01.lvt': "Not last of type: range pair"
                 { 1 }
                 {
                   \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
@@ -5612,6 +5647,7 @@
                     \l_@@_range_same_count_int
                   }
                   {
+                    % Test: 'zc-typeset01.lvt': "Not last of type: range to one"
                     { 0 }
                     {
                       \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
@@ -5624,6 +5660,7 @@
                             }
                         }
                     }
+                    % Test: 'zc-typeset01.lvt': "Not last of type: range to pair"
                     { 1 }
                     {
                       \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
@@ -5640,6 +5677,7 @@
                     }
                   }
                   {
+                    % Test: 'zc-typeset01.lvt': "Not last of type: range"
                     \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                       {
                         \tl_if_empty:VF \l_@@_range_beg_label_tl
