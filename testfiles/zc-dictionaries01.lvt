@@ -1,0 +1,55 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+% This file is intended to test the build-in dictionaries.
+
+\begin{document}
+
+\START
+
+\ExplSyntaxOn
+
+\TEST { Built-in~dictionaries }
+  {
+    \seq_gclear:N \g__zrefclever_loaded_dictionaries_seq
+    \bool_set_false:N \l_tmpa_bool
+    \prop_map_inline:Nn \g__zrefclever_languages_prop
+      {
+        \str_if_eq:nnT {#1} {#2}
+          {
+            \bool_if:nTF \l_tmpa_bool
+              { \SEPARATOR }
+              { \bool_set_true:N \l_tmpa_bool }
+            \__zrefclever_provide_dictionary:n {#2}
+            \prop_show:c { g__zrefclever_dict_ #2 _prop}
+          }
+      }
+  }
+
+\TEST { Fallback~dictionary }
+  {
+    \prop_show:N \g__zrefclever_fallback_dict_prop
+  }
+
+\TEST { Fallback~completeness }
+  {
+    \seq_concat:NNN \g_tmpa_seq
+      \c__zrefclever_ref_options_necessarily_not_type_specific_seq
+      \c__zrefclever_ref_options_possibly_type_specific_seq
+
+    \seq_map_inline:Nn \g_tmpa_seq
+      {
+        \prop_if_in:NnTF \g__zrefclever_fallback_dict_prop {#1}
+          { \typeout{#1:~TRUE} }
+          { \typeout{#1:~FALSE} }
+      }
+  }
+
+
+
+\OMIT
+
+\end{document}

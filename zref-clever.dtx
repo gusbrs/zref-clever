@@ -2846,9 +2846,6 @@
 % with \cs{@@_get_ref_font:nN} -- do not need to be provided here, since the
 % later function sets an empty value if the option is not found.
 %
-% TODO Add regression test to ensure all fallback ``translations'' are indeed
-% present.
-%
 %    \begin{macrocode}
 \prop_new:N \g_@@_fallback_dict_prop
 \prop_gset_from_keyval:Nn \g_@@_fallback_dict_prop
@@ -5126,14 +5123,14 @@
           {
             \@@_get_ref_string:nN { namesep  }
               \l_@@_namesep_tl
-            \@@_get_ref_string:nN { rangesep }
-              \l_@@_rangesep_tl
             \@@_get_ref_string:nN { pairsep  }
               \l_@@_pairsep_tl
             \@@_get_ref_string:nN { listsep  }
               \l_@@_listsep_tl
             \@@_get_ref_string:nN { lastsep  }
               \l_@@_lastsep_tl
+            \@@_get_ref_string:nN { rangesep }
+              \l_@@_rangesep_tl
             \@@_get_ref_string:nN { refpre   }
               \l_@@_refpre_tl
             \@@_get_ref_string:nN { refpos   }

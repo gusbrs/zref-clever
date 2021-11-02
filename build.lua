@@ -18,6 +18,9 @@ installfiles = {"*.sty","*.cls","*.dict"}
 -- Two runs for label testing
 checkruns = 2
 
+-- Use UTF-8 logs for all engines
+asciiengines = {}
+
 -- CTAN upload settings
 
 uploadconfig = {
