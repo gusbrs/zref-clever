@@ -1,0 +1,117 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Built-in language and aliases
+============================================================
+The property list \g__zrefclever_languages_prop contains the pairs (without
+outer braces):
+>  {english}  =>  {english}
+>  {american}  =>  {english}
+>  {australian}  =>  {english}
+>  {british}  =>  {english}
+>  {canadian}  =>  {english}
+>  {newzealand}  =>  {english}
+>  {UKenglish}  =>  {english}
+>  {USenglish}  =>  {english}
+>  {german}  =>  {german}
+>  {austrian}  =>  {german}
+>  {germanb}  =>  {german}
+>  {ngerman}  =>  {german}
+>  {naustrian}  =>  {german}
+>  {nswissgerman}  =>  {german}
+>  {swissgerman}  =>  {german}
+>  {french}  =>  {french}
+>  {acadian}  =>  {french}
+>  {canadien}  =>  {french}
+>  {francais}  =>  {french}
+>  {frenchb}  =>  {french}
+>  {portuguese}  =>  {portuguese}
+>  {brazilian}  =>  {portuguese}
+>  {brazil}  =>  {portuguese}
+>  {portuges}  =>  {portuguese}
+>  {spanish}  =>  {spanish}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 2: Declare existing language
+============================================================
+Package zref-clever Warning: Language 'french' is already declared on line ....
+(zref-clever)                Nothing to do.
+Package zref-clever Warning: Language 'german' is already declared on line ....
+(zref-clever)                Nothing to do.
+============================================================
+============================================================
+TEST 3: Declare new language
+============================================================
+The property list \g__zrefclever_dict_elvish_prop contains the pairs (without
+outer braces):
+>  {declension}  =>  {a,b,c}
+>  {gender}  =>  {x,y,z}
+>  {allcaps}  =>  {true}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 4: Declare new alias
+============================================================
+The property list \g__zrefclever_languages_prop contains the pairs (without
+outer braces):
+>  {english}  =>  {english}
+>  {american}  =>  {english}
+>  {australian}  =>  {english}
+>  {british}  =>  {english}
+>  {canadian}  =>  {english}
+>  {newzealand}  =>  {english}
+>  {UKenglish}  =>  {english}
+>  {USenglish}  =>  {english}
+>  {german}  =>  {german}
+>  {austrian}  =>  {german}
+>  {germanb}  =>  {german}
+>  {ngerman}  =>  {german}
+>  {naustrian}  =>  {german}
+>  {nswissgerman}  =>  {german}
+>  {swissgerman}  =>  {german}
+>  {french}  =>  {french}
+>  {acadian}  =>  {french}
+>  {canadien}  =>  {french}
+>  {francais}  =>  {french}
+>  {frenchb}  =>  {french}
+>  {portuguese}  =>  {portuguese}
+>  {brazilian}  =>  {portuguese}
+>  {brazil}  =>  {portuguese}
+>  {portuges}  =>  {portuguese}
+>  {spanish}  =>  {spanish}
+>  {elvish}  =>  {elvish}
+>  {nelvish}  =>  {elvish}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 5: Alias to unknown language
+============================================================
+Package zref-clever Warning: Language 'foobar' is unknown on line .... Can't
+(zref-clever)                alias to it. See documentation for
+(zref-clever)                '\zcDeclareLanguage' and
+(zref-clever)                '\zcDeclareLanguageAlias'.
+============================================================
+============================================================
+TEST 6: Preamble only
+============================================================
+! LaTeX Error: Can be used only in preamble.
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+l. ...  }
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+! LaTeX Error: Can be used only in preamble.
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+l. ...  }
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+============================================================

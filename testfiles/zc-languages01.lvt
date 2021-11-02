@@ -1,0 +1,59 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+% This file is intended to test language setup, including '\zcDeclareLanguage'
+% and '\zcDeclareLanguageAlias'.
+
+\START
+
+\ExplSyntaxOn
+
+\TEST { Built-in~language~and~aliases }
+  {
+    \prop_show:N \g__zrefclever_languages_prop
+  }
+
+\TEST { Declare~existing~language }
+  {
+    \zcDeclareLanguage { french }
+    \zcDeclareLanguage { german }
+  }
+
+\TEST { Declare~new~language }
+  {
+    \zcDeclareLanguage
+      [ declension = { a,b,c } , gender = { x,y,z } , allcaps ] { elvish }
+    \prop_show:N \g__zrefclever_dict_elvish_prop
+  }
+
+\TEST { Declare~new~alias }
+  {
+    \zcDeclareLanguageAlias { nelvish } { elvish }
+    \prop_show:N \g__zrefclever_languages_prop
+  }
+
+\TEST { Alias~to~unknown~language }
+  {
+    \zcDeclareLanguageAlias { english } { foobar }
+  }
+
+\ExplSyntaxOff
+
+\OMIT
+\begin{document}
+\TIMO
+
+\ExplSyntaxOn
+
+\TEST { Preamble~only }
+  {
+    \zcDeclareLanguage { english }
+    \zcDeclareLanguageAlias { myenglish } { english }
+  }
+
+\OMIT
+
+\end{document}
