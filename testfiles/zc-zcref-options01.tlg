@@ -1,0 +1,5758 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Starred unstarred
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.2\group_end: 
+and\nobreakspace \group_begin: 2.1\group_end: .
+<recently read> }
+l. ......ion-1.1, sec:section-1.2, sec:section-2.1}
+                                                  }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: }, \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.2.1}{\group_begin: 2.1\group_end: }.
+<recently read> }
+l. ......ion-1.1, sec:section-1.2, sec:section-2.1}
+                                                  }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 2: Option: ref=default
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: }, \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.2.1}{\group_begin: 2.1\group_end: }.
+<recently read> }
+l. ...    sec:section-2.1}
+                         }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 3: Option: ref=page
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.2.1}{\group_begin: 3\group_end: }.
+<recently read> }
+l. ...    sec:section-2.1}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x60.05566
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 4: Option: page
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.2.1}{\group_begin: 3\group_end: }.
+<recently read> }
+l. ...    sec:section-2.1}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x60.05566
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 5: zcpageref
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.2.1}{\group_begin: 3\group_end: }.
+<recently read> }
+l. ......on-1.1, sec:section-1.2, sec:section-2.1}
+                                                  }
+> \box...=
+\hbox(6.94444+1.94444)x60.05566
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 6: Option: ref=title
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: Section 1.1\group_end: }.
+<recently read> }
+l. ......\zcref[ref=title,noname]{sec:section-1.1}
+                                                  }
+> \box...=
+\hbox(6.83331+0.0)x47.77788
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 S
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 7: Option: ref=zc@thecnt
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: }, \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.2.1}{\group_begin: 2.1\group_end: }.
+<recently read> }
+l. ...    sec:section-2.1}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 8: Option: ref=foo
+============================================================
+! LaTeX3 Error: Key 'zref-clever/reference/ref' accepts only a fixed set of
+(LaTeX3)        choices.
+For immediate help type H <return>.
+ ...                                              
+l. ...    sec:section-2.1}
+                          }
+The key 'zref-clever/reference/ref' only accepts predefined values, and 'foo'
+is not one of these.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: }, \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.2.1}{\group_begin: 2.1\group_end: }.
+<recently read> }
+l. ...    sec:section-2.1}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 9: Option: typeset=both
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: }, \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.2.1}{\group_begin: 2.1\group_end: }.
+<recently read> }
+l. ...    sec:section-2.1}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 10: Option: typeset=ref
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: 1.1\group_end: }, \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: } and\nobreakspace \hyper@@link
+{\c_empty_tl }{section.2.1}{\group_begin: 2.1\group_end: }.
+<recently read> }
+l. ...    sec:section-2.1}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x67.22238
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 11: Option: noname
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: 1.1\group_end: }, \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: } and\nobreakspace \hyper@@link
+{\c_empty_tl }{section.2.1}{\group_begin: 2.1\group_end: }.
+<recently read> }
+l. ...    sec:section-2.1}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x67.22238
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 12: Option: typeset=name
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: .
+<recently read> }
+l. ...    sec:section-2.1}
+                          }
+> \box...=
+\hbox(6.67859+0.0)x34.00005
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 13: Option: typeset=baz
+============================================================
+! LaTeX3 Error: Key 'zref-clever/reference/typeset' accepts only a fixed set
+(LaTeX3)        of choices.
+For immediate help type H <return>.
+ ...                                              
+l. ...    sec:section-2.1}
+                          }
+The key 'zref-clever/reference/typeset' only accepts predefined values, and
+'baz' is not one of these.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: }, \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.2.1}{\group_begin: 2.1\group_end: }.
+<recently read> }
+l. ...    sec:section-2.1}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 14: Option: sort=true
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: }, \hyper@@link {\c_empty_tl }{section.1.3}{\group_begin:
+1.3\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.2.1}{\group_begin: 2.1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 15: Option: sort
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: }, \hyper@@link {\c_empty_tl }{section.1.3}{\group_begin:
+1.3\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.2.1}{\group_begin: 2.1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 16: Option: sort=false
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.2.1}{\group_begin:
+2.1\group_end: }, \hyper@@link {\c_empty_tl }{section.1.3}{\group_begin:
+1.3\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 17: Option: nosort
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.2.1}{\group_begin:
+2.1\group_end: }, \hyper@@link {\c_empty_tl }{section.1.3}{\group_begin:
+1.3\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 18: Option: typesort (default)
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: }).
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \box...=
+\hbox(7.5+2.5)x223.97266
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 19: Option: typesort=
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: }).
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \box...=
+\hbox(7.5+2.5)x223.97266
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 20: Option: notypesort
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: }).
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \box...=
+\hbox(7.5+2.5)x223.97266
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 21: Option: typesort
+============================================================
+! LaTeX3 Error: The key 'zref-clever/reference/typesort' requires a value.
+For immediate help type H <return>.
+ ...                                              
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+The key 'zref-clever/reference/typesort' must have a value.
+No value was present: the key will be ignored.
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: }).
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \box...=
+\hbox(7.5+2.5)x223.97266
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 22: Option: typesort={{{othertypes}},table}
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: }).
+<recently read> }
+l. ......on-1.1.2, sec:section-1.1, cha:chapter-1}
+                                                  }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ......on-1.1.2, sec:section-1.1, cha:chapter-1}
+                                                  }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ......on-1.1.2, sec:section-1.1, cha:chapter-1}
+                                                  }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ......on-1.1.2, sec:section-1.1, cha:chapter-1}
+                                                  }
+> \box...=
+\hbox(7.5+2.5)x223.97266
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 23: Option: typesort={chapter,section,{{othertypes}},table}
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ......on-1.1.2, sec:section-1.1, cha:chapter-1}
+                                                  }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ......on-1.1.2, sec:section-1.1, cha:chapter-1}
+                                                  }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: }).
+<recently read> }
+l. ......on-1.1.2, sec:section-1.1, cha:chapter-1}
+                                                  }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ......on-1.1.2, sec:section-1.1, cha:chapter-1}
+                                                  }
+> \box...=
+\hbox(7.5+2.5)x223.97266
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 24: Option: comp=true
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } to\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.3}{\group_begin: 1.3\group_end: }.
+<recently read> }
+l. ...    sec:section-1.3}
+                          }
+> \box...=
+\hbox(6.67859+0.0)x78.44458
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 o
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 25: Option: comp
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } to\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.3}{\group_begin: 1.3\group_end: }.
+<recently read> }
+l. ...    sec:section-1.3}
+                          }
+> \box...=
+\hbox(6.67859+0.0)x78.44458
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 o
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 26: Option: comp=true (interaction with sort)
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: }, \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.3}{\group_begin: 1.3\group_end: }.
+<recently read> }
+l. ...    sec:section-1.3}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 27: Option: comp=false
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: }, \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.3}{\group_begin: 1.3\group_end: }.
+<recently read> }
+l. ...    sec:section-1.3}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 28: Option: nocomp
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: }, \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.3}{\group_begin: 1.3\group_end: }.
+<recently read> }
+l. ...    sec:section-1.3}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 29: Option: range=true
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } to\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.3}{\group_begin: 1.3\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1}
+                          }
+> \box...=
+\hbox(6.67859+0.0)x78.44458
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 o
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 30: Option: range
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } to\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.3}{\group_begin: 1.3\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1}
+                          }
+> \box...=
+\hbox(6.67859+0.0)x78.44458
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 o
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 31: Option: range=false
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: }, \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.3}{\group_begin: 1.3\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x104.55576
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 32: Option: range=true (interaction with sort)
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } to\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.3}{\group_begin: 1.3\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, sec:section-1.1}
+                                           }
+> \box...=
+\hbox(6.67859+0.0)x78.44458
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 o
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 33: Option: range (to pair)
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.3}{\group_begin: 1.3\group_end: }.
+<recently read> }
+l. ......,range]{sec:section-1.3, sec:section-1.2}
+                                                  }
+> \box...=
+\hbox(6.94444+0.0)x85.66682
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 34: Option: range (multitype)
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: chapters\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{chapter.1}{\group_begin:
+1\group_end: } to\nobreakspace \hyper@@link {\c_empty_tl
+}{chapter.3}{\group_begin: 3\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } to\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.3}{\group_begin: 1.3\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \box...=
+\hbox(6.94444+1.94444)x166.5836
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 o
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.3}
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 o
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 35: Option: range (multitype, page)
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.3}{\group_begin:
+1\group_end: }\textendash \hyper@@link {\c_empty_tl }{chapter.3}{\group_begin:
+5\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, cha:chapter-1}
+                                         }
+> \box...=
+\hbox(6.44444+1.94444)x42.27786
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.3}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 {
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.3}
+.\OT1/cmr/m/n/10 5
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 36: Option: cap=true
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: Chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \box...=
+\hbox(6.94444+1.94444)x153.97252
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 C
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 S
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 37: Option: cap
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: Chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \box...=
+\hbox(6.94444+1.94444)x153.97252
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 C
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 S
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 38: Option: cap=false
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \box...=
+\hbox(6.94444+1.94444)x149.30582
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 39: Option: nocap
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \box...=
+\hbox(6.94444+1.94444)x149.30582
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 40: Option: capfirst=true
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: Chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \box...=
+\hbox(6.94444+1.94444)x152.36139
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 C
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 41: Option: capfirst
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: Chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \box...=
+\hbox(6.94444+1.94444)x152.36139
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 C
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 42: Option: capfirst=false
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \box...=
+\hbox(6.94444+1.94444)x149.30582
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 43: Option: abbrev=true
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: eq.\group_end: \nobreakspace (\group_begin:
+1.2\group_end: }).
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{figure.1.1}{\group_begin: fig.\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \box...=
+\hbox(7.5+2.5)x135.27806
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 .
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 .
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 44: Option: abbrev
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: eq.\group_end: \nobreakspace (\group_begin:
+1.2\group_end: }).
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{figure.1.1}{\group_begin: fig.\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \box...=
+\hbox(7.5+2.5)x135.27806
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 .
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 .
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 45: Option: abbrev=false
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: }).
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{figure.1.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \box...=
+\hbox(7.5+2.5)x171.41704
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 46: Option: noabbrev
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: }).
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{figure.1.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \box...=
+\hbox(7.5+2.5)x171.41704
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 47: Option: noabbrevfirst=true
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: }).
+<recently read> }
+l. ...    fig:figure-1.1.1, tab:table-1.1.1}
+                                            }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{figure.1.1}{\group_begin: fig.\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    fig:figure-1.1.1, tab:table-1.1.1}
+                                            }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    fig:figure-1.1.1, tab:table-1.1.1}
+                                            }
+> \box...=
+\hbox(7.5+2.5)x160.27814
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 .
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 48: Option: noabbrevfirst
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: }).
+<recently read> }
+l. ...    fig:figure-1.1.1, tab:table-1.1.1}
+                                            }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{figure.1.1}{\group_begin: fig.\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    fig:figure-1.1.1, tab:table-1.1.1}
+                                            }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    fig:figure-1.1.1, tab:table-1.1.1}
+                                            }
+> \box...=
+\hbox(7.5+2.5)x160.27814
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 .
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 49: Option: noabbrevfirst=false
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: eq.\group_end: \nobreakspace (\group_begin:
+1.2\group_end: }).
+<recently read> }
+l. ...    fig:figure-1.1.1, tab:table-1.1.1}
+                                            }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{figure.1.1}{\group_begin: fig.\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    fig:figure-1.1.1, tab:table-1.1.1}
+                                            }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    fig:figure-1.1.1, tab:table-1.1.1}
+                                            }
+> \box...=
+\hbox(7.5+2.5)x135.27806
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 .
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 .
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 50: Option: S
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: Equation\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: }).
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{figure.1.1}{\group_begin: fig.\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \box...=
+\hbox(7.5+2.5)x162.63927
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 E
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 .
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 51: Option: (no) S
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: eq.\group_end: \nobreakspace (\group_begin:
+1.2\group_end: }).
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{figure.1.1}{\group_begin: fig.\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    tab:table-1.1.1}
+                          }
+> \box...=
+\hbox(7.5+2.5)x135.27806
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 .
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 .
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 52: Option: hyperref
+============================================================
+Package zref-clever Warning: Option 'hyperref' only available in the preamble
+(zref-clever)                on line .... To inhibit hyperlinking locally, you
+(zref-clever)                can use the starred version of '\zcref'.
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ......0=\hbox{\zcref[hyperref]{sec:section-1.1}
+                                                  }
+> \box...=
+\hbox(6.67859+0.0)x46.16675
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 53: Option: nameinlink=true
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapters\group_end: \nobreakspace \group_begin:
+1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{chapter.2}{\group_begin: 2\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1, cha:chapter-2}
+                                       }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: sections\group_end: \nobreakspace \group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1, cha:chapter-2}
+                                       }
+> \box...=
+\hbox(6.94444+1.94444)x181.02809
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.2}
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 54: Option: nameinlink
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapters\group_end: \nobreakspace \group_begin:
+1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{chapter.2}{\group_begin: 2\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1, cha:chapter-2}
+                                       }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: sections\group_end: \nobreakspace \group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1, cha:chapter-2}
+                                       }
+> \box...=
+\hbox(6.94444+1.94444)x181.02809
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.2}
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 55: Option: nameinlink=false 1
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: chapter\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{chapter.1}{\group_begin:
+1\group_end: }.
+<recently read> }
+l. ......nk=false]{sec:section-1.1, cha:chapter-1}
+                                                  }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ......nk=false]{sec:section-1.1, cha:chapter-1}
+                                                  }
+> \box...=
+\hbox(6.94444+1.94444)x109.80574
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 56: Option: nameinlink=false 2
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ......\zcref[nameinlink=false]{sec:section-1.1}
+                                                  }
+> \box...=
+\hbox(6.67859+0.0)x46.16675
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 57: Option: nameinlink=single (when single)
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ......zcref[nameinlink=single]{sec:section-1.1}
+                                                  }
+> \box...=
+\hbox(6.67859+0.0)x46.16675
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 58: Option: nameinlink=single (when not single)
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: chapter\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{chapter.1}{\group_begin:
+1\group_end: }.
+<recently read> }
+l. ......k=single]{sec:section-1.1, cha:chapter-1}
+                                                  }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ......k=single]{sec:section-1.1, cha:chapter-1}
+                                                  }
+> \box...=
+\hbox(6.94444+1.94444)x109.80574
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 59: Option: nameinlink=tsingle
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \box...=
+\hbox(6.94444+1.94444)x149.30582
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 60: Option: preposinlink=true
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: equations\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: )} and\nobreakspace \hyper@@link {\c_empty_tl
+}{equation.1.1.3}{(\group_begin: 1.3\group_end: )}.
+<recently read> }
+l. ...    eq:equation-1.1.3}
+                            }
+> \box...=
+\hbox(7.5+2.5)x108.66692
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 )
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.3}
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\OT1/cmr/m/n/10 )
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 61: Option: preposinlink
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: equations\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: )} and\nobreakspace \hyper@@link {\c_empty_tl
+}{equation.1.1.3}{(\group_begin: 1.3\group_end: )}.
+<recently read> }
+l. ...    eq:equation-1.1.3}
+                            }
+> \box...=
+\hbox(7.5+2.5)x108.66692
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 )
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.3}
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\OT1/cmr/m/n/10 )
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 62: Option: preposinlink=false
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: equations\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: }) and\nobreakspace (\hyper@@link {\c_empty_tl
+}{equation.1.1.3}{\group_begin: 1.3\group_end: }).
+<recently read> }
+l. ...    eq:equation-1.1.3}
+                            }
+> \box...=
+\hbox(7.5+2.5)x108.66692
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 63: Option: lang=main (main language: english)
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \box...=
+\hbox(6.94444+1.94444)x195.97258
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 64: Option: lang=current (main language: english)
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \box...=
+\hbox(6.94444+1.94444)x195.97258
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 65: Option: lang=main (language: ngerman)
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \box...=
+\hbox(6.94444+1.94444)x195.97258
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 66: Option: lang=current (language: ngerman)
+============================================================
+(zref-clever-german.dict)
+Package zref-clever Info: Loaded 'german' dictionary.
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: Kapitel\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Abschnitte\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } und\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: Tabelle\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \box...=
+\hbox(6.94444+1.94444)x217.2782
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 K
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 l
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 T
+.\kern-0.83334
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\kern0.27779
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 67: Option: lang=french
+============================================================
+(zref-clever-french.dict)
+Package zref-clever Info: Loaded 'french' dictionary.
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapitre\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } et\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2, tab:table-1.1.1}
+                                           }
+> \box...=
+\hbox(6.94444+1.94444)x180.41695
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 t
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 t
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 68: Option: d=...
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: Kapitel\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Abschnitte\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } und\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x163.38922
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 K
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 l
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: Kapitel\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Abschnitte\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } und\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x163.38922
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 K
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 l
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: Kapitel\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Abschnitte\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } und\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x163.38922
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 K
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 l
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: Kapitel\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Abschnitten\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } und\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x168.9448
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 K
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 l
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: Kapitels\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Abschnitte\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } und\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x167.33366
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 K
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: Kapitel\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Abschnitte\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } und\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x163.38922
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 K
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 l
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+Package zref-clever Warning: Declension case 'K' unknown for language 'german'
+(zref-clever)                on line .... Using default declension case.
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: Kapitel\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Abschnitte\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } und\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x163.38922
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 K
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 l
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 69: Option: nudge=true
+============================================================
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+Package zref-clever Warning: Multiple labels have been compressed into
+(zref-clever)                singular type name for type 'page' on line ....
+Package zref-clever Warning: Gender mismatch for type 'section' on line ....
+(zref-clever)                You've specified 'g=m' but type name is 'f' for
+(zref-clever)                language 'french'.
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+============================================================
+============================================================
+TEST 70: Option: nudge
+============================================================
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+Package zref-clever Warning: Multiple labels have been compressed into
+(zref-clever)                singular type name for type 'page' on line ....
+Package zref-clever Warning: Gender mismatch for type 'section' on line ....
+(zref-clever)                You've specified 'g=m' but type name is 'f' for
+(zref-clever)                language 'french'.
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+============================================================
+============================================================
+TEST 71: Option: nudge=false
+============================================================
+============================================================
+============================================================
+TEST 72: Option: nonudge
+============================================================
+============================================================
+============================================================
+TEST 73: Option: nudge=obeydraft
+============================================================
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+Package zref-clever Warning: Multiple labels have been compressed into
+(zref-clever)                singular type name for type 'page' on line ....
+Package zref-clever Warning: Gender mismatch for type 'section' on line ....
+(zref-clever)                You've specified 'g=m' but type name is 'f' for
+(zref-clever)                language 'french'.
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+============================================================
+============================================================
+TEST 74: Option: nudge=obeyfinal
+============================================================
+============================================================
+============================================================
+TEST 75: Option: nudgeif=all
+============================================================
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+Package zref-clever Warning: Multiple labels have been compressed into
+(zref-clever)                singular type name for type 'page' on line ....
+Package zref-clever Warning: Gender mismatch for type 'section' on line ....
+(zref-clever)                You've specified 'g=m' but type name is 'f' for
+(zref-clever)                language 'french'.
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+============================================================
+============================================================
+TEST 76: Option: nudgeif=multitype
+============================================================
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+============================================================
+============================================================
+TEST 77: Option: nudgeif=comptosing
+============================================================
+Package zref-clever Warning: Multiple labels have been compressed into
+(zref-clever)                singular type name for type 'page' on line ....
+============================================================
+============================================================
+TEST 78: Option: nudgeif=gender
+============================================================
+Package zref-clever Warning: Gender mismatch for type 'section' on line ....
+(zref-clever)                You've specified 'g=m' but type name is 'f' for
+(zref-clever)                language 'french'.
+============================================================
+============================================================
+TEST 79: Option: nudgeif={multitype,comptosing}
+============================================================
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+Package zref-clever Warning: Multiple labels have been compressed into
+(zref-clever)                singular type name for type 'page' on line ....
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+============================================================
+============================================================
+TEST 80: Option: nudgeif={multitype,gender}
+============================================================
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+Package zref-clever Warning: Gender mismatch for type 'section' on line ....
+(zref-clever)                You've specified 'g=m' but type name is 'f' for
+(zref-clever)                language 'french'.
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+============================================================
+============================================================
+TEST 81: Option: nudgeif={comptosing,gender}
+============================================================
+Package zref-clever Warning: Multiple labels have been compressed into
+(zref-clever)                singular type name for type 'page' on line ....
+Package zref-clever Warning: Gender mismatch for type 'section' on line ....
+(zref-clever)                You've specified 'g=m' but type name is 'f' for
+(zref-clever)                language 'french'.
+============================================================
+============================================================
+TEST 82: Option: nudgeif={multitype,comptosing,gender}
+============================================================
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+Package zref-clever Warning: Multiple labels have been compressed into
+(zref-clever)                singular type name for type 'page' on line ....
+Package zref-clever Warning: Gender mismatch for type 'section' on line ....
+(zref-clever)                You've specified 'g=m' but type name is 'f' for
+(zref-clever)                language 'french'.
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+============================================================
+============================================================
+TEST 83: Option: nudgeif=foo
+============================================================
+Package zref-clever Warning: Unknown value 'foo' for 'nudgeif' option on line
+(zref-clever)                802.
+Package zref-clever Warning: Unknown value 'foo' for 'nudgeif' option on line
+(zref-clever)                804.
+Package zref-clever Warning: Unknown value 'foo' for 'nudgeif' option on line
+(zref-clever)                806.
+============================================================
+============================================================
+TEST 84: Option: sg
+============================================================
+Package zref-clever Warning: Multiple labels have been compressed into
+(zref-clever)                singular type name for type 'page' on line ....
+Package zref-clever Warning: Option 'sg' signals that a singular type name was
+(zref-clever)                expected on line .... But type 'page' has plural
+(zref-clever)                type name.
+============================================================
+============================================================
+TEST 85: Option: g=...
+============================================================
+Package zref-clever Warning: Gender mismatch for type 'section' on line ....
+(zref-clever)                You've specified 'g=m' but type name is 'f' for
+(zref-clever)                language 'french'.
+Package zref-clever Warning: Gender mismatch for type 'section' on line ....
+(zref-clever)                You've specified 'g=m' but type name is 'f' for
+(zref-clever)                language 'french'.
+Package zref-clever Warning: Gender mismatch for type 'chapter' on line ....
+(zref-clever)                You've specified 'g=f' but type name is 'm' for
+(zref-clever)                language 'french'.
+Package zref-clever Warning: Gender mismatch for type 'chapter' on line ....
+(zref-clever)                You've specified 'g=f' but type name is 'm' for
+(zref-clever)                language 'french'.
+Package zref-clever Warning: Language 'french' has no 'n' gender declared on
+(zref-clever)                line 844.
+Package zref-clever Warning: Language 'french' has no 'n' gender declared on
+(zref-clever)                line 846.
+Package zref-clever Warning: Language 'french' has no 'n' gender declared on
+(zref-clever)                line 848.
+Package zref-clever Warning: Language 'english' has no declared gender on line
+(zref-clever)                850. Nothing to do with option 'g=f'.
+Package zref-clever Warning: Language 'english' has no declared gender on line
+(zref-clever)                851. Nothing to do with option 'g=f'.
+Package zref-clever Warning: Language 'english' has no declared gender on line
+(zref-clever)                853. Nothing to do with option 'g=f'.
+============================================================
+============================================================
+TEST 86: Option: font=...
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, sec:section-1.2}
+                                           }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, sec:section-1.2}
+                                           }
+> \box...=
+\hbox(6.94444+1.94444)x193.99489
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/bx/n/10 c
+.\kern-0.31944
+.\OT1/cmr/bx/n/10 h
+.\OT1/cmr/bx/n/10 a
+.\OT1/cmr/bx/n/10 p
+.\OT1/cmr/bx/n/10 t
+.\OT1/cmr/bx/n/10 e
+.\OT1/cmr/bx/n/10 r
+.\penalty 10000
+.\glue 3.83331 plus 1.91666 minus 1.27777
+.\OT1/cmr/bx/n/10 1
+.\pdfendlink
+.\glue 3.83331 plus 1.91666 minus 1.27777
+.\OT1/cmr/bx/n/10 a
+.\OT1/cmr/bx/n/10 n
+.\OT1/cmr/bx/n/10 d
+.\penalty 10000
+.\glue 3.83331 plus 1.91666 minus 1.27777
+.\OT1/cmr/bx/n/10 s
+.\OT1/cmr/bx/n/10 e
+.\OT1/cmr/bx/n/10 c
+.\OT1/cmr/bx/n/10 t
+.\OT1/cmr/bx/n/10 i
+.\OT1/cmr/bx/n/10 o
+.\OT1/cmr/bx/n/10 n
+.\OT1/cmr/bx/n/10 s
+.\penalty 10000
+.\glue 3.83331 plus 1.91666 minus 1.27777
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/bx/n/10 1
+.\OT1/cmr/bx/n/10 .
+.\OT1/cmr/bx/n/10 1
+.\pdfendlink
+.\glue 3.83331 plus 1.91666 minus 1.27777
+.\OT1/cmr/bx/n/10 a
+.\OT1/cmr/bx/n/10 n
+.\OT1/cmr/bx/n/10 d
+.\penalty 10000
+.\glue 3.83331 plus 1.91666 minus 1.27777
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/bx/n/10 1
+.\OT1/cmr/bx/n/10 .
+.\OT1/cmr/bx/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, sec:section-1.2}
+                                           }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, sec:section-1.2}
+                                           }
+> \box...=
+\hbox(6.94444+1.94444)x173.1268
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/it/10 c
+.\OT1/cmr/m/it/10 h
+.\OT1/cmr/m/it/10 a
+.\OT1/cmr/m/it/10 p
+.\OT1/cmr/m/it/10 t
+.\OT1/cmr/m/it/10 e
+.\OT1/cmr/m/it/10 r
+.\penalty 10000
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\OT1/cmr/m/it/10 1
+.\pdfendlink
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\OT1/cmr/m/it/10 a
+.\OT1/cmr/m/it/10 n
+.\OT1/cmr/m/it/10 d
+.\penalty 10000
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\OT1/cmr/m/it/10 s
+.\OT1/cmr/m/it/10 e
+.\kern-0.51112
+.\OT1/cmr/m/it/10 c
+.\OT1/cmr/m/it/10 t
+.\OT1/cmr/m/it/10 i
+.\OT1/cmr/m/it/10 o
+.\OT1/cmr/m/it/10 n
+.\OT1/cmr/m/it/10 s
+.\penalty 10000
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/it/10 1
+.\OT1/cmr/m/it/10 .
+.\OT1/cmr/m/it/10 1
+.\pdfendlink
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\OT1/cmr/m/it/10 a
+.\OT1/cmr/m/it/10 n
+.\OT1/cmr/m/it/10 d
+.\penalty 10000
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/it/10 1
+.\OT1/cmr/m/it/10 .
+.\OT1/cmr/m/it/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, sec:section-1.2}
+                                           }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.1, sec:section-1.2}
+                                           }
+> \box...=
+\hbox(6.94444+1.94444)x181.15636
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmss/bx/n/10 c
+.\OT1/cmss/bx/n/10 h
+.\OT1/cmss/bx/n/10 a
+.\OT1/cmss/bx/n/10 p
+.\OT1/cmss/bx/n/10 t
+.\OT1/cmss/bx/n/10 e
+.\OT1/cmss/bx/n/10 r
+.\penalty 10000
+.\glue 3.66669 plus 1.83334 minus 1.22223
+.\OT1/cmss/bx/n/10 1
+.\pdfendlink
+.\glue 3.66669 plus 1.83334 minus 1.22223
+.\OT1/cmss/bx/n/10 a
+.\OT1/cmss/bx/n/10 n
+.\OT1/cmss/bx/n/10 d
+.\penalty 10000
+.\glue 3.66669 plus 1.83334 minus 1.22223
+.\OT1/cmss/bx/n/10 s
+.\OT1/cmss/bx/n/10 e
+.\OT1/cmss/bx/n/10 c
+.\OT1/cmss/bx/n/10 t
+.\OT1/cmss/bx/n/10 i
+.\OT1/cmss/bx/n/10 o
+.\OT1/cmss/bx/n/10 n
+.\OT1/cmss/bx/n/10 s
+.\penalty 10000
+.\glue 3.66669 plus 1.83334 minus 1.22223
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmss/bx/n/10 1
+.\OT1/cmss/bx/n/10 .
+.\OT1/cmss/bx/n/10 1
+.\pdfendlink
+.\glue 3.66669 plus 1.83334 minus 1.22223
+.\OT1/cmss/bx/n/10 a
+.\OT1/cmss/bx/n/10 n
+.\OT1/cmss/bx/n/10 d
+.\penalty 10000
+.\glue 3.66669 plus 1.83334 minus 1.22223
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmss/bx/n/10 1
+.\OT1/cmss/bx/n/10 .
+.\OT1/cmss/bx/n/10 2
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 87: Option: titleref
+============================================================
+Package zref-clever Warning: Option 'titleref' only available in the preamble
+(zref-clever)                on line .... Did you mean 'ref=title'?.
+============================================================
+============================================================
+TEST 88: Option: note=...
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ......hbox{\zcref[note={a note}]{cha:chapter-1}
+                                                  }
+> \box...=
+\hbox(6.94444+1.94444)x71.41678
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 89: Option: check=...
+============================================================
+Package zref-check Warning: Failed check 'thispage' for label
+(zref-check)                'sec:section-1.1' on page 10 on line ....
+Package zref-check Warning: Failed check 'prevpage' for label
+(zref-check)                'sec:section-1.1' on page 10 on line ....
+============================================================
+============================================================
+TEST 90: Option: tpairsep=..., tlistsep=..., tlastsep=...
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ......on-1.1.2, sec:section-1.1, cha:chapter-1}
+                                                  }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ......on-1.1.2, sec:section-1.1, cha:chapter-1}
+                                                  }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ......on-1.1.2, sec:section-1.1, cha:chapter-1}
+                                                  }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
+(\group_begin: 1.2\group_end: }).
+<recently read> }
+l. ......on-1.1.2, sec:section-1.1, cha:chapter-1}
+                                                  }
+> \box...=
+\hbox(7.5+2.5)x233.27821
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 N
+.\OT1/cmr/m/n/10 D
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ......p={~\&~}]{sec:section-1.1, cha:chapter-1}
+                                                  }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ......p={~\&~}]{sec:section-1.1, cha:chapter-1}
+                                                  }
+> \box...=
+\hbox(6.94444+1.94444)x101.47238
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 &
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 91: Option: notesep=...
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...    cha:chapter-1}
+                        }
+> \box...=
+\hbox(6.94444+1.94444)x148.69469
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 { (ligature --)
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 92: Option: namesep=...
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \qquad \group_begin:
+1\group_end: }.
+<recently read> }
+l. ......p=\qquad]{sec:section-1.1, cha:chapter-1}
+                                                  }
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: section\group_end: \qquad \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ......p=\qquad]{sec:section-1.1, cha:chapter-1}
+                                                  }
+> \box...=
+\hbox(6.94444+1.94444)x143.13914
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\glue 20.00003
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\glue 20.00003
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 93: Option: pairsep=..., listsep=..., lastsep=...
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: },, \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: },, \hyper@@link {\c_empty_tl }{section.2.1}{\group_begin:
+2.1\group_end: }~AND~\hyper@@link {\c_empty_tl }{section.3.1}{\group_begin:
+3.1\group_end: }.
+<recently read> }
+l. ......on-1.2, sec:section-2.1, sec:section-3.1}
+                                                  }
+> \box...=
+\hbox(6.83331+1.94444)x135.52803
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 N
+.\OT1/cmr/m/n/10 D
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.3.1}
+.\OT1/cmr/m/n/10 3
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: }~\&~\hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:
+1.2\group_end: }.
+<recently read> }
+l. ......{~\&~}]{sec:section-1.1, sec:section-1.2}
+                                                  }
+> \box...=
+\hbox(6.94444+0.0)x77.33347
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 &
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 94: Option: rangesep=...
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: }\textrightarrow {}\hyper@@link {\c_empty_tl
+}{section.1.4}{\group_begin: 1.4\group_end: }.
+<recently read> }
+l. ......on-1.2, sec:section-1.3, sec:section-1.4}
+                                                  }
+> \box...=
+\hbox(6.67859+0.0)x72.88657
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\TS1/cmr/m/n/10 ^^Y
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.4}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 4
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 95: Option: refpre=..., refpos=...
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace [\group_begin: 1.1\group_end: ] and\nobreakspace [\group_begin:
+1.2\group_end: ].
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(7.5+2.5)x96.77797
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 [
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 ]
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 [
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 ]
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
+\nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
+1.3\group_end: .
+<recently read> }
+l. ...    eq:equation-1.1.3}
+                            }
+> \box...=
+\hbox(6.94444+1.94444)x93.11131
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 96: Option: namefont=...
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: \bfseries chapter\group_end: \nobreakspace
+\group_begin: 1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \bfseries
+sections\group_end: \nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: 1.1\group_end: } and\nobreakspace \hyper@@link
+{\c_empty_tl }{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x159.67612
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/bx/n/10 c
+.\kern-0.31944
+.\OT1/cmr/bx/n/10 h
+.\OT1/cmr/bx/n/10 a
+.\OT1/cmr/bx/n/10 p
+.\OT1/cmr/bx/n/10 t
+.\OT1/cmr/bx/n/10 e
+.\OT1/cmr/bx/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/bx/n/10 s
+.\OT1/cmr/bx/n/10 e
+.\OT1/cmr/bx/n/10 c
+.\OT1/cmr/bx/n/10 t
+.\OT1/cmr/bx/n/10 i
+.\OT1/cmr/bx/n/10 o
+.\OT1/cmr/bx/n/10 n
+.\OT1/cmr/bx/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: \itshape chapter\group_end: \nobreakspace
+\group_begin: 1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \itshape
+sections\group_end: \nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.1}{\group_begin: 1.1\group_end: } and\nobreakspace \hyper@@link
+{\c_empty_tl }{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x148.83858
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/it/10 c
+.\OT1/cmr/m/it/10 h
+.\OT1/cmr/m/it/10 a
+.\OT1/cmr/m/it/10 p
+.\OT1/cmr/m/it/10 t
+.\OT1/cmr/m/it/10 e
+.\OT1/cmr/m/it/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/it/10 s
+.\OT1/cmr/m/it/10 e
+.\kern-0.51112
+.\OT1/cmr/m/it/10 c
+.\OT1/cmr/m/it/10 t
+.\OT1/cmr/m/it/10 i
+.\OT1/cmr/m/it/10 o
+.\OT1/cmr/m/it/10 n
+.\OT1/cmr/m/it/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: \em chapter\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \em sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x151.37178
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\OT1/cmr/m/it/10 1
+.\pdfendlink
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\OT1/cmr/m/it/10 a
+.\OT1/cmr/m/it/10 n
+.\OT1/cmr/m/it/10 d
+.\penalty 10000
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/it/10 1
+.\OT1/cmr/m/it/10 .
+.\OT1/cmr/m/it/10 1
+.\pdfendlink
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\OT1/cmr/m/it/10 a
+.\OT1/cmr/m/it/10 n
+.\OT1/cmr/m/it/10 d
+.\penalty 10000
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/it/10 1
+.\OT1/cmr/m/it/10 .
+.\OT1/cmr/m/it/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 97: Option: reffont=...
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+\bfseries 1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin: \bfseries
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: \bfseries 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x153.88887
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/bx/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/bx/n/10 1
+.\OT1/cmr/bx/n/10 .
+.\OT1/cmr/bx/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/bx/n/10 1
+.\OT1/cmr/bx/n/10 .
+.\OT1/cmr/bx/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+\itshape 1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin: \itshape
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: \itshape 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                          }
+> \box...=
+\hbox(6.94444+1.94444)x150.43889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/it/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/it/10 1
+.\OT1/cmr/m/it/10 .
+.\OT1/cmr/m/it/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/it/10 1
+.\OT1/cmr/m/it/10 .
+.\OT1/cmr/m/it/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin: \em
+1\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                           }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin: \em
+1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{section.1.2}{\group_begin: \em 1.2\group_end: }.
+<recently read> }
+l. ...    sec:section-1.2}
+                           }
+> \box...=
+\hbox(6.94444+1.94444)x149.77147
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/it/10 c
+.\OT1/cmr/m/it/10 h
+.\OT1/cmr/m/it/10 a
+.\OT1/cmr/m/it/10 p
+.\OT1/cmr/m/it/10 t
+.\OT1/cmr/m/it/10 e
+.\OT1/cmr/m/it/10 r
+.\penalty 10000
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\OT1/cmr/m/it/10 a
+.\OT1/cmr/m/it/10 n
+.\OT1/cmr/m/it/10 d
+.\penalty 10000
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\OT1/cmr/m/it/10 s
+.\OT1/cmr/m/it/10 e
+.\kern-0.51112
+.\OT1/cmr/m/it/10 c
+.\OT1/cmr/m/it/10 t
+.\OT1/cmr/m/it/10 i
+.\OT1/cmr/m/it/10 o
+.\OT1/cmr/m/it/10 n
+.\OT1/cmr/m/it/10 s
+.\penalty 10000
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\OT1/cmr/m/it/10 a
+.\OT1/cmr/m/it/10 n
+.\OT1/cmr/m/it/10 d
+.\penalty 10000
+.\glue 3.57774 plus 1.53333 minus 1.0222
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================

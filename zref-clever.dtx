@@ -243,22 +243,23 @@
 % separated list of reference types, specifying that their sorting is to be
 % done in the order of that list.  But \opt{typesort} does not need to receive
 % \emph{all} possible reference types.  The special value
-% \texttt{\{othertypes\}} (yes, braced) can be placed anywhere along the list,
-% to specify the sort priority of any type not included explicitly in the
-% list.  If \texttt{\{othertypes\}} is not present in the list, it is presumed
-% to be at the end of it.  Any unspecified types (that is, those falling
-% implicitly or explicitly into the \texttt{\{othertypes\}} category) get
-% sorted between themselves in the order of their first appearance in the
-% label list given as argument to \cs{zcref}.  I presume the common use cases
-% will not need to specify \texttt{\{othertypes\}} at all but, for the sake of
-% example, if you just really dislike equations, you could use
-% \texttt{typesort=\{\{othertypes\}, equation\}}.  \opt{typesort}'s default
-% value is \texttt{\{part, chapter, section, paragraph\}}, which places the
-% sectioning reference types first in the list, in their hierarchical order,
-% and leaves everything else to the order of appearance of the labels.  The
-% \opt{notypesort} option behaves like \texttt{typesort=\{\{othertypes\}\}}
-% would do, that is, it sorts all types in the order of the first appearance
-% in the labels' list.
+% \texttt{\{\{othertypes\}\}} (yes, double braced, one for \pkg{l3keys}, so
+% that the second can make the list) can be placed anywhere along the list, to
+% specify the sort priority of any type not included explicitly in the list.
+% If \texttt{\{othertypes\}} is not present in the list, it is presumed to be
+% at the end of it.  Any unspecified types (that is, those falling implicitly
+% or explicitly into the \texttt{\{othertypes\}} category) get sorted between
+% themselves in the order of their first appearance in the label list given as
+% argument to \cs{zcref}.  I presume the common use cases will not need to
+% specify \texttt{\{othertypes\}} at all but, for the sake of example, if you
+% just really dislike equations, you could use
+% \texttt{typesort=\{\{\{othertypes\}\}, equation\}}.  \opt{typesort}'s
+% default value is \texttt{\{part, chapter, section, paragraph\}}, which
+% places the sectioning reference types first in the list, in their
+% hierarchical order, and leaves everything else to the order of appearance of
+% the labels.  The \opt{notypesort} option behaves like
+% \texttt{typesort=\{\{\{othertypes\}\}\}} would do, that is, it sorts all
+% types in the order of the first appearance in the labels' list.
 %
 % \DescribeOption{comp} %
 % \DescribeOption{nocomp} %
@@ -2023,7 +2024,8 @@
 \msg_new:nnn { zref-clever } { hyperref-preamble-only }
   {
     Option~'hyperref'~only~available~in~the~preamble~\msg_line_context:.~
-    Use~the~starred~version~of~'\iow_char:N\\zcref'~instead.
+    To~inhibit~hyperlinking~locally,~you~can~use~the~starred~version~of~
+    '\iow_char:N\\zcref'.
   }
 \msg_new:nnn { zref-clever } { missing-hyperref }
   { Missing~'hyperref'~package.~Setting~'hyperref=false'. }
@@ -5433,7 +5435,7 @@
           {
             { \l_@@_nudge_enabled_bool }
             { \l_@@_nudge_multitype_bool }
-            { \int_compare_p:nNn { \l_@@_type_count_int } > { 1 } }
+            { \int_compare_p:nNn { \l_@@_type_count_int } > { 0 } }
           }
           { \msg_warning:nn { zref-clever } { nudge-multitype } }
       }

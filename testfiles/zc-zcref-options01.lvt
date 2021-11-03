@@ -1,0 +1,1010 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\usepackage[english]{babel}
+
+\usepackage[check,titleref]{zref-clever}
+
+\usepackage{hyperref}
+
+% This file is intended to test all options and respective values that can be
+% locally passed to '\zcref'.
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\NewDocumentCommand \newoptblock {m}{%
+  \noindent\rule{\textwidth}{0.4pt}\par%
+  \noindent\textbf{#1}\par}
+
+\begin{document}
+
+\chapter{Chapter 1}
+\zlabel{cha:chapter-1}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+\begin{table}
+  \caption{Table 1.1.1}
+  \zlabel{tab:table-1.1.1}
+\end{table}
+
+\newtheorem{thm}[equation]{Theorem}[section]
+
+\begin{thm}
+  \zlabel{eq:theorem-1.1.1}
+\end{thm}
+
+\begin{equation}
+  \zlabel{eq:equation-1.1.2}
+\end{equation}
+
+\begin{equation}
+  \zlabel{eq:equation-1.1.3}
+\end{equation}
+
+\begin{figure}
+  \caption{Figure 1.1.1}
+  \zlabel{fig:figure-1.1.1}
+\end{figure}
+
+\section{Section 1.2}
+\zlabel{sec:section-1.2}
+
+\section{Section 1.3}
+\zlabel{sec:section-1.3}
+\zlabel{sec:section-1.3a}
+\zlabel{sec:section-1.3b}
+
+\section{Section 1.4}
+\zlabel{sec:section-1.4}
+
+\section{Section 1.5}
+\zlabel{sec:section-1.5}
+
+\chapter{Chapter 2}
+\zlabel{cha:chapter-2}
+
+\section{Section 2.1}
+\zlabel{sec:section-2.1}
+
+\chapter{Chapter 3}
+\zlabel{cha:chapter-3}
+
+\section{Section 3.1}
+\zlabel{sec:section-3.1}
+
+\clearpage{}
+
+\START
+
+\newoptblock{star}
+
+\BEGINTEST{Starred unstarred}
+\setbox0=\hbox{\zcref*{sec:section-1.1, sec:section-1.2, sec:section-2.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-2.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{ref}
+
+\BEGINTEST{Option: ref=default}
+\setbox0=\hbox{\zcref[ref=default]{sec:section-1.1, sec:section-1.2,
+    sec:section-2.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: ref=page}
+\setbox0=\hbox{\zcref[ref=page]{sec:section-1.1, sec:section-1.2,
+    sec:section-2.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: page}
+\setbox0=\hbox{\zcref[page]{sec:section-1.1, sec:section-1.2,
+    sec:section-2.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{zcpageref}
+\setbox0=\hbox{\zcpageref{sec:section-1.1, sec:section-1.2, sec:section-2.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: ref=title}
+\setbox0=\hbox{\zcref[ref=title,noname]{sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: ref=zc@thecnt}
+\setbox0=\hbox{\zcref[ref=zc@thecnt]{sec:section-1.1, sec:section-1.2,
+    sec:section-2.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: ref=foo}
+\setbox0=\hbox{\zcref[ref=foo]{sec:section-1.1, sec:section-1.2,
+    sec:section-2.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{typeset}
+
+\BEGINTEST{Option: typeset=both}
+\setbox0=\hbox{\zcref[typeset=both]{sec:section-1.1, sec:section-1.2,
+    sec:section-2.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: typeset=ref}
+\setbox0=\hbox{\zcref[typeset=ref]{sec:section-1.1, sec:section-1.2,
+    sec:section-2.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: noname}
+\setbox0=\hbox{\zcref[noname]{sec:section-1.1, sec:section-1.2,
+    sec:section-2.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: typeset=name}
+\setbox0=\hbox{\zcref[typeset=name]{sec:section-1.1, sec:section-1.2,
+    sec:section-2.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: typeset=baz}
+\setbox0=\hbox{\zcref[typeset=baz]{sec:section-1.1, sec:section-1.2,
+    sec:section-2.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{sort}
+
+\BEGINTEST{Option: sort=true}
+\setbox0=\hbox{\zcref[sort=true]{sec:section-2.1, sec:section-1.3,
+    sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: sort}
+\setbox0=\hbox{\zcref[sort]{sec:section-2.1, sec:section-1.3,
+    sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: sort=false}
+\setbox0=\hbox{\zcref[sort=false]{sec:section-2.1, sec:section-1.3,
+    sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: nosort}
+\setbox0=\hbox{\zcref[nosort]{sec:section-2.1, sec:section-1.3,
+    sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{typesort}
+
+\BEGINTEST{Option: typesort (default)}
+\setbox0=\hbox{\zcref{tab:table-1.1.1, eq:equation-1.1.2, sec:section-1.1,
+    cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: typesort=}
+\setbox0=\hbox{\zcref[typesort=]{tab:table-1.1.1, eq:equation-1.1.2,
+    sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: notypesort}
+\setbox0=\hbox{\zcref[notypesort]{tab:table-1.1.1, eq:equation-1.1.2,
+    sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: typesort}
+\setbox0=\hbox{\zcref[typesort]{tab:table-1.1.1, eq:equation-1.1.2,
+    sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: typesort={{{othertypes}},table}}
+\setbox0=\hbox{\zcref[typesort={{{othertypes}},table}]{tab:table-1.1.1,
+    eq:equation-1.1.2, sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: typesort={chapter,section,{{othertypes}},table}}
+\setbox0=\hbox{\zcref[typesort={chapter,section,{{othertypes}},table}]{%
+    tab:table-1.1.1, eq:equation-1.1.2, sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{comp}
+
+\BEGINTEST{Option: comp=true}
+\setbox0=\hbox{\zcref[comp=true]{sec:section-1.1, sec:section-1.2,
+    sec:section-1.3}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: comp}
+\setbox0=\hbox{\zcref[comp]{sec:section-1.1, sec:section-1.2,
+    sec:section-1.3}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: comp=true (interaction with sort)}
+\setbox0=\hbox{\zcref[nosort,comp=true]{sec:section-1.2, sec:section-1.1,
+    sec:section-1.3}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: comp=false}
+\setbox0=\hbox{\zcref[comp=false]{sec:section-1.1, sec:section-1.2,
+    sec:section-1.3}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: nocomp}
+\setbox0=\hbox{\zcref[nocomp]{sec:section-1.1, sec:section-1.2,
+    sec:section-1.3}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+\clearpage{}
+\TIMO
+
+\newoptblock{range}
+
+% Using 'nocomp' for all here, to separate the effects.
+
+\BEGINTEST{Option: range=true}
+\setbox0=\hbox{\zcref[nocomp,range=true]{sec:section-1.3, sec:section-1.2,
+    sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: range}
+\setbox0=\hbox{\zcref[nocomp,range]{sec:section-1.3, sec:section-1.2,
+    sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: range=false}
+\setbox0=\hbox{\zcref[nocomp,range=false]{sec:section-1.3, sec:section-1.2,
+    sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: range=true (interaction with sort)}
+\setbox0=\hbox{\zcref[nocomp,nosort,range=true]{sec:section-1.3,
+    sec:section-1.2, sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: range (to pair)}
+\setbox0=\hbox{\zcref[nocomp,range]{sec:section-1.3, sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: range (multitype)}
+\setbox0=\hbox{\zcref[nocomp,range]{sec:section-1.3, cha:chapter-3,
+    sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: range (multitype, page)}
+\setbox0=\hbox{\zcref[nocomp,page,range]{sec:section-1.3, cha:chapter-3,
+    sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{cap}
+
+\BEGINTEST{Option: cap=true}
+\setbox0=\hbox{\zcref[cap=true]{sec:section-1.1, sec:section-1.2,
+    cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: cap}
+\setbox0=\hbox{\zcref[cap]{sec:section-1.1, sec:section-1.2,
+    cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: cap=false}
+\setbox0=\hbox{\zcref[cap=false]{sec:section-1.1, sec:section-1.2,
+    cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: nocap}
+\setbox0=\hbox{\zcref[nocap]{sec:section-1.1, sec:section-1.2,
+    cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{capfirst}
+
+% Using 'nocap' for all here.
+
+\BEGINTEST{Option: capfirst=true}
+\setbox0=\hbox{\zcref[nocap,capfirst=true]{sec:section-1.1, sec:section-1.2,
+    cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: capfirst}
+\setbox0=\hbox{\zcref[nocap,capfirst]{sec:section-1.1, sec:section-1.2,
+    cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: capfirst=false}
+\setbox0=\hbox{\zcref[nocap,capfirst=false]{sec:section-1.1, sec:section-1.2,
+    cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{abbrev}
+
+\BEGINTEST{Option: abbrev=true}
+\setbox0=\hbox{\zcref[abbrev=true]{eq:equation-1.1.2, fig:figure-1.1.1,
+    tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: abbrev}
+\setbox0=\hbox{\zcref[abbrev]{eq:equation-1.1.2, fig:figure-1.1.1,
+    tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: abbrev=false}
+\setbox0=\hbox{\zcref[abbrev=false]{eq:equation-1.1.2, fig:figure-1.1.1,
+    tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: noabbrev}
+\setbox0=\hbox{\zcref[noabbrev]{eq:equation-1.1.2, fig:figure-1.1.1,
+    tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{noabbrevfirst}
+
+% Using 'abbrev' for all here.
+
+\BEGINTEST{Option: noabbrevfirst=true}
+\setbox0=\hbox{\zcref[abbrev,noabbrevfirst=true]{eq:equation-1.1.2,
+    fig:figure-1.1.1, tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: noabbrevfirst}
+\setbox0=\hbox{\zcref[abbrev,noabbrevfirst]{eq:equation-1.1.2,
+    fig:figure-1.1.1, tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: noabbrevfirst=false}
+\setbox0=\hbox{\zcref[abbrev,noabbrevfirst=false]{eq:equation-1.1.2,
+    fig:figure-1.1.1, tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{S}
+
+% Using 'abbrev' and 'nocap'.
+
+\BEGINTEST{Option: S}
+\setbox0=\hbox{\zcref[abbrev,nocap,S]{eq:equation-1.1.2, fig:figure-1.1.1,
+    tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: (no) S}
+\setbox0=\hbox{\zcref[abbrev,nocap]{eq:equation-1.1.2, fig:figure-1.1.1,
+    tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+\clearpage{}
+\TIMO
+
+\newoptblock{hyperref}
+
+\BEGINTEST{Option: hyperref}
+\setbox0=\hbox{\zcref[hyperref]{sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{nameinlink}
+
+\BEGINTEST{Option: nameinlink=true}
+\setbox0=\hbox{\zcref[nameinlink=true]{sec:section-1.1, sec:section-1.2,
+    cha:chapter-1, cha:chapter-2}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: nameinlink}
+\setbox0=\hbox{\zcref[nameinlink]{sec:section-1.1, sec:section-1.2,
+    cha:chapter-1, cha:chapter-2}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: nameinlink=false 1}
+\setbox0=\hbox{\zcref[nameinlink=false]{sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: nameinlink=false 2}
+\setbox0=\hbox{\zcref[nameinlink=false]{sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: nameinlink=single (when single)}
+\setbox0=\hbox{\zcref[nameinlink=single]{sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: nameinlink=single (when not single)}
+\setbox0=\hbox{\zcref[nameinlink=single]{sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: nameinlink=tsingle}
+\setbox0=\hbox{\zcref[nameinlink=tsingle]{sec:section-1.1, sec:section-1.2,
+    cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{preposinlink}
+
+% Using 'nameinlink' for all here.
+
+\BEGINTEST{Option: preposinlink=true}
+\setbox0=\hbox{\zcref[nameinlink,preposinlink=true]{eq:equation-1.1.2,
+    eq:equation-1.1.3}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: preposinlink}
+\setbox0=\hbox{\zcref[nameinlink,preposinlink]{eq:equation-1.1.2,
+    eq:equation-1.1.3}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: preposinlink=false}
+\setbox0=\hbox{\zcref[nameinlink,preposinlink=false]{eq:equation-1.1.2,
+    eq:equation-1.1.3}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{lang}
+
+\BEGINTEST{Option: lang=main (main language: english)}
+\setbox0=\hbox{\zcref[lang=main]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2, tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: lang=current (main language: english)}
+\setbox0=\hbox{\zcref[lang=current]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2, tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: lang=main (language: ngerman)}
+\selectlanguage{ngerman}
+\setbox0=\hbox{\zcref[lang=main]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2, tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: lang=current (language: ngerman)}
+\selectlanguage{ngerman}
+\setbox0=\hbox{\zcref[lang=current]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2, tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: lang=french}
+\setbox0=\hbox{\zcref[lang=french]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2, tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{d}
+
+\BEGINTEST{Option: d=...}
+\setbox0=\hbox{\zcref[lang=german]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[lang=german,d=N]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[lang=german,d=A]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[lang=german,d=D]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[lang=german,d=G]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[lang=german,d=]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[lang=german,d=K]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+\clearpage{}
+\TIMO
+
+\newoptblock{nudge}
+
+\BEGINTEST{Option: nudge=true}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge=true]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge=true,page]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge=true,lang=french,g=m]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\ENDTEST
+
+\BEGINTEST{Option: nudge}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge,page]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge,lang=french,g=m]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\ENDTEST
+
+\BEGINTEST{Option: nudge=false}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge=false]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge=false,page]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge=false,lang=french,g=m]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\ENDTEST
+
+\BEGINTEST{Option: nonudge}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcsetup{nudge=true}
+\zcref[nonudge]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nonudge,page]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nonudge,lang=french,g=m]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\ENDTEST
+
+\BEGINTEST{Option: nudge=obeydraft}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge=obeydraft]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge=obeydraft,page]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge=obeydraft,lang=french,g=m]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\ENDTEST
+
+\BEGINTEST{Option: nudge=obeyfinal}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge=obeyfinal]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge=obeyfinal,page]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge=obeyfinal,lang=french,g=m]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\ENDTEST
+
+\newoptblock{nudgeif}
+
+\BEGINTEST{Option: nudgeif=all}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge,nudgeif=all]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge,nudgeif=all,page]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif=all,lang=french,g=m]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\ENDTEST
+
+\BEGINTEST{Option: nudgeif=multitype}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge,nudgeif=multitype]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif=multitype,page]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif=multitype,lang=french,g=m]{cha:chapter-1,
+  sec:section-1.1, sec:section-1.2}
+\ENDTEST
+
+\BEGINTEST{Option: nudgeif=comptosing}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge,nudgeif=comptosing]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif=comptosing,page]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif=comptosing,lang=french,g=m]{cha:chapter-1,
+  sec:section-1.1, sec:section-1.2}
+\ENDTEST
+
+\BEGINTEST{Option: nudgeif=gender}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge,nudgeif=gender]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif=gender,page]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif=gender,lang=french,g=m]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\ENDTEST
+
+\BEGINTEST{Option: nudgeif={multitype,comptosing}}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge,nudgeif={multitype,comptosing}]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif={multitype,comptosing},page]{cha:chapter-1,
+  sec:section-1.1, sec:section-1.2}
+\zcref[nudge,nudgeif={multitype,comptosing},lang=french,g=m]{cha:chapter-1,
+  sec:section-1.1, sec:section-1.2}
+\ENDTEST
+
+\BEGINTEST{Option: nudgeif={multitype,gender}}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge,nudgeif={multitype,gender}]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif={multitype,gender},page]{cha:chapter-1,  sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif={multitype,gender},lang=french,g=m]{cha:chapter-1,
+  sec:section-1.1, sec:section-1.2}
+\ENDTEST
+
+\BEGINTEST{Option: nudgeif={comptosing,gender}}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge,nudgeif={comptosing,gender}]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif={comptosing,gender},page]{cha:chapter-1,  sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif={comptosing,gender},lang=french,g=m]{cha:chapter-1,
+  sec:section-1.1, sec:section-1.2}
+\ENDTEST
+
+\BEGINTEST{Option: nudgeif={multitype,comptosing,gender}}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge,nudgeif={multitype,comptosing,gender}]{cha:chapter-1,
+  sec:section-1.1, sec:section-1.2}
+\zcref[nudge,nudgeif={multitype,comptosing,gender},page]{cha:chapter-1,
+  sec:section-1.1, sec:section-1.2}
+\zcref[nudge,nudgeif={multitype,comptosing,gender},lang=french,g=m]{
+  cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\ENDTEST
+
+\BEGINTEST{Option: nudgeif=foo}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge,nudgeif=foo]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge,nudgeif=foo,page]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif=foo,lang=french,g=m]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\ENDTEST
+
+\newoptblock{sg}
+
+\BEGINTEST{Option: sg}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge,page]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge,page,sg]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge,page]{cha:chapter-1, sec:section-1.1, sec:section-2.1}
+\zcref[nudge,page,sg]{cha:chapter-1, sec:section-1.1, sec:section-2.1}
+\ENDTEST
+
+\newoptblock{g}
+
+\BEGINTEST{Option: g=...}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[nudge,nudgeif=gender,lang=french]{cha:chapter-1}
+\zcref[nudge,nudgeif=gender,lang=french]{sec:section-1.1, sec:section-1.2}
+\zcref[nudge,nudgeif=gender,lang=french]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+
+\zcref[nudge,nudgeif=gender,lang=french,g=m]{cha:chapter-1}
+\zcref[nudge,nudgeif=gender,lang=french,g=m]{sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif=gender,lang=french,g=m]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+
+\zcref[nudge,nudgeif=gender,lang=french,g=f]{cha:chapter-1}
+\zcref[nudge,nudgeif=gender,lang=french,g=f]{sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif=gender,lang=french,g=f]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+
+\zcref[nudge,nudgeif=gender,lang=french,g=n]{cha:chapter-1}
+\zcref[nudge,nudgeif=gender,lang=french,g=n]{sec:section-1.1,
+  sec:section-1.2}
+\zcref[nudge,nudgeif=gender,lang=french,g=n]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+
+\zcref[nudge,nudgeif=gender,g=f]{cha:chapter-1}
+\zcref[nudge,nudgeif=gender,g=f]{sec:section-1.1, sec:section-1.2}
+\zcref[nudge,nudgeif=gender,g=f]{cha:chapter-1, sec:section-1.1,
+  sec:section-1.2}
+\ENDTEST
+
+\OMIT
+\clearpage{}
+\TIMO
+
+\newoptblock{font}
+
+\BEGINTEST{Option: font=...}
+\setbox0=\hbox{\zcref[font=\bfseries,note=note]{cha:chapter-1,
+    sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[font=\itshape,note=note]{cha:chapter-1,
+    sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[font=\bfseries\sffamily,note=note]{cha:chapter-1,
+    sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{titleref}
+
+\BEGINTEST{Option: titleref}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[titleref]{cha:chapter-1}
+\ENDTEST
+
+\newoptblock{note}
+
+\BEGINTEST{Option: note=...}
+\setbox0=\hbox{\zcref[note={a note}]{cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{check}
+
+\BEGINTEST{Option: check=...}
+\ExplSyntaxOn
+\bool_set_false:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+\zcref[check=thispage,note={this check should fail}]{sec:section-1.1}
+\zcref[check=prevpage,note={this check should fail}]{sec:section-1.1}
+\zcref[check=before,note={this check should pass}]{sec:section-1.2}
+\zcref[check={thispage,ignore},note={this check should fail}]{sec:section-1.3}
+\ENDTEST
+
+\newoptblock{tpairsep, tlistsep, tlastsep}
+
+\BEGINTEST{Option: tpairsep=..., tlistsep=..., tlastsep=...}
+\setbox0=\hbox{\zcref[tlistsep={,, }, tlastsep={~AND~}]{tab:table-1.1.1,
+    eq:equation-1.1.2, sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[tpairsep={~\&~}]{sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{notesep}
+
+\BEGINTEST{Option: notesep=...}
+\setbox0=\hbox{\zcref[notesep={ -- },note={a note}]{sec:section-1.1,
+    cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{namesep}
+
+\BEGINTEST{Option: namesep=...}
+\setbox0=\hbox{\zcref[namesep=\qquad]{sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{pairsep, listsep, lastsep}
+
+\BEGINTEST{Option: pairsep=..., listsep=..., lastsep=...}
+\setbox0=\hbox{\zcref[listsep={,, }, lastsep={~AND~}]{sec:section-1.1,
+    sec:section-1.2, sec:section-2.1, sec:section-3.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[pairsep={~\&~}]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+\clearpage{}
+\TIMO
+
+\newoptblock{rangesep}
+
+\BEGINTEST{Option: rangesep=...}
+\setbox0=\hbox{\zcref[rangesep={\textrightarrow{}}]{sec:section-1.1,
+    sec:section-1.2, sec:section-1.3, sec:section-1.4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{refpre, refpos}
+
+\BEGINTEST{Option: refpre=..., refpos=...}
+\setbox0=\hbox{\zcref*[refpre={[}, refpos={]}]{sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref*[refpre=, refpos=]{eq:equation-1.1.2,
+    eq:equation-1.1.3}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{namefont}
+
+\BEGINTEST{Option: namefont=...}
+\setbox0=\hbox{\zcref[namefont=\bfseries]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[namefont=\itshape]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[namefont=\em,font=\em]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{reffont}
+
+\BEGINTEST{Option: reffont=...}
+\setbox0=\hbox{\zcref[reffont=\bfseries]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[reffont=\itshape]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[reffont=\em,font=\em]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+
+\OMIT
+
+\end{document}
