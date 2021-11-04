@@ -370,10 +370,10 @@
 % \DescribeOption{lang} %
 % The \opt{lang} option controls the language used by \cs{zcref} when looking
 % for language-specific reference format options (see
-% \zcref{sec:reference-format}).  The default value, \texttt{main}, uses the
-% main document language, as defined by \pkg{babel} or \pkg{polyglossia} (or
-% \texttt{english} if none of them is loaded).  Value \texttt{current} uses
+% \zcref{sec:reference-format}).  The default value, \texttt{current}, uses
 % the current language, as defined by \pkg{babel} or \pkg{polyglossia} (or
+% \texttt{english} if none of them is loaded).  Value \texttt{main} uses the
+% main document language, as defined by \pkg{babel} or \pkg{polyglossia} (or
 % \texttt{english} if none of them is loaded).  The \opt{lang} option also
 % accepts that the language be specified directly by its name, as long as it's
 % a language known by \pkg{zref-clever}.  For more details on
@@ -645,7 +645,9 @@
 % and iv) as \emph{default translations} (that is, language-specific but not
 % type-specific).  Besides those, there's a fifth \emph{internal} scope, with
 % the least priority of all, a ``fallback'', for the cases where it is
-% meaningful to provide some value, even for an unknown language.
+% meaningful to provide some value, even for an unknown language.  The package
+% itself places the default setup for reference formatting at low precedence
+% levels, and the users can easily and conveniently override them as desired.
 %
 % General ``options'' (i) can be given by the user in the optional argument of
 % \cs{zcref}, but also set through \cs{zcsetup} or even, depending on the
@@ -710,13 +712,6 @@
 %   \zlabel{tab:reference-format}
 % \end{table}
 %
-%
-% The package itself places the default setup for reference formatting at low
-% precedence levels, and the users can easily and conveniently override them
-% as desired.  Indeed, I expect most of the users' needs to be normally
-% achievable with the general options and type-specific options, since
-% references will normally be typeset in a single language (the document's
-% main language) and, hence, multiple translations don't need to be provided.
 %
 % Understanding the role of each of these reference format options is likely
 % eased by some visual schemes of how \pkg{zref-clever} builds a reference
@@ -862,12 +857,12 @@
 % As far as language selection is concerned, if the language is declared and
 % \pkg{zref-clever} has a built-in ``dictionary'' for it, most use cases will
 % likely be covered by the \opt{lang} option (see \zcref{sec:options}), and
-% its values \texttt{main} and \texttt{current}.  When the \opt{lang} option
-% is set to \texttt{main} or \texttt{current}, \pkg{zref-check} will use,
-% respectively, the \emph{main} or \emph{current} language of the document, as
+% its values \texttt{current} and \texttt{main}.  When the \opt{lang} option
+% is set to \texttt{current} or \texttt{main}, \pkg{zref-check} will use,
+% respectively, the \emph{current} or \emph{main} language of the document, as
 % defined by \pkg{babel} or \pkg{polyglossia}.\footnote{Technically,
-% \pkg{zref-clever} uses \cs{bbl@main@language} and \cs{languagename} for
-% \pkg{babel}, and \cs{mainbabelname} and \cs{babelname} for
+% \pkg{zref-clever} uses \cs{languagename} and \cs{bbl@main@language} for
+% \pkg{babel}, and \cs{babelname} and \cs{mainbabelname} for
 % \pkg{polyglossia}, which boils down to \pkg{zref-clever} always using
 % \emph{\pkg{babel} names} internally, regardless of which language package is
 % in use.  Indeed, an acquainted user will note that
@@ -880,17 +875,12 @@
 %
 % \pkg{zref-clever}'s ``dictionaries'' are loaded sparingly and lazily.  A
 % dictionary for a single language -- that specified by user options in the
-% preamble, which by default is the main document language -- is loaded at
+% preamble, which by default is the current document language -- is loaded at
 % \texttt{begindocument}.  If any other dictionary is needed, it is loaded on
 % the fly, if and when required.  Of course, in either case, conditioned on
-% availability.  This is done because the presumed common use case for
-% \pkg{zref-clever} is to use a single language for cross-references (the
-% ``main'' one), even in many multi-language documents scenarios.  Hence, even
-% the ``loaded languages'' set, from \pkg{babel} or \pkg{polyglossia}, would
-% tend to be an overshoot of the actual needs.  So, \pkg{zref-clever} loads as
-% little as possible, but allows for convenient on the fly loading of
-% dictionaries if the values are indeed required, without users having to
-% worry about it at all.
+% availability.  In sum, \pkg{zref-clever} loads as little as possible, but
+% allows for convenient on the fly loading of dictionaries if the values are
+% indeed required, without users having to worry about it at all.
 %
 % \begin{table}
 %   \centering
@@ -2508,17 +2498,11 @@
 % like \pkg{babel} does for languages not declared in the preamble, but used
 % in the document.  This offers some convenience, of course, and that's one
 % reason to do it.  But it also has the purpose of parsimony, of ``loading the
-% least possible''.  My expectation is that for most use cases, users will
-% require a single language of the functionality of \pkg{zref-clever} -- the
-% main language of the document --, even in multilingual documents.  Hence,
-% even the set of \pkg{babel} or \pkg{polyglossia} ``loaded languages'', which
-% would be the most tenable set if loading were restricted to the preamble, is
-% bound to be an overshoot in typical cases.  Therefore, we load at
-% \texttt{begindocument} one single language (see \zcref[ref=title,
-% noname]{impl:sec:lang-option}), as specified by the user in the preamble
-% with the \opt{lang} option or, failing any specification, the main language
-% of the document, which is the default.  Anything else is lazily loaded, on
-% the fly, along the document.
+% least possible''.  Therefore, we load at \texttt{begindocument} one single
+% language (see \zcref[ref=title, noname]{impl:sec:lang-option}), as specified
+% by the user in the preamble with the \opt{lang} option or, failing any
+% specification, the current language of the document, which is the default.
+% Anything else is lazily loaded, on the fly, along the document.
 %
 % This design decision has also implications to the \emph{form} the dictionary
 % files assumed.  As far as my somewhat impressionistic sampling goes,
@@ -3299,40 +3283,41 @@
 % \cs{languagename} or \pkg{polyglossia}'s \cs{mainbabelname} and, if none of
 % them is loaded, we set it to \texttt{english}.  \cs{l_@@_main_language_tl}
 % is an internal alias for \pkg{babel}'s \cs{bbl@main@language} or for
-% \pkg{polyglossia}'s \cs{mainbabelname}, as the case may be. Note that for
+% \pkg{polyglossia}'s \cs{mainbabelname}, as the case may be.  Note that for
 % \pkg{polyglossia} we get \pkg{babel}'s language names, so that we only need
 % to handle those internally.  \cs{l_@@_ref_language_tl} is the internal
 % variable which stores the language in which the reference is to be made.
 %
 % The overall setup here seems a little roundabout, but this is actually
 % required.  In the preamble, we (potentially) don't yet have values for the
-% ``main'' and ``current'' document languages, this must be retrieved at a
+% ``current'' and ``main'' document languages, this must be retrieved at a
 % \texttt{begindocument} hook.  The \texttt{begindocument} hook is responsible
-% to get values for \cs{l_@@_main_language_tl} and
-% \cs{l_@@_current_language_tl}, and to set the default for
+% to get values for \cs{l_@@_current_language_tl} and
+% \cs{l_@@_main_language_tl}, and to set the default for
 % \cs{l_@@_ref_language_tl}.  Package options, or preamble calls to
 % \cs{zcsetup} are also hooked at \texttt{begindocument}, but come after the
 % first hook, so that the pertinent variables have been set when they are
 % executed.  Finally, we set a third \texttt{begindocument} hook, at
 % \texttt{begindocument/before}, so that it runs after any options set in the
 % preamble.  This hook redefines the \opt{lang} option for immediate execution
-% in the document body, and ensures the \texttt{main} language's dictionary
+% in the document body, and ensures the \texttt{current} language's dictionary
 % gets loaded, if it hadn't been already.
 %
-% For the \pkg{babel} and \pkg{polyglossia} variables which store the ``main''
-% and ``current'' languages, see \url{https://tex.stackexchange.com/a/233178},
-% including comments, particularly the one by Javier Bezos.  For the
-% \pkg{babel} and \pkg{polyglossia} variables which store the list of loaded
-% languages, see \url{https://tex.stackexchange.com/a/281220}, including
-% comments, particularly PLK's.  Note, however, that languages loaded by
+% For the \pkg{babel} and \pkg{polyglossia} variables which store the
+% ``current'' and ``main'' languages, see
+% \url{https://tex.stackexchange.com/a/233178}, including comments,
+% particularly the one by Javier Bezos.  For the \pkg{babel} and
+% \pkg{polyglossia} variables which store the list of loaded languages, see
+% \url{https://tex.stackexchange.com/a/281220}, including comments,
+% particularly PLK's.  Note, however, that languages loaded by
 % \cs{babelprovide}, either directly, ``on the fly'', or with the
 % \texttt{provide} option, \texttt{do not} get included in \cs{bbl@loaded}.
 %
 
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_language_tl
-\tl_new:N \l_@@_main_language_tl
 \tl_new:N \l_@@_current_language_tl
+\tl_new:N \l_@@_main_language_tl
 \AddToHook { begindocument }
   {
     \@ifpackageloaded { babel }
@@ -3353,14 +3338,14 @@
       }
 %    \end{macrocode}
 % Provide default value for \cs{l_@@_ref_language_tl} corresponding to option
-% \opt{main}, but do so outside of the \pkg{l3keys} machinery (that is,
+% \opt{current}, but do so outside of the \pkg{l3keys} machinery (that is,
 % instead of using \texttt{.initial:n}), so that we are able to distinguish
 % when the user actually gave the option, in which case the dictionary loading
 % is done verbosely, from when we are setting the default value (here), in
 % which case the dictionary loading is done silently.
 %    \begin{macrocode}
     \tl_set:Nn \l_@@_ref_language_tl
-      { \l_@@_main_language_tl }
+      { \l_@@_current_language_tl }
   }
 %    \end{macrocode}
 %
@@ -3374,14 +3359,6 @@
           {
             \str_case:nnF {#1}
               {
-                { main }
-                {
-                  \tl_set:Nn \l_@@_ref_language_tl
-                    { \l_@@_main_language_tl }
-                  \@@_provide_dictionary_verbose:x
-                    { \l_@@_ref_language_tl }
-                }
-
                 { current }
                 {
                   \tl_set:Nn \l_@@_ref_language_tl
@@ -3389,17 +3366,23 @@
                   \@@_provide_dictionary_verbose:x
                     { \l_@@_ref_language_tl }
                 }
+
+                { main }
+                {
+                  \tl_set:Nn \l_@@_ref_language_tl
+                    { \l_@@_main_language_tl }
+                  \@@_provide_dictionary_verbose:x
+                    { \l_@@_ref_language_tl }
+                }
               }
               {
                 \prop_if_in:NnTF \g_@@_languages_prop {#1}
-                  {
-                    \tl_set:Nn \l_@@_ref_language_tl {#1}
-                  }
+                  { \tl_set:Nn \l_@@_ref_language_tl {#1} }
                   {
                     \msg_warning:nnn { zref-clever }
                       { unknown-language-opt } {#1}
                     \tl_set:Nn \l_@@_ref_language_tl
-                      { \l_@@_main_language_tl }
+                      { \l_@@_current_language_tl }
                   }
                 \@@_provide_dictionary_verbose:x
                   { \l_@@_ref_language_tl }
@@ -3419,7 +3402,7 @@
 %    \end{macrocode}
 % If any \opt{lang} option has been given by the user, the corresponding
 % language is already loaded, otherwise, ensure the default one
-% (\texttt{main}) gets loaded early, but not verbosely.
+% (\texttt{current}) gets loaded early, but not verbosely.
 %    \begin{macrocode}
         \@@_provide_dictionary:x { \l_@@_ref_language_tl }
 %    \end{macrocode}
@@ -3434,14 +3417,6 @@
               {
                 \str_case:nnF {#1}
                   {
-                    { main }
-                    {
-                      \tl_set:Nn \l_@@_ref_language_tl
-                        { \l_@@_main_language_tl }
-                      \@@_provide_dictionary:x
-                        { \l_@@_ref_language_tl }
-                    }
-
                     { current }
                     {
                       \tl_set:Nn \l_@@_ref_language_tl
@@ -3449,17 +3424,23 @@
                       \@@_provide_dictionary:x
                         { \l_@@_ref_language_tl }
                     }
+
+                    { main }
+                    {
+                      \tl_set:Nn \l_@@_ref_language_tl
+                        { \l_@@_main_language_tl }
+                      \@@_provide_dictionary:x
+                        { \l_@@_ref_language_tl }
+                    }
                   }
                   {
                     \prop_if_in:NnTF \g_@@_languages_prop {#1}
-                      {
-                        \tl_set:Nn \l_@@_ref_language_tl {#1}
-                      }
+                      { \tl_set:Nn \l_@@_ref_language_tl {#1} }
                       {
                         \msg_warning:nnn { zref-clever }
                           { unknown-language-opt } {#1}
                         \tl_set:Nn \l_@@_ref_language_tl
-                          { \l_@@_main_language_tl }
+                          { \l_@@_current_language_tl }
                       }
                     \@@_provide_dictionary:x
                       { \l_@@_ref_language_tl }
