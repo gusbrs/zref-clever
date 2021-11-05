@@ -1,0 +1,97 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\usepackage[english]{babel}
+
+\usepackage[check,titleref]{zref-clever}
+
+\usepackage{hyperref}
+
+% This file is intended to test all options and respective values that can be
+% locally passed to '\zcref'.
+
+\begin{document}
+
+\START
+
+\BEGINTEST{Option: countertype=...}
+\begin{equation}
+  \zlabel{equationA}
+\end{equation}
+\begin{equation}
+  \zcsetup{countertype={equation=myequation}}
+  \zlabel{equationB}
+\end{equation}
+\begin{equation}
+  \zcsetup{countertype={fooequation=myequation}}
+  \zlabel{equationC}
+\end{equation}
+\begin{equation}
+  \zcsetup{countertype={section=mysection}}
+  \zlabel{equationD}
+\end{equation}
+\makeatletter
+\show\Z@R@equationA
+\show\Z@R@equationB
+\show\Z@R@equationC
+\show\Z@R@equationD
+\makeatother
+\ENDTEST
+
+\BEGINTEST{Option: counterresetters=...}
+\OMIT
+\newcounter{parentfoobar}
+\setcounter{parentfoobar}{7}
+\newcounter{foobar}[parentfoobar]
+\TIMO
+\ExplSyntaxOn
+\seq_show:N \l__zrefclever_counter_resetters_seq
+\zcsetup{counterresetters=parentfoobar}
+\seq_show:N \l__zrefclever_counter_resetters_seq
+\ExplSyntaxOff
+\refstepcounter{foobar}
+\zlabel{foobar}
+\makeatletter
+\show\Z@R@foobar
+\makeatother
+\ENDTEST
+
+\BEGINTEST{Option: counterresetby=...}
+\OMIT
+\newcounter{parentbarbaz}
+\setcounter{parentbarbaz}{7}
+\newcounter{barbaz}
+\TIMO
+\ExplSyntaxOn
+\prop_show:N \l__zrefclever_counter_resetby_prop
+\zcsetup{counterresetby={barbaz=parentbarbaz}}
+\prop_show:N \l__zrefclever_counter_resetby_prop
+\ExplSyntaxOff
+\refstepcounter{barbaz}
+\zlabel{barbaz}
+\makeatletter
+\show\Z@R@barbaz
+\makeatother
+\ENDTEST
+
+\BEGINTEST{Option: currentcounter=...}
+\OMIT
+\newtheorem{theorem}{Theorem}
+\TIMO
+\begin{theorem}
+  \zlabel{theoremA}
+\end{theorem}
+\begin{theorem}
+  \zcsetup{currentcounter=equation}
+  \zlabel{theoremB}
+\end{theorem}
+\makeatletter
+\show\Z@R@theoremA
+\show\Z@R@theoremB
+\makeatother
+\ENDTEST
+
+\OMIT
+
+\end{document}

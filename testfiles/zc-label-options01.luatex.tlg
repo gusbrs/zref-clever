@@ -1,0 +1,84 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Option: countertype=...
+============================================================
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line ....
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line ....
+> \Z@R@equationA=macro:
+->\default {1}\page {1}\abspage {1}\zc@counter {equation}\zc@thecnt {1}\zc@type {equation}\zc@cntval {1}\zc@pgval {1}\zc@enclval {{0}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {equation.0.0.1}.
+l. ...\show\Z@R@equationA
+> \Z@R@equationB=macro:
+->\default {2}\page {1}\abspage {1}\zc@counter {equation}\zc@thecnt {2}\zc@type {myequation}\zc@cntval {2}\zc@pgval {1}\zc@enclval {{0}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {equation.0.0.2}.
+l. ...\show\Z@R@equationB
+> \Z@R@equationC=macro:
+->\default {3}\page {1}\abspage {1}\zc@counter {equation}\zc@thecnt {3}\zc@type {equation}\zc@cntval {3}\zc@pgval {1}\zc@enclval {{0}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {equation.0.0.3}.
+l. ...\show\Z@R@equationC
+> \Z@R@equationD=macro:
+->\default {4}\page {1}\abspage {1}\zc@counter {equation}\zc@thecnt {4}\zc@type {equation}\zc@cntval {4}\zc@pgval {1}\zc@enclval {{0}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {equation.0.0.4}.
+l. ...\show\Z@R@equationD
+============================================================
+============================================================
+TEST 2: Option: counterresetters=...
+============================================================
+The sequence \l__zrefclever_counter_resetters_seq contains the items (without
+outer braces):
+>  {part}
+>  {chapter}
+>  {section}
+>  {subsection}
+>  {subsubsection}
+>  {paragraph}
+>  {subparagraph}.
+<recently read> }
+l. ......_show:N \l__zrefclever_counter_resetters_seq
+The sequence \l__zrefclever_counter_resetters_seq contains the items (without
+outer braces):
+>  {part}
+>  {chapter}
+>  {section}
+>  {subsection}
+>  {subsubsection}
+>  {paragraph}
+>  {subparagraph}
+>  {parentfoobar}.
+<recently read> }
+l. ......_show:N \l__zrefclever_counter_resetters_seq
+> \Z@R@foobar=macro:
+->\default {1}\page {1}\abspage {1}\zc@counter {foobar}\zc@thecnt {1}\zc@type {foobar}\zc@cntval {1}\zc@pgval {1}\zc@enclval {{7}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {foobar.7.1}.
+l. ...\show\Z@R@foobar
+============================================================
+============================================================
+TEST 3: Option: counterresetby=...
+============================================================
+The property list \l__zrefclever_counter_resetby_prop contains the pairs
+(without outer braces):
+>  {enumii}  =>  {enumi}
+>  {enumiii}  =>  {enumii}
+>  {enumiv}  =>  {enumiii}.
+<recently read> }
+l. ......p_show:N \l__zrefclever_counter_resetby_prop
+The property list \l__zrefclever_counter_resetby_prop contains the pairs
+(without outer braces):
+>  {enumii}  =>  {enumi}
+>  {enumiii}  =>  {enumii}
+>  {enumiv}  =>  {enumiii}
+>  {barbaz}  =>  {parentbarbaz}.
+<recently read> }
+l. ......p_show:N \l__zrefclever_counter_resetby_prop
+> \Z@R@barbaz=macro:
+->\default {1}\page {1}\abspage {1}\zc@counter {barbaz}\zc@thecnt {1}\zc@type {barbaz}\zc@cntval {1}\zc@pgval {1}\zc@enclval {{7}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {barbaz.1}.
+l. ...\show\Z@R@barbaz
+============================================================
+============================================================
+TEST 4: Option: currentcounter=...
+============================================================
+> \Z@R@theoremA=macro:
+->\default {1}\page {1}\abspage {1}\zc@counter {theorem}\zc@thecnt {1}\zc@type {theorem}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {theorem.1}.
+l. ...\show\Z@R@theoremA
+> \Z@R@theoremB=macro:
+->\default {2}\page {1}\abspage {1}\zc@counter {equation}\zc@thecnt {4}\zc@type {equation}\zc@cntval {4}\zc@pgval {1}\zc@enclval {{0}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {theorem.2}.
+l. ...\show\Z@R@theoremB
+============================================================
