@@ -400,10 +400,10 @@
 % but may be used generally to fine-tune the language and style around the
 % cross-references made with \cs{zcref}.  The \opt{nudge} option is the main
 % entrance to this feature and takes values \texttt{true}, \texttt{false},
-% \texttt{obeydraft}, or \texttt{obeyfinal}.  The first two, respectively,
-% enable or disable the ``nudging'' unconditionally.  With \texttt{obeydraft},
+% \texttt{ifdraft}, or \texttt{iffinal}.  The first two, respectively, enable
+% or disable the ``nudging'' unconditionally.  With \texttt{ifdraft},
 % \opt{nudge} keeps quiet when option \texttt{draft} is given to
-% \cs{documentclass}, while with \texttt{obeyfinal}, nudging is only enabled
+% \cs{documentclass}, while with \texttt{iffinal}, nudging is only enabled
 % when option \texttt{final} is (explicitly) passed to \cs{documentclass}.
 % The option given without a value is equivalent to \texttt{nudge=true} and
 % the package's default is \texttt{nudge=false}.  \opt{nonudge} is a
@@ -3504,13 +3504,13 @@
       { \bool_set_true:N \l_@@_nudge_enabled_bool } ,
     nudge / false .code:n =
       { \bool_set_false:N \l_@@_nudge_enabled_bool } ,
-    nudge / obeydraft .code:n =
+    nudge / ifdraft .code:n =
       {
         \ifdraft
           { \bool_set_false:N \l_@@_nudge_enabled_bool }
           { \bool_set_true:N \l_@@_nudge_enabled_bool }
       } ,
-    nudge / obeyfinal .code:n =
+    nudge / iffinal .code:n =
       {
         \ifoptionfinal
           { \bool_set_true:N \l_@@_nudge_enabled_bool }

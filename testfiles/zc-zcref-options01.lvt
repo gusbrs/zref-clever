@@ -676,25 +676,23 @@
   sec:section-1.2}
 \ENDTEST
 
-\BEGINTEST{Option: nudge=obeydraft}
+\BEGINTEST{Option: nudge=ifdraft}
 \ExplSyntaxOn
 \bool_set_false:N \l__zrefclever_verbose_testing_bool
 \ExplSyntaxOff
-\zcref[nudge=obeydraft]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
-\zcref[nudge=obeydraft,page]{cha:chapter-1, sec:section-1.1,
-  sec:section-1.2}
-\zcref[nudge=obeydraft,lang=french,g=m]{cha:chapter-1, sec:section-1.1,
+\zcref[nudge=ifdraft]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge=ifdraft,page]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge=ifdraft,lang=french,g=m]{cha:chapter-1, sec:section-1.1,
   sec:section-1.2}
 \ENDTEST
 
-\BEGINTEST{Option: nudge=obeyfinal}
+\BEGINTEST{Option: nudge=iffinal}
 \ExplSyntaxOn
 \bool_set_false:N \l__zrefclever_verbose_testing_bool
 \ExplSyntaxOff
-\zcref[nudge=obeyfinal]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
-\zcref[nudge=obeyfinal,page]{cha:chapter-1, sec:section-1.1,
-  sec:section-1.2}
-\zcref[nudge=obeyfinal,lang=french,g=m]{cha:chapter-1, sec:section-1.1,
+\zcref[nudge=iffinal]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge=iffinal,page]{cha:chapter-1, sec:section-1.1, sec:section-1.2}
+\zcref[nudge=iffinal,lang=french,g=m]{cha:chapter-1, sec:section-1.1,
   sec:section-1.2}
 \ENDTEST
 

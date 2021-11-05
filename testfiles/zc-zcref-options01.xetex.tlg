@@ -3091,7 +3091,7 @@ TEST 72: Option: nonudge
 ============================================================
 ============================================================
 ============================================================
-TEST 73: Option: nudge=obeydraft
+TEST 73: Option: nudge=ifdraft
 ============================================================
 Package zref-clever Warning: Reference with multiple types on line .... You
 (zref-clever)                may wish to separate them or review language
@@ -3106,7 +3106,7 @@ Package zref-clever Warning: Reference with multiple types on line .... You
 (zref-clever)                around it.
 ============================================================
 ============================================================
-TEST 74: Option: nudge=obeyfinal
+TEST 74: Option: nudge=iffinal
 ============================================================
 ============================================================
 ============================================================
@@ -3200,11 +3200,11 @@ Package zref-clever Warning: Reference with multiple types on line .... You
 TEST 83: Option: nudgeif=foo
 ============================================================
 Package zref-clever Warning: Unknown value 'foo' for 'nudgeif' option on line
+(zref-clever)                800.
+Package zref-clever Warning: Unknown value 'foo' for 'nudgeif' option on line
 (zref-clever)                802.
 Package zref-clever Warning: Unknown value 'foo' for 'nudgeif' option on line
 (zref-clever)                804.
-Package zref-clever Warning: Unknown value 'foo' for 'nudgeif' option on line
-(zref-clever)                806.
 ============================================================
 ============================================================
 TEST 84: Option: sg
@@ -3231,17 +3231,17 @@ Package zref-clever Warning: Gender mismatch for type 'chapter' on line ....
 (zref-clever)                You've specified 'g=f' but type name is 'm' for
 (zref-clever)                language 'french'.
 Package zref-clever Warning: Language 'french' has no 'n' gender declared on
+(zref-clever)                line 842.
+Package zref-clever Warning: Language 'french' has no 'n' gender declared on
 (zref-clever)                line 844.
 Package zref-clever Warning: Language 'french' has no 'n' gender declared on
 (zref-clever)                line 846.
-Package zref-clever Warning: Language 'french' has no 'n' gender declared on
-(zref-clever)                line 848.
 Package zref-clever Warning: Language 'english' has no declared gender on line
-(zref-clever)                850. Nothing to do with option 'g=f'.
+(zref-clever)                848. Nothing to do with option 'g=f'.
+Package zref-clever Warning: Language 'english' has no declared gender on line
+(zref-clever)                849. Nothing to do with option 'g=f'.
 Package zref-clever Warning: Language 'english' has no declared gender on line
 (zref-clever)                851. Nothing to do with option 'g=f'.
-Package zref-clever Warning: Language 'english' has no declared gender on line
-(zref-clever)                853. Nothing to do with option 'g=f'.
 ============================================================
 ============================================================
 TEST 86: Option: font=...
