@@ -1,0 +1,26 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\START
+
+\zcsetup{check}
+
+\OMIT
+\begin{document}
+\TIMO
+
+\ExplSyntaxOn
+\bool_show:N \l__zrefclever_zrefcheck_available_bool
+\ExplSyntaxOff
+
+\section{Foo 1}
+\zlabel{sec:section-1}
+
+\zcref[check=nextpage]{sec:section-1}
+
+\OMIT
+
+\end{document}

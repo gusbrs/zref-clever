@@ -1,0 +1,38 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage[T1]{fontenc}
+
+\usepackage[french,ngerman]{babel}
+
+\usepackage{zref-clever}
+
+\zcsetup{lang=spanish}
+
+\START
+
+\begin{document}
+
+\ExplSyntaxOn
+\tl_show:N \l__zrefclever_current_language_tl
+\tl_show:N \l__zrefclever_main_language_tl
+\tl_show:N \l__zrefclever_ref_language_tl
+\ExplSyntaxOff
+
+\section{Section 1}
+\zlabel{sec:section-1}
+
+\setbox0=\hbox{\zcref{sec:section-1}}
+\showbox0
+\box0
+
+\selectlanguage{french}
+
+\setbox0=\hbox{\zcref{sec:section-1}}
+\showbox0
+\box0
+
+\OMIT
+
+\end{document}

@@ -1,0 +1,24 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\START
+
+\zcsetup{titleref}
+
+\OMIT
+\begin{document}
+\TIMO
+
+\section{Foo 1}
+\zlabel{sec:section-1}
+
+\setbox0=\hbox{\zcref[ref=title,noname]{sec:section-1}}
+\showbox0
+\box0
+
+\OMIT
+
+\end{document}

@@ -1,0 +1,25 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+(../zref-titleref.sty
+Package: zref-titleref ....-..-.. v... Module titleref for zref (HO)
+(../gettitlestring.sty
+Package: gettitlestring ....-..-.. v... Cleanup title references (HO)
+(../kvoptions.sty
+Package: kvoptions ....-..-.. v... Key value format for package options (HO)
+(../keyval.sty
+Package: keyval ....-..-.. v... key=value parser (DPC)
+\KV@toks@=\toks...
+)))
+Package zref Info: New property: title on input line ....
+)
+> \box...=
+\hbox(6.8+0.11)x24.31, direction TLT
+.\TU/lmr/m/n/10 F
+.\kern-0.83 (font)
+.\TU/lmr/m/n/10 o
+.\kern0.28 (font)
+.\TU/lmr/m/n/10 o
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 1
+! OK.
+l. ...\showbox0

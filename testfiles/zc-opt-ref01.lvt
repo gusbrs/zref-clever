@@ -1,0 +1,19 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage[]{zref-clever}
+
+\zcsetup{ref=title}
+
+\START
+
+\begin{document}
+
+\ExplSyntaxOn
+\tl_show:N \l__zrefclever_ref_property_tl
+\ExplSyntaxOff
+
+\OMIT
+
+\end{document}

@@ -1,0 +1,25 @@
+\documentclass{article}
+
+\input{regression-test}
+
+
+\usepackage{zref-clever}
+
+\START
+
+\zcsetup{
+  lang=french,
+  g=f,
+}
+
+\OMIT
+\begin{document}
+\TIMO
+
+\ExplSyntaxOn
+\tl_show:N \l__zrefclever_ref_gender_tl
+\ExplSyntaxOff
+
+\OMIT
+
+\end{document}

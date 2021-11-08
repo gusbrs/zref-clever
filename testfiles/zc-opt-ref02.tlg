@@ -1,0 +1,18 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \l__zrefclever_ref_property_tl=title.
+<recently read> }
+l. ...\tl_show:N \l__zrefclever_ref_property_tl
+> \box...=
+\hbox(6.83331+0.0)x40.00008
+.\OT1/cmr/m/n/10 S
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+! OK.
+l. ...\showbox0

@@ -1,0 +1,42 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage[T1]{fontenc}
+
+\usepackage{polyglossia}
+\setdefaultlanguage{ngerman}
+\setotherlanguage{french}
+
+\usepackage{zref-clever}
+
+\zcsetup{lang=current}
+
+\begin{document}
+
+\START
+
+\ExplSyntaxOn
+\tl_show:N \l__zrefclever_current_language_tl
+\tl_show:N \l__zrefclever_main_language_tl
+\tl_show:N \l__zrefclever_ref_language_tl
+\tl_show:N \babelname
+\tl_show:N \mainbabelname
+\ExplSyntaxOff
+
+\section{Section 1}
+\zlabel{sec:section-1}
+
+\setbox0=\hbox{\zcref{sec:section-1}}
+\showbox0
+\box0
+
+\selectlanguage{french}
+
+\setbox0=\hbox{\zcref{sec:section-1}}
+\showbox0
+\box0
+
+\OMIT
+
+\end{document}
