@@ -1,0 +1,207 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\usepackage[english]{babel}
+
+\usepackage[check,titleref]{zref-clever}
+
+\usepackage{hyperref}
+
+% This file is intended to test all options that can be set by
+% '\zcRefTypeSetup'.
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\NewDocumentCommand \newoptblock {m}{%
+  \noindent\rule{\textwidth}{0.4pt}\par%
+  \noindent\textbf{#1}\par}
+
+\begin{document}
+
+\chapter{Chapter 1}
+\zlabel{cha:chapter-1}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+\begin{table}
+  \caption{Table 1.1.1}
+  \zlabel{tab:table-1.1.1}
+\end{table}
+
+\newtheorem{thm}[equation]{Theorem}[section]
+
+\begin{thm}
+  \zlabel{eq:theorem-1.1.1}
+\end{thm}
+
+\begin{equation}
+  \zlabel{eq:equation-1.1.2}
+\end{equation}
+
+\begin{equation}
+  \zlabel{eq:equation-1.1.3}
+\end{equation}
+
+\begin{figure}
+  \caption{Figure 1.1.1}
+  \zlabel{fig:figure-1.1.1}
+\end{figure}
+
+\section{Section 1.2}
+\zlabel{sec:section-1.2}
+
+\section{Section 1.3}
+\zlabel{sec:section-1.3}
+\zlabel{sec:section-1.3a}
+\zlabel{sec:section-1.3b}
+
+\section{Section 1.4}
+\zlabel{sec:section-1.4}
+
+\section{Section 1.5}
+\zlabel{sec:section-1.5}
+
+\chapter{Chapter 2}
+\zlabel{cha:chapter-2}
+
+\section{Section 2.1}
+\zlabel{sec:section-2.1}
+
+\chapter{Chapter 3}
+\zlabel{cha:chapter-3}
+
+\section{Section 3.1}
+\zlabel{sec:section-3.1}
+
+\clearpage{}
+
+\START
+
+\newoptblock{namesep}
+
+\BEGINTEST{Option: namesep=...}
+\zcRefTypeSetup{section}{namesep=\qquad}
+\zcRefTypeSetup{section}{namesep=\qquad}
+\setbox0=\hbox{\zcref{sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{pairsep, listsep, lastsep}
+
+\BEGINTEST{Option: pairsep=..., listsep=..., lastsep=...}
+\zcRefTypeSetup{section}{listsep={,, }, lastsep={~AND~},pairsep={~\&~}}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-2.1,
+    sec:section-3.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{rangesep}
+
+\BEGINTEST{Option: rangesep=...}
+\zcRefTypeSetup{section}{rangesep={\textrightarrow{}}}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3,
+    sec:section-1.4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{refpre, refpos}
+
+\BEGINTEST{Option: refpre=..., refpos=...}
+\zcRefTypeSetup{section}{refpre={[}, refpos={]}}
+\zcRefTypeSetup{equation}{refpre=, refpos=}
+\setbox0=\hbox{\zcref*{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref*{eq:equation-1.1.2, eq:equation-1.1.3}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{[Nn]ame-[sg/pl](-ab)=...}
+
+\BEGINTEST{Option: [Nn]ame-[sg/pl](-ab)=...}
+\zcRefTypeSetup{section}{
+  Name-sg=zSection,
+  name-sg=zsection,
+  Name-pl=zSections,
+  name-pl=zsections,
+  Name-sg-ab=zSec.,
+  name-sg-ab=zsec.,
+  Name-pl-ab=zSecs.,
+  name-pl-ab=zsecs.,
+}
+\setbox0=\hbox{\zcref[cap,noabbrev]{sec:section-1.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[noabbrev]{sec:section-1.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[cap,noabbrev]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[noabbrev]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[cap,abbrev]{sec:section-1.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[abbrev]{sec:section-1.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[cap,abbrev]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[abbrev]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{namefont}
+
+\BEGINTEST{Option: namefont=...}
+\zcRefTypeSetup{section}{namefont=\bfseries}
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\zcRefTypeSetup{section}{namefont=\itshape}
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\zcRefTypeSetup{section}{namefont=\em}
+\setbox0=\hbox{\zcref[font=\em]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{reffont}
+
+\BEGINTEST{Option: reffont=...}
+\zcRefTypeSetup{section}{reffont=\bfseries}
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\zcRefTypeSetup{section}{reffont=\itshape}
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\zcRefTypeSetup{section}{reffont=\em}
+\setbox0=\hbox{\zcref[font=\em]{cha:chapter-1, sec:section-1.1,
+    sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}
