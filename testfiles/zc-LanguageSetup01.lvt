@@ -1,0 +1,300 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\usepackage[english]{babel}
+
+\usepackage{zref-clever}
+
+\usepackage{hyperref}
+
+% This file is intended to test all options that can be set by
+% '\zcLanguageSetup'.
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\START
+
+\BEGINTEST{Options and scopes: default, type-specific}
+\zcLanguageSetup{ngerman}{
+  gender=m,
+  case=D,
+  tpairsep={ t\& },
+  tlistsep={,,, },
+  tlastsep={ tUND },
+  notesep={\qquad},
+  namesep={\quad},
+  pairsep={ \& },
+  listsep={,, },
+  lastsep={ UND },
+  rangesep={\textrightarrow{}},
+  refpre={[},
+  refpos={]},
+  Name-sg=Bar,
+  name-sg=bar,
+  Name-pl=Bars,
+  name-pl=bars,
+  Name-sg-ab=B.,
+  name-sg-ab=b.,
+  Name-pl-ab=Bs.,
+  name-pl-ab=bs.,
+  type=section,
+    gender=m,
+    case=D,
+    tpairsep={ \& },
+    tlistsep={,, },
+    tlastsep={ AND },
+    notesep={\qquad},
+    namesep={\quad},
+    pairsep={ \& },
+    listsep={,, },
+    lastsep={ AND },
+    rangesep={\textrightarrow{}},
+    refpre={[},
+    refpos={]},
+    Name-sg=Bar,
+    name-sg=bar,
+    Name-pl=Bars,
+    name-pl=bars,
+    Name-sg-ab=B.,
+    name-sg-ab=b.,
+    Name-pl-ab=Bs.,
+    name-pl-ab=bs.,
+}
+\ExplSyntaxOn
+\prop_show:N \g__zrefclever_dict_german_prop
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{Missing case and gender}
+\zcLanguageSetup{english}{
+  type=section,
+  gender=m,
+  case=D,
+}
+\zcLanguageSetup{french}{
+  type=section,
+  gender=n,
+}
+\ENDTEST
+
+\BEGINTEST{English setup for later tests}
+\zcLanguageSetup{english}{
+  tpairsep={ t\& },
+  tlistsep={,,, },
+  tlastsep={ tAND },
+  notesep={\qquad},
+  type=section,
+    namesep={\quad},
+    pairsep={ \& },
+    listsep={,, },
+    lastsep={ AND },
+    rangesep={\textrightarrow{}},
+    refpre={[},
+    refpos={]},
+    Name-sg=Bar,
+    name-sg=bar,
+    Name-pl=Bars,
+    name-pl=bars,
+    Name-sg-ab=B.,
+    name-sg-ab=b.,
+    Name-pl-ab=Bs.,
+    name-pl-ab=bs.,
+  type=equation,
+    refpre=,
+    refpos=,
+}
+\ExplSyntaxOn
+\prop_show:N \g__zrefclever_dict_english_prop
+\ExplSyntaxOff
+\ENDTEST
+
+\OMIT
+
+\NewDocumentCommand \newoptblock {m}{%
+  \noindent\rule{\textwidth}{0.4pt}\par%
+  \noindent\textbf{#1}\par}
+
+\begin{document}
+
+\chapter{Chapter 1}
+\zlabel{cha:chapter-1}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+\begin{table}
+  \caption{Table 1.1.1}
+  \zlabel{tab:table-1.1.1}
+\end{table}
+
+\newtheorem{thm}[equation]{Theorem}[section]
+
+\begin{thm}
+  \zlabel{eq:theorem-1.1.1}
+\end{thm}
+
+\begin{equation}
+  \zlabel{eq:equation-1.1.2}
+\end{equation}
+
+\begin{equation}
+  \zlabel{eq:equation-1.1.3}
+\end{equation}
+
+\begin{figure}
+  \caption{Figure 1.1.1}
+  \zlabel{fig:figure-1.1.1}
+\end{figure}
+
+\section{Section 1.2}
+\zlabel{sec:section-1.2}
+
+\section{Section 1.3}
+\zlabel{sec:section-1.3}
+\zlabel{sec:section-1.3a}
+\zlabel{sec:section-1.3b}
+
+\section{Section 1.4}
+\zlabel{sec:section-1.4}
+
+\section{Section 1.5}
+\zlabel{sec:section-1.5}
+
+\chapter{Chapter 2}
+\zlabel{cha:chapter-2}
+
+\section{Section 2.1}
+\zlabel{sec:section-2.1}
+
+\chapter{Chapter 3}
+\zlabel{cha:chapter-3}
+
+\section{Section 3.1}
+\zlabel{sec:section-3.1}
+
+\clearpage{}
+
+\TIMO
+
+\newoptblock{tpairsep, tlistsep, tlastsep}
+
+\BEGINTEST{Option: tpairsep=..., tlistsep=..., tlastsep=...}
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1, tab:table-1.1.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{notesep}
+
+\BEGINTEST{Option: notesep=...}
+\setbox0=\hbox{\zcref[note={a note}]{sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{namesep}
+
+\BEGINTEST{Option: namesep=...}
+\setbox0=\hbox{\zcref{sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{pairsep, listsep, lastsep}
+
+\BEGINTEST{Option: pairsep=..., listsep=..., lastsep=...}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-2.1,
+    sec:section-3.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{rangesep}
+
+\BEGINTEST{Option: rangesep=...}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3,
+    sec:section-1.4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{refpre, refpos}
+
+\BEGINTEST{Option: refpre=..., refpos=...}
+\setbox0=\hbox{\zcref*{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref*{eq:equation-1.1.2, eq:equation-1.1.3}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{[Nn]ame-[sg/pl](-ab)=...}
+
+\BEGINTEST{Option: [Nn]ame-[sg/pl](-ab)=...}
+\setbox0=\hbox{\zcref[cap,noabbrev]{sec:section-1.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[noabbrev]{sec:section-1.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[cap,noabbrev]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[noabbrev]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[cap,abbrev]{sec:section-1.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[abbrev]{sec:section-1.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[cap,abbrev]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[abbrev]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Option: [Nn]ame-[sg/pl](-ab)=... (german,d=D)}
+\selectlanguage{ngerman}
+\setbox0=\hbox{\zcref[cap,noabbrev,d=D]{sec:section-1.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[noabbrev,d=D]{sec:section-1.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[cap,noabbrev,d=D]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[noabbrev,d=D]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[cap,abbrev,d=D]{sec:section-1.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[abbrev,d=D]{sec:section-1.1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[cap,abbrev,d=D]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[abbrev,d=D]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}
