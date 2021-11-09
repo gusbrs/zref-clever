@@ -1,0 +1,150 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\usepackage[english]{babel}
+
+\usepackage{zref-clever}
+
+% This file is intended to test the precedence rules for reference format
+% options.
+
+\zcDeclareLanguage{elvish}
+\zcLanguageSetup{elvish}{
+  % rangesep comes from fallback, level 0
+  namesep={1\nobreakspace}, % default translation, level 1
+  pairsep={,1 }, % default translation, level 1
+  listsep={,1 }, % default translation, level 1
+  lastsep={1 and }, % default translation, level 1
+  notesep={ 1 }, % default translation, level 1
+  type=section,
+  pairsep={,2 }, % type-specific translation, level 2
+  listsep={,2 }, % type-specific translation, level 2
+  lastsep={2 and }, % type-specific translation, level 2
+  notesep={ 2 }, % type-specific translation, level 2
+}
+\zcRefTypeSetup{section}{
+  pairsep={,3 }, % reference type option, level 3
+  notesep={ 3 }, % reference type option, level 3
+}
+\zcsetup{
+  notesep={ 4 }, % general option, level 4
+  lang=elvish,
+}
+
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\NewDocumentCommand \newoptblock {m}{%
+  \noindent\rule{\textwidth}{0.4pt}\par%
+  \noindent\textbf{#1}\par}
+
+\begin{document}
+
+\chapter{Chapter 1}
+\zlabel{cha:chapter-1}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+\begin{table}
+  \caption{Table 1.1.1}
+  \zlabel{tab:table-1.1.1}
+\end{table}
+
+\newtheorem{thm}[equation]{Theorem}[section]
+
+\begin{thm}
+  \zlabel{eq:theorem-1.1.1}
+\end{thm}
+
+\begin{equation}
+  \zlabel{eq:equation-1.1.2}
+\end{equation}
+
+\begin{equation}
+  \zlabel{eq:equation-1.1.3}
+\end{equation}
+
+\begin{figure}
+  \caption{Figure 1.1.1}
+  \zlabel{fig:figure-1.1.1}
+\end{figure}
+
+\section{Section 1.2}
+\zlabel{sec:section-1.2}
+
+\section{Section 1.3}
+\zlabel{sec:section-1.3}
+\zlabel{sec:section-1.3a}
+\zlabel{sec:section-1.3b}
+
+\section{Section 1.4}
+\zlabel{sec:section-1.4}
+
+\section{Section 1.5}
+\zlabel{sec:section-1.5}
+
+\chapter{Chapter 2}
+\zlabel{cha:chapter-2}
+
+\section{Section 2.1}
+\zlabel{sec:section-2.1}
+
+\chapter{Chapter 3}
+\zlabel{cha:chapter-3}
+
+\section{Section 3.1}
+\zlabel{sec:section-3.1}
+
+\clearpage{}
+
+\START
+
+\newoptblock{Level 0}
+
+\BEGINTEST{Level 0: fallback (rangesep)}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3,
+    sec:section-1.4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Level 1}
+
+\BEGINTEST{Level 1: default translations (namesep)}
+\setbox0=\hbox{\zcref{sec:section-1.1, cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Level 2}
+
+\BEGINTEST{Leve 2: type-specific translations (listsep, lastsep)}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-2.1,
+    sec:section-3.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Level 3}
+
+\BEGINTEST{Level 3: reference type options (pairsep)}
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Level 4}
+
+\BEGINTEST{Level 4: general options (notesep)}
+\setbox0=\hbox{\zcref[note={a note}]{sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}
