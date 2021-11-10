@@ -181,31 +181,31 @@
 % \DescribeOption{ref} %
 % \DescribeOption{page} %
 % The \opt{ref} option controls the label property to which \cs{zcref} refers
-% to.  It can receive values \texttt{default}, \texttt{page}, and
-% \texttt{thecounter}.  If \pkg{zref-titleref} is loaded, \opt{ref} also
-% accepts the value \texttt{title}.  The package's default is, well,
-% \texttt{default}, which is our standard reference.  \texttt{thecounter} is a
-% property set by \pkg{zref-clever} and is similar to \pkg{zref}'s
-% \texttt{default} property, except that it is not affected by the kernel's
-% \cs{labelformat}.\footnote{Technical note: the \texttt{default} property
-% stores \cs{@currentlabel}, while the \texttt{thecounter} property stores
-% \cs{the}\cs{@currentcounter}.  The later is exactly what \cs{refstepcounter}
-% uses to build \cs{@currentlabel}, except for the \cs{labelformat} prefix
-% and, hence, has the advantage of being unaffected by it.  But the former is
-% \emph{more reliable}, since \cs{@currentlabel} is expected to be correct
-% pretty much anywhere whereas, even though \cs{refstepcounter} does set
-% \cs{@currentcounter}, it is not everywhere that uses \cs{refstepcounter} for
-% the purpose.  In the cases where the references from these two do diverge,
-% \pkg{zref-clever} will likely misbehave (reference type, sorting and
-% compression inevitably depend on a correct \opt{currentcounter}), but using
-% \texttt{default} at least ensures that the reference itself is correct.
-% That said, if you do set \cs{labelformat} for some reason,
-% \texttt{thecounter} may be useful.}  By default, reference formatting,
-% sorting, and compression are done according to information inferred from the
-% \emph{current counter} (see \opt{currentcounter} option below).  Special
-% treatment in these areas is provided for \texttt{page}, but not for
-% \texttt{title}.  The \opt{page} option is a convenience alias for
-% \texttt{ref=page}.
+% to.  It can receive \pkg{zref} properties, as long as they are declared, but
+% notably \texttt{default}, \texttt{page}, \texttt{thecounter} and, if
+% \pkg{zref-titleref} is loaded, \texttt{title}.  The package's default is,
+% well, \texttt{default}, which is our standard reference.
+% \texttt{thecounter} is a property set by \pkg{zref-clever} and is similar to
+% \pkg{zref}'s \texttt{default} property, except that it is not affected by
+% the kernel's \cs{labelformat}.\footnote{Technical note: the \texttt{default}
+% property stores \cs{@currentlabel}, while the \texttt{thecounter} property
+% stores \cs{the}\cs{@currentcounter}.  The later is exactly what
+% \cs{refstepcounter} uses to build \cs{@currentlabel}, except for the
+% \cs{labelformat} prefix and, hence, has the advantage of being unaffected by
+% it.  But the former is \emph{more reliable}, since \cs{@currentlabel} is
+% expected to be correct pretty much anywhere whereas, even though
+% \cs{refstepcounter} does set \cs{@currentcounter}, it is not everywhere that
+% uses \cs{refstepcounter} for the purpose.  In the cases where the references
+% from these two do diverge, \pkg{zref-clever} will likely misbehave
+% (reference type, sorting and compression inevitably depend on a correct
+% \opt{currentcounter}), but using \texttt{default} at least ensures that the
+% reference itself is correct.  That said, if you do set \cs{labelformat} for
+% some reason, \texttt{thecounter} may be useful.}  By default, reference
+% formatting, sorting, and compression are done according to information
+% inferred from the \emph{current counter} (see \opt{currentcounter} option
+% below).  Special treatment in these areas is provided for \texttt{page}, but
+% not for any other properties.  The \opt{page} option is a convenience alias
+% for \texttt{ref=page}.
 %
 % \DescribeOption{typeset} %
 % \DescribeOption{noname} %
@@ -2006,10 +2006,10 @@
     See~documentation~for~'\iow_char:N\\zcDeclareLanguage'~and~
     '\iow_char:N\\zcDeclareLanguageAlias'.
   }
-\msg_new:nnn { zref-clever } { missing-zref-titleref }
+\msg_new:nnn { zref-clever } { zref-property-undefined }
   {
-    Option~'ref=title'~requested~\msg_line_context:.~
-    But~package~'zref-titleref'~is~not~loaded,~falling-back~to~default~'ref'.
+    Option~'ref=#1'~requested~\msg_line_context:.~
+    But~the~property~'#1'~is~not~declared,~falling-back~to~'default'.
   }
 \msg_new:nnn { zref-clever } { hyperref-preamble-only }
   {
@@ -2031,6 +2031,8 @@
   }
 \msg_new:nnn { zref-clever } { missing-type }
   { Reference~type~undefined~for~label~'#1'~\msg_line_context:. }
+\msg_new:nnn { zref-clever } { missing-property }
+  { Reference~property~'#1'~undefined~for~label~'#2'~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { missing-name }
   { Reference~format~option~'#1'~undefined~for~type~'#2'~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { missing-string }
@@ -2963,15 +2965,9 @@
 % \subsubsection*{\opt{ref} option}
 %
 % \cs{l_@@_ref_property_tl} stores the property to which the reference is
-% being made.  Currently, we restrict \texttt{ref=} to these three (or four)
-% alternatives -- \texttt{default}, \texttt{page}, \texttt{thecounter}, and
-% \texttt{title} if \pkg{zref-titleref} is loaded --, but there might be a
-% case for making this more flexible.  The infrastructure can already handle
-% receiving an arbitrary property, as long as one is satisfied with sorting
-% and compressing from the current counter.  If more flexibility is granted,
-% one thing \emph{must} be handled at this point: the existence of the
-% property itself, as far as \pkg{zref} is concerned.  This because
-% typesetting relies on the check \cs{zref@ifrefcontainsprop}, which
+% being made.  Note that one thing \emph{must} be handled at this point: the
+% existence of the property itself, as far as \pkg{zref} is concerned.  This
+% because typesetting relies on the check \cs{zref@ifrefcontainsprop}, which
 % \emph{presumes} the property is defined and silently expands the \emph{true}
 % branch if it is not (see \url{https://github.com/ho-tex/zref/issues/13},
 % thanks Ulrike Fischer).  Therefore, before adding anything to
@@ -2983,50 +2979,19 @@
 \tl_new:N \l_@@_ref_property_tl
 \keys_define:nn { zref-clever / reference }
   {
-    ref .choice: ,
-    ref / default .code:n =
-      { \tl_set:Nn \l_@@_ref_property_tl { default } } ,
-    ref / page .code:n =
-      { \tl_set:Nn \l_@@_ref_property_tl { page } } ,
-    ref / thecounter .code:n =
-      { \tl_set:Nn \l_@@_ref_property_tl { thecounter } } ,
-    ref / title .code:n =
+    ref .code:n =
       {
-        \AddToHook { begindocument }
+        \zref@ifpropundefined {#1}
           {
-            \@ifpackageloaded { zref-titleref }
-              { \tl_set:Nn \l_@@_ref_property_tl { title } }
-              {
-                \msg_warning:nn { zref-clever } { missing-zref-titleref }
-                \tl_set:Nn \l_@@_ref_property_tl { default }
-              }
+            \msg_warning:nnn { zref-clever } { zref-property-undefined } {#1}
+            \tl_set:Nn \l_@@_ref_property_tl { default }
           }
+          { \tl_set:Nn \l_@@_ref_property_tl {#1} }
       } ,
     ref .initial:n = default ,
     ref .value_required:n = true ,
     page .meta:n = { ref = page },
     page .value_forbidden:n = true ,
-  }
-\AddToHook { begindocument }
-  {
-    \@ifpackageloaded { zref-titleref }
-      {
-        \keys_define:nn { zref-clever / reference }
-          {
-            ref / title .code:n =
-              { \tl_set:Nn \l_@@_ref_property_tl { title } }
-          }
-      }
-      {
-        \keys_define:nn { zref-clever / reference }
-          {
-            ref / title .code:n =
-              {
-                \msg_warning:nn { zref-clever } { missing-zref-titleref }
-                \tl_set:Nn \l_@@_ref_property_tl { default }
-              }
-          }
-      }
   }
 %    \end{macrocode}
 %
@@ -5096,6 +5061,15 @@
             \tl_if_eq:NnT \l_@@_label_type_a_tl { zc@missingtype }
               {
                 \msg_warning:nnx { zref-clever } { missing-type }
+                  { \l_@@_label_a_tl }
+              }
+            \zref@ifrefcontainsprop
+              { \l_@@_label_a_tl }
+              { \l_@@_ref_property_tl }
+              { }
+              {
+                \msg_warning:nnxx { zref-clever } { missing-property }
+                  { \l_@@_ref_property_tl }
                   { \l_@@_label_a_tl }
               }
           }
