@@ -272,7 +272,7 @@ l. ......x{\zcref[ref=title,noname]{sec:section-1.1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 7: Option: ref=zc@thecnt
+TEST 7: Option: ref=thecounter
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
@@ -325,14 +325,9 @@ l. ...\showbox0
 ============================================================
 TEST 8: Option: ref=foo
 ============================================================
-! LaTeX3 Error: Key 'zref-clever/reference/ref' accepts only a fixed set of
-(LaTeX3)        choices.
-For immediate help type H <return>.
- ...                                              
-l. ...    sec:section-2.1}
-                        }
-The key 'zref-clever/reference/ref' only accepts predefined values, and 'foo'
-is not one of these.
+Package zref-clever Warning: Option 'ref=foo' requested on line .... But the
+(zref-clever)                property 'foo' is not declared, falling-back to
+(zref-clever)                'default'.
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
 1.1\group_end: }, \hyper@@link {\c_empty_tl }{section.1.2}{\group_begin:

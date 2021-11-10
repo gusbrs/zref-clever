@@ -127,8 +127,8 @@
 \box0
 \ENDTEST
 
-\BEGINTEST{Option: ref=zc@thecnt}
-\setbox0=\hbox{\zcref[ref=zc@thecnt]{sec:section-1.1, sec:section-1.2,
+\BEGINTEST{Option: ref=thecounter}
+\setbox0=\hbox{\zcref[ref=thecounter]{sec:section-1.1, sec:section-1.2,
     sec:section-2.1}}
 \showbox0
 \box0

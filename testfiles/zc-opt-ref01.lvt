@@ -4,11 +4,13 @@
 
 \usepackage[]{zref-clever}
 
-\zcsetup{ref=title}
-
 \START
 
+\zcsetup{ref=title}
+
+\OMIT
 \begin{document}
+\TIMO
 
 \ExplSyntaxOn
 \tl_show:N \l__zrefclever_ref_property_tl
