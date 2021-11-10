@@ -569,8 +569,8 @@
 % types: \texttt{part}, \texttt{chapter}, \texttt{section},
 % \texttt{paragraph}, \texttt{appendix}, \texttt{subappendix}, \texttt{page},
 % \texttt{line}, \texttt{figure}, \texttt{table}, \texttt{item},
-% \texttt{footnote}, \texttt{note}, \texttt{equation}, \texttt{theorem},
-% \texttt{lemma}, \texttt{corollary}, \texttt{proposition},
+% \texttt{footnote}, \texttt{endnote}, \texttt{note}, \texttt{equation},
+% \texttt{theorem}, \texttt{lemma}, \texttt{corollary}, \texttt{proposition},
 % \texttt{definition}, \texttt{proof}, \texttt{result}, \texttt{remark},
 % \texttt{example}, \texttt{algorithm}, \texttt{listing}, \texttt{exercise},
 % \texttt{solution}.  Therefore, if you are using a language for which
@@ -6446,7 +6446,63 @@
 %
 % \subsection{\cls{memoir} class}
 %
+% \cls{memoir} has quite a number of cross-referencing related features,
+% mostly dealing with captions and subfloats.  Some of them are implemented in
+% ways which make difficult or block altogether the use of \pkg{zref},
+% particularly \cs{zlabel}, short of redefining the whole stuff ourselves.
+% Hopefully, these features are specialized enough to make \pkg{zref-clever}
+% useful enough with \cls{memoir}, but unless some support is added upstream,
+% it is difficult to cover everything.
 %
+% \begin{enumerate}
+% \item Caption functionality which receives \meta{label} as optional
+%   argument, namely:
+%   \begin{enumerate}
+%   \item The \env{sidecaption} and \env{sidecontcaption} environments.  These
+%     environments \emph{store} the label in an internal macro,
+%     \cs{m@mscaplabel}, at the begin environment code (more precisely in
+%     \cs{@@sidecaption}), but both the call to \cs{refstepcounter} and the
+%     expansion of \cs{m@mscaplabel} take place at \cs{endsidecaption}.  For
+%     this reason, hooks are not particularly helpful, and there is not any
+%     easy way to grab the \meta{label} argument to start with.  I can see two
+%     ways to deal with these environments, none of which I really like.
+%     First, map through \cs{m@mscaplabel} until \cs{label} is found, then
+%     grab the next token which is the \meta{label}.  This can be used to set
+%     a \cs{zlabel} either with a kernel environment hook, or with
+%     \cs{@mem@scap@afterhook} (the former requires running
+%     \cs{refstepcounter} on our own, since the \texttt{env/.../end} hook
+%     comes before this is done by \cs{endsidecaption}).  Second, locally
+%     redefine \cs{label} to set both labels inside the environments.
+%   \item The bilingual caption commands: \cs{bitwonumcaption},
+%     \cs{bionenumcaption}, and \cs{bicaption}.  These commands do not support
+%     setting the label in their arguments (the labels do get set, but they
+%     end up included in the \texttt{title} property of the label too).  So we
+%     do the same for them as for \env{sidecaption}, just taking care of
+%     grouping, since we can't count on the convenience of the environment
+%     hook (luckily for us, they are scoped themselves, so we can add an extra
+%     group there).
+%   \end{enumerate}
+% \item The \cs{subcaptionref} command, which makes a reference to the
+%   subcaption without the number of the main caption (e.g. ``(b)'', instead
+%   of ``2.3(b)''), for labels set inside the \meta{subtitle} argument of the
+%   subcaptioning commands, namely: \cs{subcaption}, \cs{contsubcaption},
+%   \cs{subbottom}, \cs{contsubbottom}, \cs{subtop}.  This functionality is
+%   implemented by \cls{memoir} by setting a \emph{second label} with prefix
+%   \texttt{sub@\meta{label}}, and storing there just that part of interest.
+%   With \pkg{zref} this part is easier, since we can just add an extra
+%   property and retrieve it later on.  The thing is that it is hard to find a
+%   place to hook into to add the property to the \texttt{main} list, since
+%   \cls{memoir} does not really consider the possibility of some other
+%   command setting labels.  \cs{@memsubcaption} is the best place to hook I
+%   could find.  It is used by subcaptioning commands, and only those.  And
+%   there is no hope for an environment hook in this case anyway.
+% \item \cs{verbfootnote}, \cs{sidefootnote} and \cs{pagenote}, just as the
+%   regular \cs{footnote} until recently in the kernel, do not set
+%   \cs{@currentcounter} alongside \cs{@currentlabel}, proper referencing to
+%   them requires setting the type for it.
+% \end{enumerate}
+%
+% TODO Make a feature request for \pkg{zref}/\cs{zlabel} support?
 %
 %
 %    \begin{macrocode}
@@ -6474,43 +6530,74 @@
               } ,
           }
 %    \end{macrocode}
-% Support for \env{sidecaption}.  Unfortunately, \cls{memoir} does not offer
-% any good handle here, and \cs{zlabel} does not work inside the environment
-% (\cs{label} also not).  The label is supposed to be given as an optional
-% argument to the environment, and the argument is not only not stored in a
-% variable, but the argument is used to define the macro \cs{m@mscaplabel},
-% which is called at the end of the environment.  The below is somewhat
-% hackish, in that we map over \cs{m@mscaplabel} to find \cs{label} and then
-% retrieve its argument.  But it is the least intrusive I could think of, at
-% least we don't tamper with any \cls{memoir} internals.
-% TODO Make a feature request for \cs{zlabel} support?
+% Support for caption \cls{memoir} features that require that \meta{label} be
+% supplied as an optional argument.
 %    \begin{macrocode}
-        \cs_new_protected:Npn \@@_memoir_sidecaption_zlabel:
+        \cs_new_protected:Npn \@@_memoir_both_labels:
           {
-            \tl_if_empty:NF \m@mscaplabel
+            \cs_set_eq:NN \@@_memoir_orig_label:n \label
+            \cs_set:Npn \@@_memoir_label_and_zlabel:n #1
               {
-                \bool_set_false:N \l_tmpa_bool
-                \tl_map_inline:Nn \m@mscaplabel
-                  {
-                    \tl_if_eq:cNTF { label } ##1
-                      { \bool_set_true:N \l_tmpa_bool }
-                      {
-                        \bool_if:NT \l_tmpa_bool
-                          {
-                            \bool_set_false:N \l_tmpa_bool
-                            \refstepcounter{\@captype}
-                            \@bsphack \zlabel {##1} \@esphack
-                            \addtocounter{\@captype}{-1}
-                            \tl_map_break:
-                          }
-                      }
-                  }
+                \@@_memoir_orig_label:n {#1}
+                \zlabel{#1}
               }
+            \cs_set_eq:NN \label \@@_memoir_label_and_zlabel:n
           }
-        \AddToHook { env / sidecaption / end }
-          { \@@_memoir_sidecaption_zlabel: }
-        \AddToHook { env / sidecontcaption / end }
-          { \@@_memoir_sidecaption_zlabel: }
+        \AddToHook { env / sidecaption / begin }
+          { \@@_memoir_both_labels: }
+        \AddToHook { env / sidecontcaption / begin }
+          { \@@_memoir_both_labels: }
+        \AddToHook{ cmd / bitwonumcaption / before }
+          { \group_begin: \@@_memoir_both_labels: }
+        \AddToHook{ cmd / bitwonumcaption / after }
+          { \group_end: }
+        \AddToHook{ cmd / bionenumcaption / before }
+          { \group_begin: \@@_memoir_both_labels: }
+        \AddToHook{ cmd / bionenumcaption / after }
+          { \group_end: }
+        \AddToHook{ cmd / bicaption / before }
+          { \group_begin: \@@_memoir_both_labels: }
+        \AddToHook{ cmd / bicaption / after }
+          { \group_end: }
+%    \end{macrocode}
+% Support for \texttt{subcaption} reference.
+%    \begin{macrocode}
+        \zref@newprop { subcaption }
+          { \cs_if_exist_use:c { @@@@thesub \@captype } }
+        \AddToHook{ cmd / @memsubcaption / before }
+          { \zref@localaddprop \ZREF@mainlist { subcaption } }
+%    \end{macrocode}
+% Support for \cs{verbfootnote}, \cs{sidefootnote}, and \cs{pagenote}.
+%    \begin{macrocode}
+        \tl_new:N \l_@@_memoir_footnote_type_tl
+        \tl_set:Nn \l_@@_memoir_footnote_type_tl { footnote }
+        \AddToHook { env / minipage / begin }
+          { \tl_set:Nn \l_@@_memoir_footnote_type_tl { mpfootnote } }
+        \AddToHook { cmd / @makefntext / before }
+          {
+            \@@_zcsetup:x
+              { currentcounter = \l_@@_memoir_footnote_type_tl }
+          }
+        \AddToHook { cmd / @makesidefntext / before }
+          { \@@_zcsetup:n { currentcounter = sidefootnote } }
+        \@@_zcsetup:n
+          {
+            countertype =
+              {
+                sidefootnote = footnote ,
+                pagenote = endnote ,
+              } ,
+          }
+        % TODO Remove compatibility check after kernel release.
+        \IfFormatAtLeastTF { 2021-11-15 }
+          {
+            \AddToHook { file / \jobname.ent / before }
+              { \@@_zcsetup:x { currentcounter = pagenote } }
+          }
+          {
+            \AddToHook { file / before / \jobname.ent }
+              { \@@_zcsetup:x { currentcounter = pagenote } }
+          }
       }
       {}
   }
@@ -7021,6 +7108,12 @@ type = footnote ,
   Name-pl = Footnotes ,
   name-pl = footnotes ,
 
+type = endnote ,
+  Name-sg = Note ,
+  name-sg = note ,
+  Name-pl = Notes ,
+  name-pl = notes ,
+
 type = note ,
   Name-sg = Note ,
   name-sg = note ,
@@ -7358,6 +7451,21 @@ type = footnote ,
   case = G ,
     Name-sg = Fußnote ,
     Name-pl = Fußnoten ,
+
+type = endnote ,
+  gender = f ,
+  case = N ,
+    Name-sg = Endnote ,
+    Name-pl = Endnoten ,
+  case = A ,
+    Name-sg = Endnote ,
+    Name-pl = Endnoten ,
+  case = D ,
+    Name-sg = Endnote ,
+    Name-pl = Endnoten ,
+  case = G ,
+    Name-sg = Endnote ,
+    Name-pl = Endnoten ,
 
 type = note ,
   gender = f ,
@@ -7712,6 +7820,13 @@ type = footnote ,
   Name-pl = Notes ,
   name-pl = notes ,
 
+type = endnote ,
+  gender = f ,
+  Name-sg = Note ,
+  name-sg = note ,
+  Name-pl = Notes ,
+  name-pl = notes ,
+
 type = note ,
   gender = f ,
   Name-sg = Note ,
@@ -7954,6 +8069,13 @@ type = footnote ,
   Name-pl = Notas ,
   name-pl = notas ,
 
+type = endnote ,
+  gender = f ,
+  Name-sg = Nota ,
+  name-sg = nota ,
+  Name-pl = Notas ,
+  name-pl = notas ,
+
 type = note ,
   gender = f ,
   Name-sg = Nota ,
@@ -8181,6 +8303,13 @@ type = item ,
   name-pl = puntos ,
 
 type = footnote ,
+  gender = f ,
+  Name-sg = Nota ,
+  name-sg = nota ,
+  Name-pl = Notas ,
+  name-pl = notas ,
+
+type = endnote ,
   gender = f ,
   Name-sg = Nota ,
   name-sg = nota ,

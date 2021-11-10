@@ -1,0 +1,593 @@
+\documentclass{memoir}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+% This file is intended to test all possible "referable objects" in the memoir
+% document class.
+
+% Number all section levels.
+\setsecnumdepth{all}
+
+% Enable pagenotes
+\makepagenote
+
+\usepackage{hyperref}
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\NewDocumentCommand \newoptblock {m}{%
+  \noindent\rule{\textwidth}{0.4pt}\par%
+  \noindent\textbf{#1}\par}
+
+\begin{document}
+
+\book{Book 1}
+\zlabel{book:book-1}
+
+\part{Part 1}
+\zlabel{part:part-1}
+
+\chapter{Chapter 1}
+\zlabel{cha:chapter-1}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+\begin{table}
+  \rule{1.0cm}{1.0cm}
+  \caption{Table 1.1.1}
+  \zlabel{tab:table-1.1.1}
+\end{table}
+
+\begin{margintable}
+  \rule{1.0cm}{1.0cm}
+  \caption{Table 1.1.2}
+  \zlabel{tab:table-1.1.2}
+\end{margintable}
+
+% memoir's "continuation caption" (all labels must result the same)
+\begin{table}
+  \centering
+  \caption{A multi-part table} \zlabel{tab:table-1.1.3}
+  \begin{tabular}{lc} \toprule
+    just a single line & 1 \\ \bottomrule
+  \end{tabular}
+\end{table}
+\begin{table}
+  \centering
+  \contcaption{Continued} \zlabel{tab:table-1.1.4}
+  \begin{tabular}{lc} \toprule
+    just a single line & 2 \\ \bottomrule
+  \end{tabular}
+\end{table}
+\begin{table}
+  \centering
+  \contcaption{Concluded} \zlabel{tab:table-1.1.5}
+  \begin{tabular}{lc} \toprule
+    just a single line & 3 \\ \bottomrule
+  \end{tabular}
+\end{table}
+
+% Subcaption (table)
+\newsubfloat{table}
+\begin{table}
+  \centering
+  \begin{minipage}{0.3\textwidth}
+    \subcaption{First table\zlabel{tab:table-1.1.6}}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \subcaption{Second table\zlabel{tab:table-1.1.7}}
+  \end{minipage}
+  \caption{Table with subtables}\zlabel{tab:table-1.1.8}
+\end{table}
+
+\begin{equation}
+  \zlabel{eq:equation-1.1.1}
+\end{equation}
+
+\newtheorem{thm}{Theorem}
+\zcRefTypeSetup{thm}{
+  Name-sg=Theorem,
+  name-sg=theorem,
+  Name-pl=Theorems,
+  name-pl=theorems,
+}
+\begin{thm}
+  x=f(y)\zlabel{eq:equation-1.1.2}
+\end{thm}
+
+\begin{figure}
+  \rule{1.0cm}{1.0cm}
+  \caption{Figure 1.1.1}
+  \zlabel{fig:figure-1.1.1}
+\end{figure}
+
+\begin{marginfigure}
+  \rule{1.0cm}{1.0cm}
+  \caption{Figure 1.1.2}
+  \zlabel{fig:figure-1.1.2}
+\end{marginfigure}
+
+% Multiple captions in single figure
+\begin{figure}
+  \centering
+  \begin{minipage}{0.4\textwidth}
+    \centering
+    GRAPHIC 1
+    \caption{Graphic 1 in a float} \zlabel{fig:figure-1.1.3}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.4\textwidth}
+    \centering
+    GRAPHIC 2
+    \caption{Graphic 2 in same float} \zlabel{fig:figure-1.1.4}
+  \end{minipage}
+\end{figure}
+
+% Subcaption (figure)
+\newsubfloat{figure}
+\begin{figure}
+  \centering
+  \begin{minipage}{0.3\textwidth}
+    \verb?Some verbatim text?
+    \subcaption{First text\zlabel{fig:figure-1.1.5}}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \verb?More verbatim text?
+    \subcaption{Second text\zlabel{fig:figure-1.1.6}}
+  \end{minipage}
+  \caption{Verbatim texts}\zlabel{fig:figure-1.1.7}
+\end{figure}
+
+% Subbottom
+\begin{figure}
+  \centering
+  \subbottom[Subfigure 1\zlabel{fig:figure-1.1.8}]{\fbox{SUBFIGURE ONE}}
+  \hfill
+  \subbottom[Subfigure 2\zlabel{fig:figure-1.1.9}]{\fbox{SUBFIGURE TWO}}
+  \caption{Figure with two subfigures} \zlabel{fig:figure-1.1.10}
+\end{figure}
+
+% Sidecaption
+\begin{figure}
+  \begin{sidecaption}{An illustration}[fig:figure-1.1.11]
+    \centering
+    \rule{1.0cm}{1.0cm}
+  \end{sidecaption}
+\end{figure}
+
+% Bilingual captions
+\begin{figure}
+  \centering
+  EXAMPLE FIGURE WITH BITWONUMCAPTION
+  \bitwonumcaption[fig:figure-1.1.12]%
+    {}{Long \cs{bitwonumcaption}}%
+    {Bild}{ }{Lang \cs{bitwonumcaption}}
+\end{figure}
+\begin{figure}
+  \centering
+  EXAMPLE FIGURE WITH BIONENUMCAPTION
+  \bionenumcaption[fig:figure-1.1.13]%
+    {}{Long English \cs{bionenumcaption}}%
+    {Bild}{ }{Lang Deutsch \cs{bionenumcaption}}
+\end{figure}
+\begin{figure}
+  \centering
+  EXAMPLE FIGURE WITH BICAPTION
+  \bicaption[fig:figure-1.1.14]%
+    {Short English \cs{bicaption}}{Longingly}%
+    {Bild}{Langlauf}
+\end{figure}
+
+\newfloat[chapter]{graphic}{lof}{Graphic}
+\zcRefTypeSetup{graphic}{
+  Name-sg=Graphic,
+  name-sg=graphic,
+  Name-pl=Graphics,
+  name-pl=graphics,
+}
+\begin{graphic}
+  \caption{Graphic 1.1.1}
+  \zlabel{fig:graphic-1.1-1}
+\end{graphic}
+
+\begin{enumerate}
+\item Item\zlabel{item:1}
+  \begin{enumerate}
+  \item Item\zlabel{item:2}
+    \begin{enumerate}
+    \item Item\zlabel{item:3}
+      \begin{enumerate}
+      \item Item\zlabel{item:4}
+      \end{enumerate}
+    \end{enumerate}
+  \end{enumerate}
+\end{enumerate}
+
+Foo\footnote{Footnote\zlabel{fn:1}}
+
+\begin{minipage}{1.0\linewidth}
+  Bar\footnote{Footnote\zlabel{fn:2}}
+\end{minipage}
+
+% Verbatim footnotes.
+Text\verbfootnote{The \verb?\footnote? macro, like all other macros except for
+  \verb?\verbfootnote?, can not contain verbatim text in its
+  argument.\zlabel{fn:3}}
+% Using \verbfootnote in minipage results in "LaTeX Error: \begin{minipage} on
+% input line ... ended by \end{document}." (regardless of labeling...).
+% \begin{minipage}{1.0\linewidth}
+%   Text\verbfootnote{The \verb?\footnote? macro, like all other macros except
+%     for \verb?\verbfootnote?, can not contain verbatim text in its argument.}
+% \end{minipage}
+
+% Side footnote.
+Foo\sidefootnote{Footnote\zlabel{fn:4}}
+
+% End note.
+Page note.\pagenote{Page note.\zlabel{fn:5}}
+\printpagenotes*
+
+\subsection{Subsection 1.1.1}
+\zlabel{sec:subsection-1.1.1}
+
+\subsubsection{Subsubsection 1.1.1.1}
+\zlabel{sec:subsubsection-1.1.1.1}
+
+\paragraph{Paragraph 1.1.1.1.1}
+\zlabel{sec:paragraph-1.1.1.1.1}
+
+\subparagraph{Subparagraph 1.1.1.1.1.1}
+\zlabel{sec:subparagraph-1.1.1.1.1.1}
+
+\chapter{Chapter 2}
+\zlabel{cha:chapter-2}
+
+\begin{subappendices}
+
+\section{Section 2.1}
+\zlabel{sec:section-2.1}
+
+\subsection{Subsection 2.1.1}
+\zlabel{sec:subsection-2.1.1}
+
+\subsubsection{Subsubsection 2.1.1.1}
+\zlabel{sec:subsubsection-2.1.1.1}
+
+\paragraph{Paragraph 2.1.1.1.1}
+\zlabel{sec:paragraph-2.1.1.1.1}
+
+\subparagraph{Subparagraph 2.1.1.1.1.1}
+\zlabel{sec:subparagraph-2.1.1.1.1.1}
+
+\end{subappendices}
+
+\begin{appendices}
+
+\chapter{Chapter 3}
+\zlabel{cha:chapter-3}
+
+\section{Section 3.1}
+\zlabel{sec:section-3.1}
+
+\subsection{Subsection 3.1.1}
+\zlabel{sec:subsection-3.1.1}
+
+\subsubsection{Subsubsection 3.1.1.1}
+\zlabel{sec:subsubsection-3.1.1.1}
+
+\paragraph{Paragraph 3.1.1.1.1}
+\zlabel{sec:paragraph-3.1.1.1.1}
+
+\subparagraph{Subparagraph 3.1.1.1.1.1}
+\zlabel{sec:subparagraph-3.1.1.1.1.1}
+
+\end{appendices}
+
+\appendix{}
+
+\chapter{Chapter 4}
+\zlabel{cha:chapter-4}
+
+\section{Section 4.1}
+\zlabel{sec:section-4.1}
+
+\subsection{Subsection 4.1.1}
+\zlabel{sec:subsection-4.1.1}
+
+\subsubsection{Subsubsection 4.1.1.1}
+\zlabel{sec:subsubsection-4.1.1.1}
+
+\paragraph{Paragraph 4.1.1.1.1}
+\zlabel{sec:paragraph-4.1.1.1.1}
+
+\subparagraph{Subparagraph 4.1.1.1.1.1}
+\zlabel{sec:subparagraph-4.1.1.1.1.1}
+
+\clearpage{}
+
+\START
+
+\newoptblock{Book}
+
+\BEGINTEST{Reference: book}
+\setbox0=\hbox{\zcref{book:book-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Part}
+
+\BEGINTEST{Reference: part}
+\setbox0=\hbox{\zcref{part:part-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Chapter}
+
+\BEGINTEST{Reference: chapter}
+\setbox0=\hbox{\zcref{cha:chapter-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Section}
+
+\BEGINTEST{Reference: section}
+\setbox0=\hbox{\zcref{sec:section-1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Subsection}
+
+\BEGINTEST{Reference: subsection}
+\setbox0=\hbox{\zcref{sec:subsection-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Subsubsection}
+
+\BEGINTEST{Reference: subsubsection}
+\setbox0=\hbox{\zcref{sec:subsubsection-1.1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Paragraph}
+
+\BEGINTEST{Reference: paragraph}
+\setbox0=\hbox{\zcref{sec:paragraph-1.1.1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Subparagraph}
+
+\BEGINTEST{Reference: subparagraph}
+\setbox0=\hbox{\zcref{sec:subparagraph-1.1.1.1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Figure}
+
+\BEGINTEST{Reference: figure}
+\setbox0=\hbox{\zcref{fig:figure-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Margin figure}
+
+\BEGINTEST{Reference: marginfigure}
+\setbox0=\hbox{\zcref{fig:figure-1.1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Multiple captions same figure environment}
+
+\BEGINTEST{Multiple captions same figure environment. Reference: figure}
+\setbox0=\hbox{\zcref{fig:figure-1.1.3, fig:figure-1.1.4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Subcaption}
+
+\BEGINTEST{Subcaption. Reference: figure}
+\setbox0=\hbox{\zcref{fig:figure-1.1.5, fig:figure-1.1.6, fig:figure-1.1.7}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Subcaption. Reference: subcaption figure}
+\setbox0=\hbox{\zcref[ref=subcaption]{fig:figure-1.1.5, fig:figure-1.1.6,
+    fig:figure-1.1.7}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Subcaption. Reference: table}
+\setbox0=\hbox{\zcref{tab:table-1.1.6, tab:table-1.1.7, tab:table-1.1.8}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Subcaption. Reference: subcaption table}
+\setbox0=\hbox{\zcref[ref=subcaption]{tab:table-1.1.6, tab:table-1.1.7,
+    tab:table-1.1.8}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Subbottom}
+
+\BEGINTEST{Subbottom. Reference: figure}
+\setbox0=\hbox{\zcref{fig:figure-1.1.8, fig:figure-1.1.9, fig:figure-1.1.10}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Subbottom. Reference: subcaption figure}
+\setbox0=\hbox{\zcref[ref=subcaption]{fig:figure-1.1.8, fig:figure-1.1.9,
+    fig:figure-1.1.10}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Sidecaption}
+
+\BEGINTEST{Sidecaption. Reference: figure}
+\setbox0=\hbox{\zcref{fig:figure-1.1.11}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Bilingual captions}
+
+\BEGINTEST{Bilingual captions. Reference: figure}
+\setbox0=\hbox{\zcref{fig:figure-1.1.12, fig:figure-1.1.13,
+    fig:figure-1.1.14}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Newfloat}
+
+\BEGINTEST{Newfloat. Reference: graphic}
+\setbox0=\hbox{\zcref{fig:graphic-1.1-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Table}
+
+\BEGINTEST{Reference: table}
+\setbox0=\hbox{\zcref{tab:table-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Margin table}
+
+\BEGINTEST{Reference: margintable}
+\setbox0=\hbox{\zcref{tab:table-1.1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Continuation caption}
+
+\BEGINTEST{Continuation caption. Reference: table}
+\setbox0=\hbox{\zcref{tab:table-1.1.3, tab:table-1.1.4, tab:table-1.1.5}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Enumerate items}
+
+\BEGINTEST{Enumerate items. Reference: enumi-iv}
+\setbox0=\hbox{\zcref{item:1,item:2,item:3,item:4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Footnote}
+
+\BEGINTEST{Reference: footnote}
+\setbox0=\hbox{\zcref{fn:1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Mini-page footnote}
+
+\BEGINTEST{Reference: mpfootnote}
+\setbox0=\hbox{\zcref{fn:2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Verbatim footnote}
+
+\BEGINTEST{Reference: verbatim footnote}
+\setbox0=\hbox{\zcref{fn:3}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Side footnote}
+
+\BEGINTEST{Reference: side footnote}
+\setbox0=\hbox{\zcref{fn:4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Page note}
+
+\BEGINTEST{Reference: page (end) note}
+\setbox0=\hbox{\zcref{fn:5}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Equation}
+
+\BEGINTEST{Reference: equation}
+\setbox0=\hbox{\zcref{eq:equation-1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Newtheorem}
+
+\BEGINTEST{Reference: thm}
+\setbox0=\hbox{\zcref{eq:equation-1.1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Subappendices}
+
+\BEGINTEST{Reference: sectioning commands in subapenddices}
+\setbox0=\hbox{\zcref{sec:section-2.1, sec:subsection-2.1.1,
+    sec:subsubsection-2.1.1.1, sec:paragraph-2.1.1.1.1,
+    sec:subparagraph-2.1.1.1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Appendix}
+
+\BEGINTEST{Reference: sectioning commands in appendices}
+\setbox0=\hbox{\zcref{cha:chapter-3, sec:section-3.1, sec:subsection-3.1.1,
+    sec:subsubsection-3.1.1.1, sec:paragraph-3.1.1.1.1,
+    sec:subparagraph-3.1.1.1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Appendix}
+
+\BEGINTEST{Reference: sectioning commands after appendix}
+\setbox0=\hbox{\zcref{cha:chapter-4, sec:section-4.1, sec:subsection-4.1.1,
+    sec:subsubsection-4.1.1.1, sec:paragraph-4.1.1.1.1,
+    sec:subparagraph-4.1.1.1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}
