@@ -181,14 +181,14 @@
 % \DescribeOption{ref} %
 % \DescribeOption{page} %
 % The \opt{ref} option controls the label property to which \cs{zcref} refers
-% to.  It can receive values \texttt{default}, \texttt{zc@thecnt} and
-% \texttt{page}.  If \pkg{zref-titleref} is loaded, \opt{ref} also accepts the
-% value \texttt{title}.  The package's default is, well, \texttt{default},
-% which is our standard reference.  \texttt{zc@thecnt} is a property set by
-% \pkg{zref-clever} and is similar to \pkg{zref}'s \texttt{default} property,
-% except that it is not affected by the kernel's
+% to.  It can receive values \texttt{default}, \texttt{page}, and
+% \texttt{thecounter}.  If \pkg{zref-titleref} is loaded, \opt{ref} also
+% accepts the value \texttt{title}.  The package's default is, well,
+% \texttt{default}, which is our standard reference.  \texttt{thecounter} is a
+% property set by \pkg{zref-clever} and is similar to \pkg{zref}'s
+% \texttt{default} property, except that it is not affected by the kernel's
 % \cs{labelformat}.\footnote{Technical note: the \texttt{default} property
-% stores \cs{@currentlabel}, while the \texttt{zc@thecnt} property stores
+% stores \cs{@currentlabel}, while the \texttt{thecounter} property stores
 % \cs{the}\cs{@currentcounter}.  The later is exactly what \cs{refstepcounter}
 % uses to build \cs{@currentlabel}, except for the \cs{labelformat} prefix
 % and, hence, has the advantage of being unaffected by it.  But the former is
@@ -200,7 +200,7 @@
 % compression inevitably depend on a correct \opt{currentcounter}), but using
 % \texttt{default} at least ensures that the reference itself is correct.
 % That said, if you do set \cs{labelformat} for some reason,
-% \texttt{zc@thecnt} may be useful.}  By default, reference formatting,
+% \texttt{thecounter} may be useful.}  By default, reference formatting,
 % sorting, and compression are done according to information inferred from the
 % \emph{current counter} (see \opt{currentcounter} option below).  Special
 % treatment in these areas is provided for \texttt{page}, but not for
@@ -1625,16 +1625,16 @@
 % \cs{labelformat} (previously from \pkg{varioref}, now in the kernel) will
 % include there the reference ``prefix'' and complicate the job we are trying
 % to do here.  Hence, we isolate \cs{the}\meta{counter} and store it ``clean''
-% in \texttt{zc@thecnt} for reserved use.  Since \cs{@currentlabel}, which
+% in \texttt{thecounter} for reserved use.  Since \cs{@currentlabel}, which
 % populates the \texttt{default} property, is \emph{more reliable} than
-% \cs{@currentcounter}, \texttt{zc@thecnt} is meant to be kept as an
+% \cs{@currentcounter}, \texttt{thecounter} is meant to be kept as an
 % \emph{option} (\opt{ref} option), in case there's need to use
 % \pkg{zref-clever} together with \cs{labelformat}.  Based on the definition
 % of \cs{@currentlabel} done inside \cs{refstepcounter} in `texdoc source2e',
 % section `ltxref.dtx'.  We just drop the \cs{p@...} prefix.
 %
 %    \begin{macrocode}
-\zref@newprop { zc@thecnt }
+\zref@newprop { thecounter }
   {
     \cs_if_exist:cTF { c@ \l_@@_current_counter_tl }
       { \use:c { the \l_@@_current_counter_tl } }
@@ -1643,7 +1643,7 @@
           { \use:c { the \@currentcounter } }
       }
   }
-\zref@addprop \ZREF@mainlist { zc@thecnt }
+\zref@addprop \ZREF@mainlist { thecounter }
 %    \end{macrocode}
 %
 %
@@ -1673,7 +1673,7 @@
 %    \end{macrocode}
 %
 %
-% Since the \texttt{default}, \texttt{zc@thecnt}, and \texttt{page} properties
+% Since the \texttt{default}/\texttt{thecounter} and \texttt{page} properties
 % store the ``\emph{printed} representation'' of their respective counters,
 % for sorting and compressing purposes, we are also interested in their
 % numeric values.  So we store them in \texttt{zc@cntval} and
@@ -2964,7 +2964,7 @@
 %
 % \cs{l_@@_ref_property_tl} stores the property to which the reference is
 % being made.  Currently, we restrict \texttt{ref=} to these three (or four)
-% alternatives -- \texttt{default}, \texttt{zc@thecnt}, \texttt{page}, and
+% alternatives -- \texttt{default}, \texttt{page}, \texttt{thecounter}, and
 % \texttt{title} if \pkg{zref-titleref} is loaded --, but there might be a
 % case for making this more flexible.  The infrastructure can already handle
 % receiving an arbitrary property, as long as one is satisfied with sorting
@@ -2986,10 +2986,10 @@
     ref .choice: ,
     ref / default .code:n =
       { \tl_set:Nn \l_@@_ref_property_tl { default } } ,
-    ref / zc@thecnt .code:n =
-      { \tl_set:Nn \l_@@_ref_property_tl { zc@thecnt } } ,
     ref / page .code:n =
       { \tl_set:Nn \l_@@_ref_property_tl { page } } ,
+    ref / thecounter .code:n =
+      { \tl_set:Nn \l_@@_ref_property_tl { thecounter } } ,
     ref / title .code:n =
       {
         \AddToHook { begindocument }
