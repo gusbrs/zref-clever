@@ -6470,6 +6470,80 @@
 %
 %
 %
+% \subsection{\cls{memoir} class}
+%
+%
+%
+%
+%    \begin{macrocode}
+\AddToHook { begindocument }
+  {
+    \@ifclassloaded{ memoir }
+      {
+%    \end{macrocode}
+% Add subfigure and subtable support out of the box.  Technically, this is not
+% ``default'' behavior for \cls{memoir}, users have to enable it with
+% \cs{newsubfloat}, but let this be smooth.  Also, this does not cover any
+% other floats created with \cs{newfloat}.
+%    \begin{macrocode}
+        \@@_zcsetup:n
+          {
+            countertype =
+              {
+                subfigure = figure ,
+                subtable  = table ,
+              } ,
+            counterresetby =
+              {
+                subfigure = figure ,
+                subtable  = table ,
+              } ,
+          }
+%    \end{macrocode}
+% Support for \env{sidecaption}.  Unfortunately, \cls{memoir} does not offer
+% any good handle here, and \cs{zlabel} does not work inside the environment
+% (\cs{label} also not).  The label is supposed to be given as an optional
+% argument to the environment, and the argument is not only not stored in a
+% variable, but the argument is used to define the macro \cs{m@mscaplabel},
+% which is called at the end of the environment.  The below is somewhat
+% hackish, in that we map over \cs{m@mscaplabel} to find \cs{label} and then
+% retrieve its argument.  But it is the least intrusive I could think of, at
+% least we don't tamper with any \cls{memoir} internals.
+% TODO Make a feature request for \cs{zlabel} support?
+%    \begin{macrocode}
+        \cs_new_protected:Npn \@@_memoir_sidecaption_zlabel:
+          {
+            \tl_if_empty:NF \m@mscaplabel
+              {
+                \bool_set_false:N \l_tmpa_bool
+                \tl_map_inline:Nn \m@mscaplabel
+                  {
+                    \tl_if_eq:cNTF { label } ##1
+                      { \bool_set_true:N \l_tmpa_bool }
+                      {
+                        \bool_if:NT \l_tmpa_bool
+                          {
+                            \bool_set_false:N \l_tmpa_bool
+                            \refstepcounter{\@captype}
+                            \@bsphack \zlabel {##1} \@esphack
+                            \addtocounter{\@captype}{-1}
+                            \tl_map_break:
+                          }
+                      }
+                  }
+              }
+          }
+        \AddToHook { env / sidecaption / end }
+          { \@@_memoir_sidecaption_zlabel: }
+        \AddToHook { env / sidecontcaption / end }
+          { \@@_memoir_sidecaption_zlabel: }
+      }
+      {}
+  }
+%    \end{macrocode}
+%
+%
+%
 % \subsection{\pkg{amsmath} package}
 %
 % About this, see \url{https://tex.stackexchange.com/a/402297}.
@@ -6884,6 +6958,12 @@ tlastsep  = {,~and\nobreakspace} ,
 notesep   = {~} ,
 rangesep  = {~to\nobreakspace} ,
 
+type = book ,
+  Name-sg = Book ,
+  name-sg = book ,
+  Name-pl = Books ,
+  name-pl = books ,
+
 type = part ,
   Name-sg = Part ,
   name-sg = part ,
@@ -7100,6 +7180,21 @@ tlistsep = {,~} ,
 tlastsep = {~und\nobreakspace} ,
 notesep  = {~} ,
 rangesep = {~bis\nobreakspace} ,
+
+type = book ,
+  gender = n ,
+  case = N ,
+    Name-sg = Buch ,
+    Name-pl = Bücher ,
+  case = A ,
+    Name-sg = Buch ,
+    Name-pl = Bücher ,
+  case = D ,
+    Name-sg = Buch ,
+    Name-pl = Büchern ,
+  case = G ,
+    Name-sg = Buches ,
+    Name-pl = Bücher ,
 
 type = part ,
   gender = m ,
@@ -7551,6 +7646,13 @@ tlastsep = {~et\nobreakspace} ,
 notesep  = {~} ,
 rangesep = {~à\nobreakspace} ,
 
+type = book ,
+  gender = m ,
+  Name-sg = Livre ,
+  name-sg = livre ,
+  Name-pl = Livres ,
+  name-pl = livres ,
+
 type = part ,
   gender = f ,
   Name-sg = Partie ,
@@ -7775,6 +7877,13 @@ tlistsep = {,~} ,
 tlastsep = {~e\nobreakspace} ,
 notesep  = {~} ,
 rangesep = {~a\nobreakspace} ,
+
+type = book ,
+  gender = m ,
+  Name-sg =  Livro ,
+  name-sg =  livro ,
+  Name-pl =  Livros ,
+  name-pl =  livros ,
 
 type = part ,
   gender = f ,
@@ -8011,6 +8120,13 @@ tlistsep = {,~} ,
 tlastsep = {~y\nobreakspace} ,
 notesep  = {~} ,
 rangesep = {~a\nobreakspace} ,
+
+type = book ,
+  gender = m ,
+  Name-sg =  Libro ,
+  name-sg =  libro ,
+  Name-pl =  Libros ,
+  name-pl =  libros ,
 
 type = part ,
   gender = f ,
