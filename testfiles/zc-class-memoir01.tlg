@@ -107,14 +107,14 @@ l. ...\showbox0
 TEST 5: Reference: subsection
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{subsection.2.0.1}{\group_begin: section\group_end: \nobreakspace
-\group_begin: 2.0.1\group_end: }.
+}{subsection.1.1.1}{\group_begin: section\group_end: \nobreakspace
+\group_begin: 1.1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{sec:subsection-1.1.1}
                                                  }
 > \box...=
 \hbox(6.67859+0.0)x53.94455
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.2.0.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.1.1.1}
 .\OT1/cmr/m/n/10 s
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 c
@@ -124,9 +124,9 @@ l. ...\setbox0=\hbox{\zcref{sec:subsection-1.1.1}
 .\OT1/cmr/m/n/10 n
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 0
+.\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
 .\pdfendlink
@@ -137,14 +137,14 @@ l. ...\showbox0
 TEST 6: Reference: subsubsection
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{subsubsection.2.0.1.1}{\group_begin: section\group_end: \nobreakspace
-\group_begin: 2.0.1.1\group_end: }.
+}{subsubsection.1.1.1.1}{\group_begin: section\group_end: \nobreakspace
+\group_begin: 1.1.1.1\group_end: }.
 <recently read> }
 l. ......0=\hbox{\zcref{sec:subsubsection-1.1.1.1}
                                                   }
 > \box...=
 \hbox(6.67859+0.0)x61.72235
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.2.0.1.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.1.1.1.1}
 .\OT1/cmr/m/n/10 s
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 c
@@ -154,9 +154,9 @@ l. ......0=\hbox{\zcref{sec:subsubsection-1.1.1.1}
 .\OT1/cmr/m/n/10 n
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 0
+.\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
@@ -169,14 +169,14 @@ l. ...\showbox0
 TEST 7: Reference: paragraph
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{paragraph.2.0.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
-\group_begin: 2.0.1.1.1\group_end: }.
+}{paragraph.1.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
+\group_begin: 1.1.1.1.1\group_end: }.
 <recently read> }
 l. ......ox0=\hbox{\zcref{sec:paragraph-1.1.1.1.1}
                                                   }
 > \box...=
 \hbox(6.94444+1.94444)x83.94467
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.2.0.1.1.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.1.1.1.1.1}
 .\OT1/cmr/m/n/10 p
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 r
@@ -188,9 +188,9 @@ l. ......ox0=\hbox{\zcref{sec:paragraph-1.1.1.1.1}
 .\OT1/cmr/m/n/10 h
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 0
+.\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
@@ -205,14 +205,14 @@ l. ...\showbox0
 TEST 8: Reference: subparagraph
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{subparagraph.2.0.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
-\group_begin: 2.0.1.1.1.1\group_end: }.
+}{subparagraph.1.1.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
+\group_begin: 1.1.1.1.1.1\group_end: }.
 <recently read> }
 l. ......hbox{\zcref{sec:subparagraph-1.1.1.1.1.1}
                                                   }
 > \box...=
 \hbox(6.94444+1.94444)x91.72247
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.2.0.1.1.1.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.1.1.1.1.1.1}
 .\OT1/cmr/m/n/10 p
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 r
@@ -224,9 +224,9 @@ l. ......hbox{\zcref{sec:subparagraph-1.1.1.1.1.1}
 .\OT1/cmr/m/n/10 h
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 0
+.\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
@@ -653,8 +653,6 @@ l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.11}
 ! OK.
 l. ...\showbox0
 ============================================================
-[16
-]
 ============================================================
 TEST 19: Bilingual captions. Reference: figure
 ============================================================
@@ -992,7 +990,30 @@ l. ...\setbox0=\hbox{\zcref{fn:5}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 30: Reference: equation
+TEST 30: Reference: verse poemline
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{poemline.1.5}{\group_begin: line\group_end: \nobreakspace \group_begin:
+5\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{vs:verse-1.1-1}
+                                           }
+> \box...=
+\hbox(6.94444+0.0)x23.88893
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{poemline.1.5}
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 5
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 31: Reference: equation
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{equation.1.1.1}{\group_begin: equation\group_end: \nobreakspace
@@ -1023,7 +1044,7 @@ l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 31: Reference: thm
+TEST 32: Reference: thm
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{thm.1}{\group_begin: theorem\group_end: \nobreakspace \group_begin:
@@ -1049,73 +1070,21 @@ l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 32: Reference: sectioning commands in subapenddices
+TEST 33: Reference: sectioning commands in subapenddices
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: paragraphs\group_end:
-\nobreakspace \hyper@@link {\c_empty_tl }{paragraph.3.A.1.1.1}{\group_begin:
-3.A.1.1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
-}{subparagraph.3.A.1.1.1.1}{\group_begin: 3.A.1.1.1.1\group_end: }.
-<recently read> }
-l. ...    sec:subparagraph-2.1.1.1.1.1}
-                                       }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
-\nobreakspace \hyper@@link {\c_empty_tl }{section.3.A}{\group_begin:
-3.A\group_end: }, \hyper@@link {\c_empty_tl }{subsection.3.A.1}{\group_begin:
-3.A.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
-}{subsubsection.3.A.1.1}{\group_begin: 3.A.1.1\group_end: }.
+\nobreakspace \hyper@@link {\c_empty_tl }{section.2.A}{\group_begin:
+2.A\group_end: }, \hyper@@link {\c_empty_tl }{subsection.2.A.1}{\group_begin:
+2.A.1\group_end: }, \hyper@@link {\c_empty_tl
+}{subsubsection.2.A.1.1}{\group_begin: 2.A.1.1\group_end: }, \hyper@@link
+{\c_empty_tl }{paragraph.2.A.1.1.1}{\group_begin: 2.A.1.1.1\group_end: }
+and\nobreakspace \hyper@@link {\c_empty_tl
+}{subparagraph.2.A.1.1.1.1}{\group_begin: 2.A.1.1.1.1\group_end: }.
 <recently read> }
 l. ...    sec:subparagraph-2.1.1.1.1.1}
                                        }
 > \box...=
-\hbox(6.94444+1.94444)x331.27853
-.\OT1/cmr/m/n/10 p
-.\OT1/cmr/m/n/10 a
-.\OT1/cmr/m/n/10 r
-.\OT1/cmr/m/n/10 a
-.\OT1/cmr/m/n/10 g
-.\OT1/cmr/m/n/10 r
-.\OT1/cmr/m/n/10 a
-.\OT1/cmr/m/n/10 p
-.\OT1/cmr/m/n/10 h
-.\OT1/cmr/m/n/10 s
-.\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.3.A.1.1.1}
-.\OT1/cmr/m/n/10 3
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 A
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\pdfendlink
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 a
-.\OT1/cmr/m/n/10 n
-.\OT1/cmr/m/n/10 d
-.\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.3.A.1.1.1.1}
-.\OT1/cmr/m/n/10 3
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 A
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\pdfendlink
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 a
-.\OT1/cmr/m/n/10 n
-.\OT1/cmr/m/n/10 d
-.\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
+\hbox(6.94444+1.94444)x246.16724
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 p
 .\OT1/cmr/m/n/10 p
@@ -1129,17 +1098,41 @@ l. ...    sec:subparagraph-2.1.1.1.1.1}
 .\OT1/cmr/m/n/10 s
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.3.A}
-.\OT1/cmr/m/n/10 3
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.2.A}
+.\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
 .\pdfendlink
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.3.A.1}
-.\OT1/cmr/m/n/10 3
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.2.A.1}
+.\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.2.A.1.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.2.A.1.1.1}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
 .\pdfendlink
@@ -1149,10 +1142,14 @@ l. ...    sec:subparagraph-2.1.1.1.1.1}
 .\OT1/cmr/m/n/10 d
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.3.A.1.1}
-.\OT1/cmr/m/n/10 3
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.2.A.1.1.1.1}
+.\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
@@ -1162,74 +1159,22 @@ l. ...    sec:subparagraph-2.1.1.1.1.1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 33: Reference: sectioning commands in appendices
+TEST 34: Reference: sectioning commands in appendices
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: paragraphs\group_end:
-\nobreakspace \hyper@@link {\c_empty_tl }{paragraph.A.1.1.1.1}{\group_begin:
-A.1.1.1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
-}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
-<recently read> }
-l. ...    sec:subparagraph-3.1.1.1.1.1}
-                                       }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
 \nobreakspace \hyper@@link {\c_empty_tl }{chapter.A}{\group_begin:
 A\group_end: }, \hyper@@link {\c_empty_tl }{section.A.1}{\group_begin:
 A.1\group_end: }, \hyper@@link {\c_empty_tl }{subsection.A.1.1}{\group_begin:
-A.1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
-}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }.
+A.1.1\group_end: }, \hyper@@link {\c_empty_tl
+}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \hyper@@link
+{\c_empty_tl }{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: }
+and\nobreakspace \hyper@@link {\c_empty_tl
+}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
 <recently read> }
 l. ...    sec:subparagraph-3.1.1.1.1.1}
                                        }
 > \box...=
-\hbox(6.94444+1.94444)x344.88966
-.\OT1/cmr/m/n/10 p
-.\OT1/cmr/m/n/10 a
-.\OT1/cmr/m/n/10 r
-.\OT1/cmr/m/n/10 a
-.\OT1/cmr/m/n/10 g
-.\OT1/cmr/m/n/10 r
-.\OT1/cmr/m/n/10 a
-.\OT1/cmr/m/n/10 p
-.\OT1/cmr/m/n/10 h
-.\OT1/cmr/m/n/10 s
-.\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.A.1.1.1.1}
-.\OT1/cmr/m/n/10 A
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\pdfendlink
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 a
-.\OT1/cmr/m/n/10 n
-.\OT1/cmr/m/n/10 d
-.\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.A.1.1.1.1.1}
-.\OT1/cmr/m/n/10 A
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\pdfendlink
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 a
-.\OT1/cmr/m/n/10 n
-.\OT1/cmr/m/n/10 d
-.\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
+\hbox(6.94444+1.94444)x259.77837
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 p
 .\OT1/cmr/m/n/10 p
@@ -1262,14 +1207,42 @@ l. ...    sec:subparagraph-3.1.1.1.1.1}
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
 .\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.A.1.1.1}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.A.1.1.1.1}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
 .\glue 3.33333 plus 1.66666 minus 1.11111
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 n
 .\OT1/cmr/m/n/10 d
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.A.1.1.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.A.1.1.1.1.1}
 .\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
@@ -1281,7 +1254,7 @@ l. ...    sec:subparagraph-3.1.1.1.1.1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 34: Reference: sectioning commands after appendix
+TEST 35: Reference: sectioning commands after appendix
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
 \nobreakspace \hyper@@link {\c_empty_tl }{appendix.A}{\group_begin:
@@ -1374,5 +1347,4 @@ l. ...    sec:subparagraph-4.1.1.1.1.1}
 .\pdfendlink
 ! OK.
 l. ...\showbox0
-[17]
 ============================================================

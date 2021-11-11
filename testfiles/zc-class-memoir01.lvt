@@ -230,9 +230,28 @@ Text\verbfootnote{The \verb?\footnote? macro, like all other macros except for
 % Side footnote.
 Foo\sidefootnote{Footnote\zlabel{fn:4}}
 
-% End note.
-Page note.\pagenote{Page note.\zlabel{fn:5}}
-\printpagenotes*
+% Verse lines
+\linenumberfrequency{2}
+\settowidth{\versewidth}{Nay, nay, I leave thee not,
+  thou goest too}
+\begin{verse}[\versewidth]
+  \ldots \\*
+  His judgement rendered, he dissolved the Thing. \\*
+  \flagverse{Ingeborg} And your decision? \\*
+  \flagverse{Fridthjof} \vinphantom{And your decision?}
+  Have I ought to choose? \\*
+  Is not mine honour bound by his decree?\zlabel{vs:verse-1.1-1} \\*
+  And that I will redeem through Angantyr \\*
+  His paltry gold doth hide in Nastrand’s flood. \\*
+  Today will I depart. \\*
+  \flagverse{Ingeborg} \vinphantom{Today will I depart.}
+  And Ingeborg leave? \\*
+  \flagverse{Fridthjof} Nay, nay, I leave thee not,
+  thou goest too. \\*
+  \flagverse{Ingeborg} Impossible! \\*
+  \flagverse{Fridthjof} \vinphantom{Impossible!}
+  O! hear me, ere thou answerest.
+\end{verse}
 
 \subsection{Subsection 1.1.1}
 \zlabel{sec:subsection-1.1.1}
@@ -267,6 +286,10 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \zlabel{sec:subparagraph-2.1.1.1.1.1}
 
 \end{subappendices}
+
+% End note.
+Page note.\pagenote{Page note.\zlabel{fn:5}}
+\printpagenotes
 
 \begin{appendices}
 
@@ -394,6 +417,10 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \box0
 \ENDTEST
 
+\OMIT
+\clearpage{}
+\TIMO
+
 \newoptblock{Multiple captions same figure environment}
 
 \BEGINTEST{Multiple captions same figure environment. Reference: figure}
@@ -494,6 +521,10 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \box0
 \ENDTEST
 
+\OMIT
+\clearpage{}
+\TIMO
+
 \newoptblock{Enumerate items}
 
 \BEGINTEST{Enumerate items. Reference: enumi-iv}
@@ -542,6 +573,14 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \box0
 \ENDTEST
 
+\newoptblock{Verse}
+
+\BEGINTEST{Reference: verse poemline}
+\setbox0=\hbox{\zcref{vs:verse-1.1-1}}
+\showbox0
+\box0
+\ENDTEST
+
 \newoptblock{Equation}
 
 \BEGINTEST{Reference: equation}
@@ -568,7 +607,7 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \box0
 \ENDTEST
 
-\newoptblock{Appendix}
+\newoptblock{Appendices}
 
 \BEGINTEST{Reference: sectioning commands in appendices}
 \setbox0=\hbox{\zcref{cha:chapter-3, sec:section-3.1, sec:subsection-3.1.1,

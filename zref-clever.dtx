@@ -6414,6 +6414,8 @@
                     section       = appendix ,
                     subsection    = appendix ,
                     subsubsection = appendix ,
+                    paragraph     = appendix ,
+                    subparagraph  = appendix ,
                   }
               }
           }
@@ -6433,6 +6435,8 @@
                     section       = appendix ,
                     subsection    = appendix ,
                     subsubsection = appendix ,
+                    paragraph     = appendix ,
+                    subparagraph  = appendix ,
                   } ,
               }
           }
@@ -6447,12 +6451,12 @@
 % \subsection{\cls{memoir} class}
 %
 % \cls{memoir} has quite a number of cross-referencing related features,
-% mostly dealing with captions and subfloats.  Some of them are implemented in
-% ways which make difficult or block altogether the use of \pkg{zref},
-% particularly \cs{zlabel}, short of redefining the whole stuff ourselves.
-% Hopefully, these features are specialized enough to make \pkg{zref-clever}
-% useful enough with \cls{memoir}, but unless some support is added upstream,
-% it is difficult to cover everything.
+% mostly dealing with captions, subfloats, and notes.  Some of them are
+% implemented in ways which make difficult or block altogether the use of
+% \pkg{zref}, particularly \cs{zlabel}, short of redefining the whole stuff
+% ourselves.  Hopefully, these features are specialized enough to make
+% \pkg{zref-clever} useful enough with \cls{memoir}, but unless some support
+% is added upstream, it is difficult to cover everything.
 %
 % \begin{enumerate}
 % \item Caption functionality which receives \meta{label} as optional
@@ -6513,8 +6517,9 @@
 %    \end{macrocode}
 % Add subfigure and subtable support out of the box.  Technically, this is not
 % ``default'' behavior for \cls{memoir}, users have to enable it with
-% \cs{newsubfloat}, but let this be smooth.  Also, this does not cover any
-% other floats created with \cs{newfloat}.
+% \cs{newsubfloat}, but let this be smooth.  Still, this does not cover any
+% other floats created with \cs{newfloat}.  Also include setup for
+% \env{verse}.
 %    \begin{macrocode}
         \@@_zcsetup:n
           {
@@ -6522,6 +6527,7 @@
               {
                 subfigure = figure ,
                 subtable  = table ,
+                poemline  = line ,
               } ,
             counterresetby =
               {

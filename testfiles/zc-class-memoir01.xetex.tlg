@@ -84,18 +84,18 @@ l. ...\showbox0
 TEST 5: Reference: subsection
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{subsection.2.0.1}{\group_begin: section\group_end: \nobreakspace
-\group_begin: 2.0.1\group_end: }.
+}{subsection.1.1.1}{\group_begin: section\group_end: \nobreakspace
+\group_begin: 1.1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{sec:subsection-1.1.1}
                                                  }
 > \box...=
-\hbox(6.66+0.21999)x53.94
+\hbox(6.66+0.10999)x53.94
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
 .\TU/lmr/m/n/10 section
 .\penalty 10000
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 2.0.1
+.\TU/lmr/m/n/10 1.1.1
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -104,18 +104,18 @@ l. ...\showbox0
 TEST 6: Reference: subsubsection
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{subsubsection.2.0.1.1}{\group_begin: section\group_end: \nobreakspace
-\group_begin: 2.0.1.1\group_end: }.
+}{subsubsection.1.1.1.1}{\group_begin: section\group_end: \nobreakspace
+\group_begin: 1.1.1.1\group_end: }.
 <recently read> }
 l. ......0=\hbox{\zcref{sec:subsubsection-1.1.1.1}
                                                   }
 > \box...=
-\hbox(6.66+0.21999)x61.72
+\hbox(6.66+0.10999)x61.72
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
 .\TU/lmr/m/n/10 section
 .\penalty 10000
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 2.0.1.1
+.\TU/lmr/m/n/10 1.1.1.1
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -124,8 +124,8 @@ l. ...\showbox0
 TEST 7: Reference: paragraph
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{paragraph.2.0.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
-\group_begin: 2.0.1.1.1\group_end: }.
+}{paragraph.1.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
+\group_begin: 1.1.1.1.1\group_end: }.
 <recently read> }
 l. ......ox0=\hbox{\zcref{sec:paragraph-1.1.1.1.1}
                                                   }
@@ -135,7 +135,7 @@ l. ......ox0=\hbox{\zcref{sec:paragraph-1.1.1.1.1}
 .\TU/lmr/m/n/10 paragraph
 .\penalty 10000
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 2.0.1.1.1
+.\TU/lmr/m/n/10 1.1.1.1.1
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -144,8 +144,8 @@ l. ...\showbox0
 TEST 8: Reference: subparagraph
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{subparagraph.2.0.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
-\group_begin: 2.0.1.1.1.1\group_end: }.
+}{subparagraph.1.1.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
+\group_begin: 1.1.1.1.1.1\group_end: }.
 <recently read> }
 l. ......hbox{\zcref{sec:subparagraph-1.1.1.1.1.1}
                                                   }
@@ -155,7 +155,7 @@ l. ......hbox{\zcref{sec:subparagraph-1.1.1.1.1.1}
 .\TU/lmr/m/n/10 paragraph
 .\penalty 10000
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 2.0.1.1.1.1
+.\TU/lmr/m/n/10 1.1.1.1.1.1
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -452,8 +452,6 @@ l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.11}
 ! OK.
 l. ...\showbox0
 ============================================================
-[16
-]
 ============================================================
 TEST 19: Bilingual captions. Reference: figure
 ============================================================
@@ -703,7 +701,27 @@ l. ...\setbox0=\hbox{\zcref{fn:5}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 30: Reference: equation
+TEST 30: Reference: verse poemline
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{poemline.1.5}{\group_begin: line\group_end: \nobreakspace \group_begin:
+5\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{vs:verse-1.1-1}
+                                           }
+> \box...=
+\hbox(6.94+0.21999)x23.89
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 line
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 5
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 31: Reference: equation
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{equation.1.1.1}{\group_begin: equation\group_end: \nobreakspace
@@ -724,7 +742,7 @@ l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 31: Reference: thm
+TEST 32: Reference: thm
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{thm.1}{\group_begin: theorem\group_end: \nobreakspace \group_begin:
@@ -744,101 +762,69 @@ l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 32: Reference: sectioning commands in subapenddices
+TEST 33: Reference: sectioning commands in subapenddices
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: paragraphs\group_end:
-\nobreakspace \hyper@@link {\c_empty_tl }{paragraph.3.A.1.1.1}{\group_begin:
-3.A.1.1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
-}{subparagraph.3.A.1.1.1.1}{\group_begin: 3.A.1.1.1.1\group_end: }.
-<recently read> }
-l. ...    sec:subparagraph-2.1.1.1.1.1}
-                                       }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
-\nobreakspace \hyper@@link {\c_empty_tl }{section.3.A}{\group_begin:
-3.A\group_end: }, \hyper@@link {\c_empty_tl }{subsection.3.A.1}{\group_begin:
-3.A.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
-}{subsubsection.3.A.1.1}{\group_begin: 3.A.1.1\group_end: }.
+\nobreakspace \hyper@@link {\c_empty_tl }{section.2.A}{\group_begin:
+2.A\group_end: }, \hyper@@link {\c_empty_tl }{subsection.2.A.1}{\group_begin:
+2.A.1\group_end: }, \hyper@@link {\c_empty_tl
+}{subsubsection.2.A.1.1}{\group_begin: 2.A.1.1\group_end: }, \hyper@@link
+{\c_empty_tl }{paragraph.2.A.1.1.1}{\group_begin: 2.A.1.1.1\group_end: }
+and\nobreakspace \hyper@@link {\c_empty_tl
+}{subparagraph.2.A.1.1.1.1}{\group_begin: 2.A.1.1.1.1\group_end: }.
 <recently read> }
 l. ...    sec:subparagraph-2.1.1.1.1.1}
                                        }
 > \box...=
-\hbox(7.16+2.05998)x331.33
-.\TU/lmr/m/n/10 paragraphs
-.\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 3.A.1.1.1
-.\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
-.\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 3.A.1.1.1.1
-.\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
-.\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
+\hbox(7.16+1.93999)x246.2
 .\TU/lmr/m/n/10 appendices
 .\penalty 10000
 .\glue 3.33 plus 1.665 minus 1.11
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 3.A
+.\TU/lmr/m/n/10 2.A
 .\special{pdf:eann}
 .\TU/lmr/m/n/10 ,
 .\glue 3.33 plus 1.665 minus 1.11
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 3.A.1
+.\TU/lmr/m/n/10 2.A.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 2.A.1.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 2.A.1.1.1
 .\special{pdf:eann}
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 and
 .\penalty 10000
 .\glue 3.33 plus 1.665 minus 1.11
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 3.A.1.1
+.\TU/lmr/m/n/10 2.A.1.1.1.1
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 33: Reference: sectioning commands in appendices
+TEST 34: Reference: sectioning commands in appendices
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: paragraphs\group_end:
-\nobreakspace \hyper@@link {\c_empty_tl }{paragraph.A.1.1.1.1}{\group_begin:
-A.1.1.1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
-}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
-<recently read> }
-l. ...    sec:subparagraph-3.1.1.1.1.1}
-                                       }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
 \nobreakspace \hyper@@link {\c_empty_tl }{chapter.A}{\group_begin:
 A\group_end: }, \hyper@@link {\c_empty_tl }{section.A.1}{\group_begin:
 A.1\group_end: }, \hyper@@link {\c_empty_tl }{subsection.A.1.1}{\group_begin:
-A.1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
-}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }.
+A.1.1\group_end: }, \hyper@@link {\c_empty_tl
+}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \hyper@@link
+{\c_empty_tl }{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: }
+and\nobreakspace \hyper@@link {\c_empty_tl
+}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
 <recently read> }
 l. ...    sec:subparagraph-3.1.1.1.1.1}
                                        }
 > \box...=
-\hbox(7.16+2.05998)x344.94
-.\TU/lmr/m/n/10 paragraphs
-.\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A.1.1.1.1
-.\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
-.\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A.1.1.1.1.1
-.\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
-.\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
+\hbox(7.16+1.93999)x259.81
 .\TU/lmr/m/n/10 appendices
 .\penalty 10000
 .\glue 3.33 plus 1.665 minus 1.11
@@ -855,18 +841,28 @@ l. ...    sec:subparagraph-3.1.1.1.1.1}
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
 .\TU/lmr/m/n/10 A.1.1
 .\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1.1.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1.1.1.1
+.\special{pdf:eann}
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 and
 .\penalty 10000
 .\glue 3.33 plus 1.665 minus 1.11
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A.1.1.1
+.\TU/lmr/m/n/10 A.1.1.1.1.1
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 34: Reference: sectioning commands after appendix
+TEST 35: Reference: sectioning commands after appendix
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
 \nobreakspace \hyper@@link {\c_empty_tl }{appendix.A}{\group_begin:
@@ -917,5 +913,4 @@ l. ...    sec:subparagraph-4.1.1.1.1.1}
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
-[17]
 ============================================================
