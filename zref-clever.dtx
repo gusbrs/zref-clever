@@ -536,7 +536,10 @@
 % tell \pkg{zref-clever} a piece of information it has no means to retrieve
 % automatically.  The setting must correspond to the actual ``current
 % counter'', meaning here ``the counter underlying \cs{@currentlabel}'' in a
-% given situation.  Its default value is, quite naturally,
+% given situation.  Also, when using the \opt{currentcounter} option, make
+% sure the setting is duly grouped because, if set, it has precedence over
+% \cs{@currentcounter} and, contrary to the later, the former is not reset the
+% next time \cs{refstepcounter} runs.  Its default value is, quite naturally,
 % \cs{@currentcounter}.  Since this option only affects how labels are set, it
 % is not available in \cs{zcref}.
 %
@@ -6512,7 +6515,7 @@
 %    \begin{macrocode}
 \AddToHook { begindocument }
   {
-    \@ifclassloaded{ memoir }
+    \@ifclassloaded { memoir }
       {
 %    \end{macrocode}
 % Add subfigure and subtable support out of the box.  Technically, this is not
@@ -6606,6 +6609,56 @@
           }
       }
       {}
+  }
+%    \end{macrocode}
+%
+%
+%
+% \subsection{\cls{KOMA-Script} classes}
+%
+%
+%    \begin{macrocode}
+\AddToHook { begindocument }
+  {
+    \cs_if_exist:NT \KOMAClassName
+      {
+%    \end{macrocode}
+% Add support for \env{captionbeside} and \env{captionofbeside} environments.
+% These environments \emph{do} run some variation of \cs{caption} and hence
+% \cs{refstepcounter}.  However, this happens inside a parbox inside the
+% environment, thus grouped, such that we cannot see the variables set by
+% \cs{refstepcounter} when we are setting the label.  \cs{@currentlabel} is
+% smuggled out of the group by KOMA, but the same care is not granted for
+% \cs{@currentcounter}.  So we have to rely on \cs{@captype}, which the
+% underlying caption infrastructure feeds to \cs{refstepcounter}.  Since we
+% must use \texttt{env/.../after} hooks, care should be taken not to set the
+% \opt{currentcounter} option unscoped, which would be quite disastrous.  For
+% this reason, though more ``invasive'', we set \cs{@currentcounter} instead,
+% which at least will be set straight the next time \cs{refstepcounter} runs.
+% It sounds reasonable, it is the same treatment \cs{@currentlabel} is
+% receiving in this case.
+%    \begin{macrocode}
+        \AddToHook { env / captionbeside / after }
+          {
+            \tl_if_exist:NT \@captype
+              { \tl_set_eq:NN \@currentcounter \@captype }
+          }
+        \tl_new:N \g_@@_koma_captionofbeside_captype_tl
+        \AddToHook { env / captionofbeside / end }
+          { \tl_gset_eq:NN \g_@@_koma_captype_tl \@captype }
+        \AddToHook { env / captionofbeside / after }
+          {
+            \tl_if_eq:NnF \@currenvir { document }
+              {
+                \tl_if_empty:NF \g_@@_koma_captype_tl
+                  {
+                    \tl_set_eq:NN
+                      \@currentcounter \g_@@_koma_captype_tl
+                  }
+              }
+            \tl_gclear:N \g_@@_koma_captype_tl
+          }
+      }
   }
 %    \end{macrocode}
 %
