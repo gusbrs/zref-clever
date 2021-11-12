@@ -1,0 +1,132 @@
+# Based on:
+# https://github.com/josephwright/siunitx/blob/main/.github/workflows/main.yaml
+# https://github.com/zauguin/install-texlive
+# https://github.com/moewew/biblatex-ext/blob/dev/.github/workflows/l3build.yml
+
+name: CI l3build tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    name: Regression tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Generate unique ID
+        id: get-id
+        run: |
+          echo -n ::set-output name=id::
+          cat /proc/sys/kernel/random/uuid
+      - name: Load cache
+        uses: actions/cache@v2
+        with:
+          path: ~/texlive
+          key: texlive-v0-${{ steps.get-id.outputs.id }}
+          restore-keys: texlive-v0-
+      - name: Install TeX Live
+        uses: zauguin/install-texlive@v1
+        with:
+          packages: |
+            # The test framework
+            l3build
+            # Build formats
+            latex
+            latex-bin
+            luatex
+            luatexbase
+            xetex
+            # Fonts
+            metafont
+            mfware
+            ec
+            # Dependencies for zref-clever
+            zref
+            oberdiek
+            hyperref
+            zref-check
+            # Dependencies for zref
+            ltxcmds
+            kvsetkeys
+            kvdefinekeys
+            etexcmds
+            # Dependencies for tests
+            babel-english
+            babel-french
+            babel-german
+            babel-portuges
+            babel-spanish
+            babel-latin
+            hyphen-french
+            hyphen-german
+            hyphen-latin
+            polyglossia
+            carlisle
+            tools
+            memoir
+            koma-script
+            bookmark
+      - name: Run tests
+        run: l3build check -q -H --show-log-on-error
+
+  doc:
+    name: Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Generate unique ID
+        id: get-id
+        run: |
+          echo -n ::set-output name=id::
+          cat /proc/sys/kernel/random/uuid
+      - name: Load cache
+        uses: actions/cache@v2
+        with:
+          path: ~/texlive
+          key: texlive-v0-${{ steps.get-id.outputs.id }}
+          restore-keys: texlive-v0-
+      - name: Install TeX Live
+        uses: zauguin/install-texlive@v1
+        with:
+          packages: |
+            # The test framework
+            l3build
+            # Build formats
+            latex
+            latex-bin
+            # Fonts
+            metafont
+            mfware
+            # Dependencies for documentation
+            alphalph
+            infwarerr
+            amsfonts
+            amsmath
+            booktabs
+            colortbl
+            csquotes
+            ec
+            enumitem
+            fancyvrb
+            hologo
+            hyperref
+            oberdiek
+            iftex
+            intcalc
+            kvdefinekeys
+            kvoptions
+            kvsetkeys
+            ltxcmds
+            makeindex
+            pdftexcmds
+            psnfss
+            tools
+            underscore
+            zref
+      - name: Compile documentation
+        run: l3build doc -q -H
