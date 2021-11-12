@@ -121,6 +121,7 @@ jobs:
             kvdefinekeys
             kvoptions
             kvsetkeys
+            listings
             ltxcmds
             makeindex
             pdftexcmds

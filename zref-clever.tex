@@ -48,6 +48,7 @@
 
 % Used in the documentation.
 \usepackage{zref-titleref}
+\usepackage{listings}
 
 \NewDocumentCommand\opt{m}{\texttt{#1}}
 
@@ -67,9 +68,27 @@
   \item[Task] #1
   \end{description}}
 
-\NewDocumentEnvironment{zchowto}{}%
-  {\endgraf\verbatim}%
-  {\endverbatim}
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  xleftmargin=\leftmargin,
+  xrightmargin=.5\leftmargin,
+}
+\lstdefinestyle{zrefclever}{
+  language=[LaTeX]TeX,
+  % moretexcs={
+  % }
+}
+% See https://tex.stackexchange.com/a/31026 for how to use these environments
+% in a .dtx context.
+\lstnewenvironment{zchowto}[1][]{%
+  \renewcommand{\lstlistingname}{How to}%
+  \lstset{style=zrefclever,basicstyle=\ttfamily\small,#1}%
+}{}
+\lstnewenvironment{zcsnippet}[1][]{%
+  \renewcommand{\lstlistingname}{Example}%
+  \lstset{style=zrefclever,basicstyle=\ttfamily\small,#1}%
+}{}
 
 \begin{document}
 

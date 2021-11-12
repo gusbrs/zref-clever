@@ -1199,52 +1199,76 @@
 %
 % Suppose you set a ``Lemma'' environment with:
 %
-% \begin{zchowto}
-%   \newtheorem{lemma}{Lemma}
-% \end{zchowto}
+% \iffalse
+%<*example>
+% \fi
+\begin{zcsnippet}
+  \newtheorem{lemma}{Lemma}
+\end{zcsnippet}
+% \iffalse
+%</example>
+% \fi
 %
 % Or with:
 %
-% \begin{zchowto}
-%   \newtheorem{lemma}{Lemma}[section]
-% \end{zchowto}
+% \iffalse
+%<*example>
+% \fi
+\begin{zcsnippet}
+  \newtheorem{lemma}{Lemma}[section]
+\end{zcsnippet}
+% \iffalse
+%</example>
+% \fi
 %
 % In this case, since \pkg{zref-clever} provides a built-in \texttt{lemma}
 % type (for supported languages) and presumes the reference type to be the
 % same name as the counter, there is no need for setup, and things just work
 % out-of-the-box.  So, you can go ahead with:
 %
-% \begin{zchowto}
-%   \documentclass{article}
-%   \usepackage{zref-clever}
-%   \newtheorem{lemma}{Lemma}[section]
-%   \begin{document}
-%   \section{Section 1}
-%   \begin{lemma}\zlabel{lemma-1}
-%     A lemma.
-%   \end{lemma}
-%   \zcref{lemma-1}
-%   \end{document}
-% \end{zchowto}
+% \iffalse
+%<*example>
+% \fi
+\begin{zchowto}[caption={\cs{newtheorem}, simple case}]
+  \documentclass{article}
+  \usepackage{zref-clever}
+  \newtheorem{lemma}{Lemma}[section]
+  \begin{document}
+  \section{Section 1}
+  \begin{lemma}\zlabel{lemma-1}
+    A lemma.
+  \end{lemma}
+  \zcref{lemma-1}
+  \end{document}
+\end{zchowto}
+% \iffalse
+%</example>
+% \fi
 %
 % If, however, you had chosen an environment name which did not happen to
 % coincide with the built-in reference type, all you'd need to do is instruct
 % \pkg{zref-clever} to associate the counter for your environment to the
 % desired type with the \opt{countertype} option:
 %
-% \begin{zchowto}
-%   \documentclass{article}
-%   \usepackage{zref-clever}
-%   \zcsetup{countertype={lem=lemma}}
-%   \newtheorem{lem}{Lemma}[section]
-%   \begin{document}
-%   \section{Section 1}
-%   \begin{lem}\zlabel{lemma-1}
-%     A lemma.
-%   \end{lem}
-%   \zcref{lemma-1}
-%   \end{document}
-% \end{zchowto}
+% \iffalse
+%<*example>
+% \fi
+\begin{zchowto}[caption={\cs{newtheorem}, simple case}]
+  \documentclass{article}
+  \usepackage{zref-clever}
+  \zcsetup{countertype={lem=lemma}}
+  \newtheorem{lem}{Lemma}[section]
+  \begin{document}
+  \section{Section 1}
+  \begin{lem}\zlabel{lemma-1}
+    A lemma.
+  \end{lem}
+  \zcref{lemma-1}
+  \end{document}
+\end{zchowto}
+% \iffalse
+%</example>
+% \fi
 %
 %
 % \subsubsection*{Shared counter}
@@ -1262,26 +1286,32 @@
 % management system and just set it for all occurrences with
 % \cs{AddToHook}\texttt{\{env/\meta{myenv}/begin\}}.
 %
-% \begin{zchowto}
-%   \documentclass{article}
-%   \usepackage{zref-clever}
-%   \AddToHook{env/mytheorem/begin}{%
-%     \zcsetup{countertype={mytheorem=theorem}}}
-%   \AddToHook{env/myproposition/begin}{%
-%     \zcsetup{countertype={mytheorem=proposition}}}
-%   \newtheorem{mytheorem}{Theorem}[section]
-%   \newtheorem{myproposition}[mytheorem]{Proposition}
-%   \begin{document}
-%   \section{Section 1}
-%   \begin{mytheorem}\zlabel{theorem-1}
-%     A theorem.
-%   \end{mytheorem}
-%   \begin{myproposition}\zlabel{proposition-1}
-%     A proposition.
-%   \end{myproposition}
-%   \zcref{theorem-1,proposition-1}
-%   \end{document}
-% \end{zchowto}
+% \iffalse
+%<*example>
+% \fi
+\begin{zchowto}[caption={\cs{newtheorem}, shared counter}]
+  \documentclass{article}
+  \usepackage{zref-clever}
+  \AddToHook{env/mytheorem/begin}{%
+    \zcsetup{countertype={mytheorem=theorem}}}
+  \AddToHook{env/myproposition/begin}{%
+    \zcsetup{countertype={mytheorem=proposition}}}
+  \newtheorem{mytheorem}{Theorem}[section]
+  \newtheorem{myproposition}[mytheorem]{Proposition}
+  \begin{document}
+  \section{Section 1}
+  \begin{mytheorem}\zlabel{theorem-1}
+    A theorem.
+  \end{mytheorem}
+  \begin{myproposition}\zlabel{proposition-1}
+    A proposition.
+  \end{myproposition}
+  \zcref{theorem-1,proposition-1}
+  \end{document}
+\end{zchowto}
+% \iffalse
+%</example>
+% \fi
 %
 %
 % \subsubsection*{Custom type}
@@ -1300,24 +1330,30 @@
 % rely on default translations already provided by the package (assuming the
 % language is supported).
 %
-% \begin{zchowto}
-%   \documentclass{article}
-%   \usepackage{zref-clever}
-%   \newtheorem{myconjecture}{Conjecture}[section]
-%   \zcRefTypeSetup{myconjecture}{
-%     Name-sg = Conjecture ,
-%     name-sg = conjecture ,
-%     Name-pl = Conjectures ,
-%     name-pl = conjectures ,
-%   }
-%   \begin{document}
-%   \section{Section 1}
-%   \begin{myconjecture}\zlabel{conjecture-1}
-%     A conjecture.
-%   \end{myconjecture}
-%   \zcref{conjecture-1}
-%   \end{document}
-% \end{zchowto}
+% \iffalse
+%<*example>
+% \fi
+\begin{zchowto}[caption={\cs{newtheorem}, custom type}]
+  \documentclass{article}
+  \usepackage{zref-clever}
+  \newtheorem{myconjecture}{Conjecture}[section]
+  \zcRefTypeSetup{myconjecture}{
+    Name-sg = Conjecture ,
+    name-sg = conjecture ,
+    Name-pl = Conjectures ,
+    name-pl = conjectures ,
+  }
+  \begin{document}
+  \section{Section 1}
+  \begin{myconjecture}\zlabel{conjecture-1}
+    A conjecture.
+  \end{myconjecture}
+  \zcref{conjecture-1}
+  \end{document}
+\end{zchowto}
+% \iffalse
+%</example>
+% \fi
 %
 %
 %
@@ -1334,44 +1370,50 @@
 % cannot really rely on an implicit counter-type association, and have to set
 % it explicitly with the \opt{countertype} option.
 %
-% \begin{zchowto}
-%   \documentclass{article}
-%   \usepackage{zref-clever}
-%   \zcsetup{
-%     countertype = {
-%       myenumeratei   = item ,
-%       myenumerateii  = item ,
-%       myenumerateiii = item ,
-%       myenumerateiv  = item ,
-%     } ,
-%     counterresetby = {
-%       myenumerateii  = myenumeratei ,
-%       myenumerateiii = myenumerateii ,
-%       myenumerateiv  = myenumerateiii ,
-%     }
-%   }
-%   \usepackage{enumitem}
-%   \newlist{myenumerate}{enumerate}{4}
-%   \setlist[myenumerate,1]{label=(\arabic*)}
-%   \setlist[myenumerate,2]{label=(\Roman*)}
-%   \setlist[myenumerate,3]{label=(\Alph*)}
-%   \setlist[myenumerate,4]{label=(\roman*)}
-%   \begin{document}
-%   \begin{myenumerate}
-%   \item An item.\zlabel{item-1}
-%     \begin{myenumerate}
-%     \item An item.\zlabel{item-2}
-%       \begin{myenumerate}
-%       \item An item.\zlabel{item-3}
-%         \begin{myenumerate}
-%         \item An item.\zlabel{item-4}
-%         \end{myenumerate}
-%       \end{myenumerate}
-%     \end{myenumerate}
-%   \end{myenumerate}
-%   \zcref{item-1,item-2,item-3,item-4}
-%   \end{document}
-% \end{zchowto}
+% \iffalse
+%<*example>
+% \fi
+\begin{zchowto}[caption={\pkg{enumitem}}]
+  \documentclass{article}
+  \usepackage{zref-clever}
+  \zcsetup{
+    countertype = {
+      myenumeratei   = item ,
+      myenumerateii  = item ,
+      myenumerateiii = item ,
+      myenumerateiv  = item ,
+    } ,
+    counterresetby = {
+      myenumerateii  = myenumeratei ,
+      myenumerateiii = myenumerateii ,
+      myenumerateiv  = myenumerateiii ,
+    }
+  }
+  \usepackage{enumitem}
+  \newlist{myenumerate}{enumerate}{4}
+  \setlist[myenumerate,1]{label=(\arabic*)}
+  \setlist[myenumerate,2]{label=(\Roman*)}
+  \setlist[myenumerate,3]{label=(\Alph*)}
+  \setlist[myenumerate,4]{label=(\roman*)}
+  \begin{document}
+  \begin{myenumerate}
+  \item An item.\zlabel{item-1}
+    \begin{myenumerate}
+    \item An item.\zlabel{item-2}
+      \begin{myenumerate}
+      \item An item.\zlabel{item-3}
+        \begin{myenumerate}
+        \item An item.\zlabel{item-4}
+        \end{myenumerate}
+      \end{myenumerate}
+    \end{myenumerate}
+  \end{myenumerate}
+  \zcref{item-1,item-2,item-3,item-4}
+  \end{document}
+\end{zchowto}
+% \iffalse
+%</example>
+% \fi
 %
 %
 % \subsection{\pkg{zref-xr}}
@@ -1398,36 +1440,56 @@
 % ``\texttt{A}'' to the labels from ``\texttt{B}'', and not the contrary, a
 % minimum setup would be the following.
 %
-% \bigskip{}
+% \iffalse
+%<*example>
+% \fi
+\begin{zchowto}[caption={\pkg{zref-xr}}]
+\end{zchowto}
+% \iffalse
+%</example>
+% \fi
 %
+% \vspace{-1ex}
 % \file{documentA.tex}:
 %
-% \begin{zchowto}
-%   \documentclass{article}
-%   \usepackage{zref-clever}
-%   \usepackage{zref-xr}
-%   \zexternaldocument[B-]{documentB}
-%   \usepackage{hyperref}
-%   \begin{document}
-%   \section{Section A1}
-%   \zlabel{sec:section-a1}
-%   \zcref{sec:section-a1,B-sec:section-b1}
-%   \end{document}
-% \end{zchowto}
+% \iffalse
+%<*example>
+% \fi
+\begin{zchowto}
+  \documentclass{article}
+  \usepackage{zref-clever}
+  \usepackage{zref-xr}
+  \zexternaldocument[B-]{documentB}
+  \usepackage{hyperref}
+  \begin{document}
+  \section{Section A1}
+  \zlabel{sec:section-a1}
+  \zcref{sec:section-a1,B-sec:section-b1}
+  \end{document}
+\end{zchowto}
+% \iffalse
+%</example>
+% \fi
 %
 % \file{documentB.tex}:
 %
-% \begin{zchowto}
-%   \documentclass{article}
-%   \usepackage{zref-clever}
-%   \usepackage{hyperref}
-%   \begin{document}
-%   \section{Section B1}
-%   \zlabel{sec:section-b1}
-%   \end{document}
-% \end{zchowto}
+% \iffalse
+%<*example>
+% \fi
+\begin{zchowto}
+  \documentclass{article}
+  \usepackage{zref-clever}
+  \usepackage{hyperref}
+  \begin{document}
+  \section{Section B1}
+  \zlabel{sec:section-b1}
+  \end{document}
+\end{zchowto}
+% \iffalse
+%</example>
+% \fi
 %
-%
+% \addtocounter{lstlisting}{-2}
 %
 % \section{Limitations}
 %
