@@ -1,11 +1,11 @@
-\documentclass{scrbook}
+\documentclass{scrartcl}
 
 \input{regression-test}
 
 \usepackage{zref-clever}
 
 % This file is intended to test all possible "referable objects" in the
-% scrbook document class.
+% scrartcl document class.
 
 % Number down to subparagraph.
 \setcounter{secnumdepth}{5}
@@ -24,9 +24,6 @@
 
 \part{Part 1}
 \zlabel{part:part-1}
-
-\chapter{Chapter 1}
-\zlabel{cha:chapter-1}
 
 \section{Section 1.1}
 \zlabel{sec:section-1.1}
@@ -148,9 +145,6 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 
 \appendix{}
 
-\chapter{Chapter 2}
-\zlabel{cha:chapter-2}
-
 \section{Section 2.1}
 \zlabel{sec:section-2.1}
 
@@ -174,14 +168,6 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 
 \BEGINTEST{Reference: part}
 \setbox0=\hbox{\zcref{part:part-1}}
-\showbox0
-\box0
-\ENDTEST
-
-\newoptblock{Chapter}
-
-\BEGINTEST{Reference: chapter}
-\setbox0=\hbox{\zcref{cha:chapter-1}}
 \showbox0
 \box0
 \ENDTEST
@@ -313,7 +299,7 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Appendix}
 
 \BEGINTEST{Reference: sectioning commands after appendix}
-\setbox0=\hbox{\zcref{cha:chapter-2, sec:section-2.1, sec:subsection-2.1.1,
+\setbox0=\hbox{\zcref{sec:section-2.1, sec:subsection-2.1.1,
     sec:subsubsection-2.1.1.1, sec:paragraph-2.1.1.1.1,
     sec:subparagraph-2.1.1.1.1.1}}
 \showbox0

@@ -24,44 +24,17 @@ l. ...\setbox0=\hbox{\zcref{part:part-1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 2: Reference: chapter
+TEST 2: Reference: section
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+}{section.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
 1\group_end: }.
-<recently read> }
-l. ...\setbox0=\hbox{\zcref{cha:chapter-1}
-                                          }
-> \box...=
-\hbox(7.60416+2.12917)x44.74295
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
-.\OT1/cmr/m/n/10.95 c
-.\kern-0.30418
-.\OT1/cmr/m/n/10.95 h
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 r
-.\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
-! OK.
-l. ...\showbox0
-============================================================
-============================================================
-TEST 3: Reference: section
-============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{sec:section-1.1}
                                             }
 > \box...=
-\hbox(7.31305+0.0)x50.55255
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+\hbox(7.31305+0.0)x42.03587
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
 .\OT1/cmr/m/n/10.95 s
 .\OT1/cmr/m/n/10.95 e
 .\OT1/cmr/m/n/10.95 c
@@ -72,24 +45,22 @@ l. ...\setbox0=\hbox{\zcref{sec:section-1.1}
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
 .\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 4: Reference: subsection
+TEST 3: Reference: subsection
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{subsection.1.1.1}{\group_begin: section\group_end: \nobreakspace
-\group_begin: 1.1.1\group_end: }.
+}{subsection.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{sec:subsection-1.1.1}
                                                  }
 > \box...=
-\hbox(7.31305+0.0)x59.06923
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.1.1.1}
+\hbox(7.31305+0.0)x50.55255
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.1.1}
 .\OT1/cmr/m/n/10.95 s
 .\OT1/cmr/m/n/10.95 e
 .\OT1/cmr/m/n/10.95 c
@@ -102,24 +73,22 @@ l. ...\setbox0=\hbox{\zcref{sec:subsection-1.1.1}
 .\OT1/cmr/m/n/10.95 1
 .\OT1/cmr/m/n/10.95 .
 .\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 5: Reference: subsubsection
+TEST 4: Reference: subsubsection
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{subsubsection.1.1.1.1}{\group_begin: section\group_end: \nobreakspace
-\group_begin: 1.1.1.1\group_end: }.
+}{subsubsection.1.1.1}{\group_begin: section\group_end: \nobreakspace
+\group_begin: 1.1.1\group_end: }.
 <recently read> }
 l. ......0=\hbox{\zcref{sec:subsubsection-1.1.1.1}
                                                   }
 > \box...=
-\hbox(7.31305+0.0)x67.5859
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.1.1.1.1}
+\hbox(7.31305+0.0)x59.06923
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.1.1.1}
 .\OT1/cmr/m/n/10.95 s
 .\OT1/cmr/m/n/10.95 e
 .\OT1/cmr/m/n/10.95 c
@@ -134,24 +103,22 @@ l. ......0=\hbox{\zcref{sec:subsubsection-1.1.1.1}
 .\OT1/cmr/m/n/10.95 1
 .\OT1/cmr/m/n/10.95 .
 .\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 6: Reference: paragraph
+TEST 5: Reference: paragraph
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{paragraph.1.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
-\group_begin: 1.1.1.1.1\group_end: }.
+}{paragraph.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
+\group_begin: 1.1.1.1\group_end: }.
 <recently read> }
 l. ......ox0=\hbox{\zcref{sec:paragraph-1.1.1.1.1}
                                                   }
 > \box...=
-\hbox(7.60416+2.12917)x91.91928
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.1.1.1.1.1}
+\hbox(7.60416+2.12917)x83.4026
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.1.1.1.1}
 .\OT1/cmr/m/n/10.95 p
 .\OT1/cmr/m/n/10.95 a
 .\OT1/cmr/m/n/10.95 r
@@ -170,24 +137,22 @@ l. ......ox0=\hbox{\zcref{sec:paragraph-1.1.1.1.1}
 .\OT1/cmr/m/n/10.95 1
 .\OT1/cmr/m/n/10.95 .
 .\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 7: Reference: subparagraph
+TEST 6: Reference: subparagraph
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{subparagraph.1.1.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
-\group_begin: 1.1.1.1.1.1\group_end: }.
+}{subparagraph.1.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
+\group_begin: 1.1.1.1.1\group_end: }.
 <recently read> }
 l. ......hbox{\zcref{sec:subparagraph-1.1.1.1.1.1}
                                                   }
 > \box...=
-\hbox(7.60416+2.12917)x100.43596
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.1.1.1.1.1.1}
+\hbox(7.60416+2.12917)x91.91928
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.1.1.1.1.1}
 .\OT1/cmr/m/n/10.95 p
 .\OT1/cmr/m/n/10.95 a
 .\OT1/cmr/m/n/10.95 r
@@ -208,24 +173,22 @@ l. ......hbox{\zcref{sec:subparagraph-1.1.1.1.1.1}
 .\OT1/cmr/m/n/10.95 1
 .\OT1/cmr/m/n/10.95 .
 .\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 8: Reference: figure
+TEST 7: Reference: figure
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{figure.1.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+}{figure.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
+1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.1}
                                              }
 > \box...=
-\hbox(7.60416+2.12917)x44.4388
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
+\hbox(7.60416+2.12917)x35.92212
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1}
 .\OT1/cmr/m/n/10.95 ^^L (ligature fi)
 .\OT1/cmr/m/n/10.95 g
 .\OT1/cmr/m/n/10.95 u
@@ -233,25 +196,23 @@ l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.1}
 .\OT1/cmr/m/n/10.95 e
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
 .\OT1/cmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 9: Reference: captionbeside figure
+TEST 8: Reference: captionbeside figure
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{figure.1.3}{\group_begin: figure\group_end: \nobreakspace \group_begin:
-1.3\group_end: }.
+}{figure.3}{\group_begin: figure\group_end: \nobreakspace \group_begin:
+3\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.3}
                                              }
 > \box...=
-\hbox(7.60416+2.12917)x44.4388
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.3}
+\hbox(7.60416+2.12917)x35.92212
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.3}
 .\OT1/cmr/m/n/10.95 ^^L (ligature fi)
 .\OT1/cmr/m/n/10.95 g
 .\OT1/cmr/m/n/10.95 u
@@ -259,25 +220,23 @@ l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.3}
 .\OT1/cmr/m/n/10.95 e
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
 .\OT1/cmr/m/n/10.95 3
 .\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 10: Reference: table
+TEST 9: Reference: table
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+}{table.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tab:table-1.1.1}
                                             }
 > \box...=
-\hbox(7.60416+0.0)x41.36671
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+\hbox(7.60416+0.0)x32.85004
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1}
 .\OT1/cmr/m/n/10.95 t
 .\OT1/cmr/m/n/10.95 a
 .\OT1/cmr/m/n/10.95 b
@@ -285,25 +244,23 @@ l. ...\setbox0=\hbox{\zcref{tab:table-1.1.1}
 .\OT1/cmr/m/n/10.95 e
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
 .\OT1/cmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 11: Reference: captionof table
+TEST 10: Reference: captionof table
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{table.1.2}{\group_begin: table\group_end: \nobreakspace \group_begin:
-1.2\group_end: }.
+}{table.2}{\group_begin: table\group_end: \nobreakspace \group_begin:
+2\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tab:table-1.1.2}
                                             }
 > \box...=
-\hbox(7.60416+0.0)x41.36671
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.2}
+\hbox(7.60416+0.0)x32.85004
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.2}
 .\OT1/cmr/m/n/10.95 t
 .\OT1/cmr/m/n/10.95 a
 .\OT1/cmr/m/n/10.95 b
@@ -311,25 +268,23 @@ l. ...\setbox0=\hbox{\zcref{tab:table-1.1.2}
 .\OT1/cmr/m/n/10.95 e
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
 .\OT1/cmr/m/n/10.95 2
 .\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 12: Reference: captionofbeside table
+TEST 11: Reference: captionofbeside table
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{table.1.3}{\group_begin: table\group_end: \nobreakspace \group_begin:
-1.3\group_end: }.
+}{table.3}{\group_begin: table\group_end: \nobreakspace \group_begin:
+3\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tab:table-1.1.3}
                                             }
 > \box...=
-\hbox(7.60416+0.0)x41.36671
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.3}
+\hbox(7.60416+0.0)x32.85004
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.3}
 .\OT1/cmr/m/n/10.95 t
 .\OT1/cmr/m/n/10.95 a
 .\OT1/cmr/m/n/10.95 b
@@ -337,15 +292,13 @@ l. ...\setbox0=\hbox{\zcref{tab:table-1.1.3}
 .\OT1/cmr/m/n/10.95 e
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
 .\OT1/cmr/m/n/10.95 3
 .\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 13: Reference: enumi-iv
+TEST 12: Reference: enumi-iv
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: items\group_end:
 \nobreakspace \hyper@@link {\c_empty_tl }{Item.1}{\group_begin: 1\group_end:
@@ -401,7 +354,7 @@ l. ......\hbox{\zcref{item:1,item:2,item:3,item:4}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 14: Reference: footnote
+TEST 13: Reference: footnote
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{Hfootnote.1}{\group_begin: footnote\group_end: \nobreakspace \group_begin:
@@ -429,7 +382,7 @@ l. ...\setbox0=\hbox{\zcref{fn:1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 15: Reference: mpfootnote
+TEST 14: Reference: mpfootnote
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{Item.4}{\group_begin: footnote\group_end: \nobreakspace \group_begin:
@@ -457,17 +410,17 @@ l. ...\setbox0=\hbox{\zcref{fn:2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 16: Reference: equation
+TEST 15: Reference: equation
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{equation.1.1.1}{\group_begin: equation\group_end: \nobreakspace
-(\group_begin: 1.1\group_end: }).
+}{equation.1.1}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
+1\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.1}
                                               }
 > \box...=
-\hbox(8.2125+2.73749)x67.22092
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.1}
+\hbox(8.2125+2.73749)x58.70424
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1}
 .\OT1/cmr/m/n/10.95 e
 .\OT1/cmr/m/n/10.95 q
 .\OT1/cmr/m/n/10.95 u
@@ -480,15 +433,13 @@ l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.1}
 .\glue 3.65 plus 1.825 minus 1.21666
 .\OT1/cmr/m/n/10.95 (
 .\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
 .\pdfendlink
 .\OT1/cmr/m/n/10.95 )
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 17: Reference: thm
+TEST 16: Reference: thm
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{thm.1}{\group_begin: theorem\group_end: \nobreakspace \group_begin:
@@ -514,22 +465,21 @@ l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 18: Reference: sectioning commands after appendix
+TEST 17: Reference: sectioning commands after appendix
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
 \nobreakspace \hyper@@link {\c_empty_tl }{appendix.A}{\group_begin:
-A\group_end: }, \hyper@@link {\c_empty_tl }{section.A.1}{\group_begin:
-A.1\group_end: }, \hyper@@link {\c_empty_tl }{subsection.A.1.1}{\group_begin:
-A.1.1\group_end: }, \hyper@@link {\c_empty_tl
-}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \hyper@@link
-{\c_empty_tl }{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: }
+A\group_end: }, \hyper@@link {\c_empty_tl }{subsection.A.1}{\group_begin:
+A.1\group_end: }, \hyper@@link {\c_empty_tl
+}{subsubsection.A.1.1}{\group_begin: A.1.1\group_end: }, \hyper@@link
+{\c_empty_tl }{paragraph.A.1.1.1}{\group_begin: A.1.1.1\group_end: }
 and\nobreakspace \hyper@@link {\c_empty_tl
-}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
+}{subparagraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: }.
 <recently read> }
 l. ...    sec:subparagraph-2.1.1.1.1.1}
                                        }
 > \box...=
-\hbox(7.60416+2.12917)x284.45695
+\hbox(7.60416+2.12917)x226.96939
 .\OT1/cmr/m/n/10.95 a
 .\OT1/cmr/m/n/10.95 p
 .\OT1/cmr/m/n/10.95 p
@@ -548,26 +498,15 @@ l. ...    sec:subparagraph-2.1.1.1.1.1}
 .\pdfendlink
 .\OT1/cmr/m/n/10.95 ,
 .\glue 3.65 plus 1.825 minus 1.21666
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.A.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.A.1}
 .\OT1/cmr/m/n/10.95 A
 .\OT1/cmr/m/n/10.95 .
 .\OT1/cmr/m/n/10.95 1
 .\pdfendlink
 .\OT1/cmr/m/n/10.95 ,
 .\glue 3.65 plus 2.28123 minus 0.97333
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.A.1.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.A.1.1}
 .\OT1/cmr/m/n/10.95 A
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
-.\OT1/cmr/m/n/10.95 ,
-.\glue 3.65 plus 2.28123 minus 0.97333
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.A.1.1.1}
-.\OT1/cmr/m/n/10.95 A
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
 .\OT1/cmr/m/n/10.95 .
 .\OT1/cmr/m/n/10.95 1
 .\OT1/cmr/m/n/10.95 .
@@ -575,10 +514,8 @@ l. ...    sec:subparagraph-2.1.1.1.1.1}
 .\pdfendlink
 .\OT1/cmr/m/n/10.95 ,
 .\glue 3.65 plus 2.28123 minus 0.97333
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.A.1.1.1.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.A.1.1.1}
 .\OT1/cmr/m/n/10.95 A
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
 .\OT1/cmr/m/n/10.95 .
 .\OT1/cmr/m/n/10.95 1
 .\OT1/cmr/m/n/10.95 .
@@ -592,10 +529,8 @@ l. ...    sec:subparagraph-2.1.1.1.1.1}
 .\OT1/cmr/m/n/10.95 d
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.A.1.1.1.1.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.A.1.1.1.1}
 .\OT1/cmr/m/n/10.95 A
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
 .\OT1/cmr/m/n/10.95 .
 .\OT1/cmr/m/n/10.95 1
 .\OT1/cmr/m/n/10.95 .

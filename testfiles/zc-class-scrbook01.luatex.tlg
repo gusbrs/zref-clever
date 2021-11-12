@@ -8,17 +8,17 @@ TEST 1: Reference: part
 I\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{part:part-1}
-                                        }
+                                      }
 > \box...=
-\hbox(7.48248+2.12917)x27.70961
+\hbox(7.47885+2.1243)x27.71445, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{part.1}
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 t
+.\TU/lmr/m/n/10.95 p
+.\TU/lmr/m/n/10.95 a
+.\TU/lmr/m/n/10.95 r
+.\TU/lmr/m/n/10.95 t
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 I
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 I
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -31,21 +31,23 @@ TEST 2: Reference: chapter
 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{cha:chapter-1}
-                                          }
+                                        }
 > \box...=
-\hbox(7.60416+2.12917)x44.74295
+\hbox(7.5993+2.1243)x44.74171, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
-.\OT1/cmr/m/n/10.95 c
-.\kern-0.30418
-.\OT1/cmr/m/n/10.95 h
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 r
+.\TU/lmr/m/n/10.95 c
+.\kern-0.3066 (font)
+.\TU/lmr/m/n/10.95 h
+.\TU/lmr/m/n/10.95 a
+.\TU/lmr/m/n/10.95 p
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 t
+.\TU/lmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 r
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -58,22 +60,24 @@ TEST 3: Reference: section
 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{sec:section-1.1}
-                                            }
+                                          }
 > \box...=
-\hbox(7.31305+0.0)x50.55255
+\hbox(7.2927+0.12045)x50.54521, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
-.\OT1/cmr/m/n/10.95 s
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 c
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 i
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 n
+.\TU/lmr/m/n/10.95 s
+.\TU/lmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 c
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 t
+.\TU/lmr/m/n/10.95 i
+.\TU/lmr/m/n/10.95 o
+.\TU/lmr/m/n/10.95 n
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -86,24 +90,26 @@ TEST 4: Reference: subsection
 \group_begin: 1.1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{sec:subsection-1.1.1}
-                                                 }
+                                               }
 > \box...=
-\hbox(7.31305+0.0)x59.06923
+\hbox(7.2927+0.12045)x59.06432, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.1.1.1}
-.\OT1/cmr/m/n/10.95 s
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 c
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 i
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 n
+.\TU/lmr/m/n/10.95 s
+.\TU/lmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 c
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 t
+.\TU/lmr/m/n/10.95 i
+.\TU/lmr/m/n/10.95 o
+.\TU/lmr/m/n/10.95 n
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -115,27 +121,29 @@ TEST 5: Reference: subsubsection
 }{subsubsection.1.1.1.1}{\group_begin: section\group_end: \nobreakspace
 \group_begin: 1.1.1.1\group_end: }.
 <recently read> }
-l. ......0=\hbox{\zcref{sec:subsubsection-1.1.1.1}
+l. ......ox0=\hbox{\zcref{sec:subsubsection-1.1.1.1}
                                                   }
 > \box...=
-\hbox(7.31305+0.0)x67.5859
+\hbox(7.2927+0.12045)x67.58342, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.1.1.1.1}
-.\OT1/cmr/m/n/10.95 s
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 c
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 i
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 n
+.\TU/lmr/m/n/10.95 s
+.\TU/lmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 c
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 t
+.\TU/lmr/m/n/10.95 i
+.\TU/lmr/m/n/10.95 o
+.\TU/lmr/m/n/10.95 n
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -147,31 +155,33 @@ TEST 6: Reference: paragraph
 }{paragraph.1.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
 \group_begin: 1.1.1.1.1\group_end: }.
 <recently read> }
-l. ......ox0=\hbox{\zcref{sec:paragraph-1.1.1.1.1}
+l. ...\setbox0=\hbox{\zcref{sec:paragraph-1.1.1.1.1}
                                                   }
 > \box...=
-\hbox(7.60416+2.12917)x91.91928
+\hbox(7.5993+2.2557)x91.94719, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.1.1.1.1.1}
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 g
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 h
+.\TU/lmr/m/n/10.95 p
+.\TU/lmr/m/n/10.95 a
+.\TU/lmr/m/n/10.95 r
+.\TU/lmr/m/n/10.95 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 g
+.\TU/lmr/m/n/10.95 r
+.\TU/lmr/m/n/10.95 a
+.\TU/lmr/m/n/10.95 p
+.\TU/lmr/m/n/10.95 h
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -183,33 +193,35 @@ TEST 7: Reference: subparagraph
 }{subparagraph.1.1.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
 \group_begin: 1.1.1.1.1.1\group_end: }.
 <recently read> }
-l. ......hbox{\zcref{sec:subparagraph-1.1.1.1.1.1}
+l. ......=\hbox{\zcref{sec:subparagraph-1.1.1.1.1.1}
                                                   }
 > \box...=
-\hbox(7.60416+2.12917)x100.43596
+\hbox(7.5993+2.2557)x100.4663, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.1.1.1.1.1.1}
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 g
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 h
+.\TU/lmr/m/n/10.95 p
+.\TU/lmr/m/n/10.95 a
+.\TU/lmr/m/n/10.95 r
+.\TU/lmr/m/n/10.95 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 g
+.\TU/lmr/m/n/10.95 r
+.\TU/lmr/m/n/10.95 a
+.\TU/lmr/m/n/10.95 p
+.\TU/lmr/m/n/10.95 h
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -222,20 +234,22 @@ TEST 8: Reference: figure
 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.1}
-                                             }
+                                           }
 > \box...=
-\hbox(7.60416+2.12917)x44.4388
+\hbox(7.71974+2.2557)x44.44606, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
-.\OT1/cmr/m/n/10.95 ^^L (ligature fi)
-.\OT1/cmr/m/n/10.95 g
-.\OT1/cmr/m/n/10.95 u
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 ﬁ (ligature fi)
+.\TU/lmr/m/n/10.95 g
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 u
+.\TU/lmr/m/n/10.95 r
+.\TU/lmr/m/n/10.95 e
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -248,20 +262,22 @@ TEST 9: Reference: captionbeside figure
 1.3\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.3}
-                                             }
+                                           }
 > \box...=
-\hbox(7.60416+2.12917)x44.4388
+\hbox(7.71974+2.2557)x44.44606, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.3}
-.\OT1/cmr/m/n/10.95 ^^L (ligature fi)
-.\OT1/cmr/m/n/10.95 g
-.\OT1/cmr/m/n/10.95 u
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 ﬁ (ligature fi)
+.\TU/lmr/m/n/10.95 g
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 u
+.\TU/lmr/m/n/10.95 r
+.\TU/lmr/m/n/10.95 e
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 3
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 3
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -274,20 +290,22 @@ TEST 10: Reference: table
 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tab:table-1.1.1}
-                                            }
+                                          }
 > \box...=
-\hbox(7.60416+0.0)x41.36671
+\hbox(7.5993+0.12045)x41.36911, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 b
-.\OT1/cmr/m/n/10.95 l
-.\OT1/cmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 t
+.\TU/lmr/m/n/10.95 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 b
+.\TU/lmr/m/n/10.95 l
+.\TU/lmr/m/n/10.95 e
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -300,20 +318,22 @@ TEST 11: Reference: captionof table
 1.2\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tab:table-1.1.2}
-                                            }
+                                          }
 > \box...=
-\hbox(7.60416+0.0)x41.36671
+\hbox(7.5993+0.12045)x41.36911, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.2}
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 b
-.\OT1/cmr/m/n/10.95 l
-.\OT1/cmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 t
+.\TU/lmr/m/n/10.95 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 b
+.\TU/lmr/m/n/10.95 l
+.\TU/lmr/m/n/10.95 e
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 2
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 2
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -326,20 +346,22 @@ TEST 12: Reference: captionofbeside table
 1.3\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tab:table-1.1.3}
-                                            }
+                                          }
 > \box...=
-\hbox(7.60416+0.0)x41.36671
+\hbox(7.5993+0.2409)x41.36911, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.3}
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 b
-.\OT1/cmr/m/n/10.95 l
-.\OT1/cmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 t
+.\TU/lmr/m/n/10.95 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 b
+.\TU/lmr/m/n/10.95 l
+.\TU/lmr/m/n/10.95 e
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 3
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 3
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -354,48 +376,48 @@ TEST 13: Reference: enumi-iv
 and\nobreakspace \hyper@@link {\c_empty_tl }{Item.4}{\group_begin:
 1(a)iA\group_end: }.
 <recently read> }
-l. ......\hbox{\zcref{item:1,item:2,item:3,item:4}
+l. ......0=\hbox{\zcref{item:1,item:2,item:3,item:4}
                                                   }
 > \box...=
-\hbox(8.2125+2.73749)x137.24016
-.\OT1/cmr/m/n/10.95 i
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 m
-.\OT1/cmr/m/n/10.95 s
+\hbox(8.2125+2.7375)x137.23637, direction TLT
+.\TU/lmr/m/n/10.95 i
+.\TU/lmr/m/n/10.95 t
+.\TU/lmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 m
+.\TU/lmr/m/n/10.95 s
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.1}
-.\OT1/cmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
-.\OT1/cmr/m/n/10.95 ,
-.\glue 3.65 plus 2.28123 minus 0.97333
+.\TU/lmr/m/n/10.95 ,
+.\glue(\spaceskip) 3.64635 plus 2.27898 minus 0.97235
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.2}
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 a
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 a
 .\pdfendlink
-.\OT1/cmr/m/n/10.95 ,
-.\glue 3.65 plus 2.28123 minus 0.97333
+.\TU/lmr/m/n/10.95 ,
+.\glue(\spaceskip) 3.64635 plus 2.27898 minus 0.97235
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.3}
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 (
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 )
-.\OT1/cmr/m/n/10.95 i
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 (
+.\TU/lmr/m/n/10.95 a
+.\TU/lmr/m/n/10.95 )
+.\TU/lmr/m/n/10.95 i
 .\pdfendlink
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 n
-.\OT1/cmr/m/n/10.95 d
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 a
+.\TU/lmr/m/n/10.95 n
+.\TU/lmr/m/n/10.95 d
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.4}
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 (
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 )
-.\OT1/cmr/m/n/10.95 i
-.\OT1/cmr/m/n/10.95 A
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 (
+.\TU/lmr/m/n/10.95 a
+.\TU/lmr/m/n/10.95 )
+.\TU/lmr/m/n/10.95 i
+.\TU/lmr/m/n/10.95 A
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -408,22 +430,24 @@ TEST 14: Reference: footnote
 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fn:1}
-                                 }
+                               }
 > \box...=
-\hbox(7.60416+0.0)x48.66673
+\hbox(7.71974+0.12045)x48.67276, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Hfootnote.1}
-.\OT1/cmr/m/n/10.95 f
-.\OT1/cmr/m/n/10.95 o
-.\kern0.30417
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 n
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 f
+.\TU/lmr/m/n/10.95 o
+.\kern0.3066 (font)
+.\TU/lmr/m/n/10.95 o
+.\TU/lmr/m/n/10.95 t
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 n
+.\TU/lmr/m/n/10.95 o
+.\TU/lmr/m/n/10.95 t
+.\TU/lmr/m/n/10.95 e
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -436,22 +460,24 @@ TEST 15: Reference: mpfootnote
 {\itshape a}\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fn:2}
-                                 }
+                               }
 > \box...=
-\hbox(7.60416+0.0)x48.78836
+\hbox(7.71974+0.12045)x48.7932, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.4}
-.\OT1/cmr/m/n/10.95 f
-.\OT1/cmr/m/n/10.95 o
-.\kern0.30417
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 n
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 f
+.\TU/lmr/m/n/10.95 o
+.\kern0.3066 (font)
+.\TU/lmr/m/n/10.95 o
+.\TU/lmr/m/n/10.95 t
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 n
+.\TU/lmr/m/n/10.95 o
+.\TU/lmr/m/n/10.95 t
+.\TU/lmr/m/n/10.95 e
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/it/10.95 a
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/it/10.95 a
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -464,26 +490,28 @@ TEST 16: Reference: equation
 (\group_begin: 1.1\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.1}
-                                              }
+                                            }
 > \box...=
-\hbox(8.2125+2.73749)x67.22092
+\hbox(8.2125+2.7375)x67.23302, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.1}
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 q
-.\OT1/cmr/m/n/10.95 u
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 i
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 n
+.\TU/lmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 q
+.\TU/lmr/m/n/10.95 u
+.\TU/lmr/m/n/10.95 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 t
+.\TU/lmr/m/n/10.95 i
+.\TU/lmr/m/n/10.95 o
+.\TU/lmr/m/n/10.95 n
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 (
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 (
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
-.\OT1/cmr/m/n/10.95 )
+.\TU/lmr/m/n/10.95 )
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -495,20 +523,24 @@ TEST 17: Reference: thm
 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.2}
-                                              }
+                                            }
 > \box...=
-\hbox(7.60416+0.0)x48.0888
+\hbox(7.5993+0.12045)x48.08147, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{thm.1}
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 h
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 m
+.\TU/lmr/m/n/10.95 t
+.\TU/lmr/m/n/10.95 h
+.\TU/lmr/m/n/10.95 e
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 o
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 r
+.\TU/lmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 m
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0
@@ -527,83 +559,87 @@ and\nobreakspace \hyper@@link {\c_empty_tl
 }{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
 <recently read> }
 l. ...    sec:subparagraph-2.1.1.1.1.1}
-                                       }
+                                     }
 > \box...=
-\hbox(7.60416+2.12917)x284.45695
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 p
-.\kern0.30417
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 n
-.\OT1/cmr/m/n/10.95 d
-.\OT1/cmr/m/n/10.95 i
-.\OT1/cmr/m/n/10.95 c
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 s
+\hbox(7.8402+2.1243)x284.49193, direction TLT
+.\TU/lmr/m/n/10.95 a
+.\TU/lmr/m/n/10.95 p
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 p
+.\kern0.3066 (font)
+.\TU/lmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 n
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 d
+.\TU/lmr/m/n/10.95 i
+.\TU/lmr/m/n/10.95 c
+.\TU/lmr/m/n/10.95 e
+.\TU/lmr/m/n/10.95 s
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{appendix.A}
-.\OT1/cmr/m/n/10.95 A
+.\TU/lmr/m/n/10.95 A
 .\pdfendlink
-.\OT1/cmr/m/n/10.95 ,
-.\glue 3.65 plus 1.825 minus 1.21666
+.\TU/lmr/m/n/10.95 ,
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.A.1}
-.\OT1/cmr/m/n/10.95 A
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 A
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
-.\OT1/cmr/m/n/10.95 ,
-.\glue 3.65 plus 2.28123 minus 0.97333
+.\TU/lmr/m/n/10.95 ,
+.\glue(\spaceskip) 3.64635 plus 2.27898 minus 0.97235
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.A.1.1}
-.\OT1/cmr/m/n/10.95 A
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 A
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
-.\OT1/cmr/m/n/10.95 ,
-.\glue 3.65 plus 2.28123 minus 0.97333
+.\TU/lmr/m/n/10.95 ,
+.\glue(\spaceskip) 3.64635 plus 2.27898 minus 0.97235
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.A.1.1.1}
-.\OT1/cmr/m/n/10.95 A
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 A
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
-.\OT1/cmr/m/n/10.95 ,
-.\glue 3.65 plus 2.28123 minus 0.97333
+.\TU/lmr/m/n/10.95 ,
+.\glue(\spaceskip) 3.64635 plus 2.27898 minus 0.97235
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.A.1.1.1.1}
-.\OT1/cmr/m/n/10.95 A
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 A
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 n
-.\OT1/cmr/m/n/10.95 d
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 a
+.\TU/lmr/m/n/10.95 n
+.\TU/lmr/m/n/10.95 d
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.A.1.1.1.1.1}
-.\OT1/cmr/m/n/10.95 A
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 A
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
 .\pdfendlink
 ! OK.
 l. ...\showbox0

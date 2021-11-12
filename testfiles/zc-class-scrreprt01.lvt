@@ -1,11 +1,11 @@
-\documentclass{scrbook}
+\documentclass{scrreprt}
 
 \input{regression-test}
 
 \usepackage{zref-clever}
 
 % This file is intended to test all possible "referable objects" in the
-% scrbook document class.
+% scrreprt document class.
 
 % Number down to subparagraph.
 \setcounter{secnumdepth}{5}

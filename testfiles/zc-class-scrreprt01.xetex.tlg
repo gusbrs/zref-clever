@@ -10,16 +10,13 @@ I\group_end: }.
 l. ...\setbox0=\hbox{\zcref{part:part-1}
                                         }
 > \box...=
-\hbox(7.48248+2.12917)x27.70961
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{part.1}
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 t
+\hbox(7.47885+2.12428)x27.71443
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 part
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 I
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 I
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -33,20 +30,13 @@ TEST 2: Reference: chapter
 l. ...\setbox0=\hbox{\zcref{cha:chapter-1}
                                           }
 > \box...=
-\hbox(7.60416+2.12917)x44.74295
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
-.\OT1/cmr/m/n/10.95 c
-.\kern-0.30418
-.\OT1/cmr/m/n/10.95 h
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 r
+\hbox(7.5993+2.12428)x44.7417
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 chapter
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -60,21 +50,13 @@ TEST 3: Reference: section
 l. ...\setbox0=\hbox{\zcref{sec:section-1.1}
                                             }
 > \box...=
-\hbox(7.31305+0.0)x50.55255
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
-.\OT1/cmr/m/n/10.95 s
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 c
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 i
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 n
+\hbox(7.2927+0.12044)x50.54518
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 section
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1.1
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -88,23 +70,13 @@ TEST 4: Reference: subsection
 l. ...\setbox0=\hbox{\zcref{sec:subsection-1.1.1}
                                                  }
 > \box...=
-\hbox(7.31305+0.0)x59.06923
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.1.1.1}
-.\OT1/cmr/m/n/10.95 s
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 c
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 i
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 n
+\hbox(7.2927+0.12044)x59.06429
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 section
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1.1.1
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -118,25 +90,13 @@ TEST 5: Reference: subsubsection
 l. ......0=\hbox{\zcref{sec:subsubsection-1.1.1.1}
                                                   }
 > \box...=
-\hbox(7.31305+0.0)x67.5859
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.1.1.1.1}
-.\OT1/cmr/m/n/10.95 s
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 c
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 i
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 n
+\hbox(7.2927+0.12044)x67.58337
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 section
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1.1.1.1
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -150,29 +110,13 @@ TEST 6: Reference: paragraph
 l. ......ox0=\hbox{\zcref{sec:paragraph-1.1.1.1.1}
                                                   }
 > \box...=
-\hbox(7.60416+2.12917)x91.91928
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.1.1.1.1.1}
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 g
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 h
+\hbox(7.5993+2.25569)x91.94713
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 paragraph
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1.1.1.1.1
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -186,31 +130,13 @@ TEST 7: Reference: subparagraph
 l. ......hbox{\zcref{sec:subparagraph-1.1.1.1.1.1}
                                                   }
 > \box...=
-\hbox(7.60416+2.12917)x100.43596
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.1.1.1.1.1.1}
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 g
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 h
+\hbox(7.5993+2.25569)x100.46623
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 paragraph
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1.1.1.1.1.1
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -224,19 +150,13 @@ TEST 8: Reference: figure
 l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.1}
                                              }
 > \box...=
-\hbox(7.60416+2.12917)x44.4388
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
-.\OT1/cmr/m/n/10.95 ^^L (ligature fi)
-.\OT1/cmr/m/n/10.95 g
-.\OT1/cmr/m/n/10.95 u
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 e
+\hbox(7.71974+2.25569)x44.44603
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 figure
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1.1
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -250,19 +170,13 @@ TEST 9: Reference: captionbeside figure
 l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.3}
                                              }
 > \box...=
-\hbox(7.60416+2.12917)x44.4388
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.3}
-.\OT1/cmr/m/n/10.95 ^^L (ligature fi)
-.\OT1/cmr/m/n/10.95 g
-.\OT1/cmr/m/n/10.95 u
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 e
+\hbox(7.71974+2.25569)x44.44603
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 figure
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 3
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1.3
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -276,19 +190,13 @@ TEST 10: Reference: table
 l. ...\setbox0=\hbox{\zcref{tab:table-1.1.1}
                                             }
 > \box...=
-\hbox(7.60416+0.0)x41.36671
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 b
-.\OT1/cmr/m/n/10.95 l
-.\OT1/cmr/m/n/10.95 e
+\hbox(7.5993+0.12044)x41.36908
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 table
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1.1
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -302,19 +210,13 @@ TEST 11: Reference: captionof table
 l. ...\setbox0=\hbox{\zcref{tab:table-1.1.2}
                                             }
 > \box...=
-\hbox(7.60416+0.0)x41.36671
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.2}
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 b
-.\OT1/cmr/m/n/10.95 l
-.\OT1/cmr/m/n/10.95 e
+\hbox(7.5993+0.12044)x41.36908
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 table
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 2
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1.2
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -328,19 +230,13 @@ TEST 12: Reference: captionofbeside table
 l. ...\setbox0=\hbox{\zcref{tab:table-1.1.3}
                                             }
 > \box...=
-\hbox(7.60416+0.0)x41.36671
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.3}
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 b
-.\OT1/cmr/m/n/10.95 l
-.\OT1/cmr/m/n/10.95 e
+\hbox(7.5993+0.24089)x41.36908
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 table
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 3
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1.3
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -357,46 +253,30 @@ and\nobreakspace \hyper@@link {\c_empty_tl }{Item.4}{\group_begin:
 l. ......\hbox{\zcref{item:1,item:2,item:3,item:4}
                                                   }
 > \box...=
-\hbox(8.2125+2.73749)x137.24016
-.\OT1/cmr/m/n/10.95 i
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 m
-.\OT1/cmr/m/n/10.95 s
+\hbox(8.2125+2.73749)x137.23631
+.\TU/lmr/m/n/10.95 items
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.1}
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
-.\OT1/cmr/m/n/10.95 ,
-.\glue 3.65 plus 2.28123 minus 0.97333
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.2}
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 a
-.\pdfendlink
-.\OT1/cmr/m/n/10.95 ,
-.\glue 3.65 plus 2.28123 minus 0.97333
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.3}
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 (
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 )
-.\OT1/cmr/m/n/10.95 i
-.\pdfendlink
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 n
-.\OT1/cmr/m/n/10.95 d
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10.95 ,
+.\glue 3.64635 plus 2.27895 minus 0.97235
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 1a
+.\special{pdf:eann}
+.\TU/lmr/m/n/10.95 ,
+.\glue 3.64635 plus 2.27895 minus 0.97235
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 1(a)i
+.\special{pdf:eann}
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 and
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.4}
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 (
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 )
-.\OT1/cmr/m/n/10.95 i
-.\OT1/cmr/m/n/10.95 A
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 1(a)iA
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -410,21 +290,13 @@ TEST 14: Reference: footnote
 l. ...\setbox0=\hbox{\zcref{fn:1}
                                  }
 > \box...=
-\hbox(7.60416+0.0)x48.66673
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Hfootnote.1}
-.\OT1/cmr/m/n/10.95 f
-.\OT1/cmr/m/n/10.95 o
-.\kern0.30417
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 n
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 e
+\hbox(7.71974+0.12044)x48.67274
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 footnote
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -438,21 +310,13 @@ TEST 15: Reference: mpfootnote
 l. ...\setbox0=\hbox{\zcref{fn:2}
                                  }
 > \box...=
-\hbox(7.60416+0.0)x48.78836
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.4}
-.\OT1/cmr/m/n/10.95 f
-.\OT1/cmr/m/n/10.95 o
-.\kern0.30417
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 n
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 e
+\hbox(7.71974+0.12044)x48.79318
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 footnote
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/it/10.95 a
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/it/10.95 a
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -466,24 +330,14 @@ TEST 16: Reference: equation
 l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.1}
                                               }
 > \box...=
-\hbox(8.2125+2.73749)x67.22092
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.1}
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 q
-.\OT1/cmr/m/n/10.95 u
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 i
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 n
+\hbox(8.2125+2.73749)x67.23299
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 equation
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 (
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
-.\OT1/cmr/m/n/10.95 )
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 (1.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10.95 )
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -497,19 +351,13 @@ TEST 17: Reference: thm
 l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.2}
                                               }
 > \box...=
-\hbox(7.60416+0.0)x48.0888
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{thm.1}
-.\OT1/cmr/m/n/10.95 t
-.\OT1/cmr/m/n/10.95 h
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 o
-.\OT1/cmr/m/n/10.95 r
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 m
+\hbox(7.5993+0.12044)x48.08145
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 theorem
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -529,82 +377,40 @@ and\nobreakspace \hyper@@link {\c_empty_tl
 l. ...    sec:subparagraph-2.1.1.1.1.1}
                                        }
 > \box...=
-\hbox(7.60416+2.12917)x284.45695
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 p
-.\OT1/cmr/m/n/10.95 p
-.\kern0.30417
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 n
-.\OT1/cmr/m/n/10.95 d
-.\OT1/cmr/m/n/10.95 i
-.\OT1/cmr/m/n/10.95 c
-.\OT1/cmr/m/n/10.95 e
-.\OT1/cmr/m/n/10.95 s
+\hbox(7.8402+2.12428)x284.49187
+.\TU/lmr/m/n/10.95 appendices
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{appendix.A}
-.\OT1/cmr/m/n/10.95 A
-.\pdfendlink
-.\OT1/cmr/m/n/10.95 ,
-.\glue 3.65 plus 1.825 minus 1.21666
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.A.1}
-.\OT1/cmr/m/n/10.95 A
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
-.\OT1/cmr/m/n/10.95 ,
-.\glue 3.65 plus 2.28123 minus 0.97333
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.A.1.1}
-.\OT1/cmr/m/n/10.95 A
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
-.\OT1/cmr/m/n/10.95 ,
-.\glue 3.65 plus 2.28123 minus 0.97333
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.A.1.1.1}
-.\OT1/cmr/m/n/10.95 A
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
-.\OT1/cmr/m/n/10.95 ,
-.\glue 3.65 plus 2.28123 minus 0.97333
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.A.1.1.1.1}
-.\OT1/cmr/m/n/10.95 A
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
-.\glue 3.65 plus 1.825 minus 1.21666
-.\OT1/cmr/m/n/10.95 a
-.\OT1/cmr/m/n/10.95 n
-.\OT1/cmr/m/n/10.95 d
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 A
+.\special{pdf:eann}
+.\TU/lmr/m/n/10.95 ,
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 A.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10.95 ,
+.\glue 3.64635 plus 2.27895 minus 0.97235
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 A.1.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10.95 ,
+.\glue 3.64635 plus 2.27895 minus 0.97235
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 A.1.1.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10.95 ,
+.\glue 3.64635 plus 2.27895 minus 0.97235
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 A.1.1.1.1
+.\special{pdf:eann}
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 and
 .\penalty 10000
-.\glue 3.65 plus 1.825 minus 1.21666
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.A.1.1.1.1.1}
-.\OT1/cmr/m/n/10.95 A
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 1
-.\pdfendlink
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 A.1.1.1.1.1
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
