@@ -1356,6 +1356,49 @@
 % \fi
 %
 %
+% \subsection{\pkg{newfloat}}
+%
+% \zctask{Setup a new float environment created with \pkg{newfloat} to be
+% referred to with \cs{zcref}.  None of \pkg{zref-clever} built-in reference
+% types is adequate for my needs.}
+%
+% The case here is pretty much the same as that for \cs{newtheorem} with a
+% custom type.  Hence, we need to setup a corresponding type, for which
+% providing the ``type names'' should normally suffice.  Note that, as far as
+% \pkg{zref-clever} is concerned, there's nothing specific to the
+% \pkg{newfloat} package in the setup, the same procedure can be used with
+% \cls{memoir}'s \cs{newfloat} command or with the \pkg{float},
+% \pkg{floatrow}, and \pkg{trivfloat} packages.
+%
+% \iffalse
+%<*example>
+% \fi
+\begin{zchowto}[caption={\pkg{newfloat}}]
+  \documentclass{article}
+  \usepackage{newfloat}
+  \DeclareFloatingEnvironment{diagram}
+  \usepackage{zref-clever}
+  \zcRefTypeSetup{diagram}{
+    Name-sg = Diagram ,
+    name-sg = diagram ,
+    Name-pl = Diagrams ,
+    name-pl = diagrams ,
+  }
+  \begin{document}
+  \section{Section 1}
+  \begin{diagram}
+    A diagram.
+    \caption{A diagram}
+    \zlabel{diagram-1}
+  \end{diagram}
+  \zcref{diagram-1}
+  \end{document}
+\end{zchowto}
+% \iffalse
+%</example>
+% \fi
+%
+%
 %
 % \subsection{\pkg{enumitem}}
 %
@@ -1363,12 +1406,12 @@
 % be referred to with \cs{zcref}.}
 %
 % Since the \texttt{enumerate} environment's counters are reset at each
-% nesting level, but not with the usual \cs{refstepcounter} machinery, we have
-% to inform \pkg{zref-clever} of this resetting behavior with the
-% \opt{counterresetby} option.  Also, given the naming of the underlying
-% counters is tied with the environment's name and the level's number, we
-% cannot really rely on an implicit counter-type association, and have to set
-% it explicitly with the \opt{countertype} option.
+% nesting level, but not with the standard machinery, we have to inform
+% \pkg{zref-clever} of this resetting behavior with the \opt{counterresetby}
+% option.  Also, given the naming of the underlying counters is tied with the
+% environment's name and the level's number, we cannot really rely on an
+% implicit counter-type association, and have to set it explicitly with the
+% \opt{countertype} option.
 %
 % \iffalse
 %<*example>
@@ -1449,7 +1492,7 @@
 %</example>
 % \fi
 %
-% \vspace{-1ex}
+% \vspace{-1.5ex}
 % \file{documentA.tex}:
 %
 % \iffalse
