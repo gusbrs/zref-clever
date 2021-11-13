@@ -1664,16 +1664,14 @@
 % without special handling anyway, we make the cut at the 2021-11-15 kernel
 % release.
 %
-% TODO Bump this to 2021-11-15 when the release comes.
-%
 %    \begin{macrocode}
 \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
-\IfFormatAtLeastTF{2021-06-01}
+\IfFormatAtLeastTF{2021-11-15}
   {}
   {%
     \PackageError{zref-clever}{LaTeX kernel too old}
       {%
-        'zref-clever' requires a LaTeX kernel newer than 2021-06-01.%
+        'zref-clever' requires a LaTeX kernel 2021-11-15 or newer.%
         \MessageBreak Loading will abort!%
       }%
     \endinput
@@ -6380,37 +6378,6 @@
 % \pkg{zref-clever} to work properly with them.
 %
 %
-% \subsection{\cs{footnote}}
-%
-% I'd love not to have to tamper with the \cs{footnote}'s machinery\dots{}
-% However, it is too basic a feature not to work out-of-the-box and,
-% unfortunately, it neither uses \cs{refstepcounter} nor sets
-% \cs{@currentcounter}.  So there's really not much to do here except trust in
-% the new hook management system.
-%
-% I have made a feature request though, for having \cs{@currentcounter}
-% recorded there too: \url{https://github.com/latex3/latex2e/issues/687}.
-%
-% TODO The FR has been implemented, remove this when the new release comes.
-%
-%    \begin{macrocode}
-\IfFormatAtLeastTF { 2021-11-15 }
-  { }
-  {
-    \tl_new:N \l_@@_footnote_type_tl
-    \tl_set:Nn \l_@@_footnote_type_tl { footnote }
-    \AddToHook { env / minipage / begin }
-      { \tl_set:Nn \l_@@_footnote_type_tl { mpfootnote } }
-    \AddToHook { cmd / @makefntext / before }
-      {
-        \@@_zcsetup:x
-          { currentcounter = \l_@@_footnote_type_tl }
-      }
-  }
-%    \end{macrocode}
-%
-%
-%
 % \subsection{\cs{appendix}}
 %
 % One relevant case of different reference types sharing the same counter is
@@ -6469,18 +6436,7 @@
 % workaround may be needed in case of trouble.  Phelype Oleinik recommends
 % activating/providing the generic hook in question, so that \pkg{ltcmdhooks}
 % considers the patch as already done, and do the patch ourselves with
-% \pkg{etoolbox} (\url{https://tex.stackexchange.com/a/617998}).  Like so:
-%
-% \begin{verbatim}
-%   \IfFormatAtLeastTF{2021-11-15}%
-%     {\ActivateGenericHook}%
-%     {\ProvideHook}%
-%       {cmd/appendix/before}
-%   \usepackage{etoolbox}
-%   \pretocmd\appendix
-%     {\UseHook{cmd/appendix/before}}
-%     {}{\FAILED}
-% \end{verbatim}
+% \pkg{etoolbox} (\url{https://tex.stackexchange.com/a/617998}).
 %
 %
 %
@@ -6702,16 +6658,9 @@
                 pagenote = endnote ,
               } ,
           }
-        % TODO Remove compatibility check after kernel release.
-        \IfFormatAtLeastTF { 2021-11-15 }
-          {
-            \AddToHook { file / \jobname.ent / before }
-              { \@@_zcsetup:x { currentcounter = pagenote } }
-          }
-          {
-            \AddToHook { file / before / \jobname.ent }
-              { \@@_zcsetup:x { currentcounter = pagenote } }
-          }
+        \AddToHook { file / \jobname.ent / before }
+          { \@@_zcsetup:x { currentcounter = pagenote } }
+        \msg_info:nnn { zref-clever } { compat-class } { memoir }
       }
       {}
   }
@@ -6763,6 +6712,7 @@
               }
             \tl_gclear:N \g_@@_koma_captype_tl
           }
+        \msg_info:nnx { zref-clever } { compat-class } { \KOMAClassName }
       }
   }
 %    \end{macrocode}
@@ -6814,43 +6764,18 @@
 % the latter's documented recommendation to load it last.  And use \cs{cref}
 % to make references to those.
 % CHECK Should I just make this no-op in case 'cleveref' is loaded?
-% TODO Remove this compatibility conditional when 2021-11-15 release comes.
 %    \begin{macrocode}
-        \IfFormatAtLeastTF { 2021-11-15 }
+        \@ifpackageloaded { hyperref }
           {
-            \@ifpackageloaded { hyperref }
-              {
-                \AddToHook { package / nameref / after }
-                  {
-                    \cs_new_eq:NN \@@_orig_ltxlabel:n \ltx@label
-                    \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
-                  }
-              }
+            \AddToHook { package / nameref / after }
               {
                 \cs_new_eq:NN \@@_orig_ltxlabel:n \ltx@label
                 \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
               }
           }
           {
-            \@ifpackageloaded { hyperref }
-              {
-                \@ifpackageloaded { nameref }
-                  {
-                    \cs_new_eq:NN \@@_orig_ltxlabel:n \ltx@label
-                    \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
-                  }
-                  {
-                    \AddToHook { package / after / nameref }
-                      {
-                        \cs_new_eq:NN \@@_orig_ltxlabel:n \ltx@label
-                        \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
-                      }
-                  }
-              }
-              {
-                \cs_new_eq:NN \@@_orig_ltxlabel:n \ltx@label
-                \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
-              }
+            \cs_new_eq:NN \@@_orig_ltxlabel:n \ltx@label
+            \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
           }
 %    \end{macrocode}
 % The \env{subequations} environment uses \texttt{parentequation} and
@@ -6859,11 +6784,14 @@
 % refstepped, it is then stored in \texttt{parentequation} and set to `0' and,
 % at the end of the environment it is restored to the value of
 % \texttt{parentequation}.  So, here, we really must specify manually
-% \opt{currentcounter} and the resetting.  Note that, for \env{subequations},
-% \cs{zlabel} works just fine (that is, if given immediately after
-% \texttt{\cs{begin}\{subequations\}}, to refer to the parent equation).  See
+% \opt{currentcounter} and the resetting.  We cannot even set
+% \cs{@currentcounter} at \texttt{env/.../begin}, since the call to
+% \cs{refstepcounter}\texttt{\{equation\}} done by \env{subequations} will
+% override that in sequence.  See
 % \url{https://github.com/latex3/latex2e/issues/687#issuecomment-951451024}
-% and subsequent discussion.
+% and subsequent discussion.  Note that, for \env{subequations}, \cs{zlabel}
+% works just fine (that is, if given immediately after
+% \texttt{\cs{begin}\{subequations\}}, to refer to the parent equation).
 %    \begin{macrocode}
         \AddToHook { env / subequations / begin }
           {
@@ -6881,22 +6809,17 @@
           }
 %    \end{macrocode}
 % \pkg{amsmath} does use \cs{refstepcounter} for the \texttt{equation} counter
-% throughout.  But we still have to set \opt{currentcounter} manually for two
-% reasons.  First: \cs{tag}, which naturally does not change the counter, and
-% just sets \cs{@currentlabel}.  Thus a label to a tag gets
-% \cs{@currentcounter} from whatever came last, normally the current
-% sectioning command.  And we also include the starred environments here, so
-% that we can get proper data for \cs{tag}ed equations even if the environment
-% is unnumbered.  Second, since we had to manually set \opt{currentcounter} to
-% \texttt{parentequation} in \env{subequations}, we also have to manually set
-% it to \env{equation} in environments which may be used within it.  The
-% \env{xxalignat} environment is not included, because it is ``starred'' by
-% default (i.e.\ unnumbered), and does not display or accepts labels or tags
-% anyway.  The \env{-ed} (\env{gathered}, \env{aligned}, and \env{alignedat})
-% and \env{cases} environments ``must appear within an enclosing math
-% environment''.  Same logic applies to other environments defined or
-% redefined by the package, like \env{array}, \env{matrix} and variations.
-% Finally, \env{split} too can only be used as part of another environment.
+% throughout.  But we still have to set \opt{currentcounter} manually because,
+% since we had to manually set \opt{currentcounter} to \texttt{parentequation}
+% in \env{subequations}, we also have to manually set it to \env{equation} in
+% environments which may be used within it.  The \env{xxalignat} environment
+% is not included, because it is ``starred'' by default (i.e.\ unnumbered),
+% and does not display or accepts labels or tags anyway.  The \env{-ed}
+% (\env{gathered}, \env{aligned}, and \env{alignedat}) and \env{cases}
+% environments ``must appear within an enclosing math environment''.  Same
+% logic applies to other environments defined or redefined by the package,
+% like \env{array}, \env{matrix} and variations.  Finally, \env{split} too can
+% only be used as part of another environment.
 %    \begin{macrocode}
         \clist_map_inline:nn
           {
@@ -7040,6 +6963,7 @@
             \AddToHook { env / #1 / begin }
               { \@@_zcsetup:n { currentcounter = equation } }
           }
+        \msg_info:nnn { zref-clever } { compat-package } { breqn }
       }
       {}
   }
