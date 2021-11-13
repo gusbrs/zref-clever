@@ -1,0 +1,30 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{diagram.1.1}{\group_begin: diagram\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{diagram-1}
+                                   }
+> \box...=
+\hbox(6.94+2.06)x51.7, direction TLT
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{diagram.1.1}
+.\TU/lmr/m/n/10 d
+.\TU/lmr/m/n/10 i
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 m
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0

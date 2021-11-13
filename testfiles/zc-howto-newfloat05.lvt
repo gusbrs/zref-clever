@@ -1,0 +1,41 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\usepackage{trivfloat}
+\trivfloat{diagram}
+
+\zcRefTypeSetup{diagram}{
+  Name-sg = Diagram ,
+  name-sg = diagram ,
+  Name-pl = Diagrams ,
+  name-pl = diagrams ,
+}
+
+\usepackage{hyperref}
+
+\begin{document}
+
+\section{Section 1}
+
+\begin{diagram}
+  A diagram.
+  \caption{A diagram}
+  \zlabel{diagram-1}
+\end{diagram}
+
+\START
+
+\setbox0=\hbox{\zcref{diagram-1}}
+\showbox0
+\box0
+
+\OMIT
+
+\end{document}

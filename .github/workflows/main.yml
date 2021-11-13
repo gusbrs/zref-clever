@@ -58,18 +58,24 @@ jobs:
             babel-english
             babel-french
             babel-german
+            babel-latin
             babel-portuges
             babel-spanish
-            babel-latin
+            bookmark
+            caption
+            carlisle
+            enumitem
+            float
+            floatrow
             hyphen-french
             hyphen-german
             hyphen-latin
-            polyglossia
-            carlisle
-            tools
-            memoir
             koma-script
-            bookmark
+            memoir
+            newfloat
+            polyglossia
+            tools
+            trivfloat
       - name: Run tests
         run: l3build check -q -H --show-log-on-error
 
@@ -104,7 +110,6 @@ jobs:
             mfware
             # Dependencies for documentation
             alphalph
-            infwarerr
             amsfonts
             amsmath
             booktabs
@@ -115,8 +120,8 @@ jobs:
             fancyvrb
             hologo
             hyperref
-            oberdiek
             iftex
+            infwarerr
             intcalc
             kvdefinekeys
             kvoptions
@@ -124,6 +129,7 @@ jobs:
             listings
             ltxcmds
             makeindex
+            oberdiek
             pdftexcmds
             psnfss
             tools

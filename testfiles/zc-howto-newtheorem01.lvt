@@ -1,0 +1,31 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\newtheorem{lemma}{Lemma}[section]
+
+\usepackage{hyperref}
+
+\begin{document}
+
+\section{Section 1}
+
+\begin{lemma}\zlabel{lemma-1}
+  A lemma.
+\end{lemma}
+
+\START
+
+\setbox0=\hbox{\zcref{lemma-1}}
+\showbox0
+\box0
+
+\OMIT
+
+\end{document}

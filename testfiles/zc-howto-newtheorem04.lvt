@@ -1,0 +1,38 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\newtheorem{myconjecture}{Conjecture}[section]
+
+\zcRefTypeSetup{myconjecture}{
+  Name-sg = Conjecture ,
+  name-sg = conjecture ,
+  Name-pl = Conjectures ,
+  name-pl = conjectures ,
+}
+
+\usepackage{hyperref}
+
+\begin{document}
+
+\section{Section 1}
+
+\begin{myconjecture}\zlabel{conjecture-1}
+  A conjecture.
+\end{myconjecture}
+
+\START
+
+\setbox0=\hbox{\zcref{conjecture-1}}
+\showbox0
+\box0
+
+\OMIT
+
+\end{document}

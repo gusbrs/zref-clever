@@ -1,0 +1,57 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\zcsetup{
+  countertype = {
+    myenumeratei   = item ,
+    myenumerateii  = item ,
+    myenumerateiii = item ,
+    myenumerateiv  = item ,
+  } ,
+  counterresetby = {
+    myenumerateii  = myenumeratei ,
+    myenumerateiii = myenumerateii ,
+    myenumerateiv  = myenumerateiii ,
+  }
+}
+
+\usepackage{enumitem}
+\newlist{myenumerate}{enumerate}{4}
+\setlist[myenumerate,1]{label=(\arabic*)}
+\setlist[myenumerate,2]{label=(\Roman*)}
+\setlist[myenumerate,3]{label=(\Alph*)}
+\setlist[myenumerate,4]{label=(\roman*)}
+
+\usepackage{hyperref}
+
+\begin{document}
+
+\begin{myenumerate}
+\item An item.\zlabel{item-1}
+  \begin{myenumerate}
+  \item An item.\zlabel{item-2}
+    \begin{myenumerate}
+    \item An item.\zlabel{item-3}
+      \begin{myenumerate}
+      \item An item.\zlabel{item-4}
+      \end{myenumerate}
+    \end{myenumerate}
+  \end{myenumerate}
+\end{myenumerate}
+
+\START
+
+\setbox0=\hbox{\zcref{item-1,item-2,item-3,item-4}}
+\showbox0
+\box0
+
+\OMIT
+
+\end{document}
