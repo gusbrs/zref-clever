@@ -6,9 +6,6 @@
 bundle = ""
 module = "zref-clever"
 
--- Use a dedicated readme for CTAN to meet upload requirements
-ctanreadme = "readme-ctan.md"
-
 -- Typeset only the .tex files
 typesetfiles = {"*.tex"}
 
@@ -33,21 +30,23 @@ checkconfigs = {"build-moreruns","build"}
 asciiengines = {}
 
 -- CTAN upload settings
-
 uploadconfig = {
-  version = "0.0.0", -- first line for tagging
+  version = "0.1.0-alpha", -- first line for tagging
   pkg = "zref-clever",
   author = "Gustavo Barros",
   uploader = "Gustavo Barros",
-  summary = "",
+  summary = "Clever cross-references based on zref",
   license = "lppl1.3c",
-  ctanPath = "",
-  repository = "",
-  bugtracker = "",
+  ctanPath = "/macros/latex/contrib/zref-clever",
+  repository = "https://github.com/gusbrs/zref-clever",
+  bugtracker = "https://github.com/gusbrs/zref-clever/issues",
   update = true,
   announcement_file = "ctan-announcement.text",
   note_file = "ctan-note.text",
 }
+
+-- Use a dedicated readme for CTAN to meet upload requirements
+ctanreadme = "readme-ctan.md"
 
 -- Set version, release date and copyright automatically
 tagfiles = {
@@ -138,8 +137,8 @@ function update_tag(file, content, tagname, tagdate)
   return content
 end
 
--- function tag_hook(tagname)
---   local tagname_safe = string.gsub(tagname, "^v", "")
---   os.execute('git commit -a -m "Step release tag"')
---   os.execute('git tag -a -m "" v' .. tagname_safe)
--- end
+function tag_hook(tagname)
+  local tagname_safe = string.gsub(tagname, "^v", "")
+  os.execute('git commit -a -m "Step release tag"')
+  os.execute('git tag -a -m "" v' .. tagname_safe)
+end
