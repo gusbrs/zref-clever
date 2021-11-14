@@ -6564,13 +6564,16 @@
 %   command setting labels.  \cs{@memsubcaption} is the best place to hook I
 %   could find.  It is used by subcaptioning commands, and only those.  And
 %   there is no hope for an environment hook in this case anyway.
-% \item \cs{verbfootnote}, \cs{sidefootnote} and \cs{pagenote}, just as the
-%   regular \cs{footnote} until recently in the kernel, do not set
-%   \cs{@currentcounter} alongside \cs{@currentlabel}, proper referencing to
-%   them requires setting the type for it.
+% \item \cls{memoir}'s \cs{footnote}, \cs{verbfootnote}, \cs{sidefootnote} and
+%   \cs{pagenote}, just as the regular \cs{footnote} until recently in the
+%   kernel, do not set \cs{@currentcounter} alongside \cs{@currentlabel},
+%   proper referencing to them requires setting the type for it.
+% \item Note that \cls{memoir}'s appendix features ``emulates'' the
+%   \pkg{appendix} package, hence the corresponding compatibility module is
+%   loaded for \cls{memoir} even if that package is not itself loaded.  The
+%   same is true for the \cs{appendix} command module, since it is also
+%   defined.
 % \end{enumerate}
-%
-% TODO Make a feature request for \pkg{zref}/\cs{zlabel} support?
 %
 %
 %    \begin{macrocode}
@@ -6637,7 +6640,8 @@
         \AddToHook{ cmd / @memsubcaption / before }
           { \zref@localaddprop \ZREF@mainlist { subcaption } }
 %    \end{macrocode}
-% Support for \cs{verbfootnote}, \cs{sidefootnote}, and \cs{pagenote}.
+% Support for \cs{footnote}, \cs{verbfootnote}, \cs{sidefootnote}, and
+% \cs{pagenote}.
 %    \begin{macrocode}
         \tl_new:N \l_@@_memoir_footnote_type_tl
         \tl_set:Nn \l_@@_memoir_footnote_type_tl { footnote }
@@ -6920,7 +6924,7 @@
 %
 % From the \pkg{breqn} documentation: \textquote{Use of the normal \cs{label}
 % command instead of the \opt{label} option works, I think, most of the time
-% (untested)}.  Indeed, light testing suggest it does work for \cs{zlabel}
+% (untested)}.  Indeed, light testing suggests it does work for \cs{zlabel}
 % just as well.  However, if it happens not to work, there was no easy
 % alternative handle I could find.  In particular, it does not seem viable to
 % leverage the \opt{label=} option without hacking the package internals, even

@@ -1,0 +1,63 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\usepackage{enumitem}
+
+\setlistdepth{6}
+\renewlist{enumerate}{enumerate}{7}
+\setlist[enumerate,1]{label=(\arabic*)}
+\setlist[enumerate,2]{label=(\Roman*)}
+\setlist[enumerate,3]{label=(\Alph*)}
+\setlist[enumerate,4]{label=(\roman*)}
+\setlist[enumerate,5]{label=(\arabic*)}
+\setlist[enumerate,6]{label=(\Roman*)}
+\setlist[enumerate,7]{label=(\Alph*)}
+
+\usepackage{hyperref}
+
+\ExplSyntaxOn \bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\begin{document}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+\begin{enumerate}
+\item test 1\zlabel{enum1}
+  \begin{enumerate}
+  \item test 2\zlabel{enum2}
+    \begin{enumerate}
+    \item test 3\zlabel{enum3}
+      \begin{enumerate}
+      \item test 4\zlabel{enum4}
+        \begin{enumerate}
+        \item test 5\zlabel{enum5}
+          \begin{enumerate}
+          \item test 6\zlabel{enum6}
+            \begin{enumerate}
+            \item test 7\zlabel{enum7}
+            \end{enumerate}
+          \end{enumerate}
+        \end{enumerate}
+      \end{enumerate}
+    \end{enumerate}
+  \end{enumerate}
+\end{enumerate}
+
+\clearpage{}
+
+\START
+
+\BEGINTEST{Reference: enumitem}
+\setbox0=\hbox{\zcref{enum1,enum2,enum3,enum4,enum5,enum6,enum7}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}

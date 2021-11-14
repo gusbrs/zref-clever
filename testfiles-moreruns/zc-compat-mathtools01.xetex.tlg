@@ -1,0 +1,314 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+Completed box being shipped out [2]
+\vbox(633.0+0.0)x407.0
+.\vbox(0.0+0.0)x0.0, glue set - 14.99626fil
+..\kern 0.0
+..\kern 16.0
+..\kern -1.00374
+..\hbox(0.0+0.0)x0.0, glue set - 60.99626fil
+...\kern 0.0
+...\kern 62.0
+...\kern -1.00374
+...\special{pdf:dest (page.2) [@thispage /XYZ @xpos @ypos null]}
+...\penalty 10000
+...\glue 0.0 plus 1.0fil minus 1.0fil
+..\glue 0.0 plus 1.0fil minus 1.0fil
+.\glue(\lineskip) 0.0
+.\vbox(633.0+0.0)x407.0
+..\glue 16.0
+..\vbox(617.0+0.0)x345.0, shifted 62.0
+...\vbox(12.0+0.0)x345.0, glue set 12.0fil
+....\glue 0.0 plus 1.0fil
+....\hbox(0.0+0.0)x345.0
+.....\hbox(0.0+0.0)x345.0
+...\glue 25.0
+...\glue(\lineskip) 0.0
+...\vbox(550.0+0.0)x345.0, glue set 408.35635fil
+....\write-{}
+....\glue(\topskip) 10.0
+....\hbox(0.0+0.0)x345.0, glue set 330.0fil
+.....\hbox(0.0+0.0)x15.0
+.....\penalty 10000
+.....\glue(\parfillskip) 0.0 plus 1.0fil
+.....\glue(\rightskip) 0.0
+....\penalty 10000
+....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+....\glue(\baselineskip) 5.55556
+....\hbox(6.44444+0.83333)x192.7777, shifted 152.2223
+.....\hbox(6.44444+0.83333)x40.5554, display
+......\hbox(0.0+0.0)x0.0
+......\OT1/cmr/m/n/10 1
+......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+......\OT1/cmr/m/n/10 +
+......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+......\OT1/cmr/m/n/10 1
+......\glue(\thickmuskip) 2.77771 plus 2.77771
+......\OT1/cmr/m/n/10 =
+......\glue(\thickmuskip) 2.77771 plus 2.77771
+......\OT1/cmr/m/n/10 2
+.....\kern152.22227
+.....\hbox(0.0+0.0)x0.00002, display
+......\kern 0.00002
+......\write1{\newlabel{eq1}{{1}{\thepage }{Section 1.1}{section.1}{}}}
+......\write1{\zref@newlabel{eq1}{\default{1}\page{\Z@C@page }\abspage{\Z@C@abspage \ETC.}
+....\penalty 0
+....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+....\penalty 10000
+....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+....\glue(\baselineskip) 3.66667
+....\hbox(7.5+2.49998)x192.7777, shifted 152.2223
+.....\hbox(6.44444+0.83333)x40.5554, display
+......\hbox(0.0+0.0)x0.0
+......\OT1/cmr/m/n/10 1
+......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+......\OT1/cmr/m/n/10 +
+......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+......\OT1/cmr/m/n/10 1
+......\glue(\thickmuskip) 2.77771 plus 2.77771
+......\OT1/cmr/m/n/10 =
+......\glue(\thickmuskip) 2.77771 plus 2.77771
+......\OT1/cmr/m/n/10 2
+.....\kern139.44229
+.....\hbox(7.5+2.49998)x12.78, display
+......\penalty 10000
+......\hbox(0.0+0.0)x0.0
+......\hbox(0.0+0.0)x0.0
+.......\mathon
+.......\hbox(0.0+0.0)x0.0, shifted -12.0
+........\special{pdf:dest (equation.1.1) [@thispage /XYZ @xpos @ypos null]}
+........\penalty 10000
+.......\mathoff
+......\hbox(7.5+2.49998)x12.78
+.......\TU/lmr/m/n/10 (1
+.......\kern 0.0
+.......\TU/lmr/m/n/10 )
+......\write1{\newlabel{eq2}{{1}{\thepage }{Section 1.1}{equation.1.1}{}}}
+......\write1{\zref@newlabel{eq2}{\default{1}\page{\Z@C@page }\abspage{\Z@C@abspage \ETC.}
+....\penalty 0
+....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+....\penalty 10000
+....\glue(\abovedisplayshortskip) 0.0 plus 3.0
+....\glue(\baselineskip) 2.00002
+....\hbox(7.5+2.49998)x192.7777, shifted 152.2223
+.....\hbox(6.44444+0.83333)x40.5554, display
+......\OT1/cmr/m/n/10 2
+......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+......\OT1/cmr/m/n/10 +
+......\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+......\OT1/cmr/m/n/10 2
+......\glue(\thickmuskip) 2.77771 plus 2.77771
+......\OT1/cmr/m/n/10 =
+......\glue(\thickmuskip) 2.77771 plus 2.77771
+......\OT1/cmr/m/n/10 4
+.....\kern129.72229
+.....\hbox(7.5+2.49998)x22.5, display
+......\hbox(7.5+2.49998)x22.5
+.......\TU/lmr/m/n/10 (
+.......\penalty 10000
+.......\hbox(0.0+0.0)x0.0
+........\hbox(0.0+0.0)x0.0, shifted -12.0
+.........\special{pdf:dest (AMS.1) [@thispage /XYZ @xpos @ypos null]}
+.........\penalty 10000
+.......\TU/lmr/m/n/10 eq1
+.......\kern 0.0
+.......\TU/lmr/m/n/10 )
+......\write1{\newlabel{eq1:tag}{{{eq1}}{\thepage }{Section 1.1}{AMS.1}{}}}
+......\write1{\zref@newlabel{eq1:tag}{\default{{eq1}}\page{\Z@C@page }\abspage{\Z@C@abspage \ETC.}
+....\penalty 0
+....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
+....\special{pdf:dest (equation.1.2) [@thispage /XYZ @xpos @ypos null]}
+....\penalty 10000
+....\glue -6.0 plus -3.0 minus -3.0
+....\glue 6.0 plus 3.0 minus 3.0
+....\write1{\zref@newlabel{subeq:A}{\default{2}\page{\Z@C@page }\abspage{\Z@C@abspage \ETC.}
+....\glue(\parskip) 0.0 plus 1.0
+....\glue(\parskip) 0.0
+....\glue(\baselineskip) 9.50002
+....\hbox(0.0+0.0)x345.0, glue set 330.0fil
+.....\hbox(0.0+0.0)x15.0
+.....\penalty 10000
+.....\glue(\parfillskip) 0.0 plus 1.0fil
+.....\glue(\rightskip) 0.0
+....\penalty 10000
+....\glue(\abovedisplayskip) 10.0 plus 2.0 minus 5.0
+....\glue -3.0
+....\glue 0.0
+....\glue(\baselineskip) 6.60004
+....\hbox(8.39996+3.60004)x345.0, display
+.....\glue(\tabskip) 137.56021
+.....\hbox(8.39996+3.60004)x27.80896
+......\glue 0.0 plus 1.0fil
+......\hbox(8.39996+3.60004)x0.0
+.......\vbox(8.39996+3.60004)x0.0
+........\kern 0.0
+........\hbox(8.39996+3.60004)x0.0
+.........\rule(8.39996+3.60004)x0.0
+......\hbox(6.83331+0.83333)x27.80896
+.......\mathon
+.......\hbox(6.83331+0.83333)x27.80896
+........\OML/cmm/m/it/10 A
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\OT1/cmr/m/n/10 +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\OML/cmm/m/it/10 B
+........\kern0.50172
+.......\mathoff
+.....\glue(\tabskip) 0.0
+.....\hbox(8.39996+3.60004)x42.07062, glue set 0.92844fil
+......\hbox(6.83331+0.83333)x41.14218
+.......\mathon
+.......\hbox(6.83331+0.83333)x41.14218
+........\hbox(0.0+0.0)x0.0
+........\glue(\thickmuskip) 2.77771 plus 2.77771
+........\OT1/cmr/m/n/10 =
+........\glue(\thickmuskip) 2.77771 plus 2.77771
+........\OML/cmm/m/it/10 B
+........\kern0.50172
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\OT1/cmr/m/n/10 +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\OML/cmm/m/it/10 A
+.......\mathoff
+......\glue 0.0 plus 1.0fil
+.....\glue(\tabskip) 137.56021
+.....\hbox(8.39996+3.60004)x0.0
+......\kern -137.56021
+......\kern 137.56021
+......\hbox(8.39996+3.60004)x0.0, glue set - 0.00002fil
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+.......\hbox(8.39996+3.60004)x0.00002
+........\hbox(8.39996+3.60004)x0.0
+.........\vbox(8.39996+3.60004)x0.0
+..........\kern 0.0
+..........\hbox(8.39996+3.60004)x0.0
+...........\rule(8.39996+3.60004)x0.0
+........\kern 0.00002
+........\write1{\newlabel{align:a}{{2}{\thepage }{Section 1.1}{equation.1.2}{}}}
+........\write1{\zref@newlabel{align:a}{\default{2}\page{\Z@C@page }\abspage{\Z@C@abspage \ETC.}
+.....\glue(\tabskip) 0.0
+....\penalty 10000
+....\glue 0.0
+....\glue(\baselineskip) 3.0
+....\hbox(8.39996+3.60004)x345.0, display
+.....\glue(\tabskip) 137.56021
+.....\hbox(8.39996+3.60004)x27.80896, glue set 19.94647fil
+......\glue 0.0 plus 1.0fil
+......\hbox(8.39996+3.60004)x0.0
+.......\vbox(8.39996+3.60004)x0.0
+........\kern 0.0
+........\hbox(8.39996+3.60004)x0.0
+.........\rule(8.39996+3.60004)x0.0
+......\hbox(6.83331+0.0)x7.86249
+.......\mathon
+.......\OML/cmm/m/it/10 C
+.......\kern0.71527
+.......\mathoff
+.....\glue(\tabskip) 0.0
+.....\hbox(8.39996+3.60004)x42.07062
+......\hbox(6.83331+0.83333)x42.07062
+.......\mathon
+.......\hbox(6.83331+0.83333)x42.07062
+........\hbox(0.0+0.0)x0.0
+........\glue(\thickmuskip) 2.77771 plus 2.77771
+........\OT1/cmr/m/n/10 =
+........\glue(\thickmuskip) 2.77771 plus 2.77771
+........\OML/cmm/m/it/10 D
+........\kern0.27779
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\OT1/cmr/m/n/10 +
+........\glue(\medmuskip) 2.22217 plus 1.11108 minus 2.22217
+........\OML/cmm/m/it/10 E
+........\kern0.57637
+.......\mathoff
+......\glue 0.0 plus 1.0fil
+.....\glue(\tabskip) 137.56021
+.....\hbox(8.39996+3.60004)x0.0
+......\kern -137.56021
+......\kern 137.56021
+......\hbox(8.39996+3.60004)x0.0, glue set - 17.78fil
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+.......\hbox(8.39996+3.60004)x17.78
+........\hbox(8.39996+3.60004)x0.0
+.........\vbox(8.39996+3.60004)x0.0
+..........\kern 0.0
+..........\hbox(8.39996+3.60004)x0.0
+...........\rule(8.39996+3.60004)x0.0
+........\penalty 10000
+........\hbox(0.0+0.0)x0.0
+.........\hbox(0.0+0.0)x0.0, shifted -15.0
+..........\special{pdf:dest (equation.1.2a) [@thispage /XYZ @xpos @ypos null]}
+..........\penalty 10000
+........\hbox(7.5+2.49998)x17.78
+.........\TU/lmr/m/n/10 (2a
+.........\kern 0.0
+.........\TU/lmr/m/n/10 )
+........\write1{\newlabel{align:b}{{2a}{\thepage }{Section 1.1}{equation.1.2a}{}}}
+........\write1{\zref@newlabel{align:b}{\default{2a}\page{\Z@C@page }\abspage{\Z@C@abspage \ETC.}
+.....\glue(\tabskip) 0.0
+....\penalty 10000
+....\glue 0.0
+....\glue(\baselineskip) 3.0
+....\hbox(8.39996+3.60004)x345.0, display
+.....\glue(\tabskip) 137.56021
+.....\hbox(8.39996+3.60004)x27.80896, glue set 19.85065fil
+......\glue 0.0 plus 1.0fil
+......\hbox(8.39996+3.60004)x0.0
+.......\vbox(8.39996+3.60004)x0.0
+........\kern 0.0
+........\hbox(8.39996+3.60004)x0.0
+.........\rule(8.39996+3.60004)x0.0
+......\hbox(6.83331+0.0)x7.95831
+.......\mathon
+.......\OML/cmm/m/it/10 E
+.......\kern0.57637
+.......\mathoff
+.....\glue(\tabskip) 0.0
+.....\hbox(8.39996+3.60004)x42.07062, glue set 20.91794fil
+......\hbox(6.83331+0.0)x21.15268
+.......\mathon
+.......\hbox(6.83331+0.0)x21.15268
+........\hbox(0.0+0.0)x0.0
+........\glue(\thickmuskip) 2.77771 plus 2.77771
+........\OT1/cmr/m/n/10 =
+........\glue(\thickmuskip) 2.77771 plus 2.77771
+........\OML/cmm/m/it/10 F
+........\kern1.3889
+.......\mathoff
+......\glue 0.0 plus 1.0fil
+.....\glue(\tabskip) 137.56021
+.....\hbox(8.39996+3.60004)x0.0
+......\kern -137.56021
+......\kern 137.56021
+......\hbox(8.39996+3.60004)x0.0, glue set - 0.00002fil
+.......\glue 0.0 plus 1.0fil minus 1.0fil
+.......\hbox(8.39996+3.60004)x0.00002
+........\hbox(8.39996+3.60004)x0.0
+.........\vbox(8.39996+3.60004)x0.0
+..........\kern 0.0
+..........\hbox(8.39996+3.60004)x0.0
+...........\rule(8.39996+3.60004)x0.0
+........\kern 0.00002
+........\write1{\newlabel{align:c}{{2}{\thepage }{Section 1.1}{equation.1.2a}{}}}
+........\write1{\zref@newlabel{align:c}{\default{2}\page{\Z@C@page }\abspage{\Z@C@abspage \ETC.}
+.....\glue(\tabskip) 0.0
+....\penalty 10000
+....\glue 0.0
+....\penalty 0
+....\glue(\belowdisplayskip) 10.0 plus 2.0 minus 5.0
+....\glue 0.0 plus 1.0fil
+....\glue 0.0
+....\glue 0.0 plus 0.0001fil
+...\glue(\baselineskip) 23.34
+...\hbox(6.66+0.0)x345.0
+....\hbox(6.66+0.0)x345.0, glue set 170.0fil
+.....\glue 0.0 plus 1.0fil
+.....\TU/lmr/m/n/10 2
+.....\glue 0.0 plus 1.0fil
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
+\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
+}{equation.1.1}{\group_begin: \upshape 1\group_end: }\textup {)}
+and\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
+}{equation.1.2a}{\group_begin: \upshape 2a\group_end: }\textup {)}.
+<recently read> }
+l. ...\zcref{eq2,align:b}

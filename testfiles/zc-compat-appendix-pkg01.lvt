@@ -1,0 +1,130 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\usepackage{appendix}
+
+\usepackage{zref-clever}
+
+% Number all section levels.
+\setcounter{secnumdepth}{5}
+
+\usepackage{hyperref}
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\NewDocumentCommand \newoptblock {m}{%
+  \noindent\rule{\textwidth}{0.4pt}\par%
+  \noindent\textbf{#1}\par}
+
+\begin{document}
+
+\chapter{Chapter 1}
+\zlabel{cha:chapter-1}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+\chapter{Chapter 2}
+\zlabel{cha:chapter-2}
+
+\begin{subappendices}
+
+\section{Section 2.1}
+\zlabel{sec:section-2.1}
+
+\subsection{Subsection 2.1.1}
+\zlabel{sec:subsection-2.1.1}
+
+\subsubsection{Subsubsection 2.1.1.1}
+\zlabel{sec:subsubsection-2.1.1.1}
+
+\paragraph{Paragraph 2.1.1.1.1}
+\zlabel{sec:paragraph-2.1.1.1.1}
+
+\subparagraph{Subparagraph 2.1.1.1.1.1}
+\zlabel{sec:subparagraph-2.1.1.1.1.1}
+
+\end{subappendices}
+
+\begin{appendices}
+
+\chapter{Chapter 3}
+\zlabel{cha:chapter-3}
+
+\section{Section 3.1}
+\zlabel{sec:section-3.1}
+
+\subsection{Subsection 3.1.1}
+\zlabel{sec:subsection-3.1.1}
+
+\subsubsection{Subsubsection 3.1.1.1}
+\zlabel{sec:subsubsection-3.1.1.1}
+
+\paragraph{Paragraph 3.1.1.1.1}
+\zlabel{sec:paragraph-3.1.1.1.1}
+
+\subparagraph{Subparagraph 3.1.1.1.1.1}
+\zlabel{sec:subparagraph-3.1.1.1.1.1}
+
+\end{appendices}
+
+\appendix{}
+
+\chapter{Chapter 4}
+\zlabel{cha:chapter-4}
+
+\section{Section 4.1}
+\zlabel{sec:section-4.1}
+
+\subsection{Subsection 4.1.1}
+\zlabel{sec:subsection-4.1.1}
+
+\subsubsection{Subsubsection 4.1.1.1}
+\zlabel{sec:subsubsection-4.1.1.1}
+
+\paragraph{Paragraph 4.1.1.1.1}
+\zlabel{sec:paragraph-4.1.1.1.1}
+
+\subparagraph{Subparagraph 4.1.1.1.1.1}
+\zlabel{sec:subparagraph-4.1.1.1.1.1}
+
+\clearpage{}
+
+\START
+
+\newoptblock{Subappendices}
+
+\BEGINTEST{Reference: sectioning commands in subapenddices}
+\setbox0=\hbox{\zcref{sec:section-2.1, sec:subsection-2.1.1,
+    sec:subsubsection-2.1.1.1, sec:paragraph-2.1.1.1.1,
+    sec:subparagraph-2.1.1.1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Appendices}
+
+\BEGINTEST{Reference: sectioning commands in appendices}
+\setbox0=\hbox{\zcref{cha:chapter-3, sec:section-3.1, sec:subsection-3.1.1,
+    sec:subsubsection-3.1.1.1, sec:paragraph-3.1.1.1.1,
+    sec:subparagraph-3.1.1.1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Appendix}
+
+\BEGINTEST{Reference: sectioning commands after appendix}
+\setbox0=\hbox{\zcref{cha:chapter-4, sec:section-4.1, sec:subsection-4.1.1,
+    sec:subsubsection-4.1.1.1, sec:paragraph-4.1.1.1.1,
+    sec:subparagraph-4.1.1.1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}

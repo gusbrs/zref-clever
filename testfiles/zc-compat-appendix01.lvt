@@ -1,0 +1,53 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+% Number down to subparagraph.
+\setcounter{secnumdepth}{5}
+
+\usepackage{hyperref}
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\begin{document}
+
+\chapter{Chapter 1}
+\zlabel{cha:chapter-1}
+
+\appendix{}
+
+\chapter{Chapter 2}
+\zlabel{cha:chapter-2}
+
+\section{Section 2.1}
+\zlabel{sec:section-2.1}
+
+\subsection{Subsection 2.1.1}
+\zlabel{sec:subsection-2.1.1}
+
+\subsubsection{Subsubsection 2.1.1.1}
+\zlabel{sec:subsubsection-2.1.1.1}
+
+\paragraph{Paragraph 2.1.1.1.1}
+\zlabel{sec:paragraph-2.1.1.1.1}
+
+\subparagraph{Subparagraph 2.1.1.1.1.1}
+\zlabel{sec:subparagraph-2.1.1.1.1.1}
+
+\clearpage{}
+
+\START
+
+\setbox0=\hbox{\zcref{cha:chapter-2, sec:section-2.1, sec:subsection-2.1.1,
+    sec:subsubsection-2.1.1.1, sec:paragraph-2.1.1.1.1,
+    sec:subparagraph-2.1.1.1.1.1}}
+\showbox0
+\box0
+
+\OMIT
+
+\end{document}

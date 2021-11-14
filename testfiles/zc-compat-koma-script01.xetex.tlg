@@ -1,0 +1,42 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Reference: captionbeside figure
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{figure.1.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.4}
+                                            }
+> \box...=
+\hbox(7.71974+2.25569)x44.44603
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 figure
+.\penalty 10000
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1.1
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 2: Reference: captionofbeside table
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{tab:table-1.1.3}
+                                           }
+> \box...=
+\hbox(7.5993+0.12044)x41.36908
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10.95 table
+.\penalty 10000
+.\glue 3.64635 plus 1.82317 minus 1.21544
+.\TU/lmr/m/n/10.95 1.1
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================

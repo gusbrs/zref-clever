@@ -37,6 +37,7 @@ jobs:
             # Build formats
             latex
             latex-bin
+            latex-bin-dev
             luatex
             luatexbase
             xetex
@@ -55,6 +56,8 @@ jobs:
             kvdefinekeys
             etexcmds
             # Dependencies for tests
+            amsmath
+            appendix
             babel-english
             babel-french
             babel-german
@@ -62,15 +65,20 @@ jobs:
             babel-portuges
             babel-spanish
             bookmark
+            breqn
             caption
             carlisle
             enumitem
+            epstopdf-pkg
             float
             floatrow
+            graphics
             hyphen-french
             hyphen-german
             hyphen-latin
             koma-script
+            listings
+            mathtools
             memoir
             newfloat
             polyglossia

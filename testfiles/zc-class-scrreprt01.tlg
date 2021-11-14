@@ -244,14 +244,14 @@ l. ...\showbox0
 TEST 9: Reference: captionbeside figure
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{figure.1.3}{\group_begin: figure\group_end: \nobreakspace \group_begin:
-1.3\group_end: }.
+}{figure.1.4}{\group_begin: figure\group_end: \nobreakspace \group_begin:
+1.4\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.3}
+l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.4}
                                              }
 > \box...=
 \hbox(7.60416+2.12917)x44.4388
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.3}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.4}
 .\OT1/cmr/m/n/10.95 ^^L (ligature fi)
 .\OT1/cmr/m/n/10.95 g
 .\OT1/cmr/m/n/10.95 u
@@ -261,7 +261,7 @@ l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.3}
 .\glue 3.65 plus 1.825 minus 1.21666
 .\OT1/cmr/m/n/10.95 1
 .\OT1/cmr/m/n/10.95 .
-.\OT1/cmr/m/n/10.95 3
+.\OT1/cmr/m/n/10.95 4
 .\pdfendlink
 ! OK.
 l. ...\showbox0

@@ -1,0 +1,360 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\usepackage{amsmath}
+
+\usepackage{hyperref}
+
+\ExplSyntaxOn \bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\NewDocumentCommand \newoptblock {m}{%
+  \noindent\rule{\textwidth}{0.4pt}\par%
+  \noindent\textbf{#1}\par}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\envert}[1]{\left\lvert#1\right\rvert} \let\abs=\envert
+
+\begin{document}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+\begin{equation}
+  \begin{pmatrix} D_1t&-a_{12}t_2&\dots&-a_{1n}t_n\\
+    -a_{21}t_1&D_2t&\dots&-a_{2n}t_n\\
+    \hdotsfor[2]{4}\\
+    -a_{n1}t_1&-a_{n2}t_2&\dots&D_nt
+  \end{pmatrix}\label{eq:1}
+\end{equation}
+
+\begin{equation}\label{compl-gr}
+  A^{(1)}_l =\begin{cases} n!,&\text{if }l =1\\
+    0,&\text{otherwise}.\end{cases}
+\end{equation}
+
+\begin{equation*} \tag{eq1}\label{eq1:tag}
+  A^{(1)}_l =\begin{cases} n!,&\text{if }l =1\\
+    0,&\text{otherwise}.\end{cases}
+\end{equation*}
+
+\begin{align}
+  \begin{split}\abs{I_1}
+    &=\left\lvert \int_\Omega gRu\,d\Omega\right\rvert\\
+    &\le C_3\left[\int_\Omega\left(\int_{a}^x
+          g(\xi,t)\,d\xi\right)^2d\Omega\right]^{1/2}\\
+    &\quad\times \left[\int_\Omega\left\{u^2_x+\frac{1}{k} \left(\int_{a}^x
+            cu_t\,d\xi\right)^2\right\}
+        c\Omega\right]^{1/2}\\
+    &\le C_4\left\lvert \left\lvert f\left\lvert \wt{S}^{-1,0}_{a,-}
+          W_2(\Omega,\Gamma_l)\right\rvert\right\rvert \left\lvert
+        \abs{u}\overset{\circ}\to W_2^{\wt{A}}
+        (\Omega;\Gamma_r,T)\right\rvert\right\rvert.
+  \end{split}\label{eq:A}\\
+  \begin{split}\abs{I_2}&=\left\lvert \int_{0}^T \psi(t)\left\{u(a,t)
+        -\int_{\gamma(t)}^a\frac{d\theta}{k(\theta,t)}
+        \int_{a}^\theta c(\xi)u_t(\xi,t)\,d\xi\right\}dt\right\rvert\\
+    &\le C_6\left\lvert \left\lvert f\int_\Omega \left\lvert
+          \wt{S}^{-1,0}_{a,-} W_2(\Omega,\Gamma_l)\right\rvert\right\rvert
+      \left\lvert \abs{u}\overset{\circ}\to W_2^{\wt{A}}
+        (\Omega;\Gamma_r,T)\right\rvert\right\rvert.
+  \end{split}\label{eq:A-2}
+\end{align}
+
+\begin{align*}
+  \begin{split}\abs{I_1}
+    &=\left\lvert \int_\Omega gRu\,d\Omega\right\rvert\\
+    &\le C_3\left[\int_\Omega\left(\int_{a}^x
+          g(\xi,t)\,d\xi\right)^2d\Omega\right]^{1/2}\\
+    &\quad\times \left[\int_\Omega\left\{u^2_x+\frac{1}{k} \left(\int_{a}^x
+            cu_t\,d\xi\right)^2\right\}
+        c\Omega\right]^{1/2}\\
+    &\le C_4\left\lvert \left\lvert f\left\lvert \wt{S}^{-1,0}_{a,-}
+          W_2(\Omega,\Gamma_l)\right\rvert\right\rvert \left\lvert
+        \abs{u}\overset{\circ}\to W_2^{\wt{A}}
+        (\Omega;\Gamma_r,T)\right\rvert\right\rvert.
+  \end{split}\tag{altag1}\label{tag:eq:A}\\
+  \begin{split}\abs{I_2}&=\left\lvert \int_{0}^T \psi(t)\left\{u(a,t)
+        -\int_{\gamma(t)}^a\frac{d\theta}{k(\theta,t)}
+        \int_{a}^\theta c(\xi)u_t(\xi,t)\,d\xi\right\}dt\right\rvert\\
+    &\le C_6\left\lvert \left\lvert f\int_\Omega \left\lvert
+          \wt{S}^{-1,0}_{a,-} W_2(\Omega,\Gamma_l)\right\rvert\right\rvert
+      \left\lvert \abs{u}\overset{\circ}\to W_2^{\wt{A}}
+        (\Omega;\Gamma_r,T)\right\rvert\right\rvert.
+  \end{split}\tag{altag2}\label{tag:eq:A-2}
+\end{align*}
+
+\begin{alignat}{3}
+  V_i & =v_i - q_i v_j, & \qquad X_i & = x_i - q_i x_j, & \qquad U_i & = u_i,
+  \qquad \text{for $i\ne j$;}\label{eq:B}\\
+  V_j & = v_j, & \qquad X_j & = x_j, & \qquad U_j & u_j + \sum_{i\ne j} q_i
+  u_i.
+\end{alignat}
+
+\begin{alignat}{3}
+  V_i & =v_i - q_i v_j, & \qquad X_i & = x_i - q_i x_j, & \qquad U_i & = u_i,
+  \qquad \text{for $i\ne j$;}\label{eq:F}\\
+  V_j & = v_j, & \qquad X_j & = x_j, & \qquad U_j & u_j + \sum_{i\ne j} q_i
+  u_i.\label{eq:G}
+\end{alignat}
+
+\begin{alignat*}{2}
+  x& =y && \qquad \text {by (\zref{eq:A})}\tag{tagalnat1}\label{eq:C}\\
+  x'& = y' && \qquad \text {by (\zref{eq:B})}\tag{tagalnat2}\label{eq:D}\\
+  x+x' & = y+y' && \qquad \text {by Axiom 1.}
+\end{alignat*}
+
+\begin{flalign}
+  flalign &= x & x &= x\label{eq:flal1}\\
+  flalign &= x & x &= x
+\end{flalign}
+
+\begin{flalign*}
+  flalign &= x & x &= x\tag{flal1}\label{tag:eq:flal1}\\
+  flalign &= x & x &= x
+\end{flalign*}
+
+\begin{xalignat}{2}
+  xalignat &= x & x &= x\label{eq:xal1}\\
+  xalignat &= x & x &= x
+\end{xalignat}
+
+\begin{xalignat*}{2}
+  xalignat &= x & x &= x\tag{xal1}\label{tag:eq:xal1}\\
+  xalignat &= x & x &= x
+\end{xalignat*}
+
+\begin{gather}
+  \label{gather:AA}A+B=B\\
+  \label{gather:BB}C=D+E\\
+  \tag{\ref*{align:c}$'$}\label{gather:CC}E=F
+\end{gather}
+
+\begin{gather*}
+  A+B=B\\
+  C=D+E\\
+  \tag{taggath}\label{tag:gather:CC}E=F
+\end{gather*}
+
+\begin{multline}\label{eq:E}
+  \int_a^b\biggl\{\int_a^b[f(x)^2g(y)^2+f(y)^2g(x)^2]
+  -2f(x)g(x)f(y)g(y)\,dx\biggr\}\,dy \\
+  =\int_a^b\biggl\{g(y)^2\int_a^bf^2+f(y)^2 \int_a^b g^2-2f(y)g(y)\int_a^b
+  fg\biggr\}\,dy
+\end{multline}
+
+\begin{multline*}\tag{multln}\label{tag:eq:E}
+  \int_a^b\biggl\{\int_a^b[f(x)^2g(y)^2+f(y)^2g(x)^2]
+  -2f(x)g(x)f(y)g(y)\,dx\biggr\}\,dy \\
+  =\int_a^b\biggl\{g(y)^2\int_a^bf^2+f(y)^2 \int_a^b g^2-2f(y)g(y)\int_a^b
+  fg\biggr\}\,dy
+\end{multline*}
+
+\begin{subequations}\zlabel{subeq:A}
+  \begin{align}
+    \label{align:a}A+B&=B+A\\
+    \label{align:b}C&=D+E\\
+    \label{align:c}E&=F
+  \end{align}
+\end{subequations}
+
+\begin{subequations}
+  \begin{align}
+    \label{xalign:a}A+B&=B&     B&=B+A\\
+    \label{xalign:b}C&=D+E&     C\oplus D&=E\\
+    \label{xalign:c}E&=F&       E'&=F'
+  \end{align}
+\end{subequations}
+
+\begin{subequations}
+  \begin{gather}
+    \label{gather:a}A+B=B\\
+    \label{gather:b}C=D+E\\
+    \tag{\ref*{align:c}$'$}\label{gather:c}E=F
+  \end{gather}
+\end{subequations}
+
+\begin{subequations}
+  \begin{equation}
+    \label{split:x}
+    \begin{split}
+      A&=B+C+F\\
+      &=G
+    \end{split}
+  \end{equation}
+  and a multline environment:
+  \begin{multline}\label{multline:x}
+    A[B]C[D]E[F]G[[H[I]J[K]L[M]N]]=\\
+    H[I]J[K]L[M]N[O]P[Q]R[S]T[U]V[W]X[Y]Z
+  \end{multline}
+\end{subequations}
+
+\begin{equation*}
+  a=b \tag*{Q\&A}\label{eq:example}
+\end{equation*}
+
+\clearpage{}
+
+\START
+
+\newoptblock{equation}
+
+\BEGINTEST{Reference: equation}
+\setbox0=\hbox{\zcref{eq:1}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref{compl-gr}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{equation*}
+
+\BEGINTEST{Reference: equation*}
+\setbox0=\hbox{\zcref{eq1:tag}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{align}
+
+\BEGINTEST{Reference: align}
+\setbox0=\hbox{\zcref{eq:A, eq:A-2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{align*}
+
+\BEGINTEST{Reference: align*}
+\setbox0=\hbox{\zcref{tag:eq:A, tag:eq:A-2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{alignat}
+
+\BEGINTEST{Reference: alignat}
+\setbox0=\hbox{\zcref{eq:B}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref{eq:F,eq:G}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{alignat*}
+
+\BEGINTEST{Reference: alignat*}
+\setbox0=\hbox{\zcref{eq:C, eq:D}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{flalign}
+
+\BEGINTEST{Reference: flalign}
+\setbox0=\hbox{\zcref{eq:flal1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{flalign*}
+
+\BEGINTEST{Reference: flalign*}
+\setbox0=\hbox{\zcref{tag:eq:flal1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{xalignat}
+
+\BEGINTEST{Reference: xalignat}
+\setbox0=\hbox{\zcref{eq:xal1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{xalignat*}
+
+\BEGINTEST{Reference: xalignat*}
+\setbox0=\hbox{\zcref{tag:eq:xal1}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+\clearpage{}
+\TIMO
+
+\newoptblock{gather}
+
+\BEGINTEST{Reference: gather}
+\setbox0=\hbox{\zcref[nocomp]{gather:AA,gather:BB,gather:CC}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{gather*}
+
+\BEGINTEST{Reference: gather*}
+\setbox0=\hbox{\zcref{tag:gather:CC}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{multline}
+
+\BEGINTEST{Reference: multline}
+\setbox0=\hbox{\zcref{eq:E}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{multline*}
+
+\BEGINTEST{Reference: multline*}
+\setbox0=\hbox{\zcref{tag:eq:E}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{subequations}
+
+\BEGINTEST{Reference: subequations}
+\setbox0=\hbox{\zcref{subeq:A}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[nocomp]{align:a,align:b,align:c}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[nocomp]{xalign:a,xalign:b,xalign:c}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[nocomp]{gather:a,gather:b,gather:c}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref{split:x,multline:x}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{equation font}
+
+\BEGINTEST{Reference: equation font}
+\setbox0=\hbox{%
+  \itshape
+  \ref{eq:example},
+  \eqref{eq:example},
+  \zcref{eq:example}.
+}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}

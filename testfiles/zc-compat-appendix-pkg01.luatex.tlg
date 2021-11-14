@@ -1,0 +1,293 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Reference: sectioning commands in subapenddices
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.a.2.A}{\group_begin:
+2.A\group_end: }, \hyper@@link {\c_empty_tl
+}{subsection.a.2.A.1}{\group_begin: 2.A.1\group_end: }, \hyper@@link
+{\c_empty_tl }{subsubsection.a.2.A.1.1}{\group_begin: 2.A.1.1\group_end: },
+\hyper@@link {\c_empty_tl }{paragraph.a.2.A.1.1.1}{\group_begin:
+2.A.1.1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{subparagraph.a.2.A.1.1.1.1}{\group_begin: 2.A.1.1.1.1\group_end: }.
+<recently read> }
+l. ...    sec:subparagraph-2.1.1.1.1.1}
+                                     }
+> \box...=
+\hbox(7.16+1.94)x246.19998, direction TLT
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 p
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 p
+.\kern0.28 (font)
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 d
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 s
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.a.2.A}
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 A
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.a.2.A.1}
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.a.2.A.1.1}
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.a.2.A.1.1.1}
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.a.2.A.1.1.1.1}
+.\TU/lmr/m/n/10 2
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 2: Reference: sectioning commands in appendices
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{appendix.b.A}{\group_begin:
+A\group_end: }, \hyper@@link {\c_empty_tl }{section.b.A.1}{\group_begin:
+A.1\group_end: }, \hyper@@link {\c_empty_tl
+}{subsection.b.A.1.1}{\group_begin: A.1.1\group_end: }, \hyper@@link
+{\c_empty_tl }{subsubsection.b.A.1.1.1}{\group_begin: A.1.1.1\group_end: },
+\hyper@@link {\c_empty_tl }{paragraph.b.A.1.1.1.1}{\group_begin:
+A.1.1.1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{subparagraph.b.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
+<recently read> }
+l. ...    sec:subparagraph-3.1.1.1.1.1}
+                                     }
+> \box...=
+\hbox(7.16+1.94)x259.80998, direction TLT
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 p
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 p
+.\kern0.28 (font)
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 d
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 s
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{appendix.b.A}
+.\TU/lmr/m/n/10 A
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.b.A.1}
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.b.A.1.1}
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.b.A.1.1.1}
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.b.A.1.1.1.1}
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.b.A.1.1.1.1.1}
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 3: Reference: sectioning commands after appendix
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{appendix.A}{\group_begin:
+A\group_end: }, \hyper@@link {\c_empty_tl }{section.A.1}{\group_begin:
+A.1\group_end: }, \hyper@@link {\c_empty_tl }{subsection.A.1.1}{\group_begin:
+A.1.1\group_end: }, \hyper@@link {\c_empty_tl
+}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \hyper@@link
+{\c_empty_tl }{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: }
+and\nobreakspace \hyper@@link {\c_empty_tl
+}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
+<recently read> }
+l. ...    sec:subparagraph-4.1.1.1.1.1}
+                                     }
+> \box...=
+\hbox(7.16+1.94)x259.80998, direction TLT
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 p
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 p
+.\kern0.28 (font)
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 d
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 s
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{appendix.A}
+.\TU/lmr/m/n/10 A
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.A.1}
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.A.1.1}
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.A.1.1.1}
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.A.1.1.1.1}
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.A.1.1.1.1.1}
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================

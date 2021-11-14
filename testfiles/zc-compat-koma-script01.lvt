@@ -1,0 +1,81 @@
+\documentclass{scrbook}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\usepackage{hyperref}
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\NewDocumentCommand \newoptblock {m}{%
+  \noindent\rule{\textwidth}{0.4pt}\par%
+  \noindent\textbf{#1}\par}
+
+\begin{document}
+
+\chapter{Chapter 1}
+\zlabel{cha:chapter-1}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+% captionbeside
+\begin{figure}
+  \begin{captionbeside}[Example: Figure beside description]%
+    {A figure description which is neither above nor
+      below, but beside the figure}[i][\linewidth][%
+        \dimexpr\marginparwidth+\marginparsep\relax]*
+      \fbox{%
+        \parbox[b][5\baselineskip][c]{.25\textwidth}
+          {%
+            \hspace*{\fill}\KOMAScript
+            \hspace*{\fill}\par
+          }%
+        }
+    \end{captionbeside}
+  \zlabel{fig:figure-1.1.4}
+\end{figure}
+
+% captionofbeside
+\begin{minipage}{1\linewidth}
+  \centering
+  \begin{captionofbeside}{table}{Measure of the rectangle}
+    \fbox{%
+      \parbox[b][5\baselineskip][c]{.25\textwidth}
+      {%
+        \begin{tabular}{ll}
+          Width: & 4\,cm\\
+          Height: & 5\,cm
+        \end{tabular}%
+      }%
+    }
+  \end{captionofbeside}
+  \zlabel{tab:table-1.1.3}
+\end{minipage}
+
+\clearpage{}
+
+\START
+
+\newoptblock{Captionbeside}
+
+\BEGINTEST{Reference: captionbeside figure}
+\setbox0=\hbox{\zcref{fig:figure-1.1.4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Captionofbeside}
+
+\BEGINTEST{Reference: captionofbeside table}
+\setbox0=\hbox{\zcref{tab:table-1.1.3}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}

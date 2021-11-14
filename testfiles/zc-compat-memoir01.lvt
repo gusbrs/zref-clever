@@ -1,0 +1,358 @@
+\documentclass{memoir}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+% Number all section levels.
+\setsecnumdepth{all}
+
+% Enable pagenotes
+\makepagenote
+
+\usepackage{hyperref}
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\NewDocumentCommand \newoptblock {m}{%
+  \noindent\rule{\textwidth}{0.4pt}\par%
+  \noindent\textbf{#1}\par}
+
+\begin{document}
+
+\chapter{Chapter 1}
+\zlabel{cha:chapter-1}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+% Subcaption (figure)
+\newsubfloat{figure}
+\begin{figure}
+  \centering
+  \begin{minipage}{0.3\textwidth}
+    \verb?Some verbatim text?
+    \subcaption{First text\zlabel{fig:figure-1.1.5}}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \verb?More verbatim text?
+    \subcaption{Second text\zlabel{fig:figure-1.1.6}}
+  \end{minipage}
+  \caption{Verbatim texts}\zlabel{fig:figure-1.1.7}
+\end{figure}
+
+% Subbottom
+\begin{figure}
+  \centering
+  \subbottom[Subfigure 1\zlabel{fig:figure-1.1.8}]{\fbox{SUBFIGURE ONE}}
+  \hfill
+  \subbottom[Subfigure 2\zlabel{fig:figure-1.1.9}]{\fbox{SUBFIGURE TWO}}
+  \caption{Figure with two subfigures} \zlabel{fig:figure-1.1.10}
+\end{figure}
+
+% Subcaption (table)
+\newsubfloat{table}
+\begin{table}
+  \centering
+  \begin{minipage}{0.3\textwidth}
+    \subcaption{First table\zlabel{tab:table-1.1.6}}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.3\textwidth}
+    \subcaption{Second table\zlabel{tab:table-1.1.7}}
+  \end{minipage}
+  \caption{Table with subtables}\zlabel{tab:table-1.1.8}
+\end{table}
+
+% Verse lines
+\linenumberfrequency{2}
+\settowidth{\versewidth}{Nay, nay, I leave thee not,
+  thou goest too}
+\begin{verse}[\versewidth]
+  \ldots \\*
+  His judgement rendered, he dissolved the Thing. \\*
+  \flagverse{Ingeborg} And your decision? \\*
+  \flagverse{Fridthjof} \vinphantom{And your decision?}
+  Have I ought to choose? \\*
+  Is not mine honour bound by his decree?\zlabel{vs:verse-1.1-1} \\*
+  And that I will redeem through Angantyr \\*
+  His paltry gold doth hide in Nastrand’s flood. \\*
+  Today will I depart. \\*
+  \flagverse{Ingeborg} \vinphantom{Today will I depart.}
+  And Ingeborg leave? \\*
+  \flagverse{Fridthjof} Nay, nay, I leave thee not,
+  thou goest too. \\*
+  \flagverse{Ingeborg} Impossible! \\*
+  \flagverse{Fridthjof} \vinphantom{Impossible!}
+  O! hear me, ere thou answerest.
+\end{verse}
+
+% Sidecaption
+\begin{figure}
+  \begin{sidecaption}{An illustration}[fig:figure-1.1.11]
+    \centering
+    \rule{1.0cm}{1.0cm}
+  \end{sidecaption}
+\end{figure}
+
+% Bilingual captions
+\begin{figure}
+  \centering
+  EXAMPLE FIGURE WITH BITWONUMCAPTION
+  \bitwonumcaption[fig:figure-1.1.12]%
+    {}{Long \cs{bitwonumcaption}}%
+    {Bild}{ }{Lang \cs{bitwonumcaption}}
+\end{figure}
+\begin{figure}
+  \centering
+  EXAMPLE FIGURE WITH BIONENUMCAPTION
+  \bionenumcaption[fig:figure-1.1.13]%
+    {}{Long English \cs{bionenumcaption}}%
+    {Bild}{ }{Lang Deutsch \cs{bionenumcaption}}
+\end{figure}
+\begin{figure}
+  \centering
+  EXAMPLE FIGURE WITH BICAPTION
+  \bicaption[fig:figure-1.1.14]%
+    {Short English \cs{bicaption}}{Longingly}%
+    {Bild}{Langlauf}
+\end{figure}
+
+% Regular footnotes.
+Foo\footnote{Footnote\zlabel{fn:1}}
+
+% Mini-page footnotes.
+\begin{minipage}{1.0\linewidth}
+  Bar\footnote{Footnote\zlabel{fn:2}}
+\end{minipage}
+
+% Verbatim footnotes.
+Text\verbfootnote{The \verb?\footnote? macro, like all other macros except for
+  \verb?\verbfootnote?, can not contain verbatim text in its
+  argument.\zlabel{fn:3}}
+% Using \verbfootnote in minipage results in "LaTeX Error: \begin{minipage} on
+% input line ... ended by \end{document}." (regardless of labeling...).
+% \begin{minipage}{1.0\linewidth}
+%   Text\verbfootnote{The \verb?\footnote? macro, like all other macros except
+%     for \verb?\verbfootnote?, can not contain verbatim text in its argument.}
+% \end{minipage}
+
+% Side footnote.
+Foo\sidefootnote{Footnote\zlabel{fn:4}}
+
+\chapter{Chapter 2}
+\zlabel{cha:chapter-2}
+
+\begin{subappendices}
+
+\section{Section 2.1}
+\zlabel{sec:section-2.1}
+
+\subsection{Subsection 2.1.1}
+\zlabel{sec:subsection-2.1.1}
+
+\subsubsection{Subsubsection 2.1.1.1}
+\zlabel{sec:subsubsection-2.1.1.1}
+
+\paragraph{Paragraph 2.1.1.1.1}
+\zlabel{sec:paragraph-2.1.1.1.1}
+
+\subparagraph{Subparagraph 2.1.1.1.1.1}
+\zlabel{sec:subparagraph-2.1.1.1.1.1}
+
+\end{subappendices}
+
+% End note.
+Page note.\pagenote{Page note.\zlabel{fn:5}}
+\printpagenotes
+
+\begin{appendices}
+
+\chapter{Chapter 3}
+\zlabel{cha:chapter-3}
+
+\section{Section 3.1}
+\zlabel{sec:section-3.1}
+
+\subsection{Subsection 3.1.1}
+\zlabel{sec:subsection-3.1.1}
+
+\subsubsection{Subsubsection 3.1.1.1}
+\zlabel{sec:subsubsection-3.1.1.1}
+
+\paragraph{Paragraph 3.1.1.1.1}
+\zlabel{sec:paragraph-3.1.1.1.1}
+
+\subparagraph{Subparagraph 3.1.1.1.1.1}
+\zlabel{sec:subparagraph-3.1.1.1.1.1}
+
+\end{appendices}
+
+\appendix{}
+
+\chapter{Chapter 4}
+\zlabel{cha:chapter-4}
+
+\section{Section 4.1}
+\zlabel{sec:section-4.1}
+
+\subsection{Subsection 4.1.1}
+\zlabel{sec:subsection-4.1.1}
+
+\subsubsection{Subsubsection 4.1.1.1}
+\zlabel{sec:subsubsection-4.1.1.1}
+
+\paragraph{Paragraph 4.1.1.1.1}
+\zlabel{sec:paragraph-4.1.1.1.1}
+
+\subparagraph{Subparagraph 4.1.1.1.1.1}
+\zlabel{sec:subparagraph-4.1.1.1.1.1}
+
+\clearpage{}
+
+\START
+
+\newoptblock{Subcaption}
+
+\BEGINTEST{Subcaption. Reference: figure}
+\setbox0=\hbox{\zcref{fig:figure-1.1.5, fig:figure-1.1.6, fig:figure-1.1.7}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Subcaption. Reference: subcaption figure}
+\setbox0=\hbox{\zcref[ref=subcaption]{fig:figure-1.1.5, fig:figure-1.1.6,
+    fig:figure-1.1.7}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Subcaption. Reference: table}
+\setbox0=\hbox{\zcref{tab:table-1.1.6, tab:table-1.1.7, tab:table-1.1.8}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Subcaption. Reference: subcaption table}
+\setbox0=\hbox{\zcref[ref=subcaption]{tab:table-1.1.6, tab:table-1.1.7,
+    tab:table-1.1.8}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Subbottom}
+
+\BEGINTEST{Subbottom. Reference: figure}
+\setbox0=\hbox{\zcref{fig:figure-1.1.8, fig:figure-1.1.9, fig:figure-1.1.10}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Subbottom. Reference: subcaption figure}
+\setbox0=\hbox{\zcref[ref=subcaption]{fig:figure-1.1.8, fig:figure-1.1.9,
+    fig:figure-1.1.10}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Sidecaption}
+
+\BEGINTEST{Sidecaption. Reference: figure}
+\setbox0=\hbox{\zcref{fig:figure-1.1.11}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Bilingual captions}
+
+\BEGINTEST{Bilingual captions. Reference: figure}
+\setbox0=\hbox{\zcref{fig:figure-1.1.12, fig:figure-1.1.13,
+    fig:figure-1.1.14}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Footnote}
+
+\BEGINTEST{Reference: footnote}
+\setbox0=\hbox{\zcref{fn:1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Mini-page footnote}
+
+\BEGINTEST{Reference: mpfootnote}
+\setbox0=\hbox{\zcref{fn:2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Verbatim footnote}
+
+\BEGINTEST{Reference: verbatim footnote}
+\setbox0=\hbox{\zcref{fn:3}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Side footnote}
+
+\BEGINTEST{Reference: side footnote}
+\setbox0=\hbox{\zcref{fn:4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Page note}
+
+\BEGINTEST{Reference: page (end) note}
+\setbox0=\hbox{\zcref{fn:5}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Verse}
+
+\BEGINTEST{Reference: verse poemline}
+\setbox0=\hbox{\zcref{vs:verse-1.1-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Subappendices}
+
+\BEGINTEST{Reference: sectioning commands in subapenddices}
+\setbox0=\hbox{\zcref{sec:section-2.1, sec:subsection-2.1.1,
+    sec:subsubsection-2.1.1.1, sec:paragraph-2.1.1.1.1,
+    sec:subparagraph-2.1.1.1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Appendices}
+
+\BEGINTEST{Reference: sectioning commands in appendices}
+\setbox0=\hbox{\zcref{cha:chapter-3, sec:section-3.1, sec:subsection-3.1.1,
+    sec:subsubsection-3.1.1.1, sec:paragraph-3.1.1.1.1,
+    sec:subparagraph-3.1.1.1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{Appendix}
+
+\BEGINTEST{Reference: sectioning commands after appendix}
+\setbox0=\hbox{\zcref{cha:chapter-4, sec:section-4.1, sec:subsection-4.1.1,
+    sec:subsubsection-4.1.1.1, sec:paragraph-4.1.1.1.1,
+    sec:subparagraph-4.1.1.1.1.1}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}

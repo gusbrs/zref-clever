@@ -1,0 +1,183 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Reference: dmath
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
+\nobreakspace \textup {(}\hyper@@link {\c_empty_tl }{section.1}{\group_begin:
+\upshape 1\group_end: }\textup {)}, \textup {(}\hyper@@link {\c_empty_tl
+}{section.1}{\group_begin: \upshape 2\group_end: }\textup {)} and\nobreakspace
+\textup {(}\hyper@@link {\c_empty_tl }{section.1}{\group_begin: \upshape
+3\group_end: }\textup {)}.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref[nocomp]{eq:1,eq:2,eq:3}
+                                                  }
+> \box...=
+\hbox(7.5+2.5)x112.00024
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\kern 0.0
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\kern 0.0
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\kern 0.0
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 (
+.\kern 0.0
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\OT1/cmr/m/n/10 2
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\kern 0.0
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\kern 0.0
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\kern 0.0
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\kern 0.0
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 2: Reference: dseries
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1}{\group_begin: equation\group_end: \nobreakspace \textup
+{(}\group_begin: \upshape 4\group_end: }\textup {)}.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{eq:4}
+                                }
+> \box...=
+\hbox(7.5+2.5)x53.61124
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\kern 0.0
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\kern 0.0
+.\OT1/cmr/m/n/10 4
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\kern 0.0
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 3: Reference: dgroup
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section.1}{\group_begin: equation\group_end: \nobreakspace \textup
+{(}\group_begin: \upshape 5\group_end: }\textup {)}.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{eq:5}
+                                }
+> \box...=
+\hbox(7.5+2.5)x53.61124
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\kern 0.0
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\kern 0.0
+.\OT1/cmr/m/n/10 5
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\kern 0.0
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
+\nobreakspace \textup {(}\hyper@@link {\c_empty_tl }{section.1}{\group_begin:
+\upshape 5a\group_end: }\textup {)}, \textup {(}\hyper@@link {\c_empty_tl
+}{section.1}{\group_begin: \upshape 5b\group_end: }\textup {)}
+and\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
+}{section.1}{\group_begin: \upshape 5c\group_end: }\textup {)}.
+<recently read> }
+l. ......x0=\hbox{\zcref[nocomp]{eq:5a,eq:5b,eq:5c}
+                                                  }
+> \box...=
+\hbox(7.5+2.5)x127.00027
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
+.\kern 0.0
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\kern 0.0
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\OT1/cmr/m/n/10 5
+.\OT1/cmr/m/n/10 a
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\OT1/cmr/m/n/10 ,
+.\kern 0.0
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 (
+.\kern 0.0
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\OT1/cmr/m/n/10 5
+.\OT1/cmr/m/n/10 b
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\kern 0.0
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\kern 0.0
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\kern 0.0
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\OT1/cmr/m/n/10 5
+.\OT1/cmr/m/n/10 c
+.\pdfendlink
+.\OT1/cmr/m/n/10 )
+.\kern 0.0
+! OK.
+l. ...\showbox0
+============================================================

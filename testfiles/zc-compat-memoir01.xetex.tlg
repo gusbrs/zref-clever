@@ -1,0 +1,527 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Subcaption. Reference: figure
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{figure.1.1}{\group_begin:
+1.1\group_end: }, \hyper@@link {\c_empty_tl }{subfigure.1.1.1}{\group_begin:
+1.1(a)\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{subfigure.1.1.2}{\group_begin: 1.1(b)\group_end: }.
+<recently read> }
+l. .......1.5, fig:figure-1.1.6, fig:figure-1.1.7}
+                                                  }
+> \box...=
+\hbox(7.5+2.49998)x125.09999
+.\TU/lmr/m/n/10 figures
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1.1(a)
+.\special{pdf:eann}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1.1(b)
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 2: Subcaption. Reference: subcaption figure
+============================================================
+Package zref-clever Warning: Reference property 'subcaption' undefined for
+(zref-clever)                label 'fig:figure-1.1.7' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
+\nobreakspace \__zrefclever_ref_default: , \hyper@@link {\c_empty_tl
+}{subfigure.1.1.1}{\group_begin: (a)\group_end: } and\nobreakspace
+\hyper@@link {\c_empty_tl }{subfigure.1.1.2}{\group_begin: (b)\group_end: }.
+<recently read> }
+l. ...    fig:figure-1.1.7}
+                           }
+> \box...=
+\hbox(7.5+2.49998)x97.62
+.\TU/lmr/m/n/10 figures
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\hbox(7.0+0.0)x10.86
+..\TU/lmr/bx/n/10 ??
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 (a)
+.\special{pdf:eann}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 (b)
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 3: Subcaption. Reference: table
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: tables\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{table.1.1}{\group_begin:
+1.1\group_end: }, \hyper@@link {\c_empty_tl }{subtable.1.1.1}{\group_begin:
+1.1(a)\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{subtable.1.1.2}{\group_begin: 1.1(b)\group_end: }.
+<recently read> }
+l. ......-1.1.6, tab:table-1.1.7, tab:table-1.1.8}
+                                                  }
+> \box...=
+\hbox(7.5+2.49998)x122.29
+.\TU/lmr/m/n/10 tables
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1.1(a)
+.\special{pdf:eann}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1.1(b)
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 4: Subcaption. Reference: subcaption table
+============================================================
+Package zref-clever Warning: Reference property 'subcaption' undefined for
+(zref-clever)                label 'tab:table-1.1.8' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: tables\group_end:
+\nobreakspace \__zrefclever_ref_default: , \hyper@@link {\c_empty_tl
+}{subtable.1.1.1}{\group_begin: (a)\group_end: } and\nobreakspace \hyper@@link
+{\c_empty_tl }{subtable.1.1.2}{\group_begin: (b)\group_end: }.
+<recently read> }
+l. ...    tab:table-1.1.8}
+                          }
+> \box...=
+\hbox(7.5+2.49998)x94.81
+.\TU/lmr/m/n/10 tables
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\hbox(7.0+0.0)x10.86
+..\TU/lmr/bx/n/10 ??
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 (a)
+.\special{pdf:eann}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 (b)
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 5: Subbottom. Reference: figure
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{figure.1.2}{\group_begin:
+1.2\group_end: }, \hyper@@link {\c_empty_tl }{subfigure.1.2.1}{\group_begin:
+1.2(a)\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{subfigure.1.2.2}{\group_begin: 1.2(b)\group_end: }.
+<recently read> }
+l. ......1.8, fig:figure-1.1.9, fig:figure-1.1.10}
+                                                  }
+> \box...=
+\hbox(7.5+2.49998)x125.09999
+.\TU/lmr/m/n/10 figures
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1.2
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1.2(a)
+.\special{pdf:eann}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1.2(b)
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 6: Subbottom. Reference: subcaption figure
+============================================================
+Package zref-clever Warning: Reference property 'subcaption' undefined for
+(zref-clever)                label 'fig:figure-1.1.10' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
+\nobreakspace \__zrefclever_ref_default: , \hyper@@link {\c_empty_tl
+}{subfigure.1.2.1}{\group_begin: (a)\group_end: } and\nobreakspace
+\hyper@@link {\c_empty_tl }{subfigure.1.2.2}{\group_begin: (b)\group_end: }.
+<recently read> }
+l. ...    fig:figure-1.1.10}
+                            }
+> \box...=
+\hbox(7.5+2.49998)x97.62
+.\TU/lmr/m/n/10 figures
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\hbox(7.0+0.0)x10.86
+..\TU/lmr/bx/n/10 ??
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 (a)
+.\special{pdf:eann}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 (b)
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 7: Sidecaption. Reference: figure
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{figure.1.3}{\group_begin: figure\group_end: \nobreakspace \group_begin:
+1.3\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.11}
+                                              }
+> \box...=
+\hbox(7.05+2.05998)x40.59
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 figure
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 1.3
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 8: Bilingual captions. Reference: figure
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{figure.1.4}{\group_begin:
+1.4\group_end: } to\nobreakspace \hyper@@link {\c_empty_tl
+}{figure.1.6}{\group_begin: 1.6\group_end: }.
+<recently read> }
+l. ...    fig:figure-1.1.14}
+                            }
+> \box...=
+\hbox(7.05+2.05998)x72.86
+.\TU/lmr/m/n/10 figures
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1.4
+.\special{pdf:eann}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 to
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1.6
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 9: Reference: footnote
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{Hfootnote.1}{\group_begin: footnote\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{fn:1}
+                                 }
+> \box...=
+\hbox(7.05+0.10999)x44.45
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 footnote
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 1
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 10: Reference: mpfootnote
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{memhycontfloat.2}{\group_begin: footnote\group_end: \nobreakspace
+\group_begin: {\itshape a}\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{fn:2}
+                                 }
+> \box...=
+\hbox(7.05+0.10999)x44.56
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 footnote
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/it/10 a
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 11: Reference: verbatim footnote
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{memhycontfloat.2}{\group_begin: footnote\group_end: \nobreakspace
+\group_begin: 2\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{fn:3}
+                                 }
+> \box...=
+\hbox(7.05+0.10999)x44.45
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 footnote
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 2
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 12: Reference: side footnote
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{memhycontfloat.2}{\group_begin: footnote\group_end: \nobreakspace
+\group_begin: 1\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{fn:4}
+                                 }
+> \box...=
+\hbox(7.05+0.10999)x44.45
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 footnote
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 1
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 13: Reference: page (end) note
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{section*.2}{\group_begin: note\group_end: \nobreakspace \group_begin:
+1\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{fn:5}
+                                 }
+> \box...=
+\hbox(6.66+0.10999)x27.22
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 note
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 1
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 14: Reference: verse poemline
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{poemline.1.5}{\group_begin: line\group_end: \nobreakspace \group_begin:
+5\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{vs:verse-1.1-1}
+                                           }
+> \box...=
+\hbox(6.94+0.21999)x23.89
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 line
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 5
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 15: Reference: sectioning commands in subapenddices
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{section.2.A}{\group_begin:
+2.A\group_end: }, \hyper@@link {\c_empty_tl }{subsection.2.A.1}{\group_begin:
+2.A.1\group_end: }, \hyper@@link {\c_empty_tl
+}{subsubsection.2.A.1.1}{\group_begin: 2.A.1.1\group_end: }, \hyper@@link
+{\c_empty_tl }{paragraph.2.A.1.1.1}{\group_begin: 2.A.1.1.1\group_end: }
+and\nobreakspace \hyper@@link {\c_empty_tl
+}{subparagraph.2.A.1.1.1.1}{\group_begin: 2.A.1.1.1.1\group_end: }.
+<recently read> }
+l. ...    sec:subparagraph-2.1.1.1.1.1}
+                                       }
+> \box...=
+\hbox(7.16+1.93999)x246.2
+.\TU/lmr/m/n/10 appendices
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 2.A
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 2.A.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 2.A.1.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 2.A.1.1.1
+.\special{pdf:eann}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 2.A.1.1.1.1
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 16: Reference: sectioning commands in appendices
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{chapter.A}{\group_begin:
+A\group_end: }, \hyper@@link {\c_empty_tl }{section.A.1}{\group_begin:
+A.1\group_end: }, \hyper@@link {\c_empty_tl }{subsection.A.1.1}{\group_begin:
+A.1.1\group_end: }, \hyper@@link {\c_empty_tl
+}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \hyper@@link
+{\c_empty_tl }{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: }
+and\nobreakspace \hyper@@link {\c_empty_tl
+}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
+<recently read> }
+l. ...    sec:subparagraph-3.1.1.1.1.1}
+                                       }
+> \box...=
+\hbox(7.16+1.93999)x259.81
+.\TU/lmr/m/n/10 appendices
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1.1.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1.1.1.1
+.\special{pdf:eann}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1.1.1.1.1
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 17: Reference: sectioning commands after appendix
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{appendix.A}{\group_begin:
+A\group_end: }, \hyper@@link {\c_empty_tl }{section.A.1}{\group_begin:
+A.1\group_end: }, \hyper@@link {\c_empty_tl }{subsection.A.1.1}{\group_begin:
+A.1.1\group_end: }, \hyper@@link {\c_empty_tl
+}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \hyper@@link
+{\c_empty_tl }{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: }
+and\nobreakspace \hyper@@link {\c_empty_tl
+}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
+<recently read> }
+l. ...    sec:subparagraph-4.1.1.1.1.1}
+                                       }
+> \box...=
+\hbox(7.16+1.93999)x259.81
+.\TU/lmr/m/n/10 appendices
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1.1.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1.1.1.1
+.\special{pdf:eann}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1.1.1.1.1
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================

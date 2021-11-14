@@ -1,0 +1,51 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{appendix.A}{\group_begin:
+A\group_end: }, \hyper@@link {\c_empty_tl }{section.A.1}{\group_begin:
+A.1\group_end: }, \hyper@@link {\c_empty_tl }{subsection.A.1.1}{\group_begin:
+A.1.1\group_end: }, \hyper@@link {\c_empty_tl
+}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \hyper@@link
+{\c_empty_tl }{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: }
+and\nobreakspace \hyper@@link {\c_empty_tl
+}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
+<recently read> }
+l. ...    sec:subparagraph-2.1.1.1.1.1}
+                                      }
+> \box...=
+\hbox(7.16+1.93999)x259.81
+.\TU/lmr/m/n/10 appendices
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1.1.1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ,
+.\glue 3.33 plus 2.08124 minus 0.888
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1.1.1.1
+.\special{pdf:eann}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 A.1.1.1.1.1
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0

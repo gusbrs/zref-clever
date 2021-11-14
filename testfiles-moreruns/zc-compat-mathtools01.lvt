@@ -1,0 +1,49 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\usepackage{amsmath}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs,showmanualtags}
+
+\usepackage{hyperref}
+
+\ExplSyntaxOn \bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\begin{document}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+\clearpage{}
+
+\START
+\showoutput
+
+\begin{equation}\label{eq1}
+  1+1=2
+\end{equation}
+\begin{equation}\label{eq2}
+  1+1=2
+\end{equation}
+\begin{equation*} \tag{eq1}\label{eq1:tag}
+  2+2=4
+\end{equation*}%
+
+\begin{subequations}\zlabel{subeq:A}
+  \begin{align}
+    \label{align:a}A+B&=B+A\\
+    \label{align:b}C&=D+E\\
+    \label{align:c}E&=F
+  \end{align}
+\end{subequations}
+
+\vfil\break
+\zcref{eq2,align:b}
+
+\OMIT
+
+\end{document}
