@@ -19,12 +19,12 @@ installfiles = {"*.sty","*.cls","*.dict"}
 checkruns = 2
 
 -- Include pdflatex-dev format to checkengines
--- For some reason, I can't get lualatex-dev format to work with this, see
--- https://tex.stackexchange.com/q/611424.  But pdflatex-dev is enough here.
+-- See https://tex.stackexchange.com/q/611424
 checkengines = {"pdftex","luatex","xetex","pdftexdev"}
 specialformats = specialformats or {}
-specialformats["latex"] =
-  { pdftexdev = { binary = "pdflatex-dev", format = "" } }
+specialformats.latex = specialformats.latex or {}
+specialformats.latex.pdftexdev =
+  { binary = "pdftex", format = "pdflatex-dev" }
 
 -- Set up different test sets
 checkconfigs = {"build-moreruns","build"}
