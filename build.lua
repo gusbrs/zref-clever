@@ -18,6 +18,17 @@ installfiles = {"*.sty","*.cls","*.dict"}
 -- Two runs for label testing
 checkruns = 2
 
+-- Include pdflatex-dev format to checkengines
+-- For some reason, I can't get lualatex-dev format to work with this, see
+-- https://tex.stackexchange.com/q/611424.  But pdflatex-dev is enough here.
+checkengines = {"pdftex","luatex","xetex","pdftexdev"}
+specialformats = specialformats or {}
+specialformats["latex"] =
+  { pdftexdev = { binary = "pdflatex-dev", format = "" } }
+
+-- Set up different test sets
+checkconfigs = {"build-moreruns","build"}
+
 -- Use UTF-8 logs for all engines
 asciiengines = {}
 
