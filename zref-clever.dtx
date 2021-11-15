@@ -443,7 +443,7 @@
 %
 % \DescribeOption{titleref} %
 % The \opt{titleref} option receives no value and, when given, loads
-% \pkg{zref}'s \pkg{zref-titleref} module.  This is a preamble only option.%
+% \pkg{zref}'s \pkg{zref-titleref} module.  This is a preamble only option.
 %
 % \DescribeOption{note} %
 % The \opt{note} option receives as value some text to be typeset at the end
@@ -542,6 +542,22 @@
 % next time \cs{refstepcounter} runs.  Its default value is, quite naturally,
 % \cs{@currentcounter}.  Since this option only affects how labels are set, it
 % is not available in \cs{zcref}.
+%
+% \DescribeOption{nocompat} %
+% Some packages, document classes, or LaTeX features may require specific
+% support to work with \pkg{zref-clever} (see \zcref{sec:limitations}).
+% \pkg{zref-clever} tries to make things smoother by covering some of them.
+% Depending on the case, this can take the form of some simple setup for
+% \pkg{zref-clever}, or may involve the use of hooks to external environments
+% or commands and, eventually, a patch or redefinition.  By default, all the
+% available compatibility modules are enabled.  Should this be undesired or
+% cause any problems in your environment, the option \opt{nocompat} can
+% selectively or completely inhibit their loading.  \opt{nocompat} receives a
+% comma separated list of compatibility modules to disable (for the list of
+% available modules and details about each of them, see
+% \zcref{sec:comp-modules}).  You can disable all modules by setting
+% \opt{nocompat} without a value (or an empty one).  This is a preamble only
+% option.
 %
 %
 %
@@ -1535,6 +1551,7 @@
 % \addtocounter{lstlisting}{-2}
 %
 % \section{Limitations}
+% \zlabel{sec:limitations}
 %
 % Being based on \pkg{zref} entails one quite sizable advantage for
 % \pkg{zref-clever}: the extensible referencing system of the former allows
@@ -1552,7 +1569,7 @@
 % The limitation here is less one of \pkg{zref-clever} than that of a
 % potencial lack of support for \pkg{zref} itself.  Broadly speaking, what
 % \pkg{zref-clever} does is setup \pkg{zref} so that its \cs{zref@newlabel}s
-% contain the information we need using \pkg{zref}'s API.  Once the
+% contains the information we need using \pkg{zref}'s API.  Once the
 % \cs{zlabel} is set correctly, there is little in the way of
 % \pkg{zref-clever}, it can just extract the label's information, again using
 % \pkg{zref}'s API, and do its job.  Therefore, the problems that may arise
@@ -1560,50 +1577,69 @@
 %
 % For \cs{zlabel} to be able to set a label with everything \pkg{zref-clever}
 % needs, some conditions must be fulfilled, most of which are pretty much the
-% same as that of a regular label, but not only.  In particular, the
-% \cs{@currentcounter} is critical for the task of \pkg{zref-clever}: the
-% reference type will depend on that and, consequently, sorting and
-% compression as well, counter resetting behavior information is also
-% retrieved based on it, and so on.  \pkg{zref} provides the
-% \pkg{zref-counter} module which stores it in the \texttt{counter} property.
-%
-% Despite that, as far as I've been experimenting, the following label setting
-% requirements seem to be potentially problematic and are not necessarily
-% granted for \cs{zlabel}:
+% same as that of a regular label, but not only.  As far as my experience
+% goes, the following label setting requirements can be potentially
+% problematic and are not necessarily granted for \cs{zlabel}:
 %
 % \begin{enumerate}
-% \item One must be able to call \cs{zlabel} at the appropriate scope/location
-%   so as to set the label.  Alternatively, \cs{zlabel} must be called with
-%   the desired label by some other means.
-% \item When \cs{zlabel} is set, it must see the proper value of
+% \item One must be able to call \cs{zlabel}, directly or indirectly, at the
+%   appropriate scope/location so as to set the label.
+% \item When \cs{zlabel} is set, it must see a correct value of
 %   \cs{@currentcounter}.
 % \end{enumerate}
 %
-% As for the first, it is not everywhere we technically can set a (z)label.
-% On verbatim-like environments it depends on how they are defined and whether
-% they provide a proper place or option to do so.  But not only those,
-% \pkg{amsmath} environments also handle \cs{label} specially and the same
-% work is not done for \cs{zlabel}.
+% As to the first, it is not everywhere we technically can set a (z)label.  On
+% verbatim-like environments it depends on how they are defined and whether
+% they provide a proper place or option to do so.  But other places may be
+% problematic too, for example, \pkg{amsmath} display math environments also
+% handle \cs{label} specially and the same work is not done for \cs{zlabel}.
 %
-% Regarding \cs{@currentcounter}, since the 2020-10-01 kernel release, it is
-% set by \cs{refstepcounter} alongside \cs{@currentlabel}.  Hence, as long as
-% \cs{refstepcounter} is the tool used for the purpose, \cs{zlabel} will tend
-% to have all information within its grasp at label setting time.  But that's
-% not always the case.  For this reason \pkg{zref-clever} has the option
+% Regarding the second, a correctly set \cs{@currentcounter} is critical for
+% the task of \pkg{zref-clever}: the reference type will depend on that and,
+% consequently, sorting and compression as well, counter resetting behavior
+% information is also retrieved based on it, and so on.  Since the 2020-10-01
+% \LaTeX{} release, \cs{@currentcounter} is set by \cs{refstepcounter}
+% alongside \cs{@currentlabel} and, since the 2021-11-15 release, the support
+% for \cs{@currentcounter} has been further extended in the kernel.  Hence, as
+% long as kernel features are involved, or as long as \cs{refstepcounter} is
+% the tool used for the purpose of reference setting, \cs{zlabel} will tend to
+% have all information within its grasp at label setting time.  But that's not
+% always the case.  For this reason, \pkg{zref-clever} has the option
 % \opt{currentcounter} which at least allows for some viable workarounds when
-% the kernel's \cs{@currentcounter} itself cannot be relied upon.  Whether we
-% have a proper opening to set it, depends on the case.  Still,
-% \cs{refstepcounter} is ubiquitous enough a tool that we can count on
-% \cs{@currentcounter} most of the time.
+% the value of \cs{@currentcounter} cannot be relied upon.  Whether we have a
+% proper opening to set it, depends on the case.  Still, \cs{refstepcounter}
+% is ubiquitous enough a tool that we can count on \cs{@currentcounter} most
+% of the time.
 %
 % All in all, most things work, but some things don't.  And if the later will
-% eventually work depends essentially on whether support for \pkg{zref}
-% (\pkg{zref-counter} included) is provided by these packages/features or not.
-% In what follows of this section, I list cases of known lack of support.
-% Even if, formally, this should probably belong to \pkg{zref} rather than
-% here, \pkg{zref-clever} is more of a ``user side'' kind of package than
-% \pkg{zref} itself, so hopefully it is not inappropriate to do so.
+% eventually work depends essentially on whether support for \pkg{zref} is
+% provided by these packages/classes or not.  Or, failing that, whether
+% \pkg{zref-clever} is able to provide some specific support when a reasonable
+% way to do so is within reach.
 %
+%
+%
+% \section{Compatibility modules}
+% \zlabel{sec:comp-modules}
+%
+%
+% \DescribeOption{appendix} %
+%
+% \DescribeOption{appendices} %
+%
+% \DescribeOption{memoir} %
+%
+% \DescribeOption{KOMA} %
+%
+% \DescribeOption{amsmath} %
+%
+% \DescribeOption{mathtools} %
+%
+% \DescribeOption{breqn} %
+%
+% \DescribeOption{listings} %
+%
+% \DescribeOption{enumitem} %
 %
 %
 % \section{Acknowledgments}
@@ -2008,6 +2044,25 @@
 % \section{Plumbing}
 %
 %
+% \subsection{Auxiliary}
+%
+%
+% \begin{macro}
+%   {
+%     \@@_if_package_loaded:n ,
+%     \@@_if_class_loaded:n ,
+%   }
+%   Just a convenience, since sometimes we just need one of the branches, and
+%   it is particularly easy to miss the empty F branch after a long T one.
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \@@_if_package_loaded:n #1 { T , F , TF }
+  { \IfPackageLoadedTF {#1} { \prg_return_true: } { \prg_return_false: } }
+\prg_new_conditional:Npnn \@@_if_class_loaded:n #1 { T , F , TF }
+  { \IfClassLoadedTF {#1} { \prg_return_true: } { \prg_return_false: } }
+%    \end{macrocode}
+% \end{macro}
+%
+%
 % \subsection{Messages}
 %
 %
@@ -2130,6 +2185,13 @@
     Option~'titleref'~only~available~in~the~preamble~\msg_line_context:.~
     Did~you~mean~'ref=title'?.
   }
+\msg_new:nnn { zref-clever } { option-preamble-only }
+  { Option~'#1'~only~available~in~the~preamble~\msg_line_context:. }
+\msg_new:nnn { zref-clever } { unknown-compat-module }
+  {
+    Unknown~compatibility~module~'#1'~given~to~option~'nocompat'.~
+    Nothing~to~do.
+  }
 \msg_new:nnn { zref-clever } { missing-zref-check }
   {
     Option~'check'~requested~\msg_line_context:.~
@@ -2153,19 +2215,6 @@
 \msg_new:nnn { zref-clever } { compat-class }
   { Loaded~support~for~'#1'~documentclass. }
 %    \end{macrocode}
-%
-%
-%
-% \subsection{Packages}
-%
-% \begin{macro}{\@@_def_extract:Nnnn}
-%   Just a convenience, since sometimes we just need one of the branches, and
-%   it is particularly easy to miss the empty F branch after a long T one.
-%    \begin{macrocode}
-\prg_new_conditional:Npnn \@@_if_package_loaded:n #1 { T , F , TF }
-  { \IfPackageLoadedTF {#1} { \prg_return_true: } { \prg_return_false: } }
-%    \end{macrocode}
-% \end{macro}
 %
 %
 % \subsection{Data extraction}
@@ -3885,6 +3934,80 @@
     currentcounter .initial:n = \@currentcounter ,
   }
 %    \end{macrocode}
+%
+%
+% \subsubsection*{\opt{nocompat} option}
+%
+%
+%    \begin{macrocode}
+\bool_new:N \g_@@_nocompat_bool
+\seq_new:N \g_@@_nocompat_modules_seq
+\keys_define:nn { zref-clever / reference }
+  {
+    nocompat .code:n =
+      {
+        \tl_if_empty:nTF {#1}
+          { \bool_gset_true:N \g_@@_nocompat_bool }
+          {
+            \clist_map_inline:nn {#1}
+              {
+                \seq_if_in:NnF \g_@@_nocompat_modules_seq {##1}
+                  {
+                    \seq_gput_right:Nn
+                      \g_@@_nocompat_modules_seq {##1}
+                  }
+              }
+          }
+      } ,
+  }
+\AddToHook { begindocument }
+  {
+    \keys_define:nn { zref-clever / reference }
+      {
+        nocompat .code:n =
+          {
+            \msg_warning:nnn { zref-clever }
+              { option-preamble-only } { nocompat }
+          }
+      }
+  }
+\AtEndOfPackage
+  {
+    \AddToHook { begindocument }
+      {
+        \seq_map_inline:Nn \g_@@_nocompat_modules_seq
+          { \msg_warning:nnn { zref-clever } { unknown-compat-module } {#1} }
+      }
+  }
+%    \end{macrocode}
+%
+% \begin{macro}{\@@_compat_module:nn}
+%   Function to be used for compatibility modules loading.  It should load the
+%   module as long as \cs{l_@@_nocompat_bool} is false and \meta{module} is
+%   not in \cs{l_@@_nocompat_modules_seq}.  The \texttt{begindocument} hook is
+%   needed so that we can have the option functional along the whole preamble,
+%   not just at package load time.  This requirement might be relaxed if we
+%   made the option only available at load time, but this would not buy us
+%   much leeway anyway, since for most compatibility modules, we must test for
+%   the presence of packages at \texttt{begindocument}, only kernel features
+%   and document classes could be checked reliably before that.  Besides,
+%   since we are using the new hook management system, there is always its
+%   functionality to deal with potential loading order issues.
+%   \begin{syntax}
+%     \cs{@@_compat_module:nn} \Arg{module} \Arg{code}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_compat_module:nn #1#2
+  {
+    \AddToHook { begindocument }
+      {
+        \bool_if:NF \g_@@_nocompat_bool
+          { \seq_if_in:NnF \g_@@_nocompat_modules_seq {#1} {#2} }
+        \seq_gremove_all:Nn \g_@@_nocompat_modules_seq {#1}
+      }
+  }
+%    \end{macrocode}
+% \end{macro}
 %
 %
 %
@@ -5701,7 +5824,7 @@
 %
 %
 %
-% \subsection*{Aux functions}
+% \subsection*{Auxiliary functions}
 %
 % \cs{@@_get_ref:n} and \cs{@@_get_ref_first:} are the two functions which
 % actually build the reference blocks for typesetting.  \cs{@@_get_ref:n}
@@ -6390,7 +6513,7 @@
 % \pkg{zref-clever} to work properly with them.
 %
 %
-% \subsection{\cs{appendix}}
+% \subsection{\opt{appendix}}
 %
 % One relevant case of different reference types sharing the same counter is
 % the \cs{appendix} which in some document classes, including the standard
@@ -6417,18 +6540,21 @@
 % environment instead.
 %
 %    \begin{macrocode}
-\AddToHook { cmd / appendix / before }
+\@@_compat_module:nn { appendix }
   {
-    \@@_zcsetup:n
+    \AddToHook { cmd / appendix / before }
       {
-        countertype =
+        \@@_zcsetup:n
           {
-            chapter       = appendix ,
-            section       = appendix ,
-            subsection    = appendix ,
-            subsubsection = appendix ,
-            paragraph     = appendix ,
-            subparagraph  = appendix ,
+            countertype =
+              {
+                chapter       = appendix ,
+                section       = appendix ,
+                subsection    = appendix ,
+                subsubsection = appendix ,
+                paragraph     = appendix ,
+                subparagraph  = appendix ,
+              }
           }
       }
   }
@@ -6452,13 +6578,13 @@
 %
 %
 %
-% \subsection{\pkg{appendix} package}
+% \subsection{\opt{appendices}}
 %
-% These settings also apply to the \cls{memoir} class, since it ``emulates''
-% the loading of the \pkg{appendix} package.
+% This module applies both to the \pkg{appendix} package, and to the
+% \cls{memoir} class, since it ``emulates'' the package.
 %
 %    \begin{macrocode}
-\AddToHook { begindocument }
+\@@_compat_module:nn { appendices }
   {
     \@@_if_package_loaded:nT { appendix }
       {
@@ -6523,13 +6649,13 @@
 %
 %
 %
-% \subsection{\cls{memoir} class}
+% \subsection{\opt{memoir}}
 %
-% \cls{memoir} has quite a number of cross-referencing related features,
-% mostly dealing with captions, subfloats, and notes.  Some of them are
-% implemented in ways which make difficult or block altogether the use of
-% \pkg{zref}, particularly \cs{zlabel}, short of redefining the whole stuff
-% ourselves.  Hopefully, these features are specialized enough to make
+% The \cls{memoir} document class has quite a number of cross-referencing
+% related features, mostly dealing with captions, subfloats, and notes.  Some
+% of them are implemented in ways which make difficult or block altogether the
+% use of \pkg{zref}, particularly \cs{zlabel}, short of redefining the whole
+% stuff ourselves.  Hopefully, these features are specialized enough to make
 % \pkg{zref-clever} useful enough with \cls{memoir}, but unless some support
 % is added upstream, it is difficult to cover everything.
 %
@@ -6588,9 +6714,9 @@
 %
 %
 %    \begin{macrocode}
-\AddToHook { begindocument }
+\@@_compat_module:nn { memoir }
   {
-    \@ifclassloaded { memoir }
+    \@@_if_class_loaded:nT { memoir }
       {
 %    \end{macrocode}
 % Add subfigure and subtable support out of the box.  Technically, this is not
@@ -6677,17 +6803,17 @@
           { \@@_zcsetup:x { currentcounter = pagenote } }
         \msg_info:nnn { zref-clever } { compat-class } { memoir }
       }
-      {}
   }
 %    \end{macrocode}
 %
 %
 %
-% \subsection{\cls{KOMA-Script} classes}
+% \subsection{\opt{KOMA}}
 %
+% Support for \texttt{KOMA-Script} document classes.
 %
 %    \begin{macrocode}
-\AddToHook { begindocument }
+\@@_compat_module:nn { KOMA }
   {
     \cs_if_exist:NT \KOMAClassName
       {
@@ -6734,12 +6860,12 @@
 %
 %
 %
-% \subsection{\pkg{amsmath} package}
+% \subsection{\opt{amsmath}}
 %
 % About this, see \url{https://tex.stackexchange.com/a/402297}.
 %
 %    \begin{macrocode}
-\AddToHook { begindocument }
+\@@_compat_module:nn { amsmath }
   {
     \@@_if_package_loaded:nT { amsmath }
       {
@@ -6874,7 +7000,7 @@
 %
 %
 %
-% \subsection{\pkg{mathtools} package}
+% \subsection{\opt{mathtools}}
 %
 % All math environments defined by \pkg{mathtools}, extending the
 % \pkg{amsmath} set, are meant to be used within enclosing math environments,
@@ -6891,7 +7017,7 @@
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_mathtools_showonlyrefs_bool
-\AddToHook { begindocument }
+\@@_compat_module:nn { mathtools }
   {
     \@@_if_package_loaded:nT { mathtools }
       {
@@ -6929,7 +7055,7 @@
 %    \end{macrocode}
 %
 %
-% \subsection{\pkg{breqn} package}
+% \subsection{\opt{breqn}}
 %
 % From the \pkg{breqn} documentation: \textquote{Use of the normal \cs{label}
 % command instead of the \opt{label} option works, I think, most of the time
@@ -6941,7 +7067,7 @@
 % civil''.
 %
 %    \begin{macrocode}
-\AddToHook { begindocument }
+\@@_compat_module:nn { breqn }
   {
     \@@_if_package_loaded:nT { breqn }
       {
@@ -6983,10 +7109,10 @@
 %
 %
 %
-% \subsection{\pkg{listings} package}
+% \subsection{\opt{listings}}
 %
 %    \begin{macrocode}
-\AddToHook { begindocument }
+\@@_compat_module:nn { listings }
   {
     \@@_if_package_loaded:nT { listings }
       {
@@ -7028,7 +7154,7 @@
 %    \end{macrocode}
 %
 %
-% \subsection{\pkg{enumitem} package}
+% \subsection{\opt{enumitem}}
 %
 % The procedure below will ``see'' any changes made to the \texttt{enumerate}
 % environment (made with \pkg{enumitem}'s \cs{renewlist}) as long as it is
@@ -7049,7 +7175,7 @@
 % \cs{c@enumN} counter.
 %
 %    \begin{macrocode}
-\AddToHook { begindocument }
+\@@_compat_module:nn { enumitem }
   {
     \@@_if_package_loaded:nT { enumitem }
       {
