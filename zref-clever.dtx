@@ -6746,10 +6746,10 @@
         \cs_new_protected:Npn \@@_memoir_both_labels:
           {
             \cs_set_eq:NN \@@_memoir_orig_label:n \label
-            \cs_set:Npn \@@_memoir_label_and_zlabel:n #1
+            \cs_set:Npn \@@_memoir_label_and_zlabel:n ##1
               {
-                \@@_memoir_orig_label:n {#1}
-                \zlabel{#1}
+                \@@_memoir_orig_label:n {##1}
+                \zlabel{##1}
               }
             \cs_set_eq:NN \label \@@_memoir_label_and_zlabel:n
           }
