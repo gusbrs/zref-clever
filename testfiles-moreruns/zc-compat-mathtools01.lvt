@@ -2,8 +2,6 @@
 
 \input{regression-test}
 
-\listfiles{}
-
 \usepackage{zref-clever}
 
 \usepackage{amsmath}
@@ -15,23 +13,14 @@
 \ExplSyntaxOn \bool_set_true:N \l__zrefclever_verbose_testing_bool
 \ExplSyntaxOff
 
-\START
-
-\BEGINTEST{begin document messages}
-\ENDTEST
-% Mark the test, but don't actually include \begin{document} inside it,
-% otherwise we run into catcode problems along the document.
 \begin{document}
-\SEPARATOR
-
-\OMIT
 
 \section{Section 1.1}
 \zlabel{sec:section-1.1}
 
 \clearpage{}
 
-\TIMO
+\START
 
 \BEGINTEST{mathtools module}
 \ExplSyntaxOn

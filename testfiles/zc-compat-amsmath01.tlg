@@ -1,54 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 ============================================================
-TEST 1: begin document messages
-============================================================
-============================================================
-(zc-compat-amsmath01.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-(../zref-hyperref.sty
-Package: zref-hyperref ....-..-.. v... Module hyperref for zref (HO)
-Package zref Info: New property: anchor on input line ....
-)
-Package zref-clever Info: Loaded support for 'amsmath' package.
-Package hyperref Info: Link coloring OFF on input line ....
-(../nameref.sty
-Package: nameref ....-..-.. v... Cross-referencing by name of section
-(../refcount.sty
-Package: refcount ....-..-.. v... Data extraction from label references (HO)
-)
-(../gettitlestring.sty
-Package: gettitlestring ....-..-.. v... Cleanup title references (HO)
-)
-\c@section@level=\count...
-)
-LaTeX Info: Redefining \ref on input line ....
-LaTeX Info: Redefining \pageref on input line ....
-LaTeX Info: Redefining \nameref on input line ....
-(zc-compat-amsmath01.out) (zc-compat-amsmath01.out)
-\@outlinefile=\write...
-(zref-clever-english.dict)
-Package zref-clever Info: Loaded 'english' dictionary.
-============================================================
-============================================================
-TEST 2: amsmath module
+TEST 1: amsmath module
 ============================================================
 > \__zrefclever_ltxlabel:n=macro:#1->\__zrefclever_orig_ltxlabel:n
 {#1}\zref@wrapper@babel \zref@label {#1}.
@@ -279,7 +232,7 @@ The property list \l__zrefclever_type_equation_options_prop contains the pairs
 l. ......ype_equation_options_prop~not~defined } }
 ============================================================
 ============================================================
-TEST 3: Reference: equation
+TEST 2: Reference: equation
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{equation.1.1}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -339,7 +292,7 @@ l. ...\setbox0=\hbox{\zcref{compl-gr}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 4: Reference: equation*
+TEST 3: Reference: equation*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{AMS.1}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -373,7 +326,7 @@ l. ...\setbox0=\hbox{\zcref{eq1:tag}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 5: Reference: align
+TEST 4: Reference: align
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
 \nobreakspace \textup {(}\hyper@@link {\c_empty_tl
@@ -422,7 +375,7 @@ l. ...\setbox0=\hbox{\zcref{eq:A, eq:A-2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 6: Reference: align*
+TEST 5: Reference: align*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
 \nobreakspace \textup {(}\hyper@@link {\c_empty_tl }{AMS.4}{\group_begin:
@@ -481,7 +434,7 @@ l. ...\setbox0=\hbox{\zcref{tag:eq:A, tag:eq:A-2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 7: Reference: alignat
+TEST 6: Reference: alignat
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{equation.1.5}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -558,7 +511,7 @@ l. ...\setbox0=\hbox{\zcref{eq:F,eq:G}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 8: Reference: alignat*
+TEST 7: Reference: alignat*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
 \nobreakspace \textup {(}\hyper@@link {\c_empty_tl }{AMS.8}{\group_begin:
@@ -623,7 +576,7 @@ l. ...\setbox0=\hbox{\zcref{eq:C, eq:D}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 9: Reference: flalign
+TEST 8: Reference: flalign
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{equation.1.9}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -655,7 +608,7 @@ l. ...\setbox0=\hbox{\zcref{eq:flal1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 10: Reference: flalign*
+TEST 9: Reference: flalign*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{AMS.11}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -690,7 +643,7 @@ l. ...\setbox0=\hbox{\zcref{tag:eq:flal1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 11: Reference: xalignat
+TEST 10: Reference: xalignat
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{equation.1.11}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -723,7 +676,7 @@ l. ...\setbox0=\hbox{\zcref{eq:xal1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 12: Reference: xalignat*
+TEST 11: Reference: xalignat*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{AMS.13}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -758,7 +711,7 @@ l. ...\setbox0=\hbox{\zcref{tag:eq:xal1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 13: Reference: gather
+TEST 12: Reference: gather
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
 \nobreakspace \textup {(}\hyper@@link {\c_empty_tl
@@ -827,7 +780,7 @@ l. ......ef[nocomp]{gather:AA,gather:BB,gather:CC}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 14: Reference: gather*
+TEST 13: Reference: gather*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{AMS.17}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -865,7 +818,7 @@ l. ...\setbox0=\hbox{\zcref{tag:gather:CC}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 15: Reference: multline
+TEST 14: Reference: multline
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{equation.1.15}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -898,7 +851,7 @@ l. ...\setbox0=\hbox{\zcref{eq:E}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 16: Reference: multline*
+TEST 15: Reference: multline*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{AMS.19}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -936,7 +889,7 @@ l. ...\setbox0=\hbox{\zcref{tag:eq:E}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 17: Reference: subequations
+TEST 16: Reference: subequations
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{equation.1.16}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -1209,7 +1162,7 @@ l. ...\setbox0=\hbox{\zcref{split:x,multline:x}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 18: Reference: equation font
+TEST 17: Reference: equation font
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{AMS.22}{\group_begin: equation\group_end: \nobreakspace \textup

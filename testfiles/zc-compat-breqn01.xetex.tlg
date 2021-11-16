@@ -1,58 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 ============================================================
-TEST 1: begin document messages
-============================================================
-============================================================
-(zc-compat-breqn01.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line ....
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-(../zref-hyperref.sty
-Package: zref-hyperref ....-..-.. v... Module hyperref for zref (HO)
-Package zref Info: New property: anchor on input line ....
-)
-Package zref-clever Info: Loaded support for 'amsmath' package.
-Package zref-clever Info: Loaded support for 'breqn' package.
-Package hyperref Info: Link coloring OFF on input line ....
-(../nameref.sty
-Package: nameref ....-..-.. v... Cross-referencing by name of section
-(../refcount.sty
-Package: refcount ....-..-.. v... Data extraction from label references (HO)
-)
-(../gettitlestring.sty
-Package: gettitlestring ....-..-.. v... Cleanup title references (HO)
-)
-\c@section@level=\count...
-)
-LaTeX Info: Redefining \ref on input line ....
-LaTeX Info: Redefining \pageref on input line ....
-LaTeX Info: Redefining \nameref on input line ....
-(zc-compat-breqn01.out) (zc-compat-breqn01.out)
-\@outlinefile=\write...
-(zref-clever-english.dict)
-Package zref-clever Info: Loaded 'english' dictionary.
-============================================================
-============================================================
-TEST 2: breqn module
+TEST 1: breqn module
 ============================================================
 > \l__zrefclever_current_counter_tl=parentequation.
 <recently read> }
@@ -119,7 +68,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 l. ...  { \ShowHook { env / #1 / begin } }
 ============================================================
 ============================================================
-TEST 3: Reference: dmath
+TEST 2: Reference: dmath
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
 \nobreakspace \textup {(}\hyper@@link {\c_empty_tl }{section.1}{\group_begin:
@@ -128,7 +77,7 @@ TEST 3: Reference: dmath
 \textup {(}\hyper@@link {\c_empty_tl }{section.1}{\group_begin: \upshape
 3\group_end: }\textup {)}.
 <recently read> }
-l. ......box0=\hbox{\zcref[nocomp]{eq:1,eq:2,eq:3}
+l. ...\setbox0=\hbox{\zcref[nocomp]{eq:1,eq:2,eq:3}
                                                   }
 > \box...=
 \hbox(7.5+2.49998)x112.01
@@ -167,7 +116,7 @@ l. ......box0=\hbox{\zcref[nocomp]{eq:1,eq:2,eq:3}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 4: Reference: dseries
+TEST 3: Reference: dseries
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{section.1}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -192,7 +141,7 @@ l. ...\setbox0=\hbox{\zcref{eq:4}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 5: Reference: dgroup
+TEST 4: Reference: dgroup
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{section.1}{\group_begin: equation\group_end: \nobreakspace \textup

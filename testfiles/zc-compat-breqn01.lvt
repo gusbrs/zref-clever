@@ -15,16 +15,7 @@
   \noindent\rule{\textwidth}{0.4pt}\par%
   \noindent\textbf{#1}\par}
 
-\START
-
-\BEGINTEST{begin document messages}
-\ENDTEST
-% Mark the test, but don't actually include \begin{document} inside it,
-% otherwise we run into catcode problems along the document.
 \begin{document}
-\SEPARATOR
-
-\OMIT
 
 \section{Section 1.1}
 \zlabel{sec:section-1.1}
@@ -74,7 +65,7 @@ T(n) \hiderel{\leq} T(2^{\lceil\lg n\rceil})
 
 \clearpage{}
 
-\TIMO
+\START
 
 \BEGINTEST{breqn module}
 \ExplSyntaxOn

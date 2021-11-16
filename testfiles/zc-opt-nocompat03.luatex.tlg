@@ -1,61 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 ============================================================
-TEST 1: begin document messages
-============================================================
-============================================================
-(zc-opt-nocompat03.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line ....
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-\c@lstlisting=\count...
-(../zref-hyperref.sty
-Package: zref-hyperref ....-..-.. v... Module hyperref for zref (HO)
-Package zref Info: New property: anchor on input line ....
-)
-Package zref-clever Warning: Unknown compatibility module 'foo' given to
-(zref-clever)                option 'nocompat'. Nothing to do.
-Package zref-clever Warning: Unknown compatibility module 'bar' given to
-(zref-clever)                option 'nocompat'. Nothing to do.
-Package hyperref Info: Link coloring OFF on input line ....
-(../nameref.sty
-Package: nameref ....-..-.. v... Cross-referencing by name of section
-(../refcount.sty
-Package: refcount ....-..-.. v... Data extraction from label references (HO)
-)
-(../gettitlestring.sty
-Package: gettitlestring ....-..-.. v... Cleanup title references (HO)
-)
-\c@section@level=\count...
-)
-LaTeX Info: Redefining \ref on input line ....
-LaTeX Info: Redefining \pageref on input line ....
-LaTeX Info: Redefining \nameref on input line ....
-(zc-opt-nocompat03.out) (zc-opt-nocompat03.out)
-\@outlinefile=\write...
-(zref-clever-english.dict)
-Package zref-clever Info: Loaded 'english' dictionary.
-============================================================
-============================================================
-TEST 2: appendix module after
+TEST 1: appendix module after
 ============================================================
 > \appendix=macro:->\ltx@IfUndefined {chapter}{\gdef \theHsection
 {\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
@@ -81,7 +27,7 @@ l. ...\prop_show:N \l__zrefclever_counter_type_prop
 l. ...\ShowHook { cmd / appendix / before }
 ============================================================
 ============================================================
-TEST 3: appendices module
+TEST 2: appendices module
 ============================================================
 > \appendix=macro:->\ltx@IfUndefined {chapter}{\gdef \theHsection
 {\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
@@ -143,7 +89,7 @@ outer braces):
 l. ...  \prop_show:N \l__zrefclever_counter_type_prop
 ============================================================
 ============================================================
-TEST 4: amsmath module
+TEST 3: amsmath module
 ============================================================
 __zrefclever_ltxlabel:n not defined
 __zrefclever_orig_ltxlabel:n not defined
@@ -247,7 +193,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 l__zrefclever_type_equation_options_prop not defined
 ============================================================
 ============================================================
-TEST 5: listings module
+TEST 4: listings module
 ============================================================
 The property list \l__zrefclever_counter_type_prop contains the pairs (without
 outer braces):
@@ -267,7 +213,7 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}.
 <recently read> }
-l. ......_show:N \l__zrefclever_counter_resetby_prop
+l. ......p_show:N \l__zrefclever_counter_resetby_prop
 > \lsthk@Init=macro:->\lst@ifshowspaces \let \lst@outputspace
 \lst@visiblespace \lst@keepspacestrue \fi \edef \ttdefault {\ttdefault }\let
 \lsts@nfss@catcodes \nfss@catcodes \let \nfss@catcodes \lst@nfss@catcodes

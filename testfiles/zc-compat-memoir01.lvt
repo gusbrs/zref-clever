@@ -20,16 +20,7 @@
   \noindent\rule{\textwidth}{0.4pt}\par%
   \noindent\textbf{#1}\par}
 
-\START
-
-\BEGINTEST{begin document messages}
-\ENDTEST
-% Mark the test, but don't actually include \begin{document} inside it,
-% otherwise we run into catcode problems along the document.
 \begin{document}
-\SEPARATOR
-
-\OMIT
 
 \chapter{Chapter 1}
 \zlabel{cha:chapter-1}
@@ -222,7 +213,7 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 
 \clearpage{}
 
-\TIMO
+\START
 
 \BEGINTEST{memoir module}
 \ExplSyntaxOn

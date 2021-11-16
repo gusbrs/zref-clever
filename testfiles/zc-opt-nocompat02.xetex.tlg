@@ -1,74 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 ============================================================
-TEST 1: begin document messages
-============================================================
-============================================================
-(zc-opt-nocompat02.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line ....
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line ....
-LaTeX Font Info:    ... okay on input line ....
-Package scrbase Info: activating english \contentsname on input line ....
-Package scrbase Info: activating english \listfigurename on input line ....
-Package scrbase Info: activating english \listtablename on input line ....
-\c@lstlisting=\count...
-(../zref-hyperref.sty
-Package: zref-hyperref ....-..-.. v... Module hyperref for zref (HO)
-Package zref Info: New property: anchor on input line ....
-)
-Package hyperref Info: Link coloring OFF on input line ....
-(../nameref.sty
-Package: nameref ....-..-.. v... Cross-referencing by name of section
-(../refcount.sty
-Package: refcount ....-..-.. v... Data extraction from label references (HO)
-)
-(../gettitlestring.sty
-Package: gettitlestring ....-..-.. v... Cleanup title references (HO)
-)
-\c@section@level=\count...
-)
-LaTeX Info: Redefining \ref on input line ....
-LaTeX Info: Redefining \pageref on input line ....
-LaTeX Info: Redefining \nameref on input line ....
-(zc-opt-nocompat02.out) (zc-opt-nocompat02.out)
-\@outlinefile=\write...
-Class scrbook Info: loading recommended package `bookmark'.
-(scrbook)           Using `bookmark' together with `hyperref' is recommended,
-(scrbook)           because of handling of possible bookmark level gaps.
-(scrbook)           You can avoid loading `bookmark' with KOMA-Script option
-(scrbook)           `bookmarkpackage=false' before \begin{document} and
-(scrbook)           you can avoid this message adding:
-(scrbook)             \usepackage{bookmark}
-(scrbook)           before \begin{document} on input line ....
-(../bookmark.sty
-Package: bookmark ....-..-.. v... PDF bookmarks (HO)
-(../bkm-dvipdfm.def
-File: bkm-dvipdfm.def ....-..-.. v... bookmark driver for dvipdfm (HO)
-\BKM@id=\count...
-))
-(zref-clever-english.dict)
-Package zref-clever Info: Loaded 'english' dictionary.
-============================================================
-============================================================
-TEST 2: appendix module before
+TEST 1: appendix module before
 ============================================================
 > \appendix=macro:->\ltx@IfUndefined {chapter}{\gdef \theHsection
 {\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
@@ -94,7 +27,7 @@ l. ...\prop_show:N \l__zrefclever_counter_type_prop
 l. ...\ShowHook { cmd / appendix / before }
 ============================================================
 ============================================================
-TEST 3: appendix module after
+TEST 2: appendix module after
 ============================================================
 > \appendix=macro:->\ltx@IfUndefined {chapter}{\gdef \theHsection
 {\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
@@ -120,7 +53,7 @@ l. ...\prop_show:N \l__zrefclever_counter_type_prop
 l. ...\ShowHook { cmd / appendix / before }
 ============================================================
 ============================================================
-TEST 4: appendices module
+TEST 3: appendices module
 ============================================================
 > \appendix=macro:->\ltx@IfUndefined {chapter}{\gdef \theHsection
 {\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
@@ -182,7 +115,7 @@ outer braces):
 l. ......op_show:N \l__zrefclever_counter_type_prop
 ============================================================
 ============================================================
-TEST 5: KOMA module
+TEST 4: KOMA module
 ============================================================
 -> The hook 'env / captionbeside / after':
 > The hook is not declared.
@@ -201,7 +134,7 @@ l. ...\ShowHook { env / captionofbeside / end }
 l. ...\ShowHook { env / captionofbeside / after }
 ============================================================
 ============================================================
-TEST 6: amsmath module
+TEST 5: amsmath module
 ============================================================
 __zrefclever_ltxlabel:n not defined
 __zrefclever_orig_ltxlabel:n not defined
@@ -305,7 +238,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 l__zrefclever_type_equation_options_prop not defined
 ============================================================
 ============================================================
-TEST 7: mathtools module
+TEST 6: mathtools module
 ============================================================
 > \l__zrefclever_mathtools_showonlyrefs_bool=false.
 <recently read> }
@@ -313,7 +246,7 @@ l. ......l__zrefclever_mathtools_showonlyrefs_bool
 __zrefclever_mathtools_showonlyrefs:n not defined
 ============================================================
 ============================================================
-TEST 8: breqn module
+TEST 7: breqn module
 ============================================================
 > \l__zrefclever_current_counter_tl=\@currentcounter .
 <recently read> }
@@ -354,7 +287,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 l. ...  { \ShowHook { env / #1 / begin } }
 ============================================================
 ============================================================
-TEST 9: listings module
+TEST 8: listings module
 ============================================================
 The property list \l__zrefclever_counter_type_prop contains the pairs (without
 outer braces):
@@ -416,7 +349,7 @@ l. ......how:N \l__zrefclever_counter_resetby_prop
 l. ...\cs_show:c { \@lst hk@ Init }
 ============================================================
 ============================================================
-TEST 10: enumitem module
+TEST 9: enumitem module
 ============================================================
 The property list \l__zrefclever_counter_type_prop contains the pairs (without
 outer braces):

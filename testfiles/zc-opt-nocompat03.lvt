@@ -12,14 +12,9 @@
 
 \usepackage{hyperref}
 
-\START
-
-\BEGINTEST{begin document messages}
-\ENDTEST
-% Mark the test, but don't actually include \begin{document} inside it,
-% otherwise we run into catcode problems along the document.
 \begin{document}
-\SEPARATOR
+
+\START
 
 \appendix{}
 

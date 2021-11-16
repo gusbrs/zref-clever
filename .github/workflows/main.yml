@@ -80,7 +80,6 @@ jobs:
             listings
             mathtools
             memoir
-            mptopdf
             newfloat
             polyglossia
             tools
