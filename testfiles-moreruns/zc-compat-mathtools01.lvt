@@ -13,14 +13,35 @@
 \ExplSyntaxOn \bool_set_true:N \l__zrefclever_verbose_testing_bool
 \ExplSyntaxOff
 
+\START
+
+\BEGINTEST{begin document messages}
+\ENDTEST
+% Mark the test, but don't actually include \begin{document} inside it,
+% otherwise we run into catcode problems along the document.
 \begin{document}
+\SEPARATOR
+
+\OMIT
 
 \section{Section 1.1}
 \zlabel{sec:section-1.1}
 
 \clearpage{}
 
-\START
+\TIMO
+
+\BEGINTEST{mathtools module}
+\ExplSyntaxOn
+\bool_show:N \l__zrefclever_mathtools_showonlyrefs_bool
+\cs_if_exist:NTF \__zrefclever_mathtools_showonlyrefs:n
+  { \cs_show:N \__zrefclever_mathtools_showonlyrefs:n }
+  { \typeout { __zrefclever_mathtools_showonlyrefs:n~not~defined } }
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{equation numbers}
+\ENDTEST
 \showoutput
 
 \begin{equation}\label{eq1}
@@ -42,6 +63,8 @@
 \end{subequations}
 
 \vfil\break
+\SEPARATOR
+
 \zcref{eq2,align:b}
 
 \OMIT

@@ -15,11 +15,19 @@
   \noindent\rule{\textwidth}{0.4pt}\par%
   \noindent\textbf{#1}\par}
 
+\START
+
+\BEGINTEST{begin document messages}
+\ENDTEST
+% Mark the test, but don't actually include \begin{document} inside it,
+% otherwise we run into catcode problems along the document.
 \begin{document}
+\SEPARATOR
+
+\OMIT
 
 \section{Section 1.1}
 \zlabel{sec:section-1.1}
-
 
 \begin{dmath}\zlabel{eq:1}
 f(x)=\frac{1}{x} \condition{for $x\neq 0$}
@@ -66,7 +74,27 @@ T(n) \hiderel{\leq} T(2^{\lceil\lg n\rceil})
 
 \clearpage{}
 
-\START
+\TIMO
+
+\BEGINTEST{breqn module}
+\ExplSyntaxOn
+\begin{dgroup}
+  \tl_show:N \l__zrefclever_current_counter_tl
+  \prop_show:N \l__zrefclever_counter_type_prop
+  \prop_show:N \l__zrefclever_counter_resetby_prop
+  \begin{dmath}
+    x=y
+  \end{dmath}
+\end{dgroup}
+\clist_map_inline:nn
+  {
+    dmath ,
+    dseries ,
+    darray ,
+  }
+  { \ShowHook { env / #1 / begin } }
+\ExplSyntaxOff
+\ENDTEST
 
 \newoptblock{dmath}
 

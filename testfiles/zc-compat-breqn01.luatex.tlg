@@ -1,7 +1,144 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 ============================================================
-TEST 1: Reference: dmath
+TEST 1: begin document messages
+============================================================
+============================================================
+(zc-compat-breqn01.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line ....
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+(../zref-hyperref.sty
+Package: zref-hyperref ....-..-.. v... Module hyperref for zref (HO)
+Package zref Info: New property: anchor on input line ....
+)
+Package zref-clever Info: Loaded support for 'amsmath' package.
+Package zref-clever Info: Loaded support for 'breqn' package.
+(../supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count...
+\scratchdimen=\dimen...
+\scratchbox=\box...
+\nofMPsegments=\count...
+\nofMParguments=\count...
+\everyMPshowfont=\toks...
+\MPscratchCnt=\count...
+\MPscratchDim=\dimen...
+\MPnumerator=\count...
+\makeMPintoPDFobject=\count...
+\everyMPtoPDFconversion=\toks...
+) (../epstopdf-base.sty
+Package: epstopdf-base ....-..-.. v... Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line ....
+(../epstopdf-sys.cfg
+File: epstopdf-sys.cfg ....-..-.. v... Configuration of (r)epstopdf for TeX Live
+))
+Package hyperref Info: Link coloring OFF on input line ....
+(../nameref.sty
+Package: nameref ....-..-.. v... Cross-referencing by name of section
+(../refcount.sty
+Package: refcount ....-..-.. v... Data extraction from label references (HO)
+)
+(../gettitlestring.sty
+Package: gettitlestring ....-..-.. v... Cleanup title references (HO)
+)
+\c@section@level=\count...
+)
+LaTeX Info: Redefining \ref on input line ....
+LaTeX Info: Redefining \pageref on input line ....
+LaTeX Info: Redefining \nameref on input line ....
+(zc-compat-breqn01.out) (zc-compat-breqn01.out)
+\@outlinefile=\write...
+(zref-clever-english.dict)
+Package zref-clever Info: Loaded 'english' dictionary.
+============================================================
+============================================================
+TEST 2: breqn module
+============================================================
+> \l__zrefclever_current_counter_tl=parentequation.
+<recently read> }
+l. ...  \tl_show:N \l__zrefclever_current_counter_tl
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}
+>  {parentequation}  =>  {equation}.
+<recently read> }
+l. ...  \prop_show:N \l__zrefclever_counter_type_prop
+The property list \l__zrefclever_counter_resetby_prop contains the pairs
+(without outer braces):
+>  {enumii}  =>  {enumi}
+>  {enumiii}  =>  {enumii}
+>  {enumiv}  =>  {enumiii}
+>  {equation}  =>  {parentequation}.
+<recently read> }
+l. ......p_show:N \l__zrefclever_counter_resetby_prop
+-> The generic hook 'env/dmath/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/dseries/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/darray/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+============================================================
+============================================================
+TEST 3: Reference: dmath
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
 \nobreakspace \textup {(}\hyper@@link {\c_empty_tl }{section.1}{\group_begin:
@@ -11,7 +148,7 @@ TEST 1: Reference: dmath
 3\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref[nocomp]{eq:1,eq:2,eq:3}
-                                                }
+                                                 }
 > \box...=
 \hbox(7.5+2.5)x112.01, direction TLT
 .\TU/lmr/m/n/10 e
@@ -62,14 +199,14 @@ l. ...\setbox0=\hbox{\zcref[nocomp]{eq:1,eq:2,eq:3}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 2: Reference: dseries
+TEST 4: Reference: dseries
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{section.1}{\group_begin: equation\group_end: \nobreakspace \textup
 {(}\group_begin: \upshape 4\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:4}
-                              }
+                               }
 > \box...=
 \hbox(7.5+2.5)x53.62, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
@@ -96,14 +233,14 @@ l. ...\setbox0=\hbox{\zcref{eq:4}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 3: Reference: dgroup
+TEST 5: Reference: dgroup
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{section.1}{\group_begin: equation\group_end: \nobreakspace \textup
 {(}\group_begin: \upshape 5\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:5}
-                              }
+                               }
 > \box...=
 \hbox(7.5+2.5)x53.62, direction TLT
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
@@ -135,7 +272,7 @@ l. ...\showbox0
 and\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
 }{section.1}{\group_begin: \upshape 5c\group_end: }\textup {)}.
 <recently read> }
-l. ......box0=\hbox{\zcref[nocomp]{eq:5a,eq:5b,eq:5c}
+l. ......ox0=\hbox{\zcref[nocomp]{eq:5a,eq:5b,eq:5c}
                                                   }
 > \box...=
 \hbox(7.5+2.5)x127.01, direction TLT

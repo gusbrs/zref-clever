@@ -18,7 +18,16 @@
 \newcommand{\wt}{\widetilde}
 \newcommand{\envert}[1]{\left\lvert#1\right\rvert} \let\abs=\envert
 
+\START
+
+\BEGINTEST{begin document messages}
+\ENDTEST
+% Mark the test, but don't actually include \begin{document} inside it,
+% otherwise we run into catcode problems along the document.
 \begin{document}
+\SEPARATOR
+
+\OMIT
 
 \section{Section 1.1}
 \zlabel{sec:section-1.1}
@@ -198,7 +207,47 @@
 
 \clearpage{}
 
-\START
+\TIMO
+
+\BEGINTEST{amsmath module}
+\ExplSyntaxOn
+\makeatletter
+\cs_if_exist:NTF \__zrefclever_ltxlabel:n
+  { \cs_show:N \__zrefclever_ltxlabel:n }
+  { \typeout { __zrefclever_ltxlabel:n~not~defined } }
+\cs_if_exist:NTF \__zrefclever_orig_ltxlabel:n
+  { \cs_show:N \__zrefclever_orig_ltxlabel:n }
+  { \typeout { __zrefclever_orig_ltxlabel:n~not~defined } }
+\cs_show:N \ltx@label
+\begin{subequations}
+  \tl_show:N \l__zrefclever_current_counter_tl
+  \prop_show:N \l__zrefclever_counter_type_prop
+  \prop_show:N \l__zrefclever_counter_resetby_prop
+\end{subequations}
+\clist_map_inline:nn
+  {
+    equation ,
+    equation* ,
+    align ,
+    align* ,
+    alignat ,
+    alignat* ,
+    flalign ,
+    flalign* ,
+    xalignat ,
+    xalignat* ,
+    gather ,
+    gather* ,
+    multline ,
+    multline* ,
+  }
+  { \ShowHook { env / #1 / begin } }
+\prop_if_exist:NTF \l__zrefclever_type_equation_options_prop
+  { \prop_show:N \l__zrefclever_type_equation_options_prop }
+  { \typeout { l__zrefclever_type_equation_options_prop~not~defined } }
+\makeatother
+\ExplSyntaxOff
+\ENDTEST
 
 \newoptblock{equation}
 

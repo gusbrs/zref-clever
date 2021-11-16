@@ -20,7 +20,16 @@
   \noindent\rule{\textwidth}{0.4pt}\par%
   \noindent\textbf{#1}\par}
 
+\START
+
+\BEGINTEST{begin document messages}
+\ENDTEST
+% Mark the test, but don't actually include \begin{document} inside it,
+% otherwise we run into catcode problems along the document.
 \begin{document}
+\SEPARATOR
+
+\OMIT
 
 \chapter{Chapter 1}
 \zlabel{cha:chapter-1}
@@ -213,7 +222,35 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 
 \clearpage{}
 
-\START
+\TIMO
+
+\BEGINTEST{memoir module}
+\ExplSyntaxOn
+\makeatletter
+\prop_show:N \l__zrefclever_counter_type_prop
+\prop_show:N \l__zrefclever_counter_resetby_prop
+\cs_if_exist:NTF \__zrefclever_memoir_both_labels:
+  { \cs_show:N \__zrefclever_memoir_both_labels: }
+  { \typeout { __zrefclever_memoir_both_labels:~not~defined } }
+\ShowHook { env / sidecaption / begin }
+\ShowHook { env / sidecontcaption / begin }
+\ShowHook { cmd / bitwonumcaption / before }
+\ShowHook { cmd / bitwonumcaption / after }
+\ShowHook { cmd / bionenumcaption / before }
+\ShowHook { cmd / bionenumcaption / after }
+\ShowHook { cmd / bicaption / before }
+\ShowHook { cmd / bicaption / after }
+\zref@ifpropundefined { subcaption }
+  { \typeout { subcaption~property~not~defined } }
+  { \typeout { subcaption~property~is~defined } }
+\ShowHook { cmd / @memsubcaption / before }
+\ShowHook { env / minipage / begin }
+\ShowHook { cmd / @makefntext / before }
+\ShowHook { cmd / @makesidefntext / before }
+\ShowHook { file / \jobname.ent / before }
+\makeatother
+\ExplSyntaxOff
+\ENDTEST
 
 \newoptblock{Subcaption}
 

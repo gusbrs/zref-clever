@@ -14,7 +14,16 @@
   \noindent\rule{\textwidth}{0.4pt}\par%
   \noindent\textbf{#1}\par}
 
+\START
+
+\BEGINTEST{begin document messages}
+\ENDTEST
+% Mark the test, but don't actually include \begin{document} inside it,
+% otherwise we run into catcode problems along the document.
 \begin{document}
+\SEPARATOR
+
+\OMIT
 
 \chapter{Chapter 1}
 \zlabel{cha:chapter-1}
@@ -58,7 +67,13 @@
 
 \clearpage{}
 
-\START
+\TIMO
+
+\BEGINTEST{KOMA module}
+\ShowHook{env/captionbeside/after}
+\ShowHook{env/captionofbeside/end}
+\ShowHook{env/captionofbeside/after}
+\ENDTEST
 
 \newoptblock{Captionbeside}
 

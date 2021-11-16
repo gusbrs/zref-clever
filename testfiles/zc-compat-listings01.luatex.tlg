@@ -1,7 +1,124 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 ============================================================
-TEST 1: Reference: lstlisting
+TEST 1: begin document messages
+============================================================
+============================================================
+(zc-compat-listings01.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line ....
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+(../zref-hyperref.sty
+Package: zref-hyperref ....-..-.. v... Module hyperref for zref (HO)
+Package zref Info: New property: anchor on input line ....
+)
+Package zref-clever Info: Loaded support for 'listings' package.
+\c@lstlisting=\count...
+Package hyperref Info: Link coloring OFF on input line ....
+(../nameref.sty
+Package: nameref ....-..-.. v... Cross-referencing by name of section
+(../refcount.sty
+Package: refcount ....-..-.. v... Data extraction from label references (HO)
+)
+(../gettitlestring.sty
+Package: gettitlestring ....-..-.. v... Cleanup title references (HO)
+)
+\c@section@level=\count...
+)
+LaTeX Info: Redefining \ref on input line ....
+LaTeX Info: Redefining \pageref on input line ....
+LaTeX Info: Redefining \nameref on input line ....
+(zc-compat-listings01.out) (zc-compat-listings01.out)
+\@outlinefile=\write...
+(zref-clever-english.dict)
+Package zref-clever Info: Loaded 'english' dictionary.
+============================================================
+============================================================
+TEST 2: listings module
+============================================================
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}
+>  {lstlisting}  =>  {listing}
+>  {lstnumber}  =>  {line}.
+<recently read> }
+l. ...\prop_show:N \l__zrefclever_counter_type_prop
+The property list \l__zrefclever_counter_resetby_prop contains the pairs
+(without outer braces):
+>  {enumii}  =>  {enumi}
+>  {enumiii}  =>  {enumii}
+>  {enumiv}  =>  {enumiii}
+>  {lstnumber}  =>  {lstlisting}.
+<recently read> }
+l. ......p_show:N \l__zrefclever_counter_resetby_prop
+> \lsthk@Init=macro:->\lst@ifshowspaces \let \lst@outputspace
+\lst@visiblespace \lst@keepspacestrue \fi \edef \ttdefault {\ttdefault }\let
+\lsts@nfss@catcodes \nfss@catcodes \let \nfss@catcodes \lst@nfss@catcodes
+\edef \lst@OrgOutput {\the \output }\ifcase \lst@useoutput \relax \or \output
+{\global \setbox \lst@gtempboxa \box \@cclv \expandafter \egroup
+\lst@SaveToken \lst@InterruptModes \setbox \@cclv \box \lst@gtempboxa \bgroup
+\lst@OrgOutput \egroup \bgroup \aftergroup \pagegoal \aftergroup \vsize
+\aftergroup \lst@ReenterModes \aftergroup \lst@RestoreToken }\else \output
+{\lst@RestoreOrigCatcodes \lst@ifec \lst@RestoreOrigExtendedCatcodes \fi
+\lst@OrgOutput }\fi \let \lst@bnext \relax \let \lst@enext \relax
+\lst@basicstyle \ifx \lst@inputenc \@empty \else \@ifundefined
+{inputencoding}{}{\inputencoding \lst@inputenc }\fi \ifx \lst@linerange
+\@empty \edef \lst@linerange {{\lst@firstline }-{\lst@lastline },}\fi
+\lst@GetLineInterval \lst@ifsensitive \else \let \lst@KeywordTest
+\lst@KEYWORDTEST \let \lst@WorkingTest \lst@WORKINGTEST \let \lst@IfOneOutOf
+\lst@IFONEOUTOF \fi \lsthk@TrackKeywords \lsthk@PostTrackKeywords \let
+\lst@ifkeywords \iftrue \global \let \lst@prefixkeyword \relax \def
+\@currentlabel {\thelstnumber }\ifnum \z@ >\lst@stepnumber \let
+\lst@advancelstnum \m@ne \edef \lst@stepnumber {-\lst@stepnumber }\fi \ifnum
+\z@ <\lst@stepnumber \global \lst@skipnumbers \lst@firstnumber \global \divide
+\lst@skipnumbers \lst@stepnumber \global \multiply \lst@skipnumbers
+-\lst@stepnumber \global \advance \lst@skipnumbers \lst@firstnumber \ifnum
+\lst@skipnumbers >\z@ \global \advance \lst@skipnumbers -\lst@stepnumber \fi
+\else \let \lst@SkipOrPrintLabel \relax \fi \lst@ifresetmargins \advance
+\linewidth \@totalleftmargin \advance \linewidth \rightmargin
+\@totalleftmargin \z@ \fi \advance \linewidth -\lst@xleftmargin \advance
+\linewidth -\lst@xrightmargin \advance \@totalleftmargin \lst@xleftmargin
+\relax \parskip \z@ \ifdim \z@ =\lst@lineskip \else \@tempdima \baselineskip
+\advance \@tempdima \lst@lineskip \multiply \@tempdima \@cclvi \divide
+\@tempdima \baselineskip \relax \multiply \@tempdima \@cclvi \edef
+\baselinestretch {\strip@pt \@tempdima }\selectfont \fi \lst@ifbreaklines
+\hbadness \@M \pretolerance \@M \@rightskip \@flushglue \rightskip \@rightskip
+\leftskip \z@skip \parindent \z@ \def \lst@parshape {\parshape \tw@
+\@totalleftmargin \linewidth \lst@breakshape }\else \let \lst@discretionary
+\@empty \fi \ifx \lst@fillcolor \@empty \let \lst@fillcolor \lst@bkgcolor \fi
+\ifx \lst@rulesepcolor \@empty \let \lst@rulesepcolor \lst@fillcolor \fi
+\lst@frameInit \tl_if_empty:NF \lst@label {\zlabel {\lst@label
+}}\__zrefclever_zcsetup:n {currentcounter=lstnumber}.
+<recently read> }
+l. ...\cs_show:c { \@lst hk@ Init }
+============================================================
+============================================================
+TEST 3: Reference: lstlisting
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{lstlisting.1}{\group_begin: listing\group_end: \nobreakspace \group_begin:

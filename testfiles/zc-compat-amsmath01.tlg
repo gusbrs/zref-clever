@@ -1,7 +1,285 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 ============================================================
-TEST 1: Reference: equation
+TEST 1: begin document messages
+============================================================
+============================================================
+(zc-compat-amsmath01.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+(../zref-hyperref.sty
+Package: zref-hyperref ....-..-.. v... Module hyperref for zref (HO)
+Package zref Info: New property: anchor on input line ....
+)
+Package zref-clever Info: Loaded support for 'amsmath' package.
+Package hyperref Info: Link coloring OFF on input line ....
+(../nameref.sty
+Package: nameref ....-..-.. v... Cross-referencing by name of section
+(../refcount.sty
+Package: refcount ....-..-.. v... Data extraction from label references (HO)
+)
+(../gettitlestring.sty
+Package: gettitlestring ....-..-.. v... Cleanup title references (HO)
+)
+\c@section@level=\count...
+)
+LaTeX Info: Redefining \ref on input line ....
+LaTeX Info: Redefining \pageref on input line ....
+LaTeX Info: Redefining \nameref on input line ....
+(zc-compat-amsmath01.out) (zc-compat-amsmath01.out)
+\@outlinefile=\write...
+(zref-clever-english.dict)
+Package zref-clever Info: Loaded 'english' dictionary.
+============================================================
+============================================================
+TEST 2: amsmath module
+============================================================
+> \__zrefclever_ltxlabel:n=macro:#1->\__zrefclever_orig_ltxlabel:n
+{#1}\zref@wrapper@babel \zref@label {#1}.
+<recently read> }
+l. ......{ __zrefclever_ltxlabel:n~not~defined } }
+> \__zrefclever_orig_ltxlabel:n=macro:#1->\@bsphack \begingroup \def
+\label@name {#1}\label@hook \protected@write \@auxout {}{\string \newlabel
+{#1}{{\@currentlabel }{\thepage }{\@currentlabelname }{\@currentHref
+}{}}}\endgroup \@esphack .
+<recently read> }
+l. ......refclever_orig_ltxlabel:n~not~defined } }
+> \ltx@label=macro:#1->\__zrefclever_orig_ltxlabel:n {#1}\zref@wrapper@babel
+\zref@label {#1}.
+<recently read> }
+l. ...\cs_show:N \ltx@label
+> \l__zrefclever_current_counter_tl=parentequation.
+<recently read> }
+l. ......_show:N \l__zrefclever_current_counter_tl
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}
+>  {parentequation}  =>  {equation}.
+<recently read> }
+l. ......p_show:N \l__zrefclever_counter_type_prop
+The property list \l__zrefclever_counter_resetby_prop contains the pairs
+(without outer braces):
+>  {enumii}  =>  {enumi}
+>  {enumiii}  =>  {enumii}
+>  {enumiv}  =>  {enumiii}
+>  {equation}  =>  {parentequation}.
+<recently read> }
+l. ......how:N \l__zrefclever_counter_resetby_prop
+-> The generic hook 'env/equation/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/equation*/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/align/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/align*/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/alignat/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/alignat*/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/flalign/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/flalign*/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/xalignat/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/xalignat*/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/gather/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/gather*/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/multline/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/multline*/begin':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+The property list \l__zrefclever_type_equation_options_prop contains the pairs
+(without outer braces):
+>  {reffont}  =>  {\upshape }
+>  {refpre}  =>  {\textup {(}}
+>  {refpos}  =>  {\textup {)}}.
+<recently read> }
+l. ......ype_equation_options_prop~not~defined } }
+============================================================
+============================================================
+TEST 3: Reference: equation
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{equation.1.1}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -61,7 +339,7 @@ l. ...\setbox0=\hbox{\zcref{compl-gr}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 2: Reference: equation*
+TEST 4: Reference: equation*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{AMS.1}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -95,7 +373,7 @@ l. ...\setbox0=\hbox{\zcref{eq1:tag}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 3: Reference: align
+TEST 5: Reference: align
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
 \nobreakspace \textup {(}\hyper@@link {\c_empty_tl
@@ -144,7 +422,7 @@ l. ...\setbox0=\hbox{\zcref{eq:A, eq:A-2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 4: Reference: align*
+TEST 6: Reference: align*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
 \nobreakspace \textup {(}\hyper@@link {\c_empty_tl }{AMS.4}{\group_begin:
@@ -203,7 +481,7 @@ l. ...\setbox0=\hbox{\zcref{tag:eq:A, tag:eq:A-2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 5: Reference: alignat
+TEST 7: Reference: alignat
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{equation.1.5}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -280,7 +558,7 @@ l. ...\setbox0=\hbox{\zcref{eq:F,eq:G}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 6: Reference: alignat*
+TEST 8: Reference: alignat*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
 \nobreakspace \textup {(}\hyper@@link {\c_empty_tl }{AMS.8}{\group_begin:
@@ -345,7 +623,7 @@ l. ...\setbox0=\hbox{\zcref{eq:C, eq:D}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 7: Reference: flalign
+TEST 9: Reference: flalign
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{equation.1.9}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -377,7 +655,7 @@ l. ...\setbox0=\hbox{\zcref{eq:flal1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 8: Reference: flalign*
+TEST 10: Reference: flalign*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{AMS.11}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -412,7 +690,7 @@ l. ...\setbox0=\hbox{\zcref{tag:eq:flal1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 9: Reference: xalignat
+TEST 11: Reference: xalignat
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{equation.1.11}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -445,7 +723,7 @@ l. ...\setbox0=\hbox{\zcref{eq:xal1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 10: Reference: xalignat*
+TEST 12: Reference: xalignat*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{AMS.13}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -480,7 +758,7 @@ l. ...\setbox0=\hbox{\zcref{tag:eq:xal1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 11: Reference: gather
+TEST 13: Reference: gather
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
 \nobreakspace \textup {(}\hyper@@link {\c_empty_tl
@@ -549,7 +827,7 @@ l. ......ef[nocomp]{gather:AA,gather:BB,gather:CC}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 12: Reference: gather*
+TEST 14: Reference: gather*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{AMS.17}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -587,7 +865,7 @@ l. ...\setbox0=\hbox{\zcref{tag:gather:CC}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 13: Reference: multline
+TEST 15: Reference: multline
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{equation.1.15}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -620,7 +898,7 @@ l. ...\setbox0=\hbox{\zcref{eq:E}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 14: Reference: multline*
+TEST 16: Reference: multline*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{AMS.19}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -658,7 +936,7 @@ l. ...\setbox0=\hbox{\zcref{tag:eq:E}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 15: Reference: subequations
+TEST 17: Reference: subequations
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{equation.1.16}{\group_begin: equation\group_end: \nobreakspace \textup
@@ -931,7 +1209,7 @@ l. ...\setbox0=\hbox{\zcref{split:x,multline:x}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 16: Reference: equation font
+TEST 18: Reference: equation font
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{AMS.22}{\group_begin: equation\group_end: \nobreakspace \textup

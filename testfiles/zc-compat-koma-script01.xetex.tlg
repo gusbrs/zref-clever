@@ -1,7 +1,117 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 ============================================================
-TEST 1: Reference: captionbeside figure
+TEST 1: begin document messages
+============================================================
+============================================================
+(zc-compat-koma-script01.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line ....
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+Package scrbase Info: activating english \contentsname on input line ....
+Package scrbase Info: activating english \listfigurename on input line ....
+Package scrbase Info: activating english \listtablename on input line ....
+(../zref-hyperref.sty
+Package: zref-hyperref ....-..-.. v... Module hyperref for zref (HO)
+Package zref Info: New property: anchor on input line ....
+)
+Package zref-clever Info: Loaded support for 'scrbook' documentclass.
+Package hyperref Info: Link coloring OFF on input line ....
+(../nameref.sty
+Package: nameref ....-..-.. v... Cross-referencing by name of section
+(../refcount.sty
+Package: refcount ....-..-.. v... Data extraction from label references (HO)
+)
+(../gettitlestring.sty
+Package: gettitlestring ....-..-.. v... Cleanup title references (HO)
+)
+\c@section@level=\count...
+)
+LaTeX Info: Redefining \ref on input line ....
+LaTeX Info: Redefining \pageref on input line ....
+LaTeX Info: Redefining \nameref on input line ....
+(zc-compat-koma-script01.out) (zc-compat-koma-script01.out)
+\@outlinefile=\write...
+Class scrbook Info: loading recommended package `bookmark'.
+(scrbook)           Using `bookmark' together with `hyperref' is recommended,
+(scrbook)           because of handling of possible bookmark level gaps.
+(scrbook)           You can avoid loading `bookmark' with KOMA-Script option
+(scrbook)           `bookmarkpackage=false' before \begin{document} and
+(scrbook)           you can avoid this message adding:
+(scrbook)             \usepackage{bookmark}
+(scrbook)           before \begin{document} on input line ....
+(../bookmark.sty
+Package: bookmark ....-..-.. v... PDF bookmarks (HO)
+(../bkm-dvipdfm.def
+File: bkm-dvipdfm.def ....-..-.. v... bookmark driver for dvipdfm (HO)
+\BKM@id=\count...
+))
+(zref-clever-english.dict)
+Package zref-clever Info: Loaded 'english' dictionary.
+============================================================
+============================================================
+TEST 2: KOMA module
+============================================================
+-> The generic hook 'env/captionbeside/after':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed first):
+>     -> \tl_if_exist:NT \@captype {\tl_set_eq:NN \@currentcounter \@captype }
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order (after reversal):
+>     ---.
+<recently read> }
+l. ...\ShowHook{env/captionbeside/after}
+-> The generic hook 'env/captionofbeside/end':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \tl_gset_eq:NN \g__zrefclever_koma_captype_tl \@captype 
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...\ShowHook{env/captionofbeside/end}
+-> The generic hook 'env/captionofbeside/after':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed first):
+>     -> \tl_if_eq:NnF \@currenvir {document}{\tl_if_empty:NF \g__zrefclever_koma_captype_tl {\tl_set_eq:NN \@currentcounter \g__zrefclever_koma_captype_tl }}\tl_gclear:N \g__zrefclever_koma_captype_tl 
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order (after reversal):
+>     ---.
+<recently read> }
+l. ...\ShowHook{env/captionofbeside/after}
+============================================================
+============================================================
+TEST 3: Reference: captionbeside figure
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{figure.1.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
@@ -21,7 +131,7 @@ l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.4}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 2: Reference: captionofbeside table
+TEST 4: Reference: captionofbeside table
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:

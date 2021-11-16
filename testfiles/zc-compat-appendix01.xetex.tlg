@@ -1,5 +1,127 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
+============================================================
+TEST 1: begin document messages
+============================================================
+============================================================
+(zc-compat-appendix01.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line ....
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+(../zref-hyperref.sty
+Package: zref-hyperref ....-..-.. v... Module hyperref for zref (HO)
+Package zref Info: New property: anchor on input line ....
+)
+Package hyperref Info: Link coloring OFF on input line ....
+(../nameref.sty
+Package: nameref ....-..-.. v... Cross-referencing by name of section
+(../refcount.sty
+Package: refcount ....-..-.. v... Data extraction from label references (HO)
+)
+(../gettitlestring.sty
+Package: gettitlestring ....-..-.. v... Cleanup title references (HO)
+)
+\c@section@level=\count...
+)
+LaTeX Info: Redefining \ref on input line ....
+LaTeX Info: Redefining \pageref on input line ....
+LaTeX Info: Redefining \nameref on input line ....
+(zc-compat-appendix01.out) (zc-compat-appendix01.out)
+\@outlinefile=\write...
+(zref-clever-english.dict)
+Package zref-clever Info: Loaded 'english' dictionary.
+============================================================
+============================================================
+TEST 2: appendix module before
+============================================================
+> \appendix=macro:->\UseHook {cmd/appendix/before}\ltx@IfUndefined
+{chapter}{\gdef \theHsection {\Hy@AlphNoErr {section}}}{\gdef \theHchapter
+{\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp {\Hy@appendixstring
+}\HyOrg@appendix .
+<recently read> }
+l. ...\cs_show:N \appendix
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}.
+<recently read> }
+l. ...\prop_show:N \l__zrefclever_counter_type_prop
+-> The generic hook 'cmd/appendix/before':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {countertype={chapter=appendix,section=appendix,subsection=appendix,subsubsection=appendix,paragraph=appendix,subparagraph=appendix,}}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...\ShowHook { cmd / appendix / before }
+============================================================
+============================================================
+TEST 3: appendix module after
+============================================================
+> \appendix=macro:->\UseHook {cmd/appendix/before}\ltx@IfUndefined
+{chapter}{\gdef \theHsection {\Hy@AlphNoErr {section}}}{\gdef \theHchapter
+{\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp {\Hy@appendixstring
+}\HyOrg@appendix .
+<recently read> }
+l. ...\cs_show:N \appendix
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {appendix}
+>  {subsubsection}  =>  {appendix}
+>  {subparagraph}  =>  {appendix}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}
+>  {chapter}  =>  {appendix}
+>  {section}  =>  {appendix}
+>  {paragraph}  =>  {appendix}.
+<recently read> }
+l. ...\prop_show:N \l__zrefclever_counter_type_prop
+-> The generic hook 'cmd/appendix/before':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \__zrefclever_zcsetup:n {countertype={chapter=appendix,section=appendix,subsection=appendix,subsubsection=appendix,paragraph=appendix,subparagraph=appendix,}}
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...\ShowHook { cmd / appendix / before }
+============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
 \nobreakspace \hyper@@link {\c_empty_tl }{appendix.A}{\group_begin:
 A\group_end: }, \hyper@@link {\c_empty_tl }{section.A.1}{\group_begin:

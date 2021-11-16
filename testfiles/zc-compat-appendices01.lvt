@@ -19,7 +19,16 @@
   \noindent\rule{\textwidth}{0.4pt}\par%
   \noindent\textbf{#1}\par}
 
+\START
+
+\BEGINTEST{begin document messages}
+\ENDTEST
+% Mark the test, but don't actually include \begin{document} inside it,
+% otherwise we run into catcode problems along the document.
 \begin{document}
+\SEPARATOR
+
+\OMIT
 
 \chapter{Chapter 1}
 \zlabel{cha:chapter-1}
@@ -93,7 +102,32 @@
 
 \clearpage{}
 
-\START
+\TIMO
+
+\BEGINTEST{appendices module}
+\ExplSyntaxOn
+\makeatletter
+\cs_show:N \appendix
+\cs_if_exist:cTF { c@zc@appendix }
+  { \cs_show:N \c@zc@appendix }
+  { \typeout { zc@appendix~counter~not~defined } }
+\cs_if_exist:cTF { c@zc@save@appendix }
+  { \cs_show:N \c@zc@save@appendix }
+  { \typeout { zc@save@appendix~counter~not~defined } }
+\prop_show:N \l__zrefclever_counter_resetby_prop
+\ShowHook { cmd / appendix / before }
+\ShowHook { env / appendices / begin }
+\ShowHook { env / appendices / end }
+\ShowHook { env / subappendices / begin }
+\begin{appendices}
+  \prop_show:N \l__zrefclever_counter_type_prop
+\end{appendices}
+\begin{subappendices}
+  \prop_show:N \l__zrefclever_counter_type_prop
+\end{subappendices}
+\makeatother
+\ExplSyntaxOff
+\ENDTEST
 
 \newoptblock{Subappendices}
 
