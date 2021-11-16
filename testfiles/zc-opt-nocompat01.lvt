@@ -1,0 +1,195 @@
+\documentclass{memoir}
+
+\input{regression-test}
+
+\usepackage{appendix}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs,showmanualtags}
+\usepackage{breqn}
+\usepackage{listings}
+\usepackage{enumitem}
+\setlistdepth{5}
+\renewlist{enumerate}{enumerate}{6}
+\setlist[enumerate,1]{label=(\arabic*)}
+\setlist[enumerate,2]{label=(\Roman*)}
+\setlist[enumerate,3]{label=(\Alph*)}
+\setlist[enumerate,4]{label=(\roman*)}
+\setlist[enumerate,5]{label=(\arabic*)}
+\setlist[enumerate,6]{label=(\Roman*)}
+
+\usepackage{zref-clever}
+
+\zcsetup{nocompat}
+
+\usepackage{hyperref}
+
+\START
+
+\BEGINTEST{begin document messages}
+\ENDTEST
+% Mark the test, but don't actually include \begin{document} inside it,
+% otherwise we run into catcode problems along the document.
+\begin{document}
+\SEPARATOR
+
+\BEGINTEST{appendix module before}
+\ExplSyntaxOn
+\cs_show:N \appendix
+\prop_show:N \l__zrefclever_counter_type_prop
+\ShowHook { cmd / appendix / before }
+\ExplSyntaxOff
+\ENDTEST
+
+\appendix{}
+
+\BEGINTEST{appendix module after}
+\ExplSyntaxOn
+\cs_show:N \appendix
+\prop_show:N \l__zrefclever_counter_type_prop
+\ShowHook { cmd / appendix / before }
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{appendices module}
+\ExplSyntaxOn
+\makeatletter
+\cs_show:N \appendix
+\cs_if_exist:cTF { c@zc@appendix }
+  { \cs_show:N \c@zc@appendix }
+  { \typeout { zc@appendix~counter~not~defined } }
+\cs_if_exist:cTF { c@zc@save@appendix }
+  { \cs_show:N \c@zc@save@appendix }
+  { \typeout { zc@save@appendix~counter~not~defined } }
+\prop_show:N \l__zrefclever_counter_resetby_prop
+\ShowHook { cmd / appendix / before }
+\ShowHook { env / appendices / begin }
+\ShowHook { env / appendices / end }
+\ShowHook { env / subappendices / begin }
+\begin{appendices}
+  \prop_show:N \l__zrefclever_counter_type_prop
+\end{appendices}
+\begin{subappendices}
+  \prop_show:N \l__zrefclever_counter_type_prop
+\end{subappendices}
+\makeatother
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{memoir module}
+\ExplSyntaxOn
+\makeatletter
+\prop_show:N \l__zrefclever_counter_type_prop
+\prop_show:N \l__zrefclever_counter_resetby_prop
+\cs_if_exist:NTF \__zrefclever_memoir_both_labels:
+  { \cs_show:N \__zrefclever_memoir_both_labels: }
+  { \typeout { __zrefclever_memoir_both_labels:~not~defined } }
+\ShowHook { env / sidecaption / begin }
+\ShowHook { env / sidecontcaption / begin }
+\ShowHook { cmd / bitwonumcaption / before }
+\ShowHook { cmd / bitwonumcaption / after }
+\ShowHook { cmd / bionenumcaption / before }
+\ShowHook { cmd / bionenumcaption / after }
+\ShowHook { cmd / bicaption / before }
+\ShowHook { cmd / bicaption / after }
+\zref@ifpropundefined { subcaption }
+  { \typeout { subcaption~property~not~defined } }
+  { \typeout { subcaption~property~is~defined } }
+\ShowHook { cmd / @memsubcaption / before }
+\ShowHook { env / minipage / begin }
+\ShowHook { cmd / @makefntext / before }
+\ShowHook { cmd / @makesidefntext / before }
+\ShowHook { file / \jobname.ent / before }
+\makeatother
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{amsmath module}
+\ExplSyntaxOn
+\makeatletter
+\cs_if_exist:NTF \__zrefclever_ltxlabel:n
+  { \cs_show:N \__zrefclever_ltxlabel:n }
+  { \typeout { __zrefclever_ltxlabel:n~not~defined } }
+\cs_if_exist:NTF \__zrefclever_orig_ltxlabel:n
+  { \cs_show:N \__zrefclever_orig_ltxlabel:n }
+  { \typeout { __zrefclever_orig_ltxlabel:n~not~defined } }
+\cs_show:N \ltx@label
+\begin{subequations}
+  \tl_show:N \l__zrefclever_current_counter_tl
+  \prop_show:N \l__zrefclever_counter_type_prop
+  \prop_show:N \l__zrefclever_counter_resetby_prop
+\end{subequations}
+\clist_map_inline:nn
+  {
+    equation ,
+    equation* ,
+    align ,
+    align* ,
+    alignat ,
+    alignat* ,
+    flalign ,
+    flalign* ,
+    xalignat ,
+    xalignat* ,
+    gather ,
+    gather* ,
+    multline ,
+    multline* ,
+  }
+  { \ShowHook { env / #1 / begin } }
+\prop_if_exist:NTF \l__zrefclever_type_equation_options_prop
+  { \prop_show:N \l__zrefclever_type_equation_options_prop }
+  { \typeout { l__zrefclever_type_equation_options_prop~not~defined } }
+\makeatother
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{mathtools module}
+\ExplSyntaxOn
+\bool_show:N \l__zrefclever_mathtools_showonlyrefs_bool
+\cs_if_exist:NTF \__zrefclever_mathtools_showonlyrefs:n
+  { \cs_show:N \__zrefclever_mathtools_showonlyrefs:n }
+  { \typeout { __zrefclever_mathtools_showonlyrefs:n~not~defined } }
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{breqn module}
+\ExplSyntaxOn
+\begin{dgroup}
+  \tl_show:N \l__zrefclever_current_counter_tl
+  \prop_show:N \l__zrefclever_counter_type_prop
+  \prop_show:N \l__zrefclever_counter_resetby_prop
+  \begin{dmath}
+    x=y
+  \end{dmath}
+\end{dgroup}
+\clist_map_inline:nn
+  {
+    dmath ,
+    dseries ,
+    darray ,
+  }
+  { \ShowHook { env / #1 / begin } }
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{listings module}
+\ExplSyntaxOn
+\makeatletter
+\prop_show:N \l__zrefclever_counter_type_prop
+\prop_show:N \l__zrefclever_counter_resetby_prop
+\cs_show:c { \@lst hk@ Init }
+\makeatother
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{enumitem module}
+\ExplSyntaxOn
+\prop_show:N \l__zrefclever_counter_type_prop
+\prop_show:N \l__zrefclever_counter_resetby_prop
+\ExplSyntaxOff
+\ENDTEST
+
+\OMIT
+
+\end{document}

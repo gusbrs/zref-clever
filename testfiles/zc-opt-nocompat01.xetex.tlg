@@ -1,0 +1,497 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: begin document messages
+============================================================
+============================================================
+(zc-opt-nocompat01.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line ....
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line ....
+LaTeX Font Info:    ... okay on input line ....
+\c@lstlisting=\count...
+(../zref-hyperref.sty
+Package: zref-hyperref ....-..-.. v... Module hyperref for zref (HO)
+Package zref Info: New property: anchor on input line ....
+)
+Package hyperref Info: Link coloring OFF on input line ....
+(../nameref.sty
+Package: nameref ....-..-.. v... Cross-referencing by name of section
+(../refcount.sty
+Package: refcount ....-..-.. v... Data extraction from label references (HO)
+)
+(../gettitlestring.sty
+Package: gettitlestring ....-..-.. v... Cleanup title references (HO)
+)
+\c@section@level=\count...
+)
+Redoing nameref's sectioning
+Redoing nameref's label
+LaTeX Info: Redefining \nameref on input line ....
+LaTeX Info: Redefining \ref on input line ....
+LaTeX Info: Redefining \pageref on input line ....
+LaTeX Info: Redefining \nameref on input line ....
+(zc-opt-nocompat01.out) (zc-opt-nocompat01.out)
+\@outlinefile=\write...
+(zref-clever-english.dict)
+Package zref-clever Info: Loaded 'english' dictionary.
+============================================================
+============================================================
+TEST 2: appendix module before
+============================================================
+> \appendix=macro:->\ltx@IfUndefined {chapter}{\gdef \theHsection
+{\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
+\Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
+<recently read> }
+l. ...\cs_show:N \appendix
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}.
+<recently read> }
+l. ...\prop_show:N \l__zrefclever_counter_type_prop
+-> The generic hook 'cmd/appendix/before':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { cmd / appendix / before }
+============================================================
+============================================================
+TEST 3: appendix module after
+============================================================
+> \appendix=macro:->\ltx@IfUndefined {chapter}{\gdef \theHsection
+{\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
+\Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
+<recently read> }
+l. ...\cs_show:N \appendix
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}.
+<recently read> }
+l. ...\prop_show:N \l__zrefclever_counter_type_prop
+-> The generic hook 'cmd/appendix/before':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { cmd / appendix / before }
+============================================================
+============================================================
+TEST 4: appendices module
+============================================================
+> \appendix=macro:->\ltx@IfUndefined {chapter}{\gdef \theHsection
+{\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
+\Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
+<recently read> }
+l. ...\cs_show:N \appendix
+zc@appendix counter not defined
+zc@save@appendix counter not defined
+The property list \l__zrefclever_counter_resetby_prop contains the pairs
+(without outer braces):
+>  {enumii}  =>  {enumi}
+>  {enumiii}  =>  {enumii}
+>  {enumiv}  =>  {enumiii}.
+<recently read> }
+l. ......show:N \l__zrefclever_counter_resetby_prop
+-> The generic hook 'cmd/appendix/before':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { cmd / appendix / before }
+-> The generic hook 'env/appendices/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { env / appendices / begin }
+-> The generic hook 'env/appendices/end':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { env / appendices / end }
+-> The generic hook 'env/subappendices/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { env / subappendices / begin }
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}.
+<recently read> }
+l. ......op_show:N \l__zrefclever_counter_type_prop
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}.
+<recently read> }
+l. ......op_show:N \l__zrefclever_counter_type_prop
+============================================================
+============================================================
+TEST 5: memoir module
+============================================================
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}.
+<recently read> }
+l. ...\prop_show:N \l__zrefclever_counter_type_prop
+The property list \l__zrefclever_counter_resetby_prop contains the pairs
+(without outer braces):
+>  {enumii}  =>  {enumi}
+>  {enumiii}  =>  {enumii}
+>  {enumiv}  =>  {enumiii}.
+<recently read> }
+l. ......show:N \l__zrefclever_counter_resetby_prop
+__zrefclever_memoir_both_labels: not defined
+-> The generic hook 'env/sidecaption/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { env / sidecaption / begin }
+-> The generic hook 'env/sidecontcaption/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { env / sidecontcaption / begin }
+-> The generic hook 'cmd/bitwonumcaption/before':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { cmd / bitwonumcaption / before }
+-> The generic hook 'cmd/bitwonumcaption/after':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { cmd / bitwonumcaption / after }
+-> The generic hook 'cmd/bionenumcaption/before':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { cmd / bionenumcaption / before }
+-> The generic hook 'cmd/bionenumcaption/after':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { cmd / bionenumcaption / after }
+-> The generic hook 'cmd/bicaption/before':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { cmd / bicaption / before }
+-> The generic hook 'cmd/bicaption/after':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { cmd / bicaption / after }
+subcaption property not defined
+-> The generic hook 'cmd/@memsubcaption/before':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { cmd / @memsubcaption / before }
+-> The generic hook 'env/minipage/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { env / minipage / begin }
+-> The generic hook 'cmd/@makefntext/before':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { cmd / @makefntext / before }
+-> The generic hook 'cmd/@makesidefntext/before':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { cmd / @makesidefntext / before }
+-> The generic hook 'file/zc-opt-nocompat01.ent/before':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...\ShowHook { file / \jobname.ent / before }
+============================================================
+============================================================
+TEST 6: amsmath module
+============================================================
+__zrefclever_ltxlabel:n not defined
+__zrefclever_orig_ltxlabel:n not defined
+> \ltx@label=macro:#1->\@bsphack \begingroup \def \label@name {#1}\label@hook
+\protected@write \@auxout {}{\string \newlabel {#1}{{\@currentlabel }{\thepage
+}{\@currentlabelname }{\@currentHref }{}}}\endgroup \@esphack .
+<recently read> }
+l. ...\cs_show:N \ltx@label
+> \l__zrefclever_current_counter_tl=\@currentcounter .
+<recently read> }
+l. ......_show:N \l__zrefclever_current_counter_tl
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}.
+<recently read> }
+l. ......p_show:N \l__zrefclever_counter_type_prop
+The property list \l__zrefclever_counter_resetby_prop contains the pairs
+(without outer braces):
+>  {enumii}  =>  {enumi}
+>  {enumiii}  =>  {enumii}
+>  {enumiv}  =>  {enumiii}.
+<recently read> }
+l. ......how:N \l__zrefclever_counter_resetby_prop
+-> The generic hook 'env/equation/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/equation*/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/align/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/align*/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/alignat/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/alignat*/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/flalign/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/flalign*/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/xalignat/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/xalignat*/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/gather/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/gather*/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/multline/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/multline*/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+l__zrefclever_type_equation_options_prop not defined
+============================================================
+============================================================
+TEST 7: mathtools module
+============================================================
+> \l__zrefclever_mathtools_showonlyrefs_bool=false.
+<recently read> }
+l. ......l__zrefclever_mathtools_showonlyrefs_bool
+__zrefclever_mathtools_showonlyrefs:n not defined
+============================================================
+============================================================
+TEST 8: breqn module
+============================================================
+> \l__zrefclever_current_counter_tl=\@currentcounter .
+<recently read> }
+l. ......_show:N \l__zrefclever_current_counter_tl
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}.
+<recently read> }
+l. ......p_show:N \l__zrefclever_counter_type_prop
+The property list \l__zrefclever_counter_resetby_prop contains the pairs
+(without outer braces):
+>  {enumii}  =>  {enumi}
+>  {enumiii}  =>  {enumii}
+>  {enumiv}  =>  {enumiii}.
+<recently read> }
+l. ......how:N \l__zrefclever_counter_resetby_prop
+-> The generic hook 'env/dmath/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/dseries/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+-> The generic hook 'env/darray/begin':
+> The hook is not declared.
+> The hook is empty.
+<recently read> }
+l. ...  { \ShowHook { env / #1 / begin } }
+============================================================
+============================================================
+TEST 9: listings module
+============================================================
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}.
+<recently read> }
+l. ......p_show:N \l__zrefclever_counter_type_prop
+The property list \l__zrefclever_counter_resetby_prop contains the pairs
+(without outer braces):
+>  {enumii}  =>  {enumi}
+>  {enumiii}  =>  {enumii}
+>  {enumiv}  =>  {enumiii}.
+<recently read> }
+l. ......how:N \l__zrefclever_counter_resetby_prop
+> \lsthk@Init=macro:->\lst@ifshowspaces \let \lst@outputspace
+\lst@visiblespace \lst@keepspacestrue \fi \edef \ttdefault {\ttdefault }\let
+\lsts@nfss@catcodes \nfss@catcodes \let \nfss@catcodes \lst@nfss@catcodes
+\edef \lst@OrgOutput {\the \output }\ifcase \lst@useoutput \relax \or \output
+{\global \setbox \lst@gtempboxa \box \@cclv \expandafter \egroup
+\lst@SaveToken \lst@InterruptModes \setbox \@cclv \box \lst@gtempboxa \bgroup
+\lst@OrgOutput \egroup \bgroup \aftergroup \pagegoal \aftergroup \vsize
+\aftergroup \lst@ReenterModes \aftergroup \lst@RestoreToken }\else \output
+{\lst@RestoreOrigCatcodes \lst@ifec \lst@RestoreOrigExtendedCatcodes \fi
+\lst@OrgOutput }\fi \let \lst@bnext \relax \let \lst@enext \relax
+\lst@basicstyle \ifx \lst@inputenc \@empty \else \@ifundefined
+{inputencoding}{}{\inputencoding \lst@inputenc }\fi \ifx \lst@linerange
+\@empty \edef \lst@linerange {{\lst@firstline }-{\lst@lastline },}\fi
+\lst@GetLineInterval \lst@ifsensitive \else \let \lst@KeywordTest
+\lst@KEYWORDTEST \let \lst@WorkingTest \lst@WORKINGTEST \let \lst@IfOneOutOf
+\lst@IFONEOUTOF \fi \lsthk@TrackKeywords \lsthk@PostTrackKeywords \let
+\lst@ifkeywords \iftrue \global \let \lst@prefixkeyword \relax \def
+\@currentlabel {\thelstnumber }\ifnum \z@ >\lst@stepnumber \let
+\lst@advancelstnum \m@ne \edef \lst@stepnumber {-\lst@stepnumber }\fi \ifnum
+\z@ <\lst@stepnumber \global \lst@skipnumbers \lst@firstnumber \global \divide
+\lst@skipnumbers \lst@stepnumber \global \multiply \lst@skipnumbers
+-\lst@stepnumber \global \advance \lst@skipnumbers \lst@firstnumber \ifnum
+\lst@skipnumbers >\z@ \global \advance \lst@skipnumbers -\lst@stepnumber \fi
+\else \let \lst@SkipOrPrintLabel \relax \fi \lst@ifresetmargins \advance
+\linewidth \@totalleftmargin \advance \linewidth \rightmargin
+\@totalleftmargin \z@ \fi \advance \linewidth -\lst@xleftmargin \advance
+\linewidth -\lst@xrightmargin \advance \@totalleftmargin \lst@xleftmargin
+\relax \parskip \z@ \ifdim \z@ =\lst@lineskip \else \@tempdima \baselineskip
+\advance \@tempdima \lst@lineskip \multiply \@tempdima \@cclvi \divide
+\@tempdima \baselineskip \relax \multiply \@tempdima \@cclvi \edef
+\baselinestretch {\strip@pt \@tempdima }\selectfont \fi \lst@ifbreaklines
+\hbadness \@M \pretolerance \@M \@rightskip \@flushglue \rightskip \@rightskip
+\leftskip \z@skip \parindent \z@ \def \lst@parshape {\parshape \tw@
+\@totalleftmargin \linewidth \lst@breakshape }\else \let \lst@discretionary
+\@empty \fi \ifx \lst@fillcolor \@empty \let \lst@fillcolor \lst@bkgcolor \fi
+\ifx \lst@rulesepcolor \@empty \let \lst@rulesepcolor \lst@fillcolor \fi
+\lst@frameInit .
+<recently read> }
+l. ...\cs_show:c { \@lst hk@ Init }
+============================================================
+============================================================
+TEST 10: enumitem module
+============================================================
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}.
+<recently read> }
+l. ......p_show:N \l__zrefclever_counter_type_prop
+The property list \l__zrefclever_counter_resetby_prop contains the pairs
+(without outer braces):
+>  {enumii}  =>  {enumi}
+>  {enumiii}  =>  {enumii}
+>  {enumiv}  =>  {enumiii}.
+<recently read> }
+l. ......how:N \l__zrefclever_counter_resetby_prop
+============================================================

@@ -1,0 +1,111 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\usepackage{appendix}
+\usepackage{amsmath}
+\usepackage{listings}
+
+\usepackage{zref-clever}
+
+\zcsetup{nocompat={appendix,appendices,amsmath,listings,foo,bar}}
+
+\usepackage{hyperref}
+
+\START
+
+\BEGINTEST{begin document messages}
+\ENDTEST
+% Mark the test, but don't actually include \begin{document} inside it,
+% otherwise we run into catcode problems along the document.
+\begin{document}
+\SEPARATOR
+
+\appendix{}
+
+\BEGINTEST{appendix module after}
+\ExplSyntaxOn
+\cs_show:N \appendix
+\prop_show:N \l__zrefclever_counter_type_prop
+\ShowHook { cmd / appendix / before }
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{appendices module}
+\ExplSyntaxOn
+\makeatletter
+\cs_show:N \appendix
+\cs_if_exist:cTF { c@zc@appendix }
+  { \cs_show:N \c@zc@appendix }
+  { \typeout { zc@appendix~counter~not~defined } }
+\cs_if_exist:cTF { c@zc@save@appendix }
+  { \cs_show:N \c@zc@save@appendix }
+  { \typeout { zc@save@appendix~counter~not~defined } }
+\prop_show:N \l__zrefclever_counter_resetby_prop
+\ShowHook { cmd / appendix / before }
+\ShowHook { env / appendices / begin }
+\ShowHook { env / appendices / end }
+\ShowHook { env / subappendices / begin }
+\begin{appendices}
+  \prop_show:N \l__zrefclever_counter_type_prop
+\end{appendices}
+\begin{subappendices}
+  \prop_show:N \l__zrefclever_counter_type_prop
+\end{subappendices}
+\makeatother
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{amsmath module}
+\ExplSyntaxOn
+\makeatletter
+\cs_if_exist:NTF \__zrefclever_ltxlabel:n
+  { \cs_show:N \__zrefclever_ltxlabel:n }
+  { \typeout { __zrefclever_ltxlabel:n~not~defined } }
+\cs_if_exist:NTF \__zrefclever_orig_ltxlabel:n
+  { \cs_show:N \__zrefclever_orig_ltxlabel:n }
+  { \typeout { __zrefclever_orig_ltxlabel:n~not~defined } }
+\cs_show:N \ltx@label
+\begin{subequations}
+  \tl_show:N \l__zrefclever_current_counter_tl
+  \prop_show:N \l__zrefclever_counter_type_prop
+  \prop_show:N \l__zrefclever_counter_resetby_prop
+\end{subequations}
+\clist_map_inline:nn
+  {
+    equation ,
+    equation* ,
+    align ,
+    align* ,
+    alignat ,
+    alignat* ,
+    flalign ,
+    flalign* ,
+    xalignat ,
+    xalignat* ,
+    gather ,
+    gather* ,
+    multline ,
+    multline* ,
+  }
+  { \ShowHook { env / #1 / begin } }
+\prop_if_exist:NTF \l__zrefclever_type_equation_options_prop
+  { \prop_show:N \l__zrefclever_type_equation_options_prop }
+  { \typeout { l__zrefclever_type_equation_options_prop~not~defined } }
+\makeatother
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{listings module}
+\ExplSyntaxOn
+\makeatletter
+\prop_show:N \l__zrefclever_counter_type_prop
+\prop_show:N \l__zrefclever_counter_resetby_prop
+\cs_show:c { \@lst hk@ Init }
+\makeatother
+\ExplSyntaxOff
+\ENDTEST
+
+\OMIT
+
+\end{document}
