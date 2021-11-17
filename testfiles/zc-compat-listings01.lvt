@@ -34,7 +34,7 @@
 \makeatletter
 \prop_show:N \l__zrefclever_counter_type_prop
 \prop_show:N \l__zrefclever_counter_resetby_prop
-\cs_show:c { \@lst hk@ Init }
+\cs_show:c { \@lst hk@ PreInit }
 \makeatother
 \ExplSyntaxOff
 \ENDTEST
