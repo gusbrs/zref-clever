@@ -57,6 +57,7 @@ jobs:
             etexcmds
             # Dependencies for tests
             amsmath
+            amsfonts
             appendix
             babel-english
             babel-french
@@ -83,7 +84,6 @@ jobs:
             newfloat
             polyglossia
             tools
-            trivfloat
       - name: Run tests
         run: l3build check -q -H --show-log-on-error
 
@@ -116,6 +116,8 @@ jobs:
             # Fonts
             metafont
             mfware
+            mathpazo
+            psnfss
             # Dependencies for documentation
             alphalph
             amsfonts
@@ -128,6 +130,7 @@ jobs:
             fancyvrb
             hologo
             hyperref
+            hypdoc
             iftex
             infwarerr
             intcalc
@@ -137,11 +140,14 @@ jobs:
             listings
             ltxcmds
             makeindex
+            mptopdf
+            newfloat
             oberdiek
             pdftexcmds
             psnfss
             tools
             underscore
             zref
+            zref-check
       - name: Compile documentation
         run: l3build doc -q -H

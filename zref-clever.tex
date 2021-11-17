@@ -44,11 +44,12 @@
 
 % Have \GetFileInfo pick up date and version data and used in the
 % documentation.
-\usepackage[cap,nameinlink=false]{zref-clever}
+\usepackage[cap,nameinlink=false,check,titleref]{zref-clever}
 
 % Used in the documentation.
-\usepackage{zref-titleref}
+\usepackage[osf]{mathpazo}
 \usepackage{listings}
+\usepackage{newfloat}
 
 \NewDocumentCommand\opt{m}{\texttt{#1}}
 
@@ -66,28 +67,68 @@
   \item[Task] #1
   \end{description}}
 
+\lstdefinestyle{code}{
+  language=[LaTeX]TeX,
+  moretexcs={
+    AddToHook,
+    define@key,
+    patchcmd,
+    eq@setnumber,
+    DeclareFloatingEnvironment,
+    newlist,
+    setlist,
+    zexternaldocument,
+  }
+}
+\lstdefinestyle{zrefclever}{
+  style=code,
+  moretexcs={
+    zcref,
+    zlabel,
+    zcsetup,
+    zcLanguageSetup,
+    zcRefTypeSetup,
+  }
+}
 \lstset{
+  style=zrefclever,
   basicstyle=\ttfamily,
   columns=fullflexible,
   keepspaces,
   xleftmargin=\leftmargin,
   xrightmargin=.5\leftmargin,
 }
-\lstdefinestyle{zrefclever}{
-  language=[LaTeX]TeX,
-  % moretexcs={
-  % }
-}
 % See https://tex.stackexchange.com/a/31026 for how to use these environments
 % in a .dtx context.
-\lstnewenvironment{zchowto}[1][]{%
-  \renewcommand{\lstlistingname}{How to}%
-  \lstset{style=zrefclever,basicstyle=\ttfamily\small,#1}%
-}{}
-\lstnewenvironment{zcsnippet}[1][]{%
+\lstnewenvironment{zcexample}[1][]{%
   \renewcommand{\lstlistingname}{Example}%
-  \lstset{style=zrefclever,basicstyle=\ttfamily\small,#1}%
+  \lstset{#1}%
 }{}
+\makeatletter
+\NewDocumentCommand{\zchowto}{}{%
+  \setlength\abovecaptionskip{6pt}%
+  \def\@captype{zchowtofloat}}
+\NewDocumentCommand{\endzchowto}{}{\medskip{}}
+\NewDocumentCommand{\zcworkaround}{}{%
+  \setlength\abovecaptionskip{6pt}%
+  \def\@captype{zcworkaroundfloat}}
+\NewDocumentCommand{\endzcworkaround}{}{\medskip{}}
+\makeatother
+
+\DeclareFloatingEnvironment[name={How to}]{zchowtofloat}
+\DeclareFloatingEnvironment[name={Work around}]{zcworkaroundfloat}
+\zcRefTypeSetup{zchowtofloat}{
+  Name-sg = {How to},
+  name-sg = {how to},
+  Name-pl = {How tos},
+  name-pl = {how tos},
+}
+\zcRefTypeSetup{zcworkaroundfloat}{
+  Name-sg = {Work around},
+  name-sg = {work around},
+  Name-pl = {Work arounds},
+  name-pl = {work arounds},
+}
 
 \begin{document}
 

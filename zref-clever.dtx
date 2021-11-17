@@ -846,19 +846,25 @@
 % reasonable, they may not be what you want.  The ``fallback'' option values
 % are the following:
 %
-% \begin{verbatim}
-%     tpairsep  = {, } ,
-%     tlistsep  = {, } ,
-%     tlastsep  = {, } ,
-%     notesep   = { } ,
-%     namesep   = {\nobreakspace} ,
-%     pairsep   = {, } ,
-%     listsep   = {, } ,
-%     lastsep   = {, } ,
-%     rangesep  = {\textendash} ,
-%     refpre    = {} ,
-%     refpos    = {} ,
-% \end{verbatim}
+% \iffalse
+%<*example>
+% \fi
+\begin{zcexample}
+  tpairsep  = {, } ,
+  tlistsep  = {, } ,
+  tlastsep  = {, } ,
+  notesep   = { } ,
+  namesep   = {\nobreakspace} ,
+  pairsep   = {, } ,
+  listsep   = {, } ,
+  lastsep   = {, } ,
+  rangesep  = {\textendash} ,
+  refpre    = {} ,
+  refpos    = {} ,
+\end{zcexample}
+% \iffalse
+%</example>
+% \fi
 %
 %
 % \section{Internationalization}
@@ -1039,33 +1045,40 @@
 %
 % A couple of examples to illustrate the syntax of \cs{zcLanguageSetup}:
 %
-% \begin{verbatim}
-%   \zcLanguageSetup{french}{
-%     type = section ,
-%       gender = f ,
-%       Name-sg = Section ,
-%       name-sg = section ,
-%       Name-pl = Sections ,
-%       name-pl = sections ,
-%   }
-%   \zcLanguageSetup{german}{
-%     type = section ,
-%       gender = m ,
-%       case = N ,
-%         Name-sg = Abschnitt ,
-%         Name-pl = Abschnitte ,
-%       case = A ,
-%         Name-sg = Abschnitt ,
-%         Name-pl = Abschnitte ,
-%       case = D ,
-%         Name-sg = Abschnitt ,
-%         Name-pl = Abschnitten ,
-%       case = G ,
-%         Name-sg = Abschnitts ,
-%         Name-pl = Abschnitte ,
-%   }
-% \end{verbatim}
+% \iffalse
+%<*example>
+% \fi
+\begin{zcexample}
+  \zcLanguageSetup{french}{
+    type = section ,
+      gender = f ,
+      Name-sg = Section ,
+      name-sg = section ,
+      Name-pl = Sections ,
+      name-pl = sections ,
+  }
+  \zcLanguageSetup{german}{
+    type = section ,
+      gender = m ,
+      case = N ,
+        Name-sg = Abschnitt ,
+        Name-pl = Abschnitte ,
+      case = A ,
+        Name-sg = Abschnitt ,
+        Name-pl = Abschnitte ,
+      case = D ,
+        Name-sg = Abschnitt ,
+        Name-pl = Abschnitten ,
+      case = G ,
+        Name-sg = Abschnitts ,
+        Name-pl = Abschnitte ,
+  }
+\end{zcexample}
+% \iffalse
+%</example>
+% \fi
 %
+% \bigskip{}
 %
 % As already noted, \pkg{zref-clever} has some support for languages with
 % declension.  This means mainly the declension of \emph{nouns}, which is used
@@ -1218,9 +1231,9 @@
 % \iffalse
 %<*example>
 % \fi
-\begin{zcsnippet}
+\begin{zcexample}
   \newtheorem{lemma}{Lemma}
-\end{zcsnippet}
+\end{zcexample}
 % \iffalse
 %</example>
 % \fi
@@ -1230,9 +1243,9 @@
 % \iffalse
 %<*example>
 % \fi
-\begin{zcsnippet}
+\begin{zcexample}
   \newtheorem{lemma}{Lemma}[section]
-\end{zcsnippet}
+\end{zcexample}
 % \iffalse
 %</example>
 % \fi
@@ -1245,7 +1258,9 @@
 % \iffalse
 %<*example>
 % \fi
-\begin{zchowto}[caption={\cs{newtheorem}, simple case}]
+\begin{zchowto}
+\caption{\cs{newtheorem}, simple case}
+\begin{lstlisting}
   \documentclass{article}
   \usepackage{zref-clever}
   \newtheorem{lemma}{Lemma}[section]
@@ -1256,6 +1271,7 @@
   \end{lemma}
   \zcref{lemma-1}
   \end{document}
+\end{lstlisting}
 \end{zchowto}
 % \iffalse
 %</example>
@@ -1269,7 +1285,9 @@
 % \iffalse
 %<*example>
 % \fi
-\begin{zchowto}[caption={\cs{newtheorem}, simple case}]
+\begin{zchowto}
+\caption{\cs{newtheorem}, simple case}
+\begin{lstlisting}
   \documentclass{article}
   \usepackage{zref-clever}
   \zcsetup{countertype={lem=lemma}}
@@ -1281,6 +1299,7 @@
   \end{lem}
   \zcref{lemma-1}
   \end{document}
+\end{lstlisting}
 \end{zchowto}
 % \iffalse
 %</example>
@@ -1305,7 +1324,9 @@
 % \iffalse
 %<*example>
 % \fi
-\begin{zchowto}[caption={\cs{newtheorem}, shared counter}]
+\begin{zchowto}
+\caption{\cs{newtheorem}, shared counter}
+\begin{lstlisting}
   \documentclass{article}
   \usepackage{zref-clever}
   \AddToHook{env/mytheorem/begin}{%
@@ -1324,6 +1345,7 @@
   \end{myproposition}
   \zcref{theorem-1,proposition-1}
   \end{document}
+\end{lstlisting}
 \end{zchowto}
 % \iffalse
 %</example>
@@ -1349,7 +1371,9 @@
 % \iffalse
 %<*example>
 % \fi
-\begin{zchowto}[caption={\cs{newtheorem}, custom type}]
+\begin{zchowto}
+\caption{\cs{newtheorem}, custom type}
+\begin{lstlisting}
   \documentclass{article}
   \usepackage{zref-clever}
   \newtheorem{myconjecture}{Conjecture}[section]
@@ -1366,6 +1390,7 @@
   \end{myconjecture}
   \zcref{conjecture-1}
   \end{document}
+\end{lstlisting}
 \end{zchowto}
 % \iffalse
 %</example>
@@ -1389,7 +1414,9 @@
 % \iffalse
 %<*example>
 % \fi
-\begin{zchowto}[caption={\pkg{newfloat}}]
+\begin{zchowto}
+\caption{\pkg{newfloat}}
+\begin{lstlisting}
   \documentclass{article}
   \usepackage{newfloat}
   \DeclareFloatingEnvironment{diagram}
@@ -1409,6 +1436,7 @@
   \end{diagram}
   \zcref{diagram-1}
   \end{document}
+\end{lstlisting}
 \end{zchowto}
 % \iffalse
 %</example>
@@ -1432,7 +1460,9 @@
 % \iffalse
 %<*example>
 % \fi
-\begin{zchowto}[caption={\pkg{enumitem}}]
+\begin{zchowto}
+\caption{\pkg{enumitem}}
+\begin{lstlisting}
   \documentclass{article}
   \usepackage{zref-clever}
   \zcsetup{
@@ -1469,6 +1499,7 @@
   \end{myenumerate}
   \zcref{item-1,item-2,item-3,item-4}
   \end{document}
+\end{lstlisting}
 \end{zchowto}
 % \iffalse
 %</example>
@@ -1499,22 +1530,14 @@
 % ``\texttt{A}'' to the labels from ``\texttt{B}'', and not the contrary, a
 % minimum setup would be the following.
 %
-% \iffalse
-%<*example>
-% \fi
-\begin{zchowto}[caption={\pkg{zref-xr}}]
-\end{zchowto}
-% \iffalse
-%</example>
-% \fi
-%
-% \vspace{-1.5ex}
-% \file{documentA.tex}:
 %
 % \iffalse
 %<*example>
 % \fi
 \begin{zchowto}
+\caption{\pkg{zref-xr}}
+\file{documentA.tex}:
+\begin{lstlisting}
   \documentclass{article}
   \usepackage{zref-clever}
   \usepackage{zref-xr}
@@ -1525,17 +1548,10 @@
   \zlabel{sec:section-a1}
   \zcref{sec:section-a1,B-sec:section-b1}
   \end{document}
-\end{zchowto}
-% \iffalse
-%</example>
-% \fi
-%
-% \file{documentB.tex}:
-%
-% \iffalse
-%<*example>
-% \fi
-\begin{zchowto}
+\end{lstlisting}
+
+\file{documentB.tex}:
+\begin{lstlisting}
   \documentclass{article}
   \usepackage{zref-clever}
   \usepackage{hyperref}
@@ -1543,12 +1559,12 @@
   \section{Section B1}
   \zlabel{sec:section-b1}
   \end{document}
+\end{lstlisting}
 \end{zchowto}
 % \iffalse
 %</example>
 % \fi
 %
-% \addtocounter{lstlisting}{-2}
 %
 % \section{Limitations}
 % \zlabel{sec:limitations}
