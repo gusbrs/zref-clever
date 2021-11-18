@@ -31,59 +31,8 @@ jobs:
       - name: Install TeX Live
         uses: zauguin/install-texlive@v1
         with:
-          packages: |
-            # The test framework
-            l3build
-            # Build formats
-            latex
-            latex-bin
-            latex-bin-dev
-            luatex
-            luatexbase
-            xetex
-            # Fonts
-            metafont
-            mfware
-            ec
-            # Dependencies for zref-clever
-            zref
-            oberdiek
-            hyperref
-            zref-check
-            # Dependencies for zref
-            ltxcmds
-            kvsetkeys
-            kvdefinekeys
-            etexcmds
-            # Dependencies for tests
-            amsmath
-            amsfonts
-            appendix
-            babel-english
-            babel-french
-            babel-german
-            babel-latin
-            babel-portuges
-            babel-spanish
-            bookmark
-            breqn
-            caption
-            carlisle
-            enumitem
-            epstopdf-pkg
-            float
-            floatrow
-            graphics
-            hyphen-french
-            hyphen-german
-            hyphen-latin
-            koma-script
-            listings
-            mathtools
-            memoir
-            newfloat
-            polyglossia
-            tools
+          # List the required TeX Live packages in a separate file
+          package_file: .github/tl_packages
       - name: Run tests
         run: l3build check -q -H --show-log-on-error
 
@@ -107,47 +56,7 @@ jobs:
       - name: Install TeX Live
         uses: zauguin/install-texlive@v1
         with:
-          packages: |
-            # The test framework
-            l3build
-            # Build formats
-            latex
-            latex-bin
-            # Fonts
-            metafont
-            mfware
-            mathpazo
-            psnfss
-            # Dependencies for documentation
-            alphalph
-            amsfonts
-            amsmath
-            booktabs
-            colortbl
-            csquotes
-            ec
-            enumitem
-            fancyvrb
-            hologo
-            hyperref
-            hypdoc
-            iftex
-            infwarerr
-            intcalc
-            kvdefinekeys
-            kvoptions
-            kvsetkeys
-            listings
-            ltxcmds
-            makeindex
-            mptopdf
-            newfloat
-            oberdiek
-            pdftexcmds
-            psnfss
-            tools
-            underscore
-            zref
-            zref-check
+          # List the required TeX Live packages in a separate file
+          package_file: .github/tl_packages
       - name: Compile documentation
         run: l3build doc -q -H
