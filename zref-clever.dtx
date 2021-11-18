@@ -1638,24 +1638,173 @@
 % \section{Compatibility modules}
 % \zlabel{sec:comp-modules}
 %
+% This section gives a description of each compatibility module provided by
+% \pkg{zref-clever}.  These modules intend to smooth the interaction of
+% \LaTeX{} features, document classes, and packages with \pkg{zref-clever} and
+% \pkg{zref}, and they can be selectively or completely disabled with the
+% option \opt{nocompat} (see \zcref{sec:options}).  This set is not to be
+% confused with ``the list of packages or classes supported by
+% \pkg{zref-clever}''.  In most circumstances, things should just work out of
+% the box, and need no specific handling.  These are just the ones for which
+% some special treatment was required.  Of course, this effort is bound to be
+% incomplete (see the \zcheck[prevsec]{sec:limitations}{previous section}).
+%
+% The purpose of outlining to some extend what the compatibility modules do is
+% twofold.  First, some of them require usage adjustments for label setting,
+% which must be somehow conveyed in this documentation.  Second, the kind and
+% degree of intervention in external code varies significantly for each
+% module, and since this is an area of potential friction, a minimum of
+% information for the users to judge whether they want to leave these modules
+% enabled or not is due.  For this reason, this is also a little technical,
+% but for full details, see the code documentation.
+%
+% \bigskip{}
 %
 % \DescribeOption{appendix} %
+% The \cs{appendix} command provided by many document classes is normally used
+% to change the behavior of the sectioning commands after that point.
+% Usually, depending on the class, the changes that interest us involve using
+% \cs{@Alph} for numbering and \cs{appendixname} for chapter's names.  In sum,
+% we'd like to refer to the appendix sectioning commands as ``appendices''
+% rather than ``chapters'' or ``sections''.  Since the sectioning commands are
+% the same as before \cs{appendix}, and so are their underlying counters, we
+% must configure the counter type of the sectioning counters to
+% \texttt{appendix}.  And this is what this compatibility module does, and it
+% uses a \pkg{ltcmdhooks} hook on \cs{appendix} for the purpose.  Hence, this
+% module applies to any document class or package which provides that command.
 %
 % \DescribeOption{appendices} %
+% This module implements support for the \env{appendices} and
+% \env{subappendices} environments provided by the \pkg{appendix} package, and
+% also by \cls{memoir}.  The task is the same as for the \texttt{appendix}
+% module: set proper counter types for the sectioning counters.  This module
+% employs environment hooks to \env{appendices} and \env{subappendices} and a
+% command hook to \cs{appendix} for the purpose.
 %
 % \DescribeOption{memoir} %
+% The \cls{memoir} class implements several features with one or another
+% implication to cross-referencing, usually bearing just the standard
+% referencing system in mind, and related mainly to captions, subfloats, and
+% notes.  This compatibility module tries to adjust \pkg{zref-clever} to these
+% features with support for the following: i) set counter types for counters
+% \texttt{subfigure}, \texttt{subtable}, and \texttt{poemline}; ii) configure
+% resetting behavior (\opt{counterresetby} option) for \texttt{subfigure} and
+% \texttt{subtable} counters; iii) provide that the \meta{label} arguments to
+% environments \env{sidecaption} and \env{sidecontcaption} and commands
+% \cs{bitwonumcaption}, \cs{bionenumcaption}, and \cs{bicaption} \emph{also}
+% set a \cs{zlabel} of the same name; iv) provide the \pkg{zref} property
+% ``\texttt{subcaption}'' so that we can refer to, for example,
+% \texttt{\cs{zcref}[ref=subcaption]\{subcap-1\}} to emulate the functionality
+% of \cls{memoir}'s \cs{subcaptionref}; v) provide that \cs{footnote},
+% \cs{verbfootnote}, \cs{sidefootnote}, and \cs{pagenote} get a proper
+% \opt{currentcounter} set; and v) set counter types for counters
+% \texttt{sidefootnote} and \texttt{pagenote}.  Naturally, the sheer number of
+% features that required some specific support implies that some gymnastics
+% were needed here.  But the most sensitive changes are: i) a local
+% redefinition of \cs{label} inside the environments \env{sidecaption} and
+% \env{sidecontcaption} and the commands \cs{bitwonumcaption},
+% \cs{bionenumcaption}, and \cs{bicaption}; and ii) the use of
+% \pkg{ltcmdhooks} command hooks on \cs{bitwonumcaption},
+% \cs{bionenumcaption}, \cs{bicaption}, \cs{@memsubcaption}, \cs{@makefntext},
+% and \cs{@makesidefntext}.
 %
 % \DescribeOption{KOMA} %
+% The \cls{KOMA-Script} document classes are much more strict than
+% \cls{memoir} in using standard mechanisms for cross-reference related
+% features, so that very little adjustment is needed here.  Only the
+% environments \env{captionbeside} and \env{captionofbeside} require special
+% treatment.  And, though they do use \cs{refstepcounter} under the hood,
+% since they are environments, we don't get to see reference variables outside
+% them.  \cs{@currentlabel} is smuggled out of the group, but not
+% \cs{@currentcounter}, so we must arrange for the later to have a correct
+% value outside the caption environments too.  Environment hooks are used for
+% the purpose, essentially setting \cs{@currentcounter} to \cs{@captype},
+% which would be the value the captioning infrastructure would set for it.
 %
 % \DescribeOption{amsmath} %
+% \pkg{amsmath}'s display math environments have their contents processed
+% twice, once for measuring and the second does the final typesetting.  Hence,
+% \pkg{amsmath} needs to handle \cs{label} specially inside these
+% environments, otherwise we'd have duplicate labels all around, and indeed it
+% does redefine \cs{label} locally inside them.  Alas, the same treatment is
+% not granted to \cs{zlabel}.  However, \cs{label} is set basically to
+% \emph{store} the value of the argument inside the environments, and its
+% global meaning is kept in \cs{ltx@label} which is called at the appropriate
+% time to actually set the label.  So, what \pkg{zref-clever} does is redefine
+% \cs{ltx@label} to set \texttt{both} a regular \cs{label} and a \cs{zlabel}
+% for the same \meta{label} (which does not generate a duplicate label problem
+% since the referencing systems are independent).  Therefore, you must use
+% \cs{label} (not \cs{zlabel}) inside \pkg{amsmath}'s display math
+% environments, and this compatibility module arranges that you can also refer
+% to that label with \pkg{zref} and, of course, with \cs{zcref} as well.  The
+% following environments are subject to this usage restriction:
+% \env{equation}, \env{align}, \env{alignat}, \env{flalign}, \env{xalignat},
+% \env{gather}, \env{multline}, and their respective starred versions.  In
+% particular, the same is not the case for the \env{subequations} environment,
+% inside which \cs{zlabel} works as usual (to refer to the main equation
+% number, that is, right after \texttt{\cs{begin}\{subequations\}}).  This
+% module also ensures proper \opt{currentcounter} values are in place for the
+% display math environments, for which it uses environment hooks, and sets the
+% font of equation references to \cs{upshape}, following \pkg{amsmath}'s
+% \cs{eqref}.
 %
 % \DescribeOption{mathtools} %
+% \pkg{mathtools} has a feature to show the numbers only for those equations
+% actually referenced (with \cs{eqref} or \cs{refeq}), which is enabled by the
+% \opt{showonlyrefs} option.  This compatibility module adds support for this
+% feature, such that equation references made with \cs{zcref} also get marked
+% as ``referenced'' for \pkg{mathtools}, when the option is active, of course.
+% The module uses a couple of \pkg{mathtools} functions, but does not need to
+% redefine or hook into anything, everything is handled on \pkg{zref-clever}'s
+% side.
 %
 % \DescribeOption{breqn} %
+% This compatibility module only sets proper \opt{currentcounter} values for
+% the environments \env{dgroup}, \env{dmath}, \env{dseries}, and \env{darray},
+% and uses environment hooks for the purpose.  Note that these environments
+% offer a \opt{label} option for label setting, but implements it in a way
+% that is somewhat tricky to grab for our purposes, so we don't do it.
+% However, \pkg{breqn}'s documentation says the following about the use of
+% \cs{label} inside its environments: \textquote{Use of the normal \cs{label}
+% command instead of the \opt{label} option works, I think, most of the time
+% (untested)}.  My light testing suggests the same is true for \cs{zlabel},
+% which can then be used directly in these environments.  But the ``second
+% class'' status for this use is the one granted by \pkg{breqn}, there's not
+% much we can do here.  If you have any trouble with this, you may wish to
+% check \zcref{wkrnd:breqn}.
 %
 % \DescribeOption{listings} %
+% Being \env{lstlisting}s environments what they are, one cannot simply place
+% a label inside them without special treatment.  \pkg{listings} arranges to
+% this by providing a \opt{label} option for setting a label for the whole
+% environment, and a properly escaped label command inside the environment can
+% be used to refer to the line number.  While the later can also be used to
+% set a \cs{zlabel} to make line number references, the \opt{label} option is
+% catered to the standard labels exclusively.  Hence, this compatibility
+% module uses the same label name -- which luckily and atypically is stored in
+% a variable -- and sets a \cs{zlabel} as well.  This is done by using
+% \pkg{listings}' \texttt{PreInit} hook, se we don't have to redefine or
+% tamper with anything for the purpose.  Besides this, the module also sets
+% appropriate \opt{countertype}, \opt{counterresetby} and \opt{currentcounter}
+% values for the \pkg{listings}' counters: \texttt{lstlisting} and
+% \texttt{lstnumber}.
 %
 % \DescribeOption{enumitem} %
+% \LaTeX{}'s \env{enumerate} environment requires some special treatment from
+% \pkg{zref-clever}, since its resetting behavior is not stored in the
+% standard way, and the counters' names, given they are numbered by level, do
+% not map to the reference type naturally.  This is done by default for the up
+% to four levels of nested \env{enumerate} environments the kernel offers.
+% \pkg{enumitem}, though, allows one to increase this maximum list depth for
+% \env{enumerate} and, if this is done, setup for these deeper nesting levels
+% have also to be taken care of, and that's what this compatibility module
+% does.  All settings here are internal to \pkg{zref-clever}, no hooks or
+% redefinitions are needed, we just check the existing pertinent counters at
+% \texttt{begindocument}, and supply settings for them.  Of course, this means
+% that only \pkg{enumitem}'s settings done in the preamble will be visible to
+% the module and provided for.
+%
+%
 %
 %
 % \section{Acknowledgments}
