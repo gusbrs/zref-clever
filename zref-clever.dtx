@@ -1262,16 +1262,16 @@
 \begin{zchowto}
 \caption{\cs{newtheorem}, simple case}
 \begin{lstlisting}
-  \documentclass{article}
-  \usepackage{zref-clever}
-  \newtheorem{lemma}{Lemma}[section]
-  \begin{document}
-  \section{Section 1}
-  \begin{lemma}\zlabel{lemma-1}
-    A lemma.
-  \end{lemma}
-  \zcref{lemma-1}
-  \end{document}
+\documentclass{article}
+\usepackage{zref-clever}
+\newtheorem{lemma}{Lemma}[section]
+\begin{document}
+\section{Section 1}
+\begin{lemma}\zlabel{lemma-1}
+  A lemma.
+\end{lemma}
+\zcref{lemma-1}
+\end{document}
 \end{lstlisting}
 \end{zchowto}
 % \iffalse
@@ -1289,17 +1289,17 @@
 \begin{zchowto}
 \caption{\cs{newtheorem}, simple case}
 \begin{lstlisting}
-  \documentclass{article}
-  \usepackage{zref-clever}
-  \zcsetup{countertype={lem=lemma}}
-  \newtheorem{lem}{Lemma}[section]
-  \begin{document}
-  \section{Section 1}
-  \begin{lem}\zlabel{lemma-1}
-    A lemma.
-  \end{lem}
-  \zcref{lemma-1}
-  \end{document}
+\documentclass{article}
+\usepackage{zref-clever}
+\zcsetup{countertype={lem=lemma}}
+\newtheorem{lem}{Lemma}[section]
+\begin{document}
+\section{Section 1}
+\begin{lem}\zlabel{lemma-1}
+  A lemma.
+\end{lem}
+\zcref{lemma-1}
+\end{document}
 \end{lstlisting}
 \end{zchowto}
 % \iffalse
@@ -1328,24 +1328,24 @@
 \begin{zchowto}
 \caption{\cs{newtheorem}, shared counter}
 \begin{lstlisting}
-  \documentclass{article}
-  \usepackage{zref-clever}
-  \AddToHook{env/mytheorem/begin}{%
-    \zcsetup{countertype={mytheorem=theorem}}}
-  \AddToHook{env/myproposition/begin}{%
-    \zcsetup{countertype={mytheorem=proposition}}}
-  \newtheorem{mytheorem}{Theorem}[section]
-  \newtheorem{myproposition}[mytheorem]{Proposition}
-  \begin{document}
-  \section{Section 1}
-  \begin{mytheorem}\zlabel{theorem-1}
-    A theorem.
-  \end{mytheorem}
-  \begin{myproposition}\zlabel{proposition-1}
-    A proposition.
-  \end{myproposition}
-  \zcref{theorem-1,proposition-1}
-  \end{document}
+\documentclass{article}
+\usepackage{zref-clever}
+\AddToHook{env/mytheorem/begin}{%
+  \zcsetup{countertype={mytheorem=theorem}}}
+\AddToHook{env/myproposition/begin}{%
+  \zcsetup{countertype={mytheorem=proposition}}}
+\newtheorem{mytheorem}{Theorem}[section]
+\newtheorem{myproposition}[mytheorem]{Proposition}
+\begin{document}
+\section{Section 1}
+\begin{mytheorem}\zlabel{theorem-1}
+  A theorem.
+\end{mytheorem}
+\begin{myproposition}\zlabel{proposition-1}
+  A proposition.
+\end{myproposition}
+\zcref{theorem-1,proposition-1}
+\end{document}
 \end{lstlisting}
 \end{zchowto}
 % \iffalse
@@ -1375,22 +1375,22 @@
 \begin{zchowto}
 \caption{\cs{newtheorem}, custom type}
 \begin{lstlisting}
-  \documentclass{article}
-  \usepackage{zref-clever}
-  \newtheorem{myconjecture}{Conjecture}[section]
-  \zcRefTypeSetup{myconjecture}{
-    Name-sg = Conjecture ,
-    name-sg = conjecture ,
-    Name-pl = Conjectures ,
-    name-pl = conjectures ,
-  }
-  \begin{document}
-  \section{Section 1}
-  \begin{myconjecture}\zlabel{conjecture-1}
-    A conjecture.
-  \end{myconjecture}
-  \zcref{conjecture-1}
-  \end{document}
+\documentclass{article}
+\usepackage{zref-clever}
+\newtheorem{myconjecture}{Conjecture}[section]
+\zcRefTypeSetup{myconjecture}{
+  Name-sg = Conjecture ,
+  name-sg = conjecture ,
+  Name-pl = Conjectures ,
+  name-pl = conjectures ,
+}
+\begin{document}
+\section{Section 1}
+\begin{myconjecture}\zlabel{conjecture-1}
+  A conjecture.
+\end{myconjecture}
+\zcref{conjecture-1}
+\end{document}
 \end{lstlisting}
 \end{zchowto}
 % \iffalse
@@ -1418,31 +1418,30 @@
 \begin{zchowto}
 \caption{\pkg{newfloat}}
 \begin{lstlisting}
-  \documentclass{article}
-  \usepackage{newfloat}
-  \DeclareFloatingEnvironment{diagram}
-  \usepackage{zref-clever}
-  \zcRefTypeSetup{diagram}{
-    Name-sg = Diagram ,
-    name-sg = diagram ,
-    Name-pl = Diagrams ,
-    name-pl = diagrams ,
-  }
-  \begin{document}
-  \section{Section 1}
-  \begin{diagram}
-    A diagram.
-    \caption{A diagram}
-    \zlabel{diagram-1}
-  \end{diagram}
-  \zcref{diagram-1}
-  \end{document}
+\documentclass{article}
+\usepackage{newfloat}
+\DeclareFloatingEnvironment{diagram}
+\usepackage{zref-clever}
+\zcRefTypeSetup{diagram}{
+  Name-sg = Diagram ,
+  name-sg = diagram ,
+  Name-pl = Diagrams ,
+  name-pl = diagrams ,
+}
+\begin{document}
+\section{Section 1}
+\begin{diagram}
+  A diagram.
+  \caption{A diagram}
+  \zlabel{diagram-1}
+\end{diagram}
+\zcref{diagram-1}
+\end{document}
 \end{lstlisting}
 \end{zchowto}
 % \iffalse
 %</example>
 % \fi
-%
 %
 %
 % \subsection{\pkg{amsmath}}
@@ -1467,29 +1466,73 @@
 \caption{\pkg{amsmath}}
 \zlabel{how:amsmath}
 \begin{lstlisting}
-  \documentclass{article}
-  \usepackage{amsmath}
-  \usepackage{zref-clever}
-  \usepackage{hyperref}
-  \begin{document}
-  \section{Section 1}
-  \begin{equation}\label{eq:1}
-    A^{(1)}_l =\begin{cases} n!,&\text{if }l =1\\
-      0,&\text{otherwise}.\end{cases}
-  \end{equation}
-  \begin{equation*} \tag{foo}\label{eq:2}
-    A^{(1)}_l =\begin{cases} n!,&\text{if }l =1\\
-      0,&\text{otherwise}.\end{cases}
-  \end{equation*}
-  \begin{subequations}\zlabel{eq:3}
-    \begin{align}
-      A+B&=B+A\\
-      C&=D+E\label{eq:3b}\\
-      E&=F
-    \end{align}
-  \end{subequations}
-  \zcref{eq:1,eq:2,eq:3,eq:3b}
-  \end{document}
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{zref-clever}
+\usepackage{hyperref}
+\begin{document}
+\section{Section 1}
+\begin{equation}\label{eq:1}
+  A^{(1)}_l =\begin{cases} n!,&\text{if }l =1\\
+    0,&\text{otherwise}.\end{cases}
+\end{equation}
+\begin{equation*} \tag{foo}\label{eq:2}
+  A^{(1)}_l =\begin{cases} n!,&\text{if }l =1\\
+    0,&\text{otherwise}.\end{cases}
+\end{equation*}
+\begin{subequations}\zlabel{eq:3}
+  \begin{align}
+    A+B&=B+A\\
+    C&=D+E\label{eq:3b}\\
+    E&=F
+  \end{align}
+\end{subequations}
+\zcref{eq:1,eq:2,eq:3,eq:3b}
+\end{document}
+\end{lstlisting}
+\end{zchowto}
+% \iffalse
+%</example>
+% \fi
+%
+%
+% \subsection{\pkg{listings}}
+%
+% \zctask{Make references a \env{lstlisting} environment from the
+% \pkg{listings} package with \cs{zcref}.}
+%
+% Given how \pkg{amsmath}'s display math environments work, they need to
+% handle \cs{label} specially, and this support is quite hard-wired into the
+% environments, but it is not extended to \cs{zlabel}.  \pkg{zref-clever}'s
+% \opt{amsmath} compatibility module provides that a \cs{label} used inside
+% these environments set both a regular \cs{label} and a \cs{zlabel}, so that
+% we can refer to the equations with both referencing systems.  Note the use
+% of \cs{zlabel} for \env{subequations} though.  For more details, see the
+% description of the \opt{amsmath} compatibility module at
+% \zcref{sec:comp-modules}.
+%
+% \iffalse
+%<*example>
+% \fi
+\begin{zchowto}
+\caption{\pkg{listings}}
+\zlabel{how:listings}
+\begin{lstlisting}[escapeinside=`']
+\documentclass{article}
+\usepackage{listings}
+\usepackage{zref-clever}
+\usepackage{hyperref}
+\begin{document}
+\section{Section 1}
+\lstset{escapeinside={(*@}{@*)}, numbers=left, numberstyle=\tiny}
+`\textbackslash{}'begin{lstlisting}[caption={Useless code}, label=lst:1]
+  for i:=maxint to 0 do
+  begin
+      { do nothing }(*@\zlabel{ln:1.1}@*)
+  end;
+`\textbackslash{}'end{lstlisting}
+\zcref{lst:1,ln:1.1}
+\end{document}
 \end{lstlisting}
 \end{zchowto}
 % \iffalse
@@ -1516,42 +1559,42 @@
 \begin{zchowto}
 \caption{\pkg{enumitem}}
 \begin{lstlisting}
-  \documentclass{article}
-  \usepackage{zref-clever}
-  \zcsetup{
-    countertype = {
-      myenumeratei   = item ,
-      myenumerateii  = item ,
-      myenumerateiii = item ,
-      myenumerateiv  = item ,
-    } ,
-    counterresetby = {
-      myenumerateii  = myenumeratei ,
-      myenumerateiii = myenumerateii ,
-      myenumerateiv  = myenumerateiii ,
-    }
+\documentclass{article}
+\usepackage{zref-clever}
+\zcsetup{
+  countertype = {
+    myenumeratei   = item ,
+    myenumerateii  = item ,
+    myenumerateiii = item ,
+    myenumerateiv  = item ,
+  } ,
+  counterresetby = {
+    myenumerateii  = myenumeratei ,
+    myenumerateiii = myenumerateii ,
+    myenumerateiv  = myenumerateiii ,
   }
-  \usepackage{enumitem}
-  \newlist{myenumerate}{enumerate}{4}
-  \setlist[myenumerate,1]{label=(\arabic*)}
-  \setlist[myenumerate,2]{label=(\Roman*)}
-  \setlist[myenumerate,3]{label=(\Alph*)}
-  \setlist[myenumerate,4]{label=(\roman*)}
-  \begin{document}
+}
+\usepackage{enumitem}
+\newlist{myenumerate}{enumerate}{4}
+\setlist[myenumerate,1]{label=(\arabic*)}
+\setlist[myenumerate,2]{label=(\Roman*)}
+\setlist[myenumerate,3]{label=(\Alph*)}
+\setlist[myenumerate,4]{label=(\roman*)}
+\begin{document}
+\begin{myenumerate}
+\item An item.\zlabel{item-1}
   \begin{myenumerate}
-  \item An item.\zlabel{item-1}
+  \item An item.\zlabel{item-2}
     \begin{myenumerate}
-    \item An item.\zlabel{item-2}
+    \item An item.\zlabel{item-3}
       \begin{myenumerate}
-      \item An item.\zlabel{item-3}
-        \begin{myenumerate}
-        \item An item.\zlabel{item-4}
-        \end{myenumerate}
+      \item An item.\zlabel{item-4}
       \end{myenumerate}
     \end{myenumerate}
   \end{myenumerate}
-  \zcref{item-1,item-2,item-3,item-4}
-  \end{document}
+\end{myenumerate}
+\zcref{item-1,item-2,item-3,item-4}
+\end{document}
 \end{lstlisting}
 \end{zchowto}
 % \iffalse
@@ -1591,27 +1634,27 @@
 \caption{\pkg{zref-xr}}
 \file{documentA.tex}:
 \begin{lstlisting}
-  \documentclass{article}
-  \usepackage{zref-clever}
-  \usepackage{zref-xr}
-  \zexternaldocument[B-]{documentB}
-  \usepackage{hyperref}
-  \begin{document}
-  \section{Section A1}
-  \zlabel{sec:section-a1}
-  \zcref{sec:section-a1,B-sec:section-b1}
-  \end{document}
+\documentclass{article}
+\usepackage{zref-clever}
+\usepackage{zref-xr}
+\zexternaldocument[B-]{documentB}
+\usepackage{hyperref}
+\begin{document}
+\section{Section A1}
+\zlabel{sec:section-a1}
+\zcref{sec:section-a1,B-sec:section-b1}
+\end{document}
 \end{lstlisting}
 
 \file{documentB.tex}:
 \begin{lstlisting}
-  \documentclass{article}
-  \usepackage{zref-clever}
-  \usepackage{hyperref}
-  \begin{document}
-  \section{Section B1}
-  \zlabel{sec:section-b1}
-  \end{document}
+\documentclass{article}
+\usepackage{zref-clever}
+\usepackage{hyperref}
+\begin{document}
+\section{Section B1}
+\zlabel{sec:section-b1}
+\end{document}
 \end{lstlisting}
 \end{zchowto}
 % \iffalse
@@ -1900,32 +1943,32 @@
 \caption{\pkg{breqn}}
 \zlabel{wkrnd:breqn}
 \begin{lstlisting}
-  \documentclass{article}
-  \usepackage{zref-clever}
-  \usepackage{breqn}
-  \makeatletter
-  \define@key{breqn}{label}{%
-    \edef\next@label{%
-      \noexpand\label{\next@label@pre#1}%
-      \noexpand\zlabel{\next@label@pre#1}}%
-    \let\next@label@pre\@empty}
-  \makeatother
-  \usepackage{hyperref}
-  \usepackage{etoolbox}
-  \makeatletter
-  \patchcmd\eq@setnumber{\stepcounter}{\refstepcounter}{}{%
-    \errmessage{Patching \noexpand\eq@setnumber failed}}
-  \makeatother
-  \begin{document}
-  \section{Section 1}
-  \begin{dmath}[label={eq:1}]
-    f(x)=\frac{1}{x} \condition{for $x\neq 0$}
-  \end{dmath}
-  \begin{dmath}[labelprefix={eq:},label={2}]
-    H_2^2 = x_1^2 + x_1 x_2 + x_2^2 - q_1 - q_2
-  \end{dmath}
-  \zcref{eq:1,eq:2}
-  \end{document}
+\documentclass{article}
+\usepackage{zref-clever}
+\usepackage{breqn}
+\makeatletter
+\define@key{breqn}{label}{%
+  \edef\next@label{%
+    \noexpand\label{\next@label@pre#1}%
+    \noexpand\zlabel{\next@label@pre#1}}%
+  \let\next@label@pre\@empty}
+\makeatother
+\usepackage{hyperref}
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\eq@setnumber{\stepcounter}{\refstepcounter}{}{%
+  \errmessage{Patching \noexpand\eq@setnumber failed}}
+\makeatother
+\begin{document}
+\section{Section 1}
+\begin{dmath}[label={eq:1}]
+  f(x)=\frac{1}{x} \condition{for $x\neq 0$}
+\end{dmath}
+\begin{dmath}[labelprefix={eq:},label={2}]
+  H_2^2 = x_1^2 + x_1 x_2 + x_2^2 - q_1 - q_2
+\end{dmath}
+\zcref{eq:1,eq:2}
+\end{document}
 \end{lstlisting}
 \end{zcworkaround}
 % \iffalse
