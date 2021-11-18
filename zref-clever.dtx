@@ -1805,6 +1805,84 @@
 % the module and provided for.
 %
 %
+% \section{Work arounds}
+%
+% \marginpar{\raggedleft\raisebox{-1.5ex}{\dbend}}As should be clear by now,
+% the use of \pkg{zref}'s \cs{zlabel} and thus of \pkg{zref-clever} may
+% occasionally require some adjustments, since it does not enjoy the universal
+% support the standard referencing system does.  The compatibility modules
+% presented in the \zcheck[prevsec]{sec:comp-modules}{previous section} do go
+% a long way in ensuring the user has to worry very little about it, but they
+% cannot hopefully go all the way.  Not only because this kind of support will
+% never be exhaustive, but also since, sometimes, given the way certain
+% features are implemented by packages or document classes, there may not be a
+% reasonable way to provide this support, from our side.  But, still, most of
+% the time, it is still ``viable'' to get there, if one really wishes to do
+% so.  So, this section keeps track of some known recipes, which I don't think
+% belong in \pkg{zref-clever} itself, but which you may choose to use.  Note
+% that this list is intended to spare users from having to reinvent the wheel
+% every time someone needs something of the sort, but from \pkg{zref-clever}'s
+% perspective, their status is ``not supported''.
+%
+%
+% \subsection*{\pkg{breqn}}
+%
+% As mentioned in \opt{breqn}'s compatibility module
+% (\zcref{sec:comp-modules}), \pkg{breqn}'s math environments \env{dgroup},
+% \env{dmath}, \env{dseries}, and \env{darray} offer a \opt{label} option
+% (plus \opt{labelprefix}) for the purpose of label setting.  Setting a
+% \cs{zlabel} alongside with a regular \cs{label} based on that option
+% requires redefining some of \pkg{breqn} internals.  Also, \pkg{breqn} does
+% not use \cs{refstepcounter} to increment the equation counters and, as a
+% result, fails to set \pkg{hyperref} anchors for the equations (thus
+% affecting standard labels too).  The example below also provides to
+% that.\footnote{The later workaround thanks to Heiko Oberdiek, at
+% \url{https://tex.stackexchange.com/a/241150}.}
+%
+%
+% \iffalse
+%<*example>
+% \fi
+\begin{zcworkaround}
+\caption{\pkg{breqn}}
+\zlabel{wkrnd:breqn}
+\begin{lstlisting}
+  \documentclass{article}
+  \usepackage{zref-clever}
+  \usepackage{breqn}
+  \makeatletter
+  \define@key{breqn}{label}{%
+    \edef\next@label{%
+      \noexpand\label{\next@label@pre#1}%
+      \noexpand\zlabel{\next@label@pre#1}}%
+    \let\next@label@pre\@empty}
+  \makeatother
+  \usepackage{hyperref}
+  \usepackage{etoolbox}
+  \makeatletter
+  \patchcmd\eq@setnumber{\stepcounter}{\refstepcounter}{}{%
+    \errmessage{Patching \noexpand\eq@setnumber failed}}
+  \makeatother
+  \begin{document}
+  \section{Section 1}
+  \begin{dmath}[label={eq:1}]
+    f(x)=\frac{1}{x} \condition{for $x\neq 0$}
+  \end{dmath}
+  \begin{dmath}[labelprefix={eq:},label={2}]
+    H_2^2 = x_1^2 + x_1 x_2 + x_2^2 - q_1 - q_2
+  \end{dmath}
+  \zcref{eq:1,eq:2}
+  \end{document}
+\end{lstlisting}
+\end{zcworkaround}
+% \iffalse
+%</example>
+% \fi
+%
+% Of course, you can always adapt things to your needs and, e.g., make the
+% \opt{label} option set just \cs{zlabel} instead of both labels, or create a
+% separate \opt{zlabel} option.
+%
 %
 %
 % \section{Acknowledgments}
@@ -7241,7 +7319,10 @@
 % unnumbered environments, the starred environments from \pkg{breqn} don't
 % typeset any tag/number at all, even for a manually given \opt{number=} as an
 % option.  So, even if one can actually set a label in them, it is not really
-% meaningful to make a reference to them.
+% meaningful to make a reference to them.  Also contrary to \pkg{amsmath}'s
+% practice, \pkg{breqn} uses \cs{stepcounter} instead of \cs{refstepcounter}
+% for incrementing the equation counters (see
+% \url{https://tex.stackexchange.com/a/241150}).
 %    \begin{macrocode}
         \AddToHook { env / dgroup / begin }
           {

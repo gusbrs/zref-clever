@@ -1,0 +1,62 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\usepackage{breqn}
+
+\makeatletter
+\define@key{breqn}{label}{%
+  \edef\next@label{%
+    \noexpand\label{\next@label@pre#1}%
+    \noexpand\zlabel{\next@label@pre#1}}%
+  \let\next@label@pre\@empty}
+\makeatother
+
+\usepackage{hyperref}
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\eq@setnumber{\stepcounter}{\refstepcounter}{}{%
+  \errmessage{Patching \noexpand\eq@setnumber failed}}
+\makeatother
+
+\ExplSyntaxOn \bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\NewDocumentCommand \newoptblock {m}{%
+  \noindent\rule{\textwidth}{0.4pt}\par%
+  \noindent\textbf{#1}\par}
+
+\begin{document}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+\clearpage{}
+
+\begin{dmath}[label={eq:1}]
+  f(x)=\frac{1}{x} \condition{for $x\neq 0$}
+\end{dmath}
+
+\clearpage{}
+
+\begin{dmath}[labelprefix={eq:},label={2}]
+  H_2^2 = x_1^2 + x_1 x_2 + x_2^2 - q_1 - q_2
+\end{dmath}
+
+\clearpage{}
+
+\START
+
+\newoptblock{dmath}
+
+\BEGINTEST{Reference: dmath}
+\setbox0=\hbox{\zcref{eq:1,eq:2}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}
