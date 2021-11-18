@@ -1198,8 +1198,9 @@
 % \section{How tos}
 %
 % This section gathers some usage examples, or ``how tos'', of cases which may
-% require some \pkg{zref-clever} setup, and each item is set around a
-% cross-reference ``task'' we'd like to perform with \pkg{zref-clever}.
+% require some \pkg{zref-clever} setup, or usage adjustments, and each item is
+% set around a cross-reference ``task'' we'd like to perform with
+% \pkg{zref-clever}.
 %
 %
 % \subsection{\cs{newtheorem}}
@@ -1442,6 +1443,58 @@
 %</example>
 % \fi
 %
+%
+%
+% \subsection{\pkg{amsmath}}
+%
+% \zctask{Make references to \pkg{amsmath} display math environments with
+% \cs{zcref}.}
+%
+% Given how \pkg{amsmath}'s display math environments work, they need to
+% handle \cs{label} specially, and this support is quite hard-wired into the
+% environments, but it is not extended to \cs{zlabel}.  \pkg{zref-clever}'s
+% \opt{amsmath} compatibility module provides that a \cs{label} used inside
+% these environments set both a regular \cs{label} and a \cs{zlabel}, so that
+% we can refer to the equations with both referencing systems.  Note the use
+% of \cs{zlabel} for \env{subequations} though.  For more details, see the
+% description of the \opt{amsmath} compatibility module at
+% \zcref{sec:comp-modules}.
+%
+% \iffalse
+%<*example>
+% \fi
+\begin{zchowto}
+\caption{\pkg{amsmath}}
+\zlabel{how:amsmath}
+\begin{lstlisting}
+  \documentclass{article}
+  \usepackage{amsmath}
+  \usepackage{zref-clever}
+  \usepackage{hyperref}
+  \begin{document}
+  \section{Section 1}
+  \begin{equation}\label{eq:1}
+    A^{(1)}_l =\begin{cases} n!,&\text{if }l =1\\
+      0,&\text{otherwise}.\end{cases}
+  \end{equation}
+  \begin{equation*} \tag{foo}\label{eq:2}
+    A^{(1)}_l =\begin{cases} n!,&\text{if }l =1\\
+      0,&\text{otherwise}.\end{cases}
+  \end{equation*}
+  \begin{subequations}\zlabel{eq:3}
+    \begin{align}
+      A+B&=B+A\\
+      C&=D+E\label{eq:3b}\\
+      E&=F
+    \end{align}
+  \end{subequations}
+  \zcref{eq:1,eq:2,eq:3,eq:3b}
+  \end{document}
+\end{lstlisting}
+\end{zchowto}
+% \iffalse
+%</example>
+% \fi
 %
 %
 % \subsection{\pkg{enumitem}}
@@ -1742,11 +1795,11 @@
 % \env{gather}, \env{multline}, and their respective starred versions.  In
 % particular, the same is not the case for the \env{subequations} environment,
 % inside which \cs{zlabel} works as usual (to refer to the main equation
-% number, that is, right after \texttt{\cs{begin}\{subequations\}}).  This
-% module also ensures proper \opt{currentcounter} values are in place for the
-% display math environments, for which it uses environment hooks, and sets the
-% font of equation references to \cs{upshape}, following \pkg{amsmath}'s
-% \cs{eqref}.
+% number, that is, right after \texttt{\cs{begin}\{subequations\}}).  See the
+% \zcref{how:amsmath} for a use example.  This module also ensures proper
+% \opt{currentcounter} values are in place for the display math environments,
+% for which it uses environment hooks, and sets the font of equation
+% references to \cs{upshape}, following \pkg{amsmath}'s \cs{eqref}.
 %
 % \DescribeOption{mathtools} %
 % \pkg{mathtools} has a feature to show the numbers only for those equations
@@ -1836,7 +1889,7 @@
 % not use \cs{refstepcounter} to increment the equation counters and, as a
 % result, fails to set \pkg{hyperref} anchors for the equations (thus
 % affecting standard labels too).  The example below also provides to
-% that.\footnote{The later workaround thanks to Heiko Oberdiek, at
+% that.\footnote{The later work around thanks to Heiko Oberdiek, at
 % \url{https://tex.stackexchange.com/a/241150}.}
 %
 %

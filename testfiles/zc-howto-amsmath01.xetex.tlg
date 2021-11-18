@@ -1,0 +1,60 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: amsmath how to
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
+\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
+}{equation.1.1}{\group_begin: \upshape 1\group_end: }\textup {)}, \textup
+{(}\hyper@@link {\c_empty_tl }{AMS.1}{\group_begin: \upshape {foo}\group_end:
+}\textup {)}, \textup {(}\hyper@@link {\c_empty_tl
+}{equation.1.2}{\group_begin: \upshape 2\group_end: }\textup {)}
+and\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
+}{equation.1.2b}{\group_begin: \upshape 2b\group_end: }\textup {)}.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{eq:1,eq:2,eq:3,eq:3b}
+                                                }
+> \box...=
+\hbox(7.5+2.49998)x144.79999
+.\TU/lmr/m/n/10 equations
+.\kern 0.0
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 (
+.\kern 0.0
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ),
+.\kern 0.0
+.\glue 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 (
+.\kern 0.0
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 foo
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ),
+.\kern 0.0
+.\glue 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 (
+.\kern 0.0
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 2
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 )
+.\kern 0.0
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\kern 0.0
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 (
+.\kern 0.0
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 2b
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 )
+.\kern 0.0
+! OK.
+l. ...\showbox0
+============================================================
