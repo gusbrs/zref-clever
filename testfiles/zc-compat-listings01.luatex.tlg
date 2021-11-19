@@ -30,9 +30,48 @@ l. ......p_show:N \l__zrefclever_counter_resetby_prop
 \lst@filenamerpl \global \let \lst@name \lst@arg \global \let \lstname
 \lst@name \ifx \lst@firstnumber \@undefined \def \lst@firstnumber {\lst@lineno
 }\fi \linewidth \lst@linewidth \relax \tl_if_empty:NF \lst@label {\zlabel
-{\lst@label }}\__zrefclever_zcsetup:n {currentcounter=lstnumber}.
+{\lst@label }}.
 <recently read> }
 l. ...\cs_show:c { \@lst hk@ PreInit }
+> \lsthk@Init=macro:->\lst@ifshowspaces \let \lst@outputspace
+\lst@visiblespace \lst@keepspacestrue \fi \edef \ttdefault {\ttdefault }\let
+\lsts@nfss@catcodes \nfss@catcodes \let \nfss@catcodes \lst@nfss@catcodes
+\edef \lst@OrgOutput {\the \output }\ifcase \lst@useoutput \relax \or \output
+{\global \setbox \lst@gtempboxa \box \@cclv \expandafter \egroup
+\lst@SaveToken \lst@InterruptModes \setbox \@cclv \box \lst@gtempboxa \bgroup
+\lst@OrgOutput \egroup \bgroup \aftergroup \pagegoal \aftergroup \vsize
+\aftergroup \lst@ReenterModes \aftergroup \lst@RestoreToken }\else \output
+{\lst@RestoreOrigCatcodes \lst@ifec \lst@RestoreOrigExtendedCatcodes \fi
+\lst@OrgOutput }\fi \let \lst@bnext \relax \let \lst@enext \relax
+\lst@basicstyle \ifx \lst@inputenc \@empty \else \@ifundefined
+{inputencoding}{}{\inputencoding \lst@inputenc }\fi \ifx \lst@linerange
+\@empty \edef \lst@linerange {{\lst@firstline }-{\lst@lastline },}\fi
+\lst@GetLineInterval \lst@ifsensitive \else \let \lst@KeywordTest
+\lst@KEYWORDTEST \let \lst@WorkingTest \lst@WORKINGTEST \let \lst@IfOneOutOf
+\lst@IFONEOUTOF \fi \lsthk@TrackKeywords \lsthk@PostTrackKeywords \let
+\lst@ifkeywords \iftrue \global \let \lst@prefixkeyword \relax \def
+\@currentlabel {\thelstnumber }\ifnum \z@ >\lst@stepnumber \let
+\lst@advancelstnum \m@ne \edef \lst@stepnumber {-\lst@stepnumber }\fi \ifnum
+\z@ <\lst@stepnumber \global \lst@skipnumbers \lst@firstnumber \global \divide
+\lst@skipnumbers \lst@stepnumber \global \multiply \lst@skipnumbers
+-\lst@stepnumber \global \advance \lst@skipnumbers \lst@firstnumber \ifnum
+\lst@skipnumbers >\z@ \global \advance \lst@skipnumbers -\lst@stepnumber \fi
+\else \let \lst@SkipOrPrintLabel \relax \fi \lst@ifresetmargins \advance
+\linewidth \@totalleftmargin \advance \linewidth \rightmargin
+\@totalleftmargin \z@ \fi \advance \linewidth -\lst@xleftmargin \advance
+\linewidth -\lst@xrightmargin \advance \@totalleftmargin \lst@xleftmargin
+\relax \parskip \z@ \ifdim \z@ =\lst@lineskip \else \@tempdima \baselineskip
+\advance \@tempdima \lst@lineskip \multiply \@tempdima \@cclvi \divide
+\@tempdima \baselineskip \relax \multiply \@tempdima \@cclvi \edef
+\baselinestretch {\strip@pt \@tempdima }\selectfont \fi \lst@ifbreaklines
+\hbadness \@M \pretolerance \@M \@rightskip \@flushglue \rightskip \@rightskip
+\leftskip \z@skip \parindent \z@ \def \lst@parshape {\parshape \tw@
+\@totalleftmargin \linewidth \lst@breakshape }\else \let \lst@discretionary
+\@empty \fi \ifx \lst@fillcolor \@empty \let \lst@fillcolor \lst@bkgcolor \fi
+\ifx \lst@rulesepcolor \@empty \let \lst@rulesepcolor \lst@fillcolor \fi
+\lst@frameInit \__zrefclever_zcsetup:n {currentcounter=lstnumber}.
+<recently read> }
+l. ...\cs_show:c { \@lst hk@ Init }
 ============================================================
 ============================================================
 TEST 2: Reference: lstlisting

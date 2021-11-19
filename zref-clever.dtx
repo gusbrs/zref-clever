@@ -7467,29 +7467,33 @@
               } ,
             counterresetby = { lstnumber = lstlisting } ,
           }
-        \lst@AddToHook { PreInit }
-          {
 %    \end{macrocode}
 % Set (also) a \cs{zlabel} with the label received in the \texttt{label=}
-% option from the \texttt{lstlisting} environment.
+% option from the \texttt{lstlisting} environment.  The \emph{only} place to
+% set this label is the \texttt{PreInit} hook.  This hook, comes right after
+% \cs{lst@MakeCaption} in \cs{lst@Init}, which runs \cs{refstepcounter} on
+% \texttt{lstlisting}, so we must come after it.  Also \pkg{listings} itself
+% sets \cs{@currentlabel} to \cs{thelstnumber} in the \texttt{Init} hook,
+% which comes right after the \texttt{PreInit} one in \cs{lst@Init}.  Since,
+% if we add to \texttt{Init} here, we go to the end of it, we'd be seeing the
+% wrong \cs{@currentlabel} at that point.
 %    \begin{macrocode}
-            \tl_if_empty:NF \lst@label
-              { \zlabel { \lst@label } }
+        \lst@AddToHook { PreInit }
+          { \tl_if_empty:NF \lst@label { \zlabel { \lst@label } } }
 %    \end{macrocode}
-% The correct place to set \texttt{currentcounter} to \texttt{lstnumber} is
-% indeed the \texttt{Init} hook, since \pkg{listings} itself sets
-% \cs{@currentlabel} to \cs{thelstnumber} in the same hook.  See section
-% ``Line numbers'' of `\texttt{texdoc listings-devel}' (the \file{.dtx}), and
-% search for the definition of macro \cs{c@lstnumber}.  Note that
-% \pkg{listings} \emph{does use} \cs{refstepcounter}\texttt{\{lstnumber\}},
-% but does so in the \texttt{EveryPar} hook, and there must be some grouping
-% involved such that \cs{@currentcounter} ends up not being visible to the
-% label.  Indeed, the fact that \pkg{listings} manually sets
+% Set \texttt{currentcounter} to \texttt{lstnumber} in the \texttt{Init} hook,
+% since \pkg{listings} itself sets \cs{@currentlabel} to \cs{thelstnumber}
+% here.  Note that \pkg{listings} \emph{does use} \cs{refstepcounter} on
+% \texttt{lstnumber}, but does so in the \texttt{EveryPar} hook, and there
+% must be some grouping involved such that \cs{@currentcounter} ends up not
+% being visible to the label.  See section ``Line numbers'' of `\texttt{texdoc
+% listings-devel}' (the \file{.dtx}), and search for the definition of macro
+% \cs{c@lstnumber}.  Indeed, the fact that \pkg{listings} manually sets
 % \cs{@currentlabel} to \cs{thelstnumber} is a signal that the work of
 % \cs{refstepcounter} is being restrained somehow.
 %    \begin{macrocode}
-            \@@_zcsetup:n { currentcounter = lstnumber }
-          }
+        \lst@AddToHook { Init }
+          { \@@_zcsetup:n { currentcounter = lstnumber } }
         \msg_info:nnn { zref-clever } { compat-package } { listings }
       }
   }
