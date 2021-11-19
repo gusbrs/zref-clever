@@ -48,7 +48,6 @@
 
 \usepackage[osf]{mathpazo}
 \usepackage{listings}
-\usepackage{newfloat}
 
 \NewDocumentCommand\opt{m}{\texttt{#1}}
 
@@ -77,6 +76,13 @@
     newlist,
     setlist,
     zexternaldocument,
+    next@label,
+    next@label@pre,
+    @empty,
+    tag,
+    text,
+    lstset,
+    condition,
   }
 }
 \lstdefinestyle{zrefclever}{
@@ -97,32 +103,40 @@
   xleftmargin=\leftmargin,
   xrightmargin=.5\leftmargin,
 }
-% See https://tex.stackexchange.com/a/31026 for how to use these environments
-% in a .dtx context.
+% Setup inspired by https://tex.stackexchange.com/a/4068. For how to use these
+% environments in a .dtx context see https://tex.stackexchange.com/a/31026.
+\newcounter{zchowto}
+\lstnewenvironment{zchowto}[1][]{%
+  \renewcommand{\lstlistingname}{How to}%
+  \lstset{#1}%
+  \zcsetup{currentcounter=zchowto}%
+  \setcounter{lstlisting}{\value{zchowto}}%
+}{}
+\newcounter{zcworkaround}
+\lstnewenvironment{zcworkaround}[1][]{%
+  \renewcommand{\lstlistingname}{Work around}%
+  \lstset{#1}%
+  \zcsetup{currentcounter=zcworkaround}%
+  \setcounter{lstlisting}{\value{zcworkaround}}%
+}{}
 \lstnewenvironment{zcexample}[1][]{%
   \renewcommand{\lstlistingname}{Example}%
   \lstset{#1}%
 }{}
+\ExplSyntaxOn
 \makeatletter
-\NewDocumentCommand{\zchowto}{}{%
-  \setlength\abovecaptionskip{6pt}%
-  \def\@captype{zchowtofloat}}
-\NewDocumentCommand{\endzchowto}{}{\medskip{}}
-\NewDocumentCommand{\zcworkaround}{}{%
-  \setlength\abovecaptionskip{6pt}%
-  \def\@captype{zcworkaroundfloat}}
-\NewDocumentCommand{\endzcworkaround}{}{\medskip{}}
+\lst@AddToHook { PreInit }
+  { \exp_args:Nx \refstepcounter { \l__zrefclever_current_counter_tl } }
 \makeatother
+\ExplSyntaxOff
 
-\DeclareFloatingEnvironment[name={How to}]{zchowtofloat}
-\DeclareFloatingEnvironment[name={Work around}]{zcworkaroundfloat}
-\zcRefTypeSetup{zchowtofloat}{
+\zcRefTypeSetup{zchowto}{
   Name-sg = {How to},
   name-sg = {how to},
   Name-pl = {How tos},
   name-pl = {how tos},
 }
-\zcRefTypeSetup{zcworkaroundfloat}{
+\zcRefTypeSetup{zcworkaround}{
   Name-sg = {Work around},
   name-sg = {work around},
   Name-pl = {Work arounds},
@@ -1307,9 +1321,7 @@ In this case, since \pkg{zref-clever} provides a built-in \texttt{lemma} type
 as the counter, there is no need for setup, and things just work
 out-of-the-box.  So, you can go ahead with:
 
-\begin{zchowto}
-\caption{\cs{newtheorem}, simple case}
-\begin{lstlisting}
+\begin{zchowto}[caption={\cs{newtheorem}, simple case}]
 \documentclass{article}
 \usepackage{zref-clever}
 \newtheorem{lemma}{Lemma}[section]
@@ -1320,7 +1332,6 @@ out-of-the-box.  So, you can go ahead with:
 \end{lemma}
 \zcref{lemma-1}
 \end{document}
-\end{lstlisting}
 \end{zchowto}
 
 If, however, you had chosen an environment name which did not happen to
@@ -1328,9 +1339,7 @@ coincide with the built-in reference type, all you'd need to do is instruct
 \pkg{zref-clever} to associate the counter for your environment to the desired
 type with the \opt{countertype} option:
 
-\begin{zchowto}
-\caption{\cs{newtheorem}, simple case}
-\begin{lstlisting}
+\begin{zchowto}[caption={\cs{newtheorem}, simple case}]
 \documentclass{article}
 \usepackage{zref-clever}
 \zcsetup{countertype={lem=lemma}}
@@ -1342,7 +1351,6 @@ type with the \opt{countertype} option:
 \end{lem}
 \zcref{lemma-1}
 \end{document}
-\end{lstlisting}
 \end{zchowto}
 
 
@@ -1361,9 +1369,7 @@ the purpose.  Even better, we can leverage the kernel's new hook management
 system and just set it for all occurrences with
 \cs{AddToHook}\texttt{\{env/\meta{myenv}/begin\}}.
 
-\begin{zchowto}
-\caption{\cs{newtheorem}, shared counter}
-\begin{lstlisting}
+\begin{zchowto}[caption={\cs{newtheorem}, shared counter}]
 \documentclass{article}
 \usepackage{zref-clever}
 \AddToHook{env/mytheorem/begin}{%
@@ -1380,9 +1386,8 @@ system and just set it for all occurrences with
 \begin{myproposition}\zlabel{proposition-1}
   A proposition.
 \end{myproposition}
-\zcref{theorem-1,proposition-1}
+\zcref{theorem-1, proposition-1}
 \end{document}
-\end{lstlisting}
 \end{zchowto}
 
 
@@ -1402,9 +1407,7 @@ custom type are the ``type names'' and other reference format options can rely
 on default translations already provided by the package (assuming the language
 is supported).
 
-\begin{zchowto}
-\caption{\cs{newtheorem}, custom type}
-\begin{lstlisting}
+\begin{zchowto}[caption={\cs{newtheorem}, custom type}]
 \documentclass{article}
 \usepackage{zref-clever}
 \newtheorem{myconjecture}{Conjecture}[section]
@@ -1421,7 +1424,6 @@ is supported).
 \end{myconjecture}
 \zcref{conjecture-1}
 \end{document}
-\end{lstlisting}
 \end{zchowto}
 
 
@@ -1439,9 +1441,7 @@ package in the setup, the same procedure can be used with \cls{memoir}'s
 \cs{newfloat} command or with the \pkg{float}, \pkg{floatrow}, and
 \pkg{trivfloat} packages.
 
-\begin{zchowto}
-\caption{\pkg{newfloat}}
-\begin{lstlisting}
+\begin{zchowto}[caption={\pkg{newfloat}}]
 \documentclass{article}
 \usepackage{newfloat}
 \DeclareFloatingEnvironment{diagram}
@@ -1461,7 +1461,6 @@ package in the setup, the same procedure can be used with \cls{memoir}'s
 \end{diagram}
 \zcref{diagram-1}
 \end{document}
-\end{lstlisting}
 \end{zchowto}
 
 
@@ -1480,10 +1479,7 @@ can refer to the equations with both referencing systems.  Note the use of
 description of the \opt{amsmath} compatibility module at
 \zcref{sec:comp-modules}.
 
-\begin{zchowto}
-\caption{\pkg{amsmath}}
-\zlabel{how:amsmath}
-\begin{lstlisting}
+\begin{zchowto}[caption={\pkg{amsmath}},label={how:amsmath}]
 \documentclass{article}
 \usepackage{amsmath}
 \usepackage{zref-clever}
@@ -1505,9 +1501,8 @@ description of the \opt{amsmath} compatibility module at
     E&=F
   \end{align}
 \end{subequations}
-\zcref{eq:1,eq:2,eq:3,eq:3b}
+\zcref{eq:1, eq:2, eq:3, eq:3b}
 \end{document}
-\end{lstlisting}
 \end{zchowto}
 
 
@@ -1526,10 +1521,7 @@ can refer to the equations with both referencing systems.  Note the use of
 description of the \opt{amsmath} compatibility module at
 \zcref{sec:comp-modules}.
 
-\begin{zchowto}
-\caption{\pkg{listings}}
-\zlabel{how:listings}
-\begin{lstlisting}[escapeinside=`']
+\begin{zchowto}[caption={\pkg{listings}},label={how:listings},escapeinside=`']
 \documentclass{article}
 \usepackage{listings}
 \usepackage{zref-clever}
@@ -1537,15 +1529,14 @@ description of the \opt{amsmath} compatibility module at
 \begin{document}
 \section{Section 1}
 \lstset{escapeinside={(*@}{@*)}, numbers=left, numberstyle=\tiny}
-`\textbackslash{}'begin{lstlisting}[caption={Useless code}, label=lst:1]
+\begin{lstlisting}[caption={Useless code}, label=lst:1]
   for i:=maxint to 0 do
   begin
       { do nothing }(*@\zlabel{ln:1.1}@*)
   end;
-`\textbackslash{}'end{lstlisting}
-\zcref{lst:1,ln:1.1}
-\end{document}
 \end{lstlisting}
+\zcref{lst:1, ln:1.1}
+\end{document}
 \end{zchowto}
 
 
@@ -1562,9 +1553,7 @@ environment's name and the level's number, we cannot really rely on an
 implicit counter-type association, and have to set it explicitly with the
 \opt{countertype} option.
 
-\begin{zchowto}
-\caption{\pkg{enumitem}}
-\begin{lstlisting}
+\begin{zchowto}[caption={\pkg{enumitem}}]
 \documentclass{article}
 \usepackage{zref-clever}
 \zcsetup{
@@ -1599,9 +1588,8 @@ implicit counter-type association, and have to set it explicitly with the
     \end{myenumerate}
   \end{myenumerate}
 \end{myenumerate}
-\zcref{item-1,item-2,item-3,item-4}
+\zcref{item-1, item-2, item-3, item-4}
 \end{document}
-\end{lstlisting}
 \end{zchowto}
 
 
@@ -1630,10 +1618,8 @@ to the labels from ``\texttt{B}'', and not the contrary, a minimum setup would
 be the following.
 
 
-\begin{zchowto}
-\caption{\pkg{zref-xr}}
-\file{documentA.tex}:
-\begin{lstlisting}
+\begin{zchowto}[caption={\pkg{zref-xr}},escapeinside=`']
+`\hspace*{-1em}\file{documentA.tex}:\vspace{1ex}'
 \documentclass{article}
 \usepackage{zref-clever}
 \usepackage{zref-xr}
@@ -1642,12 +1628,10 @@ be the following.
 \begin{document}
 \section{Section A1}
 \zlabel{sec:section-a1}
-\zcref{sec:section-a1,B-sec:section-b1}
+\zcref{sec:section-a1, B-sec:section-b1}
 \end{document}
-\end{lstlisting}
-
-\file{documentB.tex}:
-\begin{lstlisting}
+`\vspace{-1ex}'
+`\hspace*{-1em}\file{documentB.tex}:\vspace{1ex}'
 \documentclass{article}
 \usepackage{zref-clever}
 \usepackage{hyperref}
@@ -1655,7 +1639,6 @@ be the following.
 \section{Section B1}
 \zlabel{sec:section-b1}
 \end{document}
-\end{lstlisting}
 \end{zchowto}
 
 
@@ -1875,7 +1858,8 @@ variable -- and sets a \cs{zlabel} as well.  This is done by using
 \pkg{listings}' \texttt{PreInit} hook, se we don't have to redefine or tamper
 with anything for the purpose.  Besides this, the module also sets appropriate
 \opt{countertype}, \opt{counterresetby} and \opt{currentcounter} values for
-the \pkg{listings}' counters: \texttt{lstlisting} and \texttt{lstnumber}.
+the \pkg{listings}' counters: \texttt{lstlisting} and \texttt{lstnumber}. See
+the \zcref{how:listings} for a use example.
 
 \DescribeOption{enumitem} %
 \LaTeX{}'s \env{enumerate} environment requires some special treatment from
@@ -1927,10 +1911,7 @@ also provides to that.\footnote{The later work around thanks to Heiko
   Oberdiek, at \url{https://tex.stackexchange.com/a/241150}.}
 
 
-\begin{zcworkaround}
-\caption{\pkg{breqn}}
-\zlabel{wkrnd:breqn}
-\begin{lstlisting}
+\begin{zcworkaround}[caption={\pkg{breqn}},label={wkrnd:breqn}]
 \documentclass{article}
 \usepackage{zref-clever}
 \usepackage{breqn}
@@ -1955,9 +1936,8 @@ also provides to that.\footnote{The later work around thanks to Heiko
 \begin{dmath}[labelprefix={eq:},label={2}]
   H_2^2 = x_1^2 + x_1 x_2 + x_2^2 - q_1 - q_2
 \end{dmath}
-\zcref{eq:1,eq:2}
+\zcref{eq:1, eq:2}
 \end{document}
-\end{lstlisting}
 \end{zcworkaround}
 
 Of course, you can always adapt things to your needs and, e.g., make the
