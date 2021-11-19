@@ -10,6 +10,78 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  ZC_PACKAGE_LIST: |
+    # The test framework
+    l3build
+    # Build formats
+    latex
+    latex-bin
+    latex-bin-dev
+    luatex
+    luatexbase
+    xetex
+    # Fonts
+    metafont
+    mfware
+    ec
+    amsfonts
+    mathpazo
+    psnfss
+    # Dependencies
+    alphalph
+    amsmath
+    appendix
+    babel-english
+    babel-french
+    babel-german
+    babel-latin
+    babel-portuges
+    babel-spanish
+    bookmark
+    booktabs
+    breqn
+    caption
+    carlisle
+    colortbl
+    csquotes
+    dvips
+    enumitem
+    epstopdf-pkg
+    etexcmds
+    fancyvrb
+    float
+    floatrow
+    graphics
+    hologo
+    hypdoc
+    hyperref
+    hyphen-french
+    hyphen-german
+    hyphen-latin
+    iftex
+    infwarerr
+    intcalc
+    koma-script
+    kvdefinekeys
+    kvoptions
+    kvsetkeys
+    listings
+    ltxcmds
+    makeindex
+    mathtools
+    memoir
+    mptopdf
+    newfloat
+    oberdiek
+    pdftexcmds
+    polyglossia
+    tools
+    trivfloat
+    underscore
+    zref
+    zref-check
+
 jobs:
   check:
     name: Regression tests
@@ -31,8 +103,7 @@ jobs:
       - name: Install TeX Live
         uses: zauguin/install-texlive@v1
         with:
-          # List the required TeX Live packages in a separate file
-          package_file: .github/tl_packages
+          packages: ${{ env.ZC_PACKAGE_LIST }}
       - name: Run tests
         run: l3build check -q -H --show-log-on-error
 
@@ -56,7 +127,6 @@ jobs:
       - name: Install TeX Live
         uses: zauguin/install-texlive@v1
         with:
-          # List the required TeX Live packages in a separate file
-          package_file: .github/tl_packages
+          packages: ${{ env.ZC_PACKAGE_LIST }}
       - name: Compile documentation
         run: l3build doc -q -H
