@@ -1,0 +1,131 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\usepackage{subcaption}
+
+\usepackage{hyperref}
+
+\ExplSyntaxOn \bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\begin{document}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+\begin{figure}
+  \centering
+  \subcaptionbox[.4\linewidht]{A cat\zlabel{cat}}
+  {\rule{4cm}{2cm}}
+  \subcaptionbox[.4\linewidht]{An elephant\zlabel{elephant}}
+  {\rule{4cm}{2cm}}
+  \caption{Two animals}\zlabel{animals}
+\end{figure}
+
+\begin{figure}
+  \begin{subfigure}[b]{.5\linewidth}
+    \centering\large A
+    \caption{A subfigure}\zlabel{fig:1a}
+  \end{subfigure}%
+  \begin{subfigure}[b]{.5\linewidth}
+    \centering\large B
+    \caption{Another subfigure}\zlabel{fig:1b}
+  \end{subfigure}
+  \caption{A figure}\zlabel{fig:1}
+\end{figure}
+
+\begin{table}
+  \begin{subtable}[b]{.5\linewidth}
+    \centering\large A
+    \caption{A subtable}\zlabel{tab:1a}
+  \end{subtable}%
+  \begin{subtable}[b]{.5\linewidth}
+    \centering\large B
+    \caption{Another subtable}\zlabel{tab:1b}
+  \end{subtable}
+  \caption{A table}\zlabel{tab:1}
+\end{table}
+
+\begin{figure}
+  \begin{minipage}[b]{.5\linewidth}
+    \centering\large A
+    \subcaption{A subfigure}\zlabel{fig:2a}
+  \end{minipage}%
+  \begin{minipage}[b]{.5\linewidth}
+    \centering\large B
+    \subcaption{Another subfigure}\zlabel{fig:2b}
+  \end{minipage}
+  \caption{A figure}\zlabel{fig:2}
+\end{figure}
+
+\clearpage{}
+
+\START
+
+\BEGINTEST{subcaption module}
+\ExplSyntaxOn
+\makeatletter
+\prop_show:N \l__zrefclever_counter_type_prop
+\prop_show:N \l__zrefclever_counter_resetby_prop
+\zref@ifpropundefined { subref }
+  { \typeout { subref~property~not~defined } }
+  { \typeout { subref~property~is~defined } }
+\cs_show:c { caption@subtypehook }
+\makeatother
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{Reference: subcaptionbox}
+\setbox0=\hbox{\zcref{cat,elephant,animals}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Reference: subfigure}
+\setbox0=\hbox{\zcref{fig:1a,fig:1b,fig:1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Reference: subtable}
+\setbox0=\hbox{\zcref{tab:1a,tab:1b,tab:1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Reference: subcaption}
+\setbox0=\hbox{\zcref{fig:2a,fig:2b,fig:2}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Reference: subcaptionbox subref}
+\setbox0=\hbox{\zcref[ref=subref]{cat,elephant,animals}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Reference: subfigure subref}
+\setbox0=\hbox{\zcref[ref=subref]{fig:1a,fig:1b,fig:1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Reference: subtable subref}
+\setbox0=\hbox{\zcref[ref=subref]{tab:1a,tab:1b,tab:1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Reference: subcaption subref}
+\setbox0=\hbox{\zcref[ref=subref]{fig:2a,fig:2b,fig:2}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}

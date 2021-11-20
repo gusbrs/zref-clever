@@ -1876,6 +1876,15 @@ are needed, we just check the existing pertinent counters at
 that only \pkg{enumitem}'s settings done in the preamble will be visible to
 the module and provided for.
 
+\DescribeOption{subcaption} %
+This compatibility module sets appropriate \opt{countertype} and
+\opt{counterresetby} for the \texttt{subfigure} and \texttt{subtable}
+counters, and provides the \pkg{zref} property ``\texttt{subref}'' so that we
+can refer to, for example, \texttt{\cs{zcref}[ref=subref]\{label-X\}} to
+emulate the functionality of \cls{subcaption}'s \cs{subref}.  The later
+feature uses the \cs{caption@subtypehook} provided by \pkg{caption} to locally
+add the \texttt{subref} property to \pkg{zref}'s main property list.
+
 
 \section{Work arounds}
 

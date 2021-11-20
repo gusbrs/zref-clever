@@ -5634,6 +5634,40 @@
 %    \end{macrocode}
 %
 %
+%
+% \subsection{\opt{subcaption}}
+%
+%
+%    \begin{macrocode}
+\@@_compat_module:nn { subcaption }
+  {
+    \@@_if_package_loaded:nT { subcaption }
+      {
+        \@@_zcsetup:n
+          {
+            countertype =
+              {
+                subfigure = figure ,
+                subtable = table ,
+              } ,
+            counterresetby =
+              {
+                subfigure = figure ,
+                subtable = table ,
+              } ,
+          }
+%    \end{macrocode}
+% Support for \texttt{subref} reference.
+%    \begin{macrocode}
+        \zref@newprop { subref }
+          { \cs_if_exist_use:c { thesub \@captype } }
+        \tl_put_right:Nn \caption@subtypehook
+          { \zref@localaddprop \ZREF@mainlist { subref } }
+      }
+  }
+%    \end{macrocode}
+%
+%
 %    \begin{macrocode}
 %</package>
 %    \end{macrocode}
