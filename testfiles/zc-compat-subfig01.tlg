@@ -1,0 +1,75 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: subfig module
+============================================================
+The property list \l__zrefclever_counter_type_prop contains the pairs (without
+outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}
+>  {subfigure}  =>  {figure}
+>  {subtable}  =>  {table}.
+<recently read> }
+l. ...\prop_show:N \l__zrefclever_counter_type_prop
+The property list \l__zrefclever_counter_resetby_prop contains the pairs
+(without outer braces):
+>  {enumii}  =>  {enumi}
+>  {enumiii}  =>  {enumii}
+>  {enumiv}  =>  {enumiii}
+>  {subfigure}  =>  {figure}
+>  {subtable}  =>  {table}.
+<recently read> }
+l. ......show:N \l__zrefclever_counter_resetby_prop
+============================================================
+============================================================
+TEST 2: Reference: subfloat
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{figure.caption.1}{\group_begin:
+1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{subfigure.1.1}{\group_begin: 1a\group_end: } to\nobreakspace \hyper@@link
+{\c_empty_tl }{subfigure.1.3}{\group_begin: 1c\group_end: }.
+<recently read> }
+l. ......x{\zcref{3figs, 3figs-a, 3figs-b, 3figs-c}
+                                                  }
+> \box...=
+\hbox(6.94444+1.94444)x94.52794
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.caption.1}
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subfigure.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 a
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 o
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subfigure.1.3}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 c
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================

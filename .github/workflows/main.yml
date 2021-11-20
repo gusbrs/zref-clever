@@ -76,6 +76,7 @@ env:
     oberdiek
     pdftexcmds
     polyglossia
+    subfig
     tools
     trivfloat
     underscore

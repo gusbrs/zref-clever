@@ -1,0 +1,47 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\usepackage{subfig}
+
+\usepackage{hyperref}
+
+\ExplSyntaxOn \bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\begin{document}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+\begin{figure}
+  \centering
+  \subfloat[First.]{Foo bar\zlabel{3figs-a}}\qquad
+  \subfloat[Second.]{Foo bar baz\zlabel{3figs-b}}\\
+  \subfloat[Third.]{\zlabel{3figs-c}Foo barrr}
+  \caption{Three sub-floats.}
+  \zlabel{3figs}
+\end{figure}
+
+\clearpage{}
+
+\START
+
+\BEGINTEST{subfig module}
+\ExplSyntaxOn
+\prop_show:N \l__zrefclever_counter_type_prop
+\prop_show:N \l__zrefclever_counter_resetby_prop
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{Reference: subfloat}
+\setbox0=\hbox{\zcref{3figs, 3figs-a, 3figs-b, 3figs-c}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}

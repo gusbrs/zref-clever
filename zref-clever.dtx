@@ -5668,6 +5668,35 @@
 %    \end{macrocode}
 %
 %
+% \subsection{\opt{subfig}}
+%
+% Though \pkg{subfig} offers \cs{subref} (as \pkg{subcaption}), I could not
+% find any reasonable place to add the \texttt{subref} property to
+% \pkg{zref}'s main list.
+%
+%    \begin{macrocode}
+\@@_compat_module:nn { subfig }
+  {
+    \@@_if_package_loaded:nT { subfig }
+      {
+        \@@_zcsetup:n
+          {
+            countertype =
+              {
+                subfigure = figure ,
+                subtable = table ,
+              } ,
+            counterresetby =
+              {
+                subfigure = figure ,
+                subtable = table ,
+              } ,
+          }
+      }
+  }
+%    \end{macrocode}
+%
+%
 %    \begin{macrocode}
 %</package>
 %    \end{macrocode}
