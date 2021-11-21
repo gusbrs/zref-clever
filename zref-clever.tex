@@ -109,14 +109,12 @@
 \lstnewenvironment{zchowto}[1][]{%
   \renewcommand{\lstlistingname}{How to}%
   \lstset{#1}%
-  \zcsetup{currentcounter=zchowto}%
   \setcounter{lstlisting}{\value{zchowto}}%
 }{}
 \newcounter{zcworkaround}
 \lstnewenvironment{zcworkaround}[1][]{%
   \renewcommand{\lstlistingname}{Work around}%
   \lstset{#1}%
-  \zcsetup{currentcounter=zcworkaround}%
   \setcounter{lstlisting}{\value{zcworkaround}}%
 }{}
 \lstnewenvironment{zcexample}[1][]{%
@@ -126,7 +124,10 @@
 \ExplSyntaxOn
 \makeatletter
 \lst@AddToHook { PreInit }
-  { \exp_args:Nx \refstepcounter { \l__zrefclever_current_counter_tl } }
+  {
+    \cs_if_exist:cT { c@ \lstenv@name }
+      { \exp_args:Nx \refstepcounter { \lstenv@name } }
+  }
 \makeatother
 \ExplSyntaxOff
 
