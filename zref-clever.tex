@@ -89,10 +89,12 @@
   style=code,
   moretexcs={
     zcref,
+    zcpageref,
     zlabel,
     zcsetup,
     zcLanguageSetup,
     zcRefTypeSetup,
+    zcheck,
   }
 }
 \lstset{
@@ -1303,6 +1305,55 @@ This section gathers some usage examples, or ``how tos'', of cases which may
 require some \pkg{zref-clever} setup, or usage adjustments, and each item is
 set around a cross-reference ``task'' we'd like to perform with
 \pkg{zref-clever}.
+
+
+\subsection{Context sensitive references}
+
+\zctask{Make cross-references which are sensitive to the relative position
+  between the reference and the label being referred to, à la \pkg{varioref}.}
+
+\pkg{varioref}'s \cs{vref} provides for varied references for three different
+basic cases: when the reference and the label are on the same page, it
+typesets a plain reference; when the reference and the label are in contiguous
+pages (next, previous, or facing), it typesets the reference and a fixed
+string corresponding to the relative position; when the reference and the
+label are in different non-contiguous pages, it typesets a regular reference
+and a page reference.  The same end result, but with a different user
+interface concept can be achieved through \pkg{zref-clever}'s integration with
+\pkg{zref-check}.  For this, the later must be loaded, which can be most
+conveniently done with the \opt{check} option in the preamble.  With that in
+place, the different cases could be covered by the following examples:
+
+\begin{zcexample}
+\zcref[check=thispage]{fig:1}
+\zcref[check=nextpage,note={on the following page}]{fig:1}
+\zcref[check=prevpage,note={on the preceding page}]{fig:1}
+\zcref[check=facing,note={on the facing page}]{fig:1}
+\zcref[check=pagegap]{fig:1} on \zcpageref{fig:1}
+\end{zcexample}
+
+And, similarly for the cases of \cs{vpageref} (relying directly on \cs{zcheck}
+here):
+
+\begin{zcexample}
+\zcheck[thispage]{fig:1}{on this page}
+\zcheck[nextpage]{fig:1}{on the following page}
+\zcheck[prevpage]{fig:1}{on the preceding page}
+\zcheck[facing]{fig:1}{on the facing page}
+on \zcpageref[check=pagegap]{fig:1}
+\end{zcexample}
+
+Since both \cs{zcref} and \cs{zcheck} can receive multiple labels, it is not
+difficult to extend these examples to the functionality of \cs{vrefrange} and
+\cs{vpagerefrange}.  And beyond.
+
+Evidently, this does not automate the typeset results, but does automate the
+checking that the reference context is the intended one.  If the relation
+between the reference and the label does not correspond to the specified one,
+a compilation warning is issued (according to the options given to
+\pkg{zref-check}), so that the problem can be easily identified and corrected.
+See \pkg{zref-check}'s documentation for details, and further available
+checks.
 
 
 \subsection{\cs{newtheorem}}
