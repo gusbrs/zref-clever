@@ -1816,10 +1816,14 @@ environments are subject to this usage restriction: \env{equation},
 same is not the case for the \env{subequations} environment, inside which
 \cs{zlabel} works as usual (to refer to the main equation number, that is,
 right after \texttt{\cs{begin}\{subequations\}}).  See the \zcref{how:amsmath}
-for a use example.  This module also ensures proper \opt{currentcounter}
-values are in place for the display math environments, for which it uses
-environment hooks, and sets the font of equation references to \cs{upshape},
-following \pkg{amsmath}'s \cs{eqref}.
+for a use example.  The module also ensures proper \opt{currentcounter} values
+are in place for the display math environments, for which it uses environment
+hooks, and sets the font of equation references to \cs{upshape}, following
+\pkg{amsmath}'s \cs{eqref}.  Note that this module is incompatible with
+\pkg{cleveref}.  Though I don't really see a use case for having both
+\pkg{cleveref} and \pkg{zref-clever} together, if you must, you should load
+\pkg{zref-clever} with option \texttt{nocompat=amsmath} and use \pkg{cleveref}
+facilities to refer to \pkg{amsmath}'s equations.
 
 \DescribeOption{mathtools} %
 \pkg{mathtools} has a feature to show the numbers only for those equations
