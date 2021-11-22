@@ -965,18 +965,18 @@ documented here so that you can recognize when you are getting these values
 and change them appropriately as desired.  Though hopefully reasonable, they
 may not be what you want.  The ``fallback'' option values are the following:
 
-\begin{zcexample}
-  tpairsep  = {, } ,
-  tlistsep  = {, } ,
-  tlastsep  = {, } ,
-  notesep   = { } ,
-  namesep   = {\nobreakspace} ,
-  pairsep   = {, } ,
-  listsep   = {, } ,
-  lastsep   = {, } ,
-  rangesep  = {\textendash} ,
-  refpre    = {} ,
-  refpos    = {} ,
+\begin{zcexample}[escapeinside=`']
+tpairsep  = {,`\textvisiblespace{}'} ,
+tlistsep  = {,`\textvisiblespace{}'} ,
+tlastsep  = {,`\textvisiblespace{}'} ,
+notesep   = {`\textvisiblespace{}'} ,
+namesep   = {\nobreakspace} ,
+pairsep   = {,`\textvisiblespace{}'} ,
+listsep   = {,`\textvisiblespace{}'} ,
+lastsep   = {,`\textvisiblespace{}'} ,
+rangesep  = {\textendash} ,
+refpre    = {} ,
+refpos    = {} ,
 \end{zcexample}
 
 
@@ -1157,30 +1157,30 @@ to adjust some of the default language-specific options, this can be done with
 A couple of examples to illustrate the syntax of \cs{zcLanguageSetup}:
 
 \begin{zcexample}
-  \zcLanguageSetup{french}{
-    type = section ,
-      gender = f ,
-      Name-sg = Section ,
-      name-sg = section ,
-      Name-pl = Sections ,
-      name-pl = sections ,
-  }
-  \zcLanguageSetup{german}{
-    type = section ,
-      gender = m ,
-      case = N ,
-        Name-sg = Abschnitt ,
-        Name-pl = Abschnitte ,
-      case = A ,
-        Name-sg = Abschnitt ,
-        Name-pl = Abschnitte ,
-      case = D ,
-        Name-sg = Abschnitt ,
-        Name-pl = Abschnitten ,
-      case = G ,
-        Name-sg = Abschnitts ,
-        Name-pl = Abschnitte ,
-  }
+\zcLanguageSetup{french}{
+  type = section ,
+    gender = f ,
+    Name-sg = Section ,
+    name-sg = section ,
+    Name-pl = Sections ,
+    name-pl = sections ,
+}
+\zcLanguageSetup{german}{
+  type = section ,
+    gender = m ,
+    case = N ,
+      Name-sg = Abschnitt ,
+      Name-pl = Abschnitte ,
+    case = A ,
+      Name-sg = Abschnitt ,
+      Name-pl = Abschnitte ,
+    case = D ,
+      Name-sg = Abschnitt ,
+      Name-pl = Abschnitten ,
+    case = G ,
+      Name-sg = Abschnitts ,
+      Name-pl = Abschnitte ,
+}
 \end{zcexample}
 
 \bigskip{}
@@ -1332,13 +1332,13 @@ things working conveniently.
 Suppose you set a ``Lemma'' environment with:
 
 \begin{zcexample}
-  \newtheorem{lemma}{Lemma}
+\newtheorem{lemma}{Lemma}
 \end{zcexample}
 
 Or with:
 
 \begin{zcexample}
-  \newtheorem{lemma}{Lemma}[section]
+\newtheorem{lemma}{Lemma}[section]
 \end{zcexample}
 
 In this case, since \pkg{zref-clever} provides a built-in \texttt{lemma} type
