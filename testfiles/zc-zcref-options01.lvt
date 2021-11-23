@@ -171,6 +171,13 @@
 \box0
 \ENDTEST
 
+\BEGINTEST{Option: noref}
+\setbox0=\hbox{\zcref[noref]{sec:section-1.1, sec:section-1.2,
+    sec:section-2.1}}
+\showbox0
+\box0
+\ENDTEST
+
 \BEGINTEST{Option: typeset=baz}
 \setbox0=\hbox{\zcref[typeset=baz]{sec:section-1.1, sec:section-1.2,
     sec:section-2.1}}

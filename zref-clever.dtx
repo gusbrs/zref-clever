@@ -1613,8 +1613,10 @@
     typeset .initial:n = both ,
     typeset .value_required:n = true ,
 
-    noname .meta:n = { typeset = ref },
+    noname .meta:n = { typeset = ref } ,
     noname .value_forbidden:n = true ,
+    noref .meta:n = { typeset = name } ,
+    noref .value_forbidden:n = true ,
   }
 %    \end{macrocode}
 %

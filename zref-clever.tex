@@ -418,6 +418,7 @@ properties.  The \opt{page} option is a convenience alias for
 
 \DescribeOption{typeset} %
 \DescribeOption{noname} %
+\DescribeOption{noref} %
 When \cs{zcref} typesets a set of references, each group of references of the
 same type can be, and by default are, preceded by the type's ``name'', and
 this is indeed an important feature of \pkg{zref-clever}.  This is optional
@@ -430,8 +431,9 @@ references given to \cs{zcref}.  For example, for multiple references, the
 plural form is used, capitalization options are honored, etc.  Also
 hyperlinking behaves just \emph{as if} the references were present and,
 depending on the corresponding options, the name may be linked to the first
-reference of the type group.  The \opt{noname} option is a convenience alias
-for \texttt{typeset=ref}.
+reference of the type group.  The \opt{noname} and \opt{noref} options are
+convenience aliases for \texttt{typeset=ref} and \texttt{typeset=name},
+respectively.
 
 \DescribeOption{sort} %
 \DescribeOption{nosort} %
@@ -1404,28 +1406,27 @@ place, the different cases could be covered by the following examples:
 \zcref[check=pagegap]{fig:1} on \zcpageref{fig:1}
 \end{zcexample}
 
-And, similarly for the cases of \cs{vpageref} (relying directly on \cs{zcheck}
-here):
+And, similarly for the cases of \cs{vpageref}:
 
 \begin{zcexample}
-\zcheck[thispage]{fig:1}{on this page}
-\zcheck[nextpage]{fig:1}{on the following page}
-\zcheck[prevpage]{fig:1}{on the preceding page}
-\zcheck[facing]{fig:1}{on the facing page}
-on \zcpageref[check=pagegap]{fig:1}
+\zcref[noref,check=thispage,note={on this page}]{fig:1}
+\zcref[noref,check=nextpage,note={on the following page}]{fig:1}
+\zcref[noref,check=prevpage,note={on the preceding page}]{fig:1}
+\zcref[noref,check=facing,note={on the facing page}]{fig:1}
+\zcref[noref,check=pagegap]{fig:1} on \zcpageref{fig:1}
 \end{zcexample}
 
-Since both \cs{zcref} and \cs{zcheck} can receive multiple labels, it is not
-difficult to extend these examples to the functionality of \cs{vrefrange} and
-\cs{vpagerefrange}.  And beyond.
+Since \cs{zcref} can receive multiple labels, and make ranges out of them, it
+is not difficult to extend these examples to the functionality of
+\cs{vrefrange} and \cs{vpagerefrange}.
 
-Evidently, this does not automate the typeset results, but does automate the
-checking that the reference context is the intended one.  If the relation
-between the reference and the label does not correspond to the specified one,
-a compilation warning is issued (according to the options given to
-\pkg{zref-check}), so that the problem can be easily identified and corrected.
-See \pkg{zref-check}'s documentation for details, and further available
-checks.
+Evidently, this does not fully automate the typeset results, but it does
+automate the checking that the reference context is the intended one.  If the
+relation between the reference and the label does not correspond to the
+specified one, a compilation warning is issued (according to the options given
+to \pkg{zref-check}), so that the problem can be easily identified and
+corrected.  See \pkg{zref-check}'s documentation for details, and further
+available checks.
 
 
 \subsection{\cs{newtheorem}}
