@@ -184,8 +184,73 @@
 
 \tableofcontents
 
-
 \section{Introduction}
+
+Cross-referencing is an area which lends itself quite naturally to automation.
+Not only for input convenience but also, and most importantly, for end results
+consistency.  Indeed, the standard \LaTeX{} cross-referencing system -- with
+\cs{label}, \cs{ref}, and \cs{pageref} -- is already a form of automation, by
+relieving us of checking the number of the referenced object, and the page
+where it lies.
+
+But the plethora of existing features, packages and document classes which, in
+one way or another, extends this basic functionality is a clear evidence for a
+demand for more automation.  Just to name the most popular: \pkg{cleveref},
+\pkg{hyperref}, \pkg{titleref}, \pkg{nameref}, \pkg{varioref}, \pkg{fancyref},
+and the kernel's \cs{labelformat}.
+
+However, the standard cross-referencing system stores two, and only two,
+properties with the label: the printed representation of the counter last
+incremented with \cs{refstepcounter} and the page.  Of course, out of the
+mentioned desire to automate more, the need arose to store more information
+about the label to support this: the title or caption of the referenced
+object; its counter or, even better, its ``type'', that is, whether it is a
+section, chapter, figure, etc.; its hyperlink anchor, and so on.  Thus those
+two property ``fields'' of the standard label became quite a disputed real
+state.  And the packages in this area of functionality were bound to step on
+each other's toes as a result.
+
+Out of this conundrum, Heiko Oberdiek eventually developed \pkg{zref} which
+implements an extensible referencing system, making the labels store a
+property list of flexible length, so that new properties can be easily added
+and queried.  However, even when \pkg{zref} can boost this powerful basic
+concept and is really quite featureful, with several different modules
+available, it is fair to say that for the average user the package may appear
+to be somewhat raw.  Indeed, for someone who ``just wants to make a
+cross-reference'', the user interface in the \pkg{zref-user} module is akin to
+the standard \LaTeX{} cross-referencing system, and even requires some extra
+work if you want to have a hyperlinked reference.  In other words, \pkg{zref}
+seems to have focused on infrastructure and on performing a number of
+specialized tasks with different modules, and a large part of the landscape of
+automation features available for the standard referencing system was not
+carried over to \pkg{zref}, neither by the \pkg{zref} itself nor by other
+packages.
+
+\pkg{zref-clever} tries to cover this gap, by bringing a number of existing
+features available for the standard referencing system to \pkg{zref}, and
+hopefully making \pkg{zref} more accessible, and interesting, to the average
+user.  And the package's name makes it clear that the core of the envisaged
+feature set is that of \pkg{cleveref}, even though the attempt was less one of
+replicating functionality per se than that of having it as a successful point
+of reference, from where we could then try to tap into \pkg{zref}'s potential
+based on it.  Indeed, although there is a significant intersection, the
+features of \pkg{zref-clever} are neither a superset nor a subset of those of
+\pkg{cleveref}.  There are things either of them can do that the other can't.
+There are also important differences in user interface design.  In particular,
+\pkg{zref-clever} relies heavily on \texttt{key=val} interfaces both for
+general configuration and for centering in a single command -- \cs{zcref} --
+as the main entrance for reference making, whose behavior can be modulated by
+local options.
+
+Considering that \pkg{zref} itself offers the \pkg{zref-titleref} module, and
+that the integration with \pkg{zref-check} allows \pkg{zref-clever} to make
+context sensitive references, akin to those of \pkg{varioref}, a significant
+part of the most prominent automation features available to the standard
+referencing system is thus brought to \pkg{zref}, working under a single
+consistent underlying infrastructure and user interface.  Alas, there are
+limitations, of course (see \zcref{sec:limitations}).  Still, all in all,
+hopefully \pkg{zref-clever} can be the missing piece for \pkg{zref} to fulfill
+the promise insinuated by the ``z'' in its name, and be your ``last ref''.
 
 
 \subsection{Warning}
