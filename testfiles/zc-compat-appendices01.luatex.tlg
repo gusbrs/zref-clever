@@ -9,12 +9,8 @@ TEST 1: appendices module
 }\HyOrg@appendix .
 <recently read> }
 l. ...\cs_show:N \appendix
-> \c@zc@appendix=\count277.
-<recently read> }
-l. ......peout { zc@appendix~counter~not~defined } }
-> \c@zc@save@appendix=\count278.
-<recently read> }
-l. ...... { zc@save@appendix~counter~not~defined } }
+zc@appendix counter is defined
+zc@save@appendix counter is defined
 The property list \l__zrefclever_counter_resetby_prop contains the pairs
 (without outer braces):
 >  {enumii}  =>  {enumi}

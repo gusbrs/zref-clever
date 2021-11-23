@@ -28,6 +28,8 @@ env:
     amsfonts
     mathpazo
     psnfss
+    tex-gyre
+    inconsolata
     # Dependencies
     alphalph
     amsmath
@@ -71,6 +73,7 @@ env:
     makeindex
     mathtools
     memoir
+    microtype
     mptopdf
     newfloat
     oberdiek
@@ -80,6 +83,7 @@ env:
     tools
     trivfloat
     underscore
+    upquote
     zref
     zref-check
 

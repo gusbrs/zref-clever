@@ -100,10 +100,10 @@
 \makeatletter
 \cs_show:N \appendix
 \cs_if_exist:cTF { c@zc@appendix }
-  { \cs_show:N \c@zc@appendix }
+  { \typeout { zc@appendix~counter~is~defined } }
   { \typeout { zc@appendix~counter~not~defined } }
 \cs_if_exist:cTF { c@zc@save@appendix }
-  { \cs_show:N \c@zc@save@appendix }
+  { \typeout { zc@save@appendix~counter~is~defined } }
   { \typeout { zc@save@appendix~counter~not~defined } }
 \prop_show:N \l__zrefclever_counter_resetby_prop
 \ShowHook { cmd / appendix / before }
