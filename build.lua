@@ -1,5 +1,3 @@
-#!/usr/bin/env texlua
-
 -- Build script for "zref-clever" package
 
 -- Identify the bundle and module
