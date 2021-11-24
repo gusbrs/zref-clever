@@ -1904,17 +1904,17 @@ implication for cross-referencing, usually bearing just the standard
 referencing system in mind, and related mainly to captions, subfloats, and
 notes.  This compatibility module tries to adjust \pkg{zref-clever} to these
 features with support for the following: i) set counter types for counters
-\texttt{subfigure}, \texttt{subtable}, and \texttt{poemline}; ii) configure
-resetting behavior (\opt{counterresetby} option) for \texttt{subfigure} and
-\texttt{subtable} counters; iii) provide that the \meta{label} arguments to
-environments \env{sidecaption} and \env{sidecontcaption} and commands
-\cs{bitwonumcaption}, \cs{bionenumcaption}, and \cs{bicaption} \emph{also} set
-a \cs{zlabel} of the same name; iv) provide the \pkg{zref} property
-``\texttt{subcaption}'' so that we can refer to, for example,
-\texttt{\cs{zcref}[ref=subcaption]\{subcap-1\}} to emulate the functionality
-of \cls{memoir}'s \cs{subcaptionref}; v) provide that \cs{footnote},
-\cs{verbfootnote}, \cs{sidefootnote}, and \cs{pagenote} get a proper
-\opt{currentcounter} set; and v) set counter types for counters
+\texttt{subfigure}, \texttt{subtable}, and \texttt{poemline} (used in the
+\env{verse} environment); ii) configure resetting behavior
+(\opt{counterresetby} option) for \texttt{subfigure} and \texttt{subtable}
+counters; iii) provide that the \meta{label} arguments to environments
+\env{sidecaption} and \env{sidecontcaption} and commands \cs{bitwonumcaption},
+\cs{bionenumcaption}, and \cs{bicaption} \emph{also} set a \cs{zlabel} of the
+same name; iv) provide the \pkg{zref} property ``\texttt{subcaption}'' so that
+we can refer to, for example, \texttt{\cs{zcref}[ref=subcaption]\{subcap-1\}}
+to emulate the functionality of \cls{memoir}'s \cs{subcaptionref}; v) provide
+that \cs{footnote}, \cs{verbfootnote}, \cs{sidefootnote}, and \cs{pagenote}
+get a proper \opt{currentcounter} set; and v) set counter types for counters
 \texttt{sidefootnote} and \texttt{pagenote}.  Naturally, the sheer number of
 features that required some specific support implies that some gymnastics were
 needed here.  But the most sensitive changes are: i) a local redefinition of

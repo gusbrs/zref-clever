@@ -56,6 +56,10 @@
 %</driver>
 % \fi
 %
+% \DoNotIndex{\\,\{,\}}
+% \DoNotIndex{\c@,\cl@,\c@enumN,\p@}
+% \DoNotIndex{\the}
+%
 %
 % \NewDocumentCommand\opt{m}{\texttt{#1}}
 %
@@ -73,6 +77,7 @@
 %   described, numbers underlined point to the definition, all others indicate
 %   the places where it is used.%
 % }
+%
 %
 % \GetFileInfo{zref-clever.sty}
 %
@@ -189,14 +194,15 @@
 % property, is somewhat a disputed real estate.  In particular, the use of
 % \cs{labelformat} (previously from \pkg{varioref}, now in the kernel) will
 % include there the reference ``prefix'' and complicate the job we are trying
-% to do here.  Hence, we isolate \cs{the}\meta{counter} and store it ``clean''
-% in \texttt{thecounter} for reserved use.  Since \cs{@currentlabel}, which
-% populates the \texttt{default} property, is \emph{more reliable} than
-% \cs{@currentcounter}, \texttt{thecounter} is meant to be kept as an
-% \emph{option} (\opt{ref} option), in case there's need to use
-% \pkg{zref-clever} together with \cs{labelformat}.  Based on the definition
-% of \cs{@currentlabel} done inside \cs{refstepcounter} in `texdoc source2e',
-% section `ltxref.dtx'.  We just drop the \cs{p@...} prefix.
+% to do here.  Hence, we isolate \cs[no-index]{the}\meta{counter} and store it
+% ``clean'' in \texttt{thecounter} for reserved use.  Since
+% \cs{@currentlabel}, which populates the \texttt{default} property, is
+% \emph{more reliable} than \cs{@currentcounter}, \texttt{thecounter} is meant
+% to be kept as an \emph{option} (\opt{ref} option), in case there's need to
+% use \pkg{zref-clever} together with \cs{labelformat}.  Based on the
+% definition of \cs{@currentlabel} done inside \cs{refstepcounter} in `texdoc
+% source2e', section `ltxref.dtx'.  We just drop the \cs[no-index]{p@...}
+% prefix.
 %
 %    \begin{macrocode}
 \zref@newprop { thecounter }
@@ -242,8 +248,8 @@
 % store the ``\emph{printed} representation'' of their respective counters,
 % for sorting and compressing purposes, we are also interested in their
 % numeric values.  So we store them in \texttt{zc@cntval} and
-% \texttt{zc@pgval}.  For this, we use \cs{c@}\meta{counter}, which contains
-% the counter's numerical value (see `texdoc source2e', section
+% \texttt{zc@pgval}.  For this, we use \cs[no-index]{c@}\meta{counter}, which
+% contains the counter's numerical value (see `texdoc source2e', section
 % `ltcounts.dtx').
 %    \begin{macrocode}
 \zref@newprop { zc@cntval } [0]
@@ -267,10 +273,7 @@
 % here, the ``printed representation'' is not enough, not only because it is
 % easier to work with the numeric values but, given we occasionally group
 % multiple counters within a single type, sorting this group requires to know
-% the actual counter reset chain (the counters' names and values).  Indeed,
-% the set of counters grouped into a single type cannot be arbitrary: all of
-% them must belong to the same reset chain, and must be nested within each
-% other (they cannot even just share the same parent).
+% the actual counter reset chain.
 %
 % Furthermore, even if it is true that most of the definitions of counters,
 % and hence of their reset behavior, is likely to be defined in the preamble,
@@ -290,35 +293,36 @@
 % mandatory argument) gets reset every time the ``enclosing counter'' gets
 % stepped (this is called in the usual sources ``within-counter'', ``old
 % counter'', ``supercounter'', ``parent counter'' etc.).  This information is
-% a little trickier to get.  For starters, the counters which may reset the
+% somewhat tricky to get.  For starters, the counters which may reset the
 % current counter are not retrievable from the counter itself, because this
 % information is stored with the counter that does the resetting, not with the
-% one that gets reset (the list is stored in \cs{cl@}\meta{counter} with
-% format
+% one that gets reset (the list is stored in \cs[no-index]{cl@}\meta{counter}
+% with format
 % \texttt{\cs{@elt}\{countera\}\cs{@elt}\{counterb\}\cs{@elt}\{counterc\}},
-% see section `ltcounts.dtx' in `source2e').  Besides, there may be a chain of
-% resetting counters, which must be taken into account: if `counterC' gets
-% reset by `counterB', and `counterB' gets reset by `counterA', stepping the
-% latter affects all three of them.
+% see \file{ltcounts.dtx} in \texttt{texdoc source2e}).  Besides, there may be
+% a chain of resetting counters, which must be taken into account: if
+% \texttt{counterC} gets reset by \texttt{counterB}, and \texttt{counterB}
+% gets reset by \texttt{counterA}, stepping the latter affects all three of
+% them.
 %
-% The procedure below examines a set of counters, those included in
+% The procedure below examines a set of counters, those in
 % \cs{l_@@_counter_resetters_seq}, and for each of them retrieves the set of
-% counters it resets, as stored in \cs{cl@}\meta{counter}, looking for the
-% counter for which we are trying to set a label
-% (\cs{l_@@_current_counter_tl}, by default \cs{@currentcounter}, passed as
-% an argument to the functions).  There is one relevant caveat to this
-% procedure: \cs{l_@@_counter_resetters_seq} is populated by hand with the
-% ``usual suspects'', there is no way (that I know of) to ensure it is
-% exhaustive.  However, it is not that difficult to create a reasonable
-% ``usual suspects'' list which, of course, should include the counters for
-% the sectioning commands to start with, and it is easy to add more counters
-% to this list if needed, with the option \opt{counterresetters}.
-% Unfortunately, not all counters are created alike, or reset alike.  Some
-% counters, even some kernel ones, get reset by other mechanisms (notably, the
-% \texttt{enumerate} environment counters do not use the regular counter
-% machinery for resetting on each level, but are nested nevertheless by other
-% means).  Therefore, inspecting \cs{cl@}\meta{counter} cannot possibly fully
-% account for all of the automatic counter resetting which takes place in the
+% counters it resets, as stored in \cs[no-index]{cl@}\meta{counter}, looking
+% for the counter for which we are trying to set a label
+% (\cs{l_@@_current_counter_tl}, by default \cs{@currentcounter}, passed as an
+% argument to the functions).  There is one relevant caveat to this procedure:
+% \cs{l_@@_counter_resetters_seq} is populated by hand with the ``usual
+% suspects'', there is no way (that I know of) to ensure it is exhaustive.
+% However, it is not that difficult to create a reasonable ``usual suspects''
+% list which, of course, should include the counters for the sectioning
+% commands to start with, and it is easy to add more counters to this list if
+% needed, with the option \opt{counterresetters}.  Unfortunately, not all
+% counters are created alike, or reset alike.  Some counters, even some kernel
+% ones, get reset by other mechanisms (notably, the \texttt{enumerate}
+% environment counters do not use the regular counter machinery for resetting
+% on each level, but are nested nevertheless by other means).  Therefore,
+% inspecting \cs[no-index]{cl@}\meta{counter} cannot possibly fully account
+% for all of the automatic counter resetting which takes place in the
 % document.  And there's also no other ``general rule'' we could grab on for
 % this, as far as I know.  So we provide a way to manually tell
 % \pkg{zref-clever} of these cases, by means of the \opt{counterresetby}
@@ -330,9 +334,9 @@
 %
 % \begin{macro}[EXP]{\@@_get_enclosing_counters_value:n}
 %   Recursively generate a \emph{sequence} of ``enclosing counters'' values,
-%   for a given \meta{counter} and leave it in the input stream.  These
-%   functions must be expandable, since they get called from \cs{zref@newprop}
-%   and are the ones responsible for generating the desired information when
+%   for a given \meta{counter} and leave it in the input stream.  This
+%   function must be expandable, since it gets called from \cs{zref@newprop}
+%   and is the one responsible for generating the desired information when
 %   the label is being set.  Note that the order in which we are getting this
 %   information is reversed, since we are navigating the counter reset chain
 %   bottom-up.  But it is very hard to do otherwise here where we need
@@ -703,7 +707,7 @@
 % ``fallback'' settings are stored in \cs{g_@@_fallback_dict_prop}.
 %
 %
-% \begin{variable}
+% \begin{macro}
 %   {
 %     \l_@@_setup_type_tl ,
 %     \l_@@_dict_language_tl ,
@@ -723,15 +727,14 @@
 \seq_new:N \l_@@_dict_declension_seq
 \seq_new:N \l_@@_dict_gender_seq
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 %
-% \begin{variable}
+% \begin{macro}
 %   {
 %     \c_@@_ref_options_necessarily_not_type_specific_seq ,
 %     \c_@@_ref_options_possibly_type_specific_seq ,
 %     \c_@@_ref_options_type_names_seq ,
-%     \c_@@_ref_options_genders_seq ,
 %     \c_@@_ref_options_font_seq ,
 %     \c_@@_ref_options_typesetup_seq ,
 %     \c_@@_ref_options_reference_seq ,
@@ -778,9 +781,6 @@
     Name-pl-ab ,
     name-pl-ab ,
   }
-\seq_const_from_clist:Nn
-  \c_@@_ref_options_genders_seq
-  { f , m , n }
 %    \end{macrocode}
 % \cs{c_@@_ref_options_font_seq} are technically ``possibly type-specific'',
 % but are not ``language-specific'', so we separate them.
@@ -809,15 +809,15 @@
   \c_@@_ref_options_reference_seq
   \c_@@_ref_options_font_seq
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 %
 %
 % \subsection{Languages}
 %
-% \begin{variable}{\g_@@_languages_prop}
+% \begin{macro}{\g_@@_languages_prop}
 %   Stores the names of known languages and the mapping from ``language name''
-%   to ``dictionary name''.  Whether of not a language or alias is known to
+%   to ``dictionary name''.  Whether or not a language or alias is known to
 %   \pkg{zref-clever} is decided by its presence in this property list.  A
 %   ``base language'' (loose concept here, meaning just ``the name we gave for
 %   the dictionary in that particular language'') is just like any other one,
@@ -826,25 +826,26 @@
 %    \begin{macrocode}
 \prop_new:N \g_@@_languages_prop
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 %
 % \begin{macro}[int]{\zcDeclareLanguage}
 %   Declare a new language for use with \pkg{zref-clever}.  \meta{language} is
 %   taken to be both the ``language name'' and the ``dictionary name''.
-%   \oarg{options} receive a \texttt{k=v} set of options, with two valid
+%   \oarg{options} receive a \texttt{k=v} set of options, with three valid
 %   options.  The first, \opt{declension}, takes the noun declension cases
 %   prefixes for \meta{language} as a comma separated list, whose first
-%   element is taken to be the default case.  The second, \opt{allcaps},
-%   receives no value, and indicates that for \meta{language} all nouns must
-%   be capitalized for grammatical reasons, in which case, the \opt{cap}
-%   option is disregarded for \meta{language}.  If \meta{language} is already
-%   known, just warn.  This implies a particular restriction regarding
-%   \oarg{options}, namely that these options, when defined by the package,
-%   cannot be redefined by the user.  This is deliberate, otherwise the
-%   built-in dictionaries would become much too sensitive to this particular
-%   user input, and unnecessarily so.  \cs{zcDeclareLanguage} is preamble
-%   only.
+%   element is taken to be the default case.  The second, \opt{gender},
+%   receives the genders for \meta{language} as comma separated list.  The
+%   third, \opt{allcaps}, receives no value, and indicates that for
+%   \meta{language} all nouns must be capitalized for grammatical reasons, in
+%   which case, the \opt{cap} option is disregarded for \meta{language}.  If
+%   \meta{language} is already known, just warn.  This implies a particular
+%   restriction regarding \oarg{options}, namely that these options, when
+%   defined by the package, cannot be redefined by the user.  This is
+%   deliberate, otherwise the built-in dictionaries would become much too
+%   sensitive to this particular user input, and unnecessarily so.
+%   \cs{zcDeclareLanguage} is preamble only.
 %   \begin{syntax}
 %     \cs{zcDeclareLanguage} \oarg{options} \marg{language}
 %   \end{syntax}
@@ -1125,27 +1126,27 @@
 % \cs{@@_provide_dictionary:n} is only meant to load the built-in
 % dictionaries.  For languages declared by the user, or for any settings to a
 % known language made with \cs{zcLanguageSetup}, values are populated directly
-% to a variable \cs{g_@@_dict_\meta{language}_prop}, created as needed.
-% Hence, there is no need to ``load'' anything in this case: definitions and
-% assignments made by the user are performed immediately.
+% to a variable \cs{g_@@_dict_\meta{language}_prop}.  Hence, there is no need
+% to ``load'' anything in this case: definitions and assignments made by the
+% user are performed immediately.
 %
 %
 % \subsubsection*{Provide}
 %
-% \begin{variable}{\g_@@_loaded_dictionaries_seq}
+% \begin{macro}{\g_@@_loaded_dictionaries_seq}
 %   Used to keep track of whether a dictionary has already been loaded or not.
 %    \begin{macrocode}
 \seq_new:N \g_@@_loaded_dictionaries_seq
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
-% \begin{variable}{\l_@@_load_dict_verbose_bool}
+% \begin{macro}{\l_@@_load_dict_verbose_bool}
 %   Controls whether \cs{@@_provide_dictionary:n} fails silently or verbosely
 %   in case of unknown languages or dictionaries not found.
 %    \begin{macrocode}
 \bool_new:N \l_@@_load_dict_verbose_bool
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 %
 % \begin{macro}{\@@_provide_dictionary:n}
@@ -2045,7 +2046,7 @@
 %
 %
 %
-% \subsubsection*{\opt{nudge} \& Co.\ options}
+% \subsubsection*{\opt{nudge} \& co.\ options}
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_nudge_enabled_bool
@@ -2133,11 +2134,10 @@
 %
 % \opt{font} \emph{can't be used as a package option}, since the options get
 % expanded by \LaTeX{} before being passed to the package (see
-% \url{https://tex.stackexchange.com/a/489570}).  It can't be set in
-% \cs{zcref} and, for global settings, with \cs{zcsetup}.  Note that,
-% technically, the ``raw'' options are already available as
-% \cs{@raw@opt@\meta{package}.sty} (see
-% \url{https://tex.stackexchange.com/a/618439}, thanks David Carlisle).
+% \url{https://tex.stackexchange.com/a/489570}).  It can be set in \cs{zcref}
+% and, for global settings, with \cs{zcsetup}.  Note that, technically, the
+% ``raw'' options are already available as \cs{@raw@opt@\meta{package}.sty}
+% (see \url{https://tex.stackexchange.com/a/618439}, thanks David Carlisle).
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_typeset_font_tl
@@ -2968,12 +2968,12 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{variable}{\l_@@_zcref_labels_seq, \l_@@_link_star_bool}
+% \begin{macro}{\l_@@_zcref_labels_seq, \l_@@_link_star_bool}
 %    \begin{macrocode}
 \seq_new:N \l_@@_zcref_labels_seq
 \bool_new:N \l_@@_link_star_bool
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 %
 %
@@ -3013,7 +3013,7 @@
 % into account the whole chain of ``enclosing counters'' for the counters of
 % the labels at hand.
 %
-% \begin{variable}
+% \begin{macro}
 %   {
 %     \l_@@_label_type_a_tl ,
 %     \l_@@_label_type_b_tl ,
@@ -3033,26 +3033,26 @@
 \tl_new:N \l_@@_label_extdoc_a_tl
 \tl_new:N \l_@@_label_extdoc_b_tl
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
-% \begin{variable}{\l_@@_sort_decided_bool}
+% \begin{macro}{\l_@@_sort_decided_bool}
 %   Auxiliary variable for \cs{@@_sort_default_same_type:nn}, signals if the
 %   sorting between two labels has been decided or not.
 %    \begin{macrocode}
 \bool_new:N \l_@@_sort_decided_bool
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
-% \begin{variable}{\l_@@_sort_prior_a_int,\l_@@_sort_prior_b_int}
+% \begin{macro}{\l_@@_sort_prior_a_int,\l_@@_sort_prior_b_int}
 %   Auxiliary variables for \cs{@@_sort_default_different_types:nn}.  Store
 %   the sort priority of the ``current'' and ``next'' labels.
 %    \begin{macrocode}
 \int_new:N \l_@@_sort_prior_a_int
 \int_new:N \l_@@_sort_prior_b_int
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
-% \begin{variable}{\l_@@_label_types_seq}
+% \begin{macro}{\l_@@_label_types_seq}
 %   Stores the order in which reference types appear in the label list
 %   supplied by the user in \cs{zcref}.  This variable is populated by
 %   \cs{@@_label_type_put_new_right:n} at the start of \cs{@@_sort_labels:}.
@@ -3061,7 +3061,7 @@
 %    \begin{macrocode}
 \seq_new:N \l_@@_label_types_seq
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 %
 % \begin{macro}{\@@_sort_labels:}
@@ -3508,7 +3508,7 @@
 %
 % \subsection*{Variables}
 %
-% \begin{variable}
+% \begin{macro}
 %   {
 %     \l_@@_typeset_labels_seq ,
 %     \l_@@_typeset_last_bool ,
@@ -3520,9 +3520,9 @@
 \bool_new:N \l_@@_typeset_last_bool
 \bool_new:N \l_@@_last_of_type_bool
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
-% \begin{variable}
+% \begin{macro}
 %   {
 %     \l_@@_type_count_int ,
 %     \l_@@_label_count_int ,
@@ -3532,9 +3532,9 @@
 \int_new:N \l_@@_type_count_int
 \int_new:N \l_@@_label_count_int
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
-% \begin{variable}
+% \begin{macro}
 %   {
 %     \l_@@_label_a_tl ,
 %     \l_@@_label_b_tl ,
@@ -3553,9 +3553,9 @@
 \tl_new:N \l_@@_type_first_label_tl
 \tl_new:N \l_@@_type_first_label_type_tl
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
-% \begin{variable}
+% \begin{macro}
 %   {
 %     \l_@@_type_name_tl ,
 %     \l_@@_name_in_link_bool ,
@@ -3571,9 +3571,9 @@
 \tl_new:N \l_@@_name_format_fallback_tl
 \tl_new:N \l_@@_type_name_gender_tl
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
-% \begin{variable}
+% \begin{macro}
 %   {
 %     \l_@@_range_count_int ,
 %     \l_@@_range_same_count_int ,
@@ -3589,9 +3589,9 @@
 \bool_new:N \l_@@_next_maybe_range_bool
 \bool_new:N \l_@@_next_is_same_bool
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
-% \begin{variable}
+% \begin{macro}
 %   {
 %     \l_@@_tpairsep_tl ,
 %     \l_@@_tlistsep_tl ,
@@ -3622,17 +3622,17 @@
 \tl_new:N \l_@@_namefont_tl
 \tl_new:N \l_@@_reffont_tl
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 %
-% \begin{variable}{\l_@@_verbose_testing_bool}
+% \begin{macro}{\l_@@_verbose_testing_bool}
 %   Internal variable which enables extra log messaging at points of interest
 %   in the code for purposes of regression testing.  Particularly relevant to
 %   keep track of expansion control in \cs{l_@@_typeset_queue_curr_tl}.
 %    \begin{macrocode}
 \bool_new:N \l_@@_verbose_testing_bool
 %    \end{macrocode}
-% \end{variable}
+% \end{macro}
 %
 %
 % \subsection*{Main functions}
@@ -4271,9 +4271,9 @@
 % (when the queue itself gets typeset) \emph{unmodified} (``no manipulation'',
 % to use the \texttt{n} signature jargon).  We also need to prevent premature
 % expansion of material that can't be expanded at this point (e.g. grouping,
-% \cs{zref@default} or \cs{hyper@@@@link}).  In a nutshell, the job of these
-% two functions is putting the pieces in place, but with proper expansion
-% control.
+% \cs{zref@default} or \cs[replace=false]{hyper@@link}).  In a nutshell, the
+% job of these two functions is putting the pieces in place, but with proper
+% expansion control.
 %
 %
 % \begin{macro}{\@@_ref_default:, \@@_name_default:}
@@ -4993,14 +4993,7 @@
 % method, may fail noisily (see \url{https://tex.stackexchange.com/q/617905},
 % thanks Phelype Oleinik).  The 2021-11-15 kernel release already handle this
 % gracefully (see \url{https://github.com/latex3/latex2e/pull/699}, thanks
-% Phelype Oleinik).  In the meantime, given we cannot really expect to know
-% what \cs{appendix} may contain in general, since it potentially gets
-% redefined in quite a number of classes and packages, a user facing
-% workaround may be needed in case of trouble.  Phelype Oleinik recommends
-% activating/providing the generic hook in question, so that \pkg{ltcmdhooks}
-% considers the patch as already done, and do the patch ourselves with
-% \pkg{etoolbox} (\url{https://tex.stackexchange.com/a/617998}).
-%
+% Phelype Oleinik).
 %
 %
 % \subsection{\opt{appendices}}
@@ -5078,11 +5071,12 @@
 %
 % The \cls{memoir} document class has quite a number of cross-referencing
 % related features, mostly dealing with captions, subfloats, and notes.  Some
-% of them are implemented in ways which make difficult or block altogether the
-% use of \pkg{zref}, particularly \cs{zlabel}, short of redefining the whole
-% stuff ourselves.  Hopefully, these features are specialized enough to make
-% \pkg{zref-clever} useful enough with \cls{memoir}, but unless some support
-% is added upstream, it is difficult to cover everything.
+% of them are implemented in ways which make difficult the use of \pkg{zref},
+% particularly \cs{zlabel}, short of redefining the whole stuff ourselves.
+% Hopefully, these features are specialized enough to make \pkg{zref-clever}
+% useful enough with \cls{memoir} without much friction, but unless some
+% support is added upstream, it is difficult not to be a little intrusive
+% here.
 %
 % \begin{enumerate}
 % \item Caption functionality which receives \meta{label} as optional
@@ -5091,15 +5085,15 @@
 %   \item The \env{sidecaption} and \env{sidecontcaption} environments.  These
 %     environments \emph{store} the label in an internal macro,
 %     \cs{m@mscaplabel}, at the begin environment code (more precisely in
-%     \cs{@@sidecaption}), but both the call to \cs{refstepcounter} and the
-%     expansion of \cs{m@mscaplabel} take place at \cs{endsidecaption}.  For
-%     this reason, hooks are not particularly helpful, and there is not any
-%     easy way to grab the \meta{label} argument to start with.  I can see two
-%     ways to deal with these environments, none of which I really like.
-%     First, map through \cs{m@mscaplabel} until \cs{label} is found, then
-%     grab the next token which is the \meta{label}.  This can be used to set
-%     a \cs{zlabel} either with a kernel environment hook, or with
-%     \cs{@mem@scap@afterhook} (the former requires running
+%     \cs[replace=false]{@@sidecaption}), but both the call to
+%     \cs{refstepcounter} and the expansion of \cs{m@mscaplabel} take place at
+%     \cs{endsidecaption}.  For this reason, hooks are not particularly
+%     helpful, and there is not any easy way to grab the \meta{label} argument
+%     to start with.  I can see two ways to deal with these environments, none
+%     of which I really like.  First, map through \cs{m@mscaplabel} until
+%     \cs{label} is found, then grab the next token which is the \meta{label}.
+%     This can be used to set a \cs{zlabel} either with a kernel environment
+%     hook, or with \cs{@mem@scap@afterhook} (the former requires running
 %     \cs{refstepcounter} on our own, since the \texttt{env/.../end} hook
 %     comes before this is done by \cs{endsidecaption}).  Second, locally
 %     redefine \cs{label} to set both labels inside the environments.
@@ -5297,7 +5291,7 @@
 %    \end{macrocode}
 % First, we define a function for label setting inside \pkg{amsmath} math
 % environments, we want it to set both \cs{zlabel} and \cs{label}.  We may
-% ``get a ride'' but not steal the place altogether.  This makes for
+% ``get a ride'', but not steal the place altogether.  This makes for
 % potentially redundant labels, but seems a good compromise.  We \emph{must}
 % use the lower level \cs{zref@label} in this context, and hence also handle
 % protection with \cs{zref@wrapper@babel}, because \cs{zlabel} makes itself
@@ -5317,19 +5311,30 @@
 % instead.  We must handle \pkg{hyperref} here, which comes very late in the
 % preamble, and which loads \pkg{nameref} at \texttt{begindocument}, which in
 % turn, lets \cs{ltx@label} be \cs{label}.  This has to come after
-% \pkg{nameref}.  \pkg{cleveref} also redefines it, and comes even later, but
-% this procedure is not compatible with it.  Technically, some care is needed
-% here, probably mostly on the documentation side.  If \pkg{cleveref} comes
-% last and hence its redefinition takes precedence, this is of little
-% consequence to \pkg{zref-clever} except that we won't be able to refer to
-% the labels in \pkg{amsmath}'s environments with \cs{zcref}.  However, if
-% \pkg{cleveref}'s definition is overwritten by \pkg{zref-clever}, this may be
-% a substantial problem for \pkg{cleveref}, since it will find the label, but
-% it won't contain the data it is expecting.  Therefore, if for some reason
-% \pkg{cleveref} is being used alongside \pkg{cleveref}, it is due to follow
-% the latter's documented recommendation to load it last.  And use \cs{cref}
-% to make references to those.
-% CHECK Should I just make this no-op in case 'cleveref' is loaded?
+% \pkg{nameref}.  Other classes packages also redefine \cs{ltx@label}, which
+% may cause some trouble.  A \texttt{grep} on \texttt{texmf-dist} returns hits
+% for: \file{thm-restate.sty}, \file{smartref.sty}, \file{jmlrbook.cls},
+% \file{cleveref.sty}, \file{cryptocode.sty}, \file{nameref.sty},
+% \file{easyeqn.sty}, \file{empheq.sty}, \file{ntheorem.sty},
+% \file{nccmath.sty}, \file{nwejm.cls}, \file{nwejmart.cls},
+% \file{aguplus.sty}, \file{aguplus.cls}, \file{agupp.sty},
+% \file{amsmath.hyp}, \file{amsmath.sty} (surprise!), \file{amsmath.4ht},
+% \file{nameref.4ht}, \file{frenchle.sty}, \file{french.sty}, plus
+% corresponding documentations and different versions of the same packages.
+% That's not too many, but not ``just a few'' either.  The critical ones are
+% explicitly handled here (\pkg{amsmath} itself, and \pkg{nameref}).  A number
+% of those I'm really not acquainted with.  For \pkg{cleveref}, in particular,
+% this procedure is not compatible with it.  If we happen to come later than
+% it and override its definition, this may be a substantial problem for
+% \pkg{cleveref}, since it will find the label, but it won't contain the data
+% it is expecting.  However, this should normally not occur, if the user has
+% followed the documented recommendation for \pkg{cleveref} to load it last,
+% or at least very late, and besides I don't see much of an use case for using
+% both \pkg{cleveref} and \pkg{zref-clever} together.  I have documented in
+% the user manual that this module may cause potential issues, and how to work
+% around them.  And I have made an upstream feature request for a hook, so
+% that this could be made more cleanly at
+% \url{https://github.com/latex3/hyperref/issues/212}.
 %    \begin{macrocode}
         \@@_if_package_loaded:nTF { hyperref }
           {
@@ -5349,15 +5354,17 @@
 % \cs{refstepcounter}.  What happens is: at the start, \texttt{equation} is
 % refstepped, it is then stored in \texttt{parentequation} and set to `0' and,
 % at the end of the environment it is restored to the value of
-% \texttt{parentequation}.  So, here, we really must specify manually
-% \opt{currentcounter} and the resetting.  We cannot even set
-% \cs{@currentcounter} at \texttt{env/.../begin}, since the call to
+% \texttt{parentequation}.  We cannot even set \cs{@currentcounter} at
+% \texttt{env/.../begin}, since the call to
 % \cs{refstepcounter}\texttt{\{equation\}} done by \env{subequations} will
-% override that in sequence.  See
+% override that in sequence.  Unfortunately, the suggestion to set
+% \cs{@currentcounter} to \texttt{parentequation} here was not accepted, see
 % \url{https://github.com/latex3/latex2e/issues/687#issuecomment-951451024}
-% and subsequent discussion.  Note that, for \env{subequations}, \cs{zlabel}
-% works just fine (that is, if given immediately after
-% \texttt{\cs{begin}\{subequations\}}, to refer to the parent equation).
+% and subsequent discussion.  So, for \env{subequations}, we really must
+% specify manually \opt{currentcounter} and the resetting.  Note that, for
+% \env{subequations}, \cs{zlabel} works just fine (that is, if given
+% immediately after \texttt{\\begin\{subequations\}}, to refer to the
+% parent equation).
 %    \begin{macrocode}
         \AddToHook { env / subequations / begin }
           {
@@ -5375,9 +5382,10 @@
           }
 %    \end{macrocode}
 % \pkg{amsmath} does use \cs{refstepcounter} for the \texttt{equation} counter
-% throughout.  But we still have to set \opt{currentcounter} manually because,
-% since we had to manually set \opt{currentcounter} to \texttt{parentequation}
-% in \env{subequations}, we also have to manually set it to \env{equation} in
+% throughout and does set \cs{@currentcounter} for \cs{tag}s.  But we still
+% have to manually reset \opt{currentcounter} to default because, since we had
+% to manually set \opt{currentcounter} to \texttt{parentequation} in
+% \env{subequations}, we also have to manually set it to \env{equation} in
 % environments which may be used within it.  The \env{xxalignat} environment
 % is not included, because it is ``starred'' by default (i.e.\ unnumbered),
 % and does not display or accepts labels or tags anyway.  The \env{-ed}
@@ -5604,7 +5612,7 @@
 % indeed what matters from \pkg{zref-clever}'s perspective.  Since the first
 % four are defined by the kernel and already setup for \pkg{zref-clever} by
 % default, we start from \(5\), and stop at the first non-existent
-% \cs{c@enumN} counter.
+% \cs[no-index]{c@enumN} counter.
 %
 %    \begin{macrocode}
 \@@_compat_module:nn { enumitem }

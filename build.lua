@@ -24,7 +24,7 @@ specialformats.latex.pdftexdev =
   { binary = "pdftex", format = "pdflatex-dev" }
 
 -- Set up different test sets
-checkconfigs = {"build-moreruns","build"}
+checkconfigs = {"build","build-moreruns"}
 
 -- Use UTF-8 logs for all engines
 asciiengines = {}
