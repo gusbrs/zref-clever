@@ -10,7 +10,8 @@ labels can be automatically sorted and compressed into ranges when due.  The
 reference format is highly and easily customizable, both globally and locally.
 `zref-clever` is based on `zref`'s extensible referencing system.
 
-The released version of this package is available from CTAN. (soonish, but not
-yet...)
+The released version of this package is available [from
+CTAN](https://ctan.org/pkg/zref-clever).
 
-For more details, check the Documentation (use `l3build doc` for the `.pdf`s).
+For more details, check the
+[Documentation](https://mirrors.ctan.org/macros/latex/contrib/zref-clever/zref-clever.pdf).

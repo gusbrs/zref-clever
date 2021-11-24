@@ -1,2 +1,5 @@
 hard zref
+hard l3packages
+hard oberdiek
 soft hyperref
+soft zref-check
