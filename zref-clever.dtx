@@ -60,6 +60,11 @@
 % \DoNotIndex{\c@,\cl@,\c@enumN,\p@}
 % \DoNotIndex{\the}
 %
+% \NewDocumentCommand\githubissue{m}{%
+%   issue~\href{https://github.com/gusbrs/zref-clever/issues/#1}{\##1}}
+%
+% ^^A Currently just for keeping semantic markup on this.
+% \NewDocumentCommand\contributor{m}{#1}
 %
 % \NewDocumentCommand\opt{m}{\texttt{#1}}
 %
@@ -120,14 +125,14 @@
 % release).  Finally, a couple of changes came with the 2021-11-15 kernel
 % release, which are important here.  First, a fix was made to the new hook
 % management system (\pkg{ltcmdhooks}), with implications to the hook we add
-% to \cs{appendix} (see \url{https://tex.stackexchange.com/q/617905} and
-% \url{https://github.com/latex3/latex2e/pull/699}, thanks Phelype Oleinik).
-% Second, the support for \cs{@currentcounter} has been improved, including
-% \cs{footnote} and \pkg{amsmath} (see
-% \url{https://github.com/latex3/latex2e/issues/687}, thanks Frank Mittelbach
-% and Ulrike Fischer).  Hence, since we would not be able to go much backwards
-% without special handling anyway, we make the cut at the 2021-11-15 kernel
-% release.
+% to \cs{appendix} (by \contributor{Phelype Oleinik} at
+% \url{https://tex.stackexchange.com/q/617905} and
+% \url{https://github.com/latex3/latex2e/pull/699}).  Second, the support for
+% \cs{@currentcounter} has been improved, including \cs{footnote} and
+% \pkg{amsmath} (by \contributor{Frank Mittelbach} and \contributor{Ulrike
+% Fischer} at \url{https://github.com/latex3/latex2e/issues/687}).  Hence,
+% since we would not be able to go much backwards without special handling
+% anyway, we make the cut at the 2021-11-15 kernel release.
 %
 %    \begin{macrocode}
 \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
@@ -360,9 +365,9 @@
 % call.  I'll stay with the \texttt{e} variant, since conceptually it is what
 % I want (\texttt{x} itself is not expandable), and this package is anyway not
 % compatible with older kernels for which the performance penalty of the
-% \texttt{e} expansion would ensue (see also
-% \url{https://tex.stackexchange.com/q/611370/#comment1529282_611385}, thanks
-% Enrico Gregorio, aka `egreg').
+% \texttt{e} expansion would ensue (helpful comment by \contributor{Enrico
+% Gregorio}, aka `egreg' at
+% \url{https://tex.stackexchange.com/q/611370/#comment1529282_611385}).
 %    \begin{macrocode}
 \cs_generate_variant:Nn \@@_get_enclosing_counters_value:n { e }
 %    \end{macrocode}
@@ -1560,9 +1565,9 @@
 % existence of the property itself, as far as \pkg{zref} is concerned.  This
 % because typesetting relies on the check \cs{zref@ifrefcontainsprop}, which
 % \emph{presumes} the property is defined and silently expands the \emph{true}
-% branch if it is not (see \url{https://github.com/ho-tex/zref/issues/13},
-% thanks Ulrike Fischer).  Therefore, before adding anything to
-% \cs{l_@@_ref_property_tl}, check if first here with
+% branch if it is not (insightful comments by \contributor{Ulrike Fischer} at
+% \url{https://github.com/ho-tex/zref/issues/13}).  Therefore, before adding
+% anything to \cs{l_@@_ref_property_tl}, check if first here with
 % \cs{zref@ifpropundefined}: close it at the door.
 %
 %
@@ -2018,10 +2023,11 @@
 % polluting the markup too much given that, for languages that need it, it may
 % get to be used frequently.
 %
-% Thanks \texttt{@samcarter} and Alan Munn for useful comments about
-% declension on the TeX.SX chat.  Also, Florent Rougon's efforts in this area,
-% with the \pkg{xcref} package (\url{https://github.com/frougon/xcref}), have
-% been an insightful source to frame the problem in general terms.
+% \contributor{\texttt{@samcarter}} and \contributor{Alan Munn} provided
+% useful comments about declension on the TeX.SX chat.  Also,
+% \contributor{Florent Rougon}'s efforts in this area, with the \pkg{xcref}
+% package (\url{https://github.com/frougon/xcref}), have been an insightful
+% source to frame the problem in general terms.
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_decl_case_tl
@@ -2137,7 +2143,8 @@
 % \url{https://tex.stackexchange.com/a/489570}).  It can be set in \cs{zcref}
 % and, for global settings, with \cs{zcsetup}.  Note that, technically, the
 % ``raw'' options are already available as \cs{@raw@opt@\meta{package}.sty}
-% (see \url{https://tex.stackexchange.com/a/618439}, thanks David Carlisle).
+% (helpful comment by \contributor{David Carlisle} at
+% \url{https://tex.stackexchange.com/a/618439}).
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_typeset_font_tl
@@ -2577,9 +2584,10 @@
 % value'' (\texttt{key}).  This distinction is captured internally by the
 % lower-level key parsing, but must be made explicit at \cs{keys_set:nn} by
 % means of the \texttt{.default:V} property of the key in \cs{keys_define:nn}.
-% For the technique and some discussion about it, see
-% \url{https://tex.stackexchange.com/q/614690} (thanks Jonathan P.\ Spratte,
-% aka `Skillmon', and Phelype Oleinik) and
+% For the technique, by \contributor{Jonathan P.\ Spratte}, aka `Skillmon',
+% and some discussion about it, including further insights by
+% \contributor{Phelype Oleinik}, see
+% \url{https://tex.stackexchange.com/q/614690} and
 % \url{https://github.com/latex3/latex3/pull/988}.
 %
 %    \begin{macrocode}
@@ -3490,20 +3498,21 @@
 % One further thing to discuss here -- to keep this ``on record'' -- is
 % inhibition of compression for individual labels.  It is not difficult to
 % handle it at the infrastructure side, what gets sloppy is the user facing
-% syntax to signal such inhibition.  For some possible alternatives for this
-% (and good ones at that) see \url{https://tex.stackexchange.com/q/611370}
-% (thanks Enrico Gregorio, Phelype Oleinik, and Steven B.\ Segletes).  Yet
-% another alternative would be an option receiving the label(s) not to be
-% compressed, this would be a repetition, but would keep the syntax clean.
-% All in all, probably the best is simply not to allow individual inhibition
-% of compression.  We can already control compression of each \cs{zcref} call
-% with existing options, this should be enough.  I don't think the small extra
-% flexibility individual label control for this would grant is worth the
-% syntax disruption it would entail.  Anyway, it would be easy to deal with
-% this in case the need arose, by just adding another condition (coming from
-% whatever the chosen syntax was) when we check for
-% \cs{@@_labels_in_sequence:nn} in \cs{@@_typeset_refs_not_last_of_type:}.
-% But I remain unconvinced of the pertinence of doing so.
+% syntax to signal such inhibition.  For some possible alternatives for this,
+% suggested by \contributor{Enrico Gregorio}, \contributor{Phelype Oleinik},
+% and \contributor{Steven B.\ Segletes} (and good ones at that) see
+% \url{https://tex.stackexchange.com/q/611370}.  Yet another alternative would
+% be an option receiving the label(s) not to be compressed, this would be a
+% repetition, but would keep the syntax clean.  All in all, probably the best
+% is simply not to allow individual inhibition of compression.  We can already
+% control compression of each \cs{zcref} call with existing options, this
+% should be enough.  I don't think the small extra flexibility individual
+% label control for this would grant is worth the syntax disruption it would
+% entail.  Anyway, it would be easy to deal with this in case the need arose,
+% by just adding another condition (coming from whatever the chosen syntax
+% was) when we check for \cs{@@_labels_in_sequence:nn} in
+% \cs{@@_typeset_refs_not_last_of_type:}.  But I remain unconvinced of the
+% pertinence of doing so.
 %
 %
 % \subsection*{Variables}
@@ -4991,9 +5000,10 @@
 % the command being hooked at contains a double hash mark (\texttt{\#\#}) the
 % patch to add the hook, if it needs to be done with the \cs{scantokens}
 % method, may fail noisily (see \url{https://tex.stackexchange.com/q/617905},
-% thanks Phelype Oleinik).  The 2021-11-15 kernel release already handle this
-% gracefully (see \url{https://github.com/latex3/latex2e/pull/699}, thanks
-% Phelype Oleinik).
+% with a detailed explanation and possible workaround by \contributor{Phelype
+% Oleinik}).  The 2021-11-15 kernel release already handles this gracefully,
+% thanks to fix by \contributor{Phelype Oleinik} at
+% \url{https://github.com/latex3/latex2e/pull/699}.
 %
 %
 % \subsection{\opt{appendices}}
