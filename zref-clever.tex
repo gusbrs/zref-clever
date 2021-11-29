@@ -355,9 +355,17 @@ of arguments by it and/or processing by \pkg{l3keys}, particularly with regard
 to brace-stripping and space-trimming.
 
 Furthermore, \pkg{zref-clever} loads \pkg{zref}'s \pkg{zref-user} module by
-default.  So you also have its user commands available out of the box, notably
-\cs{zlabel}, but also \cs{zref} and \cs{zpageref} themselves.
+default.  So you also have its user commands available out of the box,
+including \cs{zref} and \cs{zpageref}, but notably:
 
+\begin{function}{\zlabel}
+  \begin{syntax}
+    \cs{zlabel}\marg{label}
+  \end{syntax}
+\end{function}
+Sets \meta{label} for referencing with \cs{zref} and, thus, also \cs{zcref}.
+\cs{zlabel} is provided by \pkg{zref-user} and is the counterpart of
+\cs{label} for \pkg{zref}'s referencing system.
 
 
 \subsection{Options}
@@ -2170,9 +2178,11 @@ were generously provided by (in chronological order):
   Alan Munn,
   % 2021-10-14: https://chat.stackexchange.com/transcript/message/59364073#59364073
   % 2021-10-21: https://chat.stackexchange.com/transcript/message/59418189#59418189
-  and Florent Rougon.
+  Florent Rougon,
   % https://github.com/frougon/xcref has been an useful reference for
   % declension support.
+  and Jürgen Spitzmüller.
+  % 2021-11-28: https://github.com/gusbrs/zref-clever/issues/2
 
 If I have inadvertently left anyone off the list I apologize, and please let
 me know, so that I can correct the oversight.
