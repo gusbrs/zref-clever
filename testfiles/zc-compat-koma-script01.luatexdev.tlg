@@ -1,0 +1,101 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: KOMA module
+============================================================
+-> The generic hook 'env/captionbeside/after':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed first):
+>     -> \tl_if_exist:NT \@captype {\tl_set_eq:NN \@currentcounter \@captype }
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order (after reversal):
+>     ---.
+<recently read> }
+l. ...\ShowHook{env/captionbeside/after}
+-> The generic hook 'env/captionofbeside/end':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed last):
+>     -> \tl_gset_eq:NN \g__zrefclever_koma_captype_tl \@captype 
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     ---.
+<recently read> }
+l. ...\ShowHook{env/captionofbeside/end}
+-> The generic hook 'env/captionofbeside/after':
+> Code chunks:
+>     ---
+> Document-level (top-level) code (executed first):
+>     -> \tl_if_eq:NnF \@currenvir {document}{\tl_if_empty:NF \g__zrefclever_koma_captype_tl {\tl_set_eq:NN \@currentcounter \g__zrefclever_koma_captype_tl }}\tl_gclear:N \g__zrefclever_koma_captype_tl 
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order (after reversal):
+>     ---.
+<recently read> }
+l. ...\ShowHook{env/captionofbeside/after}
+============================================================
+============================================================
+TEST 2: Reference: captionbeside figure
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{figure.1.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.4}
+                                          }
+> \box...=
+\hbox(7.71974+2.2557)x44.44606, direction TLT
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
+.\TU/lmr/m/n/10.95 ﬁ (ligature fi)
+.\TU/lmr/m/n/10.95 g
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 u
+.\TU/lmr/m/n/10.95 r
+.\TU/lmr/m/n/10.95 e
+.\penalty 10000
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 3: Reference: captionofbeside table
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
+}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1.1\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\zcref{tab:table-1.1.3}
+                                         }
+> \box...=
+\hbox(7.5993+0.12045)x41.36911, direction TLT
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
+.\TU/lmr/m/n/10.95 t
+.\TU/lmr/m/n/10.95 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10.95 -
+.\TU/lmr/m/n/10.95 b
+.\TU/lmr/m/n/10.95 l
+.\TU/lmr/m/n/10.95 e
+.\penalty 10000
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmr/m/n/10.95 1
+.\TU/lmr/m/n/10.95 .
+.\TU/lmr/m/n/10.95 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================

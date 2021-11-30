@@ -17,10 +17,16 @@ env:
     # Build formats
     latex
     latex-bin
-    latex-bin-dev
     luatex
     luatexbase
     xetex
+    # dev kernel
+    latex-bin-dev
+    latex-base-dev
+    latex-amsmath-dev
+    latex-graphics-dev
+    latex-tools-dev
+    latex-firstaid-dev
     # Fonts
     metafont
     mfware

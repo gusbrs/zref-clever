@@ -1,0 +1,52 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: items\group_end:
+\nobreakspace \hyper@@link {\c_empty_tl }{Item.1}{\group_begin:
+{{(1)}}\group_end: }, \hyper@@link {\c_empty_tl }{Item.2}{\group_begin:
+{{(I)}}\group_end: }, \hyper@@link {\c_empty_tl }{Item.3}{\group_begin:
+{{(A)}}\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
+}{Item.4}{\group_begin: {{(i)}}\group_end: }.
+<recently read> }
+l. ......x0=\hbox{\zcref{item-1,item-2,item-3,item-4}
+                                                  }
+> \box...=
+\hbox(7.5+2.5)x111.72, direction TLT
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 m
+.\TU/lmr/m/n/10 s
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.1}
+.\TU/lmr/m/n/10 (
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 )
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.2}
+.\TU/lmr/m/n/10 (
+.\TU/lmr/m/n/10 I
+.\TU/lmr/m/n/10 )
+.\pdfendlink
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.3}
+.\TU/lmr/m/n/10 (
+.\TU/lmr/m/n/10 A
+.\TU/lmr/m/n/10 )
+.\pdfendlink
+.\glue(\spaceskip) 3.33 plus 1.66331 minus 1.1111
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.4}
+.\TU/lmr/m/n/10 (
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 )
+.\pdfendlink
+! OK.
+l. ...\showbox0
