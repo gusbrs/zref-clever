@@ -27,6 +27,7 @@ env:
     latex-graphics-dev
     latex-tools-dev
     latex-firstaid-dev
+    xelatex-dev
     # Fonts
     metafont
     mfware
