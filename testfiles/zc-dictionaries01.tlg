@@ -506,10 +506,10 @@ outer braces):
 >  {type-footnote-Name-pl}  =>  {Notes}
 >  {type-footnote-name-pl}  =>  {notes}
 >  {type-endnote-gender}  =>  {f}
->  {type-endnote-Name-sg}  =>  {Note finale}
->  {type-endnote-name-sg}  =>  {note finale}
->  {type-endnote-Name-pl}  =>  {Notes finales}
->  {type-endnote-name-pl}  =>  {notes finales}
+>  {type-endnote-Name-sg}  =>  {Note}
+>  {type-endnote-name-sg}  =>  {note}
+>  {type-endnote-Name-pl}  =>  {Notes}
+>  {type-endnote-name-pl}  =>  {notes}
 >  {type-note-gender}  =>  {f}
 >  {type-note-Name-sg}  =>  {Note}
 >  {type-note-name-sg}  =>  {note}
