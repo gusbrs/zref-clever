@@ -2269,20 +2269,20 @@
 % \githubissue{1}) about the most appropriate type for \texttt{paragraph} and
 % \texttt{subparagraph} counters was that the reader of the document does not
 % care whether that particular document structure element has been introduced
-% by \cs{paragraph} or, e.g.\ \cs{subsubsection} command.  This is a
+% by \cs{paragraph} or, e.g.\ by the \cs{subsubsection} command.  This is a
 % difference the author knows, as they're using \LaTeX{}, but to the reader
-% the difference between \cs{paragraph} and \cs{subsubsection} is not really
-% relevant, and it may be just confusing to refer to them by different names.
-% In this case the type for \texttt{paragraph} and \texttt{subparagraph}
-% should just be \texttt{section}.  I don't have a strong opinion about this,
-% and the matter was not pursued further.  Besides, I presume not many people
-% would set \texttt{secnumdepth} so high to start with.  But, for the time
-% being, I left the \texttt{paragraph} type for them, since there is actually
-% a visual difference to the reader between the \cs{subsubsection} and
-% \cs{paragraph} in the standard classes: up to the former, the sectioning
-% commands break a line before the following text, while, from the later on,
-% the sectioning commands and the following text are part of the same line.
-% So, \cs{paragraph} is actually different from ``just a shorter way to write
+% the difference between them is not really relevant, and it may be just
+% confusing to refer to them by different names.  In this case the type for
+% \texttt{paragraph} and \texttt{subparagraph} should just be
+% \texttt{section}.  I don't have a strong opinion about this, and the matter
+% was not pursued further.  Besides, I presume not many people would set
+% \texttt{secnumdepth} so high to start with.  But, for the time being, I left
+% the \texttt{paragraph} type for them, since there is actually a visual
+% difference to the reader between the \cs{subsubsection} and \cs{paragraph}
+% in the standard classes: up to the former, the sectioning commands break a
+% line before the following text, while, from the later on, the sectioning
+% commands and the following text are part of the same line.  So,
+% \cs{paragraph} is actually different from ``just a shorter way to write
 % \cs{subsubsubsection}''.
 %
 %
