@@ -1405,49 +1405,68 @@ set around a cross-reference ``task'' we'd like to perform with
 \subsection{Context sensitive references}
 
 \zctask{Make cross-references which are sensitive to the relative position
-  between the reference and the label being referred to, à la \pkg{varioref}.}
+  between the reference and the label being referred to.}
 
-\pkg{varioref}'s \cs{vref} provides for varied references for three different
-basic cases: when the reference and the label are on the same page, it
-typesets a plain reference; when the reference and the label are in contiguous
-pages (next, previous, or facing), it typesets the reference and a fixed
-string corresponding to the relative position; when the reference and the
-label are in different non-contiguous pages, it typesets a regular reference
-and a page reference.  The same end result, but with a different user
-interface concept can be achieved through \pkg{zref-clever}'s integration with
-\pkg{zref-check}.  For this, the later must be loaded, which can be most
-conveniently done with the \opt{check} option in the preamble.  With that in
-place, the different cases could be covered by the following examples:
-
+It is frequently useful to make a reference to both a document element and its
+page.  For example:
 \begin{zcexample}
-\zcref[check=thispage]{fig:1}
+\zcref{fig:1} on \zcpageref{fig:1}
+\end{zcexample}
+
+However, while this works well when the object and the reference are somewhat
+distant, we may want to adjust this to something different when the label and
+the reference are close to each other.  If both are on the same page, we may
+want to drop the \cs{zcpageref}, or replace it with ``above'' or ``below''.
+And, if both are on contiguous pages, then something like ``on the following
+page'' or ``on the preceding page'' may be preferred.  Since we don't usually
+know the relative position of the reference to the label, particularly for
+floats, making these kinds of adjustments manually is an uphill battle, and
+error prone, in the absence of some support for it.
+
+\pkg{zref-clever}'s integration with \pkg{zref-check} offers some assistance
+in making these kinds of references, by providing checks for the relation
+between the reference and the label.  For example, you may use:
+\begin{zcexample}
 \zcref[check=nextpage,note={on the following page}]{fig:1}
-\zcref[check=prevpage,note={on the preceding page}]{fig:1}
-\zcref[check=facing,note={on the facing page}]{fig:1}
+\end{zcexample}
+and if \texttt{fig:1} is not on the next page relative to the reference, a
+compilation warning can be issued by \pkg{zref-check} (according to the
+package's options), so that the problem can be easily identified and
+corrected.  Evidently, this does not fully automate the typeset results, but
+it does automate the checking that the reference context is the intended one.
+
+And to make use of this feature, one does not need to rely on compiling the
+document, make one such reference according to the current state of things,
+and then adjusting them over and over, as the document gets edited.  This
+feature is best used within a certain workflow, which starts by making a
+standard reference, but adding the \texttt{pagegap} check to it:
+\begin{zcexample}
 \zcref[check=pagegap]{fig:1} on \zcpageref{fig:1}
 \end{zcexample}
 
-And, similarly for the cases of \cs{vpageref}:
-
+During the initial editing of the document, this reference will be formally
+correct, even if less than ideal in certain cases.  At a certain point, when
+you choose to give finishing touches to your document, then you can cater for
+\pkg{zref-check}'s warnings (the package has options to control them, for
+example, enabling warnings only when the \opt{draft} option is not in use).
+The \texttt{pagegap} check will pass if there's one or more pages between the
+reference and the label, in which case, that reference is already what we
+want.  However, if the referenced object lies in the previous page, the same
+page, or the next page, the \texttt{pagegap} check will issue a warning.  Thus
+telling us if there's an opportunity, or need, to adjust the context
+information of the reference.  Then we can go with one of the below, according
+to the situation:
 \begin{zcexample}
-\zcref[noref,check=thispage,note={on this page}]{fig:1}
-\zcref[noref,check=nextpage,note={on the following page}]{fig:1}
-\zcref[noref,check=prevpage,note={on the preceding page}]{fig:1}
-\zcref[noref,check=facing,note={on the facing page}]{fig:1}
-\zcref[noref,check=pagegap]{fig:1} on \zcpageref{fig:1}
+\zcref[check=thispage]{fig:1}
+\zcref[check=above,note={above}]{fig:1}
+\zcref[check=below,note={below}]{fig:1}
+\zcref[check=nextpage,note={on the following page}]{fig:1}
+\zcref[check=prevpage,note={on the preceding page}]{fig:1}
+\zcref[check=facing,note={on the facing page}]{fig:1}
 \end{zcexample}
 
-Since \cs{zcref} can receive multiple labels, and make ranges out of them, it
-is not difficult to extend these examples to the functionality of
-\cs{vrefrange} and \cs{vpagerefrange}.
-
-Evidently, this does not fully automate the typeset results, but it does
-automate the checking that the reference context is the intended one.  If the
-relation between the reference and the label does not correspond to the
-specified one, a compilation warning is issued (according to the options given
-to \pkg{zref-check}), so that the problem can be easily identified and
-corrected.  See \pkg{zref-check}'s documentation for details, and further
-available checks.
+See \pkg{zref-check}'s documentation for details, and further available
+checks.
 
 
 \subsection{\cs{newtheorem}}
