@@ -241,12 +241,11 @@ carried over to \pkg{zref}, neither by the \pkg{zref} itself nor by other
 packages.
 
 \pkg{zref-clever} tries to cover this gap, by bringing a number of existing
-features available for the standard referencing system to \pkg{zref}, and
-hopefully making \pkg{zref} more accessible, and interesting, to the average
-user.  And the package's name makes it clear that the core of the envisaged
-feature set is that of \pkg{cleveref}, even though the attempt was less one of
-replicating functionality per se than that of having it as a successful point
-of reference, from where we could then try to tap into \pkg{zref}'s potential.
+features available for the standard referencing system to \pkg{zref}.  And the
+package's name makes it clear that the core of the envisaged feature set is
+that of \pkg{cleveref}, even though the attempt was less one of replicating
+functionality per se than that of having it as a successful point of
+reference, from where we could then try to tap into \pkg{zref}'s potential.
 Indeed, although there is a significant intersection, the features of
 \pkg{zref-clever} are neither a superset nor a subset of those of
 \pkg{cleveref}.  There are things either of them can do that the other can't.
@@ -258,16 +257,16 @@ local options.
 
 Considering that \pkg{zref} itself offers the \pkg{zref-titleref} module, and
 that the integration with \pkg{zref-check} allows \pkg{zref-clever} to make
-context sensitive references, akin to those of \pkg{varioref}, a significant
-part of the most prominent automation features available to the standard
-referencing system is thus brought to \pkg{zref}, working under a single
-consistent underlying infrastructure and user interface.  Alas, there are
-limitations, of course (see \zcref{sec:limitations}).  Still, all in all,
-hopefully \pkg{zref-clever} can be the missing piece for \pkg{zref} to fulfill
-the promise insinuated by the ``z'' in its name, and be your ``last ref''.
+context sensitive references, a significant part of the most prominent
+automation features available to the standard referencing system is thus
+brought to \pkg{zref}, working under a single consistent underlying
+infrastructure and user interface.  There are some limitations, of course (see
+\zcref{sec:limitations}), and it may be your cup of tea or not.  Still, all in
+all, hopefully \pkg{zref-clever} can make \pkg{zref} more accessible, and
+interesting, to the average user.
 
 
-\subsection{Warning}
+\section{Warning}
 \zlabel{sec:warning}
 
 This package is in its early days, and should be considered experimental.  By
@@ -293,7 +292,7 @@ As usual:
 \end{zcexample}
 
 
-\subsection{Dependencies}
+\section{Dependencies}
 
 \pkg{zref-clever} requires \pkg{zref}, and \LaTeX{} kernel 2021-11-15, or
 newer.  It also needs \pkg{l3keys2e} and \pkg{ifdraft}.  Some packages are
@@ -345,9 +344,9 @@ effects if ungrouped, e.g.\ in the preamble.
     \cs{zcRefTypeSetup}\marg{type}\marg{options}
   \end{syntax}
 \end{function}
-Sets type-specific reference format options (see \zcref{sec:ref-format-opts}).
-Just as for \cs{zcsetup}, the settings performed by \cs{zcRefTypeSetup} are
-local, within the current group.
+Sets type-specific reference format options (see
+\zcref{sec:reference-format}).  Just as for \cs{zcsetup}, the settings
+performed by \cs{zcRefTypeSetup} are local, within the current group.
 
 \bigskip{}
 
@@ -372,7 +371,7 @@ Sets \meta{label} for referencing with \cs{zref} and, thus, also \cs{zcref}.
 \cs{label} for \pkg{zref}'s referencing system.
 
 
-\subsection{Options}
+\section{Options}
 \zlabel{sec:options}
 
 \pkg{zref-clever} is highly configurable, offering a lot of flexibility in
@@ -388,7 +387,7 @@ as a whole; and ``reference format options'', which control the detail of
 reference formatting, including type-specific and language-specific settings.
 
 This section covers the first group (for the second one, see
-\zcref{sec:ref-format-opts}).  General options can be set globally either as
+\zcref{sec:reference-format}).  General options can be set globally either as
 package options at load-time (see \zcref{sec:loading-package}) or by means of
 \cs{zcsetup} in the preamble (see \zcref{sec:user-interface}).  They can also
 be set locally with \cs{zcsetup} along the document or through the optional
@@ -582,7 +581,7 @@ equivalent to \texttt{nameinlink=true}.
 
 \DescribeOption{preposinlink} %
 The \opt{preposinlink} option controls whether the \opt{refpre} and
-\opt{refpos} reference format options (see \zcref{sec:ref-format-opts}) are
+\opt{refpos} reference format options (see \zcref{sec:reference-format}) are
 included in the reference hyperlink or not.  It is a boolean option.  The
 package's default is \texttt{preposinlink=false}, and the option given without
 a value is equivalent to \texttt{preposinlink=true}.
@@ -590,7 +589,7 @@ a value is equivalent to \texttt{preposinlink=true}.
 \DescribeOption{lang} %
 The \opt{lang} option controls the language used by \cs{zcref} when looking
 for language-specific reference format options (see
-\zcref{sec:ref-format-opts}).  The default value, \texttt{current}, uses the
+\zcref{sec:reference-format}).  The default value, \texttt{current}, uses the
 current language, as defined by \pkg{babel} or \pkg{polyglossia} (or
 \texttt{english} if none of them is loaded).  Value \texttt{main} uses the
 main document language, as defined by \pkg{babel} or \pkg{polyglossia} (or
@@ -632,8 +631,8 @@ is equivalent to \texttt{nudge=true} and the package's default is
 a comma separated list of elements, and recognizes values \texttt{multitype},
 \texttt{comptosing}, \texttt{gender}, and \texttt{all}.  The
 \texttt{multitype} nudge warns when the reference is composed by multiple type
-blocks (see \zcref{sec:ref-format-opts}).  The \texttt{comptosing} nudge let's
-you know when multiple labels of the same type have been compressed to a
+blocks (see \zcref{sec:reference-format}).  The \texttt{comptosing} nudge
+let's you know when multiple labels of the same type have been compressed to a
 singular type name form.  It can be combined with the \opt{sg} option, which
 is the way to tell \cs{zcref} you know it's a singular and so not to nudge if
 a compression to singular occurs, but to nudge if the contrary occurs, that
@@ -652,7 +651,7 @@ the ``nudging'' feature.
 \DescribeOption{font} %
 The \opt{font} option can receive font styling commands to change the
 appearance of the whole reference list (see also the \opt{namefont} and
-\opt{reffont} reference format options in \zcref{sec:ref-format-opts}).  It
+\opt{reffont} reference format options in \zcref{sec:reference-format}).  It
 does not affect the content of the \opt{note}, however.  The option is
 intended exclusively for commands that only change font attributes: style,
 family, shape, weight, size, color, etc.  Anything else, particularly commands
@@ -668,7 +667,7 @@ The \opt{titleref} option receives no value and, when given, loads
 \DescribeOption{note} %
 The \opt{note} option receives as value some text to be typeset at the end of
 the whole reference list.  It is separated from it by \opt{notesep} (see
-\zcref{sec:ref-format-opts}).
+\zcref{sec:reference-format}).
 
 \DescribeOption{check} %
 Provides integration of \pkg{zref-clever} with the \pkg{zref-check} package.
@@ -679,7 +678,7 @@ both checks and \cs{zcheck}'s options.  And the checks are performed for each
 label in \marg{labels} received as argument by \cs{zcref}.  See the User
 manual of \pkg{zref-check} for details.  The checks done by the \opt{check}
 option in \cs{zcref} comprise the complete reference, including the \opt{note}
-(see \zcref{sec:ref-format-opts}).  If \pkg{zref-check} was not loaded in the
+(see \zcref{sec:reference-format}).  If \pkg{zref-check} was not loaded in the
 preamble, at begin document the option is made no-op and issues a warning.
 
 \DescribeOption{countertype} %
@@ -775,10 +774,8 @@ available modules and details about each of them, see
 \opt{nocompat} without a value (or an empty one).  This is a preamble only
 option.
 
-\section{Reference format}
-\zlabel{sec:reference-format}
 
-\subsection{Reference types}
+\section{Reference types}
 \zlabel{sec:reference-types}
 
 A ``reference type'' is the basic \pkg{zref-clever} setup unit for specifying
@@ -846,7 +843,7 @@ the \cs{appendix}.
 One more observation about ``reference types'' is due here.  A \emph{type} is
 not really ``defined'' in the sense a variable or a function is.  It is more
 of a ``string'' which \pkg{zref-clever} uses to look for a whole set of
-type-specific reference format options (see \zcref{sec:ref-format-opts}).
+type-specific reference format options (see \zcref{sec:reference-format}).
 Each of these options individually may be ``set'' or not, ``defined'' or not.
 And, depending on the setup and the relevant precedence rules for this, some
 of them may be required and some not.  In practice, \pkg{zref-clever} uses the
@@ -854,8 +851,8 @@ of them may be required and some not.  In practice, \pkg{zref-clever} uses the
 compilation warning when it cannot find a suitable value.
 
 
-\subsection{Reference format options}
-\zlabel{sec:ref-format-opts}
+\section{Reference format}
+\zlabel{sec:reference-format}
 
 Formatting how the reference is to be typeset is, quite naturally, a big part
 of the user interface of \pkg{zref-clever}.  In this area, we tried to balance
@@ -1082,7 +1079,7 @@ of these language packages, or to a language specified directly by the user.
 This is primarily relevant for reference format options, particularly
 reference type \emph{names} (though not only, since most reference format
 options can have language-specific values, or ``translations'', see
-\zcref{sec:ref-format-opts}).  But other features of the package also cater
+\zcref{sec:reference-format}).  But other features of the package also cater
 for language specific needs.
 
 As far as language selection is concerned, if the language is declared and
@@ -1223,7 +1220,7 @@ the user. \cs{zcDeclareLanguageAlias} is preamble only.
   \end{syntax}
 \end{function}
 Sets language-specific reference format options for \meta{language} (see
-\zcref{sec:ref-format-opts}), be they type-specific or not. \meta{language}
+\zcref{sec:reference-format}), be they type-specific or not. \meta{language}
 must be already known to \pkg{zref-clever}.  Besides reference format options,
 \cs{zcLanguageSetup} knows three other keys: \opt{type}, \opt{case}, and
 \opt{gender}.  The first two work like a ``switch'' affecting the options
@@ -1238,7 +1235,7 @@ For \opt{case} this means the default declension case, which is the first
 element of the list provided to the \opt{declension} option in
 \cs{zcDeclareLanguage}.  For \opt{type} this means ``default translations'',
 which are language-specific but not type-specific option values (see
-\zcref{sec:ref-format-opts}).  An empty valued \texttt{type=} key can also
+\zcref{sec:reference-format}).  An empty valued \texttt{type=} key can also
 ``unset'' the type.  The \opt{gender} key sets the gender of the current
 \texttt{type} (provided the value it receives is one of the declared genders
 for \meta{language}).  \cs{zcLanguageSetup} is preamble only.
@@ -1795,10 +1792,7 @@ be the following.
 \end{document}
 \end{zchowto}
 
-\section{Compatibility}
-\zlabel{sec:compatibility}
-
-\subsection{Limitations}
+\section{Limitations}
 \zlabel{sec:limitations}
 
 Being based on \pkg{zref} entails one quite sizable advantage for
@@ -1864,7 +1858,7 @@ whether \pkg{zref-clever} is able to provide some specific support when a
 reasonable way to do so is within reach.
 
 
-\subsection{Compatibility modules}
+\section{Compatibility modules}
 \zlabel{sec:comp-modules}
 
 This section gives a description of each compatibility module provided by
@@ -2055,7 +2049,7 @@ This module just sets appropriate \opt{countertype} and \opt{counterresetby}
 for the \texttt{subfigure} and \texttt{subtable} counters.
 
 
-\subsection{Work-arounds}
+\section{Work-arounds}
 
 \marginpar{\raggedleft\raisebox{-1.5ex}{\dbend}}As should be clear by now, the
 use of \pkg{zref}'s \cs{zlabel} and thus of \pkg{zref-clever} may occasionally
