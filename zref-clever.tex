@@ -120,12 +120,14 @@
 \newcounter{zchowto}
 \lstnewenvironment{zchowto}[1][]{%
   \renewcommand{\lstlistingname}{How-to}%
+  \renewcommand*\theHlstlisting{ht.\thelstlisting}%
   \lstset{#1}%
   \setcounter{lstlisting}{\value{zchowto}}%
 }{}
 \newcounter{zcworkaround}
 \lstnewenvironment{zcworkaround}[1][]{%
   \renewcommand{\lstlistingname}{Work-around}%
+  \renewcommand*\theHlstlisting{wa.\thelstlisting}%
   \lstset{#1}%
   \setcounter{lstlisting}{\value{zcworkaround}}%
 }{}
