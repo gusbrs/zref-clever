@@ -68,37 +68,45 @@
 %
 % \NewDocumentCommand\opt{m}{\texttt{#1}}
 %
-% \pdfstringdefDisableCommands{%
+% \pdfstringdefDisableCommands{^^A
 %   \def\opt#1{#1}
 % }
 %
 % ^^A Have the Index at 'section' level rather than 'part'.  Otherwise it is
 % ^^A just the same definition from 'l3doc.cls'.
-% \IndexPrologue{%
+% \IndexPrologue{^^A
 %   \section*{Index}
 %   \markboth{Index}{Index}
 %   \addcontentsline{toc}{section}{Index}
 %   The italic numbers denote the pages where the corresponding entry is
 %   described, numbers underlined point to the definition, all others indicate
-%   the places where it is used.%
+%   the places where it is used.^^A
 % }
 %
 %
 % \GetFileInfo{zref-clever.sty}
 %
-% \title{%
-%   The \pkg{zref-clever} package implementation%
-%   \thanks{This file describes \fileversion, released \filedate.}%
+% \title{^^A
+%   The \pkg{zref-clever} package^^A
+%   \thanks{This file describes \fileversion, released \filedate.}^^A
+%   \texorpdfstring{\\{}\medskip{}}{ - }^^A
+%   Code documentation^^A
+%   \texorpdfstring{\medskip{}}{}^^A
 % }
 %
-% \author{%
-%   Gustavo Barros%
-%   \thanks{\url{https://github.com/gusbrs/zref-clever}}%
+% \author{^^A
+%   Gustavo Barros^^A
+%   \thanks{\url{https://github.com/gusbrs/zref-clever}}^^A
 % }
 %
 % \date{\filedate}
 %
 % \maketitle
+%
+% \begin{center}
+%   \textbf{EXPERIMENTAL}
+% \end{center}
+%
 %
 % \tableofcontents
 %
