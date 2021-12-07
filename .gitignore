@@ -3,3 +3,5 @@ aux/
 .auctex/
 *.pdf
 *.zip
+zref-clever-ctan.curlopt
+
