@@ -4,13 +4,11 @@
 
 \usepackage{zref-clever}
 
-\START
-
 \zcsetup{check}
 
-\OMIT
 \begin{document}
-\TIMO
+
+\START
 
 \ExplSyntaxOn
 \bool_show:N \l__zrefclever_zrefcheck_available_bool
