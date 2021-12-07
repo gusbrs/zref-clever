@@ -14,7 +14,18 @@ installfiles = {"*.sty","*.cls","*.dict"}
 checkruns = 2
 
 -- Set up different test sets
-checkconfigs = {"build","build-dev","build-moreruns"}
+checkconfigs = {"build","build-moreruns"}
+
+-- Use dev formats for regression tests
+-- See https://tex.stackexchange.com/q/611424
+checkengines = {"pdftex","luatex","xetex","pdftexdev","luatexdev","xetexdev"}
+specialformats = specialformats or {}
+specialformats.latex =
+  {
+    pdftexdev = { binary = "pdflatex-dev" , format = "" } ,
+    luatexdev = { binary = "lualatex-dev" , format = "" } ,
+    xetexdev  = { binary = "xelatex-dev"  , format = "" } ,
+  }
 
 -- Use UTF-8 logs for all engines
 asciiengines = {}
