@@ -89,12 +89,13 @@ function update_tag(file, content, tagname, tagdate)
     -- The `or ""` is meant to cover the case of the *first* release, for
     -- which there will be no match for that pattern.  It must be done
     -- manually.
+    local tagname_safe_escaped = string.gsub(tagname_safe, "%p", "%%%1")
     local announcement = string.match(
-      content, "\n(## %[v" .. tagname_safe .. "%].-\n)## %[v"
+      content, "\n(## %[v" .. tagname_safe_escaped .. "%].-\n)## %[v"
     ) or ""
     announcement = string.gsub(
       announcement,
-      "## %[v" .. tagname_safe .. "%]%(https.-%)",
+      "## %[v" .. tagname_safe_escaped .. "%]%(https.-%)",
       "## v" .. tagname_safe
     )
     -- File operations based on 'update_file_tag' function of
