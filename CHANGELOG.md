@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.1.0-alpha...HEAD)
+## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.1.1-alpha...HEAD)
+
+## [v0.1.1-alpha](https://github.com/gusbrs/zref-clever/compare/v0.1.0-alpha...v0.1.1-alpha) (2021-12-07)
 
 ### Changed
 - Improvements to the French dictionary (see issue
