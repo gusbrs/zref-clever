@@ -48,8 +48,6 @@ outer braces):
 >  {type-page-name-sg}  =>  {page}
 >  {type-page-Name-pl}  =>  {Pages}
 >  {type-page-name-pl}  =>  {pages}
->  {type-page-name-sg-ab}  =>  {p.}
->  {type-page-name-pl-ab}  =>  {pp.}
 >  {type-page-rangesep}  =>  {\textendash }
 >  {type-line-Name-sg}  =>  {Line}
 >  {type-line-name-sg}  =>  {line}
@@ -643,8 +641,6 @@ The property list \g__zrefclever_dict_portuguese_prop contains the pairs
 >  {type-page-name-sg}  =>  {página}
 >  {type-page-Name-pl}  =>  {Páginas}
 >  {type-page-name-pl}  =>  {páginas}
->  {type-page-name-sg-ab}  =>  {p.}
->  {type-page-name-pl-ab}  =>  {pp.}
 >  {type-page-rangesep}  =>  {\textendash }
 >  {type-line-gender}  =>  {f}
 >  {type-line-Name-sg}  =>  {Linha}
