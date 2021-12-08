@@ -1402,10 +1402,10 @@ set around a cross-reference ``task'' we'd like to perform with
 \pkg{zref-clever}.
 
 
-\subsection{Context sensitive references}
+\subsection{Context sensitive page references}
 
-\zctask{Make cross-references which are sensitive to the relative position
-  between the reference and the label being referred to.}
+\zctask{Make cross-references to pages which are sensitive to the relative
+  position between the reference and the label being referred to.}
 
 It is frequently useful to make a reference to both a document element and its
 page.  For example:
@@ -1436,12 +1436,12 @@ corrected.  Evidently, this does not fully automate the typeset results, but
 it does automate the checking that the reference context is the intended one.
 
 And to make use of this feature, one does not need to rely on compiling the
-document, make one such reference according to the current state of things,
-and then adjusting them over and over, as the document gets edited.  This
-feature is best used within a certain workflow, which starts by making a
-standard reference, but adding the \texttt{pagegap} check to it:
+document, make the reference according to the current state of things, and
+then adjusting it over and over, as the document gets edited.  This feature is
+best used within a certain workflow, which starts by making a standard
+reference with a page reference, but adding the \texttt{pagegap} check to it:
 \begin{zcexample}
-\zcref[check=pagegap]{fig:1} on \zcpageref{fig:1}
+\zcref{fig:1} on \zcpageref[check=pagegap]{fig:1}
 \end{zcexample}
 
 During the initial editing of the document, this reference will be formally
