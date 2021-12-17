@@ -20,12 +20,11 @@ checkconfigs = {"build","build-moreruns"}
 -- See https://tex.stackexchange.com/q/611424
 checkengines = {"pdftex","luatex","xetex","pdftexdev","luatexdev","xetexdev"}
 specialformats = specialformats or {}
-specialformats.latex =
-  {
-    pdftexdev = { binary = "pdflatex-dev" , format = "" } ,
-    luatexdev = { binary = "lualatex-dev" , format = "" } ,
-    xetexdev  = { binary = "xelatex-dev"  , format = "" } ,
-  }
+specialformats.latex = specialformats.latex or { }
+specialformats.latex.pdftexdev = { binary = "pdflatex-dev" , format = "" }
+specialformats.latex.luatexdev = { binary = "lualatex-dev" , format = "" }
+specialformats.latex.xetexdev  = { binary = "xelatex-dev"  , format = "" }
+
 
 -- Use UTF-8 logs for all engines
 asciiengines = {}
