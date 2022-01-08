@@ -1353,11 +1353,21 @@
                   { option-only-type-specific } { gender }
               }
               {
-                \seq_if_in:NnTF \l_@@_dict_gender_seq {#1}
-                  { \@@_provide_dict_type_transl:nn { gender } {#1} }
+                \clist_clear:N \l_tmpa_clist
+                \clist_map_inline:nn {#1}
                   {
-                    \msg_info:nnxx { zref-clever } { gender-not-declared }
-                      { \l_@@_dict_language_tl } {#1}
+                    \seq_if_in:NnTF \l_@@_dict_gender_seq {##1}
+                      { \clist_put_right:Nn \l_tmpa_clist {##1} }
+                      {
+                        \msg_info:nnxx { zref-clever }
+                          { gender-not-declared }
+                          { \l_@@_dict_language_tl } {##1}
+                      }
+                  }
+                \clist_if_empty:NF \l_tmpa_clist
+                  {
+                    \exp_args:Nnx \@@_provide_dict_type_transl:nn
+                      { gender } { \clist_use:Nn \l_tmpa_clist { , } }
                   }
               }
           }
@@ -2749,7 +2759,7 @@
     \prop_gput:cnn { g_@@_dict_ #1 _prop }
       { type- #2 - #3 } {#4}
   }
-\cs_generate_variant:Nn \@@_declare_type_transl:nnnn { VVnn , VVxn }
+\cs_generate_variant:Nn \@@_declare_type_transl:nnnn { VVnn , VVxn , VVnx }
 \cs_new_protected:Npn \@@_declare_default_transl:nnn #1#2#3
   {
     \prop_gput:cnn { g_@@_dict_ #1 _prop }
@@ -2805,16 +2815,23 @@
                   { option-only-type-specific } { gender }
               }
               {
-                \seq_if_in:NnTF \l_@@_dict_gender_seq {#1}
+                \clist_clear:N \l_tmpa_clist
+                \clist_map_inline:nn {#1}
                   {
-                    \@@_declare_type_transl:VVnn
+                    \seq_if_in:NnTF \l_@@_dict_gender_seq {##1}
+                      { \clist_put_right:Nn \l_tmpa_clist {##1} }
+                      {
+                        \msg_warning:nnxx { zref-clever }
+                          { gender-not-declared }
+                          { \l_@@_dict_language_tl } {##1}
+                      }
+                  }
+                \clist_if_empty:NF \l_tmpa_clist
+                  {
+                    \@@_declare_type_transl:VVnx
                       \l_@@_dict_language_tl
                       \l_@@_setup_type_tl
-                      { gender } {#1}
-                  }
-                  {
-                    \msg_warning:nnxx { zref-clever } { gender-not-declared }
-                      { \l_@@_dict_language_tl } {#1}
+                      { gender } { \clist_use:Nn \l_tmpa_clist { , } }
                   }
               }
           }
@@ -4600,9 +4617,11 @@
                       { gender }
                       \l_@@_type_name_gender_tl
                       { \tl_clear:N \l_@@_type_name_gender_tl }
-                    \tl_if_eq:NNF
-                      \l_@@_ref_gender_tl
+                    \clist_set:NV \l_tmpa_clist
                       \l_@@_type_name_gender_tl
+                    \clist_if_in:NVF
+                      \l_tmpa_clist
+                      \l_@@_ref_gender_tl
                       {
                         \tl_if_empty:NTF \l_@@_type_name_gender_tl
                           {

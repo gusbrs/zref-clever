@@ -648,13 +648,13 @@ is the way to tell \cs{zcref} you know it's a singular and so not to nudge if
 a compression to singular occurs, but to nudge if the contrary occurs, that
 is, when a plural type name form is employed.  The \texttt{gender} nudge must
 be combined with option \opt{g}, and depends on the language having support
-for it.  In essence language dictionaries can store the gender of each type
+for it.  In essence language dictionaries can store the gender(s) of each type
 name (this is done for built-in dictionaries, but can also be done with
 \cs{zcLanguageSetup} for languages declared to support it).  The \opt{g}
 option let's you specify the gender you expect for that particular reference
 and the nudge is triggered if there is a mismatch between \opt{g} and the
-gender for the type name in the dictionary.  Both the \texttt{comptosing} and
-the \texttt{gender} nudges have a type block as its scope.  See
+gender(s) for the type name in the dictionary.  Both the \texttt{comptosing}
+and the \texttt{gender} nudges have a type block as its scope.  See
 \zcref{sec:internationalization} for more details and intended use cases of
 the ``nudging'' feature.
 
@@ -1248,7 +1248,9 @@ which are language-specific but not type-specific option values (see
 \zcref{sec:reference-format}).  An empty valued \texttt{type=} key can also
 ``unset'' the type.  The \opt{gender} key sets the gender of the current
 \texttt{type} (provided the value it receives is one of the declared genders
-for \meta{language}).  \cs{zcLanguageSetup} is preamble only.
+for \meta{language}).  For \texttt{type}s which have multiple valid genders
+for a given language, the option can also receive a comma separated list.
+\cs{zcLanguageSetup} is preamble only.
 
 A couple of examples to illustrate the syntax of \cs{zcLanguageSetup}:
 
@@ -1386,10 +1388,10 @@ dictionaries of languages were this matters, and can be done with
 \cs{zcLanguageSetup} as well.  For the references, that is the purpose of the
 \opt{g} option.  When there is a mismatch between the two for any type block,
 the nudge is triggered.  Of couse, this means that the gender markup has to be
-supplied in the document at each reference.  And considering such type changes
-may not be frequent for you, or considered not particularly problematic,
-you'll have to balance if doing so is worth it.  Still, the feature is
-available, and it's up to you.
+supplied in the document at each reference.  And given such type changes may
+not be frequent for you, or considered not particularly problematic, you'll
+have to balance if doing so is worth it.  Still, the feature is available, and
+it's up to you.
 
 
 \section{How-tos}

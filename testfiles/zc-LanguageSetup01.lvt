@@ -80,6 +80,16 @@
 }
 \ENDTEST
 
+\BEGINTEST{Multiple genders}
+\zcLanguageSetup{ngerman}{
+  type=chapter,
+  gender={f,m,z},
+}
+\ExplSyntaxOn
+\prop_show:N \g__zrefclever_dict_german_prop
+\ExplSyntaxOff
+\ENDTEST
+
 \BEGINTEST{English setup for later tests}
 \zcLanguageSetup{english}{
   tpairsep={ t\& },

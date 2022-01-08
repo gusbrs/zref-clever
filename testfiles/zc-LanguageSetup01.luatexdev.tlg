@@ -80,7 +80,48 @@ Package zref-clever Warning: Language 'french' has no 'n' gender declared on
 (zref-clever)                line 80.
 ============================================================
 ============================================================
-TEST 3: English setup for later tests
+TEST 3: Multiple genders
+============================================================
+Package zref-clever Warning: Language 'german' has no 'z' gender declared on
+(zref-clever)                line 87.
+The property list \g__zrefclever_dict_german_prop contains the pairs (without
+outer braces):
+>  {declension}  =>  {N,A,D,G}
+>  {gender}  =>  {f,m,n}
+>  {allcaps}  =>  {true}
+>  {default-tpairsep}  =>  { t\& }
+>  {default-tlistsep}  =>  {,,, }
+>  {default-tlastsep}  =>  { tUND }
+>  {default-notesep}  =>  {\qquad }
+>  {default-namesep}  =>  {\quad }
+>  {default-pairsep}  =>  { \& }
+>  {default-listsep}  =>  {,, }
+>  {default-lastsep}  =>  { UND }
+>  {default-rangesep}  =>  {\textrightarrow {}}
+>  {default-refpre}  =>  {[}
+>  {default-refpos}  =>  {]}
+>  {type-section-gender}  =>  {m}
+>  {type-section-namesep}  =>  {\quad }
+>  {type-section-pairsep}  =>  { \& }
+>  {type-section-listsep}  =>  {,, }
+>  {type-section-lastsep}  =>  { AND }
+>  {type-section-rangesep}  =>  {\textrightarrow {}}
+>  {type-section-refpre}  =>  {[}
+>  {type-section-refpos}  =>  {]}
+>  {type-section-D-Name-sg}  =>  {Bar}
+>  {type-section-D-name-sg}  =>  {bar}
+>  {type-section-D-Name-pl}  =>  {Bars}
+>  {type-section-D-name-pl}  =>  {bars}
+>  {type-section-D-Name-sg-ab}  =>  {B.}
+>  {type-section-D-name-sg-ab}  =>  {b.}
+>  {type-section-D-Name-pl-ab}  =>  {Bs.}
+>  {type-section-D-name-pl-ab}  =>  {bs.}
+>  {type-chapter-gender}  =>  {f,m}.
+<recently read> }
+l. ...\prop_show:N \g__zrefclever_dict_german_prop
+============================================================
+============================================================
+TEST 4: English setup for later tests
 ============================================================
 The property list \g__zrefclever_dict_english_prop contains the pairs (without
 outer braces):
@@ -109,7 +150,7 @@ outer braces):
 l. ...\prop_show:N \g__zrefclever_dict_english_prop
 ============================================================
 ============================================================
-TEST 4: Option: tpairsep=..., tlistsep=..., tlastsep=...
+TEST 5: Option: tpairsep=..., tlistsep=..., tlastsep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
@@ -231,7 +272,7 @@ l. ......hbox{\zcref{cha:chapter-1, sec:section-1.1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 5: Option: notesep=...
+TEST 6: Option: notesep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{section.1.1}{\group_begin: bar\group_end: \quad [\group_begin:
@@ -263,7 +304,7 @@ l. ......hbox{\zcref[note={a note}]{sec:section-1.1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 6: Option: namesep=...
+TEST 7: Option: namesep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
@@ -313,7 +354,7 @@ l. ......hbox{\zcref{sec:section-1.1, cha:chapter-1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 7: Option: pairsep=..., listsep=..., lastsep=...
+TEST 8: Option: pairsep=..., listsep=..., lastsep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad
 [\hyper@@link {\c_empty_tl }{section.1.1}{\group_begin: 1.1\group_end: }],,
@@ -403,7 +444,7 @@ l. ......ox{\zcref{sec:section-1.1, sec:section-1.2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 8: Option: rangesep=...
+TEST 9: Option: rangesep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad
 [\hyper@@link {\c_empty_tl }{section.1.1}{\group_begin: 1.1\group_end:
@@ -438,7 +479,7 @@ l. ...    sec:section-1.4}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 9: Option: refpre=..., refpos=...
+TEST 10: Option: refpre=..., refpos=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad
 [\group_begin: 1.1\group_end: ] \& [\group_begin: 1.2\group_end: ].
@@ -504,7 +545,7 @@ l. ......cref*{eq:equation-1.1.2, eq:equation-1.1.3}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 10: Option: [Nn]ame-[sg/pl](-ab)=...
+TEST 11: Option: [Nn]ame-[sg/pl](-ab)=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{section.1.1}{\group_begin: Bar\group_end: \quad [\group_begin:
@@ -716,7 +757,7 @@ l. ......f[abbrev]{sec:section-1.1, sec:section-1.2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 11: Option: [Nn]ame-[sg/pl](-ab)=... (german,d=D)
+TEST 12: Option: [Nn]ame-[sg/pl](-ab)=... (german,d=D)
 ============================================================
 (zref-clever-german.dict)
 Package zref-clever Info: Loaded 'german' dictionary.
