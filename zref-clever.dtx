@@ -63,6 +63,9 @@
 % \NewDocumentCommand\githubissue{m}{^^A
 %   issue~\href{https://github.com/gusbrs/zref-clever/issues/#1}{\##1}}
 %
+% \NewDocumentCommand\githubPR{m}{^^A
+%   PR~\href{https://github.com/gusbrs/zref-clever/pull/#1}{\##1}}
+%
 % ^^A Currently just for keeping semantic markup on this.
 % \NewDocumentCommand\contributor{m}{#1}
 %
@@ -5777,7 +5780,7 @@
 % dictionaries have been provided by the author.  Translations available for
 % document elements' names in other packages have been an useful reference for
 % the purpose, namely: \pkg{babel}, \pkg{cleveref}, \pkg{translator}, and
-% \pkg{translations}.  A Dutch dictionary has been contributed later.
+% \pkg{translations}.
 %
 %
 % \subsection{English}
@@ -7196,8 +7199,9 @@ type = solution ,
 %
 % \subsection{Dutch}
 %
-% Dutch dictionary contributed (initially) by niluxv. All genders were checked
-% against the ``Dikke Van Dale''. Many words have multiple genders.
+% Dutch dictionary initially contributed by \texttt{niluxv} (\githubPR{5}).
+% All genders were checked against the ``Dikke Van Dale''.  Many words have
+% multiple genders.
 %
 %    \begin{macrocode}
 %<*package>
@@ -7340,9 +7344,9 @@ type = theorem ,
   name-pl = stellingen ,
 %    \end{macrocode}
 %
-%    An alternative plural is ``lemmata''. That is also a correct English
-%    plural for lemma, but the English dictionary chooses ``lemmas''. For
-%    consistency we therefore choose ``lemma's''.
+% 2022-01-09, \texttt{niluxv}: An alternative plural is ``lemmata''. That is
+% also a correct English plural for lemma, but the English dictionary chooses
+% ``lemmas''. For consistency we therefore choose ``lemma's''.
 %
 %    \begin{macrocode}
 type = lemma ,
@@ -7409,8 +7413,8 @@ type = algorithm ,
   name-pl = algoritmes ,
 %    \end{macrocode}
 %
-%    EN-NL Van Dale translates listing as
-%    (3) ``uitdraai van computerprogramma'', ``listing''.
+% 2022-01-09, \texttt{niluxv}: EN-NL Van Dale translates listing as (3)
+% ``uitdraai van computerprogramma'', ``listing''.
 %
 %    \begin{macrocode}
 type = listing ,
