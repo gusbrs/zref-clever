@@ -5068,20 +5068,20 @@
 %
 %
 %
-% Finally, a couple of functions for retrieving options values, according to
-% the relevant precedence rules.  They both receive an \meta{option} as
-% argument, and store the retrieved value in \meta{tl variable}.  Though these
-% are mostly general functions (for a change\dots{}), they are not completely
-% so, they rely on the current state of \cs{l_@@_label_type_a_tl}, as set
-% during the processing of the label stack.  This could be easily generalized,
-% of course, but I don't think it is worth it, \cs{l_@@_label_type_a_tl} is
-% indeed what we want in all practical cases.  The difference between
-% \cs{@@_get_ref_string:nN} and \cs{@@_get_ref_font:nN} is the kind of option
-% each should be used for.  \cs{@@_get_ref_string:nN} is meant for the general
-% options, and attempts to find values for them in all precedence levels (four
-% plus ``fallback'').  \cs{@@_get_ref_font:nN} is intended for ``font''
-% options, which cannot be ``language-specific'', thus for these we just
-% search general options and type options.
+% Finally, some functions for retrieving reference options values, according
+% to the relevant precedence rules.  They both receive an \meta{option} as
+% argument, and store the retrieved value in an appropriate.  Though these are
+% mostly general functions (for a change\dots{}), they are not completely so,
+% they rely on the current state of \cs{l_@@_label_type_a_tl}, as set during
+% the processing of the label stack.  This could be easily generalized, of
+% course, but I don't think it is worth it, \cs{l_@@_label_type_a_tl} is
+% indeed what we want in all practical cases.  The difference between each of
+% these functions is the kind of option each should be used for.
+% \cs{@@_get_ref_string:nN} is meant for the general options, and attempts to
+% find values for them in all precedence levels (four plus ``fallback'').
+% \cs{@@_get_ref_font:nN} is intended for ``font'' options, which cannot be
+% ``language-specific'', thus for these we just search general options and
+% type options.  \cs{@@_get_ref_opt_bool:nN} is intended for boolean options.
 %
 % \begin{macro}{\@@_get_ref_string:nN}
 %   \begin{syntax}
