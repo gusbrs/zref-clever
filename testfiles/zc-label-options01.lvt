@@ -8,8 +8,8 @@
 
 \usepackage{hyperref}
 
-% This file is intended to test all options and respective values that can be
-% locally passed to '\zcref'.
+% This file is intended to test all label related options and respective
+% values.
 
 \begin{document}
 
