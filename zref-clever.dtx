@@ -5777,7 +5777,7 @@
 % dictionaries have been provided by the author.  Translations available for
 % document elements' names in other packages have been an useful reference for
 % the purpose, namely: \pkg{babel}, \pkg{cleveref}, \pkg{translator}, and
-% \pkg{translations}.
+% \pkg{translations}.  A Dutch dictionary has been contributed later.
 %
 %
 % \subsection{English}
@@ -7190,6 +7190,253 @@ type = solution ,
 %
 %    \begin{macrocode}
 %</dict-spanish>
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Dutch}
+%
+% Dutch dictionary contributed (initially) by niluxv. All genders were checked
+% against the ``Dikke Van Dale''. Many words have multiple genders.
+%
+%    \begin{macrocode}
+%<*package>
+\zcDeclareLanguage [ gender = { f , m , n } ] { dutch }
+%</package>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*dict-dutch>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+namesep   = {\nobreakspace} ,
+pairsep   = {~en\nobreakspace} ,
+listsep   = {,~} ,
+lastsep   = {~en\nobreakspace} ,
+tpairsep  = {~en\nobreakspace} ,
+tlistsep  = {,~} ,
+tlastsep  = {,~en\nobreakspace} ,
+notesep   = {~} ,
+rangesep  = {~t/m\nobreakspace} ,
+
+type = book ,
+  gender = n ,
+  Name-sg = Boek ,
+  name-sg = boek ,
+  Name-pl = Boeken ,
+  name-pl = boeken ,
+
+type = part ,
+  gender = n ,
+  Name-sg = Deel ,
+  name-sg = deel ,
+  Name-pl = Delen ,
+  name-pl = delen ,
+
+type = chapter ,
+  gender = n ,
+  Name-sg = Hoofdstuk ,
+  name-sg = hoofdstuk ,
+  Name-pl = Hoofdstukken ,
+  name-pl = hoofdstukken ,
+
+type = section ,
+  gender = m ,
+  Name-sg = Paragraaf ,
+  name-sg = paragraaf ,
+  Name-pl = Paragrafen ,
+  name-pl = paragrafen ,
+
+type = paragraph ,
+  gender = f ,
+  Name-sg = Alinea ,
+  name-sg = alinea ,
+  Name-pl = Alinea's ,
+  name-pl = alinea's ,
+
+type = appendix ,
+  gender = { m , n } ,
+  Name-sg = Appendix ,
+  name-sg = appendix ,
+  Name-pl = Appendices ,
+  name-pl = appendices ,
+
+type = page ,
+  gender = { f , m } ,
+  Name-sg = Pagina ,
+  name-sg = pagina ,
+  Name-pl = Pagina's ,
+  name-pl = pagina's ,
+  rangesep = {\textendash} ,
+
+type = line ,
+  gender = m ,
+  Name-sg = Regel ,
+  name-sg = regel ,
+  Name-pl = Regels ,
+  name-pl = regels ,
+
+type = figure ,
+  gender = { n , f , m } ,
+  Name-sg = Figuur ,
+  name-sg = figuur ,
+  Name-pl = Figuren ,
+  name-pl = figuren ,
+
+type = table ,
+  gender = { f , m } ,
+  Name-sg = Tabel ,
+  name-sg = tabel ,
+  Name-pl = Tabellen ,
+  name-pl = tabellen ,
+
+type = item ,
+  gender = n ,
+  Name-sg = Punt ,
+  name-sg = punt ,
+  Name-pl = Punten ,
+  name-pl = punten ,
+
+type = footnote ,
+  gender = { f , m } ,
+  Name-sg = Voetnoot ,
+  name-sg = voetnoot ,
+  Name-pl = Voetnoten ,
+  name-pl = voetnoten ,
+
+type = endnote ,
+  gender = { f , m } ,
+  Name-sg = Eindnoot ,
+  name-sg = eindnoot ,
+  Name-pl = Eindnoten ,
+  name-pl = eindnoten ,
+
+type = note ,
+  gender = f ,
+  Name-sg = Opmerking ,
+  name-sg = opmerking ,
+  Name-pl = Opmerkingen ,
+  name-pl = opmerkingen ,
+
+type = equation ,
+  gender = f ,
+  Name-sg = Vergelijking ,
+  name-sg = vergelijking ,
+  Name-pl = Vergelijkingen ,
+  name-pl = vergelijkingen ,
+  Name-sg-ab = Vgl. ,
+  name-sg-ab = vgl. ,
+  Name-pl-ab = Vgl.'s ,
+  name-pl-ab = vgl.'s ,
+  refpre = {(} ,
+  refpos = {)} ,
+
+type = theorem ,
+  gender = f ,
+  Name-sg = Stelling ,
+  name-sg = stelling ,
+  Name-pl = Stellingen ,
+  name-pl = stellingen ,
+%    \end{macrocode}
+%
+%    An alternative plural is ``lemmata''. That is also a correct English
+%    plural for lemma, but the English dictionary chooses ``lemmas''. For
+%    consistency we therefore choose ``lemma's''.
+%
+%    \begin{macrocode}
+type = lemma ,
+  gender = n ,
+  Name-sg = Lemma ,
+  name-sg = lemma ,
+  Name-pl = Lemma's ,
+  name-pl = lemma's ,
+
+type = corollary ,
+  gender = n ,
+  Name-sg = Gevolg ,
+  name-sg = gevolg ,
+  Name-pl = Gevolgen ,
+  name-pl = gevolgen ,
+
+type = proposition ,
+  gender = f ,
+  Name-sg = Propositie ,
+  name-sg = propositie ,
+  Name-pl = Proposities ,
+  name-pl = proposities ,
+
+type = definition ,
+  gender = f ,
+  Name-sg = Definitie ,
+  name-sg = definitie ,
+  Name-pl = Definities ,
+  name-pl = definities ,
+
+type = proof ,
+  gender = n ,
+  Name-sg = Bewijs ,
+  name-sg = bewijs ,
+  Name-pl = Bewijzen ,
+  name-pl = bewijzen ,
+
+type = result ,
+  gender = n ,
+  Name-sg = Resultaat ,
+  name-sg = resultaat ,
+  Name-pl = Resultaten ,
+  name-pl = resultaten ,
+
+type = remark ,
+  gender = f ,
+  Name-sg = Opmerking ,
+  name-sg = opmerking ,
+  Name-pl = Opmerkingen ,
+  name-pl = opmerkingen ,
+
+type = example ,
+  gender = n ,
+  Name-sg = Voorbeeld ,
+  name-sg = voorbeeld ,
+  Name-pl = Voorbeelden ,
+  name-pl = voorbeelden ,
+
+type = algorithm ,
+  gender = { n , f , m } ,
+  Name-sg = Algoritme ,
+  name-sg = algoritme ,
+  Name-pl = Algoritmes ,
+  name-pl = algoritmes ,
+%    \end{macrocode}
+%
+%    EN-NL Van Dale translates listing as
+%    (3) ``uitdraai van computerprogramma'', ``listing''.
+%
+%    \begin{macrocode}
+type = listing ,
+  gender = m ,
+  Name-sg = Listing ,
+  name-sg = listing ,
+  Name-pl = Listings ,
+  name-pl = listings ,
+
+type = exercise ,
+  gender = { f , m } ,
+  Name-sg = Opgave ,
+  name-sg = opgave ,
+  Name-pl = Opgaven ,
+  name-pl = opgaven ,
+
+type = solution ,
+  gender = f ,
+  Name-sg = Oplossing ,
+  name-sg = oplossing ,
+  Name-pl = Oplossingen ,
+  name-pl = oplossingen ,
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</dict-dutch>
 %    \end{macrocode}
 %
 %

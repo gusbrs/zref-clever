@@ -6,6 +6,7 @@
 - The `gender` key in `\zcLanguageSetup` and in the built-in dictionaries can
   receive a comma separated list as value to support types with multiple valid
   genders.
+- Dutch dictionary.
 
 ## [v0.1.1-alpha](https://github.com/gusbrs/zref-clever/compare/v0.1.0-alpha...v0.1.1-alpha) (2021-12-07)
 
