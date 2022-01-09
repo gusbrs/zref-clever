@@ -29,7 +29,8 @@ outer braces):
 >  {brazilian}  =>  {portuguese}
 >  {brazil}  =>  {portuguese}
 >  {portuges}  =>  {portuguese}
->  {spanish}  =>  {spanish}.
+>  {spanish}  =>  {spanish}
+>  {dutch}  =>  {dutch}.
 <recently read> }
 l. ...  }
 ============================================================
@@ -82,6 +83,7 @@ outer braces):
 >  {brazil}  =>  {portuguese}
 >  {portuges}  =>  {portuguese}
 >  {spanish}  =>  {spanish}
+>  {dutch}  =>  {dutch}
 >  {elvish}  =>  {elvish}
 >  {nelvish}  =>  {elvish}.
 <recently read> }
