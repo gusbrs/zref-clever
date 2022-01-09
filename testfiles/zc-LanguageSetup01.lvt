@@ -121,6 +121,29 @@
 \ExplSyntaxOff
 \ENDTEST
 
+\BEGINTEST{French setup for later tests}
+\zcLanguageSetup{french}{
+  cap=true,
+  abbrev=true,
+  type=section,
+    cap=false,
+  type=equation,
+    abbrev=false,
+    Name-sg-ab = Éq. ,
+    name-sg-ab = éq. ,
+    Name-pl-ab = Éqs. ,
+    name-pl-ab = éqs. ,
+  type = figure ,
+    Name-sg-ab = Fig. ,
+    name-sg-ab = fig. ,
+    Name-pl-ab = Figs. ,
+    name-pl-ab = figs. ,
+}
+\ExplSyntaxOn
+\prop_show:N \g__zrefclever_dict_french_prop
+\ExplSyntaxOff
+\ENDTEST
+
 \OMIT
 
 \NewDocumentCommand \newoptblock {m}{%
@@ -301,6 +324,46 @@
 \showbox0
 \box0
 \setbox0=\hbox{\zcref[abbrev,d=D]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+\clearpage{}
+\TIMO
+
+\newoptblock{cap}
+
+\BEGINTEST{Option: cap=... (french)}
+\selectlanguage{french}
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1, fig:figure-1.1.1,
+    eq:equation-1.1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[cap]{cha:chapter-1, sec:section-1.1, fig:figure-1.1.1,
+    eq:equation-1.1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[nocap]{cha:chapter-1, sec:section-1.1, fig:figure-1.1.1,
+  eq:equation-1.1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{abbrev}
+
+\BEGINTEST{Option: abbrev=... (french)}
+\selectlanguage{french}
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1, fig:figure-1.1.1,
+    eq:equation-1.1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[abbrev]{cha:chapter-1, sec:section-1.1,
+    fig:figure-1.1.1, eq:equation-1.1.2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[noabbrev]{cha:chapter-1, sec:section-1.1,
+    fig:figure-1.1.1, eq:equation-1.1.2}}
 \showbox0
 \box0
 \ENDTEST

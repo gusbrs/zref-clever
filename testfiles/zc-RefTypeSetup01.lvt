@@ -203,5 +203,69 @@
 \ENDTEST
 
 \OMIT
+\clearpage{}
+\TIMO
+
+\newoptblock{cap}
+
+\BEGINTEST{Option: cap=...}
+\zcRefTypeSetup{section}{cap=true}
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\zcRefTypeSetup{section}{cap=false}
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\zcRefTypeSetup{section}{cap}
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\zcRefTypeSetup{section}{nocap}
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\zcRefTypeSetup{section}{cap}
+\setbox0=\hbox{\zcref[nocap]{cha:chapter-1, sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\zcRefTypeSetup{section}{nocap}
+\setbox0=\hbox{\zcref[cap]{cha:chapter-1, sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{abbrev}
+
+\BEGINTEST{Option: abbrev=...}
+\zcRefTypeSetup{equation}{abbrev=true}
+\setbox0=\hbox{\zcref{fig:figure-1.1.1, eq:equation-1.1.2, eq:equation-1.1.3}}
+\showbox0
+\box0
+\zcRefTypeSetup{equation}{abbrev=false}
+\setbox0=\hbox{\zcref{fig:figure-1.1.1, eq:equation-1.1.2, eq:equation-1.1.3}}
+\showbox0
+\box0
+\zcRefTypeSetup{equation}{abbrev}
+\setbox0=\hbox{\zcref{fig:figure-1.1.1, eq:equation-1.1.2, eq:equation-1.1.3}}
+\showbox0
+\box0
+\zcRefTypeSetup{equation}{noabbrev}
+\setbox0=\hbox{\zcref{fig:figure-1.1.1, eq:equation-1.1.2, eq:equation-1.1.3}}
+\showbox0
+\box0
+\zcRefTypeSetup{equation}{abbrev}
+\setbox0=\hbox{\zcref[noabbrev]{fig:figure-1.1.1, eq:equation-1.1.2,
+    eq:equation-1.1.3}}
+\showbox0
+\box0
+\zcRefTypeSetup{equation}{noabbrev}
+\setbox0=\hbox{\zcref[abbrev]{fig:figure-1.1.1, eq:equation-1.1.2,
+    eq:equation-1.1.3}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
 
 \end{document}

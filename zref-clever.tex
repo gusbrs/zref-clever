@@ -521,9 +521,10 @@ The option given without a value is equivalent to \texttt{range=true} (in the
 \DescribeOption{nocap} %
 \DescribeOption{capfirst} %
 The \opt{cap} option controls whether the reference type names should be
-capitalized or not.  It is a boolean option, and the package's default is
-\texttt{cap=false}.  The option given without a value is equivalent to
-\texttt{cap=true}.  The \opt{nocap} option is a convenience alias for
+capitalized or not.  It can receive values \texttt{true} or \texttt{false},
+and it can also be set for specific reference types or languages (see
+\zcref{sec:reference-format}).  The option given without a value is equivalent
+to \texttt{cap=true}.  The \opt{nocap} option is a convenience alias for
 \texttt{cap=false}.  The \opt{capfirst} option ensures that the reference type
 name of the \emph{first} type block is capitalized, even when \opt{cap} is set
 to \texttt{false}.
@@ -532,9 +533,10 @@ to \texttt{false}.
 \DescribeOption{noabbrev} %
 \DescribeOption{noabbrevfirst} %
 The \opt{abbrev} option controls whether to use abbreviated reference type
-names when they are available.  It is a boolean option, and the package's
-default is \texttt{abbrev=false}.  The option given without a value is
-equivalent to \texttt{abbrev=true}.  The \opt{noabbrev} option is a
+names when they are available.  It can receive values \texttt{true} or
+\texttt{false}, and it can also be set for specific reference types or
+languages (see \zcref{sec:reference-format}).  The option given without a
+value is equivalent to \texttt{abbrev=true}.  The \opt{noabbrev} option is a
 convenience alias for \texttt{abbrev=false}.  The \opt{noabbrevfirst} ensures
 that the reference type name of the \emph{first} type block is never
 abbreviated, even when \opt{abbrev} is set to \texttt{true}.
@@ -946,6 +948,10 @@ which each is available.
     \addlinespace
     Font            & namefont   & $\bullet$ & $\bullet$ &               &              \\
     options         & reffont    & $\bullet$ & $\bullet$ &               &              \\
+
+    \addlinespace
+    Other           & cap        & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
+    options         & abbrev     & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
     \bottomrule
   \end{tabular}
   \caption{Reference format options and their scopes}
@@ -1035,19 +1041,19 @@ typeset output is built as:
 \item \reffmt{type-block-group} \reffmt{notesep} \reffmt{note}
 \end{refformat}
 
-Reference format options can yet be divided in two general categories: i)
+Reference format options can yet be divided in three general categories: i)
 ``string'' options, the ones which we have seen thus far, as ``building
-blocks'' of the reference; and ii) ``font'' options, which control font
-attributes of parts of the reference, namely \opt{namefont} and \opt{reffont}.
-These options set the font, respectively, for the \texttt{type-name} and for
-\texttt{ref} (to set the font for the whole reference, see the \opt{font}
-option in \zcref{sec:options}).  ``String'' options is not really a strict
-denomination for the first category, but this set of options is intended
-exclusively for typesetting material: things you expect to see in the output
-of your references.  The ``font'' options, on the other hand, are intended
-exclusively for commands that only change font attributes: style, family,
-shape, weight, size, color, etc.  In either case, anything other than their
-intended uses is not supported.
+blocks'' of the reference; ii) ``font'' options, which control font attributes
+of parts of the reference, namely \opt{namefont} and \opt{reffont}; and iii)
+``other'' options.  ``String'' options is not really a strict denomination for
+the first category, but this set of options is intended exclusively for
+typesetting material: things you expect to see in the output of your
+references.  ``Font'' options set the font, respectively, for the
+\texttt{type-name} and for \texttt{ref} (to set the font for the whole
+reference, see the \opt{font} option in \zcref{sec:options}).  These options
+are intended exclusively for commands that only change font attributes: style,
+family, shape, weight, size, color, etc.  In either case, anything other than
+their intended uses is not supported.
 
 Finally, a comment about the internal ``fallback'' reference format values
 mentioned above.  These ``last resort'' option values are required by
@@ -2216,8 +2222,11 @@ were generously provided by (in chronological order):
   % 2021-11-25: https://github.com/gusbrs/zref-clever/issues/1
   Marcel Krüger,
   % 2021-11-26: https://github.com/latex3/l3build/issues/215
-  and Jürgen Spitzmüller.
+  Jürgen Spitzmüller,
   % 2021-11-28: https://github.com/gusbrs/zref-clever/issues/2
+  and `\texttt{niluxv}'.
+  % 2022-01-05: https://github.com/gusbrs/zref-clever/issues/4
+  % 2022-01-05: https://github.com/gusbrs/zref-clever/pull/5
 
 The package's dictionaries have been provided or improved thanks to:
   Denis Bitouzé (French),

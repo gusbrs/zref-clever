@@ -523,6 +523,11 @@
   }
 \msg_new:nnn { zref-clever } { key-requires-value }
   { The~'#1'~key~'#2'~requires~a~value~\msg_line_context:. }
+\msg_new:nnn { zref-clever } { key-boolean-or-empty }
+  {
+    The~key~'#1'~only~accepts~the~values~'true',~'false'~
+    or~an~empty~value~\msg_line_context:.
+  }
 \msg_new:nnn { zref-clever } { language-declared }
   { Language~'#1'~is~already~declared~\msg_line_context:.~Nothing~to~do. }
 \msg_new:nnn { zref-clever } { unknown-language-alias }
@@ -1051,8 +1056,8 @@
               }
           }
 %    \end{macrocode}
-% Ensure \cs{l_@@_capitalize_bool} is set to \texttt{true} when the language
-% was declared with \opt{allcaps} option.
+% Ensure the \opt{cap} in \cs{l_@@_ref_options_prop} is set to \texttt{true}
+% when the language was declared with \opt{allcaps} option.
 %    \begin{macrocode}
         \str_if_eq:eeT
           {
@@ -1064,7 +1069,7 @@
               { allcaps }
           }
           { true }
-          { \bool_set_true:N \l_@@_capitalize_bool }
+          { \prop_put:Nnn \l_@@_ref_options_prop { cap } { true } }
       }
       {
 %    \end{macrocode}
@@ -1298,12 +1303,14 @@
       { g_@@_dict_ \l_@@_dict_language_tl _prop }
       { type- \l_@@_setup_type_tl - #1 } {#2}
   }
+\cs_generate_variant:Nn \@@_provide_dict_type_transl:nn { nV }
 \cs_new_protected:Npn \@@_provide_dict_default_transl:nn #1#2
   {
     \prop_gput_if_new:cnn
       { g_@@_dict_ \l_@@_dict_language_tl _prop }
       { default- #1 } {#2}
   }
+\cs_generate_variant:Nn \@@_provide_dict_default_transl:nn { nV }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1323,6 +1330,7 @@
           { \tl_clear:N \l_@@_setup_type_tl }
           { \tl_set:Nn \l_@@_setup_type_tl {#1} }
       } ,
+
     case .code:n =
       {
         \seq_if_empty:NTF \l_@@_dict_declension_seq
@@ -1342,6 +1350,7 @@
           }
       } ,
     case .value_required:n = true ,
+
     gender .code:n =
       {
         \seq_if_empty:NTF \l_@@_dict_gender_seq
@@ -1376,6 +1385,40 @@
           }
       } ,
     gender .value_required:n = true ,
+
+    cap .choices:nn =
+      { true , false }
+      {
+        \tl_if_empty:NTF \l_@@_setup_type_tl
+          {
+            \@@_provide_dict_default_transl:nV
+              { cap } \l_keys_choice_tl
+          }
+          {
+            \@@_provide_dict_type_transl:nV
+              { cap } \l_keys_choice_tl
+          }
+      } ,
+    cap .default:n = true ,
+    nocap .meta:n = { cap = false } ,
+    nocap .value_forbidden:n = true ,
+
+    abbrev .choices:nn =
+      { true , false }
+      {
+        \tl_if_empty:NTF \l_@@_setup_type_tl
+          {
+            \@@_provide_dict_default_transl:nV
+              { abbrev } \l_keys_choice_tl
+          }
+          {
+            \@@_provide_dict_type_transl:nV
+              { abbrev } \l_keys_choice_tl
+          }
+      } ,
+    abbrev .default:n = true ,
+    noabbrev .meta:n = { abbrev = false },
+    noabbrev .value_forbidden:n = true ,
   }
 \seq_map_inline:Nn
   \c_@@_ref_options_necessarily_not_type_specific_seq
@@ -1725,14 +1768,26 @@
 % \subsubsection*{\opt{cap} and \opt{capfirst} options}
 %
 %    \begin{macrocode}
-\bool_new:N \l_@@_capitalize_bool
 \bool_new:N \l_@@_capitalize_first_bool
 \keys_define:nn { zref-clever / reference }
   {
-    cap .bool_set:N = \l_@@_capitalize_bool ,
-    cap .initial:n = false ,
+    cap .code:n =
+      {
+        \tl_if_empty:nTF {#1}
+          { \prop_remove:Nn \l_@@_ref_options_prop { cap } }
+          {
+            \bool_lazy_or:nnTF
+              { \str_if_eq_p:nn {#1} { true  } }
+              { \str_if_eq_p:nn {#1} { false } }
+              { \prop_put:Nnn \l_@@_ref_options_prop { cap } {#1} }
+              {
+                \msg_warning:nnn { zref-clever }
+                  { key-boolean-or-empty } {#1}
+              }
+          }
+      } ,
     cap .default:n = true ,
-    nocap .meta:n = { cap = false },
+    nocap .meta:n = { cap = false } ,
     nocap .value_forbidden:n = true ,
 
     capfirst .bool_set:N = \l_@@_capitalize_first_bool ,
@@ -1745,12 +1800,24 @@
 % \subsubsection*{\opt{abbrev} and \opt{noabbrevfirst} options}
 %
 %    \begin{macrocode}
-\bool_new:N \l_@@_abbrev_bool
 \bool_new:N \l_@@_noabbrev_first_bool
 \keys_define:nn { zref-clever / reference }
   {
-    abbrev .bool_set:N = \l_@@_abbrev_bool ,
-    abbrev .initial:n = false ,
+    abbrev .code:n =
+      {
+        \tl_if_empty:nTF {#1}
+          { \prop_remove:Nn \l_@@_ref_options_prop { abbrev } }
+          {
+            \bool_lazy_or:nnTF
+              { \str_if_eq_p:nn {#1} { true  } }
+              { \str_if_eq_p:nn {#1} { false } }
+              { \prop_put:Nnn \l_@@_ref_options_prop { abbrev } {#1} }
+              {
+                \msg_warning:nnn { zref-clever }
+                  { key-boolean-or-empty } {#1}
+              }
+          }
+      } ,
     abbrev .default:n = true ,
     noabbrev .meta:n = { abbrev = false },
     noabbrev .value_forbidden:n = true ,
@@ -2631,6 +2698,79 @@
 % \url{https://tex.stackexchange.com/q/614690} and
 % \url{https://github.com/latex3/latex3/pull/988}.
 %
+%
+%    \begin{macrocode}
+\keys_define:nn { zref-clever / typesetup }
+  {
+    cap .code:n =
+      {
+        \tl_if_empty:nTF {#1}
+          {
+            \prop_remove:cn
+              {
+                l_@@_type_
+                \l_@@_setup_type_tl _options_prop
+              }
+              { cap }
+          }
+          {
+            \bool_lazy_or:nnTF
+              { \str_if_eq_p:nn {#1} { true  } }
+              { \str_if_eq_p:nn {#1} { false } }
+              {
+                \prop_put:cnn
+                  {
+                    l_@@_type_
+                    \l_@@_setup_type_tl _options_prop
+                  }
+                  { cap } {#1}
+              }
+              {
+                \msg_warning:nnn { zref-clever }
+                  { key-boolean-or-empty } {#1}
+              }
+          }
+      } ,
+    cap .default:n = true ,
+    nocap .meta:n = { cap = false } ,
+    nocap .value_forbidden:n = true ,
+
+    abbrev .code:n =
+      {
+        \tl_if_empty:nTF {#1}
+          {
+            \prop_remove:cn
+              {
+                l_@@_type_
+                \l_@@_setup_type_tl _options_prop
+              }
+              { abbrev }
+          }
+          {
+            \bool_lazy_or:nnTF
+              { \str_if_eq_p:nn {#1} { true  } }
+              { \str_if_eq_p:nn {#1} { false } }
+              {
+                \prop_put:cnn
+                  {
+                    l_@@_type_
+                    \l_@@_setup_type_tl _options_prop
+                  }
+                  { abbrev } {#1}
+              }
+              {
+                \msg_warning:nnn { zref-clever }
+                  { key-boolean-or-empty } {#1}
+              }
+          }
+      } ,
+    abbrev .default:n = true ,
+    noabbrev .meta:n = { abbrev = false },
+    noabbrev .value_forbidden:n = true ,
+  }
+%    \end{macrocode}
+%
+%
 %    \begin{macrocode}
 \seq_map_inline:Nn
   \c_@@_ref_options_necessarily_not_type_specific_seq
@@ -2762,13 +2902,14 @@
     \prop_gput:cnn { g_@@_dict_ #1 _prop }
       { type- #2 - #3 } {#4}
   }
-\cs_generate_variant:Nn \@@_declare_type_transl:nnnn { VVnn , VVxn , VVnx }
+\cs_generate_variant:Nn
+  \@@_declare_type_transl:nnnn { VVnn , VVxn , VVnx , VVnV }
 \cs_new_protected:Npn \@@_declare_default_transl:nnn #1#2#3
   {
     \prop_gput:cnn { g_@@_dict_ #1 _prop }
       { default- #2 } {#3}
   }
-\cs_generate_variant:Nn \@@_declare_default_transl:nnn { Vnn }
+\cs_generate_variant:Nn \@@_declare_default_transl:nnn { Vnn , VnV }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2785,6 +2926,7 @@
           { \tl_clear:N \l_@@_setup_type_tl }
           { \tl_set:Nn \l_@@_setup_type_tl {#1} }
       } ,
+
     case .code:n =
       {
         \seq_if_empty:NTF \l_@@_dict_declension_seq
@@ -2804,6 +2946,7 @@
           }
       } ,
     case .value_required:n = true ,
+
     gender .code:n =
       {
         \seq_if_empty:NTF \l_@@_dict_gender_seq
@@ -2840,6 +2983,46 @@
           }
       } ,
     gender .value_required:n = true ,
+
+    cap .choices:nn =
+      { true , false }
+      {
+        \tl_if_empty:NTF \l_@@_setup_type_tl
+          {
+            \@@_declare_default_transl:VnV
+              \l_@@_dict_language_tl
+              { cap } \l_keys_choice_tl
+          }
+          {
+            \@@_declare_type_transl:VVnV
+              \l_@@_dict_language_tl
+              \l_@@_setup_type_tl
+              { cap } \l_keys_choice_tl
+          }
+      } ,
+    cap .default:n = true ,
+    nocap .meta:n = { cap = false } ,
+    nocap .value_forbidden:n = true ,
+
+    abbrev .choices:nn =
+      { true , false }
+      {
+        \tl_if_empty:NTF \l_@@_setup_type_tl
+          {
+            \@@_declare_default_transl:VnV
+              \l_@@_dict_language_tl
+              { abbrev } \l_keys_choice_tl
+          }
+          {
+            \@@_declare_type_transl:VVnV
+              \l_@@_dict_language_tl
+              \l_@@_setup_type_tl
+              { abbrev } \l_keys_choice_tl
+          }
+      } ,
+    abbrev .default:n = true ,
+    noabbrev .meta:n = { abbrev = false },
+    noabbrev .value_forbidden:n = true ,
   }
 \seq_map_inline:Nn
   \c_@@_ref_options_necessarily_not_type_specific_seq
@@ -3662,9 +3845,11 @@
 %     \l_@@_refpos_tl ,
 %     \l_@@_namefont_tl ,
 %     \l_@@_reffont_tl ,
+%     \l_@@_capitalize_bool ,
+%     \l_@@_abbrev_bool ,
 %   }
 %   Auxiliary variables for \cs{@@_typeset_refs:} separators, refpre/pos and
-%   font options.
+%   font and other options.
 %    \begin{macrocode}
 \tl_new:N \l_@@_tpairsep_tl
 \tl_new:N \l_@@_tlistsep_tl
@@ -3678,6 +3863,8 @@
 \tl_new:N \l_@@_refpos_tl
 \tl_new:N \l_@@_namefont_tl
 \tl_new:N \l_@@_reffont_tl
+\bool_new:N \l_@@_capitalize_bool
+\bool_new:N \l_@@_abbrev_bool
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3797,8 +3984,8 @@
               }
           }
 
-        % Get type-specific separators, refpre/pos and font options, once per
-        % type.
+        % Get type-specific separators, refpre/pos font and other options,
+        % once per type.
         \int_compare:nNnT { \l_@@_label_count_int } = { 0 }
           {
             \@@_get_ref_string:nN { namesep  }
@@ -3819,6 +4006,10 @@
               \l_@@_namefont_tl
             \@@_get_ref_font:nN   { reffont  }
               \l_@@_reffont_tl
+            \@@_get_ref_opt_bool:nnN { cap    } { false }
+              \l_@@_capitalize_bool
+            \@@_get_ref_opt_bool:nnN { abbrev } { false }
+              \l_@@_abbrev_bool
           }
 
         % Here we send this to a couple of auxiliary functions.
@@ -4988,6 +5179,74 @@
 %    \end{macrocode}
 % \end{macro}
 %
+%
+% \begin{macro}{\@@_get_ref_opt_bool:nnN}
+%   \begin{syntax}
+%     \cs{@@_get_ref_opt_bool:nN} \Arg{option}
+%     ~~\Arg{default} \Arg{bool variable}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_get_ref_opt_bool:nnN #1#2#3
+  {
+    % First attempt: general options.
+    \prop_get:NnNF \l_@@_ref_options_prop {#1} \l_tmpa_tl
+      {
+        % If not found, try type specific options.
+        \bool_lazy_and:nnTF
+          {
+            \prop_if_exist_p:c
+              {
+                l_@@_type_
+                \l_@@_label_type_a_tl _options_prop
+              }
+          }
+          {
+            \prop_if_in_p:cn
+              {
+                l_@@_type_
+                \l_@@_label_type_a_tl _options_prop
+              }
+              {#1}
+          }
+          {
+            \prop_get:cnN
+              {
+                l_@@_type_
+                \l_@@_label_type_a_tl _options_prop
+              }
+              {#1} \l_tmpa_tl
+          }
+          {
+            % If not found, try type- and language-specific.
+            \@@_get_type_transl:xxnNF
+              { \l_@@_ref_language_tl }
+              { \l_@@_label_type_a_tl }
+              {#1} \l_tmpa_tl
+              {
+                % If not found, try language-specific default.
+                \@@_get_default_transl:xnNF
+                  { \l_@@_ref_language_tl }
+                  {#1} \l_tmpa_tl
+                  {
+                    % If not found, use default argument.
+                    \bool_lazy_or:nnTF
+                      { \str_if_eq_p:nn {#2} { true  } }
+                      { \str_if_eq_p:nn {#2} { false } }
+                      { \tl_set:Nn \l_tmpa_tl {#2} }
+                      {
+                        % And, if even that fails, presume false.
+                        \tl_set:Nn \l_tmpa_tl { false }
+                      }
+                  }
+              }
+          }
+      }
+    % Having retrieved the option value, set the boolean.  At this point, we
+    % *know* '\l_tmpa_tl' is either 'true' or 'false'.
+    \use:c { bool_set_ \l_tmpa_tl :N } #3
+  }
+%    \end{macrocode}
+% \end{macro}
 %
 %
 % \section{Compatibility}
