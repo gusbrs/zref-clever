@@ -114,11 +114,11 @@
 \box0
 \ENDTEST
 
-\newoptblock{refpre, refpos}
+\newoptblock{preref, postref}
 
-\BEGINTEST{Option: refpre=..., refpos=...}
-\zcRefTypeSetup{section}{refpre={[}, refpos={]}}
-\zcRefTypeSetup{equation}{refpre=, refpos=}
+\BEGINTEST{Option: preref=..., postref=...}
+\zcRefTypeSetup{section}{preref={[}, postref={]}}
+\zcRefTypeSetup{equation}{preref=, postref=}
 \setbox0=\hbox{\zcref*{sec:section-1.1, sec:section-1.2}}
 \showbox0
 \box0

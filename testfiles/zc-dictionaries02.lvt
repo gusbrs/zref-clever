@@ -127,9 +127,9 @@
 \box0
 \ENDTEST
 
-\newoptblock{refpre, refpos}
+\newoptblock{preref, postref}
 
-\BEGINTEST{Option: refpre=..., refpos=...}
+\BEGINTEST{Option: preref=..., postref=...}
 \setbox0=\hbox{\zcref*{sec:section-1.1, sec:section-1.2}}
 \showbox0
 \box0

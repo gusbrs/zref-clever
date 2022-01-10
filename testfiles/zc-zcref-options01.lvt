@@ -962,14 +962,14 @@
 \box0
 \ENDTEST
 
-\newoptblock{refpre, refpos}
+\newoptblock{preref, postref}
 
-\BEGINTEST{Option: refpre=..., refpos=...}
-\setbox0=\hbox{\zcref*[refpre={[}, refpos={]}]{sec:section-1.1,
+\BEGINTEST{Option: preref=..., postref=...}
+\setbox0=\hbox{\zcref*[preref={[}, postref={]}]{sec:section-1.1,
     sec:section-1.2}}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref*[refpre=, refpos=]{eq:equation-1.1.2,
+\setbox0=\hbox{\zcref*[preref=, postref=]{eq:equation-1.1.2,
     eq:equation-1.1.3}}
 \showbox0
 \box0

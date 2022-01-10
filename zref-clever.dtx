@@ -662,6 +662,11 @@
   { Loaded~support~for~'#1'~package. }
 \msg_new:nnn { zref-clever } { compat-class }
   { Loaded~support~for~'#1'~documentclass. }
+\msg_new:nnn { zref-clever } { option-deprecated }
+  {
+    Option~'#1'~has~been~deprecated~\msg_line_context:.\iow_newline:
+    Use~'#2'~instead.
+  }
 %    \end{macrocode}
 %
 %
@@ -781,8 +786,8 @@
     listsep ,
     lastsep ,
     rangesep ,
-    refpre ,
-    refpos ,
+    preref ,
+    postref ,
   }
 %    \end{macrocode}
 % Only ``type names'' are ``necessarily type-specific'', which makes them
@@ -1507,8 +1512,8 @@
     listsep   = {,~} ,
     lastsep   = {,~} ,
     rangesep  = {\textendash} ,
-    refpre    = {} ,
-    refpos    = {} ,
+    preref    = {} ,
+    postref   = {} ,
   }
 %    \end{macrocode}
 %
@@ -2585,6 +2590,21 @@
           } ,
       }
   }
+\keys_define:nn { zref-clever / reference }
+  {
+    refpre .code:n =
+      {
+        % NOTE Option deprecated in 2022-01-10 for v0.1.2-alpha.
+        \msg_warning:nnnn { zref-clever }{ option-deprecated }
+          { refpre } { preref }
+      } ,
+    refpos .code:n =
+      {
+        % NOTE Option deprecated in 2022-01-10 for v0.1.2-alpha.
+        \msg_warning:nnnn { zref-clever }{ option-deprecated }
+          { refpos } { postref }
+      } ,
+  }
 %    \end{macrocode}
 %
 %
@@ -2815,6 +2835,21 @@
               }
           } ,
       }
+  }
+\keys_define:nn { zref-clever / typesetup }
+  {
+    refpre .code:n =
+      {
+        % NOTE Option deprecated in 2022-01-10 for v0.1.2-alpha.
+        \msg_warning:nnnn { zref-clever }{ option-deprecated }
+          { refpre } { preref }
+      } ,
+    refpos .code:n =
+      {
+        % NOTE Option deprecated in 2022-01-10 for v0.1.2-alpha.
+        \msg_warning:nnnn { zref-clever }{ option-deprecated }
+          { refpos } { postref }
+      } ,
   }
 %    \end{macrocode}
 %
@@ -3067,6 +3102,21 @@
               }
           } ,
       }
+  }
+\keys_define:nn { zref-clever / langsetup }
+  {
+    refpre .code:n =
+      {
+        % NOTE Option deprecated in 2022-01-10 for v0.1.2-alpha.
+        \msg_warning:nnnn { zref-clever }{ option-deprecated }
+          { refpre } { preref }
+      } ,
+    refpos .code:n =
+      {
+        % NOTE Option deprecated in 2022-01-10 for v0.1.2-alpha.
+        \msg_warning:nnnn { zref-clever }{ option-deprecated }
+          { refpos } { postref }
+      } ,
   }
 \seq_map_inline:Nn
   \c_@@_ref_options_type_names_seq
@@ -3841,14 +3891,14 @@
 %     \l_@@_listsep_tl ,
 %     \l_@@_lastsep_tl ,
 %     \l_@@_rangesep_tl ,
-%     \l_@@_refpre_tl ,
-%     \l_@@_refpos_tl ,
+%     \l_@@_preref_tl ,
+%     \l_@@_postref_tl ,
 %     \l_@@_namefont_tl ,
 %     \l_@@_reffont_tl ,
 %     \l_@@_capitalize_bool ,
 %     \l_@@_abbrev_bool ,
 %   }
-%   Auxiliary variables for \cs{@@_typeset_refs:} separators, refpre/pos and
+%   Auxiliary variables for \cs{@@_typeset_refs:} separators, pre-/postref and
 %   font and other options.
 %    \begin{macrocode}
 \tl_new:N \l_@@_tpairsep_tl
@@ -3859,8 +3909,8 @@
 \tl_new:N \l_@@_listsep_tl
 \tl_new:N \l_@@_lastsep_tl
 \tl_new:N \l_@@_rangesep_tl
-\tl_new:N \l_@@_refpre_tl
-\tl_new:N \l_@@_refpos_tl
+\tl_new:N \l_@@_preref_tl
+\tl_new:N \l_@@_postref_tl
 \tl_new:N \l_@@_namefont_tl
 \tl_new:N \l_@@_reffont_tl
 \bool_new:N \l_@@_capitalize_bool
@@ -3984,7 +4034,7 @@
               }
           }
 
-        % Get type-specific separators, refpre/pos font and other options,
+        % Get type-specific separators, pre-/postref font and other options,
         % once per type.
         \int_compare:nNnT { \l_@@_label_count_int } = { 0 }
           {
@@ -3998,10 +4048,10 @@
               \l_@@_lastsep_tl
             \@@_get_ref_string:nN { rangesep }
               \l_@@_rangesep_tl
-            \@@_get_ref_string:nN { refpre   }
-              \l_@@_refpre_tl
-            \@@_get_ref_string:nN { refpos   }
-              \l_@@_refpos_tl
+            \@@_get_ref_string:nN { preref   }
+              \l_@@_preref_tl
+            \@@_get_ref_string:nN { postref  }
+              \l_@@_postref_tl
             \@@_get_ref_font:nN   { namefont }
               \l_@@_namefont_tl
             \@@_get_ref_font:nN   { reffont  }
@@ -4559,33 +4609,33 @@
           }
           {
             \bool_if:NF \l_@@_preposinlink_bool
-              { \exp_not:V \l_@@_refpre_tl }
+              { \exp_not:V \l_@@_preref_tl }
             % It's two `@s', but escaped for DocStrip.
             \exp_not:N \hyper@@@@link
               { \@@_extract_url_unexp:n {#1} }
               { \@@_extract_unexp:nnn {#1} { anchor } { } }
               {
                 \bool_if:NT \l_@@_preposinlink_bool
-                  { \exp_not:V \l_@@_refpre_tl }
+                  { \exp_not:V \l_@@_preref_tl }
                 \exp_not:N \group_begin:
                 \exp_not:V \l_@@_reffont_tl
                 \@@_extract_unexp:nvn {#1}
                   { l_@@_ref_property_tl } { }
                 \exp_not:N \group_end:
                 \bool_if:NT \l_@@_preposinlink_bool
-                  { \exp_not:V \l_@@_refpos_tl }
+                  { \exp_not:V \l_@@_postref_tl }
               }
             \bool_if:NF \l_@@_preposinlink_bool
-              { \exp_not:V \l_@@_refpos_tl }
+              { \exp_not:V \l_@@_postref_tl }
           }
           {
-            \exp_not:V \l_@@_refpre_tl
+            \exp_not:V \l_@@_preref_tl
             \exp_not:N \group_begin:
             \exp_not:V \l_@@_reffont_tl
             \@@_extract_unexp:nvn {#1}
               { l_@@_ref_property_tl } { }
             \exp_not:N \group_end:
-            \exp_not:V \l_@@_refpos_tl
+            \exp_not:V \l_@@_postref_tl
           }
       }
       { \@@_ref_default: }
@@ -4632,7 +4682,7 @@
                     \exp_not:V \l_@@_type_name_tl
                     \exp_not:N \group_end:
                     \exp_not:V \l_@@_namesep_tl
-                    \exp_not:V \l_@@_refpre_tl
+                    \exp_not:V \l_@@_preref_tl
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_reffont_tl
                     \@@_extract_unexp:Vvn
@@ -4640,10 +4690,10 @@
                       { l_@@_ref_property_tl } { }
                     \exp_not:N \group_end:
                     \bool_if:NT \l_@@_preposinlink_bool
-                      { \exp_not:V \l_@@_refpos_tl }
+                      { \exp_not:V \l_@@_postref_tl }
                   }
                 \bool_if:NF \l_@@_preposinlink_bool
-                  { \exp_not:V \l_@@_refpos_tl }
+                  { \exp_not:V \l_@@_postref_tl }
               }
               {
                 \exp_not:N \group_begin:
@@ -4678,7 +4728,7 @@
                   }
                   {
                     \bool_if:NF \l_@@_preposinlink_bool
-                      { \exp_not:V \l_@@_refpre_tl }
+                      { \exp_not:V \l_@@_preref_tl }
                     % It's two '@s', but escaped for DocStrip.
                     \exp_not:N \hyper@@@@link
                       {
@@ -4691,7 +4741,7 @@
                       }
                       {
                         \bool_if:NT \l_@@_preposinlink_bool
-                          { \exp_not:V \l_@@_refpre_tl }
+                          { \exp_not:V \l_@@_preref_tl }
                         \exp_not:N \group_begin:
                         \exp_not:V \l_@@_reffont_tl
                         \@@_extract_unexp:Vvn
@@ -4699,20 +4749,20 @@
                           { l_@@_ref_property_tl } { }
                         \exp_not:N \group_end:
                         \bool_if:NT \l_@@_preposinlink_bool
-                          { \exp_not:V \l_@@_refpos_tl }
+                          { \exp_not:V \l_@@_postref_tl }
                       }
                     \bool_if:NF \l_@@_preposinlink_bool
-                      { \exp_not:V \l_@@_refpos_tl }
+                      { \exp_not:V \l_@@_postref_tl }
                   }
                   {
-                    \exp_not:V \l_@@_refpre_tl
+                    \exp_not:V \l_@@_preref_tl
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_reffont_tl
                     \@@_extract_unexp:Vvn
                       \l_@@_type_first_label_tl
                       { l_@@_ref_property_tl } { }
                     \exp_not:N \group_end:
-                    \exp_not:V \l_@@_refpos_tl
+                    \exp_not:V \l_@@_postref_tl
                   }
               }
               { \@@_ref_default: }
@@ -5742,8 +5792,8 @@
         \zcRefTypeSetup { equation }
           {
             reffont = \upshape ,
-            refpre  = {\textup{(}} ,
-            refpos  = {\textup{)}} ,
+            preref  = {\textup{(}} ,
+            postref = {\textup{)}} ,
           }
         \msg_info:nnn { zref-clever } { compat-package } { amsmath }
       }
@@ -6176,8 +6226,8 @@ type = equation ,
   name-sg-ab = eq. ,
   Name-pl-ab = Eqs. ,
   name-pl-ab = eqs. ,
-  refpre = {(} ,
-  refpos = {)} ,
+  preref  = {(} ,
+  postref = {)} ,
 
 type = theorem ,
   Name-sg = Theorem ,
@@ -6530,8 +6580,8 @@ type = equation ,
   case = G ,
     Name-sg = Gleichung ,
     Name-pl = Gleichungen ,
-  refpre = {(} ,
-  refpos = {)} ,
+  preref  = {(} ,
+  postref = {)} ,
 
 type = theorem ,
   gender = n ,
@@ -6875,8 +6925,8 @@ type = equation ,
   name-sg = équation ,
   Name-pl = Équations ,
   name-pl = équations ,
-  refpre = {(} ,
-  refpos = {)} ,
+  preref  = {(} ,
+  postref = {)} ,
 
 type = theorem ,
   gender = m ,
@@ -7124,8 +7174,8 @@ type = equation ,
   name-sg-ab = eq. ,
   Name-pl-ab = Eqs. ,
   name-pl-ab = eqs. ,
-  refpre = {(} ,
-  refpos = {)} ,
+  preref  = {(} ,
+  postref = {)} ,
 
 type = theorem ,
   gender = m ,
@@ -7355,8 +7405,8 @@ type = equation ,
   name-sg = ecuación ,
   Name-pl = Ecuaciones ,
   name-pl = ecuaciones ,
-  refpre = {(} ,
-  refpos = {)} ,
+  preref  = {(} ,
+  postref = {)} ,
 
 type = theorem ,
   gender = m ,
@@ -7592,8 +7642,8 @@ type = equation ,
   name-sg-ab = vgl. ,
   Name-pl-ab = Vgl.'s ,
   name-pl-ab = vgl.'s ,
-  refpre = {(} ,
-  refpos = {)} ,
+  preref  = {(} ,
+  postref = {)} ,
 
 type = theorem ,
   gender = f ,

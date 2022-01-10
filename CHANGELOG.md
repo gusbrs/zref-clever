@@ -14,6 +14,10 @@
   `\zcLanguageSetup`, so that fine grained control per-type and per-language
   is now possible for these options.
 
+### Deprecated
+- The reference format options `refpre` and `refpos` have been deprecated in
+  favor or the more aptly named `preref` and `postref`, respectively.
+
 ## [v0.1.1-alpha](https://github.com/gusbrs/zref-clever/compare/v0.1.0-alpha...v0.1.1-alpha) (2021-12-07)
 
 ### Changed

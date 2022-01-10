@@ -30,8 +30,8 @@
   listsep={,, },
   lastsep={ UND },
   rangesep={\textrightarrow{}},
-  refpre={[},
-  refpos={]},
+  preref={[},
+  postref={]},
   Name-sg=Bar,
   name-sg=bar,
   Name-pl=Bars,
@@ -52,8 +52,8 @@
     listsep={,, },
     lastsep={ AND },
     rangesep={\textrightarrow{}},
-    refpre={[},
-    refpos={]},
+    preref={[},
+    postref={]},
     Name-sg=Bar,
     name-sg=bar,
     Name-pl=Bars,
@@ -102,8 +102,8 @@
     listsep={,, },
     lastsep={ AND },
     rangesep={\textrightarrow{}},
-    refpre={[},
-    refpos={]},
+    preref={[},
+    postref={]},
     Name-sg=Bar,
     name-sg=bar,
     Name-pl=Bars,
@@ -113,8 +113,8 @@
     Name-pl-ab=Bs.,
     name-pl-ab=bs.,
   type=equation,
-    refpre=,
-    refpos=,
+    preref=,
+    postref=,
 }
 \ExplSyntaxOn
 \prop_show:N \g__zrefclever_dict_english_prop
@@ -260,9 +260,9 @@
 \box0
 \ENDTEST
 
-\newoptblock{refpre, refpos}
+\newoptblock{preref, postref}
 
-\BEGINTEST{Option: refpre=..., refpos=...}
+\BEGINTEST{Option: preref=..., postref=...}
 \setbox0=\hbox{\zcref*{sec:section-1.1, sec:section-1.2}}
 \showbox0
 \box0

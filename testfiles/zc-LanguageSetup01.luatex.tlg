@@ -47,16 +47,16 @@ outer braces):
 >  {default-listsep}  =>  {,, }
 >  {default-lastsep}  =>  { UND }
 >  {default-rangesep}  =>  {\textrightarrow {}}
->  {default-refpre}  =>  {[}
->  {default-refpos}  =>  {]}
+>  {default-preref}  =>  {[}
+>  {default-postref}  =>  {]}
 >  {type-section-gender}  =>  {m}
 >  {type-section-namesep}  =>  {\quad }
 >  {type-section-pairsep}  =>  { \& }
 >  {type-section-listsep}  =>  {,, }
 >  {type-section-lastsep}  =>  { AND }
 >  {type-section-rangesep}  =>  {\textrightarrow {}}
->  {type-section-refpre}  =>  {[}
->  {type-section-refpos}  =>  {]}
+>  {type-section-preref}  =>  {[}
+>  {type-section-postref}  =>  {]}
 >  {type-section-D-Name-sg}  =>  {Bar}
 >  {type-section-D-name-sg}  =>  {bar}
 >  {type-section-D-Name-pl}  =>  {Bars}
@@ -98,16 +98,16 @@ outer braces):
 >  {default-listsep}  =>  {,, }
 >  {default-lastsep}  =>  { UND }
 >  {default-rangesep}  =>  {\textrightarrow {}}
->  {default-refpre}  =>  {[}
->  {default-refpos}  =>  {]}
+>  {default-preref}  =>  {[}
+>  {default-postref}  =>  {]}
 >  {type-section-gender}  =>  {m}
 >  {type-section-namesep}  =>  {\quad }
 >  {type-section-pairsep}  =>  { \& }
 >  {type-section-listsep}  =>  {,, }
 >  {type-section-lastsep}  =>  { AND }
 >  {type-section-rangesep}  =>  {\textrightarrow {}}
->  {type-section-refpre}  =>  {[}
->  {type-section-refpos}  =>  {]}
+>  {type-section-preref}  =>  {[}
+>  {type-section-postref}  =>  {]}
 >  {type-section-D-Name-sg}  =>  {Bar}
 >  {type-section-D-name-sg}  =>  {bar}
 >  {type-section-D-Name-pl}  =>  {Bars}
@@ -134,8 +134,8 @@ outer braces):
 >  {type-section-listsep}  =>  {,, }
 >  {type-section-lastsep}  =>  { AND }
 >  {type-section-rangesep}  =>  {\textrightarrow {}}
->  {type-section-refpre}  =>  {[}
->  {type-section-refpos}  =>  {]}
+>  {type-section-preref}  =>  {[}
+>  {type-section-postref}  =>  {]}
 >  {type-section-Name-sg}  =>  {Bar}
 >  {type-section-name-sg}  =>  {bar}
 >  {type-section-Name-pl}  =>  {Bars}
@@ -144,8 +144,8 @@ outer braces):
 >  {type-section-name-sg-ab}  =>  {b.}
 >  {type-section-Name-pl-ab}  =>  {Bs.}
 >  {type-section-name-pl-ab}  =>  {bs.}
->  {type-equation-refpre}  =>  {}
->  {type-equation-refpos}  =>  {}.
+>  {type-equation-preref}  =>  {}
+>  {type-equation-postref}  =>  {}.
 <recently read> }
 l. ...\prop_show:N \g__zrefclever_dict_english_prop
 ============================================================
@@ -500,7 +500,7 @@ l. ...    sec:section-1.4}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 11: Option: refpre=..., refpos=...
+TEST 11: Option: preref=..., postref=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad
 [\group_begin: 1.1\group_end: ] \& [\group_begin: 1.2\group_end: ].

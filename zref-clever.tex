@@ -592,8 +592,8 @@ the second reference none of them will.  The package's default is
 equivalent to \texttt{nameinlink=true}.
 
 \DescribeOption{preposinlink} %
-The \opt{preposinlink} option controls whether the \opt{refpre} and
-\opt{refpos} reference format options (see \zcref{sec:reference-format}) are
+The \opt{preposinlink} option controls whether the \opt{preref} and
+\opt{postref} reference format options (see \zcref{sec:reference-format}) are
 included in the reference hyperlink or not.  It is a boolean option.  The
 package's default is \texttt{preposinlink=false}, and the option given without
 a value is equivalent to \texttt{preposinlink=true}.
@@ -932,8 +932,8 @@ which each is available.
                     & listsep    & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
                     & lastsep    & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
                     & rangesep   & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
-                    & refpre     & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
-                    & refpos     & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
+                    & preref     & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
+                    & postref    & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
 
     \addlinespace
     Necessarily     & Name-sg    &           & $\bullet$ &   $\bullet$   &              \\
@@ -967,7 +967,7 @@ that which a standard \LaTeX{} \cs{ref} would typeset.  A \pkg{zref-clever}
 
 \begin{refformat}
 \item \reffmt{ref-block} \(\equiv\)
-\item \reffmt{refpre} \reffmt{ref} \reffmt{refpos}
+\item \reffmt{preref} \reffmt{ref} \reffmt{postref}
 \end{refformat}
 
 A \texttt{ref-block} is built for \emph{each} label given as argument to
@@ -1072,17 +1072,17 @@ and change them appropriately as desired.  Though hopefully reasonable, they
 may not be what you want.  The ``fallback'' option values are the following:
 
 \begin{zcexample}[escapeinside=`']
-tpairsep  = {,`\textvisiblespace{}'} ,
-tlistsep  = {,`\textvisiblespace{}'} ,
-tlastsep  = {,`\textvisiblespace{}'} ,
-notesep   = {`\textvisiblespace{}'} ,
-namesep   = {\nobreakspace} ,
-pairsep   = {,`\textvisiblespace{}'} ,
-listsep   = {,`\textvisiblespace{}'} ,
-lastsep   = {,`\textvisiblespace{}'} ,
-rangesep  = {\textendash} ,
-refpre    = {} ,
-refpos    = {} ,
+tpairsep = {,`\textvisiblespace{}'} ,
+tlistsep = {,`\textvisiblespace{}'} ,
+tlastsep = {,`\textvisiblespace{}'} ,
+notesep  = {`\textvisiblespace{}'} ,
+namesep  = {\nobreakspace} ,
+pairsep  = {,`\textvisiblespace{}'} ,
+listsep  = {,`\textvisiblespace{}'} ,
+lastsep  = {,`\textvisiblespace{}'} ,
+rangesep = {\textendash} ,
+preref   = {} ,
+postref  = {} ,
 \end{zcexample}
 
 
