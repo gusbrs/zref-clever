@@ -674,22 +674,22 @@
 % \subsection{Data extraction}
 %
 %
-% \begin{macro}{\@@_def_extract:Nnnn}
+% \begin{macro}{\@@_extract_default:Nnnn}
 %   Extract property \meta{prop} from \meta{label} and sets variable \meta{tl
 %   var} with extracted value.  Ensure \cs{zref@extractdefault} is expanded
 %   exactly twice, but no further to retrieve the proper value.  In case the
 %   property is not found, set \meta{tl var} with \meta{default}.
 %   \begin{syntax}
-%     \cs{@@_def_extract:Nnnn} \Arg{tl val}
+%     \cs{@@_extract_default:Nnnn} \Arg{tl val}
 %     ~~\Arg{label} \Arg{prop} \Arg{default}
 %   \end{syntax}
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_def_extract:Nnnn #1#2#3#4
+\cs_new_protected:Npn \@@_extract_default:Nnnn #1#2#3#4
   {
     \exp_args:NNNo \exp_args:NNo \tl_set:Nn #1
       { \zref@extractdefault {#2} {#3} {#4} }
   }
-\cs_generate_variant:Nn \@@_def_extract:Nnnn { NVnn }
+\cs_generate_variant:Nn \@@_extract_default:Nnnn { NVnn }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3431,7 +3431,7 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_label_type_put_new_right:n #1
   {
-    \@@_def_extract:Nnnn
+    \@@_extract_default:Nnnn
       \l_@@_label_type_a_tl {#1} { zc@type } { \c_empty_tl }
     \seq_if_in:NVF \l_@@_label_types_seq
       \l_@@_label_type_a_tl
@@ -3457,9 +3457,9 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_sort_default:nn #1#2
   {
-    \@@_def_extract:Nnnn
+    \@@_extract_default:Nnnn
       \l_@@_label_type_a_tl {#1} { zc@type } { zc@missingtype }
-    \@@_def_extract:Nnnn
+    \@@_extract_default:Nnnn
       \l_@@_label_type_b_tl {#2} { zc@type } { zc@missingtype }
 
     \tl_if_eq:NNTF
@@ -3479,15 +3479,15 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_sort_default_same_type:nn #1#2
   {
-    \@@_def_extract:Nnnn \l_@@_label_enclval_a_tl
+    \@@_extract_default:Nnnn \l_@@_label_enclval_a_tl
       {#1} { zc@enclval } { \c_empty_tl }
     \tl_reverse:N \l_@@_label_enclval_a_tl
-    \@@_def_extract:Nnnn \l_@@_label_enclval_b_tl
+    \@@_extract_default:Nnnn \l_@@_label_enclval_b_tl
       {#2} { zc@enclval } { \c_empty_tl }
     \tl_reverse:N \l_@@_label_enclval_b_tl
-    \@@_def_extract:Nnnn \l_@@_label_extdoc_a_tl
+    \@@_extract_default:Nnnn \l_@@_label_extdoc_a_tl
       {#1} { externaldocument } { \c_empty_tl }
-    \@@_def_extract:Nnnn \l_@@_label_extdoc_b_tl
+    \@@_extract_default:Nnnn \l_@@_label_extdoc_b_tl
       {#2} { externaldocument } { \c_empty_tl }
 
     \bool_set_false:N \l_@@_sort_decided_bool
@@ -3981,9 +3981,11 @@
             \tl_set:Nn \l_@@_label_type_b_tl { page }
           }
           {
-            \@@_def_extract:NVnn \l_@@_label_type_a_tl
+            \@@_extract_default:NVnn
+              \l_@@_label_type_a_tl
               \l_@@_label_a_tl { zc@type } { zc@missingtype }
-            \@@_def_extract:NVnn \l_@@_label_type_b_tl
+            \@@_extract_default:NVnn
+              \l_@@_label_type_b_tl
               \l_@@_label_b_tl { zc@type } { zc@missingtype }
           }
 
@@ -5042,9 +5044,9 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_labels_in_sequence:nn #1#2
   {
-    \@@_def_extract:Nnnn \l_@@_label_extdoc_a_tl
+    \@@_extract_default:Nnnn \l_@@_label_extdoc_a_tl
       {#1} { externaldocument } { \c_empty_tl }
-    \@@_def_extract:Nnnn \l_@@_label_extdoc_b_tl
+    \@@_extract_default:Nnnn \l_@@_label_extdoc_b_tl
       {#2} { externaldocument } { \c_empty_tl }
 
     \tl_if_eq:NNT
