@@ -26,7 +26,7 @@
   {
     \zcDeclareLanguage
       [ declension = { a,b,c } , gender = { x,y,z } , allcaps ] { elvish }
-    \prop_show:N \g__zrefclever_dict_elvish_prop
+    \prop_show:N \g__zrefclever_lang_elvish_prop
   }
 
 \TEST { Declare~new~alias }

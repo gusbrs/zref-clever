@@ -1,11 +1,11 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 ============================================================
-TEST 1: Built-in dictionaries
+TEST 1: Built-in language files
 ============================================================
-(zref-clever-english.dict)
-Package zref-clever Info: Loaded 'english' dictionary.
-The property list \g__zrefclever_dict_english_prop contains the pairs (without
+(zref-clever-english.lang)
+Package zref-clever Info: Loaded 'english' language file.
+The property list \g__zrefclever_lang_english_prop contains the pairs (without
 outer braces):
 >  {default-namesep}  =>  {\nobreakspace }
 >  {default-pairsep}  =>  { and\nobreakspace }
@@ -146,9 +146,9 @@ outer braces):
 <recently read> }
 l. ...  }
 ============================================================
-(zref-clever-german.dict)
-Package zref-clever Info: Loaded 'german' dictionary.
-The property list \g__zrefclever_dict_german_prop contains the pairs (without
+(zref-clever-german.lang)
+Package zref-clever Info: Loaded 'german' language file.
+The property list \g__zrefclever_lang_german_prop contains the pairs (without
 outer braces):
 >  {declension}  =>  {N,A,D,G}
 >  {gender}  =>  {f,m,n}
@@ -428,9 +428,9 @@ outer braces):
 <recently read> }
 l. ...  }
 ============================================================
-(zref-clever-french.dict)
-Package zref-clever Info: Loaded 'french' dictionary.
-The property list \g__zrefclever_dict_french_prop contains the pairs (without
+(zref-clever-french.lang)
+Package zref-clever Info: Loaded 'french' language file.
+The property list \g__zrefclever_lang_french_prop contains the pairs (without
 outer braces):
 >  {gender}  =>  {f,m}
 >  {default-namesep}  =>  {\nobreakspace }
@@ -588,9 +588,9 @@ outer braces):
 <recently read> }
 l. ...  }
 ============================================================
-(zref-clever-portuguese.dict)
-Package zref-clever Info: Loaded 'portuguese' dictionary.
-The property list \g__zrefclever_dict_portuguese_prop contains the pairs
+(zref-clever-portuguese.lang)
+Package zref-clever Info: Loaded 'portuguese' language file.
+The property list \g__zrefclever_lang_portuguese_prop contains the pairs
 (without outer braces):
 >  {gender}  =>  {f,m}
 >  {default-namesep}  =>  {\nobreakspace }
@@ -760,9 +760,9 @@ The property list \g__zrefclever_dict_portuguese_prop contains the pairs
 <recently read> }
 l. ...  }
 ============================================================
-(zref-clever-spanish.dict)
-Package zref-clever Info: Loaded 'spanish' dictionary.
-The property list \g__zrefclever_dict_spanish_prop contains the pairs (without
+(zref-clever-spanish.lang)
+Package zref-clever Info: Loaded 'spanish' language file.
+The property list \g__zrefclever_lang_spanish_prop contains the pairs (without
 outer braces):
 >  {gender}  =>  {f,m}
 >  {default-namesep}  =>  {\nobreakspace }
@@ -920,9 +920,9 @@ outer braces):
 <recently read> }
 l. ...  }
 ============================================================
-(zref-clever-dutch.dict)
-Package zref-clever Info: Loaded 'dutch' dictionary.
-The property list \g__zrefclever_dict_dutch_prop contains the pairs (without
+(zref-clever-dutch.lang)
+Package zref-clever Info: Loaded 'dutch' language file.
+The property list \g__zrefclever_lang_dutch_prop contains the pairs (without
 outer braces):
 >  {gender}  =>  {f,m,n}
 >  {default-namesep}  =>  {\nobreakspace }
@@ -1085,9 +1085,9 @@ outer braces):
 l. ...  }
 ============================================================
 ============================================================
-TEST 2: Fallback dictionary
+TEST 2: Fallback 
 ============================================================
-The property list \g__zrefclever_fallback_dict_prop contains the pairs
+The property list \g__zrefclever_fallback_unknown_lang_prop contains the pairs
 (without outer braces):
 >  {tpairsep}  =>  {, }
 >  {tlistsep}  =>  {, }

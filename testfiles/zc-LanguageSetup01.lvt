@@ -64,7 +64,7 @@
     name-pl-ab=bs.,
 }
 \ExplSyntaxOn
-\prop_show:N \g__zrefclever_dict_german_prop
+\prop_show:N \g__zrefclever_lang_german_prop
 \ExplSyntaxOff
 \ENDTEST
 
@@ -86,7 +86,7 @@
   gender={f,m,z},
 }
 \ExplSyntaxOn
-\prop_show:N \g__zrefclever_dict_german_prop
+\prop_show:N \g__zrefclever_lang_german_prop
 \ExplSyntaxOff
 \ENDTEST
 
@@ -117,7 +117,7 @@
     postref=,
 }
 \ExplSyntaxOn
-\prop_show:N \g__zrefclever_dict_english_prop
+\prop_show:N \g__zrefclever_lang_english_prop
 \ExplSyntaxOff
 \ENDTEST
 
@@ -140,7 +140,7 @@
     name-pl-ab = figs. ,
 }
 \ExplSyntaxOn
-\prop_show:N \g__zrefclever_dict_french_prop
+\prop_show:N \g__zrefclever_lang_french_prop
 \ExplSyntaxOff
 \ENDTEST
 

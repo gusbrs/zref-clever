@@ -7,8 +7,8 @@ module = "zref-clever"
 -- Typeset only the .tex files
 typesetfiles = {"*.tex"}
 
--- Add dictionaries to installation files
-installfiles = {"*.sty","*.cls","*.dict"}
+-- Add language files to installation files
+installfiles = {"*.sty","*.cls","*.lang"}
 
 -- Two runs for label testing
 checkruns = 2

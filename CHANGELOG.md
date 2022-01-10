@@ -3,16 +3,20 @@
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.1.1-alpha...HEAD)
 
 ### Added
-- Provided Dutch dictionary (see PR
+- Provided Dutch language file (see PR
   [#5](https://github.com/gusbrs/zref-clever/pull/5)).
 
 ### Changed
-- The `gender` key in `\zcLanguageSetup` and in the built-in dictionaries can
-  receive a comma separated list as value to support types with multiple valid
-  genders.
+- The `gender` key in `\zcLanguageSetup` and in the built-in language files
+  can receive a comma separated list as value to support types with multiple
+  valid genders.
 - The `cap` and `abbrev` options can now be set also in `\zcRefTypeSetup` and
   `\zcLanguageSetup`, so that fine grained control per-type and per-language
   is now possible for these options.
+- Abandoned the "dictionary/translation" metaphor to refer to language
+  specific options.  Mostly housekeeping, affecting the name-scheme of
+  functions and variables, but aiming at a clearer documentation in this area,
+  specially in the longer term.
 
 ### Deprecated
 - The reference format options `refpre` and `refpos` have been deprecated in

@@ -37,8 +37,8 @@ l. ...\showbox0
 LaTeX Info: Redefining \rmfamily on input line ....
 LaTeX Info: Redefining \sffamily on input line ....
 LaTeX Info: Redefining \ttfamily on input line ....
-(zref-clever-french.dict)
-Package zref-clever Info: Loaded 'french' dictionary.
+(zref-clever-french.lang)
+Package zref-clever Info: Loaded 'french' language file.
 > \box...=
 \hbox(6.66+0.11)x38.38, direction TLT
 .\TU/lmr/m/n/10 s

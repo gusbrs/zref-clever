@@ -33,7 +33,7 @@ Package zref-clever Warning: Option 'tlastsep' is not type-specific on line
 Package zref-clever Warning: Option 'notesep' is not type-specific on line ....
 (zref-clever)                Set it in '\zcLanguageSetup' before first 'type'
 (zref-clever)                switch or as package option.
-The property list \g__zrefclever_dict_german_prop contains the pairs (without
+The property list \g__zrefclever_lang_german_prop contains the pairs (without
 outer braces):
 >  {declension}  =>  {N,A,D,G}
 >  {gender}  =>  {f,m,n}
@@ -66,7 +66,7 @@ outer braces):
 >  {type-section-D-Name-pl-ab}  =>  {Bs.}
 >  {type-section-D-name-pl-ab}  =>  {bs.}.
 <recently read> }
-l. ...\prop_show:N \g__zrefclever_dict_german_prop
+l. ...\prop_show:N \g__zrefclever_lang_german_prop
 ============================================================
 ============================================================
 TEST 2: Missing case and gender
@@ -84,7 +84,7 @@ TEST 3: Multiple genders
 ============================================================
 Package zref-clever Warning: Language 'german' has no 'z' gender declared on
 (zref-clever)                line 87.
-The property list \g__zrefclever_dict_german_prop contains the pairs (without
+The property list \g__zrefclever_lang_german_prop contains the pairs (without
 outer braces):
 >  {declension}  =>  {N,A,D,G}
 >  {gender}  =>  {f,m,n}
@@ -118,12 +118,12 @@ outer braces):
 >  {type-section-D-name-pl-ab}  =>  {bs.}
 >  {type-chapter-gender}  =>  {f,m}.
 <recently read> }
-l. ...\prop_show:N \g__zrefclever_dict_german_prop
+l. ...\prop_show:N \g__zrefclever_lang_german_prop
 ============================================================
 ============================================================
 TEST 4: English setup for later tests
 ============================================================
-The property list \g__zrefclever_dict_english_prop contains the pairs (without
+The property list \g__zrefclever_lang_english_prop contains the pairs (without
 outer braces):
 >  {default-tpairsep}  =>  { t\& }
 >  {default-tlistsep}  =>  {,,, }
@@ -147,12 +147,12 @@ outer braces):
 >  {type-equation-preref}  =>  {}
 >  {type-equation-postref}  =>  {}.
 <recently read> }
-l. ......p_show:N \g__zrefclever_dict_english_prop
+l. ......p_show:N \g__zrefclever_lang_english_prop
 ============================================================
 ============================================================
 TEST 5: French setup for later tests
 ============================================================
-The property list \g__zrefclever_dict_french_prop contains the pairs (without
+The property list \g__zrefclever_lang_french_prop contains the pairs (without
 outer braces):
 >  {gender}  =>  {f,m}
 >  {default-cap}  =>  {true}
@@ -168,7 +168,7 @@ outer braces):
 >  {type-figure-Name-pl-ab}  =>  {Figs.}
 >  {type-figure-name-pl-ab}  =>  {figs.}.
 <recently read> }
-l. ...\prop_show:N \g__zrefclever_dict_french_prop
+l. ...\prop_show:N \g__zrefclever_lang_french_prop
 ============================================================
 ============================================================
 TEST 6: Option: tpairsep=..., tlistsep=..., tlastsep=...
@@ -772,8 +772,8 @@ l. ...\showbox0
 ============================================================
 TEST 13: Option: [Nn]ame-[sg/pl](-ab)=... (german,d=D)
 ============================================================
-(zref-clever-german.dict)
-Package zref-clever Info: Loaded 'german' dictionary.
+(zref-clever-german.lang)
+Package zref-clever Info: Loaded 'german' language file.
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{section.1.1}{\group_begin: Bar\group_end: \quad [\group_begin:
 1.1\group_end: }].
@@ -986,8 +986,8 @@ l. ...\showbox0
 ============================================================
 TEST 14: Option: cap=... (french)
 ============================================================
-(zref-clever-french.dict)
-Package zref-clever Info: Loaded 'french' dictionary.
+(zref-clever-french.lang)
+Package zref-clever Info: Loaded 'french' language file.
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: Chapitre\group_end: \nobreakspace \group_begin:
 1\group_end: }.

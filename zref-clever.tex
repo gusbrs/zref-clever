@@ -650,15 +650,15 @@ is the way to tell \cs{zcref} you know it's a singular and so not to nudge if
 a compression to singular occurs, but to nudge if the contrary occurs, that
 is, when a plural type name form is employed.  The \texttt{gender} nudge must
 be combined with option \opt{g}, and depends on the language having support
-for it.  In essence language dictionaries can store the gender(s) of each type
-name (this is done for built-in dictionaries, but can also be done with
+for it.  In essence language files can store the gender(s) of each type name
+(this is done for built-in language files, but can also be done with
 \cs{zcLanguageSetup} for languages declared to support it).  The \opt{g}
 option let's you specify the gender you expect for that particular reference
 and the nudge is triggered if there is a mismatch between \opt{g} and the
-gender(s) for the type name in the dictionary.  Both the \texttt{comptosing}
-and the \texttt{gender} nudges have a type block as its scope.  See
-\zcref{sec:internationalization} for more details and intended use cases of
-the ``nudging'' feature.
+gender(s) for the type name in the language file.  Both the
+\texttt{comptosing} and the \texttt{gender} nudges have a type block as its
+scope.  See \zcref{sec:internationalization} for more details and intended use
+cases of the ``nudging'' feature.
 
 \DescribeOption{font} %
 The \opt{font} option can receive font styling commands to change the
@@ -822,7 +822,7 @@ contrary may also happen, a \emph{counter} may be defined but we have no
 these reference types are available for use out of the box.\footnote{There may
   be slight availability differences depending on the language, but
   \pkg{zref-clever} strives to keep this complete list available for the
-  languages it has built-in dictionaries.}  And, in any case, it is always
+  languages it has built-in language files.}  And, in any case, it is always
 easy to setup custom reference types with \cs{zcRefTypeSetup} or
 \cs{zcLanguageSetup} (see \zcref{sec:user-interface, sec:reference-format,
   sec:internationalization}).
@@ -883,13 +883,13 @@ less overarching effects, and some precedence rules to regulate the relation
 of settings given in each of these scopes.  There are four scopes in which
 reference formatting can be specified by the user, in the following precedence
 order: i) as \emph{general options}; ii) as \emph{type-specific options}; iii)
-as \emph{language-specific and type-specific translations}; and iv) as
-\emph{default translations} (that is, language-specific but not
-type-specific).  Besides those, there's a fifth \emph{internal} scope, with
-the least priority of all, a ``fallback'', for the cases where it is
-meaningful to provide some value, even for an unknown language.  The package
-itself places the default setup for reference formatting at low precedence
-levels, and the users can easily and conveniently override them as desired.
+as \emph{language-specific and type-specific options}; and iv) as
+\emph{language-specific default options}.  Besides those, there's a fifth
+\emph{internal} scope, with the least priority of all, a ``fallback'', for the
+cases where it is meaningful to provide some value, even for an unknown
+language.  The package itself places the default setup for reference
+formatting at low precedence levels, and the users can easily and conveniently
+override them as desired.
 
 ``General options'' (i) can be given by the user in the optional argument of
 \cs{zcref}, but also set through \cs{zcsetup} or even, depending on the case,
@@ -900,10 +900,10 @@ as package options at load-time (see \zcref{sec:options}).\footnote{The use of
   options you are setting include \emph{commands} you can't set them at
   load-time, and rather \emph{must} use \cs{zcsetup}.}  ``Type-specific
 options'' (ii) are handled by \cs{zcRefTypeSetup} (see
-\zcref{sec:user-interface}).  ``Language-specific translations'', be they
+\zcref{sec:user-interface}).  ``Language-specific options'', be they
 ``type-specific'' (iii) or ``default'' (iv) have their user interface in
 \cs{zcLanguageSetup}, and have their values populated by the package's
-built-in dictionaries (see \zcref{sec:internationalization}).  Not all
+built-in language files (see \zcref{sec:internationalization}).  Not all
 reference format specifications can be given in all of these scopes, though.
 Some of them can't be type-specific, others must be type-specific, so the set
 available in each scope depends on the pertinence of the case.
@@ -916,42 +916,43 @@ which each is available.
   \centering
   \begin{tabular}{l>{\ttfamily}lcccc}
     \toprule
-                    &            & General   & Type      & Type-specific & Default      \\
-                    &            & options   & options   & translations  & translations \\
-                    &            & (i)       & (ii)      & (iii)         & (iv)         \\
+                     &            & General   & Type      & \multicolumn{2}{c}{Language} \\
+                                                            \cmidrule(lr){5-6}
+                     &            &           &           & Type      & Default   \\
+                     &            & (i)       & (ii)      & (iii)     & (iv)      \\
 
     \midrule
-    Necessarily not & tpairsep   & $\bullet$ &           &               &  $\bullet$   \\
-    type-specific   & tlistsep   & $\bullet$ &           &               &  $\bullet$   \\
-                    & tlastsep   & $\bullet$ &           &               &  $\bullet$   \\
-                    & notesep    & $\bullet$ &           &               &  $\bullet$   \\
+    Typesetting      & tpairsep   & $\bullet$ &           &           & $\bullet$ \\
+    (necessarily not & tlistsep   & $\bullet$ &           &           & $\bullet$ \\
+    type-specific)   & tlastsep   & $\bullet$ &           &           & $\bullet$ \\
+                     & notesep    & $\bullet$ &           &           & $\bullet$ \\
 
     \addlinespace
-    Possibly        & namesep    & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
-    type-specific   & pairsep    & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
-                    & listsep    & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
-                    & lastsep    & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
-                    & rangesep   & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
-                    & preref     & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
-                    & postref    & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
+    Typesetting      & namesep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+    (possibly        & pairsep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+    type-specific)   & listsep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+                     & lastsep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+                     & rangesep   & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+                     & preref     & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+                     & postref    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
 
     \addlinespace
-    Necessarily     & Name-sg    &           & $\bullet$ &   $\bullet$   &              \\
-    type-specific   & name-sg    &           & $\bullet$ &   $\bullet$   &              \\
-                    & Name-pl    &           & $\bullet$ &   $\bullet$   &              \\
-                    & name-pl    &           & $\bullet$ &   $\bullet$   &              \\
-                    & Name-sg-ab &           & $\bullet$ &   $\bullet$   &              \\
-                    & name-sg-ab &           & $\bullet$ &   $\bullet$   &              \\
-                    & Name-pl-ab &           & $\bullet$ &   $\bullet$   &              \\
-                    & name-pl-ab &           & $\bullet$ &   $\bullet$   &              \\
+    Typesetting      & Name-sg    &           & $\bullet$ & $\bullet$ &           \\
+    (necessarily     & name-sg    &           & $\bullet$ & $\bullet$ &           \\
+    type-specific)   & Name-pl    &           & $\bullet$ & $\bullet$ &           \\
+                     & name-pl    &           & $\bullet$ & $\bullet$ &           \\
+                     & Name-sg-ab &           & $\bullet$ & $\bullet$ &           \\
+                     & name-sg-ab &           & $\bullet$ & $\bullet$ &           \\
+                     & Name-pl-ab &           & $\bullet$ & $\bullet$ &           \\
+                     & name-pl-ab &           & $\bullet$ & $\bullet$ &           \\
 
     \addlinespace
-    Font            & namefont   & $\bullet$ & $\bullet$ &               &              \\
-    options         & reffont    & $\bullet$ & $\bullet$ &               &              \\
+    Font             & namefont   & $\bullet$ & $\bullet$ &           &           \\
+                     & reffont    & $\bullet$ & $\bullet$ &           &           \\
 
     \addlinespace
-    Other           & cap        & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
-    options         & abbrev     & $\bullet$ & $\bullet$ &   $\bullet$   &  $\bullet$   \\
+    Other            & cap        & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+                     & abbrev     & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
     \bottomrule
   \end{tabular}
   \caption{Reference format options and their scopes}
@@ -1042,11 +1043,10 @@ typeset output is built as:
 \end{refformat}
 
 Reference format options can yet be divided in three general categories: i)
-``string'' options, the ones which we have seen thus far, as ``building
+``typesetting'' options, the ones which we have seen thus far, as ``building
 blocks'' of the reference; ii) ``font'' options, which control font attributes
 of parts of the reference, namely \opt{namefont} and \opt{reffont}; and iii)
-``other'' options.  ``String'' options is not really a strict denomination for
-the first category, but this set of options is intended exclusively for
+``other'' options.  ``Typesetting'' options are intended exclusively for
 typesetting material: things you expect to see in the output of your
 references.  ``Font'' options set the font, respectively, for the
 \texttt{type-name} and for \texttt{ref} (to set the font for the whole
@@ -1059,17 +1059,18 @@ Finally, a comment about the internal ``fallback'' reference format values
 mentioned above.  These ``last resort'' option values are required by
 \pkg{zref-clever} for a clear particular case: if the user loads either
 \pkg{babel} or \pkg{polyglossia}, or explicitly sets a language, with a
-language that \pkg{zref-clever} does not know and has no dictionary for, it
+language that \pkg{zref-clever} does not know and has no language file for, it
 cannot guess what language that is, and thus has to provide some reasonable
 ``language agnostic'' default, at least for the options for which this makes
-sense (all the ``string'' options, except for the \texttt{[Nn]ame-} ones).
-Users do not need to have access to this scope, since they know the language
-of their document, or know the values they want for those options, and can set
-them as general options, type-specific options, or language options through
-the user interface provided for the purpose.  But the ``fallback'' options are
-documented here so that you can recognize when you are getting these values
-and change them appropriately as desired.  Though hopefully reasonable, they
-may not be what you want.  The ``fallback'' option values are the following:
+sense (all the ``typesetting'' options, except for the \texttt{[Nn]ame-}
+ones).  Users do not need to have access to this scope, since they know the
+language of their document, or know the values they want for those options,
+and can set them as general options, type-specific options, or language
+options through the user interface provided for the purpose.  But the
+``fallback'' options are documented here so that you can recognize when you
+are getting these values and change them appropriately as desired.  Though
+hopefully reasonable, they may not be what you want.  The ``fallback'' option
+values are the following:
 
 \begin{zcexample}[escapeinside=`']
 tpairsep = {,`\textvisiblespace{}'} ,
@@ -1094,12 +1095,11 @@ postref  = {} ,
 of these language packages, or to a language specified directly by the user.
 This is primarily relevant for reference format options, particularly
 reference type \emph{names} (though not only, since most reference format
-options can have language-specific values, or ``translations'', see
-\zcref{sec:reference-format}).  But other features of the package also cater
-for language specific needs.
+options can have language-specific values see \zcref{sec:reference-format}).
+But other features of the package also cater for language specific needs.
 
 As far as language selection is concerned, if the language is declared and
-\pkg{zref-clever} has a built-in ``dictionary'' for it, most use cases will
+\pkg{zref-clever} has a built-in ``language file'' for it, most use cases will
 likely be covered by the \opt{lang} option (see \zcref{sec:options}), and its
 values \texttt{current} and \texttt{main}.  When the \opt{lang} option is set
 to \texttt{current} or \texttt{main}, \pkg{zref-check} will use, respectively,
@@ -1112,17 +1112,17 @@ the \emph{current} or \emph{main} language of the document, as defined by
   will note that \zcref{tab:languages-and-aliases} contains only \pkg{babel}
   language names.}  Users can also set \opt{lang} to a specific language
 directly, in which case \pkg{babel} and \pkg{polyglossia} are disregarded.
-\pkg{zref-clever} provides a number of built-in ``dictionaries'', for the
+\pkg{zref-clever} provides a number of built-in ``language file'', for the
 languages listed in \zcref{tab:languages-and-aliases}, which also includes the
 declared aliases to those languages.
 
-\pkg{zref-clever}'s ``dictionaries'' are loaded sparingly and lazily.  A
-dictionary for a single language -- that specified by user options in the
+\pkg{zref-clever}'s ``language files'' are loaded sparingly and lazily.  A
+language file for a single language -- that specified by user options in the
 preamble, which by default is the current document language -- is loaded at
-\texttt{begindocument}.  If any other dictionary is needed, it is loaded on
+\texttt{begindocument}.  If any other language file is needed, it is loaded on
 the fly, if and when required.  Of course, in either case, conditioned on
 availability.  In sum, \pkg{zref-clever} loads as little as possible, but
-allows for convenient on the fly loading of dictionaries if the values are
+allows for convenient on the fly loading of language files if the values are
 indeed required, without users having to worry about it at all.
 
 \begin{table}
@@ -1167,11 +1167,11 @@ indeed required, without users having to worry about it at all.
 \end{table}
 
 
-But if the built-in dictionaries do not cover your language, or if you'd like
-to adjust some of the default language-specific options, this can be done with
-\cs{zcDeclareLanguage}, \cs{zcDeclareLanguageAlias}, and
+But if the built-in language files do not cover your language, or if you'd
+like to adjust some of the default language-specific options, this can be done
+with \cs{zcDeclareLanguage}, \cs{zcDeclareLanguageAlias}, and
 \cs{zcLanguageSetup}.\footnote{Needless to say, if you'd like to contribute a
-  dictionary or improve an existing one, that is much welcome at
+  language file or improve an existing one, that is much welcome at
   \url{https://github.com/gusbrs/zref-clever/issues}.}
 
 \begin{function}{\zcDeclareLanguage}
@@ -1194,13 +1194,13 @@ in \cs{zcLanguageSetup}.  There is no default presumed in this case.  Finally,
 capitalized for grammatical reasons.  For a language declared with the
 \opt{allcaps} option, the \opt{cap} reference option (see \zcref{sec:options})
 is disregarded, and \cs{zcref} always uses the capitalized type name forms.
-This means that dictionaries for languages with such a trait can be halved in
-size, and that user customization for them is simplified, only requiring the
-capitalized name forms.  On the other hand, the non-capitalized \texttt{name-}
-reference format options are rendered no-op for the language in question.
-\zcref[S]{tab:language-options} presents an overview of the options in effect
-for the languages declared by \pkg{zref-clever}.  \cs{zcDeclareLanguage} is
-preamble only.
+This means that language files for languages with such a trait can be halved
+in size, and that user customization for them is simplified, only requiring
+the capitalized name forms.  On the other hand, the non-capitalized
+\texttt{name-} reference format options are rendered no-op for the language in
+question.  \zcref[S]{tab:language-options} presents an overview of the options
+in effect for the languages declared by \pkg{zref-clever}.
+\cs{zcDeclareLanguage} is preamble only.
 
 \begin{table}
   \centering
@@ -1250,14 +1250,13 @@ for reference type \texttt{foo}.  Similarly, after \texttt{case=X} (provided
 first occurrence of either \opt{type} or \opt{case} default values are set.
 For \opt{case} this means the default declension case, which is the first
 element of the list provided to the \opt{declension} option in
-\cs{zcDeclareLanguage}.  For \opt{type} this means ``default translations'',
-which are language-specific but not type-specific option values (see
-\zcref{sec:reference-format}).  An empty valued \texttt{type=} key can also
-``unset'' the type.  The \opt{gender} key sets the gender of the current
-\texttt{type} (provided the value it receives is one of the declared genders
-for \meta{language}).  For \texttt{type}s which have multiple valid genders
-for a given language, the option can also receive a comma separated list.
-\cs{zcLanguageSetup} is preamble only.
+\cs{zcDeclareLanguage}.  For \opt{type} this means language-specific but not
+type-specific option values (see \zcref{sec:reference-format}).  An empty
+valued \texttt{type=} key can also ``unset'' the type.  The \opt{gender} key
+sets the gender of the current \texttt{type} (provided the value it receives
+is one of the declared genders for \meta{language}).  For \texttt{type}s which
+have multiple valid genders for a given language, the option can also receive
+a comma separated list.  \cs{zcLanguageSetup} is preamble only.
 
 A couple of examples to illustrate the syntax of \cs{zcLanguageSetup}:
 
@@ -1299,7 +1298,7 @@ their typeset output automated.
 
 For reference type names, the declension cases for each language must be
 declared with \cs{zcDeclareLanguage}, and the name reference format options
-must be provided for each case, which is done for built-in dictionaries of
+must be provided for each case, which is done for built-in language files of
 languages which have noun declension, and can be done by the user with
 \cs{zcLanguageSetup}, as we've seen.  \pkg{zref-clever} does not try to guess
 or infer the case though, you must tell it to \cs{zcref}.  And this is done by
@@ -1335,11 +1334,11 @@ is comprised of multiple type blocks.  \opt{comptosing} when multiple labels
 of the same type block have been compressed into a single one and, hence, the
 type name used is singular.  Finally, \opt{gender} nudges when there is a
 mismatch between the gender specified in \cs{zcref} with the \opt{g} option
-and the gender of the type name, as stored in the dictionary or language
-settings, for each type block.  Which nudges to use is configurable with the
-option \opt{nudgeif}.  And, if you're sure of the results for a particular
-\cs{zcref} call, you can always silence the nudges locally with the
-\opt{nonudge} option.
+and the gender of the type name, as set in the language file or with
+\cs{zcLanguageSetup}, for each type block.  Which nudges to use is
+configurable with the option \opt{nudgeif}.  And, if you're sure of the
+results for a particular \cs{zcref} call, you can always silence the nudges
+locally with the \opt{nonudge} option.
 
 The main reason to watch for multiple type references with the \opt{multitype}
 nudge is that bundling together automatically a list of type blocks is less
@@ -1391,7 +1390,7 @@ example, that implies that the reference to it changes gender and the likely
 preceding article will no longer pass to the reference.  The \opt{gender}
 nudge requires that the gender of each type name and of each reference be
 explicitly specified.  For the type names, this is done for the built-in
-dictionaries of languages were this matters, and can be done with
+language files of languages were this matters, and can be done with
 \cs{zcLanguageSetup} as well.  For the references, that is the purpose of the
 \opt{g} option.  When there is a mismatch between the two for any type block,
 the nudge is triggered.  Of couse, this means that the gender markup has to be
@@ -1593,8 +1592,8 @@ cross-references in multiple languages, in which case you'd require
 \cs{zcLanguageSetup}, the most convenient way to setup a reference type is
 \cs{zcRefTypeSetup}.  In most cases, what we really need to provide for a
 custom type are the ``type names'' and other reference format options can rely
-on default translations already provided by the package (assuming the language
-is supported).
+on default language options already provided by the package (assuming the
+language is supported).
 
 \begin{zchowto}[caption={\cs{newtheorem}, custom type}]
 \documentclass{article}
@@ -2228,7 +2227,7 @@ were generously provided by (in chronological order):
   % 2022-01-05: https://github.com/gusbrs/zref-clever/issues/4
   % 2022-01-05: https://github.com/gusbrs/zref-clever/pull/5
 
-The package's dictionaries have been provided or improved thanks to:
+The package's language files have been provided or improved thanks to:
   Denis Bitouzé (French),
   % 2021-11-25: https://github.com/gusbrs/zref-clever/issues/1
   François Lagarde (French), % 'flagarde'

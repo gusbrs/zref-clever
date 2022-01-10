@@ -45,7 +45,7 @@ Package zref-clever Warning: Language 'german' is already declared on line ....
 ============================================================
 TEST 3: Declare new language
 ============================================================
-The property list \g__zrefclever_dict_elvish_prop contains the pairs (without
+The property list \g__zrefclever_lang_elvish_prop contains the pairs (without
 outer braces):
 >  {declension}  =>  {a,b,c}
 >  {gender}  =>  {x,y,z}

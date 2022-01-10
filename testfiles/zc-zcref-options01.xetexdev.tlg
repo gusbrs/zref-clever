@@ -2657,8 +2657,8 @@ l. ...\showbox0
 ============================================================
 TEST 67: Option: lang=current (language: ngerman)
 ============================================================
-(zref-clever-german.dict)
-Package zref-clever Info: Loaded 'german' dictionary.
+(zref-clever-german.lang)
+Package zref-clever Info: Loaded 'german' language file.
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: Kapitel\group_end: \nobreakspace \group_begin:
 1\group_end: }.
@@ -2717,8 +2717,8 @@ l. ...\showbox0
 ============================================================
 TEST 68: Option: lang=french
 ============================================================
-(zref-clever-french.dict)
-Package zref-clever Info: Loaded 'french' dictionary.
+(zref-clever-french.lang)
+Package zref-clever Info: Loaded 'french' language file.
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: chapitre\group_end: \nobreakspace \group_begin:
 1\group_end: }.
