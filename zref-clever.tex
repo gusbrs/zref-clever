@@ -883,7 +883,7 @@ less overarching effects, and some precedence rules to regulate the relation
 of settings given in each of these scopes.  There are four scopes in which
 reference formatting can be specified by the user, in the following precedence
 order: i) as \emph{general options}; ii) as \emph{type-specific options}; iii)
-as \emph{language-specific and type-specific options}; and iv) as
+as \emph{language- and type-specific options}; and iv) as
 \emph{language-specific default options}.  Besides those, there's a fifth
 \emph{internal} scope, with the least priority of all, a ``fallback'', for the
 cases where it is meaningful to provide some value, even for an unknown
@@ -891,25 +891,24 @@ language.  The package itself places the default setup for reference
 formatting at low precedence levels, and the users can easily and conveniently
 override them as desired.
 
-``General options'' (i) can be given by the user in the optional argument of
+``General'' options (i) can be given by the user in the optional argument of
 \cs{zcref}, but also set through \cs{zcsetup} or even, depending on the case,
 as package options at load-time (see \zcref{sec:options}).\footnote{The use of
   \cs{zcsetup} for global reference format settings is recommended though.
   Whether you can use load-time options or not depends on the values of the
   options: due to how \LaTeX{} handles package options, if the values of the
   options you are setting include \emph{commands} you can't set them at
-  load-time, and rather \emph{must} use \cs{zcsetup}.}  ``Type-specific
-options'' (ii) are handled by \cs{zcRefTypeSetup} (see
-\zcref{sec:user-interface}).  ``Language-specific options'', be they
-``type-specific'' (iii) or ``default'' (iv) have their user interface in
-\cs{zcLanguageSetup}, and have their values populated by the package's
-built-in language files (see \zcref{sec:internationalization}).  Not all
-reference format specifications can be given in all of these scopes, though.
-Some of them can't be type-specific, others must be type-specific, so the set
-available in each scope depends on the pertinence of the case.
-\zcref{tab:reference-format} introduces the available reference format
-options, which will be discussed in more detail soon, and lists the scopes in
-which each is available.
+  load-time, and rather \emph{must} use \cs{zcsetup}.}  ``Type'' specific
+options (ii) are handled by \cs{zcRefTypeSetup} (see
+\zcref{sec:user-interface}).  ``Language'' options, whether ``type'' specific
+(iii) or ``default'' (iv) have their user interface in \cs{zcLanguageSetup},
+and have their values populated by the package's built-in language files (see
+\zcref{sec:internationalization}).  Not all reference format specifications
+can be given in all of these scopes, though.  Some of them can't be
+type-specific, others must be type-specific, so the set available in each
+scope depends on the pertinence of the case.  \zcref{tab:reference-format}
+introduces the available reference format options, which will be discussed in
+more detail soon, and lists the scopes in which each is available.
 
 
 \begin{table}[htb]
