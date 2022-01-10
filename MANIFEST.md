@@ -42,11 +42,12 @@ The files created by ‘unpacking’ the package sources. This typically include
 `.sty` and `.cls` files created from DocStrip `.dtx` files.
 
 * zref-clever.sty †
-* zref-clever-english.dict †
-* zref-clever-french.dict †
-* zref-clever-german.dict †
-* zref-clever-portuguese.dict †
-* zref-clever-spanish.dict †
+* zref-clever-dutch.lang †
+* zref-clever-english.lang †
+* zref-clever-french.lang †
+* zref-clever-german.lang †
+* zref-clever-portuguese.lang †
+* zref-clever-spanish.lang †
 
 ### Typeset documents
 
@@ -82,8 +83,6 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-compat-memoir01.lvt 
 * zc-compat-subcaption01.lvt 
 * zc-compat-subfig01.lvt 
-* zc-dictionaries01.lvt 
-* zc-dictionaries02.lvt 
 * zc-howto-amsmath01.lvt 
 * zc-howto-enumitem01.lvt 
 * zc-howto-listings01.lvt 
@@ -98,6 +97,8 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-howto-newtheorem04.lvt 
 * zc-howto-zref-xr01.lvt 
 * zc-label-options01.lvt 
+* zc-langfiles01.lvt 
+* zc-langfiles02.lvt 
 * zc-languages01.lvt 
 * zc-opt-check01.lvt 
 * zc-opt-d01.lvt 
@@ -219,12 +220,6 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-compat-subfig01.tlg 
 * zc-compat-subfig01.xetex.tlg 
 * zc-compat-subfig01.xetexdev.tlg 
-* zc-dictionaries01.tlg 
-* zc-dictionaries02.luatex.tlg 
-* zc-dictionaries02.luatexdev.tlg 
-* zc-dictionaries02.tlg 
-* zc-dictionaries02.xetex.tlg 
-* zc-dictionaries02.xetexdev.tlg 
 * zc-howto-amsmath01.luatex.tlg 
 * zc-howto-amsmath01.luatexdev.tlg 
 * zc-howto-amsmath01.tlg 
@@ -293,6 +288,12 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-label-options01.luatex.tlg 
 * zc-label-options01.luatexdev.tlg 
 * zc-label-options01.tlg 
+* zc-langfiles01.tlg 
+* zc-langfiles02.luatex.tlg 
+* zc-langfiles02.luatexdev.tlg 
+* zc-langfiles02.tlg 
+* zc-langfiles02.xetex.tlg 
+* zc-langfiles02.xetexdev.tlg 
 * zc-languages01.tlg 
 * zc-opt-check01.luatex.tlg 
 * zc-opt-check01.luatexdev.tlg 
@@ -419,11 +420,12 @@ All files included in the `zref-clever/source` directory.
 
 All files included in the `zref-clever/tex` directory.
 
-* zref-clever-english.dict 
-* zref-clever-french.dict 
-* zref-clever-german.dict 
-* zref-clever-portuguese.dict 
-* zref-clever-spanish.dict 
+* zref-clever-dutch.lang 
+* zref-clever-english.lang 
+* zref-clever-french.lang 
+* zref-clever-german.lang 
+* zref-clever-portuguese.lang 
+* zref-clever-spanish.lang 
 * zref-clever.sty 
 
 ### Doc files (TDS)
