@@ -2,6 +2,9 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.1.2-alpha...HEAD)
 
+### Fixed
+- Fixed handling of type names defined to be empty.
+
 ## [v0.1.2-alpha](https://github.com/gusbrs/zref-clever/compare/v0.1.1-alpha...v0.1.2-alpha) (2022-01-10)
 
 ### Added

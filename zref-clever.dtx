@@ -3852,6 +3852,7 @@
 %   {
 %     \l_@@_type_name_tl ,
 %     \l_@@_name_in_link_bool ,
+%     \l_@@_type_name_missing_bool ,
 %     \l_@@_name_format_tl ,
 %     \l_@@_name_format_fallback_tl ,
 %     \l_@@_type_name_gender_tl ,
@@ -3860,6 +3861,7 @@
 %    \begin{macrocode}
 \tl_new:N \l_@@_type_name_tl
 \bool_new:N \l_@@_name_in_link_bool
+\bool_new:N \l_@@_type_name_missing_bool
 \tl_new:N \l_@@_name_format_tl
 \tl_new:N \l_@@_name_format_fallback_tl
 \tl_new:N \l_@@_type_name_gender_tl
@@ -4710,7 +4712,7 @@
               }
           }
           {
-            \tl_if_empty:NTF \l_@@_type_name_tl
+            \bool_if:nTF \l_@@_type_name_missing_bool
               {
                 \@@_name_default:
                 \exp_not:V \l_@@_namesep_tl
@@ -4720,7 +4722,8 @@
                 \exp_not:V \l_@@_namefont_tl
                 \exp_not:V \l_@@_type_name_tl
                 \exp_not:N \group_end:
-                \exp_not:V \l_@@_namesep_tl
+                \tl_if_empty:NF \l_@@_type_name_tl
+                  { \exp_not:V \l_@@_namesep_tl }
               }
             \zref@ifrefcontainsprop
               { \l_@@_type_first_label_tl }
@@ -4794,11 +4797,17 @@
 \cs_new_protected:Npn \@@_type_name_setup:
   {
     \zref@ifrefundefined { \l_@@_type_first_label_tl }
-      { \tl_clear:N \l_@@_type_name_tl }
+      {
+        \tl_clear:N \l_@@_type_name_tl
+        \bool_set_true:N \l_@@_type_name_missing_bool
+      }
       {
         \tl_if_eq:NnTF
           \l_@@_type_first_label_type_tl { zc@missingtype }
-          { \tl_clear:N \l_@@_type_name_tl }
+          {
+            \tl_clear:N \l_@@_type_name_tl
+            \bool_set_true:N \l_@@_type_name_missing_bool
+          }
           {
             % Determine whether we should use capitalization, abbreviation,
             % and plural.
@@ -4915,6 +4924,7 @@
                       \l_@@_type_name_tl
                       {
                         \tl_clear:N \l_@@_type_name_tl
+                        \bool_set_true:N \l_@@_type_name_missing_bool
                         \msg_warning:nnxx { zref-clever } { missing-name }
                           { \l_@@_name_format_tl }
                           { \l_@@_type_first_label_type_tl }
@@ -4963,6 +4973,7 @@
                               \l_@@_type_name_tl
                               {
                                 \tl_clear:N \l_@@_type_name_tl
+                                \bool_set_true:N \l_@@_type_name_missing_bool
                                 \msg_warning:nnxx { zref-clever }
                                   { missing-name }
                                   { \l_@@_name_format_tl }
