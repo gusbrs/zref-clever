@@ -89,8 +89,6 @@ outer braces):
 >  {type-equation-name-sg-ab}  =>  {eq.}
 >  {type-equation-Name-pl-ab}  =>  {Eqs.}
 >  {type-equation-name-pl-ab}  =>  {eqs.}
->  {type-equation-preref}  =>  {(}
->  {type-equation-postref}  =>  {)}
 >  {type-theorem-Name-sg}  =>  {Theorem}
 >  {type-theorem-name-sg}  =>  {theorem}
 >  {type-theorem-Name-pl}  =>  {Theorems}
@@ -306,8 +304,6 @@ outer braces):
 >  {type-equation-D-Name-pl}  =>  {Gleichungen}
 >  {type-equation-G-Name-sg}  =>  {Gleichung}
 >  {type-equation-G-Name-pl}  =>  {Gleichungen}
->  {type-equation-preref}  =>  {(}
->  {type-equation-postref}  =>  {)}
 >  {type-theorem-gender}  =>  {n}
 >  {type-theorem-N-Name-sg}  =>  {Theorem}
 >  {type-theorem-N-Name-pl}  =>  {Theoreme}
@@ -518,8 +514,6 @@ outer braces):
 >  {type-equation-name-sg}  =>  {équation}
 >  {type-equation-Name-pl}  =>  {Équations}
 >  {type-equation-name-pl}  =>  {équations}
->  {type-equation-preref}  =>  {(}
->  {type-equation-postref}  =>  {)}
 >  {type-theorem-gender}  =>  {m}
 >  {type-theorem-Name-sg}  =>  {Théorème}
 >  {type-theorem-name-sg}  =>  {théorème}
@@ -690,8 +684,6 @@ The property list \g__zrefclever_lang_portuguese_prop contains the pairs
 >  {type-equation-name-sg-ab}  =>  {eq.}
 >  {type-equation-Name-pl-ab}  =>  {Eqs.}
 >  {type-equation-name-pl-ab}  =>  {eqs.}
->  {type-equation-preref}  =>  {(}
->  {type-equation-postref}  =>  {)}
 >  {type-theorem-gender}  =>  {m}
 >  {type-theorem-Name-sg}  =>  {Teorema}
 >  {type-theorem-name-sg}  =>  {teorema}
@@ -850,8 +842,6 @@ outer braces):
 >  {type-equation-name-sg}  =>  {ecuación}
 >  {type-equation-Name-pl}  =>  {Ecuaciones}
 >  {type-equation-name-pl}  =>  {ecuaciones}
->  {type-equation-preref}  =>  {(}
->  {type-equation-postref}  =>  {)}
 >  {type-theorem-gender}  =>  {m}
 >  {type-theorem-Name-sg}  =>  {Teorema}
 >  {type-theorem-name-sg}  =>  {teorema}
@@ -1014,8 +1004,6 @@ outer braces):
 >  {type-equation-name-sg-ab}  =>  {vgl.}
 >  {type-equation-Name-pl-ab}  =>  {Vgl.'s}
 >  {type-equation-name-pl-ab}  =>  {vgl.'s}
->  {type-equation-preref}  =>  {(}
->  {type-equation-postref}  =>  {)}
 >  {type-theorem-gender}  =>  {f}
 >  {type-theorem-Name-sg}  =>  {Stelling}
 >  {type-theorem-name-sg}  =>  {stelling}
@@ -1085,7 +1073,7 @@ outer braces):
 l. ...  }
 ============================================================
 ============================================================
-TEST 2: Fallback 
+TEST 2: Fallback
 ============================================================
 The property list \g__zrefclever_fallback_unknown_lang_prop contains the pairs
 (without outer braces):
@@ -1097,24 +1085,7 @@ The property list \g__zrefclever_fallback_unknown_lang_prop contains the pairs
 >  {pairsep}  =>  {, }
 >  {listsep}  =>  {, }
 >  {lastsep}  =>  {, }
->  {rangesep}  =>  {\textendash }
->  {preref}  =>  {}
->  {postref}  =>  {}.
+>  {rangesep}  =>  {\textendash }.
 <recently read> }
 l. ...  }
-============================================================
-============================================================
-TEST 3: Fallback completeness
-============================================================
-tpairsep: TRUE
-tlistsep: TRUE
-tlastsep: TRUE
-notesep: TRUE
-namesep: TRUE
-pairsep: TRUE
-listsep: TRUE
-lastsep: TRUE
-rangesep: TRUE
-preref: TRUE
-postref: TRUE
 ============================================================

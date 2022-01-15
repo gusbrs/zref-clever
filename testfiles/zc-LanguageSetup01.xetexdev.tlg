@@ -6,29 +6,29 @@ TEST 1: Options and scopes: default, type-specific
 Package zref-clever Warning: No type specified for option 'gender' on line ....
 (zref-clever)                Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'Name-sg' on line
-(zref-clever)                65. Set it after 'type' switch.
+(zref-clever)                63. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'name-sg' on line
-(zref-clever)                65. Set it after 'type' switch.
+(zref-clever)                63. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'Name-pl' on line
-(zref-clever)                65. Set it after 'type' switch.
+(zref-clever)                63. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'name-pl' on line
-(zref-clever)                65. Set it after 'type' switch.
+(zref-clever)                63. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'Name-sg-ab' on line
-(zref-clever)                65. Set it after 'type' switch.
+(zref-clever)                63. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'name-sg-ab' on line
-(zref-clever)                65. Set it after 'type' switch.
+(zref-clever)                63. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'Name-pl-ab' on line
-(zref-clever)                65. Set it after 'type' switch.
+(zref-clever)                63. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'name-pl-ab' on line
-(zref-clever)                65. Set it after 'type' switch.
+(zref-clever)                63. Set it after 'type' switch.
 Package zref-clever Warning: Option 'tpairsep' is not type-specific on line
-(zref-clever)                65. Set it in '\zcLanguageSetup' before first
+(zref-clever)                63. Set it in '\zcLanguageSetup' before first
 (zref-clever)                'type' switch or as package option.
 Package zref-clever Warning: Option 'tlistsep' is not type-specific on line
-(zref-clever)                65. Set it in '\zcLanguageSetup' before first
+(zref-clever)                63. Set it in '\zcLanguageSetup' before first
 (zref-clever)                'type' switch or as package option.
 Package zref-clever Warning: Option 'tlastsep' is not type-specific on line
-(zref-clever)                65. Set it in '\zcLanguageSetup' before first
+(zref-clever)                63. Set it in '\zcLanguageSetup' before first
 (zref-clever)                'type' switch or as package option.
 Package zref-clever Warning: Option 'notesep' is not type-specific on line ....
 (zref-clever)                Set it in '\zcLanguageSetup' before first 'type'
@@ -47,16 +47,12 @@ outer braces):
 >  {default-listsep}  =>  {,, }
 >  {default-lastsep}  =>  { UND }
 >  {default-rangesep}  =>  {\textrightarrow {}}
->  {default-preref}  =>  {[}
->  {default-postref}  =>  {]}
 >  {type-section-gender}  =>  {m}
 >  {type-section-namesep}  =>  {\quad }
 >  {type-section-pairsep}  =>  { \& }
 >  {type-section-listsep}  =>  {,, }
 >  {type-section-lastsep}  =>  { AND }
 >  {type-section-rangesep}  =>  {\textrightarrow {}}
->  {type-section-preref}  =>  {[}
->  {type-section-postref}  =>  {]}
 >  {type-section-D-Name-sg}  =>  {Bar}
 >  {type-section-D-name-sg}  =>  {bar}
 >  {type-section-D-Name-pl}  =>  {Bars}
@@ -72,18 +68,18 @@ l. ...\prop_show:N \g__zrefclever_lang_german_prop
 TEST 2: Missing case and gender
 ============================================================
 Package zref-clever Warning: Language 'english' has no declared gender on line
-(zref-clever)                76. Nothing to do with option 'gender=m'.
+(zref-clever)                74. Nothing to do with option 'gender=m'.
 Package zref-clever Warning: Language 'english' has no declared declension
 (zref-clever)                cases on line .... Nothing to do with option
 (zref-clever)                'case=D'.
 Package zref-clever Warning: Language 'french' has no 'n' gender declared on
-(zref-clever)                line 80.
+(zref-clever)                line 78.
 ============================================================
 ============================================================
 TEST 3: Multiple genders
 ============================================================
 Package zref-clever Warning: Language 'german' has no 'z' gender declared on
-(zref-clever)                line 87.
+(zref-clever)                line 85.
 The property list \g__zrefclever_lang_german_prop contains the pairs (without
 outer braces):
 >  {declension}  =>  {N,A,D,G}
@@ -98,16 +94,12 @@ outer braces):
 >  {default-listsep}  =>  {,, }
 >  {default-lastsep}  =>  { UND }
 >  {default-rangesep}  =>  {\textrightarrow {}}
->  {default-preref}  =>  {[}
->  {default-postref}  =>  {]}
 >  {type-section-gender}  =>  {m}
 >  {type-section-namesep}  =>  {\quad }
 >  {type-section-pairsep}  =>  { \& }
 >  {type-section-listsep}  =>  {,, }
 >  {type-section-lastsep}  =>  { AND }
 >  {type-section-rangesep}  =>  {\textrightarrow {}}
->  {type-section-preref}  =>  {[}
->  {type-section-postref}  =>  {]}
 >  {type-section-D-Name-sg}  =>  {Bar}
 >  {type-section-D-name-sg}  =>  {bar}
 >  {type-section-D-Name-pl}  =>  {Bars}
@@ -134,8 +126,6 @@ outer braces):
 >  {type-section-listsep}  =>  {,, }
 >  {type-section-lastsep}  =>  { AND }
 >  {type-section-rangesep}  =>  {\textrightarrow {}}
->  {type-section-preref}  =>  {[}
->  {type-section-postref}  =>  {]}
 >  {type-section-Name-sg}  =>  {Bar}
 >  {type-section-name-sg}  =>  {bar}
 >  {type-section-Name-pl}  =>  {Bars}
@@ -143,9 +133,7 @@ outer braces):
 >  {type-section-Name-sg-ab}  =>  {B.}
 >  {type-section-name-sg-ab}  =>  {b.}
 >  {type-section-Name-pl-ab}  =>  {Bs.}
->  {type-section-name-pl-ab}  =>  {bs.}
->  {type-equation-preref}  =>  {}
->  {type-equation-postref}  =>  {}.
+>  {type-section-name-pl-ab}  =>  {bs.}.
 <recently read> }
 l. ......p_show:N \g__zrefclever_lang_english_prop
 ============================================================
@@ -404,7 +392,7 @@ l. ...    sec:section-1.4}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 11: Option: preref=..., postref=...
+TEST 11: Option: refbounds=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad
 [\group_begin: 1.1\group_end: ] \& [\group_begin: 1.2\group_end: ].

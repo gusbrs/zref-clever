@@ -127,17 +127,6 @@
 \box0
 \ENDTEST
 
-\newoptblock{preref, postref}
-
-\BEGINTEST{Option: preref=..., postref=...}
-\setbox0=\hbox{\zcref*{sec:section-1.1, sec:section-1.2}}
-\showbox0
-\box0
-\setbox0=\hbox{\zcref*{eq:equation-1.1.2, eq:equation-1.1.3}}
-\showbox0
-\box0
-\ENDTEST
-
 \OMIT
 
 \end{document}

@@ -225,9 +225,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 l. ...  { \ShowHook { env / #1 / begin } }
 The property list \l__zrefclever_type_equation_options_prop contains the pairs
 (without outer braces):
->  {reffont}  =>  {\upshape }
->  {preref}  =>  {\textup {(}}
->  {postref}  =>  {\textup {)}}.
+>  {reffont}  =>  {\upshape }.
 <recently read> }
 l. ......_type_equation_options_prop~not~defined } }
 ============================================================

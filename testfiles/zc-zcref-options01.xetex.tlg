@@ -2391,94 +2391,7 @@ l. ...    cha:chapter-1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 61: Option: preposinlink=true
-============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{equation.1.1.2}{\group_begin: equations\group_end: \nobreakspace
-(\group_begin: 1.2\group_end: )} and\nobreakspace \hyper@@link {\c_empty_tl
-}{equation.1.1.3}{(\group_begin: 1.3\group_end: )}.
-<recently read> }
-l. ...    eq:equation-1.1.3}
-                            }
-> \box...=
-\hbox(7.5+2.49998)x108.68
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 equations
-.\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 (1.2)
-.\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
-.\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 (1.3)
-.\special{pdf:eann}
-! OK.
-l. ...\showbox0
-============================================================
-============================================================
-TEST 62: Option: preposinlink
-============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{equation.1.1.2}{\group_begin: equations\group_end: \nobreakspace
-(\group_begin: 1.2\group_end: )} and\nobreakspace \hyper@@link {\c_empty_tl
-}{equation.1.1.3}{(\group_begin: 1.3\group_end: )}.
-<recently read> }
-l. ...    eq:equation-1.1.3}
-                            }
-> \box...=
-\hbox(7.5+2.49998)x108.68
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 equations
-.\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 (1.2)
-.\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
-.\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 (1.3)
-.\special{pdf:eann}
-! OK.
-l. ...\showbox0
-============================================================
-============================================================
-TEST 63: Option: preposinlink=false
-============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{equation.1.1.2}{\group_begin: equations\group_end: \nobreakspace
-(\group_begin: 1.2\group_end: }) and\nobreakspace (\hyper@@link {\c_empty_tl
-}{equation.1.1.3}{\group_begin: 1.3\group_end: }).
-<recently read> }
-l. ...    eq:equation-1.1.3}
-                            }
-> \box...=
-\hbox(7.5+2.49998)x108.68
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 equations
-.\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 (1.2
-.\special{pdf:eann}
-.\TU/lmr/m/n/10 )
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
-.\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 (
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 1.3
-.\special{pdf:eann}
-.\TU/lmr/m/n/10 )
-! OK.
-l. ...\showbox0
-============================================================
-============================================================
-TEST 64: Option: lang=main (main language: english)
+TEST 61: Option: lang=main (main language: english)
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
@@ -2537,7 +2450,7 @@ l. ...    sec:section-1.2, tab:table-1.1.1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 65: Option: lang=current (main language: english)
+TEST 62: Option: lang=current (main language: english)
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
@@ -2596,7 +2509,7 @@ l. ...    sec:section-1.2, tab:table-1.1.1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 66: Option: lang=main (language: ngerman)
+TEST 63: Option: lang=main (language: ngerman)
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
@@ -2655,7 +2568,7 @@ l. ...    sec:section-1.2, tab:table-1.1.1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 67: Option: lang=current (language: ngerman)
+TEST 64: Option: lang=current (language: ngerman)
 ============================================================
 (zref-clever-german.lang)
 Package zref-clever Info: Loaded 'german' language file.
@@ -2715,7 +2628,7 @@ l. ...    sec:section-1.2, tab:table-1.1.1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 68: Option: lang=french
+TEST 65: Option: lang=french
 ============================================================
 (zref-clever-french.lang)
 Package zref-clever Info: Loaded 'french' language file.
@@ -2775,7 +2688,7 @@ l. ...    sec:section-1.2, tab:table-1.1.1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 69: Option: d=...
+TEST 66: Option: d=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: Kapitel\group_end: \nobreakspace \group_begin:
@@ -3061,7 +2974,7 @@ l. ...    sec:section-1.2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 70: Option: nudge=true
+TEST 67: Option: nudge=true
 ============================================================
 Package zref-clever Warning: Reference with multiple types on line .... You
 (zref-clever)                may wish to separate them or review language
@@ -3076,7 +2989,7 @@ Package zref-clever Warning: Reference with multiple types on line .... You
 (zref-clever)                around it.
 ============================================================
 ============================================================
-TEST 71: Option: nudge
+TEST 68: Option: nudge
 ============================================================
 Package zref-clever Warning: Reference with multiple types on line .... You
 (zref-clever)                may wish to separate them or review language
@@ -3091,34 +3004,15 @@ Package zref-clever Warning: Reference with multiple types on line .... You
 (zref-clever)                around it.
 ============================================================
 ============================================================
-TEST 72: Option: nudge=false
+TEST 69: Option: nudge=false
 ============================================================
 ============================================================
 ============================================================
-TEST 73: Option: nonudge
+TEST 70: Option: nonudge
 ============================================================
 ============================================================
 ============================================================
-TEST 74: Option: nudge=ifdraft
-============================================================
-Package zref-clever Warning: Reference with multiple types on line .... You
-(zref-clever)                may wish to separate them or review language
-(zref-clever)                around it.
-Package zref-clever Warning: Multiple labels have been compressed into
-(zref-clever)                singular type name for type 'page' on line ....
-Package zref-clever Warning: Gender mismatch for type 'section' on line ....
-(zref-clever)                You've specified 'g=m' but type name is 'f' for
-(zref-clever)                language 'french'.
-Package zref-clever Warning: Reference with multiple types on line .... You
-(zref-clever)                may wish to separate them or review language
-(zref-clever)                around it.
-============================================================
-============================================================
-TEST 75: Option: nudge=iffinal
-============================================================
-============================================================
-============================================================
-TEST 76: Option: nudgeif=all
+TEST 71: Option: nudge=ifdraft
 ============================================================
 Package zref-clever Warning: Reference with multiple types on line .... You
 (zref-clever)                may wish to separate them or review language
@@ -3133,64 +3027,11 @@ Package zref-clever Warning: Reference with multiple types on line .... You
 (zref-clever)                around it.
 ============================================================
 ============================================================
-TEST 77: Option: nudgeif=multitype
-============================================================
-Package zref-clever Warning: Reference with multiple types on line .... You
-(zref-clever)                may wish to separate them or review language
-(zref-clever)                around it.
-Package zref-clever Warning: Reference with multiple types on line .... You
-(zref-clever)                may wish to separate them or review language
-(zref-clever)                around it.
+TEST 72: Option: nudge=iffinal
 ============================================================
 ============================================================
-TEST 78: Option: nudgeif=comptosing
 ============================================================
-Package zref-clever Warning: Multiple labels have been compressed into
-(zref-clever)                singular type name for type 'page' on line ....
-============================================================
-============================================================
-TEST 79: Option: nudgeif=gender
-============================================================
-Package zref-clever Warning: Gender mismatch for type 'section' on line ....
-(zref-clever)                You've specified 'g=m' but type name is 'f' for
-(zref-clever)                language 'french'.
-============================================================
-============================================================
-TEST 80: Option: nudgeif={multitype,comptosing}
-============================================================
-Package zref-clever Warning: Reference with multiple types on line .... You
-(zref-clever)                may wish to separate them or review language
-(zref-clever)                around it.
-Package zref-clever Warning: Multiple labels have been compressed into
-(zref-clever)                singular type name for type 'page' on line ....
-Package zref-clever Warning: Reference with multiple types on line .... You
-(zref-clever)                may wish to separate them or review language
-(zref-clever)                around it.
-============================================================
-============================================================
-TEST 81: Option: nudgeif={multitype,gender}
-============================================================
-Package zref-clever Warning: Reference with multiple types on line .... You
-(zref-clever)                may wish to separate them or review language
-(zref-clever)                around it.
-Package zref-clever Warning: Gender mismatch for type 'section' on line ....
-(zref-clever)                You've specified 'g=m' but type name is 'f' for
-(zref-clever)                language 'french'.
-Package zref-clever Warning: Reference with multiple types on line .... You
-(zref-clever)                may wish to separate them or review language
-(zref-clever)                around it.
-============================================================
-============================================================
-TEST 82: Option: nudgeif={comptosing,gender}
-============================================================
-Package zref-clever Warning: Multiple labels have been compressed into
-(zref-clever)                singular type name for type 'page' on line ....
-Package zref-clever Warning: Gender mismatch for type 'section' on line ....
-(zref-clever)                You've specified 'g=m' but type name is 'f' for
-(zref-clever)                language 'french'.
-============================================================
-============================================================
-TEST 83: Option: nudgeif={multitype,comptosing,gender}
+TEST 73: Option: nudgeif=all
 ============================================================
 Package zref-clever Warning: Reference with multiple types on line .... You
 (zref-clever)                may wish to separate them or review language
@@ -3205,17 +3046,89 @@ Package zref-clever Warning: Reference with multiple types on line .... You
 (zref-clever)                around it.
 ============================================================
 ============================================================
-TEST 84: Option: nudgeif=foo
+TEST 74: Option: nudgeif=multitype
+============================================================
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+============================================================
+============================================================
+TEST 75: Option: nudgeif=comptosing
+============================================================
+Package zref-clever Warning: Multiple labels have been compressed into
+(zref-clever)                singular type name for type 'page' on line ....
+============================================================
+============================================================
+TEST 76: Option: nudgeif=gender
+============================================================
+Package zref-clever Warning: Gender mismatch for type 'section' on line ....
+(zref-clever)                You've specified 'g=m' but type name is 'f' for
+(zref-clever)                language 'french'.
+============================================================
+============================================================
+TEST 77: Option: nudgeif={multitype,comptosing}
+============================================================
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+Package zref-clever Warning: Multiple labels have been compressed into
+(zref-clever)                singular type name for type 'page' on line ....
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+============================================================
+============================================================
+TEST 78: Option: nudgeif={multitype,gender}
+============================================================
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+Package zref-clever Warning: Gender mismatch for type 'section' on line ....
+(zref-clever)                You've specified 'g=m' but type name is 'f' for
+(zref-clever)                language 'french'.
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+============================================================
+============================================================
+TEST 79: Option: nudgeif={comptosing,gender}
+============================================================
+Package zref-clever Warning: Multiple labels have been compressed into
+(zref-clever)                singular type name for type 'page' on line ....
+Package zref-clever Warning: Gender mismatch for type 'section' on line ....
+(zref-clever)                You've specified 'g=m' but type name is 'f' for
+(zref-clever)                language 'french'.
+============================================================
+============================================================
+TEST 80: Option: nudgeif={multitype,comptosing,gender}
+============================================================
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+Package zref-clever Warning: Multiple labels have been compressed into
+(zref-clever)                singular type name for type 'page' on line ....
+Package zref-clever Warning: Gender mismatch for type 'section' on line ....
+(zref-clever)                You've specified 'g=m' but type name is 'f' for
+(zref-clever)                language 'french'.
+Package zref-clever Warning: Reference with multiple types on line .... You
+(zref-clever)                may wish to separate them or review language
+(zref-clever)                around it.
+============================================================
+============================================================
+TEST 81: Option: nudgeif=foo
 ============================================================
 Package zref-clever Warning: Unknown value 'foo' for 'nudgeif' option on line
-(zref-clever)                807.
+(zref-clever)                782.
 Package zref-clever Warning: Unknown value 'foo' for 'nudgeif' option on line
-(zref-clever)                809.
+(zref-clever)                784.
 Package zref-clever Warning: Unknown value 'foo' for 'nudgeif' option on line
-(zref-clever)                811.
+(zref-clever)                786.
 ============================================================
 ============================================================
-TEST 85: Option: sg
+TEST 82: Option: sg
 ============================================================
 Package zref-clever Warning: Multiple labels have been compressed into
 (zref-clever)                singular type name for type 'page' on line ....
@@ -3224,7 +3137,7 @@ Package zref-clever Warning: Option 'sg' signals that a singular type name was
 (zref-clever)                type name.
 ============================================================
 ============================================================
-TEST 86: Option: g=...
+TEST 83: Option: g=...
 ============================================================
 Package zref-clever Warning: Gender mismatch for type 'section' on line ....
 (zref-clever)                You've specified 'g=m' but type name is 'f' for
@@ -3239,20 +3152,20 @@ Package zref-clever Warning: Gender mismatch for type 'chapter' on line ....
 (zref-clever)                You've specified 'g=f' but type name is 'm' for
 (zref-clever)                language 'french'.
 Package zref-clever Warning: Language 'french' has no 'n' gender declared on
-(zref-clever)                line 849.
+(zref-clever)                line 824.
 Package zref-clever Warning: Language 'french' has no 'n' gender declared on
-(zref-clever)                line 851.
+(zref-clever)                line 826.
 Package zref-clever Warning: Language 'french' has no 'n' gender declared on
-(zref-clever)                line 853.
+(zref-clever)                line 828.
 Package zref-clever Warning: Language 'english' has no declared gender on line
-(zref-clever)                855. Nothing to do with option 'g=f'.
+(zref-clever)                830. Nothing to do with option 'g=f'.
 Package zref-clever Warning: Language 'english' has no declared gender on line
-(zref-clever)                856. Nothing to do with option 'g=f'.
+(zref-clever)                831. Nothing to do with option 'g=f'.
 Package zref-clever Warning: Language 'english' has no declared gender on line
-(zref-clever)                858. Nothing to do with option 'g=f'.
+(zref-clever)                833. Nothing to do with option 'g=f'.
 ============================================================
 ============================================================
-TEST 87: Option: font=...
+TEST 84: Option: font=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
@@ -3382,13 +3295,13 @@ l. ...    sec:section-1.1, sec:section-1.2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 88: Option: titleref
+TEST 85: Option: titleref
 ============================================================
 Package zref-clever Warning: Option 'titleref' only available in the preamble
 (zref-clever)                on line .... Did you mean 'ref=title'?.
 ============================================================
 ============================================================
-TEST 89: Option: note=...
+TEST 86: Option: note=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
@@ -3412,7 +3325,7 @@ l. ......hbox{\zcref[note={a note}]{cha:chapter-1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 90: Option: check=...
+TEST 87: Option: check=...
 ============================================================
 Package zref-check Warning: Failed check 'thispage' for label
 (zref-check)                'sec:section-1.1' on page 10 on line ....
@@ -3420,7 +3333,7 @@ Package zref-check Warning: Failed check 'prevpage' for label
 (zref-check)                'sec:section-1.1' on page 10 on line ....
 ============================================================
 ============================================================
-TEST 91: Option: tpairsep=..., tlistsep=..., tlastsep=...
+TEST 88: Option: tpairsep=..., tlistsep=..., tlastsep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
@@ -3519,7 +3432,7 @@ l. ......p={~\&~}]{sec:section-1.1, cha:chapter-1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 92: Option: notesep=...
+TEST 89: Option: notesep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
@@ -3561,7 +3474,7 @@ l. ...    cha:chapter-1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 93: Option: namesep=...
+TEST 90: Option: namesep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: chapter\group_end: \qquad \group_begin:
@@ -3595,7 +3508,7 @@ l. ......p=\qquad]{sec:section-1.1, cha:chapter-1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 94: Option: pairsep=..., listsep=..., lastsep=...
+TEST 91: Option: pairsep=..., listsep=..., lastsep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
@@ -3661,7 +3574,7 @@ l. ......{~\&~}]{sec:section-1.1, sec:section-1.2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 95: Option: rangesep=...
+TEST 92: Option: rangesep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin:
@@ -3686,14 +3599,14 @@ l. ......on-1.2, sec:section-1.3, sec:section-1.4}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 96: Option: preref=..., postref=...
+TEST 93: Option: refbounds=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace [\group_begin: 1.1\group_end: ] and\nobreakspace [\group_begin:
 1.2\group_end: ].
 <recently read> }
-l. ...    sec:section-1.2}
-                          }
+l. ......[,,,]}]{sec:section-1.1, sec:section-1.2}
+                                                  }
 > \box...=
 \hbox(7.5+2.49998)x96.78
 .\TU/lmr/m/n/10 sections
@@ -3711,8 +3624,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ...    eq:equation-1.1.3}
-                            }
+l. ......s=]{eq:equation-1.1.2, eq:equation-1.1.3}
+                                                  }
 > \box...=
 \hbox(6.94+1.93999)x93.12
 .\TU/lmr/m/n/10 equations
@@ -3728,7 +3641,7 @@ l. ...    eq:equation-1.1.3}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 97: Option: namefont=...
+TEST 94: Option: namefont=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: \bfseries chapter\group_end: \nobreakspace
@@ -3852,7 +3765,7 @@ l. ...    sec:section-1.2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 98: Option: reffont=...
+TEST 95: Option: reffont=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
 }{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
@@ -3899,14 +3812,14 @@ l. ...\showbox0
 \itshape 1\group_end: }.
 <recently read> }
 l. ...    sec:section-1.2}
-                           }
+                          }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin: \itshape
 1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
 }{section.1.2}{\group_begin: \itshape 1.2\group_end: }.
 <recently read> }
 l. ...    sec:section-1.2}
-                           }
+                          }
 > \box...=
 \hbox(6.94+1.93999)x150.43
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
@@ -3939,14 +3852,14 @@ l. ...\showbox0
 1\group_end: }.
 <recently read> }
 l. ...    sec:section-1.2}
-                           }
+                          }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \hyper@@link {\c_empty_tl }{section.1.1}{\group_begin: \em
 1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
 }{section.1.2}{\group_begin: \em 1.2\group_end: }.
 <recently read> }
 l. ...    sec:section-1.2}
-                           }
+                          }
 > \box...=
 \hbox(6.94+1.93999)x149.78001
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}

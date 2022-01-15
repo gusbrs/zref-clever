@@ -398,7 +398,7 @@
   {
     \bool_if:nTF
       { \prop_if_in_p:Nn \l_@@_counter_resetby_prop {#1} }
-      { \prop_item:Nn  \l_@@_counter_resetby_prop {#1} }
+      { \prop_item:Nn \l_@@_counter_resetby_prop {#1} }
       {
         \seq_map_tokens:Nn \l_@@_counter_resetters_seq
           { \@@_counter_reset_by_aux:nn {#1} }
@@ -641,6 +641,12 @@
     Unknown~compatibility~module~'#1'~given~to~option~'nocompat'.~
     Nothing~to~do.
   }
+\msg_new:nnn { zref-clever } { refbounds-must-be-four }
+  {
+    The~value~of~option~'#1'~must~be~a~comma~sepatared~list~
+    of~four~items.~We~received~'#2'~items~\msg_line_context:.~
+    Option~not~set.
+  }
 \msg_new:nnn { zref-clever } { missing-zref-check }
   {
     Option~'check'~requested~\msg_line_context:.~
@@ -652,11 +658,6 @@
   { Reference~property~'#1'~undefined~for~label~'#2'~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { missing-name }
   { Reference~format~option~'#1'~undefined~for~type~'#2'~\msg_line_context:. }
-\msg_new:nnn { zref-clever } { missing-string }
-  {
-    We~couldn't~find~a~value~for~reference~option~'#1'~\msg_line_context:.~
-    But~we~should~have:~throw~a~rock~at~the~maintainer.
-  }
 \msg_new:nnn { zref-clever } { single-element-range }
   { Range~for~type~'#1'~resulted~in~single~element~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { compat-package }
@@ -760,20 +761,21 @@
 %
 % \begin{macro}
 %   {
-%     \c_@@_ref_options_necessarily_not_type_specific_seq ,
-%     \c_@@_ref_options_possibly_type_specific_seq ,
-%     \c_@@_ref_options_type_names_seq ,
-%     \c_@@_ref_options_font_seq ,
-%     \c_@@_ref_options_typesetup_seq ,
-%     \c_@@_ref_options_reference_seq ,
+%     \c_@@_rf_opts_necessarily_not_type_specific_seq ,
+%     \c_@@_rf_opts_possibly_type_specific_seq ,
+%     \c_@@_rf_opts_refbounds_seq ,
+%     \c_@@_rf_opts_type_names_seq ,
+%     \c_@@_rf_opts_font_seq ,
+%     \c_@@_rf_opts_typesetup_seq ,
+%     \c_@@_rf_opts_reference_seq ,
 %   }
-%     Lists of reference format related options in ``categories''.  Since
-%     these options are set in different scopes, and at different places,
-%     storing the actual lists in centralized variables makes the job not only
-%     easier later on, but also keeps things consistent.
+%     Lists of reference format options in ``categories''.  Since these
+%     options are set in different scopes, and at different places, storing
+%     the actual lists in centralized variables makes the job not only easier
+%     later on, but also keeps things consistent.
 %    \begin{macrocode}
 \seq_const_from_clist:Nn
-  \c_@@_ref_options_necessarily_not_type_specific_seq
+  \c_@@_rf_opts_necessarily_not_type_specific_seq
   {
     tpairsep ,
     tlistsep ,
@@ -781,15 +783,27 @@
     notesep ,
   }
 \seq_const_from_clist:Nn
-  \c_@@_ref_options_possibly_type_specific_seq
+  \c_@@_rf_opts_possibly_type_specific_seq
   {
     namesep ,
     pairsep ,
     listsep ,
     lastsep ,
     rangesep ,
-    preref ,
-    postref ,
+  }
+\seq_const_from_clist:Nn
+  \c_@@_rf_opts_refbounds_seq
+  {
+    refbounds-first ,
+    refbounds-first-sg ,
+    refbounds-first-pb ,
+    refbounds-first-rb ,
+    refbounds-mid ,
+    refbounds-mid-rb ,
+    refbounds-mid-re ,
+    refbounds-last ,
+    refbounds-last-pe ,
+    refbounds-last-re ,
   }
 %    \end{macrocode}
 % Only ``type names'' are ``necessarily type-specific'', which makes them
@@ -798,7 +812,7 @@
 % \cs{@@_type_name_setup:}.
 %    \begin{macrocode}
 \seq_const_from_clist:Nn
-  \c_@@_ref_options_type_names_seq
+  \c_@@_rf_opts_type_names_seq
   {
     Name-sg ,
     name-sg ,
@@ -810,11 +824,11 @@
     name-pl-ab ,
   }
 %    \end{macrocode}
-% \cs{c_@@_ref_options_font_seq} are technically ``possibly type-specific'',
+% \cs{c_@@_rf_opts_font_seq} are technically ``possibly type-specific'',
 % but are not ``language-specific'', so we separate them.
 %    \begin{macrocode}
 \seq_const_from_clist:Nn
-  \c_@@_ref_options_font_seq
+  \c_@@_rf_opts_font_seq
   {
     namefont ,
     reffont ,
@@ -822,23 +836,239 @@
 %    \end{macrocode}
 % And, finally, some combined groups of the above variables, for convenience.
 %    \begin{macrocode}
-\seq_new:N \c_@@_ref_options_typesetup_seq
-\seq_gconcat:NNN \c_@@_ref_options_typesetup_seq
-  \c_@@_ref_options_possibly_type_specific_seq
-  \c_@@_ref_options_type_names_seq
-\seq_gconcat:NNN \c_@@_ref_options_typesetup_seq
-  \c_@@_ref_options_typesetup_seq
-  \c_@@_ref_options_font_seq
-\seq_new:N \c_@@_ref_options_reference_seq
-\seq_gconcat:NNN \c_@@_ref_options_reference_seq
-  \c_@@_ref_options_necessarily_not_type_specific_seq
-  \c_@@_ref_options_possibly_type_specific_seq
-\seq_gconcat:NNN \c_@@_ref_options_reference_seq
-  \c_@@_ref_options_reference_seq
-  \c_@@_ref_options_font_seq
+\seq_new:N \c_@@_rf_opts_typesetup_seq
+\seq_gconcat:NNN \c_@@_rf_opts_typesetup_seq
+  \c_@@_rf_opts_possibly_type_specific_seq
+  \c_@@_rf_opts_type_names_seq
+\seq_gconcat:NNN \c_@@_rf_opts_typesetup_seq
+  \c_@@_rf_opts_typesetup_seq
+  \c_@@_rf_opts_font_seq
+\seq_new:N \c_@@_rf_opts_reference_seq
+\seq_gconcat:NNN \c_@@_rf_opts_reference_seq
+  \c_@@_rf_opts_necessarily_not_type_specific_seq
+  \c_@@_rf_opts_possibly_type_specific_seq
+\seq_gconcat:NNN \c_@@_rf_opts_reference_seq
+  \c_@@_rf_opts_reference_seq
+  \c_@@_rf_opts_font_seq
 %    \end{macrocode}
 % \end{macro}
 %
+%
+% We set here also the ``derived'' refbounds options, which are the same for
+% every option scope.
+%
+%    \begin{macrocode}
+\clist_map_inline:nn
+  {
+    reference ,
+    typesetup ,
+    langsetup ,
+    langfile ,
+  }
+  {
+    \keys_define:nn { zref-clever / #1 }
+      {
+        +refbounds-first .meta:n =
+          {
+            refbounds-first = {##1} ,
+            refbounds-first-sg = {##1} ,
+            refbounds-first-pb = {##1} ,
+            refbounds-first-rb = {##1} ,
+          } ,
+        +refbounds-first .default:x = \c_novalue_tl ,
+        +refbounds-mid .meta:n =
+          {
+            refbounds-mid = {##1} ,
+            refbounds-mid-rb = {##1} ,
+            refbounds-mid-re = {##1} ,
+          } ,
+        +refbounds-mid .default:x = \c_novalue_tl ,
+        +refbounds-last .meta:n =
+          {
+            refbounds-last = {##1} ,
+            refbounds-last-pe = {##1} ,
+            refbounds-last-re = {##1} ,
+          } ,
+        +refbounds-last .default:x = \c_novalue_tl ,
+        +refbounds-rb .meta:n =
+          {
+            refbounds-first-rb = {##1} ,
+            refbounds-mid-rb = {##1} ,
+          } ,
+        +refbounds-rb .default:x = \c_novalue_tl ,
+        +refbounds-re .meta:n =
+          {
+            refbounds-mid-re = {##1} ,
+            refbounds-last-re = {##1} ,
+          } ,
+        +refbounds-re .default:x = \c_novalue_tl ,
+        +refbounds .meta:n =
+          {
+            +refbounds-first = {##1} ,
+            +refbounds-mid = {##1} ,
+            +refbounds-last = {##1} ,
+          } ,
+        +refbounds .default:x = \c_novalue_tl ,
+        refbounds .meta:n = { +refbounds = {##1} } ,
+        refbounds .default:x = \c_novalue_tl ,
+      }
+  }
+%    \end{macrocode}
+%
+%
+% \subsection{Option infra}
+%
+% \begin{macro}[EXP]{\@@_opt_name_general:nn}
+%   Defines, and leaves in the input stream, the name of the variable used to
+%   store the general \meta{option}.  The data type of the variable must be
+%   specified (\texttt{tl}, \texttt{seq}, \texttt{bool}, etc.).
+%   \begin{syntax}
+%     \cs{@@_opt_name_general:nn} \Arg{option} \Arg{data type}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_opt_name_general:nn #1#2
+  { l_@@_opt_general_ #1 _ #2 }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_opt_name_type:nnn}
+%   Defines, and leaves in the input stream, the name of the variable used to
+%   store the type-specific \meta{option} for \meta{ref type}.
+%   \begin{syntax}
+%     \cs{@@_opt_name_type:nnn} \Arg{ref type} \Arg{option} \Arg{data type}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_opt_name_type:nnn #1#2#3
+  { l_@@_opt_type_ #1 _ #2 _ #3 }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_opt_name_lang_default:nnn}
+%   Defines, and leaves in the input stream, the name of the variable used to
+%   store the language-specific default \meta{option} for base language
+%   \meta{base lang}.
+%   \begin{syntax}
+%     \cs{@@_opt_name_lang_default:nnn} \Arg{base lang} \Arg{option} \Arg{data type}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_opt_name_lang_default:nnn #1#2#3
+  { g_@@_opt_lang_ #1 _default_ #2 _ #3 }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_opt_name_lang_type:nnnn}
+%   Defines, and leaves in the input stream, the name of the variable used to
+%   store the language- and type-specific \meta{option} for \meta{base lang}
+%   and \meta{ref type}.
+%   \begin{syntax}
+%     \cs{@@_opt_name_lang_type:nnnn} \Arg{base lang} \Arg{ref type}
+%     ~~\Arg{option} \Arg{data type}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_opt_name_lang_type:nnnn #1#2#3#4
+  { g_@@_opt_lang_ #1 _type_ #2 _ #3 _ #4 }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_opt_name_fallback:nn}
+%   Defines, and leaves in the input stream, the name of the variable used to
+%   store the fallback \meta{option}.
+%   \begin{syntax}
+%     \cs{@@_opt_name_fallback:nn} \Arg{option} \Arg{data type}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_opt_name_fallback:nn #1#2
+  { c_@@_opt_fallback_ #1 _ #2 }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}
+%   {
+%     \@@_opt_seq_set_clist_split:Nn ,
+%     \@@_opt_seq_gset_clist_split:Nn ,
+%     \@@_opt_seq_gset_clist_split_if_new:Nn ,
+%   }
+%   \begin{syntax}
+%     \cs{@@_opt_seq_set_clist_split:Nn} \Arg{option seq} \Arg{value}
+%     \cs{@@_opt_seq_gset_clist_split:Nn} \Arg{option seq} \Arg{value}
+%     \cs{@@_opt_seq_gset_clist_split_if_new:Nn} \Arg{option seq} \Arg{value}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_opt_seq_set_clist_split:Nn #1#2
+  { \seq_set_split:Nnn #1 { , } {#2} }
+\cs_new_protected:Npn \@@_opt_seq_gset_clist_split:Nn #1#2
+  { \seq_gset_split:Nnn #1 { , } {#2} }
+% \cs_new_protected:Npn \@@_opt_seq_gset_clist_split_if_new:Nn #1#2
+%   {
+%     \@@_opt_seq_if_set:NF #1
+%       { \seq_gset_split:Nnn #1 { , } {#2} }
+%   }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}
+%   {
+%     \@@_opt_seq_unset:N ,
+%     \@@_opt_seq_unset:c ,
+%     \@@_opt_seq_gunset:N ,
+%     \@@_opt_seq_gunset:c ,
+%   }
+%   Unset \meta{option seq}.  These functions *define* what means to be unset
+%   for an option sequence, and it must match what the conditional
+%   \cs{@@_opt_seq_if_set:N} tests for.
+%   \begin{syntax}
+%     \cs{@@_opt_seq_unset:N} \Arg{option seq}
+%     \cs{@@_opt_seq_gunset:N} \Arg{option seq}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_opt_seq_unset:N #1
+  { \seq_set_eq:NN #1 \scan_stop: }
+\cs_new_protected:Npn \@@_opt_seq_gunset:N #1
+  { \seq_gset_eq:NN #1 \scan_stop: }
+\cs_generate_variant:Nn \@@_opt_seq_unset:N { c }
+\cs_generate_variant:Nn \@@_opt_seq_gunset:N { c }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP,TF]
+%   {
+%     \@@_opt_seq_if_set:N ,
+%     \@@_opt_seq_if_set:c ,
+%   }
+%   \begin{syntax}
+%     \cs{@@_opt_seq_if_set:N(TF)} \Arg{option seq}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \@@_opt_seq_if_set:N #1 { F , TF }
+  { \seq_if_exist:NTF #1 { \prg_return_true: } { \prg_return_false: } }
+\prg_generate_conditional_variant:Nnn
+  \@@_opt_seq_if_set:N { c } { F , TF }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[TF]
+%   {
+%     \@@_opt_seq_get:NN ,
+%     \@@_opt_seq_get:cN ,
+%   }
+%   \begin{syntax}
+%     \cs{@@_opt_seq_get:NN(TF)} \Arg{option seq to get} \Arg{seq var to set}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_protected_conditional:Npnn \@@_opt_seq_get:NN #1#2 { F }
+  {
+    \@@_opt_seq_if_set:NTF #1
+      {
+        \seq_set_eq:NN #2 #1
+        \prg_return_true:
+      }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn
+  \@@_opt_seq_get:NN { cN } { F }
+%    \end{macrocode}
+% \end{macro}
 %
 %
 % \subsection{Languages}
@@ -1429,7 +1659,7 @@
     noabbrev .value_forbidden:n = true ,
   }
 \seq_map_inline:Nn
-  \c_@@_ref_options_necessarily_not_type_specific_seq
+  \c_@@_rf_opts_necessarily_not_type_specific_seq
   {
     \keys_define:nn { zref-clever / langfile }
       {
@@ -1446,7 +1676,7 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_ref_options_possibly_type_specific_seq
+  \c_@@_rf_opts_possibly_type_specific_seq
   {
     \keys_define:nn { zref-clever / langfile }
       {
@@ -1460,7 +1690,7 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_ref_options_type_names_seq
+  \c_@@_rf_opts_type_names_seq
   {
     \keys_define:nn { zref-clever / langfile }
       {
@@ -1485,22 +1715,117 @@
   }
 %    \end{macrocode}
 %
+%    \begin{macrocode}
+\seq_map_inline:Nn
+  \c_@@_rf_opts_refbounds_seq
+  {
+    \keys_define:nn { zref-clever / langfile }
+      {
+        #1 .default:x = \c_novalue_tl ,
+        #1 .code:n =
+          {
+            \tl_if_empty:NTF \l_@@_setup_type_tl
+              {
+                \tl_if_novalue:nTF {##1}
+                  {
+                    \@@_opt_seq_gunset:c
+                      {
+                        \@@_opt_name_lang_default:nnn
+                          { \l_@@_base_language_tl } {#1} { seq }
+                      }
+                  }
+                  {
+                    \@@_opt_seq_if_set:cF
+                      {
+                        \@@_opt_name_lang_default:nnn
+                          { \l_@@_base_language_tl } {#1} { seq }
+                      }
+                      {
+                        \seq_gclear:N \g_tmpa_seq
+                        \@@_opt_seq_gset_clist_split:Nn
+                          \g_tmpa_seq {##1}
+                        \bool_lazy_or:nnTF
+                          { \tl_if_empty_p:n {##1} }
+                          {
+                            \int_compare_p:nNn
+                              { \seq_count:N \g_tmpa_seq } = { 4 }
+                          }
+                          {
+                            \seq_gset_eq:cN
+                              {
+                                \@@_opt_name_lang_default:nnn
+                                  { \l_@@_base_language_tl } {#1} { seq }
+                              }
+                              \g_tmpa_seq
+                          }
+                          {
+                            \msg_info:nnxx { zref-clever }
+                              { refbounds-must-be-four }
+                              {#1} { \seq_count:N \g_tmpa_seq }
+                          }
+                      }
+                  }
+              }
+              {
+                \tl_if_novalue:nTF {##1}
+                  {
+                    \@@_opt_seq_gunset:c
+                      {
+                        \@@_opt_name_lang_type:nnnn
+                          { \l_@@_base_language_tl }
+                          { \l_@@_setup_type_tl } {#1} { seq }
+                      }
+                  }
+                  {
+                    \@@_opt_seq_if_set:cF
+                      {
+                        \@@_opt_name_lang_type:nnnn
+                          { \l_@@_base_language_tl }
+                          { \l_@@_setup_type_tl } {#1} { seq }
+                      }
+                      {
+                        \seq_gclear:N \g_tmpa_seq
+                        \@@_opt_seq_gset_clist_split:Nn
+                          \g_tmpa_seq {##1}
+                        \bool_lazy_or:nnTF
+                          { \tl_if_empty_p:n {##1} }
+                          {
+                            \int_compare_p:nNn
+                              { \seq_count:N \g_tmpa_seq } = { 4 }
+                          }
+                          {
+                            \seq_gset_eq:cN
+                              {
+                                \@@_opt_name_lang_type:nnnn
+                                  { \l_@@_base_language_tl }
+                                  { \l_@@_setup_type_tl } {#1} { seq }
+                              }
+                              \g_tmpa_seq
+                          }
+                          {
+                            \msg_info:nnxx { zref-clever }
+                              { refbounds-must-be-four }
+                              {#1} { \seq_count:N \g_tmpa_seq }
+                          }
+                      }
+                  }
+              }
+          } ,
+      }
+  }
+%    \end{macrocode}
 %
 %
 % \subsubsection*{Fallback}
 %
-% All ``strings'' queried with \cs{@@_get_ref_opt_typeset:nN} -- in practice,
-% those in either \cs{c_@@_ref_options_necessarily_not_type_specific_seq} or
-% \cs{c_@@_ref_options_possibly_type_specific_seq} -- must have their values
-% set for ``fallback'', even if to empty ones, since this is what will be
-% retrieved in the absence of a proper language-specific option, which will be
-% the case if \pkg{babel} or \pkg{polyglossia} is loaded and sets a language
-% which \pkg{zref-clever} does not know.  On the other hand, ``type names''
-% are not looked for in ``fallback'', since it is indeed impossible to provide
-% any reasonable value for them for a ``specified but unknown language''.
-% Also ``font'' options -- those in \cs{c_@@_ref_options_font_seq}, and
-% queried with \cs{@@_get_ref_opt_font:nN} -- do not need to be provided here,
-% since the later function sets an empty value if the option is not found.
+% It is convenient for a number of language typesetting options (some basic
+% separators), which are queried with \cs{@@_get_ref_opt_typeset:nN} to have
+% some ``fallback'' value available in case \pkg{babel} or \pkg{polyglossia}
+% is loaded and sets a language which \pkg{zref-clever} does not know.  On the
+% other hand, ``type names'' are not looked for in ``fallback'', since it is
+% indeed impossible to provide any reasonable value for them for a ``specified
+% but unknown language''.  Other typesetting options, for which it is not a
+% problem being empty, need not be catered for with a fallback value.
 %
 %    \begin{macrocode}
 \prop_new:N \g_@@_fallback_unknown_lang_prop
@@ -1515,8 +1840,6 @@
     listsep   = {,~} ,
     lastsep   = {,~} ,
     rangesep  = {\textendash} ,
-    preref    = {} ,
-    postref   = {} ,
   }
 %    \end{macrocode}
 %
@@ -1929,9 +2252,12 @@
 \bool_new:N \l_@@_preposinlink_bool
 \keys_define:nn { zref-clever / reference }
   {
-    preposinlink .bool_set:N =  \l_@@_preposinlink_bool ,
-    preposinlink .initial:n = false ,
-    preposinlink .default:n = true ,
+    preposinlink .code:n =
+      {
+        % NOTE Option deprecated in 2022-01-12 for v0.1.3-alpha.
+        \msg_warning:nnnn { zref-clever }{ option-deprecated }
+          { preposinlink } { refbounds }
+      } ,
   }
 %    \end{macrocode}
 %
@@ -2581,7 +2907,7 @@
 %    \begin{macrocode}
 \prop_new:N \l_@@_ref_options_prop
 \seq_map_inline:Nn
-  \c_@@_ref_options_reference_seq
+  \c_@@_rf_opts_reference_seq
   {
     \keys_define:nn { zref-clever / reference }
       {
@@ -2600,17 +2926,66 @@
       {
         % NOTE Option deprecated in 2022-01-10 for v0.1.2-alpha.
         \msg_warning:nnnn { zref-clever }{ option-deprecated }
-          { refpre } { preref }
+          { refpre } { refbounds }
       } ,
     refpos .code:n =
       {
         % NOTE Option deprecated in 2022-01-10 for v0.1.2-alpha.
         \msg_warning:nnnn { zref-clever }{ option-deprecated }
-          { refpos } { postref }
+          { refpos } { refbounds }
+      } ,
+    preref .code:n =
+      {
+        % NOTE Option deprecated in 2022-01-14 for v0.1.3-alpha.
+        \msg_warning:nnnn { zref-clever }{ option-deprecated }
+          { preref } { refbounds }
+      } ,
+    postref .code:n =
+      {
+        % NOTE Option deprecated in 2022-01-14 for v0.1.3-alpha.
+        \msg_warning:nnnn { zref-clever }{ option-deprecated }
+          { postref } { refbounds }
       } ,
   }
 %    \end{macrocode}
 %
+%
+%    \begin{macrocode}
+\seq_map_inline:Nn
+  \c_@@_rf_opts_refbounds_seq
+  {
+    \keys_define:nn { zref-clever / reference }
+      {
+        #1 .default:x = \c_novalue_tl ,
+        #1 .code:n =
+          {
+            \tl_if_novalue:nTF {##1}
+              {
+                \@@_opt_seq_unset:c
+                  { \@@_opt_name_general:nn {#1} { seq } }
+              }
+              {
+                \seq_clear:N \l_tmpa_seq
+                \@@_opt_seq_set_clist_split:Nn
+                  \l_tmpa_seq {##1}
+                \bool_lazy_or:nnTF
+                  { \tl_if_empty_p:n {##1} }
+                  { \int_compare_p:nNn { \seq_count:N \l_tmpa_seq } = { 4 } }
+                  {
+                    \seq_set_eq:cN
+                      { \@@_opt_name_general:nn {#1} { seq } }
+                      \l_tmpa_seq
+                  }
+                  {
+                    \msg_warning:nnxx { zref-clever }
+                      { refbounds-must-be-four }
+                      {#1} { \seq_count:N \l_tmpa_seq }
+                  }
+              }
+          } ,
+      }
+  }
+%    \end{macrocode}
 %
 %
 % \subsubsection*{Package options}
@@ -2796,7 +3171,7 @@
 %
 %    \begin{macrocode}
 \seq_map_inline:Nn
-  \c_@@_ref_options_necessarily_not_type_specific_seq
+  \c_@@_rf_opts_necessarily_not_type_specific_seq
   {
     \keys_define:nn { zref-clever / typesetup }
       {
@@ -2812,7 +3187,7 @@
 %
 %    \begin{macrocode}
 \seq_map_inline:Nn
-  \c_@@_ref_options_typesetup_seq
+  \c_@@_rf_opts_typesetup_seq
   {
     \keys_define:nn { zref-clever / typesetup }
       {
@@ -2845,17 +3220,71 @@
       {
         % NOTE Option deprecated in 2022-01-10 for v0.1.2-alpha.
         \msg_warning:nnnn { zref-clever }{ option-deprecated }
-          { refpre } { preref }
+          { refpre } { refbounds }
       } ,
     refpos .code:n =
       {
         % NOTE Option deprecated in 2022-01-10 for v0.1.2-alpha.
         \msg_warning:nnnn { zref-clever }{ option-deprecated }
-          { refpos } { postref }
+          { refpos } { refbounds }
+      } ,
+    preref .code:n =
+      {
+        % NOTE Option deprecated in 2022-01-14 for v0.1.3-alpha.
+        \msg_warning:nnnn { zref-clever }{ option-deprecated }
+          { preref } { refbounds }
+      } ,
+    postref .code:n =
+      {
+        % NOTE Option deprecated in 2022-01-14 for v0.1.3-alpha.
+        \msg_warning:nnnn { zref-clever }{ option-deprecated }
+          { postref } { refbounds }
       } ,
   }
 %    \end{macrocode}
 %
+%    \begin{macrocode}
+\seq_map_inline:Nn
+  \c_@@_rf_opts_refbounds_seq
+  {
+    \keys_define:nn { zref-clever / typesetup }
+      {
+        #1 .default:x = \c_novalue_tl ,
+        #1 .code:n =
+          {
+            \tl_if_novalue:nTF {##1}
+              {
+                \@@_opt_seq_unset:c
+                  {
+                    \@@_opt_name_type:nnn
+                      { \l_@@_setup_type_tl } {#1} { seq }
+                  }
+              }
+              {
+                \seq_clear:N \l_tmpa_seq
+                \@@_opt_seq_set_clist_split:Nn
+                  \l_tmpa_seq {##1}
+                \bool_lazy_or:nnTF
+                  { \tl_if_empty_p:n {##1} }
+                  { \int_compare_p:nNn { \seq_count:N \l_tmpa_seq } = { 4 } }
+                  {
+                    \seq_set_eq:cN
+                      {
+                        \@@_opt_name_type:nnn
+                          { \l_@@_setup_type_tl } {#1} { seq }
+                      }
+                      \l_tmpa_seq
+                  }
+                  {
+                    \msg_warning:nnxx { zref-clever }
+                      { refbounds-must-be-four }
+                      {#1} { \seq_count:N \l_tmpa_seq }
+                  }
+              }
+          } ,
+      }
+  }
+%    \end{macrocode}
 %
 %
 % \subsection{\cs{zcLanguageSetup}}
@@ -3063,7 +3492,7 @@
     noabbrev .value_forbidden:n = true ,
   }
 \seq_map_inline:Nn
-  \c_@@_ref_options_necessarily_not_type_specific_seq
+  \c_@@_rf_opts_necessarily_not_type_specific_seq
   {
     \keys_define:nn { zref-clever / langsetup }
       {
@@ -3084,7 +3513,7 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_ref_options_possibly_type_specific_seq
+  \c_@@_rf_opts_possibly_type_specific_seq
   {
     \keys_define:nn { zref-clever / langsetup }
       {
@@ -3112,17 +3541,29 @@
       {
         % NOTE Option deprecated in 2022-01-10 for v0.1.2-alpha.
         \msg_warning:nnnn { zref-clever }{ option-deprecated }
-          { refpre } { preref }
+          { refpre } { refbounds }
       } ,
     refpos .code:n =
       {
         % NOTE Option deprecated in 2022-01-10 for v0.1.2-alpha.
         \msg_warning:nnnn { zref-clever }{ option-deprecated }
-          { refpos } { postref }
+          { refpos } { refbounds }
+      } ,
+    preref .code:n =
+      {
+        % NOTE Option deprecated in 2022-01-14 for v0.1.3-alpha.
+        \msg_warning:nnnn { zref-clever }{ option-deprecated }
+          { preref } { refbounds }
+      } ,
+    postref .code:n =
+      {
+        % NOTE Option deprecated in 2022-01-14 for v0.1.3-alpha.
+        \msg_warning:nnnn { zref-clever }{ option-deprecated }
+          { postref } { refbounds }
       } ,
   }
 \seq_map_inline:Nn
-  \c_@@_ref_options_type_names_seq
+  \c_@@_rf_opts_type_names_seq
   {
     \keys_define:nn { zref-clever / langsetup }
       {
@@ -3154,6 +3595,90 @@
   }
 %    \end{macrocode}
 %
+%    \begin{macrocode}
+\seq_map_inline:Nn
+  \c_@@_rf_opts_refbounds_seq
+  {
+    \keys_define:nn { zref-clever / langsetup }
+      {
+        #1 .default:x = \c_novalue_tl ,
+        #1 .code:n =
+          {
+            \tl_if_empty:NTF \l_@@_setup_type_tl
+              {
+                \tl_if_novalue:nTF {##1}
+                  {
+                    \@@_opt_seq_gunset:c
+                      {
+                        \@@_opt_name_lang_default:nnn
+                          { \l_@@_base_language_tl } {#1} { seq }
+                      }
+                  }
+                  {
+                    \seq_gclear:N \g_tmpa_seq
+                    \@@_opt_seq_gset_clist_split:Nn
+                      \g_tmpa_seq {##1}
+                    \bool_lazy_or:nnTF
+                      { \tl_if_empty_p:n {##1} }
+                      {
+                        \int_compare_p:nNn
+                          { \seq_count:N \g_tmpa_seq } = { 4 }
+                      }
+                      {
+                        \seq_gset_eq:cN
+                          {
+                            \@@_opt_name_lang_default:nnn
+                              { \l_@@_base_language_tl } {#1} { seq }
+                          }
+                          \g_tmpa_seq
+                      }
+                      {
+                        \msg_warning:nnxx { zref-clever }
+                          { refbounds-must-be-four }
+                          {#1} { \seq_count:N \g_tmpa_seq }
+                      }
+                  }
+              }
+              {
+                \tl_if_novalue:nTF {##1}
+                  {
+                    \@@_opt_seq_gunset:c
+                      {
+                        \@@_opt_name_lang_type:nnnn
+                          { \l_@@_base_language_tl }
+                          { \l_@@_setup_type_tl } {#1} { seq }
+                      }
+                  }
+                  {
+                    \seq_gclear:N \g_tmpa_seq
+                    \@@_opt_seq_gset_clist_split:Nn
+                      \g_tmpa_seq {##1}
+                    \bool_lazy_or:nnTF
+                      { \tl_if_empty_p:n {##1} }
+                      {
+                        \int_compare_p:nNn
+                          { \seq_count:N \g_tmpa_seq } = { 4 }
+                      }
+                      {
+                        \seq_gset_eq:cN
+                          {
+                            \@@_opt_name_lang_type:nnnn
+                              { \l_@@_base_language_tl }
+                              { \l_@@_setup_type_tl } {#1} { seq }
+                          }
+                          \g_tmpa_seq
+                      }
+                      {
+                        \msg_warning:nnxx { zref-clever }
+                          { refbounds-must-be-four }
+                          {#1} { \seq_count:N \g_tmpa_seq }
+                      }
+                  }
+              }
+          } ,
+      }
+  }
+%    \end{macrocode}
 %
 %
 % \section{User interface}
@@ -3896,15 +4421,13 @@
 %     \l_@@_listsep_tl ,
 %     \l_@@_lastsep_tl ,
 %     \l_@@_rangesep_tl ,
-%     \l_@@_preref_tl ,
-%     \l_@@_postref_tl ,
 %     \l_@@_namefont_tl ,
 %     \l_@@_reffont_tl ,
 %     \l_@@_capitalize_bool ,
 %     \l_@@_abbrev_bool ,
 %   }
-%   Auxiliary variables for \cs{@@_typeset_refs:} separators, pre-/postref and
-%   font and other options.
+%     Auxiliary variables for \cs{@@_typeset_refs:} separators, and font and
+%     other options.
 %    \begin{macrocode}
 \tl_new:N \l_@@_tpairsep_tl
 \tl_new:N \l_@@_tlistsep_tl
@@ -3914,8 +4437,6 @@
 \tl_new:N \l_@@_listsep_tl
 \tl_new:N \l_@@_lastsep_tl
 \tl_new:N \l_@@_rangesep_tl
-\tl_new:N \l_@@_preref_tl
-\tl_new:N \l_@@_postref_tl
 \tl_new:N \l_@@_namefont_tl
 \tl_new:N \l_@@_reffont_tl
 \bool_new:N \l_@@_capitalize_bool
@@ -3923,6 +4444,38 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}
+%   {
+%     \l_@@_refbounds_first_seq ,
+%     \l_@@_refbounds_first_sg_seq ,
+%     \l_@@_refbounds_first_pb_seq ,
+%     \l_@@_refbounds_first_rb_seq ,
+%     \l_@@_refbounds_mid_seq ,
+%     \l_@@_refbounds_mid_rb_seq ,
+%     \l_@@_refbounds_mid_re_seq ,
+%     \l_@@_refbounds_last_seq ,
+%     \l_@@_refbounds_last_pe_seq ,
+%     \l_@@_refbounds_last_re_seq ,
+%     \l_@@_type_first_refbounds_seq ,
+%     \l_@@_type_first_refbounds_set_bool ,
+%   }
+%   Auxiliary variables for \cs{@@_typeset_refs:}: advanced reference format
+%   options.
+%    \begin{macrocode}
+\seq_new:N \l_@@_refbounds_first_seq
+\seq_new:N \l_@@_refbounds_first_sg_seq
+\seq_new:N \l_@@_refbounds_first_pb_seq
+\seq_new:N \l_@@_refbounds_first_rb_seq
+\seq_new:N \l_@@_refbounds_mid_seq
+\seq_new:N \l_@@_refbounds_mid_rb_seq
+\seq_new:N \l_@@_refbounds_mid_re_seq
+\seq_new:N \l_@@_refbounds_last_seq
+\seq_new:N \l_@@_refbounds_last_pe_seq
+\seq_new:N \l_@@_refbounds_last_re_seq
+\seq_new:N \l_@@_type_first_refbounds_seq
+\bool_new:N \l_@@_type_first_refbounds_set_bool
+%    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\l_@@_verbose_testing_bool}
 %   Internal variable which enables extra log messaging at points of interest
@@ -3952,6 +4505,7 @@
     \int_zero:N \l_@@_type_count_int
     \int_zero:N \l_@@_range_count_int
     \int_zero:N \l_@@_range_same_count_int
+    \bool_set_false:N \l_@@_type_first_refbounds_set_bool
 
     % Get type block options (not type-specific).
     \@@_get_ref_opt_typeset:nN { tpairsep }
@@ -4041,7 +4595,7 @@
               }
           }
 
-        % Get type-specific separators, pre-/postref font and other options,
+        % Get type-specific separators, refbounds, font and other options,
         % once per type.
         \int_compare:nNnT { \l_@@_label_count_int } = { 0 }
           {
@@ -4055,10 +4609,6 @@
               \l_@@_lastsep_tl
             \@@_get_ref_opt_typeset:nN { rangesep }
               \l_@@_rangesep_tl
-            \@@_get_ref_opt_typeset:nN { preref   }
-              \l_@@_preref_tl
-            \@@_get_ref_opt_typeset:nN { postref  }
-              \l_@@_postref_tl
             \@@_get_ref_opt_font:nN { namefont }
               \l_@@_namefont_tl
             \@@_get_ref_opt_font:nN { reffont  }
@@ -4067,6 +4617,46 @@
               \l_@@_capitalize_bool
             \@@_get_ref_opt_bool:nnN { abbrev } { false }
               \l_@@_abbrev_bool
+            \@@_get_rf_opt_seq:nxxN { refbounds-first }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
+              \l_@@_refbounds_first_seq
+            \@@_get_rf_opt_seq:nxxN { refbounds-first-sg }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
+              \l_@@_refbounds_first_sg_seq
+            \@@_get_rf_opt_seq:nxxN { refbounds-first-pb }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
+              \l_@@_refbounds_first_pb_seq
+            \@@_get_rf_opt_seq:nxxN { refbounds-first-rb }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
+              \l_@@_refbounds_first_rb_seq
+            \@@_get_rf_opt_seq:nxxN { refbounds-mid }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
+              \l_@@_refbounds_mid_seq
+            \@@_get_rf_opt_seq:nxxN { refbounds-mid-rb }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
+              \l_@@_refbounds_mid_rb_seq
+            \@@_get_rf_opt_seq:nxxN { refbounds-mid-re }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
+              \l_@@_refbounds_mid_re_seq
+            \@@_get_rf_opt_seq:nxxN { refbounds-last }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
+              \l_@@_refbounds_last_seq
+            \@@_get_rf_opt_seq:nxxN { refbounds-last-pe }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
+              \l_@@_refbounds_last_pe_seq
+            \@@_get_rf_opt_seq:nxxN { refbounds-last-re }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
+              \l_@@_refbounds_last_re_seq
           }
 
         % Here we send this to a couple of auxiliary functions.
@@ -4111,19 +4701,31 @@
             \l_@@_label_a_tl
           \tl_set:NV \l_@@_type_first_label_type_tl
             \l_@@_label_type_a_tl
+          \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+            \l_@@_refbounds_first_sg_seq
+          \bool_set_true:N \l_@@_type_first_refbounds_set_bool
         }
 
         % The last is the second: we have a pair (if not repeated).
         % Test: 'zc-typeset01.lvt': "Last of type: pair"
         { 1 }
         {
-          \int_compare:nNnF { \l_@@_range_same_count_int } = { 1 }
+          \int_compare:nNnTF { \l_@@_range_same_count_int } = { 1 }
+            {
+              \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                \l_@@_refbounds_first_sg_seq
+              \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+            }
             {
               \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                 {
                   \exp_not:V \l_@@_pairsep_tl
-                  \@@_get_ref:V \l_@@_label_a_tl
+                  \@@_get_ref:VN \l_@@_label_a_tl
+                    \l_@@_refbounds_last_pe_seq
                 }
+              \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                \l_@@_refbounds_first_pb_seq
+              \bool_set_true:N \l_@@_type_first_refbounds_set_bool
             }
         }
       }
@@ -4139,7 +4741,8 @@
               \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                 {
                   \exp_not:V \l_@@_lastsep_tl
-                  \@@_get_ref:V \l_@@_label_a_tl
+                  \@@_get_ref:VN \l_@@_label_a_tl
+                    \l_@@_refbounds_last_seq
                 }
             }
             % Last in the range is also the second in it.
@@ -4152,12 +4755,14 @@
                   % second element in the range, but the third or more in the
                   % type list.
                   \exp_not:V \l_@@_listsep_tl
-                  \@@_get_ref:V \l_@@_range_beg_label_tl
+                  \@@_get_ref:VN \l_@@_range_beg_label_tl
+                    \l_@@_refbounds_mid_seq
                   \int_compare:nNnF
                     { \l_@@_range_same_count_int } = { 1 }
                     {
                       \exp_not:V \l_@@_lastsep_tl
-                      \@@_get_ref:V \l_@@_label_a_tl
+                      \@@_get_ref:VN \l_@@_label_a_tl
+                        \l_@@_refbounds_last_seq
                     }
                 }
             }
@@ -4175,49 +4780,94 @@
                 { 0 }
                 {
                   % If `range_beg_label' is empty, it means it was also the
-                  % first of the type, and hence was already handled.
-                  \tl_if_empty:VF \l_@@_range_beg_label_tl
+                  % first of the type, and hence its typesetting was already
+                  % handled, and we just have to set refbounds.
+                  \tl_if_empty:VTF \l_@@_range_beg_label_tl
+                    {
+                      \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                        \l_@@_refbounds_first_sg_seq
+                      \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                    }
                     {
                       \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                         {
                           \exp_not:V \l_@@_lastsep_tl
-                          \@@_get_ref:V
+                          \@@_get_ref:VN
                             \l_@@_range_beg_label_tl
+                            \l_@@_refbounds_last_seq
                         }
                     }
                 }
-                % A `range', but with no skipped value, treat as list.
+                % A `range', but with no skipped value, treat as pair if range
+                % started with first of type, otherwise as list.
                 % Test: 'zc-typeset01.lvt': "Last of type: range to pair"
                 { 1 }
                 {
-                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                  % Ditto.
+                  \tl_if_empty:VTF \l_@@_range_beg_label_tl
                     {
-                      % Ditto.
-                      \tl_if_empty:VF \l_@@_range_beg_label_tl
+                      \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                        \l_@@_refbounds_first_pb_seq
+                      \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                    }
+                    {
+                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                         {
                           \exp_not:V \l_@@_listsep_tl
-                          \@@_get_ref:V
+                          \@@_get_ref:VN
                             \l_@@_range_beg_label_tl
+                            \l_@@_refbounds_mid_seq
                         }
+                    }
+                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                    {
                       \exp_not:V \l_@@_lastsep_tl
-                      \@@_get_ref:V \l_@@_label_a_tl
+                      \@@_get_ref:VN \l_@@_label_a_tl
+                        \l_@@_refbounds_last_seq
                     }
                 }
               }
               {
                 % An actual range.
                 % Test: 'zc-typeset01.lvt': "Last of type: range"
+                % Ditto.
+                \tl_if_empty:VTF \l_@@_range_beg_label_tl
+                  {
+                    \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                      \l_@@_refbounds_first_rb_seq
+                    \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                  }
+                  {
+                    % If the queue is empty, it means we are inserting the
+                    % range right after the first reference in the block, in
+                    % which case 'pairsep' is due, not 'lastsep'.
+                    % Technically, this would be both '-mid-pe' and '-mid-rb',
+                    % but we let the latter take precedence.
+                    \tl_if_empty:NTF \l_@@_typeset_queue_curr_tl
+                      {
+                        \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                          {
+                            \exp_not:V \l_@@_pairsep_tl
+                            \@@_get_ref:VN
+                              \l_@@_range_beg_label_tl
+                              \l_@@_refbounds_mid_rb_seq
+                          }
+                      }
+                      {
+                        \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                          {
+                            \exp_not:V \l_@@_lastsep_tl
+                            \@@_get_ref:VN
+                              \l_@@_range_beg_label_tl
+                              \l_@@_refbounds_mid_rb_seq
+                          }
+                      }
+                  }
                 \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                   {
-                    % Ditto.
-                    \tl_if_empty:VF \l_@@_range_beg_label_tl
-                      {
-                        \exp_not:V \l_@@_lastsep_tl
-                        \@@_get_ref:V
-                          \l_@@_range_beg_label_tl
-                      }
                     \exp_not:V \l_@@_rangesep_tl
-                    \@@_get_ref:V \l_@@_label_a_tl
+                    \@@_get_ref:VN \l_@@_label_a_tl
+                      \l_@@_refbounds_last_re_seq
                   }
               }
           }
@@ -4249,14 +4899,38 @@
               }
             % Test: 'zc-typeset01.lvt': "Last of type: option range"
             % Test: 'zc-typeset01.lvt': "Last of type: option range to pair"
-            \tl_set:Nx \l_@@_typeset_queue_curr_tl
+            \bool_if:NTF \l_@@_next_maybe_range_bool
               {
-                \bool_if:NTF \l_@@_next_maybe_range_bool
-                  { \exp_not:V \l_@@_pairsep_tl }
-                  { \exp_not:V \l_@@_rangesep_tl }
-                \@@_get_ref:V \l_@@_label_a_tl
+                \tl_set:Nx \l_@@_typeset_queue_curr_tl
+                  {
+                    \exp_not:V \l_@@_pairsep_tl
+                    \@@_get_ref:VN \l_@@_label_a_tl
+                      \l_@@_refbounds_last_pe_seq
+                  }
+                \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                  \l_@@_refbounds_first_pb_seq
+                \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+              }
+              {
+                \tl_set:Nx \l_@@_typeset_queue_curr_tl
+                  {
+                    \exp_not:V \l_@@_rangesep_tl
+                    \@@_get_ref:VN \l_@@_label_a_tl
+                      \l_@@_refbounds_last_re_seq
+                  }
+                \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                  \l_@@_refbounds_first_rb_seq
+                \bool_set_true:N \l_@@_type_first_refbounds_set_bool
               }
           }
+      }
+
+    % If none of the special cases for the first of type refbounds have been
+    % set, do it.
+    \bool_if:NF \l_@@_type_first_refbounds_set_bool
+      {
+        \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+          \l_@@_refbounds_first_seq
       }
 
     % Now that the type block is finished, we can add the name and the first
@@ -4274,7 +4948,10 @@
           {
             % Test: 'zc-typeset01.lvt': "Last of type: option typeset ref"
             \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
-              { \@@_get_ref:V \l_@@_type_first_label_tl }
+              {
+                \@@_get_ref:VN \l_@@_type_first_label_tl
+                  \l_@@_type_first_refbounds_seq
+              }
           }
           {
             \bool_if:NTF \l_@@_typeset_name_bool
@@ -4377,6 +5054,7 @@
         \int_incr:N \l_@@_type_count_int
         \int_zero:N \l_@@_range_count_int
         \int_zero:N \l_@@_range_same_count_int
+        \bool_set_false:N \l_@@_type_first_refbounds_set_bool
       }
   }
 %    \end{macrocode}
@@ -4458,7 +5136,8 @@
                   \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                     {
                       \exp_not:V \l_@@_listsep_tl
-                      \@@_get_ref:V \l_@@_label_a_tl
+                      \@@_get_ref:VN \l_@@_label_a_tl
+                        \l_@@_refbounds_mid_seq
                     }
                 }
                 % Last is second in the range: if `range_same_count' is also
@@ -4468,20 +5147,30 @@
                 % Test: 'zc-typeset01.lvt': "Not last of type: range pair"
                 { 1 }
                 {
-                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                  \tl_if_empty:VTF \l_@@_range_beg_label_tl
                     {
-                      \tl_if_empty:VF \l_@@_range_beg_label_tl
+                      \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                        \l_@@_refbounds_first_seq
+                      \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                    }
+                    {
+                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                         {
                           \exp_not:V \l_@@_listsep_tl
-                          \@@_get_ref:V
+                          \@@_get_ref:VN
                             \l_@@_range_beg_label_tl
+                            \l_@@_refbounds_mid_seq
                         }
+                    }
+                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                    {
                       \int_compare:nNnF
                         { \l_@@_range_same_count_int } = { 1 }
                         {
                           \exp_not:V \l_@@_listsep_tl
-                          \@@_get_ref:V
+                          \@@_get_ref:VN
                             \l_@@_label_a_tl
+                            \l_@@_refbounds_mid_seq
                         }
                     }
                 }
@@ -4500,44 +5189,70 @@
                     % Test: 'zc-typeset01.lvt': "Not last of type: range to one"
                     { 0 }
                     {
-                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                      \tl_if_empty:VTF \l_@@_range_beg_label_tl
                         {
-                          \tl_if_empty:VF \l_@@_range_beg_label_tl
+                          \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                            \l_@@_refbounds_first_seq
+                          \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                        }
+                        {
+                          \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                             {
                               \exp_not:V \l_@@_listsep_tl
-                              \@@_get_ref:V
+                              \@@_get_ref:VN
                                 \l_@@_range_beg_label_tl
+                                \l_@@_refbounds_mid_seq
                             }
                         }
                     }
                     % Test: 'zc-typeset01.lvt': "Not last of type: range to pair"
                     { 1 }
                     {
-                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                      \tl_if_empty:VTF \l_@@_range_beg_label_tl
                         {
-                          \tl_if_empty:VF \l_@@_range_beg_label_tl
+                          \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                            \l_@@_refbounds_first_seq
+                          \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                        }
+                        {
+                          \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                             {
                               \exp_not:V \l_@@_listsep_tl
-                              \@@_get_ref:V
+                              \@@_get_ref:VN
                                 \l_@@_range_beg_label_tl
+                                \l_@@_refbounds_mid_seq
                             }
+                        }
+                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                        {
                           \exp_not:V \l_@@_listsep_tl
-                          \@@_get_ref:V \l_@@_label_a_tl
+                          \@@_get_ref:VN \l_@@_label_a_tl
+                            \l_@@_refbounds_mid_seq
                         }
                     }
                   }
                   {
                     % Test: 'zc-typeset01.lvt': "Not last of type: range"
-                    \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                    \tl_if_empty:VTF \l_@@_range_beg_label_tl
                       {
-                        \tl_if_empty:VF \l_@@_range_beg_label_tl
+                        \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                          \l_@@_refbounds_first_rb_seq
+                        \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                      }
+                      {
+                        \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                           {
                             \exp_not:V \l_@@_listsep_tl
-                            \@@_get_ref:V
+                            \@@_get_ref:VN
                               \l_@@_range_beg_label_tl
+                              \l_@@_refbounds_mid_rb_seq
                           }
+                      }
+                    \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                      {
                         \exp_not:V \l_@@_rangesep_tl
-                        \@@_get_ref:V \l_@@_label_a_tl
+                        \@@_get_ref:VN \l_@@_label_a_tl
+                          \l_@@_refbounds_mid_re_seq
                       }
                   }
               }
@@ -4556,8 +5271,8 @@
 %
 % \subsection*{Auxiliary functions}
 %
-% \cs{@@_get_ref:n} and \cs{@@_get_ref_first:} are the two functions which
-% actually build the reference blocks for typesetting.  \cs{@@_get_ref:n}
+% \cs{@@_get_ref:nN} and \cs{@@_get_ref_first:} are the two functions which
+% actually build the reference blocks for typesetting.  \cs{@@_get_ref:nN}
 % handles all references but the first of its type, and \cs{@@_get_ref_first:}
 % deals with the first reference of a type.  Saying they do ``typesetting'' is
 % imprecise though, they actually prepare material to be accumulated in
@@ -4568,10 +5283,10 @@
 % the queue, we are using a number of variables which are transient to the
 % current label, the label properties among them, but not only.  Hence, these
 % variables \emph{must} be expanded to their current values to be stored in
-% the queue.  Indeed, \cs{@@_get_ref:n} and \cs{@@_get_ref_first:} get called,
-% as they must, in the context of \texttt{x} type expansions.  But we don't
-% want to expand the values of the variables themselves, so we need to get
-% current values, but stop expansion after that.  In particular, reference
+% the queue.  Indeed, \cs{@@_get_ref:nN} and \cs{@@_get_ref_first:} get
+% called, as they must, in the context of \texttt{x} type expansions.  But we
+% don't want to expand the values of the variables themselves, so we need to
+% get current values, but stop expansion after that.  In particular, reference
 % options given by the user should reach the stream for its final typesetting
 % (when the queue itself gets typeset) \emph{unmodified} (``no manipulation'',
 % to use the \texttt{n} signature jargon).  We also need to prevent premature
@@ -4596,16 +5311,15 @@
 % \end{macro}
 %
 %
-% \begin{macro}{\@@_get_ref:n}
+% \begin{macro}{\@@_get_ref:nN}
 %   Handles a complete reference block to be accumulated in the ``queue'',
-%   including ``pre'' and ``pos'' elements, and hyperlinking.  For use with
-%   all labels, except the first of its type, which is done by
-%   \cs{@@_get_ref_first:}.
+%   including refbounds, and hyperlinking.  For use with all labels, except
+%   the first of its type, which is done by \cs{@@_get_ref_first:}.
 %   \begin{syntax}
-%     \cs{@@_get_ref:n} \Arg{label}
+%     \cs{@@_get_ref:nN} \Arg{label} \Arg{refbounds}
 %   \end{syntax}
 %    \begin{macrocode}
-\cs_new:Npn \@@_get_ref:n #1
+\cs_new:Npn \@@_get_ref:nN #1#2
   {
     \zref@ifrefcontainsprop {#1} { \l_@@_ref_property_tl }
       {
@@ -4615,39 +5329,37 @@
             ! \l_@@_link_star_bool
           }
           {
-            \bool_if:NF \l_@@_preposinlink_bool
-              { \exp_not:V \l_@@_preref_tl }
+            \seq_item:Nn #2 { 1 }
             % It's two `@s', but escaped for DocStrip.
             \exp_not:N \hyper@@@@link
               { \@@_extract_url_unexp:n {#1} }
               { \@@_extract_unexp:nnn {#1} { anchor } { } }
               {
-                \bool_if:NT \l_@@_preposinlink_bool
-                  { \exp_not:V \l_@@_preref_tl }
+                \seq_item:Nn #2 { 2 }
                 \exp_not:N \group_begin:
                 \exp_not:V \l_@@_reffont_tl
                 \@@_extract_unexp:nvn {#1}
                   { l_@@_ref_property_tl } { }
                 \exp_not:N \group_end:
-                \bool_if:NT \l_@@_preposinlink_bool
-                  { \exp_not:V \l_@@_postref_tl }
+                \seq_item:Nn #2 { 3 }
               }
-            \bool_if:NF \l_@@_preposinlink_bool
-              { \exp_not:V \l_@@_postref_tl }
+            \seq_item:Nn #2 { 4 }
           }
           {
-            \exp_not:V \l_@@_preref_tl
+            \seq_item:Nn #2 { 1 }
+            \seq_item:Nn #2 { 2 }
             \exp_not:N \group_begin:
             \exp_not:V \l_@@_reffont_tl
             \@@_extract_unexp:nvn {#1}
               { l_@@_ref_property_tl } { }
             \exp_not:N \group_end:
-            \exp_not:V \l_@@_postref_tl
+            \seq_item:Nn #2 { 3 }
+            \seq_item:Nn #2 { 4 }
           }
       }
       { \@@_ref_default: }
   }
-\cs_generate_variant:Nn \@@_get_ref:n { V }
+\cs_generate_variant:Nn \@@_get_ref:nN { VN }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -4689,18 +5401,17 @@
                     \exp_not:V \l_@@_type_name_tl
                     \exp_not:N \group_end:
                     \exp_not:V \l_@@_namesep_tl
-                    \exp_not:V \l_@@_preref_tl
+                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 1 }
+                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 2 }
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_reffont_tl
                     \@@_extract_unexp:Vvn
                       \l_@@_type_first_label_tl
                       { l_@@_ref_property_tl } { }
                     \exp_not:N \group_end:
-                    \bool_if:NT \l_@@_preposinlink_bool
-                      { \exp_not:V \l_@@_postref_tl }
+                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 3 }
                   }
-                \bool_if:NF \l_@@_preposinlink_bool
-                  { \exp_not:V \l_@@_postref_tl }
+                \seq_item:Nn \l_@@_type_first_refbounds_seq { 4 }
               }
               {
                 \exp_not:N \group_begin:
@@ -4735,8 +5446,7 @@
                     ! \l_@@_link_star_bool
                   }
                   {
-                    \bool_if:NF \l_@@_preposinlink_bool
-                      { \exp_not:V \l_@@_preref_tl }
+                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 1 }
                     % It's two '@s', but escaped for DocStrip.
                     \exp_not:N \hyper@@@@link
                       {
@@ -4748,29 +5458,28 @@
                           \l_@@_type_first_label_tl { anchor } { }
                       }
                       {
-                        \bool_if:NT \l_@@_preposinlink_bool
-                          { \exp_not:V \l_@@_preref_tl }
+                        \seq_item:Nn \l_@@_type_first_refbounds_seq { 2 }
                         \exp_not:N \group_begin:
                         \exp_not:V \l_@@_reffont_tl
                         \@@_extract_unexp:Vvn
                           \l_@@_type_first_label_tl
                           { l_@@_ref_property_tl } { }
                         \exp_not:N \group_end:
-                        \bool_if:NT \l_@@_preposinlink_bool
-                          { \exp_not:V \l_@@_postref_tl }
+                        \seq_item:Nn \l_@@_type_first_refbounds_seq { 3 }
                       }
-                    \bool_if:NF \l_@@_preposinlink_bool
-                      { \exp_not:V \l_@@_postref_tl }
+                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 4 }
                   }
                   {
-                    \exp_not:V \l_@@_preref_tl
+                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 1 }
+                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 2 }
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_reffont_tl
                     \@@_extract_unexp:Vvn
                       \l_@@_type_first_label_tl
                       { l_@@_ref_property_tl } { }
                     \exp_not:N \group_end:
-                    \exp_not:V \l_@@_postref_tl
+                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 3 }
+                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 4 }
                   }
               }
               { \@@_ref_default: }
@@ -5199,11 +5908,7 @@
                   {
                     % If not found, try fallback.
                     \@@_get_fallback_unknown_lang_opt:nNF {#1} #2
-                      {
-                        \tl_clear:N #2
-                        \msg_warning:nnn { zref-clever }
-                          { missing-string } {#1}
-                      }
+                      { \tl_clear:N #2 }
                   }
               }
           }
@@ -5211,6 +5916,69 @@
   }
 %    \end{macrocode}
 % \end{macro}
+%
+%
+%
+% \begin{macro}{\@@_get_rf_opt_seq:nnnN}
+%   \begin{syntax}
+%     \cs{@@_get_rf_opt_seq:nnnN} \Arg{option}
+%     ~~\Arg{ref type} \Arg{language} \Arg{seq variable}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_get_rf_opt_seq:nnnN #1#2#3#4
+  {
+    % First attempt: general options.
+    \@@_opt_seq_get:cNF
+      { \@@_opt_name_general:nn {#1} { seq } }
+      #4
+      {
+        % If not found, try type specific options.
+        \@@_opt_seq_get:cNF
+          { \@@_opt_name_type:nnn {#2} {#1} { seq } }
+          #4
+          {
+            % If not found, try type- and language-specific.
+            \prop_get:NnNTF \g_@@_languages_prop {#3}
+              \l_tmpa_tl
+              {
+                \@@_opt_seq_get:cNF
+                  {
+                    \@@_opt_name_lang_type:nnnn
+                      { \l_tmpa_tl } {#2} {#1} { seq }
+                  }
+                  #4
+                  {
+                    % If not found, try language-specific default.
+                    \@@_opt_seq_get:cNF
+                      {
+                        \@@_opt_name_lang_default:nnn
+                          { \l_tmpa_tl } {#1} { seq }
+                      }
+                      #4
+                      {
+                        % If not found, try fallback.
+                        \@@_opt_seq_get:cNF
+                          { \@@_opt_name_fallback:nn {#1} { seq } }
+                          #4
+                          { \seq_clear:N #4 }
+                      }
+                  }
+              }
+              {
+                % Base language not known, try fallback.
+                \@@_opt_seq_get:cNF
+                  { \@@_opt_name_fallback:nn {#1} { seq } }
+                  #4
+                  { \seq_clear:N #4 }
+              }
+          }
+      }
+  }
+\cs_generate_variant:Nn \@@_get_rf_opt_seq:nnnN { nxxN }
+%    \end{macrocode}
+% \end{macro}
+%
+%
 %
 % \begin{macro}{\@@_get_ref_opt_font:nN}
 %   \begin{syntax}
@@ -5809,8 +6577,7 @@
         \zcRefTypeSetup { equation }
           {
             reffont = \upshape ,
-            preref  = {\textup{(}} ,
-            postref = {\textup{)}} ,
+            refbounds = {\textup{(},,,\textup{)}} ,
           }
         \msg_info:nnn { zref-clever } { compat-package } { amsmath }
       }
@@ -6243,8 +7010,7 @@ type = equation ,
   name-sg-ab = eq. ,
   Name-pl-ab = Eqs. ,
   name-pl-ab = eqs. ,
-  preref  = {(} ,
-  postref = {)} ,
+  refbounds = {(,,,)} ,
 
 type = theorem ,
   Name-sg = Theorem ,
@@ -6597,8 +7363,7 @@ type = equation ,
   case = G ,
     Name-sg = Gleichung ,
     Name-pl = Gleichungen ,
-  preref  = {(} ,
-  postref = {)} ,
+  refbounds = {(,,,)} ,
 
 type = theorem ,
   gender = n ,
@@ -6942,8 +7707,7 @@ type = equation ,
   name-sg = équation ,
   Name-pl = Équations ,
   name-pl = équations ,
-  preref  = {(} ,
-  postref = {)} ,
+  refbounds = {(,,,)} ,
 
 type = theorem ,
   gender = m ,
@@ -7191,8 +7955,7 @@ type = equation ,
   name-sg-ab = eq. ,
   Name-pl-ab = Eqs. ,
   name-pl-ab = eqs. ,
-  preref  = {(} ,
-  postref = {)} ,
+  refbounds = {(,,,)} ,
 
 type = theorem ,
   gender = m ,
@@ -7422,8 +8185,7 @@ type = equation ,
   name-sg = ecuación ,
   Name-pl = Ecuaciones ,
   name-pl = ecuaciones ,
-  preref  = {(} ,
-  postref = {)} ,
+  refbounds = {(,,,)} ,
 
 type = theorem ,
   gender = m ,
@@ -7659,8 +8421,7 @@ type = equation ,
   name-sg-ab = vgl. ,
   Name-pl-ab = Vgl.'s ,
   name-pl-ab = vgl.'s ,
-  preref  = {(} ,
-  postref = {)} ,
+  refbounds = {(,,,)} ,
 
 type = theorem ,
   gender = f ,

@@ -539,31 +539,6 @@
 \box0
 \ENDTEST
 
-\newoptblock{preposinlink}
-
-% Using 'nameinlink' for all here.
-
-\BEGINTEST{Option: preposinlink=true}
-\setbox0=\hbox{\zcref[nameinlink,preposinlink=true]{eq:equation-1.1.2,
-    eq:equation-1.1.3}}
-\showbox0
-\box0
-\ENDTEST
-
-\BEGINTEST{Option: preposinlink}
-\setbox0=\hbox{\zcref[nameinlink,preposinlink]{eq:equation-1.1.2,
-    eq:equation-1.1.3}}
-\showbox0
-\box0
-\ENDTEST
-
-\BEGINTEST{Option: preposinlink=false}
-\setbox0=\hbox{\zcref[nameinlink,preposinlink=false]{eq:equation-1.1.2,
-    eq:equation-1.1.3}}
-\showbox0
-\box0
-\ENDTEST
-
 \newoptblock{lang}
 
 \BEGINTEST{Option: lang=main (main language: english)}
@@ -962,15 +937,13 @@
 \box0
 \ENDTEST
 
-\newoptblock{preref, postref}
+\newoptblock{refbounds}
 
-\BEGINTEST{Option: preref=..., postref=...}
-\setbox0=\hbox{\zcref*[preref={[}, postref={]}]{sec:section-1.1,
-    sec:section-1.2}}
+\BEGINTEST{Option: refbounds=...}
+\setbox0=\hbox{\zcref*[refbounds={[,,,]}]{sec:section-1.1, sec:section-1.2}}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref*[preref=, postref=]{eq:equation-1.1.2,
-    eq:equation-1.1.3}}
+\setbox0=\hbox{\zcref*[refbounds=]{eq:equation-1.1.2, eq:equation-1.1.3}}
 \showbox0
 \box0
 \ENDTEST

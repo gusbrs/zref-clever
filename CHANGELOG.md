@@ -2,8 +2,17 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.1.2-alpha...HEAD)
 
+### Added
+- The reference block formatting has been generalized to allow for more
+  flexibility in setting the reference structure, with the new option
+  `refbounds`.
+
 ### Fixed
 - Fixed handling of type names defined to be empty.
+
+### Deprecated
+- Options `preposinlink`, `preref`, and `postref` have been deprecated and
+  replaced by new option `refbounds`.
 
 ## [v0.1.2-alpha](https://github.com/gusbrs/zref-clever/compare/v0.1.1-alpha...v0.1.2-alpha) (2022-01-10)
 

@@ -114,11 +114,11 @@
 \box0
 \ENDTEST
 
-\newoptblock{preref, postref}
+\newoptblock{refbounds}
 
-\BEGINTEST{Option: preref=..., postref=...}
-\zcRefTypeSetup{section}{preref={[}, postref={]}}
-\zcRefTypeSetup{equation}{preref=, postref=}
+\BEGINTEST{Option: refbounds=...}
+\zcRefTypeSetup{section}{refbounds={[,,,]}}
+\zcRefTypeSetup{equation}{refbounds=}
 \setbox0=\hbox{\zcref*{sec:section-1.1, sec:section-1.2}}
 \showbox0
 \box0

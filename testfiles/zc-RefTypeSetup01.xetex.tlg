@@ -127,7 +127,7 @@ l. ...    sec:section-1.4}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 4: Option: preref=..., postref=...
+TEST 4: Option: refbounds=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace [\group_begin: 1.1\group_end: ] and\nobreakspace [\group_begin:

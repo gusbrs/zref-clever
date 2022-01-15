@@ -31,23 +31,9 @@
 \begin{document}
 \TIMO
 
-\TEST { Fallback~ }
+\TEST { Fallback }
   {
     \prop_show:N \g__zrefclever_fallback_unknown_lang_prop
-  }
-
-\TEST { Fallback~completeness }
-  {
-    \seq_concat:NNN \g_tmpa_seq
-      \c__zrefclever_ref_options_necessarily_not_type_specific_seq
-      \c__zrefclever_ref_options_possibly_type_specific_seq
-
-    \seq_map_inline:Nn \g_tmpa_seq
-      {
-        \prop_if_in:NnTF \g__zrefclever_fallback_unknown_lang_prop {#1}
-          { \typeout{#1:~TRUE} }
-          { \typeout{#1:~FALSE} }
-      }
   }
 
 \OMIT
