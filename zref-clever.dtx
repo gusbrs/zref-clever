@@ -5329,6 +5329,8 @@
             ! \l_@@_link_star_bool
           }
           {
+            \exp_not:N \group_begin:
+            \exp_not:V \l_@@_reffont_tl
             \seq_item:Nn #2 { 1 }
             % It's two `@s', but escaped for DocStrip.
             \exp_not:N \hyper@@@@link
@@ -5336,25 +5338,23 @@
               { \@@_extract_unexp:nnn {#1} { anchor } { } }
               {
                 \seq_item:Nn #2 { 2 }
-                \exp_not:N \group_begin:
-                \exp_not:V \l_@@_reffont_tl
                 \@@_extract_unexp:nvn {#1}
                   { l_@@_ref_property_tl } { }
-                \exp_not:N \group_end:
                 \seq_item:Nn #2 { 3 }
               }
             \seq_item:Nn #2 { 4 }
+            \exp_not:N \group_end:
           }
           {
-            \seq_item:Nn #2 { 1 }
-            \seq_item:Nn #2 { 2 }
             \exp_not:N \group_begin:
             \exp_not:V \l_@@_reffont_tl
+            \seq_item:Nn #2 { 1 }
+            \seq_item:Nn #2 { 2 }
             \@@_extract_unexp:nvn {#1}
               { l_@@_ref_property_tl } { }
-            \exp_not:N \group_end:
             \seq_item:Nn #2 { 3 }
             \seq_item:Nn #2 { 4 }
+            \exp_not:N \group_end:
           }
       }
       { \@@_ref_default: }
@@ -5385,6 +5385,7 @@
               { \l_@@_type_first_label_tl }
               { \l_@@_ref_property_tl }
               {
+                \exp_not:N \group_begin:
                 % It's two `@s', but escaped for DocStrip.
                 \exp_not:N \hyper@@@@link
                   {
@@ -5401,17 +5402,19 @@
                     \exp_not:V \l_@@_type_name_tl
                     \exp_not:N \group_end:
                     \exp_not:V \l_@@_namesep_tl
-                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 1 }
-                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 2 }
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_reffont_tl
+                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 1 }
+                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 2 }
                     \@@_extract_unexp:Vvn
                       \l_@@_type_first_label_tl
                       { l_@@_ref_property_tl } { }
-                    \exp_not:N \group_end:
                     \seq_item:Nn \l_@@_type_first_refbounds_seq { 3 }
+                    \exp_not:N \group_end:
                   }
+                \exp_not:V \l_@@_reffont_tl
                 \seq_item:Nn \l_@@_type_first_refbounds_seq { 4 }
+                \exp_not:N \group_end:
               }
               {
                 \exp_not:N \group_begin:
@@ -5446,6 +5449,8 @@
                     ! \l_@@_link_star_bool
                   }
                   {
+                    \exp_not:N \group_begin:
+                    \exp_not:V \l_@@_reffont_tl
                     \seq_item:Nn \l_@@_type_first_refbounds_seq { 1 }
                     % It's two '@s', but escaped for DocStrip.
                     \exp_not:N \hyper@@@@link
@@ -5459,27 +5464,25 @@
                       }
                       {
                         \seq_item:Nn \l_@@_type_first_refbounds_seq { 2 }
-                        \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_reffont_tl
                         \@@_extract_unexp:Vvn
                           \l_@@_type_first_label_tl
                           { l_@@_ref_property_tl } { }
-                        \exp_not:N \group_end:
                         \seq_item:Nn \l_@@_type_first_refbounds_seq { 3 }
                       }
                     \seq_item:Nn \l_@@_type_first_refbounds_seq { 4 }
+                    \exp_not:N \group_end:
                   }
                   {
-                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 1 }
-                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 2 }
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_reffont_tl
+                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 1 }
+                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 2 }
                     \@@_extract_unexp:Vvn
                       \l_@@_type_first_label_tl
                       { l_@@_ref_property_tl } { }
-                    \exp_not:N \group_end:
                     \seq_item:Nn \l_@@_type_first_refbounds_seq { 3 }
                     \seq_item:Nn \l_@@_type_first_refbounds_seq { 4 }
+                    \exp_not:N \group_end:
                   }
               }
               { \@@_ref_default: }
@@ -6575,10 +6578,7 @@
 % references \cs{textup}.
 %    \begin{macrocode}
         \zcRefTypeSetup { equation }
-          {
-            reffont = \upshape ,
-            refbounds = {\textup{(},,,\textup{)}} ,
-          }
+          { reffont = \upshape }
         \msg_info:nnn { zref-clever } { compat-package } { amsmath }
       }
   }

@@ -21,7 +21,7 @@ TEST 2: Typeset refs: warn missing type
 Package zref-clever Warning: Reference format option 'name-sg' undefined for
 (zref-clever)                type 'thm' on line ....
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default:
-\nobreakspace \hyper@@link {}{thm.1.1.1}{\group_begin: 1.1.1\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{thm.1.1.1}{1.1.1}\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:theorem-1.1.1}
                                             }
@@ -40,9 +40,9 @@ l. ...\showbox0
 ============================================================
 TEST 3: Last of type: single
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+1.1\group_end: }\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{sec:section-1.1}
                                            }
@@ -61,8 +61,8 @@ l. ...\showbox0
 TEST 4: Last of type: pair
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.1}{\group_begin: 1.1\group_end: }
-and\nobreakspace \hyper@@link {}{section.1.2}{\group_begin: 1.2\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.1}{1.1}\group_end: 
+and\nobreakspace \group_begin: \hyper@@link {}{section.1.2}{1.2}\group_end: .
 <recently read> }
 l. ......x{\zcref{sec:section-1.1, sec:section-1.2}
                                                   }
@@ -88,9 +88,9 @@ l. ...\showbox0
 TEST 5: Last of type: not range
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.1}{\group_begin: 1.1\group_end: },
-\hyper@@link {}{section.1.3}{\group_begin: 1.3\group_end: } and\nobreakspace
-\hyper@@link {}{section.1.5}{\group_begin: 1.5\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.1}{1.1}\group_end: ,
+\group_begin: \hyper@@link {}{section.1.3}{1.3}\group_end:  and\nobreakspace
+\group_begin: \hyper@@link {}{section.1.5}{1.5}\group_end: .
 <recently read> }
 l. ......ion-1.1, sec:section-1.3, sec:section-1.5}
                                                   }
@@ -121,9 +121,9 @@ l. ...\showbox0
 TEST 6: Last of type: pair in sequence
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.1}{\group_begin: 1.1\group_end: },
-\hyper@@link {}{section.1.3}{\group_begin: 1.3\group_end: } and\nobreakspace
-\hyper@@link {}{section.1.4}{\group_begin: 1.4\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.1}{1.1}\group_end: ,
+\group_begin: \hyper@@link {}{section.1.3}{1.3}\group_end:  and\nobreakspace
+\group_begin: \hyper@@link {}{section.1.4}{1.4}\group_end: .
 <recently read> }
 l. ......ion-1.1, sec:section-1.3, sec:section-1.4}
                                                   }
@@ -154,8 +154,8 @@ l. ...\showbox0
 TEST 7: Last of type: range to one
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.1}{\group_begin: 1.1\group_end: }
-and\nobreakspace \hyper@@link {}{section.1.3}{\group_begin: 1.3\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.1}{1.1}\group_end: 
+and\nobreakspace \group_begin: \hyper@@link {}{section.1.3}{1.3}\group_end: .
 <recently read> }
 l. ...    sec:section-1.3b}
                           }
@@ -181,9 +181,9 @@ l. ...\showbox0
 TEST 8: Last of type: range to pair
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.1}{\group_begin: 1.1\group_end: },
-\hyper@@link {}{section.1.3}{\group_begin: 1.3\group_end: } and\nobreakspace
-\hyper@@link {}{section.1.4}{\group_begin: 1.4\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.1}{1.1}\group_end: ,
+\group_begin: \hyper@@link {}{section.1.3}{1.3}\group_end:  and\nobreakspace
+\group_begin: \hyper@@link {}{section.1.4}{1.4}\group_end: .
 <recently read> }
 l. ...    sec:section-1.4}
                          }
@@ -214,9 +214,9 @@ l. ...\showbox0
 TEST 9: Last of type: range
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.1}{\group_begin: 1.1\group_end: }
-and\nobreakspace \hyper@@link {}{section.1.3}{\group_begin: 1.3\group_end: }
-to\nobreakspace \hyper@@link {}{section.1.5}{\group_begin: 1.5\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.1}{1.1}\group_end: 
+and\nobreakspace \group_begin: \hyper@@link {}{section.1.3}{1.3}\group_end: 
+to\nobreakspace \group_begin: \hyper@@link {}{section.1.5}{1.5}\group_end: .
 <recently read> }
 l. ...    sec:section-1.5}
                           }
@@ -249,8 +249,8 @@ l. ...\showbox0
 TEST 10: Last of type: option range
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.1}{\group_begin: 1.1\group_end: }
-to\nobreakspace \hyper@@link {}{section.1.5}{\group_begin: 1.5\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.1}{1.1}\group_end: 
+to\nobreakspace \group_begin: \hyper@@link {}{section.1.5}{1.5}\group_end: .
 <recently read> }
 l. ...    sec:section-1.5}
                           }
@@ -276,8 +276,8 @@ l. ...\showbox0
 TEST 11: Last of type: option range to pair
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.1}{\group_begin: 1.1\group_end: }
-and\nobreakspace \hyper@@link {}{section.1.2}{\group_begin: 1.2\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.1}{1.1}\group_end: 
+and\nobreakspace \group_begin: \hyper@@link {}{section.1.2}{1.2}\group_end: .
 <recently read> }
 l. ......[range]{sec:section-1.1, sec:section-1.2}
                                                   }
@@ -302,8 +302,8 @@ l. ...\showbox0
 ============================================================
 TEST 12: Last of type: option typeset ref
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
-{}{section.1.1}{\group_begin: 1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
+{}{section.1.1}{1.1}\group_end: .
 <recently read> }
 l. ......hbox{\zcref[typeset=ref]{sec:section-1.1}
                                                   }
@@ -334,9 +334,9 @@ l. ...\showbox0
 ============================================================
 TEST 14: Last of type: option typeset none
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+1.1\group_end: }\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{sec:section-1.1}
                                             }
@@ -354,9 +354,9 @@ l. ...\showbox0
 ============================================================
 TEST 15: Last of type: single type
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+1\group_end: }\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{cha:chapter-1}
                                           }
@@ -374,15 +374,15 @@ l. ...\showbox0
 ============================================================
 TEST 16: Last of type: pair of types
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+1\group_end: }\group_end: .
 <recently read> }
 l. ......ox{\zcref{cha:chapter-1, sec:section-1.1}
                                                   }
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+1.1\group_end: }\group_end: .
 <recently read> }
 l. ......ox{\zcref{cha:chapter-1, sec:section-1.1}
                                                   }
@@ -410,21 +410,21 @@ l. ...\showbox0
 ============================================================
 TEST 17: Last of type: list of types
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+1\group_end: }\group_end: .
 <recently read> }
 l. ......pter-1, sec:section-1.1, tab:table-1.1.1}
                                                   }
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+1.1\group_end: }\group_end: .
 <recently read> }
 l. ......pter-1, sec:section-1.1, tab:table-1.1.1}
                                                   }
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+1.1\group_end: }\group_end: .
 <recently read> }
 l. ......pter-1, sec:section-1.1, tab:table-1.1.1}
                                                   }
@@ -462,9 +462,9 @@ l. ...\showbox0
 TEST 18: Not last of type: first is range
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.1}{\group_begin: 1.1\group_end: }
-to\nobreakspace \hyper@@link {}{section.1.3}{\group_begin: 1.3\group_end: }
-and\nobreakspace \hyper@@link {}{section.1.5}{\group_begin: 1.5\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.1}{1.1}\group_end: 
+to\nobreakspace \group_begin: \hyper@@link {}{section.1.3}{1.3}\group_end: 
+and\nobreakspace \group_begin: \hyper@@link {}{section.1.5}{1.5}\group_end: .
 <recently read> }
 l. ...    sec:section-1.5}
                           }
@@ -497,9 +497,9 @@ l. ...\showbox0
 TEST 19: Not last of type: no range
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.1}{\group_begin: 1.1\group_end: },
-\hyper@@link {}{section.1.3}{\group_begin: 1.3\group_end: } and\nobreakspace
-\hyper@@link {}{section.1.5}{\group_begin: 1.5\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.1}{1.1}\group_end: ,
+\group_begin: \hyper@@link {}{section.1.3}{1.3}\group_end:  and\nobreakspace
+\group_begin: \hyper@@link {}{section.1.5}{1.5}\group_end: .
 <recently read> }
 l. ......on-1.1, sec:section-1.3, sec:section-1.5}
                                                   }
@@ -530,8 +530,8 @@ l. ...\showbox0
 TEST 20: Not last of type: range pair to one
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.3}{\group_begin: 1.3\group_end: }
-and\nobreakspace \hyper@@link {}{section.1.5}{\group_begin: 1.5\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.3}{1.3}\group_end: 
+and\nobreakspace \group_begin: \hyper@@link {}{section.1.5}{1.5}\group_end: .
 <recently read> }
 l. ......n-1.3, sec:section-1.3a, sec:section-1.5}
                                                   }
@@ -557,9 +557,9 @@ l. ...\showbox0
 TEST 21: Not last of type: range pair
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.2}{\group_begin: 1.2\group_end: },
-\hyper@@link {}{section.1.3}{\group_begin: 1.3\group_end: } and\nobreakspace
-\hyper@@link {}{section.1.5}{\group_begin: 1.5\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.2}{1.2}\group_end: ,
+\group_begin: \hyper@@link {}{section.1.3}{1.3}\group_end:  and\nobreakspace
+\group_begin: \hyper@@link {}{section.1.5}{1.5}\group_end: .
 <recently read> }
 l. ......on-1.2, sec:section-1.3, sec:section-1.5}
                                                   }
@@ -590,8 +590,8 @@ l. ...\showbox0
 TEST 22: Not last of type: range to one
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.3}{\group_begin: 1.3\group_end: }
-and\nobreakspace \hyper@@link {}{section.1.5}{\group_begin: 1.5\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.3}{1.3}\group_end: 
+and\nobreakspace \group_begin: \hyper@@link {}{section.1.5}{1.5}\group_end: .
 <recently read> }
 l. ...    sec:section-1.5}
                           }
@@ -617,9 +617,9 @@ l. ...\showbox0
 TEST 23: Not last of type: range to pair
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.2}{\group_begin: 1.2\group_end: },
-\hyper@@link {}{section.1.3}{\group_begin: 1.3\group_end: } and\nobreakspace
-\hyper@@link {}{section.1.5}{\group_begin: 1.5\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.2}{1.2}\group_end: ,
+\group_begin: \hyper@@link {}{section.1.3}{1.3}\group_end:  and\nobreakspace
+\group_begin: \hyper@@link {}{section.1.5}{1.5}\group_end: .
 <recently read> }
 l. ...    sec:section-1.5}
                           }
@@ -650,9 +650,9 @@ l. ...\showbox0
 TEST 24: Not last of type: range
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \hyper@@link {}{section.1.1}{\group_begin: 1.1\group_end: }
-to\nobreakspace \hyper@@link {}{section.1.3}{\group_begin: 1.3\group_end: }
-and\nobreakspace \hyper@@link {}{section.1.5}{\group_begin: 1.5\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.1.1}{1.1}\group_end: 
+to\nobreakspace \group_begin: \hyper@@link {}{section.1.3}{1.3}\group_end: 
+and\nobreakspace \group_begin: \hyper@@link {}{section.1.5}{1.5}\group_end: .
 <recently read> }
 l. ...    sec:section-1.5}
                           }

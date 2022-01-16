@@ -4,9 +4,9 @@ Don't change this file in any respect.
 TEST 1: Reference: dmath
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \textup {(}\hyper@@link {}{equation.1.1}{\group_begin: \upshape
-1\group_end: }\textup {)} and\nobreakspace \textup {(}\hyper@@link
-{}{equation.1.2}{\group_begin: \upshape 2\group_end: }\textup {)}.
+\nobreakspace \group_begin: \upshape (\hyper@@link
+{}{equation.1.1}{1})\group_end:  and\nobreakspace \group_begin: \upshape
+(\hyper@@link {}{equation.1.2}{2})\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:1,eq:2}
                                      }
@@ -21,30 +21,24 @@ l. ...\setbox0=\hbox{\zcref{eq:1,eq:2}
 .\OT1/cmr/m/n/10 o
 .\OT1/cmr/m/n/10 n
 .\OT1/cmr/m/n/10 s
-.\kern 0.0
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
 .\OT1/cmr/m/n/10 (
-.\kern 0.0
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1}
 .\OT1/cmr/m/n/10 1
 .\pdfendlink
 .\OT1/cmr/m/n/10 )
-.\kern 0.0
 .\glue 3.33333 plus 1.66666 minus 1.11111
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 n
 .\OT1/cmr/m/n/10 d
-.\kern 0.0
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
 .\OT1/cmr/m/n/10 (
-.\kern 0.0
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 2
 .\pdfendlink
 .\OT1/cmr/m/n/10 )
-.\kern 0.0
 ! OK.
 l. ...\showbox0
 ============================================================

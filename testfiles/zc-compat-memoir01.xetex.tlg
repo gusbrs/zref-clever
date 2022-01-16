@@ -215,10 +215,10 @@ l. ...\ShowHook { file / \jobname.ent / before }
 TEST 2: Subcaption. Reference: figure
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \hyper@@link {}{figure.1.1}{\group_begin: 1.1\group_end: },
-\hyper@@link {}{subfigure.1.1.1}{\group_begin: 1.1(a)\group_end: }
-and\nobreakspace \hyper@@link {}{subfigure.1.1.2}{\group_begin:
-1.1(b)\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{figure.1.1}{1.1}\group_end: ,
+\group_begin: \hyper@@link {}{subfigure.1.1.1}{1.1(a)}\group_end: 
+and\nobreakspace \group_begin: \hyper@@link
+{}{subfigure.1.1.2}{1.1(b)}\group_end: .
 <recently read> }
 l. .......1.5, fig:figure-1.1.6, fig:figure-1.1.7}
                                                   }
@@ -251,9 +251,9 @@ TEST 3: Subcaption. Reference: subcaption figure
 Package zref-clever Warning: Reference property 'subcaption' undefined for
 (zref-clever)                label 'fig:figure-1.1.7' on line ....
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \__zrefclever_ref_default: , \hyper@@link
-{}{subfigure.1.1.1}{\group_begin: (a)\group_end: } and\nobreakspace
-\hyper@@link {}{subfigure.1.1.2}{\group_begin: (b)\group_end: }.
+\nobreakspace \__zrefclever_ref_default: , \group_begin: \hyper@@link
+{}{subfigure.1.1.1}{(a)}\group_end:  and\nobreakspace \group_begin:
+\hyper@@link {}{subfigure.1.1.2}{(b)}\group_end: .
 <recently read> }
 l. ...    fig:figure-1.1.7}
                            }
@@ -283,10 +283,10 @@ l. ...\showbox0
 TEST 4: Subcaption. Reference: table
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: tables\group_end:
-\nobreakspace \hyper@@link {}{table.1.1}{\group_begin: 1.1\group_end: },
-\hyper@@link {}{subtable.1.1.1}{\group_begin: 1.1(a)\group_end: }
-and\nobreakspace \hyper@@link {}{subtable.1.1.2}{\group_begin:
-1.1(b)\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{table.1.1}{1.1}\group_end: ,
+\group_begin: \hyper@@link {}{subtable.1.1.1}{1.1(a)}\group_end: 
+and\nobreakspace \group_begin: \hyper@@link
+{}{subtable.1.1.2}{1.1(b)}\group_end: .
 <recently read> }
 l. ......-1.1.6, tab:table-1.1.7, tab:table-1.1.8}
                                                   }
@@ -319,9 +319,9 @@ TEST 5: Subcaption. Reference: subcaption table
 Package zref-clever Warning: Reference property 'subcaption' undefined for
 (zref-clever)                label 'tab:table-1.1.8' on line ....
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: tables\group_end:
-\nobreakspace \__zrefclever_ref_default: , \hyper@@link
-{}{subtable.1.1.1}{\group_begin: (a)\group_end: } and\nobreakspace
-\hyper@@link {}{subtable.1.1.2}{\group_begin: (b)\group_end: }.
+\nobreakspace \__zrefclever_ref_default: , \group_begin: \hyper@@link
+{}{subtable.1.1.1}{(a)}\group_end:  and\nobreakspace \group_begin:
+\hyper@@link {}{subtable.1.1.2}{(b)}\group_end: .
 <recently read> }
 l. ...    tab:table-1.1.8}
                           }
@@ -351,10 +351,10 @@ l. ...\showbox0
 TEST 6: Subbottom. Reference: figure
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \hyper@@link {}{figure.1.2}{\group_begin: 1.2\group_end: },
-\hyper@@link {}{subfigure.1.2.1}{\group_begin: 1.2(a)\group_end: }
-and\nobreakspace \hyper@@link {}{subfigure.1.2.2}{\group_begin:
-1.2(b)\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{figure.1.2}{1.2}\group_end: ,
+\group_begin: \hyper@@link {}{subfigure.1.2.1}{1.2(a)}\group_end: 
+and\nobreakspace \group_begin: \hyper@@link
+{}{subfigure.1.2.2}{1.2(b)}\group_end: .
 <recently read> }
 l. ......1.8, fig:figure-1.1.9, fig:figure-1.1.10}
                                                   }
@@ -387,9 +387,9 @@ TEST 7: Subbottom. Reference: subcaption figure
 Package zref-clever Warning: Reference property 'subcaption' undefined for
 (zref-clever)                label 'fig:figure-1.1.10' on line ....
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \__zrefclever_ref_default: , \hyper@@link
-{}{subfigure.1.2.1}{\group_begin: (a)\group_end: } and\nobreakspace
-\hyper@@link {}{subfigure.1.2.2}{\group_begin: (b)\group_end: }.
+\nobreakspace \__zrefclever_ref_default: , \group_begin: \hyper@@link
+{}{subfigure.1.2.1}{(a)}\group_end:  and\nobreakspace \group_begin:
+\hyper@@link {}{subfigure.1.2.2}{(b)}\group_end: .
 <recently read> }
 l. ...    fig:figure-1.1.10}
                             }
@@ -418,9 +418,9 @@ l. ...\showbox0
 ============================================================
 TEST 8: Sidecaption. Reference: figure
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{figure.1.3}{\group_begin: figure\group_end: \nobreakspace \group_begin:
-1.3\group_end: }.
+1.3\group_end: }\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.11}
                                               }
@@ -439,8 +439,8 @@ l. ...\showbox0
 TEST 9: Bilingual captions. Reference: figure
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \hyper@@link {}{figure.1.4}{\group_begin: 1.4\group_end: }
-to\nobreakspace \hyper@@link {}{figure.1.6}{\group_begin: 1.6\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{figure.1.4}{1.4}\group_end: 
+to\nobreakspace \group_begin: \hyper@@link {}{figure.1.6}{1.6}\group_end: .
 <recently read> }
 l. ...    fig:figure-1.1.14}
                             }
@@ -465,9 +465,9 @@ l. ...\showbox0
 ============================================================
 TEST 10: Reference: footnote
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{Hfootnote.1}{\group_begin: footnote\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+1\group_end: }\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fn:1}
                                  }
@@ -485,9 +485,9 @@ l. ...\showbox0
 ============================================================
 TEST 11: Reference: mpfootnote
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{memhycontfloat.2}{\group_begin: footnote\group_end: \nobreakspace
-\group_begin: {\itshape a}\group_end: }.
+\group_begin: {\itshape a}\group_end: }\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fn:2}
                                  }
@@ -505,9 +505,9 @@ l. ...\showbox0
 ============================================================
 TEST 12: Reference: verbatim footnote
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{memhycontfloat.2}{\group_begin: footnote\group_end: \nobreakspace
-\group_begin: 2\group_end: }.
+\group_begin: 2\group_end: }\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fn:3}
                                  }
@@ -525,9 +525,9 @@ l. ...\showbox0
 ============================================================
 TEST 13: Reference: side footnote
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{memhycontfloat.2}{\group_begin: footnote\group_end: \nobreakspace
-\group_begin: 1\group_end: }.
+\group_begin: 1\group_end: }\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fn:4}
                                  }
@@ -545,9 +545,9 @@ l. ...\showbox0
 ============================================================
 TEST 14: Reference: page (end) note
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{section*.2}{\group_begin: note\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+1\group_end: }\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fn:5}
                                  }
@@ -565,9 +565,9 @@ l. ...\showbox0
 ============================================================
 TEST 15: Reference: verse poemline
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{poemline.1.5}{\group_begin: line\group_end: \nobreakspace \group_begin:
-5\group_end: }.
+5\group_end: }\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{vs:verse-1.1-1}
                                            }
@@ -586,12 +586,12 @@ l. ...\showbox0
 TEST 16: Reference: sectioning commands in subapenddices
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
-\nobreakspace \hyper@@link {}{section.2.A}{\group_begin: 2.A\group_end: },
-\hyper@@link {}{subsection.2.A.1}{\group_begin: 2.A.1\group_end: },
-\hyper@@link {}{subsubsection.2.A.1.1}{\group_begin: 2.A.1.1\group_end: },
-\hyper@@link {}{paragraph.2.A.1.1.1}{\group_begin: 2.A.1.1.1\group_end: }
-and\nobreakspace \hyper@@link {}{subparagraph.2.A.1.1.1.1}{\group_begin:
-2.A.1.1.1.1\group_end: }.
+\nobreakspace \group_begin: \hyper@@link {}{section.2.A}{2.A}\group_end: ,
+\group_begin: \hyper@@link {}{subsection.2.A.1}{2.A.1}\group_end: ,
+\group_begin: \hyper@@link {}{subsubsection.2.A.1.1}{2.A.1.1}\group_end: ,
+\group_begin: \hyper@@link {}{paragraph.2.A.1.1.1}{2.A.1.1.1}\group_end: 
+and\nobreakspace \group_begin: \hyper@@link
+{}{subparagraph.2.A.1.1.1.1}{2.A.1.1.1.1}\group_end: .
 <recently read> }
 l. ...    sec:subparagraph-2.1.1.1.1.1}
                                        }
@@ -632,13 +632,13 @@ l. ...\showbox0
 TEST 17: Reference: sectioning commands in appendices
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
-\nobreakspace \hyper@@link {}{chapter.A}{\group_begin: A\group_end: },
-\hyper@@link {}{section.A.1}{\group_begin: A.1\group_end: }, \hyper@@link
-{}{subsection.A.1.1}{\group_begin: A.1.1\group_end: }, \hyper@@link
-{}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \hyper@@link
-{}{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: } and\nobreakspace
-\hyper@@link {}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end:
-}.
+\nobreakspace \group_begin: \hyper@@link {}{chapter.A}{A}\group_end: ,
+\group_begin: \hyper@@link {}{section.A.1}{A.1}\group_end: , \group_begin:
+\hyper@@link {}{subsection.A.1.1}{A.1.1}\group_end: , \group_begin:
+\hyper@@link {}{subsubsection.A.1.1.1}{A.1.1.1}\group_end: , \group_begin:
+\hyper@@link {}{paragraph.A.1.1.1.1}{A.1.1.1.1}\group_end:  and\nobreakspace
+\group_begin: \hyper@@link
+{}{subparagraph.A.1.1.1.1.1}{A.1.1.1.1.1}\group_end: .
 <recently read> }
 l. ...    sec:subparagraph-3.1.1.1.1.1}
                                        }
@@ -684,13 +684,13 @@ l. ...\showbox0
 TEST 18: Reference: sectioning commands after appendix
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
-\nobreakspace \hyper@@link {}{appendix.A}{\group_begin: A\group_end: },
-\hyper@@link {}{section.A.1}{\group_begin: A.1\group_end: }, \hyper@@link
-{}{subsection.A.1.1}{\group_begin: A.1.1\group_end: }, \hyper@@link
-{}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \hyper@@link
-{}{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: } and\nobreakspace
-\hyper@@link {}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end:
-}.
+\nobreakspace \group_begin: \hyper@@link {}{appendix.A}{A}\group_end: ,
+\group_begin: \hyper@@link {}{section.A.1}{A.1}\group_end: , \group_begin:
+\hyper@@link {}{subsection.A.1.1}{A.1.1}\group_end: , \group_begin:
+\hyper@@link {}{subsubsection.A.1.1.1}{A.1.1.1}\group_end: , \group_begin:
+\hyper@@link {}{paragraph.A.1.1.1.1}{A.1.1.1.1}\group_end:  and\nobreakspace
+\group_begin: \hyper@@link
+{}{subparagraph.A.1.1.1.1.1}{A.1.1.1.1.1}\group_end: .
 <recently read> }
 l. ...    sec:subparagraph-4.1.1.1.1.1}
                                        }

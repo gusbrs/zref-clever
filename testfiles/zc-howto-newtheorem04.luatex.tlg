@@ -1,8 +1,8 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{myconjecture.1.1}{\group_begin: conjecture\group_end: \nobreakspace
-\group_begin: 1.1\group_end: }.
+\group_begin: 1.1\group_end: }\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{conjecture-1}
                                       }
