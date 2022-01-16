@@ -106,13 +106,12 @@ l. ......p_show:N \l__zrefclever_counter_type_prop
 TEST 2: Reference: sectioning commands in subapenddices
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
-\nobreakspace \hyper@@link {\c_empty_tl }{section.a.2.A}{\group_begin:
-2.A\group_end: }, \hyper@@link {\c_empty_tl
-}{subsection.a.2.A.1}{\group_begin: 2.A.1\group_end: }, \hyper@@link
-{\c_empty_tl }{subsubsection.a.2.A.1.1}{\group_begin: 2.A.1.1\group_end: },
-\hyper@@link {\c_empty_tl }{paragraph.a.2.A.1.1.1}{\group_begin:
-2.A.1.1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
-}{subparagraph.a.2.A.1.1.1.1}{\group_begin: 2.A.1.1.1.1\group_end: }.
+\nobreakspace \hyper@@link {}{section.a.2.A}{\group_begin: 2.A\group_end: },
+\hyper@@link {}{subsection.a.2.A.1}{\group_begin: 2.A.1\group_end: },
+\hyper@@link {}{subsubsection.a.2.A.1.1}{\group_begin: 2.A.1.1\group_end: },
+\hyper@@link {}{paragraph.a.2.A.1.1.1}{\group_begin: 2.A.1.1.1\group_end: }
+and\nobreakspace \hyper@@link {}{subparagraph.a.2.A.1.1.1.1}{\group_begin:
+2.A.1.1.1.1\group_end: }.
 <recently read> }
 l. ...    sec:subparagraph-2.1.1.1.1.1}
                                        }
@@ -195,14 +194,13 @@ l. ...\showbox0
 TEST 3: Reference: sectioning commands in appendices
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
-\nobreakspace \hyper@@link {\c_empty_tl }{appendix.b.A}{\group_begin:
-A\group_end: }, \hyper@@link {\c_empty_tl }{section.b.A.1}{\group_begin:
-A.1\group_end: }, \hyper@@link {\c_empty_tl
-}{subsection.b.A.1.1}{\group_begin: A.1.1\group_end: }, \hyper@@link
-{\c_empty_tl }{subsubsection.b.A.1.1.1}{\group_begin: A.1.1.1\group_end: },
-\hyper@@link {\c_empty_tl }{paragraph.b.A.1.1.1.1}{\group_begin:
-A.1.1.1.1\group_end: } and\nobreakspace \hyper@@link {\c_empty_tl
-}{subparagraph.b.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
+\nobreakspace \hyper@@link {}{appendix.b.A}{\group_begin: A\group_end: },
+\hyper@@link {}{section.b.A.1}{\group_begin: A.1\group_end: }, \hyper@@link
+{}{subsection.b.A.1.1}{\group_begin: A.1.1\group_end: }, \hyper@@link
+{}{subsubsection.b.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \hyper@@link
+{}{paragraph.b.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: }
+and\nobreakspace \hyper@@link {}{subparagraph.b.A.1.1.1.1.1}{\group_begin:
+A.1.1.1.1.1\group_end: }.
 <recently read> }
 l. ...    sec:subparagraph-3.1.1.1.1.1}
                                        }
@@ -290,14 +288,13 @@ l. ...\showbox0
 TEST 4: Reference: sectioning commands after appendix
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
-\nobreakspace \hyper@@link {\c_empty_tl }{appendix.A}{\group_begin:
-A\group_end: }, \hyper@@link {\c_empty_tl }{section.A.1}{\group_begin:
-A.1\group_end: }, \hyper@@link {\c_empty_tl }{subsection.A.1.1}{\group_begin:
-A.1.1\group_end: }, \hyper@@link {\c_empty_tl
-}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \hyper@@link
-{\c_empty_tl }{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: }
-and\nobreakspace \hyper@@link {\c_empty_tl
-}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
+\nobreakspace \hyper@@link {}{appendix.A}{\group_begin: A\group_end: },
+\hyper@@link {}{section.A.1}{\group_begin: A.1\group_end: }, \hyper@@link
+{}{subsection.A.1.1}{\group_begin: A.1.1\group_end: }, \hyper@@link
+{}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \hyper@@link
+{}{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: } and\nobreakspace
+\hyper@@link {}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end:
+}.
 <recently read> }
 l. ...    sec:subparagraph-4.1.1.1.1.1}
                                        }

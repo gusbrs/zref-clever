@@ -76,8 +76,8 @@ l. ...\cs_show:c { \@lst hk@ Init }
 ============================================================
 TEST 2: Reference: lstlisting
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{lstlisting.1}{\group_begin: listing\group_end: \nobreakspace \group_begin:
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+{}{lstlisting.1}{\group_begin: listing\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{useless}
@@ -98,8 +98,8 @@ l. ...\setbox0=\hbox{\zcref{useless}
 .\pdfendlink
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{lstnumber.1.3}{\group_begin: line\group_end: \nobreakspace \group_begin:
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+{}{lstnumber.1.3}{\group_begin: line\group_end: \nobreakspace \group_begin:
 3\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{nothing}

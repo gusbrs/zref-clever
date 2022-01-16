@@ -3957,7 +3957,7 @@
 \cs_new_protected:Npn \@@_label_type_put_new_right:n #1
   {
     \@@_extract_default:Nnnn
-      \l_@@_label_type_a_tl {#1} { zc@type } { \c_empty_tl }
+      \l_@@_label_type_a_tl {#1} { zc@type } { }
     \seq_if_in:NVF \l_@@_label_types_seq
       \l_@@_label_type_a_tl
       {
@@ -4005,15 +4005,15 @@
 \cs_new_protected:Npn \@@_sort_default_same_type:nn #1#2
   {
     \@@_extract_default:Nnnn \l_@@_label_enclval_a_tl
-      {#1} { zc@enclval } { \c_empty_tl }
+      {#1} { zc@enclval } { }
     \tl_reverse:N \l_@@_label_enclval_a_tl
     \@@_extract_default:Nnnn \l_@@_label_enclval_b_tl
-      {#2} { zc@enclval } { \c_empty_tl }
+      {#2} { zc@enclval } { }
     \tl_reverse:N \l_@@_label_enclval_b_tl
     \@@_extract_default:Nnnn \l_@@_label_extdoc_a_tl
-      {#1} { externaldocument } { \c_empty_tl }
+      {#1} { externaldocument } { }
     \@@_extract_default:Nnnn \l_@@_label_extdoc_b_tl
-      {#2} { externaldocument } { \c_empty_tl }
+      {#2} { externaldocument } { }
 
     \bool_set_false:N \l_@@_sort_decided_bool
 
@@ -5737,11 +5737,11 @@
 \cs_new:Npn \@@_extract_url_unexp:n #1
   {
     \zref@ifpropundefined { urluse }
-      { \@@_extract_unexp:nnn {#1} { url } { \c_empty_tl } }
+      { \@@_extract_unexp:nnn {#1} { url } { } }
       {
         \zref@ifrefcontainsprop {#1} { urluse }
-          { \@@_extract_unexp:nnn {#1} { urluse } { \c_empty_tl } }
-          { \@@_extract_unexp:nnn {#1} { url } { \c_empty_tl } }
+          { \@@_extract_unexp:nnn {#1} { urluse } { } }
+          { \@@_extract_unexp:nnn {#1} { url } { } }
       }
   }
 \cs_generate_variant:Nn \@@_extract_url_unexp:n { V }
@@ -5765,9 +5765,9 @@
 \cs_new_protected:Npn \@@_labels_in_sequence:nn #1#2
   {
     \@@_extract_default:Nnnn \l_@@_label_extdoc_a_tl
-      {#1} { externaldocument } { \c_empty_tl }
+      {#1} { externaldocument } { }
     \@@_extract_default:Nnnn \l_@@_label_extdoc_b_tl
-      {#2} { externaldocument } { \c_empty_tl }
+      {#2} { externaldocument } { }
 
     \tl_if_eq:NNT
       \l_@@_label_extdoc_a_tl

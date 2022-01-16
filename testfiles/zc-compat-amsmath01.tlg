@@ -232,8 +232,8 @@ l. ......ype_equation_options_prop~not~defined } }
 ============================================================
 TEST 2: Reference: equation
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{equation.1.1}{\group_begin: equation\group_end: \nobreakspace \textup
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+{}{equation.1.1}{\group_begin: equation\group_end: \nobreakspace \textup
 {(}\group_begin: \upshape 1\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:1}
@@ -260,8 +260,8 @@ l. ...\setbox0=\hbox{\zcref{eq:1}
 .\kern 0.0
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace \textup
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+{}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace \textup
 {(}\group_begin: \upshape 2\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{compl-gr}
@@ -292,9 +292,9 @@ l. ...\showbox0
 ============================================================
 TEST 3: Reference: equation*
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{AMS.1}{\group_begin: equation\group_end: \nobreakspace \textup
-{(}\group_begin: \upshape {eq1}\group_end: }\textup {)}.
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {}{AMS.1}{\group_begin:
+equation\group_end: \nobreakspace \textup {(}\group_begin: \upshape
+{eq1}\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq1:tag}
                                     }
@@ -327,10 +327,9 @@ l. ...\showbox0
 TEST 4: Reference: align
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
-}{equation.1.3}{\group_begin: \upshape 3\group_end: }\textup {)}
-and\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
-}{equation.1.4}{\group_begin: \upshape 4\group_end: }\textup {)}.
+\nobreakspace \textup {(}\hyper@@link {}{equation.1.3}{\group_begin: \upshape
+3\group_end: }\textup {)} and\nobreakspace \textup {(}\hyper@@link
+{}{equation.1.4}{\group_begin: \upshape 4\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:A, eq:A-2}
                                          }
@@ -376,10 +375,9 @@ l. ...\showbox0
 TEST 5: Reference: align*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \textup {(}\hyper@@link {\c_empty_tl }{AMS.4}{\group_begin:
-\upshape {altag1}\group_end: }\textup {)} and\nobreakspace \textup
-{(}\hyper@@link {\c_empty_tl }{AMS.5}{\group_begin: \upshape
-{altag2}\group_end: }\textup {)}.
+\nobreakspace \textup {(}\hyper@@link {}{AMS.4}{\group_begin: \upshape
+{altag1}\group_end: }\textup {)} and\nobreakspace \textup {(}\hyper@@link
+{}{AMS.5}{\group_begin: \upshape {altag2}\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tag:eq:A, tag:eq:A-2}
                                                  }
@@ -434,8 +432,8 @@ l. ...\showbox0
 ============================================================
 TEST 6: Reference: alignat
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{equation.1.5}{\group_begin: equation\group_end: \nobreakspace \textup
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+{}{equation.1.5}{\group_begin: equation\group_end: \nobreakspace \textup
 {(}\group_begin: \upshape 5\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:B}
@@ -463,10 +461,9 @@ l. ...\setbox0=\hbox{\zcref{eq:B}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
-}{equation.1.7}{\group_begin: \upshape 7\group_end: }\textup {)}
-and\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
-}{equation.1.8}{\group_begin: \upshape 8\group_end: }\textup {)}.
+\nobreakspace \textup {(}\hyper@@link {}{equation.1.7}{\group_begin: \upshape
+7\group_end: }\textup {)} and\nobreakspace \textup {(}\hyper@@link
+{}{equation.1.8}{\group_begin: \upshape 8\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:F,eq:G}
                                       }
@@ -512,10 +509,9 @@ l. ...\showbox0
 TEST 7: Reference: alignat*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \textup {(}\hyper@@link {\c_empty_tl }{AMS.8}{\group_begin:
-\upshape {tagalnat1}\group_end: }\textup {)} and\nobreakspace \textup
-{(}\hyper@@link {\c_empty_tl }{AMS.9}{\group_begin: \upshape
-{tagalnat2}\group_end: }\textup {)}.
+\nobreakspace \textup {(}\hyper@@link {}{AMS.8}{\group_begin: \upshape
+{tagalnat1}\group_end: }\textup {)} and\nobreakspace \textup {(}\hyper@@link
+{}{AMS.9}{\group_begin: \upshape {tagalnat2}\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:C, eq:D}
                                        }
@@ -576,8 +572,8 @@ l. ...\showbox0
 ============================================================
 TEST 8: Reference: flalign
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{equation.1.9}{\group_begin: equation\group_end: \nobreakspace \textup
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+{}{equation.1.9}{\group_begin: equation\group_end: \nobreakspace \textup
 {(}\group_begin: \upshape 9\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:flal1}
@@ -608,9 +604,9 @@ l. ...\showbox0
 ============================================================
 TEST 9: Reference: flalign*
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{AMS.11}{\group_begin: equation\group_end: \nobreakspace \textup
-{(}\group_begin: \upshape {flal1}\group_end: }\textup {)}.
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {}{AMS.11}{\group_begin:
+equation\group_end: \nobreakspace \textup {(}\group_begin: \upshape
+{flal1}\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tag:eq:flal1}
                                          }
@@ -643,8 +639,8 @@ l. ...\showbox0
 ============================================================
 TEST 10: Reference: xalignat
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{equation.1.11}{\group_begin: equation\group_end: \nobreakspace \textup
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+{}{equation.1.11}{\group_begin: equation\group_end: \nobreakspace \textup
 {(}\group_begin: \upshape 11\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:xal1}
@@ -676,9 +672,9 @@ l. ...\showbox0
 ============================================================
 TEST 11: Reference: xalignat*
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{AMS.13}{\group_begin: equation\group_end: \nobreakspace \textup
-{(}\group_begin: \upshape {xal1}\group_end: }\textup {)}.
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {}{AMS.13}{\group_begin:
+equation\group_end: \nobreakspace \textup {(}\group_begin: \upshape
+{xal1}\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tag:eq:xal1}
                                         }
@@ -712,12 +708,11 @@ l. ...\showbox0
 TEST 12: Reference: gather
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
-}{equation.1.13}{\group_begin: \upshape 13\group_end: }\textup {)}, \textup
-{(}\hyper@@link {\c_empty_tl }{equation.1.14}{\group_begin: \upshape
-14\group_end: }\textup {)} and\nobreakspace \textup {(}\hyper@@link
-{\c_empty_tl }{AMS.15}{\group_begin: \upshape {\ref *{align:c}$'$}\group_end:
-}\textup {)}.
+\nobreakspace \textup {(}\hyper@@link {}{equation.1.13}{\group_begin: \upshape
+13\group_end: }\textup {)}, \textup {(}\hyper@@link
+{}{equation.1.14}{\group_begin: \upshape 14\group_end: }\textup {)}
+and\nobreakspace \textup {(}\hyper@@link {}{AMS.15}{\group_begin: \upshape
+{\ref *{align:c}$'$}\group_end: }\textup {)}.
 <recently read> }
 l. ......ef[nocomp]{gather:AA,gather:BB,gather:CC}
                                                   }
@@ -780,9 +775,9 @@ l. ...\showbox0
 ============================================================
 TEST 13: Reference: gather*
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{AMS.17}{\group_begin: equation\group_end: \nobreakspace \textup
-{(}\group_begin: \upshape {taggath}\group_end: }\textup {)}.
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {}{AMS.17}{\group_begin:
+equation\group_end: \nobreakspace \textup {(}\group_begin: \upshape
+{taggath}\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tag:gather:CC}
                                           }
@@ -818,8 +813,8 @@ l. ...\showbox0
 ============================================================
 TEST 14: Reference: multline
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{equation.1.15}{\group_begin: equation\group_end: \nobreakspace \textup
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+{}{equation.1.15}{\group_begin: equation\group_end: \nobreakspace \textup
 {(}\group_begin: \upshape 15\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:E}
@@ -851,9 +846,9 @@ l. ...\showbox0
 ============================================================
 TEST 15: Reference: multline*
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{AMS.19}{\group_begin: equation\group_end: \nobreakspace \textup
-{(}\group_begin: \upshape {multln}\group_end: }\textup {)}.
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {}{AMS.19}{\group_begin:
+equation\group_end: \nobreakspace \textup {(}\group_begin: \upshape
+{multln}\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tag:eq:E}
                                      }
@@ -889,8 +884,8 @@ l. ...\showbox0
 ============================================================
 TEST 16: Reference: subequations
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{equation.1.16}{\group_begin: equation\group_end: \nobreakspace \textup
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+{}{equation.1.16}{\group_begin: equation\group_end: \nobreakspace \textup
 {(}\group_begin: \upshape 16\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{subeq:A}
@@ -919,12 +914,11 @@ l. ...\setbox0=\hbox{\zcref{subeq:A}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
-}{equation.1.16a}{\group_begin: \upshape 16a\group_end: }\textup {)}, \textup
-{(}\hyper@@link {\c_empty_tl }{equation.1.16b}{\group_begin: \upshape
-16b\group_end: }\textup {)} and\nobreakspace \textup {(}\hyper@@link
-{\c_empty_tl }{equation.1.16c}{\group_begin: \upshape 16c\group_end: }\textup
-{)}.
+\nobreakspace \textup {(}\hyper@@link {}{equation.1.16a}{\group_begin:
+\upshape 16a\group_end: }\textup {)}, \textup {(}\hyper@@link
+{}{equation.1.16b}{\group_begin: \upshape 16b\group_end: }\textup {)}
+and\nobreakspace \textup {(}\hyper@@link {}{equation.1.16c}{\group_begin:
+\upshape 16c\group_end: }\textup {)}.
 <recently read> }
 l. ......x{\zcref[nocomp]{align:a,align:b,align:c}
                                                   }
@@ -981,12 +975,11 @@ l. ......x{\zcref[nocomp]{align:a,align:b,align:c}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
-}{equation.1.17a}{\group_begin: \upshape 17a\group_end: }\textup {)}, \textup
-{(}\hyper@@link {\c_empty_tl }{equation.1.17b}{\group_begin: \upshape
-17b\group_end: }\textup {)} and\nobreakspace \textup {(}\hyper@@link
-{\c_empty_tl }{equation.1.17c}{\group_begin: \upshape 17c\group_end: }\textup
-{)}.
+\nobreakspace \textup {(}\hyper@@link {}{equation.1.17a}{\group_begin:
+\upshape 17a\group_end: }\textup {)}, \textup {(}\hyper@@link
+{}{equation.1.17b}{\group_begin: \upshape 17b\group_end: }\textup {)}
+and\nobreakspace \textup {(}\hyper@@link {}{equation.1.17c}{\group_begin:
+\upshape 17c\group_end: }\textup {)}.
 <recently read> }
 l. ......zcref[nocomp]{xalign:a,xalign:b,xalign:c}
                                                   }
@@ -1043,12 +1036,11 @@ l. ......zcref[nocomp]{xalign:a,xalign:b,xalign:c}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
-}{equation.1.18a}{\group_begin: \upshape 18a\group_end: }\textup {)}, \textup
-{(}\hyper@@link {\c_empty_tl }{equation.1.18b}{\group_begin: \upshape
-18b\group_end: }\textup {)} and\nobreakspace \textup {(}\hyper@@link
-{\c_empty_tl }{AMS.21}{\group_begin: \upshape {\ref *{align:c}$'$}\group_end:
-}\textup {)}.
+\nobreakspace \textup {(}\hyper@@link {}{equation.1.18a}{\group_begin:
+\upshape 18a\group_end: }\textup {)}, \textup {(}\hyper@@link
+{}{equation.1.18b}{\group_begin: \upshape 18b\group_end: }\textup {)}
+and\nobreakspace \textup {(}\hyper@@link {}{AMS.21}{\group_begin: \upshape
+{\ref *{align:c}$'$}\group_end: }\textup {)}.
 <recently read> }
 l. ......zcref[nocomp]{gather:a,gather:b,gather:c}
                                                   }
@@ -1110,10 +1102,9 @@ l. ......zcref[nocomp]{gather:a,gather:b,gather:c}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
-}{equation.1.19a}{\group_begin: \upshape 19a\group_end: }\textup {)}
-and\nobreakspace \textup {(}\hyper@@link {\c_empty_tl
-}{equation.1.19b}{\group_begin: \upshape 19b\group_end: }\textup {)}.
+\nobreakspace \textup {(}\hyper@@link {}{equation.1.19a}{\group_begin:
+\upshape 19a\group_end: }\textup {)} and\nobreakspace \textup {(}\hyper@@link
+{}{equation.1.19b}{\group_begin: \upshape 19b\group_end: }\textup {)}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{split:x,multline:x}
                                                }
@@ -1162,9 +1153,9 @@ l. ...\showbox0
 ============================================================
 TEST 17: Reference: equation font
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{AMS.22}{\group_begin: equation\group_end: \nobreakspace \textup
-{(}\group_begin: \upshape Q\&A\group_end: }\textup {)}.
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {}{AMS.22}{\group_begin:
+equation\group_end: \nobreakspace \textup {(}\group_begin: \upshape
+Q\&A\group_end: }\textup {)}.
 <recently read> }
 l. ...  \zcref{eq:example}
                           .

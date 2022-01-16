@@ -46,8 +46,8 @@ l. ...\ShowHook{env/captionofbeside/after}
 ============================================================
 TEST 2: Reference: captionbeside figure
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{figure.1.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+{}{figure.1.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.4}
@@ -74,8 +74,8 @@ l. ...\showbox0
 ============================================================
 TEST 3: Reference: captionofbeside table
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link {\c_empty_tl
-}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+> \l__zrefclever_typeset_queue_curr_tl=\hyper@@link
+{}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tab:table-1.1.3}

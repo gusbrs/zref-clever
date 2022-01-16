@@ -74,14 +74,13 @@ l. ...\prop_show:N \l__zrefclever_counter_type_prop
 l. ...\ShowHook { cmd / appendix / before }
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
-\nobreakspace \hyper@@link {\c_empty_tl }{appendix.A}{\group_begin:
-A\group_end: }, \hyper@@link {\c_empty_tl }{section.A.1}{\group_begin:
-A.1\group_end: }, \hyper@@link {\c_empty_tl }{subsection.A.1.1}{\group_begin:
-A.1.1\group_end: }, \hyper@@link {\c_empty_tl
-}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \hyper@@link
-{\c_empty_tl }{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: }
-and\nobreakspace \hyper@@link {\c_empty_tl
-}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
+\nobreakspace \hyper@@link {}{appendix.A}{\group_begin: A\group_end: },
+\hyper@@link {}{section.A.1}{\group_begin: A.1\group_end: }, \hyper@@link
+{}{subsection.A.1.1}{\group_begin: A.1.1\group_end: }, \hyper@@link
+{}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \hyper@@link
+{}{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: } and\nobreakspace
+\hyper@@link {}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end:
+}.
 <recently read> }
 l. ...    sec:subparagraph-2.1.1.1.1.1}
                                     }
