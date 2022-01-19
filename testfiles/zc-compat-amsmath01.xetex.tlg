@@ -223,11 +223,9 @@ l. ...  { \ShowHook { env / #1 / begin } }
 >     ---.
 <recently read> }
 l. ...  { \ShowHook { env / #1 / begin } }
-The property list \l__zrefclever_type_equation_options_prop contains the pairs
-(without outer braces):
->  {reffont}  =>  {\upshape }.
+> \l__zrefclever_opt_type_equation_reffont_tl=\upshape .
 <recently read> }
-l. ......ype_equation_options_prop~not~defined } }
+l. ......varname_type:nnn{equation}{reffont}{tl} }
 ============================================================
 ============================================================
 TEST 2: Reference: equation

@@ -10,6 +10,11 @@
 ### Fixed
 - Fixed handling of type names defined to be empty.
 
+### Changed
+- (Internal) Moved from property lists to individually named macros to store
+  and retrieve options.  (As a result, some performance gains, and cleaner
+  code in some areas).
+
 ### Deprecated
 - Options `preposinlink`, `preref`, and `postref` have been deprecated and
   replaced by new option `refbounds`.

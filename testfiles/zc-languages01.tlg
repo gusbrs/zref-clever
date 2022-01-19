@@ -3,34 +3,82 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: Built-in language and aliases
 ============================================================
-The property list \g__zrefclever_languages_prop contains the pairs (without
-outer braces):
->  {english}  =>  {english}
->  {american}  =>  {english}
->  {australian}  =>  {english}
->  {british}  =>  {english}
->  {canadian}  =>  {english}
->  {newzealand}  =>  {english}
->  {UKenglish}  =>  {english}
->  {USenglish}  =>  {english}
->  {german}  =>  {german}
->  {austrian}  =>  {german}
->  {germanb}  =>  {german}
->  {ngerman}  =>  {german}
->  {naustrian}  =>  {german}
->  {nswissgerman}  =>  {german}
->  {swissgerman}  =>  {german}
->  {french}  =>  {french}
->  {acadian}  =>  {french}
->  {canadien}  =>  {french}
->  {francais}  =>  {french}
->  {frenchb}  =>  {french}
->  {portuguese}  =>  {portuguese}
->  {brazilian}  =>  {portuguese}
->  {brazil}  =>  {portuguese}
->  {portuges}  =>  {portuguese}
->  {spanish}  =>  {spanish}
->  {dutch}  =>  {dutch}.
+> \g__zrefclever_declared_language_english_tl=english.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_american_tl=english.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_australian_tl=english.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_british_tl=english.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_canadian_tl=english.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_newzealand_tl=english.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_UKenglish_tl=english.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_USenglish_tl=english.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_french_tl=french.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_acadian_tl=french.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_canadien_tl=french.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_francais_tl=french.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_frenchb_tl=french.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_german_tl=german.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_austrian_tl=german.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_germanb_tl=german.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_ngerman_tl=german.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_naustrian_tl=german.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_nswissgerman_tl=german.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_swissgerman_tl=german.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_portuguese_tl=portuguese.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_brazilian_tl=portuguese.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_brazil_tl=portuguese.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_portuges_tl=portuguese.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_spanish_tl=spanish.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_dutch_tl=dutch.
 <recently read> }
 l. ...  }
 ============================================================
@@ -45,47 +93,28 @@ Package zref-clever Warning: Language 'german' is already declared on line ....
 ============================================================
 TEST 3: Declare new language
 ============================================================
-The property list \g__zrefclever_lang_elvish_prop contains the pairs (without
-outer braces):
->  {declension}  =>  {a,b,c}
->  {gender}  =>  {x,y,z}
->  {allcaps}  =>  {true}.
+The sequence \g__zrefclever_opt_language_elvish_declension_seq contains the
+items (without outer braces):
+>  {a}
+>  {b}
+>  {c}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_language_elvish_gender_seq contains the items
+(without outer braces):
+>  {x}
+>  {y}
+>  {z}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_language_elvish_allcaps_bool=true.
 <recently read> }
 l. ...  }
 ============================================================
 ============================================================
 TEST 4: Declare new alias
 ============================================================
-The property list \g__zrefclever_languages_prop contains the pairs (without
-outer braces):
->  {english}  =>  {english}
->  {american}  =>  {english}
->  {australian}  =>  {english}
->  {british}  =>  {english}
->  {canadian}  =>  {english}
->  {newzealand}  =>  {english}
->  {UKenglish}  =>  {english}
->  {USenglish}  =>  {english}
->  {german}  =>  {german}
->  {austrian}  =>  {german}
->  {germanb}  =>  {german}
->  {ngerman}  =>  {german}
->  {naustrian}  =>  {german}
->  {nswissgerman}  =>  {german}
->  {swissgerman}  =>  {german}
->  {french}  =>  {french}
->  {acadian}  =>  {french}
->  {canadien}  =>  {french}
->  {francais}  =>  {french}
->  {frenchb}  =>  {french}
->  {portuguese}  =>  {portuguese}
->  {brazilian}  =>  {portuguese}
->  {brazil}  =>  {portuguese}
->  {portuges}  =>  {portuguese}
->  {spanish}  =>  {spanish}
->  {dutch}  =>  {dutch}
->  {elvish}  =>  {elvish}
->  {nelvish}  =>  {elvish}.
+> \g__zrefclever_declared_language_nelvish_tl=elvish.
 <recently read> }
 l. ...  }
 ============================================================

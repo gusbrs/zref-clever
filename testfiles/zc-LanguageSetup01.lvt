@@ -62,7 +62,77 @@
     name-pl-ab=bs.,
 }
 \ExplSyntaxOn
-\prop_show:N \g__zrefclever_lang_german_prop
+\clist_map_inline:nn
+  {
+    tpairsep ,
+    tlistsep ,
+    tlastsep ,
+    notesep ,
+    namesep ,
+    pairsep ,
+    listsep ,
+    lastsep ,
+    rangesep ,
+  }
+  {
+    \tl_show:c
+      { \__zrefclever_opt_varname_lang_default:nnn{ngerman}{#1}{tl} }
+  }
+\clist_map_inline:nn
+  {
+    refbounds-first ,
+    refbounds-first-sg ,
+    refbounds-first-pb ,
+    refbounds-first-rb ,
+    refbounds-mid ,
+    refbounds-mid-rb ,
+    refbounds-mid-re ,
+    refbounds-last ,
+    refbounds-last-pe ,
+    refbounds-last-re ,
+  }
+  {
+    \seq_show:c
+      { \__zrefclever_opt_varname_lang_default:nnn{ngerman}{#1}{seq} }
+  }
+\clist_map_inline:nn
+  {
+    namesep ,
+    pairsep ,
+    listsep ,
+    lastsep ,
+    rangesep ,
+    D-Name-sg ,
+    D-name-sg ,
+    D-Name-pl ,
+    D-name-pl ,
+    D-Name-sg-ab ,
+    D-name-sg-ab ,
+    D-Name-pl-ab ,
+    D-name-pl-ab ,
+  }
+  {
+    \tl_show:c
+      { \__zrefclever_opt_varname_lang_type:nnnn{ngerman}{section}{#1}{tl} }
+  }
+\clist_map_inline:nn
+  {
+    gender ,
+    refbounds-first ,
+    refbounds-first-sg ,
+    refbounds-first-pb ,
+    refbounds-first-rb ,
+    refbounds-mid ,
+    refbounds-mid-rb ,
+    refbounds-mid-re ,
+    refbounds-last ,
+    refbounds-last-pe ,
+    refbounds-last-re ,
+  }
+  {
+    \seq_show:c
+      { \__zrefclever_opt_varname_lang_type:nnnn{ngerman}{section}{#1}{seq} }
+  }
 \ExplSyntaxOff
 \ENDTEST
 
@@ -84,7 +154,8 @@
   gender={f,m,z},
 }
 \ExplSyntaxOn
-\prop_show:N \g__zrefclever_lang_german_prop
+\seq_show:c
+  { \__zrefclever_opt_varname_lang_type:nnnn{ngerman}{chapter}{gender}{seq} }
 \ExplSyntaxOff
 \ENDTEST
 
@@ -113,7 +184,71 @@
     refbounds=,
 }
 \ExplSyntaxOn
-\prop_show:N \g__zrefclever_lang_english_prop
+\clist_map_inline:nn
+  {
+    tpairsep ,
+    tlistsep ,
+    tlastsep ,
+    notesep ,
+  }
+  {
+    \tl_show:c
+      { \__zrefclever_opt_varname_lang_default:nnn{english}{#1}{tl} }
+  }
+\clist_map_inline:nn
+  {
+    namesep ,
+    pairsep ,
+    listsep ,
+    lastsep ,
+    rangesep ,
+    Name-sg ,
+    name-sg ,
+    Name-pl ,
+    name-pl ,
+    Name-sg-ab ,
+    name-sg-ab ,
+    Name-pl-ab ,
+    name-pl-ab ,
+  }
+  {
+    \tl_show:c
+      { \__zrefclever_opt_varname_lang_type:nnnn{english}{section}{#1}{tl} }
+  }
+\clist_map_inline:nn
+  {
+    refbounds-first ,
+    refbounds-first-sg ,
+    refbounds-first-pb ,
+    refbounds-first-rb ,
+    refbounds-mid ,
+    refbounds-mid-rb ,
+    refbounds-mid-re ,
+    refbounds-last ,
+    refbounds-last-pe ,
+    refbounds-last-re ,
+  }
+  {
+    \seq_show:c
+      { \__zrefclever_opt_varname_lang_type:nnnn{english}{section}{#1}{seq} }
+  }
+\clist_map_inline:nn
+  {
+    refbounds-first ,
+    refbounds-first-sg ,
+    refbounds-first-pb ,
+    refbounds-first-rb ,
+    refbounds-mid ,
+    refbounds-mid-rb ,
+    refbounds-mid-re ,
+    refbounds-last ,
+    refbounds-last-pe ,
+    refbounds-last-re ,
+  }
+  {
+    \seq_show:c
+      { \__zrefclever_opt_varname_lang_type:nnnn{english}{equation}{#1}{seq} }
+  }
 \ExplSyntaxOff
 \ENDTEST
 
@@ -136,7 +271,30 @@
     name-pl-ab = figs. ,
 }
 \ExplSyntaxOn
-\prop_show:N \g__zrefclever_lang_french_prop
+\bool_show:c
+  { \__zrefclever_opt_varname_lang_default:nnn{french}{cap}{bool} }
+\bool_show:c
+  { \__zrefclever_opt_varname_lang_default:nnn{french}{abbrev}{bool} }
+\bool_show:c
+  { \__zrefclever_opt_varname_lang_type:nnnn{french}{section}{cap}{bool} }
+\bool_show:c
+  { \__zrefclever_opt_varname_lang_type:nnnn{french}{equation}{abbrev}{bool} }
+\tl_show:c
+  { \__zrefclever_opt_varname_lang_type:nnnn{french}{equation}{Name-sg-ab}{tl} }
+\tl_show:c
+  { \__zrefclever_opt_varname_lang_type:nnnn{french}{equation}{name-sg-ab}{tl} }
+\tl_show:c
+  { \__zrefclever_opt_varname_lang_type:nnnn{french}{equation}{Name-pl-ab}{tl} }
+\tl_show:c
+  { \__zrefclever_opt_varname_lang_type:nnnn{french}{equation}{name-pl-ab}{tl} }
+\tl_show:c
+  { \__zrefclever_opt_varname_lang_type:nnnn{french}{figure}{Name-sg-ab}{tl} }
+\tl_show:c
+  { \__zrefclever_opt_varname_lang_type:nnnn{french}{figure}{name-sg-ab}{tl} }
+\tl_show:c
+  { \__zrefclever_opt_varname_lang_type:nnnn{french}{figure}{Name-pl-ab}{tl} }
+\tl_show:c
+  { \__zrefclever_opt_varname_lang_type:nnnn{french}{figure}{name-pl-ab}{tl} }
 \ExplSyntaxOff
 \ENDTEST
 

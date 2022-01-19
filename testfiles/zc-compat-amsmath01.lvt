@@ -233,9 +233,8 @@
     multline* ,
   }
   { \ShowHook { env / #1 / begin } }
-\prop_if_exist:NTF \l__zrefclever_type_equation_options_prop
-  { \prop_show:N \l__zrefclever_type_equation_options_prop }
-  { \typeout { l__zrefclever_type_equation_options_prop~not~defined } }
+\tl_show:c
+  { \__zrefclever_opt_varname_type:nnn{equation}{reffont}{tl} }
 \makeatother
 \ExplSyntaxOff
 \ENDTEST

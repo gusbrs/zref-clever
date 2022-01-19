@@ -7,7 +7,7 @@
 
 \usepackage{zref-clever}
 
-% This file is intended to test the fallback dictionary values in use.
+% This file is intended to test the fallback option values in use.
 
 \ExplSyntaxOn
 \bool_set_true:N \l__zrefclever_verbose_testing_bool

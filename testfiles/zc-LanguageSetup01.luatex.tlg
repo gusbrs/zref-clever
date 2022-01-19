@@ -33,130 +33,500 @@ Package zref-clever Warning: Option 'tlastsep' is not type-specific on line
 Package zref-clever Warning: Option 'notesep' is not type-specific on line ....
 (zref-clever)                Set it in '\zcLanguageSetup' before first 'type'
 (zref-clever)                switch or as package option.
-The property list \g__zrefclever_lang_german_prop contains the pairs (without
-outer braces):
->  {declension}  =>  {N,A,D,G}
->  {gender}  =>  {f,m,n}
->  {allcaps}  =>  {true}
->  {default-tpairsep}  =>  { t\& }
->  {default-tlistsep}  =>  {,,, }
->  {default-tlastsep}  =>  { tUND }
->  {default-notesep}  =>  {\qquad }
->  {default-namesep}  =>  {\quad }
->  {default-pairsep}  =>  { \& }
->  {default-listsep}  =>  {,, }
->  {default-lastsep}  =>  { UND }
->  {default-rangesep}  =>  {\textrightarrow {}}
->  {type-section-gender}  =>  {m}
->  {type-section-namesep}  =>  {\quad }
->  {type-section-pairsep}  =>  { \& }
->  {type-section-listsep}  =>  {,, }
->  {type-section-lastsep}  =>  { AND }
->  {type-section-rangesep}  =>  {\textrightarrow {}}
->  {type-section-D-Name-sg}  =>  {Bar}
->  {type-section-D-name-sg}  =>  {bar}
->  {type-section-D-Name-pl}  =>  {Bars}
->  {type-section-D-name-pl}  =>  {bars}
->  {type-section-D-Name-sg-ab}  =>  {B.}
->  {type-section-D-name-sg-ab}  =>  {b.}
->  {type-section-D-Name-pl-ab}  =>  {Bs.}
->  {type-section-D-name-pl-ab}  =>  {bs.}.
+> \g__zrefclever_opt_lang_german_default_tpairsep_tl= t\& .
 <recently read> }
-l. ...\prop_show:N \g__zrefclever_lang_german_prop
+l. ...  }
+> \g__zrefclever_opt_lang_german_default_tlistsep_tl=,,, .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_default_tlastsep_tl= tUND .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_default_notesep_tl=\qquad .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_default_namesep_tl=\quad .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_default_pairsep_tl= \& .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_default_listsep_tl=,, .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_default_lastsep_tl= UND .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_default_rangesep_tl=\textrightarrow {}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-first_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-first-sg_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-first-pb_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-first-rb_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-mid_seq contains
+the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-mid-rb_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-mid-re_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-last_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-last-pe_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-last-re_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_namesep_tl=\quad .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_pairsep_tl= \& .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_listsep_tl=,, .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_lastsep_tl= AND .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_rangesep_tl=\textrightarrow {}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_D-Name-sg_tl=Bar.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_D-name-sg_tl=bar.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_D-Name-pl_tl=Bars.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_D-name-pl_tl=bars.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_D-Name-sg-ab_tl=B..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_D-name-sg-ab_tl=b..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_D-Name-pl-ab_tl=Bs..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_D-name-pl-ab_tl=bs..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_type_section_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-first_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_german_type_section_refbounds-first-sg_seq contains
+the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_german_type_section_refbounds-first-pb_seq contains
+the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_german_type_section_refbounds-first-rb_seq contains
+the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-mid_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-mid-rb_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-mid-re_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-last_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-last-pe_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-last-re_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
 ============================================================
 ============================================================
 TEST 2: Missing case and gender
 ============================================================
 Package zref-clever Warning: Language 'english' has no declared gender on line
-(zref-clever)                74. Nothing to do with option 'gender=m'.
+(zref-clever)                144. Nothing to do with option 'gender=m'.
 Package zref-clever Warning: Language 'english' has no declared declension
 (zref-clever)                cases on line .... Nothing to do with option
 (zref-clever)                'case=D'.
 Package zref-clever Warning: Language 'french' has no 'n' gender declared on
-(zref-clever)                line 78.
+(zref-clever)                line 148.
 ============================================================
 ============================================================
 TEST 3: Multiple genders
 ============================================================
-Package zref-clever Warning: Language 'german' has no 'z' gender declared on
-(zref-clever)                line 85.
-The property list \g__zrefclever_lang_german_prop contains the pairs (without
-outer braces):
->  {declension}  =>  {N,A,D,G}
->  {gender}  =>  {f,m,n}
->  {allcaps}  =>  {true}
->  {default-tpairsep}  =>  { t\& }
->  {default-tlistsep}  =>  {,,, }
->  {default-tlastsep}  =>  { tUND }
->  {default-notesep}  =>  {\qquad }
->  {default-namesep}  =>  {\quad }
->  {default-pairsep}  =>  { \& }
->  {default-listsep}  =>  {,, }
->  {default-lastsep}  =>  { UND }
->  {default-rangesep}  =>  {\textrightarrow {}}
->  {type-section-gender}  =>  {m}
->  {type-section-namesep}  =>  {\quad }
->  {type-section-pairsep}  =>  { \& }
->  {type-section-listsep}  =>  {,, }
->  {type-section-lastsep}  =>  { AND }
->  {type-section-rangesep}  =>  {\textrightarrow {}}
->  {type-section-D-Name-sg}  =>  {Bar}
->  {type-section-D-name-sg}  =>  {bar}
->  {type-section-D-Name-pl}  =>  {Bars}
->  {type-section-D-name-pl}  =>  {bars}
->  {type-section-D-Name-sg-ab}  =>  {B.}
->  {type-section-D-name-sg-ab}  =>  {b.}
->  {type-section-D-Name-pl-ab}  =>  {Bs.}
->  {type-section-D-name-pl-ab}  =>  {bs.}
->  {type-chapter-gender}  =>  {f,m}.
+Package zref-clever Warning: Language 'ngerman' has no 'z' gender declared on
+(zref-clever)                line 155.
+The sequence \g__zrefclever_opt_lang_german_type_chapter_gender_seq contains
+the items (without outer braces):
+>  {f}
+>  {m}.
 <recently read> }
-l. ...\prop_show:N \g__zrefclever_lang_german_prop
+l. ......_type:nnnn{ngerman}{chapter}{gender}{seq} }
 ============================================================
 ============================================================
 TEST 4: English setup for later tests
 ============================================================
-The property list \g__zrefclever_lang_english_prop contains the pairs (without
-outer braces):
->  {default-tpairsep}  =>  { t\& }
->  {default-tlistsep}  =>  {,,, }
->  {default-tlastsep}  =>  { tAND }
->  {default-notesep}  =>  {\qquad }
->  {type-section-namesep}  =>  {\quad }
->  {type-section-pairsep}  =>  { \& }
->  {type-section-listsep}  =>  {,, }
->  {type-section-lastsep}  =>  { AND }
->  {type-section-rangesep}  =>  {\textrightarrow {}}
->  {type-section-Name-sg}  =>  {Bar}
->  {type-section-name-sg}  =>  {bar}
->  {type-section-Name-pl}  =>  {Bars}
->  {type-section-name-pl}  =>  {bars}
->  {type-section-Name-sg-ab}  =>  {B.}
->  {type-section-name-sg-ab}  =>  {b.}
->  {type-section-Name-pl-ab}  =>  {Bs.}
->  {type-section-name-pl-ab}  =>  {bs.}.
+> \g__zrefclever_opt_lang_english_default_tpairsep_tl= t\& .
 <recently read> }
-l. ...\prop_show:N \g__zrefclever_lang_english_prop
+l. ...  }
+> \g__zrefclever_opt_lang_english_default_tlistsep_tl=,,, .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_default_tlastsep_tl= tAND .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_default_notesep_tl=\qquad .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_type_section_namesep_tl=\quad .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_type_section_pairsep_tl= \& .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_type_section_listsep_tl=,, .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_type_section_lastsep_tl= AND .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_type_section_rangesep_tl=\textrightarrow {}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_type_section_Name-sg_tl=Bar.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_type_section_name-sg_tl=bar.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_type_section_Name-pl_tl=Bars.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_type_section_name-pl_tl=bars.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_type_section_Name-sg-ab_tl=B..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_type_section_name-sg-ab_tl=b..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_type_section_Name-pl-ab_tl=Bs..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_english_type_section_name-pl-ab_tl=bs..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-first_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_english_type_section_refbounds-first-sg_seq contains
+the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_english_type_section_refbounds-first-pb_seq contains
+the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_english_type_section_refbounds-first-rb_seq contains
+the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-mid_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-mid-rb_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-mid-re_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-last_seq
+contains the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_english_type_section_refbounds-last-pe_seq contains
+the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_english_type_section_refbounds-last-re_seq contains
+the items (without outer braces):
+>  {[}
+>  {}
+>  {}
+>  {]}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-first_seq
+contains the items (without outer braces):
+>  {}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_english_type_equation_refbounds-first-sg_seq contains
+the items (without outer braces):
+>  {}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_english_type_equation_refbounds-first-pb_seq contains
+the items (without outer braces):
+>  {}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_english_type_equation_refbounds-first-rb_seq contains
+the items (without outer braces):
+>  {}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-mid_seq
+contains the items (without outer braces):
+>  {}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_english_type_equation_refbounds-mid-rb_seq contains
+the items (without outer braces):
+>  {}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_english_type_equation_refbounds-mid-re_seq contains
+the items (without outer braces):
+>  {}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-last_seq
+contains the items (without outer braces):
+>  {}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_english_type_equation_refbounds-last-pe_seq contains
+the items (without outer braces):
+>  {}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_english_type_equation_refbounds-last-re_seq contains
+the items (without outer braces):
+>  {}.
+<recently read> }
+l. ...  }
 ============================================================
 ============================================================
 TEST 5: French setup for later tests
 ============================================================
-The property list \g__zrefclever_lang_french_prop contains the pairs (without
-outer braces):
->  {gender}  =>  {f,m}
->  {default-cap}  =>  {true}
->  {default-abbrev}  =>  {true}
->  {type-section-cap}  =>  {false}
->  {type-equation-abbrev}  =>  {false}
->  {type-equation-Name-sg-ab}  =>  {Éq.}
->  {type-equation-name-sg-ab}  =>  {éq.}
->  {type-equation-Name-pl-ab}  =>  {Éqs.}
->  {type-equation-name-pl-ab}  =>  {éqs.}
->  {type-figure-Name-sg-ab}  =>  {Fig.}
->  {type-figure-name-sg-ab}  =>  {fig.}
->  {type-figure-Name-pl-ab}  =>  {Figs.}
->  {type-figure-name-pl-ab}  =>  {figs.}.
+> \g__zrefclever_opt_lang_french_default_cap_bool=true.
 <recently read> }
-l. ...\prop_show:N \g__zrefclever_lang_french_prop
+l. ......rname_lang_default:nnn{french}{cap}{bool} }
+> \g__zrefclever_opt_lang_french_default_abbrev_bool=true.
+<recently read> }
+l. ......me_lang_default:nnn{french}{abbrev}{bool} }
+> \g__zrefclever_opt_lang_french_type_section_cap_bool=false.
+<recently read> }
+l. ......ang_type:nnnn{french}{section}{cap}{bool} }
+> \g__zrefclever_opt_lang_french_type_equation_abbrev_bool=false.
+<recently read> }
+l. ......type:nnnn{french}{equation}{abbrev}{bool} }
+> \g__zrefclever_opt_lang_french_type_equation_Name-sg-ab_tl=Éq..
+<recently read> }
+l. ......pe:nnnn{french}{equation}{Name-sg-ab}{tl} }
+> \g__zrefclever_opt_lang_french_type_equation_name-sg-ab_tl=éq..
+<recently read> }
+l. ......pe:nnnn{french}{equation}{name-sg-ab}{tl} }
+> \g__zrefclever_opt_lang_french_type_equation_Name-pl-ab_tl=Éqs..
+<recently read> }
+l. ......pe:nnnn{french}{equation}{Name-pl-ab}{tl} }
+> \g__zrefclever_opt_lang_french_type_equation_name-pl-ab_tl=éqs..
+<recently read> }
+l. ......pe:nnnn{french}{equation}{name-pl-ab}{tl} }
+> \g__zrefclever_opt_lang_french_type_figure_Name-sg-ab_tl=Fig..
+<recently read> }
+l. ......type:nnnn{french}{figure}{Name-sg-ab}{tl} }
+> \g__zrefclever_opt_lang_french_type_figure_name-sg-ab_tl=fig..
+<recently read> }
+l. ......type:nnnn{french}{figure}{name-sg-ab}{tl} }
+> \g__zrefclever_opt_lang_french_type_figure_Name-pl-ab_tl=Figs..
+<recently read> }
+l. ......type:nnnn{french}{figure}{Name-pl-ab}{tl} }
+> \g__zrefclever_opt_lang_french_type_figure_name-pl-ab_tl=figs..
+<recently read> }
+l. ......type:nnnn{french}{figure}{name-pl-ab}{tl} }
 ============================================================
 ============================================================
 TEST 6: Option: tpairsep=..., tlistsep=..., tlastsep=...

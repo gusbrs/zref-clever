@@ -13,7 +13,39 @@
 
 \TEST { Built-in~language~and~aliases }
   {
-    \prop_show:N \g__zrefclever_languages_prop
+    \clist_map_inline:nn
+      {
+        english ,
+        american ,
+        australian ,
+        british ,
+        canadian ,
+        newzealand ,
+        UKenglish ,
+        USenglish ,
+        french ,
+        acadian ,
+        canadien ,
+        francais ,
+        frenchb ,
+        german ,
+        austrian ,
+        germanb ,
+        ngerman ,
+        naustrian ,
+        nswissgerman ,
+        swissgerman ,
+        portuguese ,
+        brazilian ,
+        brazil ,
+        portuges ,
+        spanish ,
+        dutch ,
+      }
+      {
+        \tl_show:c
+          { \__zrefclever_language_varname:n {#1} }
+      }
   }
 
 \TEST { Declare~existing~language }
@@ -26,13 +58,19 @@
   {
     \zcDeclareLanguage
       [ declension = { a,b,c } , gender = { x,y,z } , allcaps ] { elvish }
-    \prop_show:N \g__zrefclever_lang_elvish_prop
+    \seq_show:c
+      { \__zrefclever_opt_varname_language:nnn{elvish}{declension}{seq} }
+    \seq_show:c
+      { \__zrefclever_opt_varname_language:nnn{elvish}{gender}{seq} }
+    \bool_show:c
+      { \__zrefclever_opt_varname_language:nnn{elvish}{allcaps}{bool} }
   }
 
 \TEST { Declare~new~alias }
   {
     \zcDeclareLanguageAlias { nelvish } { elvish }
-    \prop_show:N \g__zrefclever_languages_prop
+    \tl_show:c
+      { \__zrefclever_language_varname:n {nelvish} }
   }
 
 \TEST { Alias~to~unknown~language }

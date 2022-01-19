@@ -729,17 +729,16 @@
 %
 % For a general discussion on the precedence rules for reference format
 % options, see Section ``Reference format'' in the User manual.  Internally,
-% these precedence rules are handled / enforced in
-% \cs{@@_get_ref_opt_typeset:nN}, \cs{@@_get_ref_opt_font:nN}, and
+% these precedence rules are handled / enforced in \cs{@@_get_rf_opt_tl:nnnN},
+% \cs{@@_get_rf_opt_seq:nnnN}, \cs{@@_get_rf_opt_bool:nnnnN}, and
 % \cs{@@_type_name_setup:} which are the basic functions to retrieve proper
-% values for reference format settings.  The ``fallback'' settings are stored
-% in \cs{g_@@_fallback_unknown_lang_prop}.
+% values for reference format settings.
 %
 %
 % \begin{macro}
 %   {
 %     \l_@@_setup_type_tl ,
-%     \l_@@_base_language_tl ,
+%     \l_@@_setup_language_tl ,
 %     \l_@@_lang_decl_case_tl ,
 %     \l_@@_lang_declension_seq ,
 %     \l_@@_lang_gender_seq ,
@@ -747,11 +746,10 @@
 %   Store ``current'' type, language, and declension cases in different places
 %   for type-specific and language-specific options handling, notably in
 %   \cs{@@_provide_langfile:n}, \cs{zcRefTypeSetup}, and
-%   \cs{zcLanguageSetup}.  But also for language options retrieval, in
-%   \cs{@@_get_lang_opt_type:nnnN} and \cs{@@_get_lang_opt_default:nnN}.
+%   \cs{zcLanguageSetup}, but also for language specific options retrieval.
 %    \begin{macrocode}
 \tl_new:N \l_@@_setup_type_tl
-\tl_new:N \l_@@_base_language_tl
+\tl_new:N \l_@@_setup_language_tl
 \tl_new:N \l_@@_lang_decl_case_tl
 \seq_new:N \l_@@_lang_declension_seq
 \seq_new:N \l_@@_lang_gender_seq
@@ -761,13 +759,14 @@
 %
 % \begin{macro}
 %   {
-%     \c_@@_rf_opts_necessarily_not_type_specific_seq ,
-%     \c_@@_rf_opts_possibly_type_specific_seq ,
-%     \c_@@_rf_opts_refbounds_seq ,
-%     \c_@@_rf_opts_type_names_seq ,
-%     \c_@@_rf_opts_font_seq ,
-%     \c_@@_rf_opts_typesetup_seq ,
-%     \c_@@_rf_opts_reference_seq ,
+%     \c_@@_rf_opts_tl_not_type_specific_seq ,
+%     \c_@@_rf_opts_tl_maybe_type_specific_seq ,
+%     \c_@@_rf_opts_seq_refbounds_seq ,
+%     \c_@@_rf_opts_bool_maybe_type_specific_seq ,
+%     \c_@@_rf_opts_tl_type_names_seq ,
+%     \c_@@_rf_opts_tl_font_seq ,
+%     \c_@@_rf_opts_tl_typesetup_seq ,
+%     \c_@@_rf_opts_tl_reference_seq ,
 %   }
 %     Lists of reference format options in ``categories''.  Since these
 %     options are set in different scopes, and at different places, storing
@@ -775,7 +774,7 @@
 %     later on, but also keeps things consistent.
 %    \begin{macrocode}
 \seq_const_from_clist:Nn
-  \c_@@_rf_opts_necessarily_not_type_specific_seq
+  \c_@@_rf_opts_tl_not_type_specific_seq
   {
     tpairsep ,
     tlistsep ,
@@ -783,7 +782,7 @@
     notesep ,
   }
 \seq_const_from_clist:Nn
-  \c_@@_rf_opts_possibly_type_specific_seq
+  \c_@@_rf_opts_tl_maybe_type_specific_seq
   {
     namesep ,
     pairsep ,
@@ -792,7 +791,7 @@
     rangesep ,
   }
 \seq_const_from_clist:Nn
-  \c_@@_rf_opts_refbounds_seq
+  \c_@@_rf_opts_seq_refbounds_seq
   {
     refbounds-first ,
     refbounds-first-sg ,
@@ -805,14 +804,20 @@
     refbounds-last-pe ,
     refbounds-last-re ,
   }
+\seq_const_from_clist:Nn
+  \c_@@_rf_opts_bool_maybe_type_specific_seq
+  {
+    cap ,
+    abbrev ,
+  }
 %    \end{macrocode}
 % Only ``type names'' are ``necessarily type-specific'', which makes them
 % somewhat special on the retrieval side of things.  In short, they don't have
-% their values queried by \cs{@@_get_ref_opt_typeset:nN}, but by
+% their values queried by \cs{@@_get_rf_opt_tl:nnnN}, but by
 % \cs{@@_type_name_setup:}.
 %    \begin{macrocode}
 \seq_const_from_clist:Nn
-  \c_@@_rf_opts_type_names_seq
+  \c_@@_rf_opts_tl_type_names_seq
   {
     Name-sg ,
     name-sg ,
@@ -824,11 +829,11 @@
     name-pl-ab ,
   }
 %    \end{macrocode}
-% \cs{c_@@_rf_opts_font_seq} are technically ``possibly type-specific'',
+% \cs{c_@@_rf_opts_tl_font_seq} are technically ``possibly type-specific'',
 % but are not ``language-specific'', so we separate them.
 %    \begin{macrocode}
 \seq_const_from_clist:Nn
-  \c_@@_rf_opts_font_seq
+  \c_@@_rf_opts_tl_font_seq
   {
     namefont ,
     reffont ,
@@ -836,20 +841,20 @@
 %    \end{macrocode}
 % And, finally, some combined groups of the above variables, for convenience.
 %    \begin{macrocode}
-\seq_new:N \c_@@_rf_opts_typesetup_seq
-\seq_gconcat:NNN \c_@@_rf_opts_typesetup_seq
-  \c_@@_rf_opts_possibly_type_specific_seq
-  \c_@@_rf_opts_type_names_seq
-\seq_gconcat:NNN \c_@@_rf_opts_typesetup_seq
-  \c_@@_rf_opts_typesetup_seq
-  \c_@@_rf_opts_font_seq
-\seq_new:N \c_@@_rf_opts_reference_seq
-\seq_gconcat:NNN \c_@@_rf_opts_reference_seq
-  \c_@@_rf_opts_necessarily_not_type_specific_seq
-  \c_@@_rf_opts_possibly_type_specific_seq
-\seq_gconcat:NNN \c_@@_rf_opts_reference_seq
-  \c_@@_rf_opts_reference_seq
-  \c_@@_rf_opts_font_seq
+\seq_new:N \c_@@_rf_opts_tl_typesetup_seq
+\seq_gconcat:NNN \c_@@_rf_opts_tl_typesetup_seq
+  \c_@@_rf_opts_tl_maybe_type_specific_seq
+  \c_@@_rf_opts_tl_type_names_seq
+\seq_gconcat:NNN \c_@@_rf_opts_tl_typesetup_seq
+  \c_@@_rf_opts_tl_typesetup_seq
+  \c_@@_rf_opts_tl_font_seq
+\seq_new:N \c_@@_rf_opts_tl_reference_seq
+\seq_gconcat:NNN \c_@@_rf_opts_tl_reference_seq
+  \c_@@_rf_opts_tl_not_type_specific_seq
+  \c_@@_rf_opts_tl_maybe_type_specific_seq
+\seq_gconcat:NNN \c_@@_rf_opts_tl_reference_seq
+  \c_@@_rf_opts_tl_reference_seq
+  \c_@@_rf_opts_tl_font_seq
 %    \end{macrocode}
 % \end{macro}
 %
@@ -866,7 +871,7 @@
     langfile ,
   }
   {
-    \keys_define:nn { zref-clever / #1 }
+    \keys_define:nn { zref-clever/ #1 }
       {
         +refbounds-first .meta:n =
           {
@@ -918,69 +923,201 @@
 %
 % \subsection{Option infra}
 %
-% \begin{macro}[EXP]{\@@_opt_name_general:nn}
-%   Defines, and leaves in the input stream, the name of the variable used to
-%   store the general \meta{option}.  The data type of the variable must be
+%
+% \begin{macro}[EXP]{\@@_opt_varname_general:nn}
+%   Defines, and leaves in the input stream, the csname of the variable used
+%   to store the general \meta{option}.  The data type of the variable must be
 %   specified (\texttt{tl}, \texttt{seq}, \texttt{bool}, etc.).
 %   \begin{syntax}
-%     \cs{@@_opt_name_general:nn} \Arg{option} \Arg{data type}
+%     \cs{@@_opt_varname_general:nn} \Arg{option} \Arg{data type}
 %   \end{syntax}
 %    \begin{macrocode}
-\cs_new:Npn \@@_opt_name_general:nn #1#2
+\cs_new:Npn \@@_opt_varname_general:nn #1#2
   { l_@@_opt_general_ #1 _ #2 }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}[EXP]{\@@_opt_name_type:nnn}
-%   Defines, and leaves in the input stream, the name of the variable used to
-%   store the type-specific \meta{option} for \meta{ref type}.
+% \begin{macro}[EXP]{\@@_opt_varname_type:nnn}
+%   Defines, and leaves in the input stream, the csname of the variable used
+%   to store the type-specific \meta{option} for \meta{ref type}.
 %   \begin{syntax}
-%     \cs{@@_opt_name_type:nnn} \Arg{ref type} \Arg{option} \Arg{data type}
+%     \cs{@@_opt_varname_type:nnn} \Arg{ref type} \Arg{option} \Arg{data type}
 %   \end{syntax}
 %    \begin{macrocode}
-\cs_new:Npn \@@_opt_name_type:nnn #1#2#3
+\cs_new:Npn \@@_opt_varname_type:nnn #1#2#3
   { l_@@_opt_type_ #1 _ #2 _ #3 }
+\cs_generate_variant:Nn \@@_opt_varname_type:nnn { enn , een }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}[EXP]{\@@_opt_name_lang_default:nnn}
-%   Defines, and leaves in the input stream, the name of the variable used to
-%   store the language-specific default \meta{option} for base language
-%   \meta{base lang}.
+% \begin{macro}[EXP]{\@@_opt_varname_language:nnn}
+%   Defines, and leaves in the input stream, the csname of the variable used
+%   to store the language \meta{option} for \meta{lang} (for general language
+%   options, those set with \cs{zcDeclareLanguage}).  The
+%   ``\texttt{lang_unknown}'' branch should be guarded against, such as we
+%   normally should not get there, but this function \emph{must} return some
+%   valid csname.  The random part is there so that, in the circumstance this
+%   could not be avoided, we (hopefully) don't retrieve the value for an
+%   ``unknown language'' inadvertently.
 %   \begin{syntax}
-%     \cs{@@_opt_name_lang_default:nnn} \Arg{base lang} \Arg{option} \Arg{data type}
+%     \cs{@@_opt_varname_language:nnn} \Arg{lang} \Arg{option} \Arg{data type}
 %   \end{syntax}
 %    \begin{macrocode}
-\cs_new:Npn \@@_opt_name_lang_default:nnn #1#2#3
-  { g_@@_opt_lang_ #1 _default_ #2 _ #3 }
+\cs_new:Npn \@@_opt_varname_language:nnn #1#2#3
+  {
+    \@@_language_if_declared:nTF {#1}
+      {
+        g_@@_opt_language_
+        \tl_use:c { \@@_language_varname:n {#1} }
+        _ #2 _ #3
+      }
+      { g_@@_opt_lang_unknown_ \int_rand:n { 1000000 } _ #3 }
+  }
+\cs_generate_variant:Nn \@@_opt_varname_language:nnn { enn }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}[EXP]{\@@_opt_name_lang_type:nnnn}
-%   Defines, and leaves in the input stream, the name of the variable used to
-%   store the language- and type-specific \meta{option} for \meta{base lang}
-%   and \meta{ref type}.
+% \begin{macro}[EXP]{\@@_opt_varname_lang_default:nnn}
+%   Defines, and leaves in the input stream, the csname of the variable used
+%   to store the language-specific default reference format \meta{option} for
+%   \meta{lang}.
 %   \begin{syntax}
-%     \cs{@@_opt_name_lang_type:nnnn} \Arg{base lang} \Arg{ref type}
+%     \cs{@@_opt_varname_lang_default:nnn} \Arg{lang} \Arg{option} \Arg{data type}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_opt_varname_lang_default:nnn #1#2#3
+  {
+    \@@_language_if_declared:nTF {#1}
+      {
+        g_@@_opt_lang_
+        \tl_use:c { \@@_language_varname:n {#1} }
+        _default_ #2 _ #3
+      }
+      { g_@@_opt_lang_unknown_ \int_rand:n { 1000000 } _ #3 }
+  }
+\cs_generate_variant:Nn \@@_opt_varname_lang_default:nnn { enn }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_opt_varname_lang_type:nnnn}
+%   Defines, and leaves in the input stream, the csname of the variable used
+%   to store the language- and type-specific reference format \meta{option}
+%   for \meta{lang} and \meta{ref type}.
+%   \begin{syntax}
+%     \cs{@@_opt_varname_lang_type:nnnn} \Arg{lang} \Arg{ref type}
 %     ~~\Arg{option} \Arg{data type}
 %   \end{syntax}
 %    \begin{macrocode}
-\cs_new:Npn \@@_opt_name_lang_type:nnnn #1#2#3#4
-  { g_@@_opt_lang_ #1 _type_ #2 _ #3 _ #4 }
+\cs_new:Npn \@@_opt_varname_lang_type:nnnn #1#2#3#4
+  {
+    \@@_language_if_declared:nTF {#1}
+      {
+        g_@@_opt_lang_
+        \tl_use:c { \@@_language_varname:n {#1} }
+        _type_ #2 _ #3 _ #4
+      }
+      { g_@@_opt_lang_unknown_ \int_rand:n { 1000000 } _ #4 }
+  }
+\cs_generate_variant:Nn \@@_opt_varname_lang_type:nnnn { eenn , eeen }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}[EXP]{\@@_opt_name_fallback:nn}
-%   Defines, and leaves in the input stream, the name of the variable used to
-%   store the fallback \meta{option}.
+% \begin{macro}[EXP]{\@@_opt_varname_fallback:nn}
+%   Defines, and leaves in the input stream, the csname of the variable used
+%   to store the fallback \meta{option}.
 %   \begin{syntax}
-%     \cs{@@_opt_name_fallback:nn} \Arg{option} \Arg{data type}
+%     \cs{@@_opt_varname_fallback:nn} \Arg{option} \Arg{data type}
 %   \end{syntax}
 %    \begin{macrocode}
-\cs_new:Npn \@@_opt_name_fallback:nn #1#2
+\cs_new:Npn \@@_opt_varname_fallback:nn #1#2
   { c_@@_opt_fallback_ #1 _ #2 }
+\cs_generate_variant:Nn \@@_opt_varname_fallback:nn { vn }
 %    \end{macrocode}
 % \end{macro}
+%
+%
+%
+% \begin{macro}
+%   {
+%     \@@_opt_tl_unset:N ,
+%     \@@_opt_tl_gunset:N ,
+%     \@@_opt_tl_gunset_if_new:N ,
+%   }
+%   Unset \meta{option tl}.  These functions *define* what means to be unset
+%   for an option token list, and it must match what the conditional
+%   \cs{@@_opt_tl_if_set:N} tests for.
+%   \begin{syntax}
+%     \cs{@@_opt_tl_unset:N} \Arg{option tl}
+%     \cs{@@_opt_tl_gunset:N} \Arg{option tl}
+%     \cs{@@_opt_tl_gunset_if_new:N} \Arg{option tl}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_opt_tl_unset:N #1
+  { \tl_set_eq:NN #1 \c_novalue_tl }
+\cs_new_protected:Npn \@@_opt_tl_gunset:N #1
+  { \tl_gset_eq:NN #1 \c_novalue_tl }
+\cs_generate_variant:Nn \@@_opt_tl_unset:N { c }
+\cs_generate_variant:Nn \@@_opt_tl_gunset:N { c }
+\cs_new_protected:Npn \@@_opt_tl_gunset_if_new:N #1
+  {
+    \@@_opt_tl_if_set:NF #1
+      { \tl_gset:NN #1 \c_novalue_tl }
+  }
+\cs_generate_variant:Nn \@@_opt_tl_gunset_if_new:Nn { c }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP,TF]{\@@_opt_tl_if_set:N}
+%   \begin{syntax}
+%     \cs{@@_opt_tl_if_set:N(TF)} \Arg{option tl}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \@@_opt_tl_if_set:N #1 { F , TF }
+  {
+    \bool_lazy_and:nnTF
+      { \tl_if_exist_p:N #1 }
+      { ! \tl_if_novalue_p:n {#1} }
+      { \prg_return_true:  }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn
+  \@@_opt_seq_if_set:N { c } { F , TF }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_opt_tl_gset_if_new:Nn}
+%   \begin{syntax}
+%     \cs{@@_opt_tl_gset_if_new:Nn} \Arg{option tl} \Arg{value}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_opt_tl_gset_if_new:Nn #1#2
+  {
+    \@@_opt_tl_if_set:NF #1
+      { \tl_gset:Nn #1 {#2} }
+  }
+\cs_generate_variant:Nn \@@_opt_tl_gset_if_new:Nn { cn }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[TF]{\@@_opt_tl_get:NN}
+%   \begin{syntax}
+%     \cs{@@_opt_tl_get:NN(TF)} \Arg{option tl to get} \Arg{tl var to set}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_protected_conditional:Npnn \@@_opt_tl_get:NN #1#2 { F , TF }
+  {
+    \@@_opt_tl_if_set:NTF #1
+      {
+        \tl_set_eq:NN #2 #1
+        \prg_return_true:
+      }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn
+  \@@_opt_tl_get:NN { cN } { F , TF }
+%    \end{macrocode}
+% \end{macro}
+%
 %
 %
 % \begin{macro}
@@ -1010,9 +1147,7 @@
 % \begin{macro}
 %   {
 %     \@@_opt_seq_unset:N ,
-%     \@@_opt_seq_unset:c ,
 %     \@@_opt_seq_gunset:N ,
-%     \@@_opt_seq_gunset:c ,
 %   }
 %   Unset \meta{option seq}.  These functions *define* what means to be unset
 %   for an option sequence, and it must match what the conditional
@@ -1023,19 +1158,21 @@
 %   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_opt_seq_unset:N #1
-  { \seq_set_eq:NN #1 \scan_stop: }
+  { \cs_set_eq:NN #1 \scan_stop: }
 \cs_new_protected:Npn \@@_opt_seq_gunset:N #1
-  { \seq_gset_eq:NN #1 \scan_stop: }
+  { \cs_gset_eq:NN #1 \scan_stop: }
 \cs_generate_variant:Nn \@@_opt_seq_unset:N { c }
 \cs_generate_variant:Nn \@@_opt_seq_gunset:N { c }
+\cs_new_protected:Npn \@@_opt_seq_gunset_if_new:N #1
+  {
+    \@@_opt_seq_if_set:NF #1
+      { \cs_gset_eq:NN #1 \scan_stop: }
+  }
+\cs_generate_variant:Nn \@@_opt_seq_gunset_if_new:N { c }
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}[EXP,TF]
-%   {
-%     \@@_opt_seq_if_set:N ,
-%     \@@_opt_seq_if_set:c ,
-%   }
+% \begin{macro}[EXP,TF]{\@@_opt_seq_if_set:N}
 %   \begin{syntax}
 %     \cs{@@_opt_seq_if_set:N(TF)} \Arg{option seq}
 %   \end{syntax}
@@ -1050,7 +1187,6 @@
 % \begin{macro}[TF]
 %   {
 %     \@@_opt_seq_get:NN ,
-%     \@@_opt_seq_get:cN ,
 %   }
 %   \begin{syntax}
 %     \cs{@@_opt_seq_get:NN(TF)} \Arg{option seq to get} \Arg{seq var to set}
@@ -1071,40 +1207,143 @@
 % \end{macro}
 %
 %
+%
+% \begin{macro}
+%   {
+%     \@@_opt_bool_unset:N ,
+%     \@@_opt_bool_gunset:N ,
+%   }
+%   Unset \meta{option bool}.  These functions *define* what means to be unset
+%   for an option boolean, and it must match what the conditional
+%   \cs{@@_opt_bool_if_set:N} tests for.  The particular definition we are
+%   employing here has some relevant implications.  Setting the boolean
+%   variable to \cs{scan_stop:} (aka, \cs{relax}) means we can *never* test
+%   the variable without first testing if it is *set*.  \cs{@@_opt_bool_if:N}
+%   does this conveniently.
+%   \begin{syntax}
+%     \cs{@@_opt_bool_unset:N} \Arg{option bool}
+%     \cs{@@_opt_bool_gunset:N} \Arg{option bool}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_opt_bool_unset:N #1
+  { \cs_set_eq:NN #1 \scan_stop: }
+\cs_new_protected:Npn \@@_opt_bool_gunset:N #1
+  { \cs_gset_eq:NN #1 \scan_stop: }
+\cs_generate_variant:Nn \@@_opt_bool_unset:N { c }
+\cs_generate_variant:Nn \@@_opt_bool_gunset:N { c }
+\cs_new_protected:Npn \@@_opt_bool_gunset_if_new:N #1
+  {
+    \@@_opt_bool_if_set:NF #1
+      { \cs_gset_eq:NN #1 \scan_stop: }
+  }
+\cs_generate_variant:Nn \@@_opt_bool_gunset_if_new:N { c }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP,TF]{\@@_opt_bool_if_set:N}
+%   \begin{syntax}
+%     \cs{@@_opt_bool_if_set:N(TF)} \Arg{option bool}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \@@_opt_bool_if_set:N #1 { F , TF }
+  { \bool_if_exist:NTF #1 { \prg_return_true: } { \prg_return_false: } }
+\prg_generate_conditional_variant:Nnn
+  \@@_opt_bool_if_set:N { c } { F , TF }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}[TF]{\@@_opt_bool_get:NN}
+%   \begin{syntax}
+%     \cs{@@_opt_bool_get:NN(TF)} \Arg{option bool to get} \Arg{bool var to set}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_protected_conditional:Npnn \@@_opt_bool_get:NN #1#2 { F }
+  {
+    \@@_opt_bool_if_set:NTF #1
+      {
+        \bool_set_eq:NN #2 #1
+        \prg_return_true:
+      }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn
+  \@@_opt_bool_get:NN { cN } { F }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP,TF]{\@@_opt_bool_if:N}
+%   \begin{syntax}
+%     \cs{@@_opt_bool_if:N(TF)} \Arg{option bool}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \@@_opt_bool_if:N #1 { T , F , TF }
+  {
+    \@@_opt_bool_if_set:NTF #1
+      { \bool_if:NTF #1 { \prg_return_true: } { \prg_return_false: } }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn \@@_opt_bool_if:N { c } { T , F, TF }
+%    \end{macrocode}
+% \end{macro}
+%
+%
 % \subsection{Languages}
 %
-% \begin{macro}{\g_@@_languages_prop}
-%   Stores the names of known languages and the mapping from ``language name''
-%   to ``base language name''.  Whether or not a language or alias is known to
-%   \pkg{zref-clever} is decided by its presence in this property list.  A
-%   ``base language'' (loose concept here, meaning just ``the name we gave for
-%   the language file in that particular language'') is just like any other
-%   one, the only difference is that the ``language name'' happens to be the
-%   same as the ``base language name'', in other words, it is an ``alias to
-%   itself''.
+%
+% \begin{macro}[EXP]{\@@_language_varname:n}
+%   Defines, and leaves in the input stream, the csname of the variable used
+%   to store the \meta{base language} (as the value of this variable) for
+%   a \meta{language} declared for \pkg{zref-clever}.
+%   \begin{syntax}
+%     \cs{@@_language_varname:n} \Arg{language}
+%   \end{syntax}
 %    \begin{macrocode}
-\prop_new:N \g_@@_languages_prop
+\cs_new:Npn \@@_language_varname:n #1
+  { g_@@_declared_language_ #1 _tl }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP,TF]{\@@_language_if_declared:n}
+%   A language is considered to be declared for \pkg{zref-clever} if it passes
+%   this conditional, which requires that a variable with
+%   \cs{@@_language_varname:n}\texttt{\{\meta{language}\}} exists.
+%   \begin{syntax}
+%     \cs{@@_language_if_declared:n(TF)} \Arg{language}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \@@_language_if_declared:n #1 { TF }
+  {
+    \tl_if_exist:cTF { \@@_language_varname:n {#1} }
+     { \prg_return_true:  }
+     { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn
+  \@@_language_if_declared:n { x } { TF }
 %    \end{macrocode}
 % \end{macro}
 %
 %
 % \begin{macro}[int]{\zcDeclareLanguage}
-%   Declare a new language for use with \pkg{zref-clever}.  \meta{language} is
-%   taken to be both the ``language name'' and the ``base language name''.
-%   \oarg{options} receive a \texttt{k=v} set of options, with three valid
-%   options.  The first, \opt{declension}, takes the noun declension cases
-%   prefixes for \meta{language} as a comma separated list, whose first
-%   element is taken to be the default case.  The second, \opt{gender},
-%   receives the genders for \meta{language} as comma separated list.  The
-%   third, \opt{allcaps}, receives no value, and indicates that for
-%   \meta{language} all nouns must be capitalized for grammatical reasons, in
-%   which case, the \opt{cap} option is disregarded for \meta{language}.  If
-%   \meta{language} is already known, just warn.  This implies a particular
-%   restriction regarding \oarg{options}, namely that these options, when
-%   defined by the package, cannot be redefined by the user.  This is
-%   deliberate, otherwise the built-in language files would become much too
-%   sensitive to this particular user input, and unnecessarily so.
-%   \cs{zcDeclareLanguage} is preamble only.
+% Declare a new language for use with \pkg{zref-clever}.  \meta{language} is
+% taken to be both the ``language name'' and the ``base language name''.  A
+% ``base language'' (loose concept here, meaning just ``the name we gave for
+% the language file in that particular language'') is just like any other one,
+% the only difference is that the ``language name'' happens to be the same as
+% the ``base language name'', in other words, it is an ``alias to itself''.
+% \oarg{options} receive a \texttt{k=v} set of options, with three valid
+% options.  The first, \opt{declension}, takes the noun declension cases
+% prefixes for \meta{language} as a comma separated list, whose first element
+% is taken to be the default case.  The second, \opt{gender}, receives the
+% genders for \meta{language} as comma separated list.  The third,
+% \opt{allcaps}, receives no value, and indicates that for \meta{language} all
+% nouns must be capitalized for grammatical reasons, in which case, the
+% \opt{cap} option is disregarded for \meta{language}.  If \meta{language} is
+% already known, just warn.  This implies a particular restriction regarding
+% \oarg{options}, namely that these options, when defined by the package,
+% cannot be redefined by the user.  This is deliberate, otherwise the built-in
+% language files would become much too sensitive to this particular user
+% input, and unnecessarily so.  \cs{zcDeclareLanguage} is preamble only.
 %   \begin{syntax}
 %     \cs{zcDeclareLanguage} \oarg{options} \marg{language}
 %   \end{syntax}
@@ -1114,13 +1353,13 @@
     \group_begin:
     \tl_if_empty:nF {#2}
       {
-        \prop_if_in:NnTF \g_@@_languages_prop {#2}
+        \@@_language_if_declared:nTF {#2}
           { \msg_warning:nnn { zref-clever } { language-declared } {#2} }
           {
-            \prop_gput:Nnn \g_@@_languages_prop {#2} {#2}
-            \prop_new:c { g_@@_lang_ #2 _prop }
-            \tl_set:Nn \l_@@_base_language_tl {#2}
-            \keys_set:nn { zref-clever / declarelang } {#1}
+            \tl_new:c { \@@_language_varname:n {#2} }
+            \tl_gset:cn { \@@_language_varname:n {#2} } {#2}
+            \tl_set:Nn \l_@@_setup_language_tl {#2}
+            \keys_set:nn { zref-clever/declarelang } {#1}
           }
       }
     \group_end:
@@ -1133,7 +1372,7 @@
 % \begin{macro}[int]{\zcDeclareLanguageAlias}
 %   Declare \meta{language alias} to be an alias of \meta{aliased language}
 %   (or ``base language'').  \meta{aliased language} must be already known to
-%   \pkg{zref-clever}, as stored in \cs{g_@@_languages_prop}.
+%   \pkg{zref-clever}.
 %   \cs{zcDeclareLanguageAlias} is preamble only.
 %   \begin{syntax}
 %     \cs{zcDeclareLanguageAlias} \marg{language alias} \marg{aliased language}
@@ -1143,11 +1382,10 @@
   {
     \tl_if_empty:nF {#1}
       {
-        \prop_if_in:NnTF \g_@@_languages_prop {#2}
+        \@@_language_if_declared:nTF {#2}
           {
-            \exp_args:NNnx
-              \prop_gput:Nnn \g_@@_languages_prop {#1}
-                { \prop_item:Nn \g_@@_languages_prop {#2} }
+            \tl_gset:cx { \@@_language_varname:n {#1} }
+              { \tl_use:c { \@@_language_varname:n {#2} } }
           }
           { \msg_warning:nnn { zref-clever } { unknown-language-alias } {#2} }
       }
@@ -1159,29 +1397,38 @@
 %
 %
 %    \begin{macrocode}
-\keys_define:nn { zref-clever / declarelang }
+\keys_define:nn { zref-clever/declarelang }
   {
     declension .code:n =
       {
-        \prop_gput:cnn
-          { g_@@_lang_ \l_@@_base_language_tl _prop }
-          { declension } {#1}
+        \seq_gset_from_clist:cn
+          {
+            \@@_opt_varname_language:enn
+              { \l_@@_setup_language_tl } { declension } { seq }
+          }
+          {#1}
       } ,
     declension .value_required:n = true ,
     gender .code:n =
       {
-        \prop_gput:cnn
-          { g_@@_lang_ \l_@@_base_language_tl _prop }
-          { gender } {#1}
+        \seq_gset_from_clist:cn
+          {
+            \@@_opt_varname_language:enn
+              { \l_@@_setup_language_tl } { gender } { seq }
+          }
+          {#1}
       } ,
     gender .value_required:n = true ,
-    allcaps .code:n =
+    allcaps .choices:nn =
+      { true , false }
       {
-        \prop_gput:cnn
-          { g_@@_lang_ \l_@@_base_language_tl _prop }
-          { allcaps } { true }
+        \use:c { bool_gset_ \l_keys_choice_tl :c }
+          {
+            \@@_opt_varname_language:enn
+              { \l_@@_setup_language_tl } { allcaps } { bool }
+          }
       } ,
-    allcaps .value_forbidden:n = true ,
+    allcaps .default:n = true ,
   }
 %    \end{macrocode}
 %
@@ -1200,9 +1447,8 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_process_language_options:
   {
-    \exp_args:NNx \prop_get:NnNTF \g_@@_languages_prop
+    \@@_language_if_declared:xTF
       { \l_@@_ref_language_tl }
-      \l_@@_base_language_tl
       {
 %    \end{macrocode}
 % Validate the declension case (\opt{d}) option against the declared cases for
@@ -1212,16 +1458,13 @@
 % clearing the variable, depending on the language setup.  And also issues a
 % warning about it.
 %    \begin{macrocode}
-        \exp_args:NNx \seq_set_from_clist:Nn
-          \l_@@_lang_declension_seq
+        \@@_opt_seq_get:cNF
           {
-            \prop_item:cn
-              {
-                g_@@_lang_
-                \l_@@_base_language_tl _prop
-              }
-              { declension }
+            \@@_opt_varname_language:enn
+              { \l_@@_ref_language_tl } { declension } { seq }
           }
+          \l_@@_lang_declension_seq
+          { \seq_clear:N \l_@@_lang_declension_seq }
         \seq_if_empty:NTF \l_@@_lang_declension_seq
           {
             \tl_if_empty:NF \l_@@_ref_decl_case_tl
@@ -1257,16 +1500,13 @@
 % reference language.  If the user value for the latter does not match the
 % genders declared for the former, clear \cs{l_@@_ref_gender_tl} and warn.
 %    \begin{macrocode}
-        \exp_args:NNx \seq_set_from_clist:Nn
-          \l_@@_lang_gender_seq
+        \@@_opt_seq_get:cNF
           {
-            \prop_item:cn
-              {
-                g_@@_lang_
-                \l_@@_base_language_tl _prop
-              }
-              { gender }
+            \@@_opt_varname_language:enn
+              { \l_@@_ref_language_tl } { gender } { seq }
           }
+          \l_@@_lang_gender_seq
+          { \seq_clear:N \l_@@_lang_gender_seq }
         \seq_if_empty:NTF \l_@@_lang_gender_seq
           {
             \tl_if_empty:NF \l_@@_ref_gender_tl
@@ -1294,20 +1534,15 @@
               }
           }
 %    \end{macrocode}
-% Ensure the \opt{cap} in \cs{l_@@_ref_options_prop} is set to \texttt{true}
-% when the language was declared with \opt{allcaps} option.
+% Ensure the general \opt{cap} is set to \texttt{true} when the language was
+% declared with \opt{allcaps} option.
 %    \begin{macrocode}
-        \str_if_eq:eeT
+        \@@_opt_bool_if:cT
           {
-            \prop_item:cn
-              {
-                g_@@_lang_
-                \l_@@_base_language_tl _prop
-              }
-              { allcaps }
+            \@@_opt_varname_language:enn
+              { \l_@@_ref_language_tl } { allcaps } { bool }
           }
-          { true }
-          { \prop_put:Nnn \l_@@_ref_options_prop { cap } { true } }
+          { \keys_set:nn { zref-clever/reference } { cap = true } }
       }
       {
 %    \end{macrocode}
@@ -1384,9 +1619,9 @@
 % \cs{@@_provide_langfile:n} is only meant to load the built-in language
 % files.  For languages declared by the user, or for any settings to a known
 % language made with \cs{zcLanguageSetup}, values are populated directly to a
-% variable \cs{g_@@_lang_\meta{language}_prop}.  Hence, there is no need to
-% ``load'' anything in this case: definitions and assignments made by the user
-% are performed immediately.
+% corresponding variables.  Hence, there is no need to ``load'' anything in
+% this case: definitions and assignments made by the user are performed
+% immediately.
 %
 %
 % \subsubsection*{Provide}
@@ -1419,56 +1654,54 @@
   {
     \group_begin:
     \@bsphack
-    \prop_get:NnNTF \g_@@_languages_prop {#1}
-      \l_@@_base_language_tl
+    \tl_set:Nn \l_@@_setup_language_tl {#1}
+    \@@_language_if_declared:nTF {#1}
       {
-        \seq_if_in:NVF
+        \seq_if_in:NxF
           \g_@@_loaded_langfiles_seq
-          \l_@@_base_language_tl
+          { \tl_use:c { \@@_language_varname:n {#1} } }
           {
             \exp_args:Nx \file_get:nnNTF
-              { zref-clever- \l_@@_base_language_tl .lang }
+              {
+                zref-clever-
+                \tl_use:c { \@@_language_varname:n {#1} }
+                .lang
+              }
               { \ExplSyntaxOn }
               \l_tmpa_tl
               {
                 \tl_clear:N \l_@@_setup_type_tl
-                \exp_args:NNx \seq_set_from_clist:Nn
-                  \l_@@_lang_declension_seq
+                \@@_opt_seq_get:cNF
                   {
-                    \prop_item:cn
-                      {
-                        g_@@_lang_
-                        \l_@@_base_language_tl _prop
-                      }
-                      { declension }
+                    \@@_opt_varname_language:nnn
+                      {#1} { declension } { seq }
                   }
+                  \l_@@_lang_declension_seq
+                  { \seq_clear:N \l_@@_lang_declension_seq }
                 \seq_if_empty:NTF \l_@@_lang_declension_seq
                   { \tl_clear:N \l_@@_lang_decl_case_tl }
                   {
                     \seq_get_left:NN \l_@@_lang_declension_seq
                       \l_@@_lang_decl_case_tl
                   }
-                \exp_args:NNx \seq_set_from_clist:Nn
-                  \l_@@_lang_gender_seq
+                \@@_opt_seq_get:cNF
                   {
-                    \prop_item:cn
-                      {
-                        g_@@_lang_
-                        \l_@@_base_language_tl _prop
-                      }
-                      { gender }
+                    \@@_opt_varname_language:nnn
+                      {#1} { gender } { seq }
                   }
-                \keys_set:nV { zref-clever / langfile } \l_tmpa_tl
-                \seq_gput_right:NV \g_@@_loaded_langfiles_seq
-                  \l_@@_base_language_tl
+                  \l_@@_lang_gender_seq
+                  { \seq_clear:N \l_@@_lang_gender_seq }
+                \keys_set:nV { zref-clever/langfile } \l_tmpa_tl
+                \seq_gput_right:Nx \g_@@_loaded_langfiles_seq
+                  { \tl_use:c { \@@_language_varname:n {#1} } }
                 \msg_note:nnx { zref-clever } { langfile-loaded }
-                  { \l_@@_base_language_tl }
+                  { \tl_use:c { \@@_language_varname:n {#1} } }
               }
               {
                 \bool_if:NT \l_@@_load_langfile_verbose_bool
                   {
                     \msg_warning:nnx { zref-clever } { langfile-not-available }
-                      { \l_@@_base_language_tl }
+                      { \tl_use:c { \@@_language_varname:n {#1} } }
                   }
 %    \end{macrocode}
 % Even if we don't have the actual language file, we register it as
@@ -1481,8 +1714,8 @@
 % use the \opt{lang} option multiple times, and the
 % \texttt{langfile-not-available} warning would never go away.
 %    \begin{macrocode}
-                \seq_gput_right:NV \g_@@_loaded_langfiles_seq
-                  \l_@@_base_language_tl
+                \seq_gput_right:Nx \g_@@_loaded_langfiles_seq
+                  { \tl_use:c { \@@_language_varname:n {#1} } }
               }
           }
       }
@@ -1517,41 +1750,6 @@
 % \end{macro}
 %
 %
-% \begin{macro}
-%   {
-%     \@@_provide_lang_opt_type:nn ,
-%     \@@_provide_lang_opt_default:nn ,
-%   }
-%   A couple of auxiliary functions for the of
-%   \texttt{{zref-clever/langfile}} keys set in
-%   \cs{@@_provide_langfile:n}.  They respectively ``provide'' (i.e.  set if
-%   it value does not exist, do nothing if it already does) ``type-specific''
-%   and ``default'' language options.  Both receive \meta{key} and
-%   \meta{value} as arguments, but \cs{@@_provide_lang_opt_type:nn}
-%   relies on the current value of \cs{l_@@_setup_type_tl}, as set by the
-%   \texttt{type} key.
-%   \begin{syntax}
-%     \cs{@@_provide_lang_opt_type:nn} \Arg{key} \Arg{value}
-%     \cs{@@_provide_lang_opt_default:nn} \Arg{key} \Arg{value}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_provide_lang_opt_type:nn #1#2
-  {
-    \exp_args:Nnx \prop_gput_if_new:cnn
-      { g_@@_lang_ \l_@@_base_language_tl _prop }
-      { type- \l_@@_setup_type_tl - #1 } {#2}
-  }
-\cs_generate_variant:Nn \@@_provide_lang_opt_type:nn { nV }
-\cs_new_protected:Npn \@@_provide_lang_opt_default:nn #1#2
-  {
-    \prop_gput_if_new:cnn
-      { g_@@_lang_ \l_@@_base_language_tl _prop }
-      { default- #1 } {#2}
-  }
-\cs_generate_variant:Nn \@@_provide_lang_opt_default:nn { nV }
-%    \end{macrocode}
-% \end{macro}
-%
 %
 % The set of keys for \texttt{{zref-clever/langfile}}, which is used to
 % process the language files in \cs{@@_provide_langfile:n}.  The no-op cases
@@ -1560,7 +1758,7 @@
 % placed there nevertheless, and can be leveraged in regression tests.
 %
 %    \begin{macrocode}
-\keys_define:nn { zref-clever / langfile }
+\keys_define:nn { zref-clever/langfile }
   {
     type .code:n =
       {
@@ -1574,14 +1772,14 @@
         \seq_if_empty:NTF \l_@@_lang_declension_seq
           {
             \msg_info:nnxx { zref-clever } { language-no-decl-setup }
-              { \l_@@_base_language_tl } {#1}
+              { \l_@@_setup_language_tl } {#1}
           }
           {
             \seq_if_in:NnTF \l_@@_lang_declension_seq {#1}
               { \tl_set:Nn \l_@@_lang_decl_case_tl {#1} }
               {
                 \msg_info:nnxx { zref-clever } { unknown-decl-case }
-                  {#1} { \l_@@_base_language_tl }
+                  {#1} { \l_@@_setup_language_tl }
                 \seq_get_left:NN \l_@@_lang_declension_seq
                   \l_@@_lang_decl_case_tl
               }
@@ -1589,12 +1787,13 @@
       } ,
     case .value_required:n = true ,
 
+    gender .default:x = \c_novalue_tl ,
     gender .code:n =
       {
         \seq_if_empty:NTF \l_@@_lang_gender_seq
           {
             \msg_info:nnxxx { zref-clever } { language-no-gender }
-              { \l_@@_base_language_tl } { gender } {#1}
+              { \l_@@_setup_language_tl } { gender } {#1}
           }
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -1603,71 +1802,82 @@
                   { option-only-type-specific } { gender }
               }
               {
-                \clist_clear:N \l_tmpa_clist
-                \clist_map_inline:nn {#1}
+                \tl_if_novalue:nTF {#1}
                   {
-                    \seq_if_in:NnTF \l_@@_lang_gender_seq {##1}
-                      { \clist_put_right:Nn \l_tmpa_clist {##1} }
+                    \@@_opt_seq_gunset_if_new:c
                       {
-                        \msg_info:nnxx { zref-clever }
-                          { gender-not-declared }
-                          { \l_@@_base_language_tl } {##1}
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          { gender }
+                          { seq }
                       }
                   }
-                \clist_if_empty:NF \l_tmpa_clist
                   {
-                    \exp_args:Nnx \@@_provide_lang_opt_type:nn
-                      { gender } { \clist_use:Nn \l_tmpa_clist { , } }
+                    \seq_clear:N \l_tmpa_seq
+                    \clist_map_inline:nn {#1}
+                      {
+                        \seq_if_in:NnTF \l_@@_lang_gender_seq {##1}
+                          { \seq_put_right:Nn \l_tmpa_seq {##1} }
+                          {
+                            \msg_info:nnxx { zref-clever }
+                              { gender-not-declared }
+                              { \l_@@_setup_language_tl } {##1}
+                          }
+                      }
+                    \@@_opt_seq_if_set:cF
+                      {
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          { gender }
+                          { seq }
+                      }
+                      {
+                        \seq_gset_eq:cN
+                          {
+                            \@@_opt_varname_lang_type:eenn
+                              { \l_@@_setup_language_tl }
+                              { \l_@@_setup_type_tl }
+                              { gender }
+                              { seq }
+                          }
+                          \l_tmpa_seq
+                      }
                   }
               }
           }
       } ,
-    gender .value_required:n = true ,
-
-    cap .choices:nn =
-      { true , false }
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \@@_provide_lang_opt_default:nV
-              { cap } \l_keys_choice_tl
-          }
-          {
-            \@@_provide_lang_opt_type:nV
-              { cap } \l_keys_choice_tl
-          }
-      } ,
-    cap .default:n = true ,
-    nocap .meta:n = { cap = false } ,
-    nocap .value_forbidden:n = true ,
-
-    abbrev .choices:nn =
-      { true , false }
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \@@_provide_lang_opt_default:nV
-              { abbrev } \l_keys_choice_tl
-          }
-          {
-            \@@_provide_lang_opt_type:nV
-              { abbrev } \l_keys_choice_tl
-          }
-      } ,
-    abbrev .default:n = true ,
-    noabbrev .meta:n = { abbrev = false },
-    noabbrev .value_forbidden:n = true ,
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_necessarily_not_type_specific_seq
+  \c_@@_rf_opts_tl_not_type_specific_seq
   {
-    \keys_define:nn { zref-clever / langfile }
+    \keys_define:nn { zref-clever/langfile }
       {
-        #1 .value_required:n = true ,
+        #1 .default:x = \c_novalue_tl ,
         #1 .code:n =
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
-              { \@@_provide_lang_opt_default:nn {#1} {##1} }
+              {
+                \tl_if_novalue:nTF {##1}
+                  {
+                    \@@_opt_tl_gunset_if_new:c
+                      {
+                        \@@_opt_varname_lang_default:enn
+                          { \l_@@_setup_language_tl }
+                          {#1} { tl }
+                      }
+                  }
+                  {
+                    \@@_opt_tl_gset_if_new:cn
+                      {
+                        \@@_opt_varname_lang_default:enn
+                          { \l_@@_setup_language_tl }
+                          {#1} { tl }
+                      }
+                      {##1}
+                  }
+              }
               {
                 \msg_info:nnn { zref-clever }
                   { option-not-type-specific } {#1}
@@ -1676,25 +1886,65 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_possibly_type_specific_seq
+  \c_@@_rf_opts_tl_maybe_type_specific_seq
   {
-    \keys_define:nn { zref-clever / langfile }
+    \keys_define:nn { zref-clever/langfile }
       {
-        #1 .value_required:n = true ,
+        #1 .default:x = \c_novalue_tl ,
         #1 .code:n =
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
-              { \@@_provide_lang_opt_default:nn {#1} {##1} }
-              { \@@_provide_lang_opt_type:nn {#1} {##1} }
+              {
+                \tl_if_novalue:nTF {##1}
+                  {
+                    \@@_opt_tl_gunset_if_new:c
+                      {
+                        \@@_opt_varname_lang_default:enn
+                          { \l_@@_setup_language_tl }
+                          {#1} { tl }
+                      }
+                  }
+                  {
+                    \@@_opt_tl_gset_if_new:cn
+                      {
+                        \@@_opt_varname_lang_default:enn
+                          { \l_@@_setup_language_tl }
+                          {#1} { tl }
+                      }
+                      {##1}
+                  }
+              }
+              {
+                \tl_if_novalue:nTF {##1}
+                  {
+                    \@@_opt_tl_gunset_if_new:c
+                      {
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          {#1} { tl }
+                      }
+                  }
+                  {
+                    \@@_opt_tl_gset_if_new:cn
+                      {
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          {#1} { tl }
+                      }
+                      {##1}
+                  }
+              }
           } ,
       }
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_type_names_seq
+  \c_@@_rf_opts_tl_type_names_seq
   {
-    \keys_define:nn { zref-clever / langfile }
+    \keys_define:nn { zref-clever/langfile }
       {
-        #1 .value_required:n = true ,
+        #1 .default:x = \c_novalue_tl ,
         #1 .code:n =
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -1704,10 +1954,49 @@
               }
               {
                 \tl_if_empty:NTF \l_@@_lang_decl_case_tl
-                  { \@@_provide_lang_opt_type:nn {#1} {##1} }
                   {
-                    \@@_provide_lang_opt_type:nn
-                      { \l_@@_lang_decl_case_tl - #1 } {##1}
+                    \tl_if_novalue:nTF {##1}
+                      {
+                        \@@_opt_tl_gunset_if_new:c
+                          {
+                            \@@_opt_varname_lang_type:eenn
+                              { \l_@@_setup_language_tl }
+                              { \l_@@_setup_type_tl }
+                              {#1} { tl }
+                          }
+                      }
+                      {
+                        \@@_opt_tl_gset_if_new:cn
+                          {
+                            \@@_opt_varname_lang_type:eenn
+                              { \l_@@_setup_language_tl }
+                              { \l_@@_setup_type_tl }
+                              {#1} { tl }
+                          }
+                          {##1}
+                      }
+                  }
+                  {
+                    \tl_if_novalue:nTF {##1}
+                      {
+                        \@@_opt_tl_gunset_if_new:c
+                          {
+                            \@@_opt_varname_lang_type:eeen
+                              { \l_@@_setup_language_tl }
+                              { \l_@@_setup_type_tl }
+                              { \l_@@_lang_decl_case_tl - #1 } { tl }
+                          }
+                      }
+                      {
+                        \@@_opt_tl_gset_if_new:cn
+                          {
+                            \@@_opt_varname_lang_type:eeen
+                              { \l_@@_setup_language_tl }
+                              { \l_@@_setup_type_tl }
+                              { \l_@@_lang_decl_case_tl - #1 } { tl }
+                          }
+                          {##1}
+                      }
                   }
               }
           } ,
@@ -1717,9 +2006,9 @@
 %
 %    \begin{macrocode}
 \seq_map_inline:Nn
-  \c_@@_rf_opts_refbounds_seq
+  \c_@@_rf_opts_seq_refbounds_seq
   {
-    \keys_define:nn { zref-clever / langfile }
+    \keys_define:nn { zref-clever/langfile }
       {
         #1 .default:x = \c_novalue_tl ,
         #1 .code:n =
@@ -1728,17 +2017,17 @@
               {
                 \tl_if_novalue:nTF {##1}
                   {
-                    \@@_opt_seq_gunset:c
+                    \@@_opt_seq_gunset_if_new:c
                       {
-                        \@@_opt_name_lang_default:nnn
-                          { \l_@@_base_language_tl } {#1} { seq }
+                        \@@_opt_varname_lang_default:enn
+                          { \l_@@_setup_language_tl } {#1} { seq }
                       }
                   }
                   {
                     \@@_opt_seq_if_set:cF
                       {
-                        \@@_opt_name_lang_default:nnn
-                          { \l_@@_base_language_tl } {#1} { seq }
+                        \@@_opt_varname_lang_default:enn
+                          { \l_@@_setup_language_tl } {#1} { seq }
                       }
                       {
                         \seq_gclear:N \g_tmpa_seq
@@ -1753,8 +2042,8 @@
                           {
                             \seq_gset_eq:cN
                               {
-                                \@@_opt_name_lang_default:nnn
-                                  { \l_@@_base_language_tl } {#1} { seq }
+                                \@@_opt_varname_lang_default:enn
+                                  { \l_@@_setup_language_tl } {#1} { seq }
                               }
                               \g_tmpa_seq
                           }
@@ -1769,18 +2058,18 @@
               {
                 \tl_if_novalue:nTF {##1}
                   {
-                    \@@_opt_seq_gunset:c
+                    \@@_opt_seq_gunset_if_new:c
                       {
-                        \@@_opt_name_lang_type:nnnn
-                          { \l_@@_base_language_tl }
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
                           { \l_@@_setup_type_tl } {#1} { seq }
                       }
                   }
                   {
                     \@@_opt_seq_if_set:cF
                       {
-                        \@@_opt_name_lang_type:nnnn
-                          { \l_@@_base_language_tl }
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
                           { \l_@@_setup_type_tl } {#1} { seq }
                       }
                       {
@@ -1796,8 +2085,8 @@
                           {
                             \seq_gset_eq:cN
                               {
-                                \@@_opt_name_lang_type:nnnn
-                                  { \l_@@_base_language_tl }
+                                \@@_opt_varname_lang_type:eenn
+                                  { \l_@@_setup_language_tl }
                                   { \l_@@_setup_type_tl } {#1} { seq }
                               }
                               \g_tmpa_seq
@@ -1813,23 +2102,142 @@
           } ,
       }
   }
+\seq_map_inline:Nn
+  \c_@@_rf_opts_bool_maybe_type_specific_seq
+  {
+    \keys_define:nn { zref-clever/langfile }
+      {
+        #1 .choice: ,
+        #1 / true .code:n =
+          {
+            \tl_if_empty:NTF \l_@@_setup_type_tl
+              {
+                \@@_opt_bool_if_set:cF
+                  {
+                    \@@_opt_varname_lang_default:enn
+                      { \l_@@_setup_language_tl }
+                      {#1} { bool }
+                  }
+                  {
+                    \bool_gset_true:c
+                      {
+                        \@@_opt_varname_lang_default:enn
+                          { \l_@@_setup_language_tl }
+                          {#1} { bool }
+                      }
+                  }
+              }
+              {
+                \@@_opt_bool_if_set:cF
+                  {
+                    \@@_opt_varname_lang_type:eenn
+                      { \l_@@_setup_language_tl }
+                      { \l_@@_setup_type_tl }
+                      {#1} { bool }
+                  }
+                  {
+                    \bool_gset_true:c
+                      {
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          {#1} { bool }
+                      }
+                  }
+              }
+          } ,
+        #1 / false .code:n =
+          {
+            \tl_if_empty:NTF \l_@@_setup_type_tl
+              {
+                \@@_opt_bool_if_set:cF
+                  {
+                    \@@_opt_varname_lang_default:enn
+                      { \l_@@_setup_language_tl }
+                      {#1} { bool }
+                  }
+                  {
+                    \bool_gset_false:c
+                      {
+                        \@@_opt_varname_lang_default:enn
+                          { \l_@@_setup_language_tl }
+                          {#1} { bool }
+                      }
+                  }
+              }
+              {
+                \@@_opt_bool_if_set:cF
+                  {
+                    \@@_opt_varname_lang_type:eenn
+                      { \l_@@_setup_language_tl }
+                      { \l_@@_setup_type_tl }
+                      {#1} { bool }
+                  }
+                  {
+                    \bool_gset_false:c
+                      {
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          {#1} { bool }
+                      }
+                  }
+              }
+          } ,
+        #1 / unset .code:n =
+          {
+            \tl_if_empty:NTF \l_@@_setup_type_tl
+              {
+                \@@_opt_bool_gunset_if_new:c
+                  {
+                    \@@_opt_varname_lang_default:enn
+                      { \l_@@_setup_language_tl }
+                      {#1} { bool }
+                  }
+              }
+              {
+                \@@_opt_bool_gunset_if_new:c
+                  {
+                    \@@_opt_varname_lang_type:eenn
+                      { \l_@@_setup_language_tl }
+                      { \l_@@_setup_type_tl }
+                      {#1} { bool }
+                  }
+              }
+          } ,
+        #1 .default:n = true ,
+        no #1 .meta:n = { #1 = false } ,
+        no #1 .value_forbidden:n = true ,
+      }
+  }
 %    \end{macrocode}
 %
 %
 % \subsubsection*{Fallback}
 %
 % It is convenient for a number of language typesetting options (some basic
-% separators), which are queried with \cs{@@_get_ref_opt_typeset:nN} to have
-% some ``fallback'' value available in case \pkg{babel} or \pkg{polyglossia}
-% is loaded and sets a language which \pkg{zref-clever} does not know.  On the
-% other hand, ``type names'' are not looked for in ``fallback'', since it is
-% indeed impossible to provide any reasonable value for them for a ``specified
-% but unknown language''.  Other typesetting options, for which it is not a
-% problem being empty, need not be catered for with a fallback value.
+% separators) to have some ``fallback'' value available in case \pkg{babel} or
+% \pkg{polyglossia} is loaded and sets a language which \pkg{zref-clever} does
+% not know.  On the other hand, ``type names'' are not looked for in
+% ``fallback'', since it is indeed impossible to provide any reasonable value
+% for them for a ``specified but unknown language''.  Other typesetting
+% options, for which it is not a problem being empty, need not be catered for
+% with a fallback value.
 %
 %    \begin{macrocode}
-\prop_new:N \g_@@_fallback_unknown_lang_prop
-\prop_gset_from_keyval:Nn \g_@@_fallback_unknown_lang_prop
+\keys_define:nn { zref-clever/fallback }
+  {
+    unknown .code:n =
+      {
+        \tl_const:cn
+          {
+            \@@_opt_varname_fallback:vn
+              { l_keys_key_str } { tl }
+          }
+          {#1}
+      } ,
+  }
+\keys_set:nn { zref-clever/fallback }
   {
     tpairsep  = {,~} ,
     tlistsep  = {,~} ,
@@ -1842,92 +2250,6 @@
     rangesep  = {\textendash} ,
   }
 %    \end{macrocode}
-%
-%
-%
-% \subsubsection*{Get language options}
-%
-% \begin{macro}{\@@_get_lang_opt_type:nnnNF}
-%   Get type-specific language option of \meta{key} for \meta{type} and
-%   \meta{language}, and store it in \meta{tl variable} if found.  If not
-%   found, leave the \meta{false code} on the stream, in which case the value
-%   of \meta{tl variable} should not be relied upon.
-%   \begin{syntax}
-%     \cs{@@_get_lang_opt_type:nnnNF} \Arg{language} \Arg{type} \Arg{key}
-%     ~~\meta{tl variable} \Arg{false code}
-%   \end{syntax}
-%    \begin{macrocode}
-\prg_new_protected_conditional:Npnn
-  \@@_get_lang_opt_type:nnnN #1#2#3#4 { F }
-  {
-    \prop_get:NnNTF \g_@@_languages_prop {#1}
-      \l_@@_base_language_tl
-      {
-        \prop_get:cnNTF
-          { g_@@_lang_ \l_@@_base_language_tl _prop }
-          { type- #2 - #3 } #4
-          { \prg_return_true:  }
-          { \prg_return_false: }
-      }
-      { \prg_return_false: }
-  }
-\prg_generate_conditional_variant:Nnn
-  \@@_get_lang_opt_type:nnnN { xxxN , xxnN } { F }
-%    \end{macrocode}
-% \end{macro}
-%
-%
-% \begin{macro}{\@@_get_lang_opt_default:nnNF}
-%   Get default language option of \meta{key} for \meta{language}, and store
-%   it in \meta{tl variable} if found.  If not found, leave the \meta{false
-%   code} on the stream, in which case the value of \meta{tl variable} should
-%   not be relied upon.
-%   \begin{syntax}
-%     \cs{@@_get_lang_opt_default:nnNF} \Arg{language} \Arg{key}
-%     ~~\meta{tl variable} \Arg{false code}
-%   \end{syntax}
-%    \begin{macrocode}
-\prg_new_protected_conditional:Npnn
-  \@@_get_lang_opt_default:nnN #1#2#3 { F }
-  {
-    \prop_get:NnNTF \g_@@_languages_prop {#1}
-      \l_@@_base_language_tl
-      {
-        \prop_get:cnNTF
-          { g_@@_lang_ \l_@@_base_language_tl _prop }
-          { default- #2 } #3
-          { \prg_return_true:  }
-          { \prg_return_false: }
-      }
-      { \prg_return_false: }
-  }
-\prg_generate_conditional_variant:Nnn
-  \@@_get_lang_opt_default:nnN { xnN } { F }
-%    \end{macrocode}
-% \end{macro}
-%
-%
-% \begin{macro}{\@@_get_fallback_unknown_lang_opt:nNF}
-%   Get fallback language option of \meta{key}, and store it in \meta{tl
-%   variable} if found.  If not found, leave the \meta{false code} on the
-%   stream, in which case the value of \meta{tl variable} should not be relied
-%   upon.
-%   \begin{syntax}
-%     \cs{@@_get_fallback_unknown_lang_opt:nNF} \Arg{key}
-%     ~~\meta{tl variable} \Arg{false code}
-%   \end{syntax}
-%    \begin{macrocode}
-% {<key>}<tl var to set>
-\prg_new_protected_conditional:Npnn
-  \@@_get_fallback_unknown_lang_opt:nN #1#2 { F }
-  {
-    \prop_get:NnNTF \g_@@_fallback_unknown_lang_prop
-      { #1 } #2
-      { \prg_return_true:  }
-      { \prg_return_false: }
-  }
-%    \end{macrocode}
-% \end{macro}
 %
 %
 %
@@ -1969,7 +2291,7 @@
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_property_tl
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     ref .code:n =
       {
@@ -1994,7 +2316,7 @@
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_ref_bool
 \bool_new:N \l_@@_typeset_name_bool
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     typeset .choice: ,
     typeset / both .code:n =
@@ -2028,7 +2350,7 @@
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_sort_bool
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     sort .bool_set:N = \l_@@_typeset_sort_bool ,
     sort .initial:n = true ,
@@ -2049,7 +2371,7 @@
 %
 %    \begin{macrocode}
 \seq_new:N \l_@@_typesort_seq
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     typesort .code:n =
       {
@@ -2071,7 +2393,7 @@
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_compress_bool
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     comp .bool_set:N = \l_@@_typeset_compress_bool ,
     comp .initial:n = true ,
@@ -2087,7 +2409,7 @@
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_range_bool
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     range .bool_set:N = \l_@@_typeset_range_bool ,
     range .initial:n = false ,
@@ -2099,30 +2421,14 @@
 %
 % \subsubsection*{\opt{cap} and \opt{capfirst} options}
 %
+% The \opt{cap} option is currently being handled with other reference format
+% option booleans at \cs{c_@@_rf_opts_bool_maybe_type_specific_seq}.
+%
 %    \begin{macrocode}
-\bool_new:N \l_@@_capitalize_first_bool
-\keys_define:nn { zref-clever / reference }
+\bool_new:N \l_@@_capfirst_bool
+\keys_define:nn { zref-clever/reference }
   {
-    cap .code:n =
-      {
-        \tl_if_empty:nTF {#1}
-          { \prop_remove:Nn \l_@@_ref_options_prop { cap } }
-          {
-            \bool_lazy_or:nnTF
-              { \str_if_eq_p:nn {#1} { true  } }
-              { \str_if_eq_p:nn {#1} { false } }
-              { \prop_put:Nnn \l_@@_ref_options_prop { cap } {#1} }
-              {
-                \msg_warning:nnn { zref-clever }
-                  { key-boolean-or-empty } {#1}
-              }
-          }
-      } ,
-    cap .default:n = true ,
-    nocap .meta:n = { cap = false } ,
-    nocap .value_forbidden:n = true ,
-
-    capfirst .bool_set:N = \l_@@_capitalize_first_bool ,
+    capfirst .bool_set:N = \l_@@_capfirst_bool ,
     capfirst .initial:n = false ,
     capfirst .default:n = true ,
   }
@@ -2131,29 +2437,13 @@
 %
 % \subsubsection*{\opt{abbrev} and \opt{noabbrevfirst} options}
 %
+% The \opt{abbrev} option is currently being handled with other reference
+% format option booleans at \cs{c_@@_rf_opts_bool_maybe_type_specific_seq}.
+%
 %    \begin{macrocode}
 \bool_new:N \l_@@_noabbrev_first_bool
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
-    abbrev .code:n =
-      {
-        \tl_if_empty:nTF {#1}
-          { \prop_remove:Nn \l_@@_ref_options_prop { abbrev } }
-          {
-            \bool_lazy_or:nnTF
-              { \str_if_eq_p:nn {#1} { true  } }
-              { \str_if_eq_p:nn {#1} { false } }
-              { \prop_put:Nnn \l_@@_ref_options_prop { abbrev } {#1} }
-              {
-                \msg_warning:nnn { zref-clever }
-                  { key-boolean-or-empty } {#1}
-              }
-          }
-      } ,
-    abbrev .default:n = true ,
-    noabbrev .meta:n = { abbrev = false },
-    noabbrev .value_forbidden:n = true ,
-
     noabbrevfirst .bool_set:N = \l_@@_noabbrev_first_bool ,
     noabbrevfirst .initial:n = false ,
     noabbrevfirst .default:n = true ,
@@ -2165,7 +2455,7 @@
 % \subsubsection*{\opt{S} option}
 %
 %    \begin{macrocode}
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     S .meta:n =
       { capfirst = true , noabbrevfirst = true },
@@ -2179,7 +2469,7 @@
 %    \begin{macrocode}
 \bool_new:N \l_@@_use_hyperref_bool
 \bool_new:N \l_@@_warn_hyperref_bool
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     hyperref .choice: ,
     hyperref / auto .code:n =
@@ -2215,7 +2505,7 @@
           { \msg_warning:nn { zref-clever } { missing-hyperref } }
         \bool_set_false:N \l_@@_use_hyperref_bool
       }
-    \keys_define:nn { zref-clever / reference }
+    \keys_define:nn { zref-clever/reference }
       {
         hyperref .code:n =
           { \msg_warning:nn { zref-clever } { hyperref-preamble-only } }
@@ -2229,7 +2519,7 @@
 %
 %    \begin{macrocode}
 \str_new:N \l_@@_nameinlink_str
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     nameinlink .choice: ,
     nameinlink / true .code:n =
@@ -2250,7 +2540,7 @@
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_preposinlink_bool
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     preposinlink .code:n =
       {
@@ -2337,7 +2627,7 @@
 %
 %
 %    \begin{macrocode}
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     lang .code:n =
       {
@@ -2362,7 +2652,7 @@
                 }
               }
               {
-                \prop_if_in:NnTF \g_@@_languages_prop {#1}
+                \@@_language_if_declared:nTF {#1}
                   { \tl_set:Nn \l_@@_ref_language_tl {#1} }
                   {
                     \msg_warning:nnn { zref-clever }
@@ -2397,7 +2687,7 @@
 % become intrusive depending on the use case, and does not provide much
 % ``juice'' anyway: in \cs{zcref} missing names warnings will already ensue.
 %    \begin{macrocode}
-        \keys_define:nn { zref-clever / reference }
+        \keys_define:nn { zref-clever/reference }
           {
             lang .code:n =
               {
@@ -2420,7 +2710,7 @@
                     }
                   }
                   {
-                    \prop_if_in:NnTF \g_@@_languages_prop {#1}
+                    \@@_language_if_declared:nTF {#1}
                       { \tl_set:Nn \l_@@_ref_language_tl {#1} }
                       {
                         \msg_warning:nnn { zref-clever }
@@ -2454,14 +2744,14 @@
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_decl_case_tl
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     d .code:n =
       { \msg_warning:nnn { zref-clever } { option-document-only } { d } } ,
   }
 \AddToHook { begindocument }
   {
-    \keys_define:nn { zref-clever / reference }
+    \keys_define:nn { zref-clever/reference }
       {
 %    \end{macrocode}
 % We just store the value at this point, which is validated by
@@ -2484,7 +2774,7 @@
 \bool_new:N \l_@@_nudge_singular_bool
 \bool_new:N \l_@@_nudge_gender_bool
 \tl_new:N \l_@@_ref_gender_tl
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     nudge .choice: ,
     nudge / true .code:n =
@@ -2545,7 +2835,7 @@
   }
 \AddToHook { begindocument }
   {
-    \keys_define:nn { zref-clever / reference }
+    \keys_define:nn { zref-clever/reference }
       {
 %    \end{macrocode}
 % We just store the value at this point, which is validated by
@@ -2571,7 +2861,7 @@
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_typeset_font_tl
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   { font .tl_set:N = \l_@@_ref_typeset_font_tl }
 %    \end{macrocode}
 %
@@ -2580,14 +2870,14 @@
 % \subsubsection*{\opt{titleref} option}
 %
 %    \begin{macrocode}
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     titleref .code:n = { \RequirePackage { zref-titleref } } ,
     titleref .value_forbidden:n = true ,
   }
 \AddToHook { begindocument }
   {
-    \keys_define:nn { zref-clever / reference }
+    \keys_define:nn { zref-clever/reference }
       {
         titleref .code:n =
           { \msg_warning:nn { zref-clever } { titleref-preamble-only } }
@@ -2600,7 +2890,7 @@
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_zcref_note_tl
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     note .tl_set:N = \l_@@_zcref_note_tl ,
     note .value_required:n = true ,
@@ -2615,7 +2905,7 @@
 %    \begin{macrocode}
 \bool_new:N \l_@@_zrefcheck_available_bool
 \bool_new:N \l_@@_zcref_with_check_bool
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     check .code:n = { \RequirePackage { zref-check } } ,
     check .value_forbidden:n = true ,
@@ -2625,7 +2915,7 @@
     \@@_if_package_loaded:nTF { zref-check }
       {
         \bool_set_true:N \l_@@_zrefcheck_available_bool
-        \keys_define:nn { zref-clever / reference }
+        \keys_define:nn { zref-clever/reference }
           {
             check .code:n =
               {
@@ -2637,7 +2927,7 @@
       }
       {
         \bool_set_false:N \l_@@_zrefcheck_available_bool
-        \keys_define:nn { zref-clever / reference }
+        \keys_define:nn { zref-clever/reference }
           {
             check .value_forbidden:n = false ,
             check .code:n =
@@ -2658,7 +2948,7 @@
 %
 %    \begin{macrocode}
 \prop_new:N \l_@@_counter_type_prop
-\keys_define:nn { zref-clever / label }
+\keys_define:nn { zref-clever/label }
   {
     countertype .code:n =
       {
@@ -2722,7 +3012,7 @@
 %
 %    \begin{macrocode}
 \seq_new:N \l_@@_counter_resetters_seq
-\keys_define:nn { zref-clever / label }
+\keys_define:nn { zref-clever/label }
   {
     counterresetters .code:n =
       {
@@ -2761,7 +3051,7 @@
 %
 %    \begin{macrocode}
 \prop_new:N \l_@@_counter_resetby_prop
-\keys_define:nn { zref-clever / label }
+\keys_define:nn { zref-clever/label }
   {
     counterresetby .code:n =
       {
@@ -2802,7 +3092,7 @@
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_current_counter_tl
-\keys_define:nn { zref-clever / label }
+\keys_define:nn { zref-clever/label }
   {
     currentcounter .tl_set:N = \l_@@_current_counter_tl ,
     currentcounter .value_required:n = true ,
@@ -2817,7 +3107,7 @@
 %    \begin{macrocode}
 \bool_new:N \g_@@_nocompat_bool
 \seq_new:N \g_@@_nocompat_modules_seq
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     nocompat .code:n =
       {
@@ -2837,7 +3127,7 @@
   }
 \AddToHook { begindocument }
   {
-    \keys_define:nn { zref-clever / reference }
+    \keys_define:nn { zref-clever/reference }
       {
         nocompat .code:n =
           {
@@ -2892,35 +3182,36 @@
 % This is a set of options related to reference typesetting which receive
 % equal treatment and, hence, are handled in batch.  Since we are dealing with
 % options to be passed to \cs{zcref} or to \cs{zcsetup} or at load time, only
-% ``not necessarily type-specific'' options are pertinent here.  However, they
-% \emph{may} either be type-specific or language-specific, and thus must be
-% stored in a property list, \cs{l_@@_ref_options_prop}, in order to be
-% retrieved from the option \emph{name} by \cs{@@_get_ref_opt_typeset:nN} and
-% \cs{@@_get_ref_opt_font:nN} according to context and precedence rules.
+% ``not necessarily type-specific'' options are pertinent here.
 %
-% The keys are set so that any value, including an empty one, is added to
-% \cs{l_@@_ref_options_prop}, while a key with \emph{no value} removes the
-% property from the list, so that these options can then fall back to lower
-% precedence levels settings.  For discussion about the used technique, see
-% \zcref{sec:zcreftypesetup}.
+% The keys are set so that any value, including an empty one, while a key with
+% \emph{no value} removes the property from the list, so that these options
+% can then fall back to lower precedence levels settings.  For discussion
+% about the used technique, see \zcref{sec:zcreftypesetup}.
 %
 %    \begin{macrocode}
-\prop_new:N \l_@@_ref_options_prop
 \seq_map_inline:Nn
-  \c_@@_rf_opts_reference_seq
+  \c_@@_rf_opts_tl_reference_seq
   {
-    \keys_define:nn { zref-clever / reference }
+    \keys_define:nn { zref-clever/reference }
       {
         #1 .default:V = \c_novalue_tl ,
         #1 .code:n =
           {
             \tl_if_novalue:nTF {##1}
-              { \prop_remove:Nn \l_@@_ref_options_prop {#1} }
-              { \prop_put:Nnn \l_@@_ref_options_prop {#1} {##1} }
+              {
+                \@@_opt_tl_unset:c
+                  { \@@_opt_varname_general:nn {#1} { tl } }
+              }
+              {
+                \tl_set:cn
+                  { \@@_opt_varname_general:nn {#1} { tl } }
+                  {##1}
+              }
           } ,
       }
   }
-\keys_define:nn { zref-clever / reference }
+\keys_define:nn { zref-clever/reference }
   {
     refpre .code:n =
       {
@@ -2952,9 +3243,9 @@
 %
 %    \begin{macrocode}
 \seq_map_inline:Nn
-  \c_@@_rf_opts_refbounds_seq
+  \c_@@_rf_opts_seq_refbounds_seq
   {
-    \keys_define:nn { zref-clever / reference }
+    \keys_define:nn { zref-clever/reference }
       {
         #1 .default:x = \c_novalue_tl ,
         #1 .code:n =
@@ -2962,7 +3253,7 @@
             \tl_if_novalue:nTF {##1}
               {
                 \@@_opt_seq_unset:c
-                  { \@@_opt_name_general:nn {#1} { seq } }
+                  { \@@_opt_varname_general:nn {#1} { seq } }
               }
               {
                 \seq_clear:N \l_tmpa_seq
@@ -2973,7 +3264,7 @@
                   { \int_compare_p:nNn { \seq_count:N \l_tmpa_seq } = { 4 } }
                   {
                     \seq_set_eq:cN
-                      { \@@_opt_name_general:nn {#1} { seq } }
+                      { \@@_opt_varname_general:nn {#1} { seq } }
                       \l_tmpa_seq
                   }
                   {
@@ -2983,6 +3274,32 @@
                   }
               }
           } ,
+      }
+  }
+\seq_map_inline:Nn
+  \c_@@_rf_opts_bool_maybe_type_specific_seq
+  {
+    \keys_define:nn { zref-clever/reference }
+      {
+        #1 .choice: ,
+        #1 / true .code:n =
+          {
+            \bool_set_true:c
+              { \@@_opt_varname_general:nn {#1} { bool } }
+          } ,
+        #1 / false .code:n =
+          {
+            \bool_set_false:c
+              { \@@_opt_varname_general:nn {#1} { bool } }
+          } ,
+        #1 / unset .code:n =
+          {
+            \@@_opt_bool_unset:c
+              { \@@_opt_varname_general:nn {#1} { bool } }
+          } ,
+        #1 .default:n = true ,
+        no #1 .meta:n = { #1 = false } ,
+        no #1 .value_forbidden:n = true ,
       }
   }
 %    \end{macrocode}
@@ -3000,10 +3317,10 @@
 %    \begin{macrocode}
 \keys_define:nn { }
   {
-    zref-clever / zcsetup .inherit:n =
+    zref-clever/zcsetup .inherit:n =
       {
-        zref-clever / label ,
-        zref-clever / reference ,
+        zref-clever/label ,
+        zref-clever/reference ,
       }
   }
 %    \end{macrocode}
@@ -3012,7 +3329,7 @@
 % Process load-time package options
 % (\url{https://tex.stackexchange.com/a/15840}).
 %    \begin{macrocode}
-\ProcessKeysOptions { zref-clever / zcsetup }
+\ProcessKeysOptions { zref-clever/zcsetup }
 %    \end{macrocode}
 %
 %
@@ -3040,7 +3357,7 @@
 %   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_zcsetup:n #1
-  { \keys_set:nn { zref-clever / zcsetup } {#1} }
+  { \keys_set:nn { zref-clever/zcsetup } {#1} }
 \cs_generate_variant:Nn \@@_zcsetup:n { x }
 %    \end{macrocode}
 % \end{macro}
@@ -3066,10 +3383,8 @@
 %    \begin{macrocode}
 \NewDocumentCommand \zcRefTypeSetup { m m }
   {
-    \prop_if_exist:cF { l_@@_type_ #1 _options_prop }
-      { \prop_new:c { l_@@_type_ #1 _options_prop } }
     \tl_set:Nn \l_@@_setup_type_tl {#1}
-    \keys_set:nn { zref-clever / typesetup } {#2}
+    \keys_set:nn { zref-clever/typesetup } {#2}
   }
 %    \end{macrocode}
 % \end{macro}
@@ -3078,13 +3393,12 @@
 % Inside \cs{zcRefTypeSetup} any of the options \emph{can} receive empty
 % values, and those values, if they exist in the property list, will override
 % language-specific options, regardless of their emptiness.  In principle, we
-% could live with the situation of, once a setting has been made in
-% \cs{l_@@_type_<type>_options_prop} or in \cs{l_@@_ref_options_prop} it stays
-% there forever, and can only be overridden by a new value at the same
-% precedence level or a higher one.  But it would be nice if an user can
-% ``unset'' an option at either of those scopes to go back to the lower
-% precedence level of the language-specific options at any given point.  So
-% both in \cs{zcRefTypeSetup} and in setting reference options (see
+% could live with the situation of, once a setting has been made, it stays set
+% forever, and can only be overridden by a new value at the same precedence
+% level or a higher one.  But it would be nice if an user can ``unset'' an
+% option at either of those scopes to go back to the lower precedence level of
+% the language-specific options at any given point.  So both in
+% \cs{zcRefTypeSetup} and in setting reference options (see
 % \zcref{sec:reference-options}), we leverage the distinction of an ``empty
 % valued key'' (\texttt{key=} or \texttt{key=\{\}}) from a ``key with no
 % value'' (\texttt{key}).  This distinction is captured internally by the
@@ -3097,83 +3411,12 @@
 % \url{https://github.com/latex3/latex3/pull/988}.
 %
 %
-%    \begin{macrocode}
-\keys_define:nn { zref-clever / typesetup }
-  {
-    cap .code:n =
-      {
-        \tl_if_empty:nTF {#1}
-          {
-            \prop_remove:cn
-              {
-                l_@@_type_
-                \l_@@_setup_type_tl _options_prop
-              }
-              { cap }
-          }
-          {
-            \bool_lazy_or:nnTF
-              { \str_if_eq_p:nn {#1} { true  } }
-              { \str_if_eq_p:nn {#1} { false } }
-              {
-                \prop_put:cnn
-                  {
-                    l_@@_type_
-                    \l_@@_setup_type_tl _options_prop
-                  }
-                  { cap } {#1}
-              }
-              {
-                \msg_warning:nnn { zref-clever }
-                  { key-boolean-or-empty } {#1}
-              }
-          }
-      } ,
-    cap .default:n = true ,
-    nocap .meta:n = { cap = false } ,
-    nocap .value_forbidden:n = true ,
-
-    abbrev .code:n =
-      {
-        \tl_if_empty:nTF {#1}
-          {
-            \prop_remove:cn
-              {
-                l_@@_type_
-                \l_@@_setup_type_tl _options_prop
-              }
-              { abbrev }
-          }
-          {
-            \bool_lazy_or:nnTF
-              { \str_if_eq_p:nn {#1} { true  } }
-              { \str_if_eq_p:nn {#1} { false } }
-              {
-                \prop_put:cnn
-                  {
-                    l_@@_type_
-                    \l_@@_setup_type_tl _options_prop
-                  }
-                  { abbrev } {#1}
-              }
-              {
-                \msg_warning:nnn { zref-clever }
-                  { key-boolean-or-empty } {#1}
-              }
-          }
-      } ,
-    abbrev .default:n = true ,
-    noabbrev .meta:n = { abbrev = false },
-    noabbrev .value_forbidden:n = true ,
-  }
-%    \end{macrocode}
-%
 %
 %    \begin{macrocode}
 \seq_map_inline:Nn
-  \c_@@_rf_opts_necessarily_not_type_specific_seq
+  \c_@@_rf_opts_tl_not_type_specific_seq
   {
-    \keys_define:nn { zref-clever / typesetup }
+    \keys_define:nn { zref-clever/typesetup }
       {
         #1 .code:n =
           {
@@ -3187,34 +3430,33 @@
 %
 %    \begin{macrocode}
 \seq_map_inline:Nn
-  \c_@@_rf_opts_typesetup_seq
+  \c_@@_rf_opts_tl_typesetup_seq
   {
-    \keys_define:nn { zref-clever / typesetup }
+    \keys_define:nn { zref-clever/typesetup }
       {
         #1 .default:V = \c_novalue_tl ,
         #1 .code:n =
           {
             \tl_if_novalue:nTF {##1}
               {
-                \prop_remove:cn
+                \@@_opt_tl_unset:c
                   {
-                    l_@@_type_
-                    \l_@@_setup_type_tl _options_prop
+                    \@@_opt_varname_type:enn
+                      { \l_@@_setup_type_tl } {#1} { tl }
                   }
-                  {#1}
               }
               {
-                \prop_put:cnn
+                \tl_set:cn
                   {
-                    l_@@_type_
-                    \l_@@_setup_type_tl _options_prop
+                    \@@_opt_varname_type:enn
+                      { \l_@@_setup_type_tl } {#1} { tl }
                   }
-                  {#1} {##1}
+                  {##1}
               }
           } ,
       }
   }
-\keys_define:nn { zref-clever / typesetup }
+\keys_define:nn { zref-clever/typesetup }
   {
     refpre .code:n =
       {
@@ -3245,9 +3487,9 @@
 %
 %    \begin{macrocode}
 \seq_map_inline:Nn
-  \c_@@_rf_opts_refbounds_seq
+  \c_@@_rf_opts_seq_refbounds_seq
   {
-    \keys_define:nn { zref-clever / typesetup }
+    \keys_define:nn { zref-clever/typesetup }
       {
         #1 .default:x = \c_novalue_tl ,
         #1 .code:n =
@@ -3256,7 +3498,7 @@
               {
                 \@@_opt_seq_unset:c
                   {
-                    \@@_opt_name_type:nnn
+                    \@@_opt_varname_type:enn
                       { \l_@@_setup_type_tl } {#1} { seq }
                   }
               }
@@ -3270,7 +3512,7 @@
                   {
                     \seq_set_eq:cN
                       {
-                        \@@_opt_name_type:nnn
+                        \@@_opt_varname_type:enn
                           { \l_@@_setup_type_tl } {#1} { seq }
                       }
                       \l_tmpa_seq
@@ -3282,6 +3524,44 @@
                   }
               }
           } ,
+      }
+  }
+\seq_map_inline:Nn
+  \c_@@_rf_opts_bool_maybe_type_specific_seq
+  {
+    \keys_define:nn { zref-clever/typesetup }
+      {
+        #1 .choice: ,
+        #1 / true .code:n =
+          {
+            \bool_set_true:c
+              {
+                \@@_opt_varname_type:enn
+                  { \l_@@_setup_type_tl }
+                  {#1} { bool }
+              }
+          } ,
+        #1 / false .code:n =
+          {
+            \bool_set_false:c
+              {
+                \@@_opt_varname_type:enn
+                  { \l_@@_setup_type_tl }
+                  {#1} { bool }
+              }
+          } ,
+        #1 / unset .code:n =
+          {
+            \@@_opt_bool_unset:c
+              {
+                \@@_opt_varname_type:enn
+                  { \l_@@_setup_type_tl }
+                  {#1} { bool }
+              }
+          } ,
+        #1 .default:n = true ,
+        no #1 .meta:n = { #1 = false } ,
+        no #1 .value_forbidden:n = true ,
       }
   }
 %    \end{macrocode}
@@ -3308,37 +3588,31 @@
 \NewDocumentCommand \zcLanguageSetup { m m }
   {
     \group_begin:
-    \prop_get:NnNTF \g_@@_languages_prop {#1}
-      \l_@@_base_language_tl
+    \@@_language_if_declared:nTF {#1}
       {
         \tl_clear:N \l_@@_setup_type_tl
-        \exp_args:NNx \seq_set_from_clist:Nn
-          \l_@@_lang_declension_seq
+        \tl_set:Nn \l_@@_setup_language_tl {#1}
+        \@@_opt_seq_get:cNF
           {
-            \prop_item:cn
-              {
-                g_@@_lang_
-                \l_@@_base_language_tl _prop
-              }
-              { declension }
+            \@@_opt_varname_language:nnn
+              {#1} { declension } { seq }
           }
+          \l_@@_lang_declension_seq
+          { \seq_clear:N \l_@@_lang_declension_seq }
         \seq_if_empty:NTF \l_@@_lang_declension_seq
           { \tl_clear:N \l_@@_lang_decl_case_tl }
           {
             \seq_get_left:NN \l_@@_lang_declension_seq
               \l_@@_lang_decl_case_tl
           }
-        \exp_args:NNx \seq_set_from_clist:Nn
-          \l_@@_lang_gender_seq
+        \@@_opt_seq_get:cNF
           {
-            \prop_item:cn
-              {
-                g_@@_lang_
-                \l_@@_base_language_tl _prop
-              }
-              { gender }
+            \@@_opt_varname_language:nnn
+              {#1} { gender } { seq }
           }
-        \keys_set:nn { zref-clever / langsetup } {#2}
+          \l_@@_lang_gender_seq
+          { \seq_clear:N \l_@@_lang_gender_seq }
+        \keys_set:nn { zref-clever/langsetup } {#2}
       }
       { \msg_warning:nnn { zref-clever } { unknown-language-setup } {#1} }
     \group_end:
@@ -3348,44 +3622,12 @@
 % \end{macro}
 %
 %
-% \begin{macro}
-%   {
-%     \@@_declare_lang_opt_type:nnnn ,
-%     \@@_declare_lang_opt_default:nnn ,
-%   }
-%   A couple of auxiliary functions for the of
-%   \texttt{{zref-clever/langsetup}} keys set in \cs{zcLanguageSetup}.  They
-%   respectively declare (unconditionally set) ``type-specific'' and
-%   ``default'' language-specific options.
-%   \begin{syntax}
-%     \cs{@@_declare_lang_opt_type:nnnn} \Arg{language} \Arg{type}
-%     ~~\Arg{key} \Arg{value}
-%     \cs{@@_declare_lang_opt_default:nnn} \Arg{language}
-%     ~~\Arg{key} \Arg{value}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_declare_lang_opt_type:nnnn #1#2#3#4
-  {
-    \prop_gput:cnn { g_@@_lang_ #1 _prop }
-      { type- #2 - #3 } {#4}
-  }
-\cs_generate_variant:Nn
-  \@@_declare_lang_opt_type:nnnn { VVnn , VVxn , VVnx , VVnV }
-\cs_new_protected:Npn \@@_declare_lang_opt_default:nnn #1#2#3
-  {
-    \prop_gput:cnn { g_@@_lang_ #1 _prop }
-      { default- #2 } {#3}
-  }
-\cs_generate_variant:Nn \@@_declare_lang_opt_default:nnn { Vnn , VnV }
-%    \end{macrocode}
-% \end{macro}
-%
 %
 % The set of keys for \texttt{{zref-clever/langsetup}}, which is used to set
 % language-specific options in \cs{zcLanguageSetup}.
 %
 %    \begin{macrocode}
-\keys_define:nn { zref-clever / langsetup }
+\keys_define:nn { zref-clever/langsetup }
   {
     type .code:n =
       {
@@ -3399,14 +3641,14 @@
         \seq_if_empty:NTF \l_@@_lang_declension_seq
           {
             \msg_warning:nnxx { zref-clever } { language-no-decl-setup }
-              { \l_@@_base_language_tl } {#1}
+              { \l_@@_setup_language_tl } {#1}
           }
           {
             \seq_if_in:NnTF \l_@@_lang_declension_seq {#1}
               { \tl_set:Nn \l_@@_lang_decl_case_tl {#1} }
               {
                 \msg_warning:nnxx { zref-clever } { unknown-decl-case }
-                  {#1} { \l_@@_base_language_tl }
+                  {#1} { \l_@@_setup_language_tl }
                 \seq_get_left:NN \l_@@_lang_declension_seq
                   \l_@@_lang_decl_case_tl
               }
@@ -3414,12 +3656,13 @@
       } ,
     case .value_required:n = true ,
 
+    gender .default:x = \c_novalue_tl ,
     gender .code:n =
       {
         \seq_if_empty:NTF \l_@@_lang_gender_seq
           {
             \msg_warning:nnxxx { zref-clever } { language-no-gender }
-              { \l_@@_base_language_tl } { gender } {#1}
+              { \l_@@_setup_language_tl } { gender } {#1}
           }
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -3428,82 +3671,69 @@
                   { option-only-type-specific } { gender }
               }
               {
-                \clist_clear:N \l_tmpa_clist
-                \clist_map_inline:nn {#1}
+                \tl_if_novalue:nTF {#1}
                   {
-                    \seq_if_in:NnTF \l_@@_lang_gender_seq {##1}
-                      { \clist_put_right:Nn \l_tmpa_clist {##1} }
+                    \@@_opt_seq_gunset:c
                       {
-                        \msg_warning:nnxx { zref-clever }
-                          { gender-not-declared }
-                          { \l_@@_base_language_tl } {##1}
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          { gender }
+                          { seq }
                       }
                   }
-                \clist_if_empty:NF \l_tmpa_clist
                   {
-                    \@@_declare_lang_opt_type:VVnx
-                      \l_@@_base_language_tl
-                      \l_@@_setup_type_tl
-                      { gender } { \clist_use:Nn \l_tmpa_clist { , } }
+                    \seq_clear:N \l_tmpa_seq
+                    \clist_map_inline:nn {#1}
+                      {
+                        \seq_if_in:NnTF \l_@@_lang_gender_seq {##1}
+                          { \seq_put_right:Nn \l_tmpa_seq {##1} }
+                          {
+                            \msg_warning:nnxx { zref-clever }
+                              { gender-not-declared }
+                              { \l_@@_setup_language_tl } {##1}
+                          }
+                      }
+                    \seq_gset_eq:cN
+                      {
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          { gender }
+                          { seq }
+                      }
+                      \l_tmpa_seq
                   }
               }
           }
       } ,
-    gender .value_required:n = true ,
-
-    cap .choices:nn =
-      { true , false }
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \@@_declare_lang_opt_default:VnV
-              \l_@@_base_language_tl
-              { cap } \l_keys_choice_tl
-          }
-          {
-            \@@_declare_lang_opt_type:VVnV
-              \l_@@_base_language_tl
-              \l_@@_setup_type_tl
-              { cap } \l_keys_choice_tl
-          }
-      } ,
-    cap .default:n = true ,
-    nocap .meta:n = { cap = false } ,
-    nocap .value_forbidden:n = true ,
-
-    abbrev .choices:nn =
-      { true , false }
-      {
-        \tl_if_empty:NTF \l_@@_setup_type_tl
-          {
-            \@@_declare_lang_opt_default:VnV
-              \l_@@_base_language_tl
-              { abbrev } \l_keys_choice_tl
-          }
-          {
-            \@@_declare_lang_opt_type:VVnV
-              \l_@@_base_language_tl
-              \l_@@_setup_type_tl
-              { abbrev } \l_keys_choice_tl
-          }
-      } ,
-    abbrev .default:n = true ,
-    noabbrev .meta:n = { abbrev = false },
-    noabbrev .value_forbidden:n = true ,
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_necessarily_not_type_specific_seq
+  \c_@@_rf_opts_tl_not_type_specific_seq
   {
-    \keys_define:nn { zref-clever / langsetup }
+    \keys_define:nn { zref-clever/langsetup }
       {
-        #1 .value_required:n = true ,
+        #1 .default:x = \c_novalue_tl ,
         #1 .code:n =
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \@@_declare_lang_opt_default:Vnn
-                  \l_@@_base_language_tl
-                  {#1} {##1}
+                \tl_if_novalue:nTF {##1}
+                  {
+                    \@@_opt_tl_gunset:c
+                      {
+                        \@@_opt_varname_lang_default:enn
+                          { \l_@@_setup_language_tl } {#1} { tl }
+                      }
+                  }
+                  {
+                    \tl_gset:cn
+                      {
+                        \@@_opt_varname_lang_default:enn
+                          { \l_@@_setup_language_tl } {#1} { tl }
+                      }
+                      {##1}
+                  }
               }
               {
                 \msg_warning:nnn { zref-clever }
@@ -3513,29 +3743,58 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_possibly_type_specific_seq
+  \c_@@_rf_opts_tl_maybe_type_specific_seq
   {
-    \keys_define:nn { zref-clever / langsetup }
+    \keys_define:nn { zref-clever/langsetup }
       {
         #1 .value_required:n = true ,
         #1 .code:n =
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \@@_declare_lang_opt_default:Vnn
-                  \l_@@_base_language_tl
-                  {#1} {##1}
+                \tl_if_novalue:nTF {##1}
+                  {
+                    \@@_opt_tl_gunset:c
+                      {
+                        \@@_opt_varname_lang_default:enn
+                          { \l_@@_setup_language_tl } {#1} { tl }
+                      }
+                  }
+                  {
+                    \tl_gset:cn
+                      {
+                        \@@_opt_varname_lang_default:enn
+                          { \l_@@_setup_language_tl } {#1} { tl }
+                      }
+                      {##1}
+                  }
               }
               {
-                \@@_declare_lang_opt_type:VVnn
-                  \l_@@_base_language_tl
-                  \l_@@_setup_type_tl
-                  {#1} {##1}
+                \tl_if_novalue:nTF {##1}
+                  {
+                    \@@_opt_tl_gunset:c
+                      {
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          {#1} { tl }
+                      }
+                  }
+                  {
+                    \tl_gset:cn
+                      {
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          {#1} { tl }
+                      }
+                      {##1}
+                  }
               }
           } ,
       }
   }
-\keys_define:nn { zref-clever / langsetup }
+\keys_define:nn { zref-clever/langsetup }
   {
     refpre .code:n =
       {
@@ -3563,9 +3822,9 @@
       } ,
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_type_names_seq
+  \c_@@_rf_opts_tl_type_names_seq
   {
-    \keys_define:nn { zref-clever / langsetup }
+    \keys_define:nn { zref-clever/langsetup }
       {
         #1 .value_required:n = true ,
         #1 .code:n =
@@ -3576,18 +3835,38 @@
                   { option-only-type-specific } {#1}
               }
               {
-                \tl_if_empty:NTF \l_@@_lang_decl_case_tl
+                \tl_if_novalue:nTF {##1}
                   {
-                    \@@_declare_lang_opt_type:VVnn
-                      \l_@@_base_language_tl
-                      \l_@@_setup_type_tl
-                      {#1} {##1}
+                    \@@_opt_tl_gunset:c
+                      {
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          {#1} { tl }
+                      }
                   }
                   {
-                    \@@_declare_lang_opt_type:VVxn
-                      \l_@@_base_language_tl
-                      \l_@@_setup_type_tl
-                      { \l_@@_lang_decl_case_tl - #1 } {##1}
+                    \tl_if_empty:NTF \l_@@_lang_decl_case_tl
+                      {
+                        \tl_gset:cn
+                          {
+                            \@@_opt_varname_lang_type:eenn
+                              { \l_@@_setup_language_tl }
+                              { \l_@@_setup_type_tl }
+                              {#1} { tl }
+                          }
+                          {##1}
+                      }
+                      {
+                        \tl_gset:cn
+                          {
+                            \@@_opt_varname_lang_type:eeen
+                              { \l_@@_setup_language_tl }
+                              { \l_@@_setup_type_tl }
+                              { \l_@@_lang_decl_case_tl - #1 } { tl }
+                          }
+                          {##1}
+                      }
                   }
               }
           } ,
@@ -3597,9 +3876,9 @@
 %
 %    \begin{macrocode}
 \seq_map_inline:Nn
-  \c_@@_rf_opts_refbounds_seq
+  \c_@@_rf_opts_seq_refbounds_seq
   {
-    \keys_define:nn { zref-clever / langsetup }
+    \keys_define:nn { zref-clever/langsetup }
       {
         #1 .default:x = \c_novalue_tl ,
         #1 .code:n =
@@ -3610,8 +3889,8 @@
                   {
                     \@@_opt_seq_gunset:c
                       {
-                        \@@_opt_name_lang_default:nnn
-                          { \l_@@_base_language_tl } {#1} { seq }
+                        \@@_opt_varname_lang_default:enn
+                          { \l_@@_setup_language_tl } {#1} { seq }
                       }
                   }
                   {
@@ -3627,8 +3906,8 @@
                       {
                         \seq_gset_eq:cN
                           {
-                            \@@_opt_name_lang_default:nnn
-                              { \l_@@_base_language_tl } {#1} { seq }
+                            \@@_opt_varname_lang_default:enn
+                              { \l_@@_setup_language_tl } {#1} { seq }
                           }
                           \g_tmpa_seq
                       }
@@ -3644,8 +3923,8 @@
                   {
                     \@@_opt_seq_gunset:c
                       {
-                        \@@_opt_name_lang_type:nnnn
-                          { \l_@@_base_language_tl }
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
                           { \l_@@_setup_type_tl } {#1} { seq }
                       }
                   }
@@ -3662,8 +3941,8 @@
                       {
                         \seq_gset_eq:cN
                           {
-                            \@@_opt_name_lang_type:nnnn
-                              { \l_@@_base_language_tl }
+                            \@@_opt_varname_lang_type:eenn
+                              { \l_@@_setup_language_tl }
                               { \l_@@_setup_type_tl } {#1} { seq }
                           }
                           \g_tmpa_seq
@@ -3676,6 +3955,80 @@
                   }
               }
           } ,
+      }
+  }
+\seq_map_inline:Nn
+  \c_@@_rf_opts_bool_maybe_type_specific_seq
+  {
+    \keys_define:nn { zref-clever/langsetup }
+      {
+        #1 .choice: ,
+        #1 / true .code:n =
+          {
+            \tl_if_empty:NTF \l_@@_setup_type_tl
+              {
+                \bool_gset_true:c
+                  {
+                    \@@_opt_varname_lang_default:enn
+                      { \l_@@_setup_language_tl }
+                      {#1} { bool }
+                  }
+              }
+              {
+                \bool_gset_true:c
+                  {
+                    \@@_opt_varname_lang_type:eenn
+                      { \l_@@_setup_language_tl }
+                      { \l_@@_setup_type_tl }
+                      {#1} { bool }
+                  }
+              }
+          } ,
+        #1 / false .code:n =
+          {
+            \tl_if_empty:NTF \l_@@_setup_type_tl
+              {
+                \bool_gset_false:c
+                  {
+                    \@@_opt_varname_lang_default:enn
+                      { \l_@@_setup_language_tl }
+                      {#1} { bool }
+                  }
+              }
+              {
+                \bool_gset_false:c
+                  {
+                    \@@_opt_varname_lang_type:eenn
+                      { \l_@@_setup_language_tl }
+                      { \l_@@_setup_type_tl }
+                      {#1} { bool }
+                  }
+              }
+          } ,
+        #1 / unset .code:n =
+          {
+            \tl_if_empty:NTF \l_@@_setup_type_tl
+              {
+                \@@_opt_bool_gunset:c
+                  {
+                    \@@_opt_varname_lang_default:enn
+                      { \l_@@_setup_language_tl }
+                      {#1} { bool }
+                  }
+              }
+              {
+                \@@_opt_bool_gunset:c
+                  {
+                    \@@_opt_varname_lang_type:eenn
+                      { \l_@@_setup_language_tl }
+                      { \l_@@_setup_type_tl }
+                      {#1} { bool }
+                  }
+              }
+          } ,
+        #1 .default:n = true ,
+        no #1 .meta:n = { #1 = false } ,
+        no #1 .value_forbidden:n = true ,
       }
   }
 %    \end{macrocode}
@@ -3712,7 +4065,7 @@
 %    \end{macrocode}
 % Set options.
 %    \begin{macrocode}
-      \keys_set:nn { zref-clever / reference } {#3}
+      \keys_set:nn { zref-clever/reference } {#3}
 %    \end{macrocode}
 % Store arguments values.
 %    \begin{macrocode}
@@ -3757,7 +4110,10 @@
 %    \begin{macrocode}
       \tl_if_empty:NF \l_@@_zcref_note_tl
         {
-          \@@_get_ref_opt_typeset:nN { notesep } \l_tmpa_tl
+          \@@_get_rf_opt_tl:nxxN { notesep }
+            { \l_@@_label_type_a_tl }
+            { \l_@@_ref_language_tl }
+            \l_tmpa_tl
           \l_tmpa_tl
           \l_@@_zcref_note_tl
         }
@@ -3895,7 +4251,7 @@
 % Store label types sequence.
 %    \begin{macrocode}
     \seq_clear:N \l_@@_label_types_seq
-    \tl_if_eq:NnF \l_@@_ref_property_tl { page }
+    \tl_if_eq:NnF \l_@@_ref_propserty_tl { page }
       {
         \seq_map_function:NN \l_@@_zcref_labels_seq
           \@@_label_type_put_new_right:n
@@ -4380,7 +4736,7 @@
 %     \l_@@_type_name_missing_bool ,
 %     \l_@@_name_format_tl ,
 %     \l_@@_name_format_fallback_tl ,
-%     \l_@@_type_name_gender_tl ,
+%     \l_@@_type_name_gender_seq ,
 %   }
 %   Auxiliary variables for \cs{@@_typeset_refs:} type name handling.
 %    \begin{macrocode}
@@ -4389,7 +4745,7 @@
 \bool_new:N \l_@@_type_name_missing_bool
 \tl_new:N \l_@@_name_format_tl
 \tl_new:N \l_@@_name_format_fallback_tl
-\tl_new:N \l_@@_type_name_gender_tl
+\seq_new:N \l_@@_type_name_gender_seq
 %    \end{macrocode}
 % \end{macro}
 %
@@ -4423,7 +4779,7 @@
 %     \l_@@_rangesep_tl ,
 %     \l_@@_namefont_tl ,
 %     \l_@@_reffont_tl ,
-%     \l_@@_capitalize_bool ,
+%     \l_@@_cap_bool ,
 %     \l_@@_abbrev_bool ,
 %   }
 %     Auxiliary variables for \cs{@@_typeset_refs:} separators, and font and
@@ -4439,7 +4795,7 @@
 \tl_new:N \l_@@_rangesep_tl
 \tl_new:N \l_@@_namefont_tl
 \tl_new:N \l_@@_reffont_tl
-\bool_new:N \l_@@_capitalize_bool
+\bool_new:N \l_@@_cap_bool
 \bool_new:N \l_@@_abbrev_bool
 %    \end{macrocode}
 % \end{macro}
@@ -4508,11 +4864,17 @@
     \bool_set_false:N \l_@@_type_first_refbounds_set_bool
 
     % Get type block options (not type-specific).
-    \@@_get_ref_opt_typeset:nN { tpairsep }
+    \@@_get_rf_opt_tl:nxxN { tpairsep }
+      { \l_@@_label_type_a_tl }
+      { \l_@@_ref_language_tl }
       \l_@@_tpairsep_tl
-    \@@_get_ref_opt_typeset:nN { tlistsep }
+    \@@_get_rf_opt_tl:nxxN { tlistsep }
+      { \l_@@_label_type_a_tl }
+      { \l_@@_ref_language_tl }
       \l_@@_tlistsep_tl
-    \@@_get_ref_opt_typeset:nN { tlastsep }
+    \@@_get_rf_opt_tl:nxxN { tlastsep }
+      { \l_@@_label_type_a_tl }
+      { \l_@@_ref_language_tl }
       \l_@@_tlastsep_tl
 
     % Process label stack.
@@ -4595,27 +4957,45 @@
               }
           }
 
-        % Get type-specific separators, refbounds, font and other options,
-        % once per type.
+        % Get possibly type-specific separators, refbounds, font and other
+        % options, once per type.
         \int_compare:nNnT { \l_@@_label_count_int } = { 0 }
           {
-            \@@_get_ref_opt_typeset:nN { namesep  }
+            \@@_get_rf_opt_tl:nxxN { namesep }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
               \l_@@_namesep_tl
-            \@@_get_ref_opt_typeset:nN { pairsep  }
+            \@@_get_rf_opt_tl:nxxN { pairsep }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
               \l_@@_pairsep_tl
-            \@@_get_ref_opt_typeset:nN { listsep  }
+            \@@_get_rf_opt_tl:nxxN { listsep }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
               \l_@@_listsep_tl
-            \@@_get_ref_opt_typeset:nN { lastsep  }
+            \@@_get_rf_opt_tl:nxxN { lastsep }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
               \l_@@_lastsep_tl
-            \@@_get_ref_opt_typeset:nN { rangesep }
+            \@@_get_rf_opt_tl:nxxN { rangesep }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
               \l_@@_rangesep_tl
-            \@@_get_ref_opt_font:nN { namefont }
+            \@@_get_rf_opt_tl:nxxN { namefont }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
               \l_@@_namefont_tl
-            \@@_get_ref_opt_font:nN { reffont  }
+            \@@_get_rf_opt_tl:nxxN { reffont }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
               \l_@@_reffont_tl
-            \@@_get_ref_opt_bool:nnN { cap    } { false }
-              \l_@@_capitalize_bool
-            \@@_get_ref_opt_bool:nnN { abbrev } { false }
+            \@@_get_rf_opt_bool:nnxxN { cap } { false }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
+              \l_@@_cap_bool
+            \@@_get_rf_opt_bool:nnxxN { abbrev } { false }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
               \l_@@_abbrev_bool
             \@@_get_rf_opt_seq:nxxN { refbounds-first }
               { \l_@@_label_type_a_tl }
@@ -5524,9 +5904,9 @@
             % Determine whether we should use capitalization, abbreviation,
             % and plural.
             \bool_lazy_or:nnTF
-              { \l_@@_capitalize_bool }
+              { \l_@@_cap_bool }
               {
-                \l_@@_capitalize_first_bool &&
+                \l_@@_capfirst_bool &&
                 \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
               }
               { \tl_set:Nn \l_@@_name_format_tl {Name} }
@@ -5581,19 +5961,15 @@
                   { \l_@@_nudge_gender_bool }
                   { ! \tl_if_empty_p:N \l_@@_ref_gender_tl }
                   {
-                    \@@_get_lang_opt_type:xxnNF
-                      { \l_@@_ref_language_tl }
+                    \@@_get_rf_opt_seq:nxxN { gender }
                       { \l_@@_type_first_label_type_tl }
-                      { gender }
-                      \l_@@_type_name_gender_tl
-                      { \tl_clear:N \l_@@_type_name_gender_tl }
-                    \clist_set:NV \l_tmpa_clist
-                      \l_@@_type_name_gender_tl
-                    \clist_if_in:NVF
-                      \l_tmpa_clist
+                      { \l_@@_ref_language_tl }
+                      \l_@@_type_name_gender_seq
+                    \seq_if_in:NVF
+                      \l_@@_type_name_gender_seq
                       \l_@@_ref_gender_tl
                       {
-                        \tl_if_empty:NTF \l_@@_type_name_gender_tl
+                        \seq_if_empty:NTF \l_@@_type_name_gender_seq
                           {
                             \msg_warning:nnxxx { zref-clever }
                               { nudge-gender-not-declared-for-type }
@@ -5606,7 +5982,10 @@
                               { nudge-gender-mismatch }
                               { \l_@@_type_first_label_type_tl }
                               { \l_@@_ref_gender_tl }
-                              { \l_@@_type_name_gender_tl }
+                              {
+                                \seq_use:Nn
+                                  \l_@@_type_name_gender_seq { ,~ }
+                              }
                               { \l_@@_ref_language_tl }
                           }
                       }
@@ -5615,12 +5994,13 @@
 
             \tl_if_empty:NTF \l_@@_name_format_fallback_tl
               {
-                \prop_get:cVNF
+                \@@_opt_tl_get:cNF
                   {
-                    l_@@_type_
-                    \l_@@_type_first_label_type_tl _options_prop
+                    \@@_opt_varname_type:een
+                      { \l_@@_type_first_label_type_tl }
+                      { \l_@@_name_format_tl }
+                      { tl }
                   }
-                  \l_@@_name_format_tl
                   \l_@@_type_name_tl
                   {
                     \tl_if_empty:NF \l_@@_ref_decl_case_tl
@@ -5629,10 +6009,14 @@
                         \tl_put_left:NV \l_@@_name_format_tl
                           \l_@@_ref_decl_case_tl
                       }
-                    \@@_get_lang_opt_type:xxxNF
-                      { \l_@@_ref_language_tl }
-                      { \l_@@_type_first_label_type_tl }
-                      { \l_@@_name_format_tl }
+                    \@@_opt_tl_get:cNF
+                      {
+                        \@@_opt_varname_lang_type:eeen
+                          { \l_@@_ref_language_tl }
+                          { \l_@@_type_first_label_type_tl }
+                          { \l_@@_name_format_tl }
+                          { tl }
+                      }
                       \l_@@_type_name_tl
                       {
                         \tl_clear:N \l_@@_type_name_tl
@@ -5644,20 +6028,22 @@
                   }
               }
               {
-                \prop_get:cVNF
+                \@@_opt_tl_get:cNF
                   {
-                    l_@@_type_
-                    \l_@@_type_first_label_type_tl _options_prop
+                    \@@_opt_varname_type:een
+                      { \l_@@_type_first_label_type_tl }
+                      { \l_@@_name_format_tl }
+                      { tl }
                   }
-                  \l_@@_name_format_tl
                   \l_@@_type_name_tl
                   {
-                    \prop_get:cVNF
+                    \@@_opt_tl_get:cNF
                       {
-                        l_@@_type_
-                        \l_@@_type_first_label_type_tl _options_prop
+                        \@@_opt_varname_type:een
+                          { \l_@@_type_first_label_type_tl }
+                          { \l_@@_name_format_fallback_tl }
+                          { tl }
                       }
-                      \l_@@_name_format_fallback_tl
                       \l_@@_type_name_tl
                       {
                         \tl_if_empty:NF \l_@@_ref_decl_case_tl
@@ -5672,16 +6058,24 @@
                               \l_@@_name_format_fallback_tl
                               \l_@@_ref_decl_case_tl
                           }
-                        \@@_get_lang_opt_type:xxxNF
-                          { \l_@@_ref_language_tl }
-                          { \l_@@_type_first_label_type_tl }
-                          { \l_@@_name_format_tl }
-                          \l_@@_type_name_tl
+                        \@@_opt_tl_get:cNF
                           {
-                            \@@_get_lang_opt_type:xxxNF
+                            \@@_opt_varname_lang_type:eeen
                               { \l_@@_ref_language_tl }
                               { \l_@@_type_first_label_type_tl }
-                              { \l_@@_name_format_fallback_tl }
+                              { \l_@@_name_format_tl }
+                              { tl }
+                          }
+                          \l_@@_type_name_tl
+                          {
+                            \@@_opt_tl_get:cNF
+                              {
+                                \@@_opt_varname_lang_type:eeen
+                                  { \l_@@_ref_language_tl }
+                                  { \l_@@_type_first_label_type_tl }
+                                  { \l_@@_name_format_fallback_tl }
+                                  { tl }
+                              }
                               \l_@@_type_name_tl
                               {
                                 \tl_clear:N \l_@@_type_name_tl
@@ -5848,78 +6242,52 @@
 %
 % Finally, some functions for retrieving reference options values, according
 % to the relevant precedence rules.  They both receive an \meta{option} as
-% argument, and store the retrieved value in an appropriate.  Though these are
-% mostly general functions (for a change\dots{}), they are not completely so,
-% they rely on the current state of \cs{l_@@_label_type_a_tl}, as set during
-% the processing of the label stack.  This could be easily generalized, of
-% course, but I don't think it is worth it, \cs{l_@@_label_type_a_tl} is
-% indeed what we want in all practical cases.  The difference between each of
-% these functions is the kind of option each should be used for.
-% \cs{@@_get_ref_opt_typeset:nN} is meant for the general options, and
-% attempts to find values for them in all precedence levels (four plus
-% ``fallback'').  \cs{@@_get_ref_opt_font:nN} is intended for ``font''
-% options, which cannot be ``language-specific'', thus for these we just
-% search general options and type options.  \cs{@@_get_ref_opt_bool:nN} is
-% intended for boolean options.
+% argument, and store the retrieved value in an appropriate \meta{variable}.
+% The difference between each of these functions is the data type of the
+% option each should be used for.
 %
-% \begin{macro}{\@@_get_ref_opt_typeset:nN}
+%
+% \begin{macro}{\@@_get_rf_opt_tl:nnnN}
 %   \begin{syntax}
-%     \cs{@@_get_ref_opt_typeset:nN} \Arg{option} \Arg{tl variable}
+%     \cs{@@_get_rf_opt_tl:nnnN} \Arg{option}
+%     ~~\Arg{ref type} \Arg{language} \Arg{tl variable}
 %   \end{syntax}
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_get_ref_opt_typeset:nN #1#2
+\cs_new_protected:Npn \@@_get_rf_opt_tl:nnnN #1#2#3#4
   {
     % First attempt: general options.
-    \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
+    \@@_opt_tl_get:cNF
+      { \@@_opt_varname_general:nn {#1} { tl } }
+      #4
       {
         % If not found, try type specific options.
-        \bool_lazy_and:nnTF
-          {
-            \prop_if_exist_p:c
-              {
-                l_@@_type_
-                \l_@@_label_type_a_tl _options_prop
-              }
-          }
-          {
-            \prop_if_in_p:cn
-              {
-                l_@@_type_
-                \l_@@_label_type_a_tl _options_prop
-              }
-              {#1}
-          }
-          {
-            \prop_get:cnN
-              {
-                l_@@_type_
-                \l_@@_label_type_a_tl _options_prop
-              }
-              {#1} #2
-          }
+        \@@_opt_tl_get:cNF
+          { \@@_opt_varname_type:nnn {#2} {#1} { tl } }
+          #4
           {
             % If not found, try type- and language-specific.
-            \@@_get_lang_opt_type:xxnNF
-              { \l_@@_ref_language_tl }
-              { \l_@@_label_type_a_tl }
-              {#1} #2
+            \@@_opt_tl_get:cNF
+              { \@@_opt_varname_lang_type:nnnn {#3} {#2} {#1} { tl } }
+              #4
               {
                 % If not found, try language-specific default.
-                \@@_get_lang_opt_default:xnNF
-                  { \l_@@_ref_language_tl }
-                  {#1} #2
+                \@@_opt_tl_get:cNF
+                  { \@@_opt_varname_lang_default:nnn {#3} {#1} { tl } }
+                  #4
                   {
                     % If not found, try fallback.
-                    \@@_get_fallback_unknown_lang_opt:nNF {#1} #2
-                      { \tl_clear:N #2 }
+                    \@@_opt_tl_get:cNF
+                      { \@@_opt_varname_fallback:nn {#1} { tl } }
+                      #4
+                      { \tl_clear:N #4 }
                   }
               }
           }
       }
   }
+\cs_generate_variant:Nn \@@_get_rf_opt_tl:nnnN { nxxN }
 %    \end{macrocode}
 % \end{macro}
-%
 %
 %
 % \begin{macro}{\@@_get_rf_opt_seq:nnnN}
@@ -5932,47 +6300,30 @@
   {
     % First attempt: general options.
     \@@_opt_seq_get:cNF
-      { \@@_opt_name_general:nn {#1} { seq } }
+      { \@@_opt_varname_general:nn {#1} { seq } }
       #4
       {
         % If not found, try type specific options.
         \@@_opt_seq_get:cNF
-          { \@@_opt_name_type:nnn {#2} {#1} { seq } }
+          { \@@_opt_varname_type:nnn {#2} {#1} { seq } }
           #4
           {
             % If not found, try type- and language-specific.
-            \prop_get:NnNTF \g_@@_languages_prop {#3}
-              \l_tmpa_tl
+            \@@_opt_seq_get:cNF
+              { \@@_opt_varname_lang_type:nnnn {#3} {#2} {#1} { seq } }
+              #4
               {
+                % If not found, try language-specific default.
                 \@@_opt_seq_get:cNF
-                  {
-                    \@@_opt_name_lang_type:nnnn
-                      { \l_tmpa_tl } {#2} {#1} { seq }
-                  }
+                  { \@@_opt_varname_lang_default:nnn {#3} {#1} { seq } }
                   #4
                   {
-                    % If not found, try language-specific default.
+                    % If not found, try fallback.
                     \@@_opt_seq_get:cNF
-                      {
-                        \@@_opt_name_lang_default:nnn
-                          { \l_tmpa_tl } {#1} { seq }
-                      }
+                      { \@@_opt_varname_fallback:nn {#1} { seq } }
                       #4
-                      {
-                        % If not found, try fallback.
-                        \@@_opt_seq_get:cNF
-                          { \@@_opt_name_fallback:nn {#1} { seq } }
-                          #4
-                          { \seq_clear:N #4 }
-                      }
+                      { \seq_clear:N #4 }
                   }
-              }
-              {
-                % Base language not known, try fallback.
-                \@@_opt_seq_get:cNF
-                  { \@@_opt_name_fallback:nn {#1} { seq } }
-                  #4
-                  { \seq_clear:N #4 }
               }
           }
       }
@@ -5982,109 +6333,48 @@
 % \end{macro}
 %
 %
-%
-% \begin{macro}{\@@_get_ref_opt_font:nN}
+% \begin{macro}{\@@_get_rf_opt_bool:nnnnN}
 %   \begin{syntax}
-%     \cs{@@_get_ref_opt_font:nN} \Arg{option} \Arg{tl variable}
+%     \cs{@@_get_rf_opt_bool:nN} \Arg{option} \Arg{default}
+%     ~~\Arg{ref type} \Arg{language}  \Arg{bool variable}
 %   \end{syntax}
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_get_ref_opt_font:nN #1#2
+\cs_new_protected:Npn \@@_get_rf_opt_bool:nnnnN #1#2#3#4#5
   {
     % First attempt: general options.
-    \prop_get:NnNF \l_@@_ref_options_prop {#1} #2
+    \@@_opt_bool_get:cNF
+      { \@@_opt_varname_general:nn {#1} { bool } }
+      #5
       {
         % If not found, try type specific options.
-        \bool_if:nTF
-          {
-            \prop_if_exist_p:c
-              {
-                l_@@_type_
-                \l_@@_label_type_a_tl _options_prop
-              }
-          }
-          {
-            \prop_get:cnNF
-              {
-                l_@@_type_
-                \l_@@_label_type_a_tl _options_prop
-              }
-              {#1} #2
-              { \tl_clear:N #2 }
-          }
-          { \tl_clear:N #2 }
-      }
-  }
-%    \end{macrocode}
-% \end{macro}
-%
-%
-% \begin{macro}{\@@_get_ref_opt_bool:nnN}
-%   \begin{syntax}
-%     \cs{@@_get_ref_opt_bool:nN} \Arg{option}
-%     ~~\Arg{default} \Arg{bool variable}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_get_ref_opt_bool:nnN #1#2#3
-  {
-    % First attempt: general options.
-    \prop_get:NnNF \l_@@_ref_options_prop {#1} \l_tmpa_tl
-      {
-        % If not found, try type specific options.
-        \bool_lazy_and:nnTF
-          {
-            \prop_if_exist_p:c
-              {
-                l_@@_type_
-                \l_@@_label_type_a_tl _options_prop
-              }
-          }
-          {
-            \prop_if_in_p:cn
-              {
-                l_@@_type_
-                \l_@@_label_type_a_tl _options_prop
-              }
-              {#1}
-          }
-          {
-            \prop_get:cnN
-              {
-                l_@@_type_
-                \l_@@_label_type_a_tl _options_prop
-              }
-              {#1} \l_tmpa_tl
-          }
+        \@@_opt_bool_get:cNF
+          { \@@_opt_varname_type:nnn {#3} {#1} { bool } }
+          #5
           {
             % If not found, try type- and language-specific.
-            \@@_get_lang_opt_type:xxnNF
-              { \l_@@_ref_language_tl }
-              { \l_@@_label_type_a_tl }
-              {#1} \l_tmpa_tl
+            \@@_opt_bool_get:cNF
+              { \@@_opt_varname_lang_type:nnnn {#4} {#3} {#1} { bool } }
+              #5
               {
                 % If not found, try language-specific default.
-                \@@_get_lang_opt_default:xnNF
-                  { \l_@@_ref_language_tl }
-                  {#1} \l_tmpa_tl
+                \@@_opt_bool_get:cNF
+                  { \@@_opt_varname_lang_default:nnn {#4} {#1} { bool } }
+                  #5
                   {
-                    % If not found, use default argument.
-                    \bool_lazy_or:nnTF
-                      { \str_if_eq_p:nn {#2} { true  } }
-                      { \str_if_eq_p:nn {#2} { false } }
-                      { \tl_set:Nn \l_tmpa_tl {#2} }
-                      {
-                        % And, if even that fails, presume false.
-                        \tl_set:Nn \l_tmpa_tl { false }
-                      }
+                    % If not found, try fallback.
+                    \@@_opt_bool_get:cNF
+                      { \@@_opt_varname_fallback:nn {#1} { bool } }
+                      #5
+                      { \use:c { bool_set_ #2 :N } #5 }
                   }
               }
           }
       }
-    % Having retrieved the option value, set the boolean.  At this point, we
-    % *know* '\l_tmpa_tl' is either 'true' or 'false'.
-    \use:c { bool_set_ \l_tmpa_tl :N } #3
   }
+\cs_generate_variant:Nn \@@_get_rf_opt_bool:nnnnN { nnxxN }
 %    \end{macrocode}
 % \end{macro}
+%
 %
 %
 % \section{Compatibility}
