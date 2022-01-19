@@ -523,11 +523,6 @@
   }
 \msg_new:nnn { zref-clever } { key-requires-value }
   { The~'#1'~key~'#2'~requires~a~value~\msg_line_context:. }
-\msg_new:nnn { zref-clever } { key-boolean-or-empty }
-  {
-    The~key~'#1'~only~accepts~the~values~'true',~'false'~
-    or~an~empty~value~\msg_line_context:.
-  }
 \msg_new:nnn { zref-clever } { language-declared }
   { Language~'#1'~is~already~declared~\msg_line_context:.~Nothing~to~do. }
 \msg_new:nnn { zref-clever } { unknown-language-alias }
@@ -725,6 +720,397 @@
 % \end{macro}
 %
 %
+% \subsection{Option infra}
+%
+% This section provides the functions in which the variables naming scheme of
+% the package options is embodied, and some basic general functions to query
+% these option variables.
+%
+% I had originally implemented the option handling of the package based on
+% property lists, which are definitely very convenient.  But as the number of
+% options grew, I started to get concerned about the performance implications.
+% That there was a toll was noticeable, even when we could live with it, of
+% course.  Indeed, at the time of writing, the typesetting of a reference
+% queries about 24 different option values, most of them once per type-block,
+% each of these queries can be potentially made in up to 5 option scope
+% levels.  Considering the size of the built-in language files is running at
+% the hundreds, the package does have a lot of work to do in querying option
+% values alone, and thus it is best to smooth things in this area as much as
+% possible.  This also gives me some peace of mind that the package will scale
+% well in the long term.  For some interesting discussion about alternative
+% methods and their performance implications, see
+% \url{https://tex.stackexchange.com/q/147966}.  \contributor{Phelype Oleinik}
+% also offered some insight on the matter at
+% \url{https://tex.stackexchange.com/questions/629946/#comment1571118_629946}.
+% The only real downside of this change is that we can no longer list the
+% whole set of options in place at a given moment, which was useful for the
+% purposes of regression testing, since we don't know what the whole set of
+% active options is.
+%
+%
+% \begin{macro}[EXP]{\@@_opt_varname_general:nn}
+%   Defines, and leaves in the input stream, the csname of the variable used
+%   to store the general \meta{option}.  The data type of the variable must be
+%   specified (\texttt{tl}, \texttt{seq}, \texttt{bool}, etc.).
+%   \begin{syntax}
+%     \cs{@@_opt_varname_general:nn} \Arg{option} \Arg{data type}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_opt_varname_general:nn #1#2
+  { l_@@_opt_general_ #1 _ #2 }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_opt_varname_type:nnn}
+%   Defines, and leaves in the input stream, the csname of the variable used
+%   to store the type-specific \meta{option} for \meta{ref type}.
+%   \begin{syntax}
+%     \cs{@@_opt_varname_type:nnn} \Arg{ref type} \Arg{option} \Arg{data type}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_opt_varname_type:nnn #1#2#3
+  { l_@@_opt_type_ #1 _ #2 _ #3 }
+\cs_generate_variant:Nn \@@_opt_varname_type:nnn { enn , een }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_opt_varname_language:nnn}
+%   Defines, and leaves in the input stream, the csname of the variable used
+%   to store the language \meta{option} for \meta{lang} (for general language
+%   options, those set with \cs{zcDeclareLanguage}).  The
+%   ``\texttt{lang_unknown}'' branch should be guarded against, such as we
+%   normally should not get there, but this function \emph{must} return some
+%   valid csname.  The random part is there so that, in the circumstance this
+%   could not be avoided, we (hopefully) don't retrieve the value for an
+%   ``unknown language'' inadvertently.
+%   \begin{syntax}
+%     \cs{@@_opt_varname_language:nnn} \Arg{lang} \Arg{option} \Arg{data type}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_opt_varname_language:nnn #1#2#3
+  {
+    \@@_language_if_declared:nTF {#1}
+      {
+        g_@@_opt_language_
+        \tl_use:c { \@@_language_varname:n {#1} }
+        _ #2 _ #3
+      }
+      { g_@@_opt_lang_unknown_ \int_rand:n { 1000000 } _ #3 }
+  }
+\cs_generate_variant:Nn \@@_opt_varname_language:nnn { enn }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_opt_varname_lang_default:nnn}
+%   Defines, and leaves in the input stream, the csname of the variable used
+%   to store the language-specific default reference format \meta{option} for
+%   \meta{lang}.
+%   \begin{syntax}
+%     \cs{@@_opt_varname_lang_default:nnn} \Arg{lang} \Arg{option} \Arg{data type}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_opt_varname_lang_default:nnn #1#2#3
+  {
+    \@@_language_if_declared:nTF {#1}
+      {
+        g_@@_opt_lang_
+        \tl_use:c { \@@_language_varname:n {#1} }
+        _default_ #2 _ #3
+      }
+      { g_@@_opt_lang_unknown_ \int_rand:n { 1000000 } _ #3 }
+  }
+\cs_generate_variant:Nn \@@_opt_varname_lang_default:nnn { enn }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_opt_varname_lang_type:nnnn}
+%   Defines, and leaves in the input stream, the csname of the variable used
+%   to store the language- and type-specific reference format \meta{option}
+%   for \meta{lang} and \meta{ref type}.
+%   \begin{syntax}
+%     \cs{@@_opt_varname_lang_type:nnnn} \Arg{lang} \Arg{ref type}
+%     ~~\Arg{option} \Arg{data type}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_opt_varname_lang_type:nnnn #1#2#3#4
+  {
+    \@@_language_if_declared:nTF {#1}
+      {
+        g_@@_opt_lang_
+        \tl_use:c { \@@_language_varname:n {#1} }
+        _type_ #2 _ #3 _ #4
+      }
+      { g_@@_opt_lang_unknown_ \int_rand:n { 1000000 } _ #4 }
+  }
+\cs_generate_variant:Nn
+  \@@_opt_varname_lang_type:nnnn { eenn , eeen }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP]{\@@_opt_varname_fallback:nn}
+%   Defines, and leaves in the input stream, the csname of the variable used
+%   to store the fallback \meta{option}.
+%   \begin{syntax}
+%     \cs{@@_opt_varname_fallback:nn} \Arg{option} \Arg{data type}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_opt_varname_fallback:nn #1#2
+  { c_@@_opt_fallback_ #1 _ #2 }
+\cs_generate_variant:Nn \@@_opt_varname_fallback:nn { vn }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{macro}
+%   {
+%     \@@_opt_tl_unset:N ,
+%     \@@_opt_tl_gunset:N ,
+%     \@@_opt_tl_gunset_if_new:N ,
+%   }
+%   Unset \meta{option tl}.  These functions \emph{define} what means to be
+%   unset for an option token list, and it must match what the conditional
+%   \cs{@@_opt_tl_if_set:N} tests for.
+%   \begin{syntax}
+%     \cs{@@_opt_tl_unset:N} \Arg{option tl}
+%     \cs{@@_opt_tl_gunset:N} \Arg{option tl}
+%     \cs{@@_opt_tl_gunset_if_new:N} \Arg{option tl}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_opt_tl_unset:N #1
+  { \tl_set_eq:NN #1 \c_novalue_tl }
+\cs_new_protected:Npn \@@_opt_tl_gunset:N #1
+  { \tl_gset_eq:NN #1 \c_novalue_tl }
+\cs_generate_variant:Nn \@@_opt_tl_unset:N { c }
+\cs_generate_variant:Nn \@@_opt_tl_gunset:N { c }
+\cs_new_protected:Npn \@@_opt_tl_gunset_if_new:N #1
+  {
+    \@@_opt_tl_if_set:NF #1
+      { \tl_gset:NN #1 \c_novalue_tl }
+  }
+\cs_generate_variant:Nn \@@_opt_tl_gunset_if_new:Nn { c }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP,TF]{\@@_opt_tl_if_set:N}
+%   \begin{syntax}
+%     \cs{@@_opt_tl_if_set:N(TF)} \Arg{option tl} \Arg{true} \Arg{false}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \@@_opt_tl_if_set:N #1 { F , TF }
+  {
+    \bool_lazy_and:nnTF
+      { \tl_if_exist_p:N #1 }
+      { ! \tl_if_novalue_p:n {#1} }
+      { \prg_return_true:  }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn
+  \@@_opt_seq_if_set:N { c } { F , TF }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_opt_tl_gset_if_new:Nn}
+%   \begin{syntax}
+%     \cs{@@_opt_tl_gset_if_new:Nn} \Arg{option tl} \Arg{value}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_opt_tl_gset_if_new:Nn #1#2
+  {
+    \@@_opt_tl_if_set:NF #1
+      { \tl_gset:Nn #1 {#2} }
+  }
+\cs_generate_variant:Nn \@@_opt_tl_gset_if_new:Nn { cn }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[TF]{\@@_opt_tl_get:NN}
+%   \begin{syntax}
+%     \cs{@@_opt_tl_get:NN(TF)} \Arg{option tl to get} \Arg{tl var to set}
+%     ~~\Arg{true} \Arg{false}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_protected_conditional:Npnn \@@_opt_tl_get:NN #1#2 { F , TF }
+  {
+    \@@_opt_tl_if_set:NTF #1
+      {
+        \tl_set_eq:NN #2 #1
+        \prg_return_true:
+      }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn
+  \@@_opt_tl_get:NN { cN } { F , TF }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{macro}
+%   {
+%     \@@_opt_seq_set_clist_split:Nn ,
+%     \@@_opt_seq_gset_clist_split:Nn ,
+%   }
+%   \begin{syntax}
+%     \cs{@@_opt_seq_set_clist_split:Nn} \Arg{option seq} \Arg{value}
+%     \cs{@@_opt_seq_gset_clist_split:Nn} \Arg{option seq} \Arg{value}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_opt_seq_set_clist_split:Nn #1#2
+  { \seq_set_split:Nnn #1 { , } {#2} }
+\cs_new_protected:Npn \@@_opt_seq_gset_clist_split:Nn #1#2
+  { \seq_gset_split:Nnn #1 { , } {#2} }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}
+%   {
+%     \@@_opt_seq_unset:N ,
+%     \@@_opt_seq_gunset:N ,
+%     \@@_opt_seq_gunset_if_new:N ,
+%   }
+%   Unset \meta{option seq}.  These functions \emph{define} what means to be
+%   unset for an option sequence, and it must match what the conditional
+%   \cs{@@_opt_seq_if_set:N} tests for.
+%   \begin{syntax}
+%     \cs{@@_opt_seq_unset:N} \Arg{option seq}
+%     \cs{@@_opt_seq_gunset:N} \Arg{option seq}
+%     \cs{@@_opt_seq_gunset_if_new:N} \Arg{option seq}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_opt_seq_unset:N #1
+  { \cs_set_eq:NN #1 \scan_stop: }
+\cs_new_protected:Npn \@@_opt_seq_gunset:N #1
+  { \cs_gset_eq:NN #1 \scan_stop: }
+\cs_generate_variant:Nn \@@_opt_seq_unset:N { c }
+\cs_generate_variant:Nn \@@_opt_seq_gunset:N { c }
+\cs_new_protected:Npn \@@_opt_seq_gunset_if_new:N #1
+  {
+    \@@_opt_seq_if_set:NF #1
+      { \cs_gset_eq:NN #1 \scan_stop: }
+  }
+\cs_generate_variant:Nn \@@_opt_seq_gunset_if_new:N { c }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP,TF]{\@@_opt_seq_if_set:N}
+%   \begin{syntax}
+%     \cs{@@_opt_seq_if_set:N(TF)} \Arg{option seq} \Arg{true} \Arg{false}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \@@_opt_seq_if_set:N #1 { F , TF }
+  { \seq_if_exist:NTF #1 { \prg_return_true: } { \prg_return_false: } }
+\prg_generate_conditional_variant:Nnn
+  \@@_opt_seq_if_set:N { c } { F , TF }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[TF]{\@@_opt_seq_get:NN}
+%   \begin{syntax}
+%     \cs{@@_opt_seq_get:NN(TF)} \Arg{option seq to get} \Arg{seq var to set}
+%     ~~\Arg{true} \Arg{false}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_protected_conditional:Npnn \@@_opt_seq_get:NN #1#2 { F }
+  {
+    \@@_opt_seq_if_set:NTF #1
+      {
+        \seq_set_eq:NN #2 #1
+        \prg_return_true:
+      }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn
+  \@@_opt_seq_get:NN { cN } { F }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
+% \begin{macro}
+%   {
+%     \@@_opt_bool_unset:N ,
+%     \@@_opt_bool_gunset:N ,
+%     \@@_opt_bool_gunset_if_new:N ,
+%   }
+%   Unset \meta{option bool}.  These functions \emph{define} what means to be
+%   unset for an option boolean, and it must match what the conditional
+%   \cs{@@_opt_bool_if_set:N} tests for.  The particular definition we are
+%   employing here has some relevant implications.  Setting the boolean
+%   variable to \cs{scan_stop:} (aka, \cs{relax}) means we can \emph{never}
+%   test the variable without first testing if it is \emph{set}.
+%   \cs{@@_opt_bool_if:N} does this conveniently.
+%   \begin{syntax}
+%     \cs{@@_opt_bool_unset:N} \Arg{option bool}
+%     \cs{@@_opt_bool_gunset:N} \Arg{option bool}
+%     \cs{@@_opt_bool_gunset_if_new:N} \Arg{option bool}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_opt_bool_unset:N #1
+  { \cs_set_eq:NN #1 \scan_stop: }
+\cs_new_protected:Npn \@@_opt_bool_gunset:N #1
+  { \cs_gset_eq:NN #1 \scan_stop: }
+\cs_generate_variant:Nn \@@_opt_bool_unset:N { c }
+\cs_generate_variant:Nn \@@_opt_bool_gunset:N { c }
+\cs_new_protected:Npn \@@_opt_bool_gunset_if_new:N #1
+  {
+    \@@_opt_bool_if_set:NF #1
+      { \cs_gset_eq:NN #1 \scan_stop: }
+  }
+\cs_generate_variant:Nn \@@_opt_bool_gunset_if_new:N { c }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP,TF]{\@@_opt_bool_if_set:N}
+%   \begin{syntax}
+%     \cs{@@_opt_bool_if_set:N(TF)} \Arg{option bool} \Arg{true} \Arg{false}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \@@_opt_bool_if_set:N #1 { F , TF }
+  { \bool_if_exist:NTF #1 { \prg_return_true: } { \prg_return_false: } }
+\prg_generate_conditional_variant:Nnn
+  \@@_opt_bool_if_set:N { c } { F , TF }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}[TF]{\@@_opt_bool_get:NN}
+%   \begin{syntax}
+%     \cs{@@_opt_bool_get:NN(TF)} \Arg{option bool to get} \Arg{bool var to set}
+%     ~~\Arg{true} \Arg{false}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_protected_conditional:Npnn \@@_opt_bool_get:NN #1#2 { F }
+  {
+    \@@_opt_bool_if_set:NTF #1
+      {
+        \bool_set_eq:NN #2 #1
+        \prg_return_true:
+      }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn
+  \@@_opt_bool_get:NN { cN } { F }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP,TF]{\@@_opt_bool_if:N}
+%   \begin{syntax}
+%     \cs{@@_opt_bool_if:N(TF)} \Arg{option bool} \Arg{true} \Arg{false}
+%   \end{syntax}
+%    \begin{macrocode}
+\prg_new_conditional:Npnn \@@_opt_bool_if:N #1 { T , F , TF }
+  {
+    \@@_opt_bool_if_set:NTF #1
+      { \bool_if:NTF #1 { \prg_return_true: } { \prg_return_false: } }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn \@@_opt_bool_if:N { c } { T , F, TF }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%
 % \subsection{Reference format}
 %
 % For a general discussion on the precedence rules for reference format
@@ -733,6 +1119,30 @@
 % \cs{@@_get_rf_opt_seq:nnnN}, \cs{@@_get_rf_opt_bool:nnnnN}, and
 % \cs{@@_type_name_setup:} which are the basic functions to retrieve proper
 % values for reference format settings.
+%
+% The fact that we have multiple scopes to set reference format options has
+% some implications for how we handle these options, and for the resulting UI.
+% Since there is a clear precedence rule between the different levels, setting
+% an option at a high priority level shadows everything below it.  Hence, it
+% may be relevant to be able to ``unset'' these options too, so as to be able
+% go back to the lower precedence level of the language-specific options at
+% any given point.  However, since many of these options are token lists, or
+% clists, for which ``empty'' is a legitimate value, we cannot rely on
+% emptiness to distinguish that particular intention.  How to deal with it,
+% depends on the kind of option (its data type, to be precise).  For token
+% lists and clists/sequences, we leverage the distinction of an ``empty valued
+% key'' (\texttt{key=} or \texttt{key=\{\}}) from a ``key with no value''
+% (\texttt{key}).  This distinction is captured internally by the lower-level
+% key parsing, but must be made explicit in \cs{keys_define:nn} by means of
+% the \texttt{.default:x} property of the key.  For the technique, by
+% \contributor{Jonathan P.\ Spratte}, aka `Skillmon', and some discussion
+% about it, including further insights by \contributor{Phelype Oleinik}, see
+% \url{https://tex.stackexchange.com/q/614690} and
+% \url{https://github.com/latex3/latex3/pull/988}.  For booleans, the
+% situation is different, since they cannot meaningfully receive an empty
+% value and the ``key with no value'' is a handy and expected shorthand for
+% \texttt{key=true}.  Therefore, for reference format option booleans, we use
+% a third value ``\texttt{unset}'' for this purpose.
 %
 %
 % \begin{macro}
@@ -859,8 +1269,8 @@
 % \end{macro}
 %
 %
-% We set here also the ``derived'' refbounds options, which are the same for
-% every option scope.
+% We set here also the ``derived'' \texttt{refbounds} options, which are the
+% same for every option scope.
 %
 %    \begin{macrocode}
 \clist_map_inline:nn
@@ -921,373 +1331,6 @@
 %    \end{macrocode}
 %
 %
-% \subsection{Option infra}
-%
-%
-% \begin{macro}[EXP]{\@@_opt_varname_general:nn}
-%   Defines, and leaves in the input stream, the csname of the variable used
-%   to store the general \meta{option}.  The data type of the variable must be
-%   specified (\texttt{tl}, \texttt{seq}, \texttt{bool}, etc.).
-%   \begin{syntax}
-%     \cs{@@_opt_varname_general:nn} \Arg{option} \Arg{data type}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new:Npn \@@_opt_varname_general:nn #1#2
-  { l_@@_opt_general_ #1 _ #2 }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}[EXP]{\@@_opt_varname_type:nnn}
-%   Defines, and leaves in the input stream, the csname of the variable used
-%   to store the type-specific \meta{option} for \meta{ref type}.
-%   \begin{syntax}
-%     \cs{@@_opt_varname_type:nnn} \Arg{ref type} \Arg{option} \Arg{data type}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new:Npn \@@_opt_varname_type:nnn #1#2#3
-  { l_@@_opt_type_ #1 _ #2 _ #3 }
-\cs_generate_variant:Nn \@@_opt_varname_type:nnn { enn , een }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}[EXP]{\@@_opt_varname_language:nnn}
-%   Defines, and leaves in the input stream, the csname of the variable used
-%   to store the language \meta{option} for \meta{lang} (for general language
-%   options, those set with \cs{zcDeclareLanguage}).  The
-%   ``\texttt{lang_unknown}'' branch should be guarded against, such as we
-%   normally should not get there, but this function \emph{must} return some
-%   valid csname.  The random part is there so that, in the circumstance this
-%   could not be avoided, we (hopefully) don't retrieve the value for an
-%   ``unknown language'' inadvertently.
-%   \begin{syntax}
-%     \cs{@@_opt_varname_language:nnn} \Arg{lang} \Arg{option} \Arg{data type}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new:Npn \@@_opt_varname_language:nnn #1#2#3
-  {
-    \@@_language_if_declared:nTF {#1}
-      {
-        g_@@_opt_language_
-        \tl_use:c { \@@_language_varname:n {#1} }
-        _ #2 _ #3
-      }
-      { g_@@_opt_lang_unknown_ \int_rand:n { 1000000 } _ #3 }
-  }
-\cs_generate_variant:Nn \@@_opt_varname_language:nnn { enn }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}[EXP]{\@@_opt_varname_lang_default:nnn}
-%   Defines, and leaves in the input stream, the csname of the variable used
-%   to store the language-specific default reference format \meta{option} for
-%   \meta{lang}.
-%   \begin{syntax}
-%     \cs{@@_opt_varname_lang_default:nnn} \Arg{lang} \Arg{option} \Arg{data type}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new:Npn \@@_opt_varname_lang_default:nnn #1#2#3
-  {
-    \@@_language_if_declared:nTF {#1}
-      {
-        g_@@_opt_lang_
-        \tl_use:c { \@@_language_varname:n {#1} }
-        _default_ #2 _ #3
-      }
-      { g_@@_opt_lang_unknown_ \int_rand:n { 1000000 } _ #3 }
-  }
-\cs_generate_variant:Nn \@@_opt_varname_lang_default:nnn { enn }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}[EXP]{\@@_opt_varname_lang_type:nnnn}
-%   Defines, and leaves in the input stream, the csname of the variable used
-%   to store the language- and type-specific reference format \meta{option}
-%   for \meta{lang} and \meta{ref type}.
-%   \begin{syntax}
-%     \cs{@@_opt_varname_lang_type:nnnn} \Arg{lang} \Arg{ref type}
-%     ~~\Arg{option} \Arg{data type}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new:Npn \@@_opt_varname_lang_type:nnnn #1#2#3#4
-  {
-    \@@_language_if_declared:nTF {#1}
-      {
-        g_@@_opt_lang_
-        \tl_use:c { \@@_language_varname:n {#1} }
-        _type_ #2 _ #3 _ #4
-      }
-      { g_@@_opt_lang_unknown_ \int_rand:n { 1000000 } _ #4 }
-  }
-\cs_generate_variant:Nn \@@_opt_varname_lang_type:nnnn { eenn , eeen }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}[EXP]{\@@_opt_varname_fallback:nn}
-%   Defines, and leaves in the input stream, the csname of the variable used
-%   to store the fallback \meta{option}.
-%   \begin{syntax}
-%     \cs{@@_opt_varname_fallback:nn} \Arg{option} \Arg{data type}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new:Npn \@@_opt_varname_fallback:nn #1#2
-  { c_@@_opt_fallback_ #1 _ #2 }
-\cs_generate_variant:Nn \@@_opt_varname_fallback:nn { vn }
-%    \end{macrocode}
-% \end{macro}
-%
-%
-%
-% \begin{macro}
-%   {
-%     \@@_opt_tl_unset:N ,
-%     \@@_opt_tl_gunset:N ,
-%     \@@_opt_tl_gunset_if_new:N ,
-%   }
-%   Unset \meta{option tl}.  These functions *define* what means to be unset
-%   for an option token list, and it must match what the conditional
-%   \cs{@@_opt_tl_if_set:N} tests for.
-%   \begin{syntax}
-%     \cs{@@_opt_tl_unset:N} \Arg{option tl}
-%     \cs{@@_opt_tl_gunset:N} \Arg{option tl}
-%     \cs{@@_opt_tl_gunset_if_new:N} \Arg{option tl}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_opt_tl_unset:N #1
-  { \tl_set_eq:NN #1 \c_novalue_tl }
-\cs_new_protected:Npn \@@_opt_tl_gunset:N #1
-  { \tl_gset_eq:NN #1 \c_novalue_tl }
-\cs_generate_variant:Nn \@@_opt_tl_unset:N { c }
-\cs_generate_variant:Nn \@@_opt_tl_gunset:N { c }
-\cs_new_protected:Npn \@@_opt_tl_gunset_if_new:N #1
-  {
-    \@@_opt_tl_if_set:NF #1
-      { \tl_gset:NN #1 \c_novalue_tl }
-  }
-\cs_generate_variant:Nn \@@_opt_tl_gunset_if_new:Nn { c }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}[EXP,TF]{\@@_opt_tl_if_set:N}
-%   \begin{syntax}
-%     \cs{@@_opt_tl_if_set:N(TF)} \Arg{option tl}
-%   \end{syntax}
-%    \begin{macrocode}
-\prg_new_conditional:Npnn \@@_opt_tl_if_set:N #1 { F , TF }
-  {
-    \bool_lazy_and:nnTF
-      { \tl_if_exist_p:N #1 }
-      { ! \tl_if_novalue_p:n {#1} }
-      { \prg_return_true:  }
-      { \prg_return_false: }
-  }
-\prg_generate_conditional_variant:Nnn
-  \@@_opt_seq_if_set:N { c } { F , TF }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\@@_opt_tl_gset_if_new:Nn}
-%   \begin{syntax}
-%     \cs{@@_opt_tl_gset_if_new:Nn} \Arg{option tl} \Arg{value}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_opt_tl_gset_if_new:Nn #1#2
-  {
-    \@@_opt_tl_if_set:NF #1
-      { \tl_gset:Nn #1 {#2} }
-  }
-\cs_generate_variant:Nn \@@_opt_tl_gset_if_new:Nn { cn }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}[TF]{\@@_opt_tl_get:NN}
-%   \begin{syntax}
-%     \cs{@@_opt_tl_get:NN(TF)} \Arg{option tl to get} \Arg{tl var to set}
-%   \end{syntax}
-%    \begin{macrocode}
-\prg_new_protected_conditional:Npnn \@@_opt_tl_get:NN #1#2 { F , TF }
-  {
-    \@@_opt_tl_if_set:NTF #1
-      {
-        \tl_set_eq:NN #2 #1
-        \prg_return_true:
-      }
-      { \prg_return_false: }
-  }
-\prg_generate_conditional_variant:Nnn
-  \@@_opt_tl_get:NN { cN } { F , TF }
-%    \end{macrocode}
-% \end{macro}
-%
-%
-%
-% \begin{macro}
-%   {
-%     \@@_opt_seq_set_clist_split:Nn ,
-%     \@@_opt_seq_gset_clist_split:Nn ,
-%     \@@_opt_seq_gset_clist_split_if_new:Nn ,
-%   }
-%   \begin{syntax}
-%     \cs{@@_opt_seq_set_clist_split:Nn} \Arg{option seq} \Arg{value}
-%     \cs{@@_opt_seq_gset_clist_split:Nn} \Arg{option seq} \Arg{value}
-%     \cs{@@_opt_seq_gset_clist_split_if_new:Nn} \Arg{option seq} \Arg{value}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_opt_seq_set_clist_split:Nn #1#2
-  { \seq_set_split:Nnn #1 { , } {#2} }
-\cs_new_protected:Npn \@@_opt_seq_gset_clist_split:Nn #1#2
-  { \seq_gset_split:Nnn #1 { , } {#2} }
-% \cs_new_protected:Npn \@@_opt_seq_gset_clist_split_if_new:Nn #1#2
-%   {
-%     \@@_opt_seq_if_set:NF #1
-%       { \seq_gset_split:Nnn #1 { , } {#2} }
-%   }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}
-%   {
-%     \@@_opt_seq_unset:N ,
-%     \@@_opt_seq_gunset:N ,
-%   }
-%   Unset \meta{option seq}.  These functions *define* what means to be unset
-%   for an option sequence, and it must match what the conditional
-%   \cs{@@_opt_seq_if_set:N} tests for.
-%   \begin{syntax}
-%     \cs{@@_opt_seq_unset:N} \Arg{option seq}
-%     \cs{@@_opt_seq_gunset:N} \Arg{option seq}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_opt_seq_unset:N #1
-  { \cs_set_eq:NN #1 \scan_stop: }
-\cs_new_protected:Npn \@@_opt_seq_gunset:N #1
-  { \cs_gset_eq:NN #1 \scan_stop: }
-\cs_generate_variant:Nn \@@_opt_seq_unset:N { c }
-\cs_generate_variant:Nn \@@_opt_seq_gunset:N { c }
-\cs_new_protected:Npn \@@_opt_seq_gunset_if_new:N #1
-  {
-    \@@_opt_seq_if_set:NF #1
-      { \cs_gset_eq:NN #1 \scan_stop: }
-  }
-\cs_generate_variant:Nn \@@_opt_seq_gunset_if_new:N { c }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}[EXP,TF]{\@@_opt_seq_if_set:N}
-%   \begin{syntax}
-%     \cs{@@_opt_seq_if_set:N(TF)} \Arg{option seq}
-%   \end{syntax}
-%    \begin{macrocode}
-\prg_new_conditional:Npnn \@@_opt_seq_if_set:N #1 { F , TF }
-  { \seq_if_exist:NTF #1 { \prg_return_true: } { \prg_return_false: } }
-\prg_generate_conditional_variant:Nnn
-  \@@_opt_seq_if_set:N { c } { F , TF }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}[TF]
-%   {
-%     \@@_opt_seq_get:NN ,
-%   }
-%   \begin{syntax}
-%     \cs{@@_opt_seq_get:NN(TF)} \Arg{option seq to get} \Arg{seq var to set}
-%   \end{syntax}
-%    \begin{macrocode}
-\prg_new_protected_conditional:Npnn \@@_opt_seq_get:NN #1#2 { F }
-  {
-    \@@_opt_seq_if_set:NTF #1
-      {
-        \seq_set_eq:NN #2 #1
-        \prg_return_true:
-      }
-      { \prg_return_false: }
-  }
-\prg_generate_conditional_variant:Nnn
-  \@@_opt_seq_get:NN { cN } { F }
-%    \end{macrocode}
-% \end{macro}
-%
-%
-%
-% \begin{macro}
-%   {
-%     \@@_opt_bool_unset:N ,
-%     \@@_opt_bool_gunset:N ,
-%   }
-%   Unset \meta{option bool}.  These functions *define* what means to be unset
-%   for an option boolean, and it must match what the conditional
-%   \cs{@@_opt_bool_if_set:N} tests for.  The particular definition we are
-%   employing here has some relevant implications.  Setting the boolean
-%   variable to \cs{scan_stop:} (aka, \cs{relax}) means we can *never* test
-%   the variable without first testing if it is *set*.  \cs{@@_opt_bool_if:N}
-%   does this conveniently.
-%   \begin{syntax}
-%     \cs{@@_opt_bool_unset:N} \Arg{option bool}
-%     \cs{@@_opt_bool_gunset:N} \Arg{option bool}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_opt_bool_unset:N #1
-  { \cs_set_eq:NN #1 \scan_stop: }
-\cs_new_protected:Npn \@@_opt_bool_gunset:N #1
-  { \cs_gset_eq:NN #1 \scan_stop: }
-\cs_generate_variant:Nn \@@_opt_bool_unset:N { c }
-\cs_generate_variant:Nn \@@_opt_bool_gunset:N { c }
-\cs_new_protected:Npn \@@_opt_bool_gunset_if_new:N #1
-  {
-    \@@_opt_bool_if_set:NF #1
-      { \cs_gset_eq:NN #1 \scan_stop: }
-  }
-\cs_generate_variant:Nn \@@_opt_bool_gunset_if_new:N { c }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}[EXP,TF]{\@@_opt_bool_if_set:N}
-%   \begin{syntax}
-%     \cs{@@_opt_bool_if_set:N(TF)} \Arg{option bool}
-%   \end{syntax}
-%    \begin{macrocode}
-\prg_new_conditional:Npnn \@@_opt_bool_if_set:N #1 { F , TF }
-  { \bool_if_exist:NTF #1 { \prg_return_true: } { \prg_return_false: } }
-\prg_generate_conditional_variant:Nnn
-  \@@_opt_bool_if_set:N { c } { F , TF }
-%    \end{macrocode}
-% \end{macro}
-%
-%
-% \begin{macro}[TF]{\@@_opt_bool_get:NN}
-%   \begin{syntax}
-%     \cs{@@_opt_bool_get:NN(TF)} \Arg{option bool to get} \Arg{bool var to set}
-%   \end{syntax}
-%    \begin{macrocode}
-\prg_new_protected_conditional:Npnn \@@_opt_bool_get:NN #1#2 { F }
-  {
-    \@@_opt_bool_if_set:NTF #1
-      {
-        \bool_set_eq:NN #2 #1
-        \prg_return_true:
-      }
-      { \prg_return_false: }
-  }
-\prg_generate_conditional_variant:Nnn
-  \@@_opt_bool_get:NN { cN } { F }
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}[EXP,TF]{\@@_opt_bool_if:N}
-%   \begin{syntax}
-%     \cs{@@_opt_bool_if:N(TF)} \Arg{option bool}
-%   \end{syntax}
-%    \begin{macrocode}
-\prg_new_conditional:Npnn \@@_opt_bool_if:N #1 { T , F , TF }
-  {
-    \@@_opt_bool_if_set:NTF #1
-      { \bool_if:NTF #1 { \prg_return_true: } { \prg_return_false: } }
-      { \prg_return_false: }
-  }
-\prg_generate_conditional_variant:Nnn \@@_opt_bool_if:N { c } { T , F, TF }
-%    \end{macrocode}
-% \end{macro}
-%
-%
 % \subsection{Languages}
 %
 %
@@ -1336,7 +1379,7 @@
 % prefixes for \meta{language} as a comma separated list, whose first element
 % is taken to be the default case.  The second, \opt{gender}, receives the
 % genders for \meta{language} as comma separated list.  The third,
-% \opt{allcaps}, receives no value, and indicates that for \meta{language} all
+% \opt{allcaps}, is a boolean, and indicates that for \meta{language} all
 % nouns must be capitalized for grammatical reasons, in which case, the
 % \opt{cap} option is disregarded for \meta{language}.  If \meta{language} is
 % already known, just warn.  This implies a particular restriction regarding
@@ -1623,8 +1666,6 @@
 % this case: definitions and assignments made by the user are performed
 % immediately.
 %
-%
-% \subsubsection*{Provide}
 %
 % \begin{macro}{\g_@@_loaded_langfiles_seq}
 %   Used to keep track of whether a language file has already been loaded or
@@ -2002,9 +2043,6 @@
           } ,
       }
   }
-%    \end{macrocode}
-%
-%    \begin{macrocode}
 \seq_map_inline:Nn
   \c_@@_rf_opts_seq_refbounds_seq
   {
@@ -2213,7 +2251,6 @@
 %    \end{macrocode}
 %
 %
-% \subsubsection*{Fallback}
 %
 % It is convenient for a number of language typesetting options (some basic
 % separators) to have some ``fallback'' value available in case \pkg{babel} or
@@ -3184,10 +3221,6 @@
 % options to be passed to \cs{zcref} or to \cs{zcsetup} or at load time, only
 % ``not necessarily type-specific'' options are pertinent here.
 %
-% The keys are set so that any value, including an empty one, while a key with
-% \emph{no value} removes the property from the list, so that these options
-% can then fall back to lower precedence levels settings.  For discussion
-% about the used technique, see \zcref{sec:zcreftypesetup}.
 %
 %    \begin{macrocode}
 \seq_map_inline:Nn
@@ -3195,7 +3228,7 @@
   {
     \keys_define:nn { zref-clever/reference }
       {
-        #1 .default:V = \c_novalue_tl ,
+        #1 .default:x = \c_novalue_tl ,
         #1 .code:n =
           {
             \tl_if_novalue:nTF {##1}
@@ -3238,10 +3271,6 @@
           { postref } { refbounds }
       } ,
   }
-%    \end{macrocode}
-%
-%
-%    \begin{macrocode}
 \seq_map_inline:Nn
   \c_@@_rf_opts_seq_refbounds_seq
   {
@@ -3390,27 +3419,6 @@
 % \end{macro}
 %
 %
-% Inside \cs{zcRefTypeSetup} any of the options \emph{can} receive empty
-% values, and those values, if they exist in the property list, will override
-% language-specific options, regardless of their emptiness.  In principle, we
-% could live with the situation of, once a setting has been made, it stays set
-% forever, and can only be overridden by a new value at the same precedence
-% level or a higher one.  But it would be nice if an user can ``unset'' an
-% option at either of those scopes to go back to the lower precedence level of
-% the language-specific options at any given point.  So both in
-% \cs{zcRefTypeSetup} and in setting reference options (see
-% \zcref{sec:reference-options}), we leverage the distinction of an ``empty
-% valued key'' (\texttt{key=} or \texttt{key=\{\}}) from a ``key with no
-% value'' (\texttt{key}).  This distinction is captured internally by the
-% lower-level key parsing, but must be made explicit at \cs{keys_set:nn} by
-% means of the \texttt{.default:V} property of the key in \cs{keys_define:nn}.
-% For the technique, by \contributor{Jonathan P.\ Spratte}, aka `Skillmon',
-% and some discussion about it, including further insights by
-% \contributor{Phelype Oleinik}, see
-% \url{https://tex.stackexchange.com/q/614690} and
-% \url{https://github.com/latex3/latex3/pull/988}.
-%
-%
 %
 %    \begin{macrocode}
 \seq_map_inline:Nn
@@ -3425,16 +3433,12 @@
           } ,
       }
   }
-%    \end{macrocode}
-%
-%
-%    \begin{macrocode}
 \seq_map_inline:Nn
   \c_@@_rf_opts_tl_typesetup_seq
   {
     \keys_define:nn { zref-clever/typesetup }
       {
-        #1 .default:V = \c_novalue_tl ,
+        #1 .default:x = \c_novalue_tl ,
         #1 .code:n =
           {
             \tl_if_novalue:nTF {##1}
@@ -3483,9 +3487,6 @@
           { postref } { refbounds }
       } ,
   }
-%    \end{macrocode}
-%
-%    \begin{macrocode}
 \seq_map_inline:Nn
   \c_@@_rf_opts_seq_refbounds_seq
   {
@@ -3872,9 +3873,6 @@
           } ,
       }
   }
-%    \end{macrocode}
-%
-%    \begin{macrocode}
 \seq_map_inline:Nn
   \c_@@_rf_opts_seq_refbounds_seq
   {
@@ -6241,7 +6239,7 @@
 %
 %
 % Finally, some functions for retrieving reference options values, according
-% to the relevant precedence rules.  They both receive an \meta{option} as
+% to the relevant precedence rules.  They receive an \meta{option} as
 % argument, and store the retrieved value in an appropriate \meta{variable}.
 % The difference between each of these functions is the data type of the
 % option each should be used for.

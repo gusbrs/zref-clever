@@ -12,8 +12,7 @@
 
 ### Changed
 - (Internal) Moved from property lists to individually named macros to store
-  and retrieve options.  (As a result, some performance gains, and cleaner
-  code in some areas).
+  and retrieve options.
 
 ### Deprecated
 - Options `preposinlink`, `preref`, and `postref` have been deprecated and
