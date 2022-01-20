@@ -1463,18 +1463,20 @@
 %
 %
 %
-% \begin{macro}{\@@_process_language_options:}
+% \begin{macro}{\@@_process_language_settings:}
 %   Auxiliary function for \cs{@@_zcref:nnn}, responsible for processing
-%   options from \cs{zcDeclareLanguage}.  It is necessary to separate them
-%   from the reference options machinery because their behavior is language
-%   dependent, but the language itself can also be set as an option
-%   (\opt{lang}, value stored in \cs{l_@@_ref_language_tl}).  Hence, we must
-%   validate these options after the reference options have been set.  It is
-%   expected to be called right (or soon) after \cs{keys_set:nn} in
-%   \cs{@@_zcref:nnn}, where current values for \cs{l_@@_ref_language_tl} and
-%   \cs{l_@@_ref_decl_case_tl} are in place.
+%   language related settings.  It is necessary to separate them from the
+%   reference options machinery for two reasons.  First, because their
+%   behavior is language dependent, but the language itself can also be set as
+%   an option (\opt{lang}, value stored in \cs{l_@@_ref_language_tl}).
+%   Second, some of its tasks must be done regardless of any option being
+%   given (e.g. the default declension case, the \opt{allcaps} option).
+%   Hence, we must validate the language settings after the reference options
+%   have been set.  It is expected to be called right (or soon) after
+%   \cs{keys_set:nn} in \cs{@@_zcref:nnn}, where current values for
+%   \cs{l_@@_ref_language_tl} and \cs{l_@@_ref_decl_case_tl} are in place.
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_process_language_options:
+\cs_new_protected:Npn \@@_process_language_settings:
   {
     \@@_language_if_declared:xTF
       { \l_@@_ref_language_tl }
@@ -2773,7 +2775,7 @@
       {
 %    \end{macrocode}
 % We just store the value at this point, which is validated by
-% \cs{@@_process_language_options:} after \cs{keys_set:nn}.
+% \cs{@@_process_language_settings:} after \cs{keys_set:nn}.
 %    \begin{macrocode}
         d .tl_set:N = \l_@@_ref_decl_case_tl ,
         d .value_required:n = true ,
@@ -2857,7 +2859,7 @@
       {
 %    \end{macrocode}
 % We just store the value at this point, which is validated by
-% \cs{@@_process_language_options:} after \cs{keys_set:nn}.
+% \cs{@@_process_language_settings:} after \cs{keys_set:nn}.
 %    \begin{macrocode}
         g .tl_set:N = \l_@@_ref_gender_tl ,
         g .value_required:n = true ,
@@ -4059,9 +4061,9 @@
 %    \begin{macrocode}
       \@@_provide_langfile:x { \l_@@_ref_language_tl }
 %    \end{macrocode}
-% Process \cs{zcDeclareLanguage} options.
+% Process language settings.
 %    \begin{macrocode}
-      \@@_process_language_options:
+      \@@_process_language_settings:
 %    \end{macrocode}
 % Integration with \pkg{zref-check}.
 %    \begin{macrocode}
