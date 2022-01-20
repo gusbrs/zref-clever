@@ -539,7 +539,7 @@
   }
 \msg_new:nnn { zref-clever } { unknown-language-opt }
   {
-    Language~'#1'~is~unknown~\msg_line_context:.~Using~default.~
+    Language~'#1'~is~unknown~\msg_line_context:.~
     See~documentation~for~'\iow_char:N\\zcDeclareLanguage'~and~
     '\iow_char:N\\zcDeclareLanguageAlias'.
   }
@@ -602,15 +602,6 @@
   { Option~'#1'~is~only~available~after~\iow_char:N\\begin\{document\}. }
 \msg_new:nnn { zref-clever } { langfile-loaded }
   { Loaded~'#1'~language~file. }
-\msg_new:nnn { zref-clever } { langfile-not-available }
-  { Language~file~for~'#1'~not~available~\msg_line_context:. }
-\msg_new:nnn { zref-clever } { unknown-language-load }
-  {
-    Language~'#1'~is~unknown~\msg_line_context:.~
-    Unable~to~load~language~file.~See~documentation~for~
-    '\iow_char:N\\zcDeclareLanguage'~and~
-    '\iow_char:N\\zcDeclareLanguageAlias'.
-  }
 \msg_new:nnn { zref-clever } { zref-property-undefined }
   {
     Option~'ref=#1'~requested~\msg_line_context:.~
@@ -1341,14 +1332,14 @@
 %     \cs{@@_language_if_declared:n(TF)} \Arg{language}
 %   \end{syntax}
 %    \begin{macrocode}
-\prg_new_conditional:Npnn \@@_language_if_declared:n #1 { TF }
+\prg_new_conditional:Npnn \@@_language_if_declared:n #1 { T , F , TF }
   {
     \tl_if_exist:cTF { \@@_language_varname:n {#1} }
      { \prg_return_true:  }
      { \prg_return_false: }
   }
 \prg_generate_conditional_variant:Nnn
-  \@@_language_if_declared:n { x } { TF }
+  \@@_language_if_declared:n { x } { T , F , TF }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1663,14 +1654,6 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\l_@@_load_langfile_verbose_bool}
-%   Controls whether \cs{@@_provide_langfile:n} fails silently or verbosely
-%   in case of unknown languages or not found language files.
-%    \begin{macrocode}
-\bool_new:N \l_@@_load_langfile_verbose_bool
-%    \end{macrocode}
-% \end{macro}
-%
 %
 % \begin{macro}{\@@_provide_langfile:n}
 %   Load language file for known \meta{language} if it is available and if it
@@ -1683,8 +1666,7 @@
   {
     \group_begin:
     \@bsphack
-    \tl_set:Nn \l_@@_setup_language_tl {#1}
-    \@@_language_if_declared:nTF {#1}
+    \@@_language_if_declared:nT {#1}
       {
         \seq_if_in:NxF
           \g_@@_loaded_langfiles_seq
@@ -1699,6 +1681,7 @@
               { \ExplSyntaxOn }
               \l_tmpa_tl
               {
+                \tl_set:Nn \l_@@_setup_language_tl {#1}
                 \tl_clear:N \l_@@_setup_type_tl
                 \@@_opt_seq_get:cNF
                   {
@@ -1723,58 +1706,25 @@
                 \keys_set:nV { zref-clever/langfile } \l_tmpa_tl
                 \seq_gput_right:Nx \g_@@_loaded_langfiles_seq
                   { \tl_use:c { \@@_language_varname:n {#1} } }
-                \msg_note:nnx { zref-clever } { langfile-loaded }
+                \msg_info:nnx { zref-clever } { langfile-loaded }
                   { \tl_use:c { \@@_language_varname:n {#1} } }
               }
               {
-                \bool_if:NT \l_@@_load_langfile_verbose_bool
-                  {
-                    \msg_warning:nnx { zref-clever } { langfile-not-available }
-                      { \tl_use:c { \@@_language_varname:n {#1} } }
-                  }
 %    \end{macrocode}
 % Even if we don't have the actual language file, we register it as
 % ``loaded''.  At this point, it is a known language, properly declared.
-% There is no point in trying to load it multiple times, because users cannot
-% really provide the language files (well, technically they could, but we are
-% working so they don't need to, and have better ways to do what they want).
-% And if the users had provided some language-specific options themselves, by
-% means of \cs{zcLanguageSetup}, everything would be in place, and they could
-% use the \opt{lang} option multiple times, and the
-% \texttt{langfile-not-available} warning would never go away.
+% There is no point in trying to load it multiple times, if it was not found
+% the first time, it won't be the next.
 %    \begin{macrocode}
                 \seq_gput_right:Nx \g_@@_loaded_langfiles_seq
                   { \tl_use:c { \@@_language_varname:n {#1} } }
               }
           }
       }
-      {
-        \bool_if:NT \l_@@_load_langfile_verbose_bool
-          { \msg_warning:nnn { zref-clever } { unknown-language-load } {#1} }
-      }
     \@esphack
     \group_end:
   }
 \cs_generate_variant:Nn \@@_provide_langfile:n { x }
-%    \end{macrocode}
-% \end{macro}
-%
-%
-% \begin{macro}{\@@_provide_langfile_verbose:n}
-%   Does the same as \cs{@@_provide_langfile:n}, but warns if the loading of
-%   the language file has failed.
-%   \begin{syntax}
-%     \cs{@@_provide_langfile_verbose:n} \Arg{language}
-%   \end{syntax}
-%    \begin{macrocode}
-\cs_new_protected:Npn \@@_provide_langfile_verbose:n #1
-  {
-    \group_begin:
-    \bool_set_true:N \l_@@_load_langfile_verbose_bool
-    \@@_provide_langfile:n {#1}
-    \group_end:
-  }
-\cs_generate_variant:Nn \@@_provide_langfile_verbose:n { x }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2632,16 +2582,6 @@
             \tl_set:Nn \l_@@_main_language_tl { english }
           }
       }
-%    \end{macrocode}
-% Provide default value for \cs{l_@@_ref_language_tl} corresponding to option
-% \opt{current}, but do so outside of the \pkg{l3keys} machinery (that is,
-% instead of using \texttt{.initial:n}), so that we are able to distinguish
-% when the user actually gave the option, in which case the language file
-% loading is done verbosely, from when we are setting the default value
-% (here), in which case the language file loading is done silently.
-%    \begin{macrocode}
-    \tl_set:Nn \l_@@_ref_language_tl
-      { \l_@@_current_language_tl }
   }
 %    \end{macrocode}
 %
@@ -2659,32 +2599,27 @@
                 {
                   \tl_set:Nn \l_@@_ref_language_tl
                     { \l_@@_current_language_tl }
-                  \@@_provide_langfile_verbose:x
-                    { \l_@@_ref_language_tl }
                 }
 
                 { main }
                 {
                   \tl_set:Nn \l_@@_ref_language_tl
                     { \l_@@_main_language_tl }
-                  \@@_provide_langfile_verbose:x
-                    { \l_@@_ref_language_tl }
                 }
               }
               {
-                \@@_language_if_declared:nTF {#1}
-                  { \tl_set:Nn \l_@@_ref_language_tl {#1} }
+                \tl_set:Nn \l_@@_ref_language_tl {#1}
+                \@@_language_if_declared:nF {#1}
                   {
                     \msg_warning:nnn { zref-clever }
                       { unknown-language-opt } {#1}
-                    \tl_set:Nn \l_@@_ref_language_tl
-                      { \l_@@_current_language_tl }
                   }
-                \@@_provide_langfile_verbose:x
-                  { \l_@@_ref_language_tl }
               }
+            \@@_provide_langfile:x
+              { \l_@@_ref_language_tl }
           }
       } ,
+    lang .initial:n = current ,
     lang .value_required:n = true ,
   }
 %    \end{macrocode}
@@ -2696,16 +2631,9 @@
     \AddToHook { begindocument }
       {
 %    \end{macrocode}
-% If any \opt{lang} option has been given by the user, the corresponding
-% language is already loaded, otherwise, ensure the default one
-% (\texttt{current}) gets loaded early, but not verbosely.
-%    \begin{macrocode}
-        \@@_provide_langfile:x { \l_@@_ref_language_tl }
-%    \end{macrocode}
 % Redefinition of the \texttt{lang} key option for the document body.  Also,
-% drop the verbose language file loading in the document body, as it can
-% become intrusive depending on the use case, and does not provide much
-% ``juice'' anyway: in \cs{zcref} missing names warnings will already ensue.
+% drop the language file loading in the document body, it is somewhat
+% redundant, since \cs{@@_zcref:nnn} already ensures it.
 %    \begin{macrocode}
         \keys_define:nn { zref-clever/reference }
           {
@@ -2717,32 +2645,23 @@
                     {
                       \tl_set:Nn \l_@@_ref_language_tl
                         { \l_@@_current_language_tl }
-                      \@@_provide_langfile:x
-                        { \l_@@_ref_language_tl }
                     }
 
                     { main }
                     {
                       \tl_set:Nn \l_@@_ref_language_tl
                         { \l_@@_main_language_tl }
-                      \@@_provide_langfile:x
-                        { \l_@@_ref_language_tl }
                     }
                   }
                   {
-                    \@@_language_if_declared:nTF {#1}
-                      { \tl_set:Nn \l_@@_ref_language_tl {#1} }
+                    \tl_set:Nn \l_@@_ref_language_tl {#1}
+                    \@@_language_if_declared:nF {#1}
                       {
                         \msg_warning:nnn { zref-clever }
                           { unknown-language-opt } {#1}
-                        \tl_set:Nn \l_@@_ref_language_tl
-                          { \l_@@_current_language_tl }
                       }
-                    \@@_provide_langfile:x
-                      { \l_@@_ref_language_tl }
                   }
               } ,
-            lang .value_required:n = true ,
           }
       }
   }
