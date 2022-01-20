@@ -30,6 +30,8 @@
   listsep={,, },
   lastsep={ UND },
   rangesep={\textrightarrow{}},
+  namefont=\bfseries,
+  reffont=\itshape,
   refbounds={[,,,]},
   Name-sg=Bar,
   name-sg=bar,
@@ -51,6 +53,8 @@
     listsep={,, },
     lastsep={ AND },
     rangesep={\textrightarrow{}},
+    namefont=\bfseries,
+    reffont=\upshape,
     refbounds={[,,,]},
     Name-sg=Bar,
     name-sg=bar,
@@ -73,6 +77,8 @@
     listsep ,
     lastsep ,
     rangesep ,
+    namefont ,
+    reffont ,
   }
   {
     \tl_show:c
@@ -102,6 +108,8 @@
     listsep ,
     lastsep ,
     rangesep ,
+    namefont ,
+    reffont ,
     D-Name-sg ,
     D-name-sg ,
     D-Name-pl ,
@@ -453,6 +461,8 @@
 \showbox0
 \box0
 \ENDTEST
+
+\newoptblock{[Nn]ame-[sg/pl](-ab)=... (german,d=D)}
 
 \BEGINTEST{Option: [Nn]ame-[sg/pl](-ab)=... (german,d=D)}
 \selectlanguage{ngerman}

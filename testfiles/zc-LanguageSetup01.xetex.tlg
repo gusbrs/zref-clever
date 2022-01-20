@@ -6,29 +6,29 @@ TEST 1: Options and scopes: default, type-specific
 Package zref-clever Warning: No type specified for option 'gender' on line ....
 (zref-clever)                Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'Name-sg' on line
-(zref-clever)                63. Set it after 'type' switch.
+(zref-clever)                67. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'name-sg' on line
-(zref-clever)                63. Set it after 'type' switch.
+(zref-clever)                67. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'Name-pl' on line
-(zref-clever)                63. Set it after 'type' switch.
+(zref-clever)                67. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'name-pl' on line
-(zref-clever)                63. Set it after 'type' switch.
+(zref-clever)                67. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'Name-sg-ab' on line
-(zref-clever)                63. Set it after 'type' switch.
+(zref-clever)                67. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'name-sg-ab' on line
-(zref-clever)                63. Set it after 'type' switch.
+(zref-clever)                67. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'Name-pl-ab' on line
-(zref-clever)                63. Set it after 'type' switch.
+(zref-clever)                67. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'name-pl-ab' on line
-(zref-clever)                63. Set it after 'type' switch.
+(zref-clever)                67. Set it after 'type' switch.
 Package zref-clever Warning: Option 'tpairsep' is not type-specific on line
-(zref-clever)                63. Set it in '\zcLanguageSetup' before first
+(zref-clever)                67. Set it in '\zcLanguageSetup' before first
 (zref-clever)                'type' switch or as package option.
 Package zref-clever Warning: Option 'tlistsep' is not type-specific on line
-(zref-clever)                63. Set it in '\zcLanguageSetup' before first
+(zref-clever)                67. Set it in '\zcLanguageSetup' before first
 (zref-clever)                'type' switch or as package option.
 Package zref-clever Warning: Option 'tlastsep' is not type-specific on line
-(zref-clever)                63. Set it in '\zcLanguageSetup' before first
+(zref-clever)                67. Set it in '\zcLanguageSetup' before first
 (zref-clever)                'type' switch or as package option.
 Package zref-clever Warning: Option 'notesep' is not type-specific on line ....
 (zref-clever)                Set it in '\zcLanguageSetup' before first 'type'
@@ -58,6 +58,12 @@ l. ...  }
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_german_default_rangesep_tl=\textrightarrow {}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_default_namefont_tl=\bfseries .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_default_reffont_tl=\itshape .
 <recently read> }
 l. ...  }
 The sequence \g__zrefclever_opt_lang_german_default_refbounds-first_seq
@@ -153,6 +159,12 @@ l. ...  }
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_german_type_section_rangesep_tl=\textrightarrow {}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_namefont_tl=\bfseries .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_german_type_section_reffont_tl=\upshape .
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_german_type_section_D-Name-sg_tl=Bar.
@@ -272,18 +284,18 @@ l. ...  }
 TEST 2: Missing case and gender
 ============================================================
 Package zref-clever Warning: Language 'english' has no declared gender on line
-(zref-clever)                144. Nothing to do with option 'gender=m'.
+(zref-clever)                152. Nothing to do with option 'gender=m'.
 Package zref-clever Warning: Language 'english' has no declared declension
 (zref-clever)                cases on line .... Nothing to do with option
 (zref-clever)                'case=D'.
 Package zref-clever Warning: Language 'french' has no 'n' gender declared on
-(zref-clever)                line 148.
+(zref-clever)                line 156.
 ============================================================
 ============================================================
 TEST 3: Multiple genders
 ============================================================
 Package zref-clever Warning: Language 'ngerman' has no 'z' gender declared on
-(zref-clever)                line 155.
+(zref-clever)                line 163.
 The sequence \g__zrefclever_opt_lang_german_type_chapter_gender_seq contains
 the items (without outer braces):
 >  {f}
@@ -973,15 +985,15 @@ TEST 13: Option: [Nn]ame-[sg/pl](-ab)=... (german,d=D)
 (zref-clever-german.lang)
 Package zref-clever Info: Loaded 'german' language file.
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{section.1.1}{\group_begin: Bar\group_end: \quad \group_begin:
-[1.1\group_end: }]\group_end: .
+{}{section.1.1}{\group_begin: \bfseries Bar\group_end: \quad \group_begin:
+\upshape [1.1\group_end: }\upshape ]\group_end: .
 <recently read> }
 l. ......\zcref[cap,noabbrev,d=D]{sec:section-1.1}
                                                   }
 > \box...=
-\hbox(7.5+2.49998)x44.34
+\hbox(7.5+2.49998)x46.84999
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 Bar
+.\TU/lmr/bx/n/10 Bar
 .\glue 10.0
 .\TU/lmr/m/n/10 [1.1
 .\special{pdf:eann}
@@ -989,30 +1001,30 @@ l. ......\zcref[cap,noabbrev,d=D]{sec:section-1.1}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{section.1.1}{\group_begin: Bar\group_end: \quad \group_begin:
-[1.1\group_end: }]\group_end: .
+{}{section.1.1}{\group_begin: \bfseries Bar\group_end: \quad \group_begin:
+\upshape [1.1\group_end: }\upshape ]\group_end: .
 <recently read> }
 l. ......box{\zcref[noabbrev,d=D]{sec:section-1.1}
                                                   }
 > \box...=
-\hbox(7.5+2.49998)x44.34
+\hbox(7.5+2.49998)x46.84999
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 Bar
+.\TU/lmr/bx/n/10 Bar
 .\glue 10.0
 .\TU/lmr/m/n/10 [1.1
 .\special{pdf:eann}
 .\TU/lmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Bars\group_end: \quad
-\group_begin: [\hyper@@link {}{section.1.1}{1.1}]\group_end:  \& \group_begin:
-[\hyper@@link {}{section.1.2}{1.2}]\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \bfseries Bars\group_end:
+\quad \group_begin: \upshape [\hyper@@link {}{section.1.1}{1.1}]\group_end: 
+\& \group_begin: \upshape [\hyper@@link {}{section.1.2}{1.2}]\group_end: .
 <recently read> }
 l. ......ev,d=D]{sec:section-1.1, sec:section-1.2}
                                                   }
 > \box...=
-\hbox(7.5+2.49998)x81.06
-.\TU/lmr/m/n/10 Bars
+\hbox(7.5+2.49998)x84.17
+.\TU/lmr/bx/n/10 Bars
 .\glue 10.0
 .\TU/lmr/m/n/10 [
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
@@ -1029,15 +1041,15 @@ l. ......ev,d=D]{sec:section-1.1, sec:section-1.2}
 .\TU/lmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Bars\group_end: \quad
-\group_begin: [\hyper@@link {}{section.1.1}{1.1}]\group_end:  \& \group_begin:
-[\hyper@@link {}{section.1.2}{1.2}]\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \bfseries Bars\group_end:
+\quad \group_begin: \upshape [\hyper@@link {}{section.1.1}{1.1}]\group_end: 
+\& \group_begin: \upshape [\hyper@@link {}{section.1.2}{1.2}]\group_end: .
 <recently read> }
 l. ......ev,d=D]{sec:section-1.1, sec:section-1.2}
                                                   }
 > \box...=
-\hbox(7.5+2.49998)x81.06
-.\TU/lmr/m/n/10 Bars
+\hbox(7.5+2.49998)x84.17
+.\TU/lmr/bx/n/10 Bars
 .\glue 10.0
 .\TU/lmr/m/n/10 [
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
@@ -1055,15 +1067,15 @@ l. ......ev,d=D]{sec:section-1.1, sec:section-1.2}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{section.1.1}{\group_begin: B.\group_end: \quad \group_begin:
-[1.1\group_end: }]\group_end: .
+{}{section.1.1}{\group_begin: \bfseries B.\group_end: \quad \group_begin:
+\upshape [1.1\group_end: }\upshape ]\group_end: .
 <recently read> }
 l. ......x{\zcref[cap,abbrev,d=D]{sec:section-1.1}
                                                   }
 > \box...=
-\hbox(7.5+2.49998)x38.2
+\hbox(7.5+2.49998)x39.70999
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 B.
+.\TU/lmr/bx/n/10 B.
 .\glue 10.0
 .\TU/lmr/m/n/10 [1.1
 .\special{pdf:eann}
@@ -1071,30 +1083,30 @@ l. ......x{\zcref[cap,abbrev,d=D]{sec:section-1.1}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{section.1.1}{\group_begin: B.\group_end: \quad \group_begin:
-[1.1\group_end: }]\group_end: .
+{}{section.1.1}{\group_begin: \bfseries B.\group_end: \quad \group_begin:
+\upshape [1.1\group_end: }\upshape ]\group_end: .
 <recently read> }
 l. ......\hbox{\zcref[abbrev,d=D]{sec:section-1.1}
                                                   }
 > \box...=
-\hbox(7.5+2.49998)x38.2
+\hbox(7.5+2.49998)x39.70999
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 B.
+.\TU/lmr/bx/n/10 B.
 .\glue 10.0
 .\TU/lmr/m/n/10 [1.1
 .\special{pdf:eann}
 .\TU/lmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Bs.\group_end: \quad
-\group_begin: [\hyper@@link {}{section.1.1}{1.1}]\group_end:  \& \group_begin:
-[\hyper@@link {}{section.1.2}{1.2}]\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \bfseries Bs.\group_end:
+\quad \group_begin: \upshape [\hyper@@link {}{section.1.1}{1.1}]\group_end: 
+\& \group_begin: \upshape [\hyper@@link {}{section.1.2}{1.2}]\group_end: .
 <recently read> }
 l. ......ev,d=D]{sec:section-1.1, sec:section-1.2}
                                                   }
 > \box...=
-\hbox(7.5+2.49998)x74.92
-.\TU/lmr/m/n/10 Bs.
+\hbox(7.5+2.49998)x77.03
+.\TU/lmr/bx/n/10 Bs.
 .\glue 10.0
 .\TU/lmr/m/n/10 [
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
@@ -1111,15 +1123,15 @@ l. ......ev,d=D]{sec:section-1.1, sec:section-1.2}
 .\TU/lmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Bs.\group_end: \quad
-\group_begin: [\hyper@@link {}{section.1.1}{1.1}]\group_end:  \& \group_begin:
-[\hyper@@link {}{section.1.2}{1.2}]\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \bfseries Bs.\group_end:
+\quad \group_begin: \upshape [\hyper@@link {}{section.1.1}{1.1}]\group_end: 
+\& \group_begin: \upshape [\hyper@@link {}{section.1.2}{1.2}]\group_end: .
 <recently read> }
 l. ......ev,d=D]{sec:section-1.1, sec:section-1.2}
                                                   }
 > \box...=
-\hbox(7.5+2.49998)x74.92
-.\TU/lmr/m/n/10 Bs.
+\hbox(7.5+2.49998)x77.03
+.\TU/lmr/bx/n/10 Bs.
 .\glue 10.0
 .\TU/lmr/m/n/10 [
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}

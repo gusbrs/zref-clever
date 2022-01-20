@@ -11,6 +11,8 @@
 - Fixed handling of type names defined to be empty.
 
 ### Changed
+- The `namefont` and `reffont` options can now be set also in
+  `\zcRefTypeSetup` and `\zcLanguageSetup`.
 - (Internal) Moved from property lists to individually named macros to store
   and retrieve options.
 

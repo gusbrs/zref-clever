@@ -1199,6 +1199,8 @@
     listsep ,
     lastsep ,
     rangesep ,
+    namefont ,
+    reffont ,
   }
 \seq_const_from_clist:Nn
   \c_@@_rf_opts_seq_refbounds_seq
@@ -1239,32 +1241,16 @@
     name-pl-ab ,
   }
 %    \end{macrocode}
-% \cs{c_@@_rf_opts_tl_font_seq} are technically ``possibly type-specific'',
-% but are not ``language-specific'', so we separate them.
-%    \begin{macrocode}
-\seq_const_from_clist:Nn
-  \c_@@_rf_opts_tl_font_seq
-  {
-    namefont ,
-    reffont ,
-  }
-%    \end{macrocode}
 % And, finally, some combined groups of the above variables, for convenience.
 %    \begin{macrocode}
 \seq_new:N \c_@@_rf_opts_tl_typesetup_seq
 \seq_gconcat:NNN \c_@@_rf_opts_tl_typesetup_seq
   \c_@@_rf_opts_tl_maybe_type_specific_seq
   \c_@@_rf_opts_tl_type_names_seq
-\seq_gconcat:NNN \c_@@_rf_opts_tl_typesetup_seq
-  \c_@@_rf_opts_tl_typesetup_seq
-  \c_@@_rf_opts_tl_font_seq
 \seq_new:N \c_@@_rf_opts_tl_reference_seq
 \seq_gconcat:NNN \c_@@_rf_opts_tl_reference_seq
   \c_@@_rf_opts_tl_not_type_specific_seq
   \c_@@_rf_opts_tl_maybe_type_specific_seq
-\seq_gconcat:NNN \c_@@_rf_opts_tl_reference_seq
-  \c_@@_rf_opts_tl_reference_seq
-  \c_@@_rf_opts_tl_font_seq
 %    \end{macrocode}
 % \end{macro}
 %
