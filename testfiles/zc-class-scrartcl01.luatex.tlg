@@ -437,7 +437,7 @@ TEST 15: Reference: equation
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-(1\group_end: })\group_end: .
+(1)\group_end: }\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.1}
                                             }
@@ -458,8 +458,8 @@ l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.1}
 .\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
 .\TU/lmr/m/n/10.95 (
 .\TU/lmr/m/n/10.95 1
-.\pdfendlink
 .\TU/lmr/m/n/10.95 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================

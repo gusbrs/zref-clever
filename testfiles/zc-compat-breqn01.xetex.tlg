@@ -111,7 +111,7 @@ TEST 3: Reference: dseries
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{section.1}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-\upshape (4\group_end: }\upshape )\group_end: .
+\upshape (4)\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:4}
                                  }
@@ -121,9 +121,8 @@ l. ...\setbox0=\hbox{\zcref{eq:4}
 .\TU/lmr/m/n/10 equation
 .\penalty 10000
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 (4
+.\TU/lmr/m/n/10 (4)
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 )
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -132,7 +131,7 @@ TEST 4: Reference: dgroup
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{section.1}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-\upshape (5\group_end: }\upshape )\group_end: .
+\upshape (5)\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:5}
                                  }
@@ -142,9 +141,8 @@ l. ...\setbox0=\hbox{\zcref{eq:5}
 .\TU/lmr/m/n/10 equation
 .\penalty 10000
 .\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 (5
+.\TU/lmr/m/n/10 (5)
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 )
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:

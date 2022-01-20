@@ -122,7 +122,7 @@ TEST 3: Reference: dseries
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{section.1}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-\upshape (4\group_end: }\upshape )\group_end: .
+\upshape (4)\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:4}
                                  }
@@ -141,8 +141,8 @@ l. ...\setbox0=\hbox{\zcref{eq:4}
 .\glue 3.33333 plus 1.66666 minus 1.11111
 .\OT1/cmr/m/n/10 (
 .\OT1/cmr/m/n/10 4
-.\pdfendlink
 .\OT1/cmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -151,7 +151,7 @@ TEST 4: Reference: dgroup
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{section.1}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-\upshape (5\group_end: }\upshape )\group_end: .
+\upshape (5)\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:5}
                                  }
@@ -170,8 +170,8 @@ l. ...\setbox0=\hbox{\zcref{eq:5}
 .\glue 3.33333 plus 1.66666 minus 1.11111
 .\OT1/cmr/m/n/10 (
 .\OT1/cmr/m/n/10 5
-.\pdfendlink
 .\OT1/cmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:

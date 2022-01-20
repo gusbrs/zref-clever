@@ -232,7 +232,7 @@ TEST 2: Reference: equation
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-\upshape (1\group_end: }\upshape )\group_end: .
+\upshape (1)\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:1}
                                }
@@ -253,13 +253,13 @@ l. ...\setbox0=\hbox{\zcref{eq:1}
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 (
 .\TU/lmr/m/n/10 1
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-\upshape (2\group_end: }\upshape )\group_end: .
+\upshape (2)\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{compl-gr}
                                    }
@@ -280,8 +280,8 @@ l. ...\setbox0=\hbox{\zcref{compl-gr}
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 (
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -290,7 +290,7 @@ TEST 3: Reference: equation*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{AMS.1}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-\upshape ({eq1}\group_end: }\upshape )\group_end: .
+\upshape ({eq1})\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq1:tag}
                                   }
@@ -313,8 +313,8 @@ l. ...\setbox0=\hbox{\zcref{eq1:tag}
 .\TU/lmr/m/n/10 e
 .\TU/lmr/m/n/10 q
 .\TU/lmr/m/n/10 1
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -425,7 +425,7 @@ TEST 6: Reference: alignat
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.5}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-\upshape (5\group_end: }\upshape )\group_end: .
+\upshape (5)\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:B}
                                }
@@ -446,8 +446,8 @@ l. ...\setbox0=\hbox{\zcref{eq:B}
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 (
 .\TU/lmr/m/n/10 5
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
@@ -560,7 +560,7 @@ TEST 8: Reference: flalign
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.9}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-\upshape (9\group_end: }\upshape )\group_end: .
+\upshape (9)\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:flal1}
                                    }
@@ -581,8 +581,8 @@ l. ...\setbox0=\hbox{\zcref{eq:flal1}
 .\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 (
 .\TU/lmr/m/n/10 9
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -591,7 +591,7 @@ TEST 9: Reference: flalign*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{AMS.11}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-\upshape ({flal1}\group_end: }\upshape )\group_end: .
+\upshape ({flal1})\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tag:eq:flal1}
                                        }
@@ -615,8 +615,8 @@ l. ...\setbox0=\hbox{\zcref{tag:eq:flal1}
 .\TU/lmr/m/n/10 a
 .\TU/lmr/m/n/10 l
 .\TU/lmr/m/n/10 1
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -625,7 +625,7 @@ TEST 10: Reference: xalignat
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.11}{\group_begin: equation\group_end: \nobreakspace
-\group_begin: \upshape (11\group_end: }\upshape )\group_end: .
+\group_begin: \upshape (11)\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:xal1}
                                   }
@@ -647,8 +647,8 @@ l. ...\setbox0=\hbox{\zcref{eq:xal1}
 .\TU/lmr/m/n/10 (
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 1
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -657,7 +657,7 @@ TEST 11: Reference: xalignat*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{AMS.13}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-\upshape ({xal1}\group_end: }\upshape )\group_end: .
+\upshape ({xal1})\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tag:eq:xal1}
                                       }
@@ -681,8 +681,8 @@ l. ...\setbox0=\hbox{\zcref{tag:eq:xal1}
 .\TU/lmr/m/n/10 a
 .\TU/lmr/m/n/10 l
 .\TU/lmr/m/n/10 1
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -753,7 +753,7 @@ TEST 13: Reference: gather*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{AMS.17}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-\upshape ({taggath}\group_end: }\upshape )\group_end: .
+\upshape ({taggath})\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tag:gather:CC}
                                         }
@@ -782,8 +782,8 @@ l. ...\setbox0=\hbox{\zcref{tag:gather:CC}
 .\TU/lmr/m/n/10 a
 .\TU/lmr/m/n/10 t
 .\TU/lmr/m/n/10 h
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -792,7 +792,7 @@ TEST 14: Reference: multline
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.15}{\group_begin: equation\group_end: \nobreakspace
-\group_begin: \upshape (15\group_end: }\upshape )\group_end: .
+\group_begin: \upshape (15)\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:E}
                                }
@@ -814,8 +814,8 @@ l. ...\setbox0=\hbox{\zcref{eq:E}
 .\TU/lmr/m/n/10 (
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 5
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -824,7 +824,7 @@ TEST 15: Reference: multline*
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{AMS.19}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-\upshape ({multln}\group_end: }\upshape )\group_end: .
+\upshape ({multln})\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tag:eq:E}
                                    }
@@ -851,8 +851,8 @@ l. ...\setbox0=\hbox{\zcref{tag:eq:E}
 .\TU/lmr/m/n/10 t
 .\TU/lmr/m/n/10 l
 .\TU/lmr/m/n/10 n
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -861,7 +861,7 @@ TEST 16: Reference: subequations
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.16}{\group_begin: equation\group_end: \nobreakspace
-\group_begin: \upshape (16\group_end: }\upshape )\group_end: .
+\group_begin: \upshape (16)\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{subeq:A}
                                   }
@@ -883,8 +883,8 @@ l. ...\setbox0=\hbox{\zcref{subeq:A}
 .\TU/lmr/m/n/10 (
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 6
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
@@ -1105,7 +1105,7 @@ TEST 17: Reference: equation font
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{AMS.22}{\group_begin: equation\group_end: \nobreakspace \group_begin:
-\upshape (Q\&A\group_end: }\upshape )\group_end: .
+\upshape (Q\&A)\group_end: }\upshape \group_end: .
 <recently read> }
 l. ...  \zcref{eq:example}
                         .
@@ -1147,8 +1147,8 @@ l. ...  \zcref{eq:example}
 .\TU/lmr/m/n/10 Q
 .\TU/lmr/m/n/10 &
 .\TU/lmr/m/n/10 A
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 .\TU/lmr/m/it/10 .
 .\glue(\spaceskip) 3.58 plus 1.79 minus 1.19333
 ! OK.

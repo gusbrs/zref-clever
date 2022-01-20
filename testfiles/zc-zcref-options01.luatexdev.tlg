@@ -820,7 +820,7 @@ l. ...    cha:chapter-1}
                       }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    cha:chapter-1}
                       }
@@ -899,8 +899,8 @@ l. ...    cha:chapter-1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -915,7 +915,7 @@ l. ...    sec:section-1.1, cha:chapter-1}
                                        }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    sec:section-1.1, cha:chapter-1}
                                        }
@@ -966,8 +966,8 @@ l. ...    sec:section-1.1, cha:chapter-1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
@@ -1022,7 +1022,7 @@ l. ...    sec:section-1.1, cha:chapter-1}
                                        }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    sec:section-1.1, cha:chapter-1}
                                        }
@@ -1073,8 +1073,8 @@ l. ...    sec:section-1.1, cha:chapter-1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
@@ -1148,7 +1148,7 @@ l. ...    sec:section-1.1, cha:chapter-1}
                                        }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    sec:section-1.1, cha:chapter-1}
                                        }
@@ -1227,8 +1227,8 @@ l. ...    sec:section-1.1, cha:chapter-1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -1237,7 +1237,7 @@ TEST 23: Option: typesort={{{othertypes}},table}
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ......tion-1.1.2, sec:section-1.1, cha:chapter-1}
                                                   }
@@ -1278,8 +1278,8 @@ l. ......tion-1.1.2, sec:section-1.1, cha:chapter-1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
@@ -1356,7 +1356,7 @@ l. ......tion-1.1.2, sec:section-1.1, cha:chapter-1}
                                                   }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ......tion-1.1.2, sec:section-1.1, cha:chapter-1}
                                                   }
@@ -1420,8 +1420,8 @@ l. ......tion-1.1.2, sec:section-1.1, cha:chapter-1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\TU/lmr/m/n/10 a
@@ -2482,7 +2482,7 @@ TEST 44: Option: abbrev=true
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: eq.\group_end: \nobreakspace \group_begin:
-(1.2\group_end: })\group_end: .
+(1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    tab:table-1.1.1}
                         }
@@ -2510,8 +2510,8 @@ l. ...    tab:table-1.1.1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -2553,7 +2553,7 @@ TEST 45: Option: abbrev
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: eq.\group_end: \nobreakspace \group_begin:
-(1.2\group_end: })\group_end: .
+(1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    tab:table-1.1.1}
                         }
@@ -2581,8 +2581,8 @@ l. ...    tab:table-1.1.1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -2624,7 +2624,7 @@ TEST 46: Option: abbrev=false
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    tab:table-1.1.1}
                         }
@@ -2659,8 +2659,8 @@ l. ...    tab:table-1.1.1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -2706,7 +2706,7 @@ TEST 47: Option: noabbrev
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    tab:table-1.1.1}
                         }
@@ -2741,8 +2741,8 @@ l. ...    tab:table-1.1.1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -2788,7 +2788,7 @@ TEST 48: Option: noabbrevfirst=true
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    fig:figure-1.1.1, tab:table-1.1.1}
                                           }
@@ -2823,8 +2823,8 @@ l. ...    fig:figure-1.1.1, tab:table-1.1.1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -2866,7 +2866,7 @@ TEST 49: Option: noabbrevfirst
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    fig:figure-1.1.1, tab:table-1.1.1}
                                           }
@@ -2901,8 +2901,8 @@ l. ...    fig:figure-1.1.1, tab:table-1.1.1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -2944,7 +2944,7 @@ TEST 50: Option: noabbrevfirst=false
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: eq.\group_end: \nobreakspace \group_begin:
-(1.2\group_end: })\group_end: .
+(1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    fig:figure-1.1.1, tab:table-1.1.1}
                                           }
@@ -2972,8 +2972,8 @@ l. ...    fig:figure-1.1.1, tab:table-1.1.1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -3015,7 +3015,7 @@ TEST 51: Option: S
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: Equation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    tab:table-1.1.1}
                         }
@@ -3050,8 +3050,8 @@ l. ...    tab:table-1.1.1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -3093,7 +3093,7 @@ TEST 52: Option: (no) S
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: eq.\group_end: \nobreakspace \group_begin:
-(1.2\group_end: })\group_end: .
+(1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    tab:table-1.1.1}
                         }
@@ -3121,8 +3121,8 @@ l. ...    tab:table-1.1.1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 .\TU/lmr/m/n/10 ,
 .\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -5019,7 +5019,7 @@ l. ......tion-1.1.2, sec:section-1.1, cha:chapter-1}
                                                   }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ......tion-1.1.2, sec:section-1.1, cha:chapter-1}
                                                   }
@@ -5098,8 +5098,8 @@ l. ......tion-1.1.2, sec:section-1.1, cha:chapter-1}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link

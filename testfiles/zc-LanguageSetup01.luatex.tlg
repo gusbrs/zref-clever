@@ -1385,7 +1385,7 @@ l. ...    eq:equation-1.1.2}
                           }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: Équation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    eq:equation-1.1.2}
                           }
@@ -1459,8 +1459,8 @@ l. ...    eq:equation-1.1.2}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
@@ -1483,7 +1483,7 @@ l. ...    eq:equation-1.1.2}
                           }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: Équation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    eq:equation-1.1.2}
                           }
@@ -1557,8 +1557,8 @@ l. ...    eq:equation-1.1.2}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
@@ -1581,7 +1581,7 @@ l. ...  eq:equation-1.1.2}
                         }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: équation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...  eq:equation-1.1.2}
                         }
@@ -1655,8 +1655,8 @@ l. ...  eq:equation-1.1.2}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
@@ -1683,7 +1683,7 @@ l. ...    eq:equation-1.1.2}
                           }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: Équation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    eq:equation-1.1.2}
                           }
@@ -1757,8 +1757,8 @@ l. ...    eq:equation-1.1.2}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
@@ -1781,7 +1781,7 @@ l. ...    fig:figure-1.1.1, eq:equation-1.1.2}
                                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: Éq.\group_end: \nobreakspace \group_begin:
-(1.2\group_end: })\group_end: .
+(1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    fig:figure-1.1.1, eq:equation-1.1.2}
                                             }
@@ -1848,8 +1848,8 @@ l. ...    fig:figure-1.1.1, eq:equation-1.1.2}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
@@ -1872,7 +1872,7 @@ l. ...    fig:figure-1.1.1, eq:equation-1.1.2}
                                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{equation.1.1.2}{\group_begin: Équation\group_end: \nobreakspace
-\group_begin: (1.2\group_end: })\group_end: .
+\group_begin: (1.2)\group_end: }\group_end: .
 <recently read> }
 l. ...    fig:figure-1.1.1, eq:equation-1.1.2}
                                             }
@@ -1950,8 +1950,8 @@ l. ...    fig:figure-1.1.1, eq:equation-1.1.2}
 .\TU/lmr/m/n/10 1
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
-.\pdfendlink
 .\TU/lmr/m/n/10 )
+.\pdfendlink
 ! OK.
 l. ...\showbox0
 ============================================================
