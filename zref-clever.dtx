@@ -2248,19 +2248,14 @@
 % with a fallback value.
 %
 %    \begin{macrocode}
-\keys_define:nn { zref-clever/fallback }
+\cs_new_protected:Npn \@@_opt_tl_cset_fallback:nn #1#2
   {
-    unknown .code:n =
-      {
-        \tl_const:cn
-          {
-            \@@_opt_varname_fallback:vn
-              { l_keys_key_str } { tl }
-          }
-          {#1}
-      } ,
+    \tl_const:cn
+      { \@@_opt_varname_fallback:nn {#1} { tl } } {#2}
   }
-\keys_set:nn { zref-clever/fallback }
+\keyval_parse:nnn
+  { }
+  { \@@_opt_tl_cset_fallback:nn }
   {
     tpairsep  = {,~} ,
     tlistsep  = {,~} ,
