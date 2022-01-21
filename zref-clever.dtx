@@ -4600,11 +4600,13 @@
 %   {
 %     \l_@@_type_count_int ,
 %     \l_@@_label_count_int ,
+%     \l_@@_ref_count_int ,
 %   }
 %   Auxiliary variables for \cs{@@_typeset_refs:} main counters.
 %    \begin{macrocode}
 \int_new:N \l_@@_type_count_int
 \int_new:N \l_@@_label_count_int
+\int_new:N \l_@@_ref_count_int
 %    \end{macrocode}
 % \end{macro}
 %
@@ -4759,6 +4761,7 @@
     \tl_clear:N \l_@@_range_beg_label_tl
     \int_zero:N \l_@@_label_count_int
     \int_zero:N \l_@@_type_count_int
+    \int_zero:N \l_@@_ref_count_int
     \int_zero:N \l_@@_range_count_int
     \int_zero:N \l_@@_range_same_count_int
     \bool_set_false:N \l_@@_type_first_refbounds_set_bool
@@ -5018,11 +5021,22 @@
             % Test: 'zc-typeset01.lvt': "Last of type: not range"
             { 0 }
             {
-              \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+              \int_compare:nNnTF { \l_@@_ref_count_int } < { 2 }
                 {
-                  \exp_not:V \l_@@_lastsep_tl
-                  \@@_get_ref:VN \l_@@_label_a_tl
-                    \l_@@_refbounds_last_seq
+                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                    {
+                      \exp_not:V \l_@@_pairsep_tl
+                      \@@_get_ref:VN \l_@@_label_a_tl
+                        \l_@@_refbounds_last_pe_seq
+                    }
+                }
+                {
+                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                    {
+                      \exp_not:V \l_@@_lastsep_tl
+                      \@@_get_ref:VN \l_@@_label_a_tl
+                        \l_@@_refbounds_last_seq
+                    }
                 }
             }
             % Last in the range is also the second in it.
@@ -5069,12 +5083,24 @@
                       \bool_set_true:N \l_@@_type_first_refbounds_set_bool
                     }
                     {
-                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                      \int_compare:nNnTF { \l_@@_ref_count_int } < { 2 }
                         {
-                          \exp_not:V \l_@@_lastsep_tl
-                          \@@_get_ref:VN
-                            \l_@@_range_beg_label_tl
-                            \l_@@_refbounds_last_seq
+                          \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                            {
+                              \exp_not:V \l_@@_pairsep_tl
+                              \@@_get_ref:VN
+                                \l_@@_range_beg_label_tl
+                                \l_@@_refbounds_last_pe_seq
+                            }
+                        }
+                        {
+                          \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                            {
+                              \exp_not:V \l_@@_lastsep_tl
+                              \@@_get_ref:VN
+                                \l_@@_range_beg_label_tl
+                                \l_@@_refbounds_last_seq
+                            }
                         }
                     }
                 }
@@ -5089,6 +5115,12 @@
                       \seq_set_eq:NN \l_@@_type_first_refbounds_seq
                         \l_@@_refbounds_first_pb_seq
                       \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                        {
+                          \exp_not:V \l_@@_pairsep_tl
+                          \@@_get_ref:VN \l_@@_label_a_tl
+                            \l_@@_refbounds_last_pe_seq
+                        }
                     }
                     {
                       \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
@@ -5098,12 +5130,12 @@
                             \l_@@_range_beg_label_tl
                             \l_@@_refbounds_mid_seq
                         }
-                    }
-                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
-                    {
-                      \exp_not:V \l_@@_lastsep_tl
-                      \@@_get_ref:VN \l_@@_label_a_tl
-                        \l_@@_refbounds_last_seq
+                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                        {
+                          \exp_not:V \l_@@_lastsep_tl
+                          \@@_get_ref:VN \l_@@_label_a_tl
+                            \l_@@_refbounds_last_seq
+                        }
                     }
                 }
               }
@@ -5118,12 +5150,7 @@
                     \bool_set_true:N \l_@@_type_first_refbounds_set_bool
                   }
                   {
-                    % If the queue is empty, it means we are inserting the
-                    % range right after the first reference in the block, in
-                    % which case 'pairsep' is due, not 'lastsep'.
-                    % Technically, this would be both '-mid-pe' and '-mid-rb',
-                    % but we let the latter take precedence.
-                    \tl_if_empty:NTF \l_@@_typeset_queue_curr_tl
+                    \int_compare:nNnTF { \l_@@_ref_count_int } < { 2 }
                       {
                         \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                           {
@@ -5331,6 +5358,7 @@
         \tl_clear:N \l_@@_type_first_label_type_tl
         \tl_clear:N \l_@@_range_beg_label_tl
         \int_zero:N \l_@@_label_count_int
+        \int_zero:N \l_@@_ref_count_int
         \int_incr:N \l_@@_type_count_int
         \int_zero:N \l_@@_range_count_int
         \int_zero:N \l_@@_range_same_count_int
@@ -5369,6 +5397,7 @@
           \l_@@_label_a_tl
         \tl_set:NV \l_@@_type_first_label_type_tl
           \l_@@_label_type_a_tl
+        \int_incr:N \l_@@_ref_count_int
 
         % If the next label may be part of a range, we set `range_beg_label'
         % to "empty" (we deal with it as the "first", and must do it there, to
@@ -5413,6 +5442,7 @@
                 % Test: 'zc-typeset01.lvt': "Not last of type: no range"
                 { 0 }
                 {
+                  \int_incr:N \l_@@_ref_count_int
                   \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                     {
                       \exp_not:V \l_@@_listsep_tl
@@ -5434,6 +5464,7 @@
                       \bool_set_true:N \l_@@_type_first_refbounds_set_bool
                     }
                     {
+                      \int_incr:N \l_@@_ref_count_int
                       \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                         {
                           \exp_not:V \l_@@_listsep_tl
@@ -5442,10 +5473,11 @@
                             \l_@@_refbounds_mid_seq
                         }
                     }
-                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                  \int_compare:nNnF
+                    { \l_@@_range_same_count_int } = { 1 }
                     {
-                      \int_compare:nNnF
-                        { \l_@@_range_same_count_int } = { 1 }
+                      \int_incr:N \l_@@_ref_count_int
+                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                         {
                           \exp_not:V \l_@@_listsep_tl
                           \@@_get_ref:VN
@@ -5476,6 +5508,7 @@
                           \bool_set_true:N \l_@@_type_first_refbounds_set_bool
                         }
                         {
+                          \int_incr:N \l_@@_ref_count_int
                           \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                             {
                               \exp_not:V \l_@@_listsep_tl
@@ -5495,6 +5528,7 @@
                           \bool_set_true:N \l_@@_type_first_refbounds_set_bool
                         }
                         {
+                          \int_incr:N \l_@@_ref_count_int
                           \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                             {
                               \exp_not:V \l_@@_listsep_tl
@@ -5503,6 +5537,7 @@
                                 \l_@@_refbounds_mid_seq
                             }
                         }
+                      \int_incr:N \l_@@_ref_count_int
                       \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                         {
                           \exp_not:V \l_@@_listsep_tl
@@ -5520,6 +5555,7 @@
                         \bool_set_true:N \l_@@_type_first_refbounds_set_bool
                       }
                       {
+                        \int_incr:N \l_@@_ref_count_int
                         \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                           {
                             \exp_not:V \l_@@_listsep_tl
@@ -5528,6 +5564,11 @@
                               \l_@@_refbounds_mid_rb_seq
                           }
                       }
+                    % For the purposes of the serial comma, and thus for the
+                    % distinction of 'lastsep' and 'pairsep', a "range" counts
+                    % as one.  Since 'range_beg' has already been counted
+                    % (here or with the first of type), we refrain from
+                    % incrementing 'ref_count_int'.
                     \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                       {
                         \exp_not:V \l_@@_rangesep_tl

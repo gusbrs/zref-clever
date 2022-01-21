@@ -9,6 +9,8 @@
 
 ### Fixed
 - Fixed handling of type names defined to be empty.
+- Fixed distinction of `lastsep` and `pairsep` in cases where the type-block
+  starts or ends with a range.
 
 ### Changed
 - The `namefont` and `reffont` options can now be set also in

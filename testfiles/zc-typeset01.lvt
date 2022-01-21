@@ -4,6 +4,12 @@
 
 \usepackage{zref-clever}
 
+% Use a serial comma for 'lastsep' (not the default) so that we can
+% distinguish it in output from 'pairsep'.
+\zcLanguageSetup{english}{
+  lastsep={, and\nobreakspace},
+}
+
 \usepackage{hyperref}
 
 % This file is intended to test the multiple typesetting cases for '\zcref',
