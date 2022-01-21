@@ -1,0 +1,622 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Language declaration
+============================================================
+> \g__zrefclever_declared_language_french_tl=french.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_acadian_tl=french.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_canadien_tl=french.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_francais_tl=french.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_frenchb_tl=french.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_language_french_gender_seq contains the items
+(without outer braces):
+>  {f}
+>  {m}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 2: Language file options
+============================================================
+> \g__zrefclever_opt_lang_french_default_namesep_tl=\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_default_pairsep_tl= et\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_default_listsep_tl=, .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_default_lastsep_tl= et\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_default_tpairsep_tl= et\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_default_tlistsep_tl=, .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_default_tlastsep_tl= et\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_default_notesep_tl= .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_default_rangesep_tl= à\nobreakspace .
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_book_gender_seq contains the
+items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_book_Name-sg_tl=Livre.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_book_name-sg_tl=livre.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_book_Name-pl_tl=Livres.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_book_name-pl_tl=livres.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_part_gender_seq contains the
+items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_part_Name-sg_tl=Partie.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_part_name-sg_tl=partie.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_part_Name-pl_tl=Parties.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_part_name-pl_tl=parties.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_chapter_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_chapter_Name-sg_tl=Chapitre.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_chapter_name-sg_tl=chapitre.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_chapter_Name-pl_tl=Chapitres.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_chapter_name-pl_tl=chapitres.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_section_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_section_Name-sg_tl=Section.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_section_name-sg_tl=section.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_section_Name-pl_tl=Sections.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_section_name-pl_tl=sections.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_paragraph_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_paragraph_Name-sg_tl=Paragraphe.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_paragraph_name-sg_tl=paragraphe.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_paragraph_Name-pl_tl=Paragraphes.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_paragraph_name-pl_tl=paragraphes.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_appendix_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_appendix_Name-sg_tl=Annexe.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_appendix_name-sg_tl=annexe.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_appendix_Name-pl_tl=Annexes.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_appendix_name-pl_tl=annexes.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_page_gender_seq contains the
+items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_page_Name-sg_tl=Page.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_page_name-sg_tl=page.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_page_Name-pl_tl=Pages.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_page_name-pl_tl=pages.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_page_rangesep_tl=-.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_line_gender_seq contains the
+items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_line_Name-sg_tl=Ligne.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_line_name-sg_tl=ligne.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_line_Name-pl_tl=Lignes.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_line_name-pl_tl=lignes.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_figure_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_figure_Name-sg_tl=Figure.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_figure_name-sg_tl=figure.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_figure_Name-pl_tl=Figures.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_figure_name-pl_tl=figures.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_table_gender_seq contains the
+items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_table_Name-sg_tl=Table.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_table_name-sg_tl=table.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_table_Name-pl_tl=Tables.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_table_name-pl_tl=tables.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_item_gender_seq contains the
+items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_item_Name-sg_tl=Point.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_item_name-sg_tl=point.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_item_Name-pl_tl=Points.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_item_name-pl_tl=points.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_footnote_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_footnote_Name-sg_tl=Note.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_footnote_name-sg_tl=note.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_footnote_Name-pl_tl=Notes.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_footnote_name-pl_tl=notes.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_endnote_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_endnote_Name-sg_tl=Note.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_endnote_name-sg_tl=note.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_endnote_Name-pl_tl=Notes.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_endnote_name-pl_tl=notes.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_note_gender_seq contains the
+items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_note_Name-sg_tl=Note.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_note_name-sg_tl=note.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_note_Name-pl_tl=Notes.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_note_name-pl_tl=notes.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_equation_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_equation_Name-sg_tl=Équation.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_equation_name-sg_tl=équation.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_equation_Name-pl_tl=Équations.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_equation_name-pl_tl=équations.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_theorem_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_theorem_Name-sg_tl=Théorème.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_theorem_name-sg_tl=théorème.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_theorem_Name-pl_tl=Théorèmes.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_theorem_name-pl_tl=théorèmes.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_lemma_gender_seq contains the
+items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_lemma_Name-sg_tl=Lemme.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_lemma_name-sg_tl=lemme.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_lemma_Name-pl_tl=Lemmes.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_lemma_name-pl_tl=lemmes.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_corollary_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_corollary_Name-sg_tl=Corollaire.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_corollary_name-sg_tl=corollaire.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_corollary_Name-pl_tl=Corollaires.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_corollary_name-pl_tl=corollaires.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_proposition_gender_seq
+contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_proposition_Name-sg_tl=Proposition.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_proposition_name-sg_tl=proposition.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_proposition_Name-pl_tl=Propositions.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_proposition_name-pl_tl=propositions.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_definition_gender_seq
+contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_definition_Name-sg_tl=Définition.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_definition_name-sg_tl=définition.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_definition_Name-pl_tl=Définitions.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_definition_name-pl_tl=définitions.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_proof_gender_seq contains the
+items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_proof_Name-sg_tl=Démonstration.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_proof_name-sg_tl=démonstration.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_proof_Name-pl_tl=Démonstrations.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_proof_name-pl_tl=démonstrations.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_result_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_result_Name-sg_tl=Résultat.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_result_name-sg_tl=résultat.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_result_Name-pl_tl=Résultats.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_result_name-pl_tl=résultats.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_remark_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_remark_Name-sg_tl=Remarque.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_remark_name-sg_tl=remarque.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_remark_Name-pl_tl=Remarques.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_remark_name-pl_tl=remarques.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_example_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_example_Name-sg_tl=Exemple.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_example_name-sg_tl=exemple.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_example_Name-pl_tl=Exemples.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_example_name-pl_tl=exemples.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_algorithm_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_algorithm_Name-sg_tl=Algorithme.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_algorithm_name-sg_tl=algorithme.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_algorithm_Name-pl_tl=Algorithmes.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_algorithm_name-pl_tl=algorithmes.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_listing_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_listing_Name-sg_tl=Listing.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_listing_name-sg_tl=listing.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_listing_Name-pl_tl=Listings.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_listing_name-pl_tl=listings.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_exercise_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_exercise_Name-sg_tl=Exercice.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_exercise_name-sg_tl=exercice.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_exercise_Name-pl_tl=Exercices.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_exercise_name-pl_tl=exercices.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_solution_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_solution_Name-sg_tl=Solution.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_solution_name-sg_tl=solution.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_solution_Name-pl_tl=Solutions.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_french_type_solution_name-pl_tl=solutions.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_equation_refbounds-first_seq
+contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_french_type_equation_refbounds-first-sg_seq contains
+the items (without outer braces):
+>  {}
+>  {(}
+>  {)}
+>  {}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_french_type_equation_refbounds-first-pb_seq contains
+the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_french_type_equation_refbounds-first-rb_seq contains
+the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_equation_refbounds-mid_seq
+contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_equation_refbounds-mid-rb_seq
+contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_equation_refbounds-mid-re_seq
+contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_french_type_equation_refbounds-last_seq
+contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_french_type_equation_refbounds-last-pe_seq contains
+the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_french_type_equation_refbounds-last-re_seq contains
+the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+============================================================

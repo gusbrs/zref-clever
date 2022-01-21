@@ -1,0 +1,270 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\usepackage[french]{babel}
+
+\usepackage{zref-clever}
+
+% This file is intended to test the french language file.
+\ExplSyntaxOn
+\tl_gset:Nn \g__test_tmpa_tl { french } % base language
+\seq_gset_from_clist:Nn \g__test_tmpa_seq % all aliases, including base
+  {
+    french ,
+    acadian ,
+    canadien ,
+    francais ,
+    frenchb ,
+  }
+\ExplSyntaxOff
+
+\begin{document}
+
+\START
+
+\ExplSyntaxOn
+
+\TEST { Language~declaration }
+  {
+    \seq_map_inline:Nn \g__test_tmpa_seq
+      {
+        \tl_show:c { \__zrefclever_language_varname:n {#1} }
+      }
+    \seq_if_exist:cT
+      { \__zrefclever_opt_varname_language:enn
+          { \g__test_tmpa_tl } { declension } { seq }
+      }
+      {
+        \seq_show:c
+          {
+            \__zrefclever_opt_varname_language:enn
+              { \g__test_tmpa_tl } { declension } { seq }
+          }
+      }
+    \seq_if_exist:cT
+      {
+        \__zrefclever_opt_varname_language:enn
+          { \g__test_tmpa_tl } { gender } { seq }
+      }
+      {
+        \seq_show:c
+          {
+            \__zrefclever_opt_varname_language:enn
+              { \g__test_tmpa_tl } { gender } { seq }
+          }
+      }
+    \bool_if_exist:cT
+      {
+        \__zrefclever_opt_varname_language:enn
+          { \g__test_tmpa_tl } { allcaps } { bool }
+      }
+      {
+        \bool_show:c
+          {
+            \__zrefclever_opt_varname_language:enn
+              { \g__test_tmpa_tl } { allcaps } { bool }
+          }
+      }
+  }
+
+
+\TEST { Language~file~options }
+  {
+    \clist_map_inline:nn
+      {
+        namesep ,
+        pairsep ,
+        listsep ,
+        lastsep ,
+        tpairsep ,
+        tlistsep ,
+        tlastsep ,
+        notesep ,
+        rangesep ,
+      }
+      {
+        \tl_if_exist:cT
+          {
+            \__zrefclever_opt_varname_lang_default:enn
+              { \g__test_tmpa_tl } { #1 } { tl }
+          }
+          {
+            \tl_show:c
+              {
+                \__zrefclever_opt_varname_lang_default:enn
+                  { \g__test_tmpa_tl } { #1 } { tl }
+              }
+          }
+      }
+    \clist_map_inline:nn
+      {
+        book ,
+        part ,
+        chapter ,
+        section ,
+        paragraph ,
+        appendix ,
+        page ,
+        line ,
+        figure ,
+        table ,
+        item ,
+        footnote ,
+        endnote ,
+        note ,
+        equation ,
+        theorem ,
+        lemma ,
+        corollary ,
+        proposition ,
+        definition ,
+        proof ,
+        result ,
+        remark ,
+        example ,
+        algorithm ,
+        listing ,
+        exercise ,
+        solution ,
+      }
+      {
+        \seq_if_exist:cT
+          {
+            \__zrefclever_opt_varname_lang_type:eenn
+              { \g__test_tmpa_tl } { #1 } { gender } { seq }
+          }
+          {
+            \seq_show:c
+              {
+                \__zrefclever_opt_varname_lang_type:eenn
+                  { \g__test_tmpa_tl } { #1 } { gender } { seq }
+              }
+          }
+        \seq_if_exist:cTF
+          {
+            \__zrefclever_opt_varname_language:enn
+              { \g__test_tmpa_tl } { declension } { seq }
+          }
+          {
+            \seq_map_inline:cn
+              {
+                \__zrefclever_opt_varname_language:enn
+                  { \g__test_tmpa_tl } { declension } { seq }
+              }
+              {
+                \clist_map_inline:nn
+                  {
+                    Name-sg ,
+                    name-sg ,
+                    Name-pl ,
+                    name-pl ,
+                    Name-sg-ab ,
+                    name-sg-ab ,
+                    Name-pl-ab ,
+                    name-pl-ab ,
+                  }
+                  {
+                    \tl_if_exist:cT
+                      {
+                        \__zrefclever_opt_varname_lang_type:eenn
+                          { \g__test_tmpa_tl }
+                          { #1 } { ##1 - ####1 } { tl }
+                      }
+                      {
+                        \tl_show:c
+                          {
+                            \__zrefclever_opt_varname_lang_type:eenn
+                              { \g__test_tmpa_tl }
+                              { #1 } { ##1 - ####1 } { tl }
+                          }
+                      }
+                  }
+              }
+          }
+          {
+            \clist_map_inline:nn
+              {
+                Name-sg ,
+                name-sg ,
+                Name-pl ,
+                name-pl ,
+                Name-sg-ab ,
+                name-sg-ab ,
+                Name-pl-ab ,
+                name-pl-ab ,
+              }
+              {
+                \tl_if_exist:cT
+                  {
+                    \__zrefclever_opt_varname_lang_type:eenn
+                      { \g__test_tmpa_tl } { #1 } { ##1 } { tl }
+                  }
+                  {
+                    \tl_show:c
+                      {
+                        \__zrefclever_opt_varname_lang_type:eenn
+                          { \g__test_tmpa_tl } { #1 } { ##1 } { tl }
+                      }
+                  }
+              }
+          }
+        \clist_map_inline:nn
+          {
+            rangesep ,
+          }
+          {
+            \tl_if_exist:cT
+              {
+                \__zrefclever_opt_varname_lang_type:eenn
+                  { \g__test_tmpa_tl } { #1 } { ##1 } { tl }
+              }
+              {
+                \tl_show:c
+                  {
+                    \__zrefclever_opt_varname_lang_type:eenn
+                      { \g__test_tmpa_tl } { #1 } { ##1 } { tl }
+                  }
+              }
+          }
+      }
+    \clist_map_inline:nn
+      {
+        equation ,
+      }
+      {
+        \clist_map_inline:nn
+          {
+            refbounds-first ,
+            refbounds-first-sg ,
+            refbounds-first-pb ,
+            refbounds-first-rb ,
+            refbounds-mid ,
+            refbounds-mid-rb ,
+            refbounds-mid-re ,
+            refbounds-last ,
+            refbounds-last-pe ,
+            refbounds-last-re ,
+          }
+          {
+            \seq_if_exist:cT
+              {
+                \__zrefclever_opt_varname_lang_type:eenn
+                  { \g__test_tmpa_tl } { #1 } { ##1 } { seq }
+              }
+              {
+                \seq_show:c
+                  {
+                    \__zrefclever_opt_varname_lang_type:eenn
+                      { \g__test_tmpa_tl } { #1 } { ##1 } { seq }
+                  }
+              }
+          }
+      }
+  }
+
+\ExplSyntaxOff
+
+\OMIT
+
+\end{document}
