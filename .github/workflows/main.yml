@@ -47,6 +47,7 @@ env:
     babel-latin
     babel-portuges
     babel-spanish
+    babel-dutch
     bookmark
     booktabs
     breqn
