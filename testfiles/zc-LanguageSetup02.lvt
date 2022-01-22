@@ -1,0 +1,857 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+% \usepackage{hyperref}
+
+% This file is intended to test the multiple low-level cases of 'refbounds-'
+% in use as options for '\zcLanguageSetup'.
+
+\zcDeclareLanguage{english-refbounds-first-sg}
+\zcLanguageSetup{english-refbounds-first-sg}{
+  % Use a serial comma for 'lastsep' (not the default) so that we can
+  % distinguish it in output from 'pairsep'.
+  lastsep={, and\nobreakspace},
+  namesep={\nobreakspace} ,
+  pairsep={ and\nobreakspace} ,
+  listsep={, } ,
+  tpairsep={ and\nobreakspace} ,
+  tlistsep={, } ,
+  tlastsep={, and\nobreakspace} ,
+  notesep={ } ,
+  rangesep={ to\nobreakspace} ,
+  type=section,
+    Name-sg=Section,
+    name-sg=section,
+    Name-pl=Sections,
+    name-pl=sections,
+    refbounds-first-sg={[pre*],[pre],[pos],[pos*]},
+}
+
+\zcDeclareLanguage{english-refbounds-first}
+\zcLanguageSetup{english-refbounds-first}{
+  lastsep={, and\nobreakspace},
+  namesep={\nobreakspace} ,
+  pairsep={ and\nobreakspace} ,
+  listsep={, } ,
+  tpairsep={ and\nobreakspace} ,
+  tlistsep={, } ,
+  tlastsep={, and\nobreakspace} ,
+  notesep={ } ,
+  rangesep={ to\nobreakspace} ,
+  type=section,
+    Name-sg=Section,
+    name-sg=section,
+    Name-pl=Sections,
+    name-pl=sections,
+    refbounds-first={[pre*],[pre],[pos],[pos*]},
+}
+
+\zcDeclareLanguage{english-refbounds-first-pb}
+\zcLanguageSetup{english-refbounds-first-pb}{
+  lastsep={, and\nobreakspace},
+  namesep={\nobreakspace} ,
+  pairsep={ and\nobreakspace} ,
+  listsep={, } ,
+  tpairsep={ and\nobreakspace} ,
+  tlistsep={, } ,
+  tlastsep={, and\nobreakspace} ,
+  notesep={ } ,
+  rangesep={ to\nobreakspace} ,
+  type=section,
+    Name-sg=Section,
+    name-sg=section,
+    Name-pl=Sections,
+    name-pl=sections,
+    refbounds-first-pb={[pre*],[pre],[pos],[pos*]},
+}
+
+\zcDeclareLanguage{english-refbounds-first-rb}
+\zcLanguageSetup{english-refbounds-first-rb}{
+  lastsep={, and\nobreakspace},
+  namesep={\nobreakspace} ,
+  pairsep={ and\nobreakspace} ,
+  listsep={, } ,
+  tpairsep={ and\nobreakspace} ,
+  tlistsep={, } ,
+  tlastsep={, and\nobreakspace} ,
+  notesep={ } ,
+  rangesep={ to\nobreakspace} ,
+  type=section,
+    Name-sg=Section,
+    name-sg=section,
+    Name-pl=Sections,
+    name-pl=sections,
+    refbounds-first-rb={[pre*],[pre],[pos],[pos*]},
+}
+
+\zcDeclareLanguage{english-refbounds-mid}
+\zcLanguageSetup{english-refbounds-mid}{
+  lastsep={, and\nobreakspace},
+  namesep={\nobreakspace} ,
+  pairsep={ and\nobreakspace} ,
+  listsep={, } ,
+  tpairsep={ and\nobreakspace} ,
+  tlistsep={, } ,
+  tlastsep={, and\nobreakspace} ,
+  notesep={ } ,
+  rangesep={ to\nobreakspace} ,
+  type=section,
+    Name-sg=Section,
+    name-sg=section,
+    Name-pl=Sections,
+    name-pl=sections,
+    refbounds-mid={[pre*],[pre],[pos],[pos*]},
+}
+
+\zcDeclareLanguage{english-refbounds-mid-rb}
+\zcLanguageSetup{english-refbounds-mid-rb}{
+  lastsep={, and\nobreakspace},
+  namesep={\nobreakspace} ,
+  pairsep={ and\nobreakspace} ,
+  listsep={, } ,
+  tpairsep={ and\nobreakspace} ,
+  tlistsep={, } ,
+  tlastsep={, and\nobreakspace} ,
+  notesep={ } ,
+  rangesep={ to\nobreakspace} ,
+  type=section,
+    Name-sg=Section,
+    name-sg=section,
+    Name-pl=Sections,
+    name-pl=sections,
+    refbounds-mid-rb={[pre*],[pre],[pos],[pos*]},
+}
+
+\zcDeclareLanguage{english-refbounds-mid-re}
+\zcLanguageSetup{english-refbounds-mid-re}{
+  lastsep={, and\nobreakspace},
+  namesep={\nobreakspace} ,
+  pairsep={ and\nobreakspace} ,
+  listsep={, } ,
+  tpairsep={ and\nobreakspace} ,
+  tlistsep={, } ,
+  tlastsep={, and\nobreakspace} ,
+  notesep={ } ,
+  rangesep={ to\nobreakspace} ,
+  type=section,
+    Name-sg=Section,
+    name-sg=section,
+    Name-pl=Sections,
+    name-pl=sections,
+    refbounds-mid-re={[pre*],[pre],[pos],[pos*]},
+}
+
+\zcDeclareLanguage{english-refbounds-last}
+\zcLanguageSetup{english-refbounds-last}{
+  lastsep={, and\nobreakspace},
+  namesep={\nobreakspace} ,
+  pairsep={ and\nobreakspace} ,
+  listsep={, } ,
+  tpairsep={ and\nobreakspace} ,
+  tlistsep={, } ,
+  tlastsep={, and\nobreakspace} ,
+  notesep={ } ,
+  rangesep={ to\nobreakspace} ,
+  type=section,
+    Name-sg=Section,
+    name-sg=section,
+    Name-pl=Sections,
+    name-pl=sections,
+    refbounds-last={[pre*],[pre],[pos],[pos*]},
+}
+
+\zcDeclareLanguage{english-refbounds-last-pe}
+\zcLanguageSetup{english-refbounds-last-pe}{
+  lastsep={, and\nobreakspace},
+  namesep={\nobreakspace} ,
+  pairsep={ and\nobreakspace} ,
+  listsep={, } ,
+  tpairsep={ and\nobreakspace} ,
+  tlistsep={, } ,
+  tlastsep={, and\nobreakspace} ,
+  notesep={ } ,
+  rangesep={ to\nobreakspace} ,
+  type=section,
+    Name-sg=Section,
+    name-sg=section,
+    Name-pl=Sections,
+    name-pl=sections,
+    refbounds-last-pe={[pre*],[pre],[pos],[pos*]},
+}
+
+\zcDeclareLanguage{english-refbounds-last-re}
+\zcLanguageSetup{english-refbounds-last-re}{
+  lastsep={, and\nobreakspace},
+  namesep={\nobreakspace} ,
+  pairsep={ and\nobreakspace} ,
+  listsep={, } ,
+  tpairsep={ and\nobreakspace} ,
+  tlistsep={, } ,
+  tlastsep={, and\nobreakspace} ,
+  notesep={ } ,
+  rangesep={ to\nobreakspace} ,
+  type=section,
+    Name-sg=Section,
+    name-sg=section,
+    Name-pl=Sections,
+    name-pl=sections,
+    refbounds-last-re={[pre*],[pre],[pos],[pos*]},
+}
+
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\NewDocumentCommand \newoptblock {m}{%
+  \noindent\rule{\textwidth}{0.4pt}\par%
+  \noindent\textbf{#1}\par}
+
+\begin{document}
+
+\chapter{Chapter 1}
+\zlabel{cha:chapter-1}
+
+\section{Section 1.1}
+\zlabel{sec:section-1.1}
+
+\section{Section 1.2}
+\zlabel{sec:section-1.2}
+
+\subsection{Subsection 1.2.1}
+\zlabel{sec:subsection-1.2.1}
+
+\subsection{Subsection 1.2.2}
+\zlabel{sec:subsection-1.2.2}
+
+\subsection{Subsection 1.2.3}
+\zlabel{sec:subsection-1.2.3}
+
+\section{Section 1.3}
+\zlabel{sec:section-1.3}
+\zlabel{sec:section-1.3a}
+\zlabel{sec:section-1.3b}
+
+\section{Section 1.4}
+\zlabel{sec:section-1.4}
+
+\section{Section 1.5}
+\zlabel{sec:section-1.5}
+
+\section{Section 1.6}
+\zlabel{sec:section-1.6}
+
+\subsection{Subsection 1.6.1}
+\zlabel{sec:subsection-1.6.1}
+
+\subsection{Subsection 1.6.2}
+\zlabel{sec:subsection-1.6.2}
+
+\subsection{Subsection 1.6.3}
+\zlabel{sec:subsection-1.6.3}
+
+\section{Section 1.7}
+\zlabel{sec:section-1.7}
+
+\clearpage{}
+
+\START
+
+\newoptblock{refbounds-first-sg}
+
+\BEGINTEST{refbounds-first-sg}
+\zcsetup{lang=english-refbounds-first-sg}
+% single
+\setbox0=\hbox{\zcref{sec:section-1.3}}
+\showbox0
+\box0
+% compress to single
+\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\showbox0
+\box0
+% compress to pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\showbox0
+\box0
+% compress to range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% pair ending with range
+\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% compress to list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\showbox0
+\box0
+% list starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+% list ending with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list with range in the middle
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+\clearpage{}
+\TIMO
+
+\newoptblock{refbounds-first}
+
+\BEGINTEST{refbounds-first}
+\zcsetup{lang=english-refbounds-first}
+% single
+\setbox0=\hbox{\zcref{sec:section-1.3}}
+\showbox0
+\box0
+% compress to single
+\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\showbox0
+\box0
+% compress to pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\showbox0
+\box0
+% compress to range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% pair ending with range
+\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% compress to list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\showbox0
+\box0
+% list starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+% list ending with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list with range in the middle
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{refbounds-first-pb}
+
+\BEGINTEST{refbounds-first-pb}
+\zcsetup{lang=english-refbounds-first-pb}
+% single
+\setbox0=\hbox{\zcref{sec:section-1.3}}
+\showbox0
+\box0
+% compress to single
+\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\showbox0
+\box0
+% compress to pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\showbox0
+\box0
+% compress to range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% pair ending with range
+\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% compress to list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\showbox0
+\box0
+% list starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+% list ending with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list with range in the middle
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{refbounds-first-rb}
+
+\BEGINTEST{refbounds-first-rb}
+\zcsetup{lang=english-refbounds-first-rb}
+% single
+\setbox0=\hbox{\zcref{sec:section-1.3}}
+\showbox0
+\box0
+% compress to single
+\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\showbox0
+\box0
+% compress to pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\showbox0
+\box0
+% compress to range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% pair ending with range
+\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% compress to list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\showbox0
+\box0
+% list starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+% list ending with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list with range in the middle
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+\clearpage{}
+\TIMO
+
+\newoptblock{refbounds-mid}
+
+\BEGINTEST{refbounds-mid}
+\zcsetup{lang=english-refbounds-mid}
+% single
+\setbox0=\hbox{\zcref{sec:section-1.3}}
+\showbox0
+\box0
+% compress to single
+\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\showbox0
+\box0
+% compress to pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\showbox0
+\box0
+% compress to range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% pair ending with range
+\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% compress to list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\showbox0
+\box0
+% list starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+% list ending with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list with range in the middle
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{refbounds-mid-rb}
+
+\BEGINTEST{refbounds-mid-rb}
+\zcsetup{lang=english-refbounds-mid-rb}
+% single
+\setbox0=\hbox{\zcref{sec:section-1.3}}
+\showbox0
+\box0
+% compress to single
+\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\showbox0
+\box0
+% compress to pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\showbox0
+\box0
+% compress to range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% pair ending with range
+\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% compress to list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\showbox0
+\box0
+% list starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+% list ending with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list with range in the middle
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{refbounds-mid-re}
+
+\BEGINTEST{refbounds-mid-re}
+\zcsetup{lang=english-refbounds-mid-re}
+% single
+\setbox0=\hbox{\zcref{sec:section-1.3}}
+\showbox0
+\box0
+% compress to single
+\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\showbox0
+\box0
+% compress to pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\showbox0
+\box0
+% compress to range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% pair ending with range
+\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% compress to list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\showbox0
+\box0
+% list starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+% list ending with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list with range in the middle
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+\clearpage{}
+\TIMO
+
+\newoptblock{refbounds-last}
+
+\BEGINTEST{refbounds-last}
+\zcsetup{lang=english-refbounds-last}
+% single
+\setbox0=\hbox{\zcref{sec:section-1.3}}
+\showbox0
+\box0
+% compress to single
+\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\showbox0
+\box0
+% compress to pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\showbox0
+\box0
+% compress to range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% pair ending with range
+\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% compress to list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\showbox0
+\box0
+% list starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+% list ending with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list with range in the middle
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{refbounds-last-pe}
+
+\BEGINTEST{refbounds-last-pe}
+\zcsetup{lang=english-refbounds-last-pe}
+% single
+\setbox0=\hbox{\zcref{sec:section-1.3}}
+\showbox0
+\box0
+% compress to single
+\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\showbox0
+\box0
+% compress to pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\showbox0
+\box0
+% compress to range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% pair ending with range
+\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% compress to list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\showbox0
+\box0
+% list starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+% list ending with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list with range in the middle
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{refbounds-last-re}
+
+\BEGINTEST{refbounds-last-re}
+\zcsetup{lang=english-refbounds-last-re}
+% single
+\setbox0=\hbox{\zcref{sec:section-1.3}}
+\showbox0
+\box0
+% compress to single
+\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\showbox0
+\box0
+% compress to pair
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\showbox0
+\box0
+% compress to range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\showbox0
+\box0
+% pair starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% pair ending with range
+\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\showbox0
+\box0
+% compress to list
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\showbox0
+\box0
+% list starting with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+% list ending with range
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\showbox0
+\box0
+% list with range in the middle
+\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}
