@@ -847,7 +847,6 @@
 %    \begin{macrocode}
 \cs_new:Npn \@@_opt_varname_fallback:nn #1#2
   { c_@@_opt_fallback_ #1 _ #2 }
-\cs_generate_variant:Nn \@@_opt_varname_fallback:nn { vn }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -896,8 +895,6 @@
       { \prg_return_true:  }
       { \prg_return_false: }
   }
-\prg_generate_conditional_variant:Nnn
-  \@@_opt_seq_if_set:N { c } { F , TF }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -921,7 +918,7 @@
 %     ~~\Arg{true} \Arg{false}
 %   \end{syntax}
 %    \begin{macrocode}
-\prg_new_protected_conditional:Npnn \@@_opt_tl_get:NN #1#2 { F , TF }
+\prg_new_protected_conditional:Npnn \@@_opt_tl_get:NN #1#2 { F }
   {
     \@@_opt_tl_if_set:NTF #1
       {
@@ -931,7 +928,7 @@
       { \prg_return_false: }
   }
 \prg_generate_conditional_variant:Nnn
-  \@@_opt_tl_get:NN { cN } { F , TF }
+  \@@_opt_tl_get:NN { cN } { F }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2506,10 +2503,9 @@
 %    \end{macrocode}
 %
 %
-% \subsubsection*{\opt{preposinlink} option}
+% \subsubsection*{\opt{preposinlink} option (deprecated)}
 %
 %    \begin{macrocode}
-\bool_new:N \l_@@_preposinlink_bool
 \keys_define:nn { zref-clever/reference }
   {
     preposinlink .code:n =
