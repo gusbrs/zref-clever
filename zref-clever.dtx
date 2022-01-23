@@ -1069,7 +1069,8 @@
       { \bool_if:NTF #1 { \prg_return_true: } { \prg_return_false: } }
       { \prg_return_false: }
   }
-\prg_generate_conditional_variant:Nnn \@@_opt_bool_if:N { c } { T , F, TF }
+\prg_generate_conditional_variant:Nnn
+  \@@_opt_bool_if:N { c } { T , F , TF }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1937,7 +1938,8 @@
                             \seq_gset_eq:cN
                               {
                                 \@@_opt_varname_lang_default:enn
-                                  { \l_@@_setup_language_tl } {#1} { seq }
+                                  { \l_@@_setup_language_tl }
+                                  {#1} { seq }
                               }
                               \g_tmpa_seq
                           }
@@ -1973,7 +1975,8 @@
                               {
                                 \@@_opt_varname_lang_type:eenn
                                   { \l_@@_setup_language_tl }
-                                  { \l_@@_setup_type_tl } {#1} { seq }
+                                  { \l_@@_setup_type_tl }
+                                  {#1} { seq }
                               }
                               \g_tmpa_seq
                           }
@@ -3655,7 +3658,8 @@
                             \@@_opt_varname_lang_type:eeen
                               { \l_@@_setup_language_tl }
                               { \l_@@_setup_type_tl }
-                              { \l_@@_lang_decl_case_tl - #1 } { tl }
+                              { \l_@@_lang_decl_case_tl - #1 }
+                              { tl }
                           }
                           {##1}
                       }
@@ -3679,7 +3683,8 @@
                     \@@_opt_seq_gunset:c
                       {
                         \@@_opt_varname_lang_default:enn
-                          { \l_@@_setup_language_tl } {#1} { seq }
+                          { \l_@@_setup_language_tl }
+                          {#1} { seq }
                       }
                   }
                   {
@@ -3696,7 +3701,8 @@
                         \seq_gset_eq:cN
                           {
                             \@@_opt_varname_lang_default:enn
-                              { \l_@@_setup_language_tl } {#1} { seq }
+                              { \l_@@_setup_language_tl }
+                              {#1} { seq }
                           }
                           \g_tmpa_seq
                       }
@@ -4943,18 +4949,21 @@
                   \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                     {
                       \exp_not:V \l_@@_pairsep_tl
-                      \@@_get_ref:VN \l_@@_range_beg_label_tl
+                      \@@_get_ref:VN
+                        \l_@@_range_beg_label_tl
                         \l_@@_refbounds_last_pe_seq
                     }
                   \seq_set_eq:NN \l_@@_type_first_refbounds_seq
                     \l_@@_refbounds_first_pb_seq
-                  \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                  \bool_set_true:N
+                    \l_@@_type_first_refbounds_set_bool
                 }
                 {
                   \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                     {
                       \exp_not:V \l_@@_listsep_tl
-                      \@@_get_ref:VN \l_@@_range_beg_label_tl
+                      \@@_get_ref:VN
+                        \l_@@_range_beg_label_tl
                         \l_@@_refbounds_mid_seq
                       \exp_not:V \l_@@_lastsep_tl
                       \@@_get_ref:VN \l_@@_label_a_tl
@@ -4982,10 +4991,12 @@
                     {
                       \seq_set_eq:NN \l_@@_type_first_refbounds_seq
                         \l_@@_refbounds_first_sg_seq
-                      \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                      \bool_set_true:N
+                        \l_@@_type_first_refbounds_set_bool
                     }
                     {
-                      \int_compare:nNnTF { \l_@@_ref_count_int } < { 2 }
+                      \int_compare:nNnTF
+                        { \l_@@_ref_count_int } < { 2 }
                         {
                           \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                             {
@@ -5016,7 +5027,8 @@
                     {
                       \seq_set_eq:NN \l_@@_type_first_refbounds_seq
                         \l_@@_refbounds_first_pb_seq
-                      \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                      \bool_set_true:N
+                        \l_@@_type_first_refbounds_set_bool
                       \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                         {
                           \exp_not:V \l_@@_pairsep_tl
@@ -5049,10 +5061,12 @@
                   {
                     \seq_set_eq:NN \l_@@_type_first_refbounds_seq
                       \l_@@_refbounds_first_rb_seq
-                    \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                    \bool_set_true:N
+                      \l_@@_type_first_refbounds_set_bool
                   }
                   {
-                    \int_compare:nNnTF { \l_@@_ref_count_int } < { 2 }
+                    \int_compare:nNnTF
+                      { \l_@@_ref_count_int } < { 2 }
                       {
                         \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                           {
@@ -5061,9 +5075,11 @@
                               \l_@@_range_beg_label_tl
                               \l_@@_refbounds_mid_rb_seq
                           }
-                        \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                        \seq_set_eq:NN
+                          \l_@@_type_first_refbounds_seq
                           \l_@@_refbounds_first_pb_seq
-                        \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                        \bool_set_true:N
+                          \l_@@_type_first_refbounds_set_bool
                       }
                       {
                         \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
@@ -5366,7 +5382,8 @@
                     {
                       \seq_set_eq:NN \l_@@_type_first_refbounds_seq
                         \l_@@_refbounds_first_seq
-                      \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                      \bool_set_true:N
+                        \l_@@_type_first_refbounds_set_bool
                     }
                     {
                       \int_incr:N \l_@@_ref_count_int
@@ -5408,9 +5425,11 @@
                     {
                       \tl_if_empty:VTF \l_@@_range_beg_label_tl
                         {
-                          \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                          \seq_set_eq:NN
+                            \l_@@_type_first_refbounds_seq
                             \l_@@_refbounds_first_seq
-                          \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                          \bool_set_true:N
+                            \l_@@_type_first_refbounds_set_bool
                         }
                         {
                           \int_incr:N \l_@@_ref_count_int
@@ -5428,9 +5447,11 @@
                     {
                       \tl_if_empty:VTF \l_@@_range_beg_label_tl
                         {
-                          \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                          \seq_set_eq:NN
+                            \l_@@_type_first_refbounds_seq
                             \l_@@_refbounds_first_seq
-                          \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                          \bool_set_true:N
+                            \l_@@_type_first_refbounds_set_bool
                         }
                         {
                           \int_incr:N \l_@@_ref_count_int
@@ -5455,9 +5476,11 @@
                     % Test: 'zc-typeset01.lvt': "Not last of type: range"
                     \tl_if_empty:VTF \l_@@_range_beg_label_tl
                       {
-                        \seq_set_eq:NN \l_@@_type_first_refbounds_seq
+                        \seq_set_eq:NN
+                          \l_@@_type_first_refbounds_seq
                           \l_@@_refbounds_first_rb_seq
-                        \bool_set_true:N \l_@@_type_first_refbounds_set_bool
+                        \bool_set_true:N
+                          \l_@@_type_first_refbounds_set_bool
                       }
                       {
                         \int_incr:N \l_@@_ref_count_int
@@ -5677,7 +5700,8 @@
                   {
                     \exp_not:N \group_begin:
                     \exp_not:V \l_@@_reffont_tl
-                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 1 }
+                    \seq_item:Nn
+                      \l_@@_type_first_refbounds_seq { 1 }
                     % It's two '@s', but escaped for DocStrip.
                     \exp_not:N \hyper@@@@link
                       {
@@ -5689,13 +5713,16 @@
                           \l_@@_type_first_label_tl { anchor } { }
                       }
                       {
-                        \seq_item:Nn \l_@@_type_first_refbounds_seq { 2 }
+                        \seq_item:Nn
+                          \l_@@_type_first_refbounds_seq { 2 }
                         \@@_extract_unexp:Vvn
                           \l_@@_type_first_label_tl
                           { l_@@_ref_property_tl } { }
-                        \seq_item:Nn \l_@@_type_first_refbounds_seq { 3 }
+                        \seq_item:Nn
+                          \l_@@_type_first_refbounds_seq { 3 }
                       }
-                    \seq_item:Nn \l_@@_type_first_refbounds_seq { 4 }
+                    \seq_item:Nn
+                      \l_@@_type_first_refbounds_seq { 4 }
                     \exp_not:N \group_end:
                   }
                   {
@@ -5925,7 +5952,8 @@
                               \l_@@_type_name_tl
                               {
                                 \tl_clear:N \l_@@_type_name_tl
-                                \bool_set_true:N \l_@@_type_name_missing_bool
+                                \bool_set_true:N
+                                  \l_@@_type_name_missing_bool
                                 \msg_warning:nnxx { zref-clever }
                                   { missing-name }
                                   { \l_@@_name_format_tl }
