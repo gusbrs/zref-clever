@@ -856,7 +856,6 @@
 %   {
 %     \@@_opt_tl_unset:N ,
 %     \@@_opt_tl_gunset:N ,
-%     \@@_opt_tl_gunset_if_new:N ,
 %   }
 %   Unset \meta{option tl}.  These functions \emph{define} what means to be
 %   unset for an option token list, and it must match what the conditional
@@ -864,7 +863,6 @@
 %   \begin{syntax}
 %     \cs{@@_opt_tl_unset:N} \Arg{option tl}
 %     \cs{@@_opt_tl_gunset:N} \Arg{option tl}
-%     \cs{@@_opt_tl_gunset_if_new:N} \Arg{option tl}
 %   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_opt_tl_unset:N #1
@@ -873,12 +871,6 @@
   { \tl_gset_eq:NN #1 \c_novalue_tl }
 \cs_generate_variant:Nn \@@_opt_tl_unset:N { c }
 \cs_generate_variant:Nn \@@_opt_tl_gunset:N { c }
-\cs_new_protected:Npn \@@_opt_tl_gunset_if_new:N #1
-  {
-    \@@_opt_tl_if_set:NF #1
-      { \tl_gset:NN #1 \c_novalue_tl }
-  }
-\cs_generate_variant:Nn \@@_opt_tl_gunset_if_new:Nn { c }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -955,7 +947,6 @@
 %   {
 %     \@@_opt_seq_unset:N ,
 %     \@@_opt_seq_gunset:N ,
-%     \@@_opt_seq_gunset_if_new:N ,
 %   }
 %   Unset \meta{option seq}.  These functions \emph{define} what means to be
 %   unset for an option sequence, and it must match what the conditional
@@ -963,7 +954,6 @@
 %   \begin{syntax}
 %     \cs{@@_opt_seq_unset:N} \Arg{option seq}
 %     \cs{@@_opt_seq_gunset:N} \Arg{option seq}
-%     \cs{@@_opt_seq_gunset_if_new:N} \Arg{option seq}
 %   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_opt_seq_unset:N #1
@@ -972,12 +962,6 @@
   { \cs_gset_eq:NN #1 \scan_stop: }
 \cs_generate_variant:Nn \@@_opt_seq_unset:N { c }
 \cs_generate_variant:Nn \@@_opt_seq_gunset:N { c }
-\cs_new_protected:Npn \@@_opt_seq_gunset_if_new:N #1
-  {
-    \@@_opt_seq_if_set:NF #1
-      { \cs_gset_eq:NN #1 \scan_stop: }
-  }
-\cs_generate_variant:Nn \@@_opt_seq_gunset_if_new:N { c }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1019,7 +1003,6 @@
 %   {
 %     \@@_opt_bool_unset:N ,
 %     \@@_opt_bool_gunset:N ,
-%     \@@_opt_bool_gunset_if_new:N ,
 %   }
 %   Unset \meta{option bool}.  These functions \emph{define} what means to be
 %   unset for an option boolean, and it must match what the conditional
@@ -1031,7 +1014,6 @@
 %   \begin{syntax}
 %     \cs{@@_opt_bool_unset:N} \Arg{option bool}
 %     \cs{@@_opt_bool_gunset:N} \Arg{option bool}
-%     \cs{@@_opt_bool_gunset_if_new:N} \Arg{option bool}
 %   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_opt_bool_unset:N #1
@@ -1040,12 +1022,6 @@
   { \cs_gset_eq:NN #1 \scan_stop: }
 \cs_generate_variant:Nn \@@_opt_bool_unset:N { c }
 \cs_generate_variant:Nn \@@_opt_bool_gunset:N { c }
-\cs_new_protected:Npn \@@_opt_bool_gunset_if_new:N #1
-  {
-    \@@_opt_bool_if_set:NF #1
-      { \cs_gset_eq:NN #1 \scan_stop: }
-  }
-\cs_generate_variant:Nn \@@_opt_bool_gunset_if_new:N { c }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1130,7 +1106,12 @@
 % situation is different, since they cannot meaningfully receive an empty
 % value and the ``key with no value'' is a handy and expected shorthand for
 % \texttt{key=true}.  Therefore, for reference format option booleans, we use
-% a third value ``\texttt{unset}'' for this purpose.
+% a third value ``\texttt{unset}'' for this purpose.  In the language files
+% the ``unsetting'' behavior is less meaningful, since they only change any
+% variable if it is unset to start with, so that unsetting an unset variable
+% would be redundant.  However, for UI symmetry also in the language files
+% keys with no value should not be considered ``empty'' and boolean
+% \texttt{unset} values should exist.  They are just no-op.
 %
 %
 % \begin{macro}
@@ -1778,17 +1759,7 @@
                   { option-only-type-specific } { gender }
               }
               {
-                \tl_if_novalue:nTF {#1}
-                  {
-                    \@@_opt_seq_gunset_if_new:c
-                      {
-                        \@@_opt_varname_lang_type:eenn
-                          { \l_@@_setup_language_tl }
-                          { \l_@@_setup_type_tl }
-                          { gender }
-                          { seq }
-                      }
-                  }
+                \tl_if_novalue:nF {#1}
                   {
                     \seq_clear:N \l_tmpa_seq
                     \clist_map_inline:nn {#1}
@@ -1835,15 +1806,7 @@
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \tl_if_novalue:nTF {##1}
-                  {
-                    \@@_opt_tl_gunset_if_new:c
-                      {
-                        \@@_opt_varname_lang_default:enn
-                          { \l_@@_setup_language_tl }
-                          {#1} { tl }
-                      }
-                  }
+                \tl_if_novalue:nF {##1}
                   {
                     \@@_opt_tl_gset_if_new:cn
                       {
@@ -1871,15 +1834,7 @@
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \tl_if_novalue:nTF {##1}
-                  {
-                    \@@_opt_tl_gunset_if_new:c
-                      {
-                        \@@_opt_varname_lang_default:enn
-                          { \l_@@_setup_language_tl }
-                          {#1} { tl }
-                      }
-                  }
+                \tl_if_novalue:nF {##1}
                   {
                     \@@_opt_tl_gset_if_new:cn
                       {
@@ -1891,16 +1846,7 @@
                   }
               }
               {
-                \tl_if_novalue:nTF {##1}
-                  {
-                    \@@_opt_tl_gunset_if_new:c
-                      {
-                        \@@_opt_varname_lang_type:eenn
-                          { \l_@@_setup_language_tl }
-                          { \l_@@_setup_type_tl }
-                          {#1} { tl }
-                      }
-                  }
+                \tl_if_novalue:nF {##1}
                   {
                     \@@_opt_tl_gset_if_new:cn
                       {
@@ -1931,16 +1877,7 @@
               {
                 \tl_if_empty:NTF \l_@@_lang_decl_case_tl
                   {
-                    \tl_if_novalue:nTF {##1}
-                      {
-                        \@@_opt_tl_gunset_if_new:c
-                          {
-                            \@@_opt_varname_lang_type:eenn
-                              { \l_@@_setup_language_tl }
-                              { \l_@@_setup_type_tl }
-                              {#1} { tl }
-                          }
-                      }
+                    \tl_if_novalue:nF {##1}
                       {
                         \@@_opt_tl_gset_if_new:cn
                           {
@@ -1953,16 +1890,7 @@
                       }
                   }
                   {
-                    \tl_if_novalue:nTF {##1}
-                      {
-                        \@@_opt_tl_gunset_if_new:c
-                          {
-                            \@@_opt_varname_lang_type:eeen
-                              { \l_@@_setup_language_tl }
-                              { \l_@@_setup_type_tl }
-                              { \l_@@_lang_decl_case_tl - #1 } { tl }
-                          }
-                      }
+                    \tl_if_novalue:nF {##1}
                       {
                         \@@_opt_tl_gset_if_new:cn
                           {
@@ -1988,14 +1916,7 @@
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \tl_if_novalue:nTF {##1}
-                  {
-                    \@@_opt_seq_gunset_if_new:c
-                      {
-                        \@@_opt_varname_lang_default:enn
-                          { \l_@@_setup_language_tl } {#1} { seq }
-                      }
-                  }
+                \tl_if_novalue:nF {##1}
                   {
                     \@@_opt_seq_if_set:cF
                       {
@@ -2029,15 +1950,7 @@
                   }
               }
               {
-                \tl_if_novalue:nTF {##1}
-                  {
-                    \@@_opt_seq_gunset_if_new:c
-                      {
-                        \@@_opt_varname_lang_type:eenn
-                          { \l_@@_setup_language_tl }
-                          { \l_@@_setup_type_tl } {#1} { seq }
-                      }
-                  }
+                \tl_if_novalue:nF {##1}
                   {
                     \@@_opt_seq_if_set:cF
                       {
@@ -2157,27 +2070,7 @@
                   }
               }
           } ,
-        #1 / unset .code:n =
-          {
-            \tl_if_empty:NTF \l_@@_setup_type_tl
-              {
-                \@@_opt_bool_gunset_if_new:c
-                  {
-                    \@@_opt_varname_lang_default:enn
-                      { \l_@@_setup_language_tl }
-                      {#1} { bool }
-                  }
-              }
-              {
-                \@@_opt_bool_gunset_if_new:c
-                  {
-                    \@@_opt_varname_lang_type:eenn
-                      { \l_@@_setup_language_tl }
-                      { \l_@@_setup_type_tl }
-                      {#1} { bool }
-                  }
-              }
-          } ,
+        #1 / unset .code:n = { } ,
         #1 .default:n = true ,
         no #1 .meta:n = { #1 = false } ,
         no #1 .value_forbidden:n = true ,
