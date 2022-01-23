@@ -11,7 +11,7 @@
 \START
 
 \ExplSyntaxOn
-\bool_show:N \l__zrefclever_use_hyperref_bool
+\bool_show:N \l_zrefclever_hyperlink_bool
 \ExplSyntaxOff
 
 \section{Section 1}
