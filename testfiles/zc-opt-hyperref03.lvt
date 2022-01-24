@@ -9,7 +9,7 @@
 \begin{document}
 
 \ExplSyntaxOn
-\bool_show:N \l_zrefclever_hyperlink_bool
+\bool_show:N \l__zrefclever_hyperlink_bool
 \ExplSyntaxOff
 
 \section{Section 1}

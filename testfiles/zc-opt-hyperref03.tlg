@@ -19,9 +19,9 @@ Package zref-clever Warning: Missing 'hyperref' package. Setting
 (zref-clever)                'hyperref=false'.
 (zref-clever-english.lang)
 Package zref-clever Info: Loaded 'english' language file.
-> \l_zrefclever_hyperlink_bool=false.
+> \l__zrefclever_hyperlink_bool=false.
 <recently read> }
-l. ...\bool_show:N \l_zrefclever_hyperlink_bool
+l. ...\bool_show:N \l__zrefclever_hyperlink_bool
 > \box...=
 \hbox(6.67859+0.0)x38.38895
 .\OT1/cmr/m/n/10 s

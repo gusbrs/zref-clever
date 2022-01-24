@@ -2330,24 +2330,24 @@
 % \subsubsection*{\opt{hyperref} option}
 %
 %    \begin{macrocode}
-\bool_new:N \l_zrefclever_hyperlink_bool
+\bool_new:N \l_@@_hyperlink_bool
 \bool_new:N \l_@@_hyperref_warn_bool
 \keys_define:nn { zref-clever/reference }
   {
     hyperref .choice: ,
     hyperref / auto .code:n =
       {
-        \bool_set_true:N \l_zrefclever_hyperlink_bool
+        \bool_set_true:N \l_@@_hyperlink_bool
         \bool_set_false:N \l_@@_hyperref_warn_bool
       } ,
     hyperref / true .code:n =
       {
-        \bool_set_true:N \l_zrefclever_hyperlink_bool
+        \bool_set_true:N \l_@@_hyperlink_bool
         \bool_set_true:N \l_@@_hyperref_warn_bool
       } ,
     hyperref / false .code:n =
       {
-        \bool_set_false:N \l_zrefclever_hyperlink_bool
+        \bool_set_false:N \l_@@_hyperlink_bool
         \bool_set_false:N \l_@@_hyperref_warn_bool
       } ,
     hyperref .initial:n = auto ,
@@ -2360,13 +2360,13 @@
   {
     \@@_if_package_loaded:nTF { hyperref }
       {
-        \bool_if:NT \l_zrefclever_hyperlink_bool
+        \bool_if:NT \l_@@_hyperlink_bool
           { \RequirePackage { zref-hyperref } }
       }
       {
         \bool_if:NT \l_@@_hyperref_warn_bool
           { \msg_warning:nn { zref-clever } { missing-hyperref } }
-        \bool_set_false:N \l_zrefclever_hyperlink_bool
+        \bool_set_false:N \l_@@_hyperlink_bool
       }
     \keys_define:nn { zref-clever/reference }
       {
@@ -3958,7 +3958,7 @@
   {
     \group_begin:
     \IfBooleanT {#1}
-      { \bool_set_false:N \l_zrefclever_hyperlink_bool }
+      { \bool_set_false:N \l_@@_hyperlink_bool }
     \zcref [#2, ref = page] {#3}
     \group_end:
   }
@@ -5574,7 +5574,7 @@
       {
         \bool_if:nTF
           {
-            \l_zrefclever_hyperlink_bool &&
+            \l_@@_hyperlink_bool &&
             ! \l_@@_link_star_bool
           }
           {
@@ -5694,7 +5694,7 @@
               {
                 \bool_if:nTF
                   {
-                    \l_zrefclever_hyperlink_bool &&
+                    \l_@@_hyperlink_bool &&
                     ! \l_@@_link_star_bool
                   }
                   {
@@ -5969,7 +5969,7 @@
     % Signal whether the type name is to be included in the hyperlink or not.
     \bool_lazy_any:nTF
       {
-        { ! \l_zrefclever_hyperlink_bool }
+        { ! \l_@@_hyperlink_bool }
         { \l_@@_link_star_bool }
         { \tl_if_empty_p:N \l_@@_type_name_tl }
         { \str_if_eq_p:Vn \l_@@_nameinlink_str { false } }

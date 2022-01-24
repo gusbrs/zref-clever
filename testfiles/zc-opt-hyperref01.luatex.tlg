@@ -1,8 +1,8 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-> \l_zrefclever_hyperlink_bool=false.
+> \l__zrefclever_hyperlink_bool=false.
 <recently read> }
-l. ...\bool_show:N \l_zrefclever_hyperlink_bool
+l. ...\bool_show:N \l__zrefclever_hyperlink_bool
 > \box...=
 \hbox(6.66+0.11)x38.38, direction TLT
 .\TU/lmr/m/n/10 s
