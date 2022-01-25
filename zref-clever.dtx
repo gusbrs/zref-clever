@@ -2321,8 +2321,8 @@
 \keys_define:nn { zref-clever/reference }
   {
     S .meta:n =
-      { capfirst = true , noabbrevfirst = true },
-    S .value_forbidden:n = true ,
+      { capfirst = {#1} , noabbrevfirst = {#1} },
+    S .default:n = true ,
   }
 %    \end{macrocode}
 %
