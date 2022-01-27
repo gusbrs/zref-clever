@@ -54,7 +54,7 @@
 ### Removed
 - Dropped the `subappendix` reference type.
 
-## [v0.1.0-alpha](https://github.com/gusbrs/zref-clever/releases/tag/v0.1.0-alpha) (2021-00-24)
+## [v0.1.0-alpha](https://github.com/gusbrs/zref-clever/releases/tag/v0.1.0-alpha) (2021-11-24)
 
 ### Added
 - Initial release.
