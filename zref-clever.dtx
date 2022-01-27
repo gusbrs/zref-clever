@@ -2351,7 +2351,17 @@
         \bool_set_false:N \l_@@_hyperref_warn_bool
       } ,
     hyperref .initial:n = auto ,
-    hyperref .default:n = auto
+    hyperref .default:n = true ,
+%    \end{macrocode}
+% \opt{nohyperref} is provided mainly as a means to inhibit hyperlinking
+% locally in \pkg{zref-vario}'s commands without the need to be setting
+% \pkg{zref-clever}'s internal variables directly.  What limits setting
+% \opt{hyperref} out of the preamble is that enabling hyperlinks requires
+% loading packages.  But \opt{nohyperref} can only disable them, so we can use
+% it in the document body too.
+%    \begin{macrocode}
+    nohyperref .meta:n = { hyperref = false } ,
+    nohyperref .value_forbidden:n = true ,
   }
 %    \end{macrocode}
 %
@@ -2371,7 +2381,9 @@
     \keys_define:nn { zref-clever/reference }
       {
         hyperref .code:n =
-          { \msg_warning:nn { zref-clever } { hyperref-preamble-only } }
+          { \msg_warning:nn { zref-clever } { hyperref-preamble-only } } ,
+        nohyperref .code:n =
+          { \bool_set_false:N \l_@@_hyperlink_bool } ,
       }
   }
 %    \end{macrocode}
