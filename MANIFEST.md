@@ -65,7 +65,9 @@ the same output. These output files are sometimes shared and sometime specific f
 different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 
 * zc-LanguageSetup01.lvt 
+* zc-LanguageSetup02.lvt 
 * zc-RefTypeSetup01.lvt 
+* zc-RefTypeSetup02.lvt 
 * zc-class-article01.lvt 
 * zc-class-book01.lvt 
 * zc-class-memoir01.lvt 
@@ -83,6 +85,7 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-compat-memoir01.lvt 
 * zc-compat-subcaption01.lvt 
 * zc-compat-subfig01.lvt 
+* zc-fallback01.lvt 
 * zc-howto-amsmath01.lvt 
 * zc-howto-enumitem01.lvt 
 * zc-howto-listings01.lvt 
@@ -97,8 +100,12 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-howto-newtheorem04.lvt 
 * zc-howto-zref-xr01.lvt 
 * zc-label-options01.lvt 
-* zc-langfiles01.lvt 
-* zc-langfiles02.lvt 
+* zc-langfile-dutch01.lvt 
+* zc-langfile-english01.lvt 
+* zc-langfile-french01.lvt 
+* zc-langfile-german01.lvt 
+* zc-langfile-portuguese01.lvt 
+* zc-langfile-spanish01.lvt 
 * zc-languages01.lvt 
 * zc-opt-check01.lvt 
 * zc-opt-d01.lvt 
@@ -125,16 +132,27 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-typeset01.lvt 
 * zc-workaround-breqn01.lvt 
 * zc-zcref-options01.lvt 
+* zc-zcref-options02.lvt 
 * zc-LanguageSetup01.luatex.tlg 
 * zc-LanguageSetup01.luatexdev.tlg 
 * zc-LanguageSetup01.tlg 
 * zc-LanguageSetup01.xetex.tlg 
 * zc-LanguageSetup01.xetexdev.tlg 
+* zc-LanguageSetup02.luatex.tlg 
+* zc-LanguageSetup02.luatexdev.tlg 
+* zc-LanguageSetup02.tlg 
+* zc-LanguageSetup02.xetex.tlg 
+* zc-LanguageSetup02.xetexdev.tlg 
 * zc-RefTypeSetup01.luatex.tlg 
 * zc-RefTypeSetup01.luatexdev.tlg 
 * zc-RefTypeSetup01.tlg 
 * zc-RefTypeSetup01.xetex.tlg 
 * zc-RefTypeSetup01.xetexdev.tlg 
+* zc-RefTypeSetup02.luatex.tlg 
+* zc-RefTypeSetup02.luatexdev.tlg 
+* zc-RefTypeSetup02.tlg 
+* zc-RefTypeSetup02.xetex.tlg 
+* zc-RefTypeSetup02.xetexdev.tlg 
 * zc-class-article01.luatex.tlg 
 * zc-class-article01.luatexdev.tlg 
 * zc-class-article01.tlg 
@@ -220,6 +238,11 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-compat-subfig01.tlg 
 * zc-compat-subfig01.xetex.tlg 
 * zc-compat-subfig01.xetexdev.tlg 
+* zc-fallback01.luatex.tlg 
+* zc-fallback01.luatexdev.tlg 
+* zc-fallback01.tlg 
+* zc-fallback01.xetex.tlg 
+* zc-fallback01.xetexdev.tlg 
 * zc-howto-amsmath01.luatex.tlg 
 * zc-howto-amsmath01.luatexdev.tlg 
 * zc-howto-amsmath01.tlg 
@@ -288,12 +311,16 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-label-options01.luatex.tlg 
 * zc-label-options01.luatexdev.tlg 
 * zc-label-options01.tlg 
-* zc-langfiles01.tlg 
-* zc-langfiles02.luatex.tlg 
-* zc-langfiles02.luatexdev.tlg 
-* zc-langfiles02.tlg 
-* zc-langfiles02.xetex.tlg 
-* zc-langfiles02.xetexdev.tlg 
+* zc-langfile-dutch01.tlg 
+* zc-langfile-english01.tlg 
+* zc-langfile-french01.tlg 
+* zc-langfile-german01.tlg 
+* zc-langfile-portuguese01.luatex.tlg 
+* zc-langfile-portuguese01.luatexdev.tlg 
+* zc-langfile-portuguese01.tlg 
+* zc-langfile-portuguese01.xetex.tlg 
+* zc-langfile-portuguese01.xetexdev.tlg 
+* zc-langfile-spanish01.tlg 
 * zc-languages01.tlg 
 * zc-opt-check01.luatex.tlg 
 * zc-opt-check01.luatexdev.tlg 
@@ -402,6 +429,11 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-zcref-options01.tlg 
 * zc-zcref-options01.xetex.tlg 
 * zc-zcref-options01.xetexdev.tlg 
+* zc-zcref-options02.luatex.tlg 
+* zc-zcref-options02.luatexdev.tlg 
+* zc-zcref-options02.tlg 
+* zc-zcref-options02.xetex.tlg 
+* zc-zcref-options02.xetexdev.tlg 
 
 
 ## TDS manifest
