@@ -1303,6 +1303,15 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}[EXP]{\zrefclever_language_varname:n}
+%   A public version of \cs{@@_language_varname:n} for use in
+%   \pkg{zref-vario}.
+%    \begin{macrocode}
+\cs_set_eq:NN \zrefclever_language_varname:n
+  \@@_language_varname:n
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}[EXP,TF]{\@@_language_if_declared:n}
 %   A language is considered to be declared for \pkg{zref-clever} if it passes
 %   this conditional, which requires that a variable with
@@ -1319,6 +1328,15 @@
   }
 \prg_generate_conditional_variant:Nnn
   \@@_language_if_declared:n { x } { T , F , TF }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}[EXP,TF]{\zrefclever_language_if_declared:n}
+%   A public version of \cs{@@_language_if_declared:n} for use in
+%   \pkg{zref-vario}.
+%    \begin{macrocode}
+\prg_set_eq_conditional:NNn \zrefclever_language_if_declared:n
+  \@@_language_if_declared:n { TF }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2489,6 +2507,12 @@
   }
 %    \end{macrocode}
 %
+% \begin{macro}{\l_zrefclever_ref_language_tl}
+%   A public version of \cs{l_@@_ref_language_tl} for use in \pkg{zref-vario}.
+%    \begin{macrocode}
+\tl_set:Nn  \l_zrefclever_ref_language_tl { \l_@@_ref_language_tl }
+%    \end{macrocode}
+% \end{macro}
 %
 %    \begin{macrocode}
 \keys_define:nn { zref-clever/reference }
