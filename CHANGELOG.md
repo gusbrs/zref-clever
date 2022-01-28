@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.1.2-alpha...HEAD)
+## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.2.0-alpha...HEAD)
+
+## [v0.2.0-alpha](https://github.com/gusbrs/zref-clever/compare/v0.1.2-alpha...v0.2.0-alpha) (2022-01-28)
 
 ### Added
 - The reference block formatting has been generalized to allow for more
