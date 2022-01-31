@@ -1103,16 +1103,22 @@
 % \contributor{Jonathan P.\ Spratte}, aka `Skillmon', and some discussion
 % about it, including further insights by \contributor{Phelype Oleinik}, see
 % \url{https://tex.stackexchange.com/q/614690} and
-% \url{https://github.com/latex3/latex3/pull/988}.  For booleans, the
-% situation is different, since they cannot meaningfully receive an empty
-% value and the ``key with no value'' is a handy and expected shorthand for
+% \url{https://github.com/latex3/latex3/pull/988}.  However, Joseph Wright
+% seems to particularly dislike this use and the general idea of a ``key with
+% no value'' being somehow meaningful for \pkg{l3keys} (e.g. his comments on
+% the previous question, and
+% \url{https://tex.stackexchange.com/q/632157/#comment1576404_632157}), which
+% does make it somewhat risky to rely on this.  For booleans, the situation is
+% different, since they cannot meaningfully receive an empty value and the
+% ``key with no value'' is a handy and expected shorthand for
 % \texttt{key=true}.  Therefore, for reference format option booleans, we use
-% a third value ``\texttt{unset}'' for this purpose.  In the language files
-% the ``unsetting'' behavior is less meaningful, since they only change any
-% variable if it is unset to start with, so that unsetting an unset variable
-% would be redundant.  However, for UI symmetry also in the language files
-% keys with no value should not be considered ``empty'' and boolean
-% \texttt{unset} values should exist.  They are just no-op.
+% a third value ``\texttt{unset}'' for this purpose.  And similarly for
+% ``choice'' options.  In the language files the ``unsetting'' behavior is
+% less meaningful, since they only change any variable if it is unset to start
+% with, so that unsetting an unset variable would be redundant.  However, for
+% UI symmetry also in the language files keys with no value should not be
+% considered ``empty'' and boolean \texttt{unset} values should exist.  They
+% are just no-op.
 %
 %
 % \begin{macro}
