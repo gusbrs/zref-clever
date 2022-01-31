@@ -1,0 +1,74 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\usepackage[vario]{zref-clever}
+
+\usepackage{hyperref}
+
+\ExplSyntaxOn \bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\begin{document}
+\section{Section 1}
+\zlabel{sec:section-1}
+
+\begin{figure}
+  A figure.
+  \caption{Figure 1}
+  \zlabel{fig:figure-1}
+\end{figure}
+
+\begin{figure}
+  Another figure.
+  \caption{Figure 2}
+  \zlabel{fig:figure-2}
+\end{figure}
+
+\zvref[S]{sec:section-1}
+
+\zvpageref{fig:figure-1}
+
+\zvrefrange{fig:figure-1}{fig:figure-2}
+
+\zvpagerefrange{fig:figure-1}{fig:figure-2}
+
+\zfullref{fig:figure-1}
+
+\clearpage{}
+
+\START
+
+\BEGINTEST{zvref}
+\setbox0=\hbox{\zvref[S]{sec:section-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{zvpageref}
+\setbox0=\hbox{\zvpageref{fig:figure-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{zvrefrange}
+\setbox0=\hbox{\zvrefrange{fig:figure-1}{fig:figure-2}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{zvpagerefrange}
+\setbox0=\hbox{\zvpagerefrange{fig:figure-1}{fig:figure-2}}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{zfullref}
+\setbox0=\hbox{\zfullref{fig:figure-1}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}

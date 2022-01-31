@@ -2759,6 +2759,28 @@
 %    \end{macrocode}
 %
 %
+% \subsubsection*{\opt{vario} option}
+%
+%    \begin{macrocode}
+\keys_define:nn { zref-clever/reference }
+  {
+    vario .code:n = { \RequirePackage { zref-vario } } ,
+    vario .value_forbidden:n = true ,
+  }
+\AddToHook { begindocument }
+  {
+    \keys_define:nn { zref-clever/reference }
+      {
+        vario .code:n =
+          {
+            \msg_warning:nnn { zref-clever }
+              { option-preamble-only } { vario }
+          }
+      }
+  }
+%    \end{macrocode}
+%
+%
 % \subsubsection*{\opt{note} option}
 %
 %    \begin{macrocode}

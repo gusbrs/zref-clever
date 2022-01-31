@@ -2,6 +2,9 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.2.0-alpha...HEAD)
 
+### Added
+- Option `vario` to load package `zref-vario`.
+
 ## [v0.2.0-alpha](https://github.com/gusbrs/zref-clever/compare/v0.1.2-alpha...v0.2.0-alpha) (2022-01-28)
 
 ### Added

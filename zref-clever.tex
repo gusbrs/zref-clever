@@ -105,6 +105,11 @@
     zcLanguageSetup,
     zcRefTypeSetup,
     zcheck,
+    zvref,
+    zvpageref,
+    zvrefrange,
+    zvpagerefrange,
+    zfullref,
   }
 }
 \lstset{
@@ -666,8 +671,14 @@ means this option \emph{can't} be set at load time, as a package option.  If
 you want to set it globally, use \cs{zcsetup} instead.
 
 \DescribeOption{titleref} %
+\DescribeOption{vario} %
 The \opt{titleref} option receives no value and, when given, loads
-\pkg{zref}'s \pkg{zref-titleref} module.  This is a preamble only option.
+\pkg{zref}'s \pkg{zref-titleref} module.  Similarly, the \opt{vario} option
+loads the \pkg{zref-vario} package.  These are a preamble only options.  Note
+that \pkg{zref-vario} loads \pkg{varioref}, which has known load order
+interaction with other packages, prominently with \pkg{hyperref}.  Hence,
+depending on your document, you may wish to load \pkg{zref-vario} separately,
+instead of through the option.
 
 \DescribeOption{note} %
 The \opt{note} option receives as value some text to be typeset at the end of
@@ -1490,71 +1501,40 @@ set around a cross-reference ``task'' we'd like to perform with
 \pkg{zref-clever}.
 
 
-\subsection{Context sensitive page references}
+\subsection{Extended page references (\pkg{varioref})}
 
 \zctask{Make cross-references to pages which are sensitive to the relative
-  position between the reference and the label being referred to.}
+  position between the reference and the label being referred to using
+  \pkg{varioref}.}
 
-It is frequently useful to make a reference to both a document element and its
-page.  For example:
-\begin{zcexample}
-\zcref{fig:1} on \zcpageref{fig:1}
-\end{zcexample}
+\pkg{zref-vario}, which can be enabled with package option \opt{vario}, offers
+a layer of compatibility with \pkg{varioref} and provides
+\texttt{\textbackslash{}z}\dots{} counterparts for the latter's main reference
+commands.
 
-However, while this works well when the object and the reference are somewhat
-distant, we may want to adjust this to something different when the label and
-the reference are close to each other.  If both are on the same page, we may
-want to drop the \cs{zcpageref}, or replace it with ``above'' or ``below''.
-And, if both are on contiguous pages, then something like ``on the following
-page'' or ``on the preceding page'' may be preferred.  Since we don't usually
-know the relative position of the reference to the label, particularly for
-floats, making these kinds of adjustments manually is an uphill battle, and
-error prone, in the absence of some support for it.
-
-\pkg{zref-clever}'s integration with \pkg{zref-check} offers some assistance
-in making these kinds of references, by providing checks for the relation
-between the reference and the label.  For example, you may use:
-\begin{zcexample}
-\zcref[check=nextpage,note={on the following page}]{fig:1}
-\end{zcexample}
-and if \texttt{fig:1} is not on the next page relative to the reference, a
-compilation warning can be issued by \pkg{zref-check} (according to the
-package's options), so that the problem can be easily identified and
-corrected.  Evidently, this does not fully automate the typeset results, but
-it does automate the checking that the reference context is the intended one.
-
-And to make use of this feature, one does not need to rely on compiling the
-document, make the reference according to the current state of things, and
-then adjusting it over and over, as the document gets edited.  This feature is
-best used within a certain workflow, which starts by making a standard
-reference with a page reference, but adding the \texttt{pagegap} check to it:
-\begin{zcexample}
-\zcref{fig:1} on \zcpageref[check=pagegap]{fig:1}
-\end{zcexample}
-
-During the initial editing of the document, this reference will be formally
-correct, even if less than ideal in certain cases.  At a certain point, when
-you choose to give finishing touches to your document, then you can cater for
-\pkg{zref-check}'s warnings (the package has options to control them, for
-example, enabling warnings only when the \opt{draft} option is not in use).
-The \texttt{pagegap} check will pass if there's one or more pages between the
-reference and the label, in which case, that reference is already what we
-want.  However, if the referenced object lies in the previous page, the same
-page, or the next page, the \texttt{pagegap} check will issue a warning.  Thus
-telling us if there's an opportunity, or need, to adjust the context
-information of the reference.  Then we can go with one of the below, according
-to the situation:
-\begin{zcexample}
-\zcref[check=thispage]{fig:1}
-\zcref[check=above,note={above}]{fig:1}
-\zcref[check=below,note={below}]{fig:1}
-\zcref[check=nextpage,note={on the following page}]{fig:1}
-\zcref[check=prevpage,note={on the preceding page}]{fig:1}
-\zcref[check=facing,note={on the facing page}]{fig:1}
-\end{zcexample}
-
-See \pkg{zref-check}'s documentation for details, and further available
-checks.
+\begin{zchowto}[caption={\pkg{zref-vario}}]
+\documentclass{article}
+\usepackage[vario]{zref-clever}
+\begin{document}
+\section{Section 1}
+\zlabel{sec:section-1}
+\begin{figure}
+  A figure.
+  \caption{Figure 1}
+  \zlabel{fig:figure-1}
+\end{figure}
+\begin{figure}
+  Another figure.
+  \caption{Figure 2}
+  \zlabel{fig:figure-2}
+\end{figure}
+\zvref[S]{sec:section-1}
+\zvpageref{fig:figure-1}
+\zvrefrange{fig:figure-1}{fig:figure-2}
+\zvpagerefrange{fig:figure-1}{fig:figure-2}
+\zfullref{fig:figure-1}
+\end{document}
+\end{zchowto}
 
 
 \subsection{\cs{newtheorem}}

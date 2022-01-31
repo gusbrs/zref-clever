@@ -92,8 +92,10 @@ env:
     trivfloat
     underscore
     upquote
+    varioref
     zref
     zref-check
+    zref-vario
 
 jobs:
   check:
