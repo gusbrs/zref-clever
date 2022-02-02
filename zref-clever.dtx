@@ -6152,8 +6152,14 @@
                             =
                           { \@@_extract:nnn {#2} { zc@cntval } { -1 } }
                           {
-                            \bool_set_true:N
-                              \l_@@_next_maybe_range_bool
+%    \end{macrocode}
+% If \texttt{zc@counter}s are equal, \texttt{zc@enclval}s are equal, and
+% \texttt{zc@enclval}s are equal, but the references themselves are different,
+% this means that \cs{@currentlabel} has somehow been set manually (e.g. by an
+% \pkg{amsmath}'s \cs{tag}), in which case we have no idea what's in there,
+% and we should not even consider this is still a range.  If they are equal,
+% though, of course it is a range, and it is the same.
+%    \begin{macrocode}
                             \exp_args:Nxx \tl_if_eq:nnT
                               {
                                 \@@_extract_unexp:nvn {#1}
@@ -6164,6 +6170,8 @@
                                   { l_@@_ref_property_tl } { }
                               }
                               {
+                                \bool_set_true:N
+                                  \l_@@_next_maybe_range_bool
                                 \bool_set_true:N
                                   \l_@@_next_is_same_bool
                               }
