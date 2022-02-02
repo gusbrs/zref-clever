@@ -2173,7 +2173,9 @@
 % branch if it is not (insightful comments by \contributor{Ulrike Fischer} at
 % \url{https://github.com/ho-tex/zref/issues/13}).  Therefore, before adding
 % anything to \cs{l_@@_ref_property_tl}, check if first here with
-% \cs{zref@ifpropundefined}: close it at the door.
+% \cs{zref@ifpropundefined}: close it at the door.  We must also control for
+% an empty value, since ``empty'' passes both \cs{zref@ifpropundefined} and
+% \cs{zref@ifrefcontainsprop}.
 %
 %
 %    \begin{macrocode}
@@ -2182,12 +2184,21 @@
   {
     ref .code:n =
       {
-        \zref@ifpropundefined {#1}
+        \tl_if_empty:nTF {#1}
           {
-            \msg_warning:nnn { zref-clever } { zref-property-undefined } {#1}
+            \msg_warning:nnn { zref-clever }
+              { zref-property-undefined } {#1}
             \tl_set:Nn \l_@@_ref_property_tl { default }
           }
-          { \tl_set:Nn \l_@@_ref_property_tl {#1} }
+          {
+            \zref@ifpropundefined {#1}
+              {
+                \msg_warning:nnn { zref-clever }
+                  { zref-property-undefined } {#1}
+                \tl_set:Nn \l_@@_ref_property_tl { default }
+              }
+              { \tl_set:Nn \l_@@_ref_property_tl {#1} }
+          }
       } ,
     ref .initial:n = default ,
     ref .value_required:n = true ,
