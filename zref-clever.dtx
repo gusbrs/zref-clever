@@ -607,6 +607,11 @@
     Option~'ref=#1'~requested~\msg_line_context:.~
     But~the~property~'#1'~is~not~declared,~falling-back~to~'default'.
   }
+\msg_new:nnn { zref-clever } { endrange-property-undefined }
+  {
+    Option~'endrange=#1'~requested~\msg_line_context:.~
+    But~the~property~'#1'~is~not~declared,~'endrange'~not~set.
+  }
 \msg_new:nnn { zref-clever } { hyperref-preamble-only }
   {
     Option~'hyperref'~only~available~in~the~preamble~\msg_line_context:.~
@@ -676,7 +681,7 @@
     \exp_args:NNNo \exp_args:NNo \tl_set:Nn #1
       { \zref@extractdefault {#2} {#3} {#4} }
   }
-\cs_generate_variant:Nn \@@_extract_default:Nnnn { NVnn }
+\cs_generate_variant:Nn \@@_extract_default:Nnnn { NVnn , Nnvn }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1886,6 +1891,225 @@
           } ,
       }
   }
+\keys_define:nn { zref-clever/langfile }
+  {
+    endrange .code:n =
+      {
+        \str_case:nnF {#1}
+          {
+            { ref }
+            {
+              \tl_if_empty:NTF \l_@@_setup_type_tl
+                {
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangefunc } { tl }
+                    }
+                    { }
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangeprop } { tl }
+                    }
+                    { }
+                }
+                {
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangefunc } { tl }
+                    }
+                    { }
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangeprop } { tl }
+                    }
+                    { }
+                }
+            }
+
+            { stripprefix }
+            {
+              \tl_if_empty:NTF \l_@@_setup_type_tl
+                {
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangefunc } { tl }
+                    }
+                    { @@_get_endrange_stripprefix }
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangeprop } { tl }
+                    }
+                    { }
+                }
+                {
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangefunc } { tl }
+                    }
+                    { @@_get_endrange_stripprefix }
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangeprop } { tl }
+                    }
+                    { }
+                }
+            }
+
+            { pagecomp }
+            {
+              \tl_if_empty:NTF \l_@@_setup_type_tl
+                {
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangefunc } { tl }
+                    }
+                    { @@_get_endrange_pagecomp }
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangeprop } { tl }
+                    }
+                    { }
+                }
+                {
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangefunc } { tl }
+                    }
+                    { @@_get_endrange_pagecomp }
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangeprop } { tl }
+                    }
+                    { }
+                }
+            }
+
+            { pagecomp2 }
+            {
+              \tl_if_empty:NTF \l_@@_setup_type_tl
+                {
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangefunc } { tl }
+                    }
+                    { @@_get_endrange_pagecomptwo }
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangeprop } { tl }
+                    }
+                    { }
+                }
+                {
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangefunc } { tl }
+                    }
+                    { @@_get_endrange_pagecomptwo }
+                  \@@_opt_tl_gset_if_new:cn
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangeprop } { tl }
+                    }
+                    { }
+                }
+            }
+
+            { unset }
+            { }
+          }
+          {
+            \tl_if_empty:nTF {#1}
+              {
+                \msg_info:nnn { zref-clever }
+                  { endrange-property-undefined } {#1}
+              }
+              {
+                \zref@ifpropundefined {#1}
+                  {
+                    \msg_info:nnn { zref-clever }
+                      { endrange-property-undefined } {#1}
+                  }
+                  {
+                    \tl_if_empty:NTF \l_@@_setup_type_tl
+                      {
+                        \@@_opt_tl_gset_if_new:cn
+                          {
+                            \@@_opt_varname_lang_default:enn
+                              { \l_@@_setup_language_tl }
+                              { endrangefunc } { tl }
+                          }
+                          { @@_get_endrange_property }
+                        \@@_opt_tl_gset_if_new:cn
+                          {
+                            \@@_opt_varname_lang_default:enn
+                              { \l_@@_setup_language_tl }
+                              { endrangeprop } { tl }
+                          }
+                          {#1}
+                      }
+                      {
+                        \@@_opt_tl_gset_if_new:cn
+                          {
+                            \@@_opt_varname_lang_type:eenn
+                              { \l_@@_setup_language_tl }
+                              { \l_@@_setup_type_tl }
+                              { endrangefunc } { tl }
+                          }
+                          { @@_get_endrange_property }
+                        \@@_opt_tl_gset_if_new:cn
+                          {
+                            \@@_opt_varname_lang_type:eenn
+                              { \l_@@_setup_language_tl }
+                              { \l_@@_setup_type_tl }
+                              { endrangeprop } { tl }
+                          }
+                          {#1}
+                      }
+                  }
+              }
+          }
+      } ,
+    endrange .value_required:n = true ,
+  }
 \seq_map_inline:Nn
   \c_@@_rf_opts_tl_type_names_seq
   {
@@ -2444,6 +2668,307 @@
     nameinlink .default:n = true ,
   }
 %    \end{macrocode}
+%
+%
+% \subsubsection*{\opt{endrange} option}
+%
+% The working of \opt{endrange} option depends on two underlying option values
+% / variables: \texttt{endrangefunc} and \texttt{endrangeprop}.
+% \texttt{endrangefunc} is the more general one, and \texttt{endrangeprop} is
+% used when the first is set to \cs{@@_get_endrange_property:VVN}, which is
+% the case when the user is setting \opt{endrange} to an arbitrary \pkg{zref}
+% property, instead of one of the \cs{str_case:nn} matches.
+%
+% \texttt{endrangefunc} \emph{must} receive three arguments and, more
+% specifically, its signature \emph{must} be \texttt{VVN}.  For this reason,
+% \texttt{endrangefunc} should be stored without the signature, which is
+% added, and hard-coded, at the calling place.  The first argument is
+% \meta{beg range label}, the second \meta{end range label}, and the last
+% \meta{tl var to set}.  Of course, \meta{tl var to set} must be set to a
+% proper value, and that's the main task of the function.
+% \texttt{endrangefunc} must also handle the case where
+% \cs{zref@ifrefcontainsprop} is false, since \cs{@@_get_ref_endrange:nnN}
+% cannot take care of that.  For this purpose, it may set \meta{tl var to set}
+% to the special value \texttt{zc@missingproperty}, to signal a missing
+% property for \cs{@@_get_ref_endrange:nnN}.
+%
+% An empty \texttt{endrangefunc} signals that no processing is to be made to
+% the end range reference, that is, that it should be treated like any other
+% one, as defined by the \opt{ref} option.  This may happen either because
+% \opt{endrange} was never set for the reference type, and empty is the value
+% ``returned'' by \cs{@@_get_rf_opt_tl:nnnN} for options not set, or because
+% \opt{endrange} was set to \texttt{ref} at some scope which happens to get
+% precedence.
+%
+% One thing I was divided about in this functionality was whether to
+% (x-)expand the references before processing them, when such processing is
+% required.  At first sight, it makes sense to do so, since we are aiming at
+% ``removing common parts'' as close as possible to the printed representation
+% of the references (\pkg{cleveref} does expand them in \cs{crefstripprefix}).
+% On the other hand, this brings some new challenges: if a fragile command
+% gets there, we are in trouble; also, if a protected one gets there, though
+% things won't break as badly, we may ``strip'' the macro and stay with
+% different arguments, which will then end up in the input stream.  I think
+% \pkg{biblatex} is a good reference here, and it offers \cs{NumCheckSetup},
+% \cs{NumsCheckSetup}, and \cs{PagesCheckSetup} aimed at locally redefining
+% some commands which may interfere with the processing.  This is a good idea,
+% thus we offer a similar hook for the same purpose: \texttt{endrange-setup}.
+%
+%    \begin{macrocode}
+\NewHook { zref-clever/endrange-setup }
+%    \end{macrocode}
+%
+%
+%
+%    \begin{macrocode}
+\keys_define:nn { zref-clever/reference }
+  {
+    endrange .code:n =
+      {
+        \str_case:nnF {#1}
+          {
+            { ref }
+            {
+              \tl_clear:c
+                { \@@_opt_varname_general:nn { endrangefunc } { tl } }
+              \tl_clear:c
+                { \@@_opt_varname_general:nn { endrangeprop } { tl } }
+            }
+
+            { stripprefix }
+            {
+              \tl_set:cn
+                { \@@_opt_varname_general:nn { endrangefunc } { tl } }
+                { @@_get_endrange_stripprefix }
+              \tl_clear:c
+                { \@@_opt_varname_general:nn { endrangeprop } { tl } }
+            }
+
+            { pagecomp }
+            {
+              \tl_set:cn
+                { \@@_opt_varname_general:nn { endrangefunc } { tl } }
+                { @@_get_endrange_pagecomp }
+              \tl_clear:c
+                { \@@_opt_varname_general:nn { endrangeprop } { tl } }
+            }
+
+            { pagecomp2 }
+            {
+              \tl_set:cn
+                { \@@_opt_varname_general:nn { endrangefunc } { tl } }
+                { @@_get_endrange_pagecomptwo }
+              \tl_clear:c
+                { \@@_opt_varname_general:nn { endrangeprop } { tl } }
+            }
+
+            { unset }
+            {
+              \@@_opt_tl_unset:c
+                { \@@_opt_varname_general:nn { endrangefunc } { tl } }
+              \@@_opt_tl_unset:c
+                { \@@_opt_varname_general:nn { endrangeprop } { tl } }
+            }
+          }
+          {
+            \tl_if_empty:nTF {#1}
+              {
+                \msg_warning:nnn { zref-clever }
+                  { endrange-property-undefined } {#1}
+              }
+              {
+                \zref@ifpropundefined {#1}
+                  {
+                    \msg_warning:nnn { zref-clever }
+                      { endrange-property-undefined } {#1}
+                  }
+                  {
+                    \tl_set:cn
+                      { \@@_opt_varname_general:nn { endrangefunc } { tl } }
+                      { @@_get_endrange_property }
+                    \tl_set:cn
+                      { \@@_opt_varname_general:nn { endrangeprop } { tl } }
+                      {#1}
+                  }
+              }
+          }
+      } ,
+    endrange .value_required:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_get_endrange_property:nnN #1#2#3
+  {
+    \tl_if_empty:NTF \l_@@_endrangeprop_tl
+      {
+        \zref@ifrefcontainsprop {#2} { \l_@@_ref_property_tl }
+          {
+            \@@_extract_default:Nnvn #3
+              {#2} { l_@@_ref_property_tl } { }
+          }
+          { \tl_set:Nn #3 { zc@missingproperty } }
+      }
+      {
+        \zref@ifrefcontainsprop {#2} { \l_@@_endrangeprop_tl }
+          {
+            \@@_extract_default:Nnvn #3
+              {#2} { l_@@_endrangeprop_tl } { }
+          }
+          {
+            \zref@ifrefcontainsprop {#2} { \l_@@_ref_property_tl }
+              {
+                \@@_extract_default:Nnvn #3
+                  {#2} { l_@@_ref_property_tl } { }
+              }
+              { \tl_set:Nn #3 { zc@missingproperty } }
+          }
+      }
+  }
+\cs_generate_variant:Nn \@@_get_endrange_property:nnN { VVN }
+%    \end{macrocode}
+%
+%
+%
+% For the technique for smuggling the assignment out of the group, see
+% \contributor{Enrico Gregorio}'s answer at
+% \url{https://tex.stackexchange.com/a/56314}.
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_get_endrange_stripprefix:nnN #1#2#3
+  {
+    \zref@ifrefcontainsprop {#2} { \l_@@_ref_property_tl }
+      {
+        \group_begin:
+        \UseHook { zref-clever/endrange-setup }
+        \tl_set:Nx \l_tmpa_tl
+          { \@@_extract:nnn {#1} { \l_@@_ref_property_tl } { } }
+        \tl_set:Nx \l_tmpb_tl
+          { \@@_extract:nnn {#2} { \l_@@_ref_property_tl } { } }
+        \bool_set_false:N \l_tmpa_bool
+        \bool_until_do:Nn \l_tmpa_bool
+          {
+            \exp_args:Nxx \tl_if_eq:nnTF
+              { \tl_head:V \l_tmpa_tl } { \tl_head:V \l_tmpb_tl }
+              {
+                \tl_set:Nx \l_tmpa_tl { \tl_tail:V \l_tmpa_tl }
+                \tl_set:Nx \l_tmpb_tl { \tl_tail:V \l_tmpb_tl }
+                \tl_if_empty:NT \l_tmpb_tl
+                  { \bool_set_true:N \l_tmpa_bool }
+              }
+              { \bool_set_true:N \l_tmpa_bool }
+          }
+        \exp_args:NNNV
+          \group_end:
+          \tl_set:Nn #3 \l_tmpb_tl
+      }
+      { \tl_set:Nn #3 { zc@missingproperty } }
+  }
+\cs_generate_variant:Nn \@@_get_endrange_stripprefix:nnN { VVN }
+%    \end{macrocode}
+%
+%
+%
+% \begin{macro}{\@@_is_integer_rgx:n}
+%   Test if argument is composed only of digits (adapted from
+%   \url{https://tex.stackexchange.com/a/427559}).
+%    \begin{macrocode}
+\prg_new_protected_conditional:Npnn \@@_is_integer_rgx:n #1 { F , TF }
+  {
+    \regex_match:nnTF { \A\d+\Z } {#1}
+      { \prg_return_true:  }
+      { \prg_return_false: }
+  }
+\prg_generate_conditional_variant:Nnn
+  \@@_is_integer_rgx:n { V } { F , TF }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_get_endrange_pagecomp:nnN #1#2#3
+  {
+    \zref@ifrefcontainsprop {#2} { \l_@@_ref_property_tl }
+      {
+        \group_begin:
+        \UseHook { zref-clever/endrange-setup }
+        \tl_set:Nx \l_tmpa_tl
+          { \@@_extract:nnn {#1} { \l_@@_ref_property_tl } { } }
+        \tl_set:Nx \l_tmpb_tl
+          { \@@_extract:nnn {#2} { \l_@@_ref_property_tl } { } }
+        \bool_set_false:N \l_tmpa_bool
+        \@@_is_integer_rgx:VTF \l_tmpa_tl
+          {
+            \@@_is_integer_rgx:VF \l_tmpb_tl
+              { \bool_set_true:N \l_tmpa_bool }
+          }
+          { \bool_set_true:N \l_tmpa_bool }
+        \bool_until_do:Nn \l_tmpa_bool
+          {
+            \exp_args:Nxx \tl_if_eq:nnTF
+              { \tl_head:V \l_tmpa_tl } { \tl_head:V \l_tmpb_tl }
+              {
+                \tl_set:Nx \l_tmpa_tl { \tl_tail:V \l_tmpa_tl }
+                \tl_set:Nx \l_tmpb_tl { \tl_tail:V \l_tmpb_tl }
+                \tl_if_empty:NT \l_tmpb_tl
+                  { \bool_set_true:N \l_tmpa_bool }
+              }
+              { \bool_set_true:N \l_tmpa_bool }
+          }
+        \exp_args:NNNV
+          \group_end:
+          \tl_set:Nn #3 \l_tmpb_tl
+      }
+      { \tl_set:Nn #3 { zc@missingproperty } }
+  }
+\cs_generate_variant:Nn \@@_get_endrange_pagecomp:nnN { VVN }
+%    \end{macrocode}
+%
+%
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_get_endrange_pagecomptwo:nnN #1#2#3
+  {
+    \zref@ifrefcontainsprop {#2} { \l_@@_ref_property_tl }
+      {
+        \group_begin:
+        \UseHook { zref-clever/endrange-setup }
+        \tl_set:Nx \l_tmpa_tl
+          { \@@_extract:nnn {#1} { \l_@@_ref_property_tl } { } }
+        \tl_set:Nx \l_tmpb_tl
+          { \@@_extract:nnn {#2} { \l_@@_ref_property_tl } { } }
+        \bool_set_false:N \l_tmpa_bool
+        \@@_is_integer_rgx:VTF \l_tmpa_tl
+          {
+            \@@_is_integer_rgx:VF \l_tmpb_tl
+              { \bool_set_true:N \l_tmpa_bool }
+          }
+          { \bool_set_true:N \l_tmpa_bool }
+        \bool_until_do:Nn \l_tmpa_bool
+          {
+            \exp_args:Nxx \tl_if_eq:nnTF
+              { \tl_head:V \l_tmpa_tl } { \tl_head:V \l_tmpb_tl }
+              {
+                \bool_lazy_or:nnTF
+                  { \int_compare_p:nNn { \l_tmpb_tl } > { 99 } }
+                  { \int_compare_p:nNn { \tl_head:V \l_tmpb_tl } = { 0 } }
+                  {
+                    \tl_set:Nx \l_tmpa_tl { \tl_tail:V \l_tmpa_tl }
+                    \tl_set:Nx \l_tmpb_tl { \tl_tail:V \l_tmpb_tl }
+                  }
+                  { \bool_set_true:N \l_tmpa_bool }
+              }
+              { \bool_set_true:N \l_tmpa_bool }
+          }
+        \exp_args:NNNV
+          \group_end:
+          \tl_set:Nn #3 \l_tmpb_tl
+      }
+      { \tl_set:Nn #3 { zc@missingproperty } }
+  }
+\cs_generate_variant:Nn \@@_get_endrange_pagecomptwo:nnN { VVN }
+%    \end{macrocode}
+%
 %
 %
 % \subsubsection*{\opt{preposinlink} option (deprecated)}
@@ -3332,6 +3857,118 @@
   }
 \keys_define:nn { zref-clever/typesetup }
   {
+    endrange .code:n =
+      {
+        \str_case:nnF {#1}
+          {
+            { ref }
+            {
+              \tl_clear:c
+                {
+                  \@@_opt_varname_type:enn
+                    { \l_@@_setup_type_tl } { endrangefunc } { tl }
+                }
+              \tl_clear:c
+                {
+                  \@@_opt_varname_type:enn
+                    { \l_@@_setup_type_tl } { endrangeprop } { tl }
+                }
+            }
+
+            { stripprefix }
+            {
+              \tl_set:cn
+                {
+                  \@@_opt_varname_type:enn
+                    { \l_@@_setup_type_tl } { endrangefunc } { tl }
+                }
+                { @@_get_endrange_stripprefix }
+              \tl_clear:c
+                {
+                  \@@_opt_varname_type:enn
+                    { \l_@@_setup_type_tl } { endrangeprop } { tl }
+                }
+            }
+
+            { pagecomp }
+            {
+              \tl_set:cn
+                {
+                  \@@_opt_varname_type:enn
+                    { \l_@@_setup_type_tl } { endrangefunc } { tl }
+                }
+                { @@_get_endrange_pagecomp }
+              \tl_clear:c
+                {
+                  \@@_opt_varname_type:enn
+                    { \l_@@_setup_type_tl } { endrangeprop } { tl }
+                }
+            }
+
+            { pagecomp2 }
+            {
+              \tl_set:cn
+                {
+                  \@@_opt_varname_type:enn
+                    { \l_@@_setup_type_tl } { endrangefunc } { tl }
+                }
+                { @@_get_endrange_pagecomptwo }
+              \tl_clear:c
+                {
+                  \@@_opt_varname_type:enn
+                    { \l_@@_setup_type_tl } { endrangeprop } { tl }
+                }
+            }
+
+            { unset }
+            {
+              \@@_opt_tl_unset:c
+                {
+                  \@@_opt_varname_type:enn
+                    { \l_@@_setup_type_tl } { endrangefunc } { tl }
+                }
+              \@@_opt_tl_unset:c
+                {
+                  \@@_opt_varname_type:enn
+                    { \l_@@_setup_type_tl } { endrangeprop } { tl }
+                }
+            }
+          }
+          {
+            \tl_if_empty:nTF {#1}
+              {
+                \msg_warning:nnn { zref-clever }
+                  { endrange-property-undefined } {#1}
+              }
+              {
+                \zref@ifpropundefined {#1}
+                  {
+                    \msg_warning:nnn { zref-clever }
+                      { endrange-property-undefined } {#1}
+                  }
+                  {
+                    \tl_set:cn
+                      {
+                        \@@_opt_varname_type:enn
+                          { \l_@@_setup_type_tl }
+                          { endrangefunc } { tl }
+                      }
+                      { @@_get_endrange_property }
+                    \tl_set:cn
+                      {
+                        \@@_opt_varname_type:enn
+                          { \l_@@_setup_type_tl }
+                          { endrangeprop } { tl }
+                      }
+                      {#1}
+                  }
+              }
+          }
+      } ,
+    endrange .value_required:n = true ,
+  }
+\keys_define:nn { zref-clever/typesetup }
+  {
     refpre .code:n =
       {
         % NOTE Option deprecated in 2022-01-10 for v0.1.2-alpha.
@@ -3664,6 +4301,247 @@
               }
           } ,
       }
+  }
+\keys_define:nn { zref-clever/langsetup }
+  {
+    endrange .code:n =
+      {
+        \str_case:nnF {#1}
+          {
+            { ref }
+            {
+              \tl_if_empty:NTF \l_@@_setup_type_tl
+                {
+                  \tl_gclear:c
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangefunc } { tl }
+                    }
+                  \tl_gclear:c
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangeprop } { tl }
+                    }
+                }
+                {
+                  \tl_gclear:c
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangefunc } { tl }
+                    }
+                  \tl_gclear:c
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangeprop } { tl }
+                    }
+                }
+            }
+
+            { stripprefix }
+            {
+              \tl_if_empty:NTF \l_@@_setup_type_tl
+                {
+                  \tl_gset:cn
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangefunc } { tl }
+                    }
+                    { @@_get_endrange_stripprefix }
+                  \tl_gclear:c
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangeprop } { tl }
+                    }
+                }
+                {
+                  \tl_gset:cn
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangefunc } { tl }
+                    }
+                    { @@_get_endrange_stripprefix }
+                  \tl_gclear:c
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangeprop } { tl }
+                    }
+                }
+            }
+
+            { pagecomp }
+            {
+              \tl_if_empty:NTF \l_@@_setup_type_tl
+                {
+                  \tl_gset:cn
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangefunc } { tl }
+                    }
+                    { @@_get_endrange_pagecomp }
+                  \tl_gclear:c
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangeprop } { tl }
+                    }
+                }
+                {
+                  \tl_gset:cn
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangefunc } { tl }
+                    }
+                    { @@_get_endrange_pagecomp }
+                  \tl_gclear:c
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangeprop } { tl }
+                    }
+                }
+            }
+
+            { pagecomp2 }
+            {
+              \tl_if_empty:NTF \l_@@_setup_type_tl
+                {
+                  \tl_gset:cn
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangefunc } { tl }
+                    }
+                    { @@_get_endrange_pagecomptwo }
+                  \tl_gclear:c
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangeprop } { tl }
+                    }
+                }
+                {
+                  \tl_gset:cn
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangefunc } { tl }
+                    }
+                    { @@_get_endrange_pagecomptwo }
+                  \tl_gclear:c
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangeprop } { tl }
+                    }
+                }
+            }
+
+            { unset }
+            {
+              \tl_if_empty:NTF \l_@@_setup_type_tl
+                {
+                  \@@_opt_tl_gunset:c
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangefunc } { tl }
+                    }
+                  \@@_opt_tl_gunset:c
+                    {
+                      \@@_opt_varname_lang_default:enn
+                        { \l_@@_setup_language_tl }
+                        { endrangeprop } { tl }
+                    }
+                }
+                {
+                  \@@_opt_tl_gunset:c
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangefunc } { tl }
+                    }
+                  \@@_opt_tl_gunset:c
+                    {
+                      \@@_opt_varname_lang_type:eenn
+                        { \l_@@_setup_language_tl }
+                        { \l_@@_setup_type_tl }
+                        { endrangeprop } { tl }
+                    }
+                }
+            }
+          }
+          {
+            \tl_if_empty:nTF {#1}
+              {
+                \msg_warning:nnn { zref-clever }
+                  { endrange-property-undefined } {#1}
+              }
+              {
+                \zref@ifpropundefined {#1}
+                  {
+                    \msg_warning:nnn { zref-clever }
+                      { endrange-property-undefined } {#1}
+                  }
+                  {
+                    \tl_if_empty:NTF \l_@@_setup_type_tl
+                      {
+                        \tl_gset:cn
+                          {
+                            \@@_opt_varname_lang_default:enn
+                              { \l_@@_setup_language_tl }
+                              { endrangefunc } { tl }
+                          }
+                          { @@_get_endrange_property }
+                        \tl_gset:cn
+                          {
+                            \@@_opt_varname_lang_default:enn
+                              { \l_@@_setup_language_tl }
+                              { endrangeprop } { tl }
+                          }
+                          {#1}
+                      }
+                      {
+                        \tl_gset:cn
+                          {
+                            \@@_opt_varname_lang_type:eenn
+                              { \l_@@_setup_language_tl }
+                              { \l_@@_setup_type_tl }
+                              { endrangefunc } { tl }
+                          }
+                          { @@_get_endrange_property }
+                        \tl_gset:cn
+                          {
+                            \@@_opt_varname_lang_type:eenn
+                              { \l_@@_setup_language_tl }
+                              { \l_@@_setup_type_tl }
+                              { endrangeprop } { tl }
+                          }
+                          {#1}
+                      }
+                  }
+              }
+          }
+      } ,
+    endrange .value_required:n = true ,
   }
 \keys_define:nn { zref-clever/langsetup }
   {
@@ -4629,6 +5507,8 @@
 %     \l_@@_range_count_int ,
 %     \l_@@_range_same_count_int ,
 %     \l_@@_range_beg_label_tl ,
+%     \l_@@_range_beg_is_first_bool ,
+%     \l_@@_range_end_ref_tl ,
 %     \l_@@_next_maybe_range_bool ,
 %     \l_@@_next_is_same_bool ,
 %   }
@@ -4637,6 +5517,8 @@
 \int_new:N \l_@@_range_count_int
 \int_new:N \l_@@_range_same_count_int
 \tl_new:N \l_@@_range_beg_label_tl
+\bool_new:N \l_@@_range_beg_is_first_bool
+\tl_new:N \l_@@_range_end_ref_tl
 \bool_new:N \l_@@_next_maybe_range_bool
 \bool_new:N \l_@@_next_is_same_bool
 %    \end{macrocode}
@@ -4654,6 +5536,8 @@
 %     \l_@@_rangesep_tl ,
 %     \l_@@_namefont_tl ,
 %     \l_@@_reffont_tl ,
+%     \l_@@_endrangefunc_tl ,
+%     \l_@@_endrangeprop_tl ,
 %     \l_@@_cap_bool ,
 %     \l_@@_abbrev_bool ,
 %   }
@@ -4670,6 +5554,8 @@
 \tl_new:N \l_@@_rangesep_tl
 \tl_new:N \l_@@_namefont_tl
 \tl_new:N \l_@@_reffont_tl
+\tl_new:N \l_@@_endrangefunc_tl
+\tl_new:N \l_@@_endrangeprop_tl
 \bool_new:N \l_@@_cap_bool
 \bool_new:N \l_@@_abbrev_bool
 %    \end{macrocode}
@@ -4732,11 +5618,13 @@
     \tl_clear:N \l_@@_type_first_label_tl
     \tl_clear:N \l_@@_type_first_label_type_tl
     \tl_clear:N \l_@@_range_beg_label_tl
+    \tl_clear:N \l_@@_range_end_ref_tl
     \int_zero:N \l_@@_label_count_int
     \int_zero:N \l_@@_type_count_int
     \int_zero:N \l_@@_ref_count_int
     \int_zero:N \l_@@_range_count_int
     \int_zero:N \l_@@_range_same_count_int
+    \bool_set_false:N \l_@@_range_beg_is_first_bool
     \bool_set_false:N \l_@@_type_first_refbounds_set_bool
 
     % Get type block options (not type-specific).
@@ -4865,6 +5753,14 @@
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_reffont_tl
+            \@@_get_rf_opt_tl:nxxN { endrangefunc }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
+              \l_@@_endrangefunc_tl
+            \@@_get_rf_opt_tl:nxxN { endrangeprop }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
+              \l_@@_endrangeprop_tl
             \@@_get_rf_opt_bool:nnxxN { cap } { false }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
@@ -5019,9 +5915,9 @@
               \int_compare:nNnTF
                 { \l_@@_range_same_count_int } = { 1 }
                 {
-                  % We know `range_beg_label' is not empty, since this is the
-                  % second element in the range, but the third or more in the
-                  % type list.
+                  % We know `range_beg_is_first_bool' is false, since this is
+                  % the second element in the range, but the third or more in
+                  % the type list.
                   \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
                     {
                       \exp_not:V \l_@@_pairsep_tl
@@ -5060,10 +5956,10 @@
                 % Test: 'zc-typeset01.lvt': "Last of type: range to one"
                 { 0 }
                 {
-                  % If `range_beg_label' is empty, it means it was also the
-                  % first of the type, and hence its typesetting was already
-                  % handled, and we just have to set refbounds.
-                  \tl_if_empty:VTF \l_@@_range_beg_label_tl
+                  % If `range_beg_is_first_bool' is true, it means it was also
+                  % the first of the type, and hence its typesetting was
+                  % already handled, and we just have to set refbounds.
+                  \bool_if:NTF \l_@@_range_beg_is_first_bool
                     {
                       \seq_set_eq:NN \l_@@_type_first_refbounds_seq
                         \l_@@_refbounds_first_sg_seq
@@ -5099,7 +5995,7 @@
                 { 1 }
                 {
                   % Ditto.
-                  \tl_if_empty:VTF \l_@@_range_beg_label_tl
+                  \bool_if:NTF \l_@@_range_beg_is_first_bool
                     {
                       \seq_set_eq:NN \l_@@_type_first_refbounds_seq
                         \l_@@_refbounds_first_pb_seq
@@ -5133,7 +6029,7 @@
                 % An actual range.
                 % Test: 'zc-typeset01.lvt': "Last of type: range"
                 % Ditto.
-                \tl_if_empty:VTF \l_@@_range_beg_label_tl
+                \bool_if:NTF \l_@@_range_beg_is_first_bool
                   {
                     \seq_set_eq:NN \l_@@_type_first_refbounds_seq
                       \l_@@_refbounds_first_rb_seq
@@ -5167,11 +6063,30 @@
                           }
                       }
                   }
-                \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                \bool_lazy_and:nnTF
+                  { ! \tl_if_empty_p:N \l_@@_endrangefunc_tl }
+                  { \cs_if_exist_p:c { \l_@@_endrangefunc_tl :VVN } }
                   {
-                    \exp_not:V \l_@@_rangesep_tl
-                    \@@_get_ref:VN \l_@@_label_a_tl
-                      \l_@@_refbounds_last_re_seq
+                    \use:c { \l_@@_endrangefunc_tl :VVN }
+                      \l_@@_range_beg_label_tl
+                      \l_@@_label_a_tl
+                      \l_@@_range_end_ref_tl
+                    \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                      {
+                        \exp_not:V \l_@@_rangesep_tl
+                        \@@_get_ref_endrange:VVN
+                          \l_@@_label_a_tl
+                          \l_@@_range_end_ref_tl
+                          \l_@@_refbounds_last_re_seq
+                      }
+                  }
+                  {
+                    \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                      {
+                        \exp_not:V \l_@@_rangesep_tl
+                        \@@_get_ref:VN \l_@@_label_a_tl
+                          \l_@@_refbounds_last_re_seq
+                      }
                   }
               }
           }
@@ -5216,11 +6131,34 @@
                 \bool_set_true:N \l_@@_type_first_refbounds_set_bool
               }
               {
-                \tl_set:Nx \l_@@_typeset_queue_curr_tl
+                \bool_lazy_and:nnTF
+                  { ! \tl_if_empty_p:N \l_@@_endrangefunc_tl }
+                  { \cs_if_exist_p:c { \l_@@_endrangefunc_tl :VVN } }
                   {
-                    \exp_not:V \l_@@_rangesep_tl
-                    \@@_get_ref:VN \l_@@_label_a_tl
-                      \l_@@_refbounds_last_re_seq
+                    % We must get `type_first_label_tl' instead of
+                    % `range_beg_label_tl' here, since it is not necessary
+                    % that the first of type was actually starting a range for
+                    % the `range' option to be used.
+                    \use:c { \l_@@_endrangefunc_tl :VVN }
+                      \l_@@_type_first_label_tl
+                      \l_@@_label_a_tl
+                      \l_@@_range_end_ref_tl
+                    \tl_set:Nx \l_@@_typeset_queue_curr_tl
+                      {
+                        \exp_not:V \l_@@_rangesep_tl
+                        \@@_get_ref_endrange:VVN
+                          \l_@@_label_a_tl
+                          \l_@@_range_end_ref_tl
+                          \l_@@_refbounds_last_re_seq
+                      }
+                  }
+                  {
+                    \tl_set:Nx \l_@@_typeset_queue_curr_tl
+                      {
+                        \exp_not:V \l_@@_rangesep_tl
+                        \@@_get_ref:VN \l_@@_label_a_tl
+                          \l_@@_refbounds_last_re_seq
+                      }
                   }
                 \seq_set_eq:NN \l_@@_type_first_refbounds_seq
                   \l_@@_refbounds_first_rb_seq
@@ -5354,11 +6292,13 @@
         \tl_clear:N \l_@@_type_first_label_tl
         \tl_clear:N \l_@@_type_first_label_type_tl
         \tl_clear:N \l_@@_range_beg_label_tl
+        \tl_clear:N \l_@@_range_end_ref_tl
         \int_zero:N \l_@@_label_count_int
         \int_zero:N \l_@@_ref_count_int
         \int_incr:N \l_@@_type_count_int
         \int_zero:N \l_@@_range_count_int
         \int_zero:N \l_@@_range_same_count_int
+        \bool_set_false:N \l_@@_range_beg_is_first_bool
         \bool_set_false:N \l_@@_type_first_refbounds_set_bool
       }
   }
@@ -5396,13 +6336,16 @@
           \l_@@_label_type_a_tl
         \int_incr:N \l_@@_ref_count_int
 
-        % If the next label may be part of a range, we set `range_beg_label'
-        % to "empty" (we deal with it as the "first", and must do it there, to
-        % handle hyperlinking), but also step the range counters.
+        % If the next label may be part of a range, signal it (we deal with it
+        % as the "first", and must do it there, to handle hyperlinking), but
+        % also step the range counters.
         % Test: 'zc-typeset01.lvt': "Not last of type: first is range"
         \bool_if:NT \l_@@_next_maybe_range_bool
           {
-            \tl_clear:N \l_@@_range_beg_label_tl
+            \bool_set_true:N \l_@@_range_beg_is_first_bool
+            \tl_set:NV \l_@@_range_beg_label_tl
+              \l_@@_label_a_tl
+            \tl_clear:N \l_@@_range_end_ref_tl
             \int_incr:N \l_@@_range_count_int
             \bool_if:NT \l_@@_next_is_same_bool
               { \int_incr:N \l_@@_range_same_count_int }
@@ -5419,6 +6362,7 @@
                 % There was no range going, we are starting one.
                 \tl_set:NV \l_@@_range_beg_label_tl
                   \l_@@_label_a_tl
+                \tl_clear:N \l_@@_range_end_ref_tl
                 \int_incr:N \l_@@_range_count_int
                 \bool_if:NT \l_@@_next_is_same_bool
                   { \int_incr:N \l_@@_range_same_count_int }
@@ -5454,7 +6398,7 @@
                 % Test: 'zc-typeset01.lvt': "Not last of type: range pair"
                 { 1 }
                 {
-                  \tl_if_empty:VTF \l_@@_range_beg_label_tl
+                  \bool_if:NTF \l_@@_range_beg_is_first_bool
                     {
                       \seq_set_eq:NN \l_@@_type_first_refbounds_seq
                         \l_@@_refbounds_first_seq
@@ -5499,7 +6443,7 @@
                     % Test: 'zc-typeset01.lvt': "Not last of type: range to one"
                     { 0 }
                     {
-                      \tl_if_empty:VTF \l_@@_range_beg_label_tl
+                      \bool_if:NTF \l_@@_range_beg_is_first_bool
                         {
                           \seq_set_eq:NN
                             \l_@@_type_first_refbounds_seq
@@ -5521,7 +6465,7 @@
                     % Test: 'zc-typeset01.lvt': "Not last of type: range to pair"
                     { 1 }
                     {
-                      \tl_if_empty:VTF \l_@@_range_beg_label_tl
+                      \bool_if:NTF \l_@@_range_beg_is_first_bool
                         {
                           \seq_set_eq:NN
                             \l_@@_type_first_refbounds_seq
@@ -5550,7 +6494,7 @@
                   }
                   {
                     % Test: 'zc-typeset01.lvt': "Not last of type: range"
-                    \tl_if_empty:VTF \l_@@_range_beg_label_tl
+                    \bool_if:NTF \l_@@_range_beg_is_first_bool
                       {
                         \seq_set_eq:NN
                           \l_@@_type_first_refbounds_seq
@@ -5569,15 +6513,34 @@
                           }
                       }
                     % For the purposes of the serial comma, and thus for the
-                    % distinction of 'lastsep' and 'pairsep', a "range" counts
-                    % as one.  Since 'range_beg' has already been counted
+                    % distinction of `lastsep' and `pairsep', a "range" counts
+                    % as one.  Since `range_beg' has already been counted
                     % (here or with the first of type), we refrain from
-                    % incrementing 'ref_count_int'.
-                    \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                    % incrementing `ref_count_int'.
+                    \bool_lazy_and:nnTF
+                      { ! \tl_if_empty_p:N \l_@@_endrangefunc_tl }
+                      { \cs_if_exist_p:c { \l_@@_endrangefunc_tl :VVN } }
                       {
-                        \exp_not:V \l_@@_rangesep_tl
-                        \@@_get_ref:VN \l_@@_label_a_tl
-                          \l_@@_refbounds_mid_re_seq
+                        \use:c { \l_@@_endrangefunc_tl :VVN }
+                          \l_@@_range_beg_label_tl
+                          \l_@@_label_a_tl
+                          \l_@@_range_end_ref_tl
+                        \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                          {
+                            \exp_not:V \l_@@_rangesep_tl
+                            \@@_get_ref_endrange:VVN
+                              \l_@@_label_a_tl
+                              \l_@@_range_end_ref_tl
+                              \l_@@_refbounds_mid_re_seq
+                          }
+                      }
+                      {
+                        \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                          {
+                            \exp_not:V \l_@@_rangesep_tl
+                            \@@_get_ref:VN \l_@@_label_a_tl
+                              \l_@@_refbounds_mid_re_seq
+                          }
                       }
                   }
               }
@@ -5639,7 +6602,8 @@
 % \begin{macro}{\@@_get_ref:nN}
 %   Handles a complete reference block to be accumulated in the ``queue'',
 %   including refbounds, and hyperlinking.  For use with all labels, except
-%   the first of its type, which is done by \cs{@@_get_ref_first:}.
+%   the first of its type, which is done by \cs{@@_get_ref_first:}, and the
+%   last of a range, which is done by \cs{@@_get_ref_endrange:nnN}.
 %   \begin{syntax}
 %     \cs{@@_get_ref:nN} \Arg{label} \Arg{refbounds}
 %   \end{syntax}
@@ -5685,6 +6649,53 @@
       { \@@_ref_default: }
   }
 \cs_generate_variant:Nn \@@_get_ref:nN { VN }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\@@_get_ref_endrange:nnN}
+%   \begin{syntax}
+%     \cs{@@_get_ref_endrange:nnN} \Arg{label} \Arg{reference} \Arg{refbounds}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_get_ref_endrange:nnN #1#2#3
+  {
+    \str_if_eq:nnTF {#2} { zc@missingproperty }
+      { \@@_ref_default: }
+      {
+        \bool_if:nTF
+          {
+            \l_@@_hyperlink_bool &&
+            ! \l_@@_link_star_bool
+          }
+          {
+            \exp_not:N \group_begin:
+            \exp_not:V \l_@@_reffont_tl
+            \seq_item:Nn #3 { 1 }
+            % It's two `@s', but escaped for DocStrip.
+            \exp_not:N \hyper@@@@link
+              { \@@_extract_url_unexp:n {#1} }
+              { \@@_extract_unexp:nnn {#1} { anchor } { } }
+              {
+                \seq_item:Nn #3 { 2 }
+                \exp_not:n {#2}
+                \seq_item:Nn #3 { 3 }
+              }
+            \seq_item:Nn #3 { 4 }
+            \exp_not:N \group_end:
+          }
+          {
+            \exp_not:N \group_begin:
+            \exp_not:V \l_@@_reffont_tl
+            \seq_item:Nn #3 { 1 }
+            \seq_item:Nn #3 { 2 }
+            \exp_not:n {#2}
+            \seq_item:Nn #3 { 3 }
+            \seq_item:Nn #3 { 4 }
+            \exp_not:N \group_end:
+          }
+      }
+  }
+\cs_generate_variant:Nn \@@_get_ref_endrange:nnN { VVN }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -6768,8 +7779,8 @@
 % and subsequent discussion.  So, for \env{subequations}, we really must
 % specify manually \opt{currentcounter} and the resetting.  Note that, for
 % \env{subequations}, \cs{zlabel} works just fine (that is, if given
-% immediately after \texttt{\\begin\{subequations\}}, to refer to the
-% parent equation).
+% immediately after \texttt{\textbackslash{}begin\{subequations\}}, to refer
+% to the parent equation).
 %    \begin{macrocode}
         \AddToHook { env / subequations / begin }
           {

@@ -506,6 +506,41 @@ and defaults to \texttt{true}.  The \opt{nocomp} option is a convenience alias
 for \texttt{comp=false}.  Of course, for better compression results the
 \opt{sort} is recommended, but the two options are technically independent.
 
+\DescribeOption{endrange} %
+The \opt{endrange} option provides additional control over how the end
+reference of a range is typeset, so as to achieve terse ranges.  The option
+can operate in two technically different ways.  It may receive one of a number
+of predefined values, which can process the end reference of the range,
+comparing it with the beginning reference, to achieve a given end
+result.\footnote{For the \TeX{}nically inclined: those values that perform
+  some processing -- namely \texttt{stripprefix}, \texttt{pagecomp}, and
+  \texttt{pagecomp2} -- fully expand the references (\texttt{x}-type
+  expansion) before comparing them, since it makes sense to perform this task
+  as close as possible to the printed representation of the references.  I
+  don't expect this to be a problem in normal use cases, but it does represent
+  a limitation on what the references can contain.  In case some control over
+  this is needed, check the \texttt{zref-clever/endrange-setup} hook in the
+  code documentation.}  Or, it can specify a label property to be used
+directly, without any processing.  The available predefined values are:
+\texttt{ref}, \texttt{stripprefix}, \texttt{pagecomp}, and \texttt{pagecomp2}.
+\texttt{ref} corresponds to the default behavior, and instructs \cs{zcref} to
+use whatever property was set at the \opt{ref} option for the end of range
+reference.  \texttt{stripprefix} strips the common part at the start of each
+reference from the end one.  \texttt{pagecomp} is the equivalent of
+\texttt{stripprefix} for page numbers, it does the same thing, but only if the
+references are comprised exclusively of Arabic numerals.  \texttt{pagecomp2}
+is a variant of \texttt{pagecomp} that leaves at least two digits at the end
+reference (except for a leading zero).  If values other than the predefined
+ones are given to \opt{endrange} they are considered as label properties, as
+long as they are declared.  This property is used to typeset the end of range
+reference if the label contains it, otherwise the property specified by the
+\opt{ref} option is used as fallback.  This is useful for things like
+sub-elements for which we can build a proper abbreviated sub-reference and
+populate the label with it (the \texttt{memoir} and \texttt{subcaption}
+compatibility modules already provide the properties \texttt{subcaption} and
+\texttt{subref}, respectively, but similar ones can be built with \pkg{zref},
+as needed).
+
 \DescribeOption{range} %
 By default (that is, when the \opt{range} option is not given), \cs{zcref}
 typesets a complete list of references according to the \meta{labels} it
@@ -858,7 +893,7 @@ the \cs{appendix}.
 
 One more observation about ``reference types'' is due here.  A \emph{type} is
 not really ``defined'' in the sense a variable or a function is.  It is more
-of a ``string'' which \pkg{zref-clever} uses to look for a whole set of
+of a ``name'' which \pkg{zref-clever} uses to look for a whole set of
 type-specific reference format options (see \zcref{sec:reference-format}).
 Each of these options individually may be ``set'' or not, ``defined'' or not.
 And, depending on the setup and the relevant precedence rules for this, some
@@ -955,6 +990,7 @@ more detail soon, and lists the scopes in which each is available.
     \addlinespace
     Other            & cap        & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
                      & abbrev     & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+                     & endrange   & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
     \bottomrule
   \end{tabular}
   \caption{Reference format options and their scopes}

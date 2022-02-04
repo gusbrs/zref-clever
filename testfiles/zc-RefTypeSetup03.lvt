@@ -1,0 +1,447 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\usepackage{zref-clever}
+
+\makeatletter
+\zref@newprop{plainsection}{\@arabic\c@section}
+\zref@addprops{main}{plainsection}
+\makeatother
+
+% Use a serial comma for 'lastsep' (not the default) so that we can
+% distinguish it in output from 'pairsep'.
+\zcLanguageSetup{english}{
+  lastsep={, and\nobreakspace},
+}
+
+\usepackage{hyperref}
+
+% This file is intended to test the multiple low-level cases of 'endrange'
+% in use as options for '\zcRefTypeSetup'.
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\NewDocumentCommand \newoptblock {m}{%
+  \noindent\rule{\textwidth}{0.4pt}\par%
+  \noindent\textbf{#1}\par}
+
+\begin{document}
+
+\frontmatter
+
+\section{Section 0.1}
+\zlabel{sec:section-0.1}
+
+\clearpage{}
+
+\section{Section 0.2}
+\zlabel{sec:section-0.2}
+
+\clearpage{}
+
+\section{Section 0.3}
+\zlabel{sec:section-0.3}
+
+\clearpage{}
+
+\section{Section 0.4}
+\zlabel{sec:section-0.4}
+
+\mainmatter
+
+\chapter{Chapter 1}
+\zlabel{cha:chapter-1}
+\setcounter{page}{105}
+\setcounter{abspage}{105}
+
+\chapter{Chapter 2}
+\zlabel{cha:chapter-2}
+\setcounter{page}{106}
+\setcounter{abspage}{106}
+
+\section{Section 2.1}
+\zlabel{sec:section-2.1}
+
+\section{Section 2.2}
+\zlabel{sec:section-2.2}
+
+\section{Section 2.3}
+\zlabel{sec:section-2.3}
+
+\section{Section 2.4}
+\zlabel{sec:section-2.4}
+
+\chapter{Chapter 3}
+\zlabel{cha:chapter-3}
+\setcounter{page}{107}
+\setcounter{abspage}{107}
+
+\section{Section 3.1}
+\zlabel{sec:section-3.1}
+
+\section{Section 3.2}
+\zlabel{sec:section-3.2}
+
+\section{Section 3.3}
+\zlabel{sec:section-3.3}
+
+\section{Section 3.4}
+\zlabel{sec:section-3.4}
+
+\chapter{Chapter 4}
+\zlabel{cha:chapter-4}
+\setcounter{page}{108}
+\setcounter{abspage}{108}
+
+\chapter{Chapter 5}
+\zlabel{cha:chapter-5}
+\setcounter{page}{115}
+\setcounter{abspage}{115}
+
+\chapter{Chapter 6}
+\zlabel{cha:chapter-6}
+\setcounter{page}{116}
+\setcounter{abspage}{116}
+
+\chapter{Chapter 7}
+\zlabel{cha:chapter-7}
+\setcounter{page}{117}
+\setcounter{abspage}{117}
+
+\chapter{Chapter 8}
+\zlabel{cha:chapter-8}
+\setcounter{page}{118}
+\setcounter{abspage}{118}
+
+\chapter{Chapter 9}
+\zlabel{cha:chapter-9}
+\setcounter{page}{125}
+\setcounter{abspage}{125}
+
+\clearpage{}
+
+\START
+
+\newoptblock{no endrange}
+
+\BEGINTEST{no endrange}
+% not last of type
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+    sec:section-2.3, sec:section-2.4, sec:section-3.3}}
+\showbox0
+\box0
+% last of type
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+    sec:section-2.3, sec:section-2.4}}
+\showbox0
+\box0
+% range option
+\setbox0=\hbox{\zcref[range]{sec:section-2.1, sec:section-2.4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{endrange=ref}
+
+\BEGINTEST{endrange=ref}
+\zcRefTypeSetup{section}{
+  endrange=ref,
+}
+% not last of type
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+    sec:section-2.3, sec:section-2.4, sec:section-3.3}}
+\showbox0
+\box0
+% last of type
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+    sec:section-2.3, sec:section-2.4}}
+\showbox0
+\box0
+% range option
+\setbox0=\hbox{\zcref[range]{sec:section-2.1, sec:section-2.4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{endrange=property}
+
+\BEGINTEST{endrange=property}
+\zcRefTypeSetup{section}{
+  endrange=plainsection,
+}
+% not last of type
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+    sec:section-2.3, sec:section-2.4, sec:section-3.3}}
+\showbox0
+\box0
+% last of type
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+    sec:section-2.3, sec:section-2.4}}
+\showbox0
+\box0
+% range option
+\setbox0=\hbox{\zcref[range]{sec:section-2.1, sec:section-2.4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{endrange=property, local override}
+
+\BEGINTEST{endrange=property, local override}
+\zcRefTypeSetup{section}{
+  endrange=plainsection,
+}
+% not last of type
+\setbox0=\hbox{\zcref[endrange=ref]{cha:chapter-1, sec:section-2.1,
+    sec:section-2.2, sec:section-2.3, sec:section-2.4, sec:section-3.3}}
+\showbox0
+\box0
+% last of type
+\setbox0=\hbox{\zcref[endrange=ref]{cha:chapter-1, sec:section-2.1,
+    sec:section-2.2, sec:section-2.3, sec:section-2.4}}
+\showbox0
+\box0
+% range option
+\setbox0=\hbox{\zcref[range,endrange=ref]{sec:section-2.1, sec:section-2.4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{endrange=stripprefix}
+
+\BEGINTEST{endrange=stripprefix}
+\zcRefTypeSetup{section}{
+  endrange=stripprefix,
+}
+% not last of type
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+    sec:section-2.3, sec:section-2.4, sec:section-3.3}}
+\showbox0
+\box0
+% last of type
+\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+    sec:section-2.3, sec:section-2.4}}
+\showbox0
+\box0
+% range option
+\setbox0=\hbox{\zcref[range]{sec:section-2.1, sec:section-2.4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{endrange=stripprefix, local override}
+
+\BEGINTEST{endrange=stripprefix, local override}
+\zcRefTypeSetup{section}{
+  endrange=stripprefix,
+}
+% not last of type
+\setbox0=\hbox{\zcref[endrange=ref]{cha:chapter-1, sec:section-2.1,
+    sec:section-2.2, sec:section-2.3, sec:section-2.4, sec:section-3.3}}
+\showbox0
+\box0
+% last of type
+\setbox0=\hbox{\zcref[endrange=ref]{cha:chapter-1, sec:section-2.1,
+    sec:section-2.2, sec:section-2.3, sec:section-2.4}}
+\showbox0
+\box0
+% range option
+\setbox0=\hbox{\zcref[range,endrange=ref]{sec:section-2.1, sec:section-2.4}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{page, endrange=stripprefix}
+
+\BEGINTEST{page, endrange=stripprefix}
+\zcRefTypeSetup{page}{
+  endrange=stripprefix,
+}
+% not last of type
+\setbox0=\hbox{\zcref[page]{sec:section-0.1, cha:chapter-1, cha:chapter-2,
+    cha:chapter-3, cha:chapter-4, cha:chapter-7}}
+\showbox0
+\box0
+% last of type
+\setbox0=\hbox{\zcref[page]{cha:chapter-1, cha:chapter-2, cha:chapter-3,
+    cha:chapter-4}}
+\showbox0
+\box0
+% range option
+\setbox0=\hbox{\zcref[page,range]{cha:chapter-1, cha:chapter-4}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+\clearpage{}
+\TIMO
+
+\newoptblock{page, endrange=pagecomp}
+
+\BEGINTEST{page, endrange=pagecomp}
+\zcRefTypeSetup{page}{
+  endrange=pagecomp,
+}
+% not last of type (0*)
+\setbox0=\hbox{\zcref[page]{sec:section-0.1, cha:chapter-1, cha:chapter-2,
+    cha:chapter-3, cha:chapter-4, cha:chapter-7}}
+\showbox0
+\box0
+% not last of type (1*)
+\setbox0=\hbox{\zcref[page]{sec:section-0.1, cha:chapter-5, cha:chapter-6,
+    cha:chapter-7, cha:chapter-8, cha:chapter-9}}
+\showbox0
+\box0
+% last of type (0*)
+\setbox0=\hbox{\zcref[page]{cha:chapter-1, cha:chapter-2, cha:chapter-3,
+    cha:chapter-4}}
+\showbox0
+\box0
+% last of type (1*)
+\setbox0=\hbox{\zcref[page]{cha:chapter-5, cha:chapter-6, cha:chapter-7,
+    cha:chapter-8}}
+\showbox0
+\box0
+% range option (0*)
+\setbox0=\hbox{\zcref[page,range]{cha:chapter-1, cha:chapter-4}}
+\showbox0
+\box0
+% range option (1*)
+\setbox0=\hbox{\zcref[page,range]{cha:chapter-5, cha:chapter-8}}
+\showbox0
+\box0
+% range option (with roman)
+\setbox0=\hbox{\zcref[page,range]{sec:section-0.1, cha:chapter-8}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{page, endrange=pagecomp, local override}
+
+\BEGINTEST{page, endrange=pagecomp, local override}
+\zcRefTypeSetup{page}{
+  endrange=pagecomp,
+}
+% not last of type (0*)
+\setbox0=\hbox{\zcref[page,endrange=ref]{sec:section-0.1, cha:chapter-1,
+    cha:chapter-2, cha:chapter-3, cha:chapter-4, cha:chapter-7}}
+\showbox0
+\box0
+% not last of type (1*)
+\setbox0=\hbox{\zcref[page,endrange=ref]{sec:section-0.1, cha:chapter-5,
+    cha:chapter-6, cha:chapter-7, cha:chapter-8, cha:chapter-9}}
+\showbox0
+\box0
+% last of type (0*)
+\setbox0=\hbox{\zcref[page,endrange=ref]{cha:chapter-1, cha:chapter-2,
+    cha:chapter-3, cha:chapter-4}}
+\showbox0
+\box0
+% last of type (1*)
+\setbox0=\hbox{\zcref[page,endrange=ref]{cha:chapter-5, cha:chapter-6,
+    cha:chapter-7, cha:chapter-8}}
+\showbox0
+\box0
+% range option (0*)
+\setbox0=\hbox{\zcref[page,range,endrange=ref]{cha:chapter-1, cha:chapter-4}}
+\showbox0
+\box0
+% range option (1*)
+\setbox0=\hbox{\zcref[page,range,endrange=ref]{cha:chapter-5, cha:chapter-8}}
+\showbox0
+\box0
+% range option (with roman)
+\setbox0=\hbox{\zcref[page,range,endrange=ref]{sec:section-0.1,
+    cha:chapter-8}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{page, endrange=pagecomp2}
+
+\BEGINTEST{page, endrange=pagecomp2}
+\zcRefTypeSetup{page}{
+  endrange=pagecomp2,
+}
+% not last of type (0*)
+\setbox0=\hbox{\zcref[page]{sec:section-0.1, cha:chapter-1, cha:chapter-2,
+    cha:chapter-3, cha:chapter-4, cha:chapter-7}}
+\showbox0
+\box0
+% not last of type (1*)
+\setbox0=\hbox{\zcref[page]{sec:section-0.1, cha:chapter-5, cha:chapter-6,
+    cha:chapter-7, cha:chapter-8, cha:chapter-9}}
+\showbox0
+\box0
+% last of type (0*)
+\setbox0=\hbox{\zcref[page]{cha:chapter-1, cha:chapter-2, cha:chapter-3,
+    cha:chapter-4}}
+\showbox0
+\box0
+% last of type (1*)
+\setbox0=\hbox{\zcref[page]{cha:chapter-5, cha:chapter-6, cha:chapter-7,
+    cha:chapter-8}}
+\showbox0
+\box0
+% range option (0*)
+\setbox0=\hbox{\zcref[page,range]{cha:chapter-1, cha:chapter-4}}
+\showbox0
+\box0
+% range option (1*)
+\setbox0=\hbox{\zcref[page,range]{cha:chapter-5, cha:chapter-8}}
+\showbox0
+\box0
+% range option (with roman)
+\setbox0=\hbox{\zcref[page,range]{sec:section-0.1, cha:chapter-8}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{page, endrange=pagecomp2, local override}
+
+\BEGINTEST{page, endrange=pagecomp2, local override}
+\zcRefTypeSetup{page}{
+  endrange=pagecomp2,
+}
+% not last of type (0*)
+\setbox0=\hbox{\zcref[page,endrange=ref]{sec:section-0.1, cha:chapter-1,
+    cha:chapter-2, cha:chapter-3, cha:chapter-4, cha:chapter-7}}
+\showbox0
+\box0
+% not last of type (1*)
+\setbox0=\hbox{\zcref[page,endrange=ref]{sec:section-0.1, cha:chapter-5,
+    cha:chapter-6, cha:chapter-7, cha:chapter-8, cha:chapter-9}}
+\showbox0
+\box0
+% last of type (0*)
+\setbox0=\hbox{\zcref[page,endrange=ref]{cha:chapter-1, cha:chapter-2,
+    cha:chapter-3, cha:chapter-4}}
+\showbox0
+\box0
+% last of type (1*)
+\setbox0=\hbox{\zcref[page,endrange=ref]{cha:chapter-5, cha:chapter-6,
+    cha:chapter-7, cha:chapter-8}}
+\showbox0
+\box0
+% range option (0*)
+\setbox0=\hbox{\zcref[page,range,endrange=ref]{cha:chapter-1, cha:chapter-4}}
+\showbox0
+\box0
+% range option (1*)
+\setbox0=\hbox{\zcref[page,range,endrange=ref]{cha:chapter-5, cha:chapter-8}}
+\showbox0
+\box0
+% range option (with roman)
+\setbox0=\hbox{\zcref[page,range,endrange=ref]{sec:section-0.1,
+    cha:chapter-8}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}
