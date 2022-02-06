@@ -2811,6 +2811,8 @@
           { \tl_set:Nn #3 { zc@missingproperty } }
       }
       {
+        \zref@ifrefcontainsprop {#2} { \l_@@_endrangeprop_tl }
+          {
 %    \end{macrocode}
 % If the range came about by normal compression, we already know the beginning
 % and the end references share the same ``form'' and ``prefix'' (this is
@@ -2819,67 +2821,62 @@
 % replacement \cs{l_@@_ref_property_tl} by \cs{l_@@_endrangeprop_tl} is really
 % granted.
 %    \begin{macrocode}
-        \bool_if:NTF \l_@@_typeset_range_bool
-          {
-            \group_begin:
-            \bool_set_false:N \l_tmpa_bool
-            \exp_args:Nxx \tl_if_eq:nnT
-              { \@@_extract_unexp:nnn {#1} { externaldocument } { } }
-              { \@@_extract_unexp:nnn {#2} { externaldocument } { } }
+            \bool_if:NTF \l_@@_typeset_range_bool
               {
-                \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
+                \group_begin:
+                \bool_set_false:N \l_tmpa_bool
+                \exp_args:Nxx \tl_if_eq:nnT
+                  { \@@_extract_unexp:nnn {#1} { externaldocument } { } }
+                  { \@@_extract_unexp:nnn {#2} { externaldocument } { } }
                   {
-                    \exp_args:Nxx \tl_if_eq:nnT
-                      { \@@_extract_unexp:nnn {#1} { zc@pgfmt } { } }
-                      { \@@_extract_unexp:nnn {#2} { zc@pgfmt } { } }
-                      { \bool_set_true:N \l_tmpa_bool }
-                  }
-                  {
-                    \exp_args:Nxx \tl_if_eq:nnT
-                      { \@@_extract_unexp:nnn {#1} { zc@counter } { } }
-                      { \@@_extract_unexp:nnn {#2} { zc@counter } { } }
+                    \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
                       {
                         \exp_args:Nxx \tl_if_eq:nnT
-                          { \@@_extract_unexp:nnn {#1} { zc@enclval } { } }
-                          { \@@_extract_unexp:nnn {#2} { zc@enclval } { } }
+                          { \@@_extract_unexp:nnn {#1} { zc@pgfmt } { } }
+                          { \@@_extract_unexp:nnn {#2} { zc@pgfmt } { } }
                           { \bool_set_true:N \l_tmpa_bool }
                       }
+                      {
+                        \exp_args:Nxx \tl_if_eq:nnT
+                          { \@@_extract_unexp:nnn {#1} { zc@counter } { } }
+                          { \@@_extract_unexp:nnn {#2} { zc@counter } { } }
+                          {
+                            \exp_args:Nxx \tl_if_eq:nnT
+                              { \@@_extract_unexp:nnn {#1} { zc@enclval } { } }
+                              { \@@_extract_unexp:nnn {#2} { zc@enclval } { } }
+                              { \bool_set_true:N \l_tmpa_bool }
+                          }
+                      }
                   }
-              }
-            \zref@ifrefcontainsprop {#2} { \l_@@_endrangeprop_tl }
-              { }
-              { \bool_set_false:N \l_tmpa_bool }
-            \bool_if:NTF \l_tmpa_bool
-              {
-                \@@_extract_default:Nnvn \l_tmpb_tl
-                  {#2} { l_@@_endrangeprop_tl } { }
-              }
-              {
-                \zref@ifrefcontainsprop {#2} { \l_@@_ref_property_tl }
+                \bool_if:NTF \l_tmpa_bool
                   {
                     \@@_extract_default:Nnvn \l_tmpb_tl
-                      {#2} { l_@@_ref_property_tl } { }
+                      {#2} { l_@@_endrangeprop_tl } { }
                   }
-                  { \tl_set:Nn \l_tmpb_tl { zc@missingproperty } }
+                  {
+                    \zref@ifrefcontainsprop {#2} { \l_@@_ref_property_tl }
+                      {
+                        \@@_extract_default:Nnvn \l_tmpb_tl
+                          {#2} { l_@@_ref_property_tl } { }
+                      }
+                      { \tl_set:Nn \l_tmpb_tl { zc@missingproperty } }
+                  }
+                \exp_args:NNNV
+                  \group_end:
+                  \tl_set:Nn #3 \l_tmpb_tl
               }
-            \exp_args:NNNV
-              \group_end:
-              \tl_set:Nn #3 \l_tmpb_tl
-          }
-          {
-            \zref@ifrefcontainsprop {#2} { \l_@@_endrangeprop_tl }
               {
                 \@@_extract_default:Nnvn #3
                   {#2} { l_@@_endrangeprop_tl } { }
               }
+          }
+          {
+            \zref@ifrefcontainsprop {#2} { \l_@@_ref_property_tl }
               {
-                \zref@ifrefcontainsprop {#2} { \l_@@_ref_property_tl }
-                  {
-                    \@@_extract_default:Nnvn #3
-                      {#2} { l_@@_ref_property_tl } { }
-                  }
-                  { \tl_set:Nn #3 { zc@missingproperty } }
+                \@@_extract_default:Nnvn #3
+                  {#2} { l_@@_ref_property_tl } { }
               }
+              { \tl_set:Nn #3 { zc@missingproperty } }
           }
       }
   }
