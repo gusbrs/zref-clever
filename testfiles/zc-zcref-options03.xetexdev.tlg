@@ -338,6 +338,29 @@ l. ...    sec:section-2.4}
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
+to\nobreakspace \group_begin: \hyper@@link {}{section.3.4}{3.4}\group_end: .
+<recently read> }
+l. ...    sec:section-3.4}
+                          }
+> \box...=
+\hbox(6.77+0.21999)x78.43001
+.\TU/lmr/m/n/10 sections
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 2.1
+.\special{pdf:eann}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 to
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 3.4
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
 ============================================================
 ============================================================
 TEST 4: endrange=stripprefix

@@ -186,6 +186,10 @@
 \setbox0=\hbox{\zcref[range]{sec:section-2.1, sec:section-2.4}}
 \showbox0
 \box0
+% range option (different prefix)
+\setbox0=\hbox{\zcref[range]{sec:section-2.1, sec:section-3.4}}
+\showbox0
+\box0
 \ENDTEST
 
 \newoptblock{endrange=property, local override}
