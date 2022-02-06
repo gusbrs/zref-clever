@@ -264,8 +264,10 @@
 \zcLanguageSetup{french}{
   cap=true,
   abbrev=true,
+  rangetopair=true,
   type=section,
     cap=false,
+    rangetopair=false,
   type=equation,
     abbrev=false,
     Name-sg-ab = Éq. ,
@@ -284,7 +286,11 @@
 \bool_show:c
   { \__zrefclever_opt_varname_lang_default:nnn{french}{abbrev}{bool} }
 \bool_show:c
+  { \__zrefclever_opt_varname_lang_default:nnn{french}{rangetopair}{bool} }
+\bool_show:c
   { \__zrefclever_opt_varname_lang_type:nnnn{french}{section}{cap}{bool} }
+\bool_show:c
+  { \__zrefclever_opt_varname_lang_type:nnnn{french}{section}{rangetopair}{bool} }
 \bool_show:c
   { \__zrefclever_opt_varname_lang_type:nnnn{french}{equation}{abbrev}{bool} }
 \tl_show:c
@@ -528,6 +534,18 @@
 \box0
 \setbox0=\hbox{\zcref[noabbrev]{cha:chapter-1, sec:section-1.1,
     fig:figure-1.1.1, eq:equation-1.1.2}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{rangetopair}
+
+\BEGINTEST{Option: rangetopair=... (french)}
+\selectlanguage{french}
+\setbox0=\hbox{\zcref[range]{cha:chapter-1, cha:chapter-2}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[range]{sec:section-1.1, sec:section-1.2}}
 \showbox0
 \box0
 \ENDTEST

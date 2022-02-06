@@ -1202,6 +1202,7 @@
   {
     cap ,
     abbrev ,
+    rangetopair ,
   }
 %    \end{macrocode}
 % Only ``type names'' are ``necessarily type-specific'', which makes them
@@ -2881,6 +2882,9 @@
 %
 %
 % \subsubsection*{\opt{range} and \opt{rangetopair} options}
+%
+% The \opt{rangetopair} option is being handled with other reference format
+% option booleans at \cs{c_@@_rf_opts_bool_maybe_type_specific_seq}.
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_range_bool
@@ -5592,6 +5596,7 @@
 %     \l_@@_endrangeprop_tl ,
 %     \l_@@_cap_bool ,
 %     \l_@@_abbrev_bool ,
+%     \l_@@_rangetopair_bool ,
 %   }
 %     Auxiliary variables for \cs{@@_typeset_refs:} separators, and font and
 %     other options.
@@ -5610,6 +5615,7 @@
 \tl_new:N \l_@@_endrangeprop_tl
 \bool_new:N \l_@@_cap_bool
 \bool_new:N \l_@@_abbrev_bool
+\bool_new:N \l_@@_rangetopair_bool
 %    \end{macrocode}
 % \end{macro}
 %
@@ -5821,6 +5827,10 @@
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_abbrev_bool
+            \@@_get_rf_opt_bool:nnxxN { rangetopair } { true }
+              { \l_@@_label_type_a_tl }
+              { \l_@@_ref_language_tl }
+              \l_@@_rangetopair_bool
             \@@_get_rf_opt_seq:nxxN { refbounds-first }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
@@ -6161,12 +6171,15 @@
           }
           {
             \bool_set_false:N \l_@@_next_maybe_range_bool
-            \zref@ifrefundefined { \l_@@_type_first_label_tl }
-              { }
+            \bool_if:NT \l_@@_rangetopair_bool
               {
-                \@@_labels_in_sequence:nn
-                  { \l_@@_type_first_label_tl }
-                  { \l_@@_label_a_tl }
+                \zref@ifrefundefined { \l_@@_type_first_label_tl }
+                  { }
+                  {
+                    \@@_labels_in_sequence:nn
+                      { \l_@@_type_first_label_tl }
+                      { \l_@@_label_a_tl }
+                  }
               }
             % Test: 'zc-typeset01.lvt': "Last of type: option range"
             % Test: 'zc-typeset01.lvt': "Last of type: option range to pair"
@@ -8260,6 +8273,7 @@ type = page ,
   Name-pl = Pages ,
   name-pl = pages ,
   rangesep = {\textendash} ,
+  rangetopair = false ,
 
 type = line ,
   Name-sg = Line ,
@@ -8542,6 +8556,7 @@ type = page ,
     Name-sg = Seite ,
     Name-pl = Seiten ,
   rangesep = {\textendash} ,
+  rangetopair = false ,
 
 type = line ,
   gender = f ,
@@ -8959,6 +8974,7 @@ type = page ,
   Name-pl = Pages ,
   name-pl = pages ,
   rangesep = {-} ,
+  rangetopair = false ,
 
 type = line ,
   gender = f ,
@@ -9200,6 +9216,7 @@ type = page ,
   Name-pl = Páginas ,
   name-pl = páginas ,
   rangesep = {\textendash} ,
+  rangetopair = false ,
 
 type = line ,
   gender = f ,
@@ -9439,6 +9456,7 @@ type = page ,
   Name-pl = Páginas ,
   name-pl = páginas ,
   rangesep = {\textendash} ,
+  rangetopair = false ,
 
 type = line ,
   gender = f ,
@@ -9672,6 +9690,7 @@ type = page ,
   Name-pl = Pagina's ,
   name-pl = pagina's ,
   rangesep = {\textendash} ,
+  rangetopair = false ,
 
 type = line ,
   gender = m ,

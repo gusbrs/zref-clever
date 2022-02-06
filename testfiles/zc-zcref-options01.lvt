@@ -338,6 +338,13 @@
 \box0
 \ENDTEST
 
+\BEGINTEST{Option: range (to pair), rangetopair=false}
+\setbox0=\hbox{\zcref[nocomp,range,rangetopair=false]{sec:section-1.3,
+    sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
 \BEGINTEST{Option: range (multitype)}
 \setbox0=\hbox{\zcref[nocomp,range]{sec:section-1.3, cha:chapter-3,
     sec:section-1.1, cha:chapter-1}}

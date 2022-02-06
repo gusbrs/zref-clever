@@ -509,9 +509,15 @@ l. ......rname_lang_default:nnn{french}{cap}{bool} }
 > \g__zrefclever_opt_lang_french_default_abbrev_bool=true.
 <recently read> }
 l. ......me_lang_default:nnn{french}{abbrev}{bool} }
+> \g__zrefclever_opt_lang_french_default_rangetopair_bool=true.
+<recently read> }
+l. ......ng_default:nnn{french}{rangetopair}{bool} }
 > \g__zrefclever_opt_lang_french_type_section_cap_bool=false.
 <recently read> }
 l. ......ang_type:nnnn{french}{section}{cap}{bool} }
+> \g__zrefclever_opt_lang_french_type_section_rangetopair_bool=false.
+<recently read> }
+l. ......:nnnn{french}{section}{rangetopair}{bool} }
 > \g__zrefclever_opt_lang_french_type_equation_abbrev_bool=false.
 <recently read> }
 l. ......type:nnnn{french}{equation}{abbrev}{bool} }
@@ -1951,6 +1957,80 @@ l. ...    fig:figure-1.1.1, eq:equation-1.1.2}
 .\TU/lmr/m/n/10 .
 .\TU/lmr/m/n/10 2
 .\TU/lmr/m/n/10 )
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 16: Option: rangetopair=... (french)
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Chapitres\group_end:
+\nobreakspace \group_begin: \hyper@@link {}{chapter.1}{1}\group_end: 
+et\nobreakspace \group_begin: \hyper@@link {}{chapter.2}{2}\group_end: .
+<recently read> }
+l. ......\zcref[range]{cha:chapter-1, cha:chapter-2}
+                                                  }
+> \box...=
+\hbox(7.05+1.94)x70.63, direction TLT
+.\TU/lmr/m/n/10 C
+.\TU/lmr/m/n/10 h
+.\TU/lmr/m/n/10 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 s
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 t
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.2}
+.\TU/lmr/m/n/10 2
+.\pdfendlink
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \group_begin: \hyper@@link {}{section.1.1}{1.1}\group_end: 
+à\nobreakspace \group_begin: \hyper@@link {}{section.1.2}{1.2}\group_end: .
+<recently read> }
+l. ......ef[range]{sec:section-1.1, sec:section-1.2}
+                                                  }
+> \box...=
+\hbox(6.98+0.11)x74.54001, direction TLT
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 c
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 s
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 à
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.2}
+.\TU/lmr/m/n/10 1
+.\TU/lmr/m/n/10 .
+.\TU/lmr/m/n/10 2
 .\pdfendlink
 ! OK.
 l. ...\showbox0

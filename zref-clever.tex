@@ -542,6 +542,7 @@ number of such properties, but other ones can be built with \pkg{zref}, as
 needed).
 
 \DescribeOption{range} %
+\DescribeOption{rangetopair} %
 By default (that is, when the \opt{range} option is not given), \cs{zcref}
 typesets a complete list of references according to the \meta{labels} it
 received as argument, and only compresses some of them into ranges if the
@@ -550,12 +551,14 @@ immediate sequence.  The \opt{range} option makes \cs{zcref} behave
 differently.  Sorting is implied by this option (the \opt{sort} option is
 disregarded) and, for each reference type group in \meta{labels}, \cs{zcref}
 builds a range from the first to the last reference in it, even if references
-in between do not occur in immediate sequence.  \cs{zcref} is smart enough,
-though, to recognize when the first and last references of a type do happen to
-be contiguous, in which case it typesets a ``pair'', instead of a ``range''.
-It is a boolean option, and the package's default is \texttt{range=false}.
-The option given without a value is equivalent to \texttt{range=true} (in the
-\pkg{l3keys}' jargon, the \emph{option}'s default is \texttt{true}).
+in between do not occur in immediate sequence.  It is a boolean option, and
+the package's default is \texttt{range=false}.  The option given without a
+value is equivalent to \texttt{range=true} (in the \pkg{l3keys}' jargon, the
+\emph{option}'s default is \texttt{true}).  \cs{zcref} is smart enough to
+recognize when the first and last references of a type do happen to be
+contiguous, in which case it typesets a ``pair'', instead of a ``range''.  But
+this behavior can be disabled by setting the \opt{rangetopair} option to
+\texttt{false}.
 
 \DescribeOption{cap} %
 \DescribeOption{nocap} %
@@ -954,43 +957,44 @@ more detail soon, and lists the scopes in which each is available.
   \centering
   \begin{tabular}{l>{\ttfamily}lcccc}
     \toprule
-                     &            & General   & Type      & \multicolumn{2}{c}{Language} \\
-                                                            \cmidrule(lr){5-6}
-                     &            &           &           & Type      & Default   \\
-                     &            & (i)       & (ii)      & (iii)     & (iv)      \\
+                     &             & General   & Type      & \multicolumn{2}{c}{Language} \\
+                                                             \cmidrule(lr){5-6}
+                     &             &           &           & Type      & Default   \\
+                     &             & (i)       & (ii)      & (iii)     & (iv)      \\
 
     \midrule
-    Typesetting      & tpairsep   & $\bullet$ &           &           & $\bullet$ \\
-    (necessarily not & tlistsep   & $\bullet$ &           &           & $\bullet$ \\
-    type-specific)   & tlastsep   & $\bullet$ &           &           & $\bullet$ \\
-                     & notesep    & $\bullet$ &           &           & $\bullet$ \\
+    Typesetting      & tpairsep    & $\bullet$ &           &           & $\bullet$ \\
+    (necessarily not & tlistsep    & $\bullet$ &           &           & $\bullet$ \\
+    type-specific)   & tlastsep    & $\bullet$ &           &           & $\bullet$ \\
+                     & notesep     & $\bullet$ &           &           & $\bullet$ \\
 
     \addlinespace
-    Typesetting      & namesep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-    (possibly        & pairsep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-    type-specific)   & listsep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-                     & lastsep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-                     & rangesep   & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-                     & refbounds  & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+    Typesetting      & namesep     & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+    (possibly        & pairsep     & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+    type-specific)   & listsep     & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+                     & lastsep     & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+                     & rangesep    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+                     & refbounds   & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
 
     \addlinespace
-    Typesetting      & Name-sg    &           & $\bullet$ & $\bullet$ &           \\
-    (necessarily     & name-sg    &           & $\bullet$ & $\bullet$ &           \\
-    type-specific)   & Name-pl    &           & $\bullet$ & $\bullet$ &           \\
-                     & name-pl    &           & $\bullet$ & $\bullet$ &           \\
-                     & Name-sg-ab &           & $\bullet$ & $\bullet$ &           \\
-                     & name-sg-ab &           & $\bullet$ & $\bullet$ &           \\
-                     & Name-pl-ab &           & $\bullet$ & $\bullet$ &           \\
-                     & name-pl-ab &           & $\bullet$ & $\bullet$ &           \\
+    Typesetting      & Name-sg     &           & $\bullet$ & $\bullet$ &           \\
+    (necessarily     & name-sg     &           & $\bullet$ & $\bullet$ &           \\
+    type-specific)   & Name-pl     &           & $\bullet$ & $\bullet$ &           \\
+                     & name-pl     &           & $\bullet$ & $\bullet$ &           \\
+                     & Name-sg-ab  &           & $\bullet$ & $\bullet$ &           \\
+                     & name-sg-ab  &           & $\bullet$ & $\bullet$ &           \\
+                     & Name-pl-ab  &           & $\bullet$ & $\bullet$ &           \\
+                     & name-pl-ab  &           & $\bullet$ & $\bullet$ &           \\
 
     \addlinespace
-    Font             & namefont   & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-                     & reffont    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+    Font             & namefont    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+                     & reffont     & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
 
     \addlinespace
-    Other            & cap        & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-                     & abbrev     & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
-                     & endrange   & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+    Other            & cap         & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+                     & abbrev      & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+                     & endrange    & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
+                     & rangetopair & $\bullet$ & $\bullet$ & $\bullet$ & $\bullet$ \\
     \bottomrule
   \end{tabular}
   \caption{Reference format options and their scopes}

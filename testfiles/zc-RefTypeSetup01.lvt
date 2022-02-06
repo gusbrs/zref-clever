@@ -266,6 +266,27 @@
 \box0
 \ENDTEST
 
+\newoptblock{rangetopair}
+
+\BEGINTEST{Option: rangetopair=...}
+\zcRefTypeSetup{section}{rangetopair=true}
+\setbox0=\hbox{\zcref[range]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\zcRefTypeSetup{section}{rangetopair}
+\setbox0=\hbox{\zcref[range]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\zcRefTypeSetup{section}{rangetopair=false}
+\setbox0=\hbox{\zcref[range]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\zcRefTypeSetup{section}{norangetopair}
+\setbox0=\hbox{\zcref[range]{sec:section-1.1, sec:section-1.2}}
+\showbox0
+\box0
+\ENDTEST
+
 \OMIT
 
 \end{document}

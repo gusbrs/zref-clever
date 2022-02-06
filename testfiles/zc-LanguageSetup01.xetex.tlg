@@ -509,9 +509,15 @@ l. ......ame_lang_default:nnn{french}{cap}{bool} }
 > \g__zrefclever_opt_lang_french_default_abbrev_bool=true.
 <recently read> }
 l. ......_lang_default:nnn{french}{abbrev}{bool} }
+> \g__zrefclever_opt_lang_french_default_rangetopair_bool=true.
+<recently read> }
+l. ......_default:nnn{french}{rangetopair}{bool} }
 > \g__zrefclever_opt_lang_french_type_section_cap_bool=false.
 <recently read> }
 l. ......g_type:nnnn{french}{section}{cap}{bool} }
+> \g__zrefclever_opt_lang_french_type_section_rangetopair_bool=false.
+<recently read> }
+l. ......nnn{french}{section}{rangetopair}{bool} }
 > \g__zrefclever_opt_lang_french_type_equation_abbrev_bool=false.
 <recently read> }
 l. ......pe:nnnn{french}{equation}{abbrev}{bool} }
@@ -1515,6 +1521,56 @@ l. ...    fig:figure-1.1.1, eq:equation-1.1.2}
 .\penalty 10000
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 (1.2)
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 16: Option: rangetopair=... (french)
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Chapitres\group_end:
+\nobreakspace \group_begin: \hyper@@link {}{chapter.1}{1}\group_end: 
+et\nobreakspace \group_begin: \hyper@@link {}{chapter.2}{2}\group_end: .
+<recently read> }
+l. ......cref[range]{cha:chapter-1, cha:chapter-2}
+                                                  }
+> \box...=
+\hbox(7.05+1.93999)x70.63
+.\TU/lmr/m/n/10 Chapitres
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1
+.\special{pdf:eann}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 et
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 2
+.\special{pdf:eann}
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
+\nobreakspace \group_begin: \hyper@@link {}{section.1.1}{1.1}\group_end: 
+à\nobreakspace \group_begin: \hyper@@link {}{section.1.2}{1.2}\group_end: .
+<recently read> }
+l. ......[range]{sec:section-1.1, sec:section-1.2}
+                                                  }
+> \box...=
+\hbox(6.98+0.10999)x74.54001
+.\TU/lmr/m/n/10 sections
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1.1
+.\special{pdf:eann}
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 à
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 1.2
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0

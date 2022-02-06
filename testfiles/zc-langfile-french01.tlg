@@ -177,6 +177,9 @@ l. ...  }
 > \g__zrefclever_opt_lang_french_type_page_rangesep_tl=-.
 <recently read> }
 l. ...  }
+> \g__zrefclever_opt_lang_french_type_page_rangetopair_bool=false.
+<recently read> }
+l. ...  }
 The sequence \g__zrefclever_opt_lang_french_type_line_gender_seq contains the
 items (without outer braces):
 >  {f}.
