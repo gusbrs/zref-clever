@@ -7179,14 +7179,9 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_labels_in_sequence:nn #1#2
   {
-    \@@_extract_default:Nnnn \l_@@_label_extdoc_a_tl
-      {#1} { externaldocument } { }
-    \@@_extract_default:Nnnn \l_@@_label_extdoc_b_tl
-      {#2} { externaldocument } { }
-
-    \tl_if_eq:NNT
-      \l_@@_label_extdoc_a_tl
-      \l_@@_label_extdoc_b_tl
+    \exp_args:Nxx \tl_if_eq:nnT
+      { \@@_extract_unexp:nnn {#1} { externaldocument } { } }
+      { \@@_extract_unexp:nnn {#2} { externaldocument } { } }
       {
         \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
           {
