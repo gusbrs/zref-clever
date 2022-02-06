@@ -2527,149 +2527,6 @@
 %
 %
 %
-% \subsubsection*{\opt{range} option}
-%
-%    \begin{macrocode}
-\bool_new:N \l_@@_typeset_range_bool
-\keys_define:nn { zref-clever/reference }
-  {
-    range .bool_set:N = \l_@@_typeset_range_bool ,
-    range .initial:n = false ,
-    range .default:n = true ,
-  }
-%    \end{macrocode}
-%
-%
-%
-% \subsubsection*{\opt{cap} and \opt{capfirst} options}
-%
-% The \opt{cap} option is currently being handled with other reference format
-% option booleans at \cs{c_@@_rf_opts_bool_maybe_type_specific_seq}.
-%
-%    \begin{macrocode}
-\bool_new:N \l_@@_capfirst_bool
-\keys_define:nn { zref-clever/reference }
-  {
-    capfirst .bool_set:N = \l_@@_capfirst_bool ,
-    capfirst .initial:n = false ,
-    capfirst .default:n = true ,
-  }
-%    \end{macrocode}
-%
-%
-% \subsubsection*{\opt{abbrev} and \opt{noabbrevfirst} options}
-%
-% The \opt{abbrev} option is currently being handled with other reference
-% format option booleans at \cs{c_@@_rf_opts_bool_maybe_type_specific_seq}.
-%
-%    \begin{macrocode}
-\bool_new:N \l_@@_noabbrev_first_bool
-\keys_define:nn { zref-clever/reference }
-  {
-    noabbrevfirst .bool_set:N = \l_@@_noabbrev_first_bool ,
-    noabbrevfirst .initial:n = false ,
-    noabbrevfirst .default:n = true ,
-  }
-%    \end{macrocode}
-%
-%
-%
-% \subsubsection*{\opt{S} option}
-%
-%    \begin{macrocode}
-\keys_define:nn { zref-clever/reference }
-  {
-    S .meta:n =
-      { capfirst = {#1} , noabbrevfirst = {#1} },
-    S .default:n = true ,
-  }
-%    \end{macrocode}
-%
-%
-% \subsubsection*{\opt{hyperref} option}
-%
-%    \begin{macrocode}
-\bool_new:N \l_@@_hyperlink_bool
-\bool_new:N \l_@@_hyperref_warn_bool
-\keys_define:nn { zref-clever/reference }
-  {
-    hyperref .choice: ,
-    hyperref / auto .code:n =
-      {
-        \bool_set_true:N \l_@@_hyperlink_bool
-        \bool_set_false:N \l_@@_hyperref_warn_bool
-      } ,
-    hyperref / true .code:n =
-      {
-        \bool_set_true:N \l_@@_hyperlink_bool
-        \bool_set_true:N \l_@@_hyperref_warn_bool
-      } ,
-    hyperref / false .code:n =
-      {
-        \bool_set_false:N \l_@@_hyperlink_bool
-        \bool_set_false:N \l_@@_hyperref_warn_bool
-      } ,
-    hyperref .initial:n = auto ,
-    hyperref .default:n = true ,
-%    \end{macrocode}
-% \opt{nohyperref} is provided mainly as a means to inhibit hyperlinking
-% locally in \pkg{zref-vario}'s commands without the need to be setting
-% \pkg{zref-clever}'s internal variables directly.  What limits setting
-% \opt{hyperref} out of the preamble is that enabling hyperlinks requires
-% loading packages.  But \opt{nohyperref} can only disable them, so we can use
-% it in the document body too.
-%    \begin{macrocode}
-    nohyperref .meta:n = { hyperref = false } ,
-    nohyperref .value_forbidden:n = true ,
-  }
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\AddToHook { begindocument }
-  {
-    \@@_if_package_loaded:nTF { hyperref }
-      {
-        \bool_if:NT \l_@@_hyperlink_bool
-          { \RequirePackage { zref-hyperref } }
-      }
-      {
-        \bool_if:NT \l_@@_hyperref_warn_bool
-          { \msg_warning:nn { zref-clever } { missing-hyperref } }
-        \bool_set_false:N \l_@@_hyperlink_bool
-      }
-    \keys_define:nn { zref-clever/reference }
-      {
-        hyperref .code:n =
-          { \msg_warning:nn { zref-clever } { hyperref-preamble-only } } ,
-        nohyperref .code:n =
-          { \bool_set_false:N \l_@@_hyperlink_bool } ,
-      }
-  }
-%    \end{macrocode}
-%
-%
-%
-% \subsubsection*{\opt{nameinlink} option}
-%
-%    \begin{macrocode}
-\str_new:N \l_@@_nameinlink_str
-\keys_define:nn { zref-clever/reference }
-  {
-    nameinlink .choice: ,
-    nameinlink / true .code:n =
-      { \str_set:Nn \l_@@_nameinlink_str { true } } ,
-    nameinlink / false .code:n =
-      { \str_set:Nn \l_@@_nameinlink_str { false } } ,
-    nameinlink / single .code:n =
-      { \str_set:Nn \l_@@_nameinlink_str { single } } ,
-    nameinlink / tsingle .code:n =
-      { \str_set:Nn \l_@@_nameinlink_str { tsingle } } ,
-    nameinlink .initial:n = tsingle ,
-    nameinlink .default:n = true ,
-  }
-%    \end{macrocode}
-%
-%
 % \subsubsection*{\opt{endrange} option}
 %
 % The working of \opt{endrange} option depends on two underlying option values
@@ -2717,7 +2574,6 @@
 %    \begin{macrocode}
 \NewHook { zref-clever/endrange-setup }
 %    \end{macrocode}
-%
 %
 %
 %    \begin{macrocode}
@@ -2923,7 +2779,6 @@
 %    \end{macrocode}
 %
 %
-%
 % \begin{macro}{\@@_is_integer_rgx:n}
 %   Test if argument is composed only of digits (adapted from
 %   \url{https://tex.stackexchange.com/a/427559}).
@@ -3023,6 +2878,149 @@
 \cs_generate_variant:Nn \@@_get_endrange_pagecomptwo:nnN { VVN }
 %    \end{macrocode}
 %
+%
+%
+% \subsubsection*{\opt{range} and \opt{rangetopair} options}
+%
+%    \begin{macrocode}
+\bool_new:N \l_@@_typeset_range_bool
+\keys_define:nn { zref-clever/reference }
+  {
+    range .bool_set:N = \l_@@_typeset_range_bool ,
+    range .initial:n = false ,
+    range .default:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+%
+% \subsubsection*{\opt{cap} and \opt{capfirst} options}
+%
+% The \opt{cap} option is currently being handled with other reference format
+% option booleans at \cs{c_@@_rf_opts_bool_maybe_type_specific_seq}.
+%
+%    \begin{macrocode}
+\bool_new:N \l_@@_capfirst_bool
+\keys_define:nn { zref-clever/reference }
+  {
+    capfirst .bool_set:N = \l_@@_capfirst_bool ,
+    capfirst .initial:n = false ,
+    capfirst .default:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+% \subsubsection*{\opt{abbrev} and \opt{noabbrevfirst} options}
+%
+% The \opt{abbrev} option is currently being handled with other reference
+% format option booleans at \cs{c_@@_rf_opts_bool_maybe_type_specific_seq}.
+%
+%    \begin{macrocode}
+\bool_new:N \l_@@_noabbrev_first_bool
+\keys_define:nn { zref-clever/reference }
+  {
+    noabbrevfirst .bool_set:N = \l_@@_noabbrev_first_bool ,
+    noabbrevfirst .initial:n = false ,
+    noabbrevfirst .default:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+%
+% \subsubsection*{\opt{S} option}
+%
+%    \begin{macrocode}
+\keys_define:nn { zref-clever/reference }
+  {
+    S .meta:n =
+      { capfirst = {#1} , noabbrevfirst = {#1} },
+    S .default:n = true ,
+  }
+%    \end{macrocode}
+%
+%
+% \subsubsection*{\opt{hyperref} option}
+%
+%    \begin{macrocode}
+\bool_new:N \l_@@_hyperlink_bool
+\bool_new:N \l_@@_hyperref_warn_bool
+\keys_define:nn { zref-clever/reference }
+  {
+    hyperref .choice: ,
+    hyperref / auto .code:n =
+      {
+        \bool_set_true:N \l_@@_hyperlink_bool
+        \bool_set_false:N \l_@@_hyperref_warn_bool
+      } ,
+    hyperref / true .code:n =
+      {
+        \bool_set_true:N \l_@@_hyperlink_bool
+        \bool_set_true:N \l_@@_hyperref_warn_bool
+      } ,
+    hyperref / false .code:n =
+      {
+        \bool_set_false:N \l_@@_hyperlink_bool
+        \bool_set_false:N \l_@@_hyperref_warn_bool
+      } ,
+    hyperref .initial:n = auto ,
+    hyperref .default:n = true ,
+%    \end{macrocode}
+% \opt{nohyperref} is provided mainly as a means to inhibit hyperlinking
+% locally in \pkg{zref-vario}'s commands without the need to be setting
+% \pkg{zref-clever}'s internal variables directly.  What limits setting
+% \opt{hyperref} out of the preamble is that enabling hyperlinks requires
+% loading packages.  But \opt{nohyperref} can only disable them, so we can use
+% it in the document body too.
+%    \begin{macrocode}
+    nohyperref .meta:n = { hyperref = false } ,
+    nohyperref .value_forbidden:n = true ,
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\AddToHook { begindocument }
+  {
+    \@@_if_package_loaded:nTF { hyperref }
+      {
+        \bool_if:NT \l_@@_hyperlink_bool
+          { \RequirePackage { zref-hyperref } }
+      }
+      {
+        \bool_if:NT \l_@@_hyperref_warn_bool
+          { \msg_warning:nn { zref-clever } { missing-hyperref } }
+        \bool_set_false:N \l_@@_hyperlink_bool
+      }
+    \keys_define:nn { zref-clever/reference }
+      {
+        hyperref .code:n =
+          { \msg_warning:nn { zref-clever } { hyperref-preamble-only } } ,
+        nohyperref .code:n =
+          { \bool_set_false:N \l_@@_hyperlink_bool } ,
+      }
+  }
+%    \end{macrocode}
+%
+%
+%
+% \subsubsection*{\opt{nameinlink} option}
+%
+%    \begin{macrocode}
+\str_new:N \l_@@_nameinlink_str
+\keys_define:nn { zref-clever/reference }
+  {
+    nameinlink .choice: ,
+    nameinlink / true .code:n =
+      { \str_set:Nn \l_@@_nameinlink_str { true } } ,
+    nameinlink / false .code:n =
+      { \str_set:Nn \l_@@_nameinlink_str { false } } ,
+    nameinlink / single .code:n =
+      { \str_set:Nn \l_@@_nameinlink_str { single } } ,
+    nameinlink / tsingle .code:n =
+      { \str_set:Nn \l_@@_nameinlink_str { tsingle } } ,
+    nameinlink .initial:n = tsingle ,
+    nameinlink .default:n = true ,
+  }
+%    \end{macrocode}
 %
 %
 % \subsubsection*{\opt{preposinlink} option (deprecated)}
