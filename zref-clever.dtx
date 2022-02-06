@@ -2587,44 +2587,74 @@
             { ref }
             {
               \tl_clear:c
-                { \@@_opt_varname_general:nn { endrangefunc } { tl } }
+                {
+                  \@@_opt_varname_general:nn
+                    { endrangefunc } { tl }
+                }
               \tl_clear:c
-                { \@@_opt_varname_general:nn { endrangeprop } { tl } }
+                {
+                  \@@_opt_varname_general:nn
+                    { endrangeprop } { tl }
+                }
             }
 
             { stripprefix }
             {
               \tl_set:cn
-                { \@@_opt_varname_general:nn { endrangefunc } { tl } }
+                {
+                  \@@_opt_varname_general:nn
+                    { endrangefunc } { tl }
+                }
                 { @@_get_endrange_stripprefix }
               \tl_clear:c
-                { \@@_opt_varname_general:nn { endrangeprop } { tl } }
+                {
+                  \@@_opt_varname_general:nn
+                    { endrangeprop } { tl }
+                }
             }
 
             { pagecomp }
             {
               \tl_set:cn
-                { \@@_opt_varname_general:nn { endrangefunc } { tl } }
+                {
+                  \@@_opt_varname_general:nn
+                    { endrangefunc } { tl }
+                }
                 { @@_get_endrange_pagecomp }
               \tl_clear:c
-                { \@@_opt_varname_general:nn { endrangeprop } { tl } }
+                {
+                  \@@_opt_varname_general:nn
+                    { endrangeprop } { tl }
+                }
             }
 
             { pagecomp2 }
             {
               \tl_set:cn
-                { \@@_opt_varname_general:nn { endrangefunc } { tl } }
+                {
+                  \@@_opt_varname_general:nn
+                    { endrangefunc } { tl }
+                }
                 { @@_get_endrange_pagecomptwo }
               \tl_clear:c
-                { \@@_opt_varname_general:nn { endrangeprop } { tl } }
+                {
+                  \@@_opt_varname_general:nn
+                    { endrangeprop } { tl }
+                }
             }
 
             { unset }
             {
               \@@_opt_tl_unset:c
-                { \@@_opt_varname_general:nn { endrangefunc } { tl } }
+                {
+                  \@@_opt_varname_general:nn
+                    { endrangefunc } { tl }
+                }
               \@@_opt_tl_unset:c
-                { \@@_opt_varname_general:nn { endrangeprop } { tl } }
+                {
+                  \@@_opt_varname_general:nn
+                    { endrangeprop } { tl }
+                }
             }
           }
           {
@@ -2641,10 +2671,16 @@
                   }
                   {
                     \tl_set:cn
-                      { \@@_opt_varname_general:nn { endrangefunc } { tl } }
+                      {
+                        \@@_opt_varname_general:nn
+                          { endrangefunc } { tl }
+                      }
                       { @@_get_endrange_property }
                     \tl_set:cn
-                      { \@@_opt_varname_general:nn { endrangeprop } { tl } }
+                      {
+                        \@@_opt_varname_general:nn
+                          { endrangeprop } { tl }
+                      }
                       {#1}
                   }
               }
@@ -2683,24 +2719,48 @@
                 \group_begin:
                 \bool_set_false:N \l_tmpa_bool
                 \exp_args:Nxx \tl_if_eq:nnT
-                  { \@@_extract_unexp:nnn {#1} { externaldocument } { } }
-                  { \@@_extract_unexp:nnn {#2} { externaldocument } { } }
+                  {
+                    \@@_extract_unexp:nnn
+                      {#1} { externaldocument } { }
+                  }
+                  {
+                    \@@_extract_unexp:nnn
+                      {#2} { externaldocument } { }
+                  }
                   {
                     \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
                       {
                         \exp_args:Nxx \tl_if_eq:nnT
-                          { \@@_extract_unexp:nnn {#1} { zc@pgfmt } { } }
-                          { \@@_extract_unexp:nnn {#2} { zc@pgfmt } { } }
+                          {
+                            \@@_extract_unexp:nnn
+                              {#1} { zc@pgfmt } { }
+                          }
+                          {
+                            \@@_extract_unexp:nnn
+                              {#2} { zc@pgfmt } { }
+                          }
                           { \bool_set_true:N \l_tmpa_bool }
                       }
                       {
                         \exp_args:Nxx \tl_if_eq:nnT
-                          { \@@_extract_unexp:nnn {#1} { zc@counter } { } }
-                          { \@@_extract_unexp:nnn {#2} { zc@counter } { } }
+                          {
+                            \@@_extract_unexp:nnn
+                              {#1} { zc@counter } { }
+                          }
+                          {
+                            \@@_extract_unexp:nnn
+                              {#2} { zc@counter } { }
+                          }
                           {
                             \exp_args:Nxx \tl_if_eq:nnT
-                              { \@@_extract_unexp:nnn {#1} { zc@enclval } { } }
-                              { \@@_extract_unexp:nnn {#2} { zc@enclval } { } }
+                              {
+                                \@@_extract_unexp:nnn
+                                  {#1} { zc@enclval } { }
+                              }
+                              {
+                                \@@_extract_unexp:nnn
+                                  {#2} { zc@enclval } { }
+                              }
                               { \bool_set_true:N \l_tmpa_bool }
                           }
                       }
@@ -2711,7 +2771,8 @@
                       {#2} { l_@@_endrangeprop_tl } { }
                   }
                   {
-                    \zref@ifrefcontainsprop {#2} { \l_@@_ref_property_tl }
+                    \zref@ifrefcontainsprop
+                      {#2} { \l_@@_ref_property_tl }
                       {
                         \@@_extract_default:Nnvn \l_tmpb_tl
                           {#2} { l_@@_ref_property_tl } { }
@@ -2754,9 +2815,15 @@
         \group_begin:
         \UseHook { zref-clever/endrange-setup }
         \tl_set:Nx \l_tmpa_tl
-          { \@@_extract:nnn {#1} { \l_@@_ref_property_tl } { } }
+          {
+            \@@_extract:nnn
+              {#1} { \l_@@_ref_property_tl } { }
+          }
         \tl_set:Nx \l_tmpb_tl
-          { \@@_extract:nnn {#2} { \l_@@_ref_property_tl } { } }
+          {
+            \@@_extract:nnn
+              {#2} { \l_@@_ref_property_tl } { }
+          }
         \bool_set_false:N \l_tmpa_bool
         \bool_until_do:Nn \l_tmpa_bool
           {
@@ -2784,7 +2851,8 @@
 %   Test if argument is composed only of digits (adapted from
 %   \url{https://tex.stackexchange.com/a/427559}).
 %    \begin{macrocode}
-\prg_new_protected_conditional:Npnn \@@_is_integer_rgx:n #1 { F , TF }
+\prg_new_protected_conditional:Npnn
+  \@@_is_integer_rgx:n #1 { F , TF }
   {
     \regex_match:nnTF { \A\d+\Z } {#1}
       { \prg_return_true:  }
@@ -2804,9 +2872,15 @@
         \group_begin:
         \UseHook { zref-clever/endrange-setup }
         \tl_set:Nx \l_tmpa_tl
-          { \@@_extract:nnn {#1} { \l_@@_ref_property_tl } { } }
+          {
+            \@@_extract:nnn
+              {#1} { \l_@@_ref_property_tl } { }
+          }
         \tl_set:Nx \l_tmpb_tl
-          { \@@_extract:nnn {#2} { \l_@@_ref_property_tl } { } }
+          {
+            \@@_extract:nnn
+              {#2} { \l_@@_ref_property_tl } { }
+          }
         \bool_set_false:N \l_tmpa_bool
         \@@_is_integer_rgx:VTF \l_tmpa_tl
           {
@@ -2844,9 +2918,15 @@
         \group_begin:
         \UseHook { zref-clever/endrange-setup }
         \tl_set:Nx \l_tmpa_tl
-          { \@@_extract:nnn {#1} { \l_@@_ref_property_tl } { } }
+          {
+            \@@_extract:nnn
+              {#1} { \l_@@_ref_property_tl } { }
+          }
         \tl_set:Nx \l_tmpb_tl
-          { \@@_extract:nnn {#2} { \l_@@_ref_property_tl } { } }
+          {
+            \@@_extract:nnn
+              {#2} { \l_@@_ref_property_tl } { }
+          }
         \bool_set_false:N \l_tmpa_bool
         \@@_is_integer_rgx:VTF \l_tmpa_tl
           {
@@ -5181,7 +5261,7 @@
     \bool_set_false:N \l_@@_sort_decided_bool
 
     % First we check if there's any "external document" difference (coming
-    % from 'zref-xr') and, if so, sort based on that.
+    % from `zref-xr') and, if so, sort based on that.
     \tl_if_eq:NNF
       \l_@@_label_extdoc_a_tl
       \l_@@_label_extdoc_b_tl
@@ -5757,9 +5837,9 @@
           }
 
         % Handle warnings in case of reference or type undefined.
-        % Test: 'zc-typeset01.lvt': "Typeset refs: warn ref undefined"
+        % Test: `zc-typeset01.lvt': "Typeset refs: warn ref undefined"
         \zref@refused { \l_@@_label_a_tl }
-        % Test: 'zc-typeset01.lvt': "Typeset refs: warn missing type"
+        % Test: `zc-typeset01.lvt': "Typeset refs: warn missing type"
         \zref@ifrefundefined { \l_@@_label_a_tl }
           {}
           {
@@ -5908,7 +5988,7 @@
       {
         % It is the last label of its type, but also the first one, and that's
         % what matters here: just store it.
-        % Test: 'zc-typeset01.lvt': "Last of type: single"
+        % Test: `zc-typeset01.lvt': "Last of type: single"
         { 0 }
         {
           \tl_set:NV \l_@@_type_first_label_tl
@@ -5921,7 +6001,7 @@
         }
 
         % The last is the second: we have a pair (if not repeated).
-        % Test: 'zc-typeset01.lvt': "Last of type: pair"
+        % Test: `zc-typeset01.lvt': "Last of type: pair"
         { 1 }
         {
           \int_compare:nNnTF { \l_@@_range_same_count_int } = { 1 }
@@ -5949,7 +6029,7 @@
         \int_case:nnF { \l_@@_range_count_int }
           {
             % There was no range going on.
-            % Test: 'zc-typeset01.lvt': "Last of type: not range"
+            % Test: `zc-typeset01.lvt': "Last of type: not range"
             { 0 }
             {
               \int_compare:nNnTF { \l_@@_ref_count_int } < { 2 }
@@ -5971,7 +6051,7 @@
                 }
             }
             % Last in the range is also the second in it.
-            % Test: 'zc-typeset01.lvt': "Last of type: pair in sequence"
+            % Test: `zc-typeset01.lvt': "Last of type: pair in sequence"
             { 1 }
             {
               \int_compare:nNnTF
@@ -6015,7 +6095,7 @@
               }
               {
                 % Repetition, not a range.
-                % Test: 'zc-typeset01.lvt': "Last of type: range to one"
+                % Test: `zc-typeset01.lvt': "Last of type: range to one"
                 { 0 }
                 {
                   % If `range_beg_is_first_bool' is true, it means it was also
@@ -6053,7 +6133,7 @@
                 }
                 % A `range', but with no skipped value, treat as pair if range
                 % started with first of type, otherwise as list.
-                % Test: 'zc-typeset01.lvt': "Last of type: range to pair"
+                % Test: `zc-typeset01.lvt': "Last of type: range to pair"
                 { 1 }
                 {
                   % Ditto.
@@ -6089,7 +6169,7 @@
               }
               {
                 % An actual range.
-                % Test: 'zc-typeset01.lvt': "Last of type: range"
+                % Test: `zc-typeset01.lvt': "Last of type: range"
                 % Ditto.
                 \bool_if:NTF \l_@@_range_beg_is_first_bool
                   {
@@ -6181,8 +6261,8 @@
                       { \l_@@_label_a_tl }
                   }
               }
-            % Test: 'zc-typeset01.lvt': "Last of type: option range"
-            % Test: 'zc-typeset01.lvt': "Last of type: option range to pair"
+            % Test: `zc-typeset01.lvt': "Last of type: option range"
+            % Test: `zc-typeset01.lvt': "Last of type: option range to pair"
             \bool_if:NTF \l_@@_next_maybe_range_bool
               {
                 \tl_set:Nx \l_@@_typeset_queue_curr_tl
@@ -6253,7 +6333,7 @@
       {
         \bool_if:NTF \l_@@_typeset_ref_bool
           {
-            % Test: 'zc-typeset01.lvt': "Last of type: option typeset ref"
+            % Test: `zc-typeset01.lvt': "Last of type: option typeset ref"
             \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
               {
                 \@@_get_ref:VN \l_@@_type_first_label_tl
@@ -6263,14 +6343,14 @@
           {
             \bool_if:NTF \l_@@_typeset_name_bool
               {
-                % Test: 'zc-typeset01.lvt': "Last of type: option typeset name"
+                % Test: `zc-typeset01.lvt': "Last of type: option typeset name"
                 \tl_set:Nx \l_@@_typeset_queue_curr_tl
                   {
                     \bool_if:NTF \l_@@_name_in_link_bool
                       {
                         \exp_not:N \group_begin:
                         \exp_not:V \l_@@_namefont_tl
-                        % It's two '@s', but escaped for DocStrip.
+                        % It's two `@s', but escaped for DocStrip.
                         \exp_not:N \hyper@@@@link
                           {
                             \@@_extract_url_unexp:V
@@ -6297,7 +6377,7 @@
                 % it should not occur, given that the options are set up to
                 % typeset either "ref" or "name".  Still, leave here a
                 % sensible fallback, equal to the behavior of "both".
-                % Test: 'zc-typeset01.lvt': "Last of type: option typeset none"
+                % Test: `zc-typeset01.lvt': "Last of type: option typeset none"
                 \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
                   { \@@_get_ref_first: }
               }
@@ -6323,11 +6403,11 @@
         \int_case:nnF { \l_@@_type_count_int }
           {
             % Single type.
-            % Test: 'zc-typeset01.lvt': "Last of type: single type"
+            % Test: `zc-typeset01.lvt': "Last of type: single type"
             { 0 }
             { \l_@@_typeset_queue_curr_tl }
             % Pair of types.
-            % Test: 'zc-typeset01.lvt': "Last of type: pair of types"
+            % Test: `zc-typeset01.lvt': "Last of type: pair of types"
             { 1 }
             {
               \l_@@_tpairsep_tl
@@ -6336,7 +6416,7 @@
           }
           {
             % Last in list of types.
-            % Test: 'zc-typeset01.lvt': "Last of type: list of types"
+            % Test: `zc-typeset01.lvt': "Last of type: list of types"
             \l_@@_tlastsep_tl
             \l_@@_typeset_queue_curr_tl
           }
@@ -6404,7 +6484,7 @@
         % If the next label may be part of a range, signal it (we deal with it
         % as the "first", and must do it there, to handle hyperlinking), but
         % also step the range counters.
-        % Test: 'zc-typeset01.lvt': "Not last of type: first is range"
+        % Test: `zc-typeset01.lvt': "Not last of type: first is range"
         \bool_if:NT \l_@@_next_maybe_range_bool
           {
             \bool_set_true:N \l_@@_range_beg_is_first_bool
@@ -6445,7 +6525,7 @@
             \int_case:nnF { \l_@@_range_count_int }
               {
                 % There was no range going on.
-                % Test: 'zc-typeset01.lvt': "Not last of type: no range"
+                % Test: `zc-typeset01.lvt': "Not last of type: no range"
                 { 0 }
                 {
                   \int_incr:N \l_@@_ref_count_int
@@ -6459,8 +6539,8 @@
                 % Last is second in the range: if `range_same_count' is also
                 % `1', it's a repetition (drop it), otherwise, it's a "pair
                 % within a list", treat as list.
-                % Test: 'zc-typeset01.lvt': "Not last of type: range pair to one"
-                % Test: 'zc-typeset01.lvt': "Not last of type: range pair"
+                % Test: `zc-typeset01.lvt': "Not last of type: range pair to one"
+                % Test: `zc-typeset01.lvt': "Not last of type: range pair"
                 { 1 }
                 {
                   \bool_if:NTF \l_@@_range_beg_is_first_bool
@@ -6505,7 +6585,7 @@
                     \l_@@_range_same_count_int
                   }
                   {
-                    % Test: 'zc-typeset01.lvt': "Not last of type: range to one"
+                    % Test: `zc-typeset01.lvt': "Not last of type: range to one"
                     { 0 }
                     {
                       \bool_if:NTF \l_@@_range_beg_is_first_bool
@@ -6527,7 +6607,7 @@
                             }
                         }
                     }
-                    % Test: 'zc-typeset01.lvt': "Not last of type: range to pair"
+                    % Test: `zc-typeset01.lvt': "Not last of type: range to pair"
                     { 1 }
                     {
                       \bool_if:NTF \l_@@_range_beg_is_first_bool
@@ -6558,7 +6638,7 @@
                     }
                   }
                   {
-                    % Test: 'zc-typeset01.lvt': "Not last of type: range"
+                    % Test: `zc-typeset01.lvt': "Not last of type: range"
                     \bool_if:NTF \l_@@_range_beg_is_first_bool
                       {
                         \seq_set_eq:NN
@@ -6854,7 +6934,7 @@
                     \exp_not:V \l_@@_reffont_tl
                     \seq_item:Nn
                       \l_@@_type_first_refbounds_seq { 1 }
-                    % It's two '@s', but escaped for DocStrip.
+                    % It's two `@s', but escaped for DocStrip.
                     \exp_not:N \hyper@@@@link
                       {
                         \@@_extract_url_unexp:V
