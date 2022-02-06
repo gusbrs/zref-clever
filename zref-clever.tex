@@ -533,8 +533,8 @@ is a variant of \texttt{pagecomp} that leaves at least two digits at the end
 reference (except for a leading zero).  If values other than the predefined
 ones are given to \opt{endrange} they are considered as label properties, as
 long as they are declared.  This property is used to typeset the end of range
-reference if the label contains it, and if both references share the same
-counter and the same ``enclosing counters'' values, otherwise the property
+reference if the label contains it, and if both references would be
+``compressible'' according to the \opt{comp} option, otherwise the property
 specified by the \opt{ref} option is used.  This is useful for things like
 sub-elements for which we can build a proper abbreviated sub-reference and
 populate the label with it (some compatibility modules already provide a
