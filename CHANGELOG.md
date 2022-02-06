@@ -7,6 +7,8 @@
 - Option `rangetopair` to control behavior of `range` option when a pair
   results from building a range.
 - Option `vario` to load package `zref-vario`.
+- Reference property `subeq` for the `amsmath` `subequations` and `breqn`
+  `dgroup` environments in the respective compatibility modules.
 
 ## [v0.2.0-alpha](https://github.com/gusbrs/zref-clever/compare/v0.1.2-alpha...v0.2.0-alpha) (2022-01-28)
 

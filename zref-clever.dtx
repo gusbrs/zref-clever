@@ -7842,6 +7842,7 @@
 % immediately after \texttt{\textbackslash{}begin\{subequations\}}, to refer
 % to the parent equation).
 %    \begin{macrocode}
+        \bool_new:N \l_@@_amsmath_subequations_bool
         \AddToHook { env / subequations / begin }
           {
             \@@_zcsetup:x
@@ -7855,6 +7856,7 @@
                 currentcounter = parentequation ,
                 countertype = { parentequation = equation } ,
               }
+            \bool_set_true:N \l_@@_amsmath_subequations_bool
           }
 %    \end{macrocode}
 % \pkg{amsmath} does use \cs{refstepcounter} for the \texttt{equation} counter
@@ -7869,8 +7871,12 @@
 % environments ``must appear within an enclosing math environment''.  Same
 % logic applies to other environments defined or redefined by the package,
 % like \env{array}, \env{matrix} and variations.  Finally, \env{split} too can
-% only be used as part of another environment.
+% only be used as part of another environment.  We also arrange, at this
+% point, for the provision of the \texttt{subeq} property, for the convenience
+% of referring to them directly or to build terse ranges with the
+% \opt{endrange} option.
 %    \begin{macrocode}
+        \zref@newprop { subeq } { \alph { equation } }
         \clist_map_inline:nn
           {
             equation ,
@@ -7890,7 +7896,11 @@
           }
           {
             \AddToHook { env / #1 / begin }
-              { \@@_zcsetup:n { currentcounter = equation } }
+              {
+                \@@_zcsetup:n { currentcounter = equation }
+                \bool_if:NT \l_@@_amsmath_subequations_bool
+                  { \zref@localaddprop \ZREF@mainlist { subeq } }
+              }
           }
 %    \end{macrocode}
 % And a last touch of care for \pkg{amsmath}'s refinements: make the equation
@@ -7986,6 +7996,7 @@
 % for incrementing the equation counters (see
 % \url{https://tex.stackexchange.com/a/241150}).
 %    \begin{macrocode}
+        \bool_new:N \l_@@_breqn_dgroup_bool
         \AddToHook { env / dgroup / begin }
           {
             \@@_zcsetup:x
@@ -7999,7 +8010,11 @@
                 currentcounter = parentequation ,
                 countertype = { parentequation = equation } ,
               }
+            \bool_set_true:N \l_@@_breqn_dgroup_bool
           }
+        \zref@ifpropundefined { subeq }
+          { \zref@newprop { subeq } { \alph { equation } } }
+          { }
         \clist_map_inline:nn
           {
             dmath ,
@@ -8008,7 +8023,11 @@
           }
           {
             \AddToHook { env / #1 / begin }
-              { \@@_zcsetup:n { currentcounter = equation } }
+              {
+                \@@_zcsetup:n { currentcounter = equation }
+                \bool_if:NT \l_@@_breqn_dgroup_bool
+                  { \zref@localaddprop \ZREF@mainlist { subeq } }
+              }
           }
         \msg_info:nnn { zref-clever } { compat-package } { breqn }
       }

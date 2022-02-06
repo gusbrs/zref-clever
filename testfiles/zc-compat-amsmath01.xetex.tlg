@@ -41,11 +41,14 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 >  {equation}  =>  {parentequation}.
 <recently read> }
 l. ......how:N \l__zrefclever_counter_resetby_prop
+> \l__zrefclever_amsmath_subequations_bool=true.
+<recently read> }
+l. ...... \l__zrefclever_amsmath_subequations_bool
 -> The generic hook 'env/equation/begin':
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_amsmath_subequations_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -58,7 +61,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_amsmath_subequations_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -71,7 +74,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_amsmath_subequations_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -84,7 +87,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_amsmath_subequations_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -97,7 +100,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_amsmath_subequations_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -110,7 +113,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_amsmath_subequations_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -123,7 +126,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_amsmath_subequations_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -136,7 +139,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_amsmath_subequations_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -149,7 +152,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_amsmath_subequations_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -162,7 +165,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_amsmath_subequations_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -175,7 +178,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_amsmath_subequations_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -188,7 +191,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_amsmath_subequations_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -201,7 +204,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_amsmath_subequations_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -214,7 +217,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_amsmath_subequations_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -770,7 +773,144 @@ l. ...\setbox0=\hbox{\zcref{split:x,multline:x}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 17: Reference: equation font
+TEST 17: Reference: subequations, ref=subeq
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
+\nobreakspace \group_begin: \upshape (\hyper@@link
+{}{equation.1.16a}{a})\group_end: , \group_begin: \upshape (\hyper@@link
+{}{equation.1.16b}{b})\group_end:  and\nobreakspace \group_begin: \upshape
+(\hyper@@link {}{equation.1.16c}{c})\group_end: .
+<recently read> }
+l. ......ocomp,ref=subeq]{align:a,align:b,align:c}
+                                                  }
+> \box...=
+\hbox(7.5+2.49998)x112.01
+.\TU/lmr/m/n/10 equations
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 a
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ),
+.\glue 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 b
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 )
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 c
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 )
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
+\nobreakspace \group_begin: \upshape (\hyper@@link
+{}{equation.1.17a}{a})\group_end: , \group_begin: \upshape (\hyper@@link
+{}{equation.1.17b}{b})\group_end:  and\nobreakspace \group_begin: \upshape
+(\hyper@@link {}{equation.1.17c}{c})\group_end: .
+<recently read> }
+l. ......mp,ref=subeq]{xalign:a,xalign:b,xalign:c}
+                                                  }
+> \box...=
+\hbox(7.5+2.49998)x112.01
+.\TU/lmr/m/n/10 equations
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 a
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ),
+.\glue 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 b
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 )
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 c
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 )
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
+\nobreakspace \group_begin: \upshape (\hyper@@link
+{}{equation.1.18a}{a})\group_end: , \group_begin: \upshape (\hyper@@link
+{}{equation.1.18b}{b})\group_end:  and\nobreakspace \group_begin: \upshape
+(\hyper@@link {}{AMS.21}{b})\group_end: .
+<recently read> }
+l. ......mp,ref=subeq]{gather:a,gather:b,gather:c}
+                                                  }
+> \box...=
+\hbox(7.5+2.49998)x113.12999
+.\TU/lmr/m/n/10 equations
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 a
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ),
+.\glue 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 b
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 )
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 b
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 )
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
+\nobreakspace \group_begin: \upshape (\hyper@@link
+{}{equation.1.19a}{a})\group_end:  and\nobreakspace \group_begin: \upshape
+(\hyper@@link {}{equation.1.19b}{b})\group_end: .
+<recently read> }
+l. ......box{\zcref[ref=subeq]{split:x,multline:x}
+                                                  }
+> \box...=
+\hbox(7.5+2.49998)x93.68
+.\TU/lmr/m/n/10 equations
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 a
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 )
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 b
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 )
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 18: Reference: equation font
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
 {}{AMS.22}{\group_begin: equation\group_end: \nobreakspace \group_begin:

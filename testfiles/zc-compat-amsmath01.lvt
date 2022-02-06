@@ -214,6 +214,7 @@
   \tl_show:N \l__zrefclever_current_counter_tl
   \prop_show:N \l__zrefclever_counter_type_prop
   \prop_show:N \l__zrefclever_counter_resetby_prop
+  \bool_show:N \l__zrefclever_amsmath_subequations_bool
 \end{subequations}
 \clist_map_inline:nn
   {
@@ -377,6 +378,23 @@
 \showbox0
 \box0
 \setbox0=\hbox{\zcref{split:x,multline:x}}
+\showbox0
+\box0
+\ENDTEST
+
+\newoptblock{subequations, ref=subeq}
+
+\BEGINTEST{Reference: subequations, ref=subeq}
+\setbox0=\hbox{\zcref[nocomp,ref=subeq]{align:a,align:b,align:c}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[nocomp,ref=subeq]{xalign:a,xalign:b,xalign:c}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[nocomp,ref=subeq]{gather:a,gather:b,gather:c}}
+\showbox0
+\box0
+\setbox0=\hbox{\zcref[ref=subeq]{split:x,multline:x}}
 \showbox0
 \box0
 \ENDTEST

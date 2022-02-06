@@ -31,7 +31,7 @@ l. ......p_show:N \l__zrefclever_counter_resetby_prop
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_breqn_dgroup_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -44,7 +44,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_breqn_dgroup_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -57,7 +57,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_breqn_dgroup_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -226,6 +226,58 @@ l. ......ox0=\hbox{\zcref[nocomp]{eq:5a,eq:5b,eq:5c}
 .\TU/lmr/m/n/10 (
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
 .\TU/lmr/m/n/10 5
+.\TU/lmr/m/n/10 c
+.\pdfendlink
+.\TU/lmr/m/n/10 )
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 5: Reference: dgroup, ref=subeq
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
+\nobreakspace \group_begin: \upshape (\hyper@@link
+{}{section.1}{a})\group_end: , \group_begin: \upshape (\hyper@@link
+{}{section.1}{b})\group_end:  and\nobreakspace \group_begin: \upshape
+(\hyper@@link {}{section.1}{c})\group_end: .
+<recently read> }
+l. ......\zcref[nocomp,ref=subeq]{eq:5a,eq:5b,eq:5c}
+                                                  }
+> \box...=
+\hbox(7.5+2.5)x112.01, direction TLT
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 q
+.\TU/lmr/m/n/10 u
+.\TU/lmr/m/n/10 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 s
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 (
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\TU/lmr/m/n/10 a
+.\pdfendlink
+.\TU/lmr/m/n/10 )
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 (
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\TU/lmr/m/n/10 b
+.\pdfendlink
+.\TU/lmr/m/n/10 )
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 (
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
 .\TU/lmr/m/n/10 c
 .\pdfendlink
 .\TU/lmr/m/n/10 )

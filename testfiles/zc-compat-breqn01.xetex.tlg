@@ -31,7 +31,7 @@ l. ......show:N \l__zrefclever_counter_resetby_prop
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_breqn_dgroup_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -44,7 +44,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_breqn_dgroup_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -57,7 +57,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=equation}
+>     -> \__zrefclever_zcsetup:n {currentcounter=equation}\bool_if:NT \l__zrefclever_breqn_dgroup_bool {\zref@localaddprop \ZREF@mainlist {subeq}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -176,6 +176,45 @@ l. ......0=\hbox{\zcref[nocomp]{eq:5a,eq:5b,eq:5c}
 .\TU/lmr/m/n/10 (
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
 .\TU/lmr/m/n/10 5c
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 )
+! OK.
+l. ...\showbox0
+============================================================
+============================================================
+TEST 5: Reference: dgroup, ref=subeq
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
+\nobreakspace \group_begin: \upshape (\hyper@@link
+{}{section.1}{a})\group_end: , \group_begin: \upshape (\hyper@@link
+{}{section.1}{b})\group_end:  and\nobreakspace \group_begin: \upshape
+(\hyper@@link {}{section.1}{c})\group_end: .
+<recently read> }
+l. ......cref[nocomp,ref=subeq]{eq:5a,eq:5b,eq:5c}
+                                                  }
+> \box...=
+\hbox(7.5+2.49998)x112.01
+.\TU/lmr/m/n/10 equations
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 a
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 ),
+.\glue 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 b
+.\special{pdf:eann}
+.\TU/lmr/m/n/10 )
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 and
+.\penalty 10000
+.\glue 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
+.\TU/lmr/m/n/10 c
 .\special{pdf:eann}
 .\TU/lmr/m/n/10 )
 ! OK.

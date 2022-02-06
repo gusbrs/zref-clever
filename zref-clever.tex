@@ -2107,16 +2107,20 @@ refer to the main equation number, that is, right after
 usage example.  The module also ensures proper \opt{currentcounter} values are
 in place for the display math environments, for which it uses environment
 hooks, and sets the font of equation references to \cs{upshape}, following
-\pkg{amsmath}'s \cs{eqref}.  Note, however, that \pkg{zref-clever} is not the
-only package to redefine \cs{ltx@label}, and compatibility problems may arise
-if this module is used with such packages or with document classes that do the
-same.  In case of trouble, you can load \pkg{zref-clever} with option
-\texttt{nocompat=amsmath} and either use the standard referencing system's
-facilities to refer to \pkg{amsmath}'s equations or check the code
-documentation for the technique used for this (which is pretty standard) and
-adapt it to your case.  Given that any trouble that may arise here is one of
-the proper ``timing'' of the redefinition, it should not be particularly
-complicated to make such adjustments.
+\pkg{amsmath}'s \cs{eqref}.  Finally, the module also provides a
+\texttt{subeq} property, for display math environments used inside the
+\env{subequations} environment, which can be used to refer to them directly
+with the \opt{ref} option, or to build terse ranges with the \opt{endrange}
+option.  Note that \pkg{zref-clever} is not the only package to redefine
+\cs{ltx@label}, and compatibility problems may arise if this module is used
+with such packages or with document classes that do the same.  In case of
+trouble, you can load \pkg{zref-clever} with option \texttt{nocompat=amsmath}
+and either use the standard referencing system's facilities to refer to
+\pkg{amsmath}'s equations or check the code documentation for the technique
+used for this (which is pretty standard) and adapt it to your case.  Given
+that any trouble that may arise here is one of the proper ``timing'' of the
+redefinition, it should not be particularly complicated to make such
+adjustments.
 
 \DescribeOption{mathtools} %
 \pkg{mathtools} has a feature to show the numbers only for those equations

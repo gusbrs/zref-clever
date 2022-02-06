@@ -114,6 +114,14 @@ T(n) \hiderel{\leq} T(2^{\lceil\lg n\rceil})
 \box0
 \ENDTEST
 
+\newoptblock{dgroup, ref=subeq}
+
+\BEGINTEST{Reference: dgroup, ref=subeq}
+\setbox0=\hbox{\zcref[nocomp,ref=subeq]{eq:5a,eq:5b,eq:5c}}
+\showbox0
+\box0
+\ENDTEST
+
 \OMIT
 
 \end{document}
