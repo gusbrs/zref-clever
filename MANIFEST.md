@@ -66,8 +66,10 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 
 * zc-LanguageSetup01.lvt 
 * zc-LanguageSetup02.lvt 
+* zc-LanguageSetup03.lvt 
 * zc-RefTypeSetup01.lvt 
 * zc-RefTypeSetup02.lvt 
+* zc-RefTypeSetup03.lvt 
 * zc-class-article01.lvt 
 * zc-class-book01.lvt 
 * zc-class-memoir01.lvt 
@@ -98,6 +100,7 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-howto-newtheorem02.lvt 
 * zc-howto-newtheorem03.lvt 
 * zc-howto-newtheorem04.lvt 
+* zc-howto-zref-vario01.lvt 
 * zc-howto-zref-xr01.lvt 
 * zc-label-options01.lvt 
 * zc-langfile-dutch01.lvt 
@@ -127,12 +130,14 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-opt-ref01.lvt 
 * zc-opt-ref02.lvt 
 * zc-opt-titleref01.lvt 
+* zc-opt-vario01.lvt 
 * zc-precedence-rules01.lvt 
 * zc-sort01.lvt 
 * zc-typeset01.lvt 
 * zc-workaround-breqn01.lvt 
 * zc-zcref-options01.lvt 
 * zc-zcref-options02.lvt 
+* zc-zcref-options03.lvt 
 * zc-LanguageSetup01.luatex.tlg 
 * zc-LanguageSetup01.luatexdev.tlg 
 * zc-LanguageSetup01.tlg 
@@ -143,6 +148,11 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-LanguageSetup02.tlg 
 * zc-LanguageSetup02.xetex.tlg 
 * zc-LanguageSetup02.xetexdev.tlg 
+* zc-LanguageSetup03.luatex.tlg 
+* zc-LanguageSetup03.luatexdev.tlg 
+* zc-LanguageSetup03.tlg 
+* zc-LanguageSetup03.xetex.tlg 
+* zc-LanguageSetup03.xetexdev.tlg 
 * zc-RefTypeSetup01.luatex.tlg 
 * zc-RefTypeSetup01.luatexdev.tlg 
 * zc-RefTypeSetup01.tlg 
@@ -153,6 +163,11 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-RefTypeSetup02.tlg 
 * zc-RefTypeSetup02.xetex.tlg 
 * zc-RefTypeSetup02.xetexdev.tlg 
+* zc-RefTypeSetup03.luatex.tlg 
+* zc-RefTypeSetup03.luatexdev.tlg 
+* zc-RefTypeSetup03.tlg 
+* zc-RefTypeSetup03.xetex.tlg 
+* zc-RefTypeSetup03.xetexdev.tlg 
 * zc-class-article01.luatex.tlg 
 * zc-class-article01.luatexdev.tlg 
 * zc-class-article01.tlg 
@@ -303,6 +318,11 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-howto-newtheorem04.tlg 
 * zc-howto-newtheorem04.xetex.tlg 
 * zc-howto-newtheorem04.xetexdev.tlg 
+* zc-howto-zref-vario01.luatex.tlg 
+* zc-howto-zref-vario01.luatexdev.tlg 
+* zc-howto-zref-vario01.tlg 
+* zc-howto-zref-vario01.xetex.tlg 
+* zc-howto-zref-vario01.xetexdev.tlg 
 * zc-howto-zref-xr01.luatex.tlg 
 * zc-howto-zref-xr01.luatexdev.tlg 
 * zc-howto-zref-xr01.tlg 
@@ -408,6 +428,11 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-opt-titleref01.tlg 
 * zc-opt-titleref01.xetex.tlg 
 * zc-opt-titleref01.xetexdev.tlg 
+* zc-opt-vario01.luatex.tlg 
+* zc-opt-vario01.luatexdev.tlg 
+* zc-opt-vario01.tlg 
+* zc-opt-vario01.xetex.tlg 
+* zc-opt-vario01.xetexdev.tlg 
 * zc-precedence-rules01.luatex.tlg 
 * zc-precedence-rules01.luatexdev.tlg 
 * zc-precedence-rules01.tlg 
@@ -434,6 +459,11 @@ different engines (pdfTeX, XeTeX, LuaTeX, etc.).
 * zc-zcref-options02.tlg 
 * zc-zcref-options02.xetex.tlg 
 * zc-zcref-options02.xetexdev.tlg 
+* zc-zcref-options03.luatex.tlg 
+* zc-zcref-options03.luatexdev.tlg 
+* zc-zcref-options03.tlg 
+* zc-zcref-options03.xetex.tlg 
+* zc-zcref-options03.xetexdev.tlg 
 
 
 ## TDS manifest
