@@ -1,22 +1,10 @@
-## v0.2.0-alpha (2022-01-28)
+## v0.2.1-alpha (2022-02-07)
 
 ### Added
-- The reference block formatting has been generalized to allow for more
-  flexibility in setting the reference structure, with the new option
-  `refbounds`.
-
-### Fixed
-- Fixed handling of type names defined to be empty.
-- Fixed distinction of `lastsep` and `pairsep` in cases where the type-block
-  starts or ends with a range.
-
-### Changed
-- The `namefont` and `reffont` options can now be set also in
-  `\zcRefTypeSetup` and `\zcLanguageSetup`.
-- (Internal) Moved from property lists to individually named macros to store
-  and retrieve options.
-
-### Deprecated
-- Options `preposinlink`, `preref`, and `postref` have been deprecated and
-  replaced by new option `refbounds`.
+- Option `endrange` for typesetting terse ranges.
+- Option `rangetopair` to control behavior of `range` option when a pair
+  results from building a range.
+- Option `vario` to load package `zref-vario`.
+- Reference property `subeq` for the `amsmath` and `breqn` compatibility
+  modules.
 

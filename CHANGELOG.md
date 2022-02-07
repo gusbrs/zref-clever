@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.2.0-alpha...HEAD)
+## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.2.1-alpha...HEAD)
+
+## [v0.2.1-alpha](https://github.com/gusbrs/zref-clever/compare/v0.2.0-alpha...v0.2.1-alpha) (2022-02-07)
 
 ### Added
 - Option `endrange` for typesetting terse ranges.
