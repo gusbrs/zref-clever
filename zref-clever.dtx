@@ -643,6 +643,11 @@
     Option~'check'~requested~\msg_line_context:.~
     But~package~'zref-check'~is~not~loaded,~can't~run~the~checks.
   }
+\msg_new:nnn { zref-clever } { zref-check-too-old }
+  {
+    Option~'check'~requested~\msg_line_context:.~
+    But~'zref-check'~newer~than~'#1'~is~required,~can't~run~the~checks.
+  }
 \msg_new:nnn { zref-clever } { missing-type }
   { Reference~type~undefined~for~label~'#1'~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { missing-property }
@@ -3481,15 +3486,29 @@
   {
     \@@_if_package_loaded:nTF { zref-check }
       {
-        \bool_set_true:N \l_@@_zrefcheck_available_bool
-        \keys_define:nn { zref-clever/reference }
+        \IfPackageAtLeastTF { zref-check } { 2021-09-16 }
           {
-            check .code:n =
+            \bool_set_true:N \l_@@_zrefcheck_available_bool
+            \keys_define:nn { zref-clever/reference }
               {
-                \bool_set_true:N \l_@@_zcref_with_check_bool
-                \keys_set:nn { zref-check / zcheck } {#1}
-              } ,
-            check .value_required:n = true ,
+                check .code:n =
+                  {
+                    \bool_set_true:N \l_@@_zcref_with_check_bool
+                    \keys_set:nn { zref-check / zcheck } {#1}
+                  } ,
+                check .value_required:n = true ,
+              }
+          }
+          {
+            \bool_set_false:N \l_@@_zrefcheck_available_bool
+            \keys_define:nn { zref-clever/reference }
+              {
+                check .code:n =
+                  {
+                    \msg_warning:nnn { zref-clever }
+                      { zref-check-too-old } { 2021-09-16~v0.2.1 }
+                  } ,
+              }
           }
       }
       {
