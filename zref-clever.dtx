@@ -1307,6 +1307,30 @@
 % \subsection{Languages}
 %
 %
+% \cs{l_@@_current_language_tl} is an internal alias for \pkg{babel}'s
+% \cs{languagename} or \pkg{polyglossia}'s \cs{mainbabelname} and, if none of
+% them is loaded, we set it to \texttt{english}.  \cs{l_@@_main_language_tl}
+% is an internal alias for \pkg{babel}'s \cs{bbl@main@language} or for
+% \pkg{polyglossia}'s \cs{mainbabelname}, as the case may be.  Note that for
+% \pkg{polyglossia} we get \pkg{babel}'s language names, so that we only need
+% to handle those internally.  \cs{l_@@_ref_language_tl} is the internal
+% variable which stores the language in which the reference is to be made.
+%
+%    \begin{macrocode}
+\tl_new:N \l_@@_ref_language_tl
+\tl_new:N \l_@@_current_language_tl
+\tl_new:N \l_@@_main_language_tl
+%    \end{macrocode}
+%
+% \begin{macro}{\l_zrefclever_ref_language_tl}
+%   A public version of \cs{l_@@_ref_language_tl} for use in \pkg{zref-vario}.
+%    \begin{macrocode}
+\tl_new:N \l_zrefclever_ref_language_tl
+\tl_set:Nn \l_zrefclever_ref_language_tl { \l_@@_ref_language_tl }
+%    \end{macrocode}
+% \end{macro}
+%
+%
 % \begin{macro}[EXP]{\@@_language_varname:n}
 %   Defines, and leaves in the input stream, the csname of the variable used
 %   to store the \meta{base language} (as the value of this variable) for
@@ -1418,6 +1442,7 @@
       {
         \@@_language_if_declared:nTF {#2}
           {
+            \tl_new:c { \@@_language_varname:n {#1} }
             \tl_gset:cx { \@@_language_varname:n {#1} }
               { \tl_use:c { \@@_language_varname:n {#2} } }
           }
@@ -1435,6 +1460,11 @@
   {
     declension .code:n =
       {
+        \seq_new:c
+          {
+            \@@_opt_varname_language:enn
+              { \l_@@_setup_language_tl } { declension } { seq }
+          }
         \seq_gset_from_clist:cn
           {
             \@@_opt_varname_language:enn
@@ -1445,6 +1475,11 @@
     declension .value_required:n = true ,
     gender .code:n =
       {
+        \seq_new:c
+          {
+            \@@_opt_varname_language:enn
+              { \l_@@_setup_language_tl } { gender } { seq }
+          }
         \seq_gset_from_clist:cn
           {
             \@@_opt_varname_language:enn
@@ -1456,6 +1491,11 @@
     allcaps .choices:nn =
       { true , false }
       {
+        \bool_new:c
+          {
+            \@@_opt_varname_language:enn
+              { \l_@@_setup_language_tl } { allcaps } { bool }
+          }
         \use:c { bool_gset_ \l_keys_choice_tl :c }
           {
             \@@_opt_varname_language:enn
@@ -1817,6 +1857,14 @@
                           { seq }
                       }
                       {
+                        \seq_new:c
+                          {
+                            \@@_opt_varname_lang_type:eenn
+                              { \l_@@_setup_language_tl }
+                              { \l_@@_setup_type_tl }
+                              { gender }
+                              { seq }
+                          }
                         \seq_gset_eq:cN
                           {
                             \@@_opt_varname_lang_type:eenn
@@ -3130,15 +3178,6 @@
 % \subsubsection*{\opt{lang} option}
 % \phantomsection{}\zlabel{sec:lang-option}
 %
-% \cs{l_@@_current_language_tl} is an internal alias for \pkg{babel}'s
-% \cs{languagename} or \pkg{polyglossia}'s \cs{mainbabelname} and, if none of
-% them is loaded, we set it to \texttt{english}.  \cs{l_@@_main_language_tl}
-% is an internal alias for \pkg{babel}'s \cs{bbl@main@language} or for
-% \pkg{polyglossia}'s \cs{mainbabelname}, as the case may be.  Note that for
-% \pkg{polyglossia} we get \pkg{babel}'s language names, so that we only need
-% to handle those internally.  \cs{l_@@_ref_language_tl} is the internal
-% variable which stores the language in which the reference is to be made.
-%
 % The overall setup here seems a little roundabout, but this is actually
 % required.  In the preamble, we (potentially) don't yet have values for the
 % ``current'' and ``main'' document languages, this must be retrieved at a
@@ -3164,11 +3203,8 @@
 % \cs{babelprovide}, either directly, ``on the fly'', or with the
 % \texttt{provide} option, \texttt{do not} get included in \cs{bbl@loaded}.
 %
-
+%
 %    \begin{macrocode}
-\tl_new:N \l_@@_ref_language_tl
-\tl_new:N \l_@@_current_language_tl
-\tl_new:N \l_@@_main_language_tl
 \AddToHook { begindocument }
   {
     \@@_if_package_loaded:nTF { babel }
@@ -3190,12 +3226,6 @@
   }
 %    \end{macrocode}
 %
-% \begin{macro}{\l_zrefclever_ref_language_tl}
-%   A public version of \cs{l_@@_ref_language_tl} for use in \pkg{zref-vario}.
-%    \begin{macrocode}
-\tl_set:Nn  \l_zrefclever_ref_language_tl { \l_@@_ref_language_tl }
-%    \end{macrocode}
-% \end{macro}
 %
 %    \begin{macrocode}
 \keys_define:nn { zref-clever/reference }
