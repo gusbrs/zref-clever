@@ -4,7 +4,7 @@ Don't change this file in any respect.
 TEST 1: Option: namesep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
+{}{chapter.1}{\group_begin: chapter\group_end: \qquad \group_begin:
 1\group_end: }\group_end: .
 <recently read> }
 l. ......box{\zcref{sec:section-1.1, cha:chapter-1}
@@ -16,11 +16,10 @@ l. ......box{\zcref{sec:section-1.1, cha:chapter-1}
 l. ......box{\zcref{sec:section-1.1, cha:chapter-1}
                                                   }
 > \box...=
-\hbox(6.94+1.93999)x126.47
+\hbox(6.94+1.93999)x143.14
 .\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
 .\TU/lmr/m/n/10 chapter
-.\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
+.\glue 20.0
 .\TU/lmr/m/n/10 1
 .\special{pdf:eann}
 .\glue 3.33 plus 1.665 minus 1.11

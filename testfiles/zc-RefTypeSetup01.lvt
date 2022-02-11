@@ -84,7 +84,7 @@
 \newoptblock{namesep}
 
 \BEGINTEST{Option: namesep=...}
-\zcRefTypeSetup{section}{namesep=\qquad}
+\zcRefTypeSetup{chapter}{namesep=\qquad}
 \zcRefTypeSetup{section}{namesep=\qquad}
 \setbox0=\hbox{\zcref{sec:section-1.1, cha:chapter-1}}
 \showbox0
