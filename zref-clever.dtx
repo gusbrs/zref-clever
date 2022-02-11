@@ -936,17 +936,10 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}
-%   {
-%     \@@_opt_tl_unset:N ,
-%     \@@_opt_tl_gunset:N ,
-%   }
-%   Unset \meta{option tl}.  These functions \emph{define} what means to be
-%   unset for an option token list, and it must match what the conditional
-%   \cs{@@_opt_tl_if_set:N} tests for.
+% \begin{macro}{\@@_opt_tl_unset:N}
+%   Unset \meta{option tl}.
 %   \begin{syntax}
 %     \cs{@@_opt_tl_unset:N} \Arg{option tl}
-%     \cs{@@_opt_tl_gunset:N} \Arg{option tl}
 %   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_opt_tl_unset:N #1
@@ -959,17 +952,16 @@
           { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
       }
   }
-\cs_new_protected:Npn \@@_opt_tl_gunset:N #1
-  {
-    \tl_if_exist:NT #1
-      { \cs_undefine:N #1 }
-  }
 \cs_generate_variant:Nn \@@_opt_tl_unset:N { c }
-\cs_generate_variant:Nn \@@_opt_tl_gunset:N { c }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}[EXP,TF]{\@@_opt_tl_if_set:N}
+%   This conditional \emph{defines} what means to be unset for a token list
+%   option.  Note that the ``set bool'' not existing signals that the variable
+%   \emph{is set}, that would be the case of all global option variables
+%   (language-specific ones).  But this means care should be taken to always
+%   define and set the ``set bool'' for local variables.
 %   \begin{syntax}
 %     \cs{@@_opt_tl_if_set:N(TF)} \Arg{option tl} \Arg{true} \Arg{false}
 %   \end{syntax}
@@ -991,9 +983,14 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\@@_opt_tl_gset_if_new:Nn}
+% \begin{macro}
+%   {
+%     \@@_opt_tl_gset_if_new:Nn ,
+%     \@@_opt_tl_gclear_if_new:N ,
+%   }
 %   \begin{syntax}
 %     \cs{@@_opt_tl_gset_if_new:Nn} \Arg{option tl} \Arg{value}
+%     \cs{@@_opt_tl_gclear_if_new:N} \Arg{option tl}
 %   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_opt_tl_gset_if_new:Nn #1#2
@@ -1079,17 +1076,10 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}
-%   {
-%     \@@_opt_seq_unset:N ,
-%     \@@_opt_seq_gunset:N ,
-%   }
-%   Unset \meta{option seq}.  These functions \emph{define} what means to be
-%   unset for an option sequence, and it must match what the conditional
-%   \cs{@@_opt_seq_if_set:N} tests for.
+% \begin{macro}{\@@_opt_seq_unset:N}
+%   Unset \meta{option seq}.
 %   \begin{syntax}
 %     \cs{@@_opt_seq_unset:N} \Arg{option seq}
-%     \cs{@@_opt_seq_gunset:N} \Arg{option seq}
 %   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_opt_seq_unset:N #1
@@ -1102,17 +1092,13 @@
           { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
       }
   }
-\cs_new_protected:Npn \@@_opt_seq_gunset:N #1
-  {
-    \seq_if_exist:NT #1
-      { \cs_undefine:N #1 }
-  }
 \cs_generate_variant:Nn \@@_opt_seq_unset:N { c }
-\cs_generate_variant:Nn \@@_opt_seq_gunset:N { c }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}[EXP,TF]{\@@_opt_seq_if_set:N}
+%   This conditional \emph{defines} what means to be unset for a sequence
+%   option.
 %   \begin{syntax}
 %     \cs{@@_opt_seq_if_set:N(TF)} \Arg{option seq} \Arg{true} \Arg{false}
 %   \end{syntax}
@@ -1158,21 +1144,10 @@
 %
 %
 %
-% \begin{macro}
-%   {
-%     \@@_opt_bool_unset:N ,
-%     \@@_opt_bool_gunset:N ,
-%   }
-%   Unset \meta{option bool}.  These functions \emph{define} what means to be
-%   unset for an option boolean, and it must match what the conditional
-%   \cs{@@_opt_bool_if_set:N} tests for.  The particular definition we are
-%   employing here has some relevant implications.  Setting the boolean
-%   variable to \cs{scan_stop:} (aka, \cs{relax}) means we can \emph{never}
-%   test the variable without first testing if it is \emph{set}.
-%   \cs{@@_opt_bool_if:N} does this conveniently.
+% \begin{macro}{\@@_opt_bool_unset:N}
+%   Unset \meta{option bool}.
 %   \begin{syntax}
 %     \cs{@@_opt_bool_unset:N} \Arg{option bool}
-%     \cs{@@_opt_bool_gunset:N} \Arg{option bool}
 %   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_opt_bool_unset:N #1
@@ -1185,17 +1160,13 @@
           { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
       }
   }
-\cs_new_protected:Npn \@@_opt_bool_gunset:N #1
-  {
-    \bool_if_exist:NT #1
-      { \cs_undefine:N #1 }
-  }
 \cs_generate_variant:Nn \@@_opt_bool_unset:N { c }
-\cs_generate_variant:Nn \@@_opt_bool_gunset:N { c }
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}[EXP,TF]{\@@_opt_bool_if_set:N}
+%   This conditional \emph{defines} what means to be unset for a boolean
+%   option.
 %   \begin{syntax}
 %     \cs{@@_opt_bool_if_set:N(TF)} \Arg{option bool} \Arg{true} \Arg{false}
 %   \end{syntax}
@@ -1346,12 +1317,18 @@
 % ``key with no value'' is a handy and expected shorthand for
 % \texttt{key=true}.  Therefore, for reference format option booleans, we use
 % a third value ``\texttt{unset}'' for this purpose.  And similarly for
-% ``choice'' options.  In the language files the ``unsetting'' behavior is
-% less meaningful, since they only change any variable if it is unset to start
-% with, so that unsetting an unset variable would be redundant.  However, for
-% UI symmetry also in the language files keys with no value should not be
-% considered ``empty'' and boolean \texttt{unset} values should exist.  They
-% are just no-op.
+% ``choice'' options.
+%
+% However, ``unsetting'' options is only supported at the general and
+% reference type levels, that is, at \cs{zcsetup}, at \cs{zcref}, and at
+% \cs{zcRefTypeSetup}.  For language-specific options -- in the language files
+% or at \cs{zcLanguageSetup} -- there is no unsetting, an option which has
+% been set can there only be changed to another value.  This for two reasons.
+% First, these are low precedence levels, so it is less meaningful to be able
+% to unset these options.  Second, these settings can only be done in the
+% preamble (or the package itself).  They are meant to be global.  So, do it
+% once, do it right, and if you need to locally change something along the
+% document, use a higher precedence level.
 %
 %
 % \begin{macro}
@@ -1474,8 +1451,8 @@
 % \end{macro}
 %
 %
-% We set here also the ``derived'' \texttt{refbounds} options, which are the
-% same for every option scope.
+% We set here also the ``derived'' \texttt{refbounds} options, which are
+% (almost) the same for every option scope.
 %
 %    \begin{macrocode}
 \clist_map_inline:nn
@@ -1495,42 +1472,69 @@
             refbounds-first-pb = {##1} ,
             refbounds-first-rb = {##1} ,
           } ,
-        +refbounds-first .default:x = \c_novalue_tl ,
         +refbounds-mid .meta:n =
           {
             refbounds-mid = {##1} ,
             refbounds-mid-rb = {##1} ,
             refbounds-mid-re = {##1} ,
           } ,
-        +refbounds-mid .default:x = \c_novalue_tl ,
         +refbounds-last .meta:n =
           {
             refbounds-last = {##1} ,
             refbounds-last-pe = {##1} ,
             refbounds-last-re = {##1} ,
           } ,
-        +refbounds-last .default:x = \c_novalue_tl ,
         +refbounds-rb .meta:n =
           {
             refbounds-first-rb = {##1} ,
             refbounds-mid-rb = {##1} ,
           } ,
-        +refbounds-rb .default:x = \c_novalue_tl ,
         +refbounds-re .meta:n =
           {
             refbounds-mid-re = {##1} ,
             refbounds-last-re = {##1} ,
           } ,
-        +refbounds-re .default:x = \c_novalue_tl ,
         +refbounds .meta:n =
           {
             +refbounds-first = {##1} ,
             +refbounds-mid = {##1} ,
             +refbounds-last = {##1} ,
           } ,
-        +refbounds .default:x = \c_novalue_tl ,
         refbounds .meta:n = { +refbounds = {##1} } ,
-        refbounds .default:x = \c_novalue_tl ,
+      }
+  }
+\clist_map_inline:nn
+  {
+    reference ,
+    typesetup ,
+  }
+  {
+    \keys_define:nn { zref-clever/ #1 }
+      {
+        +refbounds-first .default:o = \c_novalue_tl ,
+        +refbounds-mid .default:o = \c_novalue_tl ,
+        +refbounds-last .default:o = \c_novalue_tl ,
+        +refbounds-rb .default:o = \c_novalue_tl ,
+        +refbounds-re .default:o = \c_novalue_tl ,
+        +refbounds .default:o = \c_novalue_tl ,
+        refbounds .default:o = \c_novalue_tl ,
+      }
+  }
+\clist_map_inline:nn
+  {
+    langsetup ,
+    langfile ,
+  }
+  {
+    \keys_define:nn { zref-clever/ #1 }
+      {
+        +refbounds-first .value_required:n = true ,
+        +refbounds-mid .value_required:n = true ,
+        +refbounds-last .value_required:n = true ,
+        +refbounds-rb .value_required:n = true ,
+        +refbounds-re .value_required:n = true ,
+        +refbounds .value_required:n = true ,
+        refbounds .value_required:n = true ,
       }
   }
 %    \end{macrocode}
@@ -2052,7 +2056,7 @@
       } ,
     case .value_required:n = true ,
 
-    gender .default:x = \c_novalue_tl ,
+    gender .value_required:n = true ,
     gender .code:n =
       {
         \seq_if_empty:NTF \l_@@_lang_gender_seq
@@ -2067,20 +2071,27 @@
                   { option-only-type-specific } { gender }
               }
               {
-                \tl_if_novalue:nF {#1}
+                \seq_clear:N \l_tmpa_seq
+                \clist_map_inline:nn {#1}
                   {
-                    \seq_clear:N \l_tmpa_seq
-                    \clist_map_inline:nn {#1}
+                    \seq_if_in:NnTF \l_@@_lang_gender_seq {##1}
+                      { \seq_put_right:Nn \l_tmpa_seq {##1} }
                       {
-                        \seq_if_in:NnTF \l_@@_lang_gender_seq {##1}
-                          { \seq_put_right:Nn \l_tmpa_seq {##1} }
-                          {
-                            \msg_info:nnxx { zref-clever }
-                              { gender-not-declared }
-                              { \l_@@_setup_language_tl } {##1}
-                          }
+                        \msg_info:nnxx { zref-clever }
+                          { gender-not-declared }
+                          { \l_@@_setup_language_tl } {##1}
                       }
-                    \@@_opt_seq_if_set:cF
+                  }
+                \@@_opt_seq_if_set:cF
+                  {
+                    \@@_opt_varname_lang_type:eenn
+                      { \l_@@_setup_language_tl }
+                      { \l_@@_setup_type_tl }
+                      { gender }
+                      { seq }
+                  }
+                  {
+                    \seq_new:c
                       {
                         \@@_opt_varname_lang_type:eenn
                           { \l_@@_setup_language_tl }
@@ -2088,25 +2099,15 @@
                           { gender }
                           { seq }
                       }
+                    \seq_gset_eq:cN
                       {
-                        \seq_new:c
-                          {
-                            \@@_opt_varname_lang_type:eenn
-                              { \l_@@_setup_language_tl }
-                              { \l_@@_setup_type_tl }
-                              { gender }
-                              { seq }
-                          }
-                        \seq_gset_eq:cN
-                          {
-                            \@@_opt_varname_lang_type:eenn
-                              { \l_@@_setup_language_tl }
-                              { \l_@@_setup_type_tl }
-                              { gender }
-                              { seq }
-                          }
-                          \l_tmpa_seq
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          { gender }
+                          { seq }
                       }
+                      \l_tmpa_seq
                   }
               }
           }
@@ -2117,21 +2118,18 @@
   {
     \keys_define:nn { zref-clever/langfile }
       {
-        #1 .default:x = \c_novalue_tl ,
+        #1 .value_required:n = true ,
         #1 .code:n =
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \tl_if_novalue:nF {##1}
+                \@@_opt_tl_gset_if_new:cn
                   {
-                    \@@_opt_tl_gset_if_new:cn
-                      {
-                        \@@_opt_varname_lang_default:enn
-                          { \l_@@_setup_language_tl }
-                          {#1} { tl }
-                      }
-                      {##1}
+                    \@@_opt_varname_lang_default:enn
+                      { \l_@@_setup_language_tl }
+                      {#1} { tl }
                   }
+                  {##1}
               }
               {
                 \msg_info:nnn { zref-clever }
@@ -2145,40 +2143,35 @@
   {
     \keys_define:nn { zref-clever/langfile }
       {
-        #1 .default:x = \c_novalue_tl ,
+        #1 .value_required:n = true ,
         #1 .code:n =
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \tl_if_novalue:nF {##1}
+                \@@_opt_tl_gset_if_new:cn
                   {
-                    \@@_opt_tl_gset_if_new:cn
-                      {
-                        \@@_opt_varname_lang_default:enn
-                          { \l_@@_setup_language_tl }
-                          {#1} { tl }
-                      }
-                      {##1}
+                    \@@_opt_varname_lang_default:enn
+                      { \l_@@_setup_language_tl }
+                      {#1} { tl }
                   }
+                  {##1}
               }
               {
-                \tl_if_novalue:nF {##1}
+                \@@_opt_tl_gset_if_new:cn
                   {
-                    \@@_opt_tl_gset_if_new:cn
-                      {
-                        \@@_opt_varname_lang_type:eenn
-                          { \l_@@_setup_language_tl }
-                          { \l_@@_setup_type_tl }
-                          {#1} { tl }
-                      }
-                      {##1}
+                    \@@_opt_varname_lang_type:eenn
+                      { \l_@@_setup_language_tl }
+                      { \l_@@_setup_type_tl }
+                      {#1} { tl }
                   }
+                  {##1}
               }
           } ,
       }
   }
 \keys_define:nn { zref-clever/langfile }
   {
+    endrange .value_required:n = true ,
     endrange .code:n =
       {
         \str_case:nnF {#1}
@@ -2328,9 +2321,6 @@
                     }
                 }
             }
-
-            { unset }
-            { }
           }
           {
             \tl_if_empty:nTF {#1}
@@ -2384,14 +2374,13 @@
               }
           }
       } ,
-    endrange .value_required:n = true ,
   }
 \seq_map_inline:Nn
   \g_@@_rf_opts_tl_type_names_seq
   {
     \keys_define:nn { zref-clever/langfile }
       {
-        #1 .default:x = \c_novalue_tl ,
+        #1 .value_required:n = true ,
         #1 .code:n =
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -2402,30 +2391,24 @@
               {
                 \tl_if_empty:NTF \l_@@_lang_decl_case_tl
                   {
-                    \tl_if_novalue:nF {##1}
+                    \@@_opt_tl_gset_if_new:cn
                       {
-                        \@@_opt_tl_gset_if_new:cn
-                          {
-                            \@@_opt_varname_lang_type:eenn
-                              { \l_@@_setup_language_tl }
-                              { \l_@@_setup_type_tl }
-                              {#1} { tl }
-                          }
-                          {##1}
+                        \@@_opt_varname_lang_type:eenn
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          {#1} { tl }
                       }
+                      {##1}
                   }
                   {
-                    \tl_if_novalue:nF {##1}
+                    \@@_opt_tl_gset_if_new:cn
                       {
-                        \@@_opt_tl_gset_if_new:cn
-                          {
-                            \@@_opt_varname_lang_type:eeen
-                              { \l_@@_setup_language_tl }
-                              { \l_@@_setup_type_tl }
-                              { \l_@@_lang_decl_case_tl - #1 } { tl }
-                          }
-                          {##1}
+                        \@@_opt_varname_lang_type:eeen
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          { \l_@@_lang_decl_case_tl - #1 } { tl }
                       }
+                      {##1}
                   }
               }
           } ,
@@ -2436,79 +2419,73 @@
   {
     \keys_define:nn { zref-clever/langfile }
       {
-        #1 .default:x = \c_novalue_tl ,
+        #1 .value_required:n = true ,
         #1 .code:n =
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \tl_if_novalue:nF {##1}
+                \@@_opt_seq_if_set:cF
                   {
-                    \@@_opt_seq_if_set:cF
+                    \@@_opt_varname_lang_default:enn
+                      { \l_@@_setup_language_tl } {#1} { seq }
+                  }
+                  {
+                    \seq_gclear:N \g_tmpa_seq
+                    \@@_opt_seq_gset_clist_split:Nn
+                      \g_tmpa_seq {##1}
+                    \bool_lazy_or:nnTF
+                      { \tl_if_empty_p:n {##1} }
                       {
-                        \@@_opt_varname_lang_default:enn
-                          { \l_@@_setup_language_tl } {#1} { seq }
+                        \int_compare_p:nNn
+                          { \seq_count:N \g_tmpa_seq } = { 4 }
                       }
                       {
-                        \seq_gclear:N \g_tmpa_seq
-                        \@@_opt_seq_gset_clist_split:Nn
-                          \g_tmpa_seq {##1}
-                        \bool_lazy_or:nnTF
-                          { \tl_if_empty_p:n {##1} }
+                        \@@_opt_seq_gset_eq:cN
                           {
-                            \int_compare_p:nNn
-                              { \seq_count:N \g_tmpa_seq } = { 4 }
+                            \@@_opt_varname_lang_default:enn
+                              { \l_@@_setup_language_tl }
+                              {#1} { seq }
                           }
-                          {
-                            \@@_opt_seq_gset_eq:cN
-                              {
-                                \@@_opt_varname_lang_default:enn
-                                  { \l_@@_setup_language_tl }
-                                  {#1} { seq }
-                              }
-                              \g_tmpa_seq
-                          }
-                          {
-                            \msg_info:nnxx { zref-clever }
-                              { refbounds-must-be-four }
-                              {#1} { \seq_count:N \g_tmpa_seq }
-                          }
+                          \g_tmpa_seq
+                      }
+                      {
+                        \msg_info:nnxx { zref-clever }
+                          { refbounds-must-be-four }
+                          {#1} { \seq_count:N \g_tmpa_seq }
                       }
                   }
               }
               {
-                \tl_if_novalue:nF {##1}
+                \@@_opt_seq_if_set:cF
                   {
-                    \@@_opt_seq_if_set:cF
+                    \@@_opt_varname_lang_type:eenn
+                      { \l_@@_setup_language_tl }
+                      { \l_@@_setup_type_tl } {#1} { seq }
+                  }
+                  {
+                    \seq_gclear:N \g_tmpa_seq
+                    \@@_opt_seq_gset_clist_split:Nn
+                      \g_tmpa_seq {##1}
+                    \bool_lazy_or:nnTF
+                      { \tl_if_empty_p:n {##1} }
                       {
-                        \@@_opt_varname_lang_type:eenn
-                          { \l_@@_setup_language_tl }
-                          { \l_@@_setup_type_tl } {#1} { seq }
+                        \int_compare_p:nNn
+                          { \seq_count:N \g_tmpa_seq } = { 4 }
                       }
                       {
-                        \seq_gclear:N \g_tmpa_seq
-                        \@@_opt_seq_gset_clist_split:Nn
-                          \g_tmpa_seq {##1}
-                        \bool_lazy_or:nnTF
-                          { \tl_if_empty_p:n {##1} }
+                        \@@_opt_seq_gset_eq:cN
                           {
-                            \int_compare_p:nNn
-                              { \seq_count:N \g_tmpa_seq } = { 4 }
+                            \@@_opt_varname_lang_type:eenn
+                              { \l_@@_setup_language_tl }
+                              { \l_@@_setup_type_tl }
+                              {#1} { seq }
                           }
-                          {
-                            \@@_opt_seq_gset_eq:cN
-                              {
-                                \@@_opt_varname_lang_type:eenn
-                                  { \l_@@_setup_language_tl }
-                                  { \l_@@_setup_type_tl }
-                                  {#1} { seq }
-                              }
-                              \g_tmpa_seq
-                          }
-                          {
-                            \msg_info:nnxx { zref-clever }
-                              { refbounds-must-be-four }
-                              {#1} { \seq_count:N \g_tmpa_seq }
-                          }
+                          \g_tmpa_seq
+                      }
+                      {
+                        \msg_info:nnxx { zref-clever }
+                          { refbounds-must-be-four }
+                          {#1} { \seq_count:N \g_tmpa_seq }
                       }
                   }
               }
@@ -2597,7 +2574,6 @@
                   }
               }
           } ,
-        #1 / unset .code:n = { } ,
         #1 .default:n = true ,
         no #1 .meta:n = { #1 = false } ,
         no #1 .value_forbidden:n = true ,
@@ -4570,7 +4546,7 @@
       } ,
     case .value_required:n = true ,
 
-    gender .default:x = \c_novalue_tl ,
+    gender .value_required:n = true ,
     gender .code:n =
       {
         \seq_if_empty:NTF \l_@@_lang_gender_seq
@@ -4585,39 +4561,26 @@
                   { option-only-type-specific } { gender }
               }
               {
-                \tl_if_novalue:nTF {#1}
+                \seq_clear:N \l_tmpa_seq
+                \clist_map_inline:nn {#1}
                   {
-                    \@@_opt_seq_gunset:c
+                    \seq_if_in:NnTF \l_@@_lang_gender_seq {##1}
+                      { \seq_put_right:Nn \l_tmpa_seq {##1} }
                       {
-                        \@@_opt_varname_lang_type:eenn
-                          { \l_@@_setup_language_tl }
-                          { \l_@@_setup_type_tl }
-                          { gender }
-                          { seq }
+                        \msg_warning:nnxx { zref-clever }
+                          { gender-not-declared }
+                          { \l_@@_setup_language_tl } {##1}
                       }
                   }
+                \@@_opt_seq_gset_eq:cN
                   {
-                    \seq_clear:N \l_tmpa_seq
-                    \clist_map_inline:nn {#1}
-                      {
-                        \seq_if_in:NnTF \l_@@_lang_gender_seq {##1}
-                          { \seq_put_right:Nn \l_tmpa_seq {##1} }
-                          {
-                            \msg_warning:nnxx { zref-clever }
-                              { gender-not-declared }
-                              { \l_@@_setup_language_tl } {##1}
-                          }
-                      }
-                    \@@_opt_seq_gset_eq:cN
-                      {
-                        \@@_opt_varname_lang_type:eenn
-                          { \l_@@_setup_language_tl }
-                          { \l_@@_setup_type_tl }
-                          { gender }
-                          { seq }
-                      }
-                      \l_tmpa_seq
+                    \@@_opt_varname_lang_type:eenn
+                      { \l_@@_setup_language_tl }
+                      { \l_@@_setup_type_tl }
+                      { gender }
+                      { seq }
                   }
+                  \l_tmpa_seq
               }
           }
       } ,
@@ -4627,27 +4590,17 @@
   {
     \keys_define:nn { zref-clever/langsetup }
       {
-        #1 .default:x = \c_novalue_tl ,
+        #1 .value_required:n = true ,
         #1 .code:n =
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \tl_if_novalue:nTF {##1}
+                \@@_opt_tl_gset:cn
                   {
-                    \@@_opt_tl_gunset:c
-                      {
-                        \@@_opt_varname_lang_default:enn
-                          { \l_@@_setup_language_tl } {#1} { tl }
-                      }
+                    \@@_opt_varname_lang_default:enn
+                      { \l_@@_setup_language_tl } {#1} { tl }
                   }
-                  {
-                    \@@_opt_tl_gset:cn
-                      {
-                        \@@_opt_varname_lang_default:enn
-                          { \l_@@_setup_language_tl } {#1} { tl }
-                      }
-                      {##1}
-                  }
+                  {##1}
               }
               {
                 \msg_warning:nnn { zref-clever }
@@ -4666,50 +4619,29 @@
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \tl_if_novalue:nTF {##1}
+                \@@_opt_tl_gset:cn
                   {
-                    \@@_opt_tl_gunset:c
-                      {
-                        \@@_opt_varname_lang_default:enn
-                          { \l_@@_setup_language_tl } {#1} { tl }
-                      }
+                    \@@_opt_varname_lang_default:enn
+                      { \l_@@_setup_language_tl } {#1} { tl }
                   }
-                  {
-                    \@@_opt_tl_gset:cn
-                      {
-                        \@@_opt_varname_lang_default:enn
-                          { \l_@@_setup_language_tl } {#1} { tl }
-                      }
-                      {##1}
-                  }
+                  {##1}
               }
               {
-                \tl_if_novalue:nTF {##1}
+                \@@_opt_tl_gset:cn
                   {
-                    \@@_opt_tl_gunset:c
-                      {
-                        \@@_opt_varname_lang_type:eenn
-                          { \l_@@_setup_language_tl }
-                          { \l_@@_setup_type_tl }
-                          {#1} { tl }
-                      }
+                    \@@_opt_varname_lang_type:eenn
+                      { \l_@@_setup_language_tl }
+                      { \l_@@_setup_type_tl }
+                      {#1} { tl }
                   }
-                  {
-                    \@@_opt_tl_gset:cn
-                      {
-                        \@@_opt_varname_lang_type:eenn
-                          { \l_@@_setup_language_tl }
-                          { \l_@@_setup_type_tl }
-                          {#1} { tl }
-                      }
-                      {##1}
-                  }
+                  {##1}
               }
           } ,
       }
   }
 \keys_define:nn { zref-clever/langsetup }
   {
+    endrange .value_required:n = true ,
     endrange .code:n =
       {
         \str_case:nnF {#1}
@@ -4859,41 +4791,6 @@
                     }
                 }
             }
-
-            { unset }
-            {
-              \tl_if_empty:NTF \l_@@_setup_type_tl
-                {
-                  \@@_opt_tl_gunset:c
-                    {
-                      \@@_opt_varname_lang_default:enn
-                        { \l_@@_setup_language_tl }
-                        { endrangefunc } { tl }
-                    }
-                  \@@_opt_tl_gunset:c
-                    {
-                      \@@_opt_varname_lang_default:enn
-                        { \l_@@_setup_language_tl }
-                        { endrangeprop } { tl }
-                    }
-                }
-                {
-                  \@@_opt_tl_gunset:c
-                    {
-                      \@@_opt_varname_lang_type:eenn
-                        { \l_@@_setup_language_tl }
-                        { \l_@@_setup_type_tl }
-                        { endrangefunc } { tl }
-                    }
-                  \@@_opt_tl_gunset:c
-                    {
-                      \@@_opt_varname_lang_type:eenn
-                        { \l_@@_setup_language_tl }
-                        { \l_@@_setup_type_tl }
-                        { endrangeprop } { tl }
-                    }
-                }
-            }
           }
           {
             \tl_if_empty:nTF {#1}
@@ -4947,7 +4844,6 @@
               }
           }
       } ,
-    endrange .value_required:n = true ,
   }
 \keys_define:nn { zref-clever/langsetup }
   {
@@ -4990,39 +4886,27 @@
                   { option-only-type-specific } {#1}
               }
               {
-                \tl_if_novalue:nTF {##1}
+                \tl_if_empty:NTF \l_@@_lang_decl_case_tl
                   {
-                    \@@_opt_tl_gunset:c
+                    \@@_opt_tl_gset:cn
                       {
                         \@@_opt_varname_lang_type:eenn
                           { \l_@@_setup_language_tl }
                           { \l_@@_setup_type_tl }
                           {#1} { tl }
                       }
+                      {##1}
                   }
                   {
-                    \tl_if_empty:NTF \l_@@_lang_decl_case_tl
+                    \@@_opt_tl_gset:cn
                       {
-                        \@@_opt_tl_gset:cn
-                          {
-                            \@@_opt_varname_lang_type:eenn
-                              { \l_@@_setup_language_tl }
-                              { \l_@@_setup_type_tl }
-                              {#1} { tl }
-                          }
-                          {##1}
+                        \@@_opt_varname_lang_type:eeen
+                          { \l_@@_setup_language_tl }
+                          { \l_@@_setup_type_tl }
+                          { \l_@@_lang_decl_case_tl - #1 }
+                          { tl }
                       }
-                      {
-                        \@@_opt_tl_gset:cn
-                          {
-                            \@@_opt_varname_lang_type:eeen
-                              { \l_@@_setup_language_tl }
-                              { \l_@@_setup_type_tl }
-                              { \l_@@_lang_decl_case_tl - #1 }
-                              { tl }
-                          }
-                          {##1}
-                      }
+                      {##1}
                   }
               }
           } ,
@@ -5033,80 +4917,58 @@
   {
     \keys_define:nn { zref-clever/langsetup }
       {
-        #1 .default:x = \c_novalue_tl ,
+        #1 .value_required:n = true ,
         #1 .code:n =
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \tl_if_novalue:nTF {##1}
+                \seq_gclear:N \g_tmpa_seq
+                \@@_opt_seq_gset_clist_split:Nn
+                  \g_tmpa_seq {##1}
+                \bool_lazy_or:nnTF
+                  { \tl_if_empty_p:n {##1} }
                   {
-                    \@@_opt_seq_gunset:c
+                    \int_compare_p:nNn
+                      { \seq_count:N \g_tmpa_seq } = { 4 }
+                  }
+                  {
+                    \@@_opt_seq_gset_eq:cN
                       {
                         \@@_opt_varname_lang_default:enn
                           { \l_@@_setup_language_tl }
                           {#1} { seq }
                       }
+                      \g_tmpa_seq
                   }
                   {
-                    \seq_gclear:N \g_tmpa_seq
-                    \@@_opt_seq_gset_clist_split:Nn
-                      \g_tmpa_seq {##1}
-                    \bool_lazy_or:nnTF
-                      { \tl_if_empty_p:n {##1} }
-                      {
-                        \int_compare_p:nNn
-                          { \seq_count:N \g_tmpa_seq } = { 4 }
-                      }
-                      {
-                        \@@_opt_seq_gset_eq:cN
-                          {
-                            \@@_opt_varname_lang_default:enn
-                              { \l_@@_setup_language_tl }
-                              {#1} { seq }
-                          }
-                          \g_tmpa_seq
-                      }
-                      {
-                        \msg_warning:nnxx { zref-clever }
-                          { refbounds-must-be-four }
-                          {#1} { \seq_count:N \g_tmpa_seq }
-                      }
+                    \msg_warning:nnxx { zref-clever }
+                      { refbounds-must-be-four }
+                      {#1} { \seq_count:N \g_tmpa_seq }
                   }
               }
               {
-                \tl_if_novalue:nTF {##1}
+                \seq_gclear:N \g_tmpa_seq
+                \@@_opt_seq_gset_clist_split:Nn
+                  \g_tmpa_seq {##1}
+                \bool_lazy_or:nnTF
+                  { \tl_if_empty_p:n {##1} }
                   {
-                    \@@_opt_seq_gunset:c
+                    \int_compare_p:nNn
+                      { \seq_count:N \g_tmpa_seq } = { 4 }
+                  }
+                  {
+                    \@@_opt_seq_gset_eq:cN
                       {
                         \@@_opt_varname_lang_type:eenn
                           { \l_@@_setup_language_tl }
                           { \l_@@_setup_type_tl } {#1} { seq }
                       }
+                      \g_tmpa_seq
                   }
                   {
-                    \seq_gclear:N \g_tmpa_seq
-                    \@@_opt_seq_gset_clist_split:Nn
-                      \g_tmpa_seq {##1}
-                    \bool_lazy_or:nnTF
-                      { \tl_if_empty_p:n {##1} }
-                      {
-                        \int_compare_p:nNn
-                          { \seq_count:N \g_tmpa_seq } = { 4 }
-                      }
-                      {
-                        \@@_opt_seq_gset_eq:cN
-                          {
-                            \@@_opt_varname_lang_type:eenn
-                              { \l_@@_setup_language_tl }
-                              { \l_@@_setup_type_tl } {#1} { seq }
-                          }
-                          \g_tmpa_seq
-                      }
-                      {
-                        \msg_warning:nnxx { zref-clever }
-                          { refbounds-must-be-four }
-                          {#1} { \seq_count:N \g_tmpa_seq }
-                      }
+                    \msg_warning:nnxx { zref-clever }
+                      { refbounds-must-be-four }
+                      {#1} { \seq_count:N \g_tmpa_seq }
                   }
               }
           } ,
@@ -5152,27 +5014,6 @@
               }
               {
                 \@@_opt_bool_gset_false:c
-                  {
-                    \@@_opt_varname_lang_type:eenn
-                      { \l_@@_setup_language_tl }
-                      { \l_@@_setup_type_tl }
-                      {#1} { bool }
-                  }
-              }
-          } ,
-        #1 / unset .code:n =
-          {
-            \tl_if_empty:NTF \l_@@_setup_type_tl
-              {
-                \@@_opt_bool_gunset:c
-                  {
-                    \@@_opt_varname_lang_default:enn
-                      { \l_@@_setup_language_tl }
-                      {#1} { bool }
-                  }
-              }
-              {
-                \@@_opt_bool_gunset:c
                   {
                     \@@_opt_varname_lang_type:eenn
                       { \l_@@_setup_language_tl }
