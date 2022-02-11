@@ -864,6 +864,43 @@
 %
 % \begin{macro}
 %   {
+%     \@@_opt_tl_gset:Nn ,
+%     \@@_opt_tl_gclear:N ,
+%   }
+%   \begin{syntax}
+%     \cs{@@_opt_tl_gset:N} \Arg{option tl} \Arg{value}
+%     \cs{@@_opt_tl_gclear:N} \Arg{option tl}
+%   \end{syntax}
+%   Note that we do not define a similar ``\cs{@@_opt_tl_set:Nn}'' (neither
+%   its correlates for \texttt{seq}, \texttt{bool}, etc.) to ensure the
+%   variable is declared, because the declaration is global, which means the
+%   variable would ``exist'', and thus ``be set'' (and empty), at the global
+%   level, defeating the precedence rules for reference format options.  This
+%   is not in accordance with \texttt{expl3} understanding, which considers an
+%   assignment to an undeclared variable an ``error''.  But I see no way
+%   around this, unless we started keeping track the ``set status'' of each
+%   variable independently of the variables themselves\dots{}.  This affects
+%   variable setting in the general and reference type levels.
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_opt_tl_gset:Nn #1#2
+  {
+    \tl_if_exist:NF #1
+      { \tl_new:N #1 }
+    \tl_gset:Nn #1 {#2}
+  }
+\cs_generate_variant:Nn \@@_opt_tl_gset:Nn { cn }
+\cs_new_protected:Npn \@@_opt_tl_gclear:N #1
+  {
+    \tl_if_exist:NF #1
+      { \tl_new:N #1 }
+    \tl_gclear:N #1
+  }
+\cs_generate_variant:Nn \@@_opt_tl_gclear:N { c }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}
+%   {
 %     \@@_opt_tl_unset:N ,
 %     \@@_opt_tl_gunset:N ,
 %   }
@@ -876,9 +913,15 @@
 %   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_opt_tl_unset:N #1
-  { \tl_set_eq:NN #1 \c_novalue_tl }
+  {
+    \tl_if_exist:NT #1
+      { \tl_set_eq:NN #1 \scan_stop: }
+  }
 \cs_new_protected:Npn \@@_opt_tl_gunset:N #1
-  { \tl_gset_eq:NN #1 \c_novalue_tl }
+  {
+    \tl_if_exist:NT #1
+      { \tl_gset_eq:NN #1 \scan_stop: }
+  }
 \cs_generate_variant:Nn \@@_opt_tl_unset:N { c }
 \cs_generate_variant:Nn \@@_opt_tl_gunset:N { c }
 %    \end{macrocode}
@@ -891,9 +934,7 @@
 %    \begin{macrocode}
 \prg_new_conditional:Npnn \@@_opt_tl_if_set:N #1 { F , TF }
   {
-    \bool_lazy_and:nnTF
-      { \tl_if_exist_p:N #1 }
-      { ! \tl_if_novalue_p:n {#1} }
+    \tl_if_exist:NTF #1
       { \prg_return_true:  }
       { \prg_return_false: }
   }
@@ -908,9 +949,23 @@
 \cs_new_protected:Npn \@@_opt_tl_gset_if_new:Nn #1#2
   {
     \@@_opt_tl_if_set:NF #1
-      { \tl_gset:Nn #1 {#2} }
+      {
+        \tl_if_exist:NF #1
+          { \tl_new:N #1 }
+        \tl_gset:Nn #1 {#2}
+      }
   }
 \cs_generate_variant:Nn \@@_opt_tl_gset_if_new:Nn { cn }
+\cs_new_protected:Npn \@@_opt_tl_gclear_if_new:N #1
+  {
+    \@@_opt_tl_if_set:NF #1
+      {
+        \tl_if_exist:NF #1
+          { \tl_new:N #1 }
+        \tl_gclear:N #1
+      }
+  }
+\cs_generate_variant:Nn \@@_opt_tl_gclear_if_new:N { c }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -940,16 +995,25 @@
 %   {
 %     \@@_opt_seq_set_clist_split:Nn ,
 %     \@@_opt_seq_gset_clist_split:Nn ,
+%     \@@_opt_seq_gset_eq:NN ,
 %   }
 %   \begin{syntax}
 %     \cs{@@_opt_seq_set_clist_split:Nn} \Arg{option seq} \Arg{value}
 %     \cs{@@_opt_seq_gset_clist_split:Nn} \Arg{option seq} \Arg{value}
+%     \cs{@@_opt_seq_gset_eq:NN} \Arg{option seq} \Arg{seq var}
 %   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_opt_seq_set_clist_split:Nn #1#2
   { \seq_set_split:Nnn #1 { , } {#2} }
 \cs_new_protected:Npn \@@_opt_seq_gset_clist_split:Nn #1#2
   { \seq_gset_split:Nnn #1 { , } {#2} }
+\cs_new_protected:Npn \@@_opt_seq_gset_eq:NN #1#2
+  {
+    \seq_if_exist:NF #1
+      { \seq_new:N #1 }
+    \seq_gset_eq:NN #1 #2
+  }
+\cs_generate_variant:Nn \@@_opt_seq_gset_eq:NN { cN }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -967,9 +1031,15 @@
 %   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_opt_seq_unset:N #1
-  { \cs_set_eq:NN #1 \scan_stop: }
+  {
+    \seq_if_exist:NT #1
+      { \cs_set_eq:NN #1 \scan_stop: }
+  }
 \cs_new_protected:Npn \@@_opt_seq_gunset:N #1
-  { \cs_gset_eq:NN #1 \scan_stop: }
+  {
+    \seq_if_exist:NT #1
+      { \cs_gset_eq:NN #1 \scan_stop: }
+  }
 \cs_generate_variant:Nn \@@_opt_seq_unset:N { c }
 \cs_generate_variant:Nn \@@_opt_seq_gunset:N { c }
 %    \end{macrocode}
@@ -1027,9 +1097,15 @@
 %   \end{syntax}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_opt_bool_unset:N #1
-  { \cs_set_eq:NN #1 \scan_stop: }
+  {
+    \bool_if_exist:NT #1
+      { \cs_set_eq:NN #1 \scan_stop: }
+  }
 \cs_new_protected:Npn \@@_opt_bool_gunset:N #1
-  { \cs_gset_eq:NN #1 \scan_stop: }
+  {
+    \bool_if_exist:NT #1
+      { \cs_gset_eq:NN #1 \scan_stop: }
+  }
 \cs_generate_variant:Nn \@@_opt_bool_unset:N { c }
 \cs_generate_variant:Nn \@@_opt_bool_gunset:N { c }
 %    \end{macrocode}
@@ -1044,6 +1120,33 @@
   { \bool_if_exist:NTF #1 { \prg_return_true: } { \prg_return_false: } }
 \prg_generate_conditional_variant:Nnn
   \@@_opt_bool_if_set:N { c } { F , TF }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}
+%   {
+%     \@@_opt_bool_gset_true:N ,
+%     \@@_opt_bool_gset_false:N ,
+%   }
+%   \begin{syntax}
+%     \cs{@@_opt_bool_gset_true:N} \Arg{option bool}
+%     \cs{@@_opt_bool_gset_false:N} \Arg{option bool}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_opt_bool_gset_true:N #1
+  {
+    \bool_if_exist:NF #1
+      { \bool_new:N #1 }
+    \bool_gset_true:N #1
+  }
+\cs_generate_variant:Nn \@@_opt_bool_gset_true:N { c }
+\cs_new_protected:Npn \@@_opt_bool_gset_false:N #1
+  {
+    \bool_if_exist:NF #1
+      { \bool_new:N #1 }
+    \bool_gset_false:N #1
+  }
+\cs_generate_variant:Nn \@@_opt_bool_gset_false:N { c }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1964,38 +2067,34 @@
             {
               \tl_if_empty:NTF \l_@@_setup_type_tl
                 {
-                  \@@_opt_tl_gset_if_new:cn
+                  \@@_opt_tl_gclear_if_new:c
                     {
                       \@@_opt_varname_lang_default:enn
                         { \l_@@_setup_language_tl }
                         { endrangefunc } { tl }
                     }
-                    { }
-                  \@@_opt_tl_gset_if_new:cn
+                  \@@_opt_tl_gclear_if_new:c
                     {
                       \@@_opt_varname_lang_default:enn
                         { \l_@@_setup_language_tl }
                         { endrangeprop } { tl }
                     }
-                    { }
                 }
                 {
-                  \@@_opt_tl_gset_if_new:cn
+                  \@@_opt_tl_gclear_if_new:c
                     {
                       \@@_opt_varname_lang_type:eenn
                         { \l_@@_setup_language_tl }
                         { \l_@@_setup_type_tl }
                         { endrangefunc } { tl }
                     }
-                    { }
-                  \@@_opt_tl_gset_if_new:cn
+                  \@@_opt_tl_gclear_if_new:c
                     {
                       \@@_opt_varname_lang_type:eenn
                         { \l_@@_setup_language_tl }
                         { \l_@@_setup_type_tl }
                         { endrangeprop } { tl }
                     }
-                    { }
                 }
             }
 
@@ -2010,13 +2109,12 @@
                         { endrangefunc } { tl }
                     }
                     { @@_get_endrange_stripprefix }
-                  \@@_opt_tl_gset_if_new:cn
+                  \@@_opt_tl_gclear_if_new:c
                     {
                       \@@_opt_varname_lang_default:enn
                         { \l_@@_setup_language_tl }
                         { endrangeprop } { tl }
                     }
-                    { }
                 }
                 {
                   \@@_opt_tl_gset_if_new:cn
@@ -2027,14 +2125,13 @@
                         { endrangefunc } { tl }
                     }
                     { @@_get_endrange_stripprefix }
-                  \@@_opt_tl_gset_if_new:cn
+                  \@@_opt_tl_gclear_if_new:c
                     {
                       \@@_opt_varname_lang_type:eenn
                         { \l_@@_setup_language_tl }
                         { \l_@@_setup_type_tl }
                         { endrangeprop } { tl }
                     }
-                    { }
                 }
             }
 
@@ -2049,13 +2146,12 @@
                         { endrangefunc } { tl }
                     }
                     { @@_get_endrange_pagecomp }
-                  \@@_opt_tl_gset_if_new:cn
+                  \@@_opt_tl_gclear_if_new:c
                     {
                       \@@_opt_varname_lang_default:enn
                         { \l_@@_setup_language_tl }
                         { endrangeprop } { tl }
                     }
-                    { }
                 }
                 {
                   \@@_opt_tl_gset_if_new:cn
@@ -2066,14 +2162,13 @@
                         { endrangefunc } { tl }
                     }
                     { @@_get_endrange_pagecomp }
-                  \@@_opt_tl_gset_if_new:cn
+                  \@@_opt_tl_gclear_if_new:c
                     {
                       \@@_opt_varname_lang_type:eenn
                         { \l_@@_setup_language_tl }
                         { \l_@@_setup_type_tl }
                         { endrangeprop } { tl }
                     }
-                    { }
                 }
             }
 
@@ -2088,13 +2183,12 @@
                         { endrangefunc } { tl }
                     }
                     { @@_get_endrange_pagecomptwo }
-                  \@@_opt_tl_gset_if_new:cn
+                  \@@_opt_tl_gclear_if_new:c
                     {
                       \@@_opt_varname_lang_default:enn
                         { \l_@@_setup_language_tl }
                         { endrangeprop } { tl }
                     }
-                    { }
                 }
                 {
                   \@@_opt_tl_gset_if_new:cn
@@ -2105,14 +2199,13 @@
                         { endrangefunc } { tl }
                     }
                     { @@_get_endrange_pagecomptwo }
-                  \@@_opt_tl_gset_if_new:cn
+                  \@@_opt_tl_gclear_if_new:c
                     {
                       \@@_opt_varname_lang_type:eenn
                         { \l_@@_setup_language_tl }
                         { \l_@@_setup_type_tl }
                         { endrangeprop } { tl }
                     }
-                    { }
                 }
             }
 
@@ -2246,7 +2339,7 @@
                               { \seq_count:N \g_tmpa_seq } = { 4 }
                           }
                           {
-                            \seq_gset_eq:cN
+                            \@@_opt_seq_gset_eq:cN
                               {
                                 \@@_opt_varname_lang_default:enn
                                   { \l_@@_setup_language_tl }
@@ -2282,7 +2375,7 @@
                               { \seq_count:N \g_tmpa_seq } = { 4 }
                           }
                           {
-                            \seq_gset_eq:cN
+                            \@@_opt_seq_gset_eq:cN
                               {
                                 \@@_opt_varname_lang_type:eenn
                                   { \l_@@_setup_language_tl }
@@ -2319,7 +2412,7 @@
                       {#1} { bool }
                   }
                   {
-                    \bool_gset_true:c
+                    \@@_opt_bool_gset_true:c
                       {
                         \@@_opt_varname_lang_default:enn
                           { \l_@@_setup_language_tl }
@@ -2336,7 +2429,7 @@
                       {#1} { bool }
                   }
                   {
-                    \bool_gset_true:c
+                    \@@_opt_bool_gset_true:c
                       {
                         \@@_opt_varname_lang_type:eenn
                           { \l_@@_setup_language_tl }
@@ -2357,7 +2450,7 @@
                       {#1} { bool }
                   }
                   {
-                    \bool_gset_false:c
+                    \@@_opt_bool_gset_false:c
                       {
                         \@@_opt_varname_lang_default:enn
                           { \l_@@_setup_language_tl }
@@ -2374,7 +2467,7 @@
                       {#1} { bool }
                   }
                   {
-                    \bool_gset_false:c
+                    \@@_opt_bool_gset_false:c
                       {
                         \@@_opt_varname_lang_type:eenn
                           { \l_@@_setup_language_tl }
@@ -4395,7 +4488,7 @@
                               { \l_@@_setup_language_tl } {##1}
                           }
                       }
-                    \seq_gset_eq:cN
+                    \@@_opt_seq_gset_eq:cN
                       {
                         \@@_opt_varname_lang_type:eenn
                           { \l_@@_setup_language_tl }
@@ -4428,7 +4521,7 @@
                       }
                   }
                   {
-                    \tl_gset:cn
+                    \@@_opt_tl_gset:cn
                       {
                         \@@_opt_varname_lang_default:enn
                           { \l_@@_setup_language_tl } {#1} { tl }
@@ -4462,7 +4555,7 @@
                       }
                   }
                   {
-                    \tl_gset:cn
+                    \@@_opt_tl_gset:cn
                       {
                         \@@_opt_varname_lang_default:enn
                           { \l_@@_setup_language_tl } {#1} { tl }
@@ -4482,7 +4575,7 @@
                       }
                   }
                   {
-                    \tl_gset:cn
+                    \@@_opt_tl_gset:cn
                       {
                         \@@_opt_varname_lang_type:eenn
                           { \l_@@_setup_language_tl }
@@ -4505,13 +4598,13 @@
             {
               \tl_if_empty:NTF \l_@@_setup_type_tl
                 {
-                  \tl_gclear:c
+                  \@@_opt_tl_gclear:c
                     {
                       \@@_opt_varname_lang_default:enn
                         { \l_@@_setup_language_tl }
                         { endrangefunc } { tl }
                     }
-                  \tl_gclear:c
+                  \@@_opt_tl_gclear:c
                     {
                       \@@_opt_varname_lang_default:enn
                         { \l_@@_setup_language_tl }
@@ -4519,14 +4612,14 @@
                     }
                 }
                 {
-                  \tl_gclear:c
+                  \@@_opt_tl_gclear:c
                     {
                       \@@_opt_varname_lang_type:eenn
                         { \l_@@_setup_language_tl }
                         { \l_@@_setup_type_tl }
                         { endrangefunc } { tl }
                     }
-                  \tl_gclear:c
+                  \@@_opt_tl_gclear:c
                     {
                       \@@_opt_varname_lang_type:eenn
                         { \l_@@_setup_language_tl }
@@ -4540,14 +4633,14 @@
             {
               \tl_if_empty:NTF \l_@@_setup_type_tl
                 {
-                  \tl_gset:cn
+                  \@@_opt_tl_gset:cn
                     {
                       \@@_opt_varname_lang_default:enn
                         { \l_@@_setup_language_tl }
                         { endrangefunc } { tl }
                     }
                     { @@_get_endrange_stripprefix }
-                  \tl_gclear:c
+                  \@@_opt_tl_gclear:c
                     {
                       \@@_opt_varname_lang_default:enn
                         { \l_@@_setup_language_tl }
@@ -4555,7 +4648,7 @@
                     }
                 }
                 {
-                  \tl_gset:cn
+                  \@@_opt_tl_gset:cn
                     {
                       \@@_opt_varname_lang_type:eenn
                         { \l_@@_setup_language_tl }
@@ -4563,7 +4656,7 @@
                         { endrangefunc } { tl }
                     }
                     { @@_get_endrange_stripprefix }
-                  \tl_gclear:c
+                  \@@_opt_tl_gclear:c
                     {
                       \@@_opt_varname_lang_type:eenn
                         { \l_@@_setup_language_tl }
@@ -4577,14 +4670,14 @@
             {
               \tl_if_empty:NTF \l_@@_setup_type_tl
                 {
-                  \tl_gset:cn
+                  \@@_opt_tl_gset:cn
                     {
                       \@@_opt_varname_lang_default:enn
                         { \l_@@_setup_language_tl }
                         { endrangefunc } { tl }
                     }
                     { @@_get_endrange_pagecomp }
-                  \tl_gclear:c
+                  \@@_opt_tl_gclear:c
                     {
                       \@@_opt_varname_lang_default:enn
                         { \l_@@_setup_language_tl }
@@ -4592,7 +4685,7 @@
                     }
                 }
                 {
-                  \tl_gset:cn
+                  \@@_opt_tl_gset:cn
                     {
                       \@@_opt_varname_lang_type:eenn
                         { \l_@@_setup_language_tl }
@@ -4600,7 +4693,7 @@
                         { endrangefunc } { tl }
                     }
                     { @@_get_endrange_pagecomp }
-                  \tl_gclear:c
+                  \@@_opt_tl_gclear:c
                     {
                       \@@_opt_varname_lang_type:eenn
                         { \l_@@_setup_language_tl }
@@ -4614,14 +4707,14 @@
             {
               \tl_if_empty:NTF \l_@@_setup_type_tl
                 {
-                  \tl_gset:cn
+                  \@@_opt_tl_gset:cn
                     {
                       \@@_opt_varname_lang_default:enn
                         { \l_@@_setup_language_tl }
                         { endrangefunc } { tl }
                     }
                     { @@_get_endrange_pagecomptwo }
-                  \tl_gclear:c
+                  \@@_opt_tl_gclear:c
                     {
                       \@@_opt_varname_lang_default:enn
                         { \l_@@_setup_language_tl }
@@ -4629,7 +4722,7 @@
                     }
                 }
                 {
-                  \tl_gset:cn
+                  \@@_opt_tl_gset:cn
                     {
                       \@@_opt_varname_lang_type:eenn
                         { \l_@@_setup_language_tl }
@@ -4637,7 +4730,7 @@
                         { endrangefunc } { tl }
                     }
                     { @@_get_endrange_pagecomptwo }
-                  \tl_gclear:c
+                  \@@_opt_tl_gclear:c
                     {
                       \@@_opt_varname_lang_type:eenn
                         { \l_@@_setup_language_tl }
@@ -4697,14 +4790,14 @@
                   {
                     \tl_if_empty:NTF \l_@@_setup_type_tl
                       {
-                        \tl_gset:cn
+                        \@@_opt_tl_gset:cn
                           {
                             \@@_opt_varname_lang_default:enn
                               { \l_@@_setup_language_tl }
                               { endrangefunc } { tl }
                           }
                           { @@_get_endrange_property }
-                        \tl_gset:cn
+                        \@@_opt_tl_gset:cn
                           {
                             \@@_opt_varname_lang_default:enn
                               { \l_@@_setup_language_tl }
@@ -4713,7 +4806,7 @@
                           {#1}
                       }
                       {
-                        \tl_gset:cn
+                        \@@_opt_tl_gset:cn
                           {
                             \@@_opt_varname_lang_type:eenn
                               { \l_@@_setup_language_tl }
@@ -4721,7 +4814,7 @@
                               { endrangefunc } { tl }
                           }
                           { @@_get_endrange_property }
-                        \tl_gset:cn
+                        \@@_opt_tl_gset:cn
                           {
                             \@@_opt_varname_lang_type:eenn
                               { \l_@@_setup_language_tl }
@@ -4790,7 +4883,7 @@
                   {
                     \tl_if_empty:NTF \l_@@_lang_decl_case_tl
                       {
-                        \tl_gset:cn
+                        \@@_opt_tl_gset:cn
                           {
                             \@@_opt_varname_lang_type:eenn
                               { \l_@@_setup_language_tl }
@@ -4800,7 +4893,7 @@
                           {##1}
                       }
                       {
-                        \tl_gset:cn
+                        \@@_opt_tl_gset:cn
                           {
                             \@@_opt_varname_lang_type:eeen
                               { \l_@@_setup_language_tl }
@@ -4845,7 +4938,7 @@
                           { \seq_count:N \g_tmpa_seq } = { 4 }
                       }
                       {
-                        \seq_gset_eq:cN
+                        \@@_opt_seq_gset_eq:cN
                           {
                             \@@_opt_varname_lang_default:enn
                               { \l_@@_setup_language_tl }
@@ -4881,7 +4974,7 @@
                           { \seq_count:N \g_tmpa_seq } = { 4 }
                       }
                       {
-                        \seq_gset_eq:cN
+                        \@@_opt_seq_gset_eq:cN
                           {
                             \@@_opt_varname_lang_type:eenn
                               { \l_@@_setup_language_tl }
@@ -4909,7 +5002,7 @@
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \bool_gset_true:c
+                \@@_opt_bool_gset_true:c
                   {
                     \@@_opt_varname_lang_default:enn
                       { \l_@@_setup_language_tl }
@@ -4917,7 +5010,7 @@
                   }
               }
               {
-                \bool_gset_true:c
+                \@@_opt_bool_gset_true:c
                   {
                     \@@_opt_varname_lang_type:eenn
                       { \l_@@_setup_language_tl }
@@ -4930,7 +5023,7 @@
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \bool_gset_false:c
+                \@@_opt_bool_gset_false:c
                   {
                     \@@_opt_varname_lang_default:enn
                       { \l_@@_setup_language_tl }
@@ -4938,7 +5031,7 @@
                   }
               }
               {
-                \bool_gset_false:c
+                \@@_opt_bool_gset_false:c
                   {
                     \@@_opt_varname_lang_type:eenn
                       { \l_@@_setup_language_tl }
