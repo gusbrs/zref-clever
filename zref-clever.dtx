@@ -1303,7 +1303,7 @@
 % key'' (\texttt{key=} or \texttt{key=\{\}}) from a ``key with no value''
 % (\texttt{key}).  This distinction is captured internally by the lower-level
 % key parsing, but must be made explicit in \cs{keys_define:nn} by means of
-% the \texttt{.default:x} property of the key.  For the technique, by
+% the \texttt{.default:o} property of the key.  For the technique, by
 % \contributor{Jonathan P.\ Spratte}, aka `Skillmon', and some discussion
 % about it, including further insights by \contributor{Phelype Oleinik}, see
 % \url{https://tex.stackexchange.com/q/614690} and
@@ -4004,7 +4004,7 @@
   {
     \keys_define:nn { zref-clever/reference }
       {
-        #1 .default:x = \c_novalue_tl ,
+        #1 .default:o = \c_novalue_tl ,
         #1 .code:n =
           {
             \tl_if_novalue:nTF {##1}
@@ -4052,7 +4052,7 @@
   {
     \keys_define:nn { zref-clever/reference }
       {
-        #1 .default:x = \c_novalue_tl ,
+        #1 .default:o = \c_novalue_tl ,
         #1 .code:n =
           {
             \tl_if_novalue:nTF {##1}
@@ -4215,7 +4215,7 @@
   {
     \keys_define:nn { zref-clever/typesetup }
       {
-        #1 .default:x = \c_novalue_tl ,
+        #1 .default:o = \c_novalue_tl ,
         #1 .code:n =
           {
             \tl_if_novalue:nTF {##1}
@@ -4381,7 +4381,7 @@
   {
     \keys_define:nn { zref-clever/typesetup }
       {
-        #1 .default:x = \c_novalue_tl ,
+        #1 .default:o = \c_novalue_tl ,
         #1 .code:n =
           {
             \tl_if_novalue:nTF {##1}
