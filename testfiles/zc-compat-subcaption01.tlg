@@ -145,7 +145,7 @@ and\nobreakspace \group_begin: \hyper@@link {}{table.caption.3}{1b}\group_end:
 .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tab:1a,tab:1b,tab:1}
-                                               }
+                                                }
 > \box...=
 \hbox(6.94444+1.94444)x83.38905
 .\OT1/cmr/m/n/10 t

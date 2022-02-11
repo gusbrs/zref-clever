@@ -2,6 +2,11 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.2.1-alpha...HEAD)
 
+### Changed
+- (Internal) Option variables setting was reviewed, ensuring proper scope is
+  in use and that they are always properly declared.  `expl3` debugging
+  enabled in regression tests.
+
 ## [v0.2.1-alpha](https://github.com/gusbrs/zref-clever/compare/v0.2.0-alpha...v0.2.1-alpha) (2022-02-07)
 
 ### Added

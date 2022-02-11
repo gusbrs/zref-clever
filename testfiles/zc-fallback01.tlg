@@ -97,7 +97,7 @@ Package zref-clever Warning: Reference format option 'name-sg' undefined for
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default:
 \nobreakspace \group_begin: 1.1\group_end: .
 <recently read> }
-l. ......box{\zcref[note={a note}]{sec:section-1.1}
+l. ......ox{\zcref[note={a note}]{sec:section-1.1}
                                                   }
 > \box...=
 \hbox(6.94444+0.0)x57.5278

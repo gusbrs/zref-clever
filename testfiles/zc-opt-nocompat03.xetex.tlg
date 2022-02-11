@@ -206,14 +206,14 @@ outer braces):
 >  {enumiv}  =>  {item}
 >  {mpfootnote}  =>  {footnote}.
 <recently read> }
-l. ...\prop_show:N \l__zrefclever_counter_type_prop
+l. ......p_show:N \l__zrefclever_counter_type_prop
 The property list \l__zrefclever_counter_resetby_prop contains the pairs
 (without outer braces):
 >  {enumii}  =>  {enumi}
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}.
 <recently read> }
-l. ......show:N \l__zrefclever_counter_resetby_prop
+l. ......how:N \l__zrefclever_counter_resetby_prop
 > \lsthk@Init=macro:->\lst@ifshowspaces \let \lst@outputspace
 \lst@visiblespace \lst@keepspacestrue \fi \edef \ttdefault {\ttdefault }\let
 \lsts@nfss@catcodes \nfss@catcodes \let \nfss@catcodes \lst@nfss@catcodes

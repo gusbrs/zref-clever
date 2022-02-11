@@ -2,7 +2,13 @@
 
 \input{regression-test}
 
-\usepackage[]{zref-clever}
+\RequirePackage[enable-debug]{expl3}
+
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation }
+\ExplSyntaxOff
+
+\usepackage{zref-clever}
 
 \START
 

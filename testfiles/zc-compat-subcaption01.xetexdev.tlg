@@ -127,7 +127,7 @@ and\nobreakspace \group_begin: \hyper@@link {}{table.caption.3}{1b}\group_end:
 .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tab:1a,tab:1b,tab:1}
-                                               }
+                                                }
 > \box...=
 \hbox(6.94+1.92998)x83.39
 .\TU/lmr/m/n/10 tables
