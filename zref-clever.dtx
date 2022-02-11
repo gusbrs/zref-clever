@@ -1155,30 +1155,36 @@
 %
 % \begin{macro}
 %   {
-%     \c_@@_rf_opts_tl_not_type_specific_seq ,
-%     \c_@@_rf_opts_tl_maybe_type_specific_seq ,
-%     \c_@@_rf_opts_seq_refbounds_seq ,
-%     \c_@@_rf_opts_bool_maybe_type_specific_seq ,
-%     \c_@@_rf_opts_tl_type_names_seq ,
-%     \c_@@_rf_opts_tl_font_seq ,
-%     \c_@@_rf_opts_tl_typesetup_seq ,
-%     \c_@@_rf_opts_tl_reference_seq ,
+%     \g_@@_rf_opts_tl_not_type_specific_seq ,
+%     \g_@@_rf_opts_tl_maybe_type_specific_seq ,
+%     \g_@@_rf_opts_seq_refbounds_seq ,
+%     \g_@@_rf_opts_bool_maybe_type_specific_seq ,
+%     \g_@@_rf_opts_tl_type_names_seq ,
+%     \g_@@_rf_opts_tl_typesetup_seq ,
+%     \g_@@_rf_opts_tl_reference_seq ,
 %   }
 %     Lists of reference format options in ``categories''.  Since these
 %     options are set in different scopes, and at different places, storing
 %     the actual lists in centralized variables makes the job not only easier
-%     later on, but also keeps things consistent.
+%     later on, but also keeps things consistent.  These variables are
+%     \emph{constants}, but I don't seem to be able to find a way to
+%     concatenate two constants into a third one without triggering \LaTeX3
+%     debug error ``Inconsistent local/global assignment''.  And repeating
+%     things in a new \cs{seq_const_from_clist:Nn} defeats the purpose of
+%     these variables.
 %    \begin{macrocode}
-\seq_const_from_clist:Nn
-  \c_@@_rf_opts_tl_not_type_specific_seq
+\seq_new:N \g_@@_rf_opts_tl_not_type_specific_seq
+\seq_gset_from_clist:Nn
+  \g_@@_rf_opts_tl_not_type_specific_seq
   {
     tpairsep ,
     tlistsep ,
     tlastsep ,
     notesep ,
   }
-\seq_const_from_clist:Nn
-  \c_@@_rf_opts_tl_maybe_type_specific_seq
+\seq_new:N \g_@@_rf_opts_tl_maybe_type_specific_seq
+\seq_gset_from_clist:Nn
+  \g_@@_rf_opts_tl_maybe_type_specific_seq
   {
     namesep ,
     pairsep ,
@@ -1188,8 +1194,9 @@
     namefont ,
     reffont ,
   }
-\seq_const_from_clist:Nn
-  \c_@@_rf_opts_seq_refbounds_seq
+\seq_new:N \g_@@_rf_opts_seq_refbounds_seq
+\seq_gset_from_clist:Nn
+  \g_@@_rf_opts_seq_refbounds_seq
   {
     refbounds-first ,
     refbounds-first-sg ,
@@ -1202,8 +1209,9 @@
     refbounds-last-pe ,
     refbounds-last-re ,
   }
-\seq_const_from_clist:Nn
-  \c_@@_rf_opts_bool_maybe_type_specific_seq
+\seq_new:N \g_@@_rf_opts_bool_maybe_type_specific_seq
+\seq_gset_from_clist:Nn
+  \g_@@_rf_opts_bool_maybe_type_specific_seq
   {
     cap ,
     abbrev ,
@@ -1215,8 +1223,9 @@
 % their values queried by \cs{@@_get_rf_opt_tl:nnnN}, but by
 % \cs{@@_type_name_setup:}.
 %    \begin{macrocode}
-\seq_const_from_clist:Nn
-  \c_@@_rf_opts_tl_type_names_seq
+\seq_new:N \g_@@_rf_opts_tl_type_names_seq
+\seq_gset_from_clist:Nn
+  \g_@@_rf_opts_tl_type_names_seq
   {
     Name-sg ,
     name-sg ,
@@ -1230,14 +1239,14 @@
 %    \end{macrocode}
 % And, finally, some combined groups of the above variables, for convenience.
 %    \begin{macrocode}
-\seq_new:N \c_@@_rf_opts_tl_typesetup_seq
-\seq_gconcat:NNN \c_@@_rf_opts_tl_typesetup_seq
-  \c_@@_rf_opts_tl_maybe_type_specific_seq
-  \c_@@_rf_opts_tl_type_names_seq
-\seq_new:N \c_@@_rf_opts_tl_reference_seq
-\seq_gconcat:NNN \c_@@_rf_opts_tl_reference_seq
-  \c_@@_rf_opts_tl_not_type_specific_seq
-  \c_@@_rf_opts_tl_maybe_type_specific_seq
+\seq_new:N \g_@@_rf_opts_tl_typesetup_seq
+\seq_gconcat:NNN \g_@@_rf_opts_tl_typesetup_seq
+  \g_@@_rf_opts_tl_maybe_type_specific_seq
+  \g_@@_rf_opts_tl_type_names_seq
+\seq_new:N \g_@@_rf_opts_tl_reference_seq
+\seq_gconcat:NNN \g_@@_rf_opts_tl_reference_seq
+  \g_@@_rf_opts_tl_not_type_specific_seq
+  \g_@@_rf_opts_tl_maybe_type_specific_seq
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1881,7 +1890,7 @@
       } ,
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_tl_not_type_specific_seq
+  \g_@@_rf_opts_tl_not_type_specific_seq
   {
     \keys_define:nn { zref-clever/langfile }
       {
@@ -1909,7 +1918,7 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_tl_maybe_type_specific_seq
+  \g_@@_rf_opts_tl_maybe_type_specific_seq
   {
     \keys_define:nn { zref-clever/langfile }
       {
@@ -2165,7 +2174,7 @@
     endrange .value_required:n = true ,
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_tl_type_names_seq
+  \g_@@_rf_opts_tl_type_names_seq
   {
     \keys_define:nn { zref-clever/langfile }
       {
@@ -2210,7 +2219,7 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_seq_refbounds_seq
+  \g_@@_rf_opts_seq_refbounds_seq
   {
     \keys_define:nn { zref-clever/langfile }
       {
@@ -2294,7 +2303,7 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_bool_maybe_type_specific_seq
+  \g_@@_rf_opts_bool_maybe_type_specific_seq
   {
     \keys_define:nn { zref-clever/langfile }
       {
@@ -3017,7 +3026,7 @@
 % \subsubsection*{\opt{range} and \opt{rangetopair} options}
 %
 % The \opt{rangetopair} option is being handled with other reference format
-% option booleans at \cs{c_@@_rf_opts_bool_maybe_type_specific_seq}.
+% option booleans at \cs{g_@@_rf_opts_bool_maybe_type_specific_seq}.
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_typeset_range_bool
@@ -3034,7 +3043,7 @@
 % \subsubsection*{\opt{cap} and \opt{capfirst} options}
 %
 % The \opt{cap} option is currently being handled with other reference format
-% option booleans at \cs{c_@@_rf_opts_bool_maybe_type_specific_seq}.
+% option booleans at \cs{g_@@_rf_opts_bool_maybe_type_specific_seq}.
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_capfirst_bool
@@ -3050,7 +3059,7 @@
 % \subsubsection*{\opt{abbrev} and \opt{noabbrevfirst} options}
 %
 % The \opt{abbrev} option is currently being handled with other reference
-% format option booleans at \cs{c_@@_rf_opts_bool_maybe_type_specific_seq}.
+% format option booleans at \cs{g_@@_rf_opts_bool_maybe_type_specific_seq}.
 %
 %    \begin{macrocode}
 \bool_new:N \l_@@_noabbrev_first_bool
@@ -3802,7 +3811,7 @@
 %
 %    \begin{macrocode}
 \seq_map_inline:Nn
-  \c_@@_rf_opts_tl_reference_seq
+  \g_@@_rf_opts_tl_reference_seq
   {
     \keys_define:nn { zref-clever/reference }
       {
@@ -3850,7 +3859,7 @@
       } ,
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_seq_refbounds_seq
+  \g_@@_rf_opts_seq_refbounds_seq
   {
     \keys_define:nn { zref-clever/reference }
       {
@@ -3884,7 +3893,7 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_bool_maybe_type_specific_seq
+  \g_@@_rf_opts_bool_maybe_type_specific_seq
   {
     \keys_define:nn { zref-clever/reference }
       {
@@ -4001,7 +4010,7 @@
 %
 %    \begin{macrocode}
 \seq_map_inline:Nn
-  \c_@@_rf_opts_tl_not_type_specific_seq
+  \g_@@_rf_opts_tl_not_type_specific_seq
   {
     \keys_define:nn { zref-clever/typesetup }
       {
@@ -4013,7 +4022,7 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_tl_typesetup_seq
+  \g_@@_rf_opts_tl_typesetup_seq
   {
     \keys_define:nn { zref-clever/typesetup }
       {
@@ -4179,7 +4188,7 @@
       } ,
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_seq_refbounds_seq
+  \g_@@_rf_opts_seq_refbounds_seq
   {
     \keys_define:nn { zref-clever/typesetup }
       {
@@ -4219,7 +4228,7 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_bool_maybe_type_specific_seq
+  \g_@@_rf_opts_bool_maybe_type_specific_seq
   {
     \keys_define:nn { zref-clever/typesetup }
       {
@@ -4401,7 +4410,7 @@
       } ,
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_tl_not_type_specific_seq
+  \g_@@_rf_opts_tl_not_type_specific_seq
   {
     \keys_define:nn { zref-clever/langsetup }
       {
@@ -4435,7 +4444,7 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_tl_maybe_type_specific_seq
+  \g_@@_rf_opts_tl_maybe_type_specific_seq
   {
     \keys_define:nn { zref-clever/langsetup }
       {
@@ -4755,7 +4764,7 @@
       } ,
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_tl_type_names_seq
+  \g_@@_rf_opts_tl_type_names_seq
   {
     \keys_define:nn { zref-clever/langsetup }
       {
@@ -4807,7 +4816,7 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_seq_refbounds_seq
+  \g_@@_rf_opts_seq_refbounds_seq
   {
     \keys_define:nn { zref-clever/langsetup }
       {
@@ -4891,7 +4900,7 @@
       }
   }
 \seq_map_inline:Nn
-  \c_@@_rf_opts_bool_maybe_type_specific_seq
+  \g_@@_rf_opts_bool_maybe_type_specific_seq
   {
     \keys_define:nn { zref-clever/langsetup }
       {
