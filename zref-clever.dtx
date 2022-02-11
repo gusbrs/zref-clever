@@ -1060,7 +1060,7 @@
   {
     \seq_if_exist:NF #1
       { \seq_new:N #1 }
-    \seq_gset_eq:NN #1 #2
+    \seq_set_eq:NN #1 #2
     \bool_if_exist:cF { \@@_opt_var_set_bool:n {#1} }
       { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
     \bool_set_true:c { \@@_opt_var_set_bool:n {#1} }
