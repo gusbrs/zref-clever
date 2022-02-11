@@ -861,27 +861,64 @@
 % \end{macro}
 %
 %
+% \begin{macro}[EXP]{\@@_opt_var_set_bool:n}
+%   The \LaTeX3 programming layer does not have the concept of a variable
+%   \emph{existing} only locally, it also considers an ``error'' if an
+%   assignment is made to a variable which was not previously declared, but
+%   declaration is always global, which means that ``setting a local variable
+%   at a local scope'', given these requirements, results in it existing, and
+%   being empty, globally.  Therefore, we need an independent mechanism from
+%   the mere existence of a variable to keep track of whether variables are
+%   ``set'' or ``unset'', within the logic of the precedence rules for options
+%   in different scopes.  \cs{@@_opt_var_set_bool:n} expands to the name of
+%   the boolean variable used to track this state for \meta{option var}.  See
+%   discussion with \contributor{Phelype Oleinik} at
+%   \url{https://tex.stackexchange.com/questions/633341/#comment1579825_633347}
+%   \begin{syntax}
+%     \cs{@@_opt_var_set_bool:n} \Arg{option var}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new:Npn \@@_opt_var_set_bool:n #1
+  { \cs_to_str:N #1 _is_set_bool }
+%    \end{macrocode}
+% \end{macro}
+%
+%
 %
 % \begin{macro}
 %   {
+%     \@@_opt_tl_set:Nn ,
+%     \@@_opt_tl_clear:N ,
 %     \@@_opt_tl_gset:Nn ,
 %     \@@_opt_tl_gclear:N ,
 %   }
 %   \begin{syntax}
+%     \cs{@@_opt_tl_set:N} \Arg{option tl} \Arg{value}
+%     \cs{@@_opt_tl_clear:N} \Arg{option tl}
 %     \cs{@@_opt_tl_gset:N} \Arg{option tl} \Arg{value}
 %     \cs{@@_opt_tl_gclear:N} \Arg{option tl}
 %   \end{syntax}
-%   Note that we do not define a similar ``\cs{@@_opt_tl_set:Nn}'' (neither
-%   its correlates for \texttt{seq}, \texttt{bool}, etc.) to ensure the
-%   variable is declared, because the declaration is global, which means the
-%   variable would ``exist'', and thus ``be set'' (and empty), at the global
-%   level, defeating the precedence rules for reference format options.  This
-%   is not in accordance with \texttt{expl3} understanding, which considers an
-%   assignment to an undeclared variable an ``error''.  But I see no way
-%   around this, unless we started keeping track the ``set status'' of each
-%   variable independently of the variables themselves\dots{}.  This affects
-%   variable setting in the general and reference type levels.
 %    \begin{macrocode}
+\cs_new_protected:Npn \@@_opt_tl_set:Nn #1#2
+  {
+    \tl_if_exist:NF #1
+      { \tl_new:N #1 }
+    \tl_set:Nn #1 {#2}
+    \bool_if_exist:cF { \@@_opt_var_set_bool:n {#1} }
+      { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
+    \bool_set_true:c { \@@_opt_var_set_bool:n {#1} }
+  }
+\cs_generate_variant:Nn \@@_opt_tl_set:Nn { cn }
+\cs_new_protected:Npn \@@_opt_tl_clear:N #1
+  {
+    \tl_if_exist:NF #1
+      { \tl_new:N #1 }
+    \tl_clear:N #1
+    \bool_if_exist:cF { \@@_opt_var_set_bool:n {#1} }
+      { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
+    \bool_set_true:c { \@@_opt_var_set_bool:n {#1} }
+  }
+\cs_generate_variant:Nn \@@_opt_tl_clear:N { c }
 \cs_new_protected:Npn \@@_opt_tl_gset:Nn #1#2
   {
     \tl_if_exist:NF #1
@@ -915,12 +952,17 @@
 \cs_new_protected:Npn \@@_opt_tl_unset:N #1
   {
     \tl_if_exist:NT #1
-      { \tl_set_eq:NN #1 \scan_stop: }
+      {
+        \tl_clear:N #1 % ?
+        \bool_if_exist:cTF { \@@_opt_var_set_bool:n {#1} }
+          { \bool_set_false:c { \@@_opt_var_set_bool:n {#1} } }
+          { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
+      }
   }
 \cs_new_protected:Npn \@@_opt_tl_gunset:N #1
   {
     \tl_if_exist:NT #1
-      { \tl_gset_eq:NN #1 \scan_stop: }
+      { \cs_undefine:N #1 }
   }
 \cs_generate_variant:Nn \@@_opt_tl_unset:N { c }
 \cs_generate_variant:Nn \@@_opt_tl_gunset:N { c }
@@ -935,7 +977,15 @@
 \prg_new_conditional:Npnn \@@_opt_tl_if_set:N #1 { F , TF }
   {
     \tl_if_exist:NTF #1
-      { \prg_return_true:  }
+      {
+        \bool_if_exist:cTF { \@@_opt_var_set_bool:n {#1} }
+          {
+            \bool_if:cTF { \@@_opt_var_set_bool:n {#1} }
+              { \prg_return_true:  }
+              { \prg_return_false: }
+          }
+          { \prg_return_true: }
+      }
       { \prg_return_false: }
   }
 %    \end{macrocode}
@@ -995,11 +1045,13 @@
 %   {
 %     \@@_opt_seq_set_clist_split:Nn ,
 %     \@@_opt_seq_gset_clist_split:Nn ,
+%     \@@_opt_seq_set_eq:NN ,
 %     \@@_opt_seq_gset_eq:NN ,
 %   }
 %   \begin{syntax}
 %     \cs{@@_opt_seq_set_clist_split:Nn} \Arg{option seq} \Arg{value}
 %     \cs{@@_opt_seq_gset_clist_split:Nn} \Arg{option seq} \Arg{value}
+%     \cs{@@_opt_seq_set_eq:NN} \Arg{option seq} \Arg{seq var}
 %     \cs{@@_opt_seq_gset_eq:NN} \Arg{option seq} \Arg{seq var}
 %   \end{syntax}
 %    \begin{macrocode}
@@ -1007,6 +1059,16 @@
   { \seq_set_split:Nnn #1 { , } {#2} }
 \cs_new_protected:Npn \@@_opt_seq_gset_clist_split:Nn #1#2
   { \seq_gset_split:Nnn #1 { , } {#2} }
+\cs_new_protected:Npn \@@_opt_seq_set_eq:NN #1#2
+  {
+    \seq_if_exist:NF #1
+      { \seq_new:N #1 }
+    \seq_gset_eq:NN #1 #2
+    \bool_if_exist:cF { \@@_opt_var_set_bool:n {#1} }
+      { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
+    \bool_set_true:c { \@@_opt_var_set_bool:n {#1} }
+  }
+\cs_generate_variant:Nn \@@_opt_seq_set_eq:NN { cN }
 \cs_new_protected:Npn \@@_opt_seq_gset_eq:NN #1#2
   {
     \seq_if_exist:NF #1
@@ -1033,12 +1095,17 @@
 \cs_new_protected:Npn \@@_opt_seq_unset:N #1
   {
     \seq_if_exist:NT #1
-      { \cs_set_eq:NN #1 \scan_stop: }
+      {
+        \seq_clear:N #1 % ?
+        \bool_if_exist:cTF { \@@_opt_var_set_bool:n {#1} }
+          { \bool_set_false:c { \@@_opt_var_set_bool:n {#1} } }
+          { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
+      }
   }
 \cs_new_protected:Npn \@@_opt_seq_gunset:N #1
   {
     \seq_if_exist:NT #1
-      { \cs_gset_eq:NN #1 \scan_stop: }
+      { \cs_undefine:N #1 }
   }
 \cs_generate_variant:Nn \@@_opt_seq_unset:N { c }
 \cs_generate_variant:Nn \@@_opt_seq_gunset:N { c }
@@ -1051,7 +1118,19 @@
 %   \end{syntax}
 %    \begin{macrocode}
 \prg_new_conditional:Npnn \@@_opt_seq_if_set:N #1 { F , TF }
-  { \seq_if_exist:NTF #1 { \prg_return_true: } { \prg_return_false: } }
+  {
+    \seq_if_exist:NTF #1
+      {
+        \bool_if_exist:cTF { \@@_opt_var_set_bool:n {#1} }
+          {
+            \bool_if:cTF { \@@_opt_var_set_bool:n {#1} }
+              { \prg_return_true:  }
+              { \prg_return_false: }
+          }
+          { \prg_return_true: }
+      }
+      { \prg_return_false: }
+  }
 \prg_generate_conditional_variant:Nnn
   \@@_opt_seq_if_set:N { c } { F , TF }
 %    \end{macrocode}
@@ -1099,12 +1178,17 @@
 \cs_new_protected:Npn \@@_opt_bool_unset:N #1
   {
     \bool_if_exist:NT #1
-      { \cs_set_eq:NN #1 \scan_stop: }
+      {
+        % \bool_set_false:N #1 % ?
+        \bool_if_exist:cTF { \@@_opt_var_set_bool:n {#1} }
+          { \bool_set_false:c { \@@_opt_var_set_bool:n {#1} } }
+          { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
+      }
   }
 \cs_new_protected:Npn \@@_opt_bool_gunset:N #1
   {
     \bool_if_exist:NT #1
-      { \cs_gset_eq:NN #1 \scan_stop: }
+      { \cs_undefine:N #1 }
   }
 \cs_generate_variant:Nn \@@_opt_bool_unset:N { c }
 \cs_generate_variant:Nn \@@_opt_bool_gunset:N { c }
@@ -1117,7 +1201,19 @@
 %   \end{syntax}
 %    \begin{macrocode}
 \prg_new_conditional:Npnn \@@_opt_bool_if_set:N #1 { F , TF }
-  { \bool_if_exist:NTF #1 { \prg_return_true: } { \prg_return_false: } }
+  {
+    \bool_if_exist:NTF #1
+      {
+        \bool_if_exist:cTF { \@@_opt_var_set_bool:n {#1} }
+          {
+            \bool_if:cTF { \@@_opt_var_set_bool:n {#1} }
+              { \prg_return_true:  }
+              { \prg_return_false: }
+          }
+          { \prg_return_true: }
+      }
+      { \prg_return_false: }
+  }
 \prg_generate_conditional_variant:Nnn
   \@@_opt_bool_if_set:N { c } { F , TF }
 %    \end{macrocode}
@@ -1125,14 +1221,38 @@
 %
 % \begin{macro}
 %   {
+%     \@@_opt_bool_set_true:N ,
+%     \@@_opt_bool_set_false:N ,
 %     \@@_opt_bool_gset_true:N ,
 %     \@@_opt_bool_gset_false:N ,
 %   }
 %   \begin{syntax}
+%     \cs{@@_opt_bool_set_true:N} \Arg{option bool}
+%     \cs{@@_opt_bool_set_false:N} \Arg{option bool}
 %     \cs{@@_opt_bool_gset_true:N} \Arg{option bool}
 %     \cs{@@_opt_bool_gset_false:N} \Arg{option bool}
 %   \end{syntax}
 %    \begin{macrocode}
+\cs_new_protected:Npn \@@_opt_bool_set_true:N #1
+  {
+    \bool_if_exist:NF #1
+      { \bool_new:N #1 }
+    \bool_set_true:N #1
+    \bool_if_exist:cF { \@@_opt_var_set_bool:n {#1} }
+      { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
+    \bool_set_true:c { \@@_opt_var_set_bool:n {#1} }
+  }
+\cs_generate_variant:Nn \@@_opt_bool_set_true:N { c }
+\cs_new_protected:Npn \@@_opt_bool_set_false:N #1
+  {
+    \bool_if_exist:NF #1
+      { \bool_new:N #1 }
+    \bool_set_false:N #1
+    \bool_if_exist:cF { \@@_opt_var_set_bool:n {#1} }
+      { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
+    \bool_set_true:c { \@@_opt_var_set_bool:n {#1} }
+  }
+\cs_generate_variant:Nn \@@_opt_bool_set_false:N { c }
 \cs_new_protected:Npn \@@_opt_bool_gset_true:N #1
   {
     \bool_if_exist:NF #1
@@ -2741,12 +2861,12 @@
           {
             { ref }
             {
-              \tl_clear:c
+              \@@_opt_tl_clear:c
                 {
                   \@@_opt_varname_general:nn
                     { endrangefunc } { tl }
                 }
-              \tl_clear:c
+              \@@_opt_tl_clear:c
                 {
                   \@@_opt_varname_general:nn
                     { endrangeprop } { tl }
@@ -2755,13 +2875,13 @@
 
             { stripprefix }
             {
-              \tl_set:cn
+              \@@_opt_tl_set:cn
                 {
                   \@@_opt_varname_general:nn
                     { endrangefunc } { tl }
                 }
                 { @@_get_endrange_stripprefix }
-              \tl_clear:c
+              \@@_opt_tl_clear:c
                 {
                   \@@_opt_varname_general:nn
                     { endrangeprop } { tl }
@@ -2770,13 +2890,13 @@
 
             { pagecomp }
             {
-              \tl_set:cn
+              \@@_opt_tl_set:cn
                 {
                   \@@_opt_varname_general:nn
                     { endrangefunc } { tl }
                 }
                 { @@_get_endrange_pagecomp }
-              \tl_clear:c
+              \@@_opt_tl_clear:c
                 {
                   \@@_opt_varname_general:nn
                     { endrangeprop } { tl }
@@ -2785,13 +2905,13 @@
 
             { pagecomp2 }
             {
-              \tl_set:cn
+              \@@_opt_tl_set:cn
                 {
                   \@@_opt_varname_general:nn
                     { endrangefunc } { tl }
                 }
                 { @@_get_endrange_pagecomptwo }
-              \tl_clear:c
+              \@@_opt_tl_clear:c
                 {
                   \@@_opt_varname_general:nn
                     { endrangeprop } { tl }
@@ -2825,13 +2945,13 @@
                       { endrange-property-undefined } {#1}
                   }
                   {
-                    \tl_set:cn
+                    \@@_opt_tl_set:cn
                       {
                         \@@_opt_varname_general:nn
                           { endrangefunc } { tl }
                       }
                       { @@_get_endrange_property }
-                    \tl_set:cn
+                    \@@_opt_tl_set:cn
                       {
                         \@@_opt_varname_general:nn
                           { endrangeprop } { tl }
@@ -3917,7 +4037,7 @@
                   { \@@_opt_varname_general:nn {#1} { tl } }
               }
               {
-                \tl_set:cn
+                \@@_opt_tl_set:cn
                   { \@@_opt_varname_general:nn {#1} { tl } }
                   {##1}
               }
@@ -3972,7 +4092,7 @@
                   { \tl_if_empty_p:n {##1} }
                   { \int_compare_p:nNn { \seq_count:N \l_tmpa_seq } = { 4 } }
                   {
-                    \seq_set_eq:cN
+                    \@@_opt_seq_set_eq:cN
                       { \@@_opt_varname_general:nn {#1} { seq } }
                       \l_tmpa_seq
                   }
@@ -3993,12 +4113,12 @@
         #1 .choice: ,
         #1 / true .code:n =
           {
-            \bool_set_true:c
+            \@@_opt_bool_set_true:c
               { \@@_opt_varname_general:nn {#1} { bool } }
           } ,
         #1 / false .code:n =
           {
-            \bool_set_false:c
+            \@@_opt_bool_set_false:c
               { \@@_opt_varname_general:nn {#1} { bool } }
           } ,
         #1 / unset .code:n =
@@ -4131,7 +4251,7 @@
                   }
               }
               {
-                \tl_set:cn
+                \@@_opt_tl_set:cn
                   {
                     \@@_opt_varname_type:enn
                       { \l_@@_setup_type_tl } {#1} { tl }
@@ -4149,12 +4269,12 @@
           {
             { ref }
             {
-              \tl_clear:c
+              \@@_opt_tl_clear:c
                 {
                   \@@_opt_varname_type:enn
                     { \l_@@_setup_type_tl } { endrangefunc } { tl }
                 }
-              \tl_clear:c
+              \@@_opt_tl_clear:c
                 {
                   \@@_opt_varname_type:enn
                     { \l_@@_setup_type_tl } { endrangeprop } { tl }
@@ -4163,13 +4283,13 @@
 
             { stripprefix }
             {
-              \tl_set:cn
+              \@@_opt_tl_set:cn
                 {
                   \@@_opt_varname_type:enn
                     { \l_@@_setup_type_tl } { endrangefunc } { tl }
                 }
                 { @@_get_endrange_stripprefix }
-              \tl_clear:c
+              \@@_opt_tl_clear:c
                 {
                   \@@_opt_varname_type:enn
                     { \l_@@_setup_type_tl } { endrangeprop } { tl }
@@ -4178,13 +4298,13 @@
 
             { pagecomp }
             {
-              \tl_set:cn
+              \@@_opt_tl_set:cn
                 {
                   \@@_opt_varname_type:enn
                     { \l_@@_setup_type_tl } { endrangefunc } { tl }
                 }
                 { @@_get_endrange_pagecomp }
-              \tl_clear:c
+              \@@_opt_tl_clear:c
                 {
                   \@@_opt_varname_type:enn
                     { \l_@@_setup_type_tl } { endrangeprop } { tl }
@@ -4193,13 +4313,13 @@
 
             { pagecomp2 }
             {
-              \tl_set:cn
+              \@@_opt_tl_set:cn
                 {
                   \@@_opt_varname_type:enn
                     { \l_@@_setup_type_tl } { endrangefunc } { tl }
                 }
                 { @@_get_endrange_pagecomptwo }
-              \tl_clear:c
+              \@@_opt_tl_clear:c
                 {
                   \@@_opt_varname_type:enn
                     { \l_@@_setup_type_tl } { endrangeprop } { tl }
@@ -4233,14 +4353,14 @@
                       { endrange-property-undefined } {#1}
                   }
                   {
-                    \tl_set:cn
+                    \@@_opt_tl_set:cn
                       {
                         \@@_opt_varname_type:enn
                           { \l_@@_setup_type_tl }
                           { endrangefunc } { tl }
                       }
                       { @@_get_endrange_property }
-                    \tl_set:cn
+                    \@@_opt_tl_set:cn
                       {
                         \@@_opt_varname_type:enn
                           { \l_@@_setup_type_tl }
@@ -4304,7 +4424,7 @@
                   { \tl_if_empty_p:n {##1} }
                   { \int_compare_p:nNn { \seq_count:N \l_tmpa_seq } = { 4 } }
                   {
-                    \seq_set_eq:cN
+                    \@@_opt_seq_set_eq:cN
                       {
                         \@@_opt_varname_type:enn
                           { \l_@@_setup_type_tl } {#1} { seq }
@@ -4328,7 +4448,7 @@
         #1 .choice: ,
         #1 / true .code:n =
           {
-            \bool_set_true:c
+            \@@_opt_bool_set_true:c
               {
                 \@@_opt_varname_type:enn
                   { \l_@@_setup_type_tl }
@@ -4337,7 +4457,7 @@
           } ,
         #1 / false .code:n =
           {
-            \bool_set_false:c
+            \@@_opt_bool_set_false:c
               {
                 \@@_opt_varname_type:enn
                   { \l_@@_setup_type_tl }
