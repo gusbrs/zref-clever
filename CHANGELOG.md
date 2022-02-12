@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.2.1-alpha...HEAD)
+## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.2.2-alpha...HEAD)
+
+## [v0.2.2-alpha](https://github.com/gusbrs/zref-clever/compare/v0.2.1-alpha...v0.2.2-alpha) (2022-02-11)
 
 ### Changed
 - (Internal) Option variables setting was reviewed, ensuring proper scope is
