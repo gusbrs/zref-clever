@@ -28,24 +28,25 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 l. ......p_show:N \l__zrefclever_counter_resetby_prop
 subref property is defined
 > \caption@subtypehook=macro:->\ifx \caption \caption@subcaption \else
-\caption@warmup \caption@ifflag 2{}{\let \caption@add@contentsline
-\caption@addsubcontentsline \let \caption@addsubcontentslines \@gobble
-\caption@ifflag 4{}{\caption@ifflag 1{\caption@clrflag
-1}{\caption@@stepcounter \@captype }\caption@setflag 4}}\c@continuedfloat
-=0\relax \let \caption@setfloatcapt \@firstofone \let \caption@chkfloat
-\@gobbletwo \caption@set {box}{none}\caption@clearmargin \caption@iflist
-{}{\let \caption@setlist \@gobble }\caption@setoptions
-{sub}\caption@setoptions {subfloat}\def \caption@settype {\caption@withoptargs
-\caption@sub@settype }\def \caption@sub@settype ##1##2{\edef \caption@tempa
-{##2}\ifx \caption@tempa \@captype \else \caption@Error {##2 inside
-\@subcaptype }\fi }\let \caption \caption@subcaption \let \@caption
-\caption@@caption \let \phantomcaption \caption@subphantom \let
-\captionlistentry \caption@sublistentry \let \caption@refstepcounter
-\caption@@@refstepcounter \if@subfloatrow \caption@Debug {Keeping \string
-\@makecaption }\else \let \@makecaption \caption@makecaption \fi \fi \let
-\subcaption \caption \let \phantomsubcaption \phantomcaption \ifx \label
-\subcaption@label \else \let \subcaption@ORI@label \label \let \label
-\subcaption@label \fi \zref@localaddprop \ZREF@mainlist {subref}.
+\caption@warmup \caption@stepcounter \@captype \caption@ifcaption {}{\let
+\caption@add@contentsline \caption@addsubcontentsline \let
+\caption@addsubcontentslines \@gobble }\c@continuedfloat =0\relax \let
+\caption@setfloatcapt \@firstofone \let \caption@chkfloat \@gobbletwo
+\caption@set {box}{none}\caption@clearmargin \caption@iflist {}{\let
+\caption@setlist \@gobble }\caption@setoptions {sub}\caption@setoptions
+{subfloat}\def \caption@settype {\caption@withoptargs \caption@sub@settype
+}\def \caption@sub@settype ##1##2{\edef \caption@tempa {##2}\ifx
+\caption@tempa \@captype \else \caption@Error {##2 inside \@subcaptype }\fi
+}\let \caption \caption@subcaption \let \@caption \caption@@caption \let
+\phantomcaption \caption@subphantom \let \captionlistentry
+\caption@sublistentry \let \captiontext \caption@subtext \let
+\caption@refstepcounter \caption@refstepcounter@ \if@subfloatrow
+\caption@Debug {Keeping \string \@makecaption }\else \let \@makecaption
+\caption@makecaption \fi \fi \ifx \label \subcaption@label \else \let
+\subcaption@ORI@label \label \let \label \subcaption@label \fi \let
+\subcaption \caption \let \phantomsubcaption \phantomcaption \let
+\subcaptionlistentry \captionlistentry \let \subcaptiontext \captiontext
+\zref@localaddprop \ZREF@mainlist {subref}.
 <recently read> }
 l. ...\cs_show:c { caption@subtypehook }
 ============================================================
