@@ -3,16 +3,17 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: no endrange
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
 <recently read> }
 l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
                                                   }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{2.4}\group_end: 
-and\nobreakspace \group_begin: \hyper@@link {}{section.3.3}{3.3}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{2.4}\group_end:  and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{section.3.3}{3.3}\group_end: .
 <recently read> }
 l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
                                                   }
@@ -79,15 +80,16 @@ l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
 .\pdfendlink
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
 <recently read> }
 l. ...    sec:section-2.3, sec:section-2.4}
                                          }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{2.4}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{2.4}\group_end: .
 <recently read> }
 l. ...    sec:section-2.3, sec:section-2.4}
                                          }
@@ -144,8 +146,9 @@ l. ...    sec:section-2.3, sec:section-2.4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{2.4}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{2.4}\group_end: .
 <recently read> }
 l. ......ef[range]{sec:section-2.1, sec:section-2.4}
                                                   }
@@ -184,16 +187,17 @@ l. ...\showbox0
 ============================================================
 TEST 2: endrange=ref
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
 <recently read> }
 l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
                                                   }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{2.4}\group_end: 
-and\nobreakspace \group_begin: \hyper@@link {}{section.3.3}{3.3}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{2.4}\group_end:  and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{section.3.3}{3.3}\group_end: .
 <recently read> }
 l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
                                                   }
@@ -260,15 +264,16 @@ l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
 .\pdfendlink
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
 <recently read> }
 l. ...    sec:section-2.3, sec:section-2.4}
                                          }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{2.4}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{2.4}\group_end: .
 <recently read> }
 l. ...    sec:section-2.3, sec:section-2.4}
                                          }
@@ -325,8 +330,9 @@ l. ...    sec:section-2.3, sec:section-2.4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{2.4}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{2.4}\group_end: .
 <recently read> }
 l. ......ef[range]{sec:section-2.1, sec:section-2.4}
                                                   }
@@ -365,16 +371,17 @@ l. ...\showbox0
 ============================================================
 TEST 3: endrange=property
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
 <recently read> }
 l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
                                                   }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{4}\group_end: 
-and\nobreakspace \group_begin: \hyper@@link {}{section.3.3}{3.3}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{4}\group_end:  and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{section.3.3}{3.3}\group_end: .
 <recently read> }
 l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
                                                   }
@@ -439,15 +446,16 @@ l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
 .\pdfendlink
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
 <recently read> }
 l. ...    sec:section-2.3, sec:section-2.4}
                                          }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{4}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{4}\group_end: .
 <recently read> }
 l. ...    sec:section-2.3, sec:section-2.4}
                                          }
@@ -502,8 +510,9 @@ l. ...    sec:section-2.3, sec:section-2.4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{4}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{4}\group_end: .
 <recently read> }
 l. ......ef[range]{sec:section-2.1, sec:section-2.4}
                                                   }
@@ -537,8 +546,9 @@ l. ......ef[range]{sec:section-2.1, sec:section-2.4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.3.4}{3.4}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.3.4}{3.4}\group_end: .
 <recently read> }
 l. ......ef[range]{sec:section-2.1, sec:section-3.4}
                                                   }
@@ -577,16 +587,17 @@ l. ...\showbox0
 ============================================================
 TEST 4: endrange=property, local override
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
 <recently read> }
 l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
                                                   }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{2.4}\group_end: 
-and\nobreakspace \group_begin: \hyper@@link {}{section.3.3}{3.3}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{2.4}\group_end:  and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{section.3.3}{3.3}\group_end: .
 <recently read> }
 l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
                                                   }
@@ -653,15 +664,16 @@ l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
 .\pdfendlink
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
 <recently read> }
 l. ......tion-2.2, sec:section-2.3, sec:section-2.4}
                                                   }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{2.4}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{2.4}\group_end: .
 <recently read> }
 l. ......tion-2.2, sec:section-2.3, sec:section-2.4}
                                                   }
@@ -718,8 +730,9 @@ l. ......tion-2.2, sec:section-2.3, sec:section-2.4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{2.4}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{2.4}\group_end: .
 <recently read> }
 l. ......ange=ref]{sec:section-2.1, sec:section-2.4}
                                                   }
@@ -758,16 +771,17 @@ l. ...\showbox0
 ============================================================
 TEST 5: endrange=stripprefix
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
 <recently read> }
 l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
                                                   }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{4}\group_end: 
-and\nobreakspace \group_begin: \hyper@@link {}{section.3.3}{3.3}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{4}\group_end:  and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{section.3.3}{3.3}\group_end: .
 <recently read> }
 l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
                                                   }
@@ -832,15 +846,16 @@ l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
 .\pdfendlink
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
 <recently read> }
 l. ...    sec:section-2.3, sec:section-2.4}
                                          }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{4}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{4}\group_end: .
 <recently read> }
 l. ...    sec:section-2.3, sec:section-2.4}
                                          }
@@ -895,8 +910,9 @@ l. ...    sec:section-2.3, sec:section-2.4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{4}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{4}\group_end: .
 <recently read> }
 l. ......ef[range]{sec:section-2.1, sec:section-2.4}
                                                   }
@@ -933,16 +949,17 @@ l. ...\showbox0
 ============================================================
 TEST 6: endrange=stripprefix, local override
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
 <recently read> }
 l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
                                                   }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{2.4}\group_end: 
-and\nobreakspace \group_begin: \hyper@@link {}{section.3.3}{3.3}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{2.4}\group_end:  and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{section.3.3}{3.3}\group_end: .
 <recently read> }
 l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
                                                   }
@@ -1009,15 +1026,16 @@ l. ......tion-2.3, sec:section-2.4, sec:section-3.3}
 .\pdfendlink
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \hyper@@link
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
 <recently read> }
 l. ......tion-2.2, sec:section-2.3, sec:section-2.4}
                                                   }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{2.4}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{2.4}\group_end: .
 <recently read> }
 l. ......tion-2.2, sec:section-2.3, sec:section-2.4}
                                                   }
@@ -1074,8 +1092,9 @@ l. ......tion-2.2, sec:section-2.3, sec:section-2.4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.2.1}{2.1}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{section.2.4}{2.4}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.2.1}{2.1}\group_end:  to\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{section.2.4}{2.4}\group_end: .
 <recently read> }
 l. ......ange=ref]{sec:section-2.1, sec:section-2.4}
                                                   }
@@ -1115,10 +1134,11 @@ l. ...\showbox0
 TEST 7: page, endrange=stripprefix
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.0.1}{i}\group_end: ,
-\group_begin: \hyper@@link {}{chapter.1}{105}\group_end: \textendash
-\group_begin: \hyper@@link {}{chapter.4}{8}\group_end: , and\nobreakspace
-\group_begin: \hyper@@link {}{chapter.7}{117}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.0.1}{i}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{8}\group_end: , and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{chapter.7}{117}\group_end: .
 <recently read> }
 l. ......ha:chapter-3, cha:chapter-4, cha:chapter-7}
                                                   }
@@ -1160,8 +1180,9 @@ l. ......ha:chapter-3, cha:chapter-4, cha:chapter-7}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.1}{105}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.4}{8}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{8}\group_end: .
 <recently read> }
 l. ...    cha:chapter-4}
                       }
@@ -1186,8 +1207,9 @@ l. ...    cha:chapter-4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.1}{105}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.4}{8}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{8}\group_end: .
 <recently read> }
 l. ......f[page,range]{cha:chapter-1, cha:chapter-4}
                                                   }
@@ -1216,10 +1238,11 @@ l. ...\showbox0
 TEST 8: page, endrange=pagecomp
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.0.1}{i}\group_end: ,
-\group_begin: \hyper@@link {}{chapter.1}{105}\group_end: \textendash
-\group_begin: \hyper@@link {}{chapter.4}{8}\group_end: , and\nobreakspace
-\group_begin: \hyper@@link {}{chapter.7}{117}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.0.1}{i}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{8}\group_end: , and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{chapter.7}{117}\group_end: .
 <recently read> }
 l. ......ha:chapter-3, cha:chapter-4, cha:chapter-7}
                                                   }
@@ -1261,10 +1284,11 @@ l. ......ha:chapter-3, cha:chapter-4, cha:chapter-7}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.0.1}{i}\group_end: ,
-\group_begin: \hyper@@link {}{chapter.5}{115}\group_end: \textendash
-\group_begin: \hyper@@link {}{chapter.8}{8}\group_end: , and\nobreakspace
-\group_begin: \hyper@@link {}{chapter.9}{125}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.0.1}{i}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.5}{115}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{8}\group_end: , and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{chapter.9}{125}\group_end: .
 <recently read> }
 l. ......ha:chapter-7, cha:chapter-8, cha:chapter-9}
                                                   }
@@ -1306,8 +1330,9 @@ l. ......ha:chapter-7, cha:chapter-8, cha:chapter-9}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.1}{105}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.4}{8}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{8}\group_end: .
 <recently read> }
 l. ...    cha:chapter-4}
                       }
@@ -1332,8 +1357,9 @@ l. ...    cha:chapter-4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.5}{115}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.8}{8}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.5}{115}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{8}\group_end: .
 <recently read> }
 l. ...    cha:chapter-8}
                       }
@@ -1358,8 +1384,9 @@ l. ...    cha:chapter-8}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.1}{105}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.4}{8}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{8}\group_end: .
 <recently read> }
 l. ......f[page,range]{cha:chapter-1, cha:chapter-4}
                                                   }
@@ -1384,8 +1411,9 @@ l. ......f[page,range]{cha:chapter-1, cha:chapter-4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.5}{115}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.8}{8}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.5}{115}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{8}\group_end: .
 <recently read> }
 l. ......f[page,range]{cha:chapter-5, cha:chapter-8}
                                                   }
@@ -1410,8 +1438,9 @@ l. ......f[page,range]{cha:chapter-5, cha:chapter-8}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.0.1}{i}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.8}{118}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.0.1}{i}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{118}\group_end: .
 <recently read> }
 l. ......page,range]{sec:section-0.1, cha:chapter-8}
                                                   }
@@ -1440,10 +1469,11 @@ l. ...\showbox0
 TEST 9: page, endrange=pagecomp, local override
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.0.1}{i}\group_end: ,
-\group_begin: \hyper@@link {}{chapter.1}{105}\group_end: \textendash
-\group_begin: \hyper@@link {}{chapter.4}{108}\group_end: , and\nobreakspace
-\group_begin: \hyper@@link {}{chapter.7}{117}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.0.1}{i}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{108}\group_end: , and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{chapter.7}{117}\group_end: .
 <recently read> }
 l. ......ha:chapter-3, cha:chapter-4, cha:chapter-7}
                                                   }
@@ -1487,10 +1517,11 @@ l. ......ha:chapter-3, cha:chapter-4, cha:chapter-7}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.0.1}{i}\group_end: ,
-\group_begin: \hyper@@link {}{chapter.5}{115}\group_end: \textendash
-\group_begin: \hyper@@link {}{chapter.8}{118}\group_end: , and\nobreakspace
-\group_begin: \hyper@@link {}{chapter.9}{125}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.0.1}{i}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.5}{115}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{118}\group_end: , and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{chapter.9}{125}\group_end: .
 <recently read> }
 l. ......ha:chapter-7, cha:chapter-8, cha:chapter-9}
                                                   }
@@ -1534,8 +1565,9 @@ l. ......ha:chapter-7, cha:chapter-8, cha:chapter-9}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.1}{105}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.4}{108}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{108}\group_end: .
 <recently read> }
 l. ...    cha:chapter-3, cha:chapter-4}
                                      }
@@ -1562,8 +1594,9 @@ l. ...    cha:chapter-3, cha:chapter-4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.5}{115}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.8}{118}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.5}{115}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{118}\group_end: .
 <recently read> }
 l. ...    cha:chapter-7, cha:chapter-8}
                                      }
@@ -1590,8 +1623,9 @@ l. ...    cha:chapter-7, cha:chapter-8}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.1}{105}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.4}{108}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{108}\group_end: .
 <recently read> }
 l. ......endrange=ref]{cha:chapter-1, cha:chapter-4}
                                                   }
@@ -1618,8 +1652,9 @@ l. ......endrange=ref]{cha:chapter-1, cha:chapter-4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.5}{115}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.8}{118}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.5}{115}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{118}\group_end: .
 <recently read> }
 l. ......endrange=ref]{cha:chapter-5, cha:chapter-8}
                                                   }
@@ -1646,8 +1681,9 @@ l. ......endrange=ref]{cha:chapter-5, cha:chapter-8}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.0.1}{i}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.8}{118}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.0.1}{i}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{118}\group_end: .
 <recently read> }
 l. ...    cha:chapter-8}
                       }
@@ -1676,10 +1712,11 @@ l. ...\showbox0
 TEST 10: page, endrange=pagecomp2
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.0.1}{i}\group_end: ,
-\group_begin: \hyper@@link {}{chapter.1}{105}\group_end: \textendash
-\group_begin: \hyper@@link {}{chapter.4}{8}\group_end: , and\nobreakspace
-\group_begin: \hyper@@link {}{chapter.7}{117}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.0.1}{i}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{8}\group_end: , and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{chapter.7}{117}\group_end: .
 <recently read> }
 l. ......ha:chapter-3, cha:chapter-4, cha:chapter-7}
                                                   }
@@ -1721,10 +1758,11 @@ l. ......ha:chapter-3, cha:chapter-4, cha:chapter-7}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.0.1}{i}\group_end: ,
-\group_begin: \hyper@@link {}{chapter.5}{115}\group_end: \textendash
-\group_begin: \hyper@@link {}{chapter.8}{18}\group_end: , and\nobreakspace
-\group_begin: \hyper@@link {}{chapter.9}{125}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.0.1}{i}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.5}{115}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{18}\group_end: , and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{chapter.9}{125}\group_end: .
 <recently read> }
 l. ......ha:chapter-7, cha:chapter-8, cha:chapter-9}
                                                   }
@@ -1767,8 +1805,9 @@ l. ......ha:chapter-7, cha:chapter-8, cha:chapter-9}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.1}{105}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.4}{8}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{8}\group_end: .
 <recently read> }
 l. ...    cha:chapter-4}
                       }
@@ -1793,8 +1832,9 @@ l. ...    cha:chapter-4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.5}{115}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.8}{18}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.5}{115}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{18}\group_end: .
 <recently read> }
 l. ...    cha:chapter-8}
                       }
@@ -1820,8 +1860,9 @@ l. ...    cha:chapter-8}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.1}{105}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.4}{8}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{8}\group_end: .
 <recently read> }
 l. ......f[page,range]{cha:chapter-1, cha:chapter-4}
                                                   }
@@ -1846,8 +1887,9 @@ l. ......f[page,range]{cha:chapter-1, cha:chapter-4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.5}{115}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.8}{18}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.5}{115}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{18}\group_end: .
 <recently read> }
 l. ......f[page,range]{cha:chapter-5, cha:chapter-8}
                                                   }
@@ -1873,8 +1915,9 @@ l. ......f[page,range]{cha:chapter-5, cha:chapter-8}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.0.1}{i}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.8}{118}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.0.1}{i}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{118}\group_end: .
 <recently read> }
 l. ......page,range]{sec:section-0.1, cha:chapter-8}
                                                   }
@@ -1903,10 +1946,11 @@ l. ...\showbox0
 TEST 11: page, endrange=pagecomp2, local override
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.0.1}{i}\group_end: ,
-\group_begin: \hyper@@link {}{chapter.1}{105}\group_end: \textendash
-\group_begin: \hyper@@link {}{chapter.4}{108}\group_end: , and\nobreakspace
-\group_begin: \hyper@@link {}{chapter.7}{117}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.0.1}{i}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{108}\group_end: , and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{chapter.7}{117}\group_end: .
 <recently read> }
 l. ......ha:chapter-3, cha:chapter-4, cha:chapter-7}
                                                   }
@@ -1950,10 +1994,11 @@ l. ......ha:chapter-3, cha:chapter-4, cha:chapter-7}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.0.1}{i}\group_end: ,
-\group_begin: \hyper@@link {}{chapter.5}{115}\group_end: \textendash
-\group_begin: \hyper@@link {}{chapter.8}{118}\group_end: , and\nobreakspace
-\group_begin: \hyper@@link {}{chapter.9}{125}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.0.1}{i}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.5}{115}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{118}\group_end: , and\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{chapter.9}{125}\group_end: .
 <recently read> }
 l. ......ha:chapter-7, cha:chapter-8, cha:chapter-9}
                                                   }
@@ -1997,8 +2042,9 @@ l. ......ha:chapter-7, cha:chapter-8, cha:chapter-9}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.1}{105}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.4}{108}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{108}\group_end: .
 <recently read> }
 l. ...    cha:chapter-3, cha:chapter-4}
                                      }
@@ -2025,8 +2071,9 @@ l. ...    cha:chapter-3, cha:chapter-4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.5}{115}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.8}{118}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.5}{115}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{118}\group_end: .
 <recently read> }
 l. ...    cha:chapter-7, cha:chapter-8}
                                      }
@@ -2053,8 +2100,9 @@ l. ...    cha:chapter-7, cha:chapter-8}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.1}{105}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.4}{108}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.1}{105}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.4}{108}\group_end: .
 <recently read> }
 l. ......endrange=ref]{cha:chapter-1, cha:chapter-4}
                                                   }
@@ -2081,8 +2129,9 @@ l. ......endrange=ref]{cha:chapter-1, cha:chapter-4}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{chapter.5}{115}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.8}{118}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{chapter.5}{115}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{118}\group_end: .
 <recently read> }
 l. ......endrange=ref]{cha:chapter-5, cha:chapter-8}
                                                   }
@@ -2109,8 +2158,9 @@ l. ......endrange=ref]{cha:chapter-5, cha:chapter-8}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: pages\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{section.0.1}{i}\group_end:
-\textendash \group_begin: \hyper@@link {}{chapter.8}{118}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{section.0.1}{i}\group_end: \textendash \group_begin:
+\__zrefclever_hyperlink:nnn {}{chapter.8}{118}\group_end: .
 <recently read> }
 l. ...    cha:chapter-8}
                       }

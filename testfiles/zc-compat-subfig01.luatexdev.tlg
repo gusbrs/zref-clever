@@ -31,9 +31,10 @@ l. ......p_show:N \l__zrefclever_counter_resetby_prop
 TEST 2: Reference: subfloat
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{figure.caption.1}{1}\group_end: 
-and\nobreakspace \group_begin: \hyper@@link {}{subfigure.1.1}{1a}\group_end: 
-to\nobreakspace \group_begin: \hyper@@link {}{subfigure.1.3}{1c}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{figure.caption.1}{1}\group_end:  and\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{subfigure.1.1}{1a}\group_end:  to\nobreakspace
+\group_begin: \__zrefclever_hyperlink:nnn {}{subfigure.1.3}{1c}\group_end: .
 <recently read> }
 l. ......box{\zcref{3figs, 3figs-a, 3figs-b, 3figs-c}
                                                   }

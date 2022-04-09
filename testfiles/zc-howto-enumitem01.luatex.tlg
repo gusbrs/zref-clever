@@ -1,10 +1,11 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: items\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{Item.1}{{{(1)}}}\group_end: ,
-\group_begin: \hyper@@link {}{Item.2}{{{(I)}}}\group_end: , \group_begin:
-\hyper@@link {}{Item.3}{{{(A)}}}\group_end:  and\nobreakspace \group_begin:
-\hyper@@link {}{Item.4}{{{(i)}}}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{Item.1}{{{(1)}}}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{Item.2}{{{(I)}}}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{Item.3}{{{(A)}}}\group_end:  and\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{Item.4}{{{(i)}}}\group_end: .
 <recently read> }
 l. ......x0=\hbox{\zcref{item-1,item-2,item-3,item-4}
                                                   }

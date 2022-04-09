@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.2.2-alpha...HEAD)
 
+### Changed
+- (Internal) Use public hyperref's commands for building links instead of the
+  internal `\hyper@@link`.
+
 ## [v0.2.2-alpha](https://github.com/gusbrs/zref-clever/compare/v0.2.1-alpha...v0.2.2-alpha) (2022-02-11)
 
 ### Changed

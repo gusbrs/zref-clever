@@ -6461,8 +6461,7 @@
                       {
                         \exp_not:N \group_begin:
                         \exp_not:V \l_@@_namefont_tl
-                        % It's two `@s', but escaped for DocStrip.
-                        \exp_not:N \hyper@@@@link
+                        \@@_hyperlink:nnn
                           {
                             \@@_extract_url_unexp:V
                               \l_@@_type_first_label_tl
@@ -6877,8 +6876,7 @@
             \exp_not:N \group_begin:
             \exp_not:V \l_@@_reffont_tl
             \seq_item:Nn #2 { 1 }
-            % It's two `@s', but escaped for DocStrip.
-            \exp_not:N \hyper@@@@link
+            \@@_hyperlink:nnn
               { \@@_extract_url_unexp:n {#1} }
               { \@@_extract_unexp:nnn {#1} { anchor } { } }
               {
@@ -6927,8 +6925,7 @@
             \exp_not:N \group_begin:
             \exp_not:V \l_@@_reffont_tl
             \seq_item:Nn #3 { 1 }
-            % It's two `@s', but escaped for DocStrip.
-            \exp_not:N \hyper@@@@link
+            \@@_hyperlink:nnn
               { \@@_extract_url_unexp:n {#1} }
               { \@@_extract_unexp:nnn {#1} { anchor } { } }
               {
@@ -6978,8 +6975,7 @@
               { \l_@@_ref_property_tl }
               {
                 \exp_not:N \group_begin:
-                % It's two `@s', but escaped for DocStrip.
-                \exp_not:N \hyper@@@@link
+                \@@_hyperlink:nnn
                   {
                     \@@_extract_url_unexp:V
                       \l_@@_type_first_label_tl
@@ -7045,8 +7041,7 @@
                     \exp_not:V \l_@@_reffont_tl
                     \seq_item:Nn
                       \l_@@_type_first_refbounds_seq { 1 }
-                    % It's two `@s', but escaped for DocStrip.
-                    \exp_not:N \hyper@@@@link
+                    \@@_hyperlink:nnn
                       {
                         \@@_extract_url_unexp:V
                           \l_@@_type_first_label_tl
@@ -7336,6 +7331,25 @@
           { \bool_set_true:N \l_@@_name_in_link_bool }
           { \bool_set_false:N \l_@@_name_in_link_bool }
       }
+  }
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\@@_hyperlink:nnn}
+%   This avoids using the internal \cs[replace=false]{hyper@@link}, using only
+%   public \pkg{hyperref} commands (see
+%   \url{https://github.com/latex3/hyperref/issues/229#issuecomment-1093870142},
+%   thanks \contributor{Ulrike Fisher}).
+%   \begin{syntax}
+%     \cs{@@_hyperlink:nnn} \Arg{url/file} \Arg{anchor} \Arg{text}
+%   \end{syntax}
+%    \begin{macrocode}
+\cs_new_protected:Npn \@@_hyperlink:nnn #1#2#3
+  {
+    \tl_if_empty:nTF {#1}
+      { \hyperlink {#2} {#3} }
+      { \hyper@linkfile {#3} {#1} {#2} }
   }
 %    \end{macrocode}
 % \end{macro}

@@ -340,8 +340,8 @@ Completed box being shipped out [2]
 .\kern 0.0
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \group_begin: \upshape (\hyper@@link
+\nobreakspace \group_begin: \upshape (\__zrefclever_hyperlink:nnn
 {}{equation.1.1}{1})\group_end:  and\nobreakspace \group_begin: \upshape
-(\hyper@@link {}{equation.1.2a}{2a})\group_end: .
+(\__zrefclever_hyperlink:nnn {}{equation.1.2a}{2a})\group_end: .
 <recently read> }
 l. ...\zcref{eq2,align:b}

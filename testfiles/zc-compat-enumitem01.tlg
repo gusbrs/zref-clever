@@ -33,13 +33,14 @@ l. ......show:N \l__zrefclever_counter_resetby_prop
 TEST 2: Reference: enumitem
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: items\group_end:
-\nobreakspace \group_begin: \hyper@@link {}{Item.1}{{{(1)}}}\group_end: ,
-\group_begin: \hyper@@link {}{Item.2}{{{(I)}}}\group_end: , \group_begin:
-\hyper@@link {}{Item.3}{{{(A)}}}\group_end: , \group_begin: \hyper@@link
-{}{Item.4}{{{(i)}}}\group_end: , \group_begin: \hyper@@link
-{}{Item.5}{{{(1)}}}\group_end: , \group_begin: \hyper@@link
-{}{Item.6}{{{(I)}}}\group_end:  and\nobreakspace \group_begin: \hyper@@link
-{}{Item.7}{{{(A)}}}\group_end: .
+\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
+{}{Item.1}{{{(1)}}}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{Item.2}{{{(I)}}}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{Item.3}{{{(A)}}}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{Item.4}{{{(i)}}}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{Item.5}{{{(1)}}}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
+{}{Item.6}{{{(I)}}}\group_end:  and\nobreakspace \group_begin:
+\__zrefclever_hyperlink:nnn {}{Item.7}{{{(A)}}}\group_end: .
 <recently read> }
 l. ......enum1,enum2,enum3,enum4,enum5,enum6,enum7}
                                                   }

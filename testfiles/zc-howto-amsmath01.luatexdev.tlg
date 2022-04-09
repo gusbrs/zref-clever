@@ -4,11 +4,12 @@ Don't change this file in any respect.
 TEST 1: amsmath how to
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \group_begin: \upshape (\hyper@@link
-{}{equation.1.1}{1})\group_end: , \group_begin: \upshape (\hyper@@link
-{}{AMS.1}{{foo}})\group_end: , \group_begin: \upshape (\hyper@@link
-{}{equation.1.2}{2})\group_end:  and\nobreakspace \group_begin: \upshape
-(\hyper@@link {}{equation.1.2b}{2b})\group_end: .
+\nobreakspace \group_begin: \upshape (\__zrefclever_hyperlink:nnn
+{}{equation.1.1}{1})\group_end: , \group_begin: \upshape
+(\__zrefclever_hyperlink:nnn {}{AMS.1}{{foo}})\group_end: , \group_begin:
+\upshape (\__zrefclever_hyperlink:nnn {}{equation.1.2}{2})\group_end: 
+and\nobreakspace \group_begin: \upshape (\__zrefclever_hyperlink:nnn
+{}{equation.1.2b}{2b})\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:1,eq:2,eq:3,eq:3b}
                                               }
