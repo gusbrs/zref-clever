@@ -453,20 +453,18 @@
 % luckily however, we have \texttt{abspage} which solves this problem.  But we
 % can decide whether two labels can be compressed into a range or not based on
 % this format: if they are identical, we can compress them, otherwise, we
-% can't.  To do so, we locally redefine \cs{c@page} to return ``1'', thus
-% avoiding any global spillovers of this trick.  Since this operation is not
-% expandable we cannot run it directly from the property definition.  Hence,
-% we use a shipout hook, and set \cs{g_@@_page_format_tl}, which can then be
-% retrieved by the starred definition of
-% \texttt{\cs{zref@newprop}*\{zc@pgfmt\}}.
+% can't.  To do so, we locally set \cs{c@page} to ``1'', thus avoiding any
+% global spillovers of this trick.  Since this operation is not expandable we
+% cannot run it directly from the property definition.  Hence, we use a
+% shipout hook, and set \cs{g_@@_page_format_tl}, which can then be retrieved
+% by the starred definition of \texttt{\cs{zref@newprop}*\{zc@pgfmt\}}.
 %
 %    \begin{macrocode}
 \tl_new:N \g_@@_page_format_tl
-\cs_new_protected:Npx \@@_page_format_aux: { \int_eval:n { 1 } }
 \AddToHook { shipout / before }
   {
     \group_begin:
-    \cs_set_eq:NN \c@page \@@_page_format_aux:
+    \int_set:Nn \c@page { 1 }
     \tl_gset:Nx \g_@@_page_format_tl { \thepage }
     \group_end:
   }
