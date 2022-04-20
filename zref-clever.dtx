@@ -6797,6 +6797,10 @@
                       }
                   }
               }
+            % We just closed a range, reset `range_beg_is_first' in case a
+            % second range for the same type occurs, in which case its
+            % `range_beg' will no longer be `first'.
+            \bool_set_false:N \l_@@_range_beg_is_first_bool
             % Reset counters.
             \int_zero:N \l_@@_range_count_int
             \int_zero:N \l_@@_range_same_count_int

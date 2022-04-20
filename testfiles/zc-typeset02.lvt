@@ -1,0 +1,75 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\RequirePackage[enable-debug]{expl3}
+
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation }
+\ExplSyntaxOff
+
+\usepackage{zref-clever}
+
+% Use a serial comma for 'lastsep' (not the default) so that we can
+% distinguish it in output from 'pairsep'.
+\zcLanguageSetup{english}{
+  lastsep={, and\nobreakspace},
+}
+
+\usepackage{hyperref}
+
+% This file is intended to test the case of two ranges for the same type.
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\begin{document}
+
+\chapter{Chapter 1}
+
+\begin{figure}
+  \caption{figure 1}
+  \zlabel{fig:1}
+\end{figure}
+
+\begin{figure}
+  \caption{figure 2}
+  \zlabel{fig:2}
+\end{figure}
+
+\begin{figure}
+  \caption{figure 3}
+  \zlabel{fig:3}
+\end{figure}
+
+\chapter{Chapter 2}
+
+\begin{figure}
+  \caption{figure 4}
+  \zlabel{fig:4}
+\end{figure}
+
+\begin{figure}
+  \caption{figure 5}
+  \zlabel{fig:5}
+\end{figure}
+
+\begin{figure}
+  \caption{figure 6}
+  \zlabel{fig:6}
+\end{figure}
+
+\clearpage{}
+
+\START
+
+\BEGINTEST{Not last of type: two ranges}
+\setbox0=\hbox{\zcref{fig:1,fig:2,fig:3,fig:4,fig:5,fig:6}}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}
