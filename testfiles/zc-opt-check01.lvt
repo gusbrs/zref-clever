@@ -9,8 +9,7 @@
 \ExplSyntaxOff
 
 \usepackage{zref-clever}
-
-\zcsetup{check}
+\usepackage{zref-check}
 
 \begin{document}
 

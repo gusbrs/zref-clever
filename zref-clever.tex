@@ -711,16 +711,6 @@ are handled by \LaTeX{}, the fact that this option receives commands as value
 means this option \emph{can't} be set at load time, as a package option.  If
 you want to set it globally, use \cs{zcsetup} instead.
 
-\DescribeOption{titleref} %
-\DescribeOption{vario} %
-The \opt{titleref} option receives no value and, when given, loads
-\pkg{zref}'s \pkg{zref-titleref} module.  Similarly, the \opt{vario} option
-loads the \pkg{zref-vario} package.  These are a preamble only options.  Note
-that \pkg{zref-vario} loads \pkg{varioref}, which has known load order
-interaction with other packages, prominently with \pkg{hyperref}.  Hence,
-depending on your document, you may wish to load \pkg{zref-vario} separately,
-instead of through the option.
-
 \DescribeOption{note} %
 The \opt{note} option receives as value some text to be typeset at the end of
 the whole reference list.  It is separated from it by \opt{notesep} (see
@@ -728,15 +718,14 @@ the whole reference list.  It is separated from it by \opt{notesep} (see
 
 \DescribeOption{check} %
 Provides integration of \pkg{zref-clever} with the \pkg{zref-check} package.
-In the preamble, the \opt{check} option receives no value and, when given,
-loads \pkg{zref-check}.  In the document body, \opt{check} requires a value,
-which works exactly like the optional argument of \cs{zcheck}, and can receive
-both checks and \cs{zcheck}'s options.  And the checks are performed for each
-label in \marg{labels} received as argument by \cs{zcref}.  See the User
-manual of \pkg{zref-check} for details.  The checks done by the \opt{check}
-option in \cs{zcref} comprise the complete reference, including the \opt{note}
-(see \zcref{sec:reference-format}).  If \pkg{zref-check} was not loaded in the
-preamble, at begin document the option is made no-op and issues a warning.
+The option is only functional in the document body and if \pkg{zref-check} has
+been loaded.  \opt{check} requires a value, which works exactly like the
+optional argument of \cs{zcheck}, and can receive both checks and
+\cs{zcheck}'s options.  And the checks are performed for each label in
+\marg{labels} received as argument by \cs{zcref}.  See the User manual of
+\pkg{zref-check} for details.  The checks done by the \opt{check} option in
+\cs{zcref} comprise the complete reference, including the \opt{note} (see
+\zcref{sec:reference-format}).
 
 \DescribeOption{countertype} %
 The \opt{countertype} option allows to specify the ``reference type'' of each

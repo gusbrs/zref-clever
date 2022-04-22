@@ -4790,13 +4790,7 @@ l. ...    sec:section-1.1, sec:section-1.2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 86: Option: titleref
-============================================================
-Package zref-clever Warning: Option 'titleref' only available in the preamble
-(zref-clever)                on line .... Did you mean 'ref=title'?.
-============================================================
-============================================================
-TEST 87: Option: note=...
+TEST 86: Option: note=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin:
 \__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
@@ -4830,7 +4824,7 @@ l. ......hbox{\zcref[note={a note}]{cha:chapter-1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 88: Option: check=...
+TEST 87: Option: check=...
 ============================================================
 Package zref-check Warning: Failed check 'thispage' for label
 (zref-check)                'sec:section-1.1' on page 10 on line ....
@@ -4838,7 +4832,7 @@ Package zref-check Warning: Failed check 'prevpage' for label
 (zref-check)                'sec:section-1.1' on page 10 on line ....
 ============================================================
 ============================================================
-TEST 89: Option: tpairsep=..., tlistsep=..., tlastsep=...
+TEST 88: Option: tpairsep=..., tlistsep=..., tlastsep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin:
 \__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
@@ -4988,7 +4982,7 @@ l. ......p={~\&~}]{sec:section-1.1, cha:chapter-1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 90: Option: notesep=...
+TEST 89: Option: notesep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin:
 \__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
@@ -5050,7 +5044,7 @@ l. ...    cha:chapter-1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 91: Option: namesep=...
+TEST 90: Option: namesep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin:
 \__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:
@@ -5101,7 +5095,7 @@ l. ......p=\qquad]{sec:section-1.1, cha:chapter-1}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 92: Option: pairsep=..., listsep=..., lastsep=...
+TEST 91: Option: pairsep=..., listsep=..., lastsep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
@@ -5197,7 +5191,7 @@ l. ......{~\&~}]{sec:section-1.1, sec:section-1.2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 93: Option: rangesep=...
+TEST 92: Option: rangesep=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
@@ -5233,7 +5227,7 @@ l. ......on-1.2, sec:section-1.3, sec:section-1.4}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 94: Option: refbounds=...
+TEST 93: Option: refbounds=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \group_begin: [1.1]\group_end:  and\nobreakspace \group_begin:
@@ -5306,7 +5300,7 @@ l. ......s=]{eq:equation-1.1.2, eq:equation-1.1.3}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 95: Option: namefont=...
+TEST 94: Option: namefont=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin:
 \__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: \bfseries
@@ -5496,7 +5490,7 @@ l. ...    sec:section-1.2}
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 96: Option: reffont=...
+TEST 95: Option: reffont=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin:
 \__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end:

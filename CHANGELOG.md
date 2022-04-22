@@ -8,8 +8,14 @@
   in "Unknown option" LaTeX error.  This change requires that users adjust
   their documents, and a suitable package warning has been provided so that
   affected users know of the change directly and how to adjust.
+- Option `check` has been made no-op in the preamble.  To load the
+  corresponding package, just use the standard `\usepackage`.
 - (Internal) Use public hyperref's commands for building links instead of the
   internal `\hyper@@link`.
+
+### Deprecated
+- Options `titleref` and `vario` have been deprecated.  To load the
+  corresponding packages, just use the standard `\usepackage`.
 
 ### Fixed
 - Bug which affected the typesetting with compression in case two ranges for

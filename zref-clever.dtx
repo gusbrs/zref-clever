@@ -620,11 +620,6 @@
   }
 \msg_new:nnn { zref-clever } { missing-hyperref }
   { Missing~'hyperref'~package.~Setting~'hyperref=false'. }
-\msg_new:nnn { zref-clever } { titleref-preamble-only }
-  {
-    Option~'titleref'~only~available~in~the~preamble~\msg_line_context:.~
-    Did~you~mean~'ref=title'?.
-  }
 \msg_new:nnn { zref-clever } { option-preamble-only }
   { Option~'#1'~only~available~in~the~preamble~\msg_line_context:. }
 \msg_new:nnn { zref-clever } { unknown-compat-module }
@@ -3645,16 +3640,12 @@
 %    \begin{macrocode}
 \keys_define:nn { zref-clever/reference }
   {
-    titleref .code:n = { \RequirePackage { zref-titleref } } ,
-    titleref .value_forbidden:n = true ,
-  }
-\AddToHook { begindocument }
-  {
-    \keys_define:nn { zref-clever/reference }
+    titleref .code:n =
       {
-        titleref .code:n =
-          { \msg_warning:nn { zref-clever } { titleref-preamble-only } }
-      }
+        % NOTE Option deprecated in 2022-04-22 for 0.2.3-alpha.
+        \msg_warning:nnxx { zref-clever }{ option-deprecated } { titleref }
+          { \iow_char:N\\usepackage\iow_char:N\{zref-titleref\iow_char:N\} }
+      } ,
   }
 %    \end{macrocode}
 %
@@ -3664,19 +3655,12 @@
 %    \begin{macrocode}
 \keys_define:nn { zref-clever/reference }
   {
-    vario .code:n = { \RequirePackage { zref-vario } } ,
-    vario .value_forbidden:n = true ,
-  }
-\AddToHook { begindocument }
-  {
-    \keys_define:nn { zref-clever/reference }
+    vario .code:n =
       {
-        vario .code:n =
-          {
-            \msg_warning:nnn { zref-clever }
-              { option-preamble-only } { vario }
-          }
-      }
+        % NOTE Option deprecated in 2022-04-22 for 0.2.3-alpha.
+        \msg_warning:nnxx { zref-clever }{ option-deprecated } { vario }
+          { \iow_char:N\\usepackage\iow_char:N\{zref-vario\iow_char:N\} }
+      } ,
   }
 %    \end{macrocode}
 %
@@ -3702,8 +3686,8 @@
 \bool_new:N \l_@@_zcref_with_check_bool
 \keys_define:nn { zref-clever/reference }
   {
-    check .code:n = { \RequirePackage { zref-check } } ,
-    check .value_forbidden:n = true ,
+    check .code:n =
+      { \msg_warning:nnn { zref-clever } { option-document-only } { check } } ,
   }
 \AddToHook { begindocument }
   {

@@ -869,15 +869,6 @@
 \box0
 \ENDTEST
 
-\newoptblock{titleref}
-
-\BEGINTEST{Option: titleref}
-\ExplSyntaxOn
-\bool_set_false:N \l__zrefclever_verbose_testing_bool
-\ExplSyntaxOff
-\zcref[titleref]{cha:chapter-1}
-\ENDTEST
-
 \newoptblock{note}
 
 \BEGINTEST{Option: note=...}
