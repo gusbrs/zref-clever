@@ -8,7 +8,8 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
-\usepackage[hyperref=false]{zref-clever}
+\usepackage{zref-clever}
+\zcsetup{hyperref=false}
 
 \usepackage{hyperref}
 

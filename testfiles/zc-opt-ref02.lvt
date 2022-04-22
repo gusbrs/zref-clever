@@ -8,7 +8,8 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
-\usepackage[titleref]{zref-clever}
+\usepackage{zref-clever}
+\usepackage{zref-titleref}
 
 \zcsetup{ref=title}
 

@@ -44,7 +44,10 @@
 
 % The package itself *must* be loaded so that \GetFileInfo can pick up date
 % and version data.  Naturally, we also use it.
-\usepackage[cap,check,titleref]{zref-clever}
+\usepackage{zref-clever}
+\zcsetup{cap}
+\usepackage{zref-check}
+\usepackage{zref-titleref}
 
 \usepackage[T1]{fontenc}
 
@@ -300,21 +303,22 @@ you should be ready to accommodate to eventual upstream changes.
 \section{Loading the package}
 \zlabel{sec:loading-package}
 
-As usual:
+\pkg{zref-clever} can be loaded with the usual:
 
-\begin{zcexample}[escapeinside=`']
-\usepackage`\oarg{options}'{zref-clever}
+\begin{zcexample}
+\usepackage{zref-clever}
 \end{zcexample}
 
+The package does not accept load-time options, package options must be set
+using \cs{zcsetup} (see \zcref{sec:user-interface}).
 
 \section{Dependencies}
 
 \pkg{zref-clever} requires \pkg{zref}, and \LaTeX{} kernel 2021-11-15, or
-newer.  It also needs \pkg{l3keys2e} and \pkg{ifdraft}.  Some packages are
-leveraged by \pkg{zref-clever} if they are present, but are not loaded by
-default or required by it, namely: \pkg{hyperref}, \pkg{zref-check}, and
-\pkg{zref}'s \pkg{zref-titleref}, \pkg{zref-hyperref}, and \pkg{zref-xr}
-modules.
+newer.  It also needs \pkg{ifdraft}.  Some packages are leveraged by
+\pkg{zref-clever} if they are present, but are not loaded by default or
+required by it, namely: \pkg{hyperref}, \pkg{zref-check}, and \pkg{zref}'s
+\pkg{zref-titleref}, \pkg{zref-hyperref}, and \pkg{zref-xr} modules.
 
 
 \section{User interface}
@@ -402,14 +406,13 @@ as a whole; and ``reference format options'', which control the detail of
 reference formatting, including type-specific and language-specific settings.
 
 This section covers the first group (for the second one, see
-\zcref{sec:reference-format}).  General options can be set globally either as
-package options at load-time (see \zcref{sec:loading-package}) or by means of
-\cs{zcsetup} in the preamble (see \zcref{sec:user-interface}).  They can also
-be set locally with \cs{zcsetup} along the document or through the optional
-argument of \cs{zcref} (see \zcref{sec:user-interface}).  Most general options
-can be used in any of these contexts, but that is not necessarily true for all
-cases, some restrictions may apply, as described in each option's
-documentation.
+\zcref{sec:reference-format}).  General options can be set globally by means
+of \cs{zcsetup} in the preamble (see \zcref{sec:user-interface}).  They can
+also be set locally with \cs{zcsetup} along the document or through the
+optional argument of \cs{zcref} (see \zcref{sec:user-interface}).  Most
+general options can be used in any of these contexts, but that is not
+necessarily true for all cases, some restrictions may apply, as described in
+each option's documentation.
 
 \bigskip{}
 
@@ -934,14 +937,8 @@ formatting at low precedence levels, and the users can easily and conveniently
 override them as desired.
 
 ``General'' options (i) can be given by the user in the optional argument of
-\cs{zcref}, but also set through \cs{zcsetup} or even, depending on the case,
-as package options at load-time (see \zcref{sec:options}).\footnote{The use of
-  \cs{zcsetup} for global reference format settings is recommended though.
-  Whether you can use load-time options or not depends on the values of the
-  options: due to how \LaTeX{} handles package options, if the values of the
-  options you are setting include \emph{commands} you can't set them at
-  load-time, and rather \emph{must} use \cs{zcsetup}.}  ``Type'' specific
-options (ii) are handled by \cs{zcRefTypeSetup} (see
+\cs{zcref}, but also set through \cs{zcsetup} (see \zcref{sec:options}).
+``Type'' specific options (ii) are handled by \cs{zcRefTypeSetup} (see
 \zcref{sec:user-interface}).  ``Language'' options, whether ``type'' specific
 (iii) or ``default'' (iv) have their user interface in \cs{zcLanguageSetup},
 and have their values populated by the package's built-in language files (see
@@ -1547,14 +1544,14 @@ set around a cross-reference ``task'' we'd like to perform with
   position between the reference and the label being referred to using
   \pkg{varioref}.}
 
-\pkg{zref-vario}, which can be enabled with package option \opt{vario}, offers
-a layer of compatibility with \pkg{varioref} and provides
-\texttt{\textbackslash{}z}\dots{} counterparts for the latter's main reference
-commands.
+The \pkg{zref-vario} package offers a layer of compatibility with
+\pkg{varioref} and provides \texttt{\textbackslash{}z}\dots{} counterparts for
+the latter's main reference commands.
 
 \begin{zchowto}[caption={\pkg{zref-vario}}]
 \documentclass{article}
-\usepackage[vario]{zref-clever}
+\usepackage{zref-clever}
+\usepackage{zref-vario}
 \begin{document}
 \section{Section 1}
 \zlabel{sec:section-1}

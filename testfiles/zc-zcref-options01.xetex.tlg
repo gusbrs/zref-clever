@@ -3158,11 +3158,11 @@ Package zref-clever Warning: Reference with multiple types on line .... You
 TEST 82: Option: nudgeif=foo
 ============================================================
 Package zref-clever Warning: Unknown value 'foo' for 'nudgeif' option on line
-(zref-clever)                795.
-Package zref-clever Warning: Unknown value 'foo' for 'nudgeif' option on line
 (zref-clever)                797.
 Package zref-clever Warning: Unknown value 'foo' for 'nudgeif' option on line
 (zref-clever)                799.
+Package zref-clever Warning: Unknown value 'foo' for 'nudgeif' option on line
+(zref-clever)                801.
 ============================================================
 ============================================================
 TEST 83: Option: sg
@@ -3189,17 +3189,17 @@ Package zref-clever Warning: Gender mismatch for type 'chapter' on line ....
 (zref-clever)                You've specified 'g=f' but type name is 'm' for
 (zref-clever)                language 'french'.
 Package zref-clever Warning: Language 'french' has no 'n' gender declared on
-(zref-clever)                line 837.
-Package zref-clever Warning: Language 'french' has no 'n' gender declared on
 (zref-clever)                line 839.
 Package zref-clever Warning: Language 'french' has no 'n' gender declared on
 (zref-clever)                line 841.
+Package zref-clever Warning: Language 'french' has no 'n' gender declared on
+(zref-clever)                line 843.
 Package zref-clever Warning: Language 'english' has no declared gender on line
-(zref-clever)                843. Nothing to do with option 'g=f'.
-Package zref-clever Warning: Language 'english' has no declared gender on line
-(zref-clever)                844. Nothing to do with option 'g=f'.
+(zref-clever)                845. Nothing to do with option 'g=f'.
 Package zref-clever Warning: Language 'english' has no declared gender on line
 (zref-clever)                846. Nothing to do with option 'g=f'.
+Package zref-clever Warning: Language 'english' has no declared gender on line
+(zref-clever)                848. Nothing to do with option 'g=f'.
 ============================================================
 ============================================================
 TEST 85: Option: font=...

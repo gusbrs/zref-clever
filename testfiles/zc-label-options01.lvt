@@ -10,7 +10,9 @@
 
 \usepackage[english]{babel}
 
-\usepackage[check,titleref]{zref-clever}
+\usepackage{zref-clever}
+\usepackage{zref-check}
+\usepackage{zref-titleref}
 
 \usepackage{hyperref}
 

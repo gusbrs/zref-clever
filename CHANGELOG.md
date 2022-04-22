@@ -3,6 +3,11 @@
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.2.2-alpha...HEAD)
 
 ### Changed
+- `zref-clever` no longer accepts package options to be set a load-time,
+  `\zcsetup` must be used instead.  The use of load-time options now results
+  in "Unknown option" LaTeX error.  This change requires that users adjust
+  their documents, and a suitable package warning has been provided so that
+  affected users know of the change directly and how to adjust.
 - (Internal) Use public hyperref's commands for building links instead of the
   internal `\hyper@@link`.
 

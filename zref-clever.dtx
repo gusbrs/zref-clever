@@ -46,7 +46,10 @@
 
 % Have \GetFileInfo pick up date and version data and used in the
 % documentation.
-\usepackage[cap,nameinlink=false,check,titleref]{zref-clever}
+\usepackage{zref-clever}
+\zcsetup{cap,nameinlink=false}
+\usepackage{zref-check}
+\usepackage{zref-titleref}
 
 \begin{document}
 
@@ -176,7 +179,6 @@
 \RequirePackage { zref-base }
 \RequirePackage { zref-user }
 \RequirePackage { zref-abspage }
-\RequirePackage { l3keys2e }
 \RequirePackage { ifdraft }
 %    \end{macrocode}
 %
@@ -662,6 +664,11 @@
   {
     Option~'#1'~has~been~deprecated~\msg_line_context:.\iow_newline:
     Use~'#2'~instead.
+  }
+\msg_new:nnn { zref-clever } { load-time-options }
+  {
+    'zref-clever'~does~not~accept~load-time~options.~
+    To~configure~package~options,~use~'\iow_char:N\\zcsetup'.
   }
 %    \end{macrocode}
 %
@@ -3624,23 +3631,13 @@
 %    \end{macrocode}
 %
 %
-%
 % \subsubsection*{\opt{font} option}
-%
-% \opt{font} \emph{can't be used as a package option}, since the options get
-% expanded by \LaTeX{} before being passed to the package (see
-% \url{https://tex.stackexchange.com/a/489570}).  It can be set in \cs{zcref}
-% and, for global settings, with \cs{zcsetup}.  Note that, technically, the
-% ``raw'' options are already available as \cs{@raw@opt@\meta{package}.sty}
-% (helpful comment by \contributor{David Carlisle} at
-% \url{https://tex.stackexchange.com/a/618439}).
 %
 %    \begin{macrocode}
 \tl_new:N \l_@@_ref_typeset_font_tl
 \keys_define:nn { zref-clever/reference }
   { font .tl_set:N = \l_@@_ref_typeset_font_tl }
 %    \end{macrocode}
-%
 %
 %
 % \subsubsection*{\opt{titleref} option}
@@ -4114,8 +4111,8 @@
 % potentially apply them selectively to different contexts: \texttt{label} and
 % \texttt{reference}.  Currently, the only use of this selection is the
 % ability to exclude label related options from \cs{zcref}'s options.  Anyway,
-% for load-time package options and for \cs{zcsetup} we want the whole set, so
-% we aggregate the two into \texttt{zref-clever/zcsetup}, and use that here.
+% for package options (\cs{zcsetup}) we want the whole set, so we aggregate
+% the two into \texttt{zref-clever/zcsetup}, and use that here.
 %
 %    \begin{macrocode}
 \keys_define:nn { }
@@ -4129,12 +4126,18 @@
 %    \end{macrocode}
 %
 %
-% Process load-time package options
-% (\url{https://tex.stackexchange.com/a/15840}).
+% \pkg{zref-clever} does not accept load-time options.  Despite the tradition
+% of so doing, Joseph Wright has a point in recommending otherwise at
+% \url{https://chat.stackexchange.com/transcript/message/60360822#60360822}:
+% separating ``loading the package'' from ``configuring the package'' grants
+% less trouble with ``option clashes'' and with expansion of options at
+% load-time.
 %    \begin{macrocode}
-\ProcessKeysOptions { zref-clever/zcsetup }
+\bool_lazy_and:nnT
+  { \tl_if_exist_p:c { opt@ zref-clever.sty } }
+  { ! \tl_if_empty_p:c { opt@ zref-clever.sty } }
+  { \msg_warning:nnx { zref-clever } { load-time-options } }
 %    \end{macrocode}
-%
 %
 %
 % \section{Configuration}
