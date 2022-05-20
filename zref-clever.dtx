@@ -7979,8 +7979,10 @@
 % actually responsible for setting the labels inside \pkg{amsmath}'s math
 % environments.  And, after that, redefine it to be \cs{@@_ltxlabel:n}
 % instead.  We must handle \pkg{hyperref} here, which comes very late in the
-% preamble, and which loads \pkg{nameref} at \texttt{begindocument}, which in
-% turn, lets \cs{ltx@label} be \cs{label}.  This has to come after
+% preamble, and which loads \pkg{nameref} at \texttt{begindocument} (though
+% this has changed recently 2022-05-16, see
+% \url{https://github.com/latex3/hyperref/commit/a011ba9308a1b047dc151796de557da0bb22abaa}),
+% which in turn, lets \cs{ltx@label} be \cs{label}.  This has to come after
 % \pkg{nameref}.  Other classes packages also redefine \cs{ltx@label}, which
 % may cause some trouble.  A \texttt{grep} on \texttt{texmf-dist} returns hits
 % for: \file{thm-restate.sty}, \file{smartref.sty}, \file{jmlrbook.cls},
