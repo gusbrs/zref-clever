@@ -1,0 +1,332 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: basic usage how to
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: section\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
+<recently read> }
+l. ......0=\hbox{A reference to \zcref{sec:section-1}
+                                                  .}
+> \box...=
+\hbox(7.16+0.11)x106.20001, direction TLT
+.\TU/lmr/m/n/10 A
+.\glue(\spaceskip) 3.33 plus 1.66331 minus 1.1111
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 f
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 r
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 o
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 c
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 n
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 .
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{figure.1}{\group_begin: Figure\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
+<recently read> }
+l. ...\setbox0=\hbox{\zcref[S]{fig:figure-1}
+                                          shows some interesting information.}
+> \box...=
+\hbox(7.05+2.06)x196.55, direction TLT
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1}
+.\TU/lmr/m/n/10 F
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 g
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 u
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 e
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 h
+.\TU/lmr/m/n/10 o
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 w
+.\TU/lmr/m/n/10 s
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 m
+.\TU/lmr/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 n
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+..= \kern-0.28 (font)
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 r
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 t
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 g
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 n
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 f
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 r
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 m
+.\TU/lmr/m/n/10 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 .
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: page\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
+<recently read> }
+l. ...  \zcpageref{sec:section-1}
+                               or with \zcref[page]{sec:section-1}.}
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: page\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
+<recently read> }
+l. ......ction-1} or with \zcref[page]{sec:section-1}
+                                                  .}
+> \box...=
+\hbox(7.16+2.06)x280.92001, direction TLT
+.\TU/lmr/m/n/10 A
+.\glue(\spaceskip) 3.33 plus 1.66331 minus 1.1111
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 f
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 r
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 b
+.\kern0.28 (font)
+.\TU/lmr/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 d
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 w
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 h
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 i
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 h
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 r
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 e
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 r
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 w
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 h
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 g
+.\TU/lmr/m/n/10 e
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 .
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: section\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
+<recently read> }
+l. ...  \zcref{sec:section-1, fig:figure-1}
+                                        .}
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
+\__zrefclever_hyperlink:nnn {}{figure.1}{\group_begin: figure\group_end:
+\nobreakspace \group_begin: 1\group_end: }\group_end: .
+<recently read> }
+l. ...  \zcref{sec:section-1, fig:figure-1}
+                                        .}
+> \box...=
+\hbox(7.16+2.06)x334.44002, direction TLT
+.\TU/lmr/m/n/10 A
+.\glue(\spaceskip) 3.33 plus 1.66331 minus 1.1111
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 f
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 r
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 c
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 l
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 o
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 b
+.\kern0.28 (font)
+.\TU/lmr/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 m
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 d
+.\TU/lmr/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 o
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 m
+.\kern-0.28 (font)
+.\TU/lmr/m/n/10 u
+.\TU/lmr/m/n/10 l
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 i
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 p
+.\TU/lmr/m/n/10 l
+.\TU/lmr/m/n/10 e
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 l
+.\TU/lmr/m/n/10 a
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 b
+.\kern0.28 (font)
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 l
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 ,
+.\glue(\spaceskip) 3.33 plus 2.08124 minus 0.888
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 s
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 n
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\TU/lmr/m/n/10 s
+.\TU/lmr/m/n/10 e
+.\TU/lmr/m/n/10 c
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 t
+.\TU/lmr/m/n/10 i
+.\TU/lmr/m/n/10 o
+.\TU/lmr/m/n/10 n
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 a
+.\TU/lmr/m/n/10 n
+.\TU/lmr/m/n/10 d
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1}
+.\TU/lmr/m/n/10 ﬁ (ligature fi)
+.\TU/lmr/m/n/10 g
+.\discretionary (penalty 50)
+..< \TU/lmr/m/n/10 -
+.\TU/lmr/m/n/10 u
+.\TU/lmr/m/n/10 r
+.\TU/lmr/m/n/10 e
+.\penalty 10000
+.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
+.\TU/lmr/m/n/10 1
+.\pdfendlink
+.\TU/lmr/m/n/10 .
+! OK.
+l. ...\showbox0
+============================================================

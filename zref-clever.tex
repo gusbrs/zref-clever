@@ -300,6 +300,74 @@ priority over backward compatibility.  So, if you choose to use this package,
 you should be ready to accommodate to eventual upstream changes.
 
 
+\section{\pkg{zref-clever} for the impatient}
+
+\pkg{zref-clever} is based on \pkg{zref}'s referencing system which, though
+independent of the standard one, is very similar to it in its user interface.
+Indeed, to use \pkg{zref}, instead of setting a \cs{label} and making a
+\cs{ref}, one would set a \cs{zlabel} and make \cs{zref}s to it, in pretty
+much the same way as for the standard system.  \pkg{zref-clever} introduces
+the more featureful \cs{zcref} for making references, but relies on
+\pkg{zref}'s \cs{zlabel} for label setting.
+
+A basic document using \pkg{zref-clever} is shown in \zcref{how:basic} which,
+despite the small necessary adjustments, should feel very familiar to any
+\LaTeX{} user acquainted with the standard referencing system:
+
+\begin{zchowto}[caption={Basic usage},label={how:basic}]
+\documentclass{article}
+\usepackage{zref-clever}
+\usepackage{hyperref}
+\begin{document}
+\section{Section 1}
+\zlabel{sec:section-1}
+\begin{figure}
+  A figure.
+  \caption{Figure 1}
+  \zlabel{fig:figure-1}
+\end{figure}
+A reference to \zcref{sec:section-1}. \zcref[S]{fig:figure-1} shows some
+interesting information.
+A page reference can be done with either \zcpageref{sec:section-1} or with
+\zcref[page]{sec:section-1}.
+A reference can also be made to multiple labels, as in \zcref{sec:section-1,
+  fig:figure-1}.
+\end{document}
+\end{zchowto}
+
+The references in the document of \zcref{how:basic} illustrate one of the main
+features of \pkg{zref-clever}, which is to include an appropriate ``type
+name'' of the reference, alongside of the reference itself.  The document
+renders its references as:
+\begin{quote}
+  A reference to section 1. Figure 1 shows some interesting information. A
+  page reference can be done with either page 1 or with page 1. A reference
+  can also be made to multiple labels, as in section 1 and figure 1.
+\end{quote}
+
+\zcref[S]{how:basic} also illustrates the use the optional argument of
+\cs{zcref} to modulate the behavior of the reference.  In particular, the
+\opt{S} option is one you should get acquainted with from the start, as it
+ensures that the type name of a reference is properly capitalized and not
+abbreviated, and it is meant to be used in references made at the beginning of
+a sentence.
+
+But \pkg{zref-clever} is highly customizable, and several other options exist,
+and multiple places where you can set them:
+
+\begin{itemize}
+\item The optional argument of \cs{zcref}: for individual references.
+\item \cs{zcsetup}: for settings meant to affect all references.
+\item \cs{zcRefTypeSetup}: to customize the behavior of each reference type.
+\item \cs{zcLanguageSetup}: for language-specific settings.
+\end{itemize}
+
+For the list of available options, and for these different scopes in which
+they can be used, see \zcref{sec:user-interface, sec:options,
+  sec:reference-format, sec:internationalization}.  Other usage examples are
+available at \zcref{sec:how-tos}.
+
+
 \section{Loading the package}
 \zlabel{sec:loading-package}
 
@@ -1520,6 +1588,7 @@ it's up to you.
 
 
 \section{How-tos}
+\zlabel{sec:how-tos}
 
 This section gathers some usage examples, or ``how-tos'', of cases which may
 require some \pkg{zref-clever} setup, or usage adjustments, and each item is
