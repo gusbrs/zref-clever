@@ -2,6 +2,9 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.0...HEAD)
 
+### Added
+- "`zref-clever` for the impatient" section to User manual.
+
 ## [v0.3.0](https://github.com/gusbrs/zref-clever/compare/v0.2.2-alpha...v0.3.0) (2022-04-22)
 
 ### Changed
