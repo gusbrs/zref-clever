@@ -5092,10 +5092,10 @@ l. ...\showbox0
 ============================================================
 TEST 87: Option: check=...
 ============================================================
-Package zref-check Warning: Failed check 'thispage' for label
-(zref-check)                'sec:section-1.1' on page 10 on line ....
-Package zref-check Warning: Failed check 'prevpage' for label
-(zref-check)                'sec:section-1.1' on page 10 on line ....
+Package zref-check Warning: Check failed on line .... Failed check 'thispage'
+(zref-check)                for label 'sec:section-1.1' on page 10.
+Package zref-check Warning: Check failed on line .... Failed check 'prevpage'
+(zref-check)                for label 'sec:section-1.1' on page 10.
 ============================================================
 ============================================================
 TEST 88: Option: tpairsep=..., tlistsep=..., tlastsep=...
