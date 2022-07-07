@@ -64,6 +64,17 @@
 
 \NewDocumentCommand\opt{m}{\texttt{#1}}
 
+% Temporary workaround for 'l3doc' bug.
+% https://github.com/latex3/latex3/issues/1111
+% FIXME Remove when fixed upstream.
+\NewDocElement[
+  macrolike = false ,
+  printtype = \textit{opt.} ,
+]{Option}{optiondesc}
+\NewDocElement[
+  macrolike = false ,
+]{Optionval}{optionval}
+
 \definecolor{reffmtbox}{gray}{0.15}
 \definecolor{reffmtback}{gray}{0.85}
 \NewDocumentCommand\reffmt{m}{%
@@ -2077,7 +2088,7 @@ see the code documentation.
 
 \bigskip{}
 
-\DescribeOption{appendix} %
+\DescribeOptionval{appendix} %
 The \cs{appendix} command provided by many document classes is normally used
 to change the behavior of the sectioning commands after that point.  Usually,
 depending on the class, the changes that interest us involve using \cs{@Alph}
@@ -2090,7 +2101,7 @@ what this compatibility module does, and it uses a \pkg{ltcmdhooks} hook on
 \cs{appendix} for the purpose.  Hence, this module applies to any document
 class or package which provides that command.
 
-\DescribeOption{appendices} %
+\DescribeOptionval{appendices} %
 This module implements support for the \env{appendices} and
 \env{subappendices} environments provided by the \pkg{appendix} package, and
 also by \cls{memoir}.  The task is the same as for the \texttt{appendix}
@@ -2098,7 +2109,7 @@ module: set proper counter types for the sectioning counters.  This module
 employs environment hooks to \env{appendices} and \env{subappendices} and a
 command hook to \cs{appendix} for the purpose.
 
-\DescribeOption{memoir} %
+\DescribeOptionval{memoir} %
 The \cls{memoir} class implements several features with one or another
 implication for cross-referencing, usually bearing just the standard
 referencing system in mind, and related mainly to captions, subfloats, and
@@ -2124,7 +2135,7 @@ and the commands \cs{bitwonumcaption}, \cs{bionenumcaption}, and
 \cs{bitwonumcaption}, \cs{bionenumcaption}, \cs{bicaption},
 \cs{@memsubcaption}, \cs{@makefntext}, and \cs{@makesidefntext}.
 
-\DescribeOption{KOMA} %
+\DescribeOptionval{KOMA} %
 The \cls{KOMA-Script} document classes are much more strict than \cls{memoir}
 in using standard mechanisms for cross-reference related features, so that
 very little adjustment is needed here.  Only the environments
@@ -2137,7 +2148,7 @@ environments too.  Environment hooks are used for the purpose, essentially
 setting \cs{@currentcounter} to \cs{@captype}, which would be the value the
 captioning infrastructure would set for it.
 
-\DescribeOption{amsmath} %
+\DescribeOptionval{amsmath} %
 \pkg{amsmath}'s display math environments have their contents processed twice,
 once for measuring and the second does the final typesetting.  Hence,
 \pkg{amsmath} needs to handle \cs{label} specially inside these environments,
@@ -2177,7 +2188,7 @@ that any trouble that may arise here is one of the proper ``timing'' of the
 redefinition, it should not be particularly complicated to make such
 adjustments.
 
-\DescribeOption{mathtools} %
+\DescribeOptionval{mathtools} %
 \pkg{mathtools} has a feature to show the numbers only for those equations
 actually referenced (with \cs{eqref} or \cs{refeq}), which is enabled by the
 \opt{showonlyrefs} option.  This compatibility module adds support for this
@@ -2187,7 +2198,7 @@ module uses a couple of \pkg{mathtools} functions, but does not need to
 redefine or hook into anything, everything is handled on \pkg{zref-clever}'s
 side.
 
-\DescribeOption{breqn} %
+\DescribeOptionval{breqn} %
 This compatibility module only sets proper \opt{currentcounter} values for the
 environments \env{dgroup}, \env{dmath}, \env{dseries}, and \env{darray}, and
 uses environment hooks for the purpose.  Note that these environments offer a
@@ -2202,7 +2213,7 @@ class'' status for this use is the one granted by \pkg{breqn}, there's not
 much we can do here.  If you have any trouble with this, you may wish to check
 \zcref{wkrnd:breqn}.
 
-\DescribeOption{listings} %
+\DescribeOptionval{listings} %
 Being \env{lstlisting}s environments what they are, one cannot simply place a
 label inside them without special treatment.  \pkg{listings} arranges to this
 by providing a \opt{label} option for setting a label for the whole
@@ -2218,7 +2229,7 @@ with anything for the purpose.  Besides this, the module also sets appropriate
 the \pkg{listings}' counters: \texttt{lstlisting} and \texttt{lstnumber}. See
 the \zcref{how:listings} for an usage example.
 
-\DescribeOption{enumitem} %
+\DescribeOptionval{enumitem} %
 \LaTeX{}'s \env{enumerate} environment requires some special treatment from
 \pkg{zref-clever}, since its resetting behavior is not stored in the standard
 way, and the counters' names, given they are numbered by level, do not map to
@@ -2233,7 +2244,7 @@ are needed, we just check the existing pertinent counters at
 that only \pkg{enumitem}'s settings done in the preamble will be visible to
 the module and provided for.
 
-\DescribeOption{subcaption} %
+\DescribeOptionval{subcaption} %
 This compatibility module sets appropriate \opt{countertype} and
 \opt{counterresetby} for the \texttt{subfigure} and \texttt{subtable}
 counters, and provides the \pkg{zref} property ``\texttt{subref}'' so that we
@@ -2242,7 +2253,7 @@ emulate the functionality of \cls{subcaption}'s \cs{subref}.  The later
 feature uses the \cs{caption@subtypehook} provided by \pkg{caption} to locally
 add the \texttt{subref} property to \pkg{zref}'s main property list.
 
-\DescribeOption{subfig} %
+\DescribeOptionval{subfig} %
 This module just sets appropriate \opt{countertype} and \opt{counterresetby}
 for the \texttt{subfigure} and \texttt{subtable} counters.
 
