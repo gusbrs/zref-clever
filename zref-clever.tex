@@ -64,16 +64,13 @@
 
 \NewDocumentCommand\opt{m}{\texttt{#1}}
 
+\setlength{\marginparsep}{2\labelsep}
+
 % Temporary workaround for 'l3doc' bug.
 % https://github.com/latex3/latex3/issues/1111
 % FIXME Remove when fixed upstream.
-\NewDocElement[
-  macrolike = false ,
-  printtype = \textit{opt.} ,
-]{Option}{optiondesc}
-\NewDocElement[
-  macrolike = false ,
-]{Optionval}{optionval}
+\NewDocElement[macrolike=false]{Option}{option}
+\NewDocElement[macrolike=false]{Optionval}{optionval}
 
 \definecolor{reffmtbox}{gray}{0.15}
 \definecolor{reffmtback}{gray}{0.85}
