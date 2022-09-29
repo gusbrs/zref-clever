@@ -532,8 +532,8 @@ l. ...\showbox0
 ============================================================
 TEST 14: Option: typeset=baz
 ============================================================
-! LaTeX3 Error: Key 'zref-clever/reference/typeset' accepts only a fixed set
-(LaTeX3)        of choices.
+! LaTeX Error: Key 'zref-clever/reference/typeset' accepts only a fixed set of
+(LaTeX)        choices.
 For immediate help type H <return>.
  ...                                              
 l. ...    sec:section-2.1}
@@ -1085,7 +1085,7 @@ l. ...\showbox0
 ============================================================
 TEST 22: Option: typesort
 ============================================================
-! LaTeX3 Error: The key 'zref-clever/reference/typesort' requires a value.
+! LaTeX Error: The key 'zref-clever/reference/typesort' requires a value.
 For immediate help type H <return>.
  ...                                              
 l. ...    sec:section-1.1, cha:chapter-1}
