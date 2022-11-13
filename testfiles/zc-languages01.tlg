@@ -45,22 +45,19 @@ l. ...  }
 > \g__zrefclever_declared_language_german_tl=german.
 <recently read> }
 l. ...  }
-> \g__zrefclever_declared_language_austrian_tl=german.
-<recently read> }
-l. ...  }
-> \g__zrefclever_declared_language_germanb_tl=german.
-<recently read> }
-l. ...  }
 > \g__zrefclever_declared_language_ngerman_tl=german.
+<recently read> }
+l. ...  }
+> \g__zrefclever_declared_language_austrian_tl=german.
 <recently read> }
 l. ...  }
 > \g__zrefclever_declared_language_naustrian_tl=german.
 <recently read> }
 l. ...  }
-> \g__zrefclever_declared_language_nswissgerman_tl=german.
+> \g__zrefclever_declared_language_swissgerman_tl=german.
 <recently read> }
 l. ...  }
-> \g__zrefclever_declared_language_swissgerman_tl=german.
+> \g__zrefclever_declared_language_nswissgerman_tl=german.
 <recently read> }
 l. ...  }
 > \g__zrefclever_declared_language_portuguese_tl=portuguese.

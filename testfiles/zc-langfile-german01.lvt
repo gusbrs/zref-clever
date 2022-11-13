@@ -18,12 +18,11 @@
 \seq_gset_from_clist:Nn \g__test_tmpa_seq % all aliases, including base
   {
     german ,
-    austrian ,
-    germanb ,
     ngerman ,
+    austrian ,
     naustrian ,
-    nswissgerman ,
     swissgerman ,
+    nswissgerman ,
   }
 \ExplSyntaxOff
 
