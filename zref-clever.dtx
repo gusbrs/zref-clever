@@ -8637,6 +8637,10 @@ type = solution ,
 %
 % German language file has been initially provided by the author.
 %
+% \pkg{babel-german} also has \file{.ldf}s for \texttt{germanb} and
+% \texttt{ngermanb}, but they are deprecated as options and, if used, they
+% fall back respectively to \texttt{german} and \texttt{ngerman}.
+%
 %    \begin{macrocode}
 %<*package>
 \zcDeclareLanguage
@@ -9114,13 +9118,14 @@ type = solution ,
 % \url{https://groups.google.com/g/fr.comp.text.tex/c/Fa11Tf6MFFs}) mailing
 % lists.
 %
+% \pkg{babel-french} also has \file{.ldf}s for \texttt{francais},
+% \texttt{frenchb}, and \texttt{canadien}, but they are deprecated as options
+% and, if used, they fall back to either \texttt{french} or \texttt{acadian}.
+%
 %    \begin{macrocode}
 %<*package>
 \zcDeclareLanguage [ gender = { f , m } ] { french }
 \zcDeclareLanguageAlias { acadian  } { french }
-\zcDeclareLanguageAlias { canadien } { french }
-\zcDeclareLanguageAlias { francais } { french }
-\zcDeclareLanguageAlias { frenchb  } { french }
 %</package>
 %    \end{macrocode}
 %
