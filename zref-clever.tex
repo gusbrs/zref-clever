@@ -1266,13 +1266,12 @@ beginning of a range.  Setting a group of them is the purpose of the derived
 options.  Each of these sets all options under it.  Some examples.
 \opt{+refbounds-first} sets \opt{refbounds-first}, \opt{refbounds-first-sg},
 \opt{refbounds-first-pb}, and \opt{refbounds-first-rg}.  In turn,
-\opt{+refbounds-first-rb} sets \opt{refbounds-first-rb} and
-\opt{refbounds-first-rb}.  And quite conveniently, \opt{+refbounds} sets
-\opt{+refbounds-first}, \opt{+refbounds-mid}, and \opt{+refbounds-last}, it is
-hence sufficient to set it to define the behavior of what is typeset around
-all references for the whole type-block.  As you probably guessed by now, the
-\opt{refbounds} option presented in \zcref{tab:reference-format} is an alias
-of \opt{+refbounds}.
+\opt{+refbounds-rb} sets \opt{refbounds-first-rb} and \opt{refbounds-mid-rb}.
+And quite conveniently, \opt{+refbounds} sets \opt{+refbounds-first},
+\opt{+refbounds-mid}, and \opt{+refbounds-last}, it is hence sufficient to set
+it to define the behavior of what is typeset around all references for the
+whole type-block.  As you probably guessed by now, the \opt{refbounds} option
+presented in \zcref{tab:reference-format} is an alias of \opt{+refbounds}.
 
 Given that base and derived options are actually setting the same group of
 underlying options (the base ones), the order in which they are given is
