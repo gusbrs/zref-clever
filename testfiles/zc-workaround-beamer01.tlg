@@ -1,0 +1,38 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Reference: figure, table
+============================================================
+> \box...=
+\hbox(7.60416+2.12917)x90.09428
+.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/N/C[.5 .5 .5]} action goto name{tab:1}
+.\OT1/cmss/m/n/10.95 t
+.\OT1/cmss/m/n/10.95 a
+.\OT1/cmss/m/n/10.95 b
+.\OT1/cmss/m/n/10.95 l
+.\OT1/cmss/m/n/10.95 e
+.\penalty 10000
+.\glue 3.65 plus 1.825 minus 1.21666
+.\OT1/cmss/m/n/10.95 1
+.\pdfendlink
+.\glue 3.65 plus 1.825 minus 1.21666
+.\OT1/cmss/m/n/10.95 a
+.\OT1/cmss/m/n/10.95 n
+.\OT1/cmss/m/n/10.95 d
+.\penalty 10000
+.\glue 3.65 plus 1.825 minus 1.21666
+.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/N/C[.5 .5 .5]} action goto name{fig:1}
+.\OT1/cmss/m/n/10.95 ^^L (ligature fi)
+.\OT1/cmss/m/n/10.95 g
+.\OT1/cmss/m/n/10.95 u
+.\OT1/cmss/m/n/10.95 r
+.\OT1/cmss/m/n/10.95 e
+.\penalty 10000
+.\glue 3.65 plus 1.825 minus 1.21666
+.\OT1/cmss/m/n/10.95 1
+.\pdfendlink
+! OK.
+\beamer@doifinframe ... {tab:1,fig:1}} \showbox 0 
+                                                  \box 0 \ENDTEST \par \OMIT...
+l. ...\end{frame}
+============================================================

@@ -1,0 +1,42 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Reference: figure, table
+============================================================
+> \box...=
+\hbox(7.71974+2.2557)x90.0966, direction TLT
+.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/N/C[.5 .5 .5]} action goto name{tab:1}
+.\TU/lmss/m/n/10.95 t
+.\TU/lmss/m/n/10.95 a
+.\discretionary (penalty 50)
+..< \TU/lmss/m/n/10.95 -
+.\TU/lmss/m/n/10.95 b
+.\TU/lmss/m/n/10.95 l
+.\TU/lmss/m/n/10.95 e
+.\penalty 10000
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmss/m/n/10.95 1
+.\pdfendlink
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmss/m/n/10.95 a
+.\TU/lmss/m/n/10.95 n
+.\TU/lmss/m/n/10.95 d
+.\penalty 10000
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/N/C[.5 .5 .5]} action goto name{fig:1}
+.\TU/lmss/m/n/10.95 ﬁ (ligature fi)
+.\TU/lmss/m/n/10.95 g
+.\discretionary (penalty 50)
+..< \TU/lmss/m/n/10.95 -
+.\TU/lmss/m/n/10.95 u
+.\TU/lmss/m/n/10.95 r
+.\TU/lmss/m/n/10.95 e
+.\penalty 10000
+.\glue(\spaceskip) 3.64635 plus 1.82318 minus 1.21545
+.\TU/lmss/m/n/10.95 1
+.\pdfendlink
+! OK.
+\beamer@doifinframe ... {tab:1,fig:1}} \showbox 0 
+                                                  \box 0 \ENDTEST \par \OMIT...
+l. ...\end{frame}
+============================================================

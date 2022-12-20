@@ -2330,7 +2330,7 @@ To start with, it redefines \cs{label} to receive an optional
 \texttt{<\meta{overlay specification}>} argument.  Then, presumably to support
 overlays, it goes on and hijacks \pkg{hyperref}'s anchoring system, sets
 anchors (\cs{hypertarget}s) to each \emph{label} in the \file{.snm} file,
-while letting every standard label anchor in the \file{.aux} file default to
+while letting every standard label's anchor in the \file{.aux} file default to
 \texttt{Doc-Start}.  Of course, having rendered useless \pkg{hyperref}'s
 anchoring, it has to redefine \cs{ref} so that it uses its own \file{.snm}
 provided ``label anchors'' to make hyperlinks.  In particular, from our
@@ -2346,7 +2346,8 @@ appear to break \pkg{cleveref}.\footnote{See, for example,
 
 Adding proper support for this is the business of \cls{beamer}, \pkg{zref},
 and/or \pkg{hyperref}.  Likely the former's really.  But, taking advantage of
-\pkg{zref}'s flexibility, as an user, you can have a work-around.
+\pkg{zref}'s flexibility, as an user, you can have a work-around in the
+meantime.
 
 \begin{zcworkaround}[caption={\cls{beamer}}]
 \documentclass{beamer}
@@ -2403,16 +2404,16 @@ A couple of caveats though.  First, there's probably still some work to be
 done there in defining and setting reference types for \cls{beamer} specific
 document objects, e.g. overlays.  But it can be done by the standard user
 interface of \pkg{zref-clever}.  Second, since \cls{beamer}'s anchoring system
-does not provide for uniqueness of anchors as \pkg{hyperref}'s one does, the
+does not provide for uniqueness of anchors as \pkg{hyperref} does, the
 procedure used by \pkg{zref-clever} in its \opt{amsmath} compatibility module
 of setting both \cs{label} and \cs{zlabel} in \pkg{amsmath}'s display math
-environments will result in duplicate anchors for labels set in them (with
-\pkg{hyperref}'s warning of ``destination with the same identifier has been
-already used, duplicate ignored'').  The warning is actually harmless in this
-case, since both labels are set in the same place, and thus have identical
-anchors.  But, if it bothers you enough, you can look at the \opt{amsmath}
-compatibility module in the code documentation, and adjust things so that it
-sets only a \cs{zlabel}.
+environments will result in duplicate anchors for labels set in them, with
+corresponding \pkg{hyperref} warnings of ``destination with the same
+identifier has been already used, duplicate ignored''.  The warning is
+actually harmless in this case, since both labels are set in the same place,
+and thus have identical anchors.  But, if it bothers you enough, you can look
+at the \opt{amsmath} compatibility module in the code documentation, and
+adjust things so that it sets only a \cs{zlabel}.
 
 
 \section{Acknowledgments}

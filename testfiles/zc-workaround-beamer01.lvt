@@ -1,0 +1,75 @@
+\documentclass{beamer}
+
+\input{regression-test}
+
+\RequirePackage[enable-debug]{expl3}
+
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation }
+\ExplSyntaxOff
+
+\usepackage{zref-clever}
+
+\makeatletter
+\RenewDocumentCommand{\zlabel}{ D<>{1} m }{%
+  \ifx\label\ltx@gobble
+  \else
+    \zref@wrapper@babel{\zref@label<#1>}{#2}%
+  \fi
+}
+\NewCommandCopy\beamer@old@zref@label\zref@label
+\RenewDocumentCommand{\zref@label}{ D<>{1} m }{%
+  \alt<#1>{%
+    \zref@ifpropundefined{anchor}{}{\zref@setcurrent{anchor}{#2}}%
+    \beamer@old@zref@label{#2}%
+    \beamer@nameslide{#2}%
+  }{%
+    \beamer@dummynameslide%
+  }%
+}
+\makeatother
+
+\NewDocumentCommand \newoptblock {m}{%
+  \noindent\rule{\textwidth}{0.4pt}\par%
+  \noindent\textbf{#1}\par}
+
+\begin{document}
+
+\begin{frame}
+  \begin{table}
+    \begin{tabular}{cc}
+      1 & 2 \\
+      3 & 4 \\
+    \end{tabular}
+    \caption{Table 1}
+    \zlabel{tab:1}
+  \end{table}
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \rule{5cm}{5cm}
+    \caption{Figure 1}
+    \zlabel{fig:1}
+  \end{figure}
+\end{frame}
+
+\START
+
+\OMIT
+\begin{frame}
+  \newoptblock{beamer}
+
+  \TIMO
+
+  \BEGINTEST{Reference: figure, table}
+  \setbox0=\hbox{\zcref{tab:1,fig:1}}
+  \showbox0
+  \box0
+  \ENDTEST
+
+  \OMIT
+
+\end{frame}
+
+\end{document}

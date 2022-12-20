@@ -48,6 +48,7 @@ env:
     babel-portuges
     babel-spanish
     babel-dutch
+    beamer
     bookmark
     booktabs
     breqn
