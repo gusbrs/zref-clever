@@ -69,8 +69,8 @@
 % \NewDocumentCommand\githubPR{m}{^^A
 %   PR~\href{https://github.com/gusbrs/zref-clever/pull/#1}{\##1}}
 %
-% ^^A Currently just for keeping semantic markup on this.
 % \NewDocumentCommand\contributor{m}{#1}
+% \NewDocumentCommand\username{m}{`\texttt{#1}'}
 %
 % \NewDocumentCommand\opt{m}{\texttt{#1}}
 %
@@ -3514,7 +3514,7 @@
 % polluting the markup too much given that, for languages that need it, it may
 % get to be used frequently.
 %
-% \contributor{\texttt{@samcarter}} and \contributor{Alan Munn} provided
+% \contributor{\username{samcarter}} and \contributor{Alan Munn} provided
 % useful comments about declension on the TeX.SX chat.  Also,
 % \contributor{Florent Rougon}'s efforts in this area, with the \pkg{xcref}
 % package (\url{https://github.com/frougon/xcref}), have been an insightful
@@ -9835,9 +9835,9 @@ type = solution ,
 %
 % \subsection{Dutch}
 %
-% Dutch language file initially contributed by \texttt{niluxv} (\githubPR{5}).
-% All genders were checked against the ``Dikke Van Dale''.  Many words have
-% multiple genders.
+% Dutch language file initially contributed by \contributor{\username{niluxv}}
+% (\githubPR{5}).  All genders were checked against the ``Dikke Van Dale''.
+% Many words have multiple genders.
 %
 %    \begin{macrocode}
 %<*package>
@@ -9981,9 +9981,10 @@ type = theorem ,
   name-pl = stellingen ,
 
 %    \end{macrocode}
-% 2022-01-09, \texttt{niluxv}: An alternative plural is ``lemmata''.  That is
-% also a correct English plural for lemma, but the English language file
-% chooses ``lemmas''.  For consistency we therefore choose ``lemma's''.
+% 2022-01-09, \contributor{\username{niluxv}}: An alternative plural is
+% ``lemmata''.  That is also a correct English plural for lemma, but the
+% English language file chooses ``lemmas''.  For consistency we therefore
+% choose ``lemma's''.
 %    \begin{macrocode}
 type = lemma ,
   gender = n ,
@@ -10049,8 +10050,8 @@ type = algorithm ,
   name-pl = algoritmes ,
 
 %    \end{macrocode}
-% 2022-01-09, \texttt{niluxv}: EN-NL Van Dale translates listing as (3)
-% ``uitdraai van computerprogramma'', ``listing''.
+% 2022-01-09, \contributor{\username{niluxv}}: EN-NL Van Dale translates
+% listing as (3) ``uitdraai van computerprogramma'', ``listing''.
 %    \begin{macrocode}
 type = listing ,
   gender = m ,
