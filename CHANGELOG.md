@@ -3,6 +3,7 @@
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.1...HEAD)
 
 ### Added
+- Localization guidelines for contributors (in the Code documentation).
 - Work-around for `beamer` in the User manual.
 
 ## [v0.3.1](https://github.com/gusbrs/zref-clever/compare/v0.3.0...v0.3.1) (2022-05-28)

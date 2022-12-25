@@ -8410,6 +8410,167 @@
 % \pkg{translations}.
 %
 %
+% \subsection{Localization guidelines}
+%
+% Since the task of localizing \pkg{zref-clever} to work in different
+% languages depends on the generous work of contributors, it is a good idea to
+% set some guidelines not only to ease the task itself but also to document
+% what the package expects in this regard.
+%
+% The first general observation is that, contrary to a common initial reaction
+% of those faced with the task of localizing the reference types, is that the
+% job is not quite one of ``translation''.  The reference type names are just
+% the internal names used by the package to refer to them, technically, they
+% could just as well be foobars.  Of course, for practical reasons, they were
+% chosen to be semantic.  However, what we are searching for is not really the
+% translation to the reference type name itself, but rather for the word /
+% term / expression which is typically used to refer to the document object
+% that the reference type is meant to represent.  And terms that should work
+% well in the contexts which cross-references are commonly used.
+%
+% That said, some comments about the reference types and common pitfalls.
+%
+% \textbf{Sectioning:} A number of reference types are provided to support
+% referencing to document sectioning commands.  Obviously, \texttt{part},
+% \texttt{chapter}, \texttt{section}, and \texttt{paragraph} are meant to
+% refer to the sectioning commands of the standard classes and elsewhere,
+% which anyone reading this is certainly acquainted with.  Note that
+% \pkg{zref-clever} uses -- by default at least, which is what the language
+% files cater for -- the \texttt{section} reference type to refer to
+% \cs{subsections} and \cs{subsubsections} as well, similarly,
+% \texttt{paragraph} also refers to \cs{subparagraph}.  The \texttt{appendix}
+% reference type is meant to refer to any sectioning command -- be them
+% chapters, sections, or paragraphs -- issued after \cs{appendix}, which
+% corresponds to how the standard classes, the KOMA Script classes, and
+% \cls{memoir} deal with appendices.  The \texttt{book} reference type
+% deserves some explanation.  The word ``book'' has a good number of meanings,
+% and the most common one is not the one which is intended here.  The Webster
+% dictionary gives us a couple of definitions of interest: ``1. A collection
+% of sheets of paper, or similar material, blank, written, or printed, bound
+% together; commonly, many folded and bound sheets containing continuous
+% printing or writing.'' and ``3. A part or subdivision of a treatise or
+% literary work; as, the tenth book of `Paradise Lost'.''  It is this third
+% meaning which the \texttt{book} reference type is meant to support: a major
+% subdivision of a work, much like \cs{part}.  Even if it does not exist in
+% the standard classes, it may exist elsewhere, in particular, it is provided
+% by \cls{memoir}.
+%
+% \textbf{Common numbered objects:} Nothing surprising here, just being
+% explicit.  \texttt{table} and \texttt{figure} refer to the document's
+% respective floats objects.  \texttt{page} to the page number.  \texttt{item}
+% to the item number in \env{enumerate} environments.  Similarly,
+% \texttt{line} is meant to refer to line numbers.
+%
+% \textbf{Notes:} \pkg{zref-clever} provides three reference types in this
+% area: \texttt{footnote}, \texttt{endnote}, and \texttt{note}.  The first two
+% refer to footnotes and end notes, respectively.  The third is meant as a
+% convenience for a general ``note'' object, either the other two, or
+% something else.  By experience, here is one place where that initial
+% observation of not simply translating the reference types names is
+% particularly relevant.  There's a natural temptation, because three
+% different types exist and are somewhat close to each other, to distinguish
+% them clearly.  Duty would compel us to do so.  But that may lead to less
+% than ideal results.  Different terms work well for some languages, like
+% English and German, which have compound words for the purpose.  But less so
+% for other languages, like Portuguese, French, or Italian.  For example, in a
+% document in French which only contains footnotes, arguably a very common use
+% case, would it be better to refer to a footnote as just ``note'', or be very
+% precise with ``note infrapaginale''?  Of course, in a document which
+% contains both footnotes and end notes, we may need the distinction.  But is
+% it really the better default?  True, possibly the inclusion of the
+% \texttt{note} reference type, with no clear object to refer to, creates more
+% noise than convenience here.  If I recall correctly, my intention was to
+% provide an easy way out for users from possible contentious localizations
+% for \texttt{footnote} and \texttt{endnote}, but I'm not sure if it's been
+% working like this in practice, and I should probably have refrained from
+% adding it in the first place.
+%
+% \textbf{Math \& Co.:} A good number of reference types provided by the
+% package are meant to cater for document objects commonly used in Mathematics
+% and related areas.  They are either straight math environments, defined by
+% the kernel, \pkg{amsmath} or other packages, or environments which are
+% normally not pre-defined by the kernel or the standard classes, but are
+% traditionally defined by users with the kernel's \cs{newtheorem} or similar
+% constructs available in the \LaTeX{} package ecosystem.  For most of them,
+% localization should strive as much as possible to use the formal terms,
+% jargon really, typically employed by mathematicians, logicians, and friends.
+% Namely for the reference types: \texttt{equation}, \texttt{theorem},
+% \texttt{lemma}, \texttt{corollary}, \texttt{proposition},
+% \texttt{definition}, \texttt{proof}, \texttt{result}, and \texttt{remark}.
+% Regarding \texttt{example}, \texttt{exercise}, and \texttt{solution} being
+% somewhat less formal is admissible.  But the chosen terms should still be
+% fit for use in Math related contexts, and should be assumed were created by
+% \cs{newtheorem} or similar, even if users may well find other uses for these
+% types.
+%
+% \textbf{Code:} A couple of reference types are provided for code related
+% environments: \texttt{algorithm} and \texttt{listing}.  By experience, the
+% \texttt{listing} type has already proven to be a particularly challenging
+% one.  Formally, it should be a good default term to encompass anything which
+% may regularly be included in a \env{lstlisting} environment as provided by
+% the \pkg{listings} package.  However, it seems that in different languages
+% it is quite difficult to find a satisfying term for it.  Though my English
+% is decent, I'm not a native speaker, still I'm not even sure how common the
+% term is used for the purpose even in English.  It seems to be traditional
+% enough in the \LaTeX{} community at least.  In doubt, pend to the jargon
+% side, anglicism if need be.  Since we are bound to displease mostly everyone
+% anyway, at least we do so in a consistent manner.
+%
+% \textbf{Completeness and abbreviated forms:} Ideally, the language file
+% should be as complete as possible.  ``Complete'' meaning it contains: i) the
+% defaults for all basic separators, \opt{namesep}, \opt{pairsep},
+% \opt{listsep}, \opt{lastsep}, \opt{tpairsep}, \opt{tlistsep},
+% \opt{tlastsep}, \opt{notesep}, and \opt{rangesep}; ii) the non-abbreviated
+% forms of names for all the supported reference types, according to the
+% language definitions, that is, usually for \opt{Name-sg}, \opt{name-sg},
+% \opt{Name-pl}, \opt{name-pl}, but only for the capitalized forms if the
+% language was declared with \opt{allcaps} option, and names for each
+% declension case, if the language was declared with \opt{declension}; iii)
+% genders for each reference type, if the language was declared with
+% \opt{gender}.  The language file may include some other things, like some
+% type specific settings for separators or refbounds, and also some
+% abbreviated name forms.  In the case of abbreviated name forms, it is usual
+% and desirable to provide some, but they should be used sparingly, only for
+% cases where the abbreviation is a common and well established tradition for
+% the language.  The reason is that \texttt{abbrev=true} is quite a common use
+% case, and it is easier to provide an occasional wanted abbreviated form, if
+% the language file didn't include it, than it is to disable several unwanted
+% ones, if the language file includes too many of them.  What should be aimed
+% at is to provide a good default abbreviations set.  Unusual or disputable
+% abbreviations should be avoided.  In particular, there is no need at all to
+% provide the same set of abbreviations for each language.  It is not because
+% English has them for a given type that some other language has to have them,
+% and it is not because English lacks them for another type, that other
+% languages shouldn't have them.  Still, with regard to abbreviated forms, it
+% is better to be conservative than opinionated.
+%
+% \textbf{\pkg{babel} names:} As is known, \pkg{babel} defines a set of
+% captions for different document objects for each supported language.  In
+% some cases, they intersect with the objects referred to with
+% cross-references, in which case consistency with \pkg{babel} should be
+% maintained as much as possible.  This is specially the case for prominent
+% and traditional objects, such as \cs{chaptername}, \cs{figurename},
+% \cs{tablename}, \cs{pagename}, \cs{partname}, and \cs{appendixname}.  This
+% is not set in stone, but there should be good reason to diverge from it.  In
+% particular, if a certain term is contentious in a given language,
+% \pkg{babel}'s default should be preferred.  For example, ``table''
+% vs. ``tableau'' in French, or ``cuadro'' vs. ``tabla'' in Spanish.
+%
+% \textbf{Precedence rule for options in the language files:} Any option given
+% twice or more times has to have some precedence rule.  Normally, the
+% language files should not contain options in duplicity, but they may happen
+% when setting some ``group'' \opt{refbounds} options, in which case
+% precedence rules become relevant.  For user facing options (those set with
+% \cs{zcLanguageSetup}), the option is always set, regardless of its previous
+% state.  Which means that the last value takes precedence.  For the language
+% files, we have to load them at \texttt{begindocument} (or later), since
+% that's the point where we know from \pkg{babel} or \pkg{polyglossia} the
+% \cs{languagename}.  But we also don't want to override any options the user
+% has actively set in the preamble.  So the language files only set the values
+% if they were not previously set.  In other words, for them the precedence
+% order is inverted, the first value takes precedence.
+%
+%
 % \subsection{English}
 %
 % English language file has been initially provided by the author.
