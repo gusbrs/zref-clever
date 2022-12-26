@@ -4,6 +4,7 @@
 
 ### Added
 - Localization guidelines for contributors (in the Code documentation).
+- Document UTF-8 input encoding requirement.
 - Work-around for `beamer` in the User manual.
 
 ## [v0.3.1](https://github.com/gusbrs/zref-clever/compare/v0.3.0...v0.3.1) (2022-05-28)

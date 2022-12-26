@@ -172,8 +172,10 @@
 %
 % \section{Dependencies}
 %
-% Required packages.  Besides these, \pkg{zref-hyperref}, \pkg{zref-titleref},
-% and \pkg{zref-check} may also be loaded depending on user options.
+% Required packages.  Besides these, \pkg{zref-hyperref} may also be loaded
+% depending on user options.  \pkg{zref-clever} also requires UTF-8 input
+% encoding (see discussion with \contributor{David Carlisle} at
+% \url{https://chat.stackexchange.com/transcript/message/62644791#62644791}).
 %
 %    \begin{macrocode}
 \RequirePackage { zref-base }
@@ -8559,8 +8561,9 @@
 % \textbf{Input encoding of language files:} When \pkg{zref-clever} was
 % released, the \LaTeX{} kernel already used UTF-8 as default input encoding.
 % Indeed, \pkg{zref-clever} requires a kernel even newer than the one where
-% the default input encoding was changed.  That given, UTF-8 language files
-% are preferred over LICR, since it makes them easier to read and maintain.
+% the default input encoding was changed.  That given, UTF-8 input encoding
+% was made a requirement of the package, and hence the language files should
+% be in UTF-8, since it makes them easier to read and maintain than LICR.
 %
 % \textbf{Precedence rule for options in the language files:} Any option given
 % twice or more times has to have some precedence rule.  Normally, the
