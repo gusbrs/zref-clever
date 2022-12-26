@@ -8556,6 +8556,12 @@
 % \pkg{babel}'s default should be preferred.  For example, ``table''
 % vs. ``tableau'' in French, or ``cuadro'' vs. ``tabla'' in Spanish.
 %
+% \textbf{Input encoding of language files:} When \pkg{zref-clever} was
+% released, the \LaTeX{} kernel already used UTF-8 as default input encoding.
+% Indeed, \pkg{zref-clever} requires a kernel even newer than the one where
+% the default input encoding was changed.  That given, UTF-8 language files
+% are preferred over LICR, since it makes them easier to read and maintain.
+%
 % \textbf{Precedence rule for options in the language files:} Any option given
 % twice or more times has to have some precedence rule.  Normally, the
 % language files should not contain options in duplicity, but they may happen
