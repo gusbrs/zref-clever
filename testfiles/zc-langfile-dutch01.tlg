@@ -131,20 +131,20 @@ l. ...  }
 l. ...  }
 The sequence \g__zrefclever_opt_lang_dutch_type_appendix_gender_seq contains
 the items (without outer braces):
->  {m}
->  {n}.
+>  {f}
+>  {m}.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_appendix_Name-sg_tl=Appendix.
+> \g__zrefclever_opt_lang_dutch_type_appendix_Name-sg_tl=Bijlage.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_appendix_name-sg_tl=appendix.
+> \g__zrefclever_opt_lang_dutch_type_appendix_name-sg_tl=bijlage.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_appendix_Name-pl_tl=Appendices.
+> \g__zrefclever_opt_lang_dutch_type_appendix_Name-pl_tl=Bijlagen.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_appendix_name-pl_tl=appendices.
+> \g__zrefclever_opt_lang_dutch_type_appendix_name-pl_tl=bijlagen.
 <recently read> }
 l. ...  }
 The sequence \g__zrefclever_opt_lang_dutch_type_page_gender_seq contains the
@@ -490,10 +490,10 @@ l. ...  }
 > \g__zrefclever_opt_lang_dutch_type_algorithm_name-sg_tl=algoritme.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_algorithm_Name-pl_tl=Algoritmes.
+> \g__zrefclever_opt_lang_dutch_type_algorithm_Name-pl_tl=Algoritmen.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_algorithm_name-pl_tl=algoritmes.
+> \g__zrefclever_opt_lang_dutch_type_algorithm_name-pl_tl=algoritmen.
 <recently read> }
 l. ...  }
 The sequence \g__zrefclever_opt_lang_dutch_type_listing_gender_seq contains
