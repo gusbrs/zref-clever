@@ -7,6 +7,10 @@
 - Document UTF-8 input encoding requirement.
 - Work-around for `beamer` in the User manual.
 
+### Changed
+- Improved consistency of the Dutch language file with `babel` captions (see
+  PR [#12](https://github.com/gusbrs/zref-clever/pull/12)).
+
 ## [v0.3.1](https://github.com/gusbrs/zref-clever/compare/v0.3.0...v0.3.1) (2022-05-28)
 
 ### Added
