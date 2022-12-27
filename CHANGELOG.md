@@ -3,6 +3,8 @@
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.1...HEAD)
 
 ### Added
+- Italian localization (see issue
+  [#11](https://github.com/gusbrs/zref-clever/issues/11)).
 - Localization guidelines for contributors (in the Code documentation).
 - Document UTF-8 input encoding requirement.
 - Work-around for `beamer` in the User manual.

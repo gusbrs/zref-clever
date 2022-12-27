@@ -10261,6 +10261,257 @@ type = solution ,
 %    \end{macrocode}
 %
 %
+% \subsection{Italian}
+%
+% Italian language file initially contributed by Matteo Ferrigato
+% (\githubissue{11}).
+%
+%    \begin{macrocode}
+%<*package>
+\zcDeclareLanguage [ gender = { f , m } ] { italian }
+%</package>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*lang-italian>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+namesep   = {\nobreakspace} ,
+pairsep   = {~e\nobreakspace} ,
+listsep   = {,~} ,
+lastsep   = {~e\nobreakspace} ,
+tpairsep  = {~e\nobreakspace} ,
+tlistsep  = {,~} ,
+tlastsep  = {,~e\nobreakspace} ,
+notesep   = {~} ,
+rangesep  = {~a\nobreakspace} ,
++refbounds-rb = {da\nobreakspace,,,} ,
+
+type = book ,
+  gender = m ,
+  Name-sg = Libro ,
+  name-sg = libro ,
+  Name-pl = Libri ,
+  name-pl = libri ,
+
+type = part ,
+  gender = f ,
+  Name-sg = Parte ,
+  name-sg = parte ,
+  Name-pl = Parti ,
+  name-pl = parti ,
+
+type = chapter ,
+  gender = m ,
+  Name-sg = Capitolo ,
+  name-sg = capitolo ,
+  Name-pl = Capitoli ,
+  name-pl = capitoli ,
+
+type = section ,
+  gender = m ,
+  Name-sg = Paragrafo ,
+  name-sg = paragrafo ,
+  Name-pl = Paragrafi ,
+  name-pl = paragrafi ,
+
+type = paragraph ,
+  gender = m ,
+  Name-sg = Capoverso ,
+  name-sg = capoverso ,
+  Name-pl = Capoversi ,
+  name-pl = capoversi ,
+
+type = appendix ,
+  gender = f ,
+  Name-sg = Appendice ,
+  name-sg = appendice ,
+  Name-pl = Appendici ,
+  name-pl = appendici ,
+
+type = page ,
+  gender = f ,
+  Name-sg = Pagina ,
+  name-sg = pagina ,
+  Name-pl = Pagine ,
+  name-pl = pagine ,
+  Name-sg-ab = Pag. ,
+  name-sg-ab = pag. ,
+  Name-pl-ab = Pag. ,
+  name-pl-ab = pag. ,
+  rangesep = {\textendash} ,
+  rangetopair = false ,
+  +refbounds-rb = {,,,} ,
+
+type = line ,
+  gender = f ,
+  Name-sg = Riga ,
+  name-sg = riga ,
+  Name-pl = Righe ,
+  name-pl = righe ,
+
+type = figure ,
+  gender = f ,
+  Name-sg = Figura ,
+  name-sg = figura ,
+  Name-pl = Figure ,
+  name-pl = figure ,
+  Name-sg-ab = Fig. ,
+  name-sg-ab = fig. ,
+  Name-pl-ab = Fig. ,
+  name-pl-ab = fig. ,
+
+type = table ,
+  gender = f ,
+  Name-sg = Tabella ,
+  name-sg = tabella ,
+  Name-pl = Tabelle ,
+  name-pl = tabelle ,
+  Name-sg-ab = Tab. ,
+  name-sg-ab = tab. ,
+  Name-pl-ab = Tab. ,
+  name-pl-ab = tab. ,
+
+type = item ,
+  gender = m ,
+  Name-sg = Punto ,
+  name-sg = punto ,
+  Name-pl = Punti ,
+  name-pl = punti ,
+
+type = footnote ,
+  gender = f ,
+  Name-sg = Nota ,
+  name-sg = nota ,
+  Name-pl = Note ,
+  name-pl = note ,
+
+type = endnote ,
+  gender = f ,
+  Name-sg = Nota ,
+  name-sg = nota ,
+  Name-pl = Note ,
+  name-pl = note ,
+
+type = note ,
+  gender = f ,
+  Name-sg = Nota ,
+  name-sg = nota ,
+  Name-pl = Note ,
+  name-pl = note ,
+
+type = equation ,
+  gender = f ,
+  Name-sg = Equazione ,
+  name-sg = equazione ,
+  Name-pl = Equazioni ,
+  name-pl = equazioni ,
+  Name-sg-ab = Eq. ,
+  name-sg-ab = eq. ,
+  Name-pl-ab = Eq. ,
+  name-pl-ab = eq. ,
+  +refbounds-rb = {da\nobreakspace(,,,)} ,
+  refbounds-first-sg = {,(,),} ,
+  refbounds = {(,,,)} ,
+
+type = theorem ,
+  gender = m ,
+  Name-sg = Teorema ,
+  name-sg = teorema ,
+  Name-pl = Teoremi ,
+  name-pl = teoremi ,
+
+type = lemma ,
+  gender = m ,
+  Name-sg = Lemma ,
+  name-sg = lemma ,
+  Name-pl = Lemmi ,
+  name-pl = lemmi ,
+
+type = corollary ,
+  gender = m ,
+  Name-sg = Corollario ,
+  name-sg = corollario ,
+  Name-pl = Corollari ,
+  name-pl = corollari ,
+
+type = proposition ,
+  gender = f ,
+  Name-sg = Proposizione ,
+  name-sg = proposizione ,
+  Name-pl = Proposizioni ,
+  name-pl = proposizioni ,
+
+type = definition ,
+  gender = f ,
+  Name-sg = Definizione ,
+  name-sg = definizione ,
+  Name-pl = Definizioni ,
+  name-pl = definizioni ,
+
+type = proof ,
+  gender = f ,
+  Name-sg = Dimostrazione ,
+  name-sg = dimostrazione ,
+  Name-pl = Dimostrazioni ,
+  name-pl = dimostrazioni ,
+
+type = result ,
+  gender = m ,
+  Name-sg = Risultato ,
+  name-sg = risultato ,
+  Name-pl = Risultati ,
+  name-pl = risultati ,
+
+type = remark ,
+  gender = f ,
+  Name-sg = Osservazione ,
+  name-sg = osservazione ,
+  Name-pl = Osservazioni ,
+  name-pl = osservazioni ,
+
+type = example ,
+  gender = m ,
+  Name-sg = Esempio ,
+  name-sg = esempio ,
+  Name-pl = Esempi ,
+  name-pl = esempi ,
+
+type = algorithm ,
+  gender = m ,
+  Name-sg = Algoritmo ,
+  name-sg = algoritmo ,
+  Name-pl = Algoritmi ,
+  name-pl = algoritmi ,
+
+type = listing ,
+  gender = m ,
+  Name-sg = Listato ,
+  name-sg = listato ,
+  Name-pl = Listati ,
+  name-pl = listati ,
+
+type = exercise ,
+  gender = m ,
+  Name-sg = Esercizio ,
+  name-sg = esercizio ,
+  Name-pl = Esercizi ,
+  name-pl = esercizi ,
+
+type = solution ,
+  gender = f ,
+  Name-sg = Soluzione ,
+  name-sg = soluzione ,
+  Name-pl = Soluzioni ,
+  name-pl = soluzioni ,
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</lang-italian>
+%    \end{macrocode}
+%
+%
 % \PrintIndex
 %
 %

@@ -43,6 +43,7 @@
         portuges ,
         spanish ,
         dutch ,
+        italian ,
       }
       {
         \tl_show:c

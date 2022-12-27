@@ -69,6 +69,9 @@ l. ...  }
 > \g__zrefclever_declared_language_dutch_tl=dutch.
 <recently read> }
 l. ...  }
+> \g__zrefclever_declared_language_italian_tl=italian.
+<recently read> }
+l. ...  }
 ============================================================
 ============================================================
 TEST 2: Declare existing language

@@ -1,0 +1,695 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Language declaration
+============================================================
+> \g__zrefclever_declared_language_italian_tl=italian.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_language_italian_gender_seq contains the items
+(without outer braces):
+>  {f}
+>  {m}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 2: Language file options
+============================================================
+> \g__zrefclever_opt_lang_italian_default_namesep_tl=\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_default_pairsep_tl= e\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_default_listsep_tl=, .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_default_lastsep_tl= e\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_default_tpairsep_tl= e\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_default_tlistsep_tl=, .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_default_tlastsep_tl=, e\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_default_notesep_tl= .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_default_rangesep_tl= a\nobreakspace .
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_default_refbounds-first-rb_seq
+contains the items (without outer braces):
+>  {da\nobreakspace }
+>  {}
+>  {}
+>  {}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_default_refbounds-mid-rb_seq
+contains the items (without outer braces):
+>  {da\nobreakspace }
+>  {}
+>  {}
+>  {}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_book_gender_seq contains the
+items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_book_Name-sg_tl=Libro.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_book_name-sg_tl=libro.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_book_Name-pl_tl=Libri.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_book_name-pl_tl=libri.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_part_gender_seq contains the
+items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_part_Name-sg_tl=Parte.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_part_name-sg_tl=parte.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_part_Name-pl_tl=Parti.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_part_name-pl_tl=parti.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_chapter_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_chapter_Name-sg_tl=Capitolo.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_chapter_name-sg_tl=capitolo.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_chapter_Name-pl_tl=Capitoli.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_chapter_name-pl_tl=capitoli.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_section_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_section_Name-sg_tl=Paragrafo.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_section_name-sg_tl=paragrafo.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_section_Name-pl_tl=Paragrafi.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_section_name-pl_tl=paragrafi.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_paragraph_gender_seq
+contains the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_paragraph_Name-sg_tl=Capoverso.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_paragraph_name-sg_tl=capoverso.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_paragraph_Name-pl_tl=Capoversi.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_paragraph_name-pl_tl=capoversi.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_appendix_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_appendix_Name-sg_tl=Appendice.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_appendix_name-sg_tl=appendice.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_appendix_Name-pl_tl=Appendici.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_appendix_name-pl_tl=appendici.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_page_gender_seq contains the
+items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_page_Name-sg_tl=Pagina.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_page_name-sg_tl=pagina.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_page_Name-pl_tl=Pagine.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_page_name-pl_tl=pagine.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_page_Name-sg-ab_tl=Pag..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_page_name-sg-ab_tl=pag..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_page_Name-pl-ab_tl=Pag..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_page_name-pl-ab_tl=pag..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_page_rangesep_tl=\textendash .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_page_rangetopair_bool=false.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_line_gender_seq contains the
+items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_line_Name-sg_tl=Riga.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_line_name-sg_tl=riga.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_line_Name-pl_tl=Righe.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_line_name-pl_tl=righe.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_figure_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_figure_Name-sg_tl=Figura.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_figure_name-sg_tl=figura.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_figure_Name-pl_tl=Figure.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_figure_name-pl_tl=figure.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_figure_Name-sg-ab_tl=Fig..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_figure_name-sg-ab_tl=fig..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_figure_Name-pl-ab_tl=Fig..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_figure_name-pl-ab_tl=fig..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_table_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_table_Name-sg_tl=Tabella.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_table_name-sg_tl=tabella.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_table_Name-pl_tl=Tabelle.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_table_name-pl_tl=tabelle.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_table_Name-sg-ab_tl=Tab..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_table_name-sg-ab_tl=tab..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_table_Name-pl-ab_tl=Tab..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_table_name-pl-ab_tl=tab..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_item_gender_seq contains the
+items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_item_Name-sg_tl=Punto.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_item_name-sg_tl=punto.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_item_Name-pl_tl=Punti.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_item_name-pl_tl=punti.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_footnote_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_footnote_Name-sg_tl=Nota.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_footnote_name-sg_tl=nota.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_footnote_Name-pl_tl=Note.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_footnote_name-pl_tl=note.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_endnote_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_endnote_Name-sg_tl=Nota.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_endnote_name-sg_tl=nota.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_endnote_Name-pl_tl=Note.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_endnote_name-pl_tl=note.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_note_gender_seq contains the
+items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_note_Name-sg_tl=Nota.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_note_name-sg_tl=nota.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_note_Name-pl_tl=Note.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_note_name-pl_tl=note.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_equation_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_equation_Name-sg_tl=Equazione.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_equation_name-sg_tl=equazione.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_equation_Name-pl_tl=Equazioni.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_equation_name-pl_tl=equazioni.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_equation_Name-sg-ab_tl=Eq..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_equation_name-sg-ab_tl=eq..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_equation_Name-pl-ab_tl=Eq..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_equation_name-pl-ab_tl=eq..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_theorem_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_theorem_Name-sg_tl=Teorema.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_theorem_name-sg_tl=teorema.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_theorem_Name-pl_tl=Teoremi.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_theorem_name-pl_tl=teoremi.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_lemma_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_lemma_Name-sg_tl=Lemma.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_lemma_name-sg_tl=lemma.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_lemma_Name-pl_tl=Lemmi.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_lemma_name-pl_tl=lemmi.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_corollary_gender_seq
+contains the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_corollary_Name-sg_tl=Corollario.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_corollary_name-sg_tl=corollario.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_corollary_Name-pl_tl=Corollari.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_corollary_name-pl_tl=corollari.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_proposition_gender_seq
+contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_proposition_Name-sg_tl=Proposizione.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_proposition_name-sg_tl=proposizione.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_proposition_Name-pl_tl=Proposizioni.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_proposition_name-pl_tl=proposizioni.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_definition_gender_seq
+contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_definition_Name-sg_tl=Definizione.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_definition_name-sg_tl=definizione.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_definition_Name-pl_tl=Definizioni.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_definition_name-pl_tl=definizioni.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_proof_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_proof_Name-sg_tl=Dimostrazione.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_proof_name-sg_tl=dimostrazione.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_proof_Name-pl_tl=Dimostrazioni.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_proof_name-pl_tl=dimostrazioni.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_result_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_result_Name-sg_tl=Risultato.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_result_name-sg_tl=risultato.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_result_Name-pl_tl=Risultati.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_result_name-pl_tl=risultati.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_remark_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_remark_Name-sg_tl=Osservazione.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_remark_name-sg_tl=osservazione.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_remark_Name-pl_tl=Osservazioni.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_remark_name-pl_tl=osservazioni.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_example_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_example_Name-sg_tl=Esempio.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_example_name-sg_tl=esempio.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_example_Name-pl_tl=Esempi.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_example_name-pl_tl=esempi.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_algorithm_gender_seq
+contains the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_algorithm_Name-sg_tl=Algoritmo.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_algorithm_name-sg_tl=algoritmo.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_algorithm_Name-pl_tl=Algoritmi.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_algorithm_name-pl_tl=algoritmi.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_listing_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_listing_Name-sg_tl=Listato.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_listing_name-sg_tl=listato.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_listing_Name-pl_tl=Listati.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_listing_name-pl_tl=listati.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_exercise_gender_seq contains
+the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_exercise_Name-sg_tl=Esercizio.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_exercise_name-sg_tl=esercizio.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_exercise_Name-pl_tl=Esercizi.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_exercise_name-pl_tl=esercizi.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_solution_gender_seq contains
+the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_solution_Name-sg_tl=Soluzione.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_solution_name-sg_tl=soluzione.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_solution_Name-pl_tl=Soluzioni.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_italian_type_solution_name-pl_tl=soluzioni.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_page_refbounds-first-rb_seq
+contains the items (without outer braces):
+>  {}
+>  {}
+>  {}
+>  {}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_page_refbounds-mid-rb_seq
+contains the items (without outer braces):
+>  {}
+>  {}
+>  {}
+>  {}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-first_seq
+contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_italian_type_equation_refbounds-first-sg_seq contains
+the items (without outer braces):
+>  {}
+>  {(}
+>  {)}
+>  {}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_italian_type_equation_refbounds-first-pb_seq contains
+the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_italian_type_equation_refbounds-first-rb_seq contains
+the items (without outer braces):
+>  {da\nobreakspace (}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-mid_seq
+contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_italian_type_equation_refbounds-mid-rb_seq contains
+the items (without outer braces):
+>  {da\nobreakspace (}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_italian_type_equation_refbounds-mid-re_seq contains
+the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-last_seq
+contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_italian_type_equation_refbounds-last-pe_seq contains
+the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence
+\g__zrefclever_opt_lang_italian_type_equation_refbounds-last-re_seq contains
+the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+============================================================

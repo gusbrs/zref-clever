@@ -48,6 +48,7 @@ env:
     babel-portuges
     babel-spanish
     babel-dutch
+    babel-italian
     beamer
     bookmark
     booktabs
@@ -70,6 +71,7 @@ env:
     hyphen-french
     hyphen-german
     hyphen-latin
+    hyphen-italian
     iftex
     infwarerr
     intcalc
