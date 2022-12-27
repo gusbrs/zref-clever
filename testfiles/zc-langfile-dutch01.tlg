@@ -135,16 +135,16 @@ the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_appendix_Name-sg_tl=Bijlage.
+> \g__zrefclever_opt_lang_dutch_type_appendix_Name-sg_tl=Bĳlage.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_appendix_name-sg_tl=bijlage.
+> \g__zrefclever_opt_lang_dutch_type_appendix_name-sg_tl=bĳlage.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_appendix_Name-pl_tl=Bijlagen.
+> \g__zrefclever_opt_lang_dutch_type_appendix_Name-pl_tl=Bĳlagen.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_appendix_name-pl_tl=bijlagen.
+> \g__zrefclever_opt_lang_dutch_type_appendix_name-pl_tl=bĳlagen.
 <recently read> }
 l. ...  }
 The sequence \g__zrefclever_opt_lang_dutch_type_page_gender_seq contains the
@@ -300,16 +300,16 @@ the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_equation_Name-sg_tl=Vergelijking.
+> \g__zrefclever_opt_lang_dutch_type_equation_Name-sg_tl=Vergelĳking.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_equation_name-sg_tl=vergelijking.
+> \g__zrefclever_opt_lang_dutch_type_equation_name-sg_tl=vergelĳking.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_equation_Name-pl_tl=Vergelijkingen.
+> \g__zrefclever_opt_lang_dutch_type_equation_Name-pl_tl=Vergelĳkingen.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_equation_name-pl_tl=vergelijkingen.
+> \g__zrefclever_opt_lang_dutch_type_equation_name-pl_tl=vergelĳkingen.
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_dutch_type_equation_Name-sg-ab_tl=Vgl..
@@ -414,16 +414,16 @@ items (without outer braces):
 >  {n}.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_proof_Name-sg_tl=Bewijs.
+> \g__zrefclever_opt_lang_dutch_type_proof_Name-sg_tl=Bewĳs.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_proof_name-sg_tl=bewijs.
+> \g__zrefclever_opt_lang_dutch_type_proof_name-sg_tl=bewĳs.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_proof_Name-pl_tl=Bewijzen.
+> \g__zrefclever_opt_lang_dutch_type_proof_Name-pl_tl=Bewĳzen.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_dutch_type_proof_name-pl_tl=bewijzen.
+> \g__zrefclever_opt_lang_dutch_type_proof_name-pl_tl=bewĳzen.
 <recently read> }
 l. ...  }
 The sequence \g__zrefclever_opt_lang_dutch_type_result_gender_seq contains the
