@@ -9,7 +9,8 @@
 
 ### Changed
 - Improved consistency of the Dutch language file with `babel` captions (see
-  PR [#12](https://github.com/gusbrs/zref-clever/pull/12)).
+  PRs [#12](https://github.com/gusbrs/zref-clever/pull/12) and
+  [#13](https://github.com/gusbrs/zref-clever/pull/13)).
 
 ## [v0.3.1](https://github.com/gusbrs/zref-clever/compare/v0.3.0...v0.3.1) (2022-05-28)
 
