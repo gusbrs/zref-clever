@@ -10065,12 +10065,18 @@ type = paragraph ,
   Name-pl = Alinea's ,
   name-pl = alinea's ,
 
+%    \end{macrocode}
+% 2022-12-27, \contributor{\username{niluxv}}: ``bijlage'' is chosen over
+% ``appendix'' (plural ``appendices'', gender: m, n) for consistency with
+% babel/polyglossia. ``bijlages'' is also a valid plural; ``bijlagen'' is
+% chosen for consistency with babel/polyglossia.
+%    \begin{macrocode}
 type = appendix ,
-  gender = { m , n } ,
-  Name-sg = Appendix ,
-  name-sg = appendix ,
-  Name-pl = Appendices ,
-  name-pl = appendices ,
+  gender = { f, m } ,
+  Name-sg = Bijlage ,
+  name-sg = bijlage ,
+  Name-pl = Bijlagen ,
+  name-pl = bijlagen ,
 
 type = page ,
   gender = { f , m } ,
@@ -10212,12 +10218,17 @@ type = example ,
   Name-pl = Voorbeelden ,
   name-pl = voorbeelden ,
 
+%    \end{macrocode}
+% 2022-12-27, \contributor{\username{niluxv}}: ``algoritmes'' is also a valid
+% plural. ``algoritmen'' is chosen to be consistent with using ``bijlagen''
+% (and not ``bijlages'') as the plural of ``bijlage''.
+%    \begin{macrocode}
 type = algorithm ,
   gender = { n , f , m } ,
   Name-sg = Algoritme ,
   name-sg = algoritme ,
-  Name-pl = Algoritmes ,
-  name-pl = algoritmes ,
+  Name-pl = Algoritmen ,
+  name-pl = algoritmen ,
 
 %    \end{macrocode}
 % 2022-01-09, \contributor{\username{niluxv}}: EN-NL Van Dale translates
