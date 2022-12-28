@@ -3,15 +3,15 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: Reference: lstlisting
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{lstlisting.1}{\group_begin: listing\group_end:
-\nobreakspace \group_begin: 1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{lstlisting.1}{\group_begin: listing\group_end: \nobreakspace \group_begin:
+1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{lst:1,ln:1.1}
                                       }
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{lstnumber.1.3}{\group_begin: line\group_end:
-\nobreakspace \group_begin: 3\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{lstnumber.1.3}{\group_begin: line\group_end: \nobreakspace \group_begin:
+3\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{lst:1,ln:1.1}
                                       }

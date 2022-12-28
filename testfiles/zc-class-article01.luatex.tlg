@@ -3,9 +3,9 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: Reference: part
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{part.1}{\group_begin: part\group_end:
-\nobreakspace \group_begin: I\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{part.1}{\group_begin: part\group_end: \nobreakspace \group_begin:
+I\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{part:part-1}
                                       }
@@ -26,9 +26,9 @@ l. ...\showbox0
 ============================================================
 TEST 2: Reference: section
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: section\group_end:
-\nobreakspace \group_begin: 1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{section.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
+1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{sec:section-1.1}
                                           }
@@ -54,9 +54,9 @@ l. ...\showbox0
 ============================================================
 TEST 3: Reference: subsection
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{subsection.1.1}{\group_begin:
-section\group_end: \nobreakspace \group_begin: 1.1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{subsection.1.1}{\group_begin: section\group_end: \nobreakspace
+\group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{sec:subsection-1.1.1}
                                                }
@@ -84,9 +84,9 @@ l. ...\showbox0
 ============================================================
 TEST 4: Reference: subsubsection
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{subsubsection.1.1.1}{\group_begin:
-section\group_end: \nobreakspace \group_begin: 1.1.1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{subsubsection.1.1.1}{\group_begin: section\group_end: \nobreakspace
+\group_begin: 1.1.1\group_end: }.
 <recently read> }
 l. ......ox0=\hbox{\zcref{sec:subsubsection-1.1.1.1}
                                                   }
@@ -116,10 +116,9 @@ l. ...\showbox0
 ============================================================
 TEST 5: Reference: paragraph
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{paragraph.1.1.1.1}{\group_begin:
-paragraph\group_end: \nobreakspace \group_begin: 1.1.1.1\group_end:
-}\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{paragraph.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
+\group_begin: 1.1.1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{sec:paragraph-1.1.1.1.1}
                                                   }
@@ -153,10 +152,9 @@ l. ...\showbox0
 ============================================================
 TEST 6: Reference: subparagraph
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{subparagraph.1.1.1.1.1}{\group_begin:
-paragraph\group_end: \nobreakspace \group_begin: 1.1.1.1.1\group_end:
-}\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{subparagraph.1.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
+\group_begin: 1.1.1.1.1\group_end: }.
 <recently read> }
 l. ......=\hbox{\zcref{sec:subparagraph-1.1.1.1.1.1}
                                                   }
@@ -192,9 +190,9 @@ l. ...\showbox0
 ============================================================
 TEST 7: Reference: figure
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{figure.1}{\group_begin: figure\group_end:
-\nobreakspace \group_begin: 1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{figure.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
+1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.1}
                                            }
@@ -218,9 +216,9 @@ l. ...\showbox0
 ============================================================
 TEST 8: Reference: table
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{table.1}{\group_begin: table\group_end:
-\nobreakspace \group_begin: 1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{table.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
+1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tab:table-1.1.1}
                                           }
@@ -245,11 +243,11 @@ l. ...\showbox0
 TEST 9: Reference: enumi-iv
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: items\group_end:
-\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
-{}{Item.1}{1}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
-{}{Item.2}{1a}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
-{}{Item.3}{1(a)i}\group_end:  and\nobreakspace \group_begin:
-\__zrefclever_hyperlink:nnn {}{Item.4}{1(a)iA}\group_end: .
+\nobreakspace \__zrefclever_hyperlink:nnn {}{Item.1}{\group_begin:
+1\group_end: }, \__zrefclever_hyperlink:nnn {}{Item.2}{\group_begin:
+1a\group_end: }, \__zrefclever_hyperlink:nnn {}{Item.3}{\group_begin:
+1(a)i\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
+{}{Item.4}{\group_begin: 1(a)iA\group_end: }.
 <recently read> }
 l. ......0=\hbox{\zcref{item:1,item:2,item:3,item:4}
                                                   }
@@ -300,9 +298,9 @@ l. ...\showbox0
 ============================================================
 TEST 10: Reference: footnote
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{Hfootnote.1}{\group_begin: footnote\group_end:
-\nobreakspace \group_begin: 1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{Hfootnote.1}{\group_begin: footnote\group_end: \nobreakspace \group_begin:
+1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fn:1}
                                }
@@ -330,9 +328,9 @@ l. ...\showbox0
 ============================================================
 TEST 11: Reference: mpfootnote
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{Item.4}{\group_begin: footnote\group_end:
-\nobreakspace \group_begin: {\itshape a}\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{Item.4}{\group_begin: footnote\group_end: \nobreakspace \group_begin:
+{\itshape a}\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fn:2}
                                }
@@ -360,9 +358,9 @@ l. ...\showbox0
 ============================================================
 TEST 12: Reference: equation
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{equation.1.1}{\group_begin: equation\group_end:
-\nobreakspace \group_begin: (1)\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{equation.1.1}{\group_begin: equation\group_end: \nobreakspace
+(\group_begin: 1\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.1}
                                             }
@@ -391,9 +389,9 @@ l. ...\showbox0
 ============================================================
 TEST 13: Reference: thm
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{thm.1}{\group_begin: theorem\group_end:
-\nobreakspace \group_begin: 1\group_end: }\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{thm.1}{\group_begin: theorem\group_end: \nobreakspace \group_begin:
+1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.2}
                                             }
@@ -422,13 +420,13 @@ l. ...\showbox0
 TEST 14: Reference: sectioning commands after appendix
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
-\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
-{}{appendix.A}{A}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
-{}{subsection.A.1}{A.1}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
-{}{subsubsection.A.1.1}{A.1.1}\group_end: , \group_begin:
-\__zrefclever_hyperlink:nnn {}{paragraph.A.1.1.1}{A.1.1.1}\group_end: 
-and\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
-{}{subparagraph.A.1.1.1.1}{A.1.1.1.1}\group_end: .
+\nobreakspace \__zrefclever_hyperlink:nnn {}{appendix.A}{\group_begin:
+A\group_end: }, \__zrefclever_hyperlink:nnn {}{subsection.A.1}{\group_begin:
+A.1\group_end: }, \__zrefclever_hyperlink:nnn
+{}{subsubsection.A.1.1}{\group_begin: A.1.1\group_end: },
+\__zrefclever_hyperlink:nnn {}{paragraph.A.1.1.1}{\group_begin:
+A.1.1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
+{}{subparagraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: }.
 <recently read> }
 l. ...    sec:subparagraph-2.1.1.1.1.1}
                                      }

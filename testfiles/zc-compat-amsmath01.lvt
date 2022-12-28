@@ -240,8 +240,6 @@
     multline* ,
   }
   { \ShowHook { env / #1 / begin } }
-\tl_show:c
-  { \__zrefclever_opt_varname_type:nnn{equation}{reffont}{tl} }
 \makeatother
 \ExplSyntaxOff
 \ENDTEST
@@ -401,19 +399,6 @@
 \showbox0
 \box0
 \setbox0=\hbox{\zcref[ref=subeq]{split:x,multline:x}}
-\showbox0
-\box0
-\ENDTEST
-
-\newoptblock{equation font}
-
-\BEGINTEST{Reference: equation font}
-\setbox0=\hbox{%
-  \itshape
-  \ref{eq:example},
-  \eqref{eq:example},
-  \zcref{eq:example}.
-}
 \showbox0
 \box0
 \ENDTEST

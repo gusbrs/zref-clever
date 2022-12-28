@@ -27,7 +27,8 @@
   \errmessage{Patching \noexpand\eq@setnumber failed}}
 \makeatother
 
-\ExplSyntaxOn \bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
 \ExplSyntaxOff
 
 \NewDocumentCommand \newoptblock {m}{%

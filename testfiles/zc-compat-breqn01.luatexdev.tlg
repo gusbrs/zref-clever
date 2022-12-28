@@ -71,11 +71,10 @@ l. ...  { \ShowHook { env / #1 / begin } }
 TEST 2: Reference: dmath
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \group_begin: \upshape (\__zrefclever_hyperlink:nnn
-{}{section.1}{1})\group_end: , \group_begin: \upshape
-(\__zrefclever_hyperlink:nnn {}{section.1}{2})\group_end:  and\nobreakspace
-\group_begin: \upshape (\__zrefclever_hyperlink:nnn
-{}{section.1}{3})\group_end: .
+\nobreakspace (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin:
+1\group_end: }), (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin:
+2\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
+{}{section.1}{\group_begin: 3\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\zcref[nocomp]{eq:1,eq:2,eq:3}
                                                 }
@@ -123,9 +122,9 @@ l. ...\showbox0
 ============================================================
 TEST 3: Reference: dseries
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: equation\group_end:
-\nobreakspace \group_begin: \upshape (4)\group_end: }\upshape \group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{section.1}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
+4\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:4}
                                }
@@ -154,9 +153,9 @@ l. ...\showbox0
 ============================================================
 TEST 4: Reference: dgroup
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin:
-\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: equation\group_end:
-\nobreakspace \group_begin: \upshape (5)\group_end: }\upshape \group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
+{}{section.1}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
+5\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{eq:5}
                                }
@@ -182,11 +181,10 @@ l. ...\setbox0=\hbox{\zcref{eq:5}
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \group_begin: \upshape (\__zrefclever_hyperlink:nnn
-{}{section.1}{5a})\group_end: , \group_begin: \upshape
-(\__zrefclever_hyperlink:nnn {}{section.1}{5b})\group_end:  and\nobreakspace
-\group_begin: \upshape (\__zrefclever_hyperlink:nnn
-{}{section.1}{5c})\group_end: .
+\nobreakspace (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin:
+5a\group_end: }), (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin:
+5b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
+{}{section.1}{\group_begin: 5c\group_end: }).
 <recently read> }
 l. ......ox0=\hbox{\zcref[nocomp]{eq:5a,eq:5b,eq:5c}
                                                   }
@@ -238,11 +236,10 @@ l. ...\showbox0
 TEST 5: Reference: dgroup, ref=subeq
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \group_begin: \upshape (\__zrefclever_hyperlink:nnn
-{}{section.1}{a})\group_end: , \group_begin: \upshape
-(\__zrefclever_hyperlink:nnn {}{section.1}{b})\group_end:  and\nobreakspace
-\group_begin: \upshape (\__zrefclever_hyperlink:nnn
-{}{section.1}{c})\group_end: .
+\nobreakspace (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin:
+a\group_end: }), (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin:
+b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
+{}{section.1}{\group_begin: c\group_end: }).
 <recently read> }
 l. ......\zcref[nocomp,ref=subeq]{eq:5a,eq:5b,eq:5c}
                                                   }

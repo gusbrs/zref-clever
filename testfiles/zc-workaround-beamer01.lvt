@@ -29,6 +29,10 @@
 }
 \makeatother
 
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
 \NewDocumentCommand \newoptblock {m}{%
   \noindent\rule{\textwidth}{0.4pt}\par%
   \noindent\textbf{#1}\par}

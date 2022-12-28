@@ -54,10 +54,10 @@ l. ...\cs_show:c { caption@subtypehook }
 TEST 2: Reference: subcaptionbox
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
-{}{figure.caption.1}{1}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
-{}{figure.caption.1}{1a}\group_end:  and\nobreakspace \group_begin:
-\__zrefclever_hyperlink:nnn {}{figure.caption.1}{1b}\group_end: .
+\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.1}{\group_begin:
+1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.caption.1}{\group_begin:
+1a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
+{}{figure.caption.1}{\group_begin: 1b\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{cat,elephant,animals}
                                                 }
@@ -97,10 +97,10 @@ l. ...\showbox0
 TEST 3: Reference: subfigure
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
-{}{figure.caption.2}{2}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
-{}{figure.caption.2}{2a}\group_end:  and\nobreakspace \group_begin:
-\__zrefclever_hyperlink:nnn {}{figure.caption.2}{2b}\group_end: .
+\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.2}{\group_begin:
+2\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.caption.2}{\group_begin:
+2a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
+{}{figure.caption.2}{\group_begin: 2b\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fig:1a,fig:1b,fig:1}
                                                }
@@ -140,10 +140,10 @@ l. ...\showbox0
 TEST 4: Reference: subtable
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: tables\group_end:
-\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
-{}{table.caption.3}{1}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
-{}{table.caption.3}{1a}\group_end:  and\nobreakspace \group_begin:
-\__zrefclever_hyperlink:nnn {}{table.caption.3}{1b}\group_end: .
+\nobreakspace \__zrefclever_hyperlink:nnn {}{table.caption.3}{\group_begin:
+1\group_end: }, \__zrefclever_hyperlink:nnn {}{table.caption.3}{\group_begin:
+1a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
+{}{table.caption.3}{\group_begin: 1b\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{tab:1a,tab:1b,tab:1}
                                                 }
@@ -183,10 +183,10 @@ l. ...\showbox0
 TEST 5: Reference: subcaption
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
-{}{figure.caption.4}{3}\group_end: , \group_begin: \__zrefclever_hyperlink:nnn
-{}{figure.caption.4}{3a}\group_end:  and\nobreakspace \group_begin:
-\__zrefclever_hyperlink:nnn {}{figure.caption.4}{3b}\group_end: .
+\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.4}{\group_begin:
+3\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.caption.4}{\group_begin:
+3a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
+{}{figure.caption.4}{\group_begin: 3b\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\zcref{fig:2a,fig:2b,fig:2}
                                                 }
@@ -228,10 +228,9 @@ TEST 6: Reference: subcaptionbox subref
 Package zref-clever Warning: Reference property 'subref' undefined for label
 (zref-clever)                'animals' on line ....
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \__zrefclever_ref_default: , \group_begin:
-\__zrefclever_hyperlink:nnn {}{figure.caption.1}{a}\group_end: 
-and\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
-{}{figure.caption.1}{b}\group_end: .
+\nobreakspace \__zrefclever_ref_default: , \__zrefclever_hyperlink:nnn
+{}{figure.caption.1}{\group_begin: a\group_end: } and\nobreakspace
+\__zrefclever_hyperlink:nnn {}{figure.caption.1}{\group_begin: b\group_end: }.
 <recently read> }
 l. ......{\zcref[ref=subref]{cat,elephant,animals}
                                                   }
@@ -271,10 +270,9 @@ TEST 7: Reference: subfigure subref
 Package zref-clever Warning: Reference property 'subref' undefined for label
 (zref-clever)                'fig:1' on line ....
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \__zrefclever_ref_default: , \group_begin:
-\__zrefclever_hyperlink:nnn {}{figure.caption.2}{a}\group_end: 
-and\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
-{}{figure.caption.2}{b}\group_end: .
+\nobreakspace \__zrefclever_ref_default: , \__zrefclever_hyperlink:nnn
+{}{figure.caption.2}{\group_begin: a\group_end: } and\nobreakspace
+\__zrefclever_hyperlink:nnn {}{figure.caption.2}{\group_begin: b\group_end: }.
 <recently read> }
 l. ......x{\zcref[ref=subref]{fig:1a,fig:1b,fig:1}
                                                   }
@@ -314,10 +312,9 @@ TEST 8: Reference: subtable subref
 Package zref-clever Warning: Reference property 'subref' undefined for label
 (zref-clever)                'tab:1' on line ....
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: tables\group_end:
-\nobreakspace \__zrefclever_ref_default: , \group_begin:
-\__zrefclever_hyperlink:nnn {}{table.caption.3}{a}\group_end: 
-and\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
-{}{table.caption.3}{b}\group_end: .
+\nobreakspace \__zrefclever_ref_default: , \__zrefclever_hyperlink:nnn
+{}{table.caption.3}{\group_begin: a\group_end: } and\nobreakspace
+\__zrefclever_hyperlink:nnn {}{table.caption.3}{\group_begin: b\group_end: }.
 <recently read> }
 l. ......x{\zcref[ref=subref]{tab:1a,tab:1b,tab:1}
                                                   }
@@ -357,10 +354,9 @@ TEST 9: Reference: subcaption subref
 Package zref-clever Warning: Reference property 'subref' undefined for label
 (zref-clever)                'fig:2' on line ....
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \__zrefclever_ref_default: , \group_begin:
-\__zrefclever_hyperlink:nnn {}{figure.caption.4}{a}\group_end: 
-and\nobreakspace \group_begin: \__zrefclever_hyperlink:nnn
-{}{figure.caption.4}{b}\group_end: .
+\nobreakspace \__zrefclever_ref_default: , \__zrefclever_hyperlink:nnn
+{}{figure.caption.4}{\group_begin: a\group_end: } and\nobreakspace
+\__zrefclever_hyperlink:nnn {}{figure.caption.4}{\group_begin: b\group_end: }.
 <recently read> }
 l. ......x{\zcref[ref=subref]{fig:2a,fig:2b,fig:2}
                                                   }
