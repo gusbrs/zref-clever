@@ -1839,8 +1839,7 @@ package in the setup, the same procedure can be used with \cls{memoir}'s
 
 \subsection{\pkg{amsmath}}
 
-\zctask{Make references to \pkg{amsmath} display math environments with
-  \cs{zcref}.}
+\zctask{Make references to \pkg{amsmath} display math environments.}
 
 Given how \pkg{amsmath}'s display math environments work, they need to handle
 \cs{label} specially, and this support is quite hard-wired into the
@@ -1879,10 +1878,48 @@ description of the \opt{amsmath} compatibility module at
 \end{zchowto}
 
 
+\subsection{Overriding the reference type}
+
+\zctask{Make references to a system of equations, which should be referred to
+  in the plural.}
+
+Though, usually, setting the \opt{countertype} option may provide a more
+general and convenient way to set the reference type of a given counter,
+sometimes we just need to do it for a particular label or set of labels.  The
+\opt{reftype} option allows us to do so and set the reference type directly,
+regardless of what the current counter is.
+
+\begin{zchowto}[caption={Overriding the reference type}]
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{zref-clever}
+\usepackage{hyperref}
+\zcRefTypeSetup{pluralequation}{
+  Name-sg = Equations ,
+  name-sg = equations ,
+  Name-pl = Equations ,
+  name-pl = equations ,
+}
+\begin{document}
+\section{Section 1}
+\begin{equation}
+  \zcsetup{reftype=pluralequation}
+  \zlabel{eq:1}
+  \begin{aligned}
+    A+B&=B+A\\
+    C&=D+E\\
+    E&=F
+  \end{aligned}
+\end{equation}
+\zcref{eq:1}
+\end{document}
+\end{zchowto}
+
+
 \subsection{\pkg{listings}}
 
 \zctask{Make references to a \env{lstlisting} environment from the
-  \pkg{listings} package with \cs{zcref}.}
+  \pkg{listings} package.}
 
 Being \env{lstlisting} a verbatim environment, setting labels inside it
 requires special treatment.  \pkg{zref-clever}'s \opt{listings} compatibility
@@ -1916,7 +1953,7 @@ description of the \opt{listings} compatibility module at
 \subsection{\pkg{enumitem}}
 
 \zctask{Setup a custom enumerate environment created with \pkg{enumitem} to be
-  referred to with \cs{zcref}.}
+  referred to.}
 
 Since the \texttt{enumerate} environment's counters are reset at each nesting
 level, but not with the standard machinery, we have to inform
@@ -1968,8 +2005,7 @@ implicit counter-type association, and have to set it explicitly with the
 
 \subsection{\pkg{zref-xr}}
 
-\zctask{Make references to labels set in an external document with
-  \cs{zcref}.}
+\zctask{Make references to labels set in an external document.}
 
 \pkg{zref} itself offers this functionality with module \pkg{zref-xr}, and
 \pkg{zref-clever} is prepared to make use of it.  Just a couple of details
@@ -2017,7 +2053,7 @@ be the following.
 
 \subsection{Ordinal references}
 
-\zctask{Typesetting the references as ordinal numbers with \cs{zcref}.}
+\zctask{Typesetting the references as ordinal numbers.}
 
 This is intended as an example of the flexibility \pkg{zref}'s extensible
 referencing system grants us.\footnote{Though clearly simplified, the example
