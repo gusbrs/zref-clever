@@ -103,14 +103,18 @@
     RenewDocumentCommand,
     NewCommandCopy,
     ltx@gobble,
+    @currentcounter,
     zref@label,
     zref@wrapper@babel,
     zref@ifpropundefined,
     zref@setcurrent,
+    zref@newprop,
+    zref@addprop,
     beamer@old@zref@label,
     alt,
     beamer@nameslide,
     beamer@dummynameslide,
+    ordinal,
   }
 }
 \lstdefinestyle{zrefclever}{
@@ -508,11 +512,7 @@ each option's documentation.
 \DescribeOption{ref} %
 \DescribeOption{page} %
 The \opt{ref} option controls the label property to which \cs{zcref} refers
-to.  It can receive \pkg{zref} properties, as long as they are
-declared,\footnote{A neat example of how powerful this is can be found at
-  \url{https://tex.stackexchange.com/a/670088}, where support for a reference
-  ``suffix'' in Turkish is provided by setting \opt{ref} to a dedicated
-  property which includes the suffix according to the reference's value.} but
+to.  It can receive \pkg{zref} properties, as long as they are declared, but
 notably \texttt{default}, \texttt{page}, \texttt{thecounter} and, if
 \pkg{zref-titleref} is loaded, \texttt{title}.  The package's default is,
 well, \texttt{default}, which is our standard reference.  \texttt{thecounter}
@@ -2006,6 +2006,40 @@ be the following.
 \zlabel{sec:section-b1}
 \end{document}
 \end{zchowto}
+
+
+\subsection{Ordinal references}
+
+\zctask{Typesetting the references as ordinal numbers with \cs{zcref}.}
+
+This is intended as an example of the flexibility \pkg{zref}'s extensible
+referencing system grants us.\footnote{Though clearly simplified, the example
+  is less than academic.  See \url{https://tex.stackexchange.com/a/670088} for
+  an application to add a reference suffix needed in Turkish.}  This can be
+done with a simple custom \pkg{zref} property, which can then be used to set
+\pkg{zref-clever}'s \opt{ref} option.
+
+\begin{zchowto}[caption={Ordinal references}]
+\documentclass{article}
+\usepackage{zref-clever}
+\usepackage{fmtcount}
+\makeatletter
+\zref@newprop{ordref}{\ordinal{\@currentcounter}}
+\zref@addprop{main}{ordref}
+\makeatother
+\zcsetup{ref=ordref}
+\begin{document}
+\section{Section 1}
+\zlabel{sec:section-1}
+\begin{figure}
+A figure.
+\caption{Figure 1}
+\zlabel{fig:figure-1}
+\end{figure}
+\zcref{sec:section-1,fig:figure-1}
+\end{document}
+\end{zchowto}
+
 
 \section{Limitations}
 \zlabel{sec:limitations}

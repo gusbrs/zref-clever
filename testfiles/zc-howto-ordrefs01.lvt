@@ -1,0 +1,49 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\RequirePackage[enable-debug]{expl3}
+
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation }
+\ExplSyntaxOff
+
+\usepackage{zref-clever}
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\makeatletter
+\zref@newprop{ordref}{\ordinal{\@currentcounter}}
+\zref@addprop{main}{ordref}
+\makeatother
+
+\zcsetup{ref=ordref}
+
+\usepackage{fmtcount}
+
+\usepackage{hyperref}
+
+\begin{document}
+
+\textsuperscript{avoid font warning}
+
+\section{Section 1}
+\zlabel{sec:section-1}
+
+\begin{figure}
+A figure.
+\caption{Figure 1}
+\zlabel{fig:figure-1}
+\end{figure}
+
+\START
+
+\setbox0=\hbox{\zcref{sec:section-1,fig:figure-1}}
+\showbox0
+\box0
+
+\OMIT
+
+\end{document}
