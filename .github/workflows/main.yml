@@ -64,6 +64,7 @@ env:
     fancyvrb
     float
     floatrow
+    fmtcount
     graphics
     hologo
     hypdoc
