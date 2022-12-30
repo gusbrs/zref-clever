@@ -23,9 +23,11 @@ l. ...\setbox0=\hbox{\zvref[S]{sec:section-1}
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 the
 .\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
 .\TU/lmr/m/n/10 preceding
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 page
+.\special{pdf:eann}
 .\write1{\zref@newlabel{5@vr}{\page{\Z@C@page }}}
 ! OK.
 l. ...\showbox0
@@ -40,9 +42,11 @@ TEST 2: zvpageref
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 the
 .\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
 .\TU/lmr/m/n/10 previous
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 page
+.\special{pdf:eann}
 .\write1{\zref@newlabel{6@vr}{\page{\Z@C@page }}}
 ! OK.
 l. ...\showbox0
@@ -78,9 +82,11 @@ l. ......ox{\zvrefrange{fig:figure-1}{fig:figure-2}
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 the
 .\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
 .\TU/lmr/m/n/10 preceding
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 page
+.\special{pdf:eann}
 .\write1{\zref@newlabel{7@vr}{\page{\Z@C@page }}}
 ! OK.
 l. ...\showbox0
@@ -95,9 +101,11 @@ TEST 4: zvpagerefrange
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 the
 .\glue 3.33 plus 1.665 minus 1.11
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
 .\TU/lmr/m/n/10 previous
 .\glue 3.33 plus 1.665 minus 1.11
 .\TU/lmr/m/n/10 page
+.\special{pdf:eann}
 .\write1{\zref@newlabel{8@vr}{\page{\Z@C@page }}}
 ! OK.
 l. ...\showbox0

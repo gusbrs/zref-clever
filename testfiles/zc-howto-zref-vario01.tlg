@@ -32,6 +32,7 @@ l. ...\setbox0=\hbox{\zvref[S]{sec:section-1}
 .\OT1/cmr/m/n/10 h
 .\OT1/cmr/m/n/10 e
 .\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
 .\OT1/cmr/m/n/10 p
 .\OT1/cmr/m/n/10 r
 .\OT1/cmr/m/n/10 e
@@ -46,6 +47,7 @@ l. ...\setbox0=\hbox{\zvref[S]{sec:section-1}
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 g
 .\OT1/cmr/m/n/10 e
+.\pdfendlink
 .\write1{\zref@newlabel{5@vr}{\page{\Z@C@page }}}
 ! OK.
 l. ...\showbox0
@@ -63,6 +65,7 @@ TEST 2: zvpageref
 .\OT1/cmr/m/n/10 h
 .\OT1/cmr/m/n/10 e
 .\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1}
 .\OT1/cmr/m/n/10 p
 .\OT1/cmr/m/n/10 r
 .\OT1/cmr/m/n/10 e
@@ -76,6 +79,7 @@ TEST 2: zvpageref
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 g
 .\OT1/cmr/m/n/10 e
+.\pdfendlink
 .\write1{\zref@newlabel{6@vr}{\page{\Z@C@page }}}
 ! OK.
 l. ...\showbox0
@@ -121,6 +125,7 @@ l. ......ox{\zvrefrange{fig:figure-1}{fig:figure-2}
 .\OT1/cmr/m/n/10 h
 .\OT1/cmr/m/n/10 e
 .\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1}
 .\OT1/cmr/m/n/10 p
 .\OT1/cmr/m/n/10 r
 .\OT1/cmr/m/n/10 e
@@ -135,6 +140,7 @@ l. ......ox{\zvrefrange{fig:figure-1}{fig:figure-2}
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 g
 .\OT1/cmr/m/n/10 e
+.\pdfendlink
 .\write1{\zref@newlabel{7@vr}{\page{\Z@C@page }}}
 ! OK.
 l. ...\showbox0
@@ -152,6 +158,7 @@ TEST 4: zvpagerefrange
 .\OT1/cmr/m/n/10 h
 .\OT1/cmr/m/n/10 e
 .\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1}
 .\OT1/cmr/m/n/10 p
 .\OT1/cmr/m/n/10 r
 .\OT1/cmr/m/n/10 e
@@ -165,6 +172,7 @@ TEST 4: zvpagerefrange
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 g
 .\OT1/cmr/m/n/10 e
+.\pdfendlink
 .\write1{\zref@newlabel{8@vr}{\page{\Z@C@page }}}
 ! OK.
 l. ...\showbox0
