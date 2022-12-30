@@ -3889,7 +3889,7 @@
 \keys_define:nn { zref-clever/label }
   {
     currentcounter .tl_set:N = \l_@@_current_counter_tl ,
-    currentcounter .value_required:n = true ,
+    currentcounter .default:n = \@currentcounter ,
     currentcounter .initial:n = \@currentcounter ,
   }
 %    \end{macrocode}

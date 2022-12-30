@@ -888,11 +888,12 @@ option, but a way to tell \pkg{zref-clever} a piece of information it has no
 means to retrieve automatically.  The setting must correspond to the actual
 ``current counter'', meaning here ``the counter underlying
 \cs{@currentlabel}'' in a given situation.  Also, when using the
-\opt{currentcounter} option, make sure the setting is duly grouped because, if
-set, it has precedence over \cs{@currentcounter} and, contrary to the later,
-the former is not reset the next time \cs{refstepcounter} runs.  Its default
-value is, quite naturally, \cs{@currentcounter}.  Since this option only
-affects how labels are set, it is not available in \cs{zcref}.
+\opt{currentcounter} option, take care that the setting is duly grouped
+because, if set, it has precedence over \cs{@currentcounter} and, contrary to
+the later, the former is not reset the next time \cs{refstepcounter} runs.
+Its default value is, quite naturally, \cs{@currentcounter}.  The default
+value can be reset by calling the option with no value.  Since this option
+only affects how labels are set, it is not available in \cs{zcref}.
 
 \DescribeOption{nocompat} %
 Some packages, document classes, or LaTeX features may require specific
