@@ -252,13 +252,17 @@
 %    \begin{macrocode}
 \zref@newprop { zc@type }
   {
-    \exp_args:NNe \prop_if_in:NnTF \l_@@_counter_type_prop
-      \l_@@_current_counter_tl
+    \tl_if_empty:NTF \l_@@_reftype_override_tl
       {
-        \exp_args:NNe \prop_item:Nn \l_@@_counter_type_prop
+        \exp_args:NNe \prop_if_in:NnTF \l_@@_counter_type_prop
+          \l_@@_current_counter_tl
+          {
+            \exp_args:NNe \prop_item:Nn \l_@@_counter_type_prop
+              { \l_@@_current_counter_tl }
+          }
           { \l_@@_current_counter_tl }
       }
-      { \l_@@_current_counter_tl }
+      { \l_@@_reftype_override_tl }
   }
 \zref@addprop \ZREF@mainlist { zc@type }
 %    \end{macrocode}
@@ -3728,6 +3732,22 @@
               { \msg_warning:nn { zref-clever } { missing-zref-check } } ,
           }
       }
+  }
+%    \end{macrocode}
+%
+%
+% \subsubsection*{\opt{reftype} option}
+%
+% This allows one to manually specify the reference type.  It is the
+% equivalent of \pkg{cleveref}'s optional argument to \cs{label}.
+%
+%    \begin{macrocode}
+\tl_new:N \l_@@_reftype_override_tl
+\keys_define:nn { zref-clever/label }
+  {
+    reftype .tl_set:N = \l_@@_reftype_override_tl ,
+    reftype .default:n = {} ,
+    reftype .initial:n = {} ,
   }
 %    \end{macrocode}
 %

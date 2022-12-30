@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.2...HEAD)
 
+### Added
+- `reftype` option, to allow for local manual override of `countertype`
+  settings.
+
 ## [v0.3.2](https://github.com/gusbrs/zref-clever/compare/v0.3.1...v0.3.2) (2022-12-27)
 
 ### Added

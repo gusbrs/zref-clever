@@ -21,6 +21,8 @@
 
 \begin{document}
 
+\textsuperscript{avoid font warning}
+
 \START
 
 \BEGINTEST{Option: countertype=...}
@@ -44,6 +46,20 @@
 \show\Z@R@equationB
 \show\Z@R@equationC
 \show\Z@R@equationD
+\makeatother
+\ENDTEST
+
+\BEGINTEST{Option: reftype=...}
+\begin{equation}
+  \zlabel{equationE}
+\end{equation}
+\begin{equation}
+  \zcsetup{reftype=myequation}
+  \zlabel{equationF}
+\end{equation}
+\makeatletter
+\show\Z@R@equationE
+\show\Z@R@equationF
 \makeatother
 \ENDTEST
 

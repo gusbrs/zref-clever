@@ -3,10 +3,6 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: Option: countertype=...
 ============================================================
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line ....
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line ....
 > \Z@R@equationA=macro:
 ->\default {1}\page {1}\abspage {1}\zc@counter {equation}\thecounter {1}\zc@type {equation}\zc@cntval {1}\zc@pgval {1}\zc@enclval {{0}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {equation.0.0.1}.
 l. ...\show\Z@R@equationA
@@ -21,7 +17,17 @@ l. ...\show\Z@R@equationC
 l. ...\show\Z@R@equationD
 ============================================================
 ============================================================
-TEST 2: Option: counterresetters=...
+TEST 2: Option: reftype=...
+============================================================
+> \Z@R@equationE=macro:
+->\default {5}\page {1}\abspage {1}\zc@counter {equation}\thecounter {5}\zc@type {equation}\zc@cntval {5}\zc@pgval {1}\zc@enclval {{0}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {equation.0.0.5}.
+l. ...\show\Z@R@equationE
+> \Z@R@equationF=macro:
+->\default {6}\page {1}\abspage {1}\zc@counter {equation}\thecounter {6}\zc@type {myequation}\zc@cntval {6}\zc@pgval {1}\zc@enclval {{0}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {equation.0.0.6}.
+l. ...\show\Z@R@equationF
+============================================================
+============================================================
+TEST 3: Option: counterresetters=...
 ============================================================
 The sequence \l__zrefclever_counter_resetters_seq contains the items (without
 outer braces):
@@ -51,7 +57,7 @@ l. ......how:N \l__zrefclever_counter_resetters_seq
 l. ...\show\Z@R@foobar
 ============================================================
 ============================================================
-TEST 3: Option: counterresetby=...
+TEST 4: Option: counterresetby=...
 ============================================================
 The property list \l__zrefclever_counter_resetby_prop contains the pairs
 (without outer braces):
@@ -73,12 +79,12 @@ l. ......show:N \l__zrefclever_counter_resetby_prop
 l. ...\show\Z@R@barbaz
 ============================================================
 ============================================================
-TEST 4: Option: currentcounter=...
+TEST 5: Option: currentcounter=...
 ============================================================
 > \Z@R@theoremA=macro:
 ->\default {1}\page {1}\abspage {1}\zc@counter {theorem}\thecounter {1}\zc@type {theorem}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {theorem.1}.
 l. ...\show\Z@R@theoremA
 > \Z@R@theoremB=macro:
-->\default {2}\page {1}\abspage {1}\zc@counter {equation}\thecounter {4}\zc@type {equation}\zc@cntval {4}\zc@pgval {1}\zc@enclval {{0}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {theorem.2}.
+->\default {2}\page {1}\abspage {1}\zc@counter {equation}\thecounter {6}\zc@type {equation}\zc@cntval {6}\zc@pgval {1}\zc@enclval {{0}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {theorem.2}.
 l. ...\show\Z@R@theoremB
 ============================================================

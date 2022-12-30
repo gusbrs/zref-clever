@@ -818,9 +818,10 @@ optional argument of \cs{zcheck}, and can receive both checks and
 \zcref{sec:reference-format}).
 
 \DescribeOption{countertype} %
+\DescribeOption{reftype} %
 The \opt{countertype} option allows to specify the ``reference type'' of each
 counter, which is stored as a label property when the label is set.  This
-``reference type'' is what determines how a reference to this label will
+reference type is what determines how a reference to this label will
 eventually be typeset when it is referred to (see
 \zcref{sec:reference-types}).  A value like \texttt{countertype = \{foo =
   bar\}} sets the \texttt{foo} counter to use the reference type \texttt{bar}.
@@ -830,8 +831,14 @@ the same name as the counter, unless otherwise specified.  Also, the default
 value of the option already sets appropriate types for basic \LaTeX{}
 counters, including those from the standard classes.  Setting a counter type
 to an empty value removes any (explicit) type association for that counter, in
-practice, this means it then uses a type equal to its name.  Since this option
-only affects how labels are set, it is not available in \cs{zcref}.
+practice, this means it then uses a type equal to its name.  The \opt{reftype}
+option allows one to specify the reference type manually, regardless of the
+current counter.  This can be used to locally override any \opt{countertype}
+settings of the package and, for those acquainted with it, is the equivalent
+of \pkg{cleveref}'s optional argument to \cs{label}.  Normally, you'd want to
+use this option within a group, but if you must do otherwise, the default
+value can be restored by setting the option without a value.  Since these
+options only affect how labels are set, they are not available in \cs{zcref}.
 
 \DescribeOption{\raisebox{-.2em}{\dbend}\ counterresetters} %
 \DescribeOption{counterresetby} %
