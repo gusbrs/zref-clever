@@ -508,7 +508,11 @@ each option's documentation.
 \DescribeOption{ref} %
 \DescribeOption{page} %
 The \opt{ref} option controls the label property to which \cs{zcref} refers
-to.  It can receive \pkg{zref} properties, as long as they are declared, but
+to.  It can receive \pkg{zref} properties, as long as they are
+declared,\footnote{A neat example of how powerful this is can be found at
+  \url{https://tex.stackexchange.com/a/670088}, where support for a reference
+  ``suffix'' in Turkish is provided by setting \opt{ref} to a dedicated
+  property which includes the suffix according to the reference's value.} but
 notably \texttt{default}, \texttt{page}, \texttt{thecounter} and, if
 \pkg{zref-titleref} is loaded, \texttt{title}.  The package's default is,
 well, \texttt{default}, which is our standard reference.  \texttt{thecounter}
