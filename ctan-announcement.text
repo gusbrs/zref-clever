@@ -1,14 +1,7 @@
-## v0.3.2 (2022-12-27)
+## v0.3.3 (2023-01-03)
 
 ### Added
-- Italian localization (see issue
-  [#11](https://github.com/gusbrs/zref-clever/issues/11)).
-- Localization guidelines for contributors (in the Code documentation).
-- Document UTF-8 input encoding requirement.
-- Work-around for `beamer` in the User manual.
-
-### Changed
-- Improved consistency of the Dutch language file with `babel` captions (see
-  PRs [#12](https://github.com/gusbrs/zref-clever/pull/12) and
-  [#13](https://github.com/gusbrs/zref-clever/pull/13)).
+- New `reftype` option, to allow for local manual override of `countertype`
+  settings.
+- Included some new How-tos to the User manual.
 

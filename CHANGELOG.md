@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.2...HEAD)
+## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.3...HEAD)
+
+## [v0.3.3](https://github.com/gusbrs/zref-clever/compare/v0.3.2...v0.3.3) (2023-01-03)
 
 ### Added
 - New `reftype` option, to allow for local manual override of `countertype`
