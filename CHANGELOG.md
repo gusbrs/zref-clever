@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.3...HEAD)
 
+### Changed
+- The `KOMA` compatibility module has been removed, since it was rendered
+  unnecessary by recent versions of KOMA Script classes.
+
 ## [v0.3.3](https://github.com/gusbrs/zref-clever/compare/v0.3.2...v0.3.3) (2023-01-03)
 
 ### Added

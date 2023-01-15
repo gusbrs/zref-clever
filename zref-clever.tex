@@ -2224,19 +2224,6 @@ and the commands \cs{bitwonumcaption}, \cs{bionenumcaption}, and
 \cs{bitwonumcaption}, \cs{bionenumcaption}, \cs{bicaption},
 \cs{@memsubcaption}, \cs{@makefntext}, and \cs{@makesidefntext}.
 
-\DescribeOption{KOMA} %
-The \cls{KOMA-Script} document classes are much more strict than \cls{memoir}
-in using standard mechanisms for cross-reference related features, so that
-very little adjustment is needed here.  Only the environments
-\env{captionbeside} and \env{captionofbeside} require special treatment.  And,
-though they do use \cs{refstepcounter} under the hood, since they are
-environments, we don't get to see reference variables outside them.
-\cs{@currentlabel} is smuggled out of the group, but not \cs{@currentcounter},
-so we must arrange for the later to have a correct value outside the caption
-environments too.  Environment hooks are used for the purpose, essentially
-setting \cs{@currentcounter} to \cs{@captype}, which would be the value the
-captioning infrastructure would set for it.
-
 \DescribeOption{amsmath} %
 \pkg{amsmath}'s display math environments have their contents processed twice,
 once for measuring and the second does the final typesetting.  Hence,
