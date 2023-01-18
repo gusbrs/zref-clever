@@ -7934,7 +7934,8 @@
 % protection with \cs{zref@wrapper@babel}, because \cs{zlabel} makes itself
 % no-op when \cs{label} is equal to \cs{ltx@gobble}, and that's precisely the
 % case inside the \env{multline} environment (and, damn!, I took a beating of
-% this detail\dots{}).
+% this detail\dots{}).  See also \url{https://github.com/ho-tex/zref/issues/4}
+% and \url{https://github.com/latex3/latex2e/issues/272}.
 %    \begin{macrocode}
         \cs_set_nopar:Npn \@@_ltxlabel:n #1
           {
