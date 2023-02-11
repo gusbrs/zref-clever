@@ -8,6 +8,8 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 \usepackage{zref-check}
 
@@ -16,7 +18,8 @@
 \START
 
 \ExplSyntaxOn
-\bool_show:N \l__zrefclever_zrefcheck_available_bool
+\renewcommand{\testtmp}{ \bool_show:N \l__zrefclever_zrefcheck_available_bool }
+\testtmp
 \ExplSyntaxOff
 
 \section{Foo 1}

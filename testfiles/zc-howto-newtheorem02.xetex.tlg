@@ -4,15 +4,21 @@ Don't change this file in any respect.
 {}{lem.1.1}{\group_begin: lemma\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{lemma-1}
-                                   }
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
-\hbox(6.94+0.10999)x44.99
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 lemma
+\hbox(6.94444+0.0)x45.0001
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(lem.1.1)>>>>}
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 m
+.\OT1/cmr/m/n/10 m
+.\OT1/cmr/m/n/10 a
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 1.1
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0

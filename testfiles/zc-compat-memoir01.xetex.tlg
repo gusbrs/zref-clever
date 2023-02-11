@@ -22,7 +22,7 @@ outer braces):
 >  {section}  =>  {appendix}
 >  {paragraph}  =>  {appendix}.
 <recently read> }
-l. ......p_show:N \l__zrefclever_counter_type_prop
+l. ...\testtmp
 The property list \l__zrefclever_counter_resetby_prop contains the pairs
 (without outer braces):
 >  {enumii}  =>  {enumi}
@@ -32,14 +32,14 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 >  {subfigure}  =>  {figure}
 >  {subtable}  =>  {table}.
 <recently read> }
-l. ......how:N \l__zrefclever_counter_resetby_prop
+l. ...\testtmp
 > \__zrefclever_memoir_both_labels:=\protected\long macro:->\cs_set_eq:NN
 \__zrefclever_memoir_orig_label:n \label \cs_set:Npn
 \__zrefclever_memoir_label_and_zlabel:n ##1{\__zrefclever_memoir_orig_label:n
 {##1}\zlabel {##1}}\cs_set_eq:NN \label
 \__zrefclever_memoir_label_and_zlabel:n .
 <recently read> }
-l. ......lever_memoir_both_labels:~not~defined } }
+l. ...  }
 -> The generic hook 'env/sidecaption/begin':
 > Code chunks:
 >     ---
@@ -221,27 +221,46 @@ TEST 2: Subcaption. Reference: figure
 \__zrefclever_hyperlink:nnn {}{subfigure.1.1.2}{\group_begin:
 1.1(b)\group_end: }.
 <recently read> }
-l. .......1.5, fig:figure-1.1.6, fig:figure-1.1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.5+2.49998)x125.09999
-.\TU/lmr/m/n/10 figures
+\hbox(7.5+2.5)x125.08362
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 1.1
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.1.1)>>>>}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 1.1(a)
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subfigure.1.1.1)>>>>}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 1.1(b)
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subfigure.1.1.2)>>>>}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -257,26 +276,38 @@ Package zref-clever Warning: Reference property 'subcaption' undefined for
 \__zrefclever_hyperlink:nnn {}{subfigure.1.1.2}{\group_begin: (b)\group_end:
 }.
 <recently read> }
-l. ...    fig:figure-1.1.7}
-                           }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.5+2.49998)x97.62
-.\TU/lmr/m/n/10 figures
+\hbox(7.5+2.5)x97.61122
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\hbox(7.0+0.0)x10.86
-..\TU/lmr/bx/n/10 ??
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 (a)
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\hbox(6.94444+0.0)x10.86105
+..\OT1/cmr/bx/n/10 ?
+..\OT1/cmr/bx/n/10 ?
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subfigure.1.1.1)>>>>}
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 (b)
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subfigure.1.1.2)>>>>}
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -290,27 +321,46 @@ TEST 4: Subcaption. Reference: table
 1.1(a)\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{subtable.1.1.2}{\group_begin: 1.1(b)\group_end: }.
 <recently read> }
-l. ......-1.1.6, tab:table-1.1.7, tab:table-1.1.8}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.5+2.49998)x122.29
-.\TU/lmr/m/n/10 tables
+\hbox(7.5+2.5)x122.27806
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 1.1
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(table.1.1)>>>>}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 1.1(a)
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subtable.1.1.1)>>>>}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 1.1(b)
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subtable.1.1.2)>>>>}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -325,26 +375,38 @@ Package zref-clever Warning: Reference property 'subcaption' undefined for
 {}{subtable.1.1.1}{\group_begin: (a)\group_end: } and\nobreakspace
 \__zrefclever_hyperlink:nnn {}{subtable.1.1.2}{\group_begin: (b)\group_end: }.
 <recently read> }
-l. ...    tab:table-1.1.8}
-                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.5+2.49998)x94.81
-.\TU/lmr/m/n/10 tables
+\hbox(7.5+2.5)x94.80566
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\hbox(7.0+0.0)x10.86
-..\TU/lmr/bx/n/10 ??
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 (a)
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\hbox(6.94444+0.0)x10.86105
+..\OT1/cmr/bx/n/10 ?
+..\OT1/cmr/bx/n/10 ?
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subtable.1.1.1)>>>>}
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 (b)
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subtable.1.1.2)>>>>}
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -359,27 +421,46 @@ TEST 6: Subbottom. Reference: figure
 \__zrefclever_hyperlink:nnn {}{subfigure.1.2.2}{\group_begin:
 1.2(b)\group_end: }.
 <recently read> }
-l. ......1.8, fig:figure-1.1.9, fig:figure-1.1.10}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.5+2.49998)x125.09999
-.\TU/lmr/m/n/10 figures
+\hbox(7.5+2.5)x125.08362
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 1.2
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.1.2)>>>>}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 1.2(a)
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subfigure.1.2.1)>>>>}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 1.2(b)
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subfigure.1.2.2)>>>>}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -395,26 +476,38 @@ Package zref-clever Warning: Reference property 'subcaption' undefined for
 \__zrefclever_hyperlink:nnn {}{subfigure.1.2.2}{\group_begin: (b)\group_end:
 }.
 <recently read> }
-l. ...    fig:figure-1.1.10}
-                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.5+2.49998)x97.62
-.\TU/lmr/m/n/10 figures
+\hbox(7.5+2.5)x97.61122
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\hbox(7.0+0.0)x10.86
-..\TU/lmr/bx/n/10 ??
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 (a)
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\hbox(6.94444+0.0)x10.86105
+..\OT1/cmr/bx/n/10 ?
+..\OT1/cmr/bx/n/10 ?
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subfigure.1.2.1)>>>>}
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 (b)
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subfigure.1.2.2)>>>>}
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 b
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -426,15 +519,21 @@ TEST 8: Sidecaption. Reference: figure
 {}{figure.1.3}{\group_begin: figure\group_end: \nobreakspace \group_begin:
 1.3\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.11}
-                                              }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.05+2.05998)x40.59
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 figure
+\hbox(6.94444+1.94444)x40.58342
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.1.3)>>>>}
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 1.3
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 3
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -447,22 +546,32 @@ TEST 9: Bilingual captions. Reference: figure
 1.4\group_end: } to\nobreakspace \__zrefclever_hyperlink:nnn
 {}{figure.1.6}{\group_begin: 1.6\group_end: }.
 <recently read> }
-l. ...    fig:figure-1.1.14}
-                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.05+2.05998)x72.86
-.\TU/lmr/m/n/10 figures
+\hbox(6.94444+1.94444)x72.86125
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 1.4
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.1.4)>>>>}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 4
 .\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 to
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 o
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 1.6
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.1.6)>>>>}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 6
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -474,15 +583,23 @@ TEST 10: Reference: footnote
 {}{Hfootnote.1}{\group_begin: footnote\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{fn:1}
-                                 }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.05+0.10999)x44.45
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 footnote
+\hbox(6.94444+0.0)x44.44456
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(Hfootnote.1)>>>>}
+.\OT1/cmr/m/n/10 f
+.\OT1/cmr/m/n/10 o
+.\kern0.27779
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 1
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -494,15 +611,23 @@ TEST 11: Reference: mpfootnote
 {}{memhycontfloat.2}{\group_begin: footnote\group_end: \nobreakspace
 \group_begin: {\itshape a}\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{fn:2}
-                                 }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.05+0.10999)x44.56
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 footnote
+\hbox(6.94444+0.0)x44.55563
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(memhycontfloat.2)>>>>}
+.\OT1/cmr/m/n/10 f
+.\OT1/cmr/m/n/10 o
+.\kern0.27779
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/it/10 a
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/it/10 a
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -514,15 +639,23 @@ TEST 12: Reference: verbatim footnote
 {}{memhycontfloat.2}{\group_begin: footnote\group_end: \nobreakspace
 \group_begin: 2\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{fn:3}
-                                 }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.05+0.10999)x44.45
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 footnote
+\hbox(6.94444+0.0)x44.44456
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(memhycontfloat.2)>>>>}
+.\OT1/cmr/m/n/10 f
+.\OT1/cmr/m/n/10 o
+.\kern0.27779
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 2
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 2
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -534,15 +667,23 @@ TEST 13: Reference: side footnote
 {}{memhycontfloat.2}{\group_begin: footnote\group_end: \nobreakspace
 \group_begin: 1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{fn:4}
-                                 }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.05+0.10999)x44.45
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 footnote
+\hbox(6.94444+0.0)x44.44456
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(memhycontfloat.2)>>>>}
+.\OT1/cmr/m/n/10 f
+.\OT1/cmr/m/n/10 o
+.\kern0.27779
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 1
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -554,15 +695,18 @@ TEST 14: Reference: page (end) note
 {}{section*.2}{\group_begin: note\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{fn:5}
-                                 }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(6.66+0.10999)x27.22
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 note
+\hbox(6.44444+0.0)x27.22227
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(section*.2)>>>>}
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 1
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -574,15 +718,18 @@ TEST 15: Reference: verse poemline
 {}{poemline.1.5}{\group_begin: line\group_end: \nobreakspace \group_begin:
 5\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{vs:verse-1.1-1}
-                                           }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(6.94+0.21999)x23.89
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 line
+\hbox(6.94444+0.0)x23.88893
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(poemline.1.5)>>>>}
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 e
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 5
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 5
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -600,37 +747,79 @@ TEST 16: Reference: sectioning commands in subapenddices
 \__zrefclever_hyperlink:nnn {}{subparagraph.2.A.1.1.1.1}{\group_begin:
 2.A.1.1.1.1\group_end: }.
 <recently read> }
-l. ...    sec:subparagraph-2.1.1.1.1.1}
-                                       }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.16+1.93999)x246.2
-.\TU/lmr/m/n/10 appendices
+\hbox(6.94444+1.94444)x246.16724
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 p
+.\kern0.27779
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 2.A
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(section.2.A)>>>>}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 A
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 2.A.1
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsection.2.A.1)>>>>}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 2.A.1.1
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsubsection.2.A.1.1)>>>>}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 2.A.1.1.1
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(paragraph.2.A.1.1.1)>>>>}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 2.A.1.1.1.1
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subparagraph.2.A.1.1.1.1)>>>>}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -649,42 +838,84 @@ A.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn
 \__zrefclever_hyperlink:nnn {}{subparagraph.A.1.1.1.1.1}{\group_begin:
 A.1.1.1.1.1\group_end: }.
 <recently read> }
-l. ...    sec:subparagraph-3.1.1.1.1.1}
-                                       }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.16+1.93999)x259.81
-.\TU/lmr/m/n/10 appendices
+\hbox(6.94444+1.94444)x259.77837
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 p
+.\kern0.27779
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(chapter.A)>>>>}
+.\OT1/cmr/m/n/10 A
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A.1
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(section.A.1)>>>>}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A.1.1
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsection.A.1.1)>>>>}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A.1.1.1
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsubsection.A.1.1.1)>>>>}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A.1.1.1.1
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(paragraph.A.1.1.1.1)>>>>}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A.1.1.1.1.1
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subparagraph.A.1.1.1.1.1)>>>>}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
@@ -703,42 +934,84 @@ A.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn
 \__zrefclever_hyperlink:nnn {}{subparagraph.A.1.1.1.1.1}{\group_begin:
 A.1.1.1.1.1\group_end: }.
 <recently read> }
-l. ...    sec:subparagraph-4.1.1.1.1.1}
-                                       }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
-\hbox(7.16+1.93999)x259.81
-.\TU/lmr/m/n/10 appendices
+\hbox(6.94444+1.94444)x259.77837
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 p
+.\kern0.27779
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(appendix.A)>>>>}
+.\OT1/cmr/m/n/10 A
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A.1
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(section.A.1)>>>>}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A.1.1
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsection.A.1.1)>>>>}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A.1.1.1
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsubsection.A.1.1.1)>>>>}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A.1.1.1.1
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(paragraph.A.1.1.1.1)>>>>}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 A.1.1.1.1.1
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subparagraph.A.1.1.1.1.1)>>>>}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0

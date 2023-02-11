@@ -8,8 +8,8 @@ TEST 1: Reference: dmath
 1\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{equation.1.2}{\group_begin: 2\group_end: }).
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:1,eq:2}
-                                     }
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
 \hbox(7.5+2.5)x93.11131
 .\OT1/cmr/m/n/10 e

@@ -4,15 +4,26 @@ Don't change this file in any respect.
 {}{myconjecture.1.1}{\group_begin: conjecture\group_end: \nobreakspace
 \group_begin: 1.1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{conjecture-1}
-                                        }
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
-\hbox(6.66+2.04999)x60.86
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 conjecture
+\hbox(6.67859+1.94444)x60.86122
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(myconjecture.1.1)>>>>}
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 j
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 1.1
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0

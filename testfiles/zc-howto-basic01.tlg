@@ -7,8 +7,8 @@ TEST 1: basic usage how to
 {}{section.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......\hbox{A reference to \zcref{sec:section-1}
-                                                  .}
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
 \hbox(6.94444+0.0)x106.22235
 .\OT1/cmr/m/n/10 A
@@ -45,8 +45,8 @@ l. ...\showbox0
 {}{figure.1}{\group_begin: Figure\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref[S]{fig:figure-1}
-                                            shows some interesting informati...
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
 \hbox(6.94444+1.94444)x196.55592
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1}
@@ -104,14 +104,14 @@ l. ...\showbox0
 {}{section.1}{\group_begin: page\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ...  \zcpageref{sec:section-1}
-                                 or with \zcref[page]{sec:section-1}.}
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
 {}{section.1}{\group_begin: page\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......ion-1} or with \zcref[page]{sec:section-1}
-                                                  .}
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
 \hbox(6.94444+1.94444)x280.94485
 .\OT1/cmr/m/n/10 A
@@ -190,14 +190,14 @@ l. ...\showbox0
 {}{section.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ...  \zcref{sec:section-1, fig:figure-1}
-                                          .}
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
 {}{figure.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ...  \zcref{sec:section-1, fig:figure-1}
-                                          .}
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
 \hbox(6.94444+1.94444)x334.47275
 .\OT1/cmr/m/n/10 A

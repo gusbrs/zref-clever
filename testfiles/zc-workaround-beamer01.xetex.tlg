@@ -14,25 +14,35 @@ l. ...\end{frame}
 <recently read> }
 l. ...\end{frame}
 > \box...=
-\hbox(7.71974+2.25569)x90.09659
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 0]/H/N/C[.5 .5 .5]/A<</\ETC.}
-.\TU/lmss/m/n/10.95 table
+\hbox(7.60416+2.12917)x90.09428
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 0]/H/N/C[.5 .5 .5]/A<</S/GoTo/D(tab:1)>>>>}
+.\OT1/cmss/m/n/10.95 t
+.\OT1/cmss/m/n/10.95 a
+.\OT1/cmss/m/n/10.95 b
+.\OT1/cmss/m/n/10.95 l
+.\OT1/cmss/m/n/10.95 e
 .\penalty 10000
-.\glue 3.64635 plus 1.82317 minus 1.21544
-.\TU/lmss/m/n/10.95 1
+.\glue 3.65 plus 1.825 minus 1.21666
+.\OT1/cmss/m/n/10.95 1
 .\special{pdf:eann}
-.\glue 3.64635 plus 1.82317 minus 1.21544
-.\TU/lmss/m/n/10.95 and
+.\glue 3.65 plus 1.825 minus 1.21666
+.\OT1/cmss/m/n/10.95 a
+.\OT1/cmss/m/n/10.95 n
+.\OT1/cmss/m/n/10.95 d
 .\penalty 10000
-.\glue 3.64635 plus 1.82317 minus 1.21544
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 0]/H/N/C[.5 .5 .5]/A<</\ETC.}
-.\TU/lmss/m/n/10.95 figure
+.\glue 3.65 plus 1.825 minus 1.21666
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 0]/H/N/C[.5 .5 .5]/A<</S/GoTo/D(fig:1)>>>>}
+.\OT1/cmss/m/n/10.95 ^^L (ligature fi)
+.\OT1/cmss/m/n/10.95 g
+.\OT1/cmss/m/n/10.95 u
+.\OT1/cmss/m/n/10.95 r
+.\OT1/cmss/m/n/10.95 e
 .\penalty 10000
-.\glue 3.64635 plus 1.82317 minus 1.21544
-.\TU/lmss/m/n/10.95 1
+.\glue 3.65 plus 1.825 minus 1.21666
+.\OT1/cmss/m/n/10.95 1
 .\special{pdf:eann}
 ! OK.
-\beamer@doifinframe ... {tab:1,fig:1}} \showbox 0 
+\beamer@doifinframe ...box {\testtmp } \showbox 0 
                                                   \box 0 \ENDTEST \par \OMIT...
 l. ...\end{frame}
 ============================================================

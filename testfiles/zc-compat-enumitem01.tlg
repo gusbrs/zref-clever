@@ -17,7 +17,7 @@ outer braces):
 >  {enumvi}  =>  {item}
 >  {enumvii}  =>  {item}.
 <recently read> }
-l. ...\prop_show:N \l__zrefclever_counter_type_prop
+l. ...\testtmp
 The property list \l__zrefclever_counter_resetby_prop contains the pairs
 (without outer braces):
 >  {enumii}  =>  {enumi}
@@ -27,7 +27,7 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 >  {enumvi}  =>  {enumv}
 >  {enumvii}  =>  {enumvi}.
 <recently read> }
-l. ......show:N \l__zrefclever_counter_resetby_prop
+l. ...\testtmp
 ============================================================
 ============================================================
 TEST 2: Reference: enumitem
@@ -42,8 +42,8 @@ TEST 2: Reference: enumitem
 {{(I)}}\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{Item.7}{\group_begin: {{(A)}}\group_end: }.
 <recently read> }
-l. ......enum1,enum2,enum3,enum4,enum5,enum6,enum7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
 \hbox(7.5+2.5)x169.50034
 .\OT1/cmr/m/n/10 i

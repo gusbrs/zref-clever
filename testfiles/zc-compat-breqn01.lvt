@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 \usepackage{breqn}
@@ -76,9 +84,12 @@ T(n) \hiderel{\leq} T(2^{\lceil\lg n\rceil})
 \BEGINTEST{breqn module}
 \ExplSyntaxOn
 \begin{dgroup}
-  \tl_show:N \l__zrefclever_current_counter_tl
-  \prop_show:N \l__zrefclever_counter_type_prop
-  \prop_show:N \l__zrefclever_counter_resetby_prop
+  \renewcommand{\testtmp}{ \tl_show:N \l__zrefclever_current_counter_tl }
+  \testtmp
+  \renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+  \testtmp
+  \renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
+  \testtmp
   \begin{dmath}
     x=y
   \end{dmath}
@@ -96,7 +107,9 @@ T(n) \hiderel{\leq} T(2^{\lceil\lg n\rceil})
 \newoptblock{dmath}
 
 \BEGINTEST{Reference: dmath}
-\setbox0=\hbox{\zcref[nocomp]{eq:1,eq:2,eq:3}}
+\renewcommand{\testtmp}{%
+  \zcref[nocomp]{eq:1,eq:2,eq:3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -104,7 +117,9 @@ T(n) \hiderel{\leq} T(2^{\lceil\lg n\rceil})
 \newoptblock{dseries}
 
 \BEGINTEST{Reference: dseries}
-\setbox0=\hbox{\zcref{eq:4}}
+\renewcommand{\testtmp}{%
+  \zcref{eq:4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -112,10 +127,14 @@ T(n) \hiderel{\leq} T(2^{\lceil\lg n\rceil})
 \newoptblock{dgroup}
 
 \BEGINTEST{Reference: dgroup}
-\setbox0=\hbox{\zcref{eq:5}}
+\renewcommand{\testtmp}{%
+  \zcref{eq:5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref[nocomp]{eq:5a,eq:5b,eq:5c}}
+\renewcommand{\testtmp}{%
+  \zcref[nocomp]{eq:5a,eq:5b,eq:5c}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -123,7 +142,9 @@ T(n) \hiderel{\leq} T(2^{\lceil\lg n\rceil})
 \newoptblock{dgroup, ref=subeq}
 
 \BEGINTEST{Reference: dgroup, ref=subeq}
-\setbox0=\hbox{\zcref[nocomp,ref=subeq]{eq:5a,eq:5b,eq:5c}}
+\renewcommand{\testtmp}{%
+  \zcref[nocomp,ref=subeq]{eq:5a,eq:5b,eq:5c}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

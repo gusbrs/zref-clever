@@ -16,7 +16,7 @@ outer braces):
 >  {subfigure}  =>  {figure}
 >  {subtable}  =>  {table}.
 <recently read> }
-l. ...\prop_show:N \l__zrefclever_counter_type_prop
+l. ...\testtmp
 The property list \l__zrefclever_counter_resetby_prop contains the pairs
 (without outer braces):
 >  {enumii}  =>  {enumi}
@@ -25,7 +25,7 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 >  {subfigure}  =>  {figure}
 >  {subtable}  =>  {table}.
 <recently read> }
-l. ......show:N \l__zrefclever_counter_resetby_prop
+l. ...\testtmp
 subref property is defined
 > \caption@subtypehook=macro:->\ifx \caption \caption@subcaption \else
 \caption@warmup \caption@stepcounter \@captype \caption@ifcaption {}{\let
@@ -48,7 +48,7 @@ subref property is defined
 \subcaptionlistentry \captionlistentry \let \subcaptiontext \captiontext
 \zref@localaddprop \ZREF@mainlist {subref}.
 <recently read> }
-l. ...\cs_show:c { caption@subtypehook }
+l. ...\testtmp
 ============================================================
 ============================================================
 TEST 2: Reference: subcaptionbox
@@ -59,8 +59,8 @@ TEST 2: Reference: subcaptionbox
 1a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{figure.caption.1}{\group_begin: 1b\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{cat,elephant,animals}
-                                                }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x86.19461
 .\OT1/cmr/m/n/10 ^^L (ligature fi)
@@ -102,8 +102,8 @@ TEST 3: Reference: subfigure
 2a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{figure.caption.2}{\group_begin: 2b\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{fig:1a,fig:1b,fig:1}
-                                               }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x86.19461
 .\OT1/cmr/m/n/10 ^^L (ligature fi)
@@ -145,8 +145,8 @@ TEST 4: Reference: subtable
 1a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{table.caption.3}{\group_begin: 1b\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{tab:1a,tab:1b,tab:1}
-                                                }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x83.38905
 .\OT1/cmr/m/n/10 t
@@ -188,8 +188,8 @@ TEST 5: Reference: subcaption
 3a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{figure.caption.4}{\group_begin: 3b\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{fig:2a,fig:2b,fig:2}
-                                                }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x86.19461
 .\OT1/cmr/m/n/10 ^^L (ligature fi)
@@ -232,8 +232,8 @@ Package zref-clever Warning: Reference property 'subref' undefined for label
 {}{figure.caption.1}{\group_begin: a\group_end: } and\nobreakspace
 \__zrefclever_hyperlink:nnn {}{figure.caption.1}{\group_begin: b\group_end: }.
 <recently read> }
-l. ......{\zcref[ref=subref]{cat,elephant,animals}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x82.05562
 .\OT1/cmr/m/n/10 ^^L (ligature fi)
@@ -274,8 +274,8 @@ Package zref-clever Warning: Reference property 'subref' undefined for label
 {}{figure.caption.2}{\group_begin: a\group_end: } and\nobreakspace
 \__zrefclever_hyperlink:nnn {}{figure.caption.2}{\group_begin: b\group_end: }.
 <recently read> }
-l. ......x{\zcref[ref=subref]{fig:1a,fig:1b,fig:1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x82.05562
 .\OT1/cmr/m/n/10 ^^L (ligature fi)
@@ -316,8 +316,8 @@ Package zref-clever Warning: Reference property 'subref' undefined for label
 {}{table.caption.3}{\group_begin: a\group_end: } and\nobreakspace
 \__zrefclever_hyperlink:nnn {}{table.caption.3}{\group_begin: b\group_end: }.
 <recently read> }
-l. ......x{\zcref[ref=subref]{tab:1a,tab:1b,tab:1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x79.25006
 .\OT1/cmr/m/n/10 t
@@ -358,8 +358,8 @@ Package zref-clever Warning: Reference property 'subref' undefined for label
 {}{figure.caption.4}{\group_begin: a\group_end: } and\nobreakspace
 \__zrefclever_hyperlink:nnn {}{figure.caption.4}{\group_begin: b\group_end: }.
 <recently read> }
-l. ......x{\zcref[ref=subref]{fig:2a,fig:2b,fig:2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x82.05562
 .\OT1/cmr/m/n/10 ^^L (ligature fi)

@@ -10,6 +10,13 @@
 
 \usepackage[T1]{fontenc}
 
+% Ensure the same font across check engines
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage[french,ngerman]{babel}
 
 \usepackage{zref-clever}
@@ -22,24 +29,33 @@
 
 \ExplSyntaxOn
 \makeatletter
-\tl_show:N \l__zrefclever_current_language_tl
-\tl_show:N \l__zrefclever_main_language_tl
-\tl_show:N \l__zrefclever_ref_language_tl
-\tl_show:N \languagename
-\tl_show:N \bbl@main@language
+\renewcommand{\testtmp}{ \tl_show:N \l__zrefclever_current_language_tl }
+\testtmp
+\renewcommand{\testtmp}{ \tl_show:N \l__zrefclever_main_language_tl }
+\testtmp
+\renewcommand{\testtmp}{ \tl_show:N \l__zrefclever_ref_language_tl }
+\testtmp
+\renewcommand{\testtmp}{ \tl_show:N \languagename }
+\testtmp
+\renewcommand{\testtmp}{ \tl_show:N \bbl@main@language }
+\testtmp
 \makeatother
 \ExplSyntaxOff
 
 \section{Section 1}
 \zlabel{sec:section-1}
 
-\setbox0=\hbox{\zcref{sec:section-1}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 
 \selectlanguage{french}
 
-\setbox0=\hbox{\zcref{sec:section-1}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 

@@ -7,8 +7,8 @@ Don't change this file in any respect.
 {{(A)}}\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{Item.4}{\group_begin: {{(i)}}\group_end: }.
 <recently read> }
-l. ......=\hbox{\zcref{item-1,item-2,item-3,item-4}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
 \hbox(7.5+2.5)x111.72244
 .\OT1/cmr/m/n/10 i

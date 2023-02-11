@@ -10,8 +10,8 @@ TEST 1: amsmath how to
 {}{equation.1.2}{\group_begin: 2\group_end: }) and\nobreakspace
 (\__zrefclever_hyperlink:nnn {}{equation.1.2b}{\group_begin: 2b\group_end: }).
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:1,eq:2,eq:3,eq:3b}
-                                                }
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
 \hbox(7.5+2.5)x144.77812
 .\OT1/cmr/m/n/10 e

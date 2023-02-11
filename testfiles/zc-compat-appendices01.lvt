@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{appendix}
 
 \usepackage{zref-clever}
@@ -106,21 +114,36 @@
 \makeatletter
 \cs_show:N \appendix
 \cs_if_exist:cTF { c@zc@appendix }
-  { \typeout { zc@appendix~counter~is~defined } }
-  { \typeout { zc@appendix~counter~not~defined } }
+  {
+    \renewcommand{\testtmp}{ \typeout { zc@appendix~counter~is~defined } }
+    \testtmp
+  }
+  {
+    \renewcommand{\testtmp}{ \typeout { zc@appendix~counter~not~defined } }
+    \testtmp
+  }
 \cs_if_exist:cTF { c@zc@save@appendix }
-  { \typeout { zc@save@appendix~counter~is~defined } }
-  { \typeout { zc@save@appendix~counter~not~defined } }
-\prop_show:N \l__zrefclever_counter_resetby_prop
+  {
+    \renewcommand{\testtmp}{ \typeout { zc@save@appendix~counter~is~defined } }
+    \testtmp
+  }
+  {
+    \renewcommand{\testtmp}{ \typeout { zc@save@appendix~counter~not~defined } }
+    \testtmp
+  }
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
+\testtmp
 \ShowHook { cmd / appendix / before }
 \ShowHook { env / appendices / begin }
 \ShowHook { env / appendices / end }
 \ShowHook { env / subappendices / begin }
 \begin{appendices}
-  \prop_show:N \l__zrefclever_counter_type_prop
+  \renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+  \testtmp
 \end{appendices}
 \begin{subappendices}
-  \prop_show:N \l__zrefclever_counter_type_prop
+  \renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+  \testtmp
 \end{subappendices}
 \makeatother
 \ExplSyntaxOff
@@ -129,9 +152,11 @@
 \newoptblock{Subappendices}
 
 \BEGINTEST{Reference: sectioning commands in subapenddices}
-\setbox0=\hbox{\zcref{sec:section-2.1, sec:subsection-2.1.1,
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-2.1, sec:subsection-2.1.1,
     sec:subsubsection-2.1.1.1, sec:paragraph-2.1.1.1.1,
     sec:subparagraph-2.1.1.1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -139,9 +164,11 @@
 \newoptblock{Appendices}
 
 \BEGINTEST{Reference: sectioning commands in appendices}
-\setbox0=\hbox{\zcref{cha:chapter-3, sec:section-3.1, sec:subsection-3.1.1,
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-3, sec:section-3.1, sec:subsection-3.1.1,
     sec:subsubsection-3.1.1.1, sec:paragraph-3.1.1.1.1,
     sec:subparagraph-3.1.1.1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -149,9 +176,11 @@
 \newoptblock{Appendix}
 
 \BEGINTEST{Reference: sectioning commands after appendix}
-\setbox0=\hbox{\zcref{cha:chapter-4, sec:section-4.1, sec:subsection-4.1.1,
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-4, sec:section-4.1, sec:subsection-4.1.1,
     sec:subsubsection-4.1.1.1, sec:paragraph-4.1.1.1.1,
     sec:subparagraph-4.1.1.1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

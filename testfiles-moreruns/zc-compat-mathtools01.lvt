@@ -2,6 +2,14 @@
 
 \input{regression-test}
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 \usepackage{amsmath}
@@ -24,10 +32,17 @@
 
 \BEGINTEST{mathtools module}
 \ExplSyntaxOn
-\bool_show:N \l__zrefclever_mathtools_showonlyrefs_bool
+\renewcommand{\testtmp}{ \bool_show:N \l__zrefclever_mathtools_showonlyrefs_bool }
+\testtmp
 \cs_if_exist:NTF \__zrefclever_mathtools_showonlyrefs:n
-  { \cs_show:N \__zrefclever_mathtools_showonlyrefs:n }
-  { \typeout { __zrefclever_mathtools_showonlyrefs:n~not~defined } }
+  {
+    \renewcommand{\testtmp}{ \cs_show:N \__zrefclever_mathtools_showonlyrefs:n }
+    \testtmp
+  }
+  {
+    \renewcommand{\testtmp}{ \typeout { __zrefclever_mathtools_showonlyrefs:n~not~defined } }
+    \testtmp
+  }
 \ExplSyntaxOff
 \ENDTEST
 

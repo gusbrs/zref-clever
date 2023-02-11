@@ -8,27 +8,37 @@ TEST 1: Reference: dmath
 1\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{equation.1.2}{\group_begin: 2\group_end: }).
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:1,eq:2}
-                                     }
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
-\hbox(7.5+2.49998)x93.12
-.\TU/lmr/m/n/10 equations
+\hbox(7.5+2.5)x93.11131
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 q
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 s
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 (
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 1
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(equation.1.1)>>>>}
+.\OT1/cmr/m/n/10 1
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 )
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 and
+.\OT1/cmr/m/n/10 )
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 (
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 2
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 (
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(equation.1.2)>>>>}
+.\OT1/cmr/m/n/10 2
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 )
+.\OT1/cmr/m/n/10 )
 ! OK.
 l. ...\showbox0
 ============================================================

@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 \usepackage{enumitem}
@@ -24,7 +32,8 @@
 
 \usepackage{hyperref}
 
-\ExplSyntaxOn \bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
 \ExplSyntaxOff
 
 \begin{document}
@@ -60,13 +69,17 @@
 
 \BEGINTEST{enumitem module}
 \ExplSyntaxOn
-\prop_show:N \l__zrefclever_counter_type_prop
-\prop_show:N \l__zrefclever_counter_resetby_prop
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+\testtmp
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
+\testtmp
 \ExplSyntaxOff
 \ENDTEST
 
 \BEGINTEST{Reference: enumitem}
-\setbox0=\hbox{\zcref{enum1,enum2,enum3,enum4,enum5,enum6,enum7}}
+\renewcommand{\testtmp}{%
+  \zcref{enum1,enum2,enum3,enum4,enum5,enum6,enum7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

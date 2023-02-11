@@ -6,8 +6,8 @@ TEST 1: refbounds-first-sg
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{sec:section-1.3}
-                                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x135.77808
 .\OT1/cmr/m/n/10 s
@@ -51,8 +51,8 @@ l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x135.77808
 .\OT1/cmr/m/n/10 s
@@ -97,8 +97,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.4\group_end: .
 <recently read> }
-l. ......{\zcref{sec:section-1.1, sec:section-1.4}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -129,8 +129,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.1, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -161,8 +161,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.2, sec:section-1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -192,8 +192,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -223,8 +223,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.2, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -263,8 +263,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -303,8 +303,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -341,8 +341,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......-1.3a, sec:section-1.3b, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -380,8 +380,8 @@ l. ...\showbox0
 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.3, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -427,8 +427,8 @@ l. ...\showbox0
 and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -474,8 +474,8 @@ l. ...\showbox0
 to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.4, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -523,8 +523,8 @@ TEST 2: refbounds-first
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{sec:section-1.3}
-                                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -544,8 +544,8 @@ l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -566,8 +566,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.4\group_end: .
 <recently read> }
-l. ......{\zcref{sec:section-1.1, sec:section-1.4}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -598,8 +598,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.1, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -630,8 +630,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.2, sec:section-1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -661,8 +661,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -692,8 +692,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.2, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -732,8 +732,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -772,8 +772,8 @@ l. ...\showbox0
 \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*],
 \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x196.94487
 .\OT1/cmr/m/n/10 s
@@ -834,8 +834,8 @@ l. ...\showbox0
 \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*],
 \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......-1.3a, sec:section-1.3b, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x196.94487
 .\OT1/cmr/m/n/10 s
@@ -897,8 +897,8 @@ l. ...\showbox0
 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.3, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -944,8 +944,8 @@ l. ...\showbox0
 \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: 
 to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x225.27826
 .\OT1/cmr/m/n/10 s
@@ -1015,8 +1015,8 @@ l. ...\showbox0
 \group_begin: 1.3\group_end:  to\nobreakspace \group_begin: 1.5\group_end: ,
 and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.4, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x225.27826
 .\OT1/cmr/m/n/10 s
@@ -1088,8 +1088,8 @@ TEST 3: refbounds-first-pb
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{sec:section-1.3}
-                                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -1109,8 +1109,8 @@ l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -1131,8 +1131,8 @@ l. ...\showbox0
 \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*]
 and\nobreakspace \group_begin: 1.4\group_end: .
 <recently read> }
-l. ......{\zcref{sec:section-1.1, sec:section-1.4}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x175.27815
 .\OT1/cmr/m/n/10 s
@@ -1187,8 +1187,8 @@ l. ...\showbox0
 \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*]
 and\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ......-1.1, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x175.27815
 .\OT1/cmr/m/n/10 s
@@ -1243,8 +1243,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.2, sec:section-1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -1274,8 +1274,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -1305,8 +1305,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.2, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -1346,8 +1346,8 @@ l. ...\showbox0
 and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x203.61154
 .\OT1/cmr/m/n/10 s
@@ -1410,8 +1410,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -1448,8 +1448,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......-1.3a, sec:section-1.3b, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -1487,8 +1487,8 @@ l. ...\showbox0
 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.3, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -1534,8 +1534,8 @@ l. ...\showbox0
 and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -1581,8 +1581,8 @@ l. ...\showbox0
 to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.4, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -1630,8 +1630,8 @@ TEST 4: refbounds-first-rb
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{sec:section-1.3}
-                                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -1651,8 +1651,8 @@ l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -1673,8 +1673,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.4\group_end: .
 <recently read> }
-l. ......{\zcref{sec:section-1.1, sec:section-1.4}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -1705,8 +1705,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.1, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -1737,8 +1737,8 @@ l. ...\showbox0
 \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*]
 to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.2, sec:section-1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x168.05591
 .\OT1/cmr/m/n/10 s
@@ -1792,8 +1792,8 @@ l. ...\showbox0
 \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*]
 to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x168.05591
 .\OT1/cmr/m/n/10 s
@@ -1848,8 +1848,8 @@ l. ...\showbox0
 to\nobreakspace \group_begin: 1.3\group_end:  and\nobreakspace \group_begin:
 1.5\group_end: .
 <recently read> }
-l. ......on-1.2, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x203.61154
 .\OT1/cmr/m/n/10 s
@@ -1912,8 +1912,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -1952,8 +1952,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -1990,8 +1990,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......-1.3a, sec:section-1.3b, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -2029,8 +2029,8 @@ l. ...\showbox0
 to\nobreakspace \group_begin: 1.3\group_end: , \group_begin: 1.5\group_end: ,
 and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.3, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x225.27826
 .\OT1/cmr/m/n/10 s
@@ -2100,8 +2100,8 @@ l. ...\showbox0
 and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -2147,8 +2147,8 @@ l. ...\showbox0
 to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.4, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -2196,8 +2196,8 @@ TEST 5: refbounds-mid
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{sec:section-1.3}
-                                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -2217,8 +2217,8 @@ l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -2239,8 +2239,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.4\group_end: .
 <recently read> }
-l. ......{\zcref{sec:section-1.1, sec:section-1.4}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -2271,8 +2271,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.1, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -2303,8 +2303,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.2, sec:section-1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -2334,8 +2334,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -2365,8 +2365,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.2, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -2405,8 +2405,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -2445,8 +2445,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , [pre*][pre]\group_begin:
 1.3\group_end: [pos][pos*], and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x196.94487
 .\OT1/cmr/m/n/10 s
@@ -2507,8 +2507,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , [pre*][pre]\group_begin:
 1.3\group_end: [pos][pos*], and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......-1.3a, sec:section-1.3b, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x196.94487
 .\OT1/cmr/m/n/10 s
@@ -2570,8 +2570,8 @@ l. ...\showbox0
 1.3\group_end: , [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*],
 and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.3, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x225.27826
 .\OT1/cmr/m/n/10 s
@@ -2641,8 +2641,8 @@ l. ...\showbox0
 1.3\group_end: [pos][pos*], and\nobreakspace \group_begin: 1.5\group_end: 
 to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x225.27826
 .\OT1/cmr/m/n/10 s
@@ -2712,8 +2712,8 @@ l. ...\showbox0
 to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.4, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -2761,8 +2761,8 @@ TEST 6: refbounds-mid-rb
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{sec:section-1.3}
-                                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -2782,8 +2782,8 @@ l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -2804,8 +2804,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.4\group_end: .
 <recently read> }
-l. ......{\zcref{sec:section-1.1, sec:section-1.4}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -2836,8 +2836,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.1, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -2868,8 +2868,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.2, sec:section-1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -2899,8 +2899,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -2930,8 +2930,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.2, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -2971,8 +2971,8 @@ l. ...\showbox0
 [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*] to\nobreakspace
 \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x203.61154
 .\OT1/cmr/m/n/10 s
@@ -3035,8 +3035,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -3073,8 +3073,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......-1.3a, sec:section-1.3b, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -3112,8 +3112,8 @@ l. ...\showbox0
 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.3, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -3159,8 +3159,8 @@ l. ...\showbox0
 and\nobreakspace [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*]
 to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x225.27826
 .\OT1/cmr/m/n/10 s
@@ -3230,8 +3230,8 @@ l. ...\showbox0
 1.3\group_end: [pos][pos*] to\nobreakspace \group_begin: 1.5\group_end: ,
 and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.4, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x225.27826
 .\OT1/cmr/m/n/10 s
@@ -3303,8 +3303,8 @@ TEST 7: refbounds-mid-re
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{sec:section-1.3}
-                                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -3324,8 +3324,8 @@ l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -3346,8 +3346,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.4\group_end: .
 <recently read> }
-l. ......{\zcref{sec:section-1.1, sec:section-1.4}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -3378,8 +3378,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.1, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -3410,8 +3410,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.2, sec:section-1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -3441,8 +3441,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -3473,8 +3473,8 @@ l. ...\showbox0
 [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*] and\nobreakspace
 \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.2, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x203.61154
 .\OT1/cmr/m/n/10 s
@@ -3537,8 +3537,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -3577,8 +3577,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -3615,8 +3615,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......-1.3a, sec:section-1.3b, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -3654,8 +3654,8 @@ l. ...\showbox0
 [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*], \group_begin:
 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.3, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x225.27826
 .\OT1/cmr/m/n/10 s
@@ -3725,8 +3725,8 @@ l. ...\showbox0
 and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -3772,8 +3772,8 @@ l. ...\showbox0
 to\nobreakspace [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*],
 and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.4, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x225.27826
 .\OT1/cmr/m/n/10 s
@@ -3845,8 +3845,8 @@ TEST 8: refbounds-last
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{sec:section-1.3}
-                                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -3866,8 +3866,8 @@ l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -3888,8 +3888,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.4\group_end: .
 <recently read> }
-l. ......{\zcref{sec:section-1.1, sec:section-1.4}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -3920,8 +3920,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.1, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -3952,8 +3952,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.2, sec:section-1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -3983,8 +3983,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -4014,8 +4014,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.2, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -4054,8 +4054,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -4094,8 +4094,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*].
 <recently read> }
-l. ......on-1.1, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x196.94487
 .\OT1/cmr/m/n/10 s
@@ -4156,8 +4156,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*].
 <recently read> }
-l. ......-1.3a, sec:section-1.3b, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x196.94487
 .\OT1/cmr/m/n/10 s
@@ -4219,8 +4219,8 @@ l. ...\showbox0
 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace
 [pre*][pre]\group_begin: 1.7\group_end: [pos][pos*].
 <recently read> }
-l. ......on-1.3, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x225.27826
 .\OT1/cmr/m/n/10 s
@@ -4290,8 +4290,8 @@ l. ...\showbox0
 and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -4337,8 +4337,8 @@ l. ...\showbox0
 to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace
 [pre*][pre]\group_begin: 1.7\group_end: [pos][pos*].
 <recently read> }
-l. ......on-1.4, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x225.27826
 .\OT1/cmr/m/n/10 s
@@ -4410,8 +4410,8 @@ TEST 9: refbounds-last-pe
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{sec:section-1.3}
-                                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -4431,8 +4431,8 @@ l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -4453,8 +4453,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace
 [pre*][pre]\group_begin: 1.4\group_end: [pos][pos*].
 <recently read> }
-l. ......{\zcref{sec:section-1.1, sec:section-1.4}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x175.27815
 .\OT1/cmr/m/n/10 s
@@ -4509,8 +4509,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace
 [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
 <recently read> }
-l. ......-1.1, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x175.27815
 .\OT1/cmr/m/n/10 s
@@ -4565,8 +4565,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.2, sec:section-1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -4596,8 +4596,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -4628,8 +4628,8 @@ l. ...\showbox0
 1.3\group_end:  and\nobreakspace [pre*][pre]\group_begin: 1.5\group_end:
 [pos][pos*].
 <recently read> }
-l. ......on-1.2, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(7.5+2.5)x203.61154
 .\OT1/cmr/m/n/10 s
@@ -4692,8 +4692,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -4732,8 +4732,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -4770,8 +4770,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......-1.3a, sec:section-1.3b, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -4809,8 +4809,8 @@ l. ...\showbox0
 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.3, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -4856,8 +4856,8 @@ l. ...\showbox0
 and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -4903,8 +4903,8 @@ l. ...\showbox0
 to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.4, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -4952,8 +4952,8 @@ TEST 10: refbounds-last-re
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{sec:section-1.3}
-                                            }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -4973,8 +4973,8 @@ l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
 \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\OT1/cmr/m/n/10 s
@@ -4995,8 +4995,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.4\group_end: .
 <recently read> }
-l. ......{\zcref{sec:section-1.1, sec:section-1.4}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -5027,8 +5027,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......-1.1, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -5059,8 +5059,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace
 [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
 <recently read> }
-l. ......on-1.1, sec:section-1.2, sec:section-1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(7.5+2.5)x168.05591
 .\OT1/cmr/m/n/10 s
@@ -5114,8 +5114,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace
 [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
 <recently read> }
-l. ......-1.3, sec:section-1.3a, sec:section-1.3b}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(7.5+2.5)x168.05591
 .\OT1/cmr/m/n/10 s
@@ -5169,8 +5169,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.2, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -5210,8 +5210,8 @@ l. ...\showbox0
 1.5\group_end:  to\nobreakspace [pre*][pre]\group_begin: 1.7\group_end:
 [pos][pos*].
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(7.5+2.5)x203.61154
 .\OT1/cmr/m/n/10 s
@@ -5274,8 +5274,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......on-1.1, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -5312,8 +5312,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
 and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
-l. ......-1.3a, sec:section-1.3b, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -5351,8 +5351,8 @@ l. ...\showbox0
 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.3, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s
@@ -5398,8 +5398,8 @@ l. ...\showbox0
 and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace
 [pre*][pre]\group_begin: 1.7\group_end: [pos][pos*].
 <recently read> }
-l. ......on-1.5, sec:section-1.6, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(7.5+2.5)x225.27826
 .\OT1/cmr/m/n/10 s
@@ -5469,8 +5469,8 @@ l. ...\showbox0
 to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
 1.7\group_end: .
 <recently read> }
-l. ......on-1.4, sec:section-1.5, sec:section-1.7}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                              }
 > \box...=
 \hbox(6.94444+1.94444)x135.66693
 .\OT1/cmr/m/n/10 s

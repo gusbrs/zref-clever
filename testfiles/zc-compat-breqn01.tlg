@@ -5,7 +5,7 @@ TEST 1: breqn module
 ============================================================
 > \l__zrefclever_current_counter_tl=parentequation.
 <recently read> }
-l. ......l_show:N \l__zrefclever_current_counter_tl
+l. ...  \testtmp
 The property list \l__zrefclever_counter_type_prop contains the pairs (without
 outer braces):
 >  {subsection}  =>  {section}
@@ -18,7 +18,7 @@ outer braces):
 >  {mpfootnote}  =>  {footnote}
 >  {parentequation}  =>  {equation}.
 <recently read> }
-l. ......op_show:N \l__zrefclever_counter_type_prop
+l. ...  \testtmp
 The property list \l__zrefclever_counter_resetby_prop contains the pairs
 (without outer braces):
 >  {enumii}  =>  {enumi}
@@ -26,7 +26,7 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 >  {enumiv}  =>  {enumiii}
 >  {equation}  =>  {parentequation}.
 <recently read> }
-l. ......show:N \l__zrefclever_counter_resetby_prop
+l. ...  \testtmp
 -> The generic hook 'env/dmath/begin':
 > Code chunks:
 >     ---
@@ -76,8 +76,8 @@ TEST 2: Reference: dmath
 2\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{section.1}{\group_begin: 3\group_end: }).
 <recently read> }
-l. ...\setbox0=\hbox{\zcref[nocomp]{eq:1,eq:2,eq:3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x112.00024
 .\OT1/cmr/m/n/10 e
@@ -124,8 +124,8 @@ TEST 3: Reference: dseries
 {}{section.1}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
 4\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:4}
-                                 }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x53.61124
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
@@ -153,8 +153,8 @@ TEST 4: Reference: dgroup
 {}{section.1}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
 5\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:5}
-                                 }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x53.61124
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
@@ -180,8 +180,8 @@ l. ...\showbox0
 5b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{section.1}{\group_begin: 5c\group_end: }).
 <recently read> }
-l. ......0=\hbox{\zcref[nocomp]{eq:5a,eq:5b,eq:5c}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x127.00027
 .\OT1/cmr/m/n/10 e
@@ -233,8 +233,8 @@ a\group_end: }), (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin:
 b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{section.1}{\group_begin: c\group_end: }).
 <recently read> }
-l. ......cref[nocomp,ref=subeq]{eq:5a,eq:5b,eq:5c}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x112.00023
 .\OT1/cmr/m/n/10 e

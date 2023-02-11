@@ -7,14 +7,14 @@ TEST 1: Option: namesep=...
 {}{chapter.1}{\group_begin: chapter\group_end: \qquad \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......box{\zcref{sec:section-1.1, cha:chapter-1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
 {}{section.1.1}{\group_begin: section\group_end: \qquad \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ......box{\zcref{sec:section-1.1, cha:chapter-1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x143.13914
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -61,8 +61,8 @@ TEST 2: Option: pairsep=..., listsep=..., lastsep=...
 2.1\group_end: }~AND~\__zrefclever_hyperlink:nnn {}{section.3.1}{\group_begin:
 3.1\group_end: }.
 <recently read> }
-l. ...    sec:section-3.1}
-                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.83331+1.94444)x135.52803
 .\OT1/cmr/m/n/10 s
@@ -115,8 +115,8 @@ l. ...\showbox0
 1.1\group_end: }~\&~\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin:
 1.2\group_end: }.
 <recently read> }
-l. ......{\zcref{sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x77.33347
 .\OT1/cmr/m/n/10 s
@@ -155,8 +155,8 @@ TEST 3: Option: rangesep=...
 1.1\group_end: }\textrightarrow {}\__zrefclever_hyperlink:nnn
 {}{section.1.4}{\group_begin: 1.4\group_end: }.
 <recently read> }
-l. ...    sec:section-1.4}
-                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x72.88657
 .\OT1/cmr/m/n/10 s
@@ -190,8 +190,8 @@ TEST 4: Option: refbounds=...
 \nobreakspace [\group_begin: 1.1\group_end: ] and\nobreakspace [\group_begin:
 1.2\group_end: ].
 <recently read> }
-l. ......\zcref*{sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x96.77797
 .\OT1/cmr/m/n/10 s
@@ -226,8 +226,8 @@ l. ...\showbox0
 \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
 1.3\group_end: .
 <recently read> }
-l. ......ef*{eq:equation-1.1.2, eq:equation-1.1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x93.11131
 .\OT1/cmr/m/n/10 e
@@ -263,8 +263,8 @@ TEST 5: Option: [Nn]ame-[sg/pl](-ab)=...
 {}{section.1.1}{\group_begin: zSection\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ......box{\zcref[cap,noabbrev]{sec:section-1.1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.83331+0.0)x52.22232
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
@@ -288,8 +288,8 @@ l. ...\showbox0
 {}{section.1.1}{\group_begin: zsection\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ......0=\hbox{\zcref[noabbrev]{sec:section-1.1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x50.61119
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
@@ -314,8 +314,8 @@ l. ...\showbox0
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......abbrev]{sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x91.7224
 .\OT1/cmr/m/n/10 z
@@ -352,8 +352,8 @@ l. ...\showbox0
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......abbrev]{sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x90.11127
 .\OT1/cmr/m/n/10 z
@@ -389,8 +389,8 @@ l. ...\showbox0
 {}{section.1.1}{\group_begin: zSec.\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ......\hbox{\zcref[cap,abbrev]{sec:section-1.1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.83331+0.0)x37.77783
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
@@ -411,8 +411,8 @@ l. ...\showbox0
 {}{section.1.1}{\group_begin: zsec.\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ......ox0=\hbox{\zcref[abbrev]{sec:section-1.1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.44444+0.0)x36.1667
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
@@ -434,8 +434,8 @@ l. ...\showbox0
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......abbrev]{sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x77.27791
 .\OT1/cmr/m/n/10 z
@@ -469,8 +469,8 @@ l. ...\showbox0
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......abbrev]{sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x75.66678
 .\OT1/cmr/m/n/10 z
@@ -507,15 +507,15 @@ TEST 6: Option: namefont=...
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \bfseries
 sections\group_end: \nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.1}{\group_begin: 1.1\group_end: } and\nobreakspace
 \__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x154.56526
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -569,15 +569,15 @@ l. ...\showbox0
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \itshape
 sections\group_end: \nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.1}{\group_begin: 1.1\group_end: } and\nobreakspace
 \__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x149.29442
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -632,15 +632,15 @@ l. ...\showbox0
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ...    sec:section-1.2}
-                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: \em sections\group_end:
 \nobreakspace \__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin:
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ...    sec:section-1.2}
-                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x150.91594
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -697,15 +697,15 @@ TEST 7: Option: reffont=...
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin:
 \bfseries 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: \bfseries 1.2\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x153.13892
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -759,15 +759,15 @@ l. ...\showbox0
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin:
 \itshape 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: \itshape 1.2\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x150.32782
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -821,15 +821,15 @@ l. ...\showbox0
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ...    sec:section-1.2}
-                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: \em
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: \em 1.2\group_end: }.
 <recently read> }
-l. ...    sec:section-1.2}
-                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x149.88254
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -887,15 +887,15 @@ TEST 8: Option: cap=...
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: Sections\group_end:
 \nobreakspace \__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin:
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x150.91695
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -949,15 +949,15 @@ l. ...\showbox0
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin:
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x149.30582
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -1011,15 +1011,15 @@ l. ...\showbox0
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: Sections\group_end:
 \nobreakspace \__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin:
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x150.91695
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -1073,15 +1073,15 @@ l. ...\showbox0
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin:
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x149.30582
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -1135,15 +1135,15 @@ l. ...\showbox0
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
 \nobreakspace \__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin:
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x149.30582
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -1197,15 +1197,15 @@ l. ...\showbox0
 {}{chapter.1}{\group_begin: Chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: Sections\group_end:
 \nobreakspace \__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin:
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x153.97252
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -1262,15 +1262,15 @@ TEST 9: Option: abbrev=...
 {}{figure.1.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. .......1, eq:equation-1.1.2, eq:equation-1.1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: eqs.\group_end:
 \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin:
 1.2\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{equation.1.1.3}{\group_begin: 1.3\group_end: }).
 <recently read> }
-l. .......1, eq:equation-1.1.2, eq:equation-1.1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x147.02808
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -1323,15 +1323,15 @@ l. ...\showbox0
 {}{figure.1.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. .......1, eq:equation-1.1.2, eq:equation-1.1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
 \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin:
 1.2\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{equation.1.1.3}{\group_begin: 1.3\group_end: }).
 <recently read> }
-l. .......1, eq:equation-1.1.2, eq:equation-1.1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x172.02815
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -1389,15 +1389,15 @@ l. ...\showbox0
 {}{figure.1.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. .......1, eq:equation-1.1.2, eq:equation-1.1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: eqs.\group_end:
 \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin:
 1.2\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{equation.1.1.3}{\group_begin: 1.3\group_end: }).
 <recently read> }
-l. .......1, eq:equation-1.1.2, eq:equation-1.1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x147.02808
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -1450,15 +1450,15 @@ l. ...\showbox0
 {}{figure.1.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. .......1, eq:equation-1.1.2, eq:equation-1.1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
 \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin:
 1.2\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{equation.1.1.3}{\group_begin: 1.3\group_end: }).
 <recently read> }
-l. .......1, eq:equation-1.1.2, eq:equation-1.1.3}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x172.02815
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -1516,15 +1516,15 @@ l. ...\showbox0
 {}{figure.1.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ...    eq:equation-1.1.3}
-                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
 \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin:
 1.2\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{equation.1.1.3}{\group_begin: 1.3\group_end: }).
 <recently read> }
-l. ...    eq:equation-1.1.3}
-                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x172.02815
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -1582,15 +1582,15 @@ l. ...\showbox0
 {}{figure.1.1}{\group_begin: fig.\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ...    eq:equation-1.1.3}
-                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: eqs.\group_end:
 \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin:
 1.2\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{equation.1.1.3}{\group_begin: 1.3\group_end: }).
 <recently read> }
-l. ...    eq:equation-1.1.3}
-                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x135.88918
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -1646,8 +1646,8 @@ TEST 10: Option: rangetopair=...
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......[range]{sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -1683,8 +1683,8 @@ l. ...\showbox0
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......[range]{sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -1720,8 +1720,8 @@ l. ...\showbox0
 1.1\group_end: } to\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......[range]{sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -1756,8 +1756,8 @@ l. ...\showbox0
 1.1\group_end: } to\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......[range]{sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s

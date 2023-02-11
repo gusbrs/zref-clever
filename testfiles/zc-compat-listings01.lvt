@@ -8,13 +8,22 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 \usepackage{listings}
 
 \usepackage{hyperref}
 
-\ExplSyntaxOn \bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
 \ExplSyntaxOff
 
 \begin{document}
@@ -38,8 +47,10 @@
 \BEGINTEST{listings module}
 \ExplSyntaxOn
 \makeatletter
-\prop_show:N \l__zrefclever_counter_type_prop
-\prop_show:N \l__zrefclever_counter_resetby_prop
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+\testtmp
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
+\testtmp
 \cs_show:c { \@lst hk@ PreInit }
 \cs_show:c { \@lst hk@ Init }
 \makeatother
@@ -47,10 +58,14 @@
 \ENDTEST
 
 \BEGINTEST{Reference: lstlisting}
-\setbox0=\hbox{\zcref{useless}}
+\renewcommand{\testtmp}{%
+  \zcref{useless}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref{nothing}}
+\renewcommand{\testtmp}{%
+  \zcref{nothing}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

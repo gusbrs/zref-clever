@@ -24,50 +24,50 @@ LaTeX Info: Redefining \up on input line ....
 Package zref-clever Info: Loaded 'german' language file.
 > \l__zrefclever_current_language_tl=\languagename .
 <recently read> }
-l. ...\tl_show:N \l__zrefclever_current_language_tl
+l. ...\testtmp
 > \l__zrefclever_main_language_tl=\bbl@main@language .
 <recently read> }
-l. ...\tl_show:N \l__zrefclever_main_language_tl
+l. ...\testtmp
 > \l__zrefclever_ref_language_tl=\l__zrefclever_main_language_tl .
 <recently read> }
-l. ...\tl_show:N \l__zrefclever_ref_language_tl
+l. ...\testtmp
 > \languagename=ngerman.
 <recently read> }
-l. ...\tl_show:N \languagename
+l. ...\testtmp
 > \bbl@main@language=ngerman.
 <recently read> }
-l. ...\tl_show:N \bbl@main@language
+l. ...\testtmp
 > \box...=
-\hbox(6.88875+0.0)x51.1668
-.\T1/lmr/m/n/10 A
-.\T1/lmr/m/n/10 b
-.\T1/lmr/m/n/10 s
-.\T1/lmr/m/n/10 c
-.\kern-0.27779
-.\T1/lmr/m/n/10 h
-.\T1/lmr/m/n/10 n
-.\T1/lmr/m/n/10 i
-.\T1/lmr/m/n/10 t
-.\T1/lmr/m/n/10 t
+\hbox(6.8872+0.0)x51.15417
+.\T1/cmr/m/n/10 A
+.\T1/cmr/m/n/10 b
+.\T1/cmr/m/n/10 s
+.\T1/cmr/m/n/10 c
+.\kern-0.27771
+.\T1/cmr/m/n/10 h
+.\T1/cmr/m/n/10 n
+.\T1/cmr/m/n/10 i
+.\T1/cmr/m/n/10 t
+.\T1/cmr/m/n/10 t
 .\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\T1/lmr/m/n/10 1
+.\glue 3.33252 plus 1.66626 minus 1.11084
+.\T1/cmr/m/n/10 1
 ! OK.
 l. ...\showbox0
 > \box...=
-\hbox(6.88875+0.0)x51.1668
-.\T1/lmr/m/n/10 A
-.\T1/lmr/m/n/10 b
-.\T1/lmr/m/n/10 s
-.\T1/lmr/m/n/10 c
-.\kern-0.27779
-.\T1/lmr/m/n/10 h
-.\T1/lmr/m/n/10 n
-.\T1/lmr/m/n/10 i
-.\T1/lmr/m/n/10 t
-.\T1/lmr/m/n/10 t
+\hbox(6.8872+0.0)x51.15417
+.\T1/cmr/m/n/10 A
+.\T1/cmr/m/n/10 b
+.\T1/cmr/m/n/10 s
+.\T1/cmr/m/n/10 c
+.\kern-0.27771
+.\T1/cmr/m/n/10 h
+.\T1/cmr/m/n/10 n
+.\T1/cmr/m/n/10 i
+.\T1/cmr/m/n/10 t
+.\T1/cmr/m/n/10 t
 .\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\T1/lmr/m/n/10 1
+.\glue 3.33252 plus 1.66626 minus 1.11084
+.\T1/cmr/m/n/10 1
 ! OK.
 l. ...\showbox0

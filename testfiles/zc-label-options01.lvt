@@ -8,6 +8,8 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+\newcommand{\testtmp}{}
+
 \usepackage[english]{babel}
 
 \usepackage{zref-clever}
@@ -70,9 +72,11 @@
 \newcounter{foobar}[parentfoobar]
 \TIMO
 \ExplSyntaxOn
-\seq_show:N \l__zrefclever_counter_resetters_seq
+\renewcommand{\testtmp}{ \seq_show:N \l__zrefclever_counter_resetters_seq }
+\testtmp
 \zcsetup{counterresetters=parentfoobar}
-\seq_show:N \l__zrefclever_counter_resetters_seq
+\renewcommand{\testtmp}{ \seq_show:N \l__zrefclever_counter_resetters_seq }
+\testtmp
 \ExplSyntaxOff
 \refstepcounter{foobar}
 \zlabel{foobar}
@@ -88,9 +92,11 @@
 \newcounter{barbaz}
 \TIMO
 \ExplSyntaxOn
-\prop_show:N \l__zrefclever_counter_resetby_prop
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
+\testtmp
 \zcsetup{counterresetby={barbaz=parentbarbaz}}
-\prop_show:N \l__zrefclever_counter_resetby_prop
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
+\testtmp
 \ExplSyntaxOff
 \refstepcounter{barbaz}
 \zlabel{barbaz}

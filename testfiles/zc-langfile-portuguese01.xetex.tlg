@@ -411,9 +411,11 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_proposition_name-sg_tl=proposição.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_portuguese_type_proposition_Name-pl_tl=Proposições.<recently read> }
+> \g__zrefclever_opt_lang_portuguese_type_proposition_Name-pl_tl=Proposições.
+<recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_portuguese_type_proposition_name-pl_tl=proposições.<recently read> }
+> \g__zrefclever_opt_lang_portuguese_type_proposition_name-pl_tl=proposições.
+<recently read> }
 l. ...  }
 The sequence \g__zrefclever_opt_lang_portuguese_type_definition_gender_seq
 contains the items (without outer braces):

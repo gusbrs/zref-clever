@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 % Number all section levels.
@@ -224,11 +232,19 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \BEGINTEST{memoir module}
 \ExplSyntaxOn
 \makeatletter
-\prop_show:N \l__zrefclever_counter_type_prop
-\prop_show:N \l__zrefclever_counter_resetby_prop
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+\testtmp
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
+\testtmp
 \cs_if_exist:NTF \__zrefclever_memoir_both_labels:
-  { \cs_show:N \__zrefclever_memoir_both_labels: }
-  { \typeout { __zrefclever_memoir_both_labels:~not~defined } }
+  {
+    \renewcommand{\testtmp}{ \cs_show:N \__zrefclever_memoir_both_labels: }
+    \testtmp
+  }
+  {
+    \renewcommand{\testtmp}{ \typeout { __zrefclever_memoir_both_labels:~not~defined } }
+    \testtmp
+  }
 \ShowHook { env / sidecaption / begin }
 \ShowHook { env / sidecontcaption / begin }
 \ShowHook { cmd / bitwonumcaption / before }
@@ -238,8 +254,14 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \ShowHook { cmd / bicaption / before }
 \ShowHook { cmd / bicaption / after }
 \zref@ifpropundefined { subcaption }
-  { \typeout { subcaption~property~not~defined } }
-  { \typeout { subcaption~property~is~defined } }
+  {
+    \renewcommand{\testtmp}{ \typeout { subcaption~property~not~defined } }
+    \testtmp
+  }
+  {
+    \renewcommand{\testtmp}{ \typeout { subcaption~property~is~defined } }
+    \testtmp
+  }
 \ShowHook { cmd / @memsubcaption / before }
 \ShowHook { env / minipage / begin }
 \ShowHook { cmd / @makefntext / before }
@@ -252,27 +274,35 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \newoptblock{Subcaption}
 
 \BEGINTEST{Subcaption. Reference: figure}
-\setbox0=\hbox{\zcref{fig:figure-1.1.5, fig:figure-1.1.6, fig:figure-1.1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{fig:figure-1.1.5, fig:figure-1.1.6, fig:figure-1.1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{Subcaption. Reference: subcaption figure}
-\setbox0=\hbox{\zcref[ref=subcaption]{fig:figure-1.1.5, fig:figure-1.1.6,
+\renewcommand{\testtmp}{%
+  \zcref[ref=subcaption]{fig:figure-1.1.5, fig:figure-1.1.6,
     fig:figure-1.1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{Subcaption. Reference: table}
-\setbox0=\hbox{\zcref{tab:table-1.1.6, tab:table-1.1.7, tab:table-1.1.8}}
+\renewcommand{\testtmp}{%
+  \zcref{tab:table-1.1.6, tab:table-1.1.7, tab:table-1.1.8}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{Subcaption. Reference: subcaption table}
-\setbox0=\hbox{\zcref[ref=subcaption]{tab:table-1.1.6, tab:table-1.1.7,
+\renewcommand{\testtmp}{%
+  \zcref[ref=subcaption]{tab:table-1.1.6, tab:table-1.1.7,
     tab:table-1.1.8}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -280,14 +310,18 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \newoptblock{Subbottom}
 
 \BEGINTEST{Subbottom. Reference: figure}
-\setbox0=\hbox{\zcref{fig:figure-1.1.8, fig:figure-1.1.9, fig:figure-1.1.10}}
+\renewcommand{\testtmp}{%
+  \zcref{fig:figure-1.1.8, fig:figure-1.1.9, fig:figure-1.1.10}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{Subbottom. Reference: subcaption figure}
-\setbox0=\hbox{\zcref[ref=subcaption]{fig:figure-1.1.8, fig:figure-1.1.9,
+\renewcommand{\testtmp}{%
+  \zcref[ref=subcaption]{fig:figure-1.1.8, fig:figure-1.1.9,
     fig:figure-1.1.10}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -295,7 +329,9 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \newoptblock{Sidecaption}
 
 \BEGINTEST{Sidecaption. Reference: figure}
-\setbox0=\hbox{\zcref{fig:figure-1.1.11}}
+\renewcommand{\testtmp}{%
+  \zcref{fig:figure-1.1.11}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -303,8 +339,10 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \newoptblock{Bilingual captions}
 
 \BEGINTEST{Bilingual captions. Reference: figure}
-\setbox0=\hbox{\zcref{fig:figure-1.1.12, fig:figure-1.1.13,
+\renewcommand{\testtmp}{%
+  \zcref{fig:figure-1.1.12, fig:figure-1.1.13,
     fig:figure-1.1.14}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -312,7 +350,9 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \newoptblock{Footnote}
 
 \BEGINTEST{Reference: footnote}
-\setbox0=\hbox{\zcref{fn:1}}
+\renewcommand{\testtmp}{%
+  \zcref{fn:1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -320,7 +360,9 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \newoptblock{Mini-page footnote}
 
 \BEGINTEST{Reference: mpfootnote}
-\setbox0=\hbox{\zcref{fn:2}}
+\renewcommand{\testtmp}{%
+  \zcref{fn:2}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -328,7 +370,9 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \newoptblock{Verbatim footnote}
 
 \BEGINTEST{Reference: verbatim footnote}
-\setbox0=\hbox{\zcref{fn:3}}
+\renewcommand{\testtmp}{%
+  \zcref{fn:3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -336,7 +380,9 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \newoptblock{Side footnote}
 
 \BEGINTEST{Reference: side footnote}
-\setbox0=\hbox{\zcref{fn:4}}
+\renewcommand{\testtmp}{%
+  \zcref{fn:4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -344,7 +390,9 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \newoptblock{Page note}
 
 \BEGINTEST{Reference: page (end) note}
-\setbox0=\hbox{\zcref{fn:5}}
+\renewcommand{\testtmp}{%
+  \zcref{fn:5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -352,7 +400,9 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \newoptblock{Verse}
 
 \BEGINTEST{Reference: verse poemline}
-\setbox0=\hbox{\zcref{vs:verse-1.1-1}}
+\renewcommand{\testtmp}{%
+  \zcref{vs:verse-1.1-1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -360,9 +410,11 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \newoptblock{Subappendices}
 
 \BEGINTEST{Reference: sectioning commands in subapenddices}
-\setbox0=\hbox{\zcref{sec:section-2.1, sec:subsection-2.1.1,
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-2.1, sec:subsection-2.1.1,
     sec:subsubsection-2.1.1.1, sec:paragraph-2.1.1.1.1,
     sec:subparagraph-2.1.1.1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -370,9 +422,11 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \newoptblock{Appendices}
 
 \BEGINTEST{Reference: sectioning commands in appendices}
-\setbox0=\hbox{\zcref{cha:chapter-3, sec:section-3.1, sec:subsection-3.1.1,
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-3, sec:section-3.1, sec:subsection-3.1.1,
     sec:subsubsection-3.1.1.1, sec:paragraph-3.1.1.1.1,
     sec:subparagraph-3.1.1.1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -380,9 +434,11 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \newoptblock{Appendix}
 
 \BEGINTEST{Reference: sectioning commands after appendix}
-\setbox0=\hbox{\zcref{cha:chapter-4, sec:section-4.1, sec:subsection-4.1.1,
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-4, sec:section-4.1, sec:subsection-4.1.1,
     sec:subsubsection-4.1.1.1, sec:paragraph-4.1.1.1.1,
     sec:subparagraph-4.1.1.1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

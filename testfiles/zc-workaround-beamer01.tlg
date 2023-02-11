@@ -42,7 +42,7 @@ l. ...\end{frame}
 .\OT1/cmss/m/n/10.95 1
 .\pdfendlink
 ! OK.
-\beamer@doifinframe ... {tab:1,fig:1}} \showbox 0 
+\beamer@doifinframe ...box {\testtmp } \showbox 0 
                                                   \box 0 \ENDTEST \par \OMIT...
 l. ...\end{frame}
 ============================================================

@@ -6,20 +6,20 @@ TEST 1: amsmath module
 > \__zrefclever_ltxlabel:n=macro:#1->\__zrefclever_orig_ltxlabel:n
 {#1}\zref@wrapper@babel \zref@label {#1}.
 <recently read> }
-l. ......{ __zrefclever_ltxlabel:n~not~defined } }
+l. ...  }
 > \__zrefclever_orig_ltxlabel:n=macro:#1->\@bsphack \begingroup \def
 \label@name {#1}\label@hook \protected@write \@auxout {}{\string \newlabel
 {#1}{{\@currentlabel }{\thepage }{\@currentlabelname }{\@currentHref
 }{}}}\endgroup \@esphack .
 <recently read> }
-l. ......refclever_orig_ltxlabel:n~not~defined } }
+l. ...  }
 > \ltx@label=macro:#1->\__zrefclever_orig_ltxlabel:n {#1}\zref@wrapper@babel
 \zref@label {#1}.
 <recently read> }
 l. ...\cs_show:N \ltx@label
 > \l__zrefclever_current_counter_tl=parentequation.
 <recently read> }
-l. ......_show:N \l__zrefclever_current_counter_tl
+l. ...  \testtmp
 The property list \l__zrefclever_counter_type_prop contains the pairs (without
 outer braces):
 >  {subsection}  =>  {section}
@@ -32,7 +32,7 @@ outer braces):
 >  {mpfootnote}  =>  {footnote}
 >  {parentequation}  =>  {equation}.
 <recently read> }
-l. ......p_show:N \l__zrefclever_counter_type_prop
+l. ...  \testtmp
 The property list \l__zrefclever_counter_resetby_prop contains the pairs
 (without outer braces):
 >  {enumii}  =>  {enumi}
@@ -40,10 +40,10 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 >  {enumiv}  =>  {enumiii}
 >  {equation}  =>  {parentequation}.
 <recently read> }
-l. ......how:N \l__zrefclever_counter_resetby_prop
+l. ...  \testtmp
 > \l__zrefclever_amsmath_subequations_bool=true.
 <recently read> }
-l. ...... \l__zrefclever_amsmath_subequations_bool
+l. ...  \testtmp
 -> The generic hook 'env/equation/begin':
 > Code chunks:
 >     ---
@@ -234,8 +234,8 @@ TEST 2: Reference: equation
 {}{equation.1.1}{\group_begin: equation\group_end: \nobreakspace
 (\group_begin: 1\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:1}
-                                 }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x53.61124
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1}
@@ -259,8 +259,8 @@ l. ...\showbox0
 {}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace
 (\group_begin: 2\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{compl-gr}
-                                     }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x53.61124
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
@@ -288,8 +288,8 @@ TEST 3: Reference: equation*
 {}{AMS.1}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
 {eq1}\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq1:tag}
-                                    }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x63.33347
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{AMS.1}
@@ -320,8 +320,8 @@ TEST 4: Reference: align
 3\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{equation.1.4}{\group_begin: 4\group_end: }).
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:A, eq:A-2}
-                                         }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x93.11131
 .\OT1/cmr/m/n/10 e
@@ -362,8 +362,8 @@ TEST 5: Reference: align*
 {altag1}\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{AMS.5}{\group_begin: {altag2}\group_end: }).
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{tag:eq:A, tag:eq:A-2}
-                                                 }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x136.44478
 .\OT1/cmr/m/n/10 e
@@ -413,8 +413,8 @@ TEST 6: Reference: alignat
 {}{equation.1.5}{\group_begin: equation\group_end: \nobreakspace
 (\group_begin: 5\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:B}
-                                 }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x53.61124
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.5}
@@ -439,8 +439,8 @@ l. ...\showbox0
 7\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{equation.1.8}{\group_begin: 8\group_end: }).
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:F,eq:G}
-                                      }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x93.11131
 .\OT1/cmr/m/n/10 e
@@ -481,8 +481,8 @@ TEST 7: Reference: alignat*
 {tagalnat1}\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{AMS.9}{\group_begin: {tagalnat2}\group_end: }).
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:C, eq:D}
-                                       }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x165.33376
 .\OT1/cmr/m/n/10 e
@@ -538,8 +538,8 @@ TEST 8: Reference: flalign
 {}{equation.1.9}{\group_begin: equation\group_end: \nobreakspace
 (\group_begin: 9\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:flal1}
-                                     }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x53.61124
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.9}
@@ -567,8 +567,8 @@ TEST 9: Reference: flalign*
 {}{AMS.11}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
 {flal1}\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{tag:eq:flal1}
-                                         }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x66.94461
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{AMS.11}
@@ -599,8 +599,8 @@ TEST 10: Reference: xalignat
 {}{equation.1.11}{\group_begin: equation\group_end: \nobreakspace
 (\group_begin: 11\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:xal1}
-                                    }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x58.61125
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.11}
@@ -629,8 +629,8 @@ TEST 11: Reference: xalignat*
 {}{AMS.13}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
 {xal1}\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{tag:eq:xal1}
-                                        }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x66.66684
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{AMS.13}
@@ -663,8 +663,8 @@ TEST 12: Reference: gather
 14\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{AMS.15}{\group_begin: {\ref *{align:c}$'$}\group_end: }).
 <recently read> }
-l. ......ef[nocomp]{gather:AA,gather:BB,gather:CC}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.51782+2.5)x134.25029
 .\OT1/cmr/m/n/10 e
@@ -720,8 +720,8 @@ TEST 13: Reference: gather*
 {}{AMS.17}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
 {taggath}\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{tag:gather:CC}
-                                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x81.94466
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{AMS.17}
@@ -755,8 +755,8 @@ TEST 14: Reference: multline
 {}{equation.1.15}{\group_begin: equation\group_end: \nobreakspace
 (\group_begin: 15\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:E}
-                                 }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x58.61125
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.15}
@@ -785,8 +785,8 @@ TEST 15: Reference: multline*
 {}{AMS.19}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
 {multln}\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{tag:eq:E}
-                                     }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x77.22241
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{AMS.19}
@@ -820,8 +820,8 @@ TEST 16: Reference: subequations
 {}{equation.1.16}{\group_begin: equation\group_end: \nobreakspace
 (\group_begin: 16\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{subeq:A}
-                                    }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x58.61125
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.16}
@@ -849,8 +849,8 @@ l. ...\showbox0
 (\__zrefclever_hyperlink:nnn {}{equation.1.16c}{\group_begin: 16c\group_end:
 }).
 <recently read> }
-l. ......x{\zcref[nocomp]{align:a,align:b,align:c}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x142.00032
 .\OT1/cmr/m/n/10 e
@@ -902,8 +902,8 @@ l. ...\showbox0
 (\__zrefclever_hyperlink:nnn {}{equation.1.17c}{\group_begin: 17c\group_end:
 }).
 <recently read> }
-l. ......zcref[nocomp]{xalign:a,xalign:b,xalign:c}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x142.00032
 .\OT1/cmr/m/n/10 e
@@ -955,8 +955,8 @@ l. ...\showbox0
 (\__zrefclever_hyperlink:nnn {}{AMS.21}{\group_begin: {\ref
 *{align:c}$'$}\group_end: }).
 <recently read> }
-l. ......zcref[nocomp]{gather:a,gather:b,gather:c}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.51782+2.5)x144.80588
 .\OT1/cmr/m/n/10 e
@@ -1011,8 +1011,8 @@ l. ...\showbox0
 19a\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{equation.1.19b}{\group_begin: 19b\group_end: }).
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{split:x,multline:x}
-                                               }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x113.66693
 .\OT1/cmr/m/n/10 e
@@ -1058,8 +1058,8 @@ a\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.16b}{\group_begin:
 b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{equation.1.16c}{\group_begin: c\group_end: }).
 <recently read> }
-l. ......ocomp,ref=subeq]{align:a,align:b,align:c}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x112.00023
 .\OT1/cmr/m/n/10 e
@@ -1104,8 +1104,8 @@ a\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.17b}{\group_begin:
 b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{equation.1.17c}{\group_begin: c\group_end: }).
 <recently read> }
-l. ......mp,ref=subeq]{xalign:a,xalign:b,xalign:c}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x112.00023
 .\OT1/cmr/m/n/10 e
@@ -1150,8 +1150,8 @@ a\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.18b}{\group_begin:
 b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{AMS.21}{\group_begin: b\group_end: }).
 <recently read> }
-l. ......mp,ref=subeq]{gather:a,gather:b,gather:c}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x113.11136
 .\OT1/cmr/m/n/10 e
@@ -1195,8 +1195,8 @@ l. ...\showbox0
 a\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
 {}{equation.1.19b}{\group_begin: b\group_end: }).
 <recently read> }
-l. ......box{\zcref[ref=subeq]{split:x,multline:x}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x93.66687
 .\OT1/cmr/m/n/10 e

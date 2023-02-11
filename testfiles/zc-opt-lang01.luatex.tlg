@@ -22,26 +22,26 @@ LaTeX Font Info:    ... okay on input line ....
 Package zref-clever Info: Loaded 'english' language file.
 > \l__zrefclever_current_language_tl=english.
 <recently read> }
-l. ...\tl_show:N \l__zrefclever_current_language_tl
+l. ...\testtmp
 > \l__zrefclever_main_language_tl=english.
 <recently read> }
-l. ...\tl_show:N \l__zrefclever_main_language_tl
+l. ...\testtmp
 > \l__zrefclever_ref_language_tl=\l__zrefclever_current_language_tl .
 <recently read> }
-l. ...\tl_show:N \l__zrefclever_ref_language_tl
+l. ...\testtmp
 > \box...=
-\hbox(6.66+0.11)x38.38, direction TLT
-.\TU/lmr/m/n/10 s
-.\TU/lmr/m/n/10 e
-.\TU/lmr/m/n/10 c
+\hbox(6.67859+0.0)x38.38895, direction TLT
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
 .\discretionary (penalty 50)
-..< \TU/lmr/m/n/10 -
-.\TU/lmr/m/n/10 t
-.\TU/lmr/m/n/10 i
-.\TU/lmr/m/n/10 o
-.\TU/lmr/m/n/10 n
+..< \OT1/cmr/m/n/10 -
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
 .\penalty 10000
-.\glue(\spaceskip) 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 1
+.\glue(\spaceskip) 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
 ! OK.
 l. ...\showbox0

@@ -6,8 +6,8 @@ TEST 1: Typeset refs: warn ref undefined
 LaTeX Warning: Reference `undefined' on page 2 undefined on input line ....
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_ref_default: .
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{undefined}
-                                     }
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
 \hbox(6.94444+0.0)x10.86105
 .\hbox(6.94444+0.0)x10.86105
@@ -25,8 +25,8 @@ Package zref-clever Warning: Reference format option 'name-sg' undefined for
 \nobreakspace \__zrefclever_hyperlink:nnn {}{thm.1.1.1}{\group_begin:
 1.1.1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:theorem-1.1.1}
-                                            }
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
 \hbox(6.94444+0.0)x34.75
 .\hbox(6.94444+0.0)x10.86105
@@ -51,8 +51,8 @@ TEST 3: Last of type: single
 {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{sec:section-1.1}
-                                           }
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
@@ -80,8 +80,8 @@ TEST 4: Last of type: pair
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......x{\zcref{sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -122,8 +122,8 @@ TEST 5: Last of type: not range
 1.3\group_end: }, and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.5}{\group_begin: 1.5\group_end: }.
 <recently read> }
-l. ......ion-1.1, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -172,8 +172,8 @@ TEST 6: Last of type: pair in sequence
 1.3\group_end: }, and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.4}{\group_begin: 1.4\group_end: }.
 <recently read> }
-l. ......ion-1.1, sec:section-1.3, sec:section-1.4}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -221,8 +221,8 @@ TEST 7: Last of type: range to one
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.3}{\group_begin: 1.3\group_end: }.
 <recently read> }
-l. ...    sec:section-1.3b}
-                           }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -263,8 +263,8 @@ TEST 8: Last of type: range to pair
 1.3\group_end: }, and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.4}{\group_begin: 1.4\group_end: }.
 <recently read> }
-l. ...    sec:section-1.4}
-                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -313,8 +313,8 @@ TEST 9: Last of type: range
 {}{section.1.3}{\group_begin: 1.3\group_end: } to\nobreakspace
 \__zrefclever_hyperlink:nnn {}{section.1.5}{\group_begin: 1.5\group_end: }.
 <recently read> }
-l. ...    sec:section-1.5}
-                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -364,8 +364,8 @@ TEST 10: Last of type: option range
 1.1\group_end: } to\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.5}{\group_begin: 1.5\group_end: }.
 <recently read> }
-l. ...    sec:section-1.5}
-                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x78.44458
 .\OT1/cmr/m/n/10 s
@@ -404,8 +404,8 @@ TEST 11: Last of type: option range to pair
 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
-l. ......[range]{sec:section-1.1, sec:section-1.2}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -443,8 +443,8 @@ TEST 12: Last of type: option typeset ref
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
 {}{section.1.1}{\group_begin: 1.1\group_end: }.
 <recently read> }
-l. ......hbox{\zcref[typeset=ref]{sec:section-1.1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.44444+0.0)x12.77782
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
@@ -461,8 +461,8 @@ TEST 13: Last of type: option typeset name
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin:
 \__zrefclever_hyperlink:nnn {}{section.1.1}{section}\group_end: .
 <recently read> }
-l. ......box{\zcref[typeset=name]{sec:section-1.1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x30.0556
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
@@ -484,8 +484,8 @@ TEST 14: Last of type: option typeset none
 {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{sec:section-1.1}
-                                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
@@ -512,8 +512,8 @@ TEST 15: Last of type: single type
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{cha:chapter-1}
-                                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x40.86118
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -539,14 +539,14 @@ TEST 16: Last of type: pair of types
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......ox{\zcref{cha:chapter-1, sec:section-1.1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
 {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ......ox{\zcref{cha:chapter-1, sec:section-1.1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x109.80574
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -592,20 +592,20 @@ TEST 17: Last of type: list of types
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, tab:table-1.1.1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
 {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, tab:table-1.1.1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
 {}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ......pter-1, sec:section-1.1, tab:table-1.1.1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x156.4725
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -668,8 +668,8 @@ TEST 18: Not last of type: first is range
 {}{section.1.3}{\group_begin: 1.3\group_end: } and\nobreakspace
 \__zrefclever_hyperlink:nnn {}{section.1.5}{\group_begin: 1.5\group_end: }.
 <recently read> }
-l. ...    sec:section-1.5}
-                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s
@@ -720,8 +720,8 @@ TEST 19: Not last of type: no range
 1.3\group_end: }, and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.5}{\group_begin: 1.5\group_end: }.
 <recently read> }
-l. ......on-1.1, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -769,8 +769,8 @@ TEST 20: Not last of type: range pair to one
 1.3\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.5}{\group_begin: 1.5\group_end: }.
 <recently read> }
-l. ......n-1.3, sec:section-1.3a, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -811,8 +811,8 @@ TEST 21: Not last of type: range pair
 1.3\group_end: }, and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.5}{\group_begin: 1.5\group_end: }.
 <recently read> }
-l. ......on-1.2, sec:section-1.3, sec:section-1.5}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -860,8 +860,8 @@ TEST 22: Not last of type: range to one
 1.3\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.5}{\group_begin: 1.5\group_end: }.
 <recently read> }
-l. ...    sec:section-1.5}
-                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
@@ -902,8 +902,8 @@ TEST 23: Not last of type: range to pair
 1.3\group_end: }, and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{section.1.5}{\group_begin: 1.5\group_end: }.
 <recently read> }
-l. ...    sec:section-1.5}
-                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x107.33354
 .\OT1/cmr/m/n/10 s
@@ -952,8 +952,8 @@ TEST 24: Not last of type: range
 {}{section.1.3}{\group_begin: 1.3\group_end: } and\nobreakspace
 \__zrefclever_hyperlink:nnn {}{section.1.5}{\group_begin: 1.5\group_end: }.
 <recently read> }
-l. ...    sec:section-1.5}
-                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x114.00021
 .\OT1/cmr/m/n/10 s

@@ -7,8 +7,8 @@ TEST 1: Reference: part
 {}{part.1}{\group_begin: part\group_end: \nobreakspace \group_begin:
 I\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{part:part-1}
-                                        }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.83331+1.94444)x25.3056
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{part.1}
@@ -30,8 +30,8 @@ TEST 2: Reference: chapter
 {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{cha:chapter-1}
-                                          }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x40.86118
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
@@ -57,8 +57,8 @@ TEST 3: Reference: section
 {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{sec:section-1.1}
-                                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x46.16675
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
@@ -85,8 +85,8 @@ TEST 4: Reference: subsection
 {}{subsection.1.1.1}{\group_begin: section\group_end: \nobreakspace
 \group_begin: 1.1.1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{sec:subsection-1.1.1}
-                                                 }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x53.94455
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.1.1.1}
@@ -115,8 +115,8 @@ TEST 5: Reference: subsubsection
 {}{subsubsection.1.1.1.1}{\group_begin: section\group_end: \nobreakspace
 \group_begin: 1.1.1.1\group_end: }.
 <recently read> }
-l. ......0=\hbox{\zcref{sec:subsubsection-1.1.1.1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.67859+0.0)x61.72235
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.1.1.1.1}
@@ -147,8 +147,8 @@ TEST 6: Reference: paragraph
 {}{paragraph.1.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
 \group_begin: 1.1.1.1.1\group_end: }.
 <recently read> }
-l. ......ox0=\hbox{\zcref{sec:paragraph-1.1.1.1.1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x83.94467
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.1.1.1.1.1}
@@ -183,8 +183,8 @@ TEST 7: Reference: subparagraph
 {}{subparagraph.1.1.1.1.1.1}{\group_begin: paragraph\group_end: \nobreakspace
 \group_begin: 1.1.1.1.1.1\group_end: }.
 <recently read> }
-l. ......hbox{\zcref{sec:subparagraph-1.1.1.1.1.1}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x91.72247
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.1.1.1.1.1.1}
@@ -221,8 +221,8 @@ TEST 8: Reference: figure
 {}{figure.1.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{fig:figure-1.1.1}
-                                             }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x40.58342
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
@@ -247,8 +247,8 @@ TEST 9: Reference: table
 {}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
 1.1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{tab:table-1.1.1}
-                                            }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x37.77786
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{table.1.1}
@@ -276,8 +276,8 @@ TEST 10: Reference: enumi-iv
 1(a)i\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{Item.4}{\group_begin: 1(a)iA\group_end: }.
 <recently read> }
-l. ......\hbox{\zcref{item:1,item:2,item:3,item:4}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x125.3336
 .\OT1/cmr/m/n/10 i
@@ -329,8 +329,8 @@ TEST 11: Reference: footnote
 {}{Hfootnote.1}{\group_begin: footnote\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{fn:1}
-                                 }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x44.44456
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Hfootnote.1}
@@ -357,8 +357,8 @@ TEST 12: Reference: mpfootnote
 {}{Item.4}{\group_begin: footnote\group_end: \nobreakspace \group_begin:
 {\itshape a}\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{fn:2}
-                                 }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x44.55563
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{Item.4}
@@ -385,8 +385,8 @@ TEST 13: Reference: equation
 {}{equation.1.1.1}{\group_begin: equation\group_end: \nobreakspace
 (\group_begin: 1.1\group_end: )}.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.1}
-                                              }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(7.5+2.5)x61.38904
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.1}
@@ -416,8 +416,8 @@ TEST 14: Reference: thm
 {}{thm.1}{\group_begin: theorem\group_end: \nobreakspace \group_begin:
 1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:equation-1.1.2}
-                                              }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+0.0)x43.91675
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{thm.1}
@@ -449,8 +449,8 @@ A.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn
 \__zrefclever_hyperlink:nnn {}{subparagraph.A.1.1.1.1.1}{\group_begin:
 A.1.1.1.1.1\group_end: }.
 <recently read> }
-l. ...    sec:subparagraph-2.1.1.1.1.1}
-                                       }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x259.77837
 .\OT1/cmr/m/n/10 a

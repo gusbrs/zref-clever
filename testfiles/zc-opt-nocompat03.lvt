@@ -8,6 +8,8 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+\newcommand{\testtmp}{}
+
 \usepackage{appendix}
 \usepackage{amsmath}
 \usepackage{listings}
@@ -42,16 +44,19 @@
 \cs_if_exist:cTF { c@zc@save@appendix }
   { \cs_show:N \c@zc@save@appendix }
   { \typeout { zc@save@appendix~counter~not~defined } }
-\prop_show:N \l__zrefclever_counter_resetby_prop
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
+\testtmp
 \ShowHook { cmd / appendix / before }
 \ShowHook { env / appendices / begin }
 \ShowHook { env / appendices / end }
 \ShowHook { env / subappendices / begin }
 \begin{appendices}
-  \prop_show:N \l__zrefclever_counter_type_prop
+  \renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+  \testtmp
 \end{appendices}
 \begin{subappendices}
-  \prop_show:N \l__zrefclever_counter_type_prop
+  \renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+  \testtmp
 \end{subappendices}
 \makeatother
 \ExplSyntaxOff
@@ -68,9 +73,12 @@
   { \typeout { __zrefclever_orig_ltxlabel:n~not~defined } }
 \cs_show:N \ltx@label
 \begin{subequations}
-  \tl_show:N \l__zrefclever_current_counter_tl
-  \prop_show:N \l__zrefclever_counter_type_prop
-  \prop_show:N \l__zrefclever_counter_resetby_prop
+  \renewcommand{\testtmp}{ \tl_show:N \l__zrefclever_current_counter_tl }
+  \testtmp
+  \renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+  \testtmp
+  \renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
+  \testtmp
 \end{subequations}
 \clist_map_inline:nn
   {
@@ -100,8 +108,10 @@
 \BEGINTEST{listings module}
 \ExplSyntaxOn
 \makeatletter
-\prop_show:N \l__zrefclever_counter_type_prop
-\prop_show:N \l__zrefclever_counter_resetby_prop
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+\testtmp
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
+\testtmp
 \cs_show:c { \@lst hk@ Init }
 \makeatother
 \ExplSyntaxOff

@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 \usepackage{zref-vario}
 
@@ -47,31 +55,41 @@
 \START
 
 \BEGINTEST{zvref}
-\setbox0=\hbox{\zvref[S]{sec:section-1}}
+\renewcommand{\testtmp}{%
+  \zvref[S]{sec:section-1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{zvpageref}
-\setbox0=\hbox{\zvpageref{fig:figure-1}}
+\renewcommand{\testtmp}{%
+  \zvpageref{fig:figure-1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{zvrefrange}
-\setbox0=\hbox{\zvrefrange{fig:figure-1}{fig:figure-2}}
+\renewcommand{\testtmp}{%
+  \zvrefrange{fig:figure-1}{fig:figure-2}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{zvpagerefrange}
-\setbox0=\hbox{\zvpagerefrange{fig:figure-1}{fig:figure-2}}
+\renewcommand{\testtmp}{%
+  \zvpagerefrange{fig:figure-1}{fig:figure-2}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{zfullref}
-\setbox0=\hbox{\zfullref{fig:figure-1}}
+\renewcommand{\testtmp}{%
+  \zfullref{fig:figure-1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

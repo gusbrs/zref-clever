@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 \usepackage{zref-titleref}
 
@@ -18,13 +26,16 @@
 \START
 
 \ExplSyntaxOn
-\tl_show:N \l__zrefclever_ref_property_tl
+\renewcommand{\testtmp}{ \tl_show:N \l__zrefclever_ref_property_tl }
+\testtmp
 \ExplSyntaxOff
 
 \section{Section 1}
 \zlabel{sec:section-1}
 
-\setbox0=\hbox{\zcref[ref=title,noname]{sec:section-1}}
+\renewcommand{\testtmp}{%
+  \zcref[ref=title,noname]{sec:section-1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 

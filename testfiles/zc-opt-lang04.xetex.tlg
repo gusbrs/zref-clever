@@ -26,38 +26,38 @@ Package zref-clever Info: Loaded 'german' language file.
 Package zref-clever Info: Loaded 'spanish' language file.
 > \l__zrefclever_current_language_tl=\languagename .
 <recently read> }
-l. ...\tl_show:N \l__zrefclever_current_language_tl
+l. ...\testtmp
 > \l__zrefclever_main_language_tl=\bbl@main@language .
 <recently read> }
-l. ...\tl_show:N \l__zrefclever_main_language_tl
+l. ...\testtmp
 > \l__zrefclever_ref_language_tl=spanish.
 <recently read> }
-l. ...\tl_show:N \l__zrefclever_ref_language_tl
+l. ...\testtmp
 > \box...=
-\hbox(6.88875+0.0)x38.94458
-.\T1/lmr/m/n/10 s
-.\T1/lmr/m/n/10 e
-.\T1/lmr/m/n/10 c
-.\T1/lmr/m/n/10 c
-.\T1/lmr/m/n/10 i
-.\T1/lmr/m/n/10 ó
-.\T1/lmr/m/n/10 n
+\hbox(6.63332+0.0)x38.93494
+.\T1/cmr/m/n/10 s
+.\T1/cmr/m/n/10 e
+.\T1/cmr/m/n/10 c
+.\T1/cmr/m/n/10 c
+.\T1/cmr/m/n/10 i
+.\T1/cmr/m/n/10 ó
+.\T1/cmr/m/n/10 n
 .\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\T1/lmr/m/n/10 1
+.\glue 3.33252 plus 1.66626 minus 1.11084
+.\T1/cmr/m/n/10 1
 ! OK.
 l. ...\showbox0
 > \box...=
-\hbox(6.88875+0.0)x38.94458
-.\T1/lmr/m/n/10 s
-.\T1/lmr/m/n/10 e
-.\T1/lmr/m/n/10 c
-.\T1/lmr/m/n/10 c
-.\T1/lmr/m/n/10 i
-.\T1/lmr/m/n/10 ó
-.\T1/lmr/m/n/10 n
+\hbox(6.63332+0.0)x38.93494
+.\T1/cmr/m/n/10 s
+.\T1/cmr/m/n/10 e
+.\T1/cmr/m/n/10 c
+.\T1/cmr/m/n/10 c
+.\T1/cmr/m/n/10 i
+.\T1/cmr/m/n/10 ó
+.\T1/cmr/m/n/10 n
 .\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\T1/lmr/m/n/10 1
+.\glue 3.33252 plus 1.66626 minus 1.11084
+.\T1/cmr/m/n/10 1
 ! OK.
 l. ...\showbox0

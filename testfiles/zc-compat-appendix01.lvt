@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 % Number down to subparagraph.
@@ -63,14 +71,17 @@
 \BEGINTEST{appendix module after}
 \ExplSyntaxOn
 \cs_show:N \appendix
-\prop_show:N \l__zrefclever_counter_type_prop
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+\testtmp
 \ShowHook { cmd / appendix / before }
 \ExplSyntaxOff
 \ENDTEST
 
-\setbox0=\hbox{\zcref{cha:chapter-2, sec:section-2.1, sec:subsection-2.1.1,
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-2, sec:section-2.1, sec:subsection-2.1.1,
     sec:subsubsection-2.1.1.1, sec:paragraph-2.1.1.1.1,
     sec:subparagraph-2.1.1.1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 

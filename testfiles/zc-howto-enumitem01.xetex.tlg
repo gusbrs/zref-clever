@@ -7,32 +7,46 @@ Don't change this file in any respect.
 {{(A)}}\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{Item.4}{\group_begin: {{(i)}}\group_end: }.
 <recently read> }
-l. ......=\hbox{\zcref{item-1,item-2,item-3,item-4}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
-\hbox(7.5+2.49998)x111.72
-.\TU/lmr/m/n/10 items
+\hbox(7.5+2.5)x111.72244
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 m
+.\OT1/cmr/m/n/10 s
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 (1)
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(Item.1)>>>>}
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 2.08124 minus 0.888
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 (I)
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(Item.2)>>>>}
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 I
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
-.\TU/lmr/m/n/10 ,
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 (A)
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(Item.3)>>>>}
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
-.\glue 3.33 plus 1.66331 minus 1.1111
-.\TU/lmr/m/n/10 and
+.\glue 3.33333 plus 1.66498 minus 1.11221
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/G\ETC.}
-.\TU/lmr/m/n/10 (i)
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(Item.4)>>>>}
+.\OT1/cmr/m/n/10 (
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 )
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0

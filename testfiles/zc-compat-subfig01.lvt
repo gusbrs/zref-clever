@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 \usepackage{subfig}
@@ -37,13 +45,17 @@
 
 \BEGINTEST{subfig module}
 \ExplSyntaxOn
-\prop_show:N \l__zrefclever_counter_type_prop
-\prop_show:N \l__zrefclever_counter_resetby_prop
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+\testtmp
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
+\testtmp
 \ExplSyntaxOff
 \ENDTEST
 
 \BEGINTEST{Reference: subfloat}
-\setbox0=\hbox{\zcref{3figs, 3figs-a, 3figs-b, 3figs-c}}
+\renewcommand{\testtmp}{%
+  \zcref{3figs, 3figs-a, 3figs-b, 3figs-c}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

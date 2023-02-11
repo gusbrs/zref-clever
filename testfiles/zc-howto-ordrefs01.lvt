@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 \ExplSyntaxOn
@@ -40,7 +48,9 @@ A figure.
 
 \START
 
-\setbox0=\hbox{\zcref{sec:section-1,fig:figure-1}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1,fig:figure-1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 

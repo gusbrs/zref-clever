@@ -18,7 +18,7 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 >  {enumiv}  =>  {enumiii}
 >  {chapter}  =>  {zc@appendix}.
 <recently read> }
-l. ......how:N \l__zrefclever_counter_resetby_prop
+l. ...\testtmp
 -> The generic hook 'cmd/appendix/before':
 > Code chunks:
 >     ---
@@ -85,7 +85,7 @@ outer braces):
 >  {section}  =>  {appendix}
 >  {paragraph}  =>  {appendix}.
 <recently read> }
-l. ......p_show:N \l__zrefclever_counter_type_prop
+l. ...  \testtmp
 The property list \l__zrefclever_counter_type_prop contains the pairs (without
 outer braces):
 >  {subsection}  =>  {appendix}
@@ -100,7 +100,7 @@ outer braces):
 >  {section}  =>  {appendix}
 >  {paragraph}  =>  {appendix}.
 <recently read> }
-l. ......p_show:N \l__zrefclever_counter_type_prop
+l. ...  \testtmp
 ============================================================
 ============================================================
 TEST 2: Reference: sectioning commands in subapenddices
@@ -115,8 +115,8 @@ TEST 2: Reference: sectioning commands in subapenddices
 and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{subparagraph.a.2.A.1.1.1.1}{\group_begin: 2.A.1.1.1.1\group_end: }.
 <recently read> }
-l. ...    sec:subparagraph-2.1.1.1.1.1}
-                                       }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x246.16724
 .\OT1/cmr/m/n/10 a
@@ -206,8 +206,8 @@ A.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn
 and\nobreakspace \__zrefclever_hyperlink:nnn
 {}{subparagraph.b.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
 <recently read> }
-l. ...    sec:subparagraph-3.1.1.1.1.1}
-                                       }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x259.77837
 .\OT1/cmr/m/n/10 a
@@ -302,8 +302,8 @@ A.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn
 \__zrefclever_hyperlink:nnn {}{subparagraph.A.1.1.1.1.1}{\group_begin:
 A.1.1.1.1.1\group_end: }.
 <recently read> }
-l. ...    sec:subparagraph-4.1.1.1.1.1}
-                                       }
+l. ...\setbox0=\hbox{\testtmp
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x259.77837
 .\OT1/cmr/m/n/10 a

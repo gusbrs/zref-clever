@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 \usepackage{amsmath}
@@ -210,17 +218,33 @@
 \ExplSyntaxOn
 \makeatletter
 \cs_if_exist:NTF \__zrefclever_ltxlabel:n
-  { \cs_show:N \__zrefclever_ltxlabel:n }
-  { \typeout { __zrefclever_ltxlabel:n~not~defined } }
+  {
+    \renewcommand{\testtmp}{ \cs_show:N \__zrefclever_ltxlabel:n }
+    \testtmp
+  }
+  {
+    \renewcommand{\testtmp}{ \typeout { __zrefclever_ltxlabel:n~not~defined } }
+    \testtmp
+  }
 \cs_if_exist:NTF \__zrefclever_orig_ltxlabel:n
-  { \cs_show:N \__zrefclever_orig_ltxlabel:n }
-  { \typeout { __zrefclever_orig_ltxlabel:n~not~defined } }
+  {
+    \renewcommand{\testtmp}{ \cs_show:N \__zrefclever_orig_ltxlabel:n }
+    \testtmp
+  }
+  {
+    \renewcommand{\testtmp}{ \typeout { __zrefclever_orig_ltxlabel:n~not~defined } }
+    \testtmp
+  }
 \cs_show:N \ltx@label
 \begin{subequations}
-  \tl_show:N \l__zrefclever_current_counter_tl
-  \prop_show:N \l__zrefclever_counter_type_prop
-  \prop_show:N \l__zrefclever_counter_resetby_prop
-  \bool_show:N \l__zrefclever_amsmath_subequations_bool
+  \renewcommand{\testtmp}{ \tl_show:N \l__zrefclever_current_counter_tl }
+  \testtmp
+  \renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+  \testtmp
+  \renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
+  \testtmp
+  \renewcommand{\testtmp}{ \bool_show:N \l__zrefclever_amsmath_subequations_bool }
+  \testtmp
 \end{subequations}
 \clist_map_inline:nn
   {
@@ -247,10 +271,14 @@
 \newoptblock{equation}
 
 \BEGINTEST{Reference: equation}
-\setbox0=\hbox{\zcref{eq:1}}
+\renewcommand{\testtmp}{%
+  \zcref{eq:1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref{compl-gr}}
+\renewcommand{\testtmp}{%
+  \zcref{compl-gr}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -258,7 +286,9 @@
 \newoptblock{equation*}
 
 \BEGINTEST{Reference: equation*}
-\setbox0=\hbox{\zcref{eq1:tag}}
+\renewcommand{\testtmp}{%
+  \zcref{eq1:tag}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -266,7 +296,9 @@
 \newoptblock{align}
 
 \BEGINTEST{Reference: align}
-\setbox0=\hbox{\zcref{eq:A, eq:A-2}}
+\renewcommand{\testtmp}{%
+  \zcref{eq:A, eq:A-2}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -274,7 +306,9 @@
 \newoptblock{align*}
 
 \BEGINTEST{Reference: align*}
-\setbox0=\hbox{\zcref{tag:eq:A, tag:eq:A-2}}
+\renewcommand{\testtmp}{%
+  \zcref{tag:eq:A, tag:eq:A-2}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -282,10 +316,14 @@
 \newoptblock{alignat}
 
 \BEGINTEST{Reference: alignat}
-\setbox0=\hbox{\zcref{eq:B}}
+\renewcommand{\testtmp}{%
+  \zcref{eq:B}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref{eq:F,eq:G}}
+\renewcommand{\testtmp}{%
+  \zcref{eq:F,eq:G}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -293,7 +331,9 @@
 \newoptblock{alignat*}
 
 \BEGINTEST{Reference: alignat*}
-\setbox0=\hbox{\zcref{eq:C, eq:D}}
+\renewcommand{\testtmp}{%
+  \zcref{eq:C, eq:D}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -301,7 +341,9 @@
 \newoptblock{flalign}
 
 \BEGINTEST{Reference: flalign}
-\setbox0=\hbox{\zcref{eq:flal1}}
+\renewcommand{\testtmp}{%
+  \zcref{eq:flal1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -309,7 +351,9 @@
 \newoptblock{flalign*}
 
 \BEGINTEST{Reference: flalign*}
-\setbox0=\hbox{\zcref{tag:eq:flal1}}
+\renewcommand{\testtmp}{%
+  \zcref{tag:eq:flal1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -317,7 +361,9 @@
 \newoptblock{xalignat}
 
 \BEGINTEST{Reference: xalignat}
-\setbox0=\hbox{\zcref{eq:xal1}}
+\renewcommand{\testtmp}{%
+  \zcref{eq:xal1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -325,7 +371,9 @@
 \newoptblock{xalignat*}
 
 \BEGINTEST{Reference: xalignat*}
-\setbox0=\hbox{\zcref{tag:eq:xal1}}
+\renewcommand{\testtmp}{%
+  \zcref{tag:eq:xal1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -337,7 +385,9 @@
 \newoptblock{gather}
 
 \BEGINTEST{Reference: gather}
-\setbox0=\hbox{\zcref[nocomp]{gather:AA,gather:BB,gather:CC}}
+\renewcommand{\testtmp}{%
+  \zcref[nocomp]{gather:AA,gather:BB,gather:CC}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -345,7 +395,9 @@
 \newoptblock{gather*}
 
 \BEGINTEST{Reference: gather*}
-\setbox0=\hbox{\zcref{tag:gather:CC}}
+\renewcommand{\testtmp}{%
+  \zcref{tag:gather:CC}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -353,7 +405,9 @@
 \newoptblock{multline}
 
 \BEGINTEST{Reference: multline}
-\setbox0=\hbox{\zcref{eq:E}}
+\renewcommand{\testtmp}{%
+  \zcref{eq:E}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -361,7 +415,9 @@
 \newoptblock{multline*}
 
 \BEGINTEST{Reference: multline*}
-\setbox0=\hbox{\zcref{tag:eq:E}}
+\renewcommand{\testtmp}{%
+  \zcref{tag:eq:E}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -369,19 +425,29 @@
 \newoptblock{subequations}
 
 \BEGINTEST{Reference: subequations}
-\setbox0=\hbox{\zcref{subeq:A}}
+\renewcommand{\testtmp}{%
+  \zcref{subeq:A}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref[nocomp]{align:a,align:b,align:c}}
+\renewcommand{\testtmp}{%
+  \zcref[nocomp]{align:a,align:b,align:c}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref[nocomp]{xalign:a,xalign:b,xalign:c}}
+\renewcommand{\testtmp}{%
+  \zcref[nocomp]{xalign:a,xalign:b,xalign:c}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref[nocomp]{gather:a,gather:b,gather:c}}
+\renewcommand{\testtmp}{%
+  \zcref[nocomp]{gather:a,gather:b,gather:c}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref{split:x,multline:x}}
+\renewcommand{\testtmp}{%
+  \zcref{split:x,multline:x}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -389,16 +455,24 @@
 \newoptblock{subequations, ref=subeq}
 
 \BEGINTEST{Reference: subequations, ref=subeq}
-\setbox0=\hbox{\zcref[nocomp,ref=subeq]{align:a,align:b,align:c}}
+\renewcommand{\testtmp}{%
+  \zcref[nocomp,ref=subeq]{align:a,align:b,align:c}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref[nocomp,ref=subeq]{xalign:a,xalign:b,xalign:c}}
+\renewcommand{\testtmp}{%
+  \zcref[nocomp,ref=subeq]{xalign:a,xalign:b,xalign:c}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref[nocomp,ref=subeq]{gather:a,gather:b,gather:c}}
+\renewcommand{\testtmp}{%
+  \zcref[nocomp,ref=subeq]{gather:a,gather:b,gather:c}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref[ref=subeq]{split:x,multline:x}}
+\renewcommand{\testtmp}{%
+  \zcref[ref=subeq]{split:x,multline:x}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

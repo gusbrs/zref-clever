@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 % This file is intended to test all possible "referable objects" in the
@@ -114,7 +122,9 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Part}
 
 \BEGINTEST{Reference: part}
-\setbox0=\hbox{\zcref{part:part-1}}
+\renewcommand{\testtmp}{%
+  \zcref{part:part-1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -122,7 +132,9 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Section}
 
 \BEGINTEST{Reference: section}
-\setbox0=\hbox{\zcref{sec:section-1.1}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -130,7 +142,9 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Subsection}
 
 \BEGINTEST{Reference: subsection}
-\setbox0=\hbox{\zcref{sec:subsection-1.1.1}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:subsection-1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -138,7 +152,9 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Subsubsection}
 
 \BEGINTEST{Reference: subsubsection}
-\setbox0=\hbox{\zcref{sec:subsubsection-1.1.1.1}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:subsubsection-1.1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -146,7 +162,9 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Paragraph}
 
 \BEGINTEST{Reference: paragraph}
-\setbox0=\hbox{\zcref{sec:paragraph-1.1.1.1.1}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:paragraph-1.1.1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -154,7 +172,9 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Subparagraph}
 
 \BEGINTEST{Reference: subparagraph}
-\setbox0=\hbox{\zcref{sec:subparagraph-1.1.1.1.1.1}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:subparagraph-1.1.1.1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -162,7 +182,9 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Figure}
 
 \BEGINTEST{Reference: figure}
-\setbox0=\hbox{\zcref{fig:figure-1.1.1}}
+\renewcommand{\testtmp}{%
+  \zcref{fig:figure-1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -170,7 +192,9 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Table}
 
 \BEGINTEST{Reference: table}
-\setbox0=\hbox{\zcref{tab:table-1.1.1}}
+\renewcommand{\testtmp}{%
+  \zcref{tab:table-1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -178,7 +202,9 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Enumerate items}
 
 \BEGINTEST{Reference: enumi-iv}
-\setbox0=\hbox{\zcref{item:1,item:2,item:3,item:4}}
+\renewcommand{\testtmp}{%
+  \zcref{item:1,item:2,item:3,item:4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -186,7 +212,9 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Footnote}
 
 \BEGINTEST{Reference: footnote}
-\setbox0=\hbox{\zcref{fn:1}}
+\renewcommand{\testtmp}{%
+  \zcref{fn:1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -194,7 +222,9 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Mini-page footnote}
 
 \BEGINTEST{Reference: mpfootnote}
-\setbox0=\hbox{\zcref{fn:2}}
+\renewcommand{\testtmp}{%
+  \zcref{fn:2}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -202,7 +232,9 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Equation}
 
 \BEGINTEST{Reference: equation}
-\setbox0=\hbox{\zcref{eq:equation-1.1.1}}
+\renewcommand{\testtmp}{%
+  \zcref{eq:equation-1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -210,7 +242,9 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Newtheorem}
 
 \BEGINTEST{Reference: thm}
-\setbox0=\hbox{\zcref{eq:equation-1.1.2}}
+\renewcommand{\testtmp}{%
+  \zcref{eq:equation-1.1.2}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -218,9 +252,11 @@ Foo\footnote{Footnote\zlabel{fn:1}}
 \newoptblock{Appendix}
 
 \BEGINTEST{Reference: sectioning commands after appendix}
-\setbox0=\hbox{\zcref{sec:section-2.1, sec:subsection-2.1.1,
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-2.1, sec:subsection-2.1.1,
     sec:subsubsection-2.1.1.1, sec:paragraph-2.1.1.1.1,
     sec:subparagraph-2.1.1.1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

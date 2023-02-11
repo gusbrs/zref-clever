@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 \usepackage{subcaption}
@@ -75,60 +83,85 @@
 \BEGINTEST{subcaption module}
 \ExplSyntaxOn
 \makeatletter
-\prop_show:N \l__zrefclever_counter_type_prop
-\prop_show:N \l__zrefclever_counter_resetby_prop
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+\testtmp
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
+\testtmp
 \zref@ifpropundefined { subref }
-  { \typeout { subref~property~not~defined } }
-  { \typeout { subref~property~is~defined } }
-\cs_show:c { caption@subtypehook }
+  {
+    \renewcommand{\testtmp}{ \typeout { subref~property~not~defined } }
+    \testtmp
+  }
+  {
+    \renewcommand{\testtmp}{ \typeout { subref~property~is~defined } }
+    \testtmp
+  }
+\renewcommand{\testtmp}{ \cs_show:c { caption@subtypehook } }
+\testtmp
 \makeatother
 \ExplSyntaxOff
 \ENDTEST
 
 \BEGINTEST{Reference: subcaptionbox}
-\setbox0=\hbox{\zcref{cat,elephant,animals}}
+\renewcommand{\testtmp}{%
+  \zcref{cat,elephant,animals}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{Reference: subfigure}
-\setbox0=\hbox{\zcref{fig:1a,fig:1b,fig:1}}
+\renewcommand{\testtmp}{%
+  \zcref{fig:1a,fig:1b,fig:1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{Reference: subtable}
-\setbox0=\hbox{\zcref{tab:1a,tab:1b,tab:1}}
+\renewcommand{\testtmp}{%
+  \zcref{tab:1a,tab:1b,tab:1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{Reference: subcaption}
-\setbox0=\hbox{\zcref{fig:2a,fig:2b,fig:2}}
+\renewcommand{\testtmp}{%
+  \zcref{fig:2a,fig:2b,fig:2}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{Reference: subcaptionbox subref}
-\setbox0=\hbox{\zcref[ref=subref]{cat,elephant,animals}}
+\renewcommand{\testtmp}{%
+  \zcref[ref=subref]{cat,elephant,animals}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{Reference: subfigure subref}
-\setbox0=\hbox{\zcref[ref=subref]{fig:1a,fig:1b,fig:1}}
+\renewcommand{\testtmp}{%
+  \zcref[ref=subref]{fig:1a,fig:1b,fig:1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{Reference: subtable subref}
-\setbox0=\hbox{\zcref[ref=subref]{tab:1a,tab:1b,tab:1}}
+\renewcommand{\testtmp}{%
+  \zcref[ref=subref]{tab:1a,tab:1b,tab:1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
 
 \BEGINTEST{Reference: subcaption subref}
-\setbox0=\hbox{\zcref[ref=subref]{fig:2a,fig:2b,fig:2}}
+\renewcommand{\testtmp}{%
+  \zcref[ref=subref]{fig:2a,fig:2b,fig:2}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

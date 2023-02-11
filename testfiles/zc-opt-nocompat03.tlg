@@ -42,7 +42,7 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}.
 <recently read> }
-l. ......show:N \l__zrefclever_counter_resetby_prop
+l. ...\testtmp
 -> The generic hook 'cmd/appendix/before':
 > The hook is not declared.
 > The hook is empty.
@@ -74,7 +74,7 @@ outer braces):
 >  {enumiv}  =>  {item}
 >  {mpfootnote}  =>  {footnote}.
 <recently read> }
-l. ......op_show:N \l__zrefclever_counter_type_prop
+l. ...  \testtmp
 The property list \l__zrefclever_counter_type_prop contains the pairs (without
 outer braces):
 >  {subsection}  =>  {section}
@@ -86,7 +86,7 @@ outer braces):
 >  {enumiv}  =>  {item}
 >  {mpfootnote}  =>  {footnote}.
 <recently read> }
-l. ......op_show:N \l__zrefclever_counter_type_prop
+l. ...  \testtmp
 ============================================================
 ============================================================
 TEST 3: amsmath module
@@ -100,7 +100,7 @@ __zrefclever_orig_ltxlabel:n not defined
 l. ...\cs_show:N \ltx@label
 > \l__zrefclever_current_counter_tl=\@currentcounter .
 <recently read> }
-l. ......l_show:N \l__zrefclever_current_counter_tl
+l. ...  \testtmp
 The property list \l__zrefclever_counter_type_prop contains the pairs (without
 outer braces):
 >  {subsection}  =>  {section}
@@ -112,14 +112,14 @@ outer braces):
 >  {enumiv}  =>  {item}
 >  {mpfootnote}  =>  {footnote}.
 <recently read> }
-l. ......op_show:N \l__zrefclever_counter_type_prop
+l. ...  \testtmp
 The property list \l__zrefclever_counter_resetby_prop contains the pairs
 (without outer braces):
 >  {enumii}  =>  {enumi}
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}.
 <recently read> }
-l. ......show:N \l__zrefclever_counter_resetby_prop
+l. ...  \testtmp
 -> The generic hook 'env/equation/begin':
 > The hook is not declared.
 > The hook is empty.
@@ -206,14 +206,14 @@ outer braces):
 >  {enumiv}  =>  {item}
 >  {mpfootnote}  =>  {footnote}.
 <recently read> }
-l. ......p_show:N \l__zrefclever_counter_type_prop
+l. ...\testtmp
 The property list \l__zrefclever_counter_resetby_prop contains the pairs
 (without outer braces):
 >  {enumii}  =>  {enumi}
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}.
 <recently read> }
-l. ......how:N \l__zrefclever_counter_resetby_prop
+l. ...\testtmp
 > \lsthk@Init=macro:->\lst@ifshowspaces \let \lst@outputspace
 \lst@visiblespace \lst@keepspacestrue \fi \edef \ttdefault {\ttdefault }\let
 \lsts@nfss@catcodes \nfss@catcodes \let \nfss@catcodes \lst@nfss@catcodes

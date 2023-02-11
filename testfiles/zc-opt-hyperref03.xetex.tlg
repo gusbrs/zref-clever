@@ -24,12 +24,18 @@ Package zref-clever Warning: Missing 'hyperref' package. Setting
 Package zref-clever Info: Loaded 'english' language file.
 > \l__zrefclever_hyperlink_bool=false.
 <recently read> }
-l. ...\bool_show:N \l__zrefclever_hyperlink_bool
+l. ...\testtmp
 > \box...=
-\hbox(6.66+0.10999)x38.38
-.\TU/lmr/m/n/10 section
+\hbox(6.67859+0.0)x38.38895
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
 .\penalty 10000
-.\glue 3.33 plus 1.665 minus 1.11
-.\TU/lmr/m/n/10 1
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
 ! OK.
 l. ...\showbox0

@@ -39,7 +39,7 @@ outer braces):
 >  {paragraph}
 >  {subparagraph}.
 <recently read> }
-l. ......how:N \l__zrefclever_counter_resetters_seq
+l. ...\testtmp
 The sequence \l__zrefclever_counter_resetters_seq contains the items (without
 outer braces):
 >  {part}
@@ -51,7 +51,7 @@ outer braces):
 >  {subparagraph}
 >  {parentfoobar}.
 <recently read> }
-l. ......how:N \l__zrefclever_counter_resetters_seq
+l. ...\testtmp
 > \Z@R@foobar=macro:
 ->\default {1}\page {1}\abspage {1}\zc@counter {foobar}\thecounter {1}\zc@type {foobar}\zc@cntval {1}\zc@pgval {1}\zc@enclval {{7}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {foobar.7.1}.
 l. ...\show\Z@R@foobar
@@ -65,7 +65,7 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}.
 <recently read> }
-l. ......show:N \l__zrefclever_counter_resetby_prop
+l. ...\testtmp
 The property list \l__zrefclever_counter_resetby_prop contains the pairs
 (without outer braces):
 >  {enumii}  =>  {enumi}
@@ -73,7 +73,7 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 >  {enumiv}  =>  {enumiii}
 >  {barbaz}  =>  {parentbarbaz}.
 <recently read> }
-l. ......show:N \l__zrefclever_counter_resetby_prop
+l. ...\testtmp
 > \Z@R@barbaz=macro:
 ->\default {1}\page {1}\abspage {1}\zc@counter {barbaz}\thecounter {1}\zc@type {barbaz}\zc@cntval {1}\zc@pgval {1}\zc@enclval {{7}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {barbaz.1}.
 l. ...\show\Z@R@barbaz

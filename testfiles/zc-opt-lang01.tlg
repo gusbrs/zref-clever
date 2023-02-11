@@ -19,13 +19,13 @@ LaTeX Font Info:    ... okay on input line ....
 Package zref-clever Info: Loaded 'english' language file.
 > \l__zrefclever_current_language_tl=english.
 <recently read> }
-l. ...\tl_show:N \l__zrefclever_current_language_tl
+l. ...\testtmp
 > \l__zrefclever_main_language_tl=english.
 <recently read> }
-l. ...\tl_show:N \l__zrefclever_main_language_tl
+l. ...\testtmp
 > \l__zrefclever_ref_language_tl=\l__zrefclever_current_language_tl .
 <recently read> }
-l. ...\tl_show:N \l__zrefclever_ref_language_tl
+l. ...\testtmp
 > \box...=
 \hbox(6.67859+0.0)x38.38895
 .\OT1/cmr/m/n/10 s

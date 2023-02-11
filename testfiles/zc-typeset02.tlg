@@ -11,8 +11,8 @@ TEST 1: Not last of type: two ranges
 to\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.2.3}{\group_begin:
 2.3\group_end: }.
 <recently read> }
-l. ......zcref{fig:1,fig:2,fig:3,fig:4,fig:5,fig:6}
-                                                  }
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
 \hbox(6.94444+1.94444)x136.75027
 .\OT1/cmr/m/n/10 ^^L (ligature fi)

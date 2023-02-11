@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 % A language which is unlikely to be supported.
 \usepackage[latin]{babel}
 
@@ -88,10 +96,14 @@
 \newoptblock{tpairsep, tlistsep, tlastsep}
 
 \BEGINTEST{Option: tpairsep=..., tlistsep=..., tlastsep=...}
-\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1, tab:table-1.1.1}}
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-1, sec:section-1.1, tab:table-1.1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-1.1}}
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-1, sec:section-1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -99,7 +111,9 @@
 \newoptblock{notesep}
 
 \BEGINTEST{Option: notesep=...}
-\setbox0=\hbox{\zcref[note={a note}]{sec:section-1.1}}
+\renewcommand{\testtmp}{%
+  \zcref[note={a note}]{sec:section-1.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -107,7 +121,9 @@
 \newoptblock{namesep}
 
 \BEGINTEST{Option: namesep=...}
-\setbox0=\hbox{\zcref{sec:section-1.1, cha:chapter-1}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, cha:chapter-1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -115,11 +131,15 @@
 \newoptblock{pairsep, listsep, lastsep}
 
 \BEGINTEST{Option: pairsep=..., listsep=..., lastsep=...}
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-2.1,
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-2.1,
     sec:section-3.1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -127,8 +147,10 @@
 \newoptblock{rangesep}
 
 \BEGINTEST{Option: rangesep=...}
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3,
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3,
     sec:section-1.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

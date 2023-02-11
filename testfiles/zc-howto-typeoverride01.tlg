@@ -7,8 +7,8 @@ TEST 1: Reference type override
 {}{equation.1.1}{\group_begin: equations\group_end: \nobreakspace
 \group_begin: 1\group_end: }.
 <recently read> }
-l. ...\setbox0=\hbox{\zcref{eq:1}
-                                }
+l. ...\setbox0=\hbox{\testtmp
+                            }
 > \box...=
 \hbox(6.67859+1.94444)x49.77788
 .\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1}

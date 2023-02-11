@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 % Use a serial comma for 'lastsep' (not the default) so that we can
@@ -65,7 +73,9 @@
 \START
 
 \BEGINTEST{Not last of type: two ranges}
-\setbox0=\hbox{\zcref{fig:1,fig:2,fig:3,fig:4,fig:5,fig:6}}
+\renewcommand{\testtmp}{%
+  \zcref{fig:1,fig:2,fig:3,fig:4,fig:5,fig:6}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

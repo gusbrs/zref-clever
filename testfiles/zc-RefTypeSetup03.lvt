@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 \makeatletter
@@ -135,17 +143,23 @@
 
 \BEGINTEST{no endrange}
 % not last of type
-\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
     sec:section-2.3, sec:section-2.4, sec:section-3.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type
-\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
     sec:section-2.3, sec:section-2.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option
-\setbox0=\hbox{\zcref[range]{sec:section-2.1, sec:section-2.4}}
+\renewcommand{\testtmp}{%
+  \zcref[range]{sec:section-2.1, sec:section-2.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -157,17 +171,23 @@
   endrange=ref,
 }
 % not last of type
-\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
     sec:section-2.3, sec:section-2.4, sec:section-3.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type
-\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
     sec:section-2.3, sec:section-2.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option
-\setbox0=\hbox{\zcref[range]{sec:section-2.1, sec:section-2.4}}
+\renewcommand{\testtmp}{%
+  \zcref[range]{sec:section-2.1, sec:section-2.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -179,21 +199,29 @@
   endrange=plainsection,
 }
 % not last of type
-\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
     sec:section-2.3, sec:section-2.4, sec:section-3.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type
-\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
     sec:section-2.3, sec:section-2.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option
-\setbox0=\hbox{\zcref[range]{sec:section-2.1, sec:section-2.4}}
+\renewcommand{\testtmp}{%
+  \zcref[range]{sec:section-2.1, sec:section-2.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option (different prefix)
-\setbox0=\hbox{\zcref[range]{sec:section-2.1, sec:section-3.4}}
+\renewcommand{\testtmp}{%
+  \zcref[range]{sec:section-2.1, sec:section-3.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -205,17 +233,23 @@
   endrange=plainsection,
 }
 % not last of type
-\setbox0=\hbox{\zcref[endrange=ref]{cha:chapter-1, sec:section-2.1,
+\renewcommand{\testtmp}{%
+  \zcref[endrange=ref]{cha:chapter-1, sec:section-2.1,
     sec:section-2.2, sec:section-2.3, sec:section-2.4, sec:section-3.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type
-\setbox0=\hbox{\zcref[endrange=ref]{cha:chapter-1, sec:section-2.1,
+\renewcommand{\testtmp}{%
+  \zcref[endrange=ref]{cha:chapter-1, sec:section-2.1,
     sec:section-2.2, sec:section-2.3, sec:section-2.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option
-\setbox0=\hbox{\zcref[range,endrange=ref]{sec:section-2.1, sec:section-2.4}}
+\renewcommand{\testtmp}{%
+  \zcref[range,endrange=ref]{sec:section-2.1, sec:section-2.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -227,17 +261,23 @@
   endrange=stripprefix,
 }
 % not last of type
-\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
     sec:section-2.3, sec:section-2.4, sec:section-3.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type
-\setbox0=\hbox{\zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
+\renewcommand{\testtmp}{%
+  \zcref{cha:chapter-1, sec:section-2.1, sec:section-2.2,
     sec:section-2.3, sec:section-2.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option
-\setbox0=\hbox{\zcref[range]{sec:section-2.1, sec:section-2.4}}
+\renewcommand{\testtmp}{%
+  \zcref[range]{sec:section-2.1, sec:section-2.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -249,17 +289,23 @@
   endrange=stripprefix,
 }
 % not last of type
-\setbox0=\hbox{\zcref[endrange=ref]{cha:chapter-1, sec:section-2.1,
+\renewcommand{\testtmp}{%
+  \zcref[endrange=ref]{cha:chapter-1, sec:section-2.1,
     sec:section-2.2, sec:section-2.3, sec:section-2.4, sec:section-3.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type
-\setbox0=\hbox{\zcref[endrange=ref]{cha:chapter-1, sec:section-2.1,
+\renewcommand{\testtmp}{%
+  \zcref[endrange=ref]{cha:chapter-1, sec:section-2.1,
     sec:section-2.2, sec:section-2.3, sec:section-2.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option
-\setbox0=\hbox{\zcref[range,endrange=ref]{sec:section-2.1, sec:section-2.4}}
+\renewcommand{\testtmp}{%
+  \zcref[range,endrange=ref]{sec:section-2.1, sec:section-2.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -271,17 +317,23 @@
   endrange=stripprefix,
 }
 % not last of type
-\setbox0=\hbox{\zcref[page]{sec:section-0.1, cha:chapter-1, cha:chapter-2,
+\renewcommand{\testtmp}{%
+  \zcref[page]{sec:section-0.1, cha:chapter-1, cha:chapter-2,
     cha:chapter-3, cha:chapter-4, cha:chapter-7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type
-\setbox0=\hbox{\zcref[page]{cha:chapter-1, cha:chapter-2, cha:chapter-3,
+\renewcommand{\testtmp}{%
+  \zcref[page]{cha:chapter-1, cha:chapter-2, cha:chapter-3,
     cha:chapter-4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option
-\setbox0=\hbox{\zcref[page,range]{cha:chapter-1, cha:chapter-4}}
+\renewcommand{\testtmp}{%
+  \zcref[page,range]{cha:chapter-1, cha:chapter-4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -297,35 +349,49 @@
   endrange=pagecomp,
 }
 % not last of type (0*)
-\setbox0=\hbox{\zcref[page]{sec:section-0.1, cha:chapter-1, cha:chapter-2,
+\renewcommand{\testtmp}{%
+  \zcref[page]{sec:section-0.1, cha:chapter-1, cha:chapter-2,
     cha:chapter-3, cha:chapter-4, cha:chapter-7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % not last of type (1*)
-\setbox0=\hbox{\zcref[page]{sec:section-0.1, cha:chapter-5, cha:chapter-6,
+\renewcommand{\testtmp}{%
+  \zcref[page]{sec:section-0.1, cha:chapter-5, cha:chapter-6,
     cha:chapter-7, cha:chapter-8, cha:chapter-9}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type (0*)
-\setbox0=\hbox{\zcref[page]{cha:chapter-1, cha:chapter-2, cha:chapter-3,
+\renewcommand{\testtmp}{%
+  \zcref[page]{cha:chapter-1, cha:chapter-2, cha:chapter-3,
     cha:chapter-4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type (1*)
-\setbox0=\hbox{\zcref[page]{cha:chapter-5, cha:chapter-6, cha:chapter-7,
+\renewcommand{\testtmp}{%
+  \zcref[page]{cha:chapter-5, cha:chapter-6, cha:chapter-7,
     cha:chapter-8}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option (0*)
-\setbox0=\hbox{\zcref[page,range]{cha:chapter-1, cha:chapter-4}}
+\renewcommand{\testtmp}{%
+  \zcref[page,range]{cha:chapter-1, cha:chapter-4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option (1*)
-\setbox0=\hbox{\zcref[page,range]{cha:chapter-5, cha:chapter-8}}
+\renewcommand{\testtmp}{%
+  \zcref[page,range]{cha:chapter-5, cha:chapter-8}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option (with roman)
-\setbox0=\hbox{\zcref[page,range]{sec:section-0.1, cha:chapter-8}}
+\renewcommand{\testtmp}{%
+  \zcref[page,range]{sec:section-0.1, cha:chapter-8}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -337,36 +403,50 @@
   endrange=pagecomp,
 }
 % not last of type (0*)
-\setbox0=\hbox{\zcref[page,endrange=ref]{sec:section-0.1, cha:chapter-1,
+\renewcommand{\testtmp}{%
+  \zcref[page,endrange=ref]{sec:section-0.1, cha:chapter-1,
     cha:chapter-2, cha:chapter-3, cha:chapter-4, cha:chapter-7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % not last of type (1*)
-\setbox0=\hbox{\zcref[page,endrange=ref]{sec:section-0.1, cha:chapter-5,
+\renewcommand{\testtmp}{%
+  \zcref[page,endrange=ref]{sec:section-0.1, cha:chapter-5,
     cha:chapter-6, cha:chapter-7, cha:chapter-8, cha:chapter-9}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type (0*)
-\setbox0=\hbox{\zcref[page,endrange=ref]{cha:chapter-1, cha:chapter-2,
+\renewcommand{\testtmp}{%
+  \zcref[page,endrange=ref]{cha:chapter-1, cha:chapter-2,
     cha:chapter-3, cha:chapter-4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type (1*)
-\setbox0=\hbox{\zcref[page,endrange=ref]{cha:chapter-5, cha:chapter-6,
+\renewcommand{\testtmp}{%
+  \zcref[page,endrange=ref]{cha:chapter-5, cha:chapter-6,
     cha:chapter-7, cha:chapter-8}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option (0*)
-\setbox0=\hbox{\zcref[page,range,endrange=ref]{cha:chapter-1, cha:chapter-4}}
+\renewcommand{\testtmp}{%
+  \zcref[page,range,endrange=ref]{cha:chapter-1, cha:chapter-4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option (1*)
-\setbox0=\hbox{\zcref[page,range,endrange=ref]{cha:chapter-5, cha:chapter-8}}
+\renewcommand{\testtmp}{%
+  \zcref[page,range,endrange=ref]{cha:chapter-5, cha:chapter-8}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option (with roman)
-\setbox0=\hbox{\zcref[page,range,endrange=ref]{sec:section-0.1,
+\renewcommand{\testtmp}{%
+  \zcref[page,range,endrange=ref]{sec:section-0.1,
     cha:chapter-8}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -378,35 +458,49 @@
   endrange=pagecomp2,
 }
 % not last of type (0*)
-\setbox0=\hbox{\zcref[page]{sec:section-0.1, cha:chapter-1, cha:chapter-2,
+\renewcommand{\testtmp}{%
+  \zcref[page]{sec:section-0.1, cha:chapter-1, cha:chapter-2,
     cha:chapter-3, cha:chapter-4, cha:chapter-7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % not last of type (1*)
-\setbox0=\hbox{\zcref[page]{sec:section-0.1, cha:chapter-5, cha:chapter-6,
+\renewcommand{\testtmp}{%
+  \zcref[page]{sec:section-0.1, cha:chapter-5, cha:chapter-6,
     cha:chapter-7, cha:chapter-8, cha:chapter-9}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type (0*)
-\setbox0=\hbox{\zcref[page]{cha:chapter-1, cha:chapter-2, cha:chapter-3,
+\renewcommand{\testtmp}{%
+  \zcref[page]{cha:chapter-1, cha:chapter-2, cha:chapter-3,
     cha:chapter-4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type (1*)
-\setbox0=\hbox{\zcref[page]{cha:chapter-5, cha:chapter-6, cha:chapter-7,
+\renewcommand{\testtmp}{%
+  \zcref[page]{cha:chapter-5, cha:chapter-6, cha:chapter-7,
     cha:chapter-8}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option (0*)
-\setbox0=\hbox{\zcref[page,range]{cha:chapter-1, cha:chapter-4}}
+\renewcommand{\testtmp}{%
+  \zcref[page,range]{cha:chapter-1, cha:chapter-4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option (1*)
-\setbox0=\hbox{\zcref[page,range]{cha:chapter-5, cha:chapter-8}}
+\renewcommand{\testtmp}{%
+  \zcref[page,range]{cha:chapter-5, cha:chapter-8}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option (with roman)
-\setbox0=\hbox{\zcref[page,range]{sec:section-0.1, cha:chapter-8}}
+\renewcommand{\testtmp}{%
+  \zcref[page,range]{sec:section-0.1, cha:chapter-8}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -418,36 +512,50 @@
   endrange=pagecomp2,
 }
 % not last of type (0*)
-\setbox0=\hbox{\zcref[page,endrange=ref]{sec:section-0.1, cha:chapter-1,
+\renewcommand{\testtmp}{%
+  \zcref[page,endrange=ref]{sec:section-0.1, cha:chapter-1,
     cha:chapter-2, cha:chapter-3, cha:chapter-4, cha:chapter-7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % not last of type (1*)
-\setbox0=\hbox{\zcref[page,endrange=ref]{sec:section-0.1, cha:chapter-5,
+\renewcommand{\testtmp}{%
+  \zcref[page,endrange=ref]{sec:section-0.1, cha:chapter-5,
     cha:chapter-6, cha:chapter-7, cha:chapter-8, cha:chapter-9}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type (0*)
-\setbox0=\hbox{\zcref[page,endrange=ref]{cha:chapter-1, cha:chapter-2,
+\renewcommand{\testtmp}{%
+  \zcref[page,endrange=ref]{cha:chapter-1, cha:chapter-2,
     cha:chapter-3, cha:chapter-4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % last of type (1*)
-\setbox0=\hbox{\zcref[page,endrange=ref]{cha:chapter-5, cha:chapter-6,
+\renewcommand{\testtmp}{%
+  \zcref[page,endrange=ref]{cha:chapter-5, cha:chapter-6,
     cha:chapter-7, cha:chapter-8}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option (0*)
-\setbox0=\hbox{\zcref[page,range,endrange=ref]{cha:chapter-1, cha:chapter-4}}
+\renewcommand{\testtmp}{%
+  \zcref[page,range,endrange=ref]{cha:chapter-1, cha:chapter-4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option (1*)
-\setbox0=\hbox{\zcref[page,range,endrange=ref]{cha:chapter-5, cha:chapter-8}}
+\renewcommand{\testtmp}{%
+  \zcref[page,range,endrange=ref]{cha:chapter-5, cha:chapter-8}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range option (with roman)
-\setbox0=\hbox{\zcref[page,range,endrange=ref]{sec:section-0.1,
+\renewcommand{\testtmp}{%
+  \zcref[page,range,endrange=ref]{sec:section-0.1,
     cha:chapter-8}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

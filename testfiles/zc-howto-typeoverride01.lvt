@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 \usepackage{amsmath}
@@ -46,7 +54,9 @@
 \START
 
 \BEGINTEST{Reference type override}
-\setbox0=\hbox{\zcref{eq:1}}
+\renewcommand{\testtmp}{%
+  \zcref{eq:1}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

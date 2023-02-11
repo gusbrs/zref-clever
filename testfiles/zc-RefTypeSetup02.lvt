@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 % Use a serial comma for 'lastsep' (not the default) so that we can
@@ -86,55 +94,81 @@
   refbounds-first-sg={[pre*],[pre],[pos],[pos*]},
 }
 % single
-\setbox0=\hbox{\zcref{sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to single
-\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair ending with range
-\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list ending with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list with range in the middle
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -150,55 +184,81 @@
   refbounds-first={[pre*],[pre],[pos],[pos*]},
 }
 % single
-\setbox0=\hbox{\zcref{sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to single
-\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair ending with range
-\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list ending with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list with range in the middle
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -210,55 +270,81 @@
   refbounds-first-pb={[pre*],[pre],[pos],[pos*]},
 }
 % single
-\setbox0=\hbox{\zcref{sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to single
-\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair ending with range
-\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list ending with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list with range in the middle
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -270,55 +356,81 @@
   refbounds-first-rb={[pre*],[pre],[pos],[pos*]},
 }
 % single
-\setbox0=\hbox{\zcref{sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to single
-\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair ending with range
-\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list ending with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list with range in the middle
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -334,55 +446,81 @@
   refbounds-mid={[pre*],[pre],[pos],[pos*]},
 }
 % single
-\setbox0=\hbox{\zcref{sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to single
-\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair ending with range
-\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list ending with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list with range in the middle
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -394,55 +532,81 @@
   refbounds-mid-rb={[pre*],[pre],[pos],[pos*]},
 }
 % single
-\setbox0=\hbox{\zcref{sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to single
-\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair ending with range
-\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list ending with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list with range in the middle
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -454,55 +618,81 @@
   refbounds-mid-re={[pre*],[pre],[pos],[pos*]},
 }
 % single
-\setbox0=\hbox{\zcref{sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to single
-\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair ending with range
-\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list ending with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list with range in the middle
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -518,55 +708,81 @@
   refbounds-last={[pre*],[pre],[pos],[pos*]},
 }
 % single
-\setbox0=\hbox{\zcref{sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to single
-\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair ending with range
-\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list ending with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list with range in the middle
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -578,55 +794,81 @@
   refbounds-last-pe={[pre*],[pre],[pos],[pos*]},
 }
 % single
-\setbox0=\hbox{\zcref{sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to single
-\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair ending with range
-\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list ending with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list with range in the middle
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST
@@ -638,55 +880,81 @@
   refbounds-last-re={[pre*],[pre],[pos],[pos*]},
 }
 % single
-\setbox0=\hbox{\zcref{sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to single
-\setbox0=\hbox{\zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.4}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.4}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to pair
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.3a, sec:section-1.3b}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % pair ending with range
-\setbox0=\hbox{\zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.2, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % compress to list
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.3a, sec:section-1.3b, sec:section-1.5}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list starting with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.2, sec:section-1.3, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list ending with range
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.5, sec:section-1.6, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 % list with range in the middle
-\setbox0=\hbox{\zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\renewcommand{\testtmp}{%
+  \zcref{sec:section-1.1, sec:section-1.3, sec:section-1.4, sec:section-1.5, sec:section-1.7}}
+\setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \ENDTEST

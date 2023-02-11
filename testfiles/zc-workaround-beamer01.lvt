@@ -8,6 +8,14 @@
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
 \usepackage{zref-clever}
 
 \makeatletter
@@ -67,7 +75,9 @@
   \TIMO
 
   \BEGINTEST{Reference: figure, table}
-  \setbox0=\hbox{\zcref{tab:1,fig:1}}
+  \renewcommand{\testtmp}{%
+    \zcref{tab:1,fig:1}}
+  \setbox0=\hbox{\testtmp}
   \showbox0
   \box0
   \ENDTEST
