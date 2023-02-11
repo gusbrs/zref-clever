@@ -16,6 +16,10 @@ checkruns = 2
 -- Set up different test sets
 checkconfigs = {"build","build-moreruns"}
 
+-- Don't wrap/truncate lines in test logs
+-- See https://tex.stackexchange.com/q/674844#comment1676566_674846
+maxprintline = 1000
+
 -- Use dev formats for regression tests
 -- See https://tex.stackexchange.com/q/611424
 -- But only for pdftexdev and luatexdev, because it is possible to ensure
