@@ -14,7 +14,7 @@ installfiles = {"*.sty","*.cls","*.lang"}
 checkruns = 2
 
 -- Set up different test sets
-checkconfigs = {"build","build-moreruns"}
+checkconfigs = {"build","build-4runs"}
 
 -- Don't wrap/truncate lines in test logs
 -- See https://tex.stackexchange.com/q/674844#comment1676566_674846
