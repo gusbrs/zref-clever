@@ -21,7 +21,8 @@
 
 \usepackage{hyperref}
 
-\ExplSyntaxOn \bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
 \ExplSyntaxOff
 
 \begin{document}
