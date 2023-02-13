@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.3...HEAD)
+## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.4...HEAD)
+
+## [v0.3.4](https://github.com/gusbrs/zref-clever/compare/v0.3.3...v0.3.4) (2023-02-13)
 
 ### Added
 - `tcolorbox` how-to to the User manual.

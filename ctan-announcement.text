@@ -1,7 +1,9 @@
-## v0.3.3 (2023-01-03)
+## v0.3.4 (2023-02-13)
 
 ### Added
-- New `reftype` option, to allow for local manual override of `countertype`
-  settings.
-- Included some new How-tos to the User manual.
+- `tcolorbox` how-to to the User manual.
+
+### Changed
+- The `KOMA` compatibility module has been removed, since it was rendered
+  unnecessary by recent versions of KOMA Script classes.
 
