@@ -1,0 +1,101 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\RequirePackage[enable-debug]{expl3}
+
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation }
+\ExplSyntaxOff
+
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
+\usepackage{zref-clever}
+\usepackage{zref-titleref}
+
+\usepackage{tcolorbox}
+
+\tcbuselibrary{theorems}
+\tcbset{label is zlabel}
+
+\newtcolorbox[auto counter,number within=section]{pabox}[2][]{%
+  label type=example,
+  title=Example~\thetcbcounter: #2,#1}
+\newtcolorbox[use counter from=pabox,number within=section]{pabox2}[2][]{%
+  label type=solution,
+  title=Solution~\thetcbcounter: #2,#1}
+\newtcbtheorem[number within=section]{mytheo}{My Theorem}{%
+  label type=mytheorem}{th}
+\zcRefTypeSetup{mytheorem}{
+  Name-sg=Mytheorem,
+  name-sg=mytheorem,
+  Name-pl=Mytheorems,
+  name-pl=mytheorems,
+}
+
+\usepackage{hyperref}
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\begin{document}
+
+\section{Section 1}
+\zlabel{sec:section-1}
+
+\begin{pabox}[label={box:1}]{Title text}
+  This is tcolorbox \zcref{box:1} on \zcpageref{box:1}.
+\end{pabox}
+
+\begin{pabox2}[label={box:2}]{Title text}
+  This is tcolorbox \zcref{box:2} on \zcpageref{box:2}.
+\end{pabox2}
+
+\begin{mytheo}{This is my title}{theo}
+  This is \zcref{th:theo} on \zcpageref{th:theo} and it is titled
+  ``\zcref[noname,ref=title]{th:theo}''.
+\end{mytheo}
+
+\clearpage{}
+
+\START
+
+\BEGINTEST{Reference: Box 1}
+\renewcommand{\testtmp}{%
+  \zcref{box:1} on \zcpageref{box:1}}
+\setbox0=\hbox{\testtmp}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Reference: Box 2}
+\renewcommand{\testtmp}{%
+  \zcref{box:2} on \zcpageref{box:2}}
+\setbox0=\hbox{\testtmp}
+\showbox0
+\box0
+\ENDTEST
+
+\BEGINTEST{Reference: My theorem}
+\renewcommand{\testtmp}{%
+  \zcref{th:theo} on \zcpageref{th:theo}}
+\setbox0=\hbox{\testtmp}
+\showbox0
+\box0
+\renewcommand{\testtmp}{%
+  \zcref[noname,ref=title]{th:theo}}
+\setbox0=\hbox{\testtmp}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}

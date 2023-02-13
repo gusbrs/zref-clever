@@ -2,6 +2,9 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.3...HEAD)
 
+### Added
+- `tcolorbox` how-to to the User manual.
+
 ### Changed
 - The `KOMA` compatibility module has been removed, since it was rendered
   unnecessary by recent versions of KOMA Script classes.
