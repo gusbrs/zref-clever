@@ -59,6 +59,7 @@ env:
     csquotes
     dvips
     enumitem
+    environ
     epstopdf-pkg
     etexcmds
     fancyvrb
@@ -92,6 +93,7 @@ env:
     pdftexcmds
     polyglossia
     subfig
+    tcolorbox
     tools
     trivfloat
     underscore
