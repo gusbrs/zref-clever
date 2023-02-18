@@ -24,7 +24,7 @@ jobs:
     
     steps:
       - name: Update TeX Live
-        run: tlmgr update --self --all
+        run: tlmgr update --self zref-vario zref-check
 
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -48,7 +48,7 @@ jobs:
 
     steps:
       - name: Update TeX Live
-        run: tlmgr update --self --all
+        run: tlmgr update --self zref-vario zref-check
 
       - name: Checkout repository
         uses: actions/checkout@v3
