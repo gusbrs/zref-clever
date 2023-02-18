@@ -108,14 +108,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Generate unique ID
         id: get-id
         run: |
           echo -n ::set-output name=id::
           cat /proc/sys/kernel/random/uuid
       - name: Load cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/texlive
           key: texlive-v0-${{ steps.get-id.outputs.id }}
@@ -132,14 +132,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Generate unique ID
         id: get-id
         run: |
           echo -n ::set-output name=id::
           cat /proc/sys/kernel/random/uuid
       - name: Load cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/texlive
           key: texlive-v0-${{ steps.get-id.outputs.id }}
