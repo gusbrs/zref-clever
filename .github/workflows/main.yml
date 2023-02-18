@@ -15,7 +15,7 @@ name: CI l3build test suite
 on: [push, pull_request]
 
 jobs:
-  check:
+  tests:
     name: Regression tests
 
     runs-on: ubuntu-latest
@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Update TeX Live
-        run: tlmgr update --self zref-vario zref-check
+        run: tlmgr update --self --all
 
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -48,7 +48,7 @@ jobs:
 
     steps:
       - name: Update TeX Live
-        run: tlmgr update --self zref-vario zref-check
+        run: tlmgr update --self --all
 
       - name: Checkout repository
         uses: actions/checkout@v3
