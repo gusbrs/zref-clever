@@ -2073,6 +2073,7 @@ with the \opt{label type} option.
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems}
 \tcbset{label is zlabel}
+\usepackage{hyperref}
 \newtcolorbox[auto counter,number within=section]{pabox}[2][]{%
   label type=example,
   title=Example~\thetcbcounter: #2,#1}
@@ -2087,7 +2088,6 @@ with the \opt{label type} option.
   Name-pl=Mytheorems,
   name-pl=mytheorems,
 }
-\usepackage{hyperref}
 \begin{document}
 \section{Section 1}
 \zlabel{sec:section-1}
