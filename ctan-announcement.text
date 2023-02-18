@@ -1,9 +1,5 @@
-## v0.3.4 (2023-02-13)
+## v0.3.5 (2023-02-18)
 
-### Added
-- `tcolorbox` how-to to the User manual.
-
-### Changed
-- The `KOMA` compatibility module has been removed, since it was rendered
-  unnecessary by recent versions of KOMA Script classes.
+### Fixed
+- In tcolorbox how-to, `hyperref` should be loaded before any `\newtcolorbox`es.
 
