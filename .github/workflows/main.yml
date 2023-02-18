@@ -17,11 +17,11 @@ on: [push, pull_request]
 jobs:
   check:
     name: Regression tests
-    
+
     runs-on: ubuntu-latest
     container:
       image: registry.gitlab.com/islandoftex/images/texlive:latest
-    
+
     steps:
       - name: Update TeX Live
         run: tlmgr update --self zref-vario zref-check
@@ -30,8 +30,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run tests
-        run: l3build check -q -H --show-log-on-error
-        
+        run: l3build check -q --show-log-on-error
+
       - name: Archive failed test output
         if: failure()
         uses: actions/upload-artifact@v3
@@ -54,4 +54,4 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Compile documentation
-        run: l3build doc -q -H
+        run: l3build doc -q
