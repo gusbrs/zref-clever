@@ -1,0 +1,13 @@
+# Set update schedule for GitHub Actions
+# See https://docs.github.com/en/code-security/dependabot/working-with-dependabot/keeping-your-actions-up-to-date-with-dependabot
+# https://github.com/gusbrs/zref-clever/pull/15#issue-1590334483
+# https://github.com/pgf-tikz/pgf/blob/master/.github/dependabot.yml
+
+version: 2
+updates:
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      # Check for updates to GitHub Actions every week
+      interval: "weekly"
