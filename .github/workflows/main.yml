@@ -108,20 +108,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Generate unique ID
-        id: get-id
-        run: |
-          echo -n ::set-output name=id::
-          cat /proc/sys/kernel/random/uuid
-      - name: Load cache
-        uses: actions/cache@v2
-        with:
-          path: ~/texlive
-          key: texlive-v0-${{ steps.get-id.outputs.id }}
-          restore-keys: texlive-v0-
+        uses: actions/checkout@v3
       - name: Install TeX Live
-        uses: zauguin/install-texlive@v1
+        uses: zauguin/install-texlive@v2
         with:
           packages: ${{ env.ZC_PACKAGE_LIST }}
       - name: Run tests
@@ -132,20 +121,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
-      - name: Generate unique ID
-        id: get-id
-        run: |
-          echo -n ::set-output name=id::
-          cat /proc/sys/kernel/random/uuid
-      - name: Load cache
-        uses: actions/cache@v2
-        with:
-          path: ~/texlive
-          key: texlive-v0-${{ steps.get-id.outputs.id }}
-          restore-keys: texlive-v0-
+        uses: actions/checkout@v3
       - name: Install TeX Live
-        uses: zauguin/install-texlive@v1
+        uses: zauguin/install-texlive@v2
         with:
           packages: ${{ env.ZC_PACKAGE_LIST }}
       - name: Compile documentation
