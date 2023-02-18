@@ -2,6 +2,9 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.4...HEAD)
 
+### Fixed
+- In tcolorbox how-to, `hyperref` should be loaded before any `\newtcolorbox`es.
+
 ## [v0.3.4](https://github.com/gusbrs/zref-clever/compare/v0.3.3...v0.3.4) (2023-02-13)
 
 ### Added

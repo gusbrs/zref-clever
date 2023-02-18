@@ -4,20 +4,20 @@ Don't change this file in any respect.
 TEST 1: Reference: Box 1
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{tcb@cnt@pabox.1}{\group_begin: example\group_end: \nobreakspace
+{}{tcb@cnt@pabox.1.1}{\group_begin: example\group_end: \nobreakspace
 \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{tcb@cnt@pabox.1}{\group_begin: page\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+{}{tcb@cnt@pabox.1.1}{\group_begin: page\group_end: \nobreakspace
+\group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
 > \box...=
 \hbox(6.94444+1.94444)x97.5002
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(tcb@cnt@pabox.1)>>>>}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(tcb@cnt@pabox.1.1)>>>>}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 x
 .\OT1/cmr/m/n/10 a
@@ -35,7 +35,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 o
 .\OT1/cmr/m/n/10 n
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(tcb@cnt@pabox.1)>>>>}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(tcb@cnt@pabox.1.1)>>>>}
 .\OT1/cmr/m/n/10 p
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 g
@@ -51,20 +51,20 @@ l. ...\showbox0
 TEST 2: Reference: Box 2
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{tcb@cnt@pabox.2}{\group_begin: solution\group_end: \nobreakspace
+{}{tcb@cnt@pabox.1.2}{\group_begin: solution\group_end: \nobreakspace
 \group_begin: 1.2\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{tcb@cnt@pabox.2}{\group_begin: page\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+{}{tcb@cnt@pabox.1.2}{\group_begin: page\group_end: \nobreakspace
+\group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
 > \box...=
 \hbox(6.94444+1.94444)x96.16687
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(tcb@cnt@pabox.2)>>>>}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(tcb@cnt@pabox.1.2)>>>>}
 .\OT1/cmr/m/n/10 s
 .\OT1/cmr/m/n/10 o
 .\OT1/cmr/m/n/10 l
@@ -83,7 +83,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 o
 .\OT1/cmr/m/n/10 n
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(tcb@cnt@pabox.2)>>>>}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(tcb@cnt@pabox.1.2)>>>>}
 .\OT1/cmr/m/n/10 p
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 g
@@ -99,20 +99,20 @@ l. ...\showbox0
 TEST 3: Reference: My theorem
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{tcb@cnt@mytheo.1}{\group_begin: mytheorem\group_end: \nobreakspace
+{}{tcb@cnt@mytheo.1.1}{\group_begin: mytheorem\group_end: \nobreakspace
 \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{tcb@cnt@mytheo.1}{\group_begin: page\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+{}{tcb@cnt@mytheo.1.1}{\group_begin: page\group_end: \nobreakspace
+\group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
 > \box...=
 \hbox(6.94444+1.94444)x110.58356
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(tcb@cnt@mytheo.1)>>>>}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(tcb@cnt@mytheo.1.1)>>>>}
 .\OT1/cmr/m/n/10 m
 .\kern-0.27779
 .\OT1/cmr/m/n/10 y
@@ -133,7 +133,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 o
 .\OT1/cmr/m/n/10 n
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(tcb@cnt@mytheo.1)>>>>}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(tcb@cnt@mytheo.1.1)>>>>}
 .\OT1/cmr/m/n/10 p
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 g
@@ -145,13 +145,13 @@ l. ...\setbox0=\hbox{\testtmp
 ! OK.
 l. ...\showbox0
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{tcb@cnt@mytheo.1}{\group_begin: This is my title\group_end: }.
+{}{tcb@cnt@mytheo.1.1}{\group_begin: This is my title\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
 > \box...=
 \hbox(6.94444+1.94444)x67.33344
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(tcb@cnt@mytheo.1)>>>>}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(tcb@cnt@mytheo.1.1)>>>>}
 .\OT1/cmr/m/n/10 T
 .\OT1/cmr/m/n/10 h
 .\OT1/cmr/m/n/10 i

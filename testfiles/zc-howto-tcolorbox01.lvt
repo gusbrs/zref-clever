@@ -24,6 +24,8 @@
 \tcbuselibrary{theorems}
 \tcbset{label is zlabel}
 
+\usepackage{hyperref}
+
 \newtcolorbox[auto counter,number within=section]{pabox}[2][]{%
   label type=example,
   title=Example~\thetcbcounter: #2,#1}
@@ -38,8 +40,6 @@
   Name-pl=Mytheorems,
   name-pl=mytheorems,
 }
-
-\usepackage{hyperref}
 
 \ExplSyntaxOn
 \bool_set_true:N \l__zrefclever_verbose_testing_bool
