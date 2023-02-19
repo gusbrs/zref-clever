@@ -1,0 +1,47 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\RequirePackage[enable-debug]{expl3}
+
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation }
+\ExplSyntaxOff
+
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
+\usepackage{zref-clever}
+
+% An empty value in the "zc@cntval" property results in "Missing number,
+% treated as zero." error, which could occur if the user set labels before the
+% first call to '\refstepcounter'.  This is fixed, and this test file is to
+% ensure there's no regression on the matter.
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\begin{document}
+
+\zlabel{label1}
+\zlabel{label2}
+
+\START
+
+\BEGINTEST{Reference: labels before refstepcounter}
+\renewcommand{\testtmp}{%
+  \zcref{label1,label2}}
+\setbox0=\hbox{\testtmp}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}

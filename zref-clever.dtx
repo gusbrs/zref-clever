@@ -274,15 +274,27 @@
 % numeric values.  So we store them in \texttt{zc@cntval} and
 % \texttt{zc@pgval}.  For this, we use \cs[no-index]{c@}\meta{counter}, which
 % contains the counter's numerical value (see `texdoc source2e', section
-% `ltcounts.dtx').
+% `ltcounts.dtx').  Also, even if we can't find a valid \cs{@currentcounter},
+% we set the value of 0 to the property, so that it is never empty (the
+% property's default is not sufficient to avoid that), because we rely on this
+% value being a number and an empty value there will result in ``Missing
+% number, treated as zero.'' error.  A typical situation where this might
+% occur is the user setting a label before \cs{refstepcounter} is called for
+% the first time in the document.  A user error, no doubt, but we should avoid
+% a hard crash.
 %    \begin{macrocode}
 \zref@newprop { zc@cntval } [0]
   {
-    \cs_if_exist:cTF { c@ \l_@@_current_counter_tl }
+    \bool_lazy_and:nnTF
+      { ! \tl_if_empty_p:N \l_@@_current_counter_tl }
+      { \cs_if_exist_p:c { c@ \l_@@_current_counter_tl } }
       { \int_use:c { c@ \l_@@_current_counter_tl } }
       {
-        \cs_if_exist:cT { c@ \@currentcounter }
+        \bool_lazy_and:nnTF
+          { ! \tl_if_empty_p:N \@currentcounter }
+          { \cs_if_exist_p:c { c@ \@currentcounter } }
           { \int_use:c { c@ \@currentcounter } }
+          { 0 }
       }
   }
 \zref@addprop \ZREF@mainlist { zc@cntval }

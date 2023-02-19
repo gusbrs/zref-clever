@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.5...HEAD)
 
+### Fixed
+- Avoid "Missing number, treated as zero" error for labels set before first
+  call to `\refstepcounter`.
+
 ## [v0.3.5](https://github.com/gusbrs/zref-clever/compare/v0.3.4...v0.3.5) (2023-02-18)
 
 ### Fixed
