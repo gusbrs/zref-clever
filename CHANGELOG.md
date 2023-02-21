@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.5...HEAD)
+## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.6...HEAD)
+
+## [v0.3.6](https://github.com/gusbrs/zref-clever/compare/v0.3.5...v0.3.6) (2023-02-21)
 
 ### Fixed
 - Avoid "Missing number, treated as zero" error for labels set before first

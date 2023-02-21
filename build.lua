@@ -43,7 +43,7 @@ packtdszip = true
 
 -- CTAN upload settings
 uploadconfig = {
-  version = "0.3.5", -- first line for tagging
+  version = "0.3.6", -- first line for tagging
   pkg = "zref-clever",
   author = "Gustavo Barros",
   uploader = "Gustavo Barros",
