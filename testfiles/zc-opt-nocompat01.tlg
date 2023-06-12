@@ -136,47 +136,6 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 >  {enumiv}  =>  {enumiii}.
 <recently read> }
 l. ...\testtmp
-__zrefclever_memoir_both_labels: not defined
--> The generic hook 'env/sidecaption/begin':
-> The hook is not declared.
-> The hook is empty.
-<recently read> }
-l. ...\ShowHook { env / sidecaption / begin }
--> The generic hook 'env/sidecontcaption/begin':
-> The hook is not declared.
-> The hook is empty.
-<recently read> }
-l. ...\ShowHook { env / sidecontcaption / begin }
--> The generic hook 'cmd/bitwonumcaption/before':
-> The hook is not declared.
-> The hook is empty.
-<recently read> }
-l. ...\ShowHook { cmd / bitwonumcaption / before }
--> The generic hook 'cmd/bitwonumcaption/after':
-> The hook is not declared.
-> The hook is empty.
-<recently read> }
-l. ...\ShowHook { cmd / bitwonumcaption / after }
--> The generic hook 'cmd/bionenumcaption/before':
-> The hook is not declared.
-> The hook is empty.
-<recently read> }
-l. ...\ShowHook { cmd / bionenumcaption / before }
--> The generic hook 'cmd/bionenumcaption/after':
-> The hook is not declared.
-> The hook is empty.
-<recently read> }
-l. ...\ShowHook { cmd / bionenumcaption / after }
--> The generic hook 'cmd/bicaption/before':
-> The hook is not declared.
-> The hook is empty.
-<recently read> }
-l. ...\ShowHook { cmd / bicaption / before }
--> The generic hook 'cmd/bicaption/after':
-> The hook is not declared.
-> The hook is empty.
-<recently read> }
-l. ...\ShowHook { cmd / bicaption / after }
 subcaption property not defined
 -> The generic hook 'cmd/@memsubcaption/before':
 > The hook is not declared.

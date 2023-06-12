@@ -33,117 +33,6 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 >  {subtable}  =>  {table}.
 <recently read> }
 l. ...\testtmp
-> \__zrefclever_memoir_both_labels:=\protected\long macro:->\cs_set_eq:NN
-\__zrefclever_memoir_orig_label:n \label \cs_set:Npn
-\__zrefclever_memoir_label_and_zlabel:n ##1{\__zrefclever_memoir_orig_label:n
-{##1}\zlabel {##1}}\cs_set_eq:NN \label
-\__zrefclever_memoir_label_and_zlabel:n .
-<recently read> }
-l. ...  }
--> The generic hook 'env/sidecaption/begin':
-> Code chunks:
->     ---
-> Document-level (top-level) code (executed last):
->     -> \__zrefclever_memoir_both_labels: 
-> Extra code for next invocation:
->     ---
-> Rules:
->     ---
-> Execution order:
->     ---.
-<recently read> }
-l. ...\ShowHook { env / sidecaption / begin }
--> The generic hook 'env/sidecontcaption/begin':
-> Code chunks:
->     ---
-> Document-level (top-level) code (executed last):
->     -> \__zrefclever_memoir_both_labels: 
-> Extra code for next invocation:
->     ---
-> Rules:
->     ---
-> Execution order:
->     ---.
-<recently read> }
-l. ...\ShowHook { env / sidecontcaption / begin }
--> The generic hook 'cmd/bitwonumcaption/before' (6 arguments):
-> Code chunks:
->     ---
-> Document-level (top-level) code (executed last):
->     -> \group_begin: \__zrefclever_memoir_both_labels: 
-> Extra code for next invocation:
->     ---
-> Rules:
->     ---
-> Execution order:
->     ---.
-<recently read> }
-l. ...\ShowHook { cmd / bitwonumcaption / before }
--> The generic hook 'cmd/bitwonumcaption/after' (6 arguments):
-> Code chunks:
->     ---
-> Document-level (top-level) code (executed first):
->     -> \group_end: 
-> Extra code for next invocation:
->     ---
-> Rules:
->     ---
-> Execution order (after reversal):
->     ---.
-<recently read> }
-l. ...\ShowHook { cmd / bitwonumcaption / after }
--> The generic hook 'cmd/bionenumcaption/before' (6 arguments):
-> Code chunks:
->     ---
-> Document-level (top-level) code (executed last):
->     -> \group_begin: \__zrefclever_memoir_both_labels: 
-> Extra code for next invocation:
->     ---
-> Rules:
->     ---
-> Execution order:
->     ---.
-<recently read> }
-l. ...\ShowHook { cmd / bionenumcaption / before }
--> The generic hook 'cmd/bionenumcaption/after' (6 arguments):
-> Code chunks:
->     ---
-> Document-level (top-level) code (executed first):
->     -> \group_end: 
-> Extra code for next invocation:
->     ---
-> Rules:
->     ---
-> Execution order (after reversal):
->     ---.
-<recently read> }
-l. ...\ShowHook { cmd / bionenumcaption / after }
--> The generic hook 'cmd/bicaption/before' (5 arguments):
-> Code chunks:
->     ---
-> Document-level (top-level) code (executed last):
->     -> \group_begin: \__zrefclever_memoir_both_labels: 
-> Extra code for next invocation:
->     ---
-> Rules:
->     ---
-> Execution order:
->     ---.
-<recently read> }
-l. ...\ShowHook { cmd / bicaption / before }
--> The generic hook 'cmd/bicaption/after' (5 arguments):
-> Code chunks:
->     ---
-> Document-level (top-level) code (executed first):
->     -> \group_end: 
-> Extra code for next invocation:
->     ---
-> Rules:
->     ---
-> Execution order (after reversal):
->     ---.
-<recently read> }
-l. ...\ShowHook { cmd / bicaption / after }
 subcaption property is defined
 -> The generic hook 'cmd/@memsubcaption/before' (3 arguments):
 > Code chunks:
@@ -517,7 +406,8 @@ TEST 8: Sidecaption. Reference: figure
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
 {}{figure.1.3}{\group_begin: figure\group_end: \nobreakspace \group_begin:
-1.3\group_end: }.
+\M@TitleReference {\M@TitleReference {1.3}{Section 1.1}}{Section
+1.1}\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -543,8 +433,11 @@ TEST 9: Bilingual captions. Reference: figure
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
 \nobreakspace \__zrefclever_hyperlink:nnn {}{figure.1.4}{\group_begin:
-1.4\group_end: } to\nobreakspace \__zrefclever_hyperlink:nnn
-{}{figure.1.6}{\group_begin: 1.6\group_end: }.
+\M@TitleReference {\M@TitleReference {1.4}{Long \cs {bitwonumcaption}}}{Long
+\cs {bitwonumcaption}}\group_end: } to\nobreakspace
+\__zrefclever_hyperlink:nnn {}{figure.1.6}{\group_begin: \M@TitleReference
+{\M@TitleReference {1.6}{Short English \cs {bicaption}}}{Short English \cs
+{bicaption}}\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
