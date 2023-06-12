@@ -906,6 +906,16 @@ Its default value is, quite naturally, \cs{@currentcounter}.  The default
 value can be reset by calling the option with no value.  Since this option
 only affects how labels are set, it is not available in \cs{zcref}.
 
+\DescribeOption{\raisebox{.4em}{\dbend}\ labelhook} %
+\opt{labelhook} is a boolean option which controls whether \pkg{zref-clever}
+uses the kernel's \texttt{label} hook to, whenever a standard \cs{label} is
+called, also set a \cs{zlabel} with the same name.  The package's default
+value is \texttt{true} so that one can use \cs{label}s along the document and
+refer to them (also) with \pkg{zref} and \pkg{zref-clever} reference commands.
+This value is not only the default, but also a recommended value.  Disabling
+this option means you are on your own to handle cases where \cs{zlabel} does
+not work, which are not many, but can be tricky to deal with where they occur.
+
 \DescribeOption{nocompat} %
 Some packages, document classes, or LaTeX features may require specific
 support to work with \pkg{zref-clever} (see \zcref{sec:limitations}).

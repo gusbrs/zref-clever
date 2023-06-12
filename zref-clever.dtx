@@ -3931,6 +3931,28 @@
 %    \end{macrocode}
 %
 %
+% \subsubsection*{\opt{labelhook} option}
+%
+%    \begin{macrocode}
+\bool_new:N \l_@@_labelhook_bool
+\keys_define:nn { zref-clever/reference }
+  {
+    labelhook .bool_set:N = \l_@@_labelhook_bool ,
+    labelhook .initial:n = true ,
+    labelhook .default:n = true ,
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\AddToHookWithArguments { label }
+  {
+    \bool_if:NT \l_@@_labelhook_bool
+      { \zlabel {#1} }
+  }
+%    \end{macrocode}
+%
+%
+%
 % \subsubsection*{\opt{nocompat} option}
 %
 %
