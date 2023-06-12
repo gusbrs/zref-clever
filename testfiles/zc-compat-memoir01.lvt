@@ -236,23 +236,6 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \testtmp
 \renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
 \testtmp
-\cs_if_exist:NTF \__zrefclever_memoir_both_labels:
-  {
-    \renewcommand{\testtmp}{ \cs_show:N \__zrefclever_memoir_both_labels: }
-    \testtmp
-  }
-  {
-    \renewcommand{\testtmp}{ \typeout { __zrefclever_memoir_both_labels:~not~defined } }
-    \testtmp
-  }
-\ShowHook { env / sidecaption / begin }
-\ShowHook { env / sidecontcaption / begin }
-\ShowHook { cmd / bitwonumcaption / before }
-\ShowHook { cmd / bitwonumcaption / after }
-\ShowHook { cmd / bionenumcaption / before }
-\ShowHook { cmd / bionenumcaption / after }
-\ShowHook { cmd / bicaption / before }
-\ShowHook { cmd / bicaption / after }
 \zref@ifpropundefined { subcaption }
   {
     \renewcommand{\testtmp}{ \typeout { subcaption~property~not~defined } }

@@ -7800,39 +7800,10 @@
 % related features, mostly dealing with captions, subfloats, and notes.  Some
 % of them are implemented in ways which make difficult the use of \pkg{zref},
 % particularly \cs{zlabel}, short of redefining the whole stuff ourselves.
-% Hopefully, these features are specialized enough to make \pkg{zref-clever}
-% useful enough with \cls{memoir} without much friction, but unless some
-% support is added upstream, it is difficult not to be a little intrusive
-% here.
+% Fortunately, however, the kernel's new \texttt{label} hook, and the
+% \opt{labelhook} option, make things somewhat easier.
 %
 % \begin{enumerate}
-% \item Caption functionality which receives \meta{label} as optional
-%   argument, namely:
-%   \begin{enumerate}
-%   \item The \env{sidecaption} and \env{sidecontcaption} environments.  These
-%     environments \emph{store} the label in an internal macro,
-%     \cs{m@mscaplabel}, at the begin environment code (more precisely in
-%     \cs[replace=false]{@@sidecaption}), but both the call to
-%     \cs{refstepcounter} and the expansion of \cs{m@mscaplabel} take place at
-%     \cs{endsidecaption}.  For this reason, hooks are not particularly
-%     helpful, and there is not any easy way to grab the \meta{label} argument
-%     to start with.  I can see two ways to deal with these environments, none
-%     of which I really like.  First, map through \cs{m@mscaplabel} until
-%     \cs{label} is found, then grab the next token which is the \meta{label}.
-%     This can be used to set a \cs{zlabel} either with a kernel environment
-%     hook, or with \cs{@mem@scap@afterhook} (the former requires running
-%     \cs{refstepcounter} on our own, since the \texttt{env/.../end} hook
-%     comes before this is done by \cs{endsidecaption}).  Second, locally
-%     redefine \cs{label} to set both labels inside the environments.
-%   \item The bilingual caption commands: \cs{bitwonumcaption},
-%     \cs{bionenumcaption}, and \cs{bicaption}.  These commands do not support
-%     setting the label in their arguments (the labels do get set, but they
-%     end up included in the \texttt{title} property of the label too).  So we
-%     do the same for them as for \env{sidecaption}, just taking care of
-%     grouping, since we can't count on the convenience of the environment
-%     hook (luckily for us, they are scoped themselves, so we can add an extra
-%     group there).
-%   \end{enumerate}
 % \item The \cs{subcaptionref} command, which makes a reference to the
 %   subcaption without the number of the main caption (e.g. ``(b)'', instead
 %   of ``2.3(b)''), for labels set inside the \meta{subtitle} argument of the
@@ -7885,36 +7856,6 @@
                 subtable  = table ,
               } ,
           }
-%    \end{macrocode}
-% Support for caption \cls{memoir} features that require that \meta{label} be
-% supplied as an optional argument.
-%    \begin{macrocode}
-        \cs_new_protected:Npn \@@_memoir_both_labels:
-          {
-            \cs_set_eq:NN \@@_memoir_orig_label:n \label
-            \cs_set:Npn \@@_memoir_label_and_zlabel:n ##1
-              {
-                \@@_memoir_orig_label:n {##1}
-                \zlabel{##1}
-              }
-            \cs_set_eq:NN \label \@@_memoir_label_and_zlabel:n
-          }
-        \AddToHook { env / sidecaption / begin }
-          { \@@_memoir_both_labels: }
-        \AddToHook { env / sidecontcaption / begin }
-          { \@@_memoir_both_labels: }
-        \AddToHook{ cmd / bitwonumcaption / before }
-          { \group_begin: \@@_memoir_both_labels: }
-        \AddToHook{ cmd / bitwonumcaption / after }
-          { \group_end: }
-        \AddToHook{ cmd / bionenumcaption / before }
-          { \group_begin: \@@_memoir_both_labels: }
-        \AddToHook{ cmd / bionenumcaption / after }
-          { \group_end: }
-        \AddToHook{ cmd / bicaption / before }
-          { \group_begin: \@@_memoir_both_labels: }
-        \AddToHook{ cmd / bicaption / after }
-          { \group_end: }
 %    \end{macrocode}
 % Support for \texttt{subcaption} reference.
 %    \begin{macrocode}
