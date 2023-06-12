@@ -138,9 +138,10 @@ TEST 5: amsmath module
 ============================================================
 __zrefclever_ltxlabel:n not defined
 __zrefclever_orig_ltxlabel:n not defined
-> \ltx@label=macro:#1->\@bsphack \begingroup \def \label@name {#1}\label@hook
-\protected@write \@auxout {}{\string \newlabel {#1}{{\@currentlabel }{\thepage
-}{\@currentlabelname }{\@currentHref }{}}}\endgroup \@esphack .
+> \ltx@label=macro:#1->\@bsphack \begingroup \UseHookWithArguments
+{label}{1}{#1}\protected@write \@auxout {}{\string \newlabel
+{#1}{{\@currentlabel }{\thepage }{\@currentlabelname }{\@currentHref
+}{\@kernel@reserved@label@data }}}\endgroup \@esphack .
 <recently read> }
 l. ...\cs_show:N \ltx@label
 > \l__zrefclever_current_counter_tl=\@currentcounter .

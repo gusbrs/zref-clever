@@ -3,10 +3,10 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: appendix module before
 ============================================================
-> \appendix=macro:->\UseHook {cmd/appendix/before}\ltx@IfUndefined
-{chapter}{\gdef \theHsection {\Hy@AlphNoErr {section}}}{\gdef \theHchapter
-{\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp {\Hy@appendixstring
-}\HyOrg@appendix .
+> \appendix=macro:->\UseHookWithArguments
+{cmd/appendix/before}{0}\ltx@IfUndefined {chapter}{\gdef \theHsection
+{\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
+\Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
 <recently read> }
 l. ...\cs_show:N \appendix
 The property list \l__zrefclever_counter_type_prop contains the pairs (without
@@ -38,10 +38,10 @@ l. ...\ShowHook { cmd / appendix / before }
 ============================================================
 TEST 2: appendix module after
 ============================================================
-> \appendix=macro:->\UseHook {cmd/appendix/before}\ltx@IfUndefined
-{chapter}{\gdef \theHsection {\Hy@AlphNoErr {section}}}{\gdef \theHchapter
-{\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp {\Hy@appendixstring
-}\HyOrg@appendix .
+> \appendix=macro:->\UseHookWithArguments
+{cmd/appendix/before}{0}\ltx@IfUndefined {chapter}{\gdef \theHsection
+{\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
+\Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
 <recently read> }
 l. ...\cs_show:N \appendix
 The property list \l__zrefclever_counter_type_prop contains the pairs (without

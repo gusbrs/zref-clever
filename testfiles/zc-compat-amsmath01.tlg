@@ -7,10 +7,10 @@ TEST 1: amsmath module
 {#1}\zref@wrapper@babel \zref@label {#1}.
 <recently read> }
 l. ...  }
-> \__zrefclever_orig_ltxlabel:n=macro:#1->\@bsphack \begingroup \def
-\label@name {#1}\label@hook \protected@write \@auxout {}{\string \newlabel
-{#1}{{\@currentlabel }{\thepage }{\@currentlabelname }{\@currentHref
-}{}}}\endgroup \@esphack .
+> \__zrefclever_orig_ltxlabel:n=macro:#1->\@bsphack \begingroup
+\UseHookWithArguments {label}{1}{#1}\protected@write \@auxout {}{\string
+\newlabel {#1}{{\@currentlabel }{\thepage }{\@currentlabelname }{\@currentHref
+}{\@kernel@reserved@label@data }}}\endgroup \@esphack .
 <recently read> }
 l. ...  }
 > \ltx@label=macro:#1->\__zrefclever_orig_ltxlabel:n {#1}\zref@wrapper@babel

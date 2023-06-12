@@ -3,10 +3,10 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: appendices module
 ============================================================
-> \appendix=macro:->\UseHook {cmd/appendix/before}\ltx@IfUndefined
-{chapter}{\gdef \theHsection {\Hy@AlphNoErr {section}}}{\gdef \theHchapter
-{\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp {\Hy@appendixstring
-}\HyOrg@appendix .
+> \appendix=macro:->\UseHookWithArguments
+{cmd/appendix/before}{0}\ltx@IfUndefined {chapter}{\gdef \theHsection
+{\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
+\Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
 <recently read> }
 l. ...\cs_show:N \appendix
 zc@appendix counter is defined
