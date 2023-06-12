@@ -131,12 +131,11 @@
 %
 % Taking a stance on backward compatibility of the package.  During initial
 % development, we have used freely recent features of the kernel (albeit
-% refraining from \pkg{l3candidates}, even though I'd have loved to have used
-% \cs{bool_case_true:}\dots{}).  We presume \pkg{xparse} (which made to the
-% kernel in the 2020-10-01 release), and \pkg{expl3} as well (which made to
-% the kernel in the 2020-02-02 release).  We also just use UTF-8 for the
+% refraining from \pkg{l3candidates}).  We presume \pkg{xparse} (which made to
+% the kernel in the 2020-10-01 release), and \pkg{expl3} as well (which made
+% to the kernel in the 2020-02-02 release).  We also just use UTF-8 for the
 % language files (which became the default input encoding in the 2018-04-01
-% release).  Finally, a couple of changes came with the 2021-11-15 kernel
+% release).  Also, a couple of changes came with the 2021-11-15 kernel
 % release, which are important here.  First, a fix was made to the new hook
 % management system (\pkg{ltcmdhooks}), with implications to the hook we add
 % to \cs{appendix} (by \contributor{Phelype Oleinik} at
@@ -144,18 +143,22 @@
 % \url{https://github.com/latex3/latex2e/pull/699}).  Second, the support for
 % \cs{@currentcounter} has been improved, including \cs{footnote} and
 % \pkg{amsmath} (by \contributor{Frank Mittelbach} and \contributor{Ulrike
-% Fischer} at \url{https://github.com/latex3/latex2e/issues/687}).  Hence,
-% since we would not be able to go much backwards without special handling
-% anyway, we make the cut at the 2021-11-15 kernel release.
+% Fischer} at \url{https://github.com/latex3/latex2e/issues/687}).  Finally,
+% and critically, the new \texttt{label} hook introduced in the 2023-06-01
+% release, alongside the corresponding new hooks with arguments, just
+% simplifies and improves label setting so much, by allowing \cs{zlabel} to be
+% set with \cs{label}, that it is definitely a must for \pkg{zref-clever}, so
+% we require that too.  Hence we make the cut at the 2023-06-01 kernel
+% release.
 %
 %    \begin{macrocode}
 \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
-\IfFormatAtLeastTF{2021-11-15}
+\IfFormatAtLeastTF{2023-06-01}
   {}
   {%
     \PackageError{zref-clever}{LaTeX kernel too old}
       {%
-        'zref-clever' requires a LaTeX kernel 2021-11-15 or newer.%
+        'zref-clever' requires a LaTeX kernel 2023-06-01 or newer.%
         \MessageBreak Loading will abort!%
       }%
     \endinput
