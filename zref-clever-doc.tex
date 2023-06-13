@@ -1941,14 +1941,13 @@ regardless of what the current counter is.
   \pkg{listings} package.}
 
 Being \env{lstlisting} a verbatim environment, setting labels inside it
-requires special treatment.  \pkg{zref-clever}'s \opt{listings} compatibility
-module provides that a label given to the \opt{label} option gets set with
-both a regular \cs{label} and a \cs{zlabel}, so that we can refer to it with
-both referencing systems.  Setting labels for specific lines of the
-environment can be done with \cs{zlabel} directly, subject to the same
-escaping as for the standard \cs{label}.  For more details, see the
-description of the \opt{listings} compatibility module at
-\zcref{sec:comp-modules}.
+requires special treatment.  \pkg{zref-clever}'s \opt{labelhook} option
+provides that a label given to the \opt{label} option gets set with both a
+regular \cs{label} and a \cs{zlabel}, so that we can refer to it with both
+referencing systems.  Setting labels for specific lines of the environment can
+be done with \cs{zlabel} directly, subject to the same escaping as for the
+standard \cs{label}.  For more details, see the description of the
+\opt{listings} compatibility module at \zcref{sec:comp-modules}.
 
 \begin{zchowto}[caption={\pkg{listings}},label={how:listings},escapeinside=`']
 \documentclass{article}
@@ -2351,20 +2350,10 @@ uses environment hooks for the purpose.  See the \zcref{how:breqn} for an
 usage example.
 
 \DescribeOption{listings} %
-Being \env{lstlisting}s environments what they are, one cannot simply place a
-label inside them without special treatment.  \pkg{listings} arranges to this
-by providing a \opt{label} option for setting a label for the whole
-environment, and a properly escaped label command inside the environment can
-be used to refer to the line number.  While the later can also be used to set
-a \cs{zlabel} to make line number references, the \opt{label} option is
-catered to the standard labels exclusively.  Hence, this compatibility module
-uses the same label name -- which luckily and atypically is stored in a
-variable -- and sets a \cs{zlabel} as well.  This is done by using
-\pkg{listings}' \texttt{PreInit} hook, se we don't have to redefine or tamper
-with anything for the purpose.  Besides this, the module also sets appropriate
-\opt{countertype}, \opt{counterresetby} and \opt{currentcounter} values for
-the \pkg{listings}' counters: \texttt{lstlisting} and \texttt{lstnumber}. See
-the \zcref{how:listings} for an usage example.
+The module also sets appropriate \opt{countertype}, \opt{counterresetby} and
+\opt{currentcounter} values for the \pkg{listings}' counters:
+\texttt{lstlisting} and \texttt{lstnumber}.  See the \zcref{how:listings} for
+an usage example.
 
 \DescribeOption{enumitem} %
 \LaTeX{}'s \env{enumerate} environment requires some special treatment from

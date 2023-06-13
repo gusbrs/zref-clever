@@ -51,7 +51,6 @@
 \testtmp
 \renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
 \testtmp
-\cs_show:c { \@lst hk@ PreInit }
 \cs_show:c { \@lst hk@ Init }
 \makeatother
 \ExplSyntaxOff
