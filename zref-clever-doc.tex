@@ -2270,22 +2270,15 @@ features with support for the following: i) set counter types for counters
 \texttt{subfigure}, \texttt{subtable}, and \texttt{poemline} (used in the
 \env{verse} environment); ii) configure resetting behavior
 (\opt{counterresetby} option) for \texttt{subfigure} and \texttt{subtable}
-counters; iii) provide that the \meta{label} arguments to environments
-\env{sidecaption} and \env{sidecontcaption} and commands \cs{bitwonumcaption},
-\cs{bionenumcaption}, and \cs{bicaption} \emph{also} set a \cs{zlabel} of the
-same name; iv) provide the \pkg{zref} property ``\texttt{subcaption}'' so that
+counters; iii) provide the \pkg{zref} property ``\texttt{subcaption}'' so that
 we can refer to, for example, \texttt{\cs{zcref}[ref=subcaption]\{subcap-1\}}
-to emulate the functionality of \cls{memoir}'s \cs{subcaptionref}; v) provide
+to emulate the functionality of \cls{memoir}'s \cs{subcaptionref}; iv) provide
 that \cs{footnote}, \cs{verbfootnote}, \cs{sidefootnote}, and \cs{pagenote}
 get a proper \opt{currentcounter} set; and v) set counter types for counters
-\texttt{sidefootnote} and \texttt{pagenote}.  Naturally, the sheer number of
-features that required some specific support implies that some gymnastics were
-needed here.  But the most sensitive changes are: i) a local redefinition of
-\cs{label} inside the environments \env{sidecaption} and \env{sidecontcaption}
-and the commands \cs{bitwonumcaption}, \cs{bionenumcaption}, and
-\cs{bicaption}; and ii) the use of \pkg{ltcmdhooks} command hooks on
-\cs{bitwonumcaption}, \cs{bionenumcaption}, \cs{bicaption},
-\cs{@memsubcaption}, \cs{@makefntext}, and \cs{@makesidefntext}.
+\texttt{sidefootnote} and \texttt{pagenote}.  The most sensitive changes are
+the use of \pkg{ltcmdhooks} command hooks on \cs{bitwonumcaption},
+\cs{bionenumcaption}, \cs{bicaption}, \cs{@memsubcaption}, \cs{@makefntext},
+and \cs{@makesidefntext}.
 
 \DescribeOption{amsmath} %
 \pkg{amsmath}'s display math environments have their contents processed twice,
