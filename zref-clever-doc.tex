@@ -2116,7 +2116,48 @@ with the \opt{label type} option.
   This is \zcref{th:theo} on \zcpageref{th:theo} and it is titled
   ``\zcref[noname,ref=title]{th:theo}''.
 \end{mytheo}
-\end{document}\end{zchowto}
+\end{document}
+\end{zchowto}
+
+
+\subsection{\pkg{breqn}}
+
+\pkg{breqn}'s math environments \env{dgroup}, \env{dmath}, \env{dseries}, and
+\env{darray} offer a \opt{label} option (plus \opt{labelprefix}) for the
+purpose of label setting.  \pkg{breqn}'s documentation says the following
+about the use of \cs{label} inside its environments: \textquote{Use of the
+  normal \cs{label} command instead of the \opt{label} option works, I think,
+  most of the time (untested)}.  My light testing suggests the same is true
+for \cs{zlabel}, which can then be used directly in these environments.
+Either way, given the \opt{labelhook} option, we can just use \pkg{breqn}'s
+\opt{label} option and rest at ease.  Also, \pkg{breqn} does not use
+\cs{refstepcounter} to increment the equation counters and, as a result, fails
+to set \pkg{hyperref} anchors for the equations (thus affecting standard
+labels too).  You may wish to use the work-around provided by Heiko Oberdiek
+at \url{https://tex.stackexchange.com/a/241150}.
+
+\begin{zchowto}[caption={\pkg{breqn}},label={how:breqn}]
+\documentclass{article}
+\usepackage{zref-clever}
+\usepackage{breqn}
+\usepackage{hyperref}
+% From https://tex.stackexchange.com/a/241150.
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\eq@setnumber{\stepcounter}{\refstepcounter}{}{%
+  \errmessage{Patching \noexpand\eq@setnumber failed}}
+\makeatother
+\begin{document}
+\section{Section 1}
+\begin{dmath}[label={eq:1}]
+  f(x)=\frac{1}{x} \condition{for $x\neq 0$}
+\end{dmath}
+\begin{dmath}[labelprefix={eq:},label={2}]
+  H_2^2 = x_1^2 + x_1 x_2 + x_2^2 - q_1 - q_2
+\end{dmath}
+\zcref{eq:1, eq:2}
+\end{document}
+\end{zchowto}
 
 
 \subsection{Ordinal references}
@@ -2306,17 +2347,8 @@ side.
 \DescribeOption{breqn} %
 This compatibility module only sets proper \opt{currentcounter} values for the
 environments \env{dgroup}, \env{dmath}, \env{dseries}, and \env{darray}, and
-uses environment hooks for the purpose.  Note that these environments offer a
-\opt{label} option for label setting, but implements it in a way that is
-somewhat tricky to grab for our purposes, so we don't do it.  However,
-\pkg{breqn}'s documentation says the following about the use of \cs{label}
-inside its environments: \textquote{Use of the normal \cs{label} command
-  instead of the \opt{label} option works, I think, most of the time
-  (untested)}.  My light testing suggests the same is true for \cs{zlabel},
-which can then be used directly in these environments.  But the ``second
-class'' status for this use is the one granted by \pkg{breqn}, there's not
-much we can do here.  If you have any trouble with this, you may wish to check
-\zcref{wkrnd:breqn}.
+uses environment hooks for the purpose.  See the \zcref{how:breqn} for an
+usage example.
 
 \DescribeOption{listings} %
 Being \env{lstlisting}s environments what they are, one cannot simply place a
@@ -2381,54 +2413,6 @@ which you may choose to use.  Note that this list is intended to spare users
 from having to reinvent the wheel every time someone needs something of the
 sort, but from \pkg{zref-clever}'s perspective, their status is ``not
 supported''.
-
-
-\subsection*{\pkg{breqn}}
-
-As mentioned in \opt{breqn}'s compatibility module (\zcref{sec:comp-modules}),
-\pkg{breqn}'s math environments \env{dgroup}, \env{dmath}, \env{dseries}, and
-\env{darray} offer a \opt{label} option (plus \opt{labelprefix}) for the
-purpose of label setting.  Setting a \cs{zlabel} alongside with a regular
-\cs{label} based on that option requires redefining some of \pkg{breqn}
-internals.  Also, \pkg{breqn} does not use \cs{refstepcounter} to increment
-the equation counters and, as a result, fails to set \pkg{hyperref} anchors
-for the equations (thus affecting standard labels too).  The example below
-also provides to that.\footnote{The later work-around thanks to Heiko
-  Oberdiek, at \url{https://tex.stackexchange.com/a/241150}.}
-
-
-\begin{zcworkaround}[caption={\pkg{breqn}},label={wkrnd:breqn}]
-\documentclass{article}
-\usepackage{zref-clever}
-\usepackage{breqn}
-\makeatletter
-\define@key{breqn}{label}{%
-  \edef\next@label{%
-    \noexpand\label{\next@label@pre#1}%
-    \noexpand\zlabel{\next@label@pre#1}}%
-  \let\next@label@pre\@empty}
-\makeatother
-\usepackage{hyperref}
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd\eq@setnumber{\stepcounter}{\refstepcounter}{}{%
-  \errmessage{Patching \noexpand\eq@setnumber failed}}
-\makeatother
-\begin{document}
-\section{Section 1}
-\begin{dmath}[label={eq:1}]
-  f(x)=\frac{1}{x} \condition{for $x\neq 0$}
-\end{dmath}
-\begin{dmath}[labelprefix={eq:},label={2}]
-  H_2^2 = x_1^2 + x_1 x_2 + x_2^2 - q_1 - q_2
-\end{dmath}
-\zcref{eq:1, eq:2}
-\end{document}
-\end{zcworkaround}
-
-Of course, you can always adapt things to your needs and, e.g., make the
-\opt{label} option set just \cs{zlabel} instead of both labels, or create a
-separate \opt{zlabel} option.
 
 
 \subsection*{\cls{beamer}}

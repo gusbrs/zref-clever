@@ -20,14 +20,6 @@
 
 \usepackage{breqn}
 
-\makeatletter
-\define@key{breqn}{label}{%
-  \edef\next@label{%
-    \noexpand\label{\next@label@pre#1}%
-    \noexpand\zlabel{\next@label@pre#1}}%
-  \let\next@label@pre\@empty}
-\makeatother
-
 \usepackage{hyperref}
 \usepackage{etoolbox}
 \makeatletter
