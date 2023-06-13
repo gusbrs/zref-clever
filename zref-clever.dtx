@@ -7905,76 +7905,14 @@
 %
 % \subsection{\opt{amsmath}}
 %
-% About this, see \url{https://tex.stackexchange.com/a/402297}.
+% About this, see \url{https://tex.stackexchange.com/a/402297} and
+% \url{https://github.com/ho-tex/zref/issues/4}.
 %
 %    \begin{macrocode}
 \@@_compat_module:nn { amsmath }
   {
     \@@_if_package_loaded:nT { amsmath }
       {
-%    \end{macrocode}
-% First, we define a function for label setting inside \pkg{amsmath} math
-% environments, we want it to set both \cs{zlabel} and \cs{label}.  We may
-% ``get a ride'', but not steal the place altogether.  This makes for
-% potentially redundant labels, but seems a good compromise.  We \emph{must}
-% use the lower level \cs{zref@label} in this context, and hence also handle
-% protection with \cs{zref@wrapper@babel}, because \cs{zlabel} makes itself
-% no-op when \cs{label} is equal to \cs{ltx@gobble}, and that's precisely the
-% case inside the \env{multline} environment (and, damn!, I took a beating of
-% this detail\dots{}).  See also \url{https://github.com/ho-tex/zref/issues/4}
-% and \url{https://github.com/latex3/latex2e/issues/272}.
-%    \begin{macrocode}
-        \cs_set_nopar:Npn \@@_ltxlabel:n #1
-          {
-            \@@_orig_ltxlabel:n {#1}
-            \zref@wrapper@babel \zref@label {#1}
-          }
-%    \end{macrocode}
-% Then we must store the original value of \cs{ltx@label}, which is the macro
-% actually responsible for setting the labels inside \pkg{amsmath}'s math
-% environments.  And, after that, redefine it to be \cs{@@_ltxlabel:n}
-% instead.  We must handle \pkg{hyperref} here, which comes very late in the
-% preamble, and which loads \pkg{nameref} at \texttt{begindocument} (though
-% this has changed recently 2022-05-16, see
-% \url{https://github.com/latex3/hyperref/commit/a011ba9308a1b047dc151796de557da0bb22abaa}),
-% which in turn, lets \cs{ltx@label} be \cs{label}.  This has to come after
-% \pkg{nameref}.  Other classes packages also redefine \cs{ltx@label}, which
-% may cause some trouble.  A \texttt{grep} on \texttt{texmf-dist} returns hits
-% for: \file{thm-restate.sty}, \file{smartref.sty}, \file{jmlrbook.cls},
-% \file{cleveref.sty}, \file{cryptocode.sty}, \file{nameref.sty},
-% \file{easyeqn.sty}, \file{empheq.sty}, \file{ntheorem.sty},
-% \file{nccmath.sty}, \file{nwejm.cls}, \file{nwejmart.cls},
-% \file{aguplus.sty}, \file{aguplus.cls}, \file{agupp.sty},
-% \file{amsmath.hyp}, \file{amsmath.sty} (surprise!), \file{amsmath.4ht},
-% \file{nameref.4ht}, \file{frenchle.sty}, \file{french.sty}, plus
-% corresponding documentations and different versions of the same packages.
-% That's not too many, but not ``just a few'' either.  The critical ones are
-% explicitly handled here (\pkg{amsmath} itself, and \pkg{nameref}).  A number
-% of those I'm really not acquainted with.  For \pkg{cleveref}, in particular,
-% this procedure is not compatible with it.  If we happen to come later than
-% it and override its definition, this may be a substantial problem for
-% \pkg{cleveref}, since it will find the label, but it won't contain the data
-% it is expecting.  However, this should normally not occur, if the user has
-% followed the documented recommendation for \pkg{cleveref} to load it last,
-% or at least very late, and besides I don't see much of an use case for using
-% both \pkg{cleveref} and \pkg{zref-clever} together.  I have documented in
-% the user manual that this module may cause potential issues, and how to work
-% around them.  And I have made an upstream feature request for a hook, so
-% that this could be made more cleanly at
-% \url{https://github.com/latex3/hyperref/issues/212}.
-%    \begin{macrocode}
-        \@@_if_package_loaded:nTF { hyperref }
-          {
-            \AddToHook { package / nameref / after }
-              {
-                \cs_new_eq:NN \@@_orig_ltxlabel:n \ltx@label
-                \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
-              }
-          }
-          {
-            \cs_new_eq:NN \@@_orig_ltxlabel:n \ltx@label
-            \cs_set_eq:NN \ltx@label \@@_ltxlabel:n
-          }
 %    \end{macrocode}
 % The \env{subequations} environment uses \texttt{parentequation} and
 % \texttt{equation} as counters, but only the later is subject to

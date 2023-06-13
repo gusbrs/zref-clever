@@ -77,8 +77,8 @@ Completed box being shipped out [2]
 .....\kern152.22227
 .....\hbox(0.0+0.0)x0.00002, display
 ......\kern 0.00002
-......\write1{\newlabel{eq1}{{1}{\thepage }{Section 1.1}{section.1}{}}}
 ......\write1{\zref@newlabel{eq1}{\default{1}\page{\Z@C@page }\abspage{\Z@C@abspage }\zc@counter{equation}\thecounter{0}\zc@type{equation}\zc@cntval{0}\zc@pgval{\Z@C@zc@pgval }\zc@enclval{}\zc@pgfmt{\Z@C@zc@pgfmt }\anchor{section.1}}}
+......\write1{\newlabel{eq1}{{1}{\thepage }{Section 1.1}{section.1}{}}}
 ....\penalty 0
 ....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ....\penalty 10000
@@ -111,8 +111,8 @@ Completed box being shipped out [2]
 .......\OT1/cmr/m/n/10 1
 .......\kern 0.0
 .......\OT1/cmr/m/n/10 )
-......\write1{\newlabel{eq2}{{1}{\thepage }{Section 1.1}{equation.1.1}{}}}
 ......\write1{\zref@newlabel{eq2}{\default{1}\page{\Z@C@page }\abspage{\Z@C@abspage }\zc@counter{equation}\thecounter{1}\zc@type{equation}\zc@cntval{1}\zc@pgval{\Z@C@zc@pgval }\zc@enclval{}\zc@pgfmt{\Z@C@zc@pgfmt }\anchor{equation.1.1}}}
+......\write1{\newlabel{eq2}{{1}{\thepage }{Section 1.1}{equation.1.1}{}}}
 ....\penalty 0
 ....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ....\penalty 10000
@@ -143,8 +143,8 @@ Completed box being shipped out [2]
 .......\OT1/cmr/m/n/10 1
 .......\kern 0.0
 .......\OT1/cmr/m/n/10 )
-......\write1{\newlabel{eq1:tag}{{{eq1}}{\thepage }{Section 1.1}{AMS.1}{}}}
 ......\write1{\zref@newlabel{eq1:tag}{\default{{eq1}}\page{\Z@C@page }\abspage{\Z@C@abspage }\zc@counter{equation}\thecounter{1}\zc@type{equation}\zc@cntval{1}\zc@pgval{\Z@C@zc@pgval }\zc@enclval{}\zc@pgfmt{\Z@C@zc@pgfmt }\anchor{AMS.1}}}
+......\write1{\newlabel{eq1:tag}{{{eq1}}{\thepage }{Section 1.1}{AMS.1}{}}}
 ....\penalty 0
 ....\glue(\belowdisplayshortskip) 6.0 plus 3.0 minus 3.0
 ....\pdfdest name{equation.1.2} xyz
@@ -214,8 +214,8 @@ Completed box being shipped out [2]
 ..........\hbox(8.39996+3.60004)x0.0
 ...........\rule(8.39996+3.60004)x0.0
 ........\kern 0.00002
-........\write1{\newlabel{align:a}{{2}{\thepage }{Section 1.1}{equation.1.2}{}}}
 ........\write1{\zref@newlabel{align:a}{\default{2}\page{\Z@C@page }\abspage{\Z@C@abspage }\zc@counter{equation}\thecounter{2}\zc@type{equation}\zc@cntval{0}\zc@pgval{\Z@C@zc@pgval }\zc@enclval{{2}}\zc@pgfmt{\Z@C@zc@pgfmt }\anchor{equation.1.2}\subeq{}}}
+........\write1{\newlabel{align:a}{{2}{\thepage }{Section 1.1}{equation.1.2}{}}}
 .....\glue(\tabskip) 0.0
 ....\penalty 10000
 ....\glue 0.0
@@ -275,8 +275,8 @@ Completed box being shipped out [2]
 .........\OT1/cmr/m/n/10 a
 .........\kern 0.0
 .........\OT1/cmr/m/n/10 )
-........\write1{\newlabel{align:b}{{2a}{\thepage }{Section 1.1}{equation.1.2a}{}}}
 ........\write1{\zref@newlabel{align:b}{\default{2a}\page{\Z@C@page }\abspage{\Z@C@abspage }\zc@counter{equation}\thecounter{2a}\zc@type{equation}\zc@cntval{1}\zc@pgval{\Z@C@zc@pgval }\zc@enclval{{2}}\zc@pgfmt{\Z@C@zc@pgfmt }\anchor{equation.1.2a}\subeq{a}}}
+........\write1{\newlabel{align:b}{{2a}{\thepage }{Section 1.1}{equation.1.2a}{}}}
 .....\glue(\tabskip) 0.0
 ....\penalty 10000
 ....\glue 0.0
@@ -321,8 +321,8 @@ Completed box being shipped out [2]
 ..........\hbox(8.39996+3.60004)x0.0
 ...........\rule(8.39996+3.60004)x0.0
 ........\kern 0.00002
-........\write1{\newlabel{align:c}{{2}{\thepage }{Section 1.1}{equation.1.2a}{}}}
 ........\write1{\zref@newlabel{align:c}{\default{2}\page{\Z@C@page }\abspage{\Z@C@abspage }\zc@counter{equation}\thecounter{2a}\zc@type{equation}\zc@cntval{1}\zc@pgval{\Z@C@zc@pgval }\zc@enclval{{2}}\zc@pgfmt{\Z@C@zc@pgfmt }\anchor{equation.1.2a}\subeq{a}}}
+........\write1{\newlabel{align:c}{{2}{\thepage }{Section 1.1}{equation.1.2a}{}}}
 .....\glue(\tabskip) 0.0
 ....\penalty 10000
 ....\glue 0.0

@@ -1855,14 +1855,19 @@ package in the setup, the same procedure can be used with \cls{memoir}'s
 
 \zctask{Make references to \pkg{amsmath} display math environments.}
 
-Given how \pkg{amsmath}'s display math environments work, they need to handle
-\cs{label} specially, and this support is quite hard-wired into the
-environments, but it is not extended to \cs{zlabel}.  \pkg{zref-clever}'s
-\opt{amsmath} compatibility module provides that a \cs{label} used inside
-these environments set both a regular \cs{label} and a \cs{zlabel}, so that we
-can refer to the equations with both referencing systems.  Note the use of
-\cs{zlabel} for \env{subequations} though.  For more details, see the
-description of the \opt{amsmath} compatibility module at
+\pkg{amsmath}'s display math environments have their contents processed twice,
+once for measuring and the second does the final typesetting.  Hence,
+\pkg{amsmath} needs to handle \cs{label} specially inside these environments,
+otherwise we'd have duplicate labels all around, and indeed it does redefine
+\cs{label} locally inside them.  Alas, the same treatment is not granted to
+\cs{zlabel}.  Therefore, you must use \cs{label} (not \cs{zlabel}) inside
+\pkg{amsmath}'s display math environments, and the \opt{labelhook} option
+provides that a \cs{label} sets both a regular \cs{label} and a \cs{zlabel},
+so that we can refer to the equations with both referencing systems.  The
+following environments are subject to this usage restriction: \env{equation},
+\env{align}, \env{alignat}, \env{flalign}, \env{xalignat}, \env{gather},
+\env{multline}, and their respective starred versions.  For more details, see
+the description of the \opt{amsmath} compatibility module at
 \zcref{sec:comp-modules}.
 
 \begin{zchowto}[caption={\pkg{amsmath}},label={how:amsmath}]
@@ -1880,7 +1885,7 @@ description of the \opt{amsmath} compatibility module at
   A^{(1)}_l =\begin{cases} n!,&\text{if }l =1\\
     0,&\text{otherwise}.\end{cases}
 \end{equation*}
-\begin{subequations}\zlabel{eq:3}
+\begin{subequations}\label{eq:3}
   \begin{align}
     A+B&=B+A\\
     C&=D+E\label{eq:3b}\\
@@ -2281,44 +2286,12 @@ the use of \pkg{ltcmdhooks} command hooks on \cs{bitwonumcaption},
 and \cs{@makesidefntext}.
 
 \DescribeOption{amsmath} %
-\pkg{amsmath}'s display math environments have their contents processed twice,
-once for measuring and the second does the final typesetting.  Hence,
-\pkg{amsmath} needs to handle \cs{label} specially inside these environments,
-otherwise we'd have duplicate labels all around, and indeed it does redefine
-\cs{label} locally inside them.  Alas, the same treatment is not granted to
-\cs{zlabel}.  However, \cs{label} is set basically to \emph{store} the value
-of the argument inside the environments, and its global meaning is kept in
-\cs{ltx@label} which is called at the appropriate time to actually set the
-label.  So, what \pkg{zref-clever} does is redefine \cs{ltx@label} to set
-\texttt{both} a regular \cs{label} and a \cs{zlabel} for the same \meta{label}
-(which does not generate a duplicate label problem since the referencing
-systems are independent).  Therefore, you must use \cs{label} (not
-\cs{zlabel}) inside \pkg{amsmath}'s display math environments, and this
-compatibility module arranges that you can also refer to that label with
-\pkg{zref} and, thus, with \cs{zcref} as well.  The following environments are
-subject to this usage restriction: \env{equation}, \env{align}, \env{alignat},
-\env{flalign}, \env{xalignat}, \env{gather}, \env{multline}, and their
-respective starred versions.  In particular, the same is not the case for the
-\env{subequations} environment, inside which \cs{zlabel} works as usual (to
-refer to the main equation number, that is, right after
-\texttt{\cs{begin}\{subequations\}}).  See the \zcref{how:amsmath} for an
-usage example.  The module also ensures proper \opt{currentcounter} values are
-in place for the display math environments, for which it uses environment
-hooks, and sets the font of equation references to \cs{upshape}, following
-\pkg{amsmath}'s \cs{eqref}.  Finally, the module also provides a
-\texttt{subeq} property, for display math environments used inside the
-\env{subequations} environment, which can be used to refer to them directly
-with the \opt{ref} option, or to build terse ranges with the \opt{endrange}
-option.  Note that \pkg{zref-clever} is not the only package to redefine
-\cs{ltx@label}, and compatibility problems may arise if this module is used
-with such packages or with document classes that do the same.  In case of
-trouble, you can load \pkg{zref-clever} with option \texttt{nocompat=amsmath}
-and either use the standard referencing system's facilities to refer to
-\pkg{amsmath}'s equations or check the code documentation for the technique
-used for this (which is pretty standard) and adapt it to your case.  Given
-that any trouble that may arise here is one of the proper ``timing'' of the
-redefinition, it should not be particularly complicated to make such
-adjustments.
+The module ensures proper \opt{currentcounter} values are in place for the
+display math environments, for which it uses environment hooks.  The module
+also provides a \texttt{subeq} property, for display math environments used
+inside the \env{subequations} environment, which can be used to refer to them
+directly with the \opt{ref} option, or to build terse ranges with the
+\opt{endrange} option.
 
 \DescribeOption{mathtools} %
 \pkg{mathtools} has a feature to show the numbers only for those equations

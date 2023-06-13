@@ -3,20 +3,6 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: amsmath module
 ============================================================
-> \__zrefclever_ltxlabel:n=macro:#1->\__zrefclever_orig_ltxlabel:n
-{#1}\zref@wrapper@babel \zref@label {#1}.
-<recently read> }
-l. ...  }
-> \__zrefclever_orig_ltxlabel:n=macro:#1->\@bsphack \begingroup
-\UseHookWithArguments {label}{1}{#1}\protected@write \@auxout {}{\string
-\newlabel {#1}{{\@currentlabel }{\thepage }{\@currentlabelname }{\@currentHref
-}{\@kernel@reserved@label@data }}}\endgroup \@esphack .
-<recently read> }
-l. ...  }
-> \ltx@label=macro:#1->\__zrefclever_orig_ltxlabel:n {#1}\zref@wrapper@babel
-\zref@label {#1}.
-<recently read> }
-l. ...\cs_show:N \ltx@label
 > \l__zrefclever_current_counter_tl=parentequation.
 <recently read> }
 l. ...  \testtmp

@@ -168,7 +168,7 @@
   fg\biggr\}\,dy
 \end{multline*}
 
-\begin{subequations}\zlabel{subeq:A}
+\begin{subequations}\label{subeq:A}
   \begin{align}
     \label{align:a}A+B&=B+A\\
     \label{align:b}C&=D+E\\
@@ -218,25 +218,6 @@
 \BEGINTEST{amsmath module}
 \ExplSyntaxOn
 \makeatletter
-\cs_if_exist:NTF \__zrefclever_ltxlabel:n
-  {
-    \renewcommand{\testtmp}{ \cs_show:N \__zrefclever_ltxlabel:n }
-    \testtmp
-  }
-  {
-    \renewcommand{\testtmp}{ \typeout { __zrefclever_ltxlabel:n~not~defined } }
-    \testtmp
-  }
-\cs_if_exist:NTF \__zrefclever_orig_ltxlabel:n
-  {
-    \renewcommand{\testtmp}{ \cs_show:N \__zrefclever_orig_ltxlabel:n }
-    \testtmp
-  }
-  {
-    \renewcommand{\testtmp}{ \typeout { __zrefclever_orig_ltxlabel:n~not~defined } }
-    \testtmp
-  }
-\cs_show:N \ltx@label
 \begin{subequations}
   \renewcommand{\testtmp}{ \tl_show:N \l__zrefclever_current_counter_tl }
   \testtmp

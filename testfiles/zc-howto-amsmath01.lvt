@@ -41,7 +41,7 @@
     0,&\text{otherwise}.\end{cases}
 \end{equation*}
 
-\begin{subequations}\zlabel{eq:3}
+\begin{subequations}\label{eq:3}
   \begin{align}
     A+B&=B+A\\
     C&=D+E\label{eq:3b}\\
