@@ -331,7 +331,11 @@ Indeed, to use \pkg{zref}, instead of setting a \cs{label} and making a
 \cs{ref}, one would set a \cs{zlabel} and make \cs{zref}s to it, in pretty
 much the same way as for the standard system.  \pkg{zref-clever} introduces
 the more featureful \cs{zcref} for making references, but relies on
-\pkg{zref}'s \cs{zlabel} for label setting.
+\pkg{zref}'s \cs{zlabel} for label setting.  \pkg{zref-clever} provides that a
+\cs{label} also sets a \cs{zlabel} with the same name using the kernel's
+\texttt{label} hook (see the \opt{labelhook} option in \zcref{sec:options}),
+so that you can use it too with standard \cs{label}s (see the
+\zcref{sec:label-or-zlabel} for discussion).
 
 A basic document using \pkg{zref-clever} is shown in \zcref{how:basic} which,
 despite the small necessary adjustments, should feel very familiar to any
@@ -403,7 +407,7 @@ available at \zcref{sec:how-tos}.
 The package does not accept load-time options, package options must be set
 using \cs{zcsetup} (see \zcref{sec:user-interface}).
 
-\pkg{zref-clever} requires a recent \LaTeX{} kernel (2021-11-15 or newer) and
+\pkg{zref-clever} requires a recent \LaTeX{} kernel (2023-06-01 or newer) and
 the packages \pkg{zref}, including some of its modules, and \pkg{ifdraft}.  It
 also requires UTF-8 input encoding, which has been the kernel's default for
 some time.
@@ -411,7 +415,7 @@ some time.
 
 \section{Dependencies}
 
-\pkg{zref-clever} requires \pkg{zref}, and \LaTeX{} kernel 2021-11-15, or
+\pkg{zref-clever} requires \pkg{zref}, and \LaTeX{} kernel 2023-06-01, or
 newer.  It also needs \pkg{ifdraft}.  Some packages are leveraged by
 \pkg{zref-clever} if they are present, but are not loaded by default or
 required by it, namely: \pkg{hyperref}, \pkg{zref-check}, and \pkg{zref}'s
@@ -485,6 +489,49 @@ including \cs{zref} and \cs{zpageref}, but notably:
 Sets \meta{label} for referencing with \cs{zref} and, thus, also \cs{zcref}.
 \cs{zlabel} is provided by \pkg{zref-user} and is the counterpart of
 \cs{label} for \pkg{zref}'s referencing system.
+
+
+\section{\cs{label} or \cs{zlabel}?}
+\zlabel{sec:label-or-zlabel}
+
+Technically, \pkg{zref}'s referencing system, and thus also \pkg{zref-clever},
+require a label set with \cs{zlabel} to make a reference.  However, the
+\opt{labelhook} option (see \zcref{sec:options}) leverages the kernel's
+\texttt{label} hook to also set a \cs{zlabel} when a standard \cs{label} is
+called, so that we can simply use \cs{label}s in our document and refer to
+them with either referencing system.  Indeed, in some places the use of
+\cs{label} this way may be required (see
+\zcref{sec:limitations,sec:comp-modules}).  That given, which is to be
+preferred: use \cs{label} all around or normally use \cs{zlabel} and,
+occasionally resort to \cs{label} where required?  I guess it depends, but we
+can reason the pros and cons of both alternatives.
+
+Simply using \cs{label} across your document clearly speaks for convenience.
+You don't have to worry with the exceptional case where a \cs{zlabel} may not
+work or setting it is not possible.  You can use either referencing system for
+your labels as desired.  Your favorite editor may have some facilities to ease
+the insertion of labels, but does not support \cs{zlabel}.  And so on.  The
+only disadvantage I can see with this approach is that two labels end up in
+the \file{.aux} file which, arguably, may be seen as a redundancy, or waste.
+
+It is probably fair to consider this redundancy, in most use cases, as a
+negligible cost.  But you may disagree, or the size of your document or your
+requirements may say otherwise, in which case you may prefer the second
+approach and use \cs{zlabel} normally, with some occasional \cs{label} where
+needed.  Known relevant cases where \cs{label} is required are documented in
+the manual (see \zcref{sec:how-tos,sec:limitations,sec:comp-modules}), but
+some trial and error can easily cover the gap for the remaining cases.  They
+are also rare cases.  So finding out where \cs{label} is required should not
+be much of a trouble either.
+
+I think the first approach does deserve the status of ``recommended'' for
+normal use cases and documents.  Despite that, note that the examples of this
+manual typically use the second approach.  There's a historic reason for this,
+since most of them were created before the kernel's \texttt{label} hook was
+available, so that it was really the only approach.  However, I'll keep the
+examples this way, notwithstanding this recommendation, because it is also
+important to document the limitations of directly using \cs{zlabel}, for those
+who may want to use the second approach.
 
 
 \section{Options}
@@ -916,7 +963,8 @@ This value is not only the default, but also a recommended value.  Disabling
 this option means you are on your own to handle cases where \cs{zlabel} does
 not work, which are not many, but can be tricky to deal with where they occur.
 Since this option only affects how labels are set, it is not available in
-\cs{zcref}.
+\cs{zcref}.  See \zcref{sec:label-or-zlabel} for some discussion of different
+labeling approaches this options allows for.
 
 \DescribeOption{nocompat} %
 Some packages, document classes, or LaTeX features may require specific
@@ -2123,6 +2171,8 @@ with the \opt{label type} option.
 
 \subsection{\pkg{breqn}}
 
+\zctask{Make references to \pkg{breqn} math environments.}
+
 \pkg{breqn}'s math environments \env{dgroup}, \env{dmath}, \env{dseries}, and
 \env{darray} offer a \opt{label} option (plus \opt{labelprefix}) for the
 purpose of label setting.  \pkg{breqn}'s documentation says the following
@@ -2131,7 +2181,7 @@ about the use of \cs{label} inside its environments: \textquote{Use of the
   most of the time (untested)}.  My light testing suggests the same is true
 for \cs{zlabel}, which can then be used directly in these environments.
 Either way, given the \opt{labelhook} option, we can just use \pkg{breqn}'s
-\opt{label} option and rest at ease.  Also, \pkg{breqn} does not use
+\opt{label} option and be at ease.  Also, \pkg{breqn} does not use
 \cs{refstepcounter} to increment the equation counters and, as a result, fails
 to set \pkg{hyperref} anchors for the equations (thus affecting standard
 labels too).  You may wish to use the work-around provided by Heiko Oberdiek
@@ -2238,6 +2288,15 @@ verbatim-like environments it depends on how they are defined and whether they
 provide a proper place or option to do so.  But other places may be
 problematic too, for example, \pkg{amsmath} display math environments also
 handle \cs{label} specially and the same work is not done for \cs{zlabel}.
+Classes and packages may offer label setting by means of arguments or options,
+and those usually only cater for the standard referencing system, etc.
+Fortunately for us, the \texttt{label} hook introduced by the \LaTeX{} kernel
+in the 2023-06-01 release improves the situation considerably.
+\pkg{zref-clever} makes use of it with the \opt{labelhook} option, enabled by
+default, so that a standard \cs{label} also sets a \cs{zlabel} with the same
+name, thus providing a very general and reliable way to deal with these places
+where setting a \cs{zlabel} directly is problematic: just set a standard
+label.
 
 Regarding the second, a correctly set \cs{@currentcounter} is critical for the
 task of \pkg{zref-clever}: the reference type will depend on that and,
@@ -2255,7 +2314,7 @@ which at least allows for some viable work-arounds when the value of
 to set it, depends on the case.  Still, \cs{refstepcounter} is ubiquitous
 enough a tool that we can count on \cs{@currentcounter} most of the time.
 
-All in all, most things work, but some things don't.  And if the later will
+All in all, most things work, but some things may not.  And if the later will
 eventually work depends essentially on whether support for \pkg{zref} is
 provided by the relevant packages and classes or not.  Or, failing that,
 whether \pkg{zref-clever} is able to provide some specific support when a
@@ -2323,9 +2382,8 @@ to emulate the functionality of \cls{memoir}'s \cs{subcaptionref}; iv) provide
 that \cs{footnote}, \cs{verbfootnote}, \cs{sidefootnote}, and \cs{pagenote}
 get a proper \opt{currentcounter} set; and v) set counter types for counters
 \texttt{sidefootnote} and \texttt{pagenote}.  The most sensitive changes are
-the use of \pkg{ltcmdhooks} command hooks on \cs{bitwonumcaption},
-\cs{bionenumcaption}, \cs{bicaption}, \cs{@memsubcaption}, \cs{@makefntext},
-and \cs{@makesidefntext}.
+the use of \pkg{ltcmdhooks} command hooks on \cs{@memsubcaption},
+\cs{@makefntext}, and \cs{@makesidefntext}.
 
 \DescribeOption{amsmath} %
 The module ensures proper \opt{currentcounter} values are in place for the
@@ -2352,7 +2410,7 @@ uses environment hooks for the purpose.  See the \zcref{how:breqn} for an
 usage example.
 
 \DescribeOption{listings} %
-The module also sets appropriate \opt{countertype}, \opt{counterresetby} and
+The module sets appropriate \opt{countertype}, \opt{counterresetby} and
 \opt{currentcounter} values for the \pkg{listings}' counters:
 \texttt{lstlisting} and \texttt{lstnumber}.  See the \zcref{how:listings} for
 an usage example.
@@ -2487,16 +2545,13 @@ A couple of caveats though.  First, there's probably still some work to be
 done there in defining and setting reference types for \cls{beamer} specific
 document objects, e.g. overlays.  But it can be done by the standard user
 interface of \pkg{zref-clever}.  Second, since \cls{beamer}'s anchoring system
-does not provide for uniqueness of anchors as \pkg{hyperref} does, the
-procedure used by \pkg{zref-clever} in its \opt{amsmath} compatibility module
-of setting both \cs{label} and \cs{zlabel} in \pkg{amsmath}'s display math
-environments will result in duplicate anchors for labels set in them, with
-corresponding \pkg{hyperref} warnings of ``destination with the same
-identifier has been already used, duplicate ignored''.  The warning is
-actually harmless in this case, since both labels are set in the same place,
-and thus have identical anchors.  But, if it bothers you enough, you can look
-at the \opt{amsmath} compatibility module in the code documentation, and
-adjust things so that it sets only a \cs{zlabel}.
+does not provide for uniqueness of anchors as \pkg{hyperref} does, if you
+(need to) use \cs{label} to set both \cs{label} and \cs{zlabel}, relying on
+the \opt{labelhook} option, this will result in duplicate anchors for labels
+set in them, with corresponding \pkg{hyperref} warnings of ``destination with
+the same identifier has been already used, duplicate ignored''.  The warning
+is actually harmless in this case, since both labels are set in the same
+place, and thus have identical anchors, it is nevertheless there.
 
 
 \section{Acknowledgments}
