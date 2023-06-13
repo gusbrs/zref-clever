@@ -3943,11 +3943,19 @@
   }
 %    \end{macrocode}
 %
+% We \emph{must} use the lower level \cs{zref@label} in this context, and
+% hence also handle protection with \cs{zref@wrapper@babel}, because
+% \cs{zlabel} makes itself no-op when \cs{label} is equal to \cs{ltx@gobble},
+% and that's precisely the case inside the \pkg{amsmath}'s \env{multline}
+% environment (and possibly elsewhere?).  See
+% \url{https://tex.stackexchange.com/a/402297} and
+% \url{https://github.com/ho-tex/zref/issues/4}.
+%
 %    \begin{macrocode}
 \AddToHookWithArguments { label }
   {
     \bool_if:NT \l_@@_labelhook_bool
-      { \zlabel {#1} }
+      { \zref@wrapper@babel \zref@label {#1} }
   }
 %    \end{macrocode}
 %
