@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.3.6...HEAD)
+## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.0...HEAD)
+
+## [v0.4.0](https://github.com/gusbrs/zref-clever/compare/v0.3.6...v0.4.0) (2023-06-14)
 
 ### Added
 - `labelhook` option, controlling whether to set a `\zlabel` alongside a

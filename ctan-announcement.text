@@ -1,6 +1,32 @@
-## v0.3.6 (2023-02-21)
+## v0.4.0 (2023-06-14)
 
-### Fixed
-- Avoid "Missing number, treated as zero" error for labels set before first
-  call to `\refstepcounter`.
+### Added
+- `labelhook` option, controlling whether to set a `\zlabel` alongside a
+  standard `\label`.  This option uses the kernel's new `label` hook, which
+  significantly improves and simplifies the task of setting a `\zlabel` in
+  places where this is not directly supported.  The option is enabled by
+  default, and strongly recommended.  It is not expected that this change will
+  bring backward compatibility problems, `\zlabel`s continue to work just as
+  before, and the places where a `\label` is required will also continue to
+  work the same way.  The only case I see where you might need to adjust
+  existing documents is if you already had both `\label`s and `\zlabel`s with
+  the same names, in which case now you'll have a duplicate `zlabel` and will
+  indeed have to correct it.  Also, you may be interested in taking a look at
+  the "`\label` or `\zlabel`?" section of the User manual, since the option
+  opens the possibility of a different approach in label setting in your
+  documents.
+
+### Changed
+- Given the new `labelhook` option and the fact that it requires both the new
+  `label` hook and the new hooks with options released in the latest LaTeX
+  kernel, the kernel version required by `zref-clever` has been bumped to
+  2023-06-01.
+
+### Removed
+- Given the new `labelhook` option, the parts of compatibility modules which
+  provided for setting `\zlabel`s with `\label` in places where the former is
+  not supported have been removed.  These would conflict with the new option,
+  and the use of the `label` hook for this purpose renders them unnecessary
+  and is superior in every aspect.  Namely, the compatibility modules changed
+  in this fashion are: `amsmath`, `memoir`, and `listings`.
 
