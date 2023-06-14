@@ -122,6 +122,23 @@
 \makeatother
 \ENDTEST
 
+\BEGINTEST{Option: labelhook=...}
+\begin{equation}
+  \label{equationG}
+\end{equation}
+\begin{equation}
+  \zcsetup{labelhook=false}
+  \label{equationH}
+\end{equation}
+\ShowHook{label}
+\makeatletter
+\show\r@equationG
+\show\Z@R@equationG
+\show\r@equationH
+\show\Z@R@equationH
+\makeatother
+\ENDTEST
+
 \OMIT
 
 \end{document}

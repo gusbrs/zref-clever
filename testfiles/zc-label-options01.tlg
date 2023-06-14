@@ -88,3 +88,32 @@ l. ...\show\Z@R@theoremA
 ->\default {2}\page {1}\abspage {1}\zc@counter {equation}\thecounter {6}\zc@type {equation}\zc@cntval {6}\zc@pgval {1}\zc@enclval {{0}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {theorem.2}.
 l. ...\show\Z@R@theoremB
 ============================================================
+============================================================
+TEST 6: Option: labelhook=...
+============================================================
+-> The hook 'label' (1 argument):
+> Code chunks:
+>     zref-clever -> \bool_if:NT \l__zrefclever_labelhook_bool {\zref@wrapper@babel \zref@label {#1}}
+>     nameref -> \def \label@name {#1}\label@hook 
+> Document-level (top-level) code (executed last):
+>     ---
+> Extra code for next invocation:
+>     ---
+> Rules:
+>     ---
+> Execution order:
+>     zref-clever, nameref.
+<recently read> }
+l. ...\ShowHook{label}
+> \r@equationG=macro:
+->{7}{1}{}{equation.0.0.7}{}.
+l. ...\show\r@equationG
+> \Z@R@equationG=macro:
+->\default {7}\page {1}\abspage {1}\zc@counter {equation}\thecounter {7}\zc@type {equation}\zc@cntval {7}\zc@pgval {1}\zc@enclval {{0}}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {equation.0.0.7}.
+l. ...\show\Z@R@equationG
+> \r@equationH=macro:
+->{8}{1}{}{equation.0.0.8}{}.
+l. ...\show\r@equationH
+> \Z@R@equationH=undefined.
+l. ...\show\Z@R@equationH
+============================================================
