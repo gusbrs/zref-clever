@@ -148,18 +148,18 @@
 % release, alongside the corresponding new hooks with arguments, just
 % simplifies and improves label setting so much, by allowing \cs{zlabel} to be
 % set with \cs{label}, that it is definitely a must for \pkg{zref-clever}, so
-% we require that too.  Hence we make the cut at the 2023-06-01 kernel
-% release.
+% we require that too.  Hence we make the cut at this latter kernel release.
 %
 %    \begin{macrocode}
+\newcommand{\zc@required@kernel@version}{2023-06-01}
 \NeedsTeXFormat{LaTeX2e}
 \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
-\IfFormatAtLeastTF{2023-06-01}
+\IfFormatAtLeastTF{\zc@required@kernel@version}
   {}
   {%
     \PackageError{zref-clever}{LaTeX kernel too old}
       {%
-        'zref-clever' requires a LaTeX kernel 2023-06-01 or newer.%
+        'zref-clever' requires a LaTeX kernel \zc@required@kernel@version\space or newer.%
         \MessageBreak Loading will abort!%
       }%
     \endinput

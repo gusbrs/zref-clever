@@ -407,19 +407,21 @@ available at \zcref{sec:how-tos}.
 The package does not accept load-time options, package options must be set
 using \cs{zcsetup} (see \zcref{sec:user-interface}).
 
-\pkg{zref-clever} requires a recent \LaTeX{} kernel (2023-06-01 or newer) and
-the packages \pkg{zref}, including some of its modules, and \pkg{ifdraft}.  It
+\pkg{zref-clever} requires a recent \LaTeX{} kernel
+(\makeatletter\zc@required@kernel@version\makeatother{} or newer) and the
+packages \pkg{zref}, including some of its modules, and \pkg{ifdraft}.  It
 also requires UTF-8 input encoding, which has been the kernel's default for
 some time.
 
 
 \section{Dependencies}
 
-\pkg{zref-clever} requires \pkg{zref}, and \LaTeX{} kernel 2023-06-01, or
-newer.  It also needs \pkg{ifdraft}.  Some packages are leveraged by
-\pkg{zref-clever} if they are present, but are not loaded by default or
-required by it, namely: \pkg{hyperref}, \pkg{zref-check}, and \pkg{zref}'s
-\pkg{zref-titleref}, \pkg{zref-hyperref}, and \pkg{zref-xr} modules.
+\pkg{zref-clever} requires \pkg{zref}, and \LaTeX{} kernel
+\makeatletter\zc@required@kernel@version\makeatother{}, or newer.  It also
+needs \pkg{ifdraft}.  Some packages are leveraged by \pkg{zref-clever} if they
+are present, but are not loaded by default or required by it, namely:
+\pkg{hyperref}, \pkg{zref-check}, and \pkg{zref}'s \pkg{zref-titleref},
+\pkg{zref-hyperref}, and \pkg{zref-xr} modules.
 
 
 \section{User interface}
