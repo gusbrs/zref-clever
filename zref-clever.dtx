@@ -471,28 +471,39 @@
 % \cs{thepage} to retrieve such information is bound to go wrong: we don't
 % know, and can't know, what is within that macro, and that's the business of
 % the user, or of the documentclass, or of the loaded packages.  The technique
-% used by \pkg{cleveref}, which we borrow here, is simple and smart: store
-% with the label what \cs{thepage} would return, if the counter \cs{c@page}
-% was ``\(1\)''.  That does not allow us to \emph{sort} the references,
-% luckily however, we have \texttt{abspage} which solves this problem.  But we
-% can decide whether two labels can be compressed into a range or not based on
-% this format: if they are identical, we can compress them, otherwise, we
-% can't.  To do so, we locally set \cs{c@page} to ``1'', thus avoiding any
-% global spillovers of this trick.  Since this operation is not expandable we
-% cannot run it directly from the property definition.  Hence, we use a
-% shipout hook, and set \cs{g_@@_page_format_tl}, which can then be retrieved
-% by the starred definition of \texttt{\cs{zref@newprop}*\{zc@pgfmt\}}.
+% used by \pkg{cleveref}, is simple and smart: store with the label what
+% \cs{thepage} would return, if the counter \cs{c@page} was ``\(1\)''.  That
+% would not allow us to \emph{sort} the references, luckily however, we have
+% \texttt{abspage} which solves this problem.  But we can decide whether two
+% labels can be compressed into a range or not based on this format: if they
+% are identical, we can compress them, otherwise, we can't.  However,
+% \texttt{x} expanding \cs{thepage} can lead to errors for some \pkg{babel}
+% packages which redefine \cs{roman} containing non-expandable material (see
+% \url{https://chat.stackexchange.com/transcript/message/63810027#63810027},
+% \url{https://chat.stackexchange.com/transcript/message/63810318#63810318},
+% \url{https://chat.stackexchange.com/transcript/message/63810720#63810720}
+% and discussion).  So I went for something a little different.  As mentioned,
+% we want to know if \cs{thepage} is the same for different labels, or if it
+% has changed.  We can thus test this directly, by comparing \cs{thepage} with
+% a stored value of it, \cs{g_@@_prev_page_format_tl}, and stepping a counter
+% every time they differ.  Of course, this cannot be done at label setting
+% time, since it is not expandable.  But we can do that comparison before
+% shipout and then define the label property as starred
+% (\texttt{\cs{zref@newprop}*\{zc@pgfmt\}}), so that the label comes after the
+% counter, and we can get the correct value of the counter.
 %
 %    \begin{macrocode}
-\tl_new:N \g_@@_page_format_tl
+\int_new:N \g_@@_page_format_int
+\tl_new:N \g_@@_prev_page_format_tl
 \AddToHook { shipout / before }
   {
-    \group_begin:
-    \int_set:Nn \c@page { 1 }
-    \tl_gset:Nx \g_@@_page_format_tl { \thepage }
-    \group_end:
+    \tl_if_eq:NNF \g_@@_prev_page_format_tl \thepage
+      {
+        \int_gincr:N \g_@@_page_format_int
+        \tl_gset_eq:NN \g_@@_prev_page_format_tl \thepage
+      }
   }
-\zref@newprop* { zc@pgfmt } { \g_@@_page_format_tl }
+\zref@newprop* { zc@pgfmt } { \int_use:N \g_@@_page_format_int }
 \zref@addprop \ZREF@mainlist { zc@pgfmt }
 %    \end{macrocode}
 %
