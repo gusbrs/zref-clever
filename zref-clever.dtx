@@ -3768,6 +3768,10 @@
 % This allows one to manually specify the reference type.  It is the
 % equivalent of \pkg{cleveref}'s optional argument to \cs{label}.
 %
+% NOTE \pkg{tcolorbox} uses the \opt{reftype} option to support its \opt{label
+% type} option when \opt{label is zlabel}.  Hence \emph{don't} make any
+% breaking changes here without previous communication.
+%
 %    \begin{macrocode}
 \tl_new:N \l_@@_reftype_override_tl
 \keys_define:nn { zref-clever/label }
