@@ -2,6 +2,9 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.1...HEAD)
 
+### Changed
+- Use `\label` instead of `\zlabel` in regression tests.
+
 ## [v0.4.1](https://github.com/gusbrs/zref-clever/compare/v0.4.0...v0.4.1) (2023-06-19)
 
 ### Changed

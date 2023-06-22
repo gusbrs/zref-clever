@@ -36,74 +36,74 @@
 \begin{document}
 
 \chapter{Chapter 1}
-\zlabel{cha:chapter-1}
+\label{cha:chapter-1}
 
 \section{Section 1.1}
-\zlabel{sec:section-1.1}
+\label{sec:section-1.1}
 
 \chapter{Chapter 2}
-\zlabel{cha:chapter-2}
+\label{cha:chapter-2}
 
 \begin{subappendices}
 
 \section{Section 2.1}
-\zlabel{sec:section-2.1}
+\label{sec:section-2.1}
 
 \subsection{Subsection 2.1.1}
-\zlabel{sec:subsection-2.1.1}
+\label{sec:subsection-2.1.1}
 
 \subsubsection{Subsubsection 2.1.1.1}
-\zlabel{sec:subsubsection-2.1.1.1}
+\label{sec:subsubsection-2.1.1.1}
 
 \paragraph{Paragraph 2.1.1.1.1}
-\zlabel{sec:paragraph-2.1.1.1.1}
+\label{sec:paragraph-2.1.1.1.1}
 
 \subparagraph{Subparagraph 2.1.1.1.1.1}
-\zlabel{sec:subparagraph-2.1.1.1.1.1}
+\label{sec:subparagraph-2.1.1.1.1.1}
 
 \end{subappendices}
 
 \begin{appendices}
 
 \chapter{Chapter 3}
-\zlabel{cha:chapter-3}
+\label{cha:chapter-3}
 
 \section{Section 3.1}
-\zlabel{sec:section-3.1}
+\label{sec:section-3.1}
 
 \subsection{Subsection 3.1.1}
-\zlabel{sec:subsection-3.1.1}
+\label{sec:subsection-3.1.1}
 
 \subsubsection{Subsubsection 3.1.1.1}
-\zlabel{sec:subsubsection-3.1.1.1}
+\label{sec:subsubsection-3.1.1.1}
 
 \paragraph{Paragraph 3.1.1.1.1}
-\zlabel{sec:paragraph-3.1.1.1.1}
+\label{sec:paragraph-3.1.1.1.1}
 
 \subparagraph{Subparagraph 3.1.1.1.1.1}
-\zlabel{sec:subparagraph-3.1.1.1.1.1}
+\label{sec:subparagraph-3.1.1.1.1.1}
 
 \end{appendices}
 
 \appendix{}
 
 \chapter{Chapter 4}
-\zlabel{cha:chapter-4}
+\label{cha:chapter-4}
 
 \section{Section 4.1}
-\zlabel{sec:section-4.1}
+\label{sec:section-4.1}
 
 \subsection{Subsection 4.1.1}
-\zlabel{sec:subsection-4.1.1}
+\label{sec:subsection-4.1.1}
 
 \subsubsection{Subsubsection 4.1.1.1}
-\zlabel{sec:subsubsection-4.1.1.1}
+\label{sec:subsubsection-4.1.1.1}
 
 \paragraph{Paragraph 4.1.1.1.1}
-\zlabel{sec:paragraph-4.1.1.1.1}
+\label{sec:paragraph-4.1.1.1.1}
 
 \subparagraph{Subparagraph 4.1.1.1.1.1}
-\zlabel{sec:subparagraph-4.1.1.1.1.1}
+\label{sec:subparagraph-4.1.1.1.1.1}
 
 \clearpage{}
 

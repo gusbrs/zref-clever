@@ -36,7 +36,7 @@
 \begin{document}
 
 \section{Section 1.1}
-\zlabel{sec:section-1.1}
+\label{sec:section-1.1}
 
 \begin{equation}
   \begin{pmatrix} D_1t&-a_{12}t_2&\dots&-a_{1n}t_n\\

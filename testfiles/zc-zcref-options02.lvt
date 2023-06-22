@@ -40,48 +40,48 @@
 \begin{document}
 
 \chapter{Chapter 1}
-\zlabel{cha:chapter-1}
+\label{cha:chapter-1}
 
 \section{Section 1.1}
-\zlabel{sec:section-1.1}
+\label{sec:section-1.1}
 
 \section{Section 1.2}
-\zlabel{sec:section-1.2}
+\label{sec:section-1.2}
 
 \subsection{Subsection 1.2.1}
-\zlabel{sec:subsection-1.2.1}
+\label{sec:subsection-1.2.1}
 
 \subsection{Subsection 1.2.2}
-\zlabel{sec:subsection-1.2.2}
+\label{sec:subsection-1.2.2}
 
 \subsection{Subsection 1.2.3}
-\zlabel{sec:subsection-1.2.3}
+\label{sec:subsection-1.2.3}
 
 \section{Section 1.3}
-\zlabel{sec:section-1.3}
-\zlabel{sec:section-1.3a}
-\zlabel{sec:section-1.3b}
+\label{sec:section-1.3}
+\label{sec:section-1.3a}
+\label{sec:section-1.3b}
 
 \section{Section 1.4}
-\zlabel{sec:section-1.4}
+\label{sec:section-1.4}
 
 \section{Section 1.5}
-\zlabel{sec:section-1.5}
+\label{sec:section-1.5}
 
 \section{Section 1.6}
-\zlabel{sec:section-1.6}
+\label{sec:section-1.6}
 
 \subsection{Subsection 1.6.1}
-\zlabel{sec:subsection-1.6.1}
+\label{sec:subsection-1.6.1}
 
 \subsection{Subsection 1.6.2}
-\zlabel{sec:subsection-1.6.2}
+\label{sec:subsection-1.6.2}
 
 \subsection{Subsection 1.6.3}
-\zlabel{sec:subsection-1.6.3}
+\label{sec:subsection-1.6.3}
 
 \section{Section 1.7}
-\zlabel{sec:section-1.7}
+\label{sec:section-1.7}
 
 \clearpage{}
 

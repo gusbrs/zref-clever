@@ -31,7 +31,7 @@
 \ExplSyntaxOff
 
 \section{Section 1}
-\zlabel{sec:section-1}
+\label{sec:section-1}
 
 \renewcommand{\testtmp}{%
   \zcref[ref=title,noname]{sec:section-1}}

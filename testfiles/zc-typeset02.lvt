@@ -38,34 +38,34 @@
 
 \begin{figure}
   \caption{figure 1}
-  \zlabel{fig:1}
+  \label{fig:1}
 \end{figure}
 
 \begin{figure}
   \caption{figure 2}
-  \zlabel{fig:2}
+  \label{fig:2}
 \end{figure}
 
 \begin{figure}
   \caption{figure 3}
-  \zlabel{fig:3}
+  \label{fig:3}
 \end{figure}
 
 \chapter{Chapter 2}
 
 \begin{figure}
   \caption{figure 4}
-  \zlabel{fig:4}
+  \label{fig:4}
 \end{figure}
 
 \begin{figure}
   \caption{figure 5}
-  \zlabel{fig:5}
+  \label{fig:5}
 \end{figure}
 
 \begin{figure}
   \caption{figure 6}
-  \zlabel{fig:6}
+  \label{fig:6}
 \end{figure}
 
 \clearpage{}

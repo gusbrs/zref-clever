@@ -30,7 +30,7 @@
 \begin{document}
 
 \chapter{Chapter 1}
-\zlabel{cha:chapter-1}
+\label{cha:chapter-1}
 
 \START
 
@@ -47,22 +47,22 @@
 \appendix{}
 
 \chapter{Chapter 2}
-\zlabel{cha:chapter-2}
+\label{cha:chapter-2}
 
 \section{Section 2.1}
-\zlabel{sec:section-2.1}
+\label{sec:section-2.1}
 
 \subsection{Subsection 2.1.1}
-\zlabel{sec:subsection-2.1.1}
+\label{sec:subsection-2.1.1}
 
 \subsubsection{Subsubsection 2.1.1.1}
-\zlabel{sec:subsubsection-2.1.1.1}
+\label{sec:subsubsection-2.1.1.1}
 
 \paragraph{Paragraph 2.1.1.1.1}
-\zlabel{sec:paragraph-2.1.1.1.1}
+\label{sec:paragraph-2.1.1.1.1}
 
 \subparagraph{Subparagraph 2.1.1.1.1.1}
-\zlabel{sec:subparagraph-2.1.1.1.1.1}
+\label{sec:subparagraph-2.1.1.1.1.1}
 
 \clearpage{}
 

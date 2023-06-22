@@ -29,19 +29,19 @@
 
 \BEGINTEST{Option: countertype=...}
 \begin{equation}
-  \zlabel{equationA}
+  \label{equationA}
 \end{equation}
 \begin{equation}
   \zcsetup{countertype={equation=myequation}}
-  \zlabel{equationB}
+  \label{equationB}
 \end{equation}
 \begin{equation}
   \zcsetup{countertype={fooequation=myequation}}
-  \zlabel{equationC}
+  \label{equationC}
 \end{equation}
 \begin{equation}
   \zcsetup{countertype={section=mysection}}
-  \zlabel{equationD}
+  \label{equationD}
 \end{equation}
 \makeatletter
 \show\Z@R@equationA
@@ -53,11 +53,11 @@
 
 \BEGINTEST{Option: reftype=...}
 \begin{equation}
-  \zlabel{equationE}
+  \label{equationE}
 \end{equation}
 \begin{equation}
   \zcsetup{reftype=myequation}
-  \zlabel{equationF}
+  \label{equationF}
 \end{equation}
 \makeatletter
 \show\Z@R@equationE
@@ -79,7 +79,7 @@
 \testtmp
 \ExplSyntaxOff
 \refstepcounter{foobar}
-\zlabel{foobar}
+\label{foobar}
 \makeatletter
 \show\Z@R@foobar
 \makeatother
@@ -99,7 +99,7 @@
 \testtmp
 \ExplSyntaxOff
 \refstepcounter{barbaz}
-\zlabel{barbaz}
+\label{barbaz}
 \makeatletter
 \show\Z@R@barbaz
 \makeatother
@@ -110,11 +110,11 @@
 \newtheorem{theorem}{Theorem}
 \TIMO
 \begin{theorem}
-  \zlabel{theoremA}
+  \label{theoremA}
 \end{theorem}
 \begin{theorem}
   \zcsetup{currentcounter=equation}
-  \zlabel{theoremB}
+  \label{theoremB}
 \end{theorem}
 \makeatletter
 \show\Z@R@theoremA

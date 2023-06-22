@@ -29,8 +29,8 @@
 
 \begin{document}
 
-\zlabel{label1}
-\zlabel{label2}
+\label{label1}
+\label{label2}
 
 \START
 

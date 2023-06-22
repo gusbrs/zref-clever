@@ -29,51 +29,51 @@
 \begin{document}
 
 \section{Section 1.1}
-\zlabel{sec:section-1.1}
+\label{sec:section-1.1}
 
 \begin{figure}
   \centering
-  \subcaptionbox[.4\linewidht]{A cat\zlabel{cat}}
+  \subcaptionbox[.4\linewidht]{A cat\label{cat}}
   {\rule{4cm}{2cm}}
-  \subcaptionbox[.4\linewidht]{An elephant\zlabel{elephant}}
+  \subcaptionbox[.4\linewidht]{An elephant\label{elephant}}
   {\rule{4cm}{2cm}}
-  \caption{Two animals}\zlabel{animals}
+  \caption{Two animals}\label{animals}
 \end{figure}
 
 \begin{figure}
   \begin{subfigure}[b]{.5\linewidth}
     \centering\large A
-    \caption{A subfigure}\zlabel{fig:1a}
+    \caption{A subfigure}\label{fig:1a}
   \end{subfigure}%
   \begin{subfigure}[b]{.5\linewidth}
     \centering\large B
-    \caption{Another subfigure}\zlabel{fig:1b}
+    \caption{Another subfigure}\label{fig:1b}
   \end{subfigure}
-  \caption{A figure}\zlabel{fig:1}
+  \caption{A figure}\label{fig:1}
 \end{figure}
 
 \begin{table}
   \begin{subtable}[b]{.5\linewidth}
     \centering\large A
-    \caption{A subtable}\zlabel{tab:1a}
+    \caption{A subtable}\label{tab:1a}
   \end{subtable}%
   \begin{subtable}[b]{.5\linewidth}
     \centering\large B
-    \caption{Another subtable}\zlabel{tab:1b}
+    \caption{Another subtable}\label{tab:1b}
   \end{subtable}
-  \caption{A table}\zlabel{tab:1}
+  \caption{A table}\label{tab:1}
 \end{table}
 
 \begin{figure}
   \begin{minipage}[b]{.5\linewidth}
     \centering\large A
-    \subcaption{A subfigure}\zlabel{fig:2a}
+    \subcaption{A subfigure}\label{fig:2a}
   \end{minipage}%
   \begin{minipage}[b]{.5\linewidth}
     \centering\large B
-    \subcaption{Another subfigure}\zlabel{fig:2b}
+    \subcaption{Another subfigure}\label{fig:2b}
   \end{minipage}
-  \caption{A figure}\zlabel{fig:2}
+  \caption{A figure}\label{fig:2}
 \end{figure}
 
 \clearpage{}

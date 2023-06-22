@@ -33,20 +33,20 @@
 \begin{document}
 
 \section{Section 1.1}
-\zlabel{sec:section-1.1}
+\label{sec:section-1.1}
 
-\begin{dmath}\zlabel{eq:1}
+\begin{dmath}\label{eq:1}
 f(x)=\frac{1}{x} \condition{for $x\neq 0$}
 \end{dmath}.
 
-\begin{dmath}\zlabel{eq:2}
+\begin{dmath}\label{eq:2}
 \frac{1}{6} \left(\sigma(k,h,0) +\frac{3(h-1)}{h}\right)
 +\frac{1}{6} \left(\sigma(h,k,0) +\frac{3(k-1)}{k}\right)
 =\frac{1}{6} \left(\frac{h}{k} +\frac{k}{h} +\frac{1}{hk}\right)
 +\frac{1}{2} -\frac{1}{2h} -\frac{1}{2k},
 \end{dmath}
 
-\begin{dmath}\zlabel{eq:3}
+\begin{dmath}\label{eq:3}
 T(n) \hiderel{\leq} T(2^{\lceil\lg n\rceil})
 \leq c(3^{\lceil\lg n\rceil}
 -2^{\lceil\lg n\rceil})
@@ -55,19 +55,19 @@ T(n) \hiderel{\leq} T(2^{\lceil\lg n\rceil})
 \end{dmath}.
 
 \newcommand\mx[1]{\begin{math}#1\end{math}}% math expression
-\begin{dseries}[frame]\zlabel{eq:4}
+\begin{dseries}[frame]\label{eq:4}
 \mx{v^{[2]} =(0,5,5,0,9,5,1,0)},
 \mx{v^{[3]} =(0,9,11,9,10,12,0,1)}.
 \end{dseries}
 
-\begin{dgroup}\zlabel{eq:5}
-  \begin{dmath}\zlabel{eq:5a}
+\begin{dgroup}\label{eq:5}
+  \begin{dmath}\label{eq:5a}
     H_1^3 = x_1 + x_2 + x_3
   \end{dmath},
-  \begin{dmath}\zlabel{eq:5b}
+  \begin{dmath}\label{eq:5b}
     H_2^2 = x_1^2 + x_1 x_2 + x_2^2 - q_1 - q_2
   \end{dmath},
-  \begin{dmath}\zlabel{eq:5c}
+  \begin{dmath}\label{eq:5c}
     H_3^1 = x_1^3 - 2x_1 q_1 - x_2 q_1
   \end{dmath}.
 \end{dgroup}

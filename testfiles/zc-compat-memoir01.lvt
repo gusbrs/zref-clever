@@ -18,6 +18,14 @@
 
 \usepackage{zref-clever}
 
+% NOTE Incredibly, precisely where it would be the most useful, I *could not*
+% systematically move to using \label instead of \zlabel for memoir.  All sort
+% of errors crept into the tests, from memoir's support for titleref in the
+% default property to undefined labels, meaning memoir locally
+% overrides \label in ways which disable the kernel hook...  So, the only real
+% alternative is selectively use \label or \zlabel to see which works, and
+% hopefully all situations are covered this way.
+
 % Number all section levels.
 \setsecnumdepth{all}
 

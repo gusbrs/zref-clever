@@ -39,22 +39,22 @@
 \begin{document}
 
 \section{Section 1.1}
-\zlabel{sec:section-1.1}
+\label{sec:section-1.1}
 
 \begin{enumerate}
-\item test 1\zlabel{enum1}
+\item test 1\label{enum1}
   \begin{enumerate}
-  \item test 2\zlabel{enum2}
+  \item test 2\label{enum2}
     \begin{enumerate}
-    \item test 3\zlabel{enum3}
+    \item test 3\label{enum3}
       \begin{enumerate}
-      \item test 4\zlabel{enum4}
+      \item test 4\label{enum4}
         \begin{enumerate}
-        \item test 5\zlabel{enum5}
+        \item test 5\label{enum5}
           \begin{enumerate}
-          \item test 6\zlabel{enum6}
+          \item test 6\label{enum6}
             \begin{enumerate}
-            \item test 7\zlabel{enum7}
+            \item test 7\label{enum7}
             \end{enumerate}
           \end{enumerate}
         \end{enumerate}

@@ -23,7 +23,7 @@
 \ExplSyntaxOff
 
 \section{Foo 1}
-\zlabel{sec:section-1}
+\label{sec:section-1}
 
 \zcref[check=nextpage]{sec:section-1}
 

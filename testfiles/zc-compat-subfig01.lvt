@@ -29,15 +29,15 @@
 \begin{document}
 
 \section{Section 1.1}
-\zlabel{sec:section-1.1}
+\label{sec:section-1.1}
 
 \begin{figure}
   \centering
-  \subfloat[First.]{Foo bar\zlabel{3figs-a}}\qquad
-  \subfloat[Second.]{Foo bar baz\zlabel{3figs-b}}\\
-  \subfloat[Third.]{\zlabel{3figs-c}Foo barrr}
+  \subfloat[First.]{Foo bar\label{3figs-a}}\qquad
+  \subfloat[Second.]{Foo bar baz\label{3figs-b}}\\
+  \subfloat[Third.]{\label{3figs-c}Foo barrr}
   \caption{Three sub-floats.}
-  \zlabel{3figs}
+  \label{3figs}
 \end{figure}
 
 \clearpage{}

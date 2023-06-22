@@ -37,21 +37,21 @@
 \begin{document}
 
 \part{Part 1}
-\zlabel{part:part-1}
+\label{part:part-1}
 
 \chapter{Chapter 1}
-\zlabel{cha:chapter-1}
+\label{cha:chapter-1}
 
 \section{Section 1.1}
-\zlabel{sec:section-1.1}
+\label{sec:section-1.1}
 
 \begin{table}
   \caption{Table 1.1.1}
-  \zlabel{tab:table-1.1.1}
+  \label{tab:table-1.1.1}
 \end{table}
 
 \begin{equation}
-  \zlabel{eq:equation-1.1.1}
+  \label{eq:equation-1.1.1}
 \end{equation}
 
 \newtheorem{thm}{Theorem}
@@ -62,17 +62,17 @@
   name-pl=theorems,
 }
 \begin{thm}
-  x=f(y)\zlabel{eq:equation-1.1.2}
+  x=f(y)\label{eq:equation-1.1.2}
 \end{thm}
 
 \begin{figure}
   \caption{Figure 1.1.1}
-  \zlabel{fig:figure-1.1.1}
+  \label{fig:figure-1.1.1}
 \end{figure}
 
 \begin{figure}
   \captionabove{Figure 1.1.2}
-  \zlabel{fig:figure-1.1.2}
+  \label{fig:figure-1.1.2}
 \end{figure}
 
 % captionof
@@ -80,14 +80,14 @@
   \begin{minipage}{.5\linewidth}
     \centering
     \rule{4cm}{5cm}
-    \caption{A rectangle}\zlabel{fig:figure-1.1.3}
+    \caption{A rectangle}\label{fig:figure-1.1.3}
   \end{minipage}%
   \begin{minipage}{.5\linewidth}
     \centering
     \captionaboveof{table}
     [Measure of the rectangle in figure~\zref{fig:figure-1.1.3}]%
     {Measure of the rectangle}
-    \zlabel{tab:table-1.1.2}
+    \label{tab:table-1.1.2}
     \begin{tabular}{ll}
       Width: & 4\,cm\\
       Height: & 5\,cm
@@ -109,7 +109,7 @@
           }%
         }
     \end{captionbeside}
-  \zlabel{fig:figure-1.1.4}
+  \label{fig:figure-1.1.4}
 \end{figure}
 
 % captionofbeside
@@ -126,59 +126,59 @@
       }%
     }
   \end{captionofbeside}
-  \zlabel{tab:table-1.1.3}
+  \label{tab:table-1.1.3}
 \end{minipage}
 
 \begin{enumerate}
-\item Item\zlabel{item:1}
+\item Item\label{item:1}
   \begin{enumerate}
-  \item Item\zlabel{item:2}
+  \item Item\label{item:2}
     \begin{enumerate}
-    \item Item\zlabel{item:3}
+    \item Item\label{item:3}
       \begin{enumerate}
-      \item Item\zlabel{item:4}
+      \item Item\label{item:4}
       \end{enumerate}
     \end{enumerate}
   \end{enumerate}
 \end{enumerate}
 
-Foo\footnote{Footnote\zlabel{fn:1}}
+Foo\footnote{Footnote\label{fn:1}}
 
 \begin{minipage}{1.0\linewidth}
-  Bar\footnote{Footnote\zlabel{fn:2}}
+  Bar\footnote{Footnote\label{fn:2}}
 \end{minipage}
 
 \subsection{Subsection 1.1.1}
-\zlabel{sec:subsection-1.1.1}
+\label{sec:subsection-1.1.1}
 
 \subsubsection{Subsubsection 1.1.1.1}
-\zlabel{sec:subsubsection-1.1.1.1}
+\label{sec:subsubsection-1.1.1.1}
 
 \paragraph{Paragraph 1.1.1.1.1}
-\zlabel{sec:paragraph-1.1.1.1.1}
+\label{sec:paragraph-1.1.1.1.1}
 
 \subparagraph{Subparagraph 1.1.1.1.1.1}
-\zlabel{sec:subparagraph-1.1.1.1.1.1}
+\label{sec:subparagraph-1.1.1.1.1.1}
 
 \appendix{}
 
 \chapter{Chapter 2}
-\zlabel{cha:chapter-2}
+\label{cha:chapter-2}
 
 \section{Section 2.1}
-\zlabel{sec:section-2.1}
+\label{sec:section-2.1}
 
 \subsection{Subsection 2.1.1}
-\zlabel{sec:subsection-2.1.1}
+\label{sec:subsection-2.1.1}
 
 \subsubsection{Subsubsection 2.1.1.1}
-\zlabel{sec:subsubsection-2.1.1.1}
+\label{sec:subsubsection-2.1.1.1}
 
 \paragraph{Paragraph 2.1.1.1.1}
-\zlabel{sec:paragraph-2.1.1.1.1}
+\label{sec:paragraph-2.1.1.1.1}
 
 \subparagraph{Subparagraph 2.1.1.1.1.1}
-\zlabel{sec:subparagraph-2.1.1.1.1.1}
+\label{sec:subparagraph-2.1.1.1.1.1}
 
 \clearpage{}
 

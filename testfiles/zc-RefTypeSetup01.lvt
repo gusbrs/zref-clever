@@ -38,60 +38,60 @@
 \begin{document}
 
 \chapter{Chapter 1}
-\zlabel{cha:chapter-1}
+\label{cha:chapter-1}
 
 \section{Section 1.1}
-\zlabel{sec:section-1.1}
+\label{sec:section-1.1}
 
 \begin{table}
   \caption{Table 1.1.1}
-  \zlabel{tab:table-1.1.1}
+  \label{tab:table-1.1.1}
 \end{table}
 
 \newtheorem{thm}[equation]{Theorem}[section]
 
 \begin{thm}
-  \zlabel{eq:theorem-1.1.1}
+  \label{eq:theorem-1.1.1}
 \end{thm}
 
 \begin{equation}
-  \zlabel{eq:equation-1.1.2}
+  \label{eq:equation-1.1.2}
 \end{equation}
 
 \begin{equation}
-  \zlabel{eq:equation-1.1.3}
+  \label{eq:equation-1.1.3}
 \end{equation}
 
 \begin{figure}
   \caption{Figure 1.1.1}
-  \zlabel{fig:figure-1.1.1}
+  \label{fig:figure-1.1.1}
 \end{figure}
 
 \section{Section 1.2}
-\zlabel{sec:section-1.2}
+\label{sec:section-1.2}
 
 \section{Section 1.3}
-\zlabel{sec:section-1.3}
-\zlabel{sec:section-1.3a}
-\zlabel{sec:section-1.3b}
+\label{sec:section-1.3}
+\label{sec:section-1.3a}
+\label{sec:section-1.3b}
 
 \section{Section 1.4}
-\zlabel{sec:section-1.4}
+\label{sec:section-1.4}
 
 \section{Section 1.5}
-\zlabel{sec:section-1.5}
+\label{sec:section-1.5}
 
 \chapter{Chapter 2}
-\zlabel{cha:chapter-2}
+\label{cha:chapter-2}
 
 \section{Section 2.1}
-\zlabel{sec:section-2.1}
+\label{sec:section-2.1}
 
 \chapter{Chapter 3}
-\zlabel{cha:chapter-3}
+\label{cha:chapter-3}
 
 \section{Section 3.1}
-\zlabel{sec:section-3.1}
+\label{sec:section-3.1}
 
 \clearpage{}
 
