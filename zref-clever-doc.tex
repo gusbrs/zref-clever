@@ -67,7 +67,7 @@
 \NewDocumentCommand\username{m}{`\texttt{#1}'}
 
 \makeatletter
-\newcommand{\zcrequiredkernelversion}{\zc@required@kernel@version}
+\newcommand{\zcrequiredkernel}{\zrefclever@required@kernel}
 \makeatother
 
 \setlength{\marginparsep}{2\labelsep}
@@ -416,12 +416,11 @@ using \cs{zcsetup} (see \zcref{sec:user-interface}).
 
 \pkg{zref-clever} requires \pkg{zref}, particularly its \pkg{zref-base},
 \pkg{zref-user} and \pkg{zref-abspage} modules, and the \LaTeX{} kernel
-\zcrequiredkernelversion{}, or newer.  It requires UTF-8 input encoding, which
-has been the kernel's default for some time.  It also needs \pkg{ifdraft}.
-Some packages are leveraged by \pkg{zref-clever} if they are present, but are
-not loaded by default or required by it, namely: \pkg{hyperref},
-\pkg{zref-check}, and \pkg{zref}'s \pkg{zref-hyperref} and \pkg{zref-xr}
-modules.
+\zcrequiredkernel{}, or newer.  It requires UTF-8 input encoding, which has
+been the kernel's default for some time.  It also needs \pkg{ifdraft}.  Some
+packages are leveraged by \pkg{zref-clever} if they are present, but are not
+loaded by default or required by it, namely: \pkg{hyperref}, \pkg{zref-check},
+and \pkg{zref}'s \pkg{zref-hyperref} and \pkg{zref-xr} modules.
 
 
 \section{User interface}

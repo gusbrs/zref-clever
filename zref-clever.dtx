@@ -151,15 +151,15 @@
 % we require that too.  Hence we make the cut at this latter kernel release.
 %
 %    \begin{macrocode}
-\newcommand{\zc@required@kernel@version}{2023-06-01}
-\NeedsTeXFormat{LaTeX2e}[\zc@required@kernel@version]
+\def\zrefclever@required@kernel{2023-06-01}
+\NeedsTeXFormat{LaTeX2e}[\zrefclever@required@kernel]
 \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
-\IfFormatAtLeastTF{\zc@required@kernel@version}
+\IfFormatAtLeastTF{\zrefclever@required@kernel}
   {}
   {%
     \PackageError{zref-clever}{LaTeX kernel too old}
       {%
-        'zref-clever' requires a LaTeX kernel \zc@required@kernel@version\space or newer.%
+        'zref-clever' requires a LaTeX kernel \zrefclever@required@kernel\space or newer.%
       }%
   }%
 %    \end{macrocode}
