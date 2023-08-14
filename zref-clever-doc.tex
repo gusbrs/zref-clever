@@ -2369,22 +2369,15 @@ employs environment hooks to \env{appendices} and \env{subappendices} and a
 command hook to \cs{appendix} for the purpose.
 
 \DescribeOption{memoir} %
-The \cls{memoir} class implements several features with one or another
-implication for cross-referencing, usually bearing just the standard
-referencing system in mind, and related mainly to captions, subfloats, and
-notes.  This compatibility module tries to adjust \pkg{zref-clever} to these
-features with support for the following: i) set counter types for counters
-\texttt{subfigure}, \texttt{subtable}, and \texttt{poemline} (used in the
-\env{verse} environment); ii) configure resetting behavior
-(\opt{counterresetby} option) for \texttt{subfigure} and \texttt{subtable}
-counters; iii) provide the \pkg{zref} property ``\texttt{subcaption}'' so that
-we can refer to, for example, \texttt{\cs{zcref}[ref=subcaption]\{subcap-1\}}
-to emulate the functionality of \cls{memoir}'s \cs{subcaptionref}; iv) provide
-that \cs{footnote}, \cs{verbfootnote}, \cs{sidefootnote}, and \cs{pagenote}
-get a proper \opt{currentcounter} set; and v) set counter types for counters
-\texttt{sidefootnote} and \texttt{pagenote}.  The most sensitive changes are
-the use of \pkg{ltcmdhooks} command hooks on \cs{@memsubcaption},
-\cs{@makefntext}, and \cs{@makesidefntext}.
+This compatibility module provides support for some of \cls{memoir}'s
+cross-referencing features. Namely, it: i) sets counter types for counters
+\texttt{subfigure}, \texttt{subtable}, \texttt{poemline} (used in the
+\env{verse} environment), \texttt{sidefootnote}, and \texttt{pagenote}; ii)
+configures resetting behavior (\opt{counterresetby} option) for
+\texttt{subfigure} and \texttt{subtable} counters; iii) provides the
+\pkg{zref} property ``\texttt{subcaption}'' so that we can refer to, for
+example, \texttt{\cs{zcref}[ref=subcaption]\{subcap-1\}} to emulate the
+functionality of \cls{memoir}'s \cs{subcaptionref}.
 
 \DescribeOption{amsmath} %
 The module ensures proper \opt{currentcounter} values are in place for the
