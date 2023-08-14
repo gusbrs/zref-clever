@@ -18,14 +18,6 @@
 
 \usepackage{zref-clever}
 
-% NOTE Incredibly, precisely where it would be the most useful, I *could not*
-% systematically move to using \label instead of \zlabel for memoir.  All sort
-% of errors crept into the tests, from memoir's support for titleref in the
-% default property to undefined labels, meaning memoir locally
-% overrides \label in ways which disable the kernel hook...  So, the only real
-% alternative is selectively use \label or \zlabel to see which works, and
-% hopefully all situations are covered this way.
-
 % Number all section levels.
 \setsecnumdepth{all}
 
@@ -45,10 +37,10 @@
 \begin{document}
 
 \chapter{Chapter 1}
-\zlabel{cha:chapter-1}
+\label{cha:chapter-1}
 
 \section{Section 1.1}
-\zlabel{sec:section-1.1}
+\label{sec:section-1.1}
 
 % Subcaption (figure)
 \newsubfloat{figure}
@@ -56,23 +48,23 @@
   \centering
   \begin{minipage}{0.3\textwidth}
     \verb?Some verbatim text?
-    \subcaption{First text\zlabel{fig:figure-1.1.5}}
+    \subcaption{First text\label{fig:figure-1.1.5}}
   \end{minipage}
   \hfill
   \begin{minipage}{0.3\textwidth}
     \verb?More verbatim text?
-    \subcaption{Second text\zlabel{fig:figure-1.1.6}}
+    \subcaption{Second text\label{fig:figure-1.1.6}}
   \end{minipage}
-  \caption{Verbatim texts}\zlabel{fig:figure-1.1.7}
+  \caption{Verbatim texts}\label{fig:figure-1.1.7}
 \end{figure}
 
 % Subbottom
 \begin{figure}
   \centering
-  \subbottom[Subfigure 1\zlabel{fig:figure-1.1.8}]{\fbox{SUBFIGURE ONE}}
+  \subbottom[Subfigure 1\label{fig:figure-1.1.8}]{\fbox{SUBFIGURE ONE}}
   \hfill
-  \subbottom[Subfigure 2\zlabel{fig:figure-1.1.9}]{\fbox{SUBFIGURE TWO}}
-  \caption{Figure with two subfigures} \zlabel{fig:figure-1.1.10}
+  \subbottom[Subfigure 2\label{fig:figure-1.1.9}]{\fbox{SUBFIGURE TWO}}
+  \caption{Figure with two subfigures} \label{fig:figure-1.1.10}
 \end{figure}
 
 % Subcaption (table)
@@ -80,13 +72,13 @@
 \begin{table}
   \centering
   \begin{minipage}{0.3\textwidth}
-    \subcaption{First table\zlabel{tab:table-1.1.6}}
+    \subcaption{First table\label{tab:table-1.1.6}}
   \end{minipage}
   \hfill
   \begin{minipage}{0.3\textwidth}
-    \subcaption{Second table\zlabel{tab:table-1.1.7}}
+    \subcaption{Second table\label{tab:table-1.1.7}}
   \end{minipage}
-  \caption{Table with subtables}\zlabel{tab:table-1.1.8}
+  \caption{Table with subtables}\label{tab:table-1.1.8}
 \end{table}
 
 % Verse lines
@@ -99,7 +91,7 @@
   \flagverse{Ingeborg} And your decision? \\*
   \flagverse{Fridthjof} \vinphantom{And your decision?}
   Have I ought to choose? \\*
-  Is not mine honour bound by his decree?\zlabel{vs:verse-1.1-1} \\*
+  Is not mine honour bound by his decree?\label{vs:verse-1.1-1} \\*
   And that I will redeem through Angantyr \\*
   His paltry gold doth hide in Nastrand’s flood. \\*
   Today will I depart. \\*
@@ -112,126 +104,73 @@
   O! hear me, ere thou answerest.
 \end{verse}
 
-% Sidecaption
-\begin{figure}
-  \begin{sidecaption}{An illustration}[fig:figure-1.1.11]
-    \centering
-    \rule{1.0cm}{1.0cm}
-  \end{sidecaption}
-\end{figure}
-
-% Bilingual captions
-\begin{figure}
-  \centering
-  EXAMPLE FIGURE WITH BITWONUMCAPTION
-  \bitwonumcaption[fig:figure-1.1.12]%
-    {}{Long \cs{bitwonumcaption}}%
-    {Bild}{ }{Lang \cs{bitwonumcaption}}
-\end{figure}
-\begin{figure}
-  \centering
-  EXAMPLE FIGURE WITH BIONENUMCAPTION
-  \bionenumcaption[fig:figure-1.1.13]%
-    {}{Long English \cs{bionenumcaption}}%
-    {Bild}{ }{Lang Deutsch \cs{bionenumcaption}}
-\end{figure}
-\begin{figure}
-  \centering
-  EXAMPLE FIGURE WITH BICAPTION
-  \bicaption[fig:figure-1.1.14]%
-    {Short English \cs{bicaption}}{Longingly}%
-    {Bild}{Langlauf}
-\end{figure}
-
-% Regular footnotes.
-Foo\footnote{Footnote\zlabel{fn:1}}
-
-% Mini-page footnotes.
-\begin{minipage}{1.0\linewidth}
-  Bar\footnote{Footnote\zlabel{fn:2}}
-\end{minipage}
-
-% Verbatim footnotes.
-Text\verbfootnote{The \verb?\footnote? macro, like all other macros except for
-  \verb?\verbfootnote?, can not contain verbatim text in its
-  argument.\zlabel{fn:3}}
-% Using \verbfootnote in minipage results in "LaTeX Error: \begin{minipage} on
-% input line ... ended by \end{document}." (regardless of labeling...).
-% \begin{minipage}{1.0\linewidth}
-%   Text\verbfootnote{The \verb?\footnote? macro, like all other macros except
-%     for \verb?\verbfootnote?, can not contain verbatim text in its argument.}
-% \end{minipage}
-
-% Side footnote.
-Foo\sidefootnote{Footnote\zlabel{fn:4}}
-
 \chapter{Chapter 2}
-\zlabel{cha:chapter-2}
+\label{cha:chapter-2}
 
 \begin{subappendices}
 
 \section{Section 2.1}
-\zlabel{sec:section-2.1}
+\label{sec:section-2.1}
 
 \subsection{Subsection 2.1.1}
-\zlabel{sec:subsection-2.1.1}
+\label{sec:subsection-2.1.1}
 
 \subsubsection{Subsubsection 2.1.1.1}
-\zlabel{sec:subsubsection-2.1.1.1}
+\label{sec:subsubsection-2.1.1.1}
 
 \paragraph{Paragraph 2.1.1.1.1}
-\zlabel{sec:paragraph-2.1.1.1.1}
+\label{sec:paragraph-2.1.1.1.1}
 
 \subparagraph{Subparagraph 2.1.1.1.1.1}
-\zlabel{sec:subparagraph-2.1.1.1.1.1}
+\label{sec:subparagraph-2.1.1.1.1.1}
 
 \end{subappendices}
 
 % End note.
-Page note.\pagenote{Page note.\zlabel{fn:5}}
+Page note.\pagenote{Page note.\label{fn:5}}
 \printpagenotes
 
 \begin{appendices}
 
 \chapter{Chapter 3}
-\zlabel{cha:chapter-3}
+\label{cha:chapter-3}
 
 \section{Section 3.1}
-\zlabel{sec:section-3.1}
+\label{sec:section-3.1}
 
 \subsection{Subsection 3.1.1}
-\zlabel{sec:subsection-3.1.1}
+\label{sec:subsection-3.1.1}
 
 \subsubsection{Subsubsection 3.1.1.1}
-\zlabel{sec:subsubsection-3.1.1.1}
+\label{sec:subsubsection-3.1.1.1}
 
 \paragraph{Paragraph 3.1.1.1.1}
-\zlabel{sec:paragraph-3.1.1.1.1}
+\label{sec:paragraph-3.1.1.1.1}
 
 \subparagraph{Subparagraph 3.1.1.1.1.1}
-\zlabel{sec:subparagraph-3.1.1.1.1.1}
+\label{sec:subparagraph-3.1.1.1.1.1}
 
 \end{appendices}
 
 \appendix{}
 
 \chapter{Chapter 4}
-\zlabel{cha:chapter-4}
+\label{cha:chapter-4}
 
 \section{Section 4.1}
-\zlabel{sec:section-4.1}
+\label{sec:section-4.1}
 
 \subsection{Subsection 4.1.1}
-\zlabel{sec:subsection-4.1.1}
+\label{sec:subsection-4.1.1}
 
 \subsubsection{Subsubsection 4.1.1.1}
-\zlabel{sec:subsubsection-4.1.1.1}
+\label{sec:subsubsection-4.1.1.1}
 
 \paragraph{Paragraph 4.1.1.1.1}
-\zlabel{sec:paragraph-4.1.1.1.1}
+\label{sec:paragraph-4.1.1.1.1}
 
 \subparagraph{Subparagraph 4.1.1.1.1.1}
-\zlabel{sec:subparagraph-4.1.1.1.1.1}
+\label{sec:subparagraph-4.1.1.1.1.1}
 
 \clearpage{}
 
@@ -253,11 +192,7 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
     \renewcommand{\testtmp}{ \typeout { subcaption~property~is~defined } }
     \testtmp
   }
-\ShowHook { cmd / @memsubcaption / before }
-\ShowHook { env / minipage / begin }
-\ShowHook { cmd / @makefntext / before }
-\ShowHook { cmd / @makesidefntext / before }
-\ShowHook { file / \jobname.ent / before }
+\ShowHook { memoir/subcaption/aftercounter }
 \makeatother
 \ExplSyntaxOff
 \ENDTEST
@@ -312,67 +247,6 @@ Page note.\pagenote{Page note.\zlabel{fn:5}}
 \renewcommand{\testtmp}{%
   \zcref[ref=subcaption]{fig:figure-1.1.8, fig:figure-1.1.9,
     fig:figure-1.1.10}}
-\setbox0=\hbox{\testtmp}
-\showbox0
-\box0
-\ENDTEST
-
-\newoptblock{Sidecaption}
-
-\BEGINTEST{Sidecaption. Reference: figure}
-\renewcommand{\testtmp}{%
-  \zcref{fig:figure-1.1.11}}
-\setbox0=\hbox{\testtmp}
-\showbox0
-\box0
-\ENDTEST
-
-\newoptblock{Bilingual captions}
-
-\BEGINTEST{Bilingual captions. Reference: figure}
-\renewcommand{\testtmp}{%
-  \zcref{fig:figure-1.1.12, fig:figure-1.1.13,
-    fig:figure-1.1.14}}
-\setbox0=\hbox{\testtmp}
-\showbox0
-\box0
-\ENDTEST
-
-\newoptblock{Footnote}
-
-\BEGINTEST{Reference: footnote}
-\renewcommand{\testtmp}{%
-  \zcref{fn:1}}
-\setbox0=\hbox{\testtmp}
-\showbox0
-\box0
-\ENDTEST
-
-\newoptblock{Mini-page footnote}
-
-\BEGINTEST{Reference: mpfootnote}
-\renewcommand{\testtmp}{%
-  \zcref{fn:2}}
-\setbox0=\hbox{\testtmp}
-\showbox0
-\box0
-\ENDTEST
-
-\newoptblock{Verbatim footnote}
-
-\BEGINTEST{Reference: verbatim footnote}
-\renewcommand{\testtmp}{%
-  \zcref{fn:3}}
-\setbox0=\hbox{\testtmp}
-\showbox0
-\box0
-\ENDTEST
-
-\newoptblock{Side footnote}
-
-\BEGINTEST{Reference: side footnote}
-\renewcommand{\testtmp}{%
-  \zcref{fn:4}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0

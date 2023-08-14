@@ -34,7 +34,7 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 <recently read> }
 l. ...\testtmp
 subcaption property is defined
--> The generic hook 'cmd/@memsubcaption/before' (3 arguments):
+-> The hook 'memoir/subcaption/aftercounter':
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
@@ -46,59 +46,7 @@ subcaption property is defined
 > Execution order:
 >     ---.
 <recently read> }
-l. ...\ShowHook { cmd / @memsubcaption / before }
--> The generic hook 'env/minipage/begin':
-> Code chunks:
->     ---
-> Document-level (top-level) code (executed last):
->     -> \tl_set:Nn \l__zrefclever_memoir_footnote_type_tl {mpfootnote}
-> Extra code for next invocation:
->     ---
-> Rules:
->     ---
-> Execution order:
->     ---.
-<recently read> }
-l. ...\ShowHook { env / minipage / begin }
--> The generic hook 'cmd/@makefntext/before' (1 argument):
-> Code chunks:
->     ---
-> Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:x {currentcounter=\l__zrefclever_memoir_footnote_type_tl }
-> Extra code for next invocation:
->     ---
-> Rules:
->     ---
-> Execution order:
->     ---.
-<recently read> }
-l. ...\ShowHook { cmd / @makefntext / before }
--> The generic hook 'cmd/@makesidefntext/before' (1 argument):
-> Code chunks:
->     ---
-> Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {currentcounter=sidefootnote}
-> Extra code for next invocation:
->     ---
-> Rules:
->     ---
-> Execution order:
->     ---.
-<recently read> }
-l. ...\ShowHook { cmd / @makesidefntext / before }
--> The generic hook 'file/zc-compat-memoir01.ent/before':
-> Code chunks:
->     ---
-> Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:x {currentcounter=pagenote}
-> Extra code for next invocation:
->     ---
-> Rules:
->     ---
-> Execution order:
->     ---.
-<recently read> }
-l. ...\ShowHook { file / \jobname.ent / before }
+l. ...\ShowHook { memoir/subcaption/aftercounter }
 ============================================================
 ============================================================
 TEST 2: Subcaption. Reference: figure
@@ -402,184 +350,7 @@ l. ...\setbox0=\hbox{\testtmp
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 8: Sidecaption. Reference: figure
-============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{figure.1.3}{\group_begin: figure\group_end: \nobreakspace \group_begin:
-\M@TitleReference {1.3}{Section 1.1}\group_end: }.
-<recently read> }
-l. ...\setbox0=\hbox{\testtmp
-                             }
-> \box...=
-\hbox(6.94444+1.94444)x40.58342
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.1.3)>>>>}
-.\OT1/cmr/m/n/10 ^^L (ligature fi)
-.\OT1/cmr/m/n/10 g
-.\OT1/cmr/m/n/10 u
-.\OT1/cmr/m/n/10 r
-.\OT1/cmr/m/n/10 e
-.\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 3
-.\special{pdf:eann}
-! OK.
-l. ...\showbox0
-============================================================
-============================================================
-TEST 9: Bilingual captions. Reference: figure
-============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.1.4}{\group_begin:
-\M@TitleReference {1.4}{Long \cs {bitwonumcaption}}\group_end: }
-to\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.1.6}{\group_begin:
-\M@TitleReference {1.6}{Short English \cs {bicaption}}\group_end: }.
-<recently read> }
-l. ...\setbox0=\hbox{\testtmp
-                             }
-> \box...=
-\hbox(6.94444+1.94444)x72.86125
-.\OT1/cmr/m/n/10 ^^L (ligature fi)
-.\OT1/cmr/m/n/10 g
-.\OT1/cmr/m/n/10 u
-.\OT1/cmr/m/n/10 r
-.\OT1/cmr/m/n/10 e
-.\OT1/cmr/m/n/10 s
-.\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.1.4)>>>>}
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 4
-.\special{pdf:eann}
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 t
-.\OT1/cmr/m/n/10 o
-.\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.1.6)>>>>}
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 6
-.\special{pdf:eann}
-! OK.
-l. ...\showbox0
-============================================================
-============================================================
-TEST 10: Reference: footnote
-============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{Hfootnote.1}{\group_begin: footnote\group_end: \nobreakspace \group_begin:
-1\group_end: }.
-<recently read> }
-l. ...\setbox0=\hbox{\testtmp
-                             }
-> \box...=
-\hbox(6.94444+0.0)x44.44456
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(Hfootnote.1)>>>>}
-.\OT1/cmr/m/n/10 f
-.\OT1/cmr/m/n/10 o
-.\kern0.27779
-.\OT1/cmr/m/n/10 o
-.\OT1/cmr/m/n/10 t
-.\OT1/cmr/m/n/10 n
-.\OT1/cmr/m/n/10 o
-.\OT1/cmr/m/n/10 t
-.\OT1/cmr/m/n/10 e
-.\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 1
-.\special{pdf:eann}
-! OK.
-l. ...\showbox0
-============================================================
-============================================================
-TEST 11: Reference: mpfootnote
-============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{memhycontfloat.2}{\group_begin: footnote\group_end: \nobreakspace
-\group_begin: {\itshape a}\group_end: }.
-<recently read> }
-l. ...\setbox0=\hbox{\testtmp
-                             }
-> \box...=
-\hbox(6.94444+0.0)x44.55563
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(memhycontfloat.2)>>>>}
-.\OT1/cmr/m/n/10 f
-.\OT1/cmr/m/n/10 o
-.\kern0.27779
-.\OT1/cmr/m/n/10 o
-.\OT1/cmr/m/n/10 t
-.\OT1/cmr/m/n/10 n
-.\OT1/cmr/m/n/10 o
-.\OT1/cmr/m/n/10 t
-.\OT1/cmr/m/n/10 e
-.\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/it/10 a
-.\special{pdf:eann}
-! OK.
-l. ...\showbox0
-============================================================
-============================================================
-TEST 12: Reference: verbatim footnote
-============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{memhycontfloat.2}{\group_begin: footnote\group_end: \nobreakspace
-\group_begin: 2\group_end: }.
-<recently read> }
-l. ...\setbox0=\hbox{\testtmp
-                             }
-> \box...=
-\hbox(6.94444+0.0)x44.44456
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(memhycontfloat.2)>>>>}
-.\OT1/cmr/m/n/10 f
-.\OT1/cmr/m/n/10 o
-.\kern0.27779
-.\OT1/cmr/m/n/10 o
-.\OT1/cmr/m/n/10 t
-.\OT1/cmr/m/n/10 n
-.\OT1/cmr/m/n/10 o
-.\OT1/cmr/m/n/10 t
-.\OT1/cmr/m/n/10 e
-.\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 2
-.\special{pdf:eann}
-! OK.
-l. ...\showbox0
-============================================================
-============================================================
-TEST 13: Reference: side footnote
-============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{memhycontfloat.2}{\group_begin: footnote\group_end: \nobreakspace
-\group_begin: 1\group_end: }.
-<recently read> }
-l. ...\setbox0=\hbox{\testtmp
-                             }
-> \box...=
-\hbox(6.94444+0.0)x44.44456
-.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(memhycontfloat.2)>>>>}
-.\OT1/cmr/m/n/10 f
-.\OT1/cmr/m/n/10 o
-.\kern0.27779
-.\OT1/cmr/m/n/10 o
-.\OT1/cmr/m/n/10 t
-.\OT1/cmr/m/n/10 n
-.\OT1/cmr/m/n/10 o
-.\OT1/cmr/m/n/10 t
-.\OT1/cmr/m/n/10 e
-.\penalty 10000
-.\glue 3.33333 plus 1.66666 minus 1.11111
-.\OT1/cmr/m/n/10 1
-.\special{pdf:eann}
-! OK.
-l. ...\showbox0
-============================================================
-============================================================
-TEST 14: Reference: page (end) note
+TEST 8: Reference: page (end) note
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
 {}{section*.2}{\group_begin: note\group_end: \nobreakspace \group_begin:
@@ -602,7 +373,7 @@ l. ...\setbox0=\hbox{\testtmp
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 15: Reference: verse poemline
+TEST 9: Reference: verse poemline
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
 {}{poemline.1.5}{\group_begin: line\group_end: \nobreakspace \group_begin:
@@ -625,7 +396,7 @@ l. ...\setbox0=\hbox{\testtmp
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 16: Reference: sectioning commands in subapenddices
+TEST 10: Reference: sectioning commands in subapenddices
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
 \nobreakspace \__zrefclever_hyperlink:nnn {}{section.2.A}{\group_begin:
@@ -715,7 +486,7 @@ l. ...\setbox0=\hbox{\testtmp
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 17: Reference: sectioning commands in appendices
+TEST 11: Reference: sectioning commands in appendices
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
 \nobreakspace \__zrefclever_hyperlink:nnn {}{chapter.A}{\group_begin:
@@ -811,7 +582,7 @@ l. ...\setbox0=\hbox{\testtmp
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 18: Reference: sectioning commands after appendix
+TEST 12: Reference: sectioning commands after appendix
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
 \nobreakspace \__zrefclever_hyperlink:nnn {}{appendix.A}{\group_begin:
