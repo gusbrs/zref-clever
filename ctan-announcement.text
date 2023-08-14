@@ -1,8 +1,8 @@
-## v0.4.1 (2023-06-19)
+## v0.4.2 (2023-08-14)
 
 ### Changed
-- Improved Dependencies section in User manual.
-
-### Fixed
-- Use safer method to define the `zc@pgfmt` property.
+- Thanks to better support for `zref` in `memoir`, the corresponding
+  compatibility module has been simplified and made more robust, without loss
+  of functionality.
+- Use `\label` instead of `\zlabel` in regression tests.
 

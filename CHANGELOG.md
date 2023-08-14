@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.1...HEAD)
+## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.2...HEAD)
+
+## [v0.4.2](https://github.com/gusbrs/zref-clever/compare/v0.4.1...v0.4.2) (2023-08-14)
 
 ### Changed
 - Thanks to better support for `zref` in `memoir`, the corresponding
