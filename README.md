@@ -14,4 +14,4 @@ The released version of this package is available [from
 CTAN](https://ctan.org/pkg/zref-clever).
 
 For more details, check the
-[Documentation](https://mirrors.ctan.org/macros/latex/contrib/zref-clever/zref-clever.pdf).
+[Documentation](https://mirrors.ctan.org/macros/latex/contrib/zref-clever/zref-clever-doc.pdf).
