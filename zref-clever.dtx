@@ -7818,38 +7818,24 @@
 % \subsection{\opt{memoir}}
 %
 % The \cls{memoir} document class has quite a number of cross-referencing
-% related features, mostly dealing with captions, subfloats, and notes.  Some
-% of them are implemented in ways which make difficult the use of \pkg{zref},
-% particularly \cs{zlabel}, short of redefining the whole stuff ourselves.
-% Fortunately, however, the kernel's new \texttt{label} hook, and the
-% \opt{labelhook} option, make things somewhat easier.
+% related features, mostly dealing with captions, subfloats, and notes.  It
+% used to be the case that a good number of them where implemented in ways
+% which make difficult the use of \pkg{zref}, particularly \cs{zlabel}, short
+% of redefining the whole stuff ourselves.  Problematic cases included: i)
+% side captions; ii) bilingual captions; iii) subcaption references; and iv)
+% footnotes, verbfootnotes, sidefootnotes, and pagenotes.
 %
-% \begin{enumerate}
-% \item The \cs{subcaptionref} command, which makes a reference to the
-%   subcaption without the number of the main caption (e.g. ``(b)'', instead
-%   of ``2.3(b)''), for labels set inside the \meta{subtitle} argument of the
-%   subcaptioning commands, namely: \cs{subcaption}, \cs{contsubcaption},
-%   \cs{subbottom}, \cs{contsubbottom}, \cs{subtop}.  This functionality is
-%   implemented by \cls{memoir} by setting a \emph{second label} with prefix
-%   \texttt{sub@\meta{label}}, and storing there just that part of interest.
-%   With \pkg{zref} this part is easier, since we can just add an extra
-%   property and retrieve it later on.  The thing is that it is hard to find a
-%   place to hook into to add the property to the \texttt{main} list, since
-%   \cls{memoir} does not really consider the possibility of some other
-%   command setting labels.  \cs{@memsubcaption} is the best place to hook I
-%   could find.  It is used by subcaptioning commands, and only those.  And
-%   there is no hope for an environment hook in this case anyway.
-% \item \cls{memoir}'s \cs{footnote}, \cs{verbfootnote}, \cs{sidefootnote} and
-%   \cs{pagenote}, just as the regular \cs{footnote} until recently in the
-%   kernel, do not set \cs{@currentcounter} alongside \cs{@currentlabel},
-%   proper referencing to them requires setting the type for it.
-% \item Note that \cls{memoir}'s appendix features ``emulates'' the
-%   \pkg{appendix} package, hence the corresponding compatibility module is
-%   loaded for \cls{memoir} even if that package is not itself loaded.  The
-%   same is true for the \cs{appendix} command module, since it is also
-%   defined.
-% \end{enumerate}
+% However, since then, the situation has much improved, given two main
+% upstream changes: i) the kernel's new \texttt{label} hook with argument,
+% introduced in the release of 2023-06-01 (thanks to \contributor{Ulrike
+% Fischer} and \contributor{Phelype Oleinik}) and ii) better support for
+% \pkg{zref} and \pkg{zref-clever} from the \cls{memoir} class itself, with
+% release of \texttt{2023/08/08 v3.8} (thanks to \contributor{Lars Madsen}).
 %
+% Also, note that \cls{memoir}'s appendix features ``emulates'' the
+% \pkg{appendix} package, hence the corresponding compatibility module is
+% loaded for \cls{memoir} even if that package is not itself loaded.  The same
+% is true for the \cs{appendix} command module, since it is also defined.
 %
 %    \begin{macrocode}
 \@@_compat_module:nn { memoir }
@@ -7878,27 +7864,15 @@
               } ,
           }
 %    \end{macrocode}
-% Support for \texttt{subcaption} reference.
+% Support for \texttt{subcaption} references.
 %    \begin{macrocode}
         \zref@newprop { subcaption }
           { \cs_if_exist_use:c { @@@@thesub \@captype } }
-        \AddToHook{ cmd / @memsubcaption / before }
+        \AddToHook{ memoir/subcaption/aftercounter }
           { \zref@localaddprop \ZREF@mainlist { subcaption } }
 %    \end{macrocode}
-% Support for \cs{footnote}, \cs{verbfootnote}, \cs{sidefootnote}, and
-% \cs{pagenote}.
+% Support for \cs{sidefootnote} and \cs{pagenote}.
 %    \begin{macrocode}
-        \tl_new:N \l_@@_memoir_footnote_type_tl
-        \tl_set:Nn \l_@@_memoir_footnote_type_tl { footnote }
-        \AddToHook { env / minipage / begin }
-          { \tl_set:Nn \l_@@_memoir_footnote_type_tl { mpfootnote } }
-        \AddToHook { cmd / @makefntext / before }
-          {
-            \@@_zcsetup:x
-              { currentcounter = \l_@@_memoir_footnote_type_tl }
-          }
-        \AddToHook { cmd / @makesidefntext / before }
-          { \@@_zcsetup:n { currentcounter = sidefootnote } }
         \@@_zcsetup:n
           {
             countertype =
@@ -7907,8 +7881,6 @@
                 pagenote = endnote ,
               } ,
           }
-        \AddToHook { file / \jobname.ent / before }
-          { \@@_zcsetup:x { currentcounter = pagenote } }
         \msg_info:nnn { zref-clever } { compat-class } { memoir }
       }
   }
