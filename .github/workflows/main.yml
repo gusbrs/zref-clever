@@ -27,7 +27,7 @@ jobs:
         run: tlmgr update --self --all
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Run tests
         run: l3build check -q --show-log-on-error
@@ -51,7 +51,7 @@ jobs:
         run: tlmgr update --self --all
 
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Compile documentation
         run: l3build doc -q
