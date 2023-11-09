@@ -1,30 +1,131 @@
 # Based on:
-# https://github.com/pgf-tikz/pgf/blob/master/.github/workflows/check.yml
-# See also:
-# https://github.com/gusbrs/zref-clever/pull/15#issue-1590334483
-# https://gitlab.com/islandoftex/images/texlive
-# https://tex.stackexchange.com/a/459486
-
-# For an alternative to the IoT docker images:
 # https://github.com/josephwright/siunitx/blob/main/.github/workflows/main.yaml
 # https://github.com/zauguin/install-texlive
 # https://github.com/moewew/biblatex-ext/blob/dev/.github/workflows/l3build.yml
+# https://github.com/latex3/latex2e/blob/develop/.github/workflows/main.yaml
 
-name: CI l3build test suite
+name: CI l3build tests
 
 on: [push, pull_request]
 
-jobs:
-  tests:
-    name: Regression tests
+env:
+  ZC_PACKAGE_LIST: |
+    # The test framework
+    l3build
+    # Build formats
+    latex
+    latex-bin
+    luatex
+    luatexbase
+    xetex
+    # dev kernel
+    latex-bin-dev
+    latex-base-dev
+    latex-amsmath-dev
+    latex-graphics-dev
+    latex-tools-dev
+    latex-firstaid-dev
+    xelatex-dev
+    # Fonts
+    metafont
+    mfware
+    ec
+    amsfonts
+    mathpazo
+    psnfss
+    tex-gyre
+    inconsolata
+    # Dependencies
+    alphalph
+    amsmath
+    appendix
+    babel-english
+    babel-french
+    babel-german
+    babel-latin
+    babel-portuges
+    babel-spanish
+    babel-dutch
+    babel-italian
+    beamer
+    bookmark
+    booktabs
+    breqn
+    caption
+    carlisle
+    colortbl
+    csquotes
+    dvips
+    enumitem
+    environ
+    epstopdf-pkg
+    etexcmds
+    fancyvrb
+    float
+    floatrow
+    fmtcount
+    graphics
+    hologo
+    hypdoc
+    hyperref
+    hyphen-french
+    hyphen-german
+    hyphen-latin
+    hyphen-italian
+    iftex
+    infwarerr
+    intcalc
+    koma-script
+    kvdefinekeys
+    kvoptions
+    kvsetkeys
+    listings
+    ltxcmds
+    makeindex
+    mathtools
+    memoir
+    microtype
+    mptopdf
+    newfloat
+    oberdiek
+    pdftexcmds
+    polyglossia
+    subfig
+    tcolorbox
+    tools
+    trivfloat
+    underscore
+    upquote
+    xpatch
+    zref
+    zref-check
+    zref-vario
 
+jobs:
+  texlive-cache:
+    name: Install TeX Live
     runs-on: ubuntu-latest
-    container:
-      image: registry.gitlab.com/islandoftex/images/texlive:latest
+    outputs:
+      cache_key: ${{ steps.texlive.outputs.cache_key }}
 
     steps:
-      - name: Update TeX Live
-        run: tlmgr update --self --all
+      - name: Install TeX Live
+        uses: zauguin/install-texlive@v3
+        with:
+          packages: ${{ env.ZC_PACKAGE_LIST }}
+
+  check:
+    name: Regression tests
+    runs-on: ubuntu-latest
+    needs: texlive-cache
+
+    steps:
+      - name: Restore TeX Live from cache
+        uses: actions/cache/restore@v3
+        with:
+          path: ~/texlive
+          key: ${{ needs.texlive-cache.outputs.cache_key }}
+          fail-on-cache-miss: true
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -41,17 +142,26 @@ jobs:
 
   doc:
     name: Documentation
-
     runs-on: ubuntu-latest
-    container:
-      image: registry.gitlab.com/islandoftex/images/texlive:latest
+    needs: texlive-cache
 
     steps:
-      - name: Update TeX Live
-        run: tlmgr update --self --all
+      - name: Restore TeX Live from cache
+        uses: actions/cache/restore@v3
+        with:
+          path: ~/texlive
+          key: ${{ needs.texlive-cache.outputs.cache_key }}
+          fail-on-cache-miss: true
 
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Compile documentation
-        run: l3build doc -q
+        run: l3build doc -q --halt-on-error
+
+      - name: Archive documentation
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: documentation
+          path: build/doc/*.pdf
