@@ -537,6 +537,27 @@
 % \end{macro}
 %
 %
+% \begin{macro}
+%   {
+%      \l_@@_tmpa_tl ,
+%      \l_@@_tmpb_tl ,
+%      \l_@@_tmpa_seq ,
+%      \g_@@_tmpa_seq ,
+%      \l_@@_tmpa_bool ,
+%      \l_@@_tmpa_int ,
+%   }
+%   Temporary scratch variables.
+%    \begin{macrocode}
+\tl_new:N \l_@@_tmpa_tl
+\tl_new:N \l_@@_tmpb_tl
+\seq_new:N \l_@@_tmpa_seq
+\seq_new:N \g_@@_tmpa_seq
+\bool_new:N \l_@@_tmpa_bool
+\int_new:N \l_@@_tmpa_int
+%    \end{macrocode}
+% \end{macro}
+%
+%
 % \subsection{Messages}
 %
 %
@@ -2000,7 +2021,7 @@
                 .lang
               }
               { \ExplSyntaxOn }
-              \l_tmpa_tl
+              \l_@@_tmpa_tl
               {
                 \tl_set:Nn \l_@@_setup_language_tl {#1}
                 \tl_clear:N \l_@@_setup_type_tl
@@ -2024,7 +2045,7 @@
                   }
                   \l_@@_lang_gender_seq
                   { \seq_clear:N \l_@@_lang_gender_seq }
-                \keys_set:nV { zref-clever/langfile } \l_tmpa_tl
+                \keys_set:nV { zref-clever/langfile } \l_@@_tmpa_tl
                 \seq_gput_right:Nx \g_@@_loaded_langfiles_seq
                   { \tl_use:c { \@@_language_varname:n {#1} } }
                 \msg_info:nnx { zref-clever } { langfile-loaded }
@@ -2102,11 +2123,11 @@
                   { option-only-type-specific } { gender }
               }
               {
-                \seq_clear:N \l_tmpa_seq
+                \seq_clear:N \l_@@_tmpa_seq
                 \clist_map_inline:nn {#1}
                   {
                     \seq_if_in:NnTF \l_@@_lang_gender_seq {##1}
-                      { \seq_put_right:Nn \l_tmpa_seq {##1} }
+                      { \seq_put_right:Nn \l_@@_tmpa_seq {##1} }
                       {
                         \msg_info:nnxx { zref-clever }
                           { gender-not-declared }
@@ -2138,7 +2159,7 @@
                           { gender }
                           { seq }
                       }
-                      \l_tmpa_seq
+                      \l_@@_tmpa_seq
                   }
               }
           }
@@ -2461,14 +2482,14 @@
                       { \l_@@_setup_language_tl } {#1} { seq }
                   }
                   {
-                    \seq_gclear:N \g_tmpa_seq
+                    \seq_gclear:N \g_@@_tmpa_seq
                     \@@_opt_seq_gset_clist_split:Nn
-                      \g_tmpa_seq {##1}
+                      \g_@@_tmpa_seq {##1}
                     \bool_lazy_or:nnTF
                       { \tl_if_empty_p:n {##1} }
                       {
                         \int_compare_p:nNn
-                          { \seq_count:N \g_tmpa_seq } = { 4 }
+                          { \seq_count:N \g_@@_tmpa_seq } = { 4 }
                       }
                       {
                         \@@_opt_seq_gset_eq:cN
@@ -2477,12 +2498,12 @@
                               { \l_@@_setup_language_tl }
                               {#1} { seq }
                           }
-                          \g_tmpa_seq
+                          \g_@@_tmpa_seq
                       }
                       {
                         \msg_info:nnxx { zref-clever }
                           { refbounds-must-be-four }
-                          {#1} { \seq_count:N \g_tmpa_seq }
+                          {#1} { \seq_count:N \g_@@_tmpa_seq }
                       }
                   }
               }
@@ -2494,14 +2515,14 @@
                       { \l_@@_setup_type_tl } {#1} { seq }
                   }
                   {
-                    \seq_gclear:N \g_tmpa_seq
+                    \seq_gclear:N \g_@@_tmpa_seq
                     \@@_opt_seq_gset_clist_split:Nn
-                      \g_tmpa_seq {##1}
+                      \g_@@_tmpa_seq {##1}
                     \bool_lazy_or:nnTF
                       { \tl_if_empty_p:n {##1} }
                       {
                         \int_compare_p:nNn
-                          { \seq_count:N \g_tmpa_seq } = { 4 }
+                          { \seq_count:N \g_@@_tmpa_seq } = { 4 }
                       }
                       {
                         \@@_opt_seq_gset_eq:cN
@@ -2511,12 +2532,12 @@
                               { \l_@@_setup_type_tl }
                               {#1} { seq }
                           }
-                          \g_tmpa_seq
+                          \g_@@_tmpa_seq
                       }
                       {
                         \msg_info:nnxx { zref-clever }
                           { refbounds-must-be-four }
-                          {#1} { \seq_count:N \g_tmpa_seq }
+                          {#1} { \seq_count:N \g_@@_tmpa_seq }
                       }
                   }
               }
@@ -2999,7 +3020,7 @@
             \bool_if:NTF \l_@@_typeset_range_bool
               {
                 \group_begin:
-                \bool_set_false:N \l_tmpa_bool
+                \bool_set_false:N \l_@@_tmpa_bool
                 \exp_args:Nxx \tl_if_eq:nnT
                   {
                     \@@_extract_unexp:nnn
@@ -3021,7 +3042,7 @@
                             \@@_extract_unexp:nnn
                               {#2} { zc@pgfmt } { }
                           }
-                          { \bool_set_true:N \l_tmpa_bool }
+                          { \bool_set_true:N \l_@@_tmpa_bool }
                       }
                       {
                         \exp_args:Nxx \tl_if_eq:nnT
@@ -3043,27 +3064,27 @@
                                 \@@_extract_unexp:nnn
                                   {#2} { zc@enclval } { }
                               }
-                              { \bool_set_true:N \l_tmpa_bool }
+                              { \bool_set_true:N \l_@@_tmpa_bool }
                           }
                       }
                   }
-                \bool_if:NTF \l_tmpa_bool
+                \bool_if:NTF \l_@@_tmpa_bool
                   {
-                    \@@_extract_default:Nnvn \l_tmpb_tl
+                    \@@_extract_default:Nnvn \l_@@_tmpb_tl
                       {#2} { l_@@_endrangeprop_tl } { }
                   }
                   {
                     \zref@ifrefcontainsprop
                       {#2} { \l_@@_ref_property_tl }
                       {
-                        \@@_extract_default:Nnvn \l_tmpb_tl
+                        \@@_extract_default:Nnvn \l_@@_tmpb_tl
                           {#2} { l_@@_ref_property_tl } { }
                       }
-                      { \tl_set:Nn \l_tmpb_tl { zc@missingproperty } }
+                      { \tl_set:Nn \l_@@_tmpb_tl { zc@missingproperty } }
                   }
                 \exp_args:NNNV
                   \group_end:
-                  \tl_set:Nn #3 \l_tmpb_tl
+                  \tl_set:Nn #3 \l_@@_tmpb_tl
               }
               {
                 \@@_extract_default:Nnvn #3
@@ -3096,32 +3117,35 @@
       {
         \group_begin:
         \UseHook { zref-clever/endrange-setup }
-        \tl_set:Nx \l_tmpa_tl
+        \tl_set:Nx \l_@@_tmpa_tl
           {
             \@@_extract:nnn
               {#1} { \l_@@_ref_property_tl } { }
           }
-        \tl_set:Nx \l_tmpb_tl
+        \tl_set:Nx \l_@@_tmpb_tl
           {
             \@@_extract:nnn
               {#2} { \l_@@_ref_property_tl } { }
           }
-        \bool_set_false:N \l_tmpa_bool
-        \bool_until_do:Nn \l_tmpa_bool
+        \bool_set_false:N \l_@@_tmpa_bool
+        \bool_until_do:Nn \l_@@_tmpa_bool
           {
             \exp_args:Nxx \tl_if_eq:nnTF
-              { \tl_head:V \l_tmpa_tl } { \tl_head:V \l_tmpb_tl }
+              { \tl_head:V \l_@@_tmpa_tl }
+              { \tl_head:V \l_@@_tmpb_tl }
               {
-                \tl_set:Nx \l_tmpa_tl { \tl_tail:V \l_tmpa_tl }
-                \tl_set:Nx \l_tmpb_tl { \tl_tail:V \l_tmpb_tl }
-                \tl_if_empty:NT \l_tmpb_tl
-                  { \bool_set_true:N \l_tmpa_bool }
+                \tl_set:Nx \l_@@_tmpa_tl
+                  { \tl_tail:V \l_@@_tmpa_tl }
+                \tl_set:Nx \l_@@_tmpb_tl
+                  { \tl_tail:V \l_@@_tmpb_tl }
+                \tl_if_empty:NT \l_@@_tmpb_tl
+                  { \bool_set_true:N \l_@@_tmpa_bool }
               }
-              { \bool_set_true:N \l_tmpa_bool }
+              { \bool_set_true:N \l_@@_tmpa_bool }
           }
         \exp_args:NNNV
           \group_end:
-          \tl_set:Nn #3 \l_tmpb_tl
+          \tl_set:Nn #3 \l_@@_tmpb_tl
       }
       { \tl_set:Nn #3 { zc@missingproperty } }
   }
@@ -3153,38 +3177,41 @@
       {
         \group_begin:
         \UseHook { zref-clever/endrange-setup }
-        \tl_set:Nx \l_tmpa_tl
+        \tl_set:Nx \l_@@_tmpa_tl
           {
             \@@_extract:nnn
               {#1} { \l_@@_ref_property_tl } { }
           }
-        \tl_set:Nx \l_tmpb_tl
+        \tl_set:Nx \l_@@_tmpb_tl
           {
             \@@_extract:nnn
               {#2} { \l_@@_ref_property_tl } { }
           }
-        \bool_set_false:N \l_tmpa_bool
-        \@@_is_integer_rgx:VTF \l_tmpa_tl
+        \bool_set_false:N \l_@@_tmpa_bool
+        \@@_is_integer_rgx:VTF \l_@@_tmpa_tl
           {
-            \@@_is_integer_rgx:VF \l_tmpb_tl
-              { \bool_set_true:N \l_tmpa_bool }
+            \@@_is_integer_rgx:VF \l_@@_tmpb_tl
+              { \bool_set_true:N \l_@@_tmpa_bool }
           }
-          { \bool_set_true:N \l_tmpa_bool }
-        \bool_until_do:Nn \l_tmpa_bool
+          { \bool_set_true:N \l_@@_tmpa_bool }
+        \bool_until_do:Nn \l_@@_tmpa_bool
           {
             \exp_args:Nxx \tl_if_eq:nnTF
-              { \tl_head:V \l_tmpa_tl } { \tl_head:V \l_tmpb_tl }
+              { \tl_head:V \l_@@_tmpa_tl }
+              { \tl_head:V \l_@@_tmpb_tl }
               {
-                \tl_set:Nx \l_tmpa_tl { \tl_tail:V \l_tmpa_tl }
-                \tl_set:Nx \l_tmpb_tl { \tl_tail:V \l_tmpb_tl }
-                \tl_if_empty:NT \l_tmpb_tl
-                  { \bool_set_true:N \l_tmpa_bool }
+                \tl_set:Nx \l_@@_tmpa_tl
+                  { \tl_tail:V \l_@@_tmpa_tl }
+                \tl_set:Nx \l_@@_tmpb_tl
+                  { \tl_tail:V \l_@@_tmpb_tl }
+                \tl_if_empty:NT \l_@@_tmpb_tl
+                  { \bool_set_true:N \l_@@_tmpa_bool }
               }
-              { \bool_set_true:N \l_tmpa_bool }
+              { \bool_set_true:N \l_@@_tmpa_bool }
           }
         \exp_args:NNNV
           \group_end:
-          \tl_set:Nn #3 \l_tmpb_tl
+          \tl_set:Nn #3 \l_@@_tmpb_tl
       }
       { \tl_set:Nn #3 { zc@missingproperty } }
   }
@@ -3199,42 +3226,48 @@
       {
         \group_begin:
         \UseHook { zref-clever/endrange-setup }
-        \tl_set:Nx \l_tmpa_tl
+        \tl_set:Nx \l_@@_tmpa_tl
           {
             \@@_extract:nnn
               {#1} { \l_@@_ref_property_tl } { }
           }
-        \tl_set:Nx \l_tmpb_tl
+        \tl_set:Nx \l_@@_tmpb_tl
           {
             \@@_extract:nnn
               {#2} { \l_@@_ref_property_tl } { }
           }
-        \bool_set_false:N \l_tmpa_bool
-        \@@_is_integer_rgx:VTF \l_tmpa_tl
+        \bool_set_false:N \l_@@_tmpa_bool
+        \@@_is_integer_rgx:VTF \l_@@_tmpa_tl
           {
-            \@@_is_integer_rgx:VF \l_tmpb_tl
-              { \bool_set_true:N \l_tmpa_bool }
+            \@@_is_integer_rgx:VF \l_@@_tmpb_tl
+              { \bool_set_true:N \l_@@_tmpa_bool }
           }
-          { \bool_set_true:N \l_tmpa_bool }
-        \bool_until_do:Nn \l_tmpa_bool
+          { \bool_set_true:N \l_@@_tmpa_bool }
+        \bool_until_do:Nn \l_@@_tmpa_bool
           {
             \exp_args:Nxx \tl_if_eq:nnTF
-              { \tl_head:V \l_tmpa_tl } { \tl_head:V \l_tmpb_tl }
+              { \tl_head:V \l_@@_tmpa_tl }
+              { \tl_head:V \l_@@_tmpb_tl }
               {
                 \bool_lazy_or:nnTF
-                  { \int_compare_p:nNn { \l_tmpb_tl } > { 99 } }
-                  { \int_compare_p:nNn { \tl_head:V \l_tmpb_tl } = { 0 } }
+                  { \int_compare_p:nNn { \l_@@_tmpb_tl } > { 99 } }
                   {
-                    \tl_set:Nx \l_tmpa_tl { \tl_tail:V \l_tmpa_tl }
-                    \tl_set:Nx \l_tmpb_tl { \tl_tail:V \l_tmpb_tl }
+                    \int_compare_p:nNn
+                      { \tl_head:V \l_@@_tmpb_tl } = { 0 }
                   }
-                  { \bool_set_true:N \l_tmpa_bool }
+                  {
+                    \tl_set:Nx \l_@@_tmpa_tl
+                      { \tl_tail:V \l_@@_tmpa_tl }
+                    \tl_set:Nx \l_@@_tmpb_tl
+                      { \tl_tail:V \l_@@_tmpb_tl }
+                  }
+                  { \bool_set_true:N \l_@@_tmpa_bool }
               }
-              { \bool_set_true:N \l_tmpa_bool }
+              { \bool_set_true:N \l_@@_tmpa_bool }
           }
         \exp_args:NNNV
           \group_end:
-          \tl_set:Nn #3 \l_tmpb_tl
+          \tl_set:Nn #3 \l_@@_tmpb_tl
       }
       { \tl_set:Nn #3 { zc@missingproperty } }
   }
@@ -4121,21 +4154,24 @@
                   { \@@_opt_varname_general:nn {#1} { seq } }
               }
               {
-                \seq_clear:N \l_tmpa_seq
+                \seq_clear:N \l_@@_tmpa_seq
                 \@@_opt_seq_set_clist_split:Nn
-                  \l_tmpa_seq {##1}
+                  \l_@@_tmpa_seq {##1}
                 \bool_lazy_or:nnTF
                   { \tl_if_empty_p:n {##1} }
-                  { \int_compare_p:nNn { \seq_count:N \l_tmpa_seq } = { 4 } }
+                  {
+                    \int_compare_p:nNn
+                      { \seq_count:N \l_@@_tmpa_seq } = { 4 }
+                  }
                   {
                     \@@_opt_seq_set_eq:cN
                       { \@@_opt_varname_general:nn {#1} { seq } }
-                      \l_tmpa_seq
+                      \l_@@_tmpa_seq
                   }
                   {
                     \msg_warning:nnxx { zref-clever }
                       { refbounds-must-be-four }
-                      {#1} { \seq_count:N \l_tmpa_seq }
+                      {#1} { \seq_count:N \l_@@_tmpa_seq }
                   }
               }
           } ,
@@ -4459,24 +4495,27 @@
                   }
               }
               {
-                \seq_clear:N \l_tmpa_seq
+                \seq_clear:N \l_@@_tmpa_seq
                 \@@_opt_seq_set_clist_split:Nn
-                  \l_tmpa_seq {##1}
+                  \l_@@_tmpa_seq {##1}
                 \bool_lazy_or:nnTF
                   { \tl_if_empty_p:n {##1} }
-                  { \int_compare_p:nNn { \seq_count:N \l_tmpa_seq } = { 4 } }
+                  {
+                    \int_compare_p:nNn
+                      { \seq_count:N \l_@@_tmpa_seq } = { 4 }
+                  }
                   {
                     \@@_opt_seq_set_eq:cN
                       {
                         \@@_opt_varname_type:enn
                           { \l_@@_setup_type_tl } {#1} { seq }
                       }
-                      \l_tmpa_seq
+                      \l_@@_tmpa_seq
                   }
                   {
                     \msg_warning:nnxx { zref-clever }
                       { refbounds-must-be-four }
-                      {#1} { \seq_count:N \l_tmpa_seq }
+                      {#1} { \seq_count:N \l_@@_tmpa_seq }
                   }
               }
           } ,
@@ -4627,11 +4666,11 @@
                   { option-only-type-specific } { gender }
               }
               {
-                \seq_clear:N \l_tmpa_seq
+                \seq_clear:N \l_@@_tmpa_seq
                 \clist_map_inline:nn {#1}
                   {
                     \seq_if_in:NnTF \l_@@_lang_gender_seq {##1}
-                      { \seq_put_right:Nn \l_tmpa_seq {##1} }
+                      { \seq_put_right:Nn \l_@@_tmpa_seq {##1} }
                       {
                         \msg_warning:nnxx { zref-clever }
                           { gender-not-declared }
@@ -4646,7 +4685,7 @@
                       { gender }
                       { seq }
                   }
-                  \l_tmpa_seq
+                  \l_@@_tmpa_seq
               }
           }
       } ,
@@ -4988,14 +5027,14 @@
           {
             \tl_if_empty:NTF \l_@@_setup_type_tl
               {
-                \seq_gclear:N \g_tmpa_seq
+                \seq_gclear:N \g_@@_tmpa_seq
                 \@@_opt_seq_gset_clist_split:Nn
-                  \g_tmpa_seq {##1}
+                  \g_@@_tmpa_seq {##1}
                 \bool_lazy_or:nnTF
                   { \tl_if_empty_p:n {##1} }
                   {
                     \int_compare_p:nNn
-                      { \seq_count:N \g_tmpa_seq } = { 4 }
+                      { \seq_count:N \g_@@_tmpa_seq } = { 4 }
                   }
                   {
                     \@@_opt_seq_gset_eq:cN
@@ -5004,23 +5043,23 @@
                           { \l_@@_setup_language_tl }
                           {#1} { seq }
                       }
-                      \g_tmpa_seq
+                      \g_@@_tmpa_seq
                   }
                   {
                     \msg_warning:nnxx { zref-clever }
                       { refbounds-must-be-four }
-                      {#1} { \seq_count:N \g_tmpa_seq }
+                      {#1} { \seq_count:N \g_@@_tmpa_seq }
                   }
               }
               {
-                \seq_gclear:N \g_tmpa_seq
+                \seq_gclear:N \g_@@_tmpa_seq
                 \@@_opt_seq_gset_clist_split:Nn
-                  \g_tmpa_seq {##1}
+                  \g_@@_tmpa_seq {##1}
                 \bool_lazy_or:nnTF
                   { \tl_if_empty_p:n {##1} }
                   {
                     \int_compare_p:nNn
-                      { \seq_count:N \g_tmpa_seq } = { 4 }
+                      { \seq_count:N \g_@@_tmpa_seq } = { 4 }
                   }
                   {
                     \@@_opt_seq_gset_eq:cN
@@ -5029,12 +5068,12 @@
                           { \l_@@_setup_language_tl }
                           { \l_@@_setup_type_tl } {#1} { seq }
                       }
-                      \g_tmpa_seq
+                      \g_@@_tmpa_seq
                   }
                   {
                     \msg_warning:nnxx { zref-clever }
                       { refbounds-must-be-four }
-                      {#1} { \seq_count:N \g_tmpa_seq }
+                      {#1} { \seq_count:N \g_@@_tmpa_seq }
                   }
               }
           } ,
@@ -5175,8 +5214,8 @@
           \@@_get_rf_opt_tl:nxxN { notesep }
             { \l_@@_label_type_a_tl }
             { \l_@@_ref_language_tl }
-            \l_tmpa_tl
-          \l_tmpa_tl
+            \l_@@_tmpa_tl
+          \l_@@_tmpa_tl
           \l_@@_zcref_note_tl
         }
 %    \end{macrocode}
@@ -8161,26 +8200,26 @@
   {
     \@@_if_package_loaded:nT { enumitem }
       {
-        \int_set:Nn \l_tmpa_int { 5 }
+        \int_set:Nn \l_@@_tmpa_int { 5 }
         \bool_while_do:nn
           {
             \cs_if_exist_p:c
-              { c@ enum \int_to_roman:n { \l_tmpa_int } }
+              { c@ enum \int_to_roman:n { \l_@@_tmpa_int } }
           }
           {
             \@@_zcsetup:x
               {
                 counterresetby =
                   {
-                    enum \int_to_roman:n { \l_tmpa_int } =
-                    enum \int_to_roman:n { \l_tmpa_int - 1 }
+                    enum \int_to_roman:n { \l_@@_tmpa_int } =
+                    enum \int_to_roman:n { \l_@@_tmpa_int - 1 }
                   } ,
                 countertype =
-                  { enum \int_to_roman:n { \l_tmpa_int } = item } ,
+                  { enum \int_to_roman:n { \l_@@_tmpa_int } = item } ,
               }
-            \int_incr:N \l_tmpa_int
+            \int_incr:N \l_@@_tmpa_int
           }
-        \int_compare:nNnT { \l_tmpa_int } > { 5 }
+        \int_compare:nNnT { \l_@@_tmpa_int } > { 5 }
           { \msg_info:nnn { zref-clever } { compat-package } { enumitem } }
       }
   }
