@@ -15,8 +15,8 @@ name: CI l3build test suite
 on: [push, pull_request]
 
 jobs:
-  setup:
-    name: Common setup
+  tests:
+    name: Regression tests
 
     runs-on: ubuntu-latest
     container:
@@ -29,13 +29,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-  tests:
-    name: Regression tests
-
-    runs-on: ubuntu-latest
-    needs: setup
-
-    steps:
       - name: Run tests
         run: l3build check -q --show-log-on-error
 
@@ -50,8 +43,15 @@ jobs:
     name: Documentation
 
     runs-on: ubuntu-latest
-    needs: setup
+    container:
+      image: registry.gitlab.com/islandoftex/images/texlive:latest
 
     steps:
+      - name: Update TeX Live
+        run: tlmgr update --self --all
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Compile documentation
         run: l3build doc -q
