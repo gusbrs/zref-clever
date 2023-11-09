@@ -3,6 +3,9 @@
 # https://github.com/zauguin/install-texlive
 # https://github.com/moewew/biblatex-ext/blob/dev/.github/workflows/l3build.yml
 # https://github.com/latex3/latex2e/blob/develop/.github/workflows/main.yaml
+# See also:
+# https://github.com/gusbrs/zref-clever/issues/20
+# https://github.com/gusbrs/zref-clever/pull/15
 
 name: CI l3build tests
 
