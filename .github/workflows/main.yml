@@ -110,6 +110,7 @@ jobs:
 
     steps:
       - name: Install TeX Live
+        id: texlive
         uses: zauguin/install-texlive@v3
         with:
           packages: ${{ env.ZC_PACKAGE_LIST }}
@@ -126,12 +127,13 @@ jobs:
           path: ~/texlive
           key: ${{ needs.texlive-cache.outputs.cache_key }}
           fail-on-cache-miss: true
+      - run: echo $HOME/texlive/bin/x86_64-linux >> $GITHUB_PATH
 
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Run tests
-        run: l3build check -q --show-log-on-error
+        run: l3build check -q
 
       - name: Archive failed test output
         if: failure()
@@ -152,6 +154,7 @@ jobs:
           path: ~/texlive
           key: ${{ needs.texlive-cache.outputs.cache_key }}
           fail-on-cache-miss: true
+      - run: echo $HOME/texlive/bin/x86_64-linux >> $GITHUB_PATH
 
       - name: Checkout repository
         uses: actions/checkout@v4
