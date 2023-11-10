@@ -2,13 +2,18 @@
 # https://github.com/josephwright/siunitx/blob/main/.github/workflows/main.yaml
 # https://github.com/zauguin/install-texlive
 # https://github.com/moewew/biblatex-ext/blob/dev/.github/workflows/l3build.yml
+# https://github.com/CTeX-org/ctex-kit/blob/master/.github/workflows/test.yml
 # See also:
 # https://github.com/gusbrs/zref-clever/issues/20
 # https://github.com/gusbrs/zref-clever/pull/15
 
 name: CI l3build tests
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 12 * * 5" # Every Friday at 12:00 UTC
 
 env:
   ZC_PACKAGE_LIST: |
