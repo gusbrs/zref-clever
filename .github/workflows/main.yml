@@ -20,14 +20,6 @@ env:
     luatex
     luatexbase
     xetex
-    # dev kernel
-    latex-bin-dev
-    latex-base-dev
-    latex-amsmath-dev
-    latex-graphics-dev
-    latex-tools-dev
-    latex-firstaid-dev
-    xelatex-dev
     # Fonts
     metafont
     mfware
