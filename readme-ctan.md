@@ -2,8 +2,8 @@
 
 **Clever LaTeX cross-references based on zref**
 
-Author: Gustavo Barros
-Maintainer: Gustavo Barros
+Author: gusbrs
+Maintainer: gusbrs
 
 `zref-clever` provides a user interface for making LaTeX cross-references
 which automates some of their typical features, thus easing their input in the
