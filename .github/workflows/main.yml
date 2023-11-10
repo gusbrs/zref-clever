@@ -2,7 +2,6 @@
 # https://github.com/josephwright/siunitx/blob/main/.github/workflows/main.yaml
 # https://github.com/zauguin/install-texlive
 # https://github.com/moewew/biblatex-ext/blob/dev/.github/workflows/l3build.yml
-# https://github.com/latex3/latex2e/blob/develop/.github/workflows/main.yaml
 # See also:
 # https://github.com/gusbrs/zref-clever/issues/20
 # https://github.com/gusbrs/zref-clever/pull/15
@@ -105,32 +104,15 @@ env:
     zref-vario
 
 jobs:
-  texlive-cache:
-    name: Install TeX Live
-    runs-on: ubuntu-latest
-    outputs:
-      cache_key: ${{ steps.texlive.outputs.cache_key }}
-
-    steps:
-      - name: Install TeX Live
-        id: texlive
-        uses: zauguin/install-texlive@v3
-        with:
-          packages: ${{ env.ZC_PACKAGE_LIST }}
-
   check:
     name: Regression tests
     runs-on: ubuntu-latest
-    needs: texlive-cache
 
     steps:
-      - name: Restore TeX Live from cache
-        uses: actions/cache/restore@v3
+      - name: Install TeX Live
+        uses: zauguin/install-texlive@v3
         with:
-          path: ~/texlive
-          key: ${{ needs.texlive-cache.outputs.cache_key }}
-          fail-on-cache-miss: true
-      - run: echo $HOME/texlive/bin/x86_64-linux >> $GITHUB_PATH
+          packages: ${{ env.ZC_PACKAGE_LIST }}
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -148,22 +130,18 @@ jobs:
   doc:
     name: Documentation
     runs-on: ubuntu-latest
-    needs: texlive-cache
 
     steps:
-      - name: Restore TeX Live from cache
-        uses: actions/cache/restore@v3
+      - name: Install TeX Live
+        uses: zauguin/install-texlive@v3
         with:
-          path: ~/texlive
-          key: ${{ needs.texlive-cache.outputs.cache_key }}
-          fail-on-cache-miss: true
-      - run: echo $HOME/texlive/bin/x86_64-linux >> $GITHUB_PATH
+          packages: ${{ env.ZC_PACKAGE_LIST }}
 
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Compile documentation
-        run: l3build doc -q --halt-on-error
+        run: l3build doc -q -H
 
       - name: Archive documentation
         if: success()
