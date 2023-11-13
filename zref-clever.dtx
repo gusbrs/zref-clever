@@ -1654,7 +1654,7 @@
      { \prg_return_false: }
   }
 \prg_generate_conditional_variant:Nnn
-  \@@_language_if_declared:n { x } { T , F , TF }
+  \@@_language_if_declared:n { e } { T , F , TF }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1729,7 +1729,7 @@
         \@@_language_if_declared:nTF {#2}
           {
             \tl_new:c { \@@_language_varname:n {#1} }
-            \tl_gset:cx { \@@_language_varname:n {#1} }
+            \tl_gset:ce { \@@_language_varname:n {#1} }
               { \tl_use:c { \@@_language_varname:n {#2} } }
           }
           { \msg_warning:nnn { zref-clever } { unknown-language-alias } {#2} }
@@ -1809,7 +1809,7 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_process_language_settings:
   {
-    \@@_language_if_declared:xTF
+    \@@_language_if_declared:eTF
       { \l_@@_ref_language_tl }
       {
 %    \end{macrocode}
@@ -1831,7 +1831,7 @@
           {
             \tl_if_empty:NF \l_@@_ref_decl_case_tl
               {
-                \msg_warning:nnxx { zref-clever }
+                \msg_warning:nnee { zref-clever }
                   { language-no-decl-ref }
                   { \l_@@_ref_language_tl }
                   { \l_@@_ref_decl_case_tl }
@@ -1848,7 +1848,7 @@
                 \seq_if_in:NVF \l_@@_lang_declension_seq
                   \l_@@_ref_decl_case_tl
                   {
-                    \msg_warning:nnxx { zref-clever }
+                    \msg_warning:nnee { zref-clever }
                       { unknown-decl-case }
                       { \l_@@_ref_decl_case_tl }
                       { \l_@@_ref_language_tl }
@@ -1873,7 +1873,7 @@
           {
             \tl_if_empty:NF \l_@@_ref_gender_tl
               {
-                \msg_warning:nnxxx { zref-clever }
+                \msg_warning:nneee { zref-clever }
                   { language-no-gender }
                   { \l_@@_ref_language_tl }
                   { g }
@@ -1887,7 +1887,7 @@
                 \seq_if_in:NVF \l_@@_lang_gender_seq
                   \l_@@_ref_gender_tl
                   {
-                    \msg_warning:nnxx { zref-clever }
+                    \msg_warning:nnee { zref-clever }
                       { gender-not-declared }
                       { \l_@@_ref_language_tl }
                       { \l_@@_ref_gender_tl }
@@ -1913,14 +1913,14 @@
 %    \begin{macrocode}
         \tl_if_empty:NF \l_@@_ref_decl_case_tl
           {
-            \msg_warning:nnxx { zref-clever } { unknown-language-decl }
+            \msg_warning:nnee { zref-clever } { unknown-language-decl }
               { \l_@@_ref_decl_case_tl }
               { \l_@@_ref_language_tl }
             \tl_clear:N \l_@@_ref_decl_case_tl
           }
         \tl_if_empty:NF \l_@@_ref_gender_tl
           {
-            \msg_warning:nnxxx { zref-clever }
+            \msg_warning:nneee { zref-clever }
               { language-no-gender }
               { \l_@@_ref_language_tl }
               { g }
@@ -2008,11 +2008,11 @@
     \@bsphack
     \@@_language_if_declared:nT {#1}
       {
-        \seq_if_in:NxF
+        \seq_if_in:NeF
           \g_@@_loaded_langfiles_seq
           { \tl_use:c { \@@_language_varname:n {#1} } }
           {
-            \exp_args:Nx \file_get:nnNTF
+            \exp_args:Ne \file_get:nnNTF
               {
                 zref-clever-
                 \tl_use:c { \@@_language_varname:n {#1} }
@@ -2044,9 +2044,9 @@
                   \l_@@_lang_gender_seq
                   { \seq_clear:N \l_@@_lang_gender_seq }
                 \keys_set:nV { zref-clever/langfile } \l_@@_tmpa_tl
-                \seq_gput_right:Nx \g_@@_loaded_langfiles_seq
+                \seq_gput_right:Ne \g_@@_loaded_langfiles_seq
                   { \tl_use:c { \@@_language_varname:n {#1} } }
-                \msg_info:nnx { zref-clever } { langfile-loaded }
+                \msg_info:nne { zref-clever } { langfile-loaded }
                   { \tl_use:c { \@@_language_varname:n {#1} } }
               }
               {
@@ -2056,7 +2056,7 @@
 % There is no point in trying to load it multiple times, if it was not found
 % the first time, it won't be the next.
 %    \begin{macrocode}
-                \seq_gput_right:Nx \g_@@_loaded_langfiles_seq
+                \seq_gput_right:Ne \g_@@_loaded_langfiles_seq
                   { \tl_use:c { \@@_language_varname:n {#1} } }
               }
           }
@@ -2064,7 +2064,7 @@
     \@esphack
     \group_end:
   }
-\cs_generate_variant:Nn \@@_provide_langfile:n { x }
+\cs_generate_variant:Nn \@@_provide_langfile:n { e }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -2090,14 +2090,14 @@
       {
         \seq_if_empty:NTF \l_@@_lang_declension_seq
           {
-            \msg_info:nnxx { zref-clever } { language-no-decl-setup }
+            \msg_info:nnee { zref-clever } { language-no-decl-setup }
               { \l_@@_setup_language_tl } {#1}
           }
           {
             \seq_if_in:NnTF \l_@@_lang_declension_seq {#1}
               { \tl_set:Nn \l_@@_lang_decl_case_tl {#1} }
               {
-                \msg_info:nnxx { zref-clever } { unknown-decl-case }
+                \msg_info:nnee { zref-clever } { unknown-decl-case }
                   {#1} { \l_@@_setup_language_tl }
                 \seq_get_left:NN \l_@@_lang_declension_seq
                   \l_@@_lang_decl_case_tl
@@ -2111,7 +2111,7 @@
       {
         \seq_if_empty:NTF \l_@@_lang_gender_seq
           {
-            \msg_info:nnxxx { zref-clever } { language-no-gender }
+            \msg_info:nneee { zref-clever } { language-no-gender }
               { \l_@@_setup_language_tl } { gender } {#1}
           }
           {
@@ -2127,7 +2127,7 @@
                     \seq_if_in:NnTF \l_@@_lang_gender_seq {##1}
                       { \seq_put_right:Nn \l_@@_tmpa_seq {##1} }
                       {
-                        \msg_info:nnxx { zref-clever }
+                        \msg_info:nnee { zref-clever }
                           { gender-not-declared }
                           { \l_@@_setup_language_tl } {##1}
                       }
@@ -2499,7 +2499,7 @@
                           \g_@@_tmpa_seq
                       }
                       {
-                        \msg_info:nnxx { zref-clever }
+                        \msg_info:nnee { zref-clever }
                           { refbounds-must-be-four }
                           {#1} { \seq_count:N \g_@@_tmpa_seq }
                       }
@@ -2533,7 +2533,7 @@
                           \g_@@_tmpa_seq
                       }
                       {
-                        \msg_info:nnxx { zref-clever }
+                        \msg_info:nnee { zref-clever }
                           { refbounds-must-be-four }
                           {#1} { \seq_count:N \g_@@_tmpa_seq }
                       }
@@ -3019,7 +3019,7 @@
               {
                 \group_begin:
                 \bool_set_false:N \l_@@_tmpa_bool
-                \exp_args:Nxx \tl_if_eq:nnT
+                \exp_args:Nee \tl_if_eq:nnT
                   {
                     \@@_extract_unexp:nnn
                       {#1} { externaldocument } { }
@@ -3031,7 +3031,7 @@
                   {
                     \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
                       {
-                        \exp_args:Nxx \tl_if_eq:nnT
+                        \exp_args:Nee \tl_if_eq:nnT
                           {
                             \@@_extract_unexp:nnn
                               {#1} { zc@pgfmt } { }
@@ -3043,7 +3043,7 @@
                           { \bool_set_true:N \l_@@_tmpa_bool }
                       }
                       {
-                        \exp_args:Nxx \tl_if_eq:nnT
+                        \exp_args:Nee \tl_if_eq:nnT
                           {
                             \@@_extract_unexp:nnn
                               {#1} { zc@counter } { }
@@ -3053,7 +3053,7 @@
                               {#2} { zc@counter } { }
                           }
                           {
-                            \exp_args:Nxx \tl_if_eq:nnT
+                            \exp_args:Nee \tl_if_eq:nnT
                               {
                                 \@@_extract_unexp:nnn
                                   {#1} { zc@enclval } { }
@@ -3115,12 +3115,12 @@
       {
         \group_begin:
         \UseHook { zref-clever/endrange-setup }
-        \tl_set:Nx \l_@@_tmpa_tl
+        \tl_set:Ne \l_@@_tmpa_tl
           {
             \@@_extract:nnn
               {#1} { \l_@@_ref_property_tl } { }
           }
-        \tl_set:Nx \l_@@_tmpb_tl
+        \tl_set:Ne \l_@@_tmpb_tl
           {
             \@@_extract:nnn
               {#2} { \l_@@_ref_property_tl } { }
@@ -3128,13 +3128,13 @@
         \bool_set_false:N \l_@@_tmpa_bool
         \bool_until_do:Nn \l_@@_tmpa_bool
           {
-            \exp_args:Nxx \tl_if_eq:nnTF
+            \exp_args:Nee \tl_if_eq:nnTF
               { \tl_head:V \l_@@_tmpa_tl }
               { \tl_head:V \l_@@_tmpb_tl }
               {
-                \tl_set:Nx \l_@@_tmpa_tl
+                \tl_set:Ne \l_@@_tmpa_tl
                   { \tl_tail:V \l_@@_tmpa_tl }
-                \tl_set:Nx \l_@@_tmpb_tl
+                \tl_set:Ne \l_@@_tmpb_tl
                   { \tl_tail:V \l_@@_tmpb_tl }
                 \tl_if_empty:NT \l_@@_tmpb_tl
                   { \bool_set_true:N \l_@@_tmpa_bool }
@@ -3175,12 +3175,12 @@
       {
         \group_begin:
         \UseHook { zref-clever/endrange-setup }
-        \tl_set:Nx \l_@@_tmpa_tl
+        \tl_set:Ne \l_@@_tmpa_tl
           {
             \@@_extract:nnn
               {#1} { \l_@@_ref_property_tl } { }
           }
-        \tl_set:Nx \l_@@_tmpb_tl
+        \tl_set:Ne \l_@@_tmpb_tl
           {
             \@@_extract:nnn
               {#2} { \l_@@_ref_property_tl } { }
@@ -3194,13 +3194,13 @@
           { \bool_set_true:N \l_@@_tmpa_bool }
         \bool_until_do:Nn \l_@@_tmpa_bool
           {
-            \exp_args:Nxx \tl_if_eq:nnTF
+            \exp_args:Nee \tl_if_eq:nnTF
               { \tl_head:V \l_@@_tmpa_tl }
               { \tl_head:V \l_@@_tmpb_tl }
               {
-                \tl_set:Nx \l_@@_tmpa_tl
+                \tl_set:Ne \l_@@_tmpa_tl
                   { \tl_tail:V \l_@@_tmpa_tl }
-                \tl_set:Nx \l_@@_tmpb_tl
+                \tl_set:Ne \l_@@_tmpb_tl
                   { \tl_tail:V \l_@@_tmpb_tl }
                 \tl_if_empty:NT \l_@@_tmpb_tl
                   { \bool_set_true:N \l_@@_tmpa_bool }
@@ -3224,12 +3224,12 @@
       {
         \group_begin:
         \UseHook { zref-clever/endrange-setup }
-        \tl_set:Nx \l_@@_tmpa_tl
+        \tl_set:Ne \l_@@_tmpa_tl
           {
             \@@_extract:nnn
               {#1} { \l_@@_ref_property_tl } { }
           }
-        \tl_set:Nx \l_@@_tmpb_tl
+        \tl_set:Ne \l_@@_tmpb_tl
           {
             \@@_extract:nnn
               {#2} { \l_@@_ref_property_tl } { }
@@ -3243,7 +3243,7 @@
           { \bool_set_true:N \l_@@_tmpa_bool }
         \bool_until_do:Nn \l_@@_tmpa_bool
           {
-            \exp_args:Nxx \tl_if_eq:nnTF
+            \exp_args:Nee \tl_if_eq:nnTF
               { \tl_head:V \l_@@_tmpa_tl }
               { \tl_head:V \l_@@_tmpb_tl }
               {
@@ -3254,9 +3254,9 @@
                       { \tl_head:V \l_@@_tmpb_tl } = { 0 }
                   }
                   {
-                    \tl_set:Nx \l_@@_tmpa_tl
+                    \tl_set:Ne \l_@@_tmpa_tl
                       { \tl_tail:V \l_@@_tmpa_tl }
-                    \tl_set:Nx \l_@@_tmpb_tl
+                    \tl_set:Ne \l_@@_tmpb_tl
                       { \tl_tail:V \l_@@_tmpb_tl }
                   }
                   { \bool_set_true:N \l_@@_tmpa_bool }
@@ -3516,7 +3516,7 @@
                       { unknown-language-opt } {#1}
                   }
               }
-            \@@_provide_langfile:x
+            \@@_provide_langfile:e
               { \l_@@_ref_language_tl }
           }
       } ,
@@ -3705,7 +3705,7 @@
     titleref .code:n =
       {
         % NOTE Option deprecated in 2022-04-22 for 0.3.0.
-        \msg_warning:nnxx { zref-clever }{ option-deprecated } { titleref }
+        \msg_warning:nnee { zref-clever }{ option-deprecated } { titleref }
           { \iow_char:N\\usepackage\iow_char:N\{zref-titleref\iow_char:N\} }
       } ,
   }
@@ -3720,7 +3720,7 @@
     vario .code:n =
       {
         % NOTE Option deprecated in 2022-04-22 for 0.3.0.
-        \msg_warning:nnxx { zref-clever }{ option-deprecated } { vario }
+        \msg_warning:nnee { zref-clever }{ option-deprecated } { vario }
           { \iow_char:N\\usepackage\iow_char:N\{zref-vario\iow_char:N\} }
       } ,
   }
@@ -4167,7 +4167,7 @@
                       \l_@@_tmpa_seq
                   }
                   {
-                    \msg_warning:nnxx { zref-clever }
+                    \msg_warning:nnee { zref-clever }
                       { refbounds-must-be-four }
                       {#1} { \seq_count:N \l_@@_tmpa_seq }
                   }
@@ -4263,7 +4263,7 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_zcsetup:n #1
   { \keys_set:nn { zref-clever/zcsetup } {#1} }
-\cs_generate_variant:Nn \@@_zcsetup:n { x }
+\cs_generate_variant:Nn \@@_zcsetup:n { e }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -4511,7 +4511,7 @@
                       \l_@@_tmpa_seq
                   }
                   {
-                    \msg_warning:nnxx { zref-clever }
+                    \msg_warning:nnee { zref-clever }
                       { refbounds-must-be-four }
                       {#1} { \seq_count:N \l_@@_tmpa_seq }
                   }
@@ -4633,14 +4633,14 @@
       {
         \seq_if_empty:NTF \l_@@_lang_declension_seq
           {
-            \msg_warning:nnxx { zref-clever } { language-no-decl-setup }
+            \msg_warning:nnee { zref-clever } { language-no-decl-setup }
               { \l_@@_setup_language_tl } {#1}
           }
           {
             \seq_if_in:NnTF \l_@@_lang_declension_seq {#1}
               { \tl_set:Nn \l_@@_lang_decl_case_tl {#1} }
               {
-                \msg_warning:nnxx { zref-clever } { unknown-decl-case }
+                \msg_warning:nnee { zref-clever } { unknown-decl-case }
                   {#1} { \l_@@_setup_language_tl }
                 \seq_get_left:NN \l_@@_lang_declension_seq
                   \l_@@_lang_decl_case_tl
@@ -4654,7 +4654,7 @@
       {
         \seq_if_empty:NTF \l_@@_lang_gender_seq
           {
-            \msg_warning:nnxxx { zref-clever } { language-no-gender }
+            \msg_warning:nneee { zref-clever } { language-no-gender }
               { \l_@@_setup_language_tl } { gender } {#1}
           }
           {
@@ -4670,7 +4670,7 @@
                     \seq_if_in:NnTF \l_@@_lang_gender_seq {##1}
                       { \seq_put_right:Nn \l_@@_tmpa_seq {##1} }
                       {
-                        \msg_warning:nnxx { zref-clever }
+                        \msg_warning:nnee { zref-clever }
                           { gender-not-declared }
                           { \l_@@_setup_language_tl } {##1}
                       }
@@ -5044,7 +5044,7 @@
                       \g_@@_tmpa_seq
                   }
                   {
-                    \msg_warning:nnxx { zref-clever }
+                    \msg_warning:nnee { zref-clever }
                       { refbounds-must-be-four }
                       {#1} { \seq_count:N \g_@@_tmpa_seq }
                   }
@@ -5069,7 +5069,7 @@
                       \g_@@_tmpa_seq
                   }
                   {
-                    \msg_warning:nnxx { zref-clever }
+                    \msg_warning:nnee { zref-clever }
                       { refbounds-must-be-four }
                       {#1} { \seq_count:N \g_@@_tmpa_seq }
                   }
@@ -5174,10 +5174,10 @@
 % Ensure language file for reference language is loaded, if available.  We
 % cannot rely on \cs{keys_set:nn} for the task, since if the \opt{lang} option
 % is set for \texttt{current}, the actual language may have changed outside
-% our control.  \cs{@@_provide_langfile:x} does nothing if the language file
+% our control.  \cs{@@_provide_langfile:e} does nothing if the language file
 % is already loaded.
 %    \begin{macrocode}
-      \@@_provide_langfile:x { \l_@@_ref_language_tl }
+      \@@_provide_langfile:e { \l_@@_ref_language_tl }
 %    \end{macrocode}
 % Process language settings.
 %    \begin{macrocode}
@@ -5209,7 +5209,7 @@
 %    \begin{macrocode}
       \tl_if_empty:NF \l_@@_zcref_note_tl
         {
-          \@@_get_rf_opt_tl:nxxN { notesep }
+          \@@_get_rf_opt_tl:neeN { notesep }
             { \l_@@_label_type_a_tl }
             { \l_@@_ref_language_tl }
             \l_@@_tmpa_tl
@@ -5570,9 +5570,9 @@
                         =
                       { \tl_head:N \l_@@_label_enclval_b_tl }
                       {
-                        \tl_set:Nx \l_@@_label_enclval_a_tl
+                        \tl_set:Ne \l_@@_label_enclval_a_tl
                           { \tl_tail:N \l_@@_label_enclval_a_tl }
-                        \tl_set:Nx \l_@@_label_enclval_b_tl
+                        \tl_set:Ne \l_@@_label_enclval_b_tl
                           { \tl_tail:N \l_@@_label_enclval_b_tl }
                       }
                       {
@@ -5980,15 +5980,15 @@
     \bool_set_false:N \l_@@_type_first_refbounds_set_bool
 
     % Get type block options (not type-specific).
-    \@@_get_rf_opt_tl:nxxN { tpairsep }
+    \@@_get_rf_opt_tl:neeN { tpairsep }
       { \l_@@_label_type_a_tl }
       { \l_@@_ref_language_tl }
       \l_@@_tpairsep_tl
-    \@@_get_rf_opt_tl:nxxN { tlistsep }
+    \@@_get_rf_opt_tl:neeN { tlistsep }
       { \l_@@_label_type_a_tl }
       { \l_@@_ref_language_tl }
       \l_@@_tlistsep_tl
-    \@@_get_rf_opt_tl:nxxN { tlastsep }
+    \@@_get_rf_opt_tl:neeN { tlastsep }
       { \l_@@_label_type_a_tl }
       { \l_@@_ref_language_tl }
       \l_@@_tlastsep_tl
@@ -6059,7 +6059,7 @@
           {
             \tl_if_eq:NnT \l_@@_label_type_a_tl { zc@missingtype }
               {
-                \msg_warning:nnx { zref-clever } { missing-type }
+                \msg_warning:nne { zref-clever } { missing-type }
                   { \l_@@_label_a_tl }
               }
             \zref@ifrefcontainsprop
@@ -6067,7 +6067,7 @@
               { \l_@@_ref_property_tl }
               { }
               {
-                \msg_warning:nnxx { zref-clever } { missing-property }
+                \msg_warning:nnee { zref-clever } { missing-property }
                   { \l_@@_ref_property_tl }
                   { \l_@@_label_a_tl }
               }
@@ -6077,91 +6077,91 @@
         % options, once per type.
         \int_compare:nNnT { \l_@@_label_count_int } = { 0 }
           {
-            \@@_get_rf_opt_tl:nxxN { namesep }
+            \@@_get_rf_opt_tl:neeN { namesep }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_namesep_tl
-            \@@_get_rf_opt_tl:nxxN { pairsep }
+            \@@_get_rf_opt_tl:neeN { pairsep }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_pairsep_tl
-            \@@_get_rf_opt_tl:nxxN { listsep }
+            \@@_get_rf_opt_tl:neeN { listsep }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_listsep_tl
-            \@@_get_rf_opt_tl:nxxN { lastsep }
+            \@@_get_rf_opt_tl:neeN { lastsep }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_lastsep_tl
-            \@@_get_rf_opt_tl:nxxN { rangesep }
+            \@@_get_rf_opt_tl:neeN { rangesep }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_rangesep_tl
-            \@@_get_rf_opt_tl:nxxN { namefont }
+            \@@_get_rf_opt_tl:neeN { namefont }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_namefont_tl
-            \@@_get_rf_opt_tl:nxxN { reffont }
+            \@@_get_rf_opt_tl:neeN { reffont }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_reffont_tl
-            \@@_get_rf_opt_tl:nxxN { endrangefunc }
+            \@@_get_rf_opt_tl:neeN { endrangefunc }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_endrangefunc_tl
-            \@@_get_rf_opt_tl:nxxN { endrangeprop }
+            \@@_get_rf_opt_tl:neeN { endrangeprop }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_endrangeprop_tl
-            \@@_get_rf_opt_bool:nnxxN { cap } { false }
+            \@@_get_rf_opt_bool:nneeN { cap } { false }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_cap_bool
-            \@@_get_rf_opt_bool:nnxxN { abbrev } { false }
+            \@@_get_rf_opt_bool:nneeN { abbrev } { false }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_abbrev_bool
-            \@@_get_rf_opt_bool:nnxxN { rangetopair } { true }
+            \@@_get_rf_opt_bool:nneeN { rangetopair } { true }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_rangetopair_bool
-            \@@_get_rf_opt_seq:nxxN { refbounds-first }
+            \@@_get_rf_opt_seq:neeN { refbounds-first }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_refbounds_first_seq
-            \@@_get_rf_opt_seq:nxxN { refbounds-first-sg }
+            \@@_get_rf_opt_seq:neeN { refbounds-first-sg }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_refbounds_first_sg_seq
-            \@@_get_rf_opt_seq:nxxN { refbounds-first-pb }
+            \@@_get_rf_opt_seq:neeN { refbounds-first-pb }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_refbounds_first_pb_seq
-            \@@_get_rf_opt_seq:nxxN { refbounds-first-rb }
+            \@@_get_rf_opt_seq:neeN { refbounds-first-rb }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_refbounds_first_rb_seq
-            \@@_get_rf_opt_seq:nxxN { refbounds-mid }
+            \@@_get_rf_opt_seq:neeN { refbounds-mid }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_refbounds_mid_seq
-            \@@_get_rf_opt_seq:nxxN { refbounds-mid-rb }
+            \@@_get_rf_opt_seq:neeN { refbounds-mid-rb }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_refbounds_mid_rb_seq
-            \@@_get_rf_opt_seq:nxxN { refbounds-mid-re }
+            \@@_get_rf_opt_seq:neeN { refbounds-mid-re }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_refbounds_mid_re_seq
-            \@@_get_rf_opt_seq:nxxN { refbounds-last }
+            \@@_get_rf_opt_seq:neeN { refbounds-last }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_refbounds_last_seq
-            \@@_get_rf_opt_seq:nxxN { refbounds-last-pe }
+            \@@_get_rf_opt_seq:neeN { refbounds-last-pe }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_refbounds_last_pe_seq
-            \@@_get_rf_opt_seq:nxxN { refbounds-last-re }
+            \@@_get_rf_opt_seq:neeN { refbounds-last-re }
               { \l_@@_label_type_a_tl }
               { \l_@@_ref_language_tl }
               \l_@@_refbounds_last_re_seq
@@ -6225,7 +6225,7 @@
               \bool_set_true:N \l_@@_type_first_refbounds_set_bool
             }
             {
-              \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+              \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                 {
                   \exp_not:V \l_@@_pairsep_tl
                   \@@_get_ref:VN \l_@@_label_a_tl
@@ -6248,7 +6248,7 @@
             {
               \int_compare:nNnTF { \l_@@_ref_count_int } < { 2 }
                 {
-                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                  \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                     {
                       \exp_not:V \l_@@_pairsep_tl
                       \@@_get_ref:VN \l_@@_label_a_tl
@@ -6256,7 +6256,7 @@
                     }
                 }
                 {
-                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                  \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                     {
                       \exp_not:V \l_@@_lastsep_tl
                       \@@_get_ref:VN \l_@@_label_a_tl
@@ -6274,7 +6274,7 @@
                   % We know `range_beg_is_first_bool' is false, since this is
                   % the second element in the range, but the third or more in
                   % the type list.
-                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                  \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                     {
                       \exp_not:V \l_@@_pairsep_tl
                       \@@_get_ref:VN
@@ -6287,7 +6287,7 @@
                     \l_@@_type_first_refbounds_set_bool
                 }
                 {
-                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                  \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                     {
                       \exp_not:V \l_@@_listsep_tl
                       \@@_get_ref:VN
@@ -6326,7 +6326,7 @@
                       \int_compare:nNnTF
                         { \l_@@_ref_count_int } < { 2 }
                         {
-                          \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                          \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                             {
                               \exp_not:V \l_@@_pairsep_tl
                               \@@_get_ref:VN
@@ -6335,7 +6335,7 @@
                             }
                         }
                         {
-                          \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                          \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                             {
                               \exp_not:V \l_@@_lastsep_tl
                               \@@_get_ref:VN
@@ -6357,7 +6357,7 @@
                         \l_@@_refbounds_first_pb_seq
                       \bool_set_true:N
                         \l_@@_type_first_refbounds_set_bool
-                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                      \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                         {
                           \exp_not:V \l_@@_pairsep_tl
                           \@@_get_ref:VN \l_@@_label_a_tl
@@ -6365,14 +6365,14 @@
                         }
                     }
                     {
-                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                      \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                         {
                           \exp_not:V \l_@@_listsep_tl
                           \@@_get_ref:VN
                             \l_@@_range_beg_label_tl
                             \l_@@_refbounds_mid_seq
                         }
-                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                      \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                         {
                           \exp_not:V \l_@@_lastsep_tl
                           \@@_get_ref:VN \l_@@_label_a_tl
@@ -6396,7 +6396,7 @@
                     \int_compare:nNnTF
                       { \l_@@_ref_count_int } < { 2 }
                       {
-                        \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                        \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                           {
                             \exp_not:V \l_@@_pairsep_tl
                             \@@_get_ref:VN
@@ -6410,7 +6410,7 @@
                           \l_@@_type_first_refbounds_set_bool
                       }
                       {
-                        \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                        \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                           {
                             \exp_not:V \l_@@_lastsep_tl
                             \@@_get_ref:VN
@@ -6427,7 +6427,7 @@
                       \l_@@_range_beg_label_tl
                       \l_@@_label_a_tl
                       \l_@@_range_end_ref_tl
-                    \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                    \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                       {
                         \exp_not:V \l_@@_rangesep_tl
                         \@@_get_ref_endrange:VVN
@@ -6437,7 +6437,7 @@
                       }
                   }
                   {
-                    \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                    \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                       {
                         \exp_not:V \l_@@_rangesep_tl
                         \@@_get_ref:VN \l_@@_label_a_tl
@@ -6459,7 +6459,7 @@
             \zref@ifrefundefined { \l_@@_type_first_label_tl }
               { }
               {
-                \msg_warning:nnx { zref-clever } { single-element-range }
+                \msg_warning:nne { zref-clever } { single-element-range }
                   { \l_@@_type_first_label_type_tl }
               }
           }
@@ -6479,7 +6479,7 @@
             % Test: `zc-typeset01.lvt': "Last of type: option range to pair"
             \bool_if:NTF \l_@@_next_maybe_range_bool
               {
-                \tl_set:Nx \l_@@_typeset_queue_curr_tl
+                \tl_set:Ne \l_@@_typeset_queue_curr_tl
                   {
                     \exp_not:V \l_@@_pairsep_tl
                     \@@_get_ref:VN \l_@@_label_a_tl
@@ -6502,7 +6502,7 @@
                       \l_@@_type_first_label_tl
                       \l_@@_label_a_tl
                       \l_@@_range_end_ref_tl
-                    \tl_set:Nx \l_@@_typeset_queue_curr_tl
+                    \tl_set:Ne \l_@@_typeset_queue_curr_tl
                       {
                         \exp_not:V \l_@@_rangesep_tl
                         \@@_get_ref_endrange:VVN
@@ -6512,7 +6512,7 @@
                       }
                   }
                   {
-                    \tl_set:Nx \l_@@_typeset_queue_curr_tl
+                    \tl_set:Ne \l_@@_typeset_queue_curr_tl
                       {
                         \exp_not:V \l_@@_rangesep_tl
                         \@@_get_ref:VN \l_@@_label_a_tl
@@ -6541,14 +6541,14 @@
     \bool_if:nTF
       { \l_@@_typeset_ref_bool && \l_@@_typeset_name_bool }
       {
-        \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
+        \tl_put_left:Ne \l_@@_typeset_queue_curr_tl
           { \@@_get_ref_first: }
       }
       {
         \bool_if:NTF \l_@@_typeset_ref_bool
           {
             % Test: `zc-typeset01.lvt': "Last of type: option typeset ref"
-            \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
+            \tl_put_left:Ne \l_@@_typeset_queue_curr_tl
               {
                 \@@_get_ref:VN \l_@@_type_first_label_tl
                   \l_@@_type_first_refbounds_seq
@@ -6558,7 +6558,7 @@
             \bool_if:NTF \l_@@_typeset_name_bool
               {
                 % Test: `zc-typeset01.lvt': "Last of type: option typeset name"
-                \tl_set:Nx \l_@@_typeset_queue_curr_tl
+                \tl_set:Ne \l_@@_typeset_queue_curr_tl
                   {
                     \bool_if:NTF \l_@@_name_in_link_bool
                       {
@@ -6591,7 +6591,7 @@
                 % typeset either "ref" or "name".  Still, leave here a
                 % sensible fallback, equal to the behavior of "both".
                 % Test: `zc-typeset01.lvt': "Last of type: option typeset none"
-                \tl_put_left:Nx \l_@@_typeset_queue_curr_tl
+                \tl_put_left:Ne \l_@@_typeset_queue_curr_tl
                   { \@@_get_ref_first: }
               }
           }
@@ -6742,7 +6742,7 @@
                 { 0 }
                 {
                   \int_incr:N \l_@@_ref_count_int
-                  \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                  \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                     {
                       \exp_not:V \l_@@_listsep_tl
                       \@@_get_ref:VN \l_@@_label_a_tl
@@ -6765,7 +6765,7 @@
                     }
                     {
                       \int_incr:N \l_@@_ref_count_int
-                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                      \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                         {
                           \exp_not:V \l_@@_listsep_tl
                           \@@_get_ref:VN
@@ -6777,7 +6777,7 @@
                     { \l_@@_range_same_count_int } = { 1 }
                     {
                       \int_incr:N \l_@@_ref_count_int
-                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                      \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                         {
                           \exp_not:V \l_@@_listsep_tl
                           \@@_get_ref:VN
@@ -6811,7 +6811,7 @@
                         }
                         {
                           \int_incr:N \l_@@_ref_count_int
-                          \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                          \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                             {
                               \exp_not:V \l_@@_listsep_tl
                               \@@_get_ref:VN
@@ -6833,7 +6833,7 @@
                         }
                         {
                           \int_incr:N \l_@@_ref_count_int
-                          \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                          \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                             {
                               \exp_not:V \l_@@_listsep_tl
                               \@@_get_ref:VN
@@ -6842,7 +6842,7 @@
                             }
                         }
                       \int_incr:N \l_@@_ref_count_int
-                      \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                      \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                         {
                           \exp_not:V \l_@@_listsep_tl
                           \@@_get_ref:VN \l_@@_label_a_tl
@@ -6862,7 +6862,7 @@
                       }
                       {
                         \int_incr:N \l_@@_ref_count_int
-                        \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                        \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                           {
                             \exp_not:V \l_@@_listsep_tl
                             \@@_get_ref:VN
@@ -6883,7 +6883,7 @@
                           \l_@@_range_beg_label_tl
                           \l_@@_label_a_tl
                           \l_@@_range_end_ref_tl
-                        \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                        \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                           {
                             \exp_not:V \l_@@_rangesep_tl
                             \@@_get_ref_endrange:VVN
@@ -6893,7 +6893,7 @@
                           }
                       }
                       {
-                        \tl_put_right:Nx \l_@@_typeset_queue_curr_tl
+                        \tl_put_right:Ne \l_@@_typeset_queue_curr_tl
                           {
                             \exp_not:V \l_@@_rangesep_tl
                             \@@_get_ref:VN \l_@@_label_a_tl
@@ -7251,7 +7251,7 @@
                   {
                     \tl_if_empty:NF \l_@@_typeset_queue_curr_tl
                       {
-                        \msg_warning:nnx { zref-clever }
+                        \msg_warning:nne { zref-clever }
                           { nudge-plural-when-sg }
                           { \l_@@_type_first_label_type_tl }
                       }
@@ -7267,7 +7267,7 @@
                         }
                       }
                       {
-                        \msg_warning:nnx { zref-clever }
+                        \msg_warning:nne { zref-clever }
                           { nudge-comptosing }
                           { \l_@@_type_first_label_type_tl }
                       }
@@ -7276,7 +7276,7 @@
                   { \l_@@_nudge_gender_bool }
                   { ! \tl_if_empty_p:N \l_@@_ref_gender_tl }
                   {
-                    \@@_get_rf_opt_seq:nxxN { gender }
+                    \@@_get_rf_opt_seq:neeN { gender }
                       { \l_@@_type_first_label_type_tl }
                       { \l_@@_ref_language_tl }
                       \l_@@_type_name_gender_seq
@@ -7286,14 +7286,14 @@
                       {
                         \seq_if_empty:NTF \l_@@_type_name_gender_seq
                           {
-                            \msg_warning:nnxxx { zref-clever }
+                            \msg_warning:nneee { zref-clever }
                               { nudge-gender-not-declared-for-type }
                               { \l_@@_ref_gender_tl }
                               { \l_@@_type_first_label_type_tl }
                               { \l_@@_ref_language_tl }
                           }
                           {
-                            \msg_warning:nnxxxx { zref-clever }
+                            \msg_warning:nneeee { zref-clever }
                               { nudge-gender-mismatch }
                               { \l_@@_type_first_label_type_tl }
                               { \l_@@_ref_gender_tl }
@@ -7336,7 +7336,7 @@
                       {
                         \tl_clear:N \l_@@_type_name_tl
                         \bool_set_true:N \l_@@_type_name_missing_bool
-                        \msg_warning:nnxx { zref-clever } { missing-name }
+                        \msg_warning:nnee { zref-clever } { missing-name }
                           { \l_@@_name_format_tl }
                           { \l_@@_type_first_label_type_tl }
                       }
@@ -7396,7 +7396,7 @@
                                 \tl_clear:N \l_@@_type_name_tl
                                 \bool_set_true:N
                                   \l_@@_type_name_missing_bool
-                                \msg_warning:nnxx { zref-clever }
+                                \msg_warning:nnee { zref-clever }
                                   { missing-name }
                                   { \l_@@_name_format_tl }
                                   { \l_@@_type_first_label_type_tl }
@@ -7496,13 +7496,13 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_labels_in_sequence:nn #1#2
   {
-    \exp_args:Nxx \tl_if_eq:nnT
+    \exp_args:Nee \tl_if_eq:nnT
       { \@@_extract_unexp:nnn {#1} { externaldocument } { } }
       { \@@_extract_unexp:nnn {#2} { externaldocument } { } }
       {
         \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
           {
-            \exp_args:Nxx \tl_if_eq:nnT
+            \exp_args:Nee \tl_if_eq:nnT
               { \@@_extract_unexp:nnn {#1} { zc@pgfmt } { } }
               { \@@_extract_unexp:nnn {#2} { zc@pgfmt } { } }
               {
@@ -7524,11 +7524,11 @@
               }
           }
           {
-            \exp_args:Nxx \tl_if_eq:nnT
+            \exp_args:Nee \tl_if_eq:nnT
               { \@@_extract_unexp:nnn {#1} { zc@counter } { } }
               { \@@_extract_unexp:nnn {#2} { zc@counter } { } }
               {
-                \exp_args:Nxx \tl_if_eq:nnT
+                \exp_args:Nee \tl_if_eq:nnT
                   { \@@_extract_unexp:nnn {#1} { zc@enclval } { } }
                   { \@@_extract_unexp:nnn {#2} { zc@enclval } { } }
                   {
@@ -7551,7 +7551,7 @@
 % and we should not even consider this is still a range.  If they are equal,
 % though, of course it is a range, and it is the same.
 %    \begin{macrocode}
-                            \exp_args:Nxx \tl_if_eq:nnT
+                            \exp_args:Nee \tl_if_eq:nnT
                               {
                                 \@@_extract_unexp:nvn {#1}
                                   { l_@@_ref_property_tl } { }
@@ -7623,7 +7623,7 @@
           }
       }
   }
-\cs_generate_variant:Nn \@@_get_rf_opt_tl:nnnN { nxxN }
+\cs_generate_variant:Nn \@@_get_rf_opt_tl:nnnN { neeN }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -7666,7 +7666,7 @@
           }
       }
   }
-\cs_generate_variant:Nn \@@_get_rf_opt_seq:nnnN { nxxN }
+\cs_generate_variant:Nn \@@_get_rf_opt_seq:nnnN { neeN }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -7709,7 +7709,7 @@
           }
       }
   }
-\cs_generate_variant:Nn \@@_get_rf_opt_bool:nnnnN { nnxxN }
+\cs_generate_variant:Nn \@@_get_rf_opt_bool:nnnnN { nneeN }
 %    \end{macrocode}
 % \end{macro}
 %
@@ -7956,7 +7956,7 @@
         \bool_new:N \l_@@_amsmath_subequations_bool
         \AddToHook { env / subequations / begin }
           {
-            \@@_zcsetup:x
+            \@@_zcsetup:e
               {
                 counterresetby =
                   {
@@ -8049,7 +8049,7 @@
                 \@bsphack
                 \seq_map_inline:Nn #1
                   {
-                    \exp_args:Nx \tl_if_eq:nnTF
+                    \exp_args:Ne \tl_if_eq:nnTF
                       { \@@_extract_unexp:nnn {##1} { zc@type } { } }
                       { equation }
                       {
@@ -8057,7 +8057,7 @@
                           { \string \MT@newlabel {##1} }
                       }
                       {
-                        \exp_args:Nx \tl_if_eq:nnT
+                        \exp_args:Ne \tl_if_eq:nnT
                           { \@@_extract_unexp:nnn {##1} { zc@type } { } }
                           { parentequation }
                           {
@@ -8100,7 +8100,7 @@
         \bool_new:N \l_@@_breqn_dgroup_bool
         \AddToHook { env / dgroup / begin }
           {
-            \@@_zcsetup:x
+            \@@_zcsetup:e
               {
                 counterresetby =
                   {
@@ -8205,7 +8205,7 @@
               { c@ enum \int_to_roman:n { \l_@@_tmpa_int } }
           }
           {
-            \@@_zcsetup:x
+            \@@_zcsetup:e
               {
                 counterresetby =
                   {

@@ -7,9 +7,9 @@ TEST 1: mathtools module
 <recently read> }
 l. ...\testtmp
 > \__zrefclever_mathtools_showonlyrefs:n=\protected\long macro:#1->\@bsphack
-\seq_map_inline:Nn #1{\exp_args:Nx \tl_if_eq:nnTF
+\seq_map_inline:Nn #1{\exp_args:Ne \tl_if_eq:nnTF
 {\__zrefclever_extract_unexp:nnn {##1}{zc@type}{}}{equation}{\protected@write
-\@auxout {}{\string \MT@newlabel {##1}}}{\exp_args:Nx \tl_if_eq:nnT
+\@auxout {}{\string \MT@newlabel {##1}}}{\exp_args:Ne \tl_if_eq:nnT
 {\__zrefclever_extract_unexp:nnn
 {##1}{zc@type}{}}{parentequation}{\protected@write \@auxout {}{\string
 \MT@newlabel {##1}}}}}\@esphack .
