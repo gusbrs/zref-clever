@@ -141,15 +141,16 @@
 % \url{https://github.com/latex3/latex2e/pull/699}).  Second, the support for
 % \cs{@currentcounter} has been improved, including \cs{footnote} and
 % \pkg{amsmath} (by \contributor{Frank Mittelbach} and \contributor{Ulrike
-% Fischer} at \url{https://github.com/latex3/latex2e/issues/687}).  Finally,
-% and critically, the new \texttt{label} hook introduced in the 2023-06-01
+% Fischer} at \url{https://github.com/latex3/latex2e/issues/687}).
+% Critically, the new \texttt{label} hook introduced in the 2023-06-01
 % release, alongside the corresponding new hooks with arguments, just
 % simplifies and improves label setting so much, by allowing \cs{zlabel} to be
 % set with \cs{label}, that it is definitely a must for \pkg{zref-clever}, so
-% we require that too.  Hence we make the cut at this latter kernel release.
+% we require that too.  Finally, since we followed the move to \texttt{e}-type
+% expansion, to play safe we require the 2023-11-01 kernel or newer.
 %
 %    \begin{macrocode}
-\def\zrefclever@required@kernel{2023-06-01}
+\def\zrefclever@required@kernel{2023-11-01}
 \NeedsTeXFormat{LaTeX2e}[\zrefclever@required@kernel]
 \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
 \IfFormatAtLeastTF{\zrefclever@required@kernel}
