@@ -10,8 +10,6 @@
 \setdefaultlanguage{ngerman}
 \setotherlanguage{french}
 
-\requirepackage[enable-debug]{expl3}
-
 \explsyntaxon
 \debug_on:n { check-declarations , deprecation }
 \explsyntaxoff

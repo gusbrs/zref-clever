@@ -6,29 +6,29 @@ TEST 1: Options and scopes: default, type-specific
 Package zref-clever Warning: No type specified for option 'gender' on line ....
 (zref-clever)                Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'Name-sg' on line
-(zref-clever)                81. Set it after 'type' switch.
+(zref-clever)                79. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'name-sg' on line
-(zref-clever)                81. Set it after 'type' switch.
+(zref-clever)                79. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'Name-pl' on line
-(zref-clever)                81. Set it after 'type' switch.
+(zref-clever)                79. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'name-pl' on line
-(zref-clever)                81. Set it after 'type' switch.
+(zref-clever)                79. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'Name-sg-ab' on line
-(zref-clever)                81. Set it after 'type' switch.
+(zref-clever)                79. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'name-sg-ab' on line
-(zref-clever)                81. Set it after 'type' switch.
+(zref-clever)                79. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'Name-pl-ab' on line
-(zref-clever)                81. Set it after 'type' switch.
+(zref-clever)                79. Set it after 'type' switch.
 Package zref-clever Warning: No type specified for option 'name-pl-ab' on line
-(zref-clever)                81. Set it after 'type' switch.
+(zref-clever)                79. Set it after 'type' switch.
 Package zref-clever Warning: Option 'tpairsep' is not type-specific on line
-(zref-clever)                81. Set it in '\zcLanguageSetup' before first
+(zref-clever)                79. Set it in '\zcLanguageSetup' before first
 (zref-clever)                'type' switch or as package option.
 Package zref-clever Warning: Option 'tlistsep' is not type-specific on line
-(zref-clever)                81. Set it in '\zcLanguageSetup' before first
+(zref-clever)                79. Set it in '\zcLanguageSetup' before first
 (zref-clever)                'type' switch or as package option.
 Package zref-clever Warning: Option 'tlastsep' is not type-specific on line
-(zref-clever)                81. Set it in '\zcLanguageSetup' before first
+(zref-clever)                79. Set it in '\zcLanguageSetup' before first
 (zref-clever)                'type' switch or as package option.
 Package zref-clever Warning: Option 'notesep' is not type-specific on line ....
 (zref-clever)                Set it in '\zcLanguageSetup' before first 'type'
@@ -284,18 +284,18 @@ l. ...  }
 TEST 2: Missing case and gender
 ============================================================
 Package zref-clever Warning: Language 'english' has no declared gender on line
-(zref-clever)                174. Nothing to do with option 'gender=m'.
+(zref-clever)                172. Nothing to do with option 'gender=m'.
 Package zref-clever Warning: Language 'english' has no declared declension
 (zref-clever)                cases on line .... Nothing to do with option
 (zref-clever)                'case=D'.
 Package zref-clever Warning: Language 'french' has no 'n' gender declared on
-(zref-clever)                line 178.
+(zref-clever)                line 176.
 ============================================================
 ============================================================
 TEST 3: Multiple genders
 ============================================================
 Package zref-clever Warning: Language 'ngerman' has no 'z' gender declared on
-(zref-clever)                line 185.
+(zref-clever)                line 183.
 The sequence \g__zrefclever_opt_lang_german_type_chapter_gender_seq contains
 the items (without outer braces):
 >  {f}

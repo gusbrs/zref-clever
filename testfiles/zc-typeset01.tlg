@@ -81,7 +81,7 @@ TEST 4: Last of type: pair
 {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
-                             }
+                            }
 > \box...=
 \hbox(6.94444+0.0)x85.66682
 .\OT1/cmr/m/n/10 s
