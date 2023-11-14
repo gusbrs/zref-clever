@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.2...HEAD)
+## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.3...HEAD)
+
+## [v0.4.3](https://github.com/gusbrs/zref-clever/compare/v0.4.2...v0.4.3) (2023-11-14)
 
 ### Changed
 - Don't use `expl3` public scratch temporary variables.
