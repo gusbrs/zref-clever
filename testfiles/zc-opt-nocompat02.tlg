@@ -3,9 +3,9 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: appendix module before
 ============================================================
-> \appendix=macro:->\ltx@IfUndefined {chapter}{\gdef \theHsection
-{\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
-\Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
+> \appendix=macro:->\@ifundefined {chapter}{\gdef \theHsection {\Hy@AlphNoErr
+{section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp
+{\Hy@appendixstring }\HyOrg@appendix .
 <recently read> }
 l. ...\cs_show:N \appendix
 The property list \l__zrefclever_counter_type_prop contains the pairs (without
@@ -29,9 +29,9 @@ l. ...\ShowHook { cmd / appendix / before }
 ============================================================
 TEST 2: appendix module after
 ============================================================
-> \appendix=macro:->\ltx@IfUndefined {chapter}{\gdef \theHsection
-{\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
-\Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
+> \appendix=macro:->\@ifundefined {chapter}{\gdef \theHsection {\Hy@AlphNoErr
+{section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp
+{\Hy@appendixstring }\HyOrg@appendix .
 <recently read> }
 l. ...\cs_show:N \appendix
 The property list \l__zrefclever_counter_type_prop contains the pairs (without
@@ -55,9 +55,9 @@ l. ...\ShowHook { cmd / appendix / before }
 ============================================================
 TEST 3: appendices module
 ============================================================
-> \appendix=macro:->\ltx@IfUndefined {chapter}{\gdef \theHsection
-{\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
-\Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
+> \appendix=macro:->\@ifundefined {chapter}{\gdef \theHsection {\Hy@AlphNoErr
+{section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp
+{\Hy@appendixstring }\HyOrg@appendix .
 <recently read> }
 l. ...\cs_show:N \appendix
 zc@appendix counter not defined

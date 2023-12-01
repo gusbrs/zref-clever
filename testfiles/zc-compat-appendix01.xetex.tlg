@@ -4,7 +4,7 @@ Don't change this file in any respect.
 TEST 1: appendix module before
 ============================================================
 > \appendix=macro:->\UseHookWithArguments
-{cmd/appendix/before}{0}\ltx@IfUndefined {chapter}{\gdef \theHsection
+{cmd/appendix/before}{0}\@ifundefined {chapter}{\gdef \theHsection
 {\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
 \Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
 <recently read> }
@@ -39,7 +39,7 @@ l. ...\ShowHook { cmd / appendix / before }
 TEST 2: appendix module after
 ============================================================
 > \appendix=macro:->\UseHookWithArguments
-{cmd/appendix/before}{0}\ltx@IfUndefined {chapter}{\gdef \theHsection
+{cmd/appendix/before}{0}\@ifundefined {chapter}{\gdef \theHsection
 {\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
 \Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
 <recently read> }
