@@ -271,7 +271,7 @@ l__zrefclever_type_equation_options_prop not defined
 ============================================================
 TEST 6: mathtools module
 ============================================================
-> \l__zrefclever_mathtools_showonlyrefs_bool=false.
+> \l__zrefclever_mathtools_loaded_bool=false.
 <recently read> }
 l. ...\testtmp
 __zrefclever_mathtools_showonlyrefs:n not defined

@@ -5231,7 +5231,7 @@
 %    \end{macrocode}
 % Integration with \pkg{mathtools}.
 %    \begin{macrocode}
-    \bool_if:NT \l_@@_mathtools_showonlyrefs_bool
+    \bool_if:NT \l_@@_mathtools_loaded_bool
       {
         \@@_mathtools_showonlyrefs:n
           { \l_@@_zcref_labels_seq }
@@ -8037,40 +8037,25 @@
 % it's worth it.
 %
 %    \begin{macrocode}
-\bool_new:N \l_@@_mathtools_showonlyrefs_bool
+\bool_new:N \l_@@_mathtools_loaded_bool
 \@@_compat_module:nn { mathtools }
   {
     \@@_if_package_loaded:nT { mathtools }
       {
-        \MH_if_boolean:nT { show_only_refs }
+        \bool_set_true:N \l_@@_mathtools_loaded_bool
+        \cs_new_protected:Npn \@@_mathtools_showonlyrefs:n #1
           {
-            \bool_set_true:N \l_@@_mathtools_showonlyrefs_bool
-            \cs_new_protected:Npn \@@_mathtools_showonlyrefs:n #1
+            \seq_map_inline:Nn #1
               {
-                \@bsphack
-                \seq_map_inline:Nn #1
-                  {
-                    \exp_args:Ne \tl_if_eq:nnTF
-                      { \@@_extract_unexp:nnn {##1} { zc@type } { } }
-                      { equation }
-                      {
-                        \protected@write \@auxout { }
-                          { \string \MT@newlabel {##1} }
-                      }
-                      {
-                        \exp_args:Ne \tl_if_eq:nnT
-                          { \@@_extract_unexp:nnn {##1} { zc@type } { } }
-                          { parentequation }
-                          {
-                            \protected@write \@auxout { }
-                              { \string \MT@newlabel {##1} }
-                          }
-                      }
-                  }
-                \@esphack
+                \tl_set:Ne \l_@@_tmpa_tl
+                  { \@@_extract_unexp:nnn {##1} { zc@type } { } }
+                \bool_lazy_or:nnT
+                  { \str_if_eq_p:Vn \l_@@_tmpa_tl { equation } }
+                  { \str_if_eq_p:Vn \l_@@_tmpa_tl { parentequation } }
+                  { \noeqref {##1} }
               }
-            \msg_info:nnn { zref-clever } { compat-package } { mathtools }
           }
+        \msg_info:nnn { zref-clever } { compat-package } { mathtools }
       }
   }
 %    \end{macrocode}

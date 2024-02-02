@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.3...HEAD)
 
+### Changed
+- Use `\noeqref` instead of `mathtools`' internals to support `showonlyrefs`
+  option in `mathtools` compatibility module.
+
 ## [v0.4.3](https://github.com/gusbrs/zref-clever/compare/v0.4.2...v0.4.3) (2023-11-14)
 
 ### Changed

@@ -3,16 +3,14 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: mathtools module
 ============================================================
-> \l__zrefclever_mathtools_showonlyrefs_bool=true.
+> \l__zrefclever_mathtools_loaded_bool=true.
 <recently read> }
 l. ...\testtmp
-> \__zrefclever_mathtools_showonlyrefs:n=\protected\long macro:#1->\@bsphack
-\seq_map_inline:Nn #1{\exp_args:Ne \tl_if_eq:nnTF
-{\__zrefclever_extract_unexp:nnn {##1}{zc@type}{}}{equation}{\protected@write
-\@auxout {}{\string \MT@newlabel {##1}}}{\exp_args:Ne \tl_if_eq:nnT
-{\__zrefclever_extract_unexp:nnn
-{##1}{zc@type}{}}{parentequation}{\protected@write \@auxout {}{\string
-\MT@newlabel {##1}}}}}\@esphack .
+> \__zrefclever_mathtools_showonlyrefs:n=\protected\long
+macro:#1->\seq_map_inline:Nn #1{\tl_set:Ne \l__zrefclever_tmpa_tl
+{\__zrefclever_extract_unexp:nnn {##1}{zc@type}{}}\bool_lazy_or:nnT
+{\str_if_eq_p:Vn \l__zrefclever_tmpa_tl {equation}}{\str_if_eq_p:Vn
+\l__zrefclever_tmpa_tl {parentequation}}{\noeqref {##1}}}.
 <recently read> }
 l. ...  }
 ============================================================

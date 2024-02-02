@@ -33,7 +33,7 @@
 
 \BEGINTEST{mathtools module}
 \ExplSyntaxOn
-\renewcommand{\testtmp}{ \bool_show:N \l__zrefclever_mathtools_showonlyrefs_bool }
+\renewcommand{\testtmp}{ \bool_show:N \l__zrefclever_mathtools_loaded_bool }
 \testtmp
 \cs_if_exist:NTF \__zrefclever_mathtools_showonlyrefs:n
   {
