@@ -16,10 +16,6 @@ checkruns = 2
 -- Set up different test sets
 checkconfigs = {"build","build-4runs"}
 
--- Don't wrap/truncate lines in test logs
--- See https://tex.stackexchange.com/q/674844#comment1676566_674846
-maxprintline = 1000
-
 -- Use UTF-8 logs for all engines
 asciiengines = {}
 
