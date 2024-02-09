@@ -6,8 +6,7 @@ TEST 1: Language declaration
 > \g__zrefclever_declared_language_italian_tl=italian.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_language_italian_gender_seq contains the items
-(without outer braces):
+The sequence \g__zrefclever_opt_language_italian_gender_seq contains the items (without outer braces):
 >  {f}
 >  {m}.
 <recently read> }
@@ -43,24 +42,21 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_default_rangesep_tl= a\nobreakspace .
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_default_refbounds-first-rb_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_default_refbounds-first-rb_seq contains the items (without outer braces):
 >  {da\nobreakspace }
 >  {}
 >  {}
 >  {}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_default_refbounds-mid-rb_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_default_refbounds-mid-rb_seq contains the items (without outer braces):
 >  {da\nobreakspace }
 >  {}
 >  {}
 >  {}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_book_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_book_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -76,8 +72,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_book_name-pl_tl=libri.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_part_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_part_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -93,8 +88,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_part_name-pl_tl=parti.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_chapter_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_chapter_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -110,8 +104,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_chapter_name-pl_tl=capitoli.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_section_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_section_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -127,8 +120,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_section_name-pl_tl=paragrafi.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_paragraph_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_paragraph_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -144,8 +136,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_paragraph_name-pl_tl=capoversi.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_appendix_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_appendix_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -161,8 +152,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_appendix_name-pl_tl=appendici.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_page_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_page_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -196,8 +186,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_page_rangetopair_bool=false.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_line_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_line_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -213,8 +202,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_line_name-pl_tl=righe.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_figure_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_figure_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -242,8 +230,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_figure_name-pl-ab_tl=fig..
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_table_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_table_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -271,8 +258,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_table_name-pl-ab_tl=tab..
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_item_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_item_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -288,8 +274,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_item_name-pl_tl=punti.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_footnote_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_footnote_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -305,8 +290,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_footnote_name-pl_tl=note.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_endnote_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_endnote_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -322,8 +306,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_endnote_name-pl_tl=note.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_note_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_note_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -339,8 +322,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_note_name-pl_tl=note.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_equation_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_equation_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -368,8 +350,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_equation_name-pl-ab_tl=eq..
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_theorem_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_theorem_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -385,8 +366,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_theorem_name-pl_tl=teoremi.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_lemma_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_lemma_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -402,8 +382,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_lemma_name-pl_tl=lemmi.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_corollary_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_corollary_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -419,8 +398,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_corollary_name-pl_tl=corollari.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_proposition_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_proposition_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -436,8 +414,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_proposition_name-pl_tl=proposizioni.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_definition_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_definition_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -453,8 +430,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_definition_name-pl_tl=definizioni.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_proof_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_proof_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -470,8 +446,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_proof_name-pl_tl=dimostrazioni.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_result_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_result_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -487,8 +462,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_result_name-pl_tl=risultati.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_remark_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_remark_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -504,8 +478,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_remark_name-pl_tl=osservazioni.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_example_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_example_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -521,8 +494,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_example_name-pl_tl=esempi.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_algorithm_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_algorithm_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -538,8 +510,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_algorithm_name-pl_tl=algoritmi.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_listing_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_listing_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -555,8 +526,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_listing_name-pl_tl=listati.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_exercise_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_exercise_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -572,8 +542,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_exercise_name-pl_tl=esercizi.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_solution_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_solution_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -589,103 +558,84 @@ l. ...  }
 > \g__zrefclever_opt_lang_italian_type_solution_name-pl_tl=soluzioni.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_page_refbounds-first-rb_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_page_refbounds-first-rb_seq contains the items (without outer braces):
 >  {}
 >  {}
 >  {}
 >  {}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_page_refbounds-mid-rb_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_page_refbounds-mid-rb_seq contains the items (without outer braces):
 >  {}
 >  {}
 >  {}
 >  {}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-first_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-first_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_italian_type_equation_refbounds-first-sg_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-first-sg_seq contains the items (without outer braces):
 >  {}
 >  {(}
 >  {)}
 >  {}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_italian_type_equation_refbounds-first-pb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-first-pb_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_italian_type_equation_refbounds-first-rb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-first-rb_seq contains the items (without outer braces):
 >  {da\nobreakspace (}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-mid_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-mid_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_italian_type_equation_refbounds-mid-rb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-mid-rb_seq contains the items (without outer braces):
 >  {da\nobreakspace (}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_italian_type_equation_refbounds-mid-re_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-mid-re_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-last_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-last_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_italian_type_equation_refbounds-last-pe_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-last-pe_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_italian_type_equation_refbounds-last-re_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_italian_type_equation_refbounds-last-re_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}

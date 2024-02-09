@@ -3,36 +3,19 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: Options and scopes: default, type-specific
 ============================================================
-Package zref-clever Warning: No type specified for option 'gender' on line ....
-(zref-clever)                Set it after 'type' switch.
-Package zref-clever Warning: No type specified for option 'Name-sg' on line
-(zref-clever)                79. Set it after 'type' switch.
-Package zref-clever Warning: No type specified for option 'name-sg' on line
-(zref-clever)                79. Set it after 'type' switch.
-Package zref-clever Warning: No type specified for option 'Name-pl' on line
-(zref-clever)                79. Set it after 'type' switch.
-Package zref-clever Warning: No type specified for option 'name-pl' on line
-(zref-clever)                79. Set it after 'type' switch.
-Package zref-clever Warning: No type specified for option 'Name-sg-ab' on line
-(zref-clever)                79. Set it after 'type' switch.
-Package zref-clever Warning: No type specified for option 'name-sg-ab' on line
-(zref-clever)                79. Set it after 'type' switch.
-Package zref-clever Warning: No type specified for option 'Name-pl-ab' on line
-(zref-clever)                79. Set it after 'type' switch.
-Package zref-clever Warning: No type specified for option 'name-pl-ab' on line
-(zref-clever)                79. Set it after 'type' switch.
-Package zref-clever Warning: Option 'tpairsep' is not type-specific on line
-(zref-clever)                79. Set it in '\zcLanguageSetup' before first
-(zref-clever)                'type' switch or as package option.
-Package zref-clever Warning: Option 'tlistsep' is not type-specific on line
-(zref-clever)                79. Set it in '\zcLanguageSetup' before first
-(zref-clever)                'type' switch or as package option.
-Package zref-clever Warning: Option 'tlastsep' is not type-specific on line
-(zref-clever)                79. Set it in '\zcLanguageSetup' before first
-(zref-clever)                'type' switch or as package option.
-Package zref-clever Warning: Option 'notesep' is not type-specific on line ....
-(zref-clever)                Set it in '\zcLanguageSetup' before first 'type'
-(zref-clever)                switch or as package option.
+Package zref-clever Warning: No type specified for option 'gender' on line .... Set it after 'type' switch.
+Package zref-clever Warning: No type specified for option 'Name-sg' on line .... Set it after 'type' switch.
+Package zref-clever Warning: No type specified for option 'name-sg' on line .... Set it after 'type' switch.
+Package zref-clever Warning: No type specified for option 'Name-pl' on line .... Set it after 'type' switch.
+Package zref-clever Warning: No type specified for option 'name-pl' on line .... Set it after 'type' switch.
+Package zref-clever Warning: No type specified for option 'Name-sg-ab' on line .... Set it after 'type' switch.
+Package zref-clever Warning: No type specified for option 'name-sg-ab' on line .... Set it after 'type' switch.
+Package zref-clever Warning: No type specified for option 'Name-pl-ab' on line .... Set it after 'type' switch.
+Package zref-clever Warning: No type specified for option 'name-pl-ab' on line .... Set it after 'type' switch.
+Package zref-clever Warning: Option 'tpairsep' is not type-specific on line .... Set it in '\zcLanguageSetup' before first 'type' switch or as package option.
+Package zref-clever Warning: Option 'tlistsep' is not type-specific on line .... Set it in '\zcLanguageSetup' before first 'type' switch or as package option.
+Package zref-clever Warning: Option 'tlastsep' is not type-specific on line .... Set it in '\zcLanguageSetup' before first 'type' switch or as package option.
+Package zref-clever Warning: Option 'notesep' is not type-specific on line .... Set it in '\zcLanguageSetup' before first 'type' switch or as package option.
 > \g__zrefclever_opt_lang_german_default_tpairsep_tl= t\& .
 <recently read> }
 l. ...  }
@@ -66,80 +49,70 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_default_reffont_tl=\itshape .
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_default_refbounds-first_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-first_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_default_refbounds-first-sg_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-first-sg_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_default_refbounds-first-pb_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-first-pb_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_default_refbounds-first-rb_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-first-rb_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_default_refbounds-mid_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-mid_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_default_refbounds-mid-rb_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-mid-rb_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_default_refbounds-mid-re_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-mid-re_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_default_refbounds-last_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-last_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_default_refbounds-last-pe_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-last-pe_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_default_refbounds-last-re_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_default_refbounds-last-re_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
@@ -191,88 +164,74 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_section_D-name-pl-ab_tl=bs..
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_section_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_section_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-first_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-first_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_german_type_section_refbounds-first-sg_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-first-sg_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_german_type_section_refbounds-first-pb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-first-pb_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_german_type_section_refbounds-first-rb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-first-rb_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-mid_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-mid_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-mid-rb_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-mid-rb_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-mid-re_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-mid-re_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-last_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-last_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-last-pe_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-last-pe_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-last-re_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-last-re_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
@@ -283,21 +242,15 @@ l. ...  }
 ============================================================
 TEST 2: Missing case and gender
 ============================================================
-Package zref-clever Warning: Language 'english' has no declared gender on line
-(zref-clever)                172. Nothing to do with option 'gender=m'.
-Package zref-clever Warning: Language 'english' has no declared declension
-(zref-clever)                cases on line .... Nothing to do with option
-(zref-clever)                'case=D'.
-Package zref-clever Warning: Language 'french' has no 'n' gender declared on
-(zref-clever)                line 176.
+Package zref-clever Warning: Language 'english' has no declared gender on line .... Nothing to do with option 'gender=m'.
+Package zref-clever Warning: Language 'english' has no declared declension cases on line .... Nothing to do with option 'case=D'.
+Package zref-clever Warning: Language 'french' has no 'n' gender declared on line ....
 ============================================================
 ============================================================
 TEST 3: Multiple genders
 ============================================================
-Package zref-clever Warning: Language 'ngerman' has no 'z' gender declared on
-(zref-clever)                line 183.
-The sequence \g__zrefclever_opt_lang_german_type_chapter_gender_seq contains
-the items (without outer braces):
+Package zref-clever Warning: Language 'ngerman' has no 'z' gender declared on line ....
+The sequence \g__zrefclever_opt_lang_german_type_chapter_gender_seq contains the items (without outer braces):
 >  {f}
 >  {m}.
 <recently read> }
@@ -357,145 +310,113 @@ l. ...  }
 > \g__zrefclever_opt_lang_english_type_section_name-pl-ab_tl=bs..
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-first_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-first_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_section_refbounds-first-sg_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-first-sg_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_section_refbounds-first-pb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-first-pb_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_section_refbounds-first-rb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-first-rb_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-mid_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-mid_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-mid-rb_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-mid-rb_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-mid-re_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-mid-re_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-last_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-last_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_section_refbounds-last-pe_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-last-pe_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_section_refbounds-last-re_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_section_refbounds-last-re_seq contains the items (without outer braces):
 >  {[}
 >  {}
 >  {}
 >  {]}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-first_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-first_seq contains the items (without outer braces):
 >  {}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_equation_refbounds-first-sg_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-first-sg_seq contains the items (without outer braces):
 >  {}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_equation_refbounds-first-pb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-first-pb_seq contains the items (without outer braces):
 >  {}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_equation_refbounds-first-rb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-first-rb_seq contains the items (without outer braces):
 >  {}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-mid_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-mid_seq contains the items (without outer braces):
 >  {}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_equation_refbounds-mid-rb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-mid-rb_seq contains the items (without outer braces):
 >  {}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_equation_refbounds-mid-re_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-mid-re_seq contains the items (without outer braces):
 >  {}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-last_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-last_seq contains the items (without outer braces):
 >  {}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_equation_refbounds-last-pe_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-last-pe_seq contains the items (without outer braces):
 >  {}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_equation_refbounds-last-re_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-last-re_seq contains the items (without outer braces):
 >  {}.
 <recently read> }
 l. ...  }
@@ -549,21 +470,15 @@ l. ...\testtmp
 ============================================================
 TEST 6: Option: tpairsep=..., tlistsep=..., tlastsep=...
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: bar\group_end: \quad [\group_begin:
-1.1\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: bar\group_end: \quad [\group_begin: 1.1\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{table.1.1}{\group_begin: table\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -617,15 +532,11 @@ l. ...\setbox0=\hbox{\testtmp
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: bar\group_end: \quad [\group_begin:
-1.1\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: bar\group_end: \quad [\group_begin: 1.1\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -665,9 +576,7 @@ l. ...\showbox0
 ============================================================
 TEST 7: Option: notesep=...
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: bar\group_end: \quad [\group_begin:
-1.1\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: bar\group_end: \quad [\group_begin: 1.1\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -697,15 +606,11 @@ l. ...\showbox0
 ============================================================
 TEST 8: Option: namesep=...
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: bar\group_end: \quad [\group_begin:
-1.1\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: bar\group_end: \quad [\group_begin: 1.1\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -745,12 +650,7 @@ l. ...\showbox0
 ============================================================
 TEST 9: Option: pairsep=..., listsep=..., lastsep=...
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad
-[\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end: }],,
-[\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end: }],,
-[\__zrefclever_hyperlink:nnn {}{section.2.1}{\group_begin: 2.1\group_end: }]
-AND [\__zrefclever_hyperlink:nnn {}{section.3.1}{\group_begin: 3.1\group_end:
-}].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end: }],, [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end: }],, [\__zrefclever_hyperlink:nnn {}{section.2.1}{\group_begin: 2.1\group_end: }] AND [\__zrefclever_hyperlink:nnn {}{section.3.1}{\group_begin: 3.1\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -802,10 +702,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad
-[\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end: }]
-\& [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end:
-}].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end: }] \& [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -839,10 +736,7 @@ l. ...\showbox0
 ============================================================
 TEST 10: Option: rangesep=...
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad
-[\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end:
-}]\textrightarrow {}[\__zrefclever_hyperlink:nnn {}{section.1.4}{\group_begin:
-1.4\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end: }]\textrightarrow {}[\__zrefclever_hyperlink:nnn {}{section.1.4}{\group_begin: 1.4\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -874,8 +768,7 @@ l. ...\showbox0
 ============================================================
 TEST 11: Option: refbounds=...
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad
-[\group_begin: 1.1\group_end: ] \& [\group_begin: 1.2\group_end: ].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad [\group_begin: 1.1\group_end: ] \& [\group_begin: 1.2\group_end: ].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -901,9 +794,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -938,9 +829,7 @@ l. ...\showbox0
 ============================================================
 TEST 12: Option: [Nn]ame-[sg/pl](-ab)=...
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: Bar\group_end: \quad [\group_begin:
-1.1\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: Bar\group_end: \quad [\group_begin: 1.1\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -959,9 +848,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: bar\group_end: \quad [\group_begin:
-1.1\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: bar\group_end: \quad [\group_begin: 1.1\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -980,10 +867,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Bars\group_end: \quad
-[\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end: }]
-\& [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end:
-}].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Bars\group_end: \quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end: }] \& [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1013,10 +897,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad
-[\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end: }]
-\& [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end:
-}].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: bars\group_end: \quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end: }] \& [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1046,9 +927,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: B.\group_end: \quad [\group_begin:
-1.1\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: B.\group_end: \quad [\group_begin: 1.1\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1066,9 +945,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: b.\group_end: \quad [\group_begin:
-1.1\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: b.\group_end: \quad [\group_begin: 1.1\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1086,10 +963,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Bs.\group_end: \quad
-[\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end: }]
-\& [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end:
-}].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Bs.\group_end: \quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end: }] \& [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1118,10 +992,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: bs.\group_end: \quad
-[\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end: }]
-\& [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end:
-}].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: bs.\group_end: \quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end: }] \& [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1156,9 +1027,7 @@ TEST 13: Option: [Nn]ame-[sg/pl](-ab)=... (german,d=D)
 ============================================================
 (zref-clever-german.lang)
 Package zref-clever Info: Loaded 'german' language file.
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: \bfseries Bar\group_end: \quad [\group_begin:
-\upshape 1.1\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: \bfseries Bar\group_end: \quad [\group_begin: \upshape 1.1\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1177,9 +1046,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: \bfseries Bar\group_end: \quad [\group_begin:
-\upshape 1.1\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: \bfseries Bar\group_end: \quad [\group_begin: \upshape 1.1\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1198,10 +1065,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \bfseries Bars\group_end:
-\quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: \upshape
-1.1\group_end: }] \& [\__zrefclever_hyperlink:nnn
-{}{section.1.2}{\group_begin: \upshape 1.2\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \bfseries Bars\group_end: \quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: \upshape 1.1\group_end: }] \& [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: \upshape 1.2\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1231,10 +1095,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \bfseries Bars\group_end:
-\quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: \upshape
-1.1\group_end: }] \& [\__zrefclever_hyperlink:nnn
-{}{section.1.2}{\group_begin: \upshape 1.2\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \bfseries Bars\group_end: \quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: \upshape 1.1\group_end: }] \& [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: \upshape 1.2\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1264,9 +1125,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: \bfseries B.\group_end: \quad [\group_begin:
-\upshape 1.1\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: \bfseries B.\group_end: \quad [\group_begin: \upshape 1.1\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1284,9 +1143,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: \bfseries B.\group_end: \quad [\group_begin:
-\upshape 1.1\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: \bfseries B.\group_end: \quad [\group_begin: \upshape 1.1\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1304,10 +1161,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \bfseries Bs.\group_end:
-\quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: \upshape
-1.1\group_end: }] \& [\__zrefclever_hyperlink:nnn
-{}{section.1.2}{\group_begin: \upshape 1.2\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \bfseries Bs.\group_end: \quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: \upshape 1.1\group_end: }] \& [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: \upshape 1.2\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1336,10 +1190,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \bfseries Bs.\group_end:
-\quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: \upshape
-1.1\group_end: }] \& [\__zrefclever_hyperlink:nnn
-{}{section.1.2}{\group_begin: \upshape 1.2\group_end: }].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: \bfseries Bs.\group_end: \quad [\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: \upshape 1.1\group_end: }] \& [\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: \upshape 1.2\group_end: }].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1374,27 +1225,19 @@ TEST 14: Option: cap=... (french)
 ============================================================
 (zref-clever-french.lang)
 Package zref-clever Info: Loaded 'french' language file.
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{chapter.1}{\group_begin: Chapitre\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: Chapitre\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{figure.1.1}{\group_begin: Fig.\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{figure.1.1}{\group_begin: Fig.\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{equation.1.1.2}{\group_begin: Equation\group_end: \nobreakspace
-(\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: Equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1466,27 +1309,19 @@ l. ...\setbox0=\hbox{\testtmp
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{chapter.1}{\group_begin: Chapitre\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: Chapitre\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: Section\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: Section\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{figure.1.1}{\group_begin: Fig.\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{figure.1.1}{\group_begin: Fig.\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{equation.1.1.2}{\group_begin: Equation\group_end: \nobreakspace
-(\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: Equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1558,27 +1393,19 @@ l. ...\setbox0=\hbox{\testtmp
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{chapter.1}{\group_begin: chapitre\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapitre\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{figure.1.1}{\group_begin: fig.\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{figure.1.1}{\group_begin: fig.\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace
-(\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1654,27 +1481,19 @@ l. ...\showbox0
 ============================================================
 TEST 15: Option: abbrev=... (french)
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{chapter.1}{\group_begin: Chapitre\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: Chapitre\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{figure.1.1}{\group_begin: Fig.\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{figure.1.1}{\group_begin: Fig.\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{equation.1.1.2}{\group_begin: Equation\group_end: \nobreakspace
-(\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: Equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1746,27 +1565,19 @@ l. ...\setbox0=\hbox{\testtmp
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{chapter.1}{\group_begin: Chapitre\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: Chapitre\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{figure.1.1}{\group_begin: Fig.\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{figure.1.1}{\group_begin: Fig.\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{equation.1.1.2}{\group_begin: Eeq.\group_end: \nobreakspace (\group_begin:
-1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: Eeq.\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1834,27 +1645,19 @@ l. ...\setbox0=\hbox{\testtmp
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{chapter.1}{\group_begin: Chapitre\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: Chapitre\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{figure.1.1}{\group_begin: Figure\group_end: \nobreakspace \group_begin:
-1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{figure.1.1}{\group_begin: Figure\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{equation.1.1.2}{\group_begin: Equation\group_end: \nobreakspace
-(\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: Equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1932,10 +1735,7 @@ l. ...\showbox0
 ============================================================
 TEST 16: Option: rangetopair=... (french)
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Chapitres\group_end:
-\nobreakspace \__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin:
-1\group_end: } et\nobreakspace \__zrefclever_hyperlink:nnn
-{}{chapter.2}{\group_begin: 2\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: Chapitres\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: 1\group_end: } et\nobreakspace \__zrefclever_hyperlink:nnn {}{chapter.2}{\group_begin: 2\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1965,10 +1765,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin:
-1.1\group_end: }aa\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin:
-1.2\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: 1.1\group_end: }aa\__zrefclever_hyperlink:nnn {}{section.1.2}{\group_begin: 1.2\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }

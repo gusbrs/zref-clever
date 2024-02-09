@@ -3,9 +3,7 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: zvref
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1}{\group_begin: Section\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: Section\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
@@ -87,10 +85,7 @@ l. ...\showbox0
 ============================================================
 TEST 3: zvrefrange
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.1}{\group_begin:
-1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
-{}{figure.2}{\group_begin: 2\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{figure.1}{\group_begin: 1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.2}{\group_begin: 2\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
@@ -180,15 +175,11 @@ l. ...\showbox0
 ============================================================
 TEST 5: zfullref
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{figure.1}{\group_begin: figure\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{figure.1}{\group_begin: figure\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{figure.1}{\group_begin: page\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{figure.1}{\group_begin: page\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }

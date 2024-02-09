@@ -3,8 +3,7 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: listings module
 ============================================================
-The property list \l__zrefclever_counter_type_prop contains the pairs (without
-outer braces):
+The property list \l__zrefclever_counter_type_prop contains the pairs (without outer braces):
 >  {subsection}  =>  {section}
 >  {subsubsection}  =>  {section}
 >  {subparagraph}  =>  {paragraph}
@@ -17,60 +16,21 @@ outer braces):
 >  {lstnumber}  =>  {line}.
 <recently read> }
 l. ...\testtmp
-The property list \l__zrefclever_counter_resetby_prop contains the pairs
-(without outer braces):
+The property list \l__zrefclever_counter_resetby_prop contains the pairs (without outer braces):
 >  {enumii}  =>  {enumi}
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}
 >  {lstnumber}  =>  {lstlisting}.
 <recently read> }
 l. ...\testtmp
-> \lsthk@Init=macro:->\lst@ifshowspaces \let \lst@outputspace
-\lst@visiblespace \lst@keepspacestrue \fi \edef \ttdefault {\ttdefault }\let
-\lsts@nfss@catcodes \nfss@catcodes \let \nfss@catcodes \lst@nfss@catcodes
-\edef \lst@OrgOutput {\the \output }\ifcase \lst@useoutput \relax \or \output
-{\global \setbox \lst@gtempboxa \box \@cclv \expandafter \egroup
-\lst@SaveToken \lst@InterruptModes \setbox \@cclv \box \lst@gtempboxa \bgroup
-\lst@OrgOutput \egroup \bgroup \aftergroup \pagegoal \aftergroup \vsize
-\aftergroup \lst@ReenterModes \aftergroup \lst@RestoreToken }\else \output
-{\lst@RestoreOrigCatcodes \lst@ifec \lst@RestoreOrigExtendedCatcodes \fi
-\lst@OrgOutput }\fi \let \lst@bnext \relax \let \lst@enext \relax
-\lst@basicstyle \ifx \lst@inputenc \@empty \else \@ifundefined
-{inputencoding}{}{\inputencoding \lst@inputenc }\fi \ifx \lst@linerange
-\@empty \edef \lst@linerange {{\lst@firstline }-{\lst@lastline },}\fi
-\lst@GetLineInterval \lst@ifsensitive \else \let \lst@KeywordTest
-\lst@KEYWORDTEST \let \lst@WorkingTest \lst@WORKINGTEST \let \lst@IfOneOutOf
-\lst@IFONEOUTOF \fi \lsthk@TrackKeywords \lsthk@PostTrackKeywords \let
-\lst@ifkeywords \iftrue \global \let \lst@prefixkeyword \relax \def
-\@currentlabel {\thelstnumber }\ifnum \z@ >\lst@stepnumber \let
-\lst@advancelstnum \m@ne \edef \lst@stepnumber {-\lst@stepnumber }\fi \ifnum
-\z@ <\lst@stepnumber \global \lst@skipnumbers \lst@firstnumber \global \divide
-\lst@skipnumbers \lst@stepnumber \global \multiply \lst@skipnumbers
--\lst@stepnumber \global \advance \lst@skipnumbers \lst@firstnumber \ifnum
-\lst@skipnumbers >\z@ \global \advance \lst@skipnumbers -\lst@stepnumber \fi
-\else \let \lst@SkipOrPrintLabel \relax \fi \lst@ifresetmargins \advance
-\linewidth \@totalleftmargin \advance \linewidth \rightmargin
-\@totalleftmargin \z@ \fi \advance \linewidth -\lst@xleftmargin \advance
-\linewidth -\lst@xrightmargin \advance \@totalleftmargin \lst@xleftmargin
-\relax \parskip \z@ \ifdim \z@ =\lst@lineskip \else \@tempdima \baselineskip
-\advance \@tempdima \lst@lineskip \multiply \@tempdima \@cclvi \divide
-\@tempdima \baselineskip \relax \multiply \@tempdima \@cclvi \edef
-\baselinestretch {\strip@pt \@tempdima }\selectfont \fi \lst@ifbreaklines
-\hbadness \@M \pretolerance \@M \@rightskip \@flushglue \rightskip \@rightskip
-\leftskip \z@skip \parindent \z@ \def \lst@parshape {\parshape \tw@
-\@totalleftmargin \linewidth \lst@breakshape }\else \let \lst@discretionary
-\@empty \fi \ifx \lst@fillcolor \@empty \let \lst@fillcolor \lst@bkgcolor \fi
-\ifx \lst@rulesepcolor \@empty \let \lst@rulesepcolor \lst@fillcolor \fi
-\lst@frameInit \__zrefclever_zcsetup:n {currentcounter=lstnumber}.
+> \lsthk@Init=macro:->\lst@ifshowspaces \let \lst@outputspace \lst@visiblespace \lst@keepspacestrue \fi \edef \ttdefault {\ttdefault }\let \lsts@nfss@catcodes \nfss@catcodes \let \nfss@catcodes \lst@nfss@catcodes \edef \lst@OrgOutput {\the \output }\ifcase \lst@useoutput \relax \or \output {\global \setbox \lst@gtempboxa \box \@cclv \expandafter \egroup \lst@SaveToken \lst@InterruptModes \setbox \@cclv \box \lst@gtempboxa \bgroup \lst@OrgOutput \egroup \bgroup \aftergroup \pagegoal \aftergroup \vsize \aftergroup \lst@ReenterModes \aftergroup \lst@RestoreToken }\else \output {\lst@RestoreOrigCatcodes \lst@ifec \lst@RestoreOrigExtendedCatcodes \fi \lst@OrgOutput }\fi \let \lst@bnext \relax \let \lst@enext \relax \lst@basicstyle \ifx \lst@inputenc \@empty \else \@ifundefined {inputencoding}{}{\inputencoding \lst@inputenc }\fi \ifx \lst@linerange \@empty \edef \lst@linerange {{\lst@firstline }-{\lst@lastline },}\fi \lst@GetLineInterval \lst@ifsensitive \else \let \lst@KeywordTest \lst@KEYWORDTEST \let \lst@WorkingTest \lst@WORKINGTEST \let \lst@IfOneOutOf \lst@IFONEOUTOF \fi \lsthk@TrackKeywords \lsthk@PostTrackKeywords \let \lst@ifkeywords \iftrue \global \let \lst@prefixkeyword \relax \def \@currentlabel {\thelstnumber }\ifnum \z@ >\lst@stepnumber \let \lst@advancelstnum \m@ne \edef \lst@stepnumber {-\lst@stepnumber }\fi \ifnum \z@ <\lst@stepnumber \global \lst@skipnumbers \lst@firstnumber \global \divide \lst@skipnumbers \lst@stepnumber \global \multiply \lst@skipnumbers -\lst@stepnumber \global \advance \lst@skipnumbers \lst@firstnumber \ifnum \lst@skipnumbers >\z@ \global \advance \lst@skipnumbers -\lst@stepnumber \fi \else \let \lst@SkipOrPrintLabel \relax \fi \lst@ifresetmargins \advance \linewidth \@totalleftmargin \advance \linewidth \rightmargin \@totalleftmargin \z@ \fi \advance \linewidth -\lst@xleftmargin \advance \linewidth -\lst@xrightmargin \advance \@totalleftmargin \lst@xleftmargin \relax \parskip \z@ \ifdim \z@ =\lst@lineskip \else \@tempdima \baselineskip \advance \@tempdima \lst@lineskip \multiply \@tempdima \@cclvi \divide \@tempdima \baselineskip \relax \multiply \@tempdima \@cclvi \edef \baselinestretch {\strip@pt \@tempdima }\selectfont \fi \lst@ifbreaklines \hbadness \@M \pretolerance \@M \@rightskip \@flushglue \rightskip \@rightskip \leftskip \z@skip \parindent \z@ \def \lst@parshape {\parshape \tw@ \@totalleftmargin \linewidth \lst@breakshape }\else \let \lst@discretionary \@empty \fi \ifx \lst@fillcolor \@empty \let \lst@fillcolor \lst@bkgcolor \fi \ifx \lst@rulesepcolor \@empty \let \lst@rulesepcolor \lst@fillcolor \fi \lst@frameInit \__zrefclever_zcsetup:n {currentcounter=lstnumber}.
 <recently read> }
 l. ...\cs_show:c { \@lst hk@ Init }
 ============================================================
 ============================================================
 TEST 2: Reference: lstlisting
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{lstlisting.1}{\group_begin: listing\group_end: \nobreakspace \group_begin:
-1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{lstlisting.1}{\group_begin: listing\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
@@ -90,9 +50,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{lstnumber.1.3}{\group_begin: line\group_end: \nobreakspace \group_begin:
-3\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{lstnumber.1.3}{\group_begin: line\group_end: \nobreakspace \group_begin: 3\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }

@@ -3,14 +3,10 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: appendix module before
 ============================================================
-> \appendix=macro:->\UseHookWithArguments
-{cmd/appendix/before}{0}\@ifundefined {chapter}{\gdef \theHsection
-{\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
-\Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
+> \appendix=macro:->\UseHookWithArguments {cmd/appendix/before}{0}\@ifundefined {chapter}{\gdef \theHsection {\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
 <recently read> }
 l. ...\cs_show:N \appendix
-The property list \l__zrefclever_counter_type_prop contains the pairs (without
-outer braces):
+The property list \l__zrefclever_counter_type_prop contains the pairs (without outer braces):
 >  {subsection}  =>  {section}
 >  {subsubsection}  =>  {section}
 >  {subparagraph}  =>  {paragraph}
@@ -38,14 +34,10 @@ l. ...\ShowHook { cmd / appendix / before }
 ============================================================
 TEST 2: appendix module after
 ============================================================
-> \appendix=macro:->\UseHookWithArguments
-{cmd/appendix/before}{0}\@ifundefined {chapter}{\gdef \theHsection
-{\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef
-\Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
+> \appendix=macro:->\UseHookWithArguments {cmd/appendix/before}{0}\@ifundefined {chapter}{\gdef \theHsection {\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
 <recently read> }
 l. ...\cs_show:N \appendix
-The property list \l__zrefclever_counter_type_prop contains the pairs (without
-outer braces):
+The property list \l__zrefclever_counter_type_prop contains the pairs (without outer braces):
 >  {subsection}  =>  {appendix}
 >  {subsubsection}  =>  {appendix}
 >  {subparagraph}  =>  {appendix}
@@ -73,16 +65,7 @@ l. ...\testtmp
 <recently read> }
 l. ...\ShowHook { cmd / appendix / before }
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end:
-\nobreakspace \__zrefclever_hyperlink:nnn {}{appendix.A}{\group_begin:
-A\group_end: }, \__zrefclever_hyperlink:nnn {}{section.A.1}{\group_begin:
-A.1\group_end: }, \__zrefclever_hyperlink:nnn
-{}{subsection.A.1.1}{\group_begin: A.1.1\group_end: },
-\__zrefclever_hyperlink:nnn {}{subsubsection.A.1.1.1}{\group_begin:
-A.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn
-{}{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: } and\nobreakspace
-\__zrefclever_hyperlink:nnn {}{subparagraph.A.1.1.1.1.1}{\group_begin:
-A.1.1.1.1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{appendix.A}{\group_begin: A\group_end: }, \__zrefclever_hyperlink:nnn {}{section.A.1}{\group_begin: A.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsection.A.1.1}{\group_begin: A.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }

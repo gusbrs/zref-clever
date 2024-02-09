@@ -436,87 +436,70 @@ l. ...  }
 > \g__zrefclever_opt_lang_english_type_solution_name-pl_tl=solutions.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-first_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-first_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_equation_refbounds-first-sg_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-first-sg_seq contains the items (without outer braces):
 >  {}
 >  {(}
 >  {)}
 >  {}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_equation_refbounds-first-pb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-first-pb_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_equation_refbounds-first-rb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-first-rb_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-mid_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-mid_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_equation_refbounds-mid-rb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-mid-rb_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_equation_refbounds-mid-re_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-mid-re_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-last_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-last_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_equation_refbounds-last-pe_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-last-pe_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_english_type_equation_refbounds-last-re_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_english_type_equation_refbounds-last-re_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}

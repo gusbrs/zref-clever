@@ -15,8 +15,7 @@ l. ...  }
 > \g__zrefclever_declared_language_portuges_tl=portuguese.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_language_portuguese_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_language_portuguese_gender_seq contains the items (without outer braces):
 >  {f}
 >  {m}.
 <recently read> }
@@ -52,8 +51,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_default_rangesep_tl= a\nobreakspace .
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_book_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_book_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -69,8 +67,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_book_name-pl_tl=livros.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_part_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_part_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -86,8 +83,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_part_name-pl_tl=partes.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_chapter_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_chapter_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -103,8 +99,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_chapter_name-pl_tl=capítulos.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_section_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_section_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -120,8 +115,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_section_name-pl_tl=seções.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_paragraph_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_paragraph_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -149,8 +143,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_paragraph_name-pl-ab_tl=par..
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_appendix_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_appendix_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -166,8 +159,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_appendix_name-pl_tl=apêndices.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_page_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_page_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -189,8 +181,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_page_rangetopair_bool=false.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_line_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_line_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -206,8 +197,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_line_name-pl_tl=linhas.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_figure_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_figure_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -235,8 +225,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_figure_name-pl-ab_tl=figs..
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_table_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_table_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -252,8 +241,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_table_name-pl_tl=tabelas.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_item_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_item_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -269,8 +257,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_item_name-pl_tl=itens.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_footnote_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_footnote_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -286,8 +273,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_footnote_name-pl_tl=notas.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_endnote_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_endnote_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -303,8 +289,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_endnote_name-pl_tl=notas.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_note_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_note_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -320,8 +305,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_note_name-pl_tl=notas.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_equation_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_equation_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -349,8 +333,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_equation_name-pl-ab_tl=eqs..
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_theorem_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_theorem_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -366,8 +349,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_theorem_name-pl_tl=teoremas.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_lemma_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_lemma_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -383,8 +365,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_lemma_name-pl_tl=lemas.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_corollary_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_corollary_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -400,8 +381,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_corollary_name-pl_tl=corolários.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_proposition_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_proposition_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -417,8 +397,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_proposition_name-pl_tl=proposições.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_definition_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_definition_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -434,8 +413,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_definition_name-pl_tl=definições.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_proof_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_proof_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -451,8 +429,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_proof_name-pl_tl=demonstrações.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_result_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_result_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -468,8 +445,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_result_name-pl_tl=resultados.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_remark_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_remark_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -485,8 +461,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_remark_name-pl_tl=observações.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_example_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_example_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -502,8 +477,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_example_name-pl_tl=exemplos.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_algorithm_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_algorithm_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -519,8 +493,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_algorithm_name-pl_tl=algoritmos.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_listing_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_listing_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -536,8 +509,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_listing_name-pl_tl=listagens.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_exercise_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_exercise_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -553,8 +525,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_exercise_name-pl_tl=exercícios.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_portuguese_type_solution_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_solution_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -570,90 +541,70 @@ l. ...  }
 > \g__zrefclever_opt_lang_portuguese_type_solution_name-pl_tl=soluções.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_portuguese_type_equation_refbounds-first_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_equation_refbounds-first_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_portuguese_type_equation_refbounds-first-sg_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_equation_refbounds-first-sg_seq contains the items (without outer braces):
 >  {}
 >  {(}
 >  {)}
 >  {}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_portuguese_type_equation_refbounds-first-pb_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_equation_refbounds-first-pb_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_portuguese_type_equation_refbounds-first-rb_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_equation_refbounds-first-rb_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_portuguese_type_equation_refbounds-mid_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_equation_refbounds-mid_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_portuguese_type_equation_refbounds-mid-rb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_equation_refbounds-mid-rb_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_portuguese_type_equation_refbounds-mid-re_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_equation_refbounds-mid-re_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_portuguese_type_equation_refbounds-last_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_equation_refbounds-last_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_portuguese_type_equation_refbounds-last-pe_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_equation_refbounds-last-pe_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_portuguese_type_equation_refbounds-last-re_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_portuguese_type_equation_refbounds-last-re_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}

@@ -3,8 +3,7 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: refbounds-first-sg
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -48,8 +47,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -93,9 +91,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.4\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.4\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -125,9 +121,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 4
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -157,9 +151,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -188,9 +180,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -219,9 +209,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -259,9 +247,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
-1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -299,9 +285,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -337,9 +321,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -375,10 +357,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -422,10 +401,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -469,10 +445,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: 
-to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end:  to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -520,8 +493,7 @@ l. ...\showbox0
 ============================================================
 TEST 2: refbounds-first
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -541,8 +513,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -562,9 +533,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.4\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.4\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -594,9 +563,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 4
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -626,9 +593,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -657,9 +622,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -688,9 +651,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -728,9 +689,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
-1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -768,9 +727,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*],
-\group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*], \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -830,9 +787,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*],
-\group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*], \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -892,10 +847,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -939,10 +891,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*],
-\group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: 
-to\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*], \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1010,10 +959,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*],
-\group_begin: 1.3\group_end:  to\nobreakspace \group_begin: 1.5\group_end: ,
-and\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*], \group_begin: 1.3\group_end:  to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1085,8 +1031,7 @@ l. ...\showbox0
 ============================================================
 TEST 3: refbounds-first-pb
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1106,8 +1051,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1127,9 +1071,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*]
-and\nobreakspace \group_begin: 1.4\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*] and\nobreakspace \group_begin: 1.4\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1183,9 +1125,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 4
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*]
-and\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*] and\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1239,9 +1179,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1270,9 +1208,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1301,9 +1237,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1341,10 +1275,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace [pre*][pre]\group_begin: 1.2\group_end: [pos][pos*]
-and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace [pre*][pre]\group_begin: 1.2\group_end: [pos][pos*] and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1406,9 +1337,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1444,9 +1373,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1482,10 +1409,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1529,10 +1453,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1576,10 +1497,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: 
-to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end:  to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1627,8 +1545,7 @@ l. ...\showbox0
 ============================================================
 TEST 4: refbounds-first-rb
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1648,8 +1565,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1669,9 +1585,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.4\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.4\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1701,9 +1615,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 4
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1733,9 +1645,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*]
-to\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*] to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1788,9 +1698,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*]
-to\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*] to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1843,10 +1751,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*]
-to\nobreakspace \group_begin: 1.3\group_end:  and\nobreakspace \group_begin:
-1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*] to\nobreakspace \group_begin: 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1908,9 +1813,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
-1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1948,9 +1851,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1986,9 +1887,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2024,10 +1923,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*]
-to\nobreakspace \group_begin: 1.3\group_end: , \group_begin: 1.5\group_end: ,
-and\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace [pre*][pre]\group_begin: 1.1\group_end: [pos][pos*] to\nobreakspace \group_begin: 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2095,10 +1991,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2142,10 +2035,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: 
-to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end:  to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2193,8 +2083,7 @@ l. ...\showbox0
 ============================================================
 TEST 5: refbounds-mid
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2214,8 +2103,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2235,9 +2123,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.4\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.4\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2267,9 +2153,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 4
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2299,9 +2183,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2330,9 +2212,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2361,9 +2241,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2401,9 +2279,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
-1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2441,9 +2317,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , [pre*][pre]\group_begin:
-1.3\group_end: [pos][pos*], and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*], and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2503,9 +2377,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , [pre*][pre]\group_begin:
-1.3\group_end: [pos][pos*], and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*], and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2565,10 +2437,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: , [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*],
-and\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: , [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*], and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2636,10 +2505,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , [pre*][pre]\group_begin:
-1.3\group_end: [pos][pos*], and\nobreakspace \group_begin: 1.5\group_end: 
-to\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*], and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2707,10 +2573,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: 
-to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end:  to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2758,8 +2621,7 @@ l. ...\showbox0
 ============================================================
 TEST 6: refbounds-mid-rb
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2779,8 +2641,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2800,9 +2661,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.4\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.4\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2832,9 +2691,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 4
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2864,9 +2721,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2895,9 +2750,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2926,9 +2779,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2966,10 +2817,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace
-[pre*][pre]\group_begin: 1.5\group_end: [pos][pos*] to\nobreakspace
-\group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*] to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3031,9 +2879,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3069,9 +2915,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3107,10 +2951,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3154,10 +2995,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*]
-to\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*] to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3225,10 +3063,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , [pre*][pre]\group_begin:
-1.3\group_end: [pos][pos*] to\nobreakspace \group_begin: 1.5\group_end: ,
-and\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*] to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3300,8 +3135,7 @@ l. ...\showbox0
 ============================================================
 TEST 7: refbounds-mid-re
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3321,8 +3155,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3342,9 +3175,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.4\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.4\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3374,9 +3205,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 4
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3406,9 +3235,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3437,9 +3264,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3468,10 +3293,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace
-[pre*][pre]\group_begin: 1.3\group_end: [pos][pos*] and\nobreakspace
-\group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*] and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3533,9 +3355,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
-1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3573,9 +3393,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3611,9 +3429,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3649,10 +3465,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace
-[pre*][pre]\group_begin: 1.3\group_end: [pos][pos*], \group_begin:
-1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*], \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3720,10 +3533,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3767,10 +3577,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: 
-to\nobreakspace [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*],
-and\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end:  to\nobreakspace [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*], and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3842,8 +3649,7 @@ l. ...\showbox0
 ============================================================
 TEST 8: refbounds-last
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3863,8 +3669,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3884,9 +3689,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.4\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.4\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3916,9 +3719,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 4
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3948,9 +3749,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -3979,9 +3778,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -4010,9 +3807,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -4050,9 +3845,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
-1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -4090,9 +3883,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -4152,9 +3943,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -4214,10 +4003,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace
-[pre*][pre]\group_begin: 1.7\group_end: [pos][pos*].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace [pre*][pre]\group_begin: 1.7\group_end: [pos][pos*].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -4285,10 +4071,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -4332,10 +4115,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: 
-to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace
-[pre*][pre]\group_begin: 1.7\group_end: [pos][pos*].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end:  to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace [pre*][pre]\group_begin: 1.7\group_end: [pos][pos*].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -4407,8 +4187,7 @@ l. ...\showbox0
 ============================================================
 TEST 9: refbounds-last-pe
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -4428,8 +4207,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -4449,9 +4227,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace
-[pre*][pre]\group_begin: 1.4\group_end: [pos][pos*].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace [pre*][pre]\group_begin: 1.4\group_end: [pos][pos*].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -4505,9 +4281,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace
-[pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -4561,9 +4335,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -4592,9 +4364,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -4623,10 +4393,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end:  and\nobreakspace [pre*][pre]\group_begin: 1.5\group_end:
-[pos][pos*].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end:  and\nobreakspace [pre*][pre]\group_begin: 1.5\group_end: [pos][pos*].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -4688,9 +4455,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
-1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -4728,9 +4493,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -4766,9 +4529,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -4804,10 +4565,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -4851,10 +4609,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -4898,10 +4653,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: 
-to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end:  to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -4949,8 +4701,7 @@ l. ...\showbox0
 ============================================================
 TEST 10: refbounds-last-re
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -4970,8 +4721,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end:
-\nobreakspace \group_begin: 1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: section\group_end: \nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -4991,9 +4741,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.4\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.4\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -5023,9 +4771,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 4
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin:
-1.3\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  and\nobreakspace \group_begin: 1.3\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -5055,9 +4801,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 3
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace
-[pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -5110,9 +4854,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace
-[pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace [pre*][pre]\group_begin: 1.3\group_end: [pos][pos*].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -5165,9 +4907,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end:  and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -5205,10 +4945,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin:
-1.5\group_end:  to\nobreakspace [pre*][pre]\group_begin: 1.7\group_end:
-[pos][pos*].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.2\group_end:  and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace [pre*][pre]\group_begin: 1.7\group_end: [pos][pos*].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -5270,9 +5007,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -5308,9 +5043,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -5346,10 +5079,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 5
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin:
-1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end:  to\nobreakspace \group_begin: 1.3\group_end: , \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -5393,10 +5123,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 7
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: ,
-and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace
-[pre*][pre]\group_begin: 1.7\group_end: [pos][pos*].
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: , and\nobreakspace \group_begin: 1.5\group_end:  to\nobreakspace [pre*][pre]\group_begin: 1.7\group_end: [pos][pos*].
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -5464,10 +5191,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ]
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end: 
-to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin:
-1.7\group_end: .
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: sections\group_end: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.3\group_end:  to\nobreakspace \group_begin: 1.5\group_end: , and\nobreakspace \group_begin: 1.7\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }

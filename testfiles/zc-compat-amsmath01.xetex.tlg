@@ -6,8 +6,7 @@ TEST 1: amsmath module
 > \l__zrefclever_current_counter_tl=parentequation.
 <recently read> }
 l. ...  \testtmp
-The property list \l__zrefclever_counter_type_prop contains the pairs (without
-outer braces):
+The property list \l__zrefclever_counter_type_prop contains the pairs (without outer braces):
 >  {subsection}  =>  {section}
 >  {subsubsection}  =>  {section}
 >  {subparagraph}  =>  {paragraph}
@@ -19,8 +18,7 @@ outer braces):
 >  {parentequation}  =>  {equation}.
 <recently read> }
 l. ...  \testtmp
-The property list \l__zrefclever_counter_resetby_prop contains the pairs
-(without outer braces):
+The property list \l__zrefclever_counter_resetby_prop contains the pairs (without outer braces):
 >  {enumii}  =>  {enumi}
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}
@@ -216,9 +214,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 ============================================================
 TEST 2: Reference: equation
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{equation.1.1}{\group_begin: equation\group_end: \nobreakspace
-(\group_begin: 1\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -241,9 +237,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace
-(\group_begin: 2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -270,9 +264,7 @@ l. ...\showbox0
 ============================================================
 TEST 3: Reference: equation*
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{AMS.1}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
-{eq1}\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{AMS.1}{\group_begin: equation\group_end: \nobreakspace (\group_begin: {eq1}\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -301,10 +293,7 @@ l. ...\showbox0
 ============================================================
 TEST 4: Reference: align
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.3}{\group_begin:
-3\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
-{}{equation.1.4}{\group_begin: 4\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.3}{\group_begin: 3\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.4}{\group_begin: 4\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -343,10 +332,7 @@ l. ...\showbox0
 ============================================================
 TEST 5: Reference: align*
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{AMS.4}{\group_begin:
-{altag1}\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
-{}{AMS.5}{\group_begin: {altag2}\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{AMS.4}{\group_begin: {altag1}\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{AMS.5}{\group_begin: {altag2}\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -395,9 +381,7 @@ l. ...\showbox0
 ============================================================
 TEST 6: Reference: alignat
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{equation.1.5}{\group_begin: equation\group_end: \nobreakspace
-(\group_begin: 5\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.5}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 5\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -420,10 +404,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.7}{\group_begin:
-7\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
-{}{equation.1.8}{\group_begin: 8\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.7}{\group_begin: 7\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.8}{\group_begin: 8\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -462,10 +443,7 @@ l. ...\showbox0
 ============================================================
 TEST 7: Reference: alignat*
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{AMS.8}{\group_begin:
-{tagalnat1}\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
-{}{AMS.9}{\group_begin: {tagalnat2}\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{AMS.8}{\group_begin: {tagalnat1}\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{AMS.9}{\group_begin: {tagalnat2}\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -520,9 +498,7 @@ l. ...\showbox0
 ============================================================
 TEST 8: Reference: flalign
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{equation.1.9}{\group_begin: equation\group_end: \nobreakspace
-(\group_begin: 9\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.9}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 9\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -549,9 +525,7 @@ l. ...\showbox0
 ============================================================
 TEST 9: Reference: flalign*
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{AMS.11}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
-{flal1}\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{AMS.11}{\group_begin: equation\group_end: \nobreakspace (\group_begin: {flal1}\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -581,9 +555,7 @@ l. ...\showbox0
 ============================================================
 TEST 10: Reference: xalignat
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{equation.1.11}{\group_begin: equation\group_end: \nobreakspace
-(\group_begin: 11\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.11}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 11\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -611,9 +583,7 @@ l. ...\showbox0
 ============================================================
 TEST 11: Reference: xalignat*
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{AMS.13}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
-{xal1}\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{AMS.13}{\group_begin: equation\group_end: \nobreakspace (\group_begin: {xal1}\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -643,11 +613,7 @@ l. ...\showbox0
 ============================================================
 TEST 12: Reference: gather
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.13}{\group_begin:
-13\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.14}{\group_begin:
-14\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
-{}{AMS.15}{\group_begin: {\ref *{align:c}$'$}\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.13}{\group_begin: 13\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.14}{\group_begin: 14\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{AMS.15}{\group_begin: {\ref *{align:c}$'$}\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -702,9 +668,7 @@ l. ...\showbox0
 ============================================================
 TEST 13: Reference: gather*
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{AMS.17}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
-{taggath}\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{AMS.17}{\group_begin: equation\group_end: \nobreakspace (\group_begin: {taggath}\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -737,9 +701,7 @@ l. ...\showbox0
 ============================================================
 TEST 14: Reference: multline
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{equation.1.15}{\group_begin: equation\group_end: \nobreakspace
-(\group_begin: 15\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.15}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 15\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -767,9 +729,7 @@ l. ...\showbox0
 ============================================================
 TEST 15: Reference: multline*
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{AMS.19}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
-{multln}\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{AMS.19}{\group_begin: equation\group_end: \nobreakspace (\group_begin: {multln}\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -802,9 +762,7 @@ l. ...\showbox0
 ============================================================
 TEST 16: Reference: subequations
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{equation.1.16}{\group_begin: equation\group_end: \nobreakspace
-(\group_begin: 16\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.16}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 16\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -828,12 +786,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.16a}{\group_begin:
-16a\group_end: }), (\__zrefclever_hyperlink:nnn
-{}{equation.1.16b}{\group_begin: 16b\group_end: }) and\nobreakspace
-(\__zrefclever_hyperlink:nnn {}{equation.1.16c}{\group_begin: 16c\group_end:
-}).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.16a}{\group_begin: 16a\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.16b}{\group_begin: 16b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.16c}{\group_begin: 16c\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -881,12 +834,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 )
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.17a}{\group_begin:
-17a\group_end: }), (\__zrefclever_hyperlink:nnn
-{}{equation.1.17b}{\group_begin: 17b\group_end: }) and\nobreakspace
-(\__zrefclever_hyperlink:nnn {}{equation.1.17c}{\group_begin: 17c\group_end:
-}).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.17a}{\group_begin: 17a\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.17b}{\group_begin: 17b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.17c}{\group_begin: 17c\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -934,12 +882,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 )
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.18a}{\group_begin:
-18a\group_end: }), (\__zrefclever_hyperlink:nnn
-{}{equation.1.18b}{\group_begin: 18b\group_end: }) and\nobreakspace
-(\__zrefclever_hyperlink:nnn {}{AMS.21}{\group_begin: {\ref
-*{align:c}$'$}\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.18a}{\group_begin: 18a\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.18b}{\group_begin: 18b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{AMS.21}{\group_begin: {\ref *{align:c}$'$}\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -992,10 +935,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 )
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.19a}{\group_begin:
-19a\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
-{}{equation.1.19b}{\group_begin: 19b\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.19a}{\group_begin: 19a\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.19b}{\group_begin: 19b\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1038,11 +978,7 @@ l. ...\showbox0
 ============================================================
 TEST 17: Reference: subequations, ref=subeq
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.16a}{\group_begin:
-a\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.16b}{\group_begin:
-b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
-{}{equation.1.16c}{\group_begin: c\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.16a}{\group_begin: a\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.16b}{\group_begin: b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.16c}{\group_begin: c\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1084,11 +1020,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 )
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.17a}{\group_begin:
-a\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.17b}{\group_begin:
-b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
-{}{equation.1.17c}{\group_begin: c\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.17a}{\group_begin: a\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.17b}{\group_begin: b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.17c}{\group_begin: c\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1130,11 +1062,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 )
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.18a}{\group_begin:
-a\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.18b}{\group_begin:
-b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
-{}{AMS.21}{\group_begin: b\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.18a}{\group_begin: a\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.18b}{\group_begin: b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{AMS.21}{\group_begin: b\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1176,10 +1104,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 )
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.19a}{\group_begin:
-a\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
-{}{equation.1.19b}{\group_begin: b\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.19a}{\group_begin: a\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.19b}{\group_begin: b\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }

@@ -3,13 +3,10 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: appendix module after
 ============================================================
-> \appendix=macro:->\@ifundefined {chapter}{\gdef \theHsection {\Hy@AlphNoErr
-{section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp
-{\Hy@appendixstring }\HyOrg@appendix .
+> \appendix=macro:->\@ifundefined {chapter}{\gdef \theHsection {\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
 <recently read> }
 l. ...\cs_show:N \appendix
-The property list \l__zrefclever_counter_type_prop contains the pairs (without
-outer braces):
+The property list \l__zrefclever_counter_type_prop contains the pairs (without outer braces):
 >  {subsection}  =>  {section}
 >  {subsubsection}  =>  {section}
 >  {subparagraph}  =>  {paragraph}
@@ -29,15 +26,12 @@ l. ...\ShowHook { cmd / appendix / before }
 ============================================================
 TEST 2: appendices module
 ============================================================
-> \appendix=macro:->\@ifundefined {chapter}{\gdef \theHsection {\Hy@AlphNoErr
-{section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp
-{\Hy@appendixstring }\HyOrg@appendix .
+> \appendix=macro:->\@ifundefined {chapter}{\gdef \theHsection {\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
 <recently read> }
 l. ...\cs_show:N \appendix
 zc@appendix counter not defined
 zc@save@appendix counter not defined
-The property list \l__zrefclever_counter_resetby_prop contains the pairs
-(without outer braces):
+The property list \l__zrefclever_counter_resetby_prop contains the pairs (without outer braces):
 >  {enumii}  =>  {enumi}
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}.
@@ -63,8 +57,7 @@ l. ...\ShowHook { env / appendices / end }
 > The hook is empty.
 <recently read> }
 l. ...\ShowHook { env / subappendices / begin }
-The property list \l__zrefclever_counter_type_prop contains the pairs (without
-outer braces):
+The property list \l__zrefclever_counter_type_prop contains the pairs (without outer braces):
 >  {subsection}  =>  {section}
 >  {subsubsection}  =>  {section}
 >  {subparagraph}  =>  {paragraph}
@@ -75,8 +68,7 @@ outer braces):
 >  {mpfootnote}  =>  {footnote}.
 <recently read> }
 l. ...  \testtmp
-The property list \l__zrefclever_counter_type_prop contains the pairs (without
-outer braces):
+The property list \l__zrefclever_counter_type_prop contains the pairs (without outer braces):
 >  {subsection}  =>  {section}
 >  {subsubsection}  =>  {section}
 >  {subparagraph}  =>  {paragraph}
@@ -93,17 +85,13 @@ TEST 3: amsmath module
 ============================================================
 __zrefclever_ltxlabel:n not defined
 __zrefclever_orig_ltxlabel:n not defined
-> \ltx@label=macro:#1->\@bsphack \begingroup \UseHookWithArguments
-{label}{1}{#1}\protected@write \@auxout {}{\string \newlabel
-{#1}{{\@currentlabel }{\thepage }{\@currentlabelname }{\@currentHref
-}{\@kernel@reserved@label@data }}}\endgroup \@esphack .
+> \ltx@label=macro:#1->\@bsphack \begingroup \UseHookWithArguments {label}{1}{#1}\protected@write \@auxout {}{\string \newlabel {#1}{{\@currentlabel }{\thepage }{\@currentlabelname }{\@currentHref }{\@kernel@reserved@label@data }}}\endgroup \@esphack .
 <recently read> }
 l. ...\cs_show:N \ltx@label
 > \l__zrefclever_current_counter_tl=\@currentcounter .
 <recently read> }
 l. ...  \testtmp
-The property list \l__zrefclever_counter_type_prop contains the pairs (without
-outer braces):
+The property list \l__zrefclever_counter_type_prop contains the pairs (without outer braces):
 >  {subsection}  =>  {section}
 >  {subsubsection}  =>  {section}
 >  {subparagraph}  =>  {paragraph}
@@ -114,8 +102,7 @@ outer braces):
 >  {mpfootnote}  =>  {footnote}.
 <recently read> }
 l. ...  \testtmp
-The property list \l__zrefclever_counter_resetby_prop contains the pairs
-(without outer braces):
+The property list \l__zrefclever_counter_resetby_prop contains the pairs (without outer braces):
 >  {enumii}  =>  {enumi}
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}.
@@ -196,8 +183,7 @@ l__zrefclever_type_equation_options_prop not defined
 ============================================================
 TEST 4: listings module
 ============================================================
-The property list \l__zrefclever_counter_type_prop contains the pairs (without
-outer braces):
+The property list \l__zrefclever_counter_type_prop contains the pairs (without outer braces):
 >  {subsection}  =>  {section}
 >  {subsubsection}  =>  {section}
 >  {subparagraph}  =>  {paragraph}
@@ -208,50 +194,13 @@ outer braces):
 >  {mpfootnote}  =>  {footnote}.
 <recently read> }
 l. ...\testtmp
-The property list \l__zrefclever_counter_resetby_prop contains the pairs
-(without outer braces):
+The property list \l__zrefclever_counter_resetby_prop contains the pairs (without outer braces):
 >  {enumii}  =>  {enumi}
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}.
 <recently read> }
 l. ...\testtmp
-> \lsthk@Init=macro:->\lst@ifshowspaces \let \lst@outputspace
-\lst@visiblespace \lst@keepspacestrue \fi \edef \ttdefault {\ttdefault }\let
-\lsts@nfss@catcodes \nfss@catcodes \let \nfss@catcodes \lst@nfss@catcodes
-\edef \lst@OrgOutput {\the \output }\ifcase \lst@useoutput \relax \or \output
-{\global \setbox \lst@gtempboxa \box \@cclv \expandafter \egroup
-\lst@SaveToken \lst@InterruptModes \setbox \@cclv \box \lst@gtempboxa \bgroup
-\lst@OrgOutput \egroup \bgroup \aftergroup \pagegoal \aftergroup \vsize
-\aftergroup \lst@ReenterModes \aftergroup \lst@RestoreToken }\else \output
-{\lst@RestoreOrigCatcodes \lst@ifec \lst@RestoreOrigExtendedCatcodes \fi
-\lst@OrgOutput }\fi \let \lst@bnext \relax \let \lst@enext \relax
-\lst@basicstyle \ifx \lst@inputenc \@empty \else \@ifundefined
-{inputencoding}{}{\inputencoding \lst@inputenc }\fi \ifx \lst@linerange
-\@empty \edef \lst@linerange {{\lst@firstline }-{\lst@lastline },}\fi
-\lst@GetLineInterval \lst@ifsensitive \else \let \lst@KeywordTest
-\lst@KEYWORDTEST \let \lst@WorkingTest \lst@WORKINGTEST \let \lst@IfOneOutOf
-\lst@IFONEOUTOF \fi \lsthk@TrackKeywords \lsthk@PostTrackKeywords \let
-\lst@ifkeywords \iftrue \global \let \lst@prefixkeyword \relax \def
-\@currentlabel {\thelstnumber }\ifnum \z@ >\lst@stepnumber \let
-\lst@advancelstnum \m@ne \edef \lst@stepnumber {-\lst@stepnumber }\fi \ifnum
-\z@ <\lst@stepnumber \global \lst@skipnumbers \lst@firstnumber \global \divide
-\lst@skipnumbers \lst@stepnumber \global \multiply \lst@skipnumbers
--\lst@stepnumber \global \advance \lst@skipnumbers \lst@firstnumber \ifnum
-\lst@skipnumbers >\z@ \global \advance \lst@skipnumbers -\lst@stepnumber \fi
-\else \let \lst@SkipOrPrintLabel \relax \fi \lst@ifresetmargins \advance
-\linewidth \@totalleftmargin \advance \linewidth \rightmargin
-\@totalleftmargin \z@ \fi \advance \linewidth -\lst@xleftmargin \advance
-\linewidth -\lst@xrightmargin \advance \@totalleftmargin \lst@xleftmargin
-\relax \parskip \z@ \ifdim \z@ =\lst@lineskip \else \@tempdima \baselineskip
-\advance \@tempdima \lst@lineskip \multiply \@tempdima \@cclvi \divide
-\@tempdima \baselineskip \relax \multiply \@tempdima \@cclvi \edef
-\baselinestretch {\strip@pt \@tempdima }\selectfont \fi \lst@ifbreaklines
-\hbadness \@M \pretolerance \@M \@rightskip \@flushglue \rightskip \@rightskip
-\leftskip \z@skip \parindent \z@ \def \lst@parshape {\parshape \tw@
-\@totalleftmargin \linewidth \lst@breakshape }\else \let \lst@discretionary
-\@empty \fi \ifx \lst@fillcolor \@empty \let \lst@fillcolor \lst@bkgcolor \fi
-\ifx \lst@rulesepcolor \@empty \let \lst@rulesepcolor \lst@fillcolor \fi
-\lst@frameInit .
+> \lsthk@Init=macro:->\lst@ifshowspaces \let \lst@outputspace \lst@visiblespace \lst@keepspacestrue \fi \edef \ttdefault {\ttdefault }\let \lsts@nfss@catcodes \nfss@catcodes \let \nfss@catcodes \lst@nfss@catcodes \edef \lst@OrgOutput {\the \output }\ifcase \lst@useoutput \relax \or \output {\global \setbox \lst@gtempboxa \box \@cclv \expandafter \egroup \lst@SaveToken \lst@InterruptModes \setbox \@cclv \box \lst@gtempboxa \bgroup \lst@OrgOutput \egroup \bgroup \aftergroup \pagegoal \aftergroup \vsize \aftergroup \lst@ReenterModes \aftergroup \lst@RestoreToken }\else \output {\lst@RestoreOrigCatcodes \lst@ifec \lst@RestoreOrigExtendedCatcodes \fi \lst@OrgOutput }\fi \let \lst@bnext \relax \let \lst@enext \relax \lst@basicstyle \ifx \lst@inputenc \@empty \else \@ifundefined {inputencoding}{}{\inputencoding \lst@inputenc }\fi \ifx \lst@linerange \@empty \edef \lst@linerange {{\lst@firstline }-{\lst@lastline },}\fi \lst@GetLineInterval \lst@ifsensitive \else \let \lst@KeywordTest \lst@KEYWORDTEST \let \lst@WorkingTest \lst@WORKINGTEST \let \lst@IfOneOutOf \lst@IFONEOUTOF \fi \lsthk@TrackKeywords \lsthk@PostTrackKeywords \let \lst@ifkeywords \iftrue \global \let \lst@prefixkeyword \relax \def \@currentlabel {\thelstnumber }\ifnum \z@ >\lst@stepnumber \let \lst@advancelstnum \m@ne \edef \lst@stepnumber {-\lst@stepnumber }\fi \ifnum \z@ <\lst@stepnumber \global \lst@skipnumbers \lst@firstnumber \global \divide \lst@skipnumbers \lst@stepnumber \global \multiply \lst@skipnumbers -\lst@stepnumber \global \advance \lst@skipnumbers \lst@firstnumber \ifnum \lst@skipnumbers >\z@ \global \advance \lst@skipnumbers -\lst@stepnumber \fi \else \let \lst@SkipOrPrintLabel \relax \fi \lst@ifresetmargins \advance \linewidth \@totalleftmargin \advance \linewidth \rightmargin \@totalleftmargin \z@ \fi \advance \linewidth -\lst@xleftmargin \advance \linewidth -\lst@xrightmargin \advance \@totalleftmargin \lst@xleftmargin \relax \parskip \z@ \ifdim \z@ =\lst@lineskip \else \@tempdima \baselineskip \advance \@tempdima \lst@lineskip \multiply \@tempdima \@cclvi \divide \@tempdima \baselineskip \relax \multiply \@tempdima \@cclvi \edef \baselinestretch {\strip@pt \@tempdima }\selectfont \fi \lst@ifbreaklines \hbadness \@M \pretolerance \@M \@rightskip \@flushglue \rightskip \@rightskip \leftskip \z@skip \parindent \z@ \def \lst@parshape {\parshape \tw@ \@totalleftmargin \linewidth \lst@breakshape }\else \let \lst@discretionary \@empty \fi \ifx \lst@fillcolor \@empty \let \lst@fillcolor \lst@bkgcolor \fi \ifx \lst@rulesepcolor \@empty \let \lst@rulesepcolor \lst@fillcolor \fi \lst@frameInit .
 <recently read> }
 l. ...\cs_show:c { \@lst hk@ Init }
 ============================================================

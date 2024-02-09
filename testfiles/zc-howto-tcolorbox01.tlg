@@ -3,15 +3,11 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: Reference: Box 1
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{tcb@cnt@pabox.1.1}{\group_begin: example\group_end: \nobreakspace
-\group_begin: 1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{tcb@cnt@pabox.1.1}{\group_begin: example\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{tcb@cnt@pabox.1.1}{\group_begin: page\group_end: \nobreakspace
-\group_begin: 1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{tcb@cnt@pabox.1.1}{\group_begin: page\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
@@ -50,15 +46,11 @@ l. ...\showbox0
 ============================================================
 TEST 2: Reference: Box 2
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{tcb@cnt@pabox.1.2}{\group_begin: solution\group_end: \nobreakspace
-\group_begin: 1.2\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{tcb@cnt@pabox.1.2}{\group_begin: solution\group_end: \nobreakspace \group_begin: 1.2\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{tcb@cnt@pabox.1.2}{\group_begin: page\group_end: \nobreakspace
-\group_begin: 1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{tcb@cnt@pabox.1.2}{\group_begin: page\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
@@ -98,15 +90,11 @@ l. ...\showbox0
 ============================================================
 TEST 3: Reference: My theorem
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{tcb@cnt@mytheo.1.1}{\group_begin: mytheorem\group_end: \nobreakspace
-\group_begin: 1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{tcb@cnt@mytheo.1.1}{\group_begin: mytheorem\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{tcb@cnt@mytheo.1.1}{\group_begin: page\group_end: \nobreakspace
-\group_begin: 1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{tcb@cnt@mytheo.1.1}{\group_begin: page\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
@@ -144,8 +132,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\pdfendlink
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{tcb@cnt@mytheo.1.1}{\group_begin: This is my title\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{tcb@cnt@mytheo.1.1}{\group_begin: This is my title\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }

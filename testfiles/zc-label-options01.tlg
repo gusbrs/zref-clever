@@ -29,8 +29,7 @@ l. ...\show\Z@R@equationF
 ============================================================
 TEST 3: Option: counterresetters=...
 ============================================================
-The sequence \l__zrefclever_counter_resetters_seq contains the items (without
-outer braces):
+The sequence \l__zrefclever_counter_resetters_seq contains the items (without outer braces):
 >  {part}
 >  {chapter}
 >  {section}
@@ -40,8 +39,7 @@ outer braces):
 >  {subparagraph}.
 <recently read> }
 l. ...\testtmp
-The sequence \l__zrefclever_counter_resetters_seq contains the items (without
-outer braces):
+The sequence \l__zrefclever_counter_resetters_seq contains the items (without outer braces):
 >  {part}
 >  {chapter}
 >  {section}
@@ -59,15 +57,13 @@ l. ...\show\Z@R@foobar
 ============================================================
 TEST 4: Option: counterresetby=...
 ============================================================
-The property list \l__zrefclever_counter_resetby_prop contains the pairs
-(without outer braces):
+The property list \l__zrefclever_counter_resetby_prop contains the pairs (without outer braces):
 >  {enumii}  =>  {enumi}
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}.
 <recently read> }
 l. ...\testtmp
-The property list \l__zrefclever_counter_resetby_prop contains the pairs
-(without outer braces):
+The property list \l__zrefclever_counter_resetby_prop contains the pairs (without outer braces):
 >  {enumii}  =>  {enumi}
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}

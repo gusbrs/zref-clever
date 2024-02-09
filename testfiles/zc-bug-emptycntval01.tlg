@@ -3,10 +3,8 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: Reference: labels before refstepcounter
 ============================================================
-Package zref-clever Warning: Reference format option 'name-sg' undefined for
-(zref-clever)                type '' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default:
-\nobreakspace \group_begin: \group_end: .
+Package zref-clever Warning: Reference format option 'name-sg' undefined for type '' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default: \nobreakspace \group_begin: \group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }

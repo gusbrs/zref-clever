@@ -1,8 +1,6 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
-Package zref-clever Warning: Option 'ref=title' requested on line .... But the
-(zref-clever)                property 'title' is not declared, falling-back to
-(zref-clever)                'default'.
+Package zref-clever Warning: Option 'ref=title' requested on line .... But the property 'title' is not declared, falling-back to 'default'.
 > \l__zrefclever_ref_property_tl=default.
 <recently read> }
 l. ...\tl_show:N \l__zrefclever_ref_property_tl

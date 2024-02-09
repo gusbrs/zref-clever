@@ -21,16 +21,14 @@ l. ...  }
 > \g__zrefclever_declared_language_nswissgerman_tl=german.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_language_german_declension_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_language_german_declension_seq contains the items (without outer braces):
 >  {N}
 >  {A}
 >  {D}
 >  {G}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_language_german_gender_seq contains the items
-(without outer braces):
+The sequence \g__zrefclever_opt_language_german_gender_seq contains the items (without outer braces):
 >  {f}
 >  {m}
 >  {n}.
@@ -70,8 +68,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_default_rangesep_tl= bis\nobreakspace .
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_book_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_book_gender_seq contains the items (without outer braces):
 >  {n}.
 <recently read> }
 l. ...  }
@@ -99,8 +96,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_book_G-Name-pl_tl=Bücher.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_part_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_part_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -128,8 +124,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_part_G-Name-pl_tl=Teile.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_chapter_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_chapter_gender_seq contains the items (without outer braces):
 >  {n}.
 <recently read> }
 l. ...  }
@@ -157,8 +152,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_chapter_G-Name-pl_tl=Kapitel.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_section_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_section_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -186,8 +180,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_section_G-Name-pl_tl=Abschnitte.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_paragraph_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_paragraph_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -215,8 +208,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_paragraph_G-Name-pl_tl=Absätze.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_appendix_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_appendix_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -244,8 +236,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_appendix_G-Name-pl_tl=Anhänge.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_page_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_page_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -279,8 +270,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_page_rangetopair_bool=false.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_line_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_line_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -308,8 +298,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_line_G-Name-pl_tl=Zeilen.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_figure_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_figure_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -361,8 +350,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_figure_G-Name-pl-ab_tl=Abb..
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_table_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_table_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -390,8 +378,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_table_G-Name-pl_tl=Tabellen.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_item_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_item_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -419,8 +406,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_item_G-Name-pl_tl=Punkte.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_footnote_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_footnote_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -448,8 +434,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_footnote_G-Name-pl_tl=Fußnoten.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_endnote_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_endnote_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -477,8 +462,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_endnote_G-Name-pl_tl=Endnoten.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_note_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_note_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -506,8 +490,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_note_G-Name-pl_tl=Anmerkungen.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_equation_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_equation_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -535,8 +518,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_equation_G-Name-pl_tl=Gleichungen.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_theorem_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_theorem_gender_seq contains the items (without outer braces):
 >  {n}.
 <recently read> }
 l. ...  }
@@ -564,8 +546,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_theorem_G-Name-pl_tl=Theoreme.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_lemma_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_lemma_gender_seq contains the items (without outer braces):
 >  {n}.
 <recently read> }
 l. ...  }
@@ -593,8 +574,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_lemma_G-Name-pl_tl=Lemmata.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_corollary_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_corollary_gender_seq contains the items (without outer braces):
 >  {n}.
 <recently read> }
 l. ...  }
@@ -622,8 +602,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_corollary_G-Name-pl_tl=Korollare.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_proposition_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_proposition_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -651,8 +630,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_proposition_G-Name-pl_tl=Sätze.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_definition_gender_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_definition_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -680,8 +658,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_definition_G-Name-pl_tl=Definitionen.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_proof_gender_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_proof_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -709,8 +686,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_proof_G-Name-pl_tl=Beweise.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_result_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_result_gender_seq contains the items (without outer braces):
 >  {n}.
 <recently read> }
 l. ...  }
@@ -738,8 +714,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_result_G-Name-pl_tl=Ergebnisse.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_remark_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_remark_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -767,8 +742,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_remark_G-Name-pl_tl=Bemerkungen.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_example_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_example_gender_seq contains the items (without outer braces):
 >  {n}.
 <recently read> }
 l. ...  }
@@ -796,8 +770,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_example_G-Name-pl_tl=Beispiele.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_algorithm_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_algorithm_gender_seq contains the items (without outer braces):
 >  {m}.
 <recently read> }
 l. ...  }
@@ -825,8 +798,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_algorithm_G-Name-pl_tl=Algorithmen.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_listing_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_listing_gender_seq contains the items (without outer braces):
 >  {n}.
 <recently read> }
 l. ...  }
@@ -854,8 +826,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_listing_G-Name-pl_tl=Listings.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_exercise_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_exercise_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -883,8 +854,7 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_exercise_G-Name-pl_tl=Übungsaufgaben.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_solution_gender_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_solution_gender_seq contains the items (without outer braces):
 >  {f}.
 <recently read> }
 l. ...  }
@@ -912,85 +882,70 @@ l. ...  }
 > \g__zrefclever_opt_lang_german_type_solution_G-Name-pl_tl=Lösungen.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-first_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-first_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_german_type_equation_refbounds-first-sg_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-first-sg_seq contains the items (without outer braces):
 >  {}
 >  {(}
 >  {)}
 >  {}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_german_type_equation_refbounds-first-pb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-first-pb_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_german_type_equation_refbounds-first-rb_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-first-rb_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-mid_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-mid_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-mid-rb_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-mid-rb_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-mid-re_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-mid-re_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-last_seq
-contains the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-last_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_german_type_equation_refbounds-last-pe_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-last-pe_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}
 >  {)}.
 <recently read> }
 l. ...  }
-The sequence
-\g__zrefclever_opt_lang_german_type_equation_refbounds-last-re_seq contains
-the items (without outer braces):
+The sequence \g__zrefclever_opt_lang_german_type_equation_refbounds-last-re_seq contains the items (without outer braces):
 >  {(}
 >  {}
 >  {}

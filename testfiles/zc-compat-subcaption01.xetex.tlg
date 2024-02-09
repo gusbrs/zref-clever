@@ -3,8 +3,7 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: subcaption module
 ============================================================
-The property list \l__zrefclever_counter_type_prop contains the pairs (without
-outer braces):
+The property list \l__zrefclever_counter_type_prop contains the pairs (without outer braces):
 >  {subsection}  =>  {section}
 >  {subsubsection}  =>  {section}
 >  {subparagraph}  =>  {paragraph}
@@ -17,8 +16,7 @@ outer braces):
 >  {subtable}  =>  {table}.
 <recently read> }
 l. ...\testtmp
-The property list \l__zrefclever_counter_resetby_prop contains the pairs
-(without outer braces):
+The property list \l__zrefclever_counter_resetby_prop contains the pairs (without outer braces):
 >  {enumii}  =>  {enumi}
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}
@@ -27,34 +25,14 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs
 <recently read> }
 l. ...\testtmp
 subref property is defined
-> \caption@subtypehook=macro:->\ifx \caption \caption@subcaption \else
-\caption@warmup \caption@stepcounter \@captype \caption@ifcaption {}{\let
-\caption@add@contentsline \caption@addsubcontentsline \let
-\caption@addsubcontentslines \@gobble }\c@continuedfloat =0\relax \let
-\caption@setfloatcapt \@firstofone \let \caption@chkfloat \@gobbletwo
-\caption@set {box}{none}\caption@clearmargin \caption@iflist {}{\let
-\caption@setlist \@gobble }\caption@setoptions {sub}\caption@setoptions
-{subfloat}\renewcommand *\caption@settype [1]{\caption@Error {##1 inside
-\@subcaptype }}\let \caption \caption@subcaption \let \@caption
-\caption@@caption \let \phantomcaption \caption@subphantom \let
-\captionlistentry \caption@sublistentry \let \captiontext \caption@subtext
-\let \caption@refstepcounter \caption@refstepcounter@ \let \@makecaption
-\caption@makecaption \fi \ifx \label \subcaption@label \else \let
-\subcaption@ORI@label \label \let \label \subcaption@label \fi \let
-\subcaption \caption \let \phantomsubcaption \phantomcaption \let
-\subcaptionlistentry \captionlistentry \let \subcaptiontext \captiontext
-\zref@localaddprop \ZREF@mainlist {subref}.
+> \caption@subtypehook=macro:->\ifx \caption \caption@subcaption \else \caption@warmup \caption@stepcounter \@captype \caption@ifcaption {}{\let \caption@add@contentsline \caption@addsubcontentsline \let \caption@addsubcontentslines \@gobble }\c@continuedfloat =0\relax \let \caption@setfloatcapt \@firstofone \let \caption@chkfloat \@gobbletwo \caption@set {box}{none}\caption@clearmargin \caption@iflist {}{\let \caption@setlist \@gobble }\caption@setoptions {sub}\caption@setoptions {subfloat}\renewcommand *\caption@settype [1]{\caption@Error {##1 inside \@subcaptype }}\let \caption \caption@subcaption \let \@caption \caption@@caption \let \phantomcaption \caption@subphantom \let \captionlistentry \caption@sublistentry \let \captiontext \caption@subtext \let \caption@refstepcounter \caption@refstepcounter@ \let \@makecaption \caption@makecaption \fi \ifx \label \subcaption@label \else \let \subcaption@ORI@label \label \let \label \subcaption@label \fi \let \subcaption \caption \let \phantomsubcaption \phantomcaption \let \subcaptionlistentry \captionlistentry \let \subcaptiontext \captiontext \zref@localaddprop \ZREF@mainlist {subref}.
 <recently read> }
 l. ...\testtmp
 ============================================================
 ============================================================
 TEST 2: Reference: subcaptionbox
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.1}{\group_begin:
-1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.caption.1}{\group_begin:
-1a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
-{}{figure.caption.1}{\group_begin: 1b\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.1}{\group_begin: 1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.caption.1}{\group_begin: 1a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.1}{\group_begin: 1b\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -93,11 +71,7 @@ l. ...\showbox0
 ============================================================
 TEST 3: Reference: subfigure
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.2}{\group_begin:
-2\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.caption.2}{\group_begin:
-2a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
-{}{figure.caption.2}{\group_begin: 2b\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.2}{\group_begin: 2\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.caption.2}{\group_begin: 2a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.2}{\group_begin: 2b\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -136,11 +110,7 @@ l. ...\showbox0
 ============================================================
 TEST 4: Reference: subtable
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: tables\group_end:
-\nobreakspace \__zrefclever_hyperlink:nnn {}{table.caption.3}{\group_begin:
-1\group_end: }, \__zrefclever_hyperlink:nnn {}{table.caption.3}{\group_begin:
-1a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
-{}{table.caption.3}{\group_begin: 1b\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: tables\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{table.caption.3}{\group_begin: 1\group_end: }, \__zrefclever_hyperlink:nnn {}{table.caption.3}{\group_begin: 1a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{table.caption.3}{\group_begin: 1b\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -179,11 +149,7 @@ l. ...\showbox0
 ============================================================
 TEST 5: Reference: subcaption
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.4}{\group_begin:
-3\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.caption.4}{\group_begin:
-3a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn
-{}{figure.caption.4}{\group_begin: 3b\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.4}{\group_begin: 3\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.caption.4}{\group_begin: 3a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.4}{\group_begin: 3b\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -222,12 +188,8 @@ l. ...\showbox0
 ============================================================
 TEST 6: Reference: subcaptionbox subref
 ============================================================
-Package zref-clever Warning: Reference property 'subref' undefined for label
-(zref-clever)                'animals' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \__zrefclever_ref_default: , \__zrefclever_hyperlink:nnn
-{}{figure.caption.1}{\group_begin: a\group_end: } and\nobreakspace
-\__zrefclever_hyperlink:nnn {}{figure.caption.1}{\group_begin: b\group_end: }.
+Package zref-clever Warning: Reference property 'subref' undefined for label 'animals' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end: \nobreakspace \__zrefclever_ref_default: , \__zrefclever_hyperlink:nnn {}{figure.caption.1}{\group_begin: a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.1}{\group_begin: b\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -264,12 +226,8 @@ l. ...\showbox0
 ============================================================
 TEST 7: Reference: subfigure subref
 ============================================================
-Package zref-clever Warning: Reference property 'subref' undefined for label
-(zref-clever)                'fig:1' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \__zrefclever_ref_default: , \__zrefclever_hyperlink:nnn
-{}{figure.caption.2}{\group_begin: a\group_end: } and\nobreakspace
-\__zrefclever_hyperlink:nnn {}{figure.caption.2}{\group_begin: b\group_end: }.
+Package zref-clever Warning: Reference property 'subref' undefined for label 'fig:1' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end: \nobreakspace \__zrefclever_ref_default: , \__zrefclever_hyperlink:nnn {}{figure.caption.2}{\group_begin: a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.2}{\group_begin: b\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -306,12 +264,8 @@ l. ...\showbox0
 ============================================================
 TEST 8: Reference: subtable subref
 ============================================================
-Package zref-clever Warning: Reference property 'subref' undefined for label
-(zref-clever)                'tab:1' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: tables\group_end:
-\nobreakspace \__zrefclever_ref_default: , \__zrefclever_hyperlink:nnn
-{}{table.caption.3}{\group_begin: a\group_end: } and\nobreakspace
-\__zrefclever_hyperlink:nnn {}{table.caption.3}{\group_begin: b\group_end: }.
+Package zref-clever Warning: Reference property 'subref' undefined for label 'tab:1' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: tables\group_end: \nobreakspace \__zrefclever_ref_default: , \__zrefclever_hyperlink:nnn {}{table.caption.3}{\group_begin: a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{table.caption.3}{\group_begin: b\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -348,12 +302,8 @@ l. ...\showbox0
 ============================================================
 TEST 9: Reference: subcaption subref
 ============================================================
-Package zref-clever Warning: Reference property 'subref' undefined for label
-(zref-clever)                'fig:2' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end:
-\nobreakspace \__zrefclever_ref_default: , \__zrefclever_hyperlink:nnn
-{}{figure.caption.4}{\group_begin: a\group_end: } and\nobreakspace
-\__zrefclever_hyperlink:nnn {}{figure.caption.4}{\group_begin: b\group_end: }.
+Package zref-clever Warning: Reference property 'subref' undefined for label 'fig:2' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end: \nobreakspace \__zrefclever_ref_default: , \__zrefclever_hyperlink:nnn {}{figure.caption.4}{\group_begin: a\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.caption.4}{\group_begin: b\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }

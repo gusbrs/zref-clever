@@ -3,24 +3,18 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: Option: tpairsep=..., tlistsep=..., tlastsep=...
 ============================================================
-Package zref-clever Warning: Reference format option 'name-sg' undefined for
-(zref-clever)                type 'chapter' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default:
-\nobreakspace \group_begin: 1\group_end: .
+Package zref-clever Warning: Reference format option 'name-sg' undefined for type 'chapter' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default: \nobreakspace \group_begin: 1\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
-Package zref-clever Warning: Reference format option 'name-sg' undefined for
-(zref-clever)                type 'section' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default:
-\nobreakspace \group_begin: 1.1\group_end: .
+Package zref-clever Warning: Reference format option 'name-sg' undefined for type 'section' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default: \nobreakspace \group_begin: 1.1\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
-Package zref-clever Warning: Reference format option 'name-sg' undefined for
-(zref-clever)                type 'table' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default:
-\nobreakspace \group_begin: 1.1\group_end: .
+Package zref-clever Warning: Reference format option 'name-sg' undefined for type 'table' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default: \nobreakspace \group_begin: 1.1\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
@@ -54,17 +48,13 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 1
 ! OK.
 l. ...\showbox0
-Package zref-clever Warning: Reference format option 'name-sg' undefined for
-(zref-clever)                type 'chapter' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default:
-\nobreakspace \group_begin: 1\group_end: .
+Package zref-clever Warning: Reference format option 'name-sg' undefined for type 'chapter' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default: \nobreakspace \group_begin: 1\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-Package zref-clever Warning: Reference format option 'name-sg' undefined for
-(zref-clever)                type 'section' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default:
-\nobreakspace \group_begin: 1.1\group_end: .
+Package zref-clever Warning: Reference format option 'name-sg' undefined for type 'section' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default: \nobreakspace \group_begin: 1.1\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -92,10 +82,8 @@ l. ...\showbox0
 ============================================================
 TEST 2: Option: notesep=...
 ============================================================
-Package zref-clever Warning: Reference format option 'name-sg' undefined for
-(zref-clever)                type 'section' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default:
-\nobreakspace \group_begin: 1.1\group_end: .
+Package zref-clever Warning: Reference format option 'name-sg' undefined for type 'section' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default: \nobreakspace \group_begin: 1.1\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -122,17 +110,13 @@ l. ...\showbox0
 ============================================================
 TEST 3: Option: namesep=...
 ============================================================
-Package zref-clever Warning: Reference format option 'name-sg' undefined for
-(zref-clever)                type 'chapter' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default:
-\nobreakspace \group_begin: 1\group_end: .
+Package zref-clever Warning: Reference format option 'name-sg' undefined for type 'chapter' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default: \nobreakspace \group_begin: 1\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-Package zref-clever Warning: Reference format option 'name-sg' undefined for
-(zref-clever)                type 'section' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default:
-\nobreakspace \group_begin: 1.1\group_end: .
+Package zref-clever Warning: Reference format option 'name-sg' undefined for type 'section' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default: \nobreakspace \group_begin: 1.1\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -160,11 +144,8 @@ l. ...\showbox0
 ============================================================
 TEST 4: Option: pairsep=..., listsep=..., lastsep=...
 ============================================================
-Package zref-clever Warning: Reference format option 'name-pl' undefined for
-(zref-clever)                type 'section' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.2\group_end: ,
-\group_begin: 2.1\group_end: , \group_begin: 3.1\group_end: .
+Package zref-clever Warning: Reference format option 'name-pl' undefined for type 'section' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.2\group_end: , \group_begin: 2.1\group_end: , \group_begin: 3.1\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -195,10 +176,8 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 1
 ! OK.
 l. ...\showbox0
-Package zref-clever Warning: Reference format option 'name-pl' undefined for
-(zref-clever)                type 'section' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default:
-\nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.2\group_end: .
+Package zref-clever Warning: Reference format option 'name-pl' undefined for type 'section' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default: \nobreakspace \group_begin: 1.1\group_end: , \group_begin: 1.2\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -223,11 +202,8 @@ l. ...\showbox0
 ============================================================
 TEST 5: Option: rangesep=...
 ============================================================
-Package zref-clever Warning: Reference format option 'name-pl' undefined for
-(zref-clever)                type 'section' on line ....
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default:
-\nobreakspace \group_begin: 1.1\group_end: \textendash \group_begin:
-1.4\group_end: .
+Package zref-clever Warning: Reference format option 'name-pl' undefined for type 'section' on line ....
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_name_default: \nobreakspace \group_begin: 1.1\group_end: \textendash \group_begin: 1.4\group_end: .
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }

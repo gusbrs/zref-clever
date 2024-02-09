@@ -76,23 +76,19 @@ l. ...  }
 ============================================================
 TEST 2: Declare existing language
 ============================================================
-Package zref-clever Warning: Language 'french' is already declared on line ....
-(zref-clever)                Nothing to do.
-Package zref-clever Warning: Language 'german' is already declared on line ....
-(zref-clever)                Nothing to do.
+Package zref-clever Warning: Language 'french' is already declared on line .... Nothing to do.
+Package zref-clever Warning: Language 'german' is already declared on line .... Nothing to do.
 ============================================================
 ============================================================
 TEST 3: Declare new language
 ============================================================
-The sequence \g__zrefclever_opt_language_elvish_declension_seq contains the
-items (without outer braces):
+The sequence \g__zrefclever_opt_language_elvish_declension_seq contains the items (without outer braces):
 >  {a}
 >  {b}
 >  {c}.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_language_elvish_gender_seq contains the items
-(without outer braces):
+The sequence \g__zrefclever_opt_language_elvish_gender_seq contains the items (without outer braces):
 >  {x}
 >  {y}
 >  {z}.
@@ -112,10 +108,7 @@ l. ...  }
 ============================================================
 TEST 5: Alias to unknown language
 ============================================================
-Package zref-clever Warning: Language 'foobar' is unknown on line .... Can't
-(zref-clever)                alias to it. See documentation for
-(zref-clever)                '\zcDeclareLanguage' and
-(zref-clever)                '\zcDeclareLanguageAlias'.
+Package zref-clever Warning: Language 'foobar' is unknown on line .... Can't alias to it. See documentation for '\zcDeclareLanguage' and '\zcDeclareLanguageAlias'.
 ============================================================
 ============================================================
 TEST 6: Preamble only

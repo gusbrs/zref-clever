@@ -6,11 +6,7 @@ TEST 1: mathtools module
 > \l__zrefclever_mathtools_loaded_bool=true.
 <recently read> }
 l. ...\testtmp
-> \__zrefclever_mathtools_showonlyrefs:n=\protected\long
-macro:#1->\seq_map_inline:Nn #1{\tl_set:Ne \l__zrefclever_tmpa_tl
-{\__zrefclever_extract_unexp:nnn {##1}{zc@type}{}}\bool_lazy_or:nnT
-{\str_if_eq_p:Vn \l__zrefclever_tmpa_tl {equation}}{\str_if_eq_p:Vn
-\l__zrefclever_tmpa_tl {parentequation}}{\noeqref {##1}}}.
+> \__zrefclever_mathtools_showonlyrefs:n=\protected\long macro:#1->\seq_map_inline:Nn #1{\tl_set:Ne \l__zrefclever_tmpa_tl {\__zrefclever_extract_unexp:nnn {##1}{zc@type}{}}\bool_lazy_or:nnT {\str_if_eq_p:Vn \l__zrefclever_tmpa_tl {equation}}{\str_if_eq_p:Vn \l__zrefclever_tmpa_tl {parentequation}}{\noeqref {##1}}}.
 <recently read> }
 l. ...  }
 ============================================================
@@ -329,9 +325,6 @@ Completed box being shipped out [2]
 .....\OT1/cmr/m/n/10 2
 .....\glue 0.0 plus 1.0fil
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.1}{\group_begin:
-1\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
-{}{equation.1.2a}{\group_begin: 2a\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.1}{\group_begin: 1\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.2a}{\group_begin: 2a\group_end: }).
 <recently read> }
 l. ...\zcref{eq2,align:b}

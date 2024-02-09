@@ -6,8 +6,7 @@ TEST 1: breqn module
 > \l__zrefclever_current_counter_tl=parentequation.
 <recently read> }
 l. ...  \testtmp
-The property list \l__zrefclever_counter_type_prop contains the pairs (without
-outer braces):
+The property list \l__zrefclever_counter_type_prop contains the pairs (without outer braces):
 >  {subsection}  =>  {section}
 >  {subsubsection}  =>  {section}
 >  {subparagraph}  =>  {paragraph}
@@ -19,8 +18,7 @@ outer braces):
 >  {parentequation}  =>  {equation}.
 <recently read> }
 l. ...  \testtmp
-The property list \l__zrefclever_counter_resetby_prop contains the pairs
-(without outer braces):
+The property list \l__zrefclever_counter_resetby_prop contains the pairs (without outer braces):
 >  {enumii}  =>  {enumi}
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}
@@ -70,11 +68,7 @@ l. ...  { \ShowHook { env / #1 / begin } }
 ============================================================
 TEST 2: Reference: dmath
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin:
-1\group_end: }), (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin:
-2\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
-{}{section.1}{\group_begin: 3\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: 1\group_end: }), (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: 2\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: 3\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -120,9 +114,7 @@ l. ...\showbox0
 ============================================================
 TEST 3: Reference: dseries
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
-4\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 4\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -149,9 +141,7 @@ l. ...\showbox0
 ============================================================
 TEST 4: Reference: dgroup
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn
-{}{section.1}{\group_begin: equation\group_end: \nobreakspace (\group_begin:
-5\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 5\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -174,11 +164,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin:
-5a\group_end: }), (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin:
-5b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
-{}{section.1}{\group_begin: 5c\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: 5a\group_end: }), (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: 5b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: 5c\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -227,11 +213,7 @@ l. ...\showbox0
 ============================================================
 TEST 5: Reference: dgroup, ref=subeq
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end:
-\nobreakspace (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin:
-a\group_end: }), (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin:
-b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn
-{}{section.1}{\group_begin: c\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: a\group_end: }), (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: b\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: c\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
