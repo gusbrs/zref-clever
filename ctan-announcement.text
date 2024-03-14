@@ -1,7 +1,6 @@
-## v0.4.3 (2023-11-14)
+## v0.4.4 (2024-03-14)
 
 ### Changed
-- Don't use `expl3` public scratch temporary variables.
-- Prefer `e-type` expansion.
-- Require 2023-11-01 LaTeX kernel.
+- Use `\noeqref` instead of `mathtools`' internals to support `showonlyrefs`
+  option in `mathtools` compatibility module.
 

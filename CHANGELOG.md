@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.3...HEAD)
+## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.4...HEAD)
+
+## [v0.4.4](https://github.com/gusbrs/zref-clever/compare/v0.4.3...v0.4.4) (2024-03-14)
 
 ### Changed
 - Use `\noeqref` instead of `mathtools`' internals to support `showonlyrefs`
