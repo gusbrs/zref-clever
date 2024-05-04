@@ -255,13 +255,17 @@
   {
     \tl_if_empty:NTF \l_@@_reftype_override_tl
       {
-        \exp_args:NNe \prop_if_in:NnTF \l_@@_counter_type_prop
-          \l_@@_current_counter_tl
+        \tl_if_empty:NTF \l_@@_fancyref_type_tl
           {
-            \exp_args:NNe \prop_item:Nn \l_@@_counter_type_prop
+            \exp_args:NNe \prop_if_in:NnTF \l_@@_counter_type_prop
+              \l_@@_current_counter_tl
+              {
+                \exp_args:NNe \prop_item:Nn \l_@@_counter_type_prop
+                  { \l_@@_current_counter_tl }
+              }
               { \l_@@_current_counter_tl }
           }
-          { \l_@@_current_counter_tl }
+          { \l_@@_fancyref_type_tl }
       }
       { \l_@@_reftype_override_tl }
   }
@@ -3874,6 +3878,70 @@
 % \cs{subsubsubsection}''.
 %
 %
+% \subsubsection*{\opt{fancyref} \& co.\ options}
+%
+%    \begin{macrocode}
+\bool_new:N \l_@@_fancyref_bool
+\tl_new:N \l_@@_fancyref_delim_tl
+\prop_new:N \l_@@_fancyref_prefixes_prop
+\keys_define:nn { zref-clever/label }
+  {
+    fancyref .bool_set:N = \l_@@_fancyref_bool ,
+    fancyref .initial:n = false ,
+    fancyref .default:n = true ,
+    fancyrefdelim .tl_set:N = \l_@@_fancyref_delim_tl ,
+    fancyrefdelim .initial:V = \c_colon_str ,
+    fancyrefdelim .value_required:n = true ,
+    fancyrefprefix .code:n =
+      {
+        \keyval_parse:nnn
+          {
+            \msg_warning:nnnn { zref-clever }
+              { key-requires-value } { fancyrefprefix }
+          }
+          {
+            \@@_prop_put_non_empty:Nnn
+              \l_@@_fancyref_prefixes_prop
+          }
+          {#1}
+      } ,
+    fancyrefprefix .value_required:n = true ,
+    fancyrefprefix .initial:n =
+      {
+        chap = chapter ,
+        sec  = section ,
+        eq   = equation ,
+        fig  = figure ,
+        tab  = table ,
+        enum = item ,
+        fn   = footnote ,
+      } ,
+  }
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\AddToHookWithArguments { label } [ ./fancyref ]
+  {
+    \bool_if:NT \l_@@_fancyref_bool
+      { \@@_facyref_set_type:n {#1} }
+  }
+\DeclareHookRule { label } { ./fancyref } { before } { ./zlabel }
+\tl_new:N \l_@@_fancyref_type_tl
+\cs_new_protected:Npn \@@_facyref_set_type:n #1
+  {
+    \seq_set_split:NVn \l_@@_tmpa_seq \l_@@_fancyref_delim_tl {#1}
+    \seq_pop_left:NN \l_@@_tmpa_seq \l_@@_tmpa_tl
+    \seq_if_empty:NTF \l_@@_tmpa_seq
+      { \tl_clear:N \l_@@_fancyref_type_tl }
+      {
+        \prop_get:NVNF \l_@@_fancyref_prefixes_prop
+          \l_@@_tmpa_tl \l_@@_fancyref_type_tl
+          { \tl_clear:N \l_@@_fancyref_type_tl }
+      }
+  }
+%    \end{macrocode}
+%
+%
 % \subsubsection*{\opt{counterresetters} option}
 %
 % \cs{l_@@_counter_resetters_seq} is used by \cs{@@_counter_reset_by:n} to
@@ -3997,7 +4065,7 @@
 % \url{https://github.com/ho-tex/zref/issues/4}.
 %
 %    \begin{macrocode}
-\AddToHookWithArguments { label }
+\AddToHookWithArguments { label } [ ./zlabel ]
   {
     \bool_if:NT \l_@@_labelhook_bool
       { \zref@wrapper@babel \zref@label {#1} }
