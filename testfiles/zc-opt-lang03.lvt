@@ -3,6 +3,8 @@
 \input{regression-test}
 
 \ExplSyntaxOn
+% Load l3backend driver earlier to avoid declaration log lines in .tlg
+\sys_ensure_backend:
 \debug_on:n { check-declarations , deprecation }
 \ExplSyntaxOff
 
