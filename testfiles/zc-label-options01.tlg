@@ -89,16 +89,17 @@ TEST 6: Option: labelhook=...
 ============================================================
 -> The hook 'label' (1 argument):
 > Code chunks:
->     zref-clever -> \bool_if:NT \l__zrefclever_labelhook_bool {\zref@wrapper@babel \zref@label {#1}}
+>     zref-clever/fancyref -> \bool_if:NT \l__zrefclever_fancyref_bool {\__zrefclever_facyref_set_type:Nn \l__zrefclever_fancyref_type_tl {#1}}
+>     zref-clever/zlabel -> \bool_if:NT \l__zrefclever_labelhook_bool {\zref@wrapper@babel \zref@label {#1}}
 >     nameref -> \def \label@name {#1}\label@hook 
 > Document-level (top-level) code (executed last):
 >     ---
 > Extra code for next invocation:
 >     ---
 > Rules:
->     ---
-> Execution order:
->     zref-clever, nameref.
+>     zref-clever/zlabel|zref-clever/fancyref with relation >
+> Execution order (after applying rules):
+>     zref-clever/fancyref, nameref, zref-clever/zlabel.
 <recently read> }
 l. ...\ShowHook{label}
 > \r@equationG=macro:
