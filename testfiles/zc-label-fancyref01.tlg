@@ -5,92 +5,92 @@ TEST 1: Option: fancyref=...
 ============================================================
 > \Z@R@chap:foo-1-1=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {chapter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@chap:foo-1-1}
+l. ...\myshowaux{chap:foo-1-1}
 > \Z@R@foo-1-2=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {myfoobarcounter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@foo-1-2}
+l. ...\myshowaux{foo-1-2}
 > \Z@R@cha:foo-1-3=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {myfoobarcounter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@cha:foo-1-3}
+l. ...\myshowaux{cha:foo-1-3}
 > \Z@R@sec:foo-1-4=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {section}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@sec:foo-1-4}
+l. ...\myshowaux{sec:foo-1-4}
 > \Z@R@chap:foo-1-5=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {myfoobarcounter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@chap:foo-1-5}
+l. ...\myshowaux{chap:foo-1-5}
 > \Z@R@sec:foo-1-6=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {myfoobarcounter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@sec:foo-1-6}
+l. ...\myshowaux{sec:foo-1-6}
 ============================================================
 ============================================================
 TEST 2: Option: fancyrefdelim=...
 ============================================================
 > \Z@R@chap::foo-2-1=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {chapter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@chap::foo-2-1}
+l. ...\myshowaux{chap::foo-2-1}
 > \Z@R@chap:foo-2-2=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {myfoobarcounter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@chap:foo-2-2}
+l. ...\myshowaux{chap:foo-2-2}
 > \Z@R@chap<!bar!>foo-2-3=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {chapter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@chap<!bar!>foo-2-3}
+l. ...\myshowaux{chap<!bar!>foo-2-3}
 > \Z@R@sec:foo-2-4=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {myfoobarcounter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@sec:foo-2-4}
+l. ...\myshowaux{sec:foo-2-4}
 ============================================================
 ============================================================
 TEST 3: Option: fancyrefprefix=...
 ============================================================
 > \Z@R@chap:foo-3-1=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {chapter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@chap:foo-3-1}
+l. ...\myshowaux{chap:foo-3-1}
 > \Z@R@sec:foo-3-2=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {section}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@sec:foo-3-2}
+l. ...\myshowaux{sec:foo-3-2}
 > \Z@R@eq:foo-3-3=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {equation}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@eq:foo-3-3}
+l. ...\myshowaux{eq:foo-3-3}
 > \Z@R@fig:foo-3-4=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {figure}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@fig:foo-3-4}
+l. ...\myshowaux{fig:foo-3-4}
 > \Z@R@tab:foo-3-5=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {table}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@tab:foo-3-5}
+l. ...\myshowaux{tab:foo-3-5}
 > \Z@R@enum:foo-3-6=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {item}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@enum:foo-3-6}
+l. ...\myshowaux{enum:foo-3-6}
 > \Z@R@fn:foo-3-7=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {footnote}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@fn:foo-3-7}
+l. ...\myshowaux{fn:foo-3-7}
 > \Z@R@thm:foo-3-8=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {myfoobarcounter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@thm:foo-3-8}
+l. ...\myshowaux{thm:foo-3-8}
 > \Z@R@cha:foo-3-9=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {myfoobarcounter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@cha:foo-3-9}
+l. ...\myshowaux{cha:foo-3-9}
 > \Z@R@thm:foo-3-10=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {theorem}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@thm:foo-3-10}
+l. ...\myshowaux{thm:foo-3-10}
 > \Z@R@cha:foo-3-11=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {chapter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@cha:foo-3-11}
+l. ...\myshowaux{cha:foo-3-11}
 > \Z@R@chap:foo-3-12=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {myfoobarcounter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@chap:foo-3-12}
+l. ...\myshowaux{chap:foo-3-12}
 > \Z@R@sec:foo-3-13=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {myfoobarcounter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@sec:foo-3-13}
+l. ...\myshowaux{sec:foo-3-13}
 ============================================================
 ============================================================
 TEST 4: Options interactions
 ============================================================
 > \Z@R@chap:foo-4-1=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {myfoobartype}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@chap:foo-4-1}
+l. ...\myshowaux{chap:foo-4-1}
 > \Z@R@chap:foo-4-2=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {chapter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@chap:foo-4-2}
+l. ...\myshowaux{chap:foo-4-2}
 > \Z@R@chap:foo-4-3=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {mybarbaztype}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
-l. ...\myshowaux{Z@R@chap:foo-4-3}
+l. ...\myshowaux{chap:foo-4-3}
 ============================================================

@@ -10,9 +10,15 @@
 \ExplSyntaxOn
 \cs_new_protected:Npn \my_tl_show_if_exist:n #1
   { \tl_if_exist:cT {#1} { \tl_show:c {#1} } }
-\NewDocumentCommand{\myshowaux}{m}{ \my_tl_show_if_exist:n {#1} }
+\NewDocumentCommand{\myshowaux}{m}{ \my_tl_show_if_exist:n { Z@R@ #1} }
 \ExplSyntaxOff
 
+% FIXME I would have liked to use "french" here, to test things with an active
+% colon.  It's supposed to be working.  But something in `l3build' is not
+% liking this.  For some reason, when testing for engines other than pdftex,
+% l3build appears to reuse the .aux file (I think...), and messes up catcodes
+% resulting in the file reaching TeX's limit of 100 errors, thus leaving and
+% not writing a new .aux file, repeating the process on the next run.
 \usepackage[english]{babel}
 
 \usepackage{zref-clever}
@@ -43,12 +49,12 @@
 \zcsetup{fancyref=false}
 \label{chap:foo-1-5}
 \label{sec:foo-1-6}
-\myshowaux{Z@R@chap:foo-1-1}
-\myshowaux{Z@R@foo-1-2}
-\myshowaux{Z@R@cha:foo-1-3}
-\myshowaux{Z@R@sec:foo-1-4}
-\myshowaux{Z@R@chap:foo-1-5}
-\myshowaux{Z@R@sec:foo-1-6}
+\myshowaux{chap:foo-1-1}
+\myshowaux{foo-1-2}
+\myshowaux{cha:foo-1-3}
+\myshowaux{sec:foo-1-4}
+\myshowaux{chap:foo-1-5}
+\myshowaux{sec:foo-1-6}
 \ENDTEST
 
 % Enable it globally for remaining tests.
@@ -61,10 +67,10 @@
 \zcsetup{fancyrefdelim={<!bar!>}}
 \label{chap<!bar!>foo-2-3}
 \label{sec:foo-2-4}
-\myshowaux{Z@R@chap::foo-2-1}
-\myshowaux{Z@R@chap:foo-2-2}
-\myshowaux{Z@R@chap<!bar!>foo-2-3}
-\myshowaux{Z@R@sec:foo-2-4}
+\myshowaux{chap::foo-2-1}
+\myshowaux{chap:foo-2-2}
+\myshowaux{chap<!bar!>foo-2-3}
+\myshowaux{sec:foo-2-4}
 \ENDTEST
 
 \BEGINTEST{Option: fancyrefprefix=...}
@@ -87,19 +93,19 @@
 \zcsetup{fancyrefprefix={chap=,sec=}}
 \label{chap:foo-3-12}
 \label{sec:foo-3-13}
-\myshowaux{Z@R@chap:foo-3-1}
-\myshowaux{Z@R@sec:foo-3-2}
-\myshowaux{Z@R@eq:foo-3-3}
-\myshowaux{Z@R@fig:foo-3-4}
-\myshowaux{Z@R@tab:foo-3-5}
-\myshowaux{Z@R@enum:foo-3-6}
-\myshowaux{Z@R@fn:foo-3-7}
-\myshowaux{Z@R@thm:foo-3-8}
-\myshowaux{Z@R@cha:foo-3-9}
-\myshowaux{Z@R@thm:foo-3-10}
-\myshowaux{Z@R@cha:foo-3-11}
-\myshowaux{Z@R@chap:foo-3-12}
-\myshowaux{Z@R@sec:foo-3-13}
+\myshowaux{chap:foo-3-1}
+\myshowaux{sec:foo-3-2}
+\myshowaux{eq:foo-3-3}
+\myshowaux{fig:foo-3-4}
+\myshowaux{tab:foo-3-5}
+\myshowaux{enum:foo-3-6}
+\myshowaux{fn:foo-3-7}
+\myshowaux{thm:foo-3-8}
+\myshowaux{cha:foo-3-9}
+\myshowaux{thm:foo-3-10}
+\myshowaux{cha:foo-3-11}
+\myshowaux{chap:foo-3-12}
+\myshowaux{sec:foo-3-13}
 \ENDTEST
 
 \BEGINTEST{Options interactions}
@@ -115,9 +121,9 @@
 \zcsetup{reftype=mybarbaztype}
 \label{chap:foo-4-3}
 \endgroup
-\myshowaux{Z@R@chap:foo-4-1}
-\myshowaux{Z@R@chap:foo-4-2}
-\myshowaux{Z@R@chap:foo-4-3}
+\myshowaux{chap:foo-4-1}
+\myshowaux{chap:foo-4-2}
+\myshowaux{chap:foo-4-3}
 \ENDTEST
 
 \OMIT
