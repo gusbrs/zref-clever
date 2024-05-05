@@ -885,6 +885,35 @@ use this option within a group, but if you must do otherwise, the default
 value can be restored by setting the option without a value.  Since these
 options only affect how labels are set, they are not available in \cs{zcref}.
 
+\DescribeOption{fancyref} %
+\DescribeOption{fancyrefdelim} %
+\DescribeOption{fancyrefprefix} %
+The \opt{fancyref} option allow users to control the reference type of labels
+based on the label prefix, à la \pkg{fancyref}.  It is a boolean option,
+initialized to \texttt{false}.  \opt{fancyrefdelim} receives a character, or
+string of characters, to be used as prefix delimiter in the labels, while
+\opt{fancyrefprefix} receives a list of key value pairs, associating prefixes
+to reference types.  Both of them are initialized to the default values used
+by \pkg{fancyref}.  In particular, \opt{fancyrefdelim} is initialized as a
+colon ``\texttt{:}''.  Setting a prefix to an empty value in
+\opt{fancyrefprefix} removes the prefix from the list.  Note that, even with
+\opt{fancyref} enabled, the \opt{reftype} option takes precedence over the
+label's prefix.  Some caveats/warnings for this feature.  First, it only works
+for labels set with \cs{label} (which is recommended practice anyway, see
+\zcref{sec:label-or-zlabel}), because it depends on the kernel's
+\texttt{label} hook, for which there is no \cs{zlabel} equivalent available.
+Second, while you can manually set the reference type of every label in your
+document, sorting and compression still depends on information which is
+derived from the counter underlying a given reference.  I'd expect things to
+match in normal use cases, but it is up to the user to keep things consistent.
+Third, \pkg{fancyref} works by using the label prefix at the time the
+reference is typeset while the \opt{fancyref} option works by setting the type
+at the time the \cs{label} is set.  They should go in the same direction,
+since the label is the same, but the mechanism is different.  Besides, there
+are a good number of reasons why \pkg{zref-clever}'s \opt{fancyref} option
+might produce different results from those of \pkg{fancyref} itself, so a
+strict compatibility is not to be expected.
+
 \DescribeOption{\raisebox{-.2em}{\dbend}\ counterresetters} %
 \DescribeOption{counterresetby} %
 The sorting and compression of references done by \cs{zcref} requires that we
