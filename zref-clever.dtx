@@ -3930,6 +3930,20 @@
       }
   }
 \DeclareHookRule { label } { ./fancyref } { before } { ./zlabel }
+%    \end{macrocode}
+%
+% \begin{macro}{\@@_facyref_set_type:Nn}
+%   Sets \meta{tl var to set} to the \opt{fancyref} reference type of a given
+%   \meta{label}.  Since the \texttt{zc@type} property tests for the emptiness
+%   of \cs{l_@@_fancyref_type_tl}, this function \emph{must} ensure an empty
+%   value of \meta{tl var to set} in case a \opt{fancyref} reference type does
+%   not exist, which may occur either if \cs{l_@@_fancyref_delim_tl} is not
+%   found in \meta{label} or if the prefix is does not exist in
+%   \cs{l_@@_fancyref_prefixes_prop}.
+%   \begin{syntax}
+%     \cs{@@_facyref_set_type:Nn} \Arg{tl var to set} \Arg{label}
+%   \end{syntax}
+%    \begin{macrocode}
 \cs_new_protected:Npn \@@_facyref_set_type:Nn #1#2
   {
     \seq_set_split:NVn \l_@@_tmpa_seq
@@ -3944,6 +3958,7 @@
       }
   }
 %    \end{macrocode}
+% \end{macro}
 %
 %
 % \subsubsection*{\opt{counterresetters} option}
