@@ -1,0 +1,125 @@
+\documentclass{book}
+
+\input{regression-test}
+
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation }
+\ExplSyntaxOff
+
+\newcommand{\testtmp}{}
+\ExplSyntaxOn
+\cs_new_protected:Npn \my_tl_show_if_exist:n #1
+  { \tl_if_exist:cT {#1} { \tl_show:c {#1} } }
+\NewDocumentCommand{\myshowaux}{m}{ \my_tl_show_if_exist:n {#1} }
+\ExplSyntaxOff
+
+\usepackage[english]{babel}
+
+\usepackage{zref-clever}
+\usepackage{zref-check}
+\usepackage{zref-titleref}
+
+\usepackage{hyperref}
+
+% This file is intended to test the fancyref and related options.
+
+\begin{document}
+
+\textsuperscript{avoid font warning}
+
+% Just a bogus counter which will not interact with any of the types of
+% interest.
+\newcounter{myfoobarcounter}
+\refstepcounter{myfoobarcounter}
+
+\START
+
+\BEGINTEST{Option: fancyref=...}
+\zcsetup{fancyref}
+\label{chap:foo-1-1}
+\label{foo-1-2}
+\label{cha:foo-1-3}
+\label{sec:foo-1-4}
+\zcsetup{fancyref=false}
+\label{chap:foo-1-5}
+\label{sec:foo-1-6}
+\myshowaux{Z@R@chap:foo-1-1}
+\myshowaux{Z@R@foo-1-2}
+\myshowaux{Z@R@cha:foo-1-3}
+\myshowaux{Z@R@sec:foo-1-4}
+\myshowaux{Z@R@chap:foo-1-5}
+\myshowaux{Z@R@sec:foo-1-6}
+\ENDTEST
+
+% Enable it globally for remaining tests.
+\zcsetup{fancyref=true}
+
+\BEGINTEST{Option: fancyrefdelim=...}
+\zcsetup{fancyrefdelim={::}}
+\label{chap::foo-2-1}
+\label{chap:foo-2-2}
+\zcsetup{fancyrefdelim={<!bar!>}}
+\label{chap<!bar!>foo-2-3}
+\label{sec:foo-2-4}
+\myshowaux{Z@R@chap::foo-2-1}
+\myshowaux{Z@R@chap:foo-2-2}
+\myshowaux{Z@R@chap<!bar!>foo-2-3}
+\myshowaux{Z@R@sec:foo-2-4}
+\ENDTEST
+
+\BEGINTEST{Option: fancyrefprefix=...}
+% initial value
+\label{chap:foo-3-1}
+\label{sec:foo-3-2}
+\label{eq:foo-3-3}
+\label{fig:foo-3-4}
+\label{tab:foo-3-5}
+\label{enum:foo-3-6}
+\label{fn:foo-3-7}
+% some which do not exist
+\label{thm:foo-3-8}
+\label{cha:foo-3-9}
+% but now we create them
+\zcsetup{fancyrefprefix={thm=theorem,cha=chapter}}
+\label{thm:foo-3-10}
+\label{cha:foo-3-11}
+% remove some of the initial ones
+\zcsetup{fancyrefprefix={chap=,sec=}}
+\label{chap:foo-3-12}
+\label{sec:foo-3-13}
+\myshowaux{Z@R@chap:foo-3-1}
+\myshowaux{Z@R@sec:foo-3-2}
+\myshowaux{Z@R@eq:foo-3-3}
+\myshowaux{Z@R@fig:foo-3-4}
+\myshowaux{Z@R@tab:foo-3-5}
+\myshowaux{Z@R@enum:foo-3-6}
+\myshowaux{Z@R@fn:foo-3-7}
+\myshowaux{Z@R@thm:foo-3-8}
+\myshowaux{Z@R@cha:foo-3-9}
+\myshowaux{Z@R@thm:foo-3-10}
+\myshowaux{Z@R@cha:foo-3-11}
+\myshowaux{Z@R@chap:foo-3-12}
+\myshowaux{Z@R@sec:foo-3-13}
+\ENDTEST
+
+\BEGINTEST{Options interactions}
+\begingroup
+\zcsetup{fancyref=false,countertype={myfoobarcounter=myfoobartype}}
+\label{chap:foo-4-1}
+\endgroup
+\begingroup
+\zcsetup{fancyref=true,countertype={myfoobarcounter=myfoobartype}}
+\label{chap:foo-4-2}
+\endgroup
+\begingroup
+\zcsetup{reftype=mybarbaztype}
+\label{chap:foo-4-3}
+\endgroup
+\myshowaux{Z@R@chap:foo-4-1}
+\myshowaux{Z@R@chap:foo-4-2}
+\myshowaux{Z@R@chap:foo-4-3}
+\ENDTEST
+
+\OMIT
+
+\end{document}
