@@ -255,7 +255,7 @@
   {
     \tl_if_empty:NTF \l_@@_reftype_override_tl
       {
-        \tl_if_empty:NTF \l_@@_fancyref_type_tl
+        \tl_if_empty:NTF \l_@@_fancylabel_type_tl
           {
             \exp_args:NNe \prop_if_in:NnTF \l_@@_counter_type_prop
               \l_@@_current_counter_tl
@@ -265,7 +265,7 @@
               }
               { \l_@@_current_counter_tl }
           }
-          { \l_@@_fancyref_type_tl }
+          { \l_@@_fancylabel_type_tl }
       }
       { \l_@@_reftype_override_tl }
   }
@@ -3880,35 +3880,35 @@
 % \cs{subsubsubsection}''.
 %
 %
-% \subsubsection*{\opt{fancyref} \& co.\ options}
+% \subsubsection*{\opt{fancylabel} \& co.\ options}
 %
 %    \begin{macrocode}
-\bool_new:N \l_@@_fancyref_bool
-\str_new:N \l_@@_fancyref_delim_str
-\prop_new:N \l_@@_fancyref_prefixes_prop
+\bool_new:N \l_@@_fancylabel_bool
+\str_new:N \l_@@_fancydelim_str
+\prop_new:N \l_@@_fancyprefixes_prop
 \keys_define:nn { zref-clever/label }
   {
-    fancyref .bool_set:N = \l_@@_fancyref_bool ,
-    fancyref .initial:n = false ,
-    fancyref .default:n = true ,
-    fancyrefdelim .str_set:N = \l_@@_fancyref_delim_str ,
-    fancyrefdelim .initial:V = \c_colon_str ,
-    fancyrefdelim .value_required:n = true ,
-    fancyrefprefix .code:n =
+    fancylabel .bool_set:N = \l_@@_fancylabel_bool ,
+    fancylabel .initial:n = false ,
+    fancylabel .default:n = true ,
+    fancydelim .str_set:N = \l_@@_fancydelim_str ,
+    fancydelim .initial:V = \c_colon_str ,
+    fancydelim .value_required:n = true ,
+    fancyprefix .code:n =
       {
         \keyval_parse:nnn
           {
             \msg_warning:nnnn { zref-clever }
-              { key-requires-value } { fancyrefprefix }
+              { key-requires-value } { fancyprefix }
           }
           {
             \@@_prop_put_non_empty:Nnn
-              \l_@@_fancyref_prefixes_prop
+              \l_@@_fancyprefixes_prop
           }
           {#1}
       } ,
-    fancyrefprefix .value_required:n = true ,
-    fancyrefprefix .initial:n =
+    fancyprefix .value_required:n = true ,
+    fancyprefix .initial:n =
       {
         chap = chapter ,
         sec  = section ,
@@ -3922,40 +3922,40 @@
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\tl_new:N \l_@@_fancyref_type_tl
-\AddToHookWithArguments { label } [ ./fancyref ]
+\tl_new:N \l_@@_fancylabel_type_tl
+\AddToHookWithArguments { label } [ ./fancylabel ]
   {
-    \bool_if:NT \l_@@_fancyref_bool
+    \bool_if:NT \l_@@_fancylabel_bool
       {
-        \@@_facyref_set_type:Nn
-          \l_@@_fancyref_type_tl {#1}
+        \@@_fancylabel_set_type:Nn
+          \l_@@_fancylabel_type_tl {#1}
       }
   }
-\DeclareHookRule { label } { ./fancyref } { before } { ./zlabel }
+\DeclareHookRule { label } { ./fancylabel } { before } { ./zlabel }
 %    \end{macrocode}
 %
-% \begin{macro}{\@@_facyref_set_type:Nn}
-%   Sets \meta{tl var to set} to the \opt{fancyref} reference type of a given
-%   \meta{label}.  Since the \texttt{zc@type} property tests for the emptiness
-%   of \cs{l_@@_fancyref_type_tl}, this function \emph{must} ensure an empty
-%   value of \meta{tl var to set} in case a \opt{fancyref} reference type does
-%   not exist, which may occur either if \cs{l_@@_fancyref_delim_tl} is not
-%   found in \meta{label} or if the prefix does not exist in
-%   \cs{l_@@_fancyref_prefixes_prop}.
+% \begin{macro}{\@@_fancylabel_set_type:Nn}
+%   Sets \meta{tl var to set} to the \opt{fancylabel} reference type of a
+%   given \meta{label}.  Since the \texttt{zc@type} property tests for the
+%   emptiness of \cs{l_@@_fancylabel_type_tl}, this function \emph{must}
+%   ensure an empty value of \meta{tl var to set} in case a \opt{fancylabel}
+%   reference type does not exist, which may occur either if
+%   \cs{l_@@_fancydelim_tl} is not found in \meta{label} or if the prefix does
+%   not exist in \cs{l_@@_fancyprefixes_prop}.
 %   \begin{syntax}
-%     \cs{@@_facyref_set_type:Nn} \Arg{tl var to set} \Arg{label}
+%     \cs{@@_fancylabel_set_type:Nn} \Arg{tl var to set} \Arg{label}
 %   \end{syntax}
 %    \begin{macrocode}
-\cs_new_protected:Npn \@@_facyref_set_type:Nn #1#2
+\cs_new_protected:Npn \@@_fancylabel_set_type:Nn #1#2
   {
     \str_set:Nn \l_@@_tmpa_str {#2}
     \seq_set_split:NVV \l_@@_tmpa_seq
-      \l_@@_fancyref_delim_str \l_@@_tmpa_str
+      \l_@@_fancydelim_str \l_@@_tmpa_str
     \seq_pop_left:NN \l_@@_tmpa_seq \l_@@_tmpa_tl
     \seq_if_empty:NTF \l_@@_tmpa_seq
       { \tl_clear:N #1 }
       {
-        \prop_get:NVNF \l_@@_fancyref_prefixes_prop
+        \prop_get:NVNF \l_@@_fancyprefixes_prop
           \l_@@_tmpa_tl #1
           { \tl_clear:N #1 }
       }

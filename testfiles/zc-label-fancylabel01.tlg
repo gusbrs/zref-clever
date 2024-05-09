@@ -1,7 +1,7 @@
 This is a generated file for the l3build validation system.
 Don't change this file in any respect.
 ============================================================
-TEST 1: Option: fancyref=...
+TEST 1: Option: fancylabel=...
 ============================================================
 > \Z@R@chap:foo-1-1=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {chapter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
@@ -23,7 +23,7 @@ l. ...\myshowaux{chap:foo-1-5}
 l. ...\myshowaux{sec:foo-1-6}
 ============================================================
 ============================================================
-TEST 2: Option: fancyrefdelim=...
+TEST 2: Option: fancydelim=...
 ============================================================
 > \Z@R@chap::foo-2-1=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {chapter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }
@@ -39,7 +39,7 @@ l. ...\myshowaux{chap<!bar!>foo-2-3}
 l. ...\myshowaux{sec:foo-2-4}
 ============================================================
 ============================================================
-TEST 3: Option: fancyrefprefix=...
+TEST 3: Option: fancyprefix=...
 ============================================================
 > \Z@R@chap:foo-3-1=\default {1}\page {1}\abspage {1}\zc@counter {myfoobarcounter}\thecounter {1}\zc@type {chapter}\zc@cntval {1}\zc@pgval {1}\zc@enclval {}\zc@pgfmt {1}\zc@abschap {0}\zc@abssec {0}\title {}\anchor {myfoobarcounter.1}.
 <recently read> }

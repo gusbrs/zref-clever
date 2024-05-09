@@ -27,7 +27,7 @@
 
 \usepackage{hyperref}
 
-% This file is intended to test the fancyref and related options.
+% This file is intended to test the fancylabel and related options.
 
 \begin{document}
 
@@ -40,13 +40,13 @@
 
 \START
 
-\BEGINTEST{Option: fancyref=...}
-\zcsetup{fancyref}
+\BEGINTEST{Option: fancylabel=...}
+\zcsetup{fancylabel}
 \label{chap:foo-1-1}
 \label{foo-1-2}
 \label{cha:foo-1-3}
 \label{sec:foo-1-4}
-\zcsetup{fancyref=false}
+\zcsetup{fancylabel=false}
 \label{chap:foo-1-5}
 \label{sec:foo-1-6}
 \myshowaux{chap:foo-1-1}
@@ -58,13 +58,13 @@
 \ENDTEST
 
 % Enable it globally for remaining tests.
-\zcsetup{fancyref=true}
+\zcsetup{fancylabel=true}
 
-\BEGINTEST{Option: fancyrefdelim=...}
-\zcsetup{fancyrefdelim={::}}
+\BEGINTEST{Option: fancydelim=...}
+\zcsetup{fancydelim={::}}
 \label{chap::foo-2-1}
 \label{chap:foo-2-2}
-\zcsetup{fancyrefdelim={<!bar!>}}
+\zcsetup{fancydelim={<!bar!>}}
 \label{chap<!bar!>foo-2-3}
 \label{sec:foo-2-4}
 \myshowaux{chap::foo-2-1}
@@ -73,7 +73,7 @@
 \myshowaux{sec:foo-2-4}
 \ENDTEST
 
-\BEGINTEST{Option: fancyrefprefix=...}
+\BEGINTEST{Option: fancyprefix=...}
 % initial value
 \label{chap:foo-3-1}
 \label{sec:foo-3-2}
@@ -86,11 +86,11 @@
 \label{thm:foo-3-8}
 \label{cha:foo-3-9}
 % but now we create them
-\zcsetup{fancyrefprefix={thm=theorem,cha=chapter}}
+\zcsetup{fancyprefix={thm=theorem,cha=chapter}}
 \label{thm:foo-3-10}
 \label{cha:foo-3-11}
 % remove some of the initial ones
-\zcsetup{fancyrefprefix={chap=,sec=}}
+\zcsetup{fancyprefix={chap=,sec=}}
 \label{chap:foo-3-12}
 \label{sec:foo-3-13}
 \myshowaux{chap:foo-3-1}
@@ -110,11 +110,11 @@
 
 \BEGINTEST{Options interactions}
 \begingroup
-\zcsetup{fancyref=false,countertype={myfoobarcounter=myfoobartype}}
+\zcsetup{fancylabel=false,countertype={myfoobarcounter=myfoobartype}}
 \label{chap:foo-4-1}
 \endgroup
 \begingroup
-\zcsetup{fancyref=true,countertype={myfoobarcounter=myfoobartype}}
+\zcsetup{fancylabel=true,countertype={myfoobarcounter=myfoobartype}}
 \label{chap:foo-4-2}
 \endgroup
 \begingroup
