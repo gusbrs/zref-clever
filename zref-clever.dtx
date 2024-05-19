@@ -45,10 +45,28 @@
 
 % Have \GetFileInfo pick up date and version data and used in the
 % documentation.
+\usepackage{polyglossia}   
+\setmainlanguage{english}  
+\setotherlanguage{german}
+\setotherlanguage{french}
+\setotherlanguage{portuguese}
+\setotherlanguage{spanish}
+\setotherlanguage{dutch}
+\setotherlanguage{italian}
+\setotherlanguage{russian}
+
+\setotherlanguage{russian}
+\setmainfont{FreeSerif}
+\setromanfont{FreeSerif} 
+\setsansfont{FreeSans} 
+\setmonofont{FreeMono}
+
 \usepackage{zref-clever}
 \zcsetup{cap,nameinlink=false}
 \usepackage{zref-check}
 \usepackage{zref-titleref}
+
+
 
 \begin{document}
 
@@ -10400,10 +10418,10 @@ type = solution ,
 % \subsection{Russian}
 %
 % Russian translation in consistent with that of \pkg{cleveref}, with the
-% following exceptions: "equation" is translated as "уравнение", rather
-% than "formula", "proposition" is translated as "предложение", rather 
-% than "утверждение"; several abbreviations are replaced with more common
-% ones, e.g. abbreviated plural of "item" is "пп.", not "п.п.".
+% following exceptions: “equation” is translated as “уравнение”, rather
+% than “formula”, “proposition” is translated as “предложение”, rather 
+% than “утверждение”; several abbreviations are replaced with more common
+% ones, e.g. abbreviated plural of “item” is “пп.”, not “п.п.”.
 %
 %    \begin{macrocode}
 %<*package>
