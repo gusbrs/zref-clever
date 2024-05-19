@@ -42,6 +42,7 @@
         spanish ,
         dutch ,
         italian ,
+        russian ,
       }
       {
         \tl_show:c

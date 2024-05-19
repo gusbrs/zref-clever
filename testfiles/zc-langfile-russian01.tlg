@@ -1,0 +1,3137 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: Language declaration
+============================================================
+> \g__zrefclever_declared_language_russian_tl=russian.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_language_russian_declension_seq contains the items (without outer braces):
+>  {n}
+>  {a}
+>  {g}
+>  {d}
+>  {i}
+>  {p}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_language_russian_gender_seq contains the items (without outer braces):
+>  {f}
+>  {m}
+>  {n}.
+<recently read> }
+l. ...  }
+============================================================
+============================================================
+TEST 2: Language file options
+============================================================
+> \g__zrefclever_opt_lang_russian_default_namesep_tl=\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_default_pairsep_tl= и\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_default_listsep_tl=, .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_default_lastsep_tl= и\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_default_tpairsep_tl= и\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_default_tlistsep_tl=, .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_default_tlastsep_tl=, и\nobreakspace .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_default_notesep_tl= .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_default_rangesep_tl= по\nobreakspace .
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_default_refbounds-first-rb_seq contains the items (without outer braces):
+>  {с\nobreakspace }
+>  {}
+>  {}
+>  {}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_default_refbounds-mid-rb_seq contains the items (without outer braces):
+>  {с\nobreakspace }
+>  {}
+>  {}
+>  {}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_book_gender_seq contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_n-Name-sg_tl=Книга.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_n-name-sg_tl=книга.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_n-Name-pl_tl=Книги.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_n-name-pl_tl=книги.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_a-Name-sg_tl=Книгу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_a-name-sg_tl=книгу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_a-Name-pl_tl=Книги.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_a-name-pl_tl=книги.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_g-Name-sg_tl=Книги.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_g-name-sg_tl=книги.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_g-Name-pl_tl=Книг.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_g-name-pl_tl=книг.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_d-Name-sg_tl=Книге.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_d-name-sg_tl=книге.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_d-Name-pl_tl=Книгам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_d-name-pl_tl=книгам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_i-Name-sg_tl=Книгой.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_i-name-sg_tl=книгой.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_i-Name-pl_tl=Книгами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_i-name-pl_tl=книгами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_p-Name-sg_tl=Книге.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_p-name-sg_tl=книге.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_p-Name-pl_tl=Книгах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_book_p-name-pl_tl=книгах.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_part_gender_seq contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_n-Name-sg_tl=Часть.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_n-name-sg_tl=часть.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_n-Name-pl_tl=Части.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_n-name-pl_tl=части.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_n-Name-sg-ab_tl=Ч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_n-name-sg-ab_tl=ч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_n-Name-pl-ab_tl=Чч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_n-name-pl-ab_tl=чч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_a-Name-sg_tl=Часть.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_a-name-sg_tl=часть.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_a-Name-pl_tl=Части.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_a-name-pl_tl=части.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_a-Name-sg-ab_tl=Ч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_a-name-sg-ab_tl=ч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_a-Name-pl-ab_tl=Чч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_a-name-pl-ab_tl=чч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_g-Name-sg_tl=Части.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_g-name-sg_tl=части.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_g-Name-pl_tl=Частей.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_g-name-pl_tl=частей.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_g-Name-sg-ab_tl=Ч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_g-name-sg-ab_tl=ч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_g-Name-pl-ab_tl=Чч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_g-name-pl-ab_tl=чч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_d-Name-sg_tl=Части.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_d-name-sg_tl=части.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_d-Name-pl_tl=Частям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_d-name-pl_tl=частям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_d-Name-sg-ab_tl=Ч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_d-name-sg-ab_tl=ч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_d-Name-pl-ab_tl=Чч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_d-name-pl-ab_tl=чч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_i-Name-sg_tl=Частью.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_i-name-sg_tl=частью.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_i-Name-pl_tl=Частями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_i-name-pl_tl=частями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_i-Name-sg-ab_tl=Ч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_i-name-sg-ab_tl=ч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_i-Name-pl-ab_tl=Чч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_i-name-pl-ab_tl=чч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_p-Name-sg_tl=Части.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_p-name-sg_tl=части.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_p-Name-pl_tl=Частях.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_p-name-pl_tl=частях.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_p-Name-sg-ab_tl=Ч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_p-name-sg-ab_tl=ч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_p-Name-pl-ab_tl=Чч..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_part_p-name-pl-ab_tl=чч..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_chapter_gender_seq contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_n-Name-sg_tl=Глава.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_n-name-sg_tl=глава.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_n-Name-pl_tl=Главы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_n-name-pl_tl=главы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_n-Name-sg-ab_tl=Гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_n-name-sg-ab_tl=гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_n-Name-pl-ab_tl=Гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_n-name-pl-ab_tl=гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_a-Name-sg_tl=Главу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_a-name-sg_tl=главу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_a-Name-pl_tl=Главы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_a-name-pl_tl=главы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_a-Name-sg-ab_tl=Гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_a-name-sg-ab_tl=гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_a-Name-pl-ab_tl=Гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_a-name-pl-ab_tl=гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_g-Name-sg_tl=Главы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_g-name-sg_tl=главы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_g-Name-pl_tl=Глав.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_g-name-pl_tl=глав.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_g-Name-sg-ab_tl=Гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_g-name-sg-ab_tl=гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_g-Name-pl-ab_tl=Гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_g-name-pl-ab_tl=гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_d-Name-sg_tl=Главе.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_d-name-sg_tl=главе.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_d-Name-pl_tl=Главам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_d-name-pl_tl=главам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_d-Name-sg-ab_tl=Гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_d-name-sg-ab_tl=гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_d-Name-pl-ab_tl=Гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_d-name-pl-ab_tl=гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_i-Name-sg_tl=Главой.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_i-name-sg_tl=главой.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_i-Name-pl_tl=Главами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_i-name-pl_tl=главами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_i-Name-sg-ab_tl=Гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_i-name-sg-ab_tl=гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_i-Name-pl-ab_tl=Гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_i-name-pl-ab_tl=гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_p-Name-sg_tl=Главе.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_p-name-sg_tl=главе.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_p-Name-pl_tl=Главах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_p-name-pl_tl=главах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_p-Name-sg-ab_tl=Гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_p-name-sg-ab_tl=гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_p-Name-pl-ab_tl=Гл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_chapter_p-name-pl-ab_tl=гл..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_section_gender_seq contains the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_n-Name-sg_tl=Раздел.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_n-name-sg_tl=раздел.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_n-Name-pl_tl=Разделы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_n-name-pl_tl=разделы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_a-Name-sg_tl=Раздел.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_a-name-sg_tl=раздел.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_a-Name-pl_tl=Разделы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_a-name-pl_tl=разделы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_g-Name-sg_tl=Раздела.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_g-name-sg_tl=раздела.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_g-Name-pl_tl=Разделов.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_g-name-pl_tl=разделов.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_d-Name-sg_tl=Разделу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_d-name-sg_tl=разделу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_d-Name-pl_tl=Разделам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_d-name-pl_tl=разделам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_i-Name-sg_tl=Разделом.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_i-name-sg_tl=разделом.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_i-Name-pl_tl=Разделами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_i-name-pl_tl=разделами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_p-Name-sg_tl=Разделе.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_p-name-sg_tl=разделе.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_p-Name-pl_tl=Разделах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_section_p-name-pl_tl=разделах.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_paragraph_gender_seq contains the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_n-Name-sg_tl=Абзац.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_n-name-sg_tl=абзац.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_n-Name-pl_tl=Абзацы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_n-name-pl_tl=абзацы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_a-Name-sg_tl=Абзац.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_a-name-sg_tl=абзац.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_a-Name-pl_tl=Абзацы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_a-name-pl_tl=абзацы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_g-Name-sg_tl=Абзаца.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_g-name-sg_tl=абзаца.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_g-Name-pl_tl=Абзацев.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_g-name-pl_tl=абзацев.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_d-Name-sg_tl=Абзацу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_d-name-sg_tl=абзацу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_d-Name-pl_tl=Абзацам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_d-name-pl_tl=абзацам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_i-Name-sg_tl=Абзацем.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_i-name-sg_tl=абзацем.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_i-Name-pl_tl=Абзацами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_i-name-pl_tl=абзацами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_p-Name-sg_tl=Абзаце.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_p-name-sg_tl=абзаце.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_p-Name-pl_tl=Абзацах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_paragraph_p-name-pl_tl=абзацах.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_appendix_gender_seq contains the items (without outer braces):
+>  {n}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_n-Name-sg_tl=Приложение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_n-name-sg_tl=приложение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_n-Name-pl_tl=Приложения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_n-name-pl_tl=приложения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_a-Name-sg_tl=Приложение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_a-name-sg_tl=приложение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_a-Name-pl_tl=Приложения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_a-name-pl_tl=приложения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_g-Name-sg_tl=Приложения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_g-name-sg_tl=приложения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_g-Name-pl_tl=Приложений.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_g-name-pl_tl=приложений.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_d-Name-sg_tl=Приложению.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_d-name-sg_tl=приложению.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_d-Name-pl_tl=Приложениям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_d-name-pl_tl=приложениям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_i-Name-sg_tl=Приложением.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_i-name-sg_tl=приложением.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_i-Name-pl_tl=Приложениями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_i-name-pl_tl=приложениями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_p-Name-sg_tl=Приложении.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_p-name-sg_tl=приложении.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_p-Name-pl_tl=Приложениях.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_appendix_p-name-pl_tl=приложениях.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_page_gender_seq contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_n-Name-sg_tl=Страница.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_n-name-sg_tl=страница.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_n-Name-pl_tl=Страницы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_n-name-pl_tl=страницы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_n-Name-sg-ab_tl=С..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_n-name-sg-ab_tl=с..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_n-Name-pl-ab_tl=Сс..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_n-name-pl-ab_tl=сс..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_a-Name-sg_tl=Страницу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_a-name-sg_tl=страницу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_a-Name-pl_tl=Страницы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_a-name-pl_tl=страницы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_a-Name-sg-ab_tl=С..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_a-name-sg-ab_tl=с..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_a-Name-pl-ab_tl=Сс..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_a-name-pl-ab_tl=сс..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_g-Name-sg_tl=Страницы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_g-name-sg_tl=страницы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_g-Name-pl_tl=Страниц.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_g-name-pl_tl=страниц.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_g-Name-sg-ab_tl=С..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_g-name-sg-ab_tl=с..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_g-Name-pl-ab_tl=Сс..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_g-name-pl-ab_tl=сс..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_d-Name-sg_tl=Странице.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_d-name-sg_tl=странице.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_d-Name-pl_tl=Страницам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_d-name-pl_tl=страницам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_d-Name-sg-ab_tl=С..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_d-name-sg-ab_tl=с..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_d-Name-pl-ab_tl=Сс..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_d-name-pl-ab_tl=сс..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_i-Name-sg_tl=Страницей.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_i-name-sg_tl=страницей.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_i-Name-pl_tl=Страницами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_i-name-pl_tl=страницами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_i-Name-sg-ab_tl=С..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_i-name-sg-ab_tl=с..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_i-Name-pl-ab_tl=Сс..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_i-name-pl-ab_tl=сс..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_p-Name-sg_tl=Странице.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_p-name-sg_tl=странице.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_p-Name-pl_tl=Страницах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_p-name-pl_tl=страницах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_p-Name-sg-ab_tl=С..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_p-name-sg-ab_tl=с..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_p-Name-pl-ab_tl=Сс..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_p-name-pl-ab_tl=сс..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_rangesep_tl=\textendash .
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_page_rangetopair_bool=false.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_line_gender_seq contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_n-Name-sg_tl=Строка.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_n-name-sg_tl=строка.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_n-Name-pl_tl=Строки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_n-name-pl_tl=строки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_a-Name-sg_tl=Строку.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_a-name-sg_tl=строку.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_a-Name-pl_tl=Строки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_a-name-pl_tl=строки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_g-Name-sg_tl=Строки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_g-name-sg_tl=строки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_g-Name-pl_tl=Строк.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_g-name-pl_tl=строк.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_d-Name-sg_tl=Строке.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_d-name-sg_tl=строке.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_d-Name-pl_tl=Строкам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_d-name-pl_tl=строкам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_i-Name-sg_tl=Строкой.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_i-name-sg_tl=строкой.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_i-Name-pl_tl=Строками.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_i-name-pl_tl=строками.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_p-Name-sg_tl=Строке.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_p-name-sg_tl=строке.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_p-Name-pl_tl=Строках.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_line_p-name-pl_tl=строках.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_figure_gender_seq contains the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_n-Name-sg_tl=Рисунок.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_n-name-sg_tl=рисунок.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_n-Name-pl_tl=Рисунки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_n-name-pl_tl=рисунки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_n-Name-sg-ab_tl=Рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_n-name-sg-ab_tl=рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_n-Name-pl-ab_tl=Рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_n-name-pl-ab_tl=рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_a-Name-sg_tl=Рисунок.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_a-name-sg_tl=рисунок.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_a-Name-pl_tl=Рисунки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_a-name-pl_tl=рисунки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_a-Name-sg-ab_tl=Рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_a-name-sg-ab_tl=рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_a-Name-pl-ab_tl=Рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_a-name-pl-ab_tl=рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_g-Name-sg_tl=Рисунка.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_g-name-sg_tl=рисунка.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_g-Name-pl_tl=Рисунков.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_g-name-pl_tl=рисунков.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_g-Name-sg-ab_tl=Рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_g-name-sg-ab_tl=рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_g-Name-pl-ab_tl=Рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_g-name-pl-ab_tl=рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_d-Name-sg_tl=Рисунку.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_d-name-sg_tl=рисунку.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_d-Name-pl_tl=Рисункам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_d-name-pl_tl=рисункам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_d-Name-sg-ab_tl=Рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_d-name-sg-ab_tl=рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_d-Name-pl-ab_tl=Рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_d-name-pl-ab_tl=рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_i-Name-sg_tl=Рисунком.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_i-name-sg_tl=рисунком.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_i-Name-pl_tl=Рисунками.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_i-name-pl_tl=рисунками.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_i-Name-sg-ab_tl=Рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_i-name-sg-ab_tl=рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_i-Name-pl-ab_tl=Рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_i-name-pl-ab_tl=рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_p-Name-sg_tl=Рисунке.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_p-name-sg_tl=рисунке.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_p-Name-pl_tl=Рисунках.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_p-name-pl_tl=рисунках.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_p-Name-sg-ab_tl=Рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_p-name-sg-ab_tl=рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_p-Name-pl-ab_tl=Рис..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_figure_p-name-pl-ab_tl=рис..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_table_gender_seq contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_n-Name-sg_tl=Таблица.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_n-name-sg_tl=таблица.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_n-Name-pl_tl=Таблицы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_n-name-pl_tl=таблицы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_n-Name-sg-ab_tl=Табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_n-name-sg-ab_tl=табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_n-Name-pl-ab_tl=Табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_n-name-pl-ab_tl=табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_a-Name-sg_tl=Таблицу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_a-name-sg_tl=таблицу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_a-Name-pl_tl=Таблицы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_a-name-pl_tl=таблицы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_a-Name-sg-ab_tl=Табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_a-name-sg-ab_tl=табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_a-Name-pl-ab_tl=Табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_a-name-pl-ab_tl=табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_g-Name-sg_tl=Таблицы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_g-name-sg_tl=таблицы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_g-Name-pl_tl=Таблиц.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_g-name-pl_tl=таблиц.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_g-Name-sg-ab_tl=Табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_g-name-sg-ab_tl=табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_g-Name-pl-ab_tl=Табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_g-name-pl-ab_tl=табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_d-Name-sg_tl=Таблице.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_d-name-sg_tl=таблице.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_d-Name-pl_tl=Таблицам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_d-name-pl_tl=таблицам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_d-Name-sg-ab_tl=Табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_d-name-sg-ab_tl=табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_d-Name-pl-ab_tl=Табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_d-name-pl-ab_tl=табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_i-Name-sg_tl=Таблицей.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_i-name-sg_tl=таблицей.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_i-Name-pl_tl=Таблицами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_i-name-pl_tl=таблицами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_i-Name-sg-ab_tl=Табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_i-name-sg-ab_tl=табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_i-Name-pl-ab_tl=Табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_i-name-pl-ab_tl=табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_p-Name-sg_tl=Таблице.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_p-name-sg_tl=таблице.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_p-Name-pl_tl=Таблицах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_p-name-pl_tl=таблицах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_p-Name-sg-ab_tl=Табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_p-name-sg-ab_tl=табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_p-Name-pl-ab_tl=Табл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_table_p-name-pl-ab_tl=табл..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_item_gender_seq contains the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_n-Name-sg_tl=Пункт.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_n-name-sg_tl=пункт.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_n-Name-pl_tl=Пункты.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_n-name-pl_tl=пункты.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_n-Name-sg-ab_tl=П..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_n-name-sg-ab_tl=п..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_n-Name-pl-ab_tl=Пп..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_n-name-pl-ab_tl=пп..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_a-Name-sg_tl=Пункт.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_a-name-sg_tl=пункт.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_a-Name-pl_tl=Пункты.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_a-name-pl_tl=пункты.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_a-Name-sg-ab_tl=П..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_a-name-sg-ab_tl=п..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_a-Name-pl-ab_tl=Пп..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_a-name-pl-ab_tl=пп..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_g-Name-sg_tl=Пункта.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_g-name-sg_tl=пункта.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_g-Name-pl_tl=Пунктов.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_g-name-pl_tl=пунктов.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_g-Name-sg-ab_tl=П..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_g-name-sg-ab_tl=п..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_g-Name-pl-ab_tl=Пп..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_g-name-pl-ab_tl=пп..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_d-Name-sg_tl=Пункту.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_d-name-sg_tl=пункту.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_d-Name-pl_tl=Пунктам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_d-name-pl_tl=пунктам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_d-Name-sg-ab_tl=П..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_d-name-sg-ab_tl=п..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_d-Name-pl-ab_tl=Пп..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_d-name-pl-ab_tl=пп..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_i-Name-sg_tl=Пунктом.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_i-name-sg_tl=пунктом.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_i-Name-pl_tl=Пунктами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_i-name-pl_tl=пунктами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_i-Name-sg-ab_tl=П..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_i-name-sg-ab_tl=п..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_i-Name-pl-ab_tl=Пп..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_i-name-pl-ab_tl=пп..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_p-Name-sg_tl=Пункте.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_p-name-sg_tl=пункте.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_p-Name-pl_tl=Пунктах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_p-name-pl_tl=пунктах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_p-Name-sg-ab_tl=П..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_p-name-sg-ab_tl=п..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_p-Name-pl-ab_tl=Пп..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_item_p-name-pl-ab_tl=пп..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_footnote_gender_seq contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_n-Name-sg_tl=Сноска.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_n-name-sg_tl=сноска.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_n-Name-pl_tl=Сноски.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_n-name-pl_tl=сноски.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_a-Name-sg_tl=Сноску.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_a-name-sg_tl=сноску.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_a-Name-pl_tl=Сноски.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_a-name-pl_tl=сноски.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_g-Name-sg_tl=Сноски.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_g-name-sg_tl=сноски.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_g-Name-pl_tl=Сносок.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_g-name-pl_tl=сносок.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_d-Name-sg_tl=Сноске.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_d-name-sg_tl=сноске.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_d-Name-pl_tl=Сноскам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_d-name-pl_tl=сноскам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_i-Name-sg_tl=Сноской.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_i-name-sg_tl=сноской.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_i-Name-pl_tl=Сносками.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_i-name-pl_tl=сносками.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_p-Name-sg_tl=Сноске.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_p-name-sg_tl=сноске.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_p-Name-pl_tl=Сносках.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_footnote_p-name-pl_tl=сносках.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_endnote_gender_seq contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_n-Name-sg_tl=Сноска.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_n-name-sg_tl=сноска.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_n-Name-pl_tl=Сноски.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_n-name-pl_tl=сноски.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_a-Name-sg_tl=Сноску.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_a-name-sg_tl=сноску.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_a-Name-pl_tl=Сноски.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_a-name-pl_tl=сноски.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_g-Name-sg_tl=Сноски.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_g-name-sg_tl=сноски.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_g-Name-pl_tl=Сносок.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_g-name-pl_tl=сносок.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_d-Name-sg_tl=Сноске.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_d-name-sg_tl=сноске.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_d-Name-pl_tl=Сноскам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_d-name-pl_tl=сноскам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_i-Name-sg_tl=Сноской.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_i-name-sg_tl=сноской.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_i-Name-pl_tl=Сносками.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_i-name-pl_tl=сносками.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_p-Name-sg_tl=Сноске.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_p-name-sg_tl=сноске.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_p-Name-pl_tl=Сносках.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_endnote_p-name-pl_tl=сносках.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_note_gender_seq contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_n-Name-sg_tl=Заметка.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_n-name-sg_tl=заметка.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_n-Name-pl_tl=Заметки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_n-name-pl_tl=заметки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_a-Name-sg_tl=Заметку.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_a-name-sg_tl=заметку.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_a-Name-pl_tl=Заметки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_a-name-pl_tl=заметки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_g-Name-sg_tl=Заметки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_g-name-sg_tl=заметки.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_g-Name-pl_tl=Заметок.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_g-name-pl_tl=заметок.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_d-Name-sg_tl=Заметке.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_d-name-sg_tl=заметке.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_d-Name-pl_tl=Заметкам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_d-name-pl_tl=заметкам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_i-Name-sg_tl=Заметкой.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_i-name-sg_tl=заметкой.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_i-Name-pl_tl=Заметками.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_i-name-pl_tl=заметками.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_p-Name-sg_tl=Заметке.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_p-name-sg_tl=заметке.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_p-Name-pl_tl=Заметках.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_note_p-name-pl_tl=заметках.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_equation_gender_seq contains the items (without outer braces):
+>  {n}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_n-Name-sg_tl=Уравнение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_n-name-sg_tl=уравнение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_n-Name-pl_tl=Уравнения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_n-name-pl_tl=уравнения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_n-Name-sg-ab_tl=Ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_n-name-sg-ab_tl=ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_n-Name-pl-ab_tl=Ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_n-name-pl-ab_tl=ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_a-Name-sg_tl=Уравнение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_a-name-sg_tl=уравнение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_a-Name-pl_tl=Уравнения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_a-name-pl_tl=уравнения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_a-Name-sg-ab_tl=Ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_a-name-sg-ab_tl=ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_a-Name-pl-ab_tl=Ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_a-name-pl-ab_tl=ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_g-Name-sg_tl=Уравнения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_g-name-sg_tl=уравнения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_g-Name-pl_tl=Уравнений.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_g-name-pl_tl=уравнений.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_g-Name-sg-ab_tl=Ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_g-name-sg-ab_tl=ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_g-Name-pl-ab_tl=Ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_g-name-pl-ab_tl=ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_d-Name-sg_tl=Уравнению.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_d-name-sg_tl=уравнению.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_d-Name-pl_tl=Уравнениям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_d-name-pl_tl=уравнениям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_d-Name-sg-ab_tl=Ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_d-name-sg-ab_tl=ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_d-Name-pl-ab_tl=Ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_d-name-pl-ab_tl=ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_i-Name-sg_tl=Уравнением.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_i-name-sg_tl=уравнением.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_i-Name-pl_tl=Уравнениями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_i-name-pl_tl=уравнениями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_i-Name-sg-ab_tl=Ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_i-name-sg-ab_tl=ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_i-Name-pl-ab_tl=Ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_i-name-pl-ab_tl=ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_p-Name-sg_tl=Уравнении.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_p-name-sg_tl=уравнении.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_p-Name-pl_tl=Уравнениях.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_p-name-pl_tl=уравнениях.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_p-Name-sg-ab_tl=Ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_p-name-sg-ab_tl=ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_p-Name-pl-ab_tl=Ур..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_equation_p-name-pl-ab_tl=ур..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_theorem_gender_seq contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_n-Name-sg_tl=Теорема.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_n-name-sg_tl=теорема.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_n-Name-pl_tl=Теоремы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_n-name-pl_tl=теоремы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_n-Name-sg-ab_tl=Теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_n-name-sg-ab_tl=теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_n-Name-pl-ab_tl=Теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_n-name-pl-ab_tl=теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_a-Name-sg_tl=Теорему.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_a-name-sg_tl=теорему.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_a-Name-pl_tl=Теоремы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_a-name-pl_tl=теоремы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_a-Name-sg-ab_tl=Теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_a-name-sg-ab_tl=теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_a-Name-pl-ab_tl=Теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_a-name-pl-ab_tl=теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_g-Name-sg_tl=Теоремы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_g-name-sg_tl=теоремы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_g-Name-pl_tl=Теорем.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_g-name-pl_tl=теорем.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_g-Name-sg-ab_tl=Теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_g-name-sg-ab_tl=теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_g-Name-pl-ab_tl=Теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_g-name-pl-ab_tl=теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_d-Name-sg_tl=Теореме.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_d-name-sg_tl=теореме.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_d-Name-pl_tl=Теоремам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_d-name-pl_tl=теоремам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_d-Name-sg-ab_tl=Теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_d-name-sg-ab_tl=теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_d-Name-pl-ab_tl=Теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_d-name-pl-ab_tl=теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_i-Name-sg_tl=Теоремой.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_i-name-sg_tl=теоремой.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_i-Name-pl_tl=Теоремами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_i-name-pl_tl=теоремами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_i-Name-sg-ab_tl=Теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_i-name-sg-ab_tl=теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_i-Name-pl-ab_tl=Теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_i-name-pl-ab_tl=теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_p-Name-sg_tl=Теореме.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_p-name-sg_tl=теореме.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_p-Name-pl_tl=Теоремах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_p-name-pl_tl=теоремах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_p-Name-sg-ab_tl=Теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_p-name-sg-ab_tl=теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_p-Name-pl-ab_tl=Теор..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_theorem_p-name-pl-ab_tl=теор..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_lemma_gender_seq contains the items (without outer braces):
+>  {f}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_n-Name-sg_tl=Лемма.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_n-name-sg_tl=лемма.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_n-Name-pl_tl=Леммы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_n-name-pl_tl=леммы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_a-Name-sg_tl=Лемму.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_a-name-sg_tl=лемму.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_a-Name-pl_tl=Леммы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_a-name-pl_tl=леммы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_g-Name-sg_tl=Леммы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_g-name-sg_tl=леммы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_g-Name-pl_tl=Лемм.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_g-name-pl_tl=лемм.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_d-Name-sg_tl=Лемме.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_d-name-sg_tl=лемме.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_d-Name-pl_tl=Леммам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_d-name-pl_tl=леммам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_i-Name-sg_tl=Леммой.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_i-name-sg_tl=леммой.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_i-Name-pl_tl=Леммами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_i-name-pl_tl=леммами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_p-Name-sg_tl=Лемме.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_p-name-sg_tl=лемме.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_p-Name-pl_tl=Леммах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_lemma_p-name-pl_tl=леммах.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_corollary_gender_seq contains the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_n-Name-sg_tl=Вывод.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_n-name-sg_tl=вывод.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_n-Name-pl_tl=Выводы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_n-name-pl_tl=выводы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_a-Name-sg_tl=Вывод.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_a-name-sg_tl=вывод.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_a-Name-pl_tl=Выводы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_a-name-pl_tl=выводы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_g-Name-sg_tl=Вывода.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_g-name-sg_tl=вывода.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_g-Name-pl_tl=Выводов.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_g-name-pl_tl=выводов.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_d-Name-sg_tl=Выводу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_d-name-sg_tl=выводу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_d-Name-pl_tl=Выводам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_d-name-pl_tl=выводам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_i-Name-sg_tl=Выводом.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_i-name-sg_tl=выводом.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_i-Name-pl_tl=Выводами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_i-name-pl_tl=выводами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_p-Name-sg_tl=Выводе.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_p-name-sg_tl=выводе.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_p-Name-pl_tl=Выводах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_corollary_p-name-pl_tl=выводах.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_proposition_gender_seq contains the items (without outer braces):
+>  {n}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_n-Name-sg_tl=Предложение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_n-name-sg_tl=предложение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_n-Name-pl_tl=Предложения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_n-name-pl_tl=предложения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_n-Name-sg-ab_tl=Предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_n-name-sg-ab_tl=предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_n-Name-pl-ab_tl=Предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_n-name-pl-ab_tl=предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_a-Name-sg_tl=Предложение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_a-name-sg_tl=предложение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_a-Name-pl_tl=Предложения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_a-name-pl_tl=предложения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_a-Name-sg-ab_tl=Предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_a-name-sg-ab_tl=предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_a-Name-pl-ab_tl=Предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_a-name-pl-ab_tl=предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_g-Name-sg_tl=Предложения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_g-name-sg_tl=предложения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_g-Name-pl_tl=Предложений.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_g-name-pl_tl=предложений.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_g-Name-sg-ab_tl=Предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_g-name-sg-ab_tl=предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_g-Name-pl-ab_tl=Предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_g-name-pl-ab_tl=предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_d-Name-sg_tl=Предложению.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_d-name-sg_tl=предложению.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_d-Name-pl_tl=Предложениям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_d-name-pl_tl=предложениям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_d-Name-sg-ab_tl=Предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_d-name-sg-ab_tl=предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_d-Name-pl-ab_tl=Предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_d-name-pl-ab_tl=предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_i-Name-sg_tl=Предложением.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_i-name-sg_tl=предложением.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_i-Name-pl_tl=Предложениями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_i-name-pl_tl=предложениями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_i-Name-sg-ab_tl=Предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_i-name-sg-ab_tl=предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_i-Name-pl-ab_tl=Предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_i-name-pl-ab_tl=предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_p-Name-sg_tl=Предложении.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_p-name-sg_tl=предложении.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_p-Name-pl_tl=Предложениях.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_p-name-pl_tl=предложениях.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_p-Name-sg-ab_tl=Предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_p-name-sg-ab_tl=предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_p-Name-pl-ab_tl=Предл..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proposition_p-name-pl-ab_tl=предл..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_definition_gender_seq contains the items (without outer braces):
+>  {n}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_n-Name-sg_tl=Определение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_n-name-sg_tl=определение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_n-Name-pl_tl=Определения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_n-name-pl_tl=определения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_n-Name-sg-ab_tl=Опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_n-name-sg-ab_tl=опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_n-Name-pl-ab_tl=Опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_n-name-pl-ab_tl=опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_a-Name-sg_tl=Определение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_a-name-sg_tl=определение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_a-Name-pl_tl=Определения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_a-name-pl_tl=определения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_a-Name-sg-ab_tl=Опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_a-name-sg-ab_tl=опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_a-Name-pl-ab_tl=Опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_a-name-pl-ab_tl=опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_g-Name-sg_tl=Определения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_g-name-sg_tl=определения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_g-Name-pl_tl=Определений.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_g-name-pl_tl=определений.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_g-Name-sg-ab_tl=Опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_g-name-sg-ab_tl=опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_g-Name-pl-ab_tl=Опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_g-name-pl-ab_tl=опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_d-Name-sg_tl=Определению.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_d-name-sg_tl=определению.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_d-Name-pl_tl=Определениям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_d-name-pl_tl=определениям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_d-Name-sg-ab_tl=Опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_d-name-sg-ab_tl=опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_d-Name-pl-ab_tl=Опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_d-name-pl-ab_tl=опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_i-Name-sg_tl=Определением.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_i-name-sg_tl=определением.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_i-Name-pl_tl=Определениями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_i-name-pl_tl=определениями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_i-Name-sg-ab_tl=Опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_i-name-sg-ab_tl=опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_i-Name-pl-ab_tl=Опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_i-name-pl-ab_tl=опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_p-Name-sg_tl=Определении.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_p-name-sg_tl=определении.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_p-Name-pl_tl=Определениях.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_p-name-pl_tl=определениях.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_p-Name-sg-ab_tl=Опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_p-name-sg-ab_tl=опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_p-Name-pl-ab_tl=Опр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_definition_p-name-pl-ab_tl=опр..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_proof_gender_seq contains the items (without outer braces):
+>  {n}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_n-Name-sg_tl=Доказательство.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_n-name-sg_tl=доказательство.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_n-Name-pl_tl=Доказательства.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_n-name-pl_tl=доказательства.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_a-Name-sg_tl=Доказательство.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_a-name-sg_tl=доказательство.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_a-Name-pl_tl=Доказательства.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_a-name-pl_tl=доказательства.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_g-Name-sg_tl=Доказательства.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_g-name-sg_tl=доказательства.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_g-Name-pl_tl=Доказательств.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_g-name-pl_tl=доказательств.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_d-Name-sg_tl=Доказательству.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_d-name-sg_tl=доказательству.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_d-Name-pl_tl=Доказательствам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_d-name-pl_tl=доказательствам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_i-Name-sg_tl=Доказательством.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_i-name-sg_tl=доказательством.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_i-Name-pl_tl=Доказательствами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_i-name-pl_tl=доказательствами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_p-Name-sg_tl=Доказательстве.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_p-name-sg_tl=доказательстве.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_p-Name-pl_tl=Доказательствах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_proof_p-name-pl_tl=доказательствах.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_result_gender_seq contains the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_n-Name-sg_tl=Результат.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_n-name-sg_tl=результат.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_n-Name-pl_tl=Результаты.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_n-name-pl_tl=результаты.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_a-Name-sg_tl=Результат.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_a-name-sg_tl=результат.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_a-Name-pl_tl=Результаты.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_a-name-pl_tl=результаты.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_g-Name-sg_tl=Результата.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_g-name-sg_tl=результата.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_g-Name-pl_tl=Результатов.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_g-name-pl_tl=результатов.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_d-Name-sg_tl=Результату.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_d-name-sg_tl=результату.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_d-Name-pl_tl=Результатам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_d-name-pl_tl=результатам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_i-Name-sg_tl=Результатом.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_i-name-sg_tl=результатом.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_i-Name-pl_tl=Результатами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_i-name-pl_tl=результатами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_p-Name-sg_tl=Результате.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_p-name-sg_tl=результате.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_p-Name-pl_tl=Результатах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_result_p-name-pl_tl=результатах.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_remark_gender_seq contains the items (without outer braces):
+>  {n}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_n-Name-sg_tl=Примечание.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_n-name-sg_tl=примечание.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_n-Name-pl_tl=Примечания.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_n-name-pl_tl=примечания.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_n-Name-sg-ab_tl=Прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_n-name-sg-ab_tl=прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_n-Name-pl-ab_tl=Прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_n-name-pl-ab_tl=прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_a-Name-sg_tl=Примечание.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_a-name-sg_tl=примечание.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_a-Name-pl_tl=Примечания.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_a-name-pl_tl=примечания.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_a-Name-sg-ab_tl=Прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_a-name-sg-ab_tl=прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_a-Name-pl-ab_tl=Прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_a-name-pl-ab_tl=прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_g-Name-sg_tl=Примечания.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_g-name-sg_tl=примечания.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_g-Name-pl_tl=Примечаний.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_g-name-pl_tl=примечаний.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_g-Name-sg-ab_tl=Прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_g-name-sg-ab_tl=прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_g-Name-pl-ab_tl=Прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_g-name-pl-ab_tl=прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_d-Name-sg_tl=Примечанию.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_d-name-sg_tl=примечанию.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_d-Name-pl_tl=Примечаниям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_d-name-pl_tl=примечаниям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_d-Name-sg-ab_tl=Прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_d-name-sg-ab_tl=прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_d-Name-pl-ab_tl=Прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_d-name-pl-ab_tl=прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_i-Name-sg_tl=Примечанием.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_i-name-sg_tl=примечанием.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_i-Name-pl_tl=Примечаниями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_i-name-pl_tl=примечаниями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_i-Name-sg-ab_tl=Прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_i-name-sg-ab_tl=прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_i-Name-pl-ab_tl=Прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_i-name-pl-ab_tl=прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_p-Name-sg_tl=Примечании.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_p-name-sg_tl=примечании.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_p-Name-pl_tl=Примечаниях.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_p-name-pl_tl=примечаниях.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_p-Name-sg-ab_tl=Прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_p-name-sg-ab_tl=прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_p-Name-pl-ab_tl=Прим..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_remark_p-name-pl-ab_tl=прим..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_example_gender_seq contains the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_n-Name-sg_tl=Пример.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_n-name-sg_tl=пример.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_n-Name-pl_tl=Примеры.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_n-name-pl_tl=примеры.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_a-Name-sg_tl=Пример.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_a-name-sg_tl=пример.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_a-Name-pl_tl=Примеры.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_a-name-pl_tl=примеры.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_g-Name-sg_tl=Примера.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_g-name-sg_tl=примера.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_g-Name-pl_tl=Примеров.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_g-name-pl_tl=примеров.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_d-Name-sg_tl=Примеру.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_d-name-sg_tl=примеру.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_d-Name-pl_tl=Примерам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_d-name-pl_tl=примерам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_i-Name-sg_tl=Примером.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_i-name-sg_tl=примером.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_i-Name-pl_tl=Примерами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_i-name-pl_tl=примерами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_p-Name-sg_tl=Примере.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_p-name-sg_tl=примере.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_p-Name-pl_tl=Примерах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_example_p-name-pl_tl=примерах.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_algorithm_gender_seq contains the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_n-Name-sg_tl=Алгоритм.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_n-name-sg_tl=алгоритм.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_n-Name-pl_tl=Алгоритмы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_n-name-pl_tl=алгоритмы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_a-Name-sg_tl=Алгоритм.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_a-name-sg_tl=алгоритм.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_a-Name-pl_tl=Алгоритмы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_a-name-pl_tl=алгоритмы.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_g-Name-sg_tl=Алгоритма.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_g-name-sg_tl=алгоритма.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_g-Name-pl_tl=Алгоритмов.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_g-name-pl_tl=алгоритмов.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_d-Name-sg_tl=Алгоритму.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_d-name-sg_tl=алгоритму.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_d-Name-pl_tl=Алгоритмам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_d-name-pl_tl=алгоритмам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_i-Name-sg_tl=Алгоритмом.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_i-name-sg_tl=алгоритмом.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_i-Name-pl_tl=Алгоритмами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_i-name-pl_tl=алгоритмами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_p-Name-sg_tl=Алгоритме.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_p-name-sg_tl=алгоритме.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_p-Name-pl_tl=Алгоритмах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_algorithm_p-name-pl_tl=алгоритмах.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_listing_gender_seq contains the items (without outer braces):
+>  {m}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_n-Name-sg_tl=Листинг.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_n-name-sg_tl=листинг.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_n-Name-pl_tl=Листинги.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_n-name-pl_tl=листинги.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_a-Name-sg_tl=Листинг.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_a-name-sg_tl=листинг.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_a-Name-pl_tl=Листинги.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_a-name-pl_tl=листинги.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_g-Name-sg_tl=Листинга.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_g-name-sg_tl=листинга.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_g-Name-pl_tl=Листингов.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_g-name-pl_tl=листингов.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_d-Name-sg_tl=Листингу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_d-name-sg_tl=листингу.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_d-Name-pl_tl=Листингам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_d-name-pl_tl=листингам.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_i-Name-sg_tl=Листингом.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_i-name-sg_tl=листинглм.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_i-Name-pl_tl=Листингами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_i-name-pl_tl=листингами.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_p-Name-sg_tl=Листинге.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_p-name-sg_tl=листинге.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_p-Name-pl_tl=Листингах.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_listing_p-name-pl_tl=листингах.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_exercise_gender_seq contains the items (without outer braces):
+>  {n}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_n-Name-sg_tl=Упражнение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_n-name-sg_tl=упражнение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_n-Name-pl_tl=Упражнения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_n-name-pl_tl=упражнения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_n-Name-sg-ab_tl=Упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_n-name-sg-ab_tl=упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_n-Name-pl-ab_tl=Упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_n-name-pl-ab_tl=упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_a-Name-sg_tl=Упражнение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_a-name-sg_tl=упражнение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_a-Name-pl_tl=Упражнения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_a-name-pl_tl=упражнения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_a-Name-sg-ab_tl=Упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_a-name-sg-ab_tl=упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_a-Name-pl-ab_tl=Упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_a-name-pl-ab_tl=упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_g-Name-sg_tl=Упражнения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_g-name-sg_tl=упражнения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_g-Name-pl_tl=Упражнений.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_g-name-pl_tl=упражнений.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_g-Name-sg-ab_tl=Упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_g-name-sg-ab_tl=упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_g-Name-pl-ab_tl=Упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_g-name-pl-ab_tl=упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_d-Name-sg_tl=Упражнению.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_d-name-sg_tl=упражнению.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_d-Name-pl_tl=Упражнениям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_d-name-pl_tl=упражнениям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_d-Name-sg-ab_tl=Упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_d-name-sg-ab_tl=упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_d-Name-pl-ab_tl=Упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_d-name-pl-ab_tl=упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_i-Name-sg_tl=Упражнением.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_i-name-sg_tl=упражнением.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_i-Name-pl_tl=Упражнениями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_i-name-pl_tl=упражнениями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_i-Name-sg-ab_tl=Упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_i-name-sg-ab_tl=упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_i-Name-pl-ab_tl=Упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_i-name-pl-ab_tl=упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_p-Name-sg_tl=Упражнении.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_p-name-sg_tl=упражнении.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_p-Name-pl_tl=Упражнениях.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_p-name-pl_tl=упражнениях.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_p-Name-sg-ab_tl=Упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_p-name-sg-ab_tl=упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_p-Name-pl-ab_tl=Упр..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_exercise_p-name-pl-ab_tl=упр..
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_solution_gender_seq contains the items (without outer braces):
+>  {n}.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_n-Name-sg_tl=Решение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_n-name-sg_tl=решение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_n-Name-pl_tl=Решения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_n-name-pl_tl=решения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_a-Name-sg_tl=Решение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_a-name-sg_tl=решение.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_a-Name-pl_tl=Решения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_a-name-pl_tl=решения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_g-Name-sg_tl=Решения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_g-name-sg_tl=решения.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_g-Name-pl_tl=Решений.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_g-name-pl_tl=решений.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_d-Name-sg_tl=Решению.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_d-name-sg_tl=решению.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_d-Name-pl_tl=Решениям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_d-name-pl_tl=решениям.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_i-Name-sg_tl=Решением.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_i-name-sg_tl=решением.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_i-Name-pl_tl=Решениями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_i-name-pl_tl=решениями.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_p-Name-sg_tl=Решении.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_p-name-sg_tl=решении.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_p-Name-pl_tl=Решениях.
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_russian_type_solution_p-name-pl_tl=решениях.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-first_seq contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-first-sg_seq contains the items (without outer braces):
+>  {}
+>  {(}
+>  {)}
+>  {}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-first-pb_seq contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-first-rb_seq contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-mid_seq contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-mid-rb_seq contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-mid-re_seq contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-last_seq contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-last-pe_seq contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-last-re_seq contains the items (without outer braces):
+>  {(}
+>  {}
+>  {}
+>  {)}.
+<recently read> }
+l. ...  }
+============================================================
