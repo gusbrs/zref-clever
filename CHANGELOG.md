@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.4...HEAD)
 
+### Added
+- Provided Russian language file (see PR
+  [#29](https://github.com/gusbrs/zref-clever/pull/29)).
+
 ## [v0.4.4](https://github.com/gusbrs/zref-clever/compare/v0.4.3...v0.4.4) (2024-03-14)
 
 ### Changed
