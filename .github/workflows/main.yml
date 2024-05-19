@@ -63,6 +63,7 @@ env:
     float
     floatrow
     fmtcount
+    fontspec
     graphics
     hologo
     hypdoc

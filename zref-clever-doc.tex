@@ -41,8 +41,10 @@
 
 \documentclass{l3doc}
 
-\usepackage[T2A]{fontenc}
-\usepackage[utf8]{inputenc}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{TeX Gyre Heros}[Scale=MatchLowercase]
+\setmonofont{inconsolata}[Scale=MatchLowercase]
 
 % The package itself *must* be loaded so that \GetFileInfo can pick up date
 % and version data.  Naturally, we also use it.
@@ -50,13 +52,6 @@
 \zcsetup{cap}
 \usepackage{zref-check}
 \usepackage{zref-titleref}
-
-\usepackage[T1]{fontenc}
-
-\usepackage[sc]{mathpazo}
-\linespread{1.05}
-\usepackage[scale=.88]{tgheros} % sans
-\usepackage[varqu,scaled=1.03]{inconsolata} % tt
 
 \usepackage{listings}
 

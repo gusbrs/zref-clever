@@ -7,6 +7,9 @@ module = "zref-clever"
 -- Typeset only the .tex files
 typesetfiles = {"*.tex"}
 
+-- Use lualatex for compiling docs
+typesetexe = "lualatex"
+
 -- Add language files to installation files
 installfiles = {"*.sty","*.cls","*.lang"}
 
