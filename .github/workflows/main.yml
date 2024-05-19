@@ -46,6 +46,7 @@ env:
     babel-spanish
     babel-dutch
     babel-italian
+    babel-russian
     beamer
     bookmark
     booktabs
@@ -53,6 +54,7 @@ env:
     caption
     carlisle
     colortbl
+    cm-unicode
     csquotes
     dvips
     enumitem
