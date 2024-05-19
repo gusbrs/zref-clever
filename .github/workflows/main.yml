@@ -56,6 +56,7 @@ env:
     colortbl
     cm-unicode
     csquotes
+    cyrillic
     dvips
     enumitem
     environ
