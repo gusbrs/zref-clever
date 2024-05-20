@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.4...HEAD)
+## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.5...HEAD)
+
+## [v0.4.5](https://github.com/gusbrs/zref-clever/compare/v0.4.4...v0.4.5) (2024-05-20)
 
 ### Added
 - Provided Russian language file (see PR
