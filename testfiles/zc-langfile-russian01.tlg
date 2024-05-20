@@ -3064,6 +3064,20 @@ l. ...  }
 > \g__zrefclever_opt_lang_russian_type_solution_p-name-pl_tl=решениях.
 <recently read> }
 l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_page_refbounds-first-rb_seq contains the items (without outer braces):
+>  {}
+>  {}
+>  {}
+>  {}.
+<recently read> }
+l. ...  }
+The sequence \g__zrefclever_opt_lang_russian_type_page_refbounds-mid-rb_seq contains the items (without outer braces):
+>  {}
+>  {}
+>  {}
+>  {}.
+<recently read> }
+l. ...  }
 The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-first_seq contains the items (without outer braces):
 >  {(}
 >  {}
@@ -3086,7 +3100,7 @@ The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-first-pb_se
 <recently read> }
 l. ...  }
 The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-first-rb_seq contains the items (without outer braces):
->  {(}
+>  {с\nobreakspace (}
 >  {}
 >  {}
 >  {)}.
@@ -3100,7 +3114,7 @@ The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-mid_seq con
 <recently read> }
 l. ...  }
 The sequence \g__zrefclever_opt_lang_russian_type_equation_refbounds-mid-rb_seq contains the items (without outer braces):
->  {(}
+>  {с\nobreakspace (}
 >  {}
 >  {}
 >  {)}.
