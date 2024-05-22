@@ -245,20 +245,23 @@ where it lies.
 
 But the plethora of existing features, packages and document classes which, in
 one way or another, extends this basic functionality is a clear indication of
-a demand for more automation.  Just to name the most popular: \pkg{cleveref},
-\pkg{hyperref}, \pkg{titleref}, \pkg{nameref}, \pkg{varioref}, \pkg{fancyref},
+a demand for more automation.  Just to name the some of the most popular:
+\pkg{cleveref}, \pkg{nameref}, \pkg{titleref}, \pkg{varioref}, \pkg{fancyref},
 and the kernel's \cs{labelformat}.
 
-However, the standard cross-referencing system stores two, and only two,
-properties with the label: the printed representation of the counter last
-incremented with \cs{refstepcounter} and the page.  Of course, out of the
-mentioned desire to automate more, the need arose to store more information
-about the label to support this: the title or caption of the referenced
-object; its counter or, even better, its ``type'', that is, whether it is a
-section, chapter, figure, etc.; its hyperlink anchor, and so on.  Thus those
-two property ``fields'' of the standard label became quite a disputed real
-state.  And the packages in this area of functionality were bound to step on
-each other's toes as a result.
+However, the standard cross-referencing system traditionally stored two, and
+only two, properties with the label: the printed representation of the counter
+last incremented with \cs{refstepcounter} and the page.\footnote{Nowadays, it
+  stores 5, so that \pkg{hyperref} and \pkg{nameref} no longer need to
+  redefine \cs{label}.}  Of course, out of the mentioned desire to automate
+more, the need arose to store more information about the label to support
+this: the title or caption of the referenced object; its counter or, even
+better, its ``type'', that is, whether it is a section, chapter, figure, etc.;
+its hyperlink anchor, and so on.  Thus those two property ``fields'' of the
+standard label became quite a disputed real state.  And the packages in this
+area of functionality, or which somehow depended on extending the
+cross-referencing mechanism, were bound to step on each other's toes as a
+result.
 
 Out of this conundrum, Heiko Oberdiek eventually developed \pkg{zref}, which
 implements an extensible referencing system, making the labels store a
@@ -2242,12 +2245,12 @@ A figure.
 \section{Limitations}
 \zlabel{sec:limitations}
 
-Being based on \pkg{zref} entails one quite sizable advantage for
+Being based on \pkg{zref} entails one significant advantage for
 \pkg{zref-clever}: the extensible referencing system of the former allows
 \pkg{zref-clever} to store and retrieve the information it needs to work
-without having to redefine some core \LaTeX{} commands.  This alone makes for
-reduced compatibility problems and less load order issues than the average
-package in this functionality area.  On the other hand, being based on
+without having to redefine some core \LaTeX{} commands.  Which leads to less
+compatibility problems and load order issues than some traditional
+cross-reference related packages.  On the other hand, being based on
 \pkg{zref} also does impair the supported scope of \pkg{zref-clever}.  Not
 because of any particular limitation of either, but because any class or
 package which implements some special handling for reference labels
