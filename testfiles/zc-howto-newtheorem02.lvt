@@ -22,9 +22,9 @@
 
 \zcsetup{countertype={lem=lemma}}
 
-\newtheorem{lem}{Lemma}[section]
-
 \usepackage{hyperref}
+
+\newtheorem{lem}{Lemma}[section]
 
 \begin{document}
 

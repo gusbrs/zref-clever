@@ -20,6 +20,8 @@
 \bool_set_true:N \l__zrefclever_verbose_testing_bool
 \ExplSyntaxOff
 
+\usepackage{hyperref}
+
 \newtheorem{myconjecture}{Conjecture}[section]
 
 \zcRefTypeSetup{myconjecture}{
@@ -28,8 +30,6 @@
   Name-pl = Conjectures ,
   name-pl = conjectures ,
 }
-
-\usepackage{hyperref}
 
 \begin{document}
 

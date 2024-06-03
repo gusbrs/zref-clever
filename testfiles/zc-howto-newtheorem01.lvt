@@ -20,9 +20,9 @@
 \bool_set_true:N \l__zrefclever_verbose_testing_bool
 \ExplSyntaxOff
 
-\newtheorem{lemma}{Lemma}[section]
-
 \usepackage{hyperref}
+
+\newtheorem{lemma}{Lemma}[section]
 
 \begin{document}
 
