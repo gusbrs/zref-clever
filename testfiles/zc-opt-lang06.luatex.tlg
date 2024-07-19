@@ -9,10 +9,10 @@ l. ...\testtmp
 > \l__zrefclever_ref_language_tl=\l__zrefclever_main_language_tl .
 <recently read> }
 l. ...\testtmp
-> \babelname=\__cmd_start_optimized: \babelname code .
+> \babelname=>ngerman.
 <recently read> }
 l. ...\testtmp
-> \mainbabelname=\__cmd_start_optimized: \mainbabelname code .
+> \mainbabelname=>ngerman.
 <recently read> }
 l. ...\testtmp
 > \box...=
