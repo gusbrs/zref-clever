@@ -29,9 +29,11 @@
 \testtmp
 \renewcommand{\testtmp}{ \tl_show:N \l__zrefclever_ref_language_tl }
 \testtmp
-\renewcommand{\testtmp}{ \tl_show:N \babelname }
+\renewcommand{\testtmp}
+  { \tl_show:e { \token_to_str:N \babelname => \babelname } }
 \testtmp
-\renewcommand{\testtmp}{ \tl_show:N \mainbabelname }
+\renewcommand{\testtmp}
+  { \tl_show:e { \token_to_str:N \mainbabelname => \mainbabelname } }
 \testtmp
 \ExplSyntaxOff
 
