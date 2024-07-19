@@ -9,10 +9,10 @@ l. ...\testtmp
 > \l__zrefclever_ref_language_tl=\l__zrefclever_current_language_tl .
 <recently read> }
 l. ...\testtmp
-> \babelname=ngerman.
+> \babelname=\__cmd_start_optimized: \babelname code .
 <recently read> }
 l. ...\testtmp
-> \mainbabelname=ngerman.
+> \mainbabelname=\__cmd_start_optimized: \mainbabelname code .
 <recently read> }
 l. ...\testtmp
 > \box...=
@@ -34,17 +34,7 @@ l. ...\testtmp
 .\TU/lmr/m/n/10 1
 ! OK.
 l. ...\showbox0
-LaTeX Info: Redefining \rmfamily on input line ....
-LaTeX Info: Redefining \sffamily on input line ....
-LaTeX Info: Redefining \ttfamily on input line ....
-Removing  `luaotfload.node_processor' from `pre_linebreak_filter'.
-Inserting `polyglossia-punct.process' in `pre_linebreak_filter'.
-Inserting `luaotfload.node_processor' in `pre_linebreak_filter'.
-Removing  `luaotfload.node_processor' from `hpack_filter'.
-Removing  `luaotfload.harf.finalize_hlist' from `hpack_filter'.
-Inserting `polyglossia-punct.process' in `hpack_filter'.
-Inserting `luaotfload.node_processor' in `hpack_filter'.
-Inserting `luaotfload.harf.finalize_hlist' in `hpack_filter'. (zref-clever-french.lang)
+(zref-clever-french.lang)
 Package zref-clever Info: Loaded 'french' language file.
 > \box...=
 \hbox(6.66+0.11)x38.38, direction TLT

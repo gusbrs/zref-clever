@@ -9,10 +9,10 @@ l. ...\testtmp
 > \l__zrefclever_ref_language_tl=\l__zrefclever_main_language_tl .
 <recently read> }
 l. ...\testtmp
-> \babelname=ngerman.
+> \babelname=\__cmd_start_optimized: \babelname code .
 <recently read> }
 l. ...\testtmp
-> \mainbabelname=ngerman.
+> \mainbabelname=\__cmd_start_optimized: \mainbabelname code .
 <recently read> }
 l. ...\testtmp
 > \box...=
@@ -23,9 +23,6 @@ l. ...\testtmp
 .\TU/lmr/m/n/10 1
 ! OK.
 l. ...\showbox0
-LaTeX Info: Redefining \rmfamily on input line ....
-LaTeX Info: Redefining \sffamily on input line ....
-LaTeX Info: Redefining \ttfamily on input line ....
 > \box...=
 \hbox(7.16+0.10999)x51.17
 .\TU/lmr/m/n/10 Abschnitt
