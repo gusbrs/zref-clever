@@ -8041,6 +8041,18 @@
 % doing special handling inside \cs{zcref}, but the feature is very cool, so
 % it's worth it.
 %
+% Note that this support comes at a little cost.  \opt{showonlyrefs} works by
+% setting a special \cs{MT@newlabel} for each label referenced with
+% \cs{eqref}.  Now, \cs{eqref} is a specialized reference command, only used
+% to refer to equations, so it sets \cs{MT@newlabel} unconditionally on the
+% first run.  \cs{zcref}, on the other hand, is a general purpose reference
+% command, used to reference labels of any type.  But we wouldn't want to set
+% \cs{MT@newlabel} indiscriminately for all referenced labels in the document,
+% so we need to test for its type.  Alas, the label must exist before its type
+% can be tested, thus we cannot set \cs{MT@newlabel} on the first run, only on
+% the second.  In sum, since \cs{eqref} requires 3 runs to work, \cs{zcref}
+% needs 4.
+%
 %    \begin{macrocode}
 \bool_new:N \l_@@_mathtools_loaded_bool
 \@@_compat_module:nn { mathtools }
