@@ -21,6 +21,7 @@ LaTeX Font Info:    ... okay on input line ....
 Package zref-clever Warning: Missing 'hyperref' package. Setting 'hyperref=false'.
 (zref-clever-english.lang)
 Package zref-clever Info: Loaded 'english' language file.
+\c@zc@appendix=\count...
 > \l__zrefclever_hyperlink_bool=false.
 <recently read> }
 l. ...\testtmp

@@ -1,4 +1,4 @@
-\documentclass{book}
+\documentclass{memoir}
 
 \input{regression-test}
 
@@ -14,9 +14,15 @@
 
 \newcommand{\testtmp}{}
 
-\usepackage{appendix}
-
 \usepackage{zref-clever}
+
+% This test file is (meant to be) very similar to `zc-compat-appendices01',
+% the only differences are that we use `memoir' (instead of `book' +
+% `appendices') to check eventual differences between the package and memoir's
+% "emulation" of it, and we set:
+\counterwithin{figure}{section}
+% to test the nesting of objects at this level and, in particular, within
+% subappendices.
 
 % Number all section levels.
 \setcounter{secnumdepth}{5}

@@ -30,12 +30,33 @@
 \chapter{Chapter 1}
 \label{cha:chapter-1}
 
+\section{Section 1.1}
+\label{sec:section-1.1}
+
+\begin{figure}
+  Figure
+  \caption{Figure 1.1}
+  \label{fig:figure-1.1}
+\end{figure}
+
 \START
 
 \BEGINTEST{appendix module before}
 \ExplSyntaxOn
 \cs_show:N \appendix
-\prop_show:N \l__zrefclever_counter_type_prop
+\cs_if_exist:cTF { c@zc@appendix }
+  {
+    \renewcommand{\testtmp}{ \typeout { zc@appendix~counter~is~defined } }
+    \testtmp
+  }
+  {
+    \renewcommand{\testtmp}{ \typeout { zc@appendix~counter~not~defined } }
+    \testtmp
+  }
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+\testtmp
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_resetby_prop }
+\testtmp
 \ShowHook { cmd / appendix / before }
 \ExplSyntaxOff
 \ENDTEST
@@ -44,23 +65,29 @@
 
 \appendix{}
 
-\chapter{Chapter 2}
-\label{cha:chapter-2}
+\chapter{Appendix A}
+\label{cha:appendix-A}
 
-\section{Section 2.1}
-\label{sec:section-2.1}
+\section{Section A.1}
+\label{sec:section-A.1}
 
-\subsection{Subsection 2.1.1}
-\label{sec:subsection-2.1.1}
+\begin{figure}
+  Figure
+  \caption{Figure A.1}
+  \label{fig:figure-A.1}
+\end{figure}
 
-\subsubsection{Subsubsection 2.1.1.1}
-\label{sec:subsubsection-2.1.1.1}
+\subsection{Subsection A.1.1}
+\label{sec:subsection-A.1.1}
 
-\paragraph{Paragraph 2.1.1.1.1}
-\label{sec:paragraph-2.1.1.1.1}
+\subsubsection{Subsubsection A.1.1.1}
+\label{sec:subsubsection-A.1.1.1}
 
-\subparagraph{Subparagraph 2.1.1.1.1.1}
-\label{sec:subparagraph-2.1.1.1.1.1}
+\paragraph{Paragraph A.1.1.1.1}
+\label{sec:paragraph-A.1.1.1.1}
+
+\subparagraph{Subparagraph A.1.1.1.1.1}
+\label{sec:subparagraph-A.1.1.1.1.1}
 
 \clearpage{}
 
@@ -76,9 +103,16 @@
 \ENDTEST
 
 \renewcommand{\testtmp}{%
-  \zcref{cha:chapter-2, sec:section-2.1, sec:subsection-2.1.1,
-    sec:subsubsection-2.1.1.1, sec:paragraph-2.1.1.1.1,
-    sec:subparagraph-2.1.1.1.1.1}}
+  \zcref{cha:appendix-A, sec:section-A.1, sec:subsection-A.1.1,
+    sec:subsubsection-A.1.1.1, sec:paragraph-A.1.1.1.1,
+    sec:subparagraph-A.1.1.1.1.1}}
+\setbox0=\hbox{\testtmp}
+\showbox0
+\box0
+
+\renewcommand{\testtmp}{%
+  \zcref{cha:appendix-A, sec:section-A.1, cha:chapter-1, sec:section-1.1,
+    fig:figure-A.1, fig:figure-1.1}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0

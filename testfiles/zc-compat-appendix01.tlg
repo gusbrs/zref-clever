@@ -6,6 +6,7 @@ TEST 1: appendix module before
 > \appendix=macro:->\UseHookWithArguments {cmd/appendix/before}{0}\@ifundefined {chapter}{\gdef \theHsection {\Hy@AlphNoErr {section}}}{\gdef \theHchapter {\Hy@AlphNoErr {chapter}}}\xdef \Hy@chapapp {\Hy@appendixstring }\HyOrg@appendix .
 <recently read> }
 l. ...\cs_show:N \appendix
+zc@appendix counter is defined
 The property list \l__zrefclever_counter_type_prop contains the pairs (without outer braces):
 >  {subsection}  =>  {section}
 >  {subsubsection}  =>  {section}
@@ -16,12 +17,19 @@ The property list \l__zrefclever_counter_type_prop contains the pairs (without o
 >  {enumiv}  =>  {item}
 >  {mpfootnote}  =>  {footnote}.
 <recently read> }
-l. ...\prop_show:N \l__zrefclever_counter_type_prop
+l. ...\testtmp
+The property list \l__zrefclever_counter_resetby_prop contains the pairs (without outer braces):
+>  {enumii}  =>  {enumi}
+>  {enumiii}  =>  {enumii}
+>  {enumiv}  =>  {enumiii}
+>  {chapter}  =>  {zc@appendix}.
+<recently read> }
+l. ...\testtmp
 -> The generic hook 'cmd/appendix/before':
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {countertype={chapter=appendix,section=appendix,subsection=appendix,subsubsection=appendix,paragraph=appendix,subparagraph=appendix,}}
+>     -> \setcounter {zc@appendix}{1}\__zrefclever_zcsetup:n {countertype={chapter=appendix,section=appendix,subsection=appendix,subsubsection=appendix,paragraph=appendix,subparagraph=appendix,}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -55,7 +63,7 @@ l. ...\testtmp
 > Code chunks:
 >     ---
 > Document-level (top-level) code (executed last):
->     -> \__zrefclever_zcsetup:n {countertype={chapter=appendix,section=appendix,subsection=appendix,subsubsection=appendix,paragraph=appendix,subparagraph=appendix,}}
+>     -> \setcounter {zc@appendix}{1}\__zrefclever_zcsetup:n {countertype={chapter=appendix,section=appendix,subsection=appendix,subsubsection=appendix,paragraph=appendix,subparagraph=appendix,}}
 > Extra code for next invocation:
 >     ---
 > Rules:
@@ -68,7 +76,7 @@ l. ...\ShowHook { cmd / appendix / before }
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{appendix.A}{\group_begin: A\group_end: }, \__zrefclever_hyperlink:nnn {}{section.A.1}{\group_begin: A.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsection.A.1.1}{\group_begin: A.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
-                            }
+                             }
 > \box...=
 \hbox(6.94444+1.94444)x259.77837
 .\OT1/cmr/m/n/10 a
@@ -143,6 +151,115 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+! OK.
+l. ...\showbox0
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: chapter\group_end: \nobreakspace \group_begin: 1\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\testtmp
+                             }
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1.1}{\group_begin: section\group_end: \nobreakspace \group_begin: 1.1\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\testtmp
+                             }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{appendix.A}{\group_begin: A\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{section.A.1}{\group_begin: A.1\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\testtmp
+                             }
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{figure.1.1}{\group_begin: 1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.A.1}{\group_begin: A.1\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\testtmp
+                             }
+> \box...=
+\hbox(6.94444+1.94444)x303.83388
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{chapter.1}
+.\OT1/cmr/m/n/10 c
+.\kern-0.27779
+.\OT1/cmr/m/n/10 h
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 r
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1.1}
+.\OT1/cmr/m/n/10 s
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 t
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 o
+.\OT1/cmr/m/n/10 n
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 p
+.\OT1/cmr/m/n/10 p
+.\kern0.27779
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 c
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{appendix.A}
+.\OT1/cmr/m/n/10 A
+.\pdfendlink
+.\glue 3.33333 plus 1.66498 minus 1.11221
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.A.1}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 ^^L (ligature fi)
+.\OT1/cmr/m/n/10 g
+.\OT1/cmr/m/n/10 u
+.\OT1/cmr/m/n/10 r
+.\OT1/cmr/m/n/10 e
+.\OT1/cmr/m/n/10 s
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\pdfendlink
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 a
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 d
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.A.1}
+.\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
 .\pdfendlink

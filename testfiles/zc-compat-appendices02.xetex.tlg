@@ -10,7 +10,9 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs (withou
 >  {enumiv}  =>  {enumiii}
 >  {chapter}  =>  {zc@appendix}
 >  {zc@subappendix}  =>  {chapter}
->  {section}  =>  {zc@subappendix}.
+>  {section}  =>  {zc@subappendix}
+>  {subfigure}  =>  {figure}
+>  {subtable}  =>  {table}.
 <recently read> }
 l. ...\testtmp
 -> The generic hook 'env/appendices/begin':
@@ -74,6 +76,11 @@ The property list \l__zrefclever_counter_type_prop contains the pairs (without o
 >  {enumiii}  =>  {item}
 >  {enumiv}  =>  {item}
 >  {mpfootnote}  =>  {footnote}
+>  {subfigure}  =>  {figure}
+>  {subtable}  =>  {table}
+>  {poemline}  =>  {line}
+>  {sidefootnote}  =>  {footnote}
+>  {pagenote}  =>  {endnote}
 >  {chapter}  =>  {appendix}
 >  {section}  =>  {appendix}
 >  {paragraph}  =>  {appendix}.
@@ -88,6 +95,11 @@ The property list \l__zrefclever_counter_type_prop contains the pairs (without o
 >  {enumiii}  =>  {item}
 >  {enumiv}  =>  {item}
 >  {mpfootnote}  =>  {footnote}
+>  {subfigure}  =>  {figure}
+>  {subtable}  =>  {table}
+>  {poemline}  =>  {line}
+>  {sidefootnote}  =>  {footnote}
+>  {pagenote}  =>  {endnote}
 >  {section}  =>  {appendix}
 >  {paragraph}  =>  {appendix}.
 <recently read> }
@@ -96,7 +108,7 @@ l. ...  \testtmp
 ============================================================
 TEST 2: Reference: sectioning commands in subapenddices
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{section.a.2.A}{\group_begin: 2.A\group_end: }, \__zrefclever_hyperlink:nnn {}{subsection.a.2.A.1}{\group_begin: 2.A.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsubsection.a.2.A.1.1}{\group_begin: 2.A.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{paragraph.a.2.A.1.1.1}{\group_begin: 2.A.1.1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{subparagraph.a.2.A.1.1.1.1}{\group_begin: 2.A.1.1.1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{section.2.A}{\group_begin: 2.A\group_end: }, \__zrefclever_hyperlink:nnn {}{subsection.2.A.1}{\group_begin: 2.A.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsubsection.2.A.1.1}{\group_begin: 2.A.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{paragraph.2.A.1.1.1}{\group_begin: 2.A.1.1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{subparagraph.2.A.1.1.1.1}{\group_begin: 2.A.1.1.1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -115,23 +127,23 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 s
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.a.2.A}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(section.2.A)>>>>}
 .\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.a.2.A.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsection.2.A.1)>>>>}
 .\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.a.2.A.1.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsubsection.2.A.1.1)>>>>}
 .\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
@@ -139,10 +151,10 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.a.2.A.1.1.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(paragraph.2.A.1.1.1)>>>>}
 .\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
@@ -152,14 +164,14 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\glue 3.33333 plus 1.66666 minus 1.11111
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 n
 .\OT1/cmr/m/n/10 d
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.a.2.A.1.1.1.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subparagraph.2.A.1.1.1.1)>>>>}
 .\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
@@ -171,14 +183,14 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
 TEST 3: Reference: sectioning commands in appendices
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{appendix.b.A}{\group_begin: A\group_end: }, \__zrefclever_hyperlink:nnn {}{section.b.A.1}{\group_begin: A.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsection.b.A.1.1}{\group_begin: A.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsubsection.b.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{paragraph.b.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{subparagraph.b.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{chapter.A}{\group_begin: A\group_end: }, \__zrefclever_hyperlink:nnn {}{section.A.1}{\group_begin: A.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsection.A.1.1}{\group_begin: A.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -197,28 +209,28 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 s
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{appendix.b.A}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(chapter.A)>>>>}
 .\OT1/cmr/m/n/10 A
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.b.A.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(section.A.1)>>>>}
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.b.A.1.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsection.A.1.1)>>>>}
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.b.A.1.1.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsubsection.A.1.1.1)>>>>}
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
@@ -226,10 +238,10 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.b.A.1.1.1.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(paragraph.A.1.1.1.1)>>>>}
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
@@ -239,14 +251,14 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\glue 3.33333 plus 1.66666 minus 1.11111
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 n
 .\OT1/cmr/m/n/10 d
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.b.A.1.1.1.1.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subparagraph.A.1.1.1.1.1)>>>>}
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
@@ -258,14 +270,14 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
 TEST 4: Reference: sectioning commands
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{section.a.2.A}{\group_begin: 2.A\group_end: }, \__zrefclever_hyperlink:nnn {}{subsection.a.2.A.1}{\group_begin: 2.A.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsubsection.a.2.A.1.1}{\group_begin: 2.A.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{paragraph.a.2.A.1.1.1}{\group_begin: 2.A.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subparagraph.a.2.A.1.1.1.1}{\group_begin: 2.A.1.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{appendix.b.A}{\group_begin: A\group_end: }, \__zrefclever_hyperlink:nnn {}{section.b.A.1}{\group_begin: A.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsection.b.A.1.1}{\group_begin: A.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsubsection.b.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{paragraph.b.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{subparagraph.b.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: appendices\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{section.2.A}{\group_begin: 2.A\group_end: }, \__zrefclever_hyperlink:nnn {}{subsection.2.A.1}{\group_begin: 2.A.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsubsection.2.A.1.1}{\group_begin: 2.A.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{paragraph.2.A.1.1.1}{\group_begin: 2.A.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subparagraph.2.A.1.1.1.1}{\group_begin: 2.A.1.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{chapter.A}{\group_begin: A\group_end: }, \__zrefclever_hyperlink:nnn {}{section.A.1}{\group_begin: A.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsection.A.1.1}{\group_begin: A.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{subsubsection.A.1.1.1}{\group_begin: A.1.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{paragraph.A.1.1.1.1}{\group_begin: A.1.1.1.1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{subparagraph.A.1.1.1.1.1}{\group_begin: A.1.1.1.1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -284,34 +296,23 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 s
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.a.2.A}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(section.2.A)>>>>}
 .\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.a.2.A.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsection.2.A.1)>>>>}
 .\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.a.2.A.1.1}
-.\OT1/cmr/m/n/10 2
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 A
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\pdfendlink
-.\OT1/cmr/m/n/10 ,
-.\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.a.2.A.1.1.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsubsection.2.A.1.1)>>>>}
 .\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
@@ -319,12 +320,10 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.a.2.A.1.1.1.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(paragraph.2.A.1.1.1)>>>>}
 .\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
@@ -334,33 +333,46 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{appendix.b.A}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subparagraph.2.A.1.1.1.1)>>>>}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
-.\pdfendlink
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\special{pdf:eann}
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(chapter.A)>>>>}
+.\OT1/cmr/m/n/10 A
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.b.A.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(section.A.1)>>>>}
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsection.b.A.1.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsection.A.1.1)>>>>}
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subsubsection.b.A.1.1.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subsubsection.A.1.1.1)>>>>}
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
@@ -368,10 +380,10 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{paragraph.b.A.1.1.1.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(paragraph.A.1.1.1.1)>>>>}
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
@@ -381,14 +393,14 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\glue 3.33333 plus 1.66666 minus 1.11111
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 n
 .\OT1/cmr/m/n/10 d
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{subparagraph.b.A.1.1.1.1.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(subparagraph.A.1.1.1.1.1)>>>>}
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
@@ -400,19 +412,19 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================
 ============================================================
 TEST 5: Reference: figures inside and outside appendices and subappendices
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{figure.1.1}{\group_begin: 1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.2.1}{\group_begin: 2.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.2.2}{\group_begin: 2.2\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.2.3}{\group_begin: 2.3\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.3.1}{\group_begin: 3.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.b.A.1}{\group_begin: A.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.b.A.2}{\group_begin: A.2\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.d.B.1}{\group_begin: B.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{figure.1.1}{\group_begin: 1.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.2.1}{\group_begin: 2.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.2.1}{\group_begin: 2.2.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.2.1}{\group_begin: 2.A.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.3.1}{\group_begin: 3.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.A.1}{\group_begin: A.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.A.2}{\group_begin: A.1.2\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.B.1}{\group_begin: B.1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
 > \box...=
-\hbox(6.94444+1.94444)x200.50043
+\hbox(6.94444+1.94444)x265.22284
 .\OT1/cmr/m/n/10 ^^L (ligature fi)
 .\OT1/cmr/m/n/10 g
 .\OT1/cmr/m/n/10 u
@@ -421,64 +433,80 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 s
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.1.1)>>>>}
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.2.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.2.1)>>>>}
 .\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
-.\OT1/cmr/m/n/10 ,
-.\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.2.2}
-.\OT1/cmr/m/n/10 2
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 2
-.\pdfendlink
-.\OT1/cmr/m/n/10 ,
-.\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.2.3}
-.\OT1/cmr/m/n/10 2
-.\OT1/cmr/m/n/10 .
-.\OT1/cmr/m/n/10 3
-.\pdfendlink
-.\OT1/cmr/m/n/10 ,
-.\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.3.1}
-.\OT1/cmr/m/n/10 3
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.b.A.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.2.1)>>>>}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\special{pdf:eann}
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.2.1)>>>>}
+.\OT1/cmr/m/n/10 2
+.\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.b.A.2}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.3.1)>>>>}
+.\OT1/cmr/m/n/10 3
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\special{pdf:eann}
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.A.1)>>>>}
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\special{pdf:eann}
+.\OT1/cmr/m/n/10 ,
+.\glue 3.33333 plus 2.08331 minus 0.88889
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.A.2)>>>>}
+.\OT1/cmr/m/n/10 A
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 2
-.\pdfendlink
+.\special{pdf:eann}
 .\glue 3.33333 plus 1.66666 minus 1.11111
 .\OT1/cmr/m/n/10 a
 .\OT1/cmr/m/n/10 n
 .\OT1/cmr/m/n/10 d
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.d.B.1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 1]/H/I/C[1 0 0]/A<</S/GoTo/D(figure.B.1)>>>>}
 .\OT1/cmr/m/n/10 B
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
-.\pdfendlink
+.\OT1/cmr/m/n/10 .
+.\OT1/cmr/m/n/10 1
+.\special{pdf:eann}
 ! OK.
 l. ...\showbox0
 ============================================================

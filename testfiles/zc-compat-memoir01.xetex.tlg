@@ -27,6 +27,8 @@ The property list \l__zrefclever_counter_resetby_prop contains the pairs (withou
 >  {enumiii}  =>  {enumii}
 >  {enumiv}  =>  {enumiii}
 >  {chapter}  =>  {zc@appendix}
+>  {zc@subappendix}  =>  {chapter}
+>  {section}  =>  {zc@subappendix}
 >  {subfigure}  =>  {figure}
 >  {subtable}  =>  {table}.
 <recently read> }

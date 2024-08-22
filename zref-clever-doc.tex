@@ -2350,18 +2350,21 @@ for numbering and \cs{appendixname} for chapter's names.  In sum, we'd like to
 refer to the appendix sectioning commands as ``appendices'' rather than
 ``chapters'' or ``sections''.  Since the sectioning commands are the same as
 before \cs{appendix}, and so are their underlying counters, we must configure
-the counter type of the sectioning counters to \texttt{appendix}.  And this is
-what this compatibility module does, and it uses a \pkg{ltcmdhooks} hook on
-\cs{appendix} for the purpose.  Hence, this module applies to any document
+the counter type of the sectioning counters to \texttt{appendix}.  Also, the
+sorting of appendix labels relative to those in the rest of the document
+requires attention, which is done by setting the main sectioning level counter
+as being reset by an internal counter with the \opt{counterresetby} option.
+And this is what this compatibility module does, using a \pkg{ltcmdhooks} hook
+on \cs{appendix} for the purpose.  Hence, this module applies to any document
 class or package which provides that command.
 
 \DescribeOption{appendices} %
 This module implements support for the \env{appendices} and
 \env{subappendices} environments provided by the \pkg{appendix} package, and
 also by \cls{memoir}.  The task is the same as for the \texttt{appendix}
-module: set proper counter types for the sectioning counters.  This module
-employs environment hooks to \env{appendices} and \env{subappendices} and a
-command hook to \cs{appendix} for the purpose.
+module: set proper counter types for the sectioning counters and ensuring
+proper sorting of labels.  This module employs environment hooks to
+\env{appendices} and \env{subappendices}.
 
 \DescribeOption{memoir} %
 This compatibility module provides support for some of \cls{memoir}'s

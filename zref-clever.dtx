@@ -7754,11 +7754,45 @@
 % appendix to ``end'', but in this case, of course, we can hook into the
 % environment instead.
 %
+% For the record, \url{https://tex.stackexchange.com/a/724742} is of
+% interest.
+%
 %    \begin{macrocode}
 \@@_compat_module:nn { appendix }
   {
+    \newcounter { zc@appendix }
+    \cs_if_exist:cTF { chapter }
+      {
+        \@@_zcsetup:e
+          {
+            counterresetby =
+              {
+%    \end{macrocode}
+% In case someone did something like
+% \texttt{\textbackslash{}counterwithin\{chapter\}\{part\}}.  Harmless
+% otherwise.
+%    \begin{macrocode}
+                zc@appendix = \@@_counter_reset_by:n { chapter } ,
+                chapter = zc@appendix ,
+              } ,
+          }
+      }
+      {
+        \cs_if_exist:cT { section }
+          {
+            \@@_zcsetup:e
+              {
+                counterresetby =
+                  {
+                    zc@appendix = \@@_counter_reset_by:n { section } ,
+                    section = zc@appendix ,
+                  } ,
+              }
+          }
+      }
     \AddToHook { cmd / appendix / before }
       {
+        \setcounter { zc@appendix } { 1 }
         \@@_zcsetup:n
           {
             countertype =
@@ -7797,26 +7831,28 @@
   {
     \@@_if_package_loaded:nT { appendix }
       {
-        \newcounter { zc@appendix }
-        \newcounter { zc@save@appendix }
-        \setcounter { zc@appendix } { 0 }
-        \setcounter { zc@save@appendix } { 0 }
-        \cs_if_exist:cTF { chapter }
-          {
-            \@@_zcsetup:n
-              { counterresetby = { chapter = zc@appendix } }
-          }
-          {
-            \cs_if_exist:cT { section }
-              {
-                \@@_zcsetup:n
-                  { counterresetby = { section = zc@appendix } }
-              }
-          }
         \AddToHook { env / appendices / begin }
           {
-            \stepcounter { zc@save@appendix }
-            \setcounter { zc@appendix } { \value { zc@save@appendix } }
+%    \end{macrocode}
+% Technically, the \env{appendices} environment can be called multiple times.
+% By default, successive calls keep track of numbering and start where the
+% previous one left off.  Which means just setting the \texttt{zc@appendix}
+% counter to 1 is enough for things to work, since the distinction between the
+% calls and the sorting of their respective references will depend on the
+% underlying sectioning.  \pkg{appendix}'s documentation however, provides a
+% way to restart from A at each call (by redefining \cs{restoreapp} to do
+% nothing).  In this case, the references inside different calls to
+% \env{appendices} get to be identical in every way, including printed form,
+% counter value, enclosing counters, etc., despite being different.  We could
+% keep track of different calls to \env{appendices} by having the
+% \texttt{zc@appendix} counter be ``stepped'' at each call.  Doing so would
+% mean though that \cs{zcref} would distingish things which are typeset
+% identically, granting some arguably weird results.  True, the user
+% \emph{can} change the printed form for each \env{appendices} call,
+% e.g. redefining \cs{thechapter}, but in this case, they are responsible for
+% keeping track of this.
+%    \begin{macrocode}
+            \setcounter { zc@appendix } { 1 }
             \@@_zcsetup:n
               {
                 countertype =
@@ -7832,13 +7868,36 @@
           }
         \AddToHook { env / appendices / end }
           { \setcounter { zc@appendix } { 0 } }
-        \AddToHook { cmd / appendix / before }
+        \newcounter { zc@subappendix }
+        \cs_if_exist:cTF { chapter }
           {
-            \stepcounter { zc@save@appendix }
-            \setcounter { zc@appendix } { \value { zc@save@appendix } }
+            \@@_zcsetup:e
+              {
+                counterresetby =
+                  {
+                    zc@subappendix = \@@_counter_reset_by:n { section } ,
+                    section = zc@subappendix ,
+                  } ,
+              }
+          }
+          {
+            \@@_zcsetup:e
+              {
+                counterresetby =
+                  {
+                    zc@subappendix = \@@_counter_reset_by:n { subsection } ,
+                    subsection = zc@subappendix ,
+                  } ,
+              }
           }
         \AddToHook { env / subappendices / begin }
           {
+%    \end{macrocode}
+% The \env{subappendices} environment, on the other hand, appears not to
+% support multiple calls inside the same chapter/section (the counter is reset
+% by default).  Either way, the same reasoning applies.
+%    \begin{macrocode}
+            \setcounter { zc@subappendix } { 1 }
             \@@_zcsetup:n
               {
                 countertype =
@@ -7851,6 +7910,8 @@
                   } ,
               }
           }
+        \AddToHook { env / subappendices / end }
+          { \setcounter { zc@subappendix } { 0 } }
         \msg_info:nnn { zref-clever } { compat-package } { appendix }
       }
   }
