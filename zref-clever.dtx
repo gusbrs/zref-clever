@@ -8096,10 +8096,13 @@
           }
 %    \end{macrocode}
 % \pkg{amsmath} does use \cs{refstepcounter} for the \texttt{equation} counter
-% throughout and does set \cs{@currentcounter} for \cs{tag}s.  But we still
-% have to manually reset \opt{currentcounter} to default because, since we had
-% to manually set \opt{currentcounter} to \texttt{parentequation} in
-% \env{subequations}, we also have to manually set it to \env{equation} in
+% throughout and supposedly sets \cs{@currentcounter} for \cs{tag}s (I'm not
+% sure if it works in all environments, though.  Once I tried to remove the
+% explicit \opt{currentcounter} setting and several labels to \cs{tag}s ended
+% up with type \texttt{section}.  But I didn't investigate this further).  But
+% we still have to manually reset \opt{currentcounter} to default because,
+% since we had to manually set \opt{currentcounter} to \texttt{parentequation}
+% in \env{subequations}, we also have to manually set it to \env{equation} in
 % environments which may be used within it.  The \env{xxalignat} environment
 % is not included, because it is ``starred'' by default (i.e.\ unnumbered),
 % and does not display or accepts labels or tags anyway.  The \env{-ed}
