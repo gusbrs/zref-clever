@@ -5,6 +5,11 @@
 ### Fixed
 - Fix sorting of appendix references.
 
+### Changed
+- The `counterresetters` option now receives a full comma separated list of
+  counters as value, instead of working by incrementally adding values to the
+  list.
+
 ## [v0.4.5](https://github.com/gusbrs/zref-clever/compare/v0.4.4...v0.4.5) (2024-05-20)
 
 ### Added

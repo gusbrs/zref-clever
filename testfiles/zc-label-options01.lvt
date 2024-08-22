@@ -72,7 +72,18 @@
 \ExplSyntaxOn
 \renewcommand{\testtmp}{ \seq_show:N \l__zrefclever_counter_resetters_seq }
 \testtmp
-\zcsetup{counterresetters=parentfoobar}
+\zcsetup{
+  counterresetters= {
+    subparagraph ,
+    paragraph ,
+    subsubsection ,
+    subsection ,
+    section ,
+    chapter ,
+    part ,
+    parentfoobar ,
+  } ,
+}
 \renewcommand{\testtmp}{ \seq_show:N \l__zrefclever_counter_resetters_seq }
 \testtmp
 \ExplSyntaxOff

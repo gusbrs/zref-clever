@@ -374,19 +374,34 @@
 % there is no possible verification mechanism for this.
 %
 %
-% \begin{macro}[EXP]{\@@_get_enclosing_counters_value:n}
-%   Recursively generate a \emph{sequence} of ``enclosing counters'' values,
-%   for a given \meta{counter} and leave it in the input stream.  This
-%   function must be expandable, since it gets called from \cs{zref@newprop}
-%   and is the one responsible for generating the desired information when
-%   the label is being set.  Note that the order in which we are getting this
-%   information is reversed, since we are navigating the counter reset chain
-%   bottom-up.  But it is very hard to do otherwise here where we need
-%   expandable functions, and easy to handle at the reading side.
+% \begin{macro}[EXP]
+%   {
+%     \@@_get_enclosing_counters:n ,
+%     \@@_get_enclosing_counters_value:n ,
+%   }
+%   Recursively generate a \emph{sequence} of ``enclosing counters'' and
+%   values, for a given \meta{counter} and leave it in the input stream.
+%   These functions must be expandable, since they get called from
+%   \cs{zref@newprop} and are the ones responsible for generating the desired
+%   information when the label is being set.  Note that the order in which we
+%   are getting this information is reversed, since we are navigating the
+%   counter reset chain bottom-up.  But it is very hard to do otherwise here
+%   where we need expandable functions, and easy to handle at the reading
+%   side.
 %     \begin{syntax}
+%       \cs{@@_get_enclosing_counters:n} \Arg{counter}
 %       \cs{@@_get_enclosing_counters_value:n} \Arg{counter}
 %     \end{syntax}
 %    \begin{macrocode}
+\cs_new:Npn \@@_get_enclosing_counters:n #1
+  {
+    \cs_if_exist:cT { c@ \@@_counter_reset_by:n {#1} }
+      {
+        { \@@_counter_reset_by:n {#1} }
+        \@@_get_enclosing_counters:e
+          { \@@_counter_reset_by:n {#1} }
+      }
+  }
 \cs_new:Npn \@@_get_enclosing_counters_value:n #1
   {
     \cs_if_exist:cT { c@ \@@_counter_reset_by:n {#1} }
@@ -406,16 +421,18 @@
 % Gregorio}, aka `egreg' at
 % \url{https://tex.stackexchange.com/q/611370/#comment1529282_611385}).
 %    \begin{macrocode}
+\cs_generate_variant:Nn \@@_get_enclosing_counters:n { e }
 \cs_generate_variant:Nn \@@_get_enclosing_counters_value:n { e }
 %    \end{macrocode}
 % \end{macro}
 %
 %
 % \begin{macro}[EXP]{\@@_counter_reset_by:n}
-%   Auxiliary function for \cs{@@_get_enclosing_counters_value:n}, and useful
-%   on its own standing.  It is broken in parts to be able to use the
-%   expandable mapping functions.  \cs{@@_counter_reset_by:n} leaves in the
-%   stream the ``enclosing counter'' which resets \meta{counter}.
+%   Auxiliary function for \cs{@@_get_enclosing_counters:n} and
+%   \cs{@@_get_enclosing_counters_value:n}, and useful on its own standing.
+%   It is broken in parts to be able to use the expandable mapping functions.
+%   \cs{@@_counter_reset_by:n} leaves in the stream the ``enclosing counter''
+%   which resets \meta{counter}.
 %   \begin{syntax}
 %     \cs{@@_counter_reset_by:n} \Arg{counter}
 %   \end{syntax}
@@ -459,6 +476,14 @@
       \l_@@_current_counter_tl
   }
 \zref@addprop \ZREF@mainlist { zc@enclval }
+%    \end{macrocode}
+%
+% The \texttt{zc@enclcnt} property is provided for the purpose of easing the
+% debugging of counter reset chains, thus it is not added \texttt{main}
+% property list by default.
+%    \begin{macrocode}
+\zref@newprop { zc@enclcnt }
+  { \@@_get_enclosing_counters:e \l_@@_current_counter_tl }
 %    \end{macrocode}
 %
 %
@@ -3883,37 +3908,70 @@
 %
 % \cs{l_@@_counter_resetters_seq} is used by \cs{@@_counter_reset_by:n} to
 % populate the \texttt{zc@enclval} property, and stores the list of counters
-% which are potential ``enclosing counters'' for other counters.  This option
-% is constructed such that users can only \emph{add} items to the variable.
-% There would be little gain and some risk in allowing removal, and the syntax
-% of the option would become unnecessarily more complicated.  Besides, users
-% can already override, for any particular counter, the search done from the
-% set in \cs{l_@@_counter_resetters_seq} with the \opt{counterresetby} option.
+% which are potential ``enclosing counters'' for other counters.
+%
+% Note that, as far as \LaTeX{} is concerned, a given counter can be reset by
+% \emph{any number of counters}.  \cs{counterwithin} just adds a new
+% ``within-counter'' for ``counter'' without removing any other existing ones.
+% However, the data structure of \pkg{zref-clever} can only account for
+% \emph{one} enclosing counter.  In a way, this is hard to circumvent, because
+% the underlying counter reset behavior works ``top-down'', but when looking
+% to a label built from a given counter we need to infer the enclosing
+% counters ``bottom-up''.  As a result, the reset chain we find is path
+% dependent or, more formally, what \cs{@@_counter_reset_by:n} returns depends
+% on the order in which it searches the list of
+% \cs{l_@@_counter_resetters_seq}, since it stops on the first match.  This
+% representation mismatch should not be a problem in most cases.  But one
+% should be aware of the limits it imposes.
+%
+% Consider the following case: the \cls{book} class sets, by default
+% \texttt{figure} and \texttt{table} counters to be reset every
+% \texttt{chapter}, \texttt{section} is also reset every \texttt{chapter}, of
+% course.  Suppose now we say
+% \cs{counterwithin}\texttt{\{figure\}\{section\}}.  Technically,
+% \texttt{figure} is being reset every \texttt{section} and every
+% \texttt{chapter}, but since \texttt{section} is also reset every
+% \texttt{chapter}, the original ``\texttt{chapter} resets \texttt{figure}''
+% behavior is now redundant.  Innocuous, but is still there.  Now, suppose we
+% want to find which counter is resetting \texttt{figure} using
+% \cs{@@_counter_reset_by:n}.  If \texttt{chapter} comes before
+% \texttt{section} in \cs{l_@@_counter_resetters_seq}, \texttt{chapter} will
+% be returned, and that's not what we want.  That's the reason
+% \opt{counterresetters} initial value goes bottom-up in the sectioning level,
+% since we'd expect the nesting of the reset chain to \emph{typically} work
+% top-down.
+%
+% If, despite all this, unexpected results still ensue, users can take care to
+% ``clean'' redundant resetting settings with \cs{counterwithout}.  Besides,
+% users can already override, for any particular counter, the search done from
+% the set in \cs{l_@@_counter_resetters_seq} with the \opt{counterresetby}
+% option.
+%
+% For the above reasons, since order matters, the \opt{counterresetters}
+% option can only be set by the full list of counters.  In other words, users
+% wanting to change this should take the initial value as their starting base.
+%
+% The \texttt{zc@enclcnt} \pkg{zref} property, not included by default in the
+% \texttt{main} property list, is provided for the purpose of easing the
+% debugging of counter reset chains.  So, by adding
+% \cs{zref@addprop}\texttt{\{main\}\{zc@enclcnt\}} you can inspect what the
+% values in the \texttt{zc@enclval} property correspond to.
 %
 %    \begin{macrocode}
 \seq_new:N \l_@@_counter_resetters_seq
 \keys_define:nn { zref-clever/label }
   {
     counterresetters .code:n =
-      {
-        \clist_map_inline:nn {#1}
-          {
-            \seq_if_in:NnF \l_@@_counter_resetters_seq {##1}
-              {
-                \seq_put_right:Nn
-                  \l_@@_counter_resetters_seq {##1}
-              }
-          }
-      } ,
+      { \seq_set_from_clist:Nn \l_@@_counter_resetters_seq {#1} } ,
     counterresetters .initial:n =
       {
-        part ,
-        chapter ,
-        section ,
-        subsection ,
-        subsubsection ,
-        paragraph ,
         subparagraph ,
+        paragraph ,
+        subsubsection ,
+        subsection ,
+        section ,
+        chapter ,
+        part ,
       },
     counterresetters .value_required:n = true ,
   }

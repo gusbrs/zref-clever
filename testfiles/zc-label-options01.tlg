@@ -30,23 +30,23 @@ l. ...\show\Z@R@equationF
 TEST 3: Option: counterresetters=...
 ============================================================
 The sequence \l__zrefclever_counter_resetters_seq contains the items (without outer braces):
->  {part}
->  {chapter}
->  {section}
->  {subsection}
->  {subsubsection}
+>  {subparagraph}
 >  {paragraph}
->  {subparagraph}.
+>  {subsubsection}
+>  {subsection}
+>  {section}
+>  {chapter}
+>  {part}.
 <recently read> }
 l. ...\testtmp
 The sequence \l__zrefclever_counter_resetters_seq contains the items (without outer braces):
->  {part}
->  {chapter}
->  {section}
->  {subsection}
->  {subsubsection}
->  {paragraph}
 >  {subparagraph}
+>  {paragraph}
+>  {subsubsection}
+>  {subsection}
+>  {section}
+>  {chapter}
+>  {part}
 >  {parentfoobar}.
 <recently read> }
 l. ...\testtmp

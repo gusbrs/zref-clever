@@ -893,30 +893,31 @@ know the counter associated with a particular label but also information on
 any counter whose stepping may trigger its resetting, or its ``enclosing
 counters''.  This information is not easily retrievable from the counter
 itself but is (normally) stored with the counter that does the resetting.  The
-\opt{counterresetters} option adds counter names, received as a comma
-separated list, to the list of counters \pkg{zref-clever} uses to search for
-``enclosing counters'' of the counter for which a label is being set.
-Unfortunately, not every counter gets reset through the standard machinery for
-this, including some \LaTeX{} kernel ones (e.g. the \texttt{enumerate}
-environment counters).  For those, there is really no way to retrieve this
-information directly, so we have to just tell \pkg{zref-clever} about them.
-And that's what the \opt{counterresetby} option is made for.  It receives a
-comma separated list of \texttt{key=value} pairs, in which \texttt{key} is the
-counter, and \texttt{value} is its ``enclosing counter'', that is, the counter
-whose stepping results in its resetting.  This is not really an ``option'' in
-the sense of ``user choice'', it is more of a way to inform \pkg{zref-clever}
-of something it cannot know or automatically find in general.  One cannot
-place arbitrary information there, or \pkg{zref-clever} can be thoroughly
-confused.  The setting must correspond to the actual resetting behavior of the
-involved counters.  \opt{counterresetby} has precedence over the search done
-in the \opt{counterresetters} list.  The default value of
-\opt{counterresetters} includes the counters for sectioning commands of the
-standard classes which, in most cases, should be the relevant ones for
-cross-referencing purposes.  The default value of \opt{counterresetby}
-includes the \texttt{enumerate} environment counters.  So, hopefully, you
-don't need to ever bother with either of these options.  But, if you do, they
-are here.  Use them with caution though.  Since these options only affect how
-labels are set, they are not available in \cs{zcref}.
+\opt{counterresetters} option receives a full comma separated list of counter
+names, which \pkg{zref-clever} uses to search for ``enclosing counters'' of
+the counter for which a label is being set.  The order matters (see code
+documentation for details), and you should also take care to start from the
+initial value set by the package.  Unfortunately, not every counter gets reset
+through the standard machinery for this, including some \LaTeX{} kernel ones
+(e.g. the \texttt{enumerate} environment counters).  For those, there is
+really no way to retrieve this information directly, so we have to just tell
+\pkg{zref-clever} about them.  And that's what the \opt{counterresetby} option
+is made for.  It receives a comma separated list of \texttt{key=value} pairs,
+in which \texttt{key} is the counter, and \texttt{value} is its ``enclosing
+counter'', that is, the counter whose stepping results in its resetting.  This
+is not really an ``option'' in the sense of ``user choice'', it is more of a
+way to inform \pkg{zref-clever} of something it cannot know or automatically
+find in general.  One cannot place arbitrary information there, or
+\pkg{zref-clever} can be thoroughly confused.  The setting must correspond to
+the actual resetting behavior of the involved counters.  \opt{counterresetby}
+has precedence over the search done in the \opt{counterresetters} list.  The
+default value of \opt{counterresetters} includes the counters for sectioning
+commands of the standard classes which, in most cases, should be the relevant
+ones for cross-referencing purposes.  The default value of
+\opt{counterresetby} includes the \texttt{enumerate} environment counters.
+So, hopefully, you don't need to ever bother with either of these options.
+But, if you do, they are here.  Use them with caution though.  Since these
+options only affect how labels are set, they are not available in \cs{zcref}.
 
 \DescribeOption{\raisebox{.4em}{\dbend}\ currentcounter} %
 \LaTeX{}'s \cs{refstepcounter} sets two variables which potentially affect the
