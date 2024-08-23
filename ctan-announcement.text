@@ -1,6 +1,10 @@
-## v0.4.5 (2024-05-20)
+## v0.4.6 (2024-08-23)
 
-### Added
-- Provided Russian language file (see PR
-  [#29](https://github.com/gusbrs/zref-clever/pull/29)).
+### Fixed
+- Fix sorting of appendix references.
+
+### Changed
+- The `counterresetters` option now receives a full comma separated list of
+  counters as value, instead of working by incrementally adding values to the
+  list.
 
