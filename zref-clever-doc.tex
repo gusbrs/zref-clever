@@ -2332,6 +2332,13 @@ handling.  These are just the ones for which some special treatment was
 required.  Of course, this effort is bound to be incomplete (see
 \zcref{sec:limitations}).
 
+Note that settings performed by the compatibility modules require special care
+if they are to be changed by users.  Since the modules depend on what has been
+loaded or not in the document, the settings are done at
+\texttt{begindocument}.  Hence, to override a setting performed by a
+compatibility module, the user must ensure their change comes after that,
+e.g.\ by adding their setting to the \texttt{begindocument} hook.
+
 The purpose of outlining to some extend what the compatibility modules do is
 twofold.  First, some of them require usage adjustments for label setting,
 which must be somehow conveyed in this documentation.  Second, the kind and
