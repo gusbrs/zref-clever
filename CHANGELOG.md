@@ -2,6 +2,9 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.6...HEAD)
 
+### Changed
+- Inhibit missing name warning if `noname` option is in use.
+
 ## [v0.4.6](https://github.com/gusbrs/zref-clever/compare/v0.4.5...v0.4.6) (2024-08-23)
 
 ### Fixed

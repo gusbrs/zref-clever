@@ -7253,188 +7253,155 @@
 %
 % \begin{macro}{\@@_type_name_setup:}
 %   Auxiliary function to \cs{@@_typeset_refs_last_of_type:}.  It is
-%   responsible for setting the type name variable \cs{l_@@_type_name_tl} and
-%   \cs{l_@@_name_in_link_bool}.  If a type name can't be found,
-%   \cs{l_@@_type_name_tl} is cleared.  The function takes no arguments, but
-%   is expected to be called in \cs{@@_typeset_refs_last_of_type:} right
-%   before \cs{@@_get_ref_first:}, which is the main consumer of the variables
-%   it sets, though not the only one (and hence this cannot be moved into
-%   \cs{@@_get_ref_first:} itself).  It also expects a number of relevant
-%   variables to have been appropriately set, and which it uses, prominently
-%   \cs{l_@@_type_first_label_type_tl}, but also the queue itself in
-%   \cs{l_@@_typeset_queue_curr_tl}, which should be ``ready except for the
-%   first label'', and the type counter \cs{l_@@_type_count_int}.
+%   responsible for setting the type name variable \cs{l_@@_type_name_tl},
+%   \cs{l_@@_name_in_link_bool}, and \cs{l_@@_type_name_missing_bool}.  If a
+%   type name can't be found, \cs{l_@@_type_name_tl} is cleared.  The function
+%   takes no arguments, but is expected to be called in
+%   \cs{@@_typeset_refs_last_of_type:} right before \cs{@@_get_ref_first:},
+%   which is the main consumer of the variables it sets, though not the only
+%   one (and hence this cannot be moved into \cs{@@_get_ref_first:} itself).
+%   It also expects a number of relevant variables to have been appropriately
+%   set, and which it uses, prominently \cs{l_@@_type_first_label_type_tl},
+%   but also the queue itself in \cs{l_@@_typeset_queue_curr_tl}, which should
+%   be ``ready except for the first label'', and the type counter
+%   \cs{l_@@_type_count_int}.
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_type_name_setup:
   {
-    \zref@ifrefundefined { \l_@@_type_first_label_tl }
+    \bool_if:nTF
+      { \l_@@_typeset_ref_bool && ! \l_@@_typeset_name_bool }
       {
+        % `typeset=ref' / `noname' option
+        % Probably redundant, since in this case the type name is not being
+        % typeset.  But, for completeness sake:
         \tl_clear:N \l_@@_type_name_tl
+        \bool_set_false:N \l_@@_name_in_link_bool
         \bool_set_true:N \l_@@_type_name_missing_bool
       }
       {
-        \tl_if_eq:NnTF
-          \l_@@_type_first_label_type_tl { zc@missingtype }
+        \zref@ifrefundefined { \l_@@_type_first_label_tl }
           {
             \tl_clear:N \l_@@_type_name_tl
             \bool_set_true:N \l_@@_type_name_missing_bool
           }
           {
-            % Determine whether we should use capitalization, abbreviation,
-            % and plural.
-            \bool_lazy_or:nnTF
-              { \l_@@_cap_bool }
+            \tl_if_eq:NnTF
+              \l_@@_type_first_label_type_tl { zc@missingtype }
               {
-                \l_@@_capfirst_bool &&
-                \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
-              }
-              { \tl_set:Nn \l_@@_name_format_tl {Name} }
-              { \tl_set:Nn \l_@@_name_format_tl {name} }
-            % If the queue is empty, we have a singular, otherwise, plural.
-            \tl_if_empty:NTF \l_@@_typeset_queue_curr_tl
-              { \tl_put_right:Nn \l_@@_name_format_tl { -sg } }
-              { \tl_put_right:Nn \l_@@_name_format_tl { -pl } }
-            \bool_lazy_and:nnTF
-              { \l_@@_abbrev_bool }
-              {
-                ! \int_compare_p:nNn
-                    { \l_@@_type_count_int } = { 0 } ||
-                ! \l_@@_noabbrev_first_bool
+                \tl_clear:N \l_@@_type_name_tl
+                \bool_set_true:N \l_@@_type_name_missing_bool
               }
               {
-                \tl_set:NV \l_@@_name_format_fallback_tl
-                  \l_@@_name_format_tl
-                \tl_put_right:Nn \l_@@_name_format_tl { -ab }
-              }
-              { \tl_clear:N \l_@@_name_format_fallback_tl }
+                % Determine whether we should use capitalization,
+                % abbreviation, and plural.
+                \bool_lazy_or:nnTF
+                  { \l_@@_cap_bool }
+                  {
+                    \l_@@_capfirst_bool &&
+                    \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
+                  }
+                  { \tl_set:Nn \l_@@_name_format_tl {Name} }
+                  { \tl_set:Nn \l_@@_name_format_tl {name} }
+                % If the queue is empty, we have a singular, otherwise,
+                % plural.
+                \tl_if_empty:NTF \l_@@_typeset_queue_curr_tl
+                  { \tl_put_right:Nn \l_@@_name_format_tl { -sg } }
+                  { \tl_put_right:Nn \l_@@_name_format_tl { -pl } }
+                \bool_lazy_and:nnTF
+                  { \l_@@_abbrev_bool }
+                  {
+                    ! \int_compare_p:nNn
+                        { \l_@@_type_count_int } = { 0 } ||
+                    ! \l_@@_noabbrev_first_bool
+                  }
+                  {
+                    \tl_set:NV \l_@@_name_format_fallback_tl
+                      \l_@@_name_format_tl
+                    \tl_put_right:Nn \l_@@_name_format_tl { -ab }
+                  }
+                  { \tl_clear:N \l_@@_name_format_fallback_tl }
 
-            % Handle number and gender nudges.
-            \bool_if:NT \l_@@_nudge_enabled_bool
-              {
-                \bool_if:NTF \l_@@_nudge_singular_bool
+                % Handle number and gender nudges.
+                % Note that these nudges get disabled for `typeset=ref' /
+                % `noname' option, but in this case they are not really
+                % meaningful anyway.
+                \bool_if:NT \l_@@_nudge_enabled_bool
                   {
-                    \tl_if_empty:NF \l_@@_typeset_queue_curr_tl
+                    \bool_if:NTF \l_@@_nudge_singular_bool
                       {
-                        \msg_warning:nne { zref-clever }
-                          { nudge-plural-when-sg }
-                          { \l_@@_type_first_label_type_tl }
-                      }
-                  }
-                  {
-                    \bool_lazy_all:nT
-                      {
-                        { \l_@@_nudge_comptosing_bool }
-                        { \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl }
-                        {
-                          \int_compare_p:nNn
-                            { \l_@@_label_count_int } > { 0 }
-                        }
-                      }
-                      {
-                        \msg_warning:nne { zref-clever }
-                          { nudge-comptosing }
-                          { \l_@@_type_first_label_type_tl }
-                      }
-                  }
-                \bool_lazy_and:nnT
-                  { \l_@@_nudge_gender_bool }
-                  { ! \tl_if_empty_p:N \l_@@_ref_gender_tl }
-                  {
-                    \@@_get_rf_opt_seq:neeN { gender }
-                      { \l_@@_type_first_label_type_tl }
-                      { \l_@@_ref_language_tl }
-                      \l_@@_type_name_gender_seq
-                    \seq_if_in:NVF
-                      \l_@@_type_name_gender_seq
-                      \l_@@_ref_gender_tl
-                      {
-                        \seq_if_empty:NTF \l_@@_type_name_gender_seq
+                        \tl_if_empty:NF \l_@@_typeset_queue_curr_tl
                           {
-                            \msg_warning:nneee { zref-clever }
-                              { nudge-gender-not-declared-for-type }
-                              { \l_@@_ref_gender_tl }
+                            \msg_warning:nne { zref-clever }
+                              { nudge-plural-when-sg }
                               { \l_@@_type_first_label_type_tl }
-                              { \l_@@_ref_language_tl }
-                          }
-                          {
-                            \msg_warning:nneeee { zref-clever }
-                              { nudge-gender-mismatch }
-                              { \l_@@_type_first_label_type_tl }
-                              { \l_@@_ref_gender_tl }
-                              {
-                                \seq_use:Nn
-                                  \l_@@_type_name_gender_seq { ,~ }
-                              }
-                              { \l_@@_ref_language_tl }
                           }
                       }
-                  }
-              }
-
-            \tl_if_empty:NTF \l_@@_name_format_fallback_tl
-              {
-                \@@_opt_tl_get:cNF
-                  {
-                    \@@_opt_varname_type:een
-                      { \l_@@_type_first_label_type_tl }
-                      { \l_@@_name_format_tl }
-                      { tl }
-                  }
-                  \l_@@_type_name_tl
-                  {
-                    \tl_if_empty:NF \l_@@_ref_decl_case_tl
                       {
-                        \tl_put_left:Nn \l_@@_name_format_tl { - }
-                        \tl_put_left:NV \l_@@_name_format_tl
-                          \l_@@_ref_decl_case_tl
+                        \bool_lazy_all:nT
+                          {
+                            { \l_@@_nudge_comptosing_bool }
+                            { \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl }
+                            {
+                              \int_compare_p:nNn
+                                { \l_@@_label_count_int } > { 0 }
+                            }
+                          }
+                          {
+                            \msg_warning:nne { zref-clever }
+                              { nudge-comptosing }
+                              { \l_@@_type_first_label_type_tl }
+                          }
                       }
-                    \@@_opt_tl_get:cNF
+                    \bool_lazy_and:nnT
+                      { \l_@@_nudge_gender_bool }
+                      { ! \tl_if_empty_p:N \l_@@_ref_gender_tl }
                       {
-                        \@@_opt_varname_lang_type:eeen
+                        \@@_get_rf_opt_seq:neeN { gender }
+                          { \l_@@_type_first_label_type_tl }
                           { \l_@@_ref_language_tl }
-                          { \l_@@_type_first_label_type_tl }
-                          { \l_@@_name_format_tl }
-                          { tl }
-                      }
-                      \l_@@_type_name_tl
-                      {
-                        \tl_clear:N \l_@@_type_name_tl
-                        \bool_set_true:N \l_@@_type_name_missing_bool
-                        \msg_warning:nnee { zref-clever } { missing-name }
-                          { \l_@@_name_format_tl }
-                          { \l_@@_type_first_label_type_tl }
+                          \l_@@_type_name_gender_seq
+                        \seq_if_in:NVF
+                          \l_@@_type_name_gender_seq
+                          \l_@@_ref_gender_tl
+                          {
+                            \seq_if_empty:NTF \l_@@_type_name_gender_seq
+                              {
+                                \msg_warning:nneee { zref-clever }
+                                  { nudge-gender-not-declared-for-type }
+                                  { \l_@@_ref_gender_tl }
+                                  { \l_@@_type_first_label_type_tl }
+                                  { \l_@@_ref_language_tl }
+                              }
+                              {
+                                \msg_warning:nneeee { zref-clever }
+                                  { nudge-gender-mismatch }
+                                  { \l_@@_type_first_label_type_tl }
+                                  { \l_@@_ref_gender_tl }
+                                  {
+                                    \seq_use:Nn
+                                      \l_@@_type_name_gender_seq { ,~ }
+                                  }
+                                  { \l_@@_ref_language_tl }
+                              }
+                          }
                       }
                   }
-              }
-              {
-                \@@_opt_tl_get:cNF
-                  {
-                    \@@_opt_varname_type:een
-                      { \l_@@_type_first_label_type_tl }
-                      { \l_@@_name_format_tl }
-                      { tl }
-                  }
-                  \l_@@_type_name_tl
+
+                \tl_if_empty:NTF \l_@@_name_format_fallback_tl
                   {
                     \@@_opt_tl_get:cNF
                       {
                         \@@_opt_varname_type:een
                           { \l_@@_type_first_label_type_tl }
-                          { \l_@@_name_format_fallback_tl }
+                          { \l_@@_name_format_tl }
                           { tl }
                       }
                       \l_@@_type_name_tl
                       {
                         \tl_if_empty:NF \l_@@_ref_decl_case_tl
                           {
-                            \tl_put_left:Nn
-                              \l_@@_name_format_tl { - }
+                            \tl_put_left:Nn \l_@@_name_format_tl { - }
                             \tl_put_left:NV \l_@@_name_format_tl
-                              \l_@@_ref_decl_case_tl
-                            \tl_put_left:Nn
-                              \l_@@_name_format_fallback_tl { - }
-                            \tl_put_left:NV
-                              \l_@@_name_format_fallback_tl
                               \l_@@_ref_decl_case_tl
                           }
                         \@@_opt_tl_get:cNF
@@ -7447,57 +7414,108 @@
                           }
                           \l_@@_type_name_tl
                           {
+                            \tl_clear:N \l_@@_type_name_tl
+                            \bool_set_true:N \l_@@_type_name_missing_bool
+                            \msg_warning:nnee { zref-clever } { missing-name }
+                              { \l_@@_name_format_tl }
+                              { \l_@@_type_first_label_type_tl }
+                          }
+                      }
+                  }
+                  {
+                    \@@_opt_tl_get:cNF
+                      {
+                        \@@_opt_varname_type:een
+                          { \l_@@_type_first_label_type_tl }
+                          { \l_@@_name_format_tl }
+                          { tl }
+                      }
+                      \l_@@_type_name_tl
+                      {
+                        \@@_opt_tl_get:cNF
+                          {
+                            \@@_opt_varname_type:een
+                              { \l_@@_type_first_label_type_tl }
+                              { \l_@@_name_format_fallback_tl }
+                              { tl }
+                          }
+                          \l_@@_type_name_tl
+                          {
+                            \tl_if_empty:NF \l_@@_ref_decl_case_tl
+                              {
+                                \tl_put_left:Nn
+                                  \l_@@_name_format_tl { - }
+                                \tl_put_left:NV \l_@@_name_format_tl
+                                  \l_@@_ref_decl_case_tl
+                                \tl_put_left:Nn
+                                  \l_@@_name_format_fallback_tl { - }
+                                \tl_put_left:NV
+                                  \l_@@_name_format_fallback_tl
+                                  \l_@@_ref_decl_case_tl
+                              }
                             \@@_opt_tl_get:cNF
                               {
                                 \@@_opt_varname_lang_type:eeen
                                   { \l_@@_ref_language_tl }
                                   { \l_@@_type_first_label_type_tl }
-                                  { \l_@@_name_format_fallback_tl }
+                                  { \l_@@_name_format_tl }
                                   { tl }
                               }
                               \l_@@_type_name_tl
                               {
-                                \tl_clear:N \l_@@_type_name_tl
-                                \bool_set_true:N
-                                  \l_@@_type_name_missing_bool
-                                \msg_warning:nnee { zref-clever }
-                                  { missing-name }
-                                  { \l_@@_name_format_tl }
-                                  { \l_@@_type_first_label_type_tl }
+                                \@@_opt_tl_get:cNF
+                                  {
+                                    \@@_opt_varname_lang_type:eeen
+                                      { \l_@@_ref_language_tl }
+                                      { \l_@@_type_first_label_type_tl }
+                                      { \l_@@_name_format_fallback_tl }
+                                      { tl }
+                                  }
+                                  \l_@@_type_name_tl
+                                  {
+                                    \tl_clear:N \l_@@_type_name_tl
+                                    \bool_set_true:N
+                                      \l_@@_type_name_missing_bool
+                                    \msg_warning:nnee { zref-clever }
+                                      { missing-name }
+                                      { \l_@@_name_format_tl }
+                                      { \l_@@_type_first_label_type_tl }
+                                  }
                               }
                           }
                       }
                   }
               }
           }
-      }
 
-    % Signal whether the type name is to be included in the hyperlink or not.
-    \bool_lazy_any:nTF
-      {
-        { ! \l_@@_hyperlink_bool }
-        { \l_@@_link_star_bool }
-        { \tl_if_empty_p:N \l_@@_type_name_tl }
-        { \str_if_eq_p:Vn \l_@@_nameinlink_str { false } }
-      }
-      { \bool_set_false:N \l_@@_name_in_link_bool }
-      {
+        % Signal whether the type name is to be included in the hyperlink or
+        % not.
         \bool_lazy_any:nTF
           {
-            { \str_if_eq_p:Vn \l_@@_nameinlink_str { true } }
-            {
-              \str_if_eq_p:Vn \l_@@_nameinlink_str { tsingle } &&
-              \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl
-            }
-            {
-              \str_if_eq_p:Vn \l_@@_nameinlink_str { single } &&
-              \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl &&
-              \l_@@_typeset_last_bool &&
-              \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
-            }
+            { ! \l_@@_hyperlink_bool }
+            { \l_@@_link_star_bool }
+            { \tl_if_empty_p:N \l_@@_type_name_tl }
+            { \str_if_eq_p:Vn \l_@@_nameinlink_str { false } }
           }
-          { \bool_set_true:N \l_@@_name_in_link_bool }
           { \bool_set_false:N \l_@@_name_in_link_bool }
+          {
+            \bool_lazy_any:nTF
+              {
+                { \str_if_eq_p:Vn \l_@@_nameinlink_str { true } }
+                {
+                  \str_if_eq_p:Vn \l_@@_nameinlink_str { tsingle } &&
+                  \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl
+                }
+                {
+                  \str_if_eq_p:Vn \l_@@_nameinlink_str { single } &&
+                  \tl_if_empty_p:N \l_@@_typeset_queue_curr_tl &&
+                  \l_@@_typeset_last_bool &&
+                  \int_compare_p:nNn { \l_@@_type_count_int } = { 0 }
+                }
+              }
+              { \bool_set_true:N \l_@@_name_in_link_bool }
+              { \bool_set_false:N \l_@@_name_in_link_bool }
+          }
       }
   }
 %    \end{macrocode}
