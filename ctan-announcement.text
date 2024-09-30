@@ -1,10 +1,5 @@
-## v0.4.6 (2024-08-23)
-
-### Fixed
-- Fix sorting of appendix references.
+## v0.4.7 (2024-09-30)
 
 ### Changed
-- The `counterresetters` option now receives a full comma separated list of
-  counters as value, instead of working by incrementally adding values to the
-  list.
+- Inhibit missing name warning if `noname` option is in use.
 
