@@ -156,7 +156,7 @@
   \zcsetup{countertype={lstlisting=zchowto}}%
   \lstset{#1}%
   \stepcounter{zchowto}%
-  \setcounter{lstlisting}{\value{zchowto}}%
+  \setcounter{lstlisting}{\value{zchowto}-1}%
 }{}
 \newcounter{zcworkaround}
 \lstnewenvironment{zcworkaround}[1][]{%
