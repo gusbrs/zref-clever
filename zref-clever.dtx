@@ -1681,8 +1681,8 @@
 \prg_new_conditional:Npnn \@@_language_if_declared:n #1 { T , F , TF }
   {
     \tl_if_exist:cTF { \@@_language_varname:n {#1} }
-     { \prg_return_true:  }
-     { \prg_return_false: }
+      { \prg_return_true:  }
+      { \prg_return_false: }
   }
 \prg_generate_conditional_variant:Nnn
   \@@_language_if_declared:n { e } { T , F , TF }
@@ -1726,17 +1726,17 @@
 \NewDocumentCommand \zcDeclareLanguage { O { } m }
   {
     \group_begin:
-    \tl_if_empty:nF {#2}
-      {
-        \@@_language_if_declared:nTF {#2}
-          { \msg_warning:nnn { zref-clever } { language-declared } {#2} }
-          {
-            \tl_new:c { \@@_language_varname:n {#2} }
-            \tl_gset:cn { \@@_language_varname:n {#2} } {#2}
-            \tl_set:Nn \l_@@_setup_language_tl {#2}
-            \keys_set:nn { zref-clever/declarelang } {#1}
-          }
-      }
+      \tl_if_empty:nF {#2}
+        {
+          \@@_language_if_declared:nTF {#2}
+            { \msg_warning:nnn { zref-clever } { language-declared } {#2} }
+            {
+              \tl_new:c { \@@_language_varname:n {#2} }
+              \tl_gset:cn { \@@_language_varname:n {#2} } {#2}
+              \tl_set:Nn \l_@@_setup_language_tl {#2}
+              \keys_set:nn { zref-clever/declarelang } {#1}
+            }
+        }
     \group_end:
   }
 \@onlypreamble \zcDeclareLanguage
@@ -2036,63 +2036,63 @@
 \cs_new_protected:Npn \@@_provide_langfile:n #1
   {
     \group_begin:
-    \@bsphack
-    \@@_language_if_declared:nT {#1}
-      {
-        \seq_if_in:NeF
-          \g_@@_loaded_langfiles_seq
-          { \tl_use:c { \@@_language_varname:n {#1} } }
-          {
-            \exp_args:Ne \file_get:nnNTF
-              {
-                zref-clever-
-                \tl_use:c { \@@_language_varname:n {#1} }
-                .lang
-              }
-              { \ExplSyntaxOn }
-              \l_@@_tmpa_tl
-              {
-                \tl_set:Nn \l_@@_setup_language_tl {#1}
-                \tl_clear:N \l_@@_setup_type_tl
-                \@@_opt_seq_get:cNF
-                  {
-                    \@@_opt_varname_language:nnn
-                      {#1} { declension } { seq }
-                  }
-                  \l_@@_lang_declension_seq
-                  { \seq_clear:N \l_@@_lang_declension_seq }
-                \seq_if_empty:NTF \l_@@_lang_declension_seq
-                  { \tl_clear:N \l_@@_lang_decl_case_tl }
-                  {
-                    \seq_get_left:NN \l_@@_lang_declension_seq
-                      \l_@@_lang_decl_case_tl
-                  }
-                \@@_opt_seq_get:cNF
-                  {
-                    \@@_opt_varname_language:nnn
-                      {#1} { gender } { seq }
-                  }
-                  \l_@@_lang_gender_seq
-                  { \seq_clear:N \l_@@_lang_gender_seq }
-                \keys_set:nV { zref-clever/langfile } \l_@@_tmpa_tl
-                \seq_gput_right:Ne \g_@@_loaded_langfiles_seq
-                  { \tl_use:c { \@@_language_varname:n {#1} } }
-                \msg_info:nne { zref-clever } { langfile-loaded }
-                  { \tl_use:c { \@@_language_varname:n {#1} } }
-              }
-              {
+      \@bsphack
+      \@@_language_if_declared:nT {#1}
+        {
+          \seq_if_in:NeF
+            \g_@@_loaded_langfiles_seq
+            { \tl_use:c { \@@_language_varname:n {#1} } }
+            {
+              \exp_args:Ne \file_get:nnNTF
+                {
+                  zref-clever-
+                  \tl_use:c { \@@_language_varname:n {#1} }
+                  .lang
+                }
+                { \ExplSyntaxOn }
+                \l_@@_tmpa_tl
+                {
+                  \tl_set:Nn \l_@@_setup_language_tl {#1}
+                  \tl_clear:N \l_@@_setup_type_tl
+                  \@@_opt_seq_get:cNF
+                    {
+                      \@@_opt_varname_language:nnn
+                        {#1} { declension } { seq }
+                    }
+                    \l_@@_lang_declension_seq
+                    { \seq_clear:N \l_@@_lang_declension_seq }
+                  \seq_if_empty:NTF \l_@@_lang_declension_seq
+                    { \tl_clear:N \l_@@_lang_decl_case_tl }
+                    {
+                      \seq_get_left:NN \l_@@_lang_declension_seq
+                        \l_@@_lang_decl_case_tl
+                    }
+                  \@@_opt_seq_get:cNF
+                    {
+                      \@@_opt_varname_language:nnn
+                        {#1} { gender } { seq }
+                    }
+                    \l_@@_lang_gender_seq
+                    { \seq_clear:N \l_@@_lang_gender_seq }
+                  \keys_set:nV { zref-clever/langfile } \l_@@_tmpa_tl
+                  \seq_gput_right:Ne \g_@@_loaded_langfiles_seq
+                    { \tl_use:c { \@@_language_varname:n {#1} } }
+                  \msg_info:nne { zref-clever } { langfile-loaded }
+                    { \tl_use:c { \@@_language_varname:n {#1} } }
+                }
+                {
 %    \end{macrocode}
 % Even if we don't have the actual language file, we register it as
 % ``loaded''.  At this point, it is a known language, properly declared.
 % There is no point in trying to load it multiple times, if it was not found
 % the first time, it won't be the next.
 %    \begin{macrocode}
-                \seq_gput_right:Ne \g_@@_loaded_langfiles_seq
-                  { \tl_use:c { \@@_language_varname:n {#1} } }
-              }
-          }
-      }
-    \@esphack
+                  \seq_gput_right:Ne \g_@@_loaded_langfiles_seq
+                    { \tl_use:c { \@@_language_varname:n {#1} } }
+                }
+            }
+        }
+      \@esphack
     \group_end:
   }
 \cs_generate_variant:Nn \@@_provide_langfile:n { e }
@@ -2116,7 +2116,6 @@
           { \tl_clear:N \l_@@_setup_type_tl }
           { \tl_set:Nn \l_@@_setup_type_tl {#1} }
       } ,
-
     case .code:n =
       {
         \seq_if_empty:NTF \l_@@_lang_declension_seq
@@ -2136,7 +2135,6 @@
           }
       } ,
     case .value_required:n = true ,
-
     gender .value_required:n = true ,
     gender .code:n =
       {
@@ -2291,7 +2289,6 @@
                     }
                 }
             }
-
             { stripprefix }
             {
               \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -2328,7 +2325,6 @@
                     }
                 }
             }
-
             { pagecomp }
             {
               \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -2365,7 +2361,6 @@
                     }
                 }
             }
-
             { pagecomp2 }
             {
               \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -2791,7 +2786,6 @@
       } ,
     typeset .initial:n = both ,
     typeset .value_required:n = true ,
-
     noname .meta:n = { typeset = ref } ,
     noname .value_forbidden:n = true ,
     noref .meta:n = { typeset = name } ,
@@ -2929,7 +2923,6 @@
                     { endrangeprop } { tl }
                 }
             }
-
             { stripprefix }
             {
               \@@_opt_tl_set:cn
@@ -2944,7 +2937,6 @@
                     { endrangeprop } { tl }
                 }
             }
-
             { pagecomp }
             {
               \@@_opt_tl_set:cn
@@ -2959,7 +2951,6 @@
                     { endrangeprop } { tl }
                 }
             }
-
             { pagecomp2 }
             {
               \@@_opt_tl_set:cn
@@ -2974,7 +2965,6 @@
                     { endrangeprop } { tl }
                 }
             }
-
             { unset }
             {
               \@@_opt_tl_unset:c
@@ -3049,71 +3039,71 @@
             \bool_if:NTF \l_@@_typeset_range_bool
               {
                 \group_begin:
-                \bool_set_false:N \l_@@_tmpa_bool
-                \exp_args:Nee \tl_if_eq:nnT
-                  {
-                    \@@_extract_unexp:nnn
-                      {#1} { externaldocument } { }
-                  }
-                  {
-                    \@@_extract_unexp:nnn
-                      {#2} { externaldocument } { }
-                  }
-                  {
-                    \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
-                      {
-                        \exp_args:Nee \tl_if_eq:nnT
-                          {
-                            \@@_extract_unexp:nnn
-                              {#1} { zc@pgfmt } { }
-                          }
-                          {
-                            \@@_extract_unexp:nnn
-                              {#2} { zc@pgfmt } { }
-                          }
-                          { \bool_set_true:N \l_@@_tmpa_bool }
-                      }
-                      {
-                        \exp_args:Nee \tl_if_eq:nnT
-                          {
-                            \@@_extract_unexp:nnn
-                              {#1} { zc@counter } { }
-                          }
-                          {
-                            \@@_extract_unexp:nnn
-                              {#2} { zc@counter } { }
-                          }
-                          {
-                            \exp_args:Nee \tl_if_eq:nnT
-                              {
-                                \@@_extract_unexp:nnn
-                                  {#1} { zc@enclval } { }
-                              }
-                              {
-                                \@@_extract_unexp:nnn
-                                  {#2} { zc@enclval } { }
-                              }
-                              { \bool_set_true:N \l_@@_tmpa_bool }
-                          }
-                      }
-                  }
-                \bool_if:NTF \l_@@_tmpa_bool
-                  {
-                    \@@_extract_default:Nnvn \l_@@_tmpb_tl
-                      {#2} { l_@@_endrangeprop_tl } { }
-                  }
-                  {
-                    \zref@ifrefcontainsprop
-                      {#2} { \l_@@_ref_property_tl }
-                      {
-                        \@@_extract_default:Nnvn \l_@@_tmpb_tl
-                          {#2} { l_@@_ref_property_tl } { }
-                      }
-                      { \tl_set:Nn \l_@@_tmpb_tl { zc@missingproperty } }
-                  }
-                \exp_args:NNNV
-                  \group_end:
-                  \tl_set:Nn #3 \l_@@_tmpb_tl
+                  \bool_set_false:N \l_@@_tmpa_bool
+                  \exp_args:Nee \tl_if_eq:nnT
+                    {
+                      \@@_extract_unexp:nnn
+                        {#1} { externaldocument } { }
+                    }
+                    {
+                      \@@_extract_unexp:nnn
+                        {#2} { externaldocument } { }
+                    }
+                    {
+                      \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
+                        {
+                          \exp_args:Nee \tl_if_eq:nnT
+                            {
+                              \@@_extract_unexp:nnn
+                                {#1} { zc@pgfmt } { }
+                            }
+                            {
+                              \@@_extract_unexp:nnn
+                                {#2} { zc@pgfmt } { }
+                            }
+                            { \bool_set_true:N \l_@@_tmpa_bool }
+                        }
+                        {
+                          \exp_args:Nee \tl_if_eq:nnT
+                            {
+                              \@@_extract_unexp:nnn
+                                {#1} { zc@counter } { }
+                            }
+                            {
+                              \@@_extract_unexp:nnn
+                                {#2} { zc@counter } { }
+                            }
+                            {
+                              \exp_args:Nee \tl_if_eq:nnT
+                                {
+                                  \@@_extract_unexp:nnn
+                                    {#1} { zc@enclval } { }
+                                }
+                                {
+                                  \@@_extract_unexp:nnn
+                                    {#2} { zc@enclval } { }
+                                }
+                                { \bool_set_true:N \l_@@_tmpa_bool }
+                            }
+                        }
+                    }
+                  \bool_if:NTF \l_@@_tmpa_bool
+                    {
+                      \@@_extract_default:Nnvn \l_@@_tmpb_tl
+                        {#2} { l_@@_endrangeprop_tl } { }
+                    }
+                    {
+                      \zref@ifrefcontainsprop
+                        {#2} { \l_@@_ref_property_tl }
+                        {
+                          \@@_extract_default:Nnvn \l_@@_tmpb_tl
+                            {#2} { l_@@_ref_property_tl } { }
+                        }
+                        { \tl_set:Nn \l_@@_tmpb_tl { zc@missingproperty } }
+                    }
+                  \exp_args:NNNV
+                    \group_end:
+                    \tl_set:Nn #3 \l_@@_tmpb_tl
               }
               {
                 \@@_extract_default:Nnvn #3
@@ -3145,36 +3135,36 @@
     \zref@ifrefcontainsprop {#2} { \l_@@_ref_property_tl }
       {
         \group_begin:
-        \UseHook { zref-clever/endrange-setup }
-        \tl_set:Ne \l_@@_tmpa_tl
-          {
-            \@@_extract:nnn
-              {#1} { \l_@@_ref_property_tl } { }
-          }
-        \tl_set:Ne \l_@@_tmpb_tl
-          {
-            \@@_extract:nnn
-              {#2} { \l_@@_ref_property_tl } { }
-          }
-        \bool_set_false:N \l_@@_tmpa_bool
-        \bool_until_do:Nn \l_@@_tmpa_bool
-          {
-            \exp_args:Nee \tl_if_eq:nnTF
-              { \tl_head:V \l_@@_tmpa_tl }
-              { \tl_head:V \l_@@_tmpb_tl }
-              {
-                \tl_set:Ne \l_@@_tmpa_tl
-                  { \tl_tail:V \l_@@_tmpa_tl }
-                \tl_set:Ne \l_@@_tmpb_tl
-                  { \tl_tail:V \l_@@_tmpb_tl }
-                \tl_if_empty:NT \l_@@_tmpb_tl
-                  { \bool_set_true:N \l_@@_tmpa_bool }
-              }
-              { \bool_set_true:N \l_@@_tmpa_bool }
-          }
-        \exp_args:NNNV
-          \group_end:
-          \tl_set:Nn #3 \l_@@_tmpb_tl
+          \UseHook { zref-clever/endrange-setup }
+          \tl_set:Ne \l_@@_tmpa_tl
+            {
+              \@@_extract:nnn
+                {#1} { \l_@@_ref_property_tl } { }
+            }
+          \tl_set:Ne \l_@@_tmpb_tl
+            {
+              \@@_extract:nnn
+                {#2} { \l_@@_ref_property_tl } { }
+            }
+          \bool_set_false:N \l_@@_tmpa_bool
+          \bool_until_do:Nn \l_@@_tmpa_bool
+            {
+              \exp_args:Nee \tl_if_eq:nnTF
+                { \tl_head:V \l_@@_tmpa_tl }
+                { \tl_head:V \l_@@_tmpb_tl }
+                {
+                  \tl_set:Ne \l_@@_tmpa_tl
+                    { \tl_tail:V \l_@@_tmpa_tl }
+                  \tl_set:Ne \l_@@_tmpb_tl
+                    { \tl_tail:V \l_@@_tmpb_tl }
+                  \tl_if_empty:NT \l_@@_tmpb_tl
+                    { \bool_set_true:N \l_@@_tmpa_bool }
+                }
+                { \bool_set_true:N \l_@@_tmpa_bool }
+            }
+          \exp_args:NNNV
+            \group_end:
+            \tl_set:Nn #3 \l_@@_tmpb_tl
       }
       { \tl_set:Nn #3 { zc@missingproperty } }
   }
@@ -3205,42 +3195,42 @@
     \zref@ifrefcontainsprop {#2} { \l_@@_ref_property_tl }
       {
         \group_begin:
-        \UseHook { zref-clever/endrange-setup }
-        \tl_set:Ne \l_@@_tmpa_tl
-          {
-            \@@_extract:nnn
-              {#1} { \l_@@_ref_property_tl } { }
-          }
-        \tl_set:Ne \l_@@_tmpb_tl
-          {
-            \@@_extract:nnn
-              {#2} { \l_@@_ref_property_tl } { }
-          }
-        \bool_set_false:N \l_@@_tmpa_bool
-        \@@_is_integer_rgx:VTF \l_@@_tmpa_tl
-          {
-            \@@_is_integer_rgx:VF \l_@@_tmpb_tl
-              { \bool_set_true:N \l_@@_tmpa_bool }
-          }
-          { \bool_set_true:N \l_@@_tmpa_bool }
-        \bool_until_do:Nn \l_@@_tmpa_bool
-          {
-            \exp_args:Nee \tl_if_eq:nnTF
-              { \tl_head:V \l_@@_tmpa_tl }
-              { \tl_head:V \l_@@_tmpb_tl }
-              {
-                \tl_set:Ne \l_@@_tmpa_tl
-                  { \tl_tail:V \l_@@_tmpa_tl }
-                \tl_set:Ne \l_@@_tmpb_tl
-                  { \tl_tail:V \l_@@_tmpb_tl }
-                \tl_if_empty:NT \l_@@_tmpb_tl
-                  { \bool_set_true:N \l_@@_tmpa_bool }
-              }
-              { \bool_set_true:N \l_@@_tmpa_bool }
-          }
-        \exp_args:NNNV
-          \group_end:
-          \tl_set:Nn #3 \l_@@_tmpb_tl
+          \UseHook { zref-clever/endrange-setup }
+          \tl_set:Ne \l_@@_tmpa_tl
+            {
+              \@@_extract:nnn
+                {#1} { \l_@@_ref_property_tl } { }
+            }
+          \tl_set:Ne \l_@@_tmpb_tl
+            {
+              \@@_extract:nnn
+                {#2} { \l_@@_ref_property_tl } { }
+            }
+          \bool_set_false:N \l_@@_tmpa_bool
+          \@@_is_integer_rgx:VTF \l_@@_tmpa_tl
+            {
+              \@@_is_integer_rgx:VF \l_@@_tmpb_tl
+                { \bool_set_true:N \l_@@_tmpa_bool }
+            }
+            { \bool_set_true:N \l_@@_tmpa_bool }
+          \bool_until_do:Nn \l_@@_tmpa_bool
+            {
+              \exp_args:Nee \tl_if_eq:nnTF
+                { \tl_head:V \l_@@_tmpa_tl }
+                { \tl_head:V \l_@@_tmpb_tl }
+                {
+                  \tl_set:Ne \l_@@_tmpa_tl
+                    { \tl_tail:V \l_@@_tmpa_tl }
+                  \tl_set:Ne \l_@@_tmpb_tl
+                    { \tl_tail:V \l_@@_tmpb_tl }
+                  \tl_if_empty:NT \l_@@_tmpb_tl
+                    { \bool_set_true:N \l_@@_tmpa_bool }
+                }
+                { \bool_set_true:N \l_@@_tmpa_bool }
+            }
+          \exp_args:NNNV
+            \group_end:
+            \tl_set:Nn #3 \l_@@_tmpb_tl
       }
       { \tl_set:Nn #3 { zc@missingproperty } }
   }
@@ -3254,49 +3244,49 @@
     \zref@ifrefcontainsprop {#2} { \l_@@_ref_property_tl }
       {
         \group_begin:
-        \UseHook { zref-clever/endrange-setup }
-        \tl_set:Ne \l_@@_tmpa_tl
-          {
-            \@@_extract:nnn
-              {#1} { \l_@@_ref_property_tl } { }
-          }
-        \tl_set:Ne \l_@@_tmpb_tl
-          {
-            \@@_extract:nnn
-              {#2} { \l_@@_ref_property_tl } { }
-          }
-        \bool_set_false:N \l_@@_tmpa_bool
-        \@@_is_integer_rgx:VTF \l_@@_tmpa_tl
-          {
-            \@@_is_integer_rgx:VF \l_@@_tmpb_tl
-              { \bool_set_true:N \l_@@_tmpa_bool }
-          }
-          { \bool_set_true:N \l_@@_tmpa_bool }
-        \bool_until_do:Nn \l_@@_tmpa_bool
-          {
-            \exp_args:Nee \tl_if_eq:nnTF
-              { \tl_head:V \l_@@_tmpa_tl }
-              { \tl_head:V \l_@@_tmpb_tl }
-              {
-                \bool_lazy_or:nnTF
-                  { \int_compare_p:nNn { \l_@@_tmpb_tl } > { 99 } }
-                  {
-                    \int_compare_p:nNn
-                      { \tl_head:V \l_@@_tmpb_tl } = { 0 }
-                  }
-                  {
-                    \tl_set:Ne \l_@@_tmpa_tl
-                      { \tl_tail:V \l_@@_tmpa_tl }
-                    \tl_set:Ne \l_@@_tmpb_tl
-                      { \tl_tail:V \l_@@_tmpb_tl }
-                  }
-                  { \bool_set_true:N \l_@@_tmpa_bool }
-              }
-              { \bool_set_true:N \l_@@_tmpa_bool }
-          }
-        \exp_args:NNNV
-          \group_end:
-          \tl_set:Nn #3 \l_@@_tmpb_tl
+          \UseHook { zref-clever/endrange-setup }
+          \tl_set:Ne \l_@@_tmpa_tl
+            {
+              \@@_extract:nnn
+                {#1} { \l_@@_ref_property_tl } { }
+            }
+          \tl_set:Ne \l_@@_tmpb_tl
+            {
+              \@@_extract:nnn
+                {#2} { \l_@@_ref_property_tl } { }
+            }
+          \bool_set_false:N \l_@@_tmpa_bool
+          \@@_is_integer_rgx:VTF \l_@@_tmpa_tl
+            {
+              \@@_is_integer_rgx:VF \l_@@_tmpb_tl
+                { \bool_set_true:N \l_@@_tmpa_bool }
+            }
+            { \bool_set_true:N \l_@@_tmpa_bool }
+          \bool_until_do:Nn \l_@@_tmpa_bool
+            {
+              \exp_args:Nee \tl_if_eq:nnTF
+                { \tl_head:V \l_@@_tmpa_tl }
+                { \tl_head:V \l_@@_tmpb_tl }
+                {
+                  \bool_lazy_or:nnTF
+                    { \int_compare_p:nNn { \l_@@_tmpb_tl } > { 99 } }
+                    {
+                      \int_compare_p:nNn
+                        { \tl_head:V \l_@@_tmpb_tl } = { 0 }
+                    }
+                    {
+                      \tl_set:Ne \l_@@_tmpa_tl
+                        { \tl_tail:V \l_@@_tmpa_tl }
+                      \tl_set:Ne \l_@@_tmpb_tl
+                        { \tl_tail:V \l_@@_tmpb_tl }
+                    }
+                    { \bool_set_true:N \l_@@_tmpa_bool }
+                }
+                { \bool_set_true:N \l_@@_tmpa_bool }
+            }
+          \exp_args:NNNV
+            \group_end:
+            \tl_set:Nn #3 \l_@@_tmpb_tl
       }
       { \tl_set:Nn #3 { zc@missingproperty } }
   }
@@ -3532,7 +3522,6 @@
                   \tl_set:Nn \l_@@_ref_language_tl
                     { \l_@@_current_language_tl }
                 }
-
                 { main }
                 {
                   \tl_set:Nn \l_@@_ref_language_tl
@@ -3578,7 +3567,6 @@
                       \tl_set:Nn \l_@@_ref_language_tl
                         { \l_@@_current_language_tl }
                     }
-
                     { main }
                     {
                       \tl_set:Nn \l_@@_ref_language_tl
@@ -4420,7 +4408,6 @@
                     { \l_@@_setup_type_tl } { endrangeprop } { tl }
                 }
             }
-
             { stripprefix }
             {
               \@@_opt_tl_set:cn
@@ -4435,7 +4422,6 @@
                     { \l_@@_setup_type_tl } { endrangeprop } { tl }
                 }
             }
-
             { pagecomp }
             {
               \@@_opt_tl_set:cn
@@ -4450,7 +4436,6 @@
                     { \l_@@_setup_type_tl } { endrangeprop } { tl }
                 }
             }
-
             { pagecomp2 }
             {
               \@@_opt_tl_set:cn
@@ -4465,7 +4450,6 @@
                     { \l_@@_setup_type_tl } { endrangeprop } { tl }
                 }
             }
-
             { unset }
             {
               \@@_opt_tl_unset:c
@@ -4645,33 +4629,33 @@
 \NewDocumentCommand \zcLanguageSetup { m m }
   {
     \group_begin:
-    \@@_language_if_declared:nTF {#1}
-      {
-        \tl_clear:N \l_@@_setup_type_tl
-        \tl_set:Nn \l_@@_setup_language_tl {#1}
-        \@@_opt_seq_get:cNF
-          {
-            \@@_opt_varname_language:nnn
-              {#1} { declension } { seq }
-          }
-          \l_@@_lang_declension_seq
-          { \seq_clear:N \l_@@_lang_declension_seq }
-        \seq_if_empty:NTF \l_@@_lang_declension_seq
-          { \tl_clear:N \l_@@_lang_decl_case_tl }
-          {
-            \seq_get_left:NN \l_@@_lang_declension_seq
-              \l_@@_lang_decl_case_tl
-          }
-        \@@_opt_seq_get:cNF
-          {
-            \@@_opt_varname_language:nnn
-              {#1} { gender } { seq }
-          }
-          \l_@@_lang_gender_seq
-          { \seq_clear:N \l_@@_lang_gender_seq }
-        \keys_set:nn { zref-clever/langsetup } {#2}
-      }
-      { \msg_warning:nnn { zref-clever } { unknown-language-setup } {#1} }
+      \@@_language_if_declared:nTF {#1}
+        {
+          \tl_clear:N \l_@@_setup_type_tl
+          \tl_set:Nn \l_@@_setup_language_tl {#1}
+          \@@_opt_seq_get:cNF
+            {
+              \@@_opt_varname_language:nnn
+                {#1} { declension } { seq }
+            }
+            \l_@@_lang_declension_seq
+            { \seq_clear:N \l_@@_lang_declension_seq }
+          \seq_if_empty:NTF \l_@@_lang_declension_seq
+            { \tl_clear:N \l_@@_lang_decl_case_tl }
+            {
+              \seq_get_left:NN \l_@@_lang_declension_seq
+                \l_@@_lang_decl_case_tl
+            }
+          \@@_opt_seq_get:cNF
+            {
+              \@@_opt_varname_language:nnn
+                {#1} { gender } { seq }
+            }
+            \l_@@_lang_gender_seq
+            { \seq_clear:N \l_@@_lang_gender_seq }
+          \keys_set:nn { zref-clever/langsetup } {#2}
+        }
+        { \msg_warning:nnn { zref-clever } { unknown-language-setup } {#1} }
     \group_end:
   }
 \@onlypreamble \zcLanguageSetup
@@ -4692,7 +4676,6 @@
           { \tl_clear:N \l_@@_setup_type_tl }
           { \tl_set:Nn \l_@@_setup_type_tl {#1} }
       } ,
-
     case .code:n =
       {
         \seq_if_empty:NTF \l_@@_lang_declension_seq
@@ -4712,7 +4695,6 @@
           }
       } ,
     case .value_required:n = true ,
-
     gender .value_required:n = true ,
     gender .code:n =
       {
@@ -4847,7 +4829,6 @@
                     }
                 }
             }
-
             { stripprefix }
             {
               \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -4884,7 +4865,6 @@
                     }
                 }
             }
-
             { pagecomp }
             {
               \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -4921,7 +4901,6 @@
                     }
                 }
             }
-
             { pagecomp2 }
             {
               \tl_if_empty:NTF \l_@@_setup_type_tl
@@ -5265,8 +5244,8 @@
 % it does not leak to the note.
 %    \begin{macrocode}
       \group_begin:
-      \l_@@_ref_typeset_font_tl
-      \@@_typeset_refs:
+        \l_@@_ref_typeset_font_tl
+        \@@_typeset_refs:
       \group_end:
 %    \end{macrocode}
 % Typeset \texttt{note}.
@@ -5294,11 +5273,11 @@
 %    \end{macrocode}
 % Integration with \pkg{mathtools}.
 %    \begin{macrocode}
-    \bool_if:NT \l_@@_mathtools_loaded_bool
-      {
-        \@@_mathtools_showonlyrefs:n
-          { \l_@@_zcref_labels_seq }
-      }
+      \bool_if:NT \l_@@_mathtools_loaded_bool
+        {
+          \@@_mathtools_showonlyrefs:n
+            { \l_@@_zcref_labels_seq }
+        }
     \group_end:
   }
 %    \end{macrocode}
@@ -5325,9 +5304,9 @@
 \NewDocumentCommand \zcpageref { s O { } m }
   {
     \group_begin:
-    \IfBooleanT {#1}
-      { \bool_set_false:N \l_@@_hyperlink_bool }
-    \zcref [#2, ref = page] {#3}
+      \IfBooleanT {#1}
+        { \bool_set_false:N \l_@@_hyperlink_bool }
+      \zcref [#2, ref = page] {#3}
     \group_end:
   }
 %    \end{macrocode}
@@ -5507,7 +5486,6 @@
       \l_@@_label_type_a_tl {#1} { zc@type } { zc@missingtype }
     \@@_extract_default:Nnnn
       \l_@@_label_type_b_tl {#2} { zc@type } { zc@missingtype }
-
     \tl_if_eq:NNTF
       \l_@@_label_type_a_tl
       \l_@@_label_type_b_tl
@@ -5535,9 +5513,7 @@
       {#1} { externaldocument } { }
     \@@_extract_default:Nnnn \l_@@_label_extdoc_b_tl
       {#2} { externaldocument } { }
-
     \bool_set_false:N \l_@@_sort_decided_bool
-
     % First we check if there's any "external document" difference (coming
     % from `zref-xr') and, if so, sort based on that.
     \tl_if_eq:NNF
@@ -5575,7 +5551,6 @@
               }
           }
       }
-
     \bool_until_do:Nn \l_@@_sort_decided_bool
       {
         \bool_if:nTF
@@ -6042,7 +6017,6 @@
     \int_zero:N \l_@@_range_same_count_int
     \bool_set_false:N \l_@@_range_beg_is_first_bool
     \bool_set_false:N \l_@@_type_first_refbounds_set_bool
-
     % Get type block options (not type-specific).
     \@@_get_rf_opt_tl:neeN { tpairsep }
       { \l_@@_label_type_a_tl }
@@ -6056,7 +6030,6 @@
       { \l_@@_label_type_a_tl }
       { \l_@@_ref_language_tl }
       \l_@@_tlastsep_tl
-
     % Process label stack.
     \bool_set_false:N \l_@@_typeset_last_bool
     \bool_until_do:Nn \l_@@_typeset_last_bool
@@ -6072,7 +6045,6 @@
             \seq_get_left:NN \l_@@_typeset_labels_seq
               \l_@@_label_b_tl
           }
-
         \tl_if_eq:NnTF \l_@@_ref_property_tl { page }
           {
             \tl_set:Nn \l_@@_label_type_a_tl { page }
@@ -6086,7 +6058,6 @@
               \l_@@_label_type_b_tl
               \l_@@_label_b_tl { zc@type } { zc@missingtype }
           }
-
         % First, we establish whether the "current label" (i.e. `a') is the
         % last one of its type.  This can happen because the "next label"
         % (i.e. `b') is of a different type (or different definition status),
@@ -6113,7 +6084,6 @@
                   }
               }
           }
-
         % Handle warnings in case of reference or type undefined.
         % Test: `zc-typeset01.lvt': "Typeset refs: warn ref undefined"
         \zref@refused { \l_@@_label_a_tl }
@@ -6136,7 +6106,6 @@
                   { \l_@@_label_a_tl }
               }
           }
-
         % Get possibly type-specific separators, refbounds, font and other
         % options, once per type.
         \int_compare:nNnT { \l_@@_label_count_int } = { 0 }
@@ -6230,7 +6199,6 @@
               { \l_@@_ref_language_tl }
               \l_@@_refbounds_last_re_seq
           }
-
         % Here we send this to a couple of auxiliary functions.
         \bool_if:NTF \l_@@_last_of_type_bool
           % There exists no next label of the same type as the current.
@@ -6277,7 +6245,6 @@
             \l_@@_refbounds_first_sg_seq
           \bool_set_true:N \l_@@_type_first_refbounds_set_bool
         }
-
         % The last is the second: we have a pair (if not repeated).
         % Test: `zc-typeset01.lvt': "Last of type: pair"
         { 1 }
@@ -6511,7 +6478,6 @@
               }
           }
       }
-
     % Handle "range" option.  The idea is simple: if the queue is not empty,
     % we replace it with the end of the range (or pair).  We can still
     % retrieve the end of the range from `label_a' since we know to be
@@ -6589,7 +6555,6 @@
               }
           }
       }
-
     % If none of the special cases for the first of type refbounds have been
     % set, do it.
     \bool_if:NF \l_@@_type_first_refbounds_set_bool
@@ -6597,7 +6562,6 @@
         \seq_set_eq:NN \l_@@_type_first_refbounds_seq
           \l_@@_refbounds_first_seq
       }
-
     % Now that the type block is finished, we can add the name and the first
     % ref to the queue.  Also, if "typeset" option is not "both", handle it
     % here as well.
@@ -6627,24 +6591,24 @@
                     \bool_if:NTF \l_@@_name_in_link_bool
                       {
                         \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_namefont_tl
-                        \@@_hyperlink:nnn
-                          {
-                            \@@_extract_url_unexp:V
-                              \l_@@_type_first_label_tl
-                          }
-                          {
-                            \@@_extract_unexp:Vnn
-                              \l_@@_type_first_label_tl
-                              { anchor } { }
-                          }
-                          { \exp_not:V \l_@@_type_name_tl }
+                          \exp_not:V \l_@@_namefont_tl
+                          \@@_hyperlink:nnn
+                            {
+                              \@@_extract_url_unexp:V
+                                \l_@@_type_first_label_tl
+                            }
+                            {
+                              \@@_extract_unexp:Vnn
+                                \l_@@_type_first_label_tl
+                                { anchor } { }
+                            }
+                            { \exp_not:V \l_@@_type_name_tl }
                         \exp_not:N \group_end:
                       }
                       {
                         \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_namefont_tl
-                        \exp_not:V \l_@@_type_name_tl
+                          \exp_not:V \l_@@_namefont_tl
+                          \exp_not:V \l_@@_type_name_tl
                         \exp_not:N \group_end:
                       }
                   }
@@ -6660,7 +6624,6 @@
               }
           }
       }
-
     % Typeset the previous type block, if there is one.
     \int_compare:nNnT { \l_@@_type_count_int } > { 0 }
       {
@@ -6668,11 +6631,9 @@
           { \l_@@_tlistsep_tl }
         \l_@@_typeset_queue_prev_tl
       }
-
     % Extra log for testing.
     \bool_if:NT \l_@@_verbose_testing_bool
       { \tl_show:N \l_@@_typeset_queue_curr_tl }
-
     % Wrap up loop, or prepare for next iteration.
     \bool_if:NTF \l_@@_typeset_last_bool
       {
@@ -6746,7 +6707,6 @@
               { \l_@@_label_a_tl } { \l_@@_label_b_tl }
           }
       }
-
     % Process the current label to the current queue.
     \int_compare:nNnTF { \l_@@_label_count_int } = { 0 }
       {
@@ -6757,7 +6717,6 @@
         \tl_set:NV \l_@@_type_first_label_type_tl
           \l_@@_label_type_a_tl
         \int_incr:N \l_@@_ref_count_int
-
         % If the next label may be part of a range, signal it (we deal with it
         % as the "first", and must do it there, to handle hyperlinking), but
         % also step the range counters.
@@ -7051,9 +7010,9 @@
               {
                 \seq_item:Nn #2 { 2 }
                 \exp_not:N \group_begin:
-                \exp_not:V \l_@@_reffont_tl
-                \@@_extract_unexp:nvn {#1}
-                  { l_@@_ref_property_tl } { }
+                  \exp_not:V \l_@@_reffont_tl
+                  \@@_extract_unexp:nvn {#1}
+                    { l_@@_ref_property_tl } { }
                 \exp_not:N \group_end:
                 \seq_item:Nn #2 { 3 }
               }
@@ -7063,9 +7022,9 @@
             \seq_item:Nn #2 { 1 }
             \seq_item:Nn #2 { 2 }
             \exp_not:N \group_begin:
-            \exp_not:V \l_@@_reffont_tl
-            \@@_extract_unexp:nvn {#1}
-              { l_@@_ref_property_tl } { }
+              \exp_not:V \l_@@_reffont_tl
+              \@@_extract_unexp:nvn {#1}
+                { l_@@_ref_property_tl } { }
             \exp_not:N \group_end:
             \seq_item:Nn #2 { 3 }
             \seq_item:Nn #2 { 4 }
@@ -7100,8 +7059,8 @@
               {
                 \seq_item:Nn #3 { 2 }
                 \exp_not:N \group_begin:
-                \exp_not:V \l_@@_reffont_tl
-                \exp_not:n {#2}
+                  \exp_not:V \l_@@_reffont_tl
+                  \exp_not:n {#2}
                 \exp_not:N \group_end:
                 \seq_item:Nn #3 { 3 }
               }
@@ -7111,8 +7070,8 @@
             \seq_item:Nn #3 { 1 }
             \seq_item:Nn #3 { 2 }
             \exp_not:N \group_begin:
-            \exp_not:V \l_@@_reffont_tl
-            \exp_not:n {#2}
+              \exp_not:V \l_@@_reffont_tl
+              \exp_not:n {#2}
             \exp_not:N \group_end:
             \seq_item:Nn #3 { 3 }
             \seq_item:Nn #3 { 4 }
@@ -7156,17 +7115,17 @@
                   }
                   {
                     \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_namefont_tl
-                    \exp_not:V \l_@@_type_name_tl
+                      \exp_not:V \l_@@_namefont_tl
+                      \exp_not:V \l_@@_type_name_tl
                     \exp_not:N \group_end:
                     \exp_not:V \l_@@_namesep_tl
                     \seq_item:Nn \l_@@_type_first_refbounds_seq { 1 }
                     \seq_item:Nn \l_@@_type_first_refbounds_seq { 2 }
                     \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_reffont_tl
-                    \@@_extract_unexp:Vvn
-                      \l_@@_type_first_label_tl
-                      { l_@@_ref_property_tl } { }
+                      \exp_not:V \l_@@_reffont_tl
+                      \@@_extract_unexp:Vvn
+                        \l_@@_type_first_label_tl
+                        { l_@@_ref_property_tl } { }
                     \exp_not:N \group_end:
                     \seq_item:Nn \l_@@_type_first_refbounds_seq { 3 }
                   }
@@ -7174,8 +7133,8 @@
               }
               {
                 \exp_not:N \group_begin:
-                \exp_not:V \l_@@_namefont_tl
-                \exp_not:V \l_@@_type_name_tl
+                  \exp_not:V \l_@@_namefont_tl
+                  \exp_not:V \l_@@_type_name_tl
                 \exp_not:N \group_end:
                 \exp_not:V \l_@@_namesep_tl
                 \@@_ref_default:
@@ -7189,8 +7148,8 @@
               }
               {
                 \exp_not:N \group_begin:
-                \exp_not:V \l_@@_namefont_tl
-                \exp_not:V \l_@@_type_name_tl
+                  \exp_not:V \l_@@_namefont_tl
+                  \exp_not:V \l_@@_type_name_tl
                 \exp_not:N \group_end:
                 \tl_if_empty:NF \l_@@_type_name_tl
                   { \exp_not:V \l_@@_namesep_tl }
@@ -7220,10 +7179,10 @@
                         \seq_item:Nn
                           \l_@@_type_first_refbounds_seq { 2 }
                         \exp_not:N \group_begin:
-                        \exp_not:V \l_@@_reffont_tl
-                        \@@_extract_unexp:Vvn
-                          \l_@@_type_first_label_tl
-                          { l_@@_ref_property_tl } { }
+                          \exp_not:V \l_@@_reffont_tl
+                          \@@_extract_unexp:Vvn
+                            \l_@@_type_first_label_tl
+                            { l_@@_ref_property_tl } { }
                         \exp_not:N \group_end:
                         \seq_item:Nn
                           \l_@@_type_first_refbounds_seq { 3 }
@@ -7235,10 +7194,10 @@
                     \seq_item:Nn \l_@@_type_first_refbounds_seq { 1 }
                     \seq_item:Nn \l_@@_type_first_refbounds_seq { 2 }
                     \exp_not:N \group_begin:
-                    \exp_not:V \l_@@_reffont_tl
-                    \@@_extract_unexp:Vvn
-                      \l_@@_type_first_label_tl
-                      { l_@@_ref_property_tl } { }
+                      \exp_not:V \l_@@_reffont_tl
+                      \@@_extract_unexp:Vvn
+                        \l_@@_type_first_label_tl
+                        { l_@@_ref_property_tl } { }
                     \exp_not:N \group_end:
                     \seq_item:Nn \l_@@_type_first_refbounds_seq { 3 }
                     \seq_item:Nn \l_@@_type_first_refbounds_seq { 4 }
@@ -7320,7 +7279,6 @@
                     \tl_put_right:Nn \l_@@_name_format_tl { -ab }
                   }
                   { \tl_clear:N \l_@@_name_format_fallback_tl }
-
                 % Handle number and gender nudges.
                 % Note that these nudges get disabled for `typeset=ref' /
                 % `noname' option, but in this case they are not really
@@ -7386,7 +7344,6 @@
                           }
                       }
                   }
-
                 \tl_if_empty:NTF \l_@@_name_format_fallback_tl
                   {
                     \@@_opt_tl_get:cNF
@@ -7487,7 +7444,6 @@
                   }
               }
           }
-
         % Signal whether the type name is to be included in the hyperlink or
         % not.
         \bool_lazy_any:nTF
@@ -7590,13 +7546,13 @@
               {
                 \int_compare:nNnTF
                   { \@@_extract:nnn {#1} { zc@pgval } { -2 } + 1 }
-                    =
+                  =
                   { \@@_extract:nnn {#2} { zc@pgval } { -1 } }
                   { \bool_set_true:N \l_@@_next_maybe_range_bool }
                   {
                     \int_compare:nNnT
                       { \@@_extract:nnn {#1} { zc@pgval } { -1 } }
-                        =
+                      =
                       { \@@_extract:nnn {#2} { zc@pgval } { -1 } }
                       {
                         \bool_set_true:N \l_@@_next_maybe_range_bool
@@ -7616,13 +7572,13 @@
                   {
                     \int_compare:nNnTF
                       { \@@_extract:nnn {#1} { zc@cntval } { -2 } + 1 }
-                        =
+                      =
                       { \@@_extract:nnn {#2} { zc@cntval } { -1 } }
                       { \bool_set_true:N \l_@@_next_maybe_range_bool }
                       {
                         \int_compare:nNnT
                           { \@@_extract:nnn {#1} { zc@cntval } { -1 } }
-                            =
+                          =
                           { \@@_extract:nnn {#2} { zc@cntval } { -1 } }
                           {
 %    \end{macrocode}
