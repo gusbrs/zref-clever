@@ -35,7 +35,7 @@
 
 \section{Section 1}
 
-\begin{myconjecture}\zlabel{conjecture-1}
+\begin{myconjecture}\label{conjecture-1}
   A conjecture.
 \end{myconjecture}
 

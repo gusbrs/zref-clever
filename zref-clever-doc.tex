@@ -306,7 +306,7 @@ more interesting to users in general.
 
 
 \section{Warning}
-\zlabel{sec:warning}
+\label{sec:warning}
 
 This package is in its early days, and should be considered experimental.  By
 this I don't mean I expect it to be ``edgy'', indeed quite a lot of effort has
@@ -345,11 +345,11 @@ despite the small necessary adjustments, should feel very familiar to any
 \usepackage{hyperref}
 \begin{document}
 \section{Section 1}
-\zlabel{sec:section-1}
+\label{sec:section-1}
 \begin{figure}
   A figure.
   \caption{Figure 1}
-  \zlabel{fig:figure-1}
+  \label{fig:figure-1}
 \end{figure}
 A reference to \zcref{sec:section-1}. \zcref[S]{fig:figure-1} shows some
 interesting information.
@@ -394,7 +394,7 @@ available at \zcref{sec:how-tos}.
 
 
 \section{Loading the package}
-\zlabel{sec:loading-package}
+\label{sec:loading-package}
 
 \pkg{zref-clever} can be loaded with the usual:
 
@@ -418,7 +418,7 @@ and \pkg{zref}'s \pkg{zref-hyperref} and \pkg{zref-xr} modules.
 
 
 \section{User interface}
-\zlabel{sec:user-interface}
+\label{sec:user-interface}
 
 \begin{function}{\zcref}
   \begin{syntax}
@@ -487,7 +487,7 @@ Sets \meta{label} for referencing with \cs{zref} and, thus, also \cs{zcref}.
 
 
 \section{\cs{label} or \cs{zlabel}?}
-\zlabel{sec:label-or-zlabel}
+\label{sec:label-or-zlabel}
 
 Technically, \pkg{zref}'s referencing system, and thus also \pkg{zref-clever},
 require a label set with \cs{zlabel} to make a reference.  However, the
@@ -530,7 +530,7 @@ who may want to use the second approach.
 
 
 \section{Options}
-\zlabel{sec:options}
+\label{sec:options}
 
 \pkg{zref-clever} is highly configurable, offering a lot of flexibility in
 typeset results of the references, but it also tries to keep these ``handles''
@@ -728,7 +728,7 @@ abbreviated, even when \opt{abbrev} is set to \texttt{true}.
 
 \DescribeOption{S} %
 \opt{S} for ``Sentence''.  The \opt{S} option is a convenience alias for
-\texttt{capfirst=true, noabbrevfirst=true}, and is intended to be used in
+\texttt{noabbrevfirst=true, capfirst=true}, and is intended to be used in
 references made at the beginning of a sentence.  It is highly recommended that
 you make a habit of using the \opt{S} option for beginning of sentence
 references.  Even if you do happen to be currently using \texttt{cap=true,
@@ -980,7 +980,7 @@ option.
 
 
 \section{Reference types}
-\zlabel{sec:reference-types}
+\label{sec:reference-types}
 
 A ``reference type'' is the basic \pkg{zref-clever} setup unit for specifying
 how a cross-reference group of a certain kind is to be typeset.  Though,
@@ -1056,7 +1056,7 @@ compilation warning when it cannot find a suitable value.
 
 
 \section{Reference format}
-\zlabel{sec:reference-format}
+\label{sec:reference-format}
 
 Formatting how the reference is to be typeset is, quite naturally, a big part
 of the user interface of \pkg{zref-clever}.  In this area, we tried to balance
@@ -1142,7 +1142,7 @@ more detail soon, and lists the scopes in which each is available.
     \bottomrule
   \end{tabular}
   \caption{Reference format options and their scopes}
-  \zlabel{tab:reference-format}
+  \label{tab:reference-format}
 \end{table}
 
 
@@ -1325,7 +1325,7 @@ available for this purpose are presented in
     \bottomrule
   \end{tabular}
   \caption{Advanced reference format options and their scopes}
-  \zlabel{tab:advanced-reference-format}
+  \label{tab:advanced-reference-format}
 \end{table}
 
 The ``base'' options are the actually operative ones, while the ``derived''
@@ -1364,7 +1364,7 @@ depends on the case.
 
 
 \section{Internationalization}
-\zlabel{sec:internationalization}
+\label{sec:internationalization}
 
 \pkg{zref-clever} provides internationalization facilities and integrates with
 \pkg{babel} and \pkg{polyglossia} to adapt to the languages in use by either
@@ -1437,7 +1437,7 @@ indeed required, without users having to worry about it at all.
     \bottomrule
   \end{tabular}
   \caption{Declared languages and aliases}
-  \zlabel{tab:languages-and-aliases}
+  \label{tab:languages-and-aliases}
 \end{table}
 
 
@@ -1493,7 +1493,7 @@ in effect for the languages declared by \pkg{zref-clever}.
     \bottomrule
   \end{tabular}
   \caption{Options for declared languages}
-  \zlabel{tab:language-options}
+  \label{tab:language-options}
 \end{table}
 
 \begin{function}{\zcDeclareLanguageAlias}
@@ -1677,7 +1677,7 @@ it's up to you.
 
 
 \section{How-tos}
-\zlabel{sec:how-tos}
+\label{sec:how-tos}
 
 This section gathers some usage examples, or ``how-tos'', of cases which may
 require some \pkg{zref-clever} setup, or usage adjustments, and each item is
@@ -1701,21 +1701,21 @@ the latter's main reference commands.
 \usepackage{zref-vario}
 \begin{document}
 \section{Section 1}
-\zlabel{sec:section-1}
+\label{sec:section-1}
 \begin{figure}
   A figure.
   \caption{Figure 1}
-  \zlabel{fig:figure-1}
+  \label{fig:figure-1}
 \end{figure}
 \begin{figure}
   Another figure.
   \caption{Figure 2}
-  \zlabel{fig:figure-2}
+  \label{fig:figure-2}
 \end{figure}
-\zvref[S]{sec:section-1}
-\zvpageref{fig:figure-1}
-\zvrefrange{fig:figure-1}{fig:figure-2}
-\zvpagerefrange{fig:figure-1}{fig:figure-2}
+\zvref[S]{sec:section-1}\par
+\zvpageref{fig:figure-1}\par
+\zvrefrange{fig:figure-1}{fig:figure-2}\par
+\zvpagerefrange{fig:figure-1}{fig:figure-2}\par
 \zfullref{fig:figure-1}
 \end{document}
 \end{zchowto}
@@ -1761,7 +1761,7 @@ box.  So, you can go ahead with:
 \newtheorem{lemma}{Lemma}[section]
 \begin{document}
 \section{Section 1}
-\begin{lemma}\zlabel{lemma-1}
+\begin{lemma}\label{lemma-1}
   A lemma.
 \end{lemma}
 \zcref{lemma-1}
@@ -1780,7 +1780,7 @@ type with the \opt{countertype} option:
 \newtheorem{lem}{Lemma}[section]
 \begin{document}
 \section{Section 1}
-\begin{lem}\zlabel{lemma-1}
+\begin{lem}\label{lemma-1}
   A lemma.
 \end{lem}
 \zcref{lemma-1}
@@ -1814,10 +1814,10 @@ system and just set it for all occurrences with
 \newtheorem{myproposition}[mytheorem]{Proposition}
 \begin{document}
 \section{Section 1}
-\begin{mytheorem}\zlabel{theorem-1}
+\begin{mytheorem}\label{theorem-1}
   A theorem.
 \end{mytheorem}
-\begin{myproposition}\zlabel{proposition-1}
+\begin{myproposition}\label{proposition-1}
   A proposition.
 \end{myproposition}
 \zcref{theorem-1, proposition-1}
@@ -1853,7 +1853,7 @@ language is supported).
 }
 \begin{document}
 \section{Section 1}
-\begin{myconjecture}\zlabel{conjecture-1}
+\begin{myconjecture}\label{conjecture-1}
   A conjecture.
 \end{myconjecture}
 \zcref{conjecture-1}
@@ -1891,7 +1891,7 @@ package in the setup, the same procedure can be used with \cls{memoir}'s
 \begin{diagram}
   A diagram.
   \caption{A diagram}
-  \zlabel{diagram-1}
+  \label{diagram-1}
 \end{diagram}
 \zcref{diagram-1}
 \end{document}
@@ -1970,7 +1970,7 @@ regardless of what the current counter is.
 \section{Section 1}
 \begin{equation}
   \zcsetup{reftype=pluralequation}
-  \zlabel{eq:1}
+  \label{eq:1}
   \begin{aligned}
     A+B&=B+A\\
     C&=D+E\\
@@ -1992,9 +1992,9 @@ requires special treatment.  \pkg{zref-clever}'s \opt{labelhook} option
 provides that a label given to the \opt{label} option gets set with both a
 regular \cs{label} and a \cs{zlabel}, so that we can refer to it with both
 referencing systems.  Setting labels for specific lines of the environment can
-be done with \cs{zlabel} directly, subject to the same escaping as for the
-standard \cs{label}.  For more details, see the description of the
-\opt{listings} compatibility module at \zcref{sec:comp-modules}.
+be done with either \cs{label} or \cs{zlabel}, subject to escaping as due.
+For more details, see the description of the \opt{listings} compatibility
+module at \zcref{sec:comp-modules}.
 
 \begin{zchowto}[caption={\pkg{listings}},label={how:listings},escapeinside=`']
 \documentclass{article}
@@ -2007,7 +2007,7 @@ standard \cs{label}.  For more details, see the description of the
 \begin{lstlisting}[caption={Useless code}, label=lst:1]
   for i:=maxint to 0 do
   begin
-      { do nothing }(*@\zlabel{ln:1.1}@*)
+      { do nothing }(*@\label{ln:1.1}@*)
   end;
 \end{lstlisting}
 \zcref{lst:1, ln:1.1}
@@ -2052,13 +2052,13 @@ implicit counter-type association, and have to set it explicitly with the
 \setlist[myenumerate,4]{label=(\roman*)}
 \begin{document}
 \begin{myenumerate}
-\item An item.\zlabel{item-1}
+\item An item.\label{item-1}
   \begin{myenumerate}
-  \item An item.\zlabel{item-2}
+  \item An item.\label{item-2}
     \begin{myenumerate}
-    \item An item.\zlabel{item-3}
+    \item An item.\label{item-3}
       \begin{myenumerate}
-      \item An item.\zlabel{item-4}
+      \item An item.\label{item-4}
       \end{myenumerate}
     \end{myenumerate}
   \end{myenumerate}
@@ -2101,7 +2101,7 @@ be the following.
 \usepackage{hyperref}
 \begin{document}
 \section{Section A1}
-\zlabel{sec:section-a1}
+\label{sec:section-a1}
 \zcref{sec:section-a1, B-sec:section-b1}
 \end{document}
 `\vspace{-1ex}'
@@ -2111,7 +2111,7 @@ be the following.
 \usepackage{hyperref}
 \begin{document}
 \section{Section B1}
-\zlabel{sec:section-b1}
+\label{sec:section-b1}
 \end{document}
 \end{zchowto}
 
@@ -2121,11 +2121,14 @@ be the following.
 \zctask{Make references to boxes from the \pkg{tcolorbox} package.}
 
 Since version 6.0.0, \pkg{tcolorbox} has support for \pkg{zref} and
-\pkg{zref-clever}, through the \opt{label is zlabel} option.  With this option
-enabled, the \opt{label} option sets a \cs{zlabel}, which can be referred to
-from \cs{zref} or \cs{zcref}.  If you are using the \opt{auto counter}, or
-some other custom counter, you can set the reference type for the box's labels
-with the \opt{label type} option.
+\pkg{zref-clever}, through the \opt{label is zlabel} option.\footnote{See,
+  however, \url{https://github.com/T-F-S/tcolorbox/issues/295}.  Depending on
+  the course of this request, things may come work without the need of further
+  setup, relying on the \opt{labelhook} option functionality.}  With this
+option enabled, the \opt{label} option sets a \cs{zlabel}, which can be
+referred to from \cs{zref} or \cs{zcref}.  If you are using the \opt{auto
+  counter}, or some other custom counter, you can set the reference type for
+the box's labels with the \opt{label type} option.
 
 \begin{zchowto}[caption={\pkg{tcolorbox}}]
 \documentclass{article}
@@ -2151,7 +2154,7 @@ with the \opt{label type} option.
 }
 \begin{document}
 \section{Section 1}
-\zlabel{sec:section-1}
+\label{sec:section-1}
 \begin{pabox}[label={box:1}]{Title text}
   This is tcolorbox \zcref{box:1} on \zcpageref{box:1}.
 \end{pabox}
@@ -2232,11 +2235,11 @@ custom \pkg{zref} property, which we then use to set \pkg{zref-clever}'s
 \zcsetup{ref=ordref}
 \begin{document}
 \section{Section 1}
-\zlabel{sec:section-1}
+\label{sec:section-1}
 \begin{figure}
 A figure.
 \caption{Figure 1}
-\zlabel{fig:figure-1}
+\label{fig:figure-1}
 \end{figure}
 \zcref{sec:section-1,fig:figure-1}
 \end{document}
@@ -2244,7 +2247,7 @@ A figure.
 
 
 \section{Limitations}
-\zlabel{sec:limitations}
+\label{sec:limitations}
 
 Being based on \pkg{zref} entails one significant advantage for
 \pkg{zref-clever}: the extensible referencing system of the former allows
@@ -2319,7 +2322,7 @@ reasonable way to do so is within reach.
 
 
 \section{Compatibility modules}
-\zlabel{sec:comp-modules}
+\label{sec:comp-modules}
 
 This section gives a description of each compatibility module provided by
 \pkg{zref-clever}.  These modules intend to smooth the interaction of \LaTeX{}

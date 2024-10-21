@@ -28,7 +28,7 @@
 
 \section{Section 1}
 
-\begin{lemma}\zlabel{lemma-1}
+\begin{lemma}\label{lemma-1}
   A lemma.
 \end{lemma}
 

@@ -37,7 +37,7 @@
 
 \begin{equation}
   \zcsetup{reftype=pluralequation}
-  \zlabel{eq:1}
+  \label{eq:1}
   \begin{aligned}
     A+B&=B+A\\
     C&=D+E\\

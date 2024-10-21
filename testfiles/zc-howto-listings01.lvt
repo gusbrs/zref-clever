@@ -26,15 +26,14 @@
 
 \begin{document}
 
-\section{Section 1.1}
-\zlabel{sec:section-1.1}
+\section{Section 1}
 
 \lstset{escapeinside={(*@}{@*)}, numbers=left, numberstyle=\tiny}
 
 \begin{lstlisting}[caption={Useless code}, label=lst:1]
   for i:=maxint to 0 do
   begin
-      { do nothing }(*@\zlabel{ln:1.1}@*)
+      { do nothing }(*@\label{ln:1.1}@*)
   end;
 \end{lstlisting}
 \zcref{lst:1,ln:1.1}

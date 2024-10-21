@@ -30,7 +30,7 @@
 
 \section{Section 1}
 
-\begin{lem}\zlabel{lemma-1}
+\begin{lem}\label{lemma-1}
   A lemma.
 \end{lem}
 

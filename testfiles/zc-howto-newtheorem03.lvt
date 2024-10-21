@@ -34,11 +34,11 @@
 
 \section{Section 1}
 
-\begin{mytheorem}\zlabel{theorem-1}
+\begin{mytheorem}\label{theorem-1}
   A theorem.
 \end{mytheorem}
 
-\begin{myproposition}\zlabel{proposition-1}
+\begin{myproposition}\label{proposition-1}
   A proposition.
 \end{myproposition}
 

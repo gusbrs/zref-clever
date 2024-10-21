@@ -25,11 +25,11 @@
 \begin{document}
 
 \section{Section 1}
-\zlabel{sec:section-1}
+\label{sec:section-1}
 \begin{figure}
   A figure.
   \caption{Figure 1}
-  \zlabel{fig:figure-1}
+  \label{fig:figure-1}
 \end{figure}
 A reference to \zcref{sec:section-1}. \zcref[S]{fig:figure-1} shows some
 interesting information.
