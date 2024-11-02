@@ -419,7 +419,7 @@ l. ...\showbox0
 ============================================================
 TEST 5: Reference: figures inside and outside appendices and subappendices
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{figure.1.1}{\group_begin: 1.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.2.1}{\group_begin: 2.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.2.1}{\group_begin: 2.2.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.2.1}{\group_begin: 2.A.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.3.1}{\group_begin: 3.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.A.1}{\group_begin: A.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.A.2}{\group_begin: A.1.2\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.B.1}{\group_begin: B.1.1\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: figures\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{figure.1.1.1}{\group_begin: 1.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.2.1.1}{\group_begin: 2.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.2.2.1}{\group_begin: 2.2.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.2.A.1}{\group_begin: 2.A.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.3.1.1}{\group_begin: 3.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.A.1.1}{\group_begin: A.1.1\group_end: }, \__zrefclever_hyperlink:nnn {}{figure.A.1.2}{\group_begin: A.1.2\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{figure.B.1.1}{\group_begin: B.1.1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -433,7 +433,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 s
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.1.1.1}
 .\OT1/cmr/m/n/10 1
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
@@ -442,7 +442,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\pdfendlink
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.2.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.2.1.1}
 .\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
@@ -451,7 +451,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\pdfendlink
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.2.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.2.2.1}
 .\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 2
@@ -460,7 +460,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\pdfendlink
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.2.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.2.A.1}
 .\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 A
@@ -469,7 +469,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\pdfendlink
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.3.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.3.1.1}
 .\OT1/cmr/m/n/10 3
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
@@ -478,7 +478,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\pdfendlink
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.A.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.A.1.1}
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
@@ -487,7 +487,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\pdfendlink
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.A.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.A.1.2}
 .\OT1/cmr/m/n/10 A
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1
@@ -500,7 +500,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 d
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.B.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{figure.B.1.1}
 .\OT1/cmr/m/n/10 B
 .\OT1/cmr/m/n/10 .
 .\OT1/cmr/m/n/10 1

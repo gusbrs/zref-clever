@@ -735,7 +735,7 @@ l. ...\setbox0=\hbox{\testtmp
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -791,7 +791,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 d
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 u
@@ -818,7 +818,7 @@ TEST 20: Option: typesort=
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -846,7 +846,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\pdfendlink
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 u
@@ -909,7 +909,7 @@ TEST 21: Option: notypesort
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -937,7 +937,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\pdfendlink
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 u
@@ -1015,7 +1015,7 @@ l. ...\setbox0=\hbox{\testtmp
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1071,7 +1071,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 d
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 u
@@ -1094,7 +1094,7 @@ l. ...\showbox0
 ============================================================
 TEST 23: Option: typesort={{{othertypes}},table}
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1112,7 +1112,7 @@ l. ...\setbox0=\hbox{\testtmp
                              }
 > \box...=
 \hbox(7.5+2.5)x223.97266
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 u
@@ -1193,7 +1193,7 @@ l. ...\setbox0=\hbox{\testtmp
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -1234,7 +1234,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\pdfendlink
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 u
@@ -2234,7 +2234,7 @@ l. ...\showbox0
 ============================================================
 TEST 45: Option: abbrev=true
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: eq.\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: eq.\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2248,7 +2248,7 @@ l. ...\setbox0=\hbox{\testtmp
                              }
 > \box...=
 \hbox(7.5+2.5)x135.27806
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 .
@@ -2297,7 +2297,7 @@ l. ...\showbox0
 ============================================================
 TEST 46: Option: abbrev
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: eq.\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: eq.\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2311,7 +2311,7 @@ l. ...\setbox0=\hbox{\testtmp
                              }
 > \box...=
 \hbox(7.5+2.5)x135.27806
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 .
@@ -2360,7 +2360,7 @@ l. ...\showbox0
 ============================================================
 TEST 47: Option: abbrev=false
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2374,7 +2374,7 @@ l. ...\setbox0=\hbox{\testtmp
                              }
 > \box...=
 \hbox(7.5+2.5)x171.41704
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 u
@@ -2430,7 +2430,7 @@ l. ...\showbox0
 ============================================================
 TEST 48: Option: noabbrev
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2444,7 +2444,7 @@ l. ...\setbox0=\hbox{\testtmp
                              }
 > \box...=
 \hbox(7.5+2.5)x171.41704
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 u
@@ -2500,7 +2500,7 @@ l. ...\showbox0
 ============================================================
 TEST 49: Option: noabbrevfirst=true
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2514,7 +2514,7 @@ l. ...\setbox0=\hbox{\testtmp
                              }
 > \box...=
 \hbox(7.5+2.5)x160.27814
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 u
@@ -2568,7 +2568,7 @@ l. ...\showbox0
 ============================================================
 TEST 50: Option: noabbrevfirst
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2582,7 +2582,7 @@ l. ...\setbox0=\hbox{\testtmp
                              }
 > \box...=
 \hbox(7.5+2.5)x160.27814
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 u
@@ -2636,7 +2636,7 @@ l. ...\showbox0
 ============================================================
 TEST 51: Option: noabbrevfirst=false
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: eq.\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: eq.\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2650,7 +2650,7 @@ l. ...\setbox0=\hbox{\testtmp
                              }
 > \box...=
 \hbox(7.5+2.5)x135.27806
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 .
@@ -2699,7 +2699,7 @@ l. ...\showbox0
 ============================================================
 TEST 52: Option: S
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: Equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: Equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2713,7 +2713,7 @@ l. ...\setbox0=\hbox{\testtmp
                              }
 > \box...=
 \hbox(7.5+2.5)x162.63927
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 E
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 u
@@ -2767,7 +2767,7 @@ l. ...\showbox0
 ============================================================
 TEST 53: Option: (no) S
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: eq.\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: eq.\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                              }
@@ -2781,7 +2781,7 @@ l. ...\setbox0=\hbox{\testtmp
                              }
 > \box...=
 \hbox(7.5+2.5)x135.27806
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 .
@@ -4391,7 +4391,7 @@ l. ...\setbox0=\hbox{\testtmp
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: equation\group_end: \nobreakspace (\group_begin: 1.2\group_end: )}.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                               }
@@ -4449,7 +4449,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 D
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
 .\OT1/cmr/m/n/10 e
 .\OT1/cmr/m/n/10 q
 .\OT1/cmr/m/n/10 u

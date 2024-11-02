@@ -3,7 +3,7 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: amsmath how to
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.1}{\group_begin: 1\group_end: }), (\__zrefclever_hyperlink:nnn {}{AMS.1}{\group_begin: {foo}\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.1.2}{\group_begin: 2\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1.2b}{\group_begin: 2b\group_end: }).
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.1}{\group_begin: 1\group_end: }), (\__zrefclever_hyperlink:nnn {}{AMS.1}{\group_begin: {foo}\group_end: }), (\__zrefclever_hyperlink:nnn {}{equation.2}{\group_begin: 2\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{equation.2b}{\group_begin: 2b\group_end: }).
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp
                             }
@@ -21,7 +21,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
 .\OT1/cmr/m/n/10 (
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.1}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1}
 .\OT1/cmr/m/n/10 1
 .\pdfendlink
 .\OT1/cmr/m/n/10 )
@@ -38,7 +38,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\OT1/cmr/m/n/10 ,
 .\glue 3.33333 plus 2.08331 minus 0.88889
 .\OT1/cmr/m/n/10 (
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.2}
 .\OT1/cmr/m/n/10 2
 .\pdfendlink
 .\OT1/cmr/m/n/10 )
@@ -49,7 +49,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\penalty 10000
 .\glue 3.33333 plus 1.66666 minus 1.11111
 .\OT1/cmr/m/n/10 (
-.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.1.2b}
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{equation.2b}
 .\OT1/cmr/m/n/10 2
 .\OT1/cmr/m/n/10 b
 .\pdfendlink
