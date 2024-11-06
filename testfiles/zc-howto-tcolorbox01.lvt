@@ -20,7 +20,6 @@
 \usepackage{tcolorbox}
 
 \tcbuselibrary{theorems}
-\tcbset{label is zlabel}
 
 \usepackage{hyperref}
 

@@ -251,17 +251,21 @@ and the kernel's \cs{labelformat}.
 
 However, the standard cross-referencing system traditionally stored two, and
 only two, properties with the label: the printed representation of the counter
-last incremented with \cs{refstepcounter} and the page.\footnote{Nowadays, it
-  stores 5, so that \pkg{hyperref} and \pkg{nameref} no longer need to
-  redefine \cs{label}.}  Of course, out of the mentioned desire to automate
-more, the need arose to store more information about the label to support
-this: the title or caption of the referenced object; its counter or, even
-better, its ``type'', that is, whether it is a section, chapter, figure, etc.;
-its hyperlink anchor, and so on.  Thus those two property ``fields'' of the
-standard label became quite a disputed real state.  And the packages in this
-area of functionality, or which somehow depended on extending the
-cross-referencing mechanism, were bound to step on each other's toes as a
-result.
+last incremented with \cs{refstepcounter} and the page.  Of course, out of the
+mentioned desire to automate more, the need arose to store more information
+about the label to support this: the title or caption of the referenced
+object; its counter or, even better, its ``type'', that is, whether it is a
+section, chapter, figure, etc.; its hyperlink anchor, and so on.  Thus those
+two property ``fields'' of the standard label became quite a disputed real
+state.  And the packages in this area of functionality, or which somehow
+depended on extending the cross-referencing mechanism, were bound to step on
+each other's toes as a result.  Nowadays (2024), many of these issues have
+changed for the better.  Notably, now the kernel's \cs{label} already stores
+five arguments, regardless of the presence of \pkg{hyperref}, and also
+provides a hook with the label as argument so that packages can extend its
+functionality without the need to redefine it, as \pkg{nameref} now already
+does (and so does \pkg{zref-clever}).\footnote{We are currently observing some
+  of the pains of adjusting the ecosystem to these improvements though\dots{}}
 
 Out of this conundrum, Heiko Oberdiek eventually developed \pkg{zref}, which
 implements an extensible referencing system, making the labels store a
@@ -299,10 +303,8 @@ that \pkg{zref-vario} offers integration of \pkg{zref-clever} with
 \pkg{varioref}, a significant part of the most prominent automation features
 available to the standard referencing system is thus brought to \pkg{zref},
 working under a single consistent underlying infrastructure and user
-interface.  Alas, there are some limitations (see \zcref{sec:limitations}),
-and it may be your cup of tea or not.  Still, all in all, hopefully
-\pkg{zref-clever} can make \pkg{zref} more accessible to the average user, and
-more interesting to users in general.
+interface.  All in all, hopefully \pkg{zref-clever} can make \pkg{zref} more
+accessible to the average user, and more interesting to users in general.
 
 
 \section{Warning}
@@ -323,21 +325,16 @@ you should be ready to accommodate to eventual upstream changes.
 
 \section{\pkg{zref-clever} for the impatient}
 
-\pkg{zref-clever} is based on \pkg{zref}'s referencing system which, though
-independent of the standard one, is very similar to it in its user interface.
-Indeed, to use \pkg{zref}, instead of setting a \cs{label} and making a
-\cs{ref}, one would set a \cs{zlabel} and make \cs{zref}s to it, in pretty
-much the same way as for the standard system.  \pkg{zref-clever} introduces
-the more featureful \cs{zcref} for making references, but relies on
-\pkg{zref}'s \cs{zlabel} for label setting.  \pkg{zref-clever} provides that a
-\cs{label} also sets a \cs{zlabel} with the same name using the kernel's
-\texttt{label} hook (see the \opt{labelhook} option in \zcref{sec:options}),
-so that you can use it too with standard \cs{label}s (see the
-\zcref{sec:label-or-zlabel} for discussion).
+Making cross-references with \pkg{zref-clever} is very similar to the standard
+referencing system in its user interface: one sets a label, with \cs{label},
+which can then be referenced, in our case with \cs{zcref}, which is the main
+and basic entrance for making references with \pkg{zref-clever}.  \cs{zcref}
+receives a list of labels as argument and its behavior can be locally changed
+through the optional argument.
 
-A basic document using \pkg{zref-clever} is shown in \zcref{how:basic} which,
-despite the small necessary adjustments, should feel very familiar to any
-\LaTeX{} user acquainted with the standard referencing system:
+A basic document using \pkg{zref-clever} is shown in \zcref{how:basic} which
+should feel very familiar to any \LaTeX{} user acquainted with the standard
+referencing system:
 
 \begin{zchowto}[caption={Basic usage},label={how:basic}]
 \documentclass{article}
@@ -476,58 +473,6 @@ Furthermore, \pkg{zref-clever} loads \pkg{zref}'s \pkg{zref-user} module by
 default.  So you also have its user commands available out of the box,
 including \cs{zref} and \cs{zpageref}, but notably:
 
-\begin{function}{\zlabel}
-  \begin{syntax}
-    \cs{zlabel}\marg{label}
-  \end{syntax}
-\end{function}
-Sets \meta{label} for referencing with \cs{zref} and, thus, also \cs{zcref}.
-\cs{zlabel} is provided by \pkg{zref-user} and is the counterpart of
-\cs{label} for \pkg{zref}'s referencing system.
-
-
-\section{\cs{label} or \cs{zlabel}?}
-\label{sec:label-or-zlabel}
-
-Technically, \pkg{zref}'s referencing system, and thus also \pkg{zref-clever},
-require a label set with \cs{zlabel} to make a reference.  However, the
-\opt{labelhook} option (see \zcref{sec:options}) leverages the kernel's
-\texttt{label} hook to also set a \cs{zlabel} when a standard \cs{label} is
-called, so that we can simply use \cs{label}s in our document and refer to
-them with either referencing system.  Indeed, in some places the use of
-\cs{label} this way may be required (see
-\zcref{sec:limitations,sec:comp-modules}).  That given, which is to be
-preferred: use \cs{label} all around or normally use \cs{zlabel} and,
-occasionally resort to \cs{label} where required?  I guess it depends, but we
-can reason the pros and cons of both alternatives.
-
-Simply using \cs{label} across your document clearly speaks for convenience.
-You don't have to worry with the exceptional case where a \cs{zlabel} may not
-work or setting it is not possible.  You can use either referencing system for
-your labels as desired.  Your favorite editor may have some facilities to ease
-the insertion of labels, but does not support \cs{zlabel}.  And so on.  The
-only disadvantage I can see with this approach is that two labels end up in
-the \file{.aux} file which, arguably, may be seen as a redundancy, or waste.
-
-It is probably fair to consider this redundancy, in most use cases, as a
-negligible cost.  But you may disagree, or the size of your document or your
-requirements may say otherwise, in which case you may prefer the second
-approach and use \cs{zlabel} normally, with some occasional \cs{label} where
-needed.  Known relevant cases where \cs{label} is required are documented in
-the manual (see \zcref{sec:how-tos,sec:limitations,sec:comp-modules}), but
-some trial and error can easily cover the gap for the remaining cases.  They
-are also rare cases.  So finding out where \cs{label} is required should not
-be much of a trouble either.
-
-I think the first approach does deserve the status of ``recommended'' for
-normal use cases and documents.  Despite that, note that the examples of this
-manual typically use the second approach.  There's a historic reason for this,
-since most of them were created before the kernel's \texttt{label} hook was
-available, so that it was really the only approach.  However, I'll keep the
-examples this way, notwithstanding this recommendation, because it is also
-important to document the limitations of directly using \cs{zlabel}, for those
-who may want to use the second approach.
-
 
 \section{Options}
 \label{sec:options}
@@ -560,9 +505,9 @@ each option's documentation.
 The \opt{ref} option controls the label property to which \cs{zcref} refers
 to.  It can receive \pkg{zref} properties, as long as they are declared, but
 notably \texttt{default}, \texttt{page}, \texttt{thecounter} and, if
-\pkg{zref-titleref} is loaded, \texttt{title}.  The package's default is,
-well, \texttt{default}, which is our standard reference.  \texttt{thecounter}
-is a property set by \pkg{zref-clever} and is similar to \pkg{zref}'s
+\pkg{zref-titleref} is loaded, \texttt{title}.  The initial value is
+\texttt{default}, which is our standard reference.  \texttt{thecounter} is a
+property set by \pkg{zref-clever} and is similar to \pkg{zref}'s
 \texttt{default} property, except that it is not affected by the kernel's
 \cs{labelformat}.\footnote{Technical note: the \texttt{default} property
   stores \cs{@currentlabel}, while the \texttt{thecounter} property stores
@@ -606,9 +551,9 @@ respectively.
 \DescribeOption{sort} %
 \DescribeOption{nosort} %
 The \opt{sort} option controls whether the list of \meta{labels} received as
-argument by \cs{zcref} should be sorted or not.  It is a boolean option, and
-defaults to \texttt{true}.  The \opt{nosort} option is a convenience alias for
-\texttt{sort=false}.
+argument by \cs{zcref} should be sorted or not.  It is a boolean option, with
+initial value \texttt{true}.  The \opt{nosort} option is a convenience alias
+for \texttt{sort=false}.
 
 \DescribeOption{typesort} %
 \DescribeOption{notypesort} %
@@ -644,8 +589,8 @@ the labels' list.
 \cs{zcref} can automatically compress a set of references of the same type
 into a range, when they occur in immediate sequence.  The \opt{comp} controls
 whether this compression should take place or not.  It is a boolean option,
-and defaults to \texttt{true}.  The \opt{nocomp} option is a convenience alias
-for \texttt{comp=false}.  Of course, for better compression results the
+with initial value \texttt{true}.  The \opt{nocomp} option is a convenience
+alias for \texttt{comp=false}.  Of course, for better compression results the
 \opt{sort} is recommended, but the two options are technically independent.
 
 \DescribeOption{endrange} %
@@ -656,32 +601,31 @@ of predefined values, which can process the end reference of the range,
 comparing it with the beginning reference, to achieve a given end
 result.\footnote{For the \TeX{}nically inclined: those values that perform
   some processing -- namely \texttt{stripprefix}, \texttt{pagecomp}, and
-  \texttt{pagecomp2} -- fully expand the references (\texttt{x}-type
-  expansion) before comparing them, since it makes sense to perform this task
-  as close as possible to the printed representation of the references.  I
-  don't expect this to be a problem in normal use cases, but it does represent
-  a limitation on what the references can contain.  In case some control over
-  this is needed, check the \texttt{zref-clever/endrange-setup} hook in the
-  code documentation.}  Or, it can specify a label property to be used
-directly, without any processing.  The available predefined values are:
-\texttt{ref}, \texttt{stripprefix}, \texttt{pagecomp}, and \texttt{pagecomp2}.
-\texttt{ref} corresponds to the default behavior, and instructs \cs{zcref} to
-use whatever property was set at the \opt{ref} option for the end of range
-reference.  \texttt{stripprefix} strips the common part at the start of each
-reference from the end one.  \texttt{pagecomp} is the equivalent of
-\texttt{stripprefix} for page numbers, it does the same thing, but only if the
-references are comprised exclusively of Arabic numerals.  \texttt{pagecomp2}
-is a variant of \texttt{pagecomp} that leaves at least two digits at the end
-reference (except for a leading zero).  If values other than the predefined
-ones are given to \opt{endrange} they are considered as label properties, as
-long as they are declared.  This property is used to typeset the end of range
-reference if the label contains it, and if both references would be
-``compressible'' according to the \opt{comp} option, otherwise the property
-specified by the \opt{ref} option is used.  This is useful for things like
-sub-elements for which we can build a proper abbreviated sub-reference and
-populate the label with it (some compatibility modules already provide a
-number of such properties, but other ones can be built with \pkg{zref}, as
-needed).
+  \texttt{pagecomp2} -- fully expand the references before comparing them,
+  since it makes sense to perform this task as close as possible to the
+  printed representation of the references.  I don't expect this to be a
+  problem in normal use cases, but it does represent a limitation on what the
+  references can contain.  In case some control over this is needed, check the
+  \texttt{zref-clever/endrange-setup} hook in the code documentation.}  Or, it
+can specify a label property to be used directly, without any processing.  The
+available predefined values are: \texttt{ref}, \texttt{stripprefix},
+\texttt{pagecomp}, and \texttt{pagecomp2}.  \texttt{ref} corresponds to the
+default behavior, and instructs \cs{zcref} to use whatever property was set at
+the \opt{ref} option for the end of range reference.  \texttt{stripprefix}
+strips the common part at the start of each reference from the end one.
+\texttt{pagecomp} is the equivalent of \texttt{stripprefix} for page numbers,
+it does the same thing, but only if the references are comprised exclusively
+of Arabic numerals.  \texttt{pagecomp2} is a variant of \texttt{pagecomp} that
+leaves at least two digits at the end reference (except for a leading zero).
+If values other than the predefined ones are given to \opt{endrange} they are
+considered as label properties, as long as they are declared.  This property
+is used to typeset the end of range reference if the label contains it, and if
+both references would be ``compressible'' according to the \opt{comp} option,
+otherwise the property specified by the \opt{ref} option is used.  This is
+useful for things like sub-elements for which we can build a proper
+abbreviated sub-reference and populate the label with it (some compatibility
+modules already provide a number of such properties, but other ones can be
+built with \pkg{zref}, as needed).
 
 \DescribeOption{range} %
 \DescribeOption{rangetopair} %
@@ -694,37 +638,31 @@ differently.  Sorting is implied by this option (the \opt{sort} option is
 disregarded) and, for each reference type group in \meta{labels}, \cs{zcref}
 builds a range from the first to the last reference in it, even if references
 in between do not occur in immediate sequence.  It is a boolean option, and
-the package's default is \texttt{range=false}.  The option given without a
-value is equivalent to \texttt{range=true} (in the \pkg{l3keys}' jargon, the
-\emph{option}'s default is \texttt{true}).  \cs{zcref} is smart enough to
-recognize when the first and last references of a type do happen to be
-contiguous, in which case it typesets a ``pair'', instead of a ``range''.  But
-this behavior can be disabled by setting the \opt{rangetopair} option to
-\texttt{false}.
+the initial value is \texttt{false}.  \cs{zcref} is smart enough to recognize
+when the first and last references of a type do happen to be contiguous, in
+which case it typesets a ``pair'', instead of a ``range''.  But this behavior
+can be disabled by setting the \opt{rangetopair} option to \texttt{false}.
 
 \DescribeOption{cap} %
 \DescribeOption{nocap} %
 \DescribeOption{capfirst} %
 The \opt{cap} option controls whether the reference type names should be
-capitalized or not.  It can receive values \texttt{true} or \texttt{false},
-and it can also be set for specific reference types or languages (see
-\zcref{sec:reference-format}).  The option given without a value is equivalent
-to \texttt{cap=true}.  The \opt{nocap} option is a convenience alias for
-\texttt{cap=false}.  The \opt{capfirst} option ensures that the reference type
-name of the \emph{first} type block is capitalized, even when \opt{cap} is set
-to \texttt{false}.
+capitalized or not.  It is a boolean option, and it can also be set for
+specific reference types or languages (see \zcref{sec:reference-format}).  The
+\opt{nocap} option is a convenience alias for \texttt{cap=false}.  The
+\opt{capfirst} option ensures that the reference type name of the \emph{first}
+type block is capitalized, even when \opt{cap} is set to \texttt{false}.
 
 \DescribeOption{abbrev} %
 \DescribeOption{noabbrev} %
 \DescribeOption{noabbrevfirst} %
 The \opt{abbrev} option controls whether to use abbreviated reference type
-names when they are available.  It can receive values \texttt{true} or
-\texttt{false}, and it can also be set for specific reference types or
-languages (see \zcref{sec:reference-format}).  The option given without a
-value is equivalent to \texttt{abbrev=true}.  The \opt{noabbrev} option is a
-convenience alias for \texttt{abbrev=false}.  The \opt{noabbrevfirst} ensures
-that the reference type name of the \emph{first} type block is never
-abbreviated, even when \opt{abbrev} is set to \texttt{true}.
+names when they are available.  It is a boolean option, and it can also be set
+for specific reference types or languages (see \zcref{sec:reference-format}).
+The \opt{noabbrev} option is a convenience alias for \texttt{abbrev=false}.
+The \opt{noabbrevfirst} ensures that the reference type name of the
+\emph{first} type block is never abbreviated, even when \opt{abbrev} is set to
+\texttt{true}.
 
 \DescribeOption{S} %
 \opt{S} for ``Sentence''.  The \opt{S} option is a convenience alias for
@@ -739,7 +677,7 @@ made short and mnemonic, it can't get any easier.
 \DescribeOption{hyperref} %
 The \opt{hyperref} option controls the use of \pkg{hyperref} by
 \pkg{zref-clever} and takes values \opt{auto}, \opt{true}, \opt{false}.  The
-default value, \opt{auto}, makes \pkg{zref-clever} use \pkg{hyperref} if it is
+initial value, \opt{auto}, makes \pkg{zref-clever} use \pkg{hyperref} if it is
 loaded, meaning that references made with \cs{zcref} get hyperlinked to the
 anchors of their respective \meta{labels}.  \opt{true} does the same thing,
 but warns if \pkg{hyperref} is not loaded (\pkg{hyperref} is never loaded for
@@ -772,14 +710,14 @@ The ``figure'' type name will only be included in the hyperlink if
 ``section'' names will be included in their respective links, while that of
 ``figure'' will not.  If the option is set to \texttt{single}, only the name
 for ``chapter'' in the first reference will be included in the link, while in
-the second reference none of them will.  The package's default is
+the second reference none of them will.  The initial value is
 \texttt{nameinlink=tsingle}, and the option given without a value is
 equivalent to \texttt{nameinlink=true}.
 
 \DescribeOption{lang} %
 The \opt{lang} option controls the language used by \cs{zcref} when looking
 for language-specific reference format options (see
-\zcref{sec:reference-format}).  The default value, \texttt{current}, uses the
+\zcref{sec:reference-format}).  The initial value, \texttt{current}, uses the
 current language, as defined by \pkg{babel} or \pkg{polyglossia} (or
 \texttt{english} if none of them is loaded).  Value \texttt{main} uses the
 main document language, as defined by \pkg{babel} or \pkg{polyglossia} (or
@@ -814,7 +752,7 @@ disable the ``nudging'' unconditionally.  With \texttt{ifdraft}, \opt{nudge}
 keeps quiet when option \texttt{draft} is given to \cs{documentclass}, while
 with \texttt{iffinal}, nudging is only enabled when option \texttt{final} is
 (explicitly) passed to \cs{documentclass}.  The option given without a value
-is equivalent to \texttt{nudge=true} and the package's default is
+is equivalent to \texttt{nudge=true} and the initial value is
 \texttt{nudge=false}.  \opt{nonudge} is a convenience alias for
 \texttt{nudge=false}, and can be used to silence individual references.  The
 \opt{nudgeif} option controls the events which may trigger a nudge.  It takes
@@ -873,7 +811,7 @@ eventually be typeset when it is referred to (see
   bar\}} sets the \texttt{foo} counter to use the reference type \texttt{bar}.
 There's only need to specify the \opt{countertype} for counters whose name
 differs from that of their type, since \pkg{zref-clever} presumes the type has
-the same name as the counter, unless otherwise specified.  Also, the default
+the same name as the counter, unless otherwise specified.  Also, the initial
 value of the option already sets appropriate types for basic \LaTeX{}
 counters, including those from the standard classes.  Setting a counter type
 to an empty value removes any (explicit) type association for that counter, in
@@ -911,9 +849,9 @@ find in general.  One cannot place arbitrary information there, or
 \pkg{zref-clever} can be thoroughly confused.  The setting must correspond to
 the actual resetting behavior of the involved counters.  \opt{counterresetby}
 has precedence over the search done in the \opt{counterresetters} list.  The
-default value of \opt{counterresetters} includes the counters for sectioning
+initial value of \opt{counterresetters} includes the counters for sectioning
 commands of the standard classes which, in most cases, should be the relevant
-ones for cross-referencing purposes.  The default value of
+ones for cross-referencing purposes.  The initial value of
 \opt{counterresetby} includes the \texttt{enumerate} environment counters.
 So, hopefully, you don't need to ever bother with either of these options.
 But, if you do, they are here.  Use them with caution though.  Since these
@@ -921,19 +859,19 @@ options only affect how labels are set, they are not available in \cs{zcref}.
 
 \DescribeOption{\raisebox{.4em}{\dbend}\ currentcounter} %
 \LaTeX{}'s \cs{refstepcounter} sets two variables which potentially affect the
-\cs{zlabel} set after it: \cs{@currentlabel} and \cs{@currentcounter}.
-Actually, traditionally, only the current label was thus stored, the current
-counter was added to \cs{refstepcounter} somewhat recently (with the
-2020-10-01 kernel release).  But, since \pkg{zref-clever} relies heavily on
-the information of what the current counter is, it must set \pkg{zref} to
-store that information with the label, as it does.  As long as the document
-element we are trying to refer to uses the standard machinery of
-\cs{refstepcounter} we are on solid ground and can retrieve the correct
-information.  However, it is not always ensured that \cs{@currentcounter} is
-kept up to date.  For example, packages which handle labels specially, for one
-reason or another, may or may not set \cs{@currentcounter} as required.
-Considering the addition of \cs{@currentcounter} to \cs{refstepcounter} itself
-is not that old, it is likely that in a good number of places a reliable
+\cs{label} set after it: \cs{@currentlabel} and \cs{@currentcounter}.  But,
+since \pkg{zref-clever} relies heavily on the information of what the current
+counter is, it must set \pkg{zref} to store that information with the label,
+as it does.  As long as the document element we are trying to refer to uses
+the standard machinery of \cs{refstepcounter} we are on solid ground and can
+retrieve the correct information.  However, it is not always ensured that
+\cs{@currentcounter} is kept up to date.  For example, packages which handle
+labels specially, for one reason or another, may or may not set
+\cs{@currentcounter} as required.  Considering the addition of
+\cs{@currentcounter} to \cs{refstepcounter} itself is not that
+old,\footnote{Traditionally, only the current label was thus stored, the
+  current counter was added to \cs{refstepcounter} somewhat recently (with the
+  2020-10-01 kernel release).} it is likely that in some places a reliable
 \cs{@currentcounter} is not really in place.  Therefore, it may happen we need
 to tell \pkg{zref-clever} what the current counter is in certain
 circumstances, and that's what \opt{currentcounter} does.  The same as with
@@ -945,22 +883,23 @@ means to retrieve automatically.  The setting must correspond to the actual
 \opt{currentcounter} option, take care that the setting is duly grouped
 because, if set, it has precedence over \cs{@currentcounter} and, contrary to
 the later, the former is not reset the next time \cs{refstepcounter} runs.
-Its default value is, quite naturally, \cs{@currentcounter}.  The default
-value can be reset by calling the option with no value.  Since this option
-only affects how labels are set, it is not available in \cs{zcref}.
+Its initial value is, quite naturally, \cs{@currentcounter}, which can be
+reset by calling the option with no value.  Since this option only affects how
+labels are set, it is not available in \cs{zcref}.
 
 \DescribeOption{\raisebox{.4em}{\dbend}\ labelhook} %
 \opt{labelhook} is a boolean option which controls whether \pkg{zref-clever}
 uses the kernel's \texttt{label} hook to, whenever a standard \cs{label} is
-called, also set a \cs{zlabel} with the same name.  The package's default
-value is \texttt{true} so that one can use \cs{label}s along the document and
-refer to them (also) with \pkg{zref} and \pkg{zref-clever} reference commands.
-This value is not only the default, but also a recommended value.  Disabling
-this option means you are on your own to handle cases where \cs{zlabel} does
-not work, which are not many, but can be tricky to deal with where they occur.
-Since this option only affects how labels are set, it is not available in
-\cs{zcref}.  See \zcref{sec:label-or-zlabel} for some discussion of different
-labeling approaches this options allows for.
+called, also set a \cs{zlabel} with the same name (which is what
+\pkg{zref-clever} actually uses to make its references).  The package's
+initial value is \texttt{true} so that one can use \cs{label}s along the
+document and refer to them (also) with \pkg{zref} and \pkg{zref-clever}
+reference commands.  This value is not only the default, but also a
+recommended value.  Disabling this option means you are on your own to handle
+cases where \cs{zlabel} does not work, which are not many, but can be tricky
+to deal with where they occur.  Since this option only affects how labels are
+set, it is not available in \cs{zcref}.  See \zcref{sec:label-or-zlabel} for
+some discussion of different labeling approaches this options allows for.
 
 \DescribeOption{nocompat} %
 Some packages, document classes, or LaTeX features may require specific
@@ -1001,7 +940,7 @@ contrary may also happen, a \emph{counter} may be defined but we have no
 \emph{type} for it, but this must be handled by \pkg{zref-clever} as an error
 (at least, if we try to refer to it), usually a ``missing name'' error.
 
-\pkg{zref-clever} provides default settings for the following reference types:
+\pkg{zref-clever} provides initial settings for the following reference types:
 \texttt{part}, \texttt{chapter}, \texttt{section}, \texttt{paragraph},
 \texttt{appendix}, \texttt{subappendix}, \texttt{page}, \texttt{line},
 \texttt{figure}, \texttt{table}, \texttt{item}, \texttt{footnote},
@@ -1023,12 +962,12 @@ The association of a \emph{counter} to its \emph{type} is controlled by the
 \opt{countertype} option.  As seen in its documentation, \pkg{zref-clever}
 presumes the \emph{type} to be the same as the \emph{counter} unless
 instructed otherwise by that option.  This association, as determined by the
-local value of the option, affects how the \emph{label} is set, which stores
-the type among its properties.  However, when it comes to typesetting, that is
+local value of the option, affects how the \cs{label} is set, which stores the
+type among its properties.  However, when it comes to typesetting, that is
 from the perspective of \cs{zcref}, only the \emph{type} matters.  In other
 words, how the reference is supposed to be typeset is determined at the point
-the \emph{label} gets set.  In sum, they may be namesakes (or not), but type
-is type and counter is counter.
+the \cs{label} gets set.  In sum, they may be namesakes (or not), but type is
+type and counter is counter.
 
 Indeed, a reference type can be associated with multiple counters because we
 may want to refer to different document elements, with different
@@ -1042,7 +981,6 @@ There are also cases in which we may want to use different \emph{reference
   types} to refer to document objects sharing the same \emph{counter}.
 Notably, the environments created with \LaTeX{}'s \cs{newtheorem} command and
 the \cs{appendix}.
-
 
 One more observation about ``reference types'' is due here.  A \emph{type} is
 not really ``defined'' in the sense a variable or a function is.  It is more
@@ -1728,13 +1666,14 @@ environments, with respective arbitrary counters, the most \pkg{zref-clever}
 can do in this regard is to provide some ``typical'' built-in reference types
 to smooth user setup but, in the general case, some user setup may be indeed
 required.  The examples below are equaly valid for \pkg{amsthm}'s
-\cs{newtheorem} since, even it provides features beyond those available in the
-kernel, its syntax and underlying relation with counters is pretty much the
-same.  The same for \pkg{ntheorem}.  For \pkg{thmtools}' \cs{declaretheorem},
-though some adjustments to the examples below may be required, the basic logic
-is the same (there is no integration with the \opt{Refname}, \opt{refname},
-and \opt{label} options, which are targeted to the standard reference system,
-but you don't actually need them to get things working conveniently).
+\cs{newtheorem} since, even if it provides features beyond those available in
+the kernel, its syntax and underlying relation with counters is pretty much
+the same.  The same for \pkg{ntheorem}.  For \pkg{thmtools}'
+\cs{declaretheorem}, though some adjustments to the examples below may be
+required, the basic logic is the same (there is no integration with the
+\opt{Refname}, \opt{refname}, and \opt{label} options, which are targeted to
+the standard reference system, but you don't actually need them to get things
+working conveniently).
 
 
 \subsubsection*{Simple case}
@@ -1898,52 +1837,6 @@ package in the setup, the same procedure can be used with \cls{memoir}'s
 \end{zchowto}
 
 
-\subsection{\pkg{amsmath}}
-
-\zctask{Make references to \pkg{amsmath} display math environments.}
-
-\pkg{amsmath}'s display math environments have their contents processed twice,
-once for measuring and the second does the final typesetting.  Hence,
-\pkg{amsmath} needs to handle \cs{label} specially inside these environments,
-otherwise we'd have duplicate labels all around, and indeed it does redefine
-\cs{label} locally inside them.  Alas, the same treatment is not granted to
-\cs{zlabel}.  Therefore, you must use \cs{label} (not \cs{zlabel}) inside
-\pkg{amsmath}'s display math environments, and the \opt{labelhook} option
-provides that a \cs{label} sets both a regular \cs{label} and a \cs{zlabel},
-so that we can refer to the equations with both referencing systems.  The
-following environments are subject to this usage restriction: \env{equation},
-\env{align}, \env{alignat}, \env{flalign}, \env{xalignat}, \env{gather},
-\env{multline}, and their respective starred versions.  For more details, see
-the description of the \opt{amsmath} compatibility module at
-\zcref{sec:comp-modules}.
-
-\begin{zchowto}[caption={\pkg{amsmath}},label={how:amsmath}]
-\documentclass{article}
-\usepackage{amsmath}
-\usepackage{zref-clever}
-\usepackage{hyperref}
-\begin{document}
-\section{Section 1}
-\begin{equation}\label{eq:1}
-  A^{(1)}_l =\begin{cases} n!,&\text{if }l =1\\
-    0,&\text{otherwise}.\end{cases}
-\end{equation}
-\begin{equation*} \tag{foo}\label{eq:2}
-  A^{(1)}_l =\begin{cases} n!,&\text{if }l =1\\
-    0,&\text{otherwise}.\end{cases}
-\end{equation*}
-\begin{subequations}\label{eq:3}
-  \begin{align}
-    A+B&=B+A\\
-    C&=D+E\label{eq:3b}\\
-    E&=F
-  \end{align}
-\end{subequations}
-\zcref{eq:1, eq:2, eq:3, eq:3b}
-\end{document}
-\end{zchowto}
-
-
 \subsection{Overriding the reference type}
 
 \zctask{Make references to a system of equations, which should be referred to
@@ -1978,39 +1871,6 @@ regardless of what the current counter is.
   \end{aligned}
 \end{equation}
 \zcref{eq:1}
-\end{document}
-\end{zchowto}
-
-
-\subsection{\pkg{listings}}
-
-\zctask{Make references to a \env{lstlisting} environment from the
-  \pkg{listings} package.}
-
-Being \env{lstlisting} a verbatim environment, setting labels inside it
-requires special treatment.  \pkg{zref-clever}'s \opt{labelhook} option
-provides that a label given to the \opt{label} option gets set with both a
-regular \cs{label} and a \cs{zlabel}, so that we can refer to it with both
-referencing systems.  Setting labels for specific lines of the environment can
-be done with either \cs{label} or \cs{zlabel}, subject to escaping as due.
-For more details, see the description of the \opt{listings} compatibility
-module at \zcref{sec:comp-modules}.
-
-\begin{zchowto}[caption={\pkg{listings}},label={how:listings},escapeinside=`']
-\documentclass{article}
-\usepackage{listings}
-\usepackage{zref-clever}
-\usepackage{hyperref}
-\begin{document}
-\section{Section 1}
-\lstset{escapeinside={(*@}{@*)}, numbers=left, numberstyle=\tiny}
-\begin{lstlisting}[caption={Useless code}, label=lst:1]
-  for i:=maxint to 0 do
-  begin
-      { do nothing }(*@\label{ln:1.1}@*)
-  end;
-\end{lstlisting}
-\zcref{lst:1, ln:1.1}
 \end{document}
 \end{zchowto}
 
@@ -2120,15 +1980,14 @@ be the following.
 
 \zctask{Make references to boxes from the \pkg{tcolorbox} package.}
 
-Since version 6.0.0, \pkg{tcolorbox} has support for \pkg{zref} and
-\pkg{zref-clever}, through the \opt{label is zlabel} option.\footnote{See,
-  however, \url{https://github.com/T-F-S/tcolorbox/issues/295}.  Depending on
-  the course of this request, things may come work without the need of further
-  setup, relying on the \opt{labelhook} option functionality.}  With this
-option enabled, the \opt{label} option sets a \cs{zlabel}, which can be
-referred to from \cs{zref} or \cs{zcref}.  If you are using the \opt{auto
-  counter}, or some other custom counter, you can set the reference type for
-the box's labels with the \opt{label type} option.
+\pkg{tcolorbox} has support for \pkg{zref} and \pkg{zref-clever}, hence
+setting labels with the \opt{label} option works out of the box (as long as
+\opt{labelhook} is enabled).  If you are using the \opt{auto counter}, or some
+other custom counter, \pkg{tcolorbox}'s \opt{label type} option can be used to
+set \pkg{zref-clever}'s \opt{reftype} for the relevant scope.  Furthermore,
+those who prefer to work with \cs{zlabel}s only can set the \opt{label is
+  zlabel} option, which makes the \opt{label} option set a \cs{zlabel}
+directly.
 
 \begin{zchowto}[caption={\pkg{tcolorbox}}]
 \documentclass{article}
@@ -2136,7 +1995,6 @@ the box's labels with the \opt{label type} option.
 \usepackage{zref-titleref}
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems}
-\tcbset{label is zlabel}
 \usepackage{hyperref}
 \newtcolorbox[auto counter,number within=section]{pabox}[2][]{%
   label type=example,
@@ -2165,48 +2023,6 @@ the box's labels with the \opt{label type} option.
   This is \zcref{th:theo} on \zcpageref{th:theo} and it is titled
   ``\zcref[noname,ref=title]{th:theo}''.
 \end{mytheo}
-\end{document}
-\end{zchowto}
-
-
-\subsection{\pkg{breqn}}
-
-\zctask{Make references to \pkg{breqn} math environments.}
-
-\pkg{breqn}'s math environments \env{dgroup}, \env{dmath}, \env{dseries}, and
-\env{darray} offer a \opt{label} option (plus \opt{labelprefix}) for the
-purpose of label setting.  \pkg{breqn}'s documentation says the following
-about the use of \cs{label} inside its environments: \textquote{Use of the
-  normal \cs{label} command instead of the \opt{label} option works, I think,
-  most of the time (untested)}.  My light testing suggests the same is true
-for \cs{zlabel}, which can then be used directly in these environments.
-Either way, given the \opt{labelhook} option, we can just use \pkg{breqn}'s
-\opt{label} option and be at ease.  Also, \pkg{breqn} does not use
-\cs{refstepcounter} to increment the equation counters and, as a result, fails
-to set \pkg{hyperref} anchors for the equations (thus affecting standard
-labels too).  You may wish to use the work-around provided by Heiko Oberdiek
-at \url{https://tex.stackexchange.com/a/241150}.
-
-\begin{zchowto}[caption={\pkg{breqn}},label={how:breqn}]
-\documentclass{article}
-\usepackage{zref-clever}
-\usepackage{breqn}
-\usepackage{hyperref}
-% From https://tex.stackexchange.com/a/241150.
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd\eq@setnumber{\stepcounter}{\refstepcounter}{}{%
-  \errmessage{Patching \noexpand\eq@setnumber failed}}
-\makeatother
-\begin{document}
-\section{Section 1}
-\begin{dmath}[label={eq:1}]
-  f(x)=\frac{1}{x} \condition{for $x\neq 0$}
-\end{dmath}
-\begin{dmath}[labelprefix={eq:},label={2}]
-  H_2^2 = x_1^2 + x_1 x_2 + x_2^2 - q_1 - q_2
-\end{dmath}
-\zcref{eq:1, eq:2}
 \end{document}
 \end{zchowto}
 
@@ -2246,6 +2062,48 @@ A figure.
 \end{zchowto}
 
 
+\section{\cs{label} or \cs{zlabel}?}
+\label{sec:label-or-zlabel}
+
+TL;DR: Just use \cs{label}, unless you have special requirements.
+
+\medskip{}
+
+Technically, \pkg{zref}'s referencing system, and thus also \pkg{zref-clever},
+require a label set with \cs{zlabel} to make a reference.  However, the
+\opt{labelhook} option (see \zcref{sec:options}) leverages the kernel's
+\texttt{label} hook to also set a \cs{zlabel} when a standard \cs{label} is
+called, so that we can simply use \cs{label}s in our document and refer to
+them with either referencing system.  Indeed, in some places the use of
+\cs{label} this way may be required.  That given, which is to be preferred:
+use \cs{label} all around or normally use \cs{zlabel} and, occasionally resort
+to \cs{label} where required?  I guess it depends, but we can reason the pros
+and cons of both alternatives.
+
+Simply using \cs{label} across your document clearly speaks for convenience.
+You don't have to worry with the exceptional case where a \cs{zlabel} may not
+work or setting it is not possible.  You can use either referencing system for
+your labels as desired.  Your favorite editor may have some facilities to ease
+the insertion of labels, but does not support \cs{zlabel}.  And so on.  The
+only disadvantage I can see with this approach is that two labels end up in
+the \file{.aux} file which, arguably, may be seen as a redundancy, or waste.
+
+It is probably fair to consider this redundancy, in most use cases, as a
+negligible cost.  But you may disagree, or the size of your document or your
+requirements may say otherwise, in which case you may prefer the second
+approach and use \cs{zlabel} normally, with some occasional \cs{label} where
+required.  Outright disabling the \opt{labelhook} option leaves you uncovered
+in such cases, but you can always locally (re-)enable it as needed.  As far as
+my experience goes, the restrictions should not be that many, and some trial
+and error can easily tell what the situation is.  See
+\zcref{sec:limitations,sec:comp-modules} for some discussion and known cases.
+
+All in all, as far as \pkg{zref-clever} is concerned, the use of \cs{label}
+throughout (with the \opt{labelhook} option) is the recommended approach.
+Consider the use of \cs{zlabel} directly if you have some special requirements
+at stake and are willing to handle a few rough edges.
+
+
 \section{Limitations}
 \label{sec:limitations}
 
@@ -2255,12 +2113,13 @@ Being based on \pkg{zref} entails one significant advantage for
 without having to redefine some core \LaTeX{} commands.  Which leads to less
 compatibility problems and load order issues than some traditional
 cross-reference related packages.  On the other hand, being based on
-\pkg{zref} also does impair the supported scope of \pkg{zref-clever}.  Not
-because of any particular limitation of either, but because any class or
-package which implements some special handling for reference labels
-universally does so aiming at the standard referencing system, and whether
-specific support for \pkg{zref} is included, or whether things work by
-spillover of the particular technique employed, is not guaranteed.
+\pkg{zref} also has some potential implications to the supported scope of
+\pkg{zref-clever}.  Not because of any particular limitation of either, but
+because any class or package which implements some special handling for
+reference labels universally does so aiming at the standard referencing
+system, and whether specific support for \pkg{zref} is included, or whether
+things work by spillover of the particular technique employed, is not
+guaranteed.
 
 The limitation here is less one of \pkg{zref-clever} than that of a potencial
 lack of support for \pkg{zref} itself.  Broadly speaking, what
@@ -2294,9 +2153,7 @@ Fortunately for us, the \texttt{label} hook introduced by the \LaTeX{} kernel
 in the 2023-06-01 release improves the situation considerably.
 \pkg{zref-clever} makes use of it with the \opt{labelhook} option, enabled by
 default, so that a standard \cs{label} also sets a \cs{zlabel} with the same
-name, thus providing a very general and reliable way to deal with these places
-where setting a \cs{zlabel} directly is problematic: just set a standard
-label.
+name, thus providing a very general and reliable way to deal with this issue.
 
 Regarding the second, a correctly set \cs{@currentcounter} is critical for the
 task of \pkg{zref-clever}: the reference type will depend on that and,
@@ -2306,19 +2163,18 @@ information is also retrieved based on it, and so on.  Since the 2020-10-01
 \cs{@currentlabel} and, since the 2021-11-15 release, the support for
 \cs{@currentcounter} has been further extended in the kernel.  Hence, as long
 as kernel features are involved, or as long as \cs{refstepcounter} is the tool
-used for the purpose of reference setting, \cs{zlabel} will tend to have all
-information within its grasp at label setting time.  But that's not always the
-case.  For this reason, \pkg{zref-clever} has the option \opt{currentcounter}
-which at least allows for some viable work-arounds when the value of
-\cs{@currentcounter} cannot be relied upon.  Whether we have a proper opening
-to set it, depends on the case.  Still, \cs{refstepcounter} is ubiquitous
-enough a tool that we can count on \cs{@currentcounter} most of the time.
+used for the purpose of reference setting, the label will tend to have all
+information within its grasp at the time it is set.  But that's not
+necessarily always the case.  For this reason, \pkg{zref-clever} has the
+option \opt{currentcounter} which at least allows for some viable work-arounds
+when the value of \cs{@currentcounter} cannot be relied upon.  Whether we have
+a proper opening to set it, depends on the case.  Still, \cs{refstepcounter}
+is ubiquitous enough a tool that we can count on \cs{@currentcounter} most of
+the time.
 
-All in all, most things work, but some things may not.  And if the later will
-eventually work depends essentially on whether support for \pkg{zref} is
-provided by the relevant packages and classes or not.  Or, failing that,
-whether \pkg{zref-clever} is able to provide some specific support when a
-reasonable way to do so is within reach.
+All in all, specially since the kernel's \texttt{label} hook has been made
+available, we can expect to find very little trouble in setting proper labels
+for \pkg{zref-clever}.  Which is not to say ``none'', of course.
 
 
 \section{Compatibility modules}
@@ -2332,8 +2188,7 @@ features, document classes, and packages with \pkg{zref-clever} and
 ``the list of packages or classes supported by \pkg{zref-clever}''.  In most
 circumstances, things should just work out of the box, and need no specific
 handling.  These are just the ones for which some special treatment was
-required.  Of course, this effort is bound to be incomplete (see
-\zcref{sec:limitations}).
+required.
 
 Note that settings performed by the compatibility modules require special care
 if they are to be changed by users.  Since the modules depend on what has been
@@ -2343,13 +2198,13 @@ compatibility module, the user must ensure their change comes after that,
 e.g.\ by adding their setting to the \texttt{begindocument} hook.
 
 The purpose of outlining to some extend what the compatibility modules do is
-twofold.  First, some of them require usage adjustments for label setting,
+twofold.  First, some of them may require usage adjustments, or awareness,
 which must be somehow conveyed in this documentation.  Second, the kind and
-degree of intervention in external code varies significantly for each module,
-and since this is an area of potential friction, a minimum of information for
-the users to judge whether they want to leave these modules enabled or not is
-due.  For this reason, this is also a little technical, but for full details,
-see the code documentation.
+degree of intervention in external code varies for each module, and since this
+is an area of potential friction, a minimum of information for the users to
+judge whether they want to leave these modules enabled or not is due.  For
+this reason, this is also a little technical, but for more details, see the
+code documentation.
 
 \bigskip{}
 
@@ -2384,17 +2239,28 @@ cross-referencing features. Namely, it: i) sets counter types for counters
 \env{verse} environment), \texttt{sidefootnote}, and \texttt{pagenote}; ii)
 configures resetting behavior (\opt{counterresetby} option) for
 \texttt{subfigure} and \texttt{subtable} counters; iii) provides the
-\pkg{zref} property ``\texttt{subcaption}'' so that we can refer to, for
-example, \texttt{\cs{zcref}[ref=subcaption]\{subcap-1\}} to emulate the
-functionality of \cls{memoir}'s \cs{subcaptionref}.
+\pkg{zref} property ``\texttt{subcaption}'' so that we can use
+\texttt{ref=subcaption} to emulate the functionality of \cls{memoir}'s
+\cs{subcaptionref}.
 
 \DescribeOption{amsmath} %
-The module ensures proper \opt{currentcounter} values are in place for the
-display math environments, for which it uses environment hooks.  The module
-also provides a \texttt{subeq} property, for display math environments used
-inside the \env{subequations} environment, which can be used to refer to them
-directly with the \opt{ref} option, or to build terse ranges with the
-\opt{endrange} option.
+\pkg{amsmath}'s display math environments have their contents processed twice,
+once for measuring and the second does the final typesetting.  Hence,
+\pkg{amsmath} needs to handle \cs{label} specially inside these environments,
+otherwise we'd have duplicate labels all around, and indeed it does redefine
+\cs{label} locally inside them.  Alas, the same treatment is not granted to
+\cs{zlabel}.  Therefore, you must use \cs{label} (not \cs{zlabel}) inside
+\pkg{amsmath}'s display math environments, but unless you disabled the
+\opt{labelhook} option you need not worry about that, and can just go with
+\cs{label} as usual.  The following environments are subject to this usage
+restriction: \env{equation}, \env{align}, \env{alignat}, \env{flalign},
+\env{xalignat}, \env{gather}, \env{multline}, and their respective starred
+versions.  Besides that, the module ensures proper \opt{currentcounter} values
+are in place for the display math environments, for which it uses environment
+hooks.  The module also provides a \texttt{subeq} property, for display math
+environments used inside the \env{subequations} environment, which can be used
+to refer to them directly with the \opt{ref} option, or to build terse ranges
+with the \opt{endrange} option.
 
 \DescribeOption{mathtools} %
 \pkg{mathtools} has a feature to show the numbers only for those equations
@@ -2402,21 +2268,30 @@ actually referenced (with \cs{eqref} or \cs{refeq}), which is enabled by the
 \opt{showonlyrefs} option.  This compatibility module adds support for this
 feature, such that equation references made with \cs{zcref} also get marked as
 ``referenced'' for \pkg{mathtools}, when the option is active, of course.  The
-module uses a couple of \pkg{mathtools} functions, but does not need to
-redefine or hook into anything, everything is handled on \pkg{zref-clever}'s
-side.
+module uses \pkg{mathtools}' \cs{noeqref} for the purpose, but does not need
+to redefine or hook into anything, everything is handled on
+\pkg{zref-clever}'s side.
 
 \DescribeOption{breqn} %
 This compatibility module only sets proper \opt{currentcounter} values for the
 environments \env{dgroup}, \env{dmath}, \env{dseries}, and \env{darray}, and
-uses environment hooks for the purpose.  See the \zcref{how:breqn} for an
-usage example.
+uses environment hooks for the purpose.  Note that, in part, this is needed
+because \pkg{breqn} does not use \cs{refstepcounter} to increment the equation
+counters and, as a result, fails to set \cs{@currentcounter}.  But, for the
+same reason, it also fails to set \pkg{hyperref} anchors for the equations
+(thus affecting the standard labels too).  So, you may wish to use the
+work-around provided by Heiko Oberdiek at
+\url{https://tex.stackexchange.com/a/241150} (or equivalent).
 
 \DescribeOption{listings} %
-The module sets appropriate \opt{countertype}, \opt{counterresetby} and
-\opt{currentcounter} values for the \pkg{listings}' counters:
-\texttt{lstlisting} and \texttt{lstnumber}.  See the \zcref{how:listings} for
-an usage example.
+Being \env{lstlisting} a verbatim environment, setting labels inside it
+requires special treatment.  \pkg{zref-clever}'s \opt{labelhook} option
+provides that a label given to the \opt{label} works out of the box, so unless
+you disabled the \opt{labelhook} option you need not worry about it.  Setting
+labels for specific lines of the environment can also be done, subject to
+escaping as due.  The module sets appropriate \opt{countertype},
+\opt{counterresetby} and \opt{currentcounter} values for the \pkg{listings}'
+counters: \texttt{lstlisting} and \texttt{lstnumber}.
 
 \DescribeOption{enumitem} %
 \LaTeX{}'s \env{enumerate} environment requires some special treatment from
@@ -2449,22 +2324,19 @@ for the \texttt{subfigure} and \texttt{subtable} counters.
 
 \section{Work-arounds}
 
-\marginpar{\raggedleft\raisebox{-1.5ex}{\dbend}}As should be clear by now, the
-use of \pkg{zref}'s \cs{zlabel} and thus of \pkg{zref-clever} may occasionally
-require some adjustments, since it does not enjoy the universal support the
-standard referencing system does.  The compatibility modules presented in
-\zcref{sec:comp-modules} go a long way in ensuring the user has to worry very
-little about it, but they cannot be expected to go all the way.  Not only
-because this kind of support will never be exhaustive, but also since,
-sometimes, given the way certain features are implemented by packages or
-document classes, there may not be a reasonable way to provide this support,
-from our side.  But, still, most of the time, it is still ``viable'' to get
-there, if one really wishes to do so.  So, this section keeps track of some
-known recipes, which I don't think belong in \pkg{zref-clever} itself, but
-which you may choose to use.  Note that this list is intended to spare users
-from having to reinvent the wheel every time someone needs something of the
-sort, but from \pkg{zref-clever}'s perspective, their status is ``not
-supported''.
+\marginpar{\raggedleft\raisebox{-1.5ex}{\dbend}}The compatibility modules
+presented in \zcref{sec:comp-modules} should go a long way in ensuring the
+user has little to worry about in setting up \pkg{zref-clever} for some more
+traditional document classes and packages, but they cannot be expected to go
+all the way.  Not only because this kind of support will never be exhaustive,
+but also since, sometimes, given the way certain features are implemented,
+there may not be a reasonable way to provide this support, from our side.
+But, still, most of the time, it is still ``viable'' to get there, if one
+really wishes to do so.  So, this section keeps track of some known recipes,
+which I don't think belong in \pkg{zref-clever} itself, but which you may
+choose to use.  Note that this list is intended to spare users from having to
+reinvent the wheel every time someone needs something of the sort, but from
+\pkg{zref-clever}'s perspective, their status is ``not supported''.
 
 
 \subsection*{\cls{beamer}}

@@ -2,6 +2,9 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.7...HEAD)
 
+### Changed
+- Documentation improvements.
+
 ## [v0.4.7](https://github.com/gusbrs/zref-clever/compare/v0.4.6...v0.4.7) (2024-09-30)
 
 ### Changed
