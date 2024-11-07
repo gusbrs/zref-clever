@@ -1,5 +1,7 @@
-## v0.4.7 (2024-09-30)
+## v0.4.8 (2024-11-07)
 
 ### Changed
-- Inhibit missing name warning if `noname` option is in use.
+- Documentation improvements.
+- Preemptively avoid empty module when setting l3keys `.inherit:n`
+  (https://github.com/latex3/latex3/issues/1254).
 
