@@ -10,9 +10,10 @@
 \setdefaultlanguage{ngerman}
 \setotherlanguage{french}
 
-\explsyntaxon
-\debug_on:n { check-declarations , deprecation }
-\explsyntaxoff
+% polyglossia...
+% \ExplSyntaxOn
+% \debug_on:n { check-declarations , deprecation }
+% \ExplSyntaxOff
 
 \usepackage{zref-clever}
 

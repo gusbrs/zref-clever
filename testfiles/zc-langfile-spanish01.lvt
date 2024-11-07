@@ -12,6 +12,8 @@
 
 % This file is intended to test the spanish language file.
 \ExplSyntaxOn
+\tl_new:N \g__test_tmpa_tl
+\seq_new:N \g__test_tmpa_seq
 \tl_gset:Nn \g__test_tmpa_tl { spanish } % base language
 \seq_gset_from_clist:Nn \g__test_tmpa_seq % all aliases, including base
   {
