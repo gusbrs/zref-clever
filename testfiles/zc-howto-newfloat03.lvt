@@ -39,7 +39,7 @@
 \begin{diagram}
   A diagram.
   \caption{A diagram}
-  \zlabel{diagram-1}
+  \label{diagram-1}
 \end{diagram}
 
 \START

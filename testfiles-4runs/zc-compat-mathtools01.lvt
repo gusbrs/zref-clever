@@ -25,7 +25,7 @@
 \begin{document}
 
 \section{Section 1.1}
-\zlabel{sec:section-1.1}
+\label{sec:section-1.1}
 
 \clearpage{}
 
@@ -61,7 +61,7 @@
   2+2=4
 \end{equation*}%
 
-\begin{subequations}\zlabel{subeq:A}
+\begin{subequations}\label{subeq:A}
   \begin{align}
     \label{align:a}A+B&=B+A\\
     \label{align:b}C&=D+E\\
