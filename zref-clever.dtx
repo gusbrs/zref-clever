@@ -3776,7 +3776,7 @@
                 check .code:n =
                   {
                     \bool_set_true:N \l_@@_zcref_with_check_bool
-                    \keys_set:nn { zref-check / zcheck } {#1}
+                    \keys_set:nn { zref-check/zcheck } {#1}
                   } ,
                 check .value_required:n = true ,
               }
@@ -4260,13 +4260,13 @@
 % for package options (\cs{zcsetup}) we want the whole set, so we aggregate
 % the two into \texttt{zref-clever/zcsetup}, and use that here.
 %
-% About the use of \texttt{.inherit:n}, see
-% \url{https://github.com/latex3/latex3/issues/1254#issuecomment-1763127993}.
+% See \url{https://github.com/latex3/latex3/issues/1254}.
 %
+% ^^A zref-clever/zcsetup
 %    \begin{macrocode}
-\keys_define:nn { }
+\keys_define:nn { zref-clever }
   {
-    zref-clever/zcsetup .inherit:n =
+    zcsetup .inherit:n =
       {
         zref-clever/label ,
         zref-clever/reference ,

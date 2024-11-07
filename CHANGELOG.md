@@ -4,6 +4,8 @@
 
 ### Changed
 - Documentation improvements.
+- Preemptively avoid empty module when setting l3keys `.inherit:n`
+  (https://github.com/latex3/latex3/issues/1254).
 
 ## [v0.4.7](https://github.com/gusbrs/zref-clever/compare/v0.4.6...v0.4.7) (2024-09-30)
 
