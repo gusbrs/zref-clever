@@ -165,7 +165,7 @@
   \zcsetup{countertype={lstlisting=zcworkaround}}%
   \lstset{#1}%
   \stepcounter{zcworkaround}%
-  \setcounter{lstlisting}{\value{zcworkaround}}%
+  \setcounter{lstlisting}{\value{zcworkaround}-1}%
 }{}
 \lstnewenvironment{zcexample}[1][]{%
   \renewcommand{\lstlistingname}{Example}%
