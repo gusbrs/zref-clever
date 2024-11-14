@@ -61,6 +61,7 @@
 
 \NewDocumentCommand\opt{m}{\texttt{#1}}
 
+\NewDocumentCommand\contributor{m}{#1}
 \NewDocumentCommand\username{m}{`\texttt{#1}'}
 
 \makeatletter
@@ -2341,6 +2342,12 @@ reinvent the wheel every time someone needs something of the sort, but from
 
 \subsection*{\cls{beamer}}
 
+Before using this, note that, if you are up-to-date, you might no longer need
+a work-around for \cls{beamer}.\footnote{See
+  \url{https://github.com/josephwright/beamer/issues/917}.  Thanks to
+  \contributor{Ulrike Fischer}, see also
+  \url{https://tex.stackexchange.com/a/730792}.}
+
 \cls{beamer} does some really atypical things with regard to cross-references.
 To start with, it redefines \cs{label} to receive an optional
 \texttt{<\meta{overlay specification}>} argument.  Then, presumably to support
@@ -2355,7 +2362,7 @@ perspective, there is no support at all for \pkg{zref} provided by
 appear to break \pkg{cleveref}.\footnote{See, for example,
   \url{https://tex.stackexchange.com/q/266080},
   \url{https://tex.stackexchange.com/q/668998}, and
-  \url{https://github.com/josephwright/beamer/issues/750}.  The workaround
+  \url{https://github.com/josephwright/beamer/issues/750}.  The work-around
   provided at \url{https://tex.stackexchange.com/a/266109} is not general
   enough since it breaks \pkg{cleveref}'s ability to receive a list of labels
   as argument.}
@@ -2472,6 +2479,8 @@ were generously provided by (in chronological order):
   % 2023-01-02: https://tex.stackexchange.com/q/670399 (comments)
   % 2023-06-01: https://github.com/latex3/latex2e/pull/956
   % 2023-07-27: https://chat.stackexchange.com/transcript/message/64067726#64067726
+  % 2024-11-14: https://tex.stackexchange.com/a/730792
+  % 2024-11-14: https://github.com/josephwright/beamer/issues/917
   Phelype Oleinik,
   % 2021-08-20: https://tex.stackexchange.com/q/611370 (comments)
   % 2021-09-09: https://tex.stackexchange.com/a/614704
