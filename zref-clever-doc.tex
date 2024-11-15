@@ -88,6 +88,8 @@
   language=[LaTeX]TeX,
   moretexcs={
     AddToHook,
+    AddToHookWithArguments,
+    DeclareHookRule,
     define@key,
     patchcmd,
     eq@setnumber,
@@ -106,6 +108,7 @@
     NewCommandCopy,
     ltx@gobble,
     @currentcounter,
+    @currentHref,
     zref@label,
     zref@wrapper@babel,
     zref@ifpropundefined,
@@ -2343,10 +2346,9 @@ reinvent the wheel every time someone needs something of the sort, but from
 \subsection*{\cls{beamer}}
 
 Before using this, note that, if you are up-to-date, you might no longer need
-a work-around for \cls{beamer}.\footnote{See
-  \url{https://github.com/josephwright/beamer/issues/917}.  Thanks to
-  \contributor{Ulrike Fischer}, see also
-  \url{https://tex.stackexchange.com/a/730792}.}
+a work-around for \cls{beamer} (check if the fix at
+\url{https://github.com/josephwright/beamer/issues/917} has already been
+released and is available to you).
 
 \cls{beamer} does some really atypical things with regard to cross-references.
 To start with, it redefines \cs{label} to receive an optional
@@ -2368,30 +2370,17 @@ appear to break \pkg{cleveref}.\footnote{See, for example,
   as argument.}
 
 Adding proper support for this is the business of \cls{beamer}, \pkg{zref},
-and/or \pkg{hyperref}.  Likely the former's really.  But, taking advantage of
-\pkg{zref}'s flexibility, as a user, you can have a work-around in the
-meantime.
+and/or \pkg{hyperref}.  Likely the former's really.  But, as a user, you can
+have a work-around in the meantime.\footnote{This work-around is thanks to
+  \contributor{Ulrike Fischer} at
+  \url{https://tex.stackexchange.com/a/730792}.}
 
 \begin{zcworkaround}[caption={\cls{beamer}}]
 \documentclass{beamer}
 \usepackage{zref-clever}
 \makeatletter
-\RenewDocumentCommand{\zlabel}{ D<>{1} m }{%
-  \ifx\label\ltx@gobble
-  \else
-    \zref@wrapper@babel{\zref@label<#1>}{#2}%
-  \fi
-}
-\NewCommandCopy\beamer@old@zref@label\zref@label
-\RenewDocumentCommand{\zref@label}{ D<>{1} m }{%
-  \alt<#1>{%
-    \zref@ifpropundefined{anchor}{}{\zref@setcurrent{anchor}{#2}}%
-    \beamer@old@zref@label{#2}%
-    \beamer@nameslide{#2}%
-  }{%
-    \beamer@dummynameslide%
-  }%
-}
+\AddToHookWithArguments{label}[setcurrentHref]{\xdef\@currentHref{#1}}
+\DeclareHookRule{label}{setcurrentHref}{before}{zref-clever}
 \makeatother
 \begin{document}
 \begin{frame}
@@ -2401,14 +2390,14 @@ meantime.
       3 & 4 \\
     \end{tabular}
     \caption{Table 1}
-    \zlabel{tab:1}
+    \label{tab:1}
   \end{table}
 \end{frame}
 \begin{frame}
   \begin{figure}
     \rule{5cm}{5cm}
     \caption{Figure 1}
-    \zlabel{fig:1}
+    \label{fig:1}
   \end{figure}
 \end{frame}
 \begin{frame}
@@ -2417,23 +2406,11 @@ meantime.
 \end{document}
 \end{zcworkaround}
 
-This work-around redefines \cs{zlabel} so that it takes an overlay
-specification argument, and provides that the work done by \cls{beamer} for
-the standard \cs{label} is also done for it.  And it works by setting the
-\texttt{anchor} to the \emph{label} so as to be able to speak the
-``\cls{beamer}-lingo'' of anchors.
-
-A couple of caveats though.  First, there's probably still some work to be
-done there in defining and setting reference types for \cls{beamer} specific
-document objects, e.g. overlays.  But it can be done by the standard user
-interface of \pkg{zref-clever}.  Second, since \cls{beamer}'s anchoring system
-does not provide for uniqueness of anchors as \pkg{hyperref} does, if you
-(need to) use \cs{label} to set both \cs{label} and \cs{zlabel}, relying on
-the \opt{labelhook} option, this will result in duplicate anchors for labels
-set in them, with corresponding \pkg{hyperref} warnings of ``destination with
-the same identifier has been already used, duplicate ignored''.  The warning
-is actually harmless in this case, since both labels are set in the same
-place, and thus have identical anchors, it is nevertheless there.
+This work-around sets \cs{@currentHref} to the \emph{label} so that the
+\texttt{anchor} gets stored with the \cs{(z)label} in the \file{.aux} file
+with the value required to speak the ``\cls{beamer}-lingo'' of anchors.  Since
+it uses the \texttt{label} hook, this presumes the use of \cs{label} with the
+\opt{labelhook} option.
 
 
 \section{Acknowledgments}
@@ -2512,6 +2489,7 @@ were generously provided by (in chronological order):
   \username{samcarter},
   % 2021-10-14: https://chat.stackexchange.com/transcript/message/59361777#59361777
   % 2021-10-21: https://chat.stackexchange.com/transcript/message/59418309#59418309
+  % 2024-11-14: https://github.com/josephwright/beamer/issues/917
   Alan Munn,
   % 2021-10-14: https://chat.stackexchange.com/transcript/message/59364073#59364073
   % 2021-10-21: https://chat.stackexchange.com/transcript/message/59418189#59418189

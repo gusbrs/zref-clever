@@ -17,22 +17,8 @@
 \usepackage{zref-clever}
 
 \makeatletter
-\RenewDocumentCommand{\zlabel}{ D<>{1} m }{%
-  \ifx\label\ltx@gobble
-  \else
-    \zref@wrapper@babel{\zref@label<#1>}{#2}%
-  \fi
-}
-\NewCommandCopy\beamer@old@zref@label\zref@label
-\RenewDocumentCommand{\zref@label}{ D<>{1} m }{%
-  \alt<#1>{%
-    \zref@ifpropundefined{anchor}{}{\zref@setcurrent{anchor}{#2}}%
-    \beamer@old@zref@label{#2}%
-    \beamer@nameslide{#2}%
-  }{%
-    \beamer@dummynameslide%
-  }%
-}
+\AddToHookWithArguments{label}[setcurrentHref]{\xdef\@currentHref{#1}}
+\DeclareHookRule{label}{setcurrentHref}{before}{zref-clever}
 \makeatother
 
 \ExplSyntaxOn
@@ -52,7 +38,7 @@
       3 & 4 \\
     \end{tabular}
     \caption{Table 1}
-    \zlabel{tab:1}
+    \label{tab:1}
   \end{table}
 \end{frame}
 
@@ -60,7 +46,7 @@
   \begin{figure}
     \rule{5cm}{5cm}
     \caption{Figure 1}
-    \zlabel{fig:1}
+    \label{fig:1}
   \end{figure}
 \end{frame}
 
