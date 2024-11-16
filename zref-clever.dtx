@@ -8384,6 +8384,53 @@
 %    \end{macrocode}
 %
 %
+% \subsection{\opt{beamer}}
+%
+% FIXME When \cls{beamer} releases fixes for these issues, remove this
+% compatibility module.  See
+% \url{https://github.com/josephwright/beamer/issues/917}.
+%
+% \cls{beamer} does some really atypical things with regard to
+% cross-references.  To start with, it redefines \cs{label} to receive an
+% optional \texttt{<\meta{overlay specification}>} argument.  Then, presumably
+% to support overlays, it goes on and hijacks \pkg{hyperref}'s anchoring
+% system, sets anchors (\cs{hypertarget}s) to each \emph{label} in the
+% \file{.snm} file, while letting every standard label's anchor in the
+% \file{.aux} file default to \texttt{Doc-Start}.  Of course, having rendered
+% useless \pkg{hyperref}'s anchoring, it has to redefine \cs{ref} so that it
+% uses its own \file{.snm} provided ``label anchors'' to make hyperlinks.  In
+% particular, from our perspective, there is no support at all for \pkg{zref}
+% provided by \cls{beamer}.  Which is specially unfortunate since the above
+% procedures also appear to break \pkg{cleveref}.  See, for example,
+% \url{https://tex.stackexchange.com/q/266080},
+% \url{https://tex.stackexchange.com/q/668998}, and
+% \url{https://github.com/josephwright/beamer/issues/750}.  The work-around
+% provided at \url{https://tex.stackexchange.com/a/266109} is not general
+% enough since it breaks \pkg{cleveref}'s ability to receive a list of labels
+% as argument.  Finally, \cls{beamer} also does not set \cs{@currentcounter}
+% for the frames, making it hard for \pkg{zref-clever} to assign the proper
+% type to labels set in that scope.
+%
+% The technique to set proper anchors is is thanks to \contributor{Ulrike
+% Fischer} at \url{https://tex.stackexchange.com/a/730792}.
+%
+%    \begin{macrocode}
+\@@_compat_module:nn { beamer }
+  {
+    \@@_if_class_loaded:nT { beamer }
+      {
+        \AddToHookWithArguments { label } [ zref-clever/compat/beamer ]
+          { \xdef\@currentHref{#1} }
+        \DeclareHookRule { label }
+          { zref-clever/compat/beamer } { before } { zref-clever }
+        \AddToHookWithArguments { cmd/refcounter/before }
+          [ zref-clever/compat/beamer ]
+          { \edef\@currentcounter{#1} }
+      }
+  }
+%    \end{macrocode}
+%
+%
 %    \begin{macrocode}
 %</package>
 %    \end{macrocode}

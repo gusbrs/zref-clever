@@ -16,18 +16,12 @@
 
 \usepackage{zref-clever}
 
-\makeatletter
-\AddToHookWithArguments{label}[setcurrentHref]{\xdef\@currentHref{#1}}
-\DeclareHookRule{label}{setcurrentHref}{before}{zref-clever}
-\AddToHookWithArguments{cmd/refcounter/before}{\edef\@currentcounter{#1}}
-\makeatother
-
-\zcsetup{countertype={framenumber=frame}}
-\zcRefTypeSetup{frame}{
-  Name-sg = Frame ,
-  name-sg = frame ,
-  Name-pl = Frames ,
-  name-pl = frames ,
+\zcsetup{countertype={framenumber=slide}}
+\zcRefTypeSetup{slide}{
+  Name-sg = Slide ,
+  name-sg = slide ,
+  Name-pl = Slides ,
+  name-pl = slides ,
 }
 
 \ExplSyntaxOn

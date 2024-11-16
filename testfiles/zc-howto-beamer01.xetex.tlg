@@ -3,7 +3,7 @@ Don't change this file in any respect.
 ============================================================
 TEST 1: Reference: frames, figure, table
 ============================================================
-> \l__zrefclever_typeset_queue_curr_tl=\group_begin: frames\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{fr:1}{\group_begin: 1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{fr:2}{\group_begin: 2\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\group_begin: slides\group_end: \nobreakspace \__zrefclever_hyperlink:nnn {}{fr:1}{\group_begin: 1\group_end: } and\nobreakspace \__zrefclever_hyperlink:nnn {}{fr:2}{\group_begin: 2\group_end: }.
 <recently read> }
 l. ...\end{frame}
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{tab:1}{\group_begin: table\group_end: \nobreakspace \group_begin: 1\group_end: }.
@@ -13,30 +13,30 @@ l. ...\end{frame}
 <recently read> }
 l. ...\end{frame}
 > \box...=
-\hbox(7.60416+2.12917)x168.41731
-.\OT1/cmss/m/n/10.95 f
-.\OT1/cmss/m/n/10.95 r
-.\OT1/cmss/m/n/10.95 a
-.\OT1/cmss/m/n/10.95 m
+\hbox(7.60416+2.12917)x162.45558
+.\OT1/cmss/m/n/10.95 s
+.\OT1/cmss/m/n/10.95 l
+.\OT1/cmss/m/n/10.95 i
+.\OT1/cmss/m/n/10.95 d
 .\OT1/cmss/m/n/10.95 e
 .\OT1/cmss/m/n/10.95 s
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
-.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/N/C[.5 .5 .5]} action goto name{fr:1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 0]/H/N/C[.5 .5 .5]/A<</S/GoTo/D(fr:1)>>>>}
 .\OT1/cmss/m/n/10.95 1
-.\pdfendlink
+.\special{pdf:eann}
 .\glue 3.65 plus 1.825 minus 1.21666
 .\OT1/cmss/m/n/10.95 a
 .\OT1/cmss/m/n/10.95 n
 .\OT1/cmss/m/n/10.95 d
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
-.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/N/C[.5 .5 .5]} action goto name{fr:2}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 0]/H/N/C[.5 .5 .5]/A<</S/GoTo/D(fr:2)>>>>}
 .\OT1/cmss/m/n/10.95 2
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmss/m/n/10.95 ,
 .\glue 3.65 plus 2.28123 minus 0.97333
-.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/N/C[.5 .5 .5]} action goto name{tab:1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 0]/H/N/C[.5 .5 .5]/A<</S/GoTo/D(tab:1)>>>>}
 .\OT1/cmss/m/n/10.95 t
 .\OT1/cmss/m/n/10.95 a
 .\OT1/cmss/m/n/10.95 b
@@ -45,7 +45,7 @@ l. ...\end{frame}
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
 .\OT1/cmss/m/n/10.95 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmss/m/n/10.95 ,
 .\glue 3.65 plus 2.28123 minus 0.97333
 .\OT1/cmss/m/n/10.95 a
@@ -53,7 +53,7 @@ l. ...\end{frame}
 .\OT1/cmss/m/n/10.95 d
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
-.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/N/C[.5 .5 .5]} action goto name{fig:1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 0]/H/N/C[.5 .5 .5]/A<</S/GoTo/D(fig:1)>>>>}
 .\OT1/cmss/m/n/10.95 ^^L (ligature fi)
 .\OT1/cmss/m/n/10.95 g
 .\OT1/cmss/m/n/10.95 u
@@ -62,7 +62,7 @@ l. ...\end{frame}
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
 .\OT1/cmss/m/n/10.95 1
-.\pdfendlink
+.\special{pdf:eann}
 ! OK.
 \beamer@doifinframe ...box {\testtmp } \showbox 0 
                                                   \box 0 \ENDTEST \par \OMIT...
@@ -74,11 +74,11 @@ TEST 2: Reference: equations, frame overlay
 > \l__zrefclever_typeset_queue_curr_tl=\group_begin: equations\group_end: \nobreakspace (\__zrefclever_hyperlink:nnn {}{eq:1}{\group_begin: 1\group_end: }) and\nobreakspace (\__zrefclever_hyperlink:nnn {}{eq:2}{\group_begin: 2\group_end: }).
 <recently read> }
 l. ...\end{frame}
-> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{overlay}{\group_begin: frame\group_end: \nobreakspace \group_begin: 4\group_end: }.
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{overlay}{\group_begin: slide\group_end: \nobreakspace \group_begin: 4\group_end: }.
 <recently read> }
 l. ...\end{frame}
 > \box...=
-\hbox(8.2125+2.73749)x157.77151
+\hbox(8.2125+2.73749)x151.80978
 .\OT1/cmss/m/n/10.95 e
 .\OT1/cmss/m/n/10.95 q
 .\OT1/cmss/m/n/10.95 u
@@ -91,9 +91,9 @@ l. ...\end{frame}
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
 .\OT1/cmss/m/n/10.95 (
-.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/N/C[.5 .5 .5]} action goto name{eq:1}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 0]/H/N/C[.5 .5 .5]/A<</S/GoTo/D(eq:1)>>>>}
 .\OT1/cmss/m/n/10.95 1
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmss/m/n/10.95 )
 .\glue 3.65 plus 1.825 minus 1.21666
 .\OT1/cmss/m/n/10.95 a
@@ -102,9 +102,9 @@ l. ...\end{frame}
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
 .\OT1/cmss/m/n/10.95 (
-.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/N/C[.5 .5 .5]} action goto name{eq:2}
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 0]/H/N/C[.5 .5 .5]/A<</S/GoTo/D(eq:2)>>>>}
 .\OT1/cmss/m/n/10.95 2
-.\pdfendlink
+.\special{pdf:eann}
 .\OT1/cmss/m/n/10.95 )
 .\glue 3.65 plus 1.825 minus 1.21666
 .\OT1/cmss/m/n/10.95 a
@@ -112,16 +112,16 @@ l. ...\end{frame}
 .\OT1/cmss/m/n/10.95 d
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
-.\pdfstartlink(*+*)x* attr{/Border[0 0 0]/H/N/C[.5 .5 .5]} action goto name{overlay}
-.\OT1/cmss/m/n/10.95 f
-.\OT1/cmss/m/n/10.95 r
-.\OT1/cmss/m/n/10.95 a
-.\OT1/cmss/m/n/10.95 m
+.\special{pdf:bann<</Type/Annot/Subtype/Link/Border[0 0 0]/H/N/C[.5 .5 .5]/A<</S/GoTo/D(overlay)>>>>}
+.\OT1/cmss/m/n/10.95 s
+.\OT1/cmss/m/n/10.95 l
+.\OT1/cmss/m/n/10.95 i
+.\OT1/cmss/m/n/10.95 d
 .\OT1/cmss/m/n/10.95 e
 .\penalty 10000
 .\glue 3.65 plus 1.825 minus 1.21666
 .\OT1/cmss/m/n/10.95 4
-.\pdfendlink
+.\special{pdf:eann}
 ! OK.
 \beamer@doifinframe ...box {\testtmp } \showbox 0 
                                                   \box 0 \ENDTEST \par \OMIT...

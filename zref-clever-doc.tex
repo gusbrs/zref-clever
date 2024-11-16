@@ -119,6 +119,8 @@
     alt,
     beamer@nameslide,
     beamer@dummynameslide,
+    uncover,
+    only,
     ordinal,
     tcbuselibrary,
     tcbset,
@@ -2031,6 +2033,68 @@ directly.
 \end{zchowto}
 
 
+\subsection{\cls{beamer}}
+
+\zctask{Making references in \cls{beamer}.}
+
+\cls{beamer} does some atypical things with regard to cross-references, in
+particular it redefines \cs{label} to support overlays.  The special treatment
+is not extended to \cs{zlabel}, hence \cls{beamer} requires the use of
+\cs{label} with the \opt{labelhook} option.  Some setup for references to
+frames is also needed, with a fitting setting for the \opt{countertype} of the
+\texttt{framenumber} counter and, possibly, corresponding type names for
+it.\footnote{I'm not sure what the best type name for it would be though.
+  ``Frame'' sounds too \cls{beamer}-specific, and possibly ``slide'' is what
+  ``the audience'' would expect.  But \emph{some} name (or preexisting type)
+  would need to be assigned, and you can always choose something else, of
+  course.  This is just to illustrate the procedure.}
+
+\begin{zchowto}[caption={\cls{beamer}}]
+\documentclass{beamer}
+\usepackage{zref-clever}
+\zcsetup{countertype={framenumber=slide}}
+\zcRefTypeSetup{slide}{
+  Name-sg = Slide ,
+  name-sg = slide ,
+  Name-pl = Slides ,
+  name-pl = slides ,
+}
+\begin{document}
+\begin{frame}[label={fr:1}]
+  \begin{table}
+    \begin{tabular}{cc}
+      1 & 2 \\
+      3 & 4 \\
+    \end{tabular}
+    \caption{Table 1}
+    \label{tab:1}
+  \end{table}
+\end{frame}
+\begin{frame}[label={fr:2}]
+  \begin{figure}
+    \rule{5cm}{5cm}
+    \caption{Figure 1}
+    \label{fig:1}
+  \end{figure}
+\end{frame}
+\begin{frame}
+  \zcref{fr:1,fr:2,tab:1,fig:1}
+\end{frame}
+\begin{frame}
+  \begin{align}
+    a &= b + c \label{eq:1}\\
+    c &= d + e \label{eq:2}
+  \end{align}
+  Blah blah. \uncover<2>{More blah blah.}\par
+  \only<3>{Specification is needed now.\label<3>{overlay}}
+\end{frame}
+\begin{frame}
+  \zcref{eq:1,eq:2,overlay}
+\end{frame}
+\end{document}
+\end{zchowto}
+
+
 \subsection{Ordinal references}
 
 \zctask{Typesetting the references as ordinal numbers.}
@@ -2325,117 +2389,30 @@ add the \texttt{subref} property to \pkg{zref}'s main property list.
 This module just sets appropriate \opt{countertype} and \opt{counterresetby}
 for the \texttt{subfigure} and \texttt{subtable} counters.
 
-
-\section{Work-arounds}
-
-\marginpar{\raggedleft\raisebox{-1.5ex}{\dbend}}The compatibility modules
-presented in \zcref{sec:comp-modules} should go a long way in ensuring the
-user has little to worry about in setting up \pkg{zref-clever} for some more
-traditional document classes and packages, but they cannot be expected to go
-all the way.  Not only because this kind of support will never be exhaustive,
-but also since, sometimes, given the way certain features are implemented,
-there may not be a reasonable way to provide this support, from our side.
-But, still, most of the time, it is still ``viable'' to get there, if one
-really wishes to do so.  So, this section keeps track of some known recipes,
-which I don't think belong in \pkg{zref-clever} itself, but which you may
-choose to use.  Note that this list is intended to spare users from having to
-reinvent the wheel every time someone needs something of the sort, but from
-\pkg{zref-clever}'s perspective, their status is ``not supported''.
+\DescribeOption{beamer} %
+This compatibility module sets proper values of \cs{@currentHref}, so that the
+\cs{label}s are stored with anchors which correspond to the ones \cls{beamer}
+actually creates, using the \texttt{label} hook for the purpose, meaning this
+strictly requires the use of \cs{label} with the \opt{labelhook} option.  It
+also sets appropriate \cs{@currentcounter} for frames, using a generic
+\texttt{cmd} hook on \cls{beamer}'s \cs{refcounter} macro.
 
 
-\subsection*{\cls{beamer}}
-
-Before using this, note that, if you are up-to-date, you might no longer need
-a work-around for \cls{beamer} (check if the fix at
-\url{https://github.com/josephwright/beamer/issues/917} has already been
-released and is available to you).
-
-\cls{beamer} does some really atypical things with regard to cross-references.
-To start with, it redefines \cs{label} to receive an optional
-\texttt{<\meta{overlay specification}>} argument.  Then, presumably to support
-overlays, it goes on and hijacks \pkg{hyperref}'s anchoring system, sets
-anchors (\cs{hypertarget}s) to each \emph{label} in the \file{.snm} file,
-while letting every standard label's anchor in the \file{.aux} file default to
-\texttt{Doc-Start}.  Of course, having rendered useless \pkg{hyperref}'s
-anchoring, it has to redefine \cs{ref} so that it uses its own \file{.snm}
-provided ``label anchors'' to make hyperlinks.  In particular, from our
-perspective, there is no support at all for \pkg{zref} provided by
-\cls{beamer}.  Which is specially unfortunate since the above procedures also
-appear to break \pkg{cleveref}.\footnote{See, for example,
-  \url{https://tex.stackexchange.com/q/266080},
-  \url{https://tex.stackexchange.com/q/668998}, and
-  \url{https://github.com/josephwright/beamer/issues/750}.  The work-around
-  provided at \url{https://tex.stackexchange.com/a/266109} is not general
-  enough since it breaks \pkg{cleveref}'s ability to receive a list of labels
-  as argument.}  Finally, \cls{beamer} also does not set \cs{@currentcounter}
-for the frames, making it hard for \pkg{zref-clever} to assign the proper type
-to labels set in that scope.
-
-Adding proper support for this is the business of \cls{beamer}, \pkg{zref},
-and/or \pkg{hyperref}.  Likely the former's really.  But, as a user, you can
-have a work-around in the meantime.\footnote{This work-around is thanks to
-  \contributor{Ulrike Fischer} at
-  \url{https://tex.stackexchange.com/a/730792}.}
-
-\begin{zcworkaround}[caption={\cls{beamer}}]
-\documentclass{beamer}
-\usepackage{zref-clever}
-\makeatletter
-\AddToHookWithArguments{label}[setcurrentHref]{\xdef\@currentHref{#1}}
-\DeclareHookRule{label}{setcurrentHref}{before}{zref-clever}
-\AddToHookWithArguments{cmd/refcounter/before}{\edef\@currentcounter{#1}}
-\makeatother
-\zcsetup{countertype={framenumber=frame}}
-\zcRefTypeSetup{frame}{
-  Name-sg = Frame ,
-  name-sg = frame ,
-  Name-pl = Frames ,
-  name-pl = frames ,
-}
-\begin{document}
-\begin{frame}[label={fr:1}]
-  \begin{table}
-    \begin{tabular}{cc}
-      1 & 2 \\
-      3 & 4 \\
-    \end{tabular}
-    \caption{Table 1}
-    \label{tab:1}
-  \end{table}
-\end{frame}
-\begin{frame}[label={fr:2}]
-  \begin{figure}
-    \rule{5cm}{5cm}
-    \caption{Figure 1}
-    \label{fig:1}
-  \end{figure}
-\end{frame}
-\begin{frame}
-  \zcref{fr:1,fr:2,tab:1,fig:1}
-\end{frame}
-\begin{frame}
-  \begin{align}
-    a &= b + c \label{eq:1}\\
-    c &= d + e \label{eq:2}
-  \end{align}
-  Blah blah. \uncover<2>{More blah blah.}\par
-  \only<3>{Specification is needed now.\label<3>{overlay}}
-\end{frame}
-\begin{frame}
-  \zcref{eq:1,eq:2,overlay}
-\end{frame}
-\end{document}
-\end{zcworkaround}
-
-This work-around sets \cs{@currentHref} to the \emph{label} so that the
-\texttt{anchor} gets stored with the \cs{(z)label} in the \file{.aux} file
-with the value required to speak the ``\cls{beamer}-lingo'' of anchors.  Since
-it uses the \texttt{label} hook, this presumes the use of \cs{label} with the
-\opt{labelhook} option.  It also also sets \cs{@currentcounter} and provides
-\opt{countertype} and names for references to frames.\footnote{I'm not sure
-  the best type name for it would be ``frame'' though.  But \emph{some} type
-  would need to be assigned, and you can always choose something else, of
-  course.}
+% \section{Work-arounds}
+%
+% \marginpar{\raggedleft\raisebox{-1.5ex}{\dbend}}The compatibility modules
+% presented in \zcref{sec:comp-modules} should go a long way in ensuring the
+% user has little to worry about in setting up \pkg{zref-clever} for some more
+% traditional document classes and packages, but they cannot be expected to go
+% all the way.  Not only because this kind of support will never be exhaustive,
+% but also since, sometimes, given the way certain features are implemented,
+% there may not be a reasonable way to provide this support, from our side.
+% But, still, most of the time, it is still ``viable'' to get there, if one
+% really wishes to do so.  So, this section keeps track of some known recipes,
+% which I don't think belong in \pkg{zref-clever} itself, but which you may
+% choose to use.  Note that this list is intended to spare users from having to
+% reinvent the wheel every time someone needs something of the sort, but from
+% \pkg{zref-clever}'s perspective, their status is ``not supported''.
 
 
 \section{Acknowledgments}
