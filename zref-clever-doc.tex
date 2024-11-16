@@ -2367,7 +2367,9 @@ appear to break \pkg{cleveref}.\footnote{See, for example,
   \url{https://github.com/josephwright/beamer/issues/750}.  The work-around
   provided at \url{https://tex.stackexchange.com/a/266109} is not general
   enough since it breaks \pkg{cleveref}'s ability to receive a list of labels
-  as argument.}
+  as argument.}  Finally, \cls{beamer} also does not set \cs{@currentcounter}
+for the frames, making it hard for \pkg{zref-clever} to assign the proper type
+to labels set in that scope.
 
 Adding proper support for this is the business of \cls{beamer}, \pkg{zref},
 and/or \pkg{hyperref}.  Likely the former's really.  But, as a user, you can
@@ -2381,9 +2383,17 @@ have a work-around in the meantime.\footnote{This work-around is thanks to
 \makeatletter
 \AddToHookWithArguments{label}[setcurrentHref]{\xdef\@currentHref{#1}}
 \DeclareHookRule{label}{setcurrentHref}{before}{zref-clever}
+\AddToHookWithArguments{cmd/refcounter/before}{\edef\@currentcounter{#1}}
 \makeatother
+\zcsetup{countertype={framenumber=frame}}
+\zcRefTypeSetup{frame}{
+  Name-sg = Frame ,
+  name-sg = frame ,
+  Name-pl = Frames ,
+  name-pl = frames ,
+}
 \begin{document}
-\begin{frame}
+\begin{frame}[label={fr:1}]
   \begin{table}
     \begin{tabular}{cc}
       1 & 2 \\
@@ -2393,7 +2403,7 @@ have a work-around in the meantime.\footnote{This work-around is thanks to
     \label{tab:1}
   \end{table}
 \end{frame}
-\begin{frame}
+\begin{frame}[label={fr:2}]
   \begin{figure}
     \rule{5cm}{5cm}
     \caption{Figure 1}
@@ -2401,7 +2411,18 @@ have a work-around in the meantime.\footnote{This work-around is thanks to
   \end{figure}
 \end{frame}
 \begin{frame}
-  \zcref{tab:1,fig:1}
+  \zcref{fr:1,fr:2,tab:1,fig:1}
+\end{frame}
+\begin{frame}
+  \begin{align}
+    a &= b + c \label{eq:1}\\
+    c &= d + e \label{eq:2}
+  \end{align}
+  Blah blah. \uncover<2>{More blah blah.}\par
+  \only<3>{Specification is needed now.\label<3>{overlay}}
+\end{frame}
+\begin{frame}
+  \zcref{eq:1,eq:2,overlay}
 \end{frame}
 \end{document}
 \end{zcworkaround}
@@ -2410,7 +2431,11 @@ This work-around sets \cs{@currentHref} to the \emph{label} so that the
 \texttt{anchor} gets stored with the \cs{(z)label} in the \file{.aux} file
 with the value required to speak the ``\cls{beamer}-lingo'' of anchors.  Since
 it uses the \texttt{label} hook, this presumes the use of \cs{label} with the
-\opt{labelhook} option.
+\opt{labelhook} option.  It also also sets \cs{@currentcounter} and provides
+\opt{countertype} and names for references to frames.\footnote{I'm not sure
+  the best type name for it would be ``frame'' though.  But \emph{some} type
+  would need to be assigned, and you can always choose something else, of
+  course.}
 
 
 \section{Acknowledgments}

@@ -19,7 +19,16 @@
 \makeatletter
 \AddToHookWithArguments{label}[setcurrentHref]{\xdef\@currentHref{#1}}
 \DeclareHookRule{label}{setcurrentHref}{before}{zref-clever}
+\AddToHookWithArguments{cmd/refcounter/before}{\edef\@currentcounter{#1}}
 \makeatother
+
+\zcsetup{countertype={framenumber=frame}}
+\zcRefTypeSetup{frame}{
+  Name-sg = Frame ,
+  name-sg = frame ,
+  Name-pl = Frames ,
+  name-pl = frames ,
+}
 
 \ExplSyntaxOn
 \bool_set_true:N \l__zrefclever_verbose_testing_bool
@@ -31,7 +40,7 @@
 
 \begin{document}
 
-\begin{frame}
+\begin{frame}[label={fr:1}]
   \begin{table}
     \begin{tabular}{cc}
       1 & 2 \\
@@ -42,7 +51,7 @@
   \end{table}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[label={fr:2}]
   \begin{figure}
     \rule{5cm}{5cm}
     \caption{Figure 1}
@@ -58,9 +67,34 @@
 
   \TIMO
 
-  \BEGINTEST{Reference: figure, table}
+  \BEGINTEST{Reference: frames, figure, table}
   \renewcommand{\testtmp}{%
-    \zcref{tab:1,fig:1}}
+    \zcref{fr:1,fr:2,tab:1,fig:1}}
+  \setbox0=\hbox{\testtmp}
+  \showbox0
+  \box0
+  \ENDTEST
+
+  \OMIT
+
+\end{frame}
+
+\begin{frame}
+  \begin{align}
+    a &= b + c \label{eq:1}\\
+    c &= d + e \label{eq:2}
+  \end{align}
+  Blah blah. \uncover<2>{More blah blah.}\par
+  \only<3>{Specification is needed now.\label<3>{overlay}}
+\end{frame}
+
+
+\begin{frame}
+  \TIMO
+
+  \BEGINTEST{Reference: equations, frame overlay}
+  \renewcommand{\testtmp}{%
+    \zcref{eq:1,eq:2,overlay}}
   \setbox0=\hbox{\testtmp}
   \showbox0
   \box0
