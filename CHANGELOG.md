@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.8...HEAD)
+## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.9...HEAD)
+
+## [v0.4.9](https://github.com/gusbrs/zref-clever/compare/v0.4.8...v0.4.9) (2024-11-16)
 
 ### Changed
 - Convert improved `beamer` work-around into compatibility module.

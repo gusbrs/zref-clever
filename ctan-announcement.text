@@ -1,7 +1,5 @@
-## v0.4.8 (2024-11-07)
+## v0.4.9 (2024-11-16)
 
 ### Changed
-- Documentation improvements.
-- Preemptively avoid empty module when setting l3keys `.inherit:n`
-  (https://github.com/latex3/latex3/issues/1254).
+- Convert improved `beamer` work-around into compatibility module.
 
