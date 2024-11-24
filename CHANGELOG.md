@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.9...HEAD)
 
+### Added
+- Swedish localization (see issue
+  [#35](https://github.com/gusbrs/zref-clever/issues/35)).
+
 ### Changed
 - The `declension` option from `\zcDeclareLanguage`, the `case` option from
   `\zcLanguageSetup`, and the `d` general option (from `\zcref`) have been

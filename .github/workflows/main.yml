@@ -47,6 +47,7 @@ env:
     babel-dutch
     babel-italian
     babel-russian
+    babel-swedish
     beamer
     bookmark
     booktabs
