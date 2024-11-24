@@ -22,19 +22,19 @@ l. ...  }
 > \g__zrefclever_opt_lang_swedish_default_lastsep_tl= och\nobreakspace .
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_default_tpairsep_tl= ochb\nobreakspace .
+> \g__zrefclever_opt_lang_swedish_default_tpairsep_tl= och\nobreakspace .
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_swedish_default_tlistsep_tl=, .
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_default_tlastsep_tl=, ochc\nobreakspace .
+> \g__zrefclever_opt_lang_swedish_default_tlastsep_tl= och\nobreakspace .
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_swedish_default_notesep_tl= .
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_default_rangesep_tl= till\nobreakspace .
+> \g__zrefclever_opt_lang_swedish_default_rangesep_tl=\textendash .
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_book_Name-sg_tl=Bok.
@@ -43,10 +43,10 @@ l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_book_name-sg_tl=bok.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_book_Name-pl_tl=Böcker.
+> \g__zrefclever_opt_lang_swedish_type_book_Name-pl_tl=Bok.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_book_name-pl_tl=böcker.
+> \g__zrefclever_opt_lang_swedish_type_book_name-pl_tl=bok.
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_part_Name-sg_tl=Del.
@@ -55,10 +55,10 @@ l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_part_name-sg_tl=del.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_part_Name-pl_tl=Delar.
+> \g__zrefclever_opt_lang_swedish_type_part_Name-pl_tl=Del.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_part_name-pl_tl=delar.
+> \g__zrefclever_opt_lang_swedish_type_part_name-pl_tl=del.
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_chapter_Name-sg_tl=Kapitel.
@@ -103,10 +103,10 @@ l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_appendix_name-sg_tl=bilaga.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_appendix_Name-pl_tl=Bilagor.
+> \g__zrefclever_opt_lang_swedish_type_appendix_Name-pl_tl=Bilaga.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_appendix_name-pl_tl=bilagor.
+> \g__zrefclever_opt_lang_swedish_type_appendix_name-pl_tl=bilaga.
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_page_Name-sg_tl=Sidan.
@@ -115,16 +115,10 @@ l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_page_name-sg_tl=sidan.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_page_Name-pl_tl=Sidorna.
+> \g__zrefclever_opt_lang_swedish_type_page_Name-pl_tl=Sidan.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_page_name-pl_tl=sidorna.
-<recently read> }
-l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_page_rangesep_tl=\textendash .
-<recently read> }
-l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_page_rangetopair_bool=false.
+> \g__zrefclever_opt_lang_swedish_type_page_name-pl_tl=sidan.
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_line_Name-sg_tl=Rad.
@@ -133,10 +127,10 @@ l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_line_name-sg_tl=rad.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_line_Name-pl_tl=Rader.
+> \g__zrefclever_opt_lang_swedish_type_line_Name-pl_tl=Rad.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_line_name-pl_tl=rader.
+> \g__zrefclever_opt_lang_swedish_type_line_name-pl_tl=rad.
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_figure_Name-sg_tl=Figur.
@@ -175,6 +169,18 @@ l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_table_name-pl_tl=tabell.
 <recently read> }
 l. ...  }
+> \g__zrefclever_opt_lang_swedish_type_table_Name-sg-ab_tl=Tab..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_swedish_type_table_name-sg-ab_tl=tab..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_swedish_type_table_Name-pl-ab_tl=Tab..
+<recently read> }
+l. ...  }
+> \g__zrefclever_opt_lang_swedish_type_table_name-pl-ab_tl=tab..
+<recently read> }
+l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_item_Name-sg_tl=Punkt.
 <recently read> }
 l. ...  }
@@ -187,16 +193,16 @@ l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_item_name-pl_tl=punkt.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_footnote_Name-sg_tl=Footnot.
+> \g__zrefclever_opt_lang_swedish_type_footnote_Name-sg_tl=Fotnot.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_footnote_name-sg_tl=footnot.
+> \g__zrefclever_opt_lang_swedish_type_footnote_name-sg_tl=fotnot.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_footnote_Name-pl_tl=Footnoter.
+> \g__zrefclever_opt_lang_swedish_type_footnote_Name-pl_tl=Fotnot.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_footnote_name-pl_tl=footnoter.
+> \g__zrefclever_opt_lang_swedish_type_footnote_name-pl_tl=fotnot.
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_endnote_Name-sg_tl=Slutnot.
@@ -205,22 +211,22 @@ l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_endnote_name-sg_tl=slutnot.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_endnote_Name-pl_tl=Slutnoter.
+> \g__zrefclever_opt_lang_swedish_type_endnote_Name-pl_tl=Slutnot.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_endnote_name-pl_tl=slutnoter.
+> \g__zrefclever_opt_lang_swedish_type_endnote_name-pl_tl=slutnot.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_note_Name-sg_tl=Notering.
+> \g__zrefclever_opt_lang_swedish_type_note_Name-sg_tl=Not.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_note_name-sg_tl=notering.
+> \g__zrefclever_opt_lang_swedish_type_note_name-sg_tl=not.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_note_Name-pl_tl=Noteringar.
+> \g__zrefclever_opt_lang_swedish_type_note_Name-pl_tl=Not.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_note_name-pl_tl=noteringar.
+> \g__zrefclever_opt_lang_swedish_type_note_name-pl_tl=not.
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_equation_Name-sg_tl=Ekvation.
@@ -283,16 +289,16 @@ l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_corollary_name-pl_tl=följdsats.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_proposition_Name-sg_tl=Proposition.
+> \g__zrefclever_opt_lang_swedish_type_proposition_Name-sg_tl=Påstående.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_proposition_name-sg_tl=proposition.
+> \g__zrefclever_opt_lang_swedish_type_proposition_name-sg_tl=påstående.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_proposition_Name-pl_tl=Proposition.
+> \g__zrefclever_opt_lang_swedish_type_proposition_Name-pl_tl=Påstående.
 <recently read> }
 l. ...  }
-> \g__zrefclever_opt_lang_swedish_type_proposition_name-pl_tl=proposition.
+> \g__zrefclever_opt_lang_swedish_type_proposition_name-pl_tl=påstående.
 <recently read> }
 l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_definition_Name-sg_tl=Definition.
