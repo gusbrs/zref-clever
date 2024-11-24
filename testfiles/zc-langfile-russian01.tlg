@@ -6,7 +6,7 @@ TEST 1: Language declaration
 > \g__zrefclever_declared_language_russian_tl=russian.
 <recently read> }
 l. ...  }
-The sequence \g__zrefclever_opt_language_russian_declension_seq contains the items (without outer braces):
+The sequence \g__zrefclever_opt_language_russian_variants_seq contains the items (without outer braces):
 >  {n}
 >  {a}
 >  {g}

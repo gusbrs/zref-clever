@@ -85,7 +85,7 @@ Package zref-clever Warning: Language 'german' is already declared on line .... 
 ============================================================
 TEST 3: Declare new language
 ============================================================
-The sequence \g__zrefclever_opt_language_elvish_declension_seq contains the items (without outer braces):
+The sequence \g__zrefclever_opt_language_elvish_variants_seq contains the items (without outer braces):
 >  {a}
 >  {b}
 >  {c}.

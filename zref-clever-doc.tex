@@ -733,11 +733,11 @@ language known by \pkg{zref-clever}.  For more details on
 \zcref*[ref=title,noname]{sec:internationalization}, see
 \zcref{sec:internationalization}.
 
-\DescribeOption{d} %
-The \opt{d} option sets the declension case, and affects the type name used
-for typesetting the reference.  Whether this option is operative, and which
-values it accepts, depends on the declared setup for each language.  For
-details, see \zcref{sec:internationalization}.
+\DescribeOption{v} %
+The \opt{v} option sets the variant, and affects the type name used for
+typesetting the reference.  Whether this option is operative, and which values
+it accepts, depends on the declared setup for each language.  For details, see
+\zcref{sec:internationalization}.
 
 \DescribeOption{nudge} %
 \DescribeOption{nudgeif} %
@@ -1399,32 +1399,35 @@ with \cs{zcDeclareLanguage}, \cs{zcDeclareLanguageAlias}, and
 \end{function}
 Declare a new language for use with \pkg{zref-clever}.  If \meta{language} has
 already been declared, just warn.  The \meta{options} argument receives the
-usual \texttt{key=value} list and recognizes three keys: \opt{declension},
-\opt{gender}, and \opt{allcaps}.  \opt{declension} receives a coma separated
-list of valid declension cases for \meta{language}.  The first element of the
-list is considered to be the default case, both for the \opt{d} option in
-\cs{zcref} and for the \opt{case} option in \cs{zcLanguageSetup}.  Similarly,
-\opt{gender} receives a comma separated list of genders for \meta{language}.
-The elements in this list are those which are recognized as valid for the
-language for both the \opt{g} option in \cs{zcref} and the \opt{gender} option
-in \cs{zcLanguageSetup}.  There is no default presumed in this case.  Finally,
-\opt{allcaps} can be used with languages for which nouns must be always
-capitalized for grammatical reasons.  For a language declared with the
-\opt{allcaps} option, the \opt{cap} reference option (see \zcref{sec:options})
-is disregarded, and \cs{zcref} always uses the capitalized type name forms.
-This means that language files for languages with such a trait can be halved
-in size, and that user customization for them is simplified, only requiring
-the capitalized name forms.  On the other hand, the non-capitalized
-\texttt{name-} reference format options are rendered no-op for the language in
-question.  \zcref[S]{tab:language-options} presents an overview of the options
-in effect for the languages declared by \pkg{zref-clever}.
-\cs{zcDeclareLanguage} is preamble only.
+usual \texttt{key=value} list and recognizes three keys: \opt{variants},
+\opt{gender}, and \opt{allcaps}.  \opt{variants} receives a coma separated
+list of valid type name variants for \meta{language}.\footnote{This option was
+  initially conceived to support declension cases, but was eventually
+  generalized to encompass a broader meaning, and is now more flexibly
+  interpreted as simply ``variants''.}  The first element of the list is
+considered to be the default variant, both for the \opt{v} option in
+\cs{zcref} and for the \opt{variant} option in \cs{zcLanguageSetup}.
+Similarly, \opt{gender} receives a comma separated list of genders for
+\meta{language}.  The elements in this list are those which are recognized as
+valid for the language for both the \opt{g} option in \cs{zcref} and the
+\opt{gender} option in \cs{zcLanguageSetup}.  There is no default presumed in
+this case.  Finally, \opt{allcaps} can be used with languages for which nouns
+must be always capitalized for grammatical reasons.  For a language declared
+with the \opt{allcaps} option, the \opt{cap} reference option (see
+\zcref{sec:options}) is disregarded, and \cs{zcref} always uses the
+capitalized type name forms.  This means that language files for languages
+with such a trait can be halved in size, and that user customization for them
+is simplified, only requiring the capitalized name forms.  On the other hand,
+the non-capitalized \texttt{name-} reference format options are rendered no-op
+for the language in question.  \zcref[S]{tab:language-options} presents an
+overview of the options in effect for the languages declared by
+\pkg{zref-clever}.  \cs{zcDeclareLanguage} is preamble only.
 
 \begin{table}
   \centering
   \begin{tabular}{l>{\ttfamily}c>{\ttfamily}c>{\ttfamily}c}
     \toprule
-    Language   & declension & gender & allcaps \\
+    Language   & variants    & gender & allcaps \\
     \midrule
     dutch      & --          & f,m,n  & --      \\
     english    & --          & --     & --      \\
@@ -1459,24 +1462,24 @@ the user. \cs{zcDeclareLanguageAlias} is preamble only.
 Sets language-specific reference format options for \meta{language} (see
 \zcref{sec:reference-format}), be they type-specific or not. \meta{language}
 must be already known to \pkg{zref-clever}.  Besides reference format options,
-\cs{zcLanguageSetup} knows three other keys: \opt{type}, \opt{case}, and
+\cs{zcLanguageSetup} knows three other keys: \opt{type}, \opt{variant}, and
 \opt{gender}.  The first two work like a ``switch'' affecting the options
 \emph{following} it.  For example, if \texttt{type=foo} is given in
 \meta{options} the options following it will be set as type-specific options
-for reference type \texttt{foo}.  Similarly, after \texttt{case=X} (provided
-\texttt{X} is a valid declension case for \meta{language}), the following
-\texttt{[Nn]ame-} options will set values for the \texttt{X} declension case
-(other reference format options are not affected by \opt{case}).  Before the
-first occurrence of either \opt{type} or \opt{case} default values are set.
-For \opt{case} this means the default declension case, which is the first
-element of the list provided to the \opt{declension} option in
-\cs{zcDeclareLanguage}.  For \opt{type} this means language-specific but not
-type-specific option values (see \zcref{sec:reference-format}).  An empty
-valued \texttt{type=} key can also ``unset'' the type.  The \opt{gender} key
-sets the gender of the current \texttt{type} (provided the value it receives
-is one of the declared genders for \meta{language}).  For \texttt{type}s which
-have multiple valid genders for a given language, the option can also receive
-a comma separated list.  \cs{zcLanguageSetup} is preamble only.
+for reference type \texttt{foo}.  Similarly, after \texttt{variant=X}
+(provided \texttt{X} is a valid variant for \meta{language}), the following
+\texttt{[Nn]ame-} options will set values for the \texttt{X} variant (other
+reference format options are not affected by \opt{variant}).  Before the first
+occurrence of either \opt{type} or \opt{variant} default values are set.  For
+\opt{variant} this means the default variant, which is the first element of
+the list provided to the \opt{variants} option in \cs{zcDeclareLanguage}.  For
+\opt{type} this means language-specific but not type-specific option values
+(see \zcref{sec:reference-format}).  An empty valued \texttt{type=} key can
+also ``unset'' the type.  The \opt{gender} key sets the gender of the current
+\texttt{type} (provided the value it receives is one of the declared genders
+for \meta{language}).  For \texttt{type}s which have multiple valid genders
+for a given language, the option can also receive a comma separated list.
+\cs{zcLanguageSetup} is preamble only.
 
 A couple of examples to illustrate the syntax of \cs{zcLanguageSetup}:
 
@@ -1492,16 +1495,16 @@ A couple of examples to illustrate the syntax of \cs{zcLanguageSetup}:
 \zcLanguageSetup{german}{
   type = section ,
     gender = m ,
-    case = N ,
+    variant = N ,
       Name-sg = Abschnitt ,
       Name-pl = Abschnitte ,
-    case = A ,
+    variant = A ,
       Name-sg = Abschnitt ,
       Name-pl = Abschnitte ,
-    case = D ,
+    variant = D ,
       Name-sg = Abschnitt ,
       Name-pl = Abschnitten ,
-    case = G ,
+    variant = G ,
       Name-sg = Abschnitts ,
       Name-pl = Abschnitte ,
 }
@@ -1517,16 +1520,16 @@ particularly for numbered and gendered articles, even if those don't have
 their typeset output automated.
 
 For reference type names, the declension cases for each language must be
-declared with \cs{zcDeclareLanguage}, and the name reference format options
-must be provided for each case, which is done for built-in language files of
-languages which have noun declension, and can be done by the user with
-\cs{zcLanguageSetup}, as we've seen.  \pkg{zref-clever} does not try to guess
-or infer the case though, you must tell it to \cs{zcref}.  And this is done by
-means of the \opt{d} option (see \zcref{sec:options}).  So you may write
-something like ``\texttt{nach den
-  \cs{zcref}[d=D]\{sec:section-1,sec:section-2\}}'' to get ``nach den
+declared as \opt{variants} with \cs{zcDeclareLanguage}, and the name reference
+format options must be provided for each case, which is done for built-in
+language files of languages which have noun declension, and can be done by the
+user with \cs{zcLanguageSetup}, as we've seen.  \pkg{zref-clever} does not try
+to guess or infer the case though, you must tell it to \cs{zcref}.  And this
+is done by means of the \opt{v} option (see \zcref{sec:options}).  So you may
+write something like ``\texttt{nach den
+  \cs{zcref}[v=D]\{sec:section-1,sec:section-2\}}'' to get ``nach den
 Abschnitten 1 und 2''.  Or ``\texttt{trotz des
-  \cs{zcref}[d=G]\{eq:theorem-1\}}'' to get ``trotz des Theorems 1''.
+  \cs{zcref}[v=G]\{eq:theorem-1\}}'' to get ``trotz des Theorems 1''.
 
 Regarding the text surrounding the reference -- the inflected article, the
 passing preposition, etc.\ --, the issue is more delicate.  \pkg{zref-clever}

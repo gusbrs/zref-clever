@@ -59,9 +59,9 @@
 \TEST { Declare~new~language }
   {
     \zcDeclareLanguage
-      [ declension = { a,b,c } , gender = { x,y,z } , allcaps ] { elvish }
+      [ variants = { a,b,c } , gender = { x,y,z } , allcaps ] { elvish }
     \seq_show:c
-      { \__zrefclever_opt_varname_language:nnn{elvish}{declension}{seq} }
+      { \__zrefclever_opt_varname_language:nnn{elvish}{variants}{seq} }
     \seq_show:c
       { \__zrefclever_opt_varname_language:nnn{elvish}{gender}{seq} }
     \bool_show:c

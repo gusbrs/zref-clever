@@ -735,7 +735,7 @@
 
 \newoptblock{d}
 
-\BEGINTEST{Option: d=...}
+\BEGINTEST{Option: v=...}
 \renewcommand{\testtmp}{%
   \zcref[lang=german]{cha:chapter-1, sec:section-1.1,
     sec:section-1.2}}
@@ -743,37 +743,37 @@
 \showbox0
 \box0
 \renewcommand{\testtmp}{%
-  \zcref[lang=german,d=N]{cha:chapter-1, sec:section-1.1,
+  \zcref[lang=german,v=N]{cha:chapter-1, sec:section-1.1,
     sec:section-1.2}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \renewcommand{\testtmp}{%
-  \zcref[lang=german,d=A]{cha:chapter-1, sec:section-1.1,
+  \zcref[lang=german,v=A]{cha:chapter-1, sec:section-1.1,
     sec:section-1.2}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \renewcommand{\testtmp}{%
-  \zcref[lang=german,d=D]{cha:chapter-1, sec:section-1.1,
+  \zcref[lang=german,v=D]{cha:chapter-1, sec:section-1.1,
     sec:section-1.2}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \renewcommand{\testtmp}{%
-  \zcref[lang=german,d=G]{cha:chapter-1, sec:section-1.1,
+  \zcref[lang=german,v=G]{cha:chapter-1, sec:section-1.1,
     sec:section-1.2}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \renewcommand{\testtmp}{%
-  \zcref[lang=german,d=]{cha:chapter-1, sec:section-1.1,
+  \zcref[lang=german,v=]{cha:chapter-1, sec:section-1.1,
     sec:section-1.2}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \renewcommand{\testtmp}{%
-  \zcref[lang=german,d=K]{cha:chapter-1, sec:section-1.1,
+  \zcref[lang=german,v=K]{cha:chapter-1, sec:section-1.1,
     sec:section-1.2}}
 \setbox0=\hbox{\testtmp}
 \showbox0

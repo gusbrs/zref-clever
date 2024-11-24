@@ -3615,7 +3615,7 @@ l. ...\setbox0=\hbox{\testtmp
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 67: Option: d=...
+TEST 67: Option: v=...
 ============================================================
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: Kapitel\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
@@ -3973,7 +3973,7 @@ l. ...\setbox0=\hbox{\testtmp
 .\special{pdf:eann}
 ! OK.
 l. ...\showbox0
-Package zref-clever Warning: Declension case 'K' unknown for language 'german' on line .... Using default declension case.
+Package zref-clever Warning: Variant 'K' unknown for language 'german' on line .... Using default variant.
 > \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{chapter.1}{\group_begin: Kapitel\group_end: \nobreakspace \group_begin: 1\group_end: }.
 <recently read> }
 l. ...\setbox0=\hbox{\testtmp

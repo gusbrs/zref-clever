@@ -12,7 +12,7 @@
 
 \zcsetup{
   lang=german,
-  d=A,
+  v=A,
 }
 
 \OMIT
@@ -20,7 +20,7 @@
 \TIMO
 
 \ExplSyntaxOn
-\tl_show:N \l__zrefclever_ref_decl_case_tl
+\tl_show:N \l__zrefclever_ref_variant_tl
 \ExplSyntaxOff
 
 \OMIT

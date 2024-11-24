@@ -32,7 +32,7 @@
 \BEGINTEST{Options and scopes: default, type-specific}
 \zcLanguageSetup{ngerman}{
   gender=m,
-  case=D,
+  variant=D,
   tpairsep={ t\& },
   tlistsep={,,, },
   tlastsep={ tUND },
@@ -55,7 +55,7 @@
   name-pl-ab=bs.,
   type=section,
     gender=m,
-    case=D,
+    variant=D,
     tpairsep={ \& },
     tlistsep={,, },
     tlastsep={ AND },
@@ -164,11 +164,11 @@
 \ExplSyntaxOff
 \ENDTEST
 
-\BEGINTEST{Missing case and gender}
+\BEGINTEST{Missing variant and gender}
 \zcLanguageSetup{english}{
   type=section,
   gender=m,
-  case=D,
+  variant=D,
 }
 \zcLanguageSetup{french}{
   type=section,
@@ -565,47 +565,47 @@
 \box0
 \ENDTEST
 
-\newoptblock{[Nn]ame-[sg/pl](-ab)=... (german,d=D)}
+\newoptblock{[Nn]ame-[sg/pl](-ab)=... (german,v=D)}
 
-\BEGINTEST{Option: [Nn]ame-[sg/pl](-ab)=... (german,d=D)}
+\BEGINTEST{Option: [Nn]ame-[sg/pl](-ab)=... (german,v=D)}
 \selectlanguage{ngerman}
 \renewcommand{\testtmp}{%
-  \zcref[cap,noabbrev,d=D]{sec:section-1.1}}
+  \zcref[cap,noabbrev,v=D]{sec:section-1.1}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \renewcommand{\testtmp}{%
-  \zcref[noabbrev,d=D]{sec:section-1.1}}
+  \zcref[noabbrev,v=D]{sec:section-1.1}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \renewcommand{\testtmp}{%
-  \zcref[cap,noabbrev,d=D]{sec:section-1.1, sec:section-1.2}}
+  \zcref[cap,noabbrev,v=D]{sec:section-1.1, sec:section-1.2}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \renewcommand{\testtmp}{%
-  \zcref[noabbrev,d=D]{sec:section-1.1, sec:section-1.2}}
+  \zcref[noabbrev,v=D]{sec:section-1.1, sec:section-1.2}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \renewcommand{\testtmp}{%
-  \zcref[cap,abbrev,d=D]{sec:section-1.1}}
+  \zcref[cap,abbrev,v=D]{sec:section-1.1}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \renewcommand{\testtmp}{%
-  \zcref[abbrev,d=D]{sec:section-1.1}}
+  \zcref[abbrev,v=D]{sec:section-1.1}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \renewcommand{\testtmp}{%
-  \zcref[cap,abbrev,d=D]{sec:section-1.1, sec:section-1.2}}
+  \zcref[cap,abbrev,v=D]{sec:section-1.1, sec:section-1.2}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0
 \renewcommand{\testtmp}{%
-  \zcref[abbrev,d=D]{sec:section-1.1, sec:section-1.2}}
+  \zcref[abbrev,v=D]{sec:section-1.1, sec:section-1.2}}
 \setbox0=\hbox{\testtmp}
 \showbox0
 \box0

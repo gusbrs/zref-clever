@@ -40,13 +40,13 @@
       }
     \seq_if_exist:cT
       { \__zrefclever_opt_varname_language:enn
-          { \g__test_tmpa_tl } { declension } { seq }
+          { \g__test_tmpa_tl } { variants } { seq }
       }
       {
         \seq_show:c
           {
             \__zrefclever_opt_varname_language:enn
-              { \g__test_tmpa_tl } { declension } { seq }
+              { \g__test_tmpa_tl } { variants } { seq }
           }
       }
     \seq_if_exist:cT
@@ -151,13 +151,13 @@
         \seq_if_exist:cTF
           {
             \__zrefclever_opt_varname_language:enn
-              { \g__test_tmpa_tl } { declension } { seq }
+              { \g__test_tmpa_tl } { variants } { seq }
           }
           {
             \seq_map_inline:cn
               {
                 \__zrefclever_opt_varname_language:enn
-                  { \g__test_tmpa_tl } { declension } { seq }
+                  { \g__test_tmpa_tl } { variants } { seq }
               }
               {
                 \clist_map_inline:nn

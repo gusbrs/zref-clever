@@ -618,31 +618,31 @@
     See~documentation~for~'\iow_char:N\\zcDeclareLanguage'~and~
     '\iow_char:N\\zcDeclareLanguageAlias'.
   }
-\msg_new:nnn { zref-clever } { unknown-language-decl }
+\msg_new:nnn { zref-clever } { unknown-language-variant }
   {
-    Can't~set~declension~'#1'~for~unknown~language~'#2'~\msg_line_context:.~
+    Can't~set~variant~'#1'~for~unknown~language~'#2'~\msg_line_context:.~
     See~documentation~for~'\iow_char:N\\zcDeclareLanguage'~and~
     '\iow_char:N\\zcDeclareLanguageAlias'.
   }
-\msg_new:nnn { zref-clever } { language-no-decl-ref }
+\msg_new:nnn { zref-clever } { language-no-variants-ref }
   {
-    Language~'#1'~has~no~declared~declension~cases~\msg_line_context:.~
-    Nothing~to~do~with~option~'d=#2'.
+    Language~'#1'~has~no~declared~variants~\msg_line_context:.~
+    Nothing~to~do~with~option~'v=#2'.
   }
 \msg_new:nnn { zref-clever } { language-no-gender }
   {
     Language~'#1'~has~no~declared~gender~\msg_line_context:.~
     Nothing~to~do~with~option~'#2=#3'.
   }
-\msg_new:nnn { zref-clever } { language-no-decl-setup }
+\msg_new:nnn { zref-clever } { language-no-variants-setup }
   {
-    Language~'#1'~has~no~declared~declension~cases~\msg_line_context:.~
-    Nothing~to~do~with~option~'case=#2'.
+    Language~'#1'~has~no~declared~variants~\msg_line_context:.~
+    Nothing~to~do~with~option~'variant=#2'.
   }
-\msg_new:nnn { zref-clever } { unknown-decl-case }
+\msg_new:nnn { zref-clever } { unknown-variant }
   {
-    Declension~case~'#1'~unknown~for~language~'#2'~\msg_line_context:.~
-    Using~default~declension~case.
+    Variant~'#1'~unknown~for~language~'#2'~\msg_line_context:.~
+    Using~default~variant.
   }
 \msg_new:nnn { zref-clever } { nudge-multitype }
   {
@@ -1410,19 +1410,19 @@
 %   {
 %     \l_@@_setup_type_tl ,
 %     \l_@@_setup_language_tl ,
-%     \l_@@_lang_decl_case_tl ,
-%     \l_@@_lang_declension_seq ,
+%     \l_@@_lang_variant_tl ,
+%     \l_@@_lang_variants_seq ,
 %     \l_@@_lang_gender_seq ,
 %   }
-%   Store ``current'' type, language, and declension cases in different places
-%   for type-specific and language-specific options handling, notably in
-%   \cs{@@_provide_langfile:n}, \cs{zcRefTypeSetup}, and
-%   \cs{zcLanguageSetup}, but also for language specific options retrieval.
+%   Store ``current'' type, language, and variants in different places for
+%   type-specific and language-specific options handling, notably in
+%   \cs{@@_provide_langfile:n}, \cs{zcRefTypeSetup}, and \cs{zcLanguageSetup},
+%   but also for language specific options retrieval.
 %    \begin{macrocode}
 \tl_new:N \l_@@_setup_type_tl
 \tl_new:N \l_@@_setup_language_tl
-\tl_new:N \l_@@_lang_decl_case_tl
-\seq_new:N \l_@@_lang_declension_seq
+\tl_new:N \l_@@_lang_variant_tl
+\seq_new:N \l_@@_lang_variants_seq
 \seq_new:N \l_@@_lang_gender_seq
 %    \end{macrocode}
 % \end{macro}
@@ -1701,18 +1701,18 @@
 % the only difference is that the ``language name'' happens to be the same as
 % the ``base language name'', in other words, it is an ``alias to itself''.
 % \oarg{options} receive a \texttt{k=v} set of options, with three valid
-% options.  The first, \opt{declension}, takes the noun declension cases
-% prefixes for \meta{language} as a comma separated list, whose first element
-% is taken to be the default case.  The second, \opt{gender}, receives the
-% genders for \meta{language} as comma separated list.  The third,
-% \opt{allcaps}, is a boolean, and indicates that for \meta{language} all
-% nouns must be capitalized for grammatical reasons, in which case, the
-% \opt{cap} option is disregarded for \meta{language}.  If \meta{language} is
-% already known, just warn.  This implies a particular restriction regarding
-% \oarg{options}, namely that these options, when defined by the package,
-% cannot be redefined by the user.  This is deliberate, otherwise the built-in
-% language files would become much too sensitive to this particular user
-% input, and unnecessarily so.  \cs{zcDeclareLanguage} is preamble only.
+% options.  The first, \opt{variants}, takes the variants for \meta{language}
+% as a comma separated list, whose first element is taken to be the default
+% case.  The second, \opt{gender}, receives the genders for \meta{language} as
+% comma separated list.  The third, \opt{allcaps}, is a boolean, and indicates
+% that for \meta{language} all nouns must be capitalized for grammatical
+% reasons, in which case, the \opt{cap} option is disregarded for
+% \meta{language}.  If \meta{language} is already known, just warn.  This
+% implies a particular restriction regarding \oarg{options}, namely that these
+% options, when defined by the package, cannot be redefined by the user.  This
+% is deliberate, otherwise the built-in language files would become much too
+% sensitive to this particular user input, and unnecessarily so.
+% \cs{zcDeclareLanguage} is preamble only.
 %   \begin{syntax}
 %     \cs{zcDeclareLanguage} \oarg{options} \marg{language}
 %   \end{syntax}
@@ -1769,21 +1769,23 @@
 %    \begin{macrocode}
 \keys_define:nn { zref-clever/declarelang }
   {
-    declension .code:n =
+    variants .code:n =
       {
         \seq_new:c
           {
             \@@_opt_varname_language:enn
-              { \l_@@_setup_language_tl } { declension } { seq }
+              { \l_@@_setup_language_tl } { variants } { seq }
           }
         \seq_gset_from_clist:cn
           {
             \@@_opt_varname_language:enn
-              { \l_@@_setup_language_tl } { declension } { seq }
+              { \l_@@_setup_language_tl } { variants } { seq }
           }
           {#1}
       } ,
-    declension .value_required:n = true ,
+    variants .value_required:n = true ,
+    % NOTE Option deprecated in 2024-11-24 for v0.5.0.
+    declension .meta:n = { variants = {#1} } ,
     gender .code:n =
       {
         \seq_new:c
@@ -1826,11 +1828,11 @@
 %   behavior is language dependent, but the language itself can also be set as
 %   an option (\opt{lang}, value stored in \cs{l_@@_ref_language_tl}).
 %   Second, some of its tasks must be done regardless of any option being
-%   given (e.g. the default declension case, the \opt{allcaps} option).
-%   Hence, we must validate the language settings after the reference options
-%   have been set.  It is expected to be called right (or soon) after
-%   \cs{keys_set:nn} in \cs{@@_zcref:nnn}, where current values for
-%   \cs{l_@@_ref_language_tl} and \cs{l_@@_ref_decl_case_tl} are in place.
+%   given (e.g. the default variant, the \opt{allcaps} option).  Hence, we
+%   must validate the language settings after the reference options have been
+%   set.  It is expected to be called right (or soon) after \cs{keys_set:nn}
+%   in \cs{@@_zcref:nnn}, where current values for \cs{l_@@_ref_language_tl}
+%   and \cs{l_@@_ref_variant_tl} are in place.
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_process_language_settings:
   {
@@ -1838,47 +1840,47 @@
       { \l_@@_ref_language_tl }
       {
 %    \end{macrocode}
-% Validate the declension case (\opt{d}) option against the declared cases for
-% the reference language.  If the user value for the latter does not match the
-% declension cases declared for the former, the function sets an appropriate
-% value for \cs{l_@@_ref_decl_case_tl}, either using the default case, or
-% clearing the variable, depending on the language setup.  And also issues a
-% warning about it.
+% Validate the variant (\opt{v}) option against the declared variants for the
+% reference language.  If the user value for the latter does not match the
+% variants declared for the former, the function sets an appropriate value for
+% \cs{l_@@_ref_variant_tl}, either using the default case, or clearing the
+% variable, depending on the language setup.  And also issues a warning about
+% it.
 %    \begin{macrocode}
         \@@_opt_seq_get:cNF
           {
             \@@_opt_varname_language:enn
-              { \l_@@_ref_language_tl } { declension } { seq }
+              { \l_@@_ref_language_tl } { variants } { seq }
           }
-          \l_@@_lang_declension_seq
-          { \seq_clear:N \l_@@_lang_declension_seq }
-        \seq_if_empty:NTF \l_@@_lang_declension_seq
+          \l_@@_lang_variants_seq
+          { \seq_clear:N \l_@@_lang_variants_seq }
+        \seq_if_empty:NTF \l_@@_lang_variants_seq
           {
-            \tl_if_empty:NF \l_@@_ref_decl_case_tl
+            \tl_if_empty:NF \l_@@_ref_variant_tl
               {
                 \msg_warning:nnee { zref-clever }
-                  { language-no-decl-ref }
+                  { language-no-variants-ref }
                   { \l_@@_ref_language_tl }
-                  { \l_@@_ref_decl_case_tl }
-                \tl_clear:N \l_@@_ref_decl_case_tl
+                  { \l_@@_ref_variant_tl }
+                \tl_clear:N \l_@@_ref_variant_tl
               }
           }
           {
-            \tl_if_empty:NTF \l_@@_ref_decl_case_tl
+            \tl_if_empty:NTF \l_@@_ref_variant_tl
               {
-                \seq_get_left:NN \l_@@_lang_declension_seq
-                  \l_@@_ref_decl_case_tl
+                \seq_get_left:NN \l_@@_lang_variants_seq
+                  \l_@@_ref_variant_tl
               }
               {
-                \seq_if_in:NVF \l_@@_lang_declension_seq
-                  \l_@@_ref_decl_case_tl
+                \seq_if_in:NVF \l_@@_lang_variants_seq
+                  \l_@@_ref_variant_tl
                   {
                     \msg_warning:nnee { zref-clever }
-                      { unknown-decl-case }
-                      { \l_@@_ref_decl_case_tl }
+                      { unknown-variant }
+                      { \l_@@_ref_variant_tl }
                       { \l_@@_ref_language_tl }
-                    \seq_get_left:NN \l_@@_lang_declension_seq
-                      \l_@@_ref_decl_case_tl
+                    \seq_get_left:NN \l_@@_lang_variants_seq
+                      \l_@@_ref_variant_tl
                   }
               }
           }
@@ -1933,15 +1935,15 @@
       }
       {
 %    \end{macrocode}
-% If the language itself is not declared, we still have to issue declension
-% and gender warnings, if \opt{d} or \opt{g} options were used.
+% If the language itself is not declared, we still have to variant and gender
+% warnings, if \opt{d} or \opt{g} options were used.
 %    \begin{macrocode}
-        \tl_if_empty:NF \l_@@_ref_decl_case_tl
+        \tl_if_empty:NF \l_@@_ref_variant_tl
           {
-            \msg_warning:nnee { zref-clever } { unknown-language-decl }
-              { \l_@@_ref_decl_case_tl }
+            \msg_warning:nnee { zref-clever } { unknown-language-variant }
+              { \l_@@_ref_variant_tl }
               { \l_@@_ref_language_tl }
-            \tl_clear:N \l_@@_ref_decl_case_tl
+            \tl_clear:N \l_@@_ref_variant_tl
           }
         \tl_if_empty:NF \l_@@_ref_gender_tl
           {
@@ -2005,7 +2007,7 @@
 %
 % \cs{@@_provide_langfile:n} is only meant to load the built-in language
 % files.  For languages declared by the user, or for any settings to a known
-% language made with \cs{zcLanguageSetup}, values are populated directly to a
+% language made with \cs{zcLanguageSetup}, values are populated directly to
 % corresponding variables.  Hence, there is no need to ``load'' anything in
 % this case: definitions and assignments made by the user are performed
 % immediately.
@@ -2051,15 +2053,15 @@
                   \@@_opt_seq_get:cNF
                     {
                       \@@_opt_varname_language:nnn
-                        {#1} { declension } { seq }
+                        {#1} { variants } { seq }
                     }
-                    \l_@@_lang_declension_seq
-                    { \seq_clear:N \l_@@_lang_declension_seq }
-                  \seq_if_empty:NTF \l_@@_lang_declension_seq
-                    { \tl_clear:N \l_@@_lang_decl_case_tl }
+                    \l_@@_lang_variants_seq
+                    { \seq_clear:N \l_@@_lang_variants_seq }
+                  \seq_if_empty:NTF \l_@@_lang_variants_seq
+                    { \tl_clear:N \l_@@_lang_variant_tl }
                     {
-                      \seq_get_left:NN \l_@@_lang_declension_seq
-                        \l_@@_lang_decl_case_tl
+                      \seq_get_left:NN \l_@@_lang_variants_seq
+                        \l_@@_lang_variant_tl
                     }
                   \@@_opt_seq_get:cNF
                     {
@@ -2110,25 +2112,25 @@
           { \tl_clear:N \l_@@_setup_type_tl }
           { \tl_set:Nn \l_@@_setup_type_tl {#1} }
       } ,
-    case .code:n =
+    variant .code:n =
       {
-        \seq_if_empty:NTF \l_@@_lang_declension_seq
+        \seq_if_empty:NTF \l_@@_lang_variants_seq
           {
-            \msg_info:nnee { zref-clever } { language-no-decl-setup }
+            \msg_info:nnee { zref-clever } { language-no-variants-setup }
               { \l_@@_setup_language_tl } {#1}
           }
           {
-            \seq_if_in:NnTF \l_@@_lang_declension_seq {#1}
-              { \tl_set:Nn \l_@@_lang_decl_case_tl {#1} }
+            \seq_if_in:NnTF \l_@@_lang_variants_seq {#1}
+              { \tl_set:Nn \l_@@_lang_variant_tl {#1} }
               {
-                \msg_info:nnee { zref-clever } { unknown-decl-case }
+                \msg_info:nnee { zref-clever } { unknown-variant }
                   {#1} { \l_@@_setup_language_tl }
-                \seq_get_left:NN \l_@@_lang_declension_seq
-                  \l_@@_lang_decl_case_tl
+                \seq_get_left:NN \l_@@_lang_variants_seq
+                  \l_@@_lang_variant_tl
               }
           }
       } ,
-    case .value_required:n = true ,
+    variant .value_required:n = true ,
     gender .value_required:n = true ,
     gender .code:n =
       {
@@ -2459,7 +2461,7 @@
                   { option-only-type-specific } {#1}
               }
               {
-                \tl_if_empty:NTF \l_@@_lang_decl_case_tl
+                \tl_if_empty:NTF \l_@@_lang_variant_tl
                   {
                     \@@_opt_tl_gset_if_new:cn
                       {
@@ -2476,7 +2478,7 @@
                         \@@_opt_varname_lang_type:eeen
                           { \l_@@_setup_language_tl }
                           { \l_@@_setup_type_tl }
-                          { \l_@@_lang_decl_case_tl - #1 } { tl }
+                          { \l_@@_lang_variant_tl - #1 } { tl }
                       }
                       {##1}
                   }
@@ -3583,11 +3585,11 @@
 %
 %
 %
-% \subsubsection*{\opt{d} option}
+% \subsubsection*{\opt{v} option}
 %
-% For setting the declension case.  Short for convenience and for not
-% polluting the markup too much given that, for languages that need it, it may
-% get to be used frequently.
+% For setting the variant.  Short for convenience and for not polluting the
+% markup too much given that, for languages that need it, it may get to be
+% used frequently.
 %
 % \contributor{\username{samcarter}} and \contributor{Alan Munn} provided
 % useful comments about declension on the TeX.SX chat.  Also,
@@ -3596,11 +3598,13 @@
 % source to frame the problem in general terms.
 %
 %    \begin{macrocode}
-\tl_new:N \l_@@_ref_decl_case_tl
+\tl_new:N \l_@@_ref_variant_tl
 \keys_define:nn { zref-clever/reference }
   {
-    d .code:n =
-      { \msg_warning:nnn { zref-clever } { option-document-only } { d } } ,
+    v .code:n =
+      { \msg_warning:nnn { zref-clever } { option-document-only } { v } } ,
+    % NOTE Option deprecated in 2024-11-24 for v0.5.0.
+    d .meta:n = { v = {#1} } ,
   }
 \AddToHook { begindocument }
   {
@@ -3610,8 +3614,10 @@
 % We just store the value at this point, which is validated by
 % \cs{@@_process_language_settings:} after \cs{keys_set:nn}.
 %    \begin{macrocode}
-        d .tl_set:N = \l_@@_ref_decl_case_tl ,
-        d .value_required:n = true ,
+        v .tl_set:N = \l_@@_ref_variant_tl ,
+        v .value_required:n = true ,
+        % NOTE Option deprecated in 2024-11-24 for v0.5.0.
+        d .meta:n = { v = {#1} } ,
       }
   }
 %    \end{macrocode}
@@ -4634,15 +4640,15 @@
           \@@_opt_seq_get:cNF
             {
               \@@_opt_varname_language:nnn
-                {#1} { declension } { seq }
+                {#1} { variants } { seq }
             }
-            \l_@@_lang_declension_seq
-            { \seq_clear:N \l_@@_lang_declension_seq }
-          \seq_if_empty:NTF \l_@@_lang_declension_seq
-            { \tl_clear:N \l_@@_lang_decl_case_tl }
+            \l_@@_lang_variants_seq
+            { \seq_clear:N \l_@@_lang_variants_seq }
+          \seq_if_empty:NTF \l_@@_lang_variants_seq
+            { \tl_clear:N \l_@@_lang_variant_tl }
             {
-              \seq_get_left:NN \l_@@_lang_declension_seq
-                \l_@@_lang_decl_case_tl
+              \seq_get_left:NN \l_@@_lang_variants_seq
+                \l_@@_lang_variant_tl
             }
           \@@_opt_seq_get:cNF
             {
@@ -4674,25 +4680,27 @@
           { \tl_clear:N \l_@@_setup_type_tl }
           { \tl_set:Nn \l_@@_setup_type_tl {#1} }
       } ,
-    case .code:n =
+    variant .code:n =
       {
-        \seq_if_empty:NTF \l_@@_lang_declension_seq
+        \seq_if_empty:NTF \l_@@_lang_variants_seq
           {
-            \msg_warning:nnee { zref-clever } { language-no-decl-setup }
+            \msg_warning:nnee { zref-clever } { language-no-variants-setup }
               { \l_@@_setup_language_tl } {#1}
           }
           {
-            \seq_if_in:NnTF \l_@@_lang_declension_seq {#1}
-              { \tl_set:Nn \l_@@_lang_decl_case_tl {#1} }
+            \seq_if_in:NnTF \l_@@_lang_variants_seq {#1}
+              { \tl_set:Nn \l_@@_lang_variant_tl {#1} }
               {
-                \msg_warning:nnee { zref-clever } { unknown-decl-case }
+                \msg_warning:nnee { zref-clever } { unknown-variant }
                   {#1} { \l_@@_setup_language_tl }
-                \seq_get_left:NN \l_@@_lang_declension_seq
-                  \l_@@_lang_decl_case_tl
+                \seq_get_left:NN \l_@@_lang_variants_seq
+                  \l_@@_lang_variant_tl
               }
           }
       } ,
-    case .value_required:n = true ,
+    variant .value_required:n = true ,
+    % NOTE Option deprecated in 2024-11-24 for v0.5.0.
+    case .meta:n = { variant = {#1} } ,
     gender .value_required:n = true ,
     gender .code:n =
       {
@@ -5030,7 +5038,7 @@
                   { option-only-type-specific } {#1}
               }
               {
-                \tl_if_empty:NTF \l_@@_lang_decl_case_tl
+                \tl_if_empty:NTF \l_@@_lang_variant_tl
                   {
                     \@@_opt_tl_gset:cn
                       {
@@ -5047,7 +5055,7 @@
                         \@@_opt_varname_lang_type:eeen
                           { \l_@@_setup_language_tl }
                           { \l_@@_setup_type_tl }
-                          { \l_@@_lang_decl_case_tl - #1 }
+                          { \l_@@_lang_variant_tl - #1 }
                           { tl }
                       }
                       {##1}
@@ -7353,11 +7361,11 @@
                       }
                       \l_@@_type_name_tl
                       {
-                        \tl_if_empty:NF \l_@@_ref_decl_case_tl
+                        \tl_if_empty:NF \l_@@_ref_variant_tl
                           {
                             \tl_put_left:Nn \l_@@_name_format_tl { - }
                             \tl_put_left:NV \l_@@_name_format_tl
-                              \l_@@_ref_decl_case_tl
+                              \l_@@_ref_variant_tl
                           }
                         \@@_opt_tl_get:cNF
                           {
@@ -7396,17 +7404,17 @@
                           }
                           \l_@@_type_name_tl
                           {
-                            \tl_if_empty:NF \l_@@_ref_decl_case_tl
+                            \tl_if_empty:NF \l_@@_ref_variant_tl
                               {
                                 \tl_put_left:Nn
                                   \l_@@_name_format_tl { - }
                                 \tl_put_left:NV \l_@@_name_format_tl
-                                  \l_@@_ref_decl_case_tl
+                                  \l_@@_ref_variant_tl
                                 \tl_put_left:Nn
                                   \l_@@_name_format_fallback_tl { - }
                                 \tl_put_left:NV
                                   \l_@@_name_format_fallback_tl
-                                  \l_@@_ref_decl_case_tl
+                                  \l_@@_ref_variant_tl
                               }
                             \@@_opt_tl_get:cNF
                               {
@@ -8560,19 +8568,19 @@
 % forms of names for all the supported reference types, according to the
 % language definitions, that is, usually for \opt{Name-sg}, \opt{name-sg},
 % \opt{Name-pl}, \opt{name-pl}, but only for the capitalized forms if the
-% language was declared with \opt{allcaps} option, and names for each
-% declension case, if the language was declared with \opt{declension}; iii)
-% genders for each reference type, if the language was declared with
-% \opt{gender}.  The language file may include some other things, like some
-% type specific settings for separators or refbounds, and also some
-% abbreviated name forms.  In the case of abbreviated name forms, it is usual
-% and desirable to provide some, but they should be used sparingly, only for
-% cases where the abbreviation is a common and well established tradition for
-% the language.  The reason is that \texttt{abbrev=true} is quite a common use
-% case, and it is easier to provide an occasional wanted abbreviated form, if
-% the language file didn't include it, than it is to disable several unwanted
-% ones, if the language file includes too many of them.  What should be aimed
-% at is to provide a good default abbreviations set.  Unusual or disputable
+% language was declared with \opt{allcaps} option, and names for each variant,
+% if the language was declared with \opt{variants}; iii) genders for each
+% reference type, if the language was declared with \opt{gender}.  The
+% language file may include some other things, like some type specific
+% settings for separators or refbounds, and also some abbreviated name forms.
+% In the case of abbreviated name forms, it is usual and desirable to provide
+% some, but they should be used sparingly, only for cases where the
+% abbreviation is a common and well established tradition for the language.
+% The reason is that \texttt{abbrev=true} is quite a common use case, and it
+% is easier to provide an occasional wanted abbreviated form, if the language
+% file didn't include it, than it is to disable several unwanted ones, if the
+% language file includes too many of them.  What should be aimed at is to
+% provide a good default abbreviations set.  Unusual or disputable
 % abbreviations should be avoided.  In particular, there is no need at all to
 % provide the same set of abbreviations for each language.  It is not because
 % English has them for a given type that some other language has to have them,
@@ -8854,7 +8862,7 @@ type = solution ,
 %    \begin{macrocode}
 %<*package>
 \zcDeclareLanguage
-  [ declension = { N , A , D , G } , gender = { f , m , n } , allcaps ]
+  [ variants = { N , A , D , G } , gender = { f , m , n } , allcaps ]
   { german }
 \zcDeclareLanguageAlias { ngerman      } { german }
 \zcDeclareLanguageAlias { austrian     } { german }
@@ -8881,106 +8889,106 @@ rangesep = {~bis\nobreakspace} ,
 
 type = book ,
   gender = n ,
-  case = N ,
+  variant = N ,
     Name-sg = Buch ,
     Name-pl = Bücher ,
-  case = A ,
+  variant = A ,
     Name-sg = Buch ,
     Name-pl = Bücher ,
-  case = D ,
+  variant = D ,
     Name-sg = Buch ,
     Name-pl = Büchern ,
-  case = G ,
+  variant = G ,
     Name-sg = Buches ,
     Name-pl = Bücher ,
 
 type = part ,
   gender = m ,
-  case = N ,
+  variant = N ,
     Name-sg = Teil ,
     Name-pl = Teile ,
-  case = A ,
+  variant = A ,
     Name-sg = Teil ,
     Name-pl = Teile ,
-  case = D ,
+  variant = D ,
     Name-sg = Teil ,
     Name-pl = Teilen ,
-  case = G ,
+  variant = G ,
     Name-sg = Teiles ,
     Name-pl = Teile ,
 
 type = chapter ,
   gender = n ,
-  case = N ,
+  variant = N ,
     Name-sg = Kapitel ,
     Name-pl = Kapitel ,
-  case = A ,
+  variant = A ,
     Name-sg = Kapitel ,
     Name-pl = Kapitel ,
-  case = D ,
+  variant = D ,
     Name-sg = Kapitel ,
     Name-pl = Kapiteln ,
-  case = G ,
+  variant = G ,
     Name-sg = Kapitels ,
     Name-pl = Kapitel ,
 
 type = section ,
   gender = m ,
-  case = N ,
+  variant = N ,
     Name-sg = Abschnitt ,
     Name-pl = Abschnitte ,
-  case = A ,
+  variant = A ,
     Name-sg = Abschnitt ,
     Name-pl = Abschnitte ,
-  case = D ,
+  variant = D ,
     Name-sg = Abschnitt ,
     Name-pl = Abschnitten ,
-  case = G ,
+  variant = G ,
     Name-sg = Abschnitts ,
     Name-pl = Abschnitte ,
 
 type = paragraph ,
   gender = m ,
-  case = N ,
+  variant = N ,
     Name-sg = Absatz ,
     Name-pl = Absätze ,
-  case = A ,
+  variant = A ,
     Name-sg = Absatz ,
     Name-pl = Absätze ,
-  case = D ,
+  variant = D ,
     Name-sg = Absatz ,
     Name-pl = Absätzen ,
-  case = G ,
+  variant = G ,
     Name-sg = Absatzes ,
     Name-pl = Absätze ,
 
 type = appendix ,
   gender = m ,
-  case = N ,
+  variant = N ,
     Name-sg = Anhang ,
     Name-pl = Anhänge ,
-  case = A ,
+  variant = A ,
     Name-sg = Anhang ,
     Name-pl = Anhänge ,
-  case = D ,
+  variant = D ,
     Name-sg = Anhang ,
     Name-pl = Anhängen ,
-  case = G ,
+  variant = G ,
     Name-sg = Anhangs ,
     Name-pl = Anhänge ,
 
 type = page ,
   gender = f ,
-  case = N ,
+  variant = N ,
     Name-sg = Seite ,
     Name-pl = Seiten ,
-  case = A ,
+  variant = A ,
     Name-sg = Seite ,
     Name-pl = Seiten ,
-  case = D ,
+  variant = D ,
     Name-sg = Seite ,
     Name-pl = Seiten ,
-  case = G ,
+  variant = G ,
     Name-sg = Seite ,
     Name-pl = Seiten ,
   rangesep = {\textendash} ,
@@ -8988,37 +8996,37 @@ type = page ,
 
 type = line ,
   gender = f ,
-  case = N ,
+  variant = N ,
     Name-sg = Zeile ,
     Name-pl = Zeilen ,
-  case = A ,
+  variant = A ,
     Name-sg = Zeile ,
     Name-pl = Zeilen ,
-  case = D ,
+  variant = D ,
     Name-sg = Zeile ,
     Name-pl = Zeilen ,
-  case = G ,
+  variant = G ,
     Name-sg = Zeile ,
     Name-pl = Zeilen ,
 
 type = figure ,
   gender = f ,
-  case = N ,
+  variant = N ,
     Name-sg = Abbildung ,
     Name-pl = Abbildungen ,
     Name-sg-ab = Abb. ,
     Name-pl-ab = Abb. ,
-  case = A ,
+  variant = A ,
     Name-sg = Abbildung ,
     Name-pl = Abbildungen ,
     Name-sg-ab = Abb. ,
     Name-pl-ab = Abb. ,
-  case = D ,
+  variant = D ,
     Name-sg = Abbildung ,
     Name-pl = Abbildungen ,
     Name-sg-ab = Abb. ,
     Name-pl-ab = Abb. ,
-  case = G ,
+  variant = G ,
     Name-sg = Abbildung ,
     Name-pl = Abbildungen ,
     Name-sg-ab = Abb. ,
@@ -9026,91 +9034,91 @@ type = figure ,
 
 type = table ,
   gender = f ,
-  case = N ,
+  variant = N ,
     Name-sg = Tabelle ,
     Name-pl = Tabellen ,
-  case = A ,
+  variant = A ,
     Name-sg = Tabelle ,
     Name-pl = Tabellen ,
-  case = D ,
+  variant = D ,
     Name-sg = Tabelle ,
     Name-pl = Tabellen ,
-  case = G ,
+  variant = G ,
     Name-sg = Tabelle ,
     Name-pl = Tabellen ,
 
 type = item ,
   gender = m ,
-  case = N ,
+  variant = N ,
     Name-sg = Punkt ,
     Name-pl = Punkte ,
-  case = A ,
+  variant = A ,
     Name-sg = Punkt ,
     Name-pl = Punkte ,
-  case = D ,
+  variant = D ,
     Name-sg = Punkt ,
     Name-pl = Punkten ,
-  case = G ,
+  variant = G ,
     Name-sg = Punktes ,
     Name-pl = Punkte ,
 
 type = footnote ,
   gender = f ,
-  case = N ,
+  variant = N ,
     Name-sg = Fußnote ,
     Name-pl = Fußnoten ,
-  case = A ,
+  variant = A ,
     Name-sg = Fußnote ,
     Name-pl = Fußnoten ,
-  case = D ,
+  variant = D ,
     Name-sg = Fußnote ,
     Name-pl = Fußnoten ,
-  case = G ,
+  variant = G ,
     Name-sg = Fußnote ,
     Name-pl = Fußnoten ,
 
 type = endnote ,
   gender = f ,
-  case = N ,
+  variant = N ,
     Name-sg = Endnote ,
     Name-pl = Endnoten ,
-  case = A ,
+  variant = A ,
     Name-sg = Endnote ,
     Name-pl = Endnoten ,
-  case = D ,
+  variant = D ,
     Name-sg = Endnote ,
     Name-pl = Endnoten ,
-  case = G ,
+  variant = G ,
     Name-sg = Endnote ,
     Name-pl = Endnoten ,
 
 type = note ,
   gender = f ,
-  case = N ,
+  variant = N ,
     Name-sg = Anmerkung ,
     Name-pl = Anmerkungen ,
-  case = A ,
+  variant = A ,
     Name-sg = Anmerkung ,
     Name-pl = Anmerkungen ,
-  case = D ,
+  variant = D ,
     Name-sg = Anmerkung ,
     Name-pl = Anmerkungen ,
-  case = G ,
+  variant = G ,
     Name-sg = Anmerkung ,
     Name-pl = Anmerkungen ,
 
 type = equation ,
   gender = f ,
-  case = N ,
+  variant = N ,
     Name-sg = Gleichung ,
     Name-pl = Gleichungen ,
-  case = A ,
+  variant = A ,
     Name-sg = Gleichung ,
     Name-pl = Gleichungen ,
-  case = D ,
+  variant = D ,
     Name-sg = Gleichung ,
     Name-pl = Gleichungen ,
-  case = G ,
+  variant = G ,
     Name-sg = Gleichung ,
     Name-pl = Gleichungen ,
   refbounds-first-sg = {,(,),} ,
@@ -9118,196 +9126,196 @@ type = equation ,
 
 type = theorem ,
   gender = n ,
-  case = N ,
+  variant = N ,
     Name-sg = Theorem ,
     Name-pl = Theoreme ,
-  case = A ,
+  variant = A ,
     Name-sg = Theorem ,
     Name-pl = Theoreme ,
-  case = D ,
+  variant = D ,
     Name-sg = Theorem ,
     Name-pl = Theoremen ,
-  case = G ,
+  variant = G ,
     Name-sg = Theorems ,
     Name-pl = Theoreme ,
 
 type = lemma ,
   gender = n ,
-  case = N ,
+  variant = N ,
     Name-sg = Lemma ,
     Name-pl = Lemmata ,
-  case = A ,
+  variant = A ,
     Name-sg = Lemma ,
     Name-pl = Lemmata ,
-  case = D ,
+  variant = D ,
     Name-sg = Lemma ,
     Name-pl = Lemmata ,
-  case = G ,
+  variant = G ,
     Name-sg = Lemmas ,
     Name-pl = Lemmata ,
 
 type = corollary ,
   gender = n ,
-  case = N ,
+  variant = N ,
     Name-sg = Korollar ,
     Name-pl = Korollare ,
-  case = A ,
+  variant = A ,
     Name-sg = Korollar ,
     Name-pl = Korollare ,
-  case = D ,
+  variant = D ,
     Name-sg = Korollar ,
     Name-pl = Korollaren ,
-  case = G ,
+  variant = G ,
     Name-sg = Korollars ,
     Name-pl = Korollare ,
 
 type = proposition ,
   gender = m ,
-  case = N ,
+  variant = N ,
     Name-sg = Satz ,
     Name-pl = Sätze ,
-  case = A ,
+  variant = A ,
     Name-sg = Satz ,
     Name-pl = Sätze ,
-  case = D ,
+  variant = D ,
     Name-sg = Satz ,
     Name-pl = Sätzen ,
-  case = G ,
+  variant = G ,
     Name-sg = Satzes ,
     Name-pl = Sätze ,
 
 type = definition ,
   gender = f ,
-  case = N ,
+  variant = N ,
     Name-sg = Definition ,
     Name-pl = Definitionen ,
-  case = A ,
+  variant = A ,
     Name-sg = Definition ,
     Name-pl = Definitionen ,
-  case = D ,
+  variant = D ,
     Name-sg = Definition ,
     Name-pl = Definitionen ,
-  case = G ,
+  variant = G ,
     Name-sg = Definition ,
     Name-pl = Definitionen ,
 
 type = proof ,
   gender = m ,
-  case = N ,
+  variant = N ,
     Name-sg = Beweis ,
     Name-pl = Beweise ,
-  case = A ,
+  variant = A ,
     Name-sg = Beweis ,
     Name-pl = Beweise ,
-  case = D ,
+  variant = D ,
     Name-sg = Beweis ,
     Name-pl = Beweisen ,
-  case = G ,
+  variant = G ,
     Name-sg = Beweises ,
     Name-pl = Beweise ,
 
 type = result ,
   gender = n ,
-  case = N ,
+  variant = N ,
     Name-sg = Ergebnis ,
     Name-pl = Ergebnisse ,
-  case = A ,
+  variant = A ,
     Name-sg = Ergebnis ,
     Name-pl = Ergebnisse ,
-  case = D ,
+  variant = D ,
     Name-sg = Ergebnis ,
     Name-pl = Ergebnissen ,
-  case = G ,
+  variant = G ,
     Name-sg = Ergebnisses ,
     Name-pl = Ergebnisse ,
 
 type = remark ,
   gender = f ,
-  case = N ,
+  variant = N ,
     Name-sg = Bemerkung ,
     Name-pl = Bemerkungen ,
-  case = A ,
+  variant = A ,
     Name-sg = Bemerkung ,
     Name-pl = Bemerkungen ,
-  case = D ,
+  variant = D ,
     Name-sg = Bemerkung ,
     Name-pl = Bemerkungen ,
-  case = G ,
+  variant = G ,
     Name-sg = Bemerkung ,
     Name-pl = Bemerkungen ,
 
 type = example ,
   gender = n ,
-  case = N ,
+  variant = N ,
     Name-sg = Beispiel ,
     Name-pl = Beispiele ,
-  case = A ,
+  variant = A ,
     Name-sg = Beispiel ,
     Name-pl = Beispiele ,
-  case = D ,
+  variant = D ,
     Name-sg = Beispiel ,
     Name-pl = Beispielen ,
-  case = G ,
+  variant = G ,
     Name-sg = Beispiels ,
     Name-pl = Beispiele ,
 
 type = algorithm ,
   gender = m ,
-  case = N ,
+  variant = N ,
     Name-sg = Algorithmus ,
     Name-pl = Algorithmen ,
-  case = A ,
+  variant = A ,
     Name-sg = Algorithmus ,
     Name-pl = Algorithmen ,
-  case = D ,
+  variant = D ,
     Name-sg = Algorithmus ,
     Name-pl = Algorithmen ,
-  case = G ,
+  variant = G ,
     Name-sg = Algorithmus ,
     Name-pl = Algorithmen ,
 
 type = listing ,
   gender = n ,
-  case = N ,
+  variant = N ,
     Name-sg = Listing ,
     Name-pl = Listings ,
-  case = A ,
+  variant = A ,
     Name-sg = Listing ,
     Name-pl = Listings ,
-  case = D ,
+  variant = D ,
     Name-sg = Listing ,
     Name-pl = Listings ,
-  case = G ,
+  variant = G ,
     Name-sg = Listings ,
     Name-pl = Listings ,
 
 type = exercise ,
   gender = f ,
-  case = N ,
+  variant = N ,
     Name-sg = Übungsaufgabe ,
     Name-pl = Übungsaufgaben ,
-  case = A ,
+  variant = A ,
     Name-sg = Übungsaufgabe ,
     Name-pl = Übungsaufgaben ,
-  case = D ,
+  variant = D ,
     Name-sg = Übungsaufgabe ,
     Name-pl = Übungsaufgaben ,
-  case = G ,
+  variant = G ,
     Name-sg = Übungsaufgabe ,
     Name-pl = Übungsaufgaben ,
 
 type = solution ,
   gender = f ,
-  case = N ,
+  variant = N ,
     Name-sg = Lösung ,
     Name-pl = Lösungen ,
-  case = A ,
+  variant = A ,
     Name-sg = Lösung ,
     Name-pl = Lösungen ,
-  case = D ,
+  variant = D ,
     Name-sg = Lösung ,
     Name-pl = Lösungen ,
-  case = G ,
+  variant = G ,
     Name-sg = Lösung ,
     Name-pl = Lösungen ,
 %    \end{macrocode}
@@ -10568,7 +10576,7 @@ type = solution ,
 %    \begin{macrocode}
 %<*package>
 \zcDeclareLanguage
-  [ declension = { n , a , g , d , i , p } , gender = { f , m , n } ]
+  [ variants = { n , a , g , d , i , p } , gender = { f , m , n } ]
   { russian }
 %</package>
 %    \end{macrocode}
@@ -10591,32 +10599,32 @@ rangesep  = {~по\nobreakspace} ,
 
 type = book ,
   gender = f ,
-  case = n ,
+  variant = n ,
     Name-sg = Книга ,
     name-sg = книга ,
     Name-pl = Книги ,
     name-pl = книги ,
-  case = a ,
+  variant = a ,
     Name-sg = Книгу ,
     name-sg = книгу ,
     Name-pl = Книги ,
     name-pl = книги ,
-  case = g ,
+  variant = g ,
     Name-sg = Книги ,
     name-sg = книги ,
     Name-pl = Книг ,
     name-pl = книг ,
-  case = d ,
+  variant = d ,
     Name-sg = Книге ,
     name-sg = книге ,
     Name-pl = Книгам ,
     name-pl = книгам ,
-  case = i ,
+  variant = i ,
     Name-sg = Книгой ,
     name-sg = книгой ,
     Name-pl = Книгами ,
     name-pl = книгами ,
-  case = p ,
+  variant = p ,
     Name-sg = Книге ,
     name-sg = книге ,
     Name-pl = Книгах ,
@@ -10624,7 +10632,7 @@ type = book ,
 
 type = part ,
   gender = f ,
-  case = n ,
+  variant = n ,
     Name-sg = Часть ,
     name-sg = часть ,
     Name-pl = Части ,
@@ -10633,7 +10641,7 @@ type = part ,
     name-sg-ab = ч. ,
     Name-pl-ab = Чч. ,
     name-pl-ab = чч. ,
-  case = a ,
+  variant = a ,
     Name-sg = Часть ,
     name-sg = часть ,
     Name-pl = Части ,
@@ -10642,7 +10650,7 @@ type = part ,
     name-sg-ab = ч. ,
     Name-pl-ab = Чч. ,
     name-pl-ab = чч. ,
-  case = g ,
+  variant = g ,
     Name-sg = Части ,
     name-sg = части ,
     Name-pl = Частей ,
@@ -10651,7 +10659,7 @@ type = part ,
     name-sg-ab = ч. ,
     Name-pl-ab = Чч. ,
     name-pl-ab = чч. ,
-  case = d ,
+  variant = d ,
     Name-sg = Части ,
     name-sg = части ,
     Name-pl = Частям ,
@@ -10660,7 +10668,7 @@ type = part ,
     name-sg-ab = ч. ,
     Name-pl-ab = Чч. ,
     name-pl-ab = чч. ,
-  case = i ,
+  variant = i ,
     Name-sg = Частью ,
     name-sg = частью ,
     Name-pl = Частями ,
@@ -10669,7 +10677,7 @@ type = part ,
     name-sg-ab = ч. ,
     Name-pl-ab = Чч. ,
     name-pl-ab = чч. ,
-  case = p ,
+  variant = p ,
     Name-sg = Части ,
     name-sg = части ,
     Name-pl = Частях ,
@@ -10681,7 +10689,7 @@ type = part ,
 
 type = chapter ,
   gender = f ,
-  case = n ,
+  variant = n ,
     Name-sg = Глава ,
     name-sg = глава ,
     Name-pl = Главы ,
@@ -10690,7 +10698,7 @@ type = chapter ,
     name-sg-ab = гл. ,
     Name-pl-ab = Гл. ,
     name-pl-ab = гл. ,
-  case = a ,
+  variant = a ,
     Name-sg = Главу ,
     name-sg = главу ,
     Name-pl = Главы ,
@@ -10699,7 +10707,7 @@ type = chapter ,
     name-sg-ab = гл. ,
     Name-pl-ab = Гл. ,
     name-pl-ab = гл. ,
-  case = g ,
+  variant = g ,
     Name-sg = Главы ,
     name-sg = главы ,
     Name-pl = Глав ,
@@ -10708,7 +10716,7 @@ type = chapter ,
     name-sg-ab = гл. ,
     Name-pl-ab = Гл. ,
     name-pl-ab = гл. ,
-  case = d ,
+  variant = d ,
     Name-sg = Главе ,
     name-sg = главе ,
     Name-pl = Главам ,
@@ -10717,7 +10725,7 @@ type = chapter ,
     name-sg-ab = гл. ,
     Name-pl-ab = Гл. ,
     name-pl-ab = гл. ,
-  case = i ,
+  variant = i ,
     Name-sg = Главой ,
     name-sg = главой ,
     Name-pl = Главами ,
@@ -10726,7 +10734,7 @@ type = chapter ,
     name-sg-ab = гл. ,
     Name-pl-ab = Гл. ,
     name-pl-ab = гл. ,
-  case = p ,
+  variant = p ,
     Name-sg = Главе ,
     name-sg = главе ,
     Name-pl = Главах ,
@@ -10738,32 +10746,32 @@ type = chapter ,
 
 type = section ,
   gender = m ,
-  case = n ,
+  variant = n ,
     Name-sg = Раздел ,
     name-sg = раздел ,
     Name-pl = Разделы ,
     name-pl = разделы ,
-  case = a ,
+  variant = a ,
     Name-sg = Раздел ,
     name-sg = раздел ,
     Name-pl = Разделы ,
     name-pl = разделы ,
-  case = g ,
+  variant = g ,
     Name-sg = Раздела ,
     name-sg = раздела ,
     Name-pl = Разделов ,
     name-pl = разделов ,
-  case = d ,
+  variant = d ,
     Name-sg = Разделу ,
     name-sg = разделу ,
     Name-pl = Разделам ,
     name-pl = разделам ,
-  case = i ,
+  variant = i ,
     Name-sg = Разделом ,
     name-sg = разделом ,
     Name-pl = Разделами ,
     name-pl = разделами ,
-  case = p ,
+  variant = p ,
     Name-sg = Разделе ,
     name-sg = разделе ,
     Name-pl = Разделах ,
@@ -10771,32 +10779,32 @@ type = section ,
 
 type = paragraph ,
   gender = m ,
-  case = n ,
+  variant = n ,
     Name-sg = Абзац ,
     name-sg = абзац ,
     Name-pl = Абзацы ,
     name-pl = абзацы ,
-  case = a ,
+  variant = a ,
     Name-sg = Абзац ,
     name-sg = абзац ,
     Name-pl = Абзацы ,
     name-pl = абзацы ,
-  case = g ,
+  variant = g ,
     Name-sg = Абзаца ,
     name-sg = абзаца ,
     Name-pl = Абзацев ,
     name-pl = абзацев ,
-  case = d ,
+  variant = d ,
     Name-sg = Абзацу ,
     name-sg = абзацу ,
     Name-pl = Абзацам ,
     name-pl = абзацам ,
-  case = i ,
+  variant = i ,
     Name-sg = Абзацем ,
     name-sg = абзацем ,
     Name-pl = Абзацами ,
     name-pl = абзацами ,
-  case = p ,
+  variant = p ,
     Name-sg = Абзаце ,
     name-sg = абзаце ,
     Name-pl = Абзацах ,
@@ -10804,32 +10812,32 @@ type = paragraph ,
 
 type = appendix ,
   gender = n ,
-  case = n ,
+  variant = n ,
     Name-sg = Приложение ,
     name-sg = приложение ,
     Name-pl = Приложения ,
     name-pl = приложения ,
-  case = a ,
+  variant = a ,
     Name-sg = Приложение ,
     name-sg = приложение ,
     Name-pl = Приложения ,
     name-pl = приложения ,
-  case = g ,
+  variant = g ,
     Name-sg = Приложения ,
     name-sg = приложения ,
     Name-pl = Приложений ,
     name-pl = приложений ,
-  case = d ,
+  variant = d ,
     Name-sg = Приложению ,
     name-sg = приложению ,
     Name-pl = Приложениям ,
     name-pl = приложениям ,
-  case = i ,
+  variant = i ,
     Name-sg = Приложением ,
     name-sg = приложением ,
     Name-pl = Приложениями ,
     name-pl = приложениями ,
-  case = p ,
+  variant = p ,
     Name-sg = Приложении ,
     name-sg = приложении ,
     Name-pl = Приложениях ,
@@ -10837,7 +10845,7 @@ type = appendix ,
 
 type = page ,
   gender = f ,
-  case = n ,
+  variant = n ,
     Name-sg = Страница ,
     name-sg = страница ,
     Name-pl = Страницы ,
@@ -10846,7 +10854,7 @@ type = page ,
     name-sg-ab = с. ,
     Name-pl-ab = Сс. ,
     name-pl-ab = сс. ,
-  case = a ,
+  variant = a ,
     Name-sg = Страницу ,
     name-sg = страницу ,
     Name-pl = Страницы ,
@@ -10855,7 +10863,7 @@ type = page ,
     name-sg-ab = с. ,
     Name-pl-ab = Сс. ,
     name-pl-ab = сс. ,
-  case = g ,
+  variant = g ,
     Name-sg = Страницы ,
     name-sg = страницы ,
     Name-pl = Страниц ,
@@ -10864,7 +10872,7 @@ type = page ,
     name-sg-ab = с. ,
     Name-pl-ab = Сс. ,
     name-pl-ab = сс. ,
-  case = d ,
+  variant = d ,
     Name-sg = Странице ,
     name-sg = странице ,
     Name-pl = Страницам ,
@@ -10873,7 +10881,7 @@ type = page ,
     name-sg-ab = с. ,
     Name-pl-ab = Сс. ,
     name-pl-ab = сс. ,
-  case = i ,
+  variant = i ,
     Name-sg = Страницей ,
     name-sg = страницей ,
     Name-pl = Страницами ,
@@ -10882,7 +10890,7 @@ type = page ,
     name-sg-ab = с. ,
     Name-pl-ab = Сс. ,
     name-pl-ab = сс. ,
-  case = p ,
+  variant = p ,
     Name-sg = Странице ,
     name-sg = странице ,
     Name-pl = Страницах ,
@@ -10897,32 +10905,32 @@ type = page ,
 
 type = line ,
   gender = f ,
-  case = n ,
+  variant = n ,
     Name-sg = Строка ,
     name-sg = строка ,
     Name-pl = Строки ,
     name-pl = строки ,
-  case = a ,
+  variant = a ,
     Name-sg = Строку ,
     name-sg = строку ,
     Name-pl = Строки ,
     name-pl = строки ,
-  case = g ,
+  variant = g ,
     Name-sg = Строки ,
     name-sg = строки ,
     Name-pl = Строк ,
     name-pl = строк ,
-  case = d ,
+  variant = d ,
     Name-sg = Строке ,
     name-sg = строке ,
     Name-pl = Строкам ,
     name-pl = строкам ,
-  case = i ,
+  variant = i ,
     Name-sg = Строкой ,
     name-sg = строкой ,
     Name-pl = Строками ,
     name-pl = строками ,
-  case = p ,
+  variant = p ,
     Name-sg = Строке ,
     name-sg = строке ,
     Name-pl = Строках ,
@@ -10930,7 +10938,7 @@ type = line ,
 
 type = figure ,
   gender = m ,
-  case = n ,
+  variant = n ,
     Name-sg = Рисунок ,
     name-sg = рисунок ,
     Name-pl = Рисунки ,
@@ -10939,7 +10947,7 @@ type = figure ,
     name-sg-ab = рис. ,
     Name-pl-ab = Рис. ,
     name-pl-ab = рис. ,
-  case = a ,
+  variant = a ,
     Name-sg = Рисунок ,
     name-sg = рисунок ,
     Name-pl = Рисунки ,
@@ -10948,7 +10956,7 @@ type = figure ,
     name-sg-ab = рис. ,
     Name-pl-ab = Рис. ,
     name-pl-ab = рис. ,
-  case = g ,
+  variant = g ,
     Name-sg = Рисунка ,
     name-sg = рисунка ,
     Name-pl = Рисунков ,
@@ -10957,7 +10965,7 @@ type = figure ,
     name-sg-ab = рис. ,
     Name-pl-ab = Рис. ,
     name-pl-ab = рис. ,
-  case = d ,
+  variant = d ,
     Name-sg = Рисунку ,
     name-sg = рисунку ,
     Name-pl = Рисункам ,
@@ -10966,7 +10974,7 @@ type = figure ,
     name-sg-ab = рис. ,
     Name-pl-ab = Рис. ,
     name-pl-ab = рис. ,
-  case = i ,
+  variant = i ,
     Name-sg = Рисунком ,
     name-sg = рисунком ,
     Name-pl = Рисунками ,
@@ -10975,7 +10983,7 @@ type = figure ,
     name-sg-ab = рис. ,
     Name-pl-ab = Рис. ,
     name-pl-ab = рис. ,
-  case = p ,
+  variant = p ,
     Name-sg = Рисунке ,
     name-sg = рисунке ,
     Name-pl = Рисунках ,
@@ -10987,7 +10995,7 @@ type = figure ,
 
 type = table ,
   gender = f ,
-  case = n ,
+  variant = n ,
     Name-sg = Таблица ,
     name-sg = таблица ,
     Name-pl = Таблицы ,
@@ -10996,7 +11004,7 @@ type = table ,
     name-sg-ab = табл. ,
     Name-pl-ab = Табл. ,
     name-pl-ab = табл. ,
-  case = a ,
+  variant = a ,
     Name-sg = Таблицу ,
     name-sg = таблицу ,
     Name-pl = Таблицы ,
@@ -11005,7 +11013,7 @@ type = table ,
     name-sg-ab = табл. ,
     Name-pl-ab = Табл. ,
     name-pl-ab = табл. ,
-  case = g ,
+  variant = g ,
     Name-sg = Таблицы ,
     name-sg = таблицы ,
     Name-pl = Таблиц ,
@@ -11014,7 +11022,7 @@ type = table ,
     name-sg-ab = табл. ,
     Name-pl-ab = Табл. ,
     name-pl-ab = табл. ,
-  case = d ,
+  variant = d ,
     Name-sg = Таблице ,
     name-sg = таблице ,
     Name-pl = Таблицам ,
@@ -11023,7 +11031,7 @@ type = table ,
     name-sg-ab = табл. ,
     Name-pl-ab = Табл. ,
     name-pl-ab = табл. ,
-  case = i ,
+  variant = i ,
     Name-sg = Таблицей ,
     name-sg = таблицей ,
     Name-pl = Таблицами ,
@@ -11032,7 +11040,7 @@ type = table ,
     name-sg-ab = табл. ,
     Name-pl-ab = Табл. ,
     name-pl-ab = табл. ,
-  case = p ,
+  variant = p ,
     Name-sg = Таблице ,
     name-sg = таблице ,
     Name-pl = Таблицах ,
@@ -11044,7 +11052,7 @@ type = table ,
 
 type = item ,
   gender = m ,
-  case = n ,
+  variant = n ,
     Name-sg = Пункт ,
     name-sg = пункт ,
     Name-pl = Пункты ,
@@ -11053,7 +11061,7 @@ type = item ,
     name-sg-ab = п. ,
     Name-pl-ab = Пп. ,
     name-pl-ab = пп. ,
-  case = a ,
+  variant = a ,
     Name-sg = Пункт ,
     name-sg = пункт ,
     Name-pl = Пункты ,
@@ -11062,7 +11070,7 @@ type = item ,
     name-sg-ab = п. ,
     Name-pl-ab = Пп. ,
     name-pl-ab = пп. ,
-  case = g ,
+  variant = g ,
     Name-sg = Пункта ,
     name-sg = пункта ,
     Name-pl = Пунктов ,
@@ -11071,7 +11079,7 @@ type = item ,
     name-sg-ab = п. ,
     Name-pl-ab = Пп. ,
     name-pl-ab = пп. ,
-  case = d ,
+  variant = d ,
     Name-sg = Пункту ,
     name-sg = пункту ,
     Name-pl = Пунктам ,
@@ -11080,7 +11088,7 @@ type = item ,
     name-sg-ab = п. ,
     Name-pl-ab = Пп. ,
     name-pl-ab = пп. ,
-  case = i ,
+  variant = i ,
     Name-sg = Пунктом ,
     name-sg = пунктом ,
     Name-pl = Пунктами ,
@@ -11089,7 +11097,7 @@ type = item ,
     name-sg-ab = п. ,
     Name-pl-ab = Пп. ,
     name-pl-ab = пп. ,
-  case = p ,
+  variant = p ,
     Name-sg = Пункте ,
     name-sg = пункте ,
     Name-pl = Пунктах ,
@@ -11101,32 +11109,32 @@ type = item ,
 
 type = footnote ,
   gender = f ,
-  case = n ,
+  variant = n ,
     Name-sg = Сноска ,
     name-sg = сноска ,
     Name-pl = Сноски ,
     name-pl = сноски ,
-  case = a ,
+  variant = a ,
     Name-sg = Сноску ,
     name-sg = сноску ,
     Name-pl = Сноски ,
     name-pl = сноски ,
-  case = g ,
+  variant = g ,
     Name-sg = Сноски ,
     name-sg = сноски ,
     Name-pl = Сносок ,
     name-pl = сносок ,
-  case = d ,
+  variant = d ,
     Name-sg = Сноске ,
     name-sg = сноске ,
     Name-pl = Сноскам ,
     name-pl = сноскам ,
-  case = i ,
+  variant = i ,
     Name-sg = Сноской ,
     name-sg = сноской ,
     Name-pl = Сносками ,
     name-pl = сносками ,
-  case = p ,
+  variant = p ,
     Name-sg = Сноске ,
     name-sg = сноске ,
     Name-pl = Сносках ,
@@ -11134,32 +11142,32 @@ type = footnote ,
 
 type = endnote ,
   gender = f ,
-  case = n ,
+  variant = n ,
     Name-sg = Сноска ,
     name-sg = сноска ,
     Name-pl = Сноски ,
     name-pl = сноски ,
-  case = a ,
+  variant = a ,
     Name-sg = Сноску ,
     name-sg = сноску ,
     Name-pl = Сноски ,
     name-pl = сноски ,
-  case = g ,
+  variant = g ,
     Name-sg = Сноски ,
     name-sg = сноски ,
     Name-pl = Сносок ,
     name-pl = сносок ,
-  case = d ,
+  variant = d ,
     Name-sg = Сноске ,
     name-sg = сноске ,
     Name-pl = Сноскам ,
     name-pl = сноскам ,
-  case = i ,
+  variant = i ,
     Name-sg = Сноской ,
     name-sg = сноской ,
     Name-pl = Сносками ,
     name-pl = сносками ,
-  case = p ,
+  variant = p ,
     Name-sg = Сноске ,
     name-sg = сноске ,
     Name-pl = Сносках ,
@@ -11167,32 +11175,32 @@ type = endnote ,
 
 type = note ,
   gender = f ,
-  case = n ,
+  variant = n ,
     Name-sg = Заметка ,
     name-sg = заметка ,
     Name-pl = Заметки ,
     name-pl = заметки ,
-  case = a ,
+  variant = a ,
     Name-sg = Заметку ,
     name-sg = заметку ,
     Name-pl = Заметки ,
     name-pl = заметки ,
-  case = g ,
+  variant = g ,
     Name-sg = Заметки ,
     name-sg = заметки ,
     Name-pl = Заметок ,
     name-pl = заметок ,
-  case = d ,
+  variant = d ,
     Name-sg = Заметке ,
     name-sg = заметке ,
     Name-pl = Заметкам ,
     name-pl = заметкам ,
-  case = i ,
+  variant = i ,
     Name-sg = Заметкой ,
     name-sg = заметкой ,
     Name-pl = Заметками ,
     name-pl = заметками ,
-  case = p ,
+  variant = p ,
     Name-sg = Заметке ,
     name-sg = заметке ,
     Name-pl = Заметках ,
@@ -11200,7 +11208,7 @@ type = note ,
 
 type = equation ,
   gender = n ,
-  case = n ,
+  variant = n ,
     Name-sg = Уравнение ,
     name-sg = уравнение ,
     Name-pl = Уравнения ,
@@ -11209,7 +11217,7 @@ type = equation ,
     name-sg-ab = ур. ,
     Name-pl-ab = Ур. ,
     name-pl-ab = ур. ,
-  case = a ,
+  variant = a ,
     Name-sg = Уравнение ,
     name-sg = уравнение ,
     Name-pl = Уравнения ,
@@ -11218,7 +11226,7 @@ type = equation ,
     name-sg-ab = ур. ,
     Name-pl-ab = Ур. ,
     name-pl-ab = ур. ,
-  case = g ,
+  variant = g ,
     Name-sg = Уравнения ,
     name-sg = уравнения ,
     Name-pl = Уравнений ,
@@ -11227,7 +11235,7 @@ type = equation ,
     name-sg-ab = ур. ,
     Name-pl-ab = Ур. ,
     name-pl-ab = ур. ,
-  case = d ,
+  variant = d ,
     Name-sg = Уравнению ,
     name-sg = уравнению ,
     Name-pl = Уравнениям ,
@@ -11236,7 +11244,7 @@ type = equation ,
     name-sg-ab = ур. ,
     Name-pl-ab = Ур. ,
     name-pl-ab = ур. ,
-  case = i ,
+  variant = i ,
     Name-sg = Уравнением ,
     name-sg = уравнением ,
     Name-pl = Уравнениями ,
@@ -11245,7 +11253,7 @@ type = equation ,
     name-sg-ab = ур. ,
     Name-pl-ab = Ур. ,
     name-pl-ab = ур. ,
-  case = p ,
+  variant = p ,
     Name-sg = Уравнении ,
     name-sg = уравнении ,
     Name-pl = Уравнениях ,
@@ -11260,7 +11268,7 @@ type = equation ,
 
 type = theorem ,
   gender = f ,
-  case = n ,
+  variant = n ,
     Name-sg = Теорема ,
     name-sg = теорема ,
     Name-pl = Теоремы ,
@@ -11269,7 +11277,7 @@ type = theorem ,
     name-sg-ab = теор. ,
     Name-pl-ab = Теор. ,
     name-pl-ab = теор. ,
-  case = a ,
+  variant = a ,
     Name-sg = Теорему ,
     name-sg = теорему ,
     Name-pl = Теоремы ,
@@ -11278,7 +11286,7 @@ type = theorem ,
     name-sg-ab = теор. ,
     Name-pl-ab = Теор. ,
     name-pl-ab = теор. ,
-  case = g ,
+  variant = g ,
     Name-sg = Теоремы ,
     name-sg = теоремы ,
     Name-pl = Теорем ,
@@ -11287,7 +11295,7 @@ type = theorem ,
     name-sg-ab = теор. ,
     Name-pl-ab = Теор. ,
     name-pl-ab = теор. ,
-  case = d ,
+  variant = d ,
     Name-sg = Теореме ,
     name-sg = теореме ,
     Name-pl = Теоремам ,
@@ -11296,7 +11304,7 @@ type = theorem ,
     name-sg-ab = теор. ,
     Name-pl-ab = Теор. ,
     name-pl-ab = теор. ,
-  case = i ,
+  variant = i ,
     Name-sg = Теоремой ,
     name-sg = теоремой ,
     Name-pl = Теоремами ,
@@ -11305,7 +11313,7 @@ type = theorem ,
     name-sg-ab = теор. ,
     Name-pl-ab = Теор. ,
     name-pl-ab = теор. ,
-  case = p ,
+  variant = p ,
     Name-sg = Теореме ,
     name-sg = теореме ,
     Name-pl = Теоремах ,
@@ -11317,32 +11325,32 @@ type = theorem ,
 
 type = lemma ,
   gender = f ,
-  case = n ,
+  variant = n ,
     Name-sg = Лемма ,
     name-sg = лемма ,
     Name-pl = Леммы ,
     name-pl = леммы ,
-  case = a ,
+  variant = a ,
     Name-sg = Лемму ,
     name-sg = лемму ,
     Name-pl = Леммы ,
     name-pl = леммы ,
-  case = g ,
+  variant = g ,
     Name-sg = Леммы ,
     name-sg = леммы ,
     Name-pl = Лемм ,
     name-pl = лемм ,
-  case = d ,
+  variant = d ,
     Name-sg = Лемме ,
     name-sg = лемме ,
     Name-pl = Леммам ,
     name-pl = леммам ,
-  case = i ,
+  variant = i ,
     Name-sg = Леммой ,
     name-sg = леммой ,
     Name-pl = Леммами ,
     name-pl = леммами ,
-  case = p ,
+  variant = p ,
     Name-sg = Лемме ,
     name-sg = лемме ,
     Name-pl = Леммах ,
@@ -11350,32 +11358,32 @@ type = lemma ,
 
 type = corollary ,
   gender = m ,
-  case = n ,
+  variant = n ,
     Name-sg = Вывод ,
     name-sg = вывод ,
     Name-pl = Выводы ,
     name-pl = выводы ,
-  case = a ,
+  variant = a ,
     Name-sg = Вывод ,
     name-sg = вывод ,
     Name-pl = Выводы ,
     name-pl = выводы ,
-  case = g ,
+  variant = g ,
     Name-sg = Вывода ,
     name-sg = вывода ,
     Name-pl = Выводов ,
     name-pl = выводов ,
-  case = d ,
+  variant = d ,
     Name-sg = Выводу ,
     name-sg = выводу ,
     Name-pl = Выводам ,
     name-pl = выводам ,
-  case = i ,
+  variant = i ,
     Name-sg = Выводом ,
     name-sg = выводом ,
     Name-pl = Выводами ,
     name-pl = выводами ,
-  case = p ,
+  variant = p ,
     Name-sg = Выводе ,
     name-sg = выводе ,
     Name-pl = Выводах ,
@@ -11383,7 +11391,7 @@ type = corollary ,
 
 type = proposition ,
   gender = n ,
-  case = n ,
+  variant = n ,
     Name-sg = Предложение ,
     name-sg = предложение ,
     Name-pl = Предложения ,
@@ -11392,7 +11400,7 @@ type = proposition ,
     name-sg-ab = предл. ,
     Name-pl-ab = Предл. ,
     name-pl-ab = предл. ,
-  case = a ,
+  variant = a ,
     Name-sg = Предложение ,
     name-sg = предложение ,
     Name-pl = Предложения ,
@@ -11401,7 +11409,7 @@ type = proposition ,
     name-sg-ab = предл. ,
     Name-pl-ab = Предл. ,
     name-pl-ab = предл. ,
-  case = g ,
+  variant = g ,
     Name-sg = Предложения ,
     name-sg = предложения ,
     Name-pl = Предложений ,
@@ -11410,7 +11418,7 @@ type = proposition ,
     name-sg-ab = предл. ,
     Name-pl-ab = Предл. ,
     name-pl-ab = предл. ,
-  case = d ,
+  variant = d ,
     Name-sg = Предложению ,
     name-sg = предложению ,
     Name-pl = Предложениям ,
@@ -11419,7 +11427,7 @@ type = proposition ,
     name-sg-ab = предл. ,
     Name-pl-ab = Предл. ,
     name-pl-ab = предл. ,
-  case = i ,
+  variant = i ,
     Name-sg = Предложением ,
     name-sg = предложением ,
     Name-pl = Предложениями ,
@@ -11428,7 +11436,7 @@ type = proposition ,
     name-sg-ab = предл. ,
     Name-pl-ab = Предл. ,
     name-pl-ab = предл. ,
-  case = p ,
+  variant = p ,
     Name-sg = Предложении ,
     name-sg = предложении ,
     Name-pl = Предложениях ,
@@ -11440,7 +11448,7 @@ type = proposition ,
 
 type = definition ,
   gender = n ,
-  case = n ,
+  variant = n ,
     Name-sg = Определение ,
     name-sg = определение ,
     Name-pl = Определения ,
@@ -11449,7 +11457,7 @@ type = definition ,
     name-sg-ab = опр. ,
     Name-pl-ab = Опр. ,
     name-pl-ab = опр. ,
-  case = a ,
+  variant = a ,
     Name-sg = Определение ,
     name-sg = определение ,
     Name-pl = Определения ,
@@ -11458,7 +11466,7 @@ type = definition ,
     name-sg-ab = опр. ,
     Name-pl-ab = Опр. ,
     name-pl-ab = опр. ,
-  case = g ,
+  variant = g ,
     Name-sg = Определения ,
     name-sg = определения ,
     Name-pl = Определений ,
@@ -11467,7 +11475,7 @@ type = definition ,
     name-sg-ab = опр. ,
     Name-pl-ab = Опр. ,
     name-pl-ab = опр. ,
-  case = d ,
+  variant = d ,
     Name-sg = Определению ,
     name-sg = определению ,
     Name-pl = Определениям ,
@@ -11476,7 +11484,7 @@ type = definition ,
     name-sg-ab = опр. ,
     Name-pl-ab = Опр. ,
     name-pl-ab = опр. ,
-  case = i ,
+  variant = i ,
     Name-sg = Определением ,
     name-sg = определением ,
     Name-pl = Определениями ,
@@ -11485,7 +11493,7 @@ type = definition ,
     name-sg-ab = опр. ,
     Name-pl-ab = Опр. ,
     name-pl-ab = опр. ,
-  case = p ,
+  variant = p ,
     Name-sg = Определении ,
     name-sg = определении ,
     Name-pl = Определениях ,
@@ -11497,32 +11505,32 @@ type = definition ,
 
 type = proof ,
   gender = n ,
-  case = n ,
+  variant = n ,
     Name-sg = Доказательство ,
     name-sg = доказательство ,
     Name-pl = Доказательства ,
     name-pl = доказательства ,
-  case = a ,
+  variant = a ,
     Name-sg = Доказательство ,
     name-sg = доказательство ,
     Name-pl = Доказательства ,
     name-pl = доказательства ,
-  case = g ,
+  variant = g ,
     Name-sg = Доказательства ,
     name-sg = доказательства ,
     Name-pl = Доказательств ,
     name-pl = доказательств ,
-  case = d ,
+  variant = d ,
     Name-sg = Доказательству ,
     name-sg = доказательству ,
     Name-pl = Доказательствам ,
     name-pl = доказательствам ,
-  case = i ,
+  variant = i ,
     Name-sg = Доказательством ,
     name-sg = доказательством ,
     Name-pl = Доказательствами ,
     name-pl = доказательствами ,
-  case = p ,
+  variant = p ,
     Name-sg = Доказательстве ,
     name-sg = доказательстве ,
     Name-pl = Доказательствах ,
@@ -11530,32 +11538,32 @@ type = proof ,
 
 type = result ,
   gender = m ,
-  case = n ,
+  variant = n ,
     Name-sg = Результат ,
     name-sg = результат ,
     Name-pl = Результаты ,
     name-pl = результаты ,
-  case = a ,
+  variant = a ,
     Name-sg = Результат ,
     name-sg = результат ,
     Name-pl = Результаты ,
     name-pl = результаты ,
-  case = g ,
+  variant = g ,
     Name-sg = Результата ,
     name-sg = результата ,
     Name-pl = Результатов ,
     name-pl = результатов ,
-  case = d ,
+  variant = d ,
     Name-sg = Результату ,
     name-sg = результату ,
     Name-pl = Результатам ,
     name-pl = результатам ,
-  case = i ,
+  variant = i ,
     Name-sg = Результатом ,
     name-sg = результатом ,
     Name-pl = Результатами ,
     name-pl = результатами ,
-  case = p ,
+  variant = p ,
     Name-sg = Результате ,
     name-sg = результате ,
     Name-pl = Результатах ,
@@ -11563,7 +11571,7 @@ type = result ,
 
 type = remark ,
   gender = n ,
-  case = n ,
+  variant = n ,
     Name-sg = Примечание ,
     name-sg = примечание ,
     Name-pl = Примечания ,
@@ -11572,7 +11580,7 @@ type = remark ,
     name-sg-ab = прим. ,
     Name-pl-ab = Прим. ,
     name-pl-ab = прим. ,
-  case = a ,
+  variant = a ,
     Name-sg = Примечание ,
     name-sg = примечание ,
     Name-pl = Примечания ,
@@ -11581,7 +11589,7 @@ type = remark ,
     name-sg-ab = прим. ,
     Name-pl-ab = Прим. ,
     name-pl-ab = прим. ,
-  case = g ,
+  variant = g ,
     Name-sg = Примечания ,
     name-sg = примечания ,
     Name-pl = Примечаний ,
@@ -11590,7 +11598,7 @@ type = remark ,
     name-sg-ab = прим. ,
     Name-pl-ab = Прим. ,
     name-pl-ab = прим. ,
-  case = d ,
+  variant = d ,
     Name-sg = Примечанию ,
     name-sg = примечанию ,
     Name-pl = Примечаниям ,
@@ -11599,7 +11607,7 @@ type = remark ,
     name-sg-ab = прим. ,
     Name-pl-ab = Прим. ,
     name-pl-ab = прим. ,
-  case = i ,
+  variant = i ,
     Name-sg = Примечанием ,
     name-sg = примечанием ,
     Name-pl = Примечаниями ,
@@ -11608,7 +11616,7 @@ type = remark ,
     name-sg-ab = прим. ,
     Name-pl-ab = Прим. ,
     name-pl-ab = прим. ,
-  case = p ,
+  variant = p ,
     Name-sg = Примечании ,
     name-sg = примечании ,
     Name-pl = Примечаниях ,
@@ -11620,32 +11628,32 @@ type = remark ,
 
 type = example ,
   gender = m ,
-  case = n ,
+  variant = n ,
     Name-sg = Пример ,
     name-sg = пример ,
     Name-pl = Примеры ,
     name-pl = примеры ,
-  case = a ,
+  variant = a ,
     Name-sg = Пример ,
     name-sg = пример ,
     Name-pl = Примеры ,
     name-pl = примеры ,
-  case = g ,
+  variant = g ,
     Name-sg = Примера ,
     name-sg = примера ,
     Name-pl = Примеров ,
     name-pl = примеров ,
-  case = d ,
+  variant = d ,
     Name-sg = Примеру ,
     name-sg = примеру ,
     Name-pl = Примерам ,
     name-pl = примерам ,
-  case = i ,
+  variant = i ,
     Name-sg = Примером ,
     name-sg = примером ,
     Name-pl = Примерами ,
     name-pl = примерами ,
-  case = p ,
+  variant = p ,
     Name-sg = Примере ,
     name-sg = примере ,
     Name-pl = Примерах ,
@@ -11653,32 +11661,32 @@ type = example ,
 
 type = algorithm ,
   gender = m ,
-  case = n ,
+  variant = n ,
     Name-sg = Алгоритм ,
     name-sg = алгоритм ,
     Name-pl = Алгоритмы ,
     name-pl = алгоритмы ,
-  case = a ,
+  variant = a ,
     Name-sg = Алгоритм ,
     name-sg = алгоритм ,
     Name-pl = Алгоритмы ,
     name-pl = алгоритмы ,
-  case = g ,
+  variant = g ,
     Name-sg = Алгоритма ,
     name-sg = алгоритма ,
     Name-pl = Алгоритмов ,
     name-pl = алгоритмов ,
-  case = d ,
+  variant = d ,
     Name-sg = Алгоритму ,
     name-sg = алгоритму ,
     Name-pl = Алгоритмам ,
     name-pl = алгоритмам ,
-  case = i ,
+  variant = i ,
     Name-sg = Алгоритмом ,
     name-sg = алгоритмом ,
     Name-pl = Алгоритмами ,
     name-pl = алгоритмами ,
-  case = p ,
+  variant = p ,
     Name-sg = Алгоритме ,
     name-sg = алгоритме ,
     Name-pl = Алгоритмах ,
@@ -11686,32 +11694,32 @@ type = algorithm ,
 
 type = listing ,
   gender = m ,
-  case = n ,
+  variant = n ,
     Name-sg = Листинг ,
     name-sg = листинг ,
     Name-pl = Листинги ,
     name-pl = листинги ,
-  case = a ,
+  variant = a ,
     Name-sg = Листинг ,
     name-sg = листинг ,
     Name-pl = Листинги ,
     name-pl = листинги ,
-  case = g ,
+  variant = g ,
     Name-sg = Листинга ,
     name-sg = листинга ,
     Name-pl = Листингов ,
     name-pl = листингов ,
-  case = d ,
+  variant = d ,
     Name-sg = Листингу ,
     name-sg = листингу ,
     Name-pl = Листингам ,
     name-pl = листингам ,
-  case = i ,
+  variant = i ,
     Name-sg = Листингом ,
     name-sg = листинглм ,
     Name-pl = Листингами ,
     name-pl = листингами ,
-  case = p ,
+  variant = p ,
     Name-sg = Листинге ,
     name-sg = листинге ,
     Name-pl = Листингах ,
@@ -11719,7 +11727,7 @@ type = listing ,
 
 type = exercise ,
   gender = n ,
-  case = n ,
+  variant = n ,
     Name-sg = Упражнение ,
     name-sg = упражнение ,
     Name-pl = Упражнения ,
@@ -11728,7 +11736,7 @@ type = exercise ,
     name-sg-ab = упр. ,
     Name-pl-ab = Упр. ,
     name-pl-ab = упр. ,
-  case = a ,
+  variant = a ,
     Name-sg = Упражнение ,
     name-sg = упражнение ,
     Name-pl = Упражнения ,
@@ -11737,7 +11745,7 @@ type = exercise ,
     name-sg-ab = упр. ,
     Name-pl-ab = Упр. ,
     name-pl-ab = упр. ,
-  case = g ,
+  variant = g ,
     Name-sg = Упражнения ,
     name-sg = упражнения ,
     Name-pl = Упражнений ,
@@ -11746,7 +11754,7 @@ type = exercise ,
     name-sg-ab = упр. ,
     Name-pl-ab = Упр. ,
     name-pl-ab = упр. ,
-  case = d ,
+  variant = d ,
     Name-sg = Упражнению ,
     name-sg = упражнению ,
     Name-pl = Упражнениям ,
@@ -11755,7 +11763,7 @@ type = exercise ,
     name-sg-ab = упр. ,
     Name-pl-ab = Упр. ,
     name-pl-ab = упр. ,
-  case = i ,
+  variant = i ,
     Name-sg = Упражнением ,
     name-sg = упражнением ,
     Name-pl = Упражнениями ,
@@ -11764,7 +11772,7 @@ type = exercise ,
     name-sg-ab = упр. ,
     Name-pl-ab = Упр. ,
     name-pl-ab = упр. ,
-  case = p ,
+  variant = p ,
     Name-sg = Упражнении ,
     name-sg = упражнении ,
     Name-pl = Упражнениях ,
@@ -11776,32 +11784,32 @@ type = exercise ,
 
 type = solution ,
   gender = n ,
-  case = n ,
+  variant = n ,
     Name-sg = Решение ,
     name-sg = решение ,
     Name-pl = Решения ,
     name-pl = решения ,
-  case = a ,
+  variant = a ,
     Name-sg = Решение ,
     name-sg = решение ,
     Name-pl = Решения ,
     name-pl = решения ,
-  case = g ,
+  variant = g ,
     Name-sg = Решения ,
     name-sg = решения ,
     Name-pl = Решений ,
     name-pl = решений ,
-  case = d ,
+  variant = d ,
     Name-sg = Решению ,
     name-sg = решению ,
     Name-pl = Решениям ,
     name-pl = решениям ,
-  case = i ,
+  variant = i ,
     Name-sg = Решением ,
     name-sg = решением ,
     Name-pl = Решениями ,
     name-pl = решениями ,
-  case = p ,
+  variant = p ,
     Name-sg = Решении ,
     name-sg = решении ,
     Name-pl = Решениях ,

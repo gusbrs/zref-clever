@@ -2,6 +2,20 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.9...HEAD)
 
+### Changed
+- The `declension` option from `\zcDeclareLanguage`, the `case` option from
+  `\zcLanguageSetup`, and the `d` general option (from `\zcref`) have been
+  renamed to `variants`, `variant`, and `v`, respectively.  This is a
+  "semantic generalization" of the existing infrastructure.  In other words,
+  the package now interprets more broadly type name variants, which can be
+  used for any language-specific needs and not just declension cases.  See
+  discussion at issue [#35](https://github.com/gusbrs/zref-clever/issues/35).
+
+### Deprecated
+- The `declension` option from `\zcDeclareLanguage`, the `case` option from
+  `\zcLanguageSetup`, and the `d` general option (from `\zcref`) have been
+  deprecated in favor of their new names.
+
 ## [v0.4.9](https://github.com/gusbrs/zref-clever/compare/v0.4.8...v0.4.9) (2024-11-16)
 
 ### Changed

@@ -240,10 +240,10 @@ The sequence \g__zrefclever_opt_lang_german_type_section_refbounds-last-re_seq c
 l. ...  }
 ============================================================
 ============================================================
-TEST 2: Missing case and gender
+TEST 2: Missing variant and gender
 ============================================================
 Package zref-clever Warning: Language 'english' has no declared gender on line .... Nothing to do with option 'gender=m'.
-Package zref-clever Warning: Language 'english' has no declared declension cases on line .... Nothing to do with option 'case=D'.
+Package zref-clever Warning: Language 'english' has no declared variants on line .... Nothing to do with option 'variant=D'.
 Package zref-clever Warning: Language 'french' has no 'n' gender declared on line ....
 ============================================================
 ============================================================
@@ -1023,7 +1023,7 @@ l. ...\setbox0=\hbox{\testtmp
 l. ...\showbox0
 ============================================================
 ============================================================
-TEST 13: Option: [Nn]ame-[sg/pl](-ab)=... (german,d=D)
+TEST 13: Option: [Nn]ame-[sg/pl](-ab)=... (german,v=D)
 ============================================================
 (zref-clever-german.lang)
 Package zref-clever Info: Loaded 'german' language file.
