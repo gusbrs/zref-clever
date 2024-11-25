@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.4.9...HEAD)
+## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.5.0...HEAD)
+
+## [v0.5.0](https://github.com/gusbrs/zref-clever/compare/v0.4.9...v0.5.0) (2024-11-25)
 
 ### Added
 - Swedish localization (see issue
