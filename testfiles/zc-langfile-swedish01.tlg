@@ -37,6 +37,9 @@ l. ...  }
 > \g__zrefclever_opt_lang_swedish_default_rangesep_tl=\textendash .
 <recently read> }
 l. ...  }
+> \g__zrefclever_opt_lang_swedish_default_rangetopair_bool=false.
+<recently read> }
+l. ...  }
 > \g__zrefclever_opt_lang_swedish_type_book_Name-sg_tl=Bok.
 <recently read> }
 l. ...  }

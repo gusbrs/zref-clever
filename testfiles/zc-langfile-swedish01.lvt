@@ -101,6 +101,24 @@
       }
     \clist_map_inline:nn
       {
+        rangetopair ,
+      }
+      {
+        \bool_if_exist:cT
+          {
+            \__zrefclever_opt_varname_lang_default:enn
+              { \g__test_tmpa_tl } { #1 } { bool }
+          }
+          {
+            \bool_show:c
+              {
+                \__zrefclever_opt_varname_lang_default:enn
+                  { \g__test_tmpa_tl } { #1 } { bool }
+              }
+          }
+      }
+    \clist_map_inline:nn
+      {
         book ,
         part ,
         chapter ,
@@ -208,42 +226,6 @@
                         \__zrefclever_opt_varname_lang_type:eenn
                           { \g__test_tmpa_tl } { #1 } { ##1 } { tl }
                       }
-                  }
-              }
-          }
-        \clist_map_inline:nn
-          {
-            rangesep ,
-          }
-          {
-            \tl_if_exist:cT
-              {
-                \__zrefclever_opt_varname_lang_type:eenn
-                  { \g__test_tmpa_tl } { #1 } { ##1 } { tl }
-              }
-              {
-                \tl_show:c
-                  {
-                    \__zrefclever_opt_varname_lang_type:eenn
-                      { \g__test_tmpa_tl } { #1 } { ##1 } { tl }
-                  }
-              }
-          }
-        \clist_map_inline:nn
-          {
-            rangetopair ,
-          }
-          {
-            \bool_if_exist:cT
-              {
-                \__zrefclever_opt_varname_lang_type:eenn
-                  { \g__test_tmpa_tl } { #1 } { ##1 } { bool }
-              }
-              {
-                \bool_show:c
-                  {
-                    \__zrefclever_opt_varname_lang_type:eenn
-                      { \g__test_tmpa_tl } { #1 } { ##1 } { bool }
                   }
               }
           }
