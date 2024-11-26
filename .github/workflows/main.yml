@@ -58,6 +58,7 @@ env:
     cm-unicode
     csquotes
     cyrillic
+    lh
     dvips
     enumitem
     environ
