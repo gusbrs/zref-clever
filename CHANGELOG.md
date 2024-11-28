@@ -2,6 +2,10 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.5.0...HEAD)
 
+### Fixed
+- Use `\protected@edef` to expand references' content at `endrange` processing
+  functions.
+
 ## [v0.5.0](https://github.com/gusbrs/zref-clever/compare/v0.4.9...v0.5.0) (2024-11-25)
 
 ### Added
