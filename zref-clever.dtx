@@ -1021,7 +1021,7 @@
   {
     \tl_if_exist:NT #1
       {
-        \tl_clear:N #1 % ?
+        \tl_clear:N #1
         \bool_if_exist:cTF { \@@_opt_var_set_bool:n {#1} }
           { \bool_set_false:c { \@@_opt_var_set_bool:n {#1} } }
           { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
@@ -1161,7 +1161,7 @@
   {
     \seq_if_exist:NT #1
       {
-        \seq_clear:N #1 % ?
+        \seq_clear:N #1
         \bool_if_exist:cTF { \@@_opt_var_set_bool:n {#1} }
           { \bool_set_false:c { \@@_opt_var_set_bool:n {#1} } }
           { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
@@ -1229,7 +1229,7 @@
   {
     \bool_if_exist:NT #1
       {
-        % \bool_set_false:N #1 % ?
+        % \bool_set_false:N #1
         \bool_if_exist:cTF { \@@_opt_var_set_bool:n {#1} }
           { \bool_set_false:c { \@@_opt_var_set_bool:n {#1} } }
           { \bool_new:c { \@@_opt_var_set_bool:n {#1} } }
