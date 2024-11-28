@@ -8359,8 +8359,11 @@
 %    \begin{macrocode}
         \zref@newprop { subref }
           { \cs_if_exist_use:c { thesub \@captype } }
-        \tl_put_right:Nn \caption@subtypehook
-          { \zref@localaddprop \ZREF@mainlist { subref } }
+        \tl_if_exist:NT \caption@subtypehook
+          {
+            \tl_put_right:Nn \caption@subtypehook
+              { \zref@localaddprop \ZREF@mainlist { subref } }
+          }
       }
   }
 %    \end{macrocode}
