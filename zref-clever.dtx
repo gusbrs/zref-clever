@@ -5584,7 +5584,7 @@
               {
                 \bool_set_true:N \l_@@_sort_decided_bool
                 \int_compare:nNnTF
-                  { \@@_extract:nnn {#1} { zc@cntval } { } }
+                  { \@@_extract:nnn {#1} { zc@cntval } { -1 } }
                     >
                   { \tl_head:N \l_@@_label_enclval_b_tl }
                   { \sort_return_swapped: }
@@ -5601,7 +5601,7 @@
                     \int_compare:nNnTF
                       { \tl_head:N \l_@@_label_enclval_a_tl }
                         <
-                      { \@@_extract:nnn {#2} { zc@cntval } { } }
+                      { \@@_extract:nnn {#2} { zc@cntval } { -1 } }
                       { \sort_return_same:    }
                       { \sort_return_swapped: }
                   }
