@@ -8270,8 +8270,11 @@
 % \cs{@currentlabel} to \cs{thelstnumber} is a signal that the work of
 % \cs{refstepcounter} is being restrained somehow.
 %    \begin{macrocode}
-        \lst@AddToHook { Init }
-          { \@@_zcsetup:n { currentcounter = lstnumber } }
+        \cs_if_exist:NT \lst@AddToHook
+          {
+            \lst@AddToHook { Init }
+              { \@@_zcsetup:n { currentcounter = lstnumber } }
+          }
         \msg_info:nnn { zref-clever } { compat-package } { listings }
       }
   }
