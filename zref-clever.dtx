@@ -12042,6 +12042,160 @@ type = solution ,
 %    \end{macrocode}
 %
 %
+% \subsection{Japanese}
+%
+%    \begin{macrocode}
+%<*package>
+\zcDeclareLanguage [ allcaps ] { japanese }
+%</package>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*lang-japanese>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+namesep   = {\nobreak} ,
+pairsep   = {と} ,
+listsep   = {，} ,
+lastsep   = {，および} ,
+tpairsep  = {および} ,
+tlistsep  = {，} ,
+tlastsep  = {，および} ,
+notesep   = {：} ,
+rangesep  = {から} ,
+
+type = book ,
+  Name-sg = 第 ,
+  Name-pl = 第 ,
+  refbounds = {,,,巻} ,
+
+type = part ,
+  Name-sg = 第 ,
+  Name-pl = 第 ,
+  refbounds = {,,,部} ,
+
+type = chapter ,
+  Name-sg = 第 ,
+  Name-pl = 第 ,
+  refbounds = {,,,章} ,
+
+type = section ,
+  Name-sg = 第 ,
+  Name-pl = 第 ,
+  refbounds = {,,,節} ,
+
+type = paragraph ,
+  Name-sg = 第 ,
+  Name-pl = 第 ,
+  refbounds = {,,,段落} ,
+
+type = appendix ,
+  Name-sg = 付録 ,
+  Name-pl = 付録 ,
+
+type = page ,
+namesep = {\nobreakspace} ,
+  Name-sg = p. ,
+  Name-pl = pp. ,
+  rangesep = {\textendash} ,
+  rangetopair = false ,
+
+type = line ,
+  namesep = {\nobreakspace} ,
+  Name-sg = line ,
+  Name-pl = lines ,
+  rangesep = {\textendash} ,
+  rangetopair = false ,
+
+type = figure ,
+  Name-sg = 図 ,
+  Name-pl = 図 ,
+
+type = table ,
+  Name-sg = 表 ,
+  Name-pl = 表 ,
+
+type = item ,
+  Name-sg = 項目 ,
+  Name-pl = 項目 ,
+
+type = footnote ,
+  Name-sg = 脚注 ,
+  Name-pl = 脚注 ,
+
+type = endnote ,
+  Name-sg = 後注 ,
+  Name-pl = 後注 ,
+
+type = note ,
+  Name-sg = 注記 ,
+  Name-pl = 注記 ,
+
+type = equation ,
+  Name-sg = 式 ,
+  Name-pl = 式 ,
+  refbounds-first-sg = {,(,),} ,
+  refbounds = {(,,,)} ,
+
+type = theorem ,
+  Name-sg = 定理 ,
+  Name-pl = 定理 ,
+
+type = lemma ,
+  Name-sg = 補題 ,
+  Name-pl = 補題 ,
+
+type = corollary ,
+  Name-sg = 系 ,
+  Name-pl = 系 ,
+
+type = proposition ,
+  Name-sg = 命題 ,
+  Name-pl = 命題 ,
+
+type = definition ,
+  Name-sg = 定義 ,
+  Name-pl = 定義 ,
+
+type = proof ,
+  Name-sg = 証明 ,
+  Name-pl = 証明 ,
+
+type = result ,
+  Name-sg = 結果 ,
+  Name-pl = 結果 ,
+
+type = remark ,
+  Name-sg = 注意 ,
+  Name-pl = 注意 ,
+
+type = example ,
+  Name-sg = 例題 ,
+  Name-pl = 例題 ,
+
+type = algorithm ,
+  Name-sg = アルゴリズム ,
+  Name-pl = アルゴリズム ,
+
+type = listing ,
+  Name-sg = コード ,
+  Name-pl = コード ,
+
+type = exercise ,
+  Name-sg = 演習 ,
+  Name-pl = 演習 ,
+
+type = solution ,
+  Name-sg = 解法 ,
+  Name-pl = 解法 ,
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</lang-japanese>
+%    \end{macrocode}
+%
+%
 % \PrintIndex
 %
 % \endinput
