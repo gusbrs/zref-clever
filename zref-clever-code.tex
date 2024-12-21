@@ -41,10 +41,20 @@
 
 \documentclass{l3doc}
 
+\usepackage[main=english]{babel}
 \usepackage{fontspec}
-\setmainfont{CMU Serif}
-\setsansfont{CMU Sans Serif}
-\setmonofont{CMU Typewriter Text}
+% \setmainfont{CMU Serif}
+% \setsansfont{CMU Sans Serif}
+% \setmonofont{CMU Typewriter Text}
+
+\babelfont{rm}{CMU Serif}
+\babelfont{sf}{CMU Sans Serif}
+\babelfont{tt}{CMU Typewriter Text}
+
+\babelprovide[onchar=ids fonts]{japanese}
+\babelfont[japanese]{rm}{Harano Aji Mincho}
+\babelfont[japanese]{sf}[Scale=0.9]{Harano Aji Gothic}
+\babelfont[japanese]{tt}[Scale=0.8]{Harano Aji Gothic}
 
 % Have \GetFileInfo pick up date and version data and used in the
 % documentation.
