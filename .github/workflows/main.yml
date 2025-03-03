@@ -113,7 +113,7 @@ jobs:
 
     steps:
       - name: Install TeX Live
-        uses: zauguin/install-texlive@v3
+        uses: zauguin/install-texlive@v4
         with:
           packages: ${{ env.ZC_PACKAGE_LIST }}
 
@@ -141,7 +141,7 @@ jobs:
       - run: sleep 2m
 
       - name: Install TeX Live
-        uses: zauguin/install-texlive@v3
+        uses: zauguin/install-texlive@v4
         with:
           packages: ${{ env.ZC_PACKAGE_LIST }}
 
