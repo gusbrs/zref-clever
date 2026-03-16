@@ -187,7 +187,11 @@
 %    \begin{macrocode}
 \RequirePackage { zref-base }
 \RequirePackage { zref-user }
-\RequirePackage { zref-abspage }
+\bool_new:N \l_@@_abspage_bool
+\bool_set_true:N \l_@@_abspage_bool
+%    \end{macrocode}
+%
+% \begin{macrocode}
 \RequirePackage { ifdraft }
 %    \end{macrocode}
 %
@@ -3414,7 +3418,48 @@
   }
 %    \end{macrocode}
 %
+% \subsubsection*{\opt{abspage} option}
 %
+% The \texttt{abspage} option controls whether the \texttt{zref-abspage} package
+% is loaded, which provides the \texttt{abspage} property used for precise page
+% sorting and referencing. When set to \texttt{true} (the default), the package
+% loads \texttt{zref-abspage} and enables full page reference functionality including
+% accurate sorting by page numbers. When set to \texttt{false}, the package does not
+% load \texttt{zref-abspage}, which saves memory but limits page sorting capabilities.
+%
+% This option can only be set in the preamble using \texttt{\\zcsetup\{abspage=...\}}.
+% Attempting to set it after \texttt{\\begin\{document\}} will result in a warning.
+%
+% Note: When \texttt{abspage=false}, page references will still work for basic functionality,
+% but sorting multiple references by page number may not be accurate since the package
+% cannot access absolute page numbers without the \texttt{zref-abspage} module.
+%
+%    \begin{macrocode}
+\keys_define:nn { zref-clever/reference }
+  {
+    abspage .bool_set:N = \l_@@_abspage_bool ,
+    abspage .initial:n = true ,
+    abspage .default:n = true ,
+    noabspage .meta:n = { abspage = false } ,
+    noabspage .value_forbidden:n = true ,
+  }
+\AddToHook { begindocument }
+  {
+    \keys_define:nn { zref-clever/reference }
+      {
+        abspage .code:n =
+          { \msg_warning:nn { zref-clever } { option-preamble-only } { abspage } } ,
+      }
+  }
+%    \end{macrocode}
+%
+% \begin{macrocode}
+\AtBeginDocument
+  {
+    \bool_if:NT \l_@@_abspage_bool
+      { \@ifpackageloaded{zref-abspage}{}{\RequirePackage { zref-abspage } } }
+  }
+%    \end{macrocode}
 %
 % \subsubsection*{\opt{nameinlink} option}
 %

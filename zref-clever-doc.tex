@@ -412,7 +412,8 @@ using \cs{zcsetup} (see \zcref{sec:user-interface}).
 \subsection{Dependencies}
 
 \pkg{zref-clever} requires \pkg{zref}, particularly its \pkg{zref-base},
-\pkg{zref-user} and \pkg{zref-abspage} modules, and the \LaTeX{} kernel
+\pkg{zref-user} and \pkg{zref-abspage}\footnote{Optionnaly disabled by the 
+\opt{abspage=false} option} modules, and the \LaTeX{} kernel
 \zcrequiredkernel{}, or newer.  It requires UTF-8 input encoding, which has
 been the kernel's default for some time.  It also needs \pkg{ifdraft}.  Some
 packages are leveraged by \pkg{zref-clever} if they are present, but are not
@@ -505,6 +506,25 @@ necessarily true for all cases, some restrictions may apply, as described in
 each option's documentation.
 
 \bigskip{}
+
+\DescribeOption{abspage} %
+\DescribeOption{noabspage} %
+The \opt{abspage} option controls whether the \pkg{zref-abspage} package is
+loaded, which provides the \texttt{abspage} property used for precise page
+sorting and referencing. When set to \texttt{true} (the default), the
+package loads \pkg{zref-abspage} and enables full page reference functionality
+including accurate sorting by page numbers. When set to \texttt{false}, the
+package does not load \pkg{zref-abspage}.
+
+The \opt{noabspage} option is a convenience alias for \texttt{abspage=false}.
+
+This option can only be set in the preamble using \cs{zcsetup}. Attempting to
+set it after \cs{begin}\{document\} will result in a warning.
+
+\emph{Note that when \texttt{abspage=false}, page references will still work
+for basic functionality, but sorting multiple references by page number may
+not be accurate since the package cannot access absolute page numbers without
+the \pkg{zref-abspage} module.}
 
 \DescribeOption{ref} %
 \DescribeOption{page} %
