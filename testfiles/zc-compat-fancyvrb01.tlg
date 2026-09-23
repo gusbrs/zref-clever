@@ -1,0 +1,39 @@
+This is a generated file for the l3build validation system.
+Don't change this file in any respect.
+============================================================
+TEST 1: fancyvrb module
+============================================================
+The property list \l__zrefclever_counter_type_prop contains the pairs (without outer braces):
+>  {subsection}  =>  {section}
+>  {subsubsection}  =>  {section}
+>  {subparagraph}  =>  {paragraph}
+>  {enumi}  =>  {item}
+>  {enumii}  =>  {item}
+>  {enumiii}  =>  {item}
+>  {enumiv}  =>  {item}
+>  {mpfootnote}  =>  {footnote}
+>  {FancyVerbLine}  =>  {line}.
+<recently read> }
+l. ...\testtmp
+============================================================
+============================================================
+TEST 2: Reference: FancyVerbLine
+============================================================
+> \l__zrefclever_typeset_queue_curr_tl=\__zrefclever_hyperlink:nnn {}{section.1}{\group_begin: line\group_end: \nobreakspace \group_begin: 3\group_end: }.
+<recently read> }
+l. ...\setbox0=\hbox{\testtmp
+                            }
+> \box...=
+\hbox(6.94444+0.0)x23.88893
+.\pdfstartlink(*+*)x* attr{/Border[0 0 1]/H/I/C[1 0 0]} action goto name{section.1}
+.\OT1/cmr/m/n/10 l
+.\OT1/cmr/m/n/10 i
+.\OT1/cmr/m/n/10 n
+.\OT1/cmr/m/n/10 e
+.\penalty 10000
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\OT1/cmr/m/n/10 3
+.\pdfendlink
+! OK.
+l. ...\showbox0
+============================================================

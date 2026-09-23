@@ -1,0 +1,60 @@
+\documentclass{article}
+
+\input{regression-test}
+
+\ExplSyntaxOn
+\debug_on:n { check-declarations , deprecation }
+\ExplSyntaxOff
+
+% Ensure the same font across check engines
+\usepackage[OT1]{fontenc}
+\renewcommand\rmdefault{cmr}
+\renewcommand\sfdefault{cmss}
+\renewcommand\ttdefault{cmtt}
+
+\newcommand{\testtmp}{}
+
+\usepackage{zref-clever}
+
+\usepackage{fancyvrb}
+
+\usepackage{hyperref}
+
+\ExplSyntaxOn
+\bool_set_true:N \l__zrefclever_verbose_testing_bool
+\ExplSyntaxOff
+
+\begin{document}
+
+\section{Section 1.1}
+\label{sec:section-1.1}
+
+\begin{Verbatim}[numbers=left, commandchars=\\\{\}]
+  for i:=maxint to 0 do
+  begin
+      { do nothing }\label{nothing}
+  end;
+\end{Verbatim}
+
+\clearpage{}
+
+\START
+
+\BEGINTEST{fancyvrb module}
+\ExplSyntaxOn
+\renewcommand{\testtmp}{ \prop_show:N \l__zrefclever_counter_type_prop }
+\testtmp
+\ExplSyntaxOff
+\ENDTEST
+
+\BEGINTEST{Reference: FancyVerbLine}
+\renewcommand{\testtmp}{%
+  \zcref{nothing}}
+\setbox0=\hbox{\testtmp}
+\showbox0
+\box0
+\ENDTEST
+
+\OMIT
+
+\end{document}

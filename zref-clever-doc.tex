@@ -2369,6 +2369,16 @@ escaping as due.  The module sets appropriate \opt{countertype},
 \opt{counterresetby} and \opt{currentcounter} values for the \pkg{listings}'
 counters: \texttt{lstlisting} and \texttt{lstnumber}.
 
+\DescribeOption{fancyvrb} %
+Labels can be set for numbered lines of \pkg{fancyvrb}'s verbatim environments
+(and those of packages built on it, such as \pkg{fvextra} and \pkg{minted}),
+subject to escaping as due (e.g.\ with the \opt{commandchars} option).  Since
+\pkg{fancyvrb} does not set \cs{@currentcounter} for its line counter, the
+module sets \opt{currentcounter} to \texttt{FancyVerbLine} for each line, and
+maps this counter to the \texttt{line} type with \opt{countertype}.  Note that
+\pkg{fancyvrb} does not create \pkg{hyperref} anchors for the lines, so the
+hyperlink of such a reference does not point to the line itself.
+
 \DescribeOption{enumitem} %
 \LaTeX{}'s \env{enumerate} environment requires some special treatment from
 \pkg{zref-clever}, since its resetting behavior is not stored in the standard
