@@ -8281,6 +8281,30 @@
 %    \end{macrocode}
 %
 %
+% \subsection{\opt{fancyvrb}}
+%
+% \pkg{fancyvrb} increments the line counter \texttt{FancyVerbLine} with its
+% own \cs{FV@refstepcounter}, which uses \cs{stepcounter} and sets
+% \cs{@currentlabel}, but not \cs{@currentcounter}.  Hence, labels set on
+% numbered lines (subject to escaping) get the line number, but neither
+% counter nor type.  We map the counter to the \texttt{line} type and set the
+% current counter right after each line is stepped.  \pkg{fvextra} and
+% \pkg{minted} build on \pkg{fancyvrb} and use the same macro.
+%
+%    \begin{macrocode}
+\@@_compat_module:nn { fancyvrb }
+  {
+    \@@_if_package_loaded:nT { fancyvrb }
+      {
+        \@@_zcsetup:n { countertype = { FancyVerbLine = line } }
+        \AddToHook { cmd / FV@refstepcounter / after }
+          { \tl_set:Nn \l_@@_current_counter_tl { FancyVerbLine } }
+        \msg_info:nnn { zref-clever } { compat-package } { fancyvrb }
+      }
+  }
+%    \end{macrocode}
+%
+%
 % \subsection{\opt{enumitem}}
 %
 % The procedure below will ``see'' any changes made to the \texttt{enumerate}

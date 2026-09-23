@@ -2,6 +2,11 @@
 
 ## [Unreleased](https://github.com/gusbrs/zref-clever/compare/v0.5.1...HEAD)
 
+### Added
+- `fancyvrb` compatibility module, for references to numbered lines of
+  `fancyvrb` (and `fvextra`, `minted`) verbatim environments (see issue
+  [#65](https://github.com/gusbrs/zref-clever/issues/65)).
+
 ## [v0.5.1](https://github.com/gusbrs/zref-clever/compare/v0.5.0...v0.5.1) (2024-11-28)
 
 ### Fixed
